@@ -94,7 +94,7 @@ namespace ClickQuest.Heroes
 		{
             get
             {
-                return _critChance * 100;
+                return _critChance;
 
             }
             set
@@ -126,6 +126,7 @@ namespace ClickQuest.Heroes
 			set 
 			{
 				_level = value;
+				OnPropertyChanged();
 			}
 		}
 

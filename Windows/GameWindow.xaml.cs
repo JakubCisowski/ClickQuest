@@ -3,9 +3,9 @@ using System.Windows;
 
 namespace ClickQuest
 {
-	public partial class MainWindow : Window
+	public partial class GameWindow : Window
 	{
-		public MainWindow()
+		public GameWindow()
 		{
 			InitializeComponent();
 		}

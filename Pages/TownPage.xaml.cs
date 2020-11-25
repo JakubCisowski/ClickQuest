@@ -4,11 +4,11 @@ using System.Windows.Controls;
 
 namespace ClickQuest.Pages
 {
-	public partial class MainPage : Page
+	public partial class TownPage : Page
 	{
 		private Hero _hero;
 
-		public MainPage()
+		public TownPage()
 		{
             InitializeComponent();
 

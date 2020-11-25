@@ -1,10 +1,10 @@
-<Page x:Class="ClickQuest.Pages.MainPage"
+<Page x:Class="ClickQuest.Pages.TownPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickQuest"
-        mc:Ignorable="d" Title="Main Page"
+        mc:Ignorable="d" Title="Town"
         Height="450" Width="800">
     <Grid>
 		<Grid.ColumnDefinitions>
@@ -21,7 +21,7 @@
 			<TextBlock x:Name="LevelBlock" Text="{Binding Path=Level, StringFormat='Level: \{0\}'}"/>
 			<TextBlock x:Name="GoldBlock" Text="{Binding Path=Gold, StringFormat='Gold: \{0\}'}"/>
 			<TextBlock x:Name="ClickDamageBlock" Text="{Binding Path=ClickDamage, StringFormat='Damage: \{0\}'}"/>
-			<TextBlock x:Name="CritChanBlock" Text="{Binding Path=CritChance, StringFormat='Critical Chance: \{0\}%'}"/>
+			<TextBlock x:Name="CritChanBlock" Text="{Binding Path=CritChance, StringFormat='Critical Chance: \{0:P1\}'}"/>
 			<TextBlock x:Name="PoisonDamageBlock" Text="{Binding Path=PoisonDamage, StringFormat='Poison Damage: \{0\}'}"/>
 		</StackPanel>
 	</Grid>

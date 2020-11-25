@@ -20,7 +20,7 @@ namespace ClickQuest.Heroes
                 xp += Equate(i);
             }
     
-            return (int) Math.Floor(xp / 32);
+            return (int) Math.Floor(xp / 16);
         }
 
         public static int XPToLevel(int xp)
