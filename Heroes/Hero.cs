@@ -94,7 +94,7 @@ namespace ClickQuest.Heroes
 		{
             get
             {
-                return _critChance;
+                return _critChance * 100;
 
             }
             set
@@ -129,11 +129,11 @@ namespace ClickQuest.Heroes
 			}
 		}
 
-		public HeroClass ThisHeroClass
+		public string ThisHeroClass
 		{
 			get 
 			{
-				return _heroClass;
+				return _heroClass.ToString();
 			}
 		}
 
