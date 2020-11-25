@@ -42,5 +42,13 @@ namespace ClickQuest.Heroes
 				OnPropertyChanged();
 			}
 		}
+
+		public int Level
+		{
+			get
+			{
+				return Heroes.Experience.XPToLevel(_experience);
+			}
+		}
 	}
 }
