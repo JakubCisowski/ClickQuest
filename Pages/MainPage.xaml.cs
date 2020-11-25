@@ -1,17 +1,18 @@
-﻿using ClickQuest.Heroes;
+using ClickQuest.Heroes;
 using System.Windows;
+using System.Windows.Controls;
 
-namespace ClickQuest
+namespace ClickQuest.Pages
 {
-	public partial class MainWindow : Window
+	public partial class MainPage : Page
 	{
 		private Hero _hero;
 
-		public MainWindow()
+		public MainPage()
 		{
-			InitializeComponent();
+            InitializeComponent();
 
-			_hero = new Hero()
+            _hero = new Hero()
 			{
 				Name = "asdf",
 				Experience = 0
