@@ -12,11 +12,7 @@ namespace ClickQuest.Pages
 		{
             InitializeComponent();
 
-            _hero = new Hero()
-			{
-				Name = "asdf",
-				Experience = 0
-			};
+            _hero = new Hero(HeroClass.Slayer, "TestHeroName");
 
 			this.DataContext = _hero;
 		}

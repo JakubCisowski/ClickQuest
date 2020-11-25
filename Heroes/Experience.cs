@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Diagnostics;
 
 namespace ClickQuest.Heroes
@@ -13,6 +12,7 @@ namespace ClickQuest.Heroes
     
         public static int LevelToXP(int level)
         {
+            level += 1;
             double xp = 0;
     
             for (int i = 1; i < level; i++)
@@ -32,7 +32,21 @@ namespace ClickQuest.Heroes
                 level++;
             }
     
-            return level;
+            return level-1;
+        }
+
+        public static void CheckIfLeveledUp(Hero hero)
+        {
+            int xpToLevel = XPToLevel(hero.Experience);
+            int lvlDifference = xpToLevel - hero.Level;
+
+            if(lvlDifference > 0)
+            {
+                for (int i = 0; i < lvlDifference;i++){
+                    hero.Level++;
+                    hero.GrantLevelUpBonuses();
+                }
+            }
         }
     }
 }
