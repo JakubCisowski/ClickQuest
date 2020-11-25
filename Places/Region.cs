@@ -17,7 +17,7 @@ namespace ClickQuest.Places
 
 		#region Private Fields
         private int _id;
-		private string _name;
+		private string _name = "testName";
         private string _background;
         private List<Monster> _monsters;
 

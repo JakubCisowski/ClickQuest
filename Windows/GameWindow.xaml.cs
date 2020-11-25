@@ -1,5 +1,6 @@
 ﻿using ClickQuest.Heroes;
 using System.Windows;
+using System.Windows.Navigation;
 
 namespace ClickQuest
 {

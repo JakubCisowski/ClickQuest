@@ -12,7 +12,10 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<Button x:Name="ExpButton" Grid.Column="0" Width="50" Height="50" Content="Exp!" Click="ExpButton_Click"/>
+		<StackPanel Orientation="Vertical" Grid.Column="0">
+				<Button x:Name="Test1" Grid.Column="0" Width="50" Height="50" Content="Location 1" Click="Test1_Click"/>
+				<Button x:Name="Test2" Grid.Column="0" Width="50" Height="50" Content="Location 2" Click="Test2_Click"/>
+		</StackPanel>
 
 		<StackPanel Orientation="Vertical" Grid.Column="1">
 			<TextBlock x:Name="HeroNameBlock" Text="{Binding Path=Name, StringFormat='Name: \{0\}'}"/>
