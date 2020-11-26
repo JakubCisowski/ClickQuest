@@ -1,0 +1,43 @@
+{
+    "monsters": [
+        {
+          "id": 1,
+          "name": "Wolf",
+          "health": 20,
+          "image": "/example.png",
+          "types": [
+            "Beast"
+          ],
+          "loot": [
+            {
+                "id": 0,
+                "frequency": 0.25
+            },
+            {
+                "id": 1,
+                "frequency": 0.75
+            }
+          ]
+        },
+        {
+            "id": 2,
+            "name": "Bat",
+            "health": 15,
+            "image": "/example.png",
+            "types": [
+              "Beast",
+              "Flying"
+            ],
+            "loot": [
+                {
+                    "id": 0,
+                    "frequency": 0.75
+                },
+                {
+                    "id": 2,
+                    "frequency": 0.25
+                }
+            ]
+          }
+    ]
+}

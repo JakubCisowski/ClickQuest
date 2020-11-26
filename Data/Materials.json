@@ -1,0 +1,14 @@
+{
+    "materials": [
+        {
+            "Id": 1,
+            "Name": "Leather",
+            "Value": 1
+        },
+        {
+            "Id": 2,
+            "Name": "Bat wing",
+            "Value": 2
+        }
+    ]
+}

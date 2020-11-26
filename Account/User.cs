@@ -36,6 +36,7 @@ namespace ClickQuest.Account
         static User()
         {
             _heroes = new List<Hero>();
+            Database.Load();
         }
     }
 }

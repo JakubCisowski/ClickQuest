@@ -7,7 +7,7 @@ namespace ClickQuest.Enemies
 {
     public enum MonsterType
 	{
-		Beast
+		Beast, Flying
 	}
     public partial class Monster : INotifyPropertyChanged
     {
@@ -23,12 +23,26 @@ namespace ClickQuest.Enemies
         private int _id;
 		private string _name;
         private int _health;
-        private MonsterType _type;
+        private string _image;
+        private List<MonsterType> _types;
         private List<(Material,double)> _loot;
 
         #endregion
 
         #region Properties
+
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string Name
         {
@@ -52,6 +66,45 @@ namespace ClickQuest.Enemies
             set
             {
                 _health = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Image
+        {
+            get
+            {
+                return _image;
+            }
+            set
+            {
+                _image = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public List<MonsterType> Types
+        {
+            get
+            {
+                return _types;
+            }
+            set
+            {
+                _types = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public List<(Material,double)> Loot
+        {
+            get
+            {
+                return _loot;
+            }
+            set
+            {
+                _loot = value;
                 OnPropertyChanged();
             }
         }

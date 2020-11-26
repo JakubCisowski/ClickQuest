@@ -6,10 +6,14 @@ namespace ClickQuest.Pages
 {
     public partial class RegionPage : Page
     {
+        private Region _region;
+
         public RegionPage(Region currentRegion)
         {
-            this.DataContext = currentRegion;
             InitializeComponent();
+
+            _region = currentRegion;
+            this.DataContext = _region;
         }
 
         private void TownButton_Click(object sender, RoutedEventArgs e)

@@ -1,0 +1,34 @@
+{
+    "regions": [
+        {
+          "id": 1,
+          "name": "Forest",
+          "background": "/example.png",
+          "monsters": [
+            {
+                "id": 1,
+                "frequency": 0.25
+            },
+            {
+                "id": 2,
+                "frequency": 0.75
+            }
+          ]
+        },
+        {
+            "id": 2,
+            "name": "Cave",
+            "background": "/example2.png",
+            "monsters": [
+                {
+                    "id": 1,
+                    "frequency": 0.75
+                },
+                {
+                    "id": 2,
+                    "frequency": 0.25
+                }
+              ]
+        }
+    ]
+}

@@ -19,11 +19,24 @@ namespace ClickQuest.Places
         private int _id;
 		private string _name = "testName";
         private string _background;
-        private List<Monster> _monsters;
+        private List<(Monster,double)> _monsters;
 
         #endregion
 
         #region Properties
+
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string Name
         {
@@ -38,6 +51,39 @@ namespace ClickQuest.Places
             }
         }
 
+        public string Background
+        {
+            get
+            {
+                return _background;
+            }
+            set
+            {
+                _background = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public List<(Monster, double)> Monsters
+        {
+            get
+            {
+                return _monsters;
+            }
+            set
+            {
+                _monsters=value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
-	}
+        
+
+        public Region(int id)
+        {
+            // load region from database (using id)
+        }
+    }
+	
 }

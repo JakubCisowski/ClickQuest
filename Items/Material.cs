@@ -22,6 +22,19 @@ namespace ClickQuest.Items
 
         #region Properties
 
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string Name
         {
             get
@@ -41,8 +54,20 @@ namespace ClickQuest.Items
             {
                 return _value;
             }
+            set
+            {
+                _value=value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        public Material(int id, string name, int value)
+        {
+            Id = id;
+            Name = name;
+            Value = value;
         }
 
-        #endregion
     }
 }
