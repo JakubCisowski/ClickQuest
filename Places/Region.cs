@@ -19,7 +19,7 @@ namespace ClickQuest.Places
         private int _id;
 		private string _name;
         private string _background;
-        private List<(Monster,double)> _monsters;
+        private List<(Monster Monster,double Frequency)> _monsters;
 
         #endregion
 
@@ -64,7 +64,7 @@ namespace ClickQuest.Places
             }
         }
 
-        public List<(Monster, double)> Monsters
+        public List<(Monster Monster, double Frequency)> Monsters
         {
             get
             {

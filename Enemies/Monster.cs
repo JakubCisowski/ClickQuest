@@ -23,6 +23,7 @@ namespace ClickQuest.Enemies
         private int _id;
 		private string _name;
         private int _health;
+        private int _currentHealth;
         private string _image;
         private List<MonsterType> _types;
         private List<(Material,double)> _loot;
@@ -66,6 +67,18 @@ namespace ClickQuest.Enemies
             set
             {
                 _health = value;
+                OnPropertyChanged();
+            }
+        }
+        public int CurrentHealth
+        {
+            get
+            {
+                return _currentHealth;
+            }
+            set
+            {
+                _currentHealth = value;
                 OnPropertyChanged();
             }
         }
@@ -116,6 +129,7 @@ namespace ClickQuest.Enemies
             Id = id;
             Name = name;
             Health = health;
+            _currentHealth = health;
             Types = types;
             Loot = loot;
         }

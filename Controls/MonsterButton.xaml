@@ -1,0 +1,29 @@
+<UserControl x:Class="ClickQuest.Controls.MonsterButton"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClickQuest"
+        mc:Ignorable="d"
+        Height="200" Width="200">
+
+        <Button>
+                <Grid>
+                        <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock x:Name="MonsterName" Grid.Row="0" Text="{Binding Path=Name}"/>
+                        <TextBlock x:Name="MonsterHealth" Grid.Row="1">
+                                <TextBlock.Text>
+                                        <MultiBinding StringFormat="Health: {0} / {1}">
+                                                <Binding Path="CurrentHealth"/>
+                                                <Binding Path="Health"/>
+                                        </MultiBinding>
+                                </TextBlock.Text>
+                        </TextBlock>
+                </Grid>
+        </Button>
+
+</UserControl>

@@ -15,8 +15,9 @@
 
                 <Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden"/>
 
-                <StackPanel Orientation="Vertical" Grid.Column="1">
+                <StackPanel x:Name="RegionPanel" Orientation="Vertical" Grid.Column="1">
                         <TextBlock x:Name="RegionNameBlock" Text="{Binding Path=Name, StringFormat='Region name: \{0\}'}"/>
+                         
                         <Button x:Name="TownButton" Grid.Column="0" Width="50" Height="50" Content="Come back to town!" Click="TownButton_Click"/>
                 </StackPanel>
 
