@@ -1,11 +1,11 @@
+using ClickQuest.Enemies;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Collections.Generic;
-using ClickQuest.Enemies;
 
 namespace ClickQuest.Places
 {
-    public class Region : INotifyPropertyChanged
+	public class Region : INotifyPropertyChanged
 	{
 		#region INotifyPropertyChanged
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -16,77 +16,77 @@ namespace ClickQuest.Places
 		#endregion
 
 		#region Private Fields
-        private int _id;
+		private int _id;
 		private string _name;
-        private string _background;
-        private List<(Monster Monster,double Frequency)> _monsters;
+		private string _background;
+		private List<(Monster Monster, double Frequency)> _monsters;
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
 
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-                OnPropertyChanged();
-            }
-        }
+		public int Id
+		{
+			get
+			{
+				return _id;
+			}
+			set
+			{
+				_id = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            { 
-                _name = value;
-                OnPropertyChanged();
-            }
-        }
+		public string Name
+		{
+			get
+			{
+				return _name;
+			}
+			set
+			{
+				_name = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public string Background
-        {
-            get
-            {
-                return _background;
-            }
-            set
-            {
-                _background = value;
-                OnPropertyChanged();
-            }
-        }
+		public string Background
+		{
+			get
+			{
+				return _background;
+			}
+			set
+			{
+				_background = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public List<(Monster Monster, double Frequency)> Monsters
-        {
-            get
-            {
-                return _monsters;
-            }
-            set
-            {
-                _monsters=value;
-                OnPropertyChanged();
-            }
-        }
+		public List<(Monster Monster, double Frequency)> Monsters
+		{
+			get
+			{
+				return _monsters;
+			}
+			set
+			{
+				_monsters = value;
+				OnPropertyChanged();
+			}
+		}
 
-        #endregion
-        
+		#endregion
 
-        public Region(int id, string name, string background, List<(Monster,double)> monsters)
-        {
-            Id = id;
-            Name = name;
-            Background = background;
-            Monsters = monsters;
-        }
-    }
-	
+
+		public Region(int id, string name, string background, List<(Monster, double)> monsters)
+		{
+			Id = id;
+			Name = name;
+			Background = background;
+			Monsters = monsters;
+		}
+	}
+
 }

@@ -1,18 +1,17 @@
-using System.Windows.Controls;
-using System.Windows;
 using ClickQuest.Enemies;
 using ClickQuest.Places;
 using System;
-using ClickQuest.Pages;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace ClickQuest.Controls
 {
-    public partial class MonsterButton : UserControl, INotifyPropertyChanged
-    {
+	public partial class MonsterButton : UserControl, INotifyPropertyChanged
+	{
 
-        #region INotifyPropertyChanged
+		#region INotifyPropertyChanged
 		public event PropertyChangedEventHandler PropertyChanged;
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
@@ -20,64 +19,64 @@ namespace ClickQuest.Controls
 		}
 		#endregion
 
-        private Monster _monster;
-        private Region _region;
-        private Random _rng = new Random();
+		private Monster _monster;
+		private Region _region;
+		private Random _rng = new Random();
 
-        public Monster Monster
-        {
-            get
-            {
-                return _monster;
-            }
-            set
-            {
-                _monster = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public MonsterButton(Region region)
-        {            
-            InitializeComponent();
-            _region = region;
-
-            SpawnMonster();
-            this.DataContext = Monster;
-        }
-
-        private void MonsterButton_Click(object sender, RoutedEventArgs e)
+		public Monster Monster
 		{
-            int damage = Account.User.CurrentHero.ClickDamage;
+			get
+			{
+				return _monster;
+			}
+			set
+			{
+				_monster = value;
+				OnPropertyChanged();
+			}
+		}
 
-            double num = _rng.Next(1, 101) / 100d;
+		public MonsterButton(Region region)
+		{
+			InitializeComponent();
+			_region = region;
 
-            if (num <= Account.User.CurrentHero.CritChance)
-            {
-                damage *= 2;
-            }
+			SpawnMonster();
+			this.DataContext = Monster;
+		}
 
-            Monster.CurrentHealth -= damage;
+		private void MonsterButton_Click(object sender, RoutedEventArgs e)
+		{
+			int damage = Account.User.CurrentHero.ClickDamage;
 
-            if (Monster.CurrentHealth<=0)
-            {
-               SpawnMonster();
-            }
-        }
+			double num = _rng.Next(1, 101) / 100d;
 
-        public void SpawnMonster()
-        {
-            double num = _rng.Next(1, 101) / 100d;
-            int i = 0;
+			if (num <= Account.User.CurrentHero.CritChance)
+			{
+				damage *= 2;
+			}
 
-            while(num > _region.Monsters[i].Frequency)
-            {
-                num -= _region.Monsters[i].Frequency;
-                i++;
-            }
+			Monster.CurrentHealth -= damage;
 
-            Monster = new Monster(_region.Monsters[i].Monster);
-            this.DataContext = Monster;
-        }
-    }
+			if (Monster.CurrentHealth <= 0)
+			{
+				SpawnMonster();
+			}
+		}
+
+		public void SpawnMonster()
+		{
+			double num = _rng.Next(1, 101) / 100d;
+			int i = 0;
+
+			while (num > _region.Monsters[i].Frequency)
+			{
+				num -= _region.Monsters[i].Frequency;
+				i++;
+			}
+
+			Monster = new Monster(_region.Monsters[i].Monster);
+			this.DataContext = Monster;
+		}
+	}
 }

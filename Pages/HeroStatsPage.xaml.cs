@@ -1,20 +1,18 @@
-using System.Windows.Controls;
-using System.Windows;
-using ClickQuest.Places;
 using ClickQuest.Heroes;
+using System.Windows.Controls;
 
 namespace ClickQuest.Pages
 {
-    public partial class HeroStatsPage : Page
-    {
-        private Hero _hero;
+	public partial class HeroStatsPage : Page
+	{
+		private Hero _hero;
 
-        public HeroStatsPage()
-        {
-            InitializeComponent();
+		public HeroStatsPage()
+		{
+			InitializeComponent();
 
-            _hero = Account.User.CurrentHero;
-            this.DataContext=_hero;
-        }
-    }
+			_hero = Account.User.CurrentHero;
+			this.DataContext = _hero;
+		}
+	}
 }

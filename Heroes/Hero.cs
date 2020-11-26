@@ -32,16 +32,16 @@ namespace ClickQuest.Heroes
 		// Specialisations/Professions
 		// Artifacts
 		// Materials
-		
+
 		#endregion
 
 		#region Properties
 
 		public int ClickDamagePerLevel { get; }
-		public double CritChancePerLevel{ get; }
-		public int PoisonDamagePerLevel{ get; }
+		public double CritChancePerLevel { get; }
+		public int PoisonDamagePerLevel { get; }
 
-        public string Name
+		public string Name
 		{
 			get
 			{
@@ -70,64 +70,64 @@ namespace ClickQuest.Heroes
 
 		public int Gold
 		{
-			get 
+			get
 			{
 				return _gold;
 			}
 			set
 			{
 				_gold = value;
-                OnPropertyChanged();
-            }
+				OnPropertyChanged();
+			}
 		}
 
 		public int ClickDamage
 		{
-			get 
+			get
 			{
-                return _clickDamage;
-            }
+				return _clickDamage;
+			}
 			set
 			{
 				_clickDamage = value;
-                OnPropertyChanged();
-            }
+				OnPropertyChanged();
+			}
 		}
 
 		public double CritChance
 		{
-            get
-            {
-                return _critChance;
+			get
+			{
+				return _critChance;
 
-            }
-            set
+			}
+			set
 			{
 				_critChance = value;
-                OnPropertyChanged();
-            }
+				OnPropertyChanged();
+			}
 		}
 
 		public int PoisonDamage
 		{
-			get 
+			get
 			{
-                return _poisonDamage;
-            }
+				return _poisonDamage;
+			}
 			set
 			{
 				_poisonDamage = value;
-                OnPropertyChanged();
-            }
+				OnPropertyChanged();
+			}
 		}
 
 		public int Level
 		{
 			get
 			{
-               return _level;
-            }
-			set 
+				return _level;
+			}
+			set
 			{
 				_level = value;
 				OnPropertyChanged();
@@ -136,7 +136,7 @@ namespace ClickQuest.Heroes
 
 		public string ThisHeroClass
 		{
-			get 
+			get
 			{
 				return _heroClass.ToString();
 			}
@@ -146,46 +146,49 @@ namespace ClickQuest.Heroes
 
 		public Hero(HeroClass heroClass, string heroName)
 		{
-            _heroClass = heroClass;
+			_heroClass = heroClass;
 			Experience = 0;
 			Gold = 0;
 			Level = 0;
-            Name = heroName;
-			ClickDamagePerLevel=1;
+			Name = heroName;
+			ClickDamagePerLevel = 1;
 
-            switch(heroClass){
+			switch (heroClass)
+			{
 				case HeroClass.Slayer:
-				ClickDamage = 2;
-				CritChance = 0.25;
-				CritChancePerLevel=0.004;
-				PoisonDamage = 0;
-				PoisonDamagePerLevel=0;
-				break;
+					ClickDamage = 2;
+					CritChance = 0.25;
+					CritChancePerLevel = 0.004;
+					PoisonDamage = 0;
+					PoisonDamagePerLevel = 0;
+					break;
 				case HeroClass.Venom:
-				ClickDamage = 2;
-				CritChance = 0;
-                CritChancePerLevel = 0;
-                PoisonDamage = 1;
-                PoisonDamagePerLevel = 2;
-                    break;
+					ClickDamage = 2;
+					CritChance = 0;
+					CritChancePerLevel = 0;
+					PoisonDamage = 1;
+					PoisonDamagePerLevel = 2;
+					break;
 			}
-        }
+		}
 
 		public void GrantLevelUpBonuses()
 		{
-			if(Level >= 100){
+			if (Level >= 100)
+			{
 				return;
 			}
-			
-			switch(_heroClass){
+
+			switch (_heroClass)
+			{
 				case HeroClass.Slayer:
-				ClickDamage += ClickDamagePerLevel;
-				CritChance += CritChancePerLevel;
-				break;
+					ClickDamage += ClickDamagePerLevel;
+					CritChance += CritChancePerLevel;
+					break;
 				case HeroClass.Venom:
-				ClickDamage += ClickDamagePerLevel;
-				PoisonDamage += PoisonDamagePerLevel;
-				break;
+					ClickDamage += ClickDamagePerLevel;
+					PoisonDamage += PoisonDamagePerLevel;
+					break;
 			}
 		}
 	}
