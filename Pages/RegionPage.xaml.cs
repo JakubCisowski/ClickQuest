@@ -2,6 +2,7 @@ using System.Windows.Controls;
 using System.Windows;
 using ClickQuest.Places;
 using System;
+using System.Linq;
 using ClickQuest.Controls;
 
 namespace ClickQuest.Pages
@@ -9,7 +10,7 @@ namespace ClickQuest.Pages
     public partial class RegionPage : Page
     {
         private Region _region;
-        Random rng = new Random();
+        private Random _rng = new Random();
 
         public RegionPage(Region currentRegion)
         {
@@ -18,7 +19,7 @@ namespace ClickQuest.Pages
             _region = currentRegion;
             this.DataContext = _region;
 
-            SpawnMonster();
+            CreateMonsterButton();
         }
 
         private void TownButton_Click(object sender, RoutedEventArgs e)
@@ -26,19 +27,9 @@ namespace ClickQuest.Pages
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(new TownPage());
 		}
 
-        private void SpawnMonster()
+        public void CreateMonsterButton()
         {
-            double num = rng.Next(1,101)/100d;
-            int i = 0;
-
-            while(num > _region.Monsters[i].Frequency)
-            {
-                num -= _region.Monsters[i].Frequency;
-                i++;
-            }
-
-            var button = new MonsterButton(_region.Monsters[i].Monster);
-
+            var button = new MonsterButton(_region);
             this.RegionPanel.Children.Insert(1, button);
         }
     }

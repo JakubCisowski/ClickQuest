@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Height="200" Width="200">
 
-        <Button>
+        <Button Click="MonsterButton_Click">
                 <Grid>
                         <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>

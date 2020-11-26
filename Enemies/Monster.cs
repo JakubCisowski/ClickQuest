@@ -129,9 +129,19 @@ namespace ClickQuest.Enemies
             Id = id;
             Name = name;
             Health = health;
-            _currentHealth = health;
+            CurrentHealth = health;
             Types = types;
             Loot = loot;
+        }
+
+        public Monster(Monster monsterToCopy)
+        {
+            Id = monsterToCopy.Id;
+            Name = monsterToCopy.Name;
+            Health = monsterToCopy.Health;
+            CurrentHealth = monsterToCopy.Health;
+            Types = monsterToCopy.Types;
+            Loot = monsterToCopy.Loot;
         }
     }
 }

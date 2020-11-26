@@ -13,9 +13,30 @@
                 <TextBlock x:Name="ExperienceBlock" Text="{Binding Path=Experience, StringFormat='Experience: \{0\}'}"/>
                 <TextBlock x:Name="LevelBlock" Text="{Binding Path=Level, StringFormat='Level: \{0\}'}"/>
                 <TextBlock x:Name="GoldBlock" Text="{Binding Path=Gold, StringFormat='Gold: \{0\}'}"/>
-                <TextBlock x:Name="ClickDamageBlock" Text="{Binding Path=ClickDamage, StringFormat='Damage: \{0\}'}"/>
-                <TextBlock x:Name="CritChanBlock" Text="{Binding Path=CritChance, StringFormat='Critical Chance: \{0:P1\}'}"/>
-                <TextBlock x:Name="PoisonDamageBlock" Text="{Binding Path=PoisonDamage, StringFormat='Poison Damage: \{0\}'}"/>
+                <TextBlock x:Name="ClickDamageBlock">
+                        <TextBlock.Text>
+                                <MultiBinding StringFormat="Damage: {0} (+{1}/lvl)">
+                                        <Binding Path="ClickDamage"/>
+                                        <Binding Path="ClickDamagePerLevel"/>
+                                </MultiBinding>
+                        </TextBlock.Text>
+                </TextBlock>
+                <TextBlock x:Name="CritChanceBlock">
+                        <TextBlock.Text>
+                                <MultiBinding StringFormat="Crit chance: {0:P1} (+{1:P1}/lvl)">
+                                        <Binding Path="CritChance"/>
+                                        <Binding Path="CritChancePerLevel"/>
+                                </MultiBinding>
+                        </TextBlock.Text>
+                </TextBlock>
+                <TextBlock x:Name="PoisonDamageBlock">
+                        <TextBlock.Text>
+                                <MultiBinding StringFormat="Poison damage: {0} (+{1}/lvl)">
+                                        <Binding Path="PoisonDamage"/>
+                                        <Binding Path="PoisonDamagePerLevel"/>
+                                </MultiBinding>
+                        </TextBlock.Text>
+                </TextBlock>
         </StackPanel> 
         
 </Page>

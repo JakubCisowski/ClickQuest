@@ -37,7 +37,11 @@ namespace ClickQuest.Heroes
 
 		#region Properties
 
-		public string Name
+		public int ClickDamagePerLevel { get; }
+		public double CritChancePerLevel{ get; }
+		public int PoisonDamagePerLevel{ get; }
+
+        public string Name
 		{
 			get
 			{
@@ -147,31 +151,40 @@ namespace ClickQuest.Heroes
 			Gold = 0;
 			Level = 0;
             Name = heroName;
+			ClickDamagePerLevel=1;
 
             switch(heroClass){
 				case HeroClass.Slayer:
 				ClickDamage = 2;
 				CritChance = 0.25;
+				CritChancePerLevel=0.004;
 				PoisonDamage = 0;
+				PoisonDamagePerLevel=0;
 				break;
 				case HeroClass.Venom:
 				ClickDamage = 2;
 				CritChance = 0;
-				PoisonDamage = 1;
-				break;
+                CritChancePerLevel = 0;
+                PoisonDamage = 1;
+                PoisonDamagePerLevel = 2;
+                    break;
 			}
         }
 
 		public void GrantLevelUpBonuses()
 		{
+			if(Level >= 100){
+				return;
+			}
+			
 			switch(_heroClass){
 				case HeroClass.Slayer:
-				ClickDamage += 1;
-				CritChance += 0.004;
+				ClickDamage += ClickDamagePerLevel;
+				CritChance += CritChancePerLevel;
 				break;
 				case HeroClass.Venom:
-				ClickDamage += 1;
-				PoisonDamage += 2;
+				ClickDamage += ClickDamagePerLevel;
+				PoisonDamage += PoisonDamagePerLevel;
 				break;
 			}
 		}
