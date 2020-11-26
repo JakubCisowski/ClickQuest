@@ -110,5 +110,14 @@ namespace ClickQuest.Enemies
         }
 
         #endregion
+
+        public Monster(int id, string name, int health, string image, List<MonsterType> types, List<(Material,double)> loot)
+        {
+            Id = id;
+            Name = name;
+            Health = health;
+            Types = types;
+            Loot = loot;
+        }
     }
 }

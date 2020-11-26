@@ -1,32 +1,32 @@
 {
-    "regions": [
+    "Regions": [
         {
-          "id": 1,
-          "name": "Forest",
-          "background": "/example.png",
-          "monsters": [
+          "Id": 1,
+          "Name": "Forest",
+          "Background": "/example.png",
+          "Monsters": [
             {
-                "id": 1,
-                "frequency": 0.25
+                "Id": 1,
+                "Frequency": 0.25
             },
             {
-                "id": 2,
-                "frequency": 0.75
+                "Id": 2,
+                "Frequency": 0.75
             }
           ]
         },
         {
-            "id": 2,
-            "name": "Cave",
-            "background": "/example2.png",
-            "monsters": [
+            "Id": 2,
+            "Name": "Cave",
+            "Background": "/example2.png",
+            "Monsters": [
                 {
-                    "id": 1,
-                    "frequency": 0.75
+                    "Id": 1,
+                    "Frequency": 0.75
                 },
                 {
-                    "id": 2,
-                    "frequency": 0.25
+                    "Id": 2,
+                    "Frequency": 0.25
                 }
               ]
         }

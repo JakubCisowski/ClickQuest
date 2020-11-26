@@ -20,12 +20,12 @@ namespace ClickQuest.Pages
 
 		private void Test1_Click(object sender, RoutedEventArgs e)
 		{
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(new RegionPage(new Region(1){Name="Test1"}));
+			//(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(new RegionPage(new Region(){Name="Test1"}));
 		}
 
 		private void Test2_Click(object sender, RoutedEventArgs e)
 		{
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(new RegionPage(new Region(1){Name="Test2"}));
+			//(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(new RegionPage(new Region(){Name="Test2"}));
 		}
 	}
 }

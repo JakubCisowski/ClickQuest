@@ -1,5 +1,10 @@
 {
-    "materials": [
+    "Materials": [
+        {
+            "Id": 0,
+            "Name": "Empty loot",
+            "Value": 0
+        },
         {
             "Id": 1,
             "Name": "Leather",

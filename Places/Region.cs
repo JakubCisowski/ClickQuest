@@ -17,7 +17,7 @@ namespace ClickQuest.Places
 
 		#region Private Fields
         private int _id;
-		private string _name = "testName";
+		private string _name;
         private string _background;
         private List<(Monster,double)> _monsters;
 
@@ -80,9 +80,12 @@ namespace ClickQuest.Places
         #endregion
         
 
-        public Region(int id)
+        public Region(int id, string name, string background, List<(Monster,double)> monsters)
         {
-            // load region from database (using id)
+            Id = id;
+            Name = name;
+            Background = background;
+            Monsters = monsters;
         }
     }
 	

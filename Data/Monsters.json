@@ -1,41 +1,41 @@
 {
-    "monsters": [
+    "Monsters": [
         {
-          "id": 1,
-          "name": "Wolf",
-          "health": 20,
-          "image": "/example.png",
-          "types": [
+          "Id": 1,
+          "Name": "Wolf",
+          "Health": 20,
+          "Image": "/example.png",
+          "Types": [
             "Beast"
           ],
-          "loot": [
+          "Loot": [
             {
-                "id": 0,
-                "frequency": 0.25
+                "Id": 0,
+                "Frequency": 0.25
             },
             {
-                "id": 1,
-                "frequency": 0.75
+                "Id": 1,
+                "Frequency": 0.75
             }
           ]
         },
         {
-            "id": 2,
-            "name": "Bat",
-            "health": 15,
-            "image": "/example.png",
-            "types": [
+            "Id": 2,
+            "Name": "Bat",
+            "Health": 15,
+            "Image": "/example.png",
+            "Types": [
               "Beast",
               "Flying"
             ],
-            "loot": [
+            "Loot": [
                 {
-                    "id": 0,
-                    "frequency": 0.75
+                    "Id": 0,
+                    "Frequency": 0.75
                 },
                 {
-                    "id": 2,
-                    "frequency": 0.25
+                    "Id": 2,
+                    "Frequency": 0.25
                 }
             ]
           }
