@@ -5,6 +5,10 @@ using ClickQuest.Items;
 
 namespace ClickQuest.Enemies
 {
+    public enum MonsterType
+	{
+		Beast
+	}
     public partial class Monster : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
@@ -19,6 +23,7 @@ namespace ClickQuest.Enemies
         private int _id;
 		private string _name;
         private int _health;
+        private MonsterType _type;
         private List<(Material,double)> _loot;
 
         #endregion
