@@ -7,7 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 
-namespace ClickQuest.Account
+namespace ClickQuest.Data
 {
 	public static partial class Database
 	{

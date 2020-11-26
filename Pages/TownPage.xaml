@@ -12,9 +12,7 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<StackPanel Orientation="Vertical" Grid.Column="0">
-				<Button x:Name="Test1" Grid.Column="0" Width="50" Height="50" Content="Location 1" Click="Test1_Click"/>
-				<Button x:Name="Test2" Grid.Column="0" Width="50" Height="50" Content="Location 2" Click="Test2_Click"/>
+		<StackPanel x:Name="RegionsPanel" Orientation="Vertical" Grid.Column="0">
 		</StackPanel>
 
 		<StackPanel Orientation="Vertical" Grid.Column="1">
