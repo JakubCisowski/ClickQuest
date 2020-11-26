@@ -12,18 +12,12 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<StackPanel x:Name="RegionsPanel" Orientation="Vertical" Grid.Column="0">
+        <Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden"/>
+
+
+		<StackPanel x:Name="RegionsPanel" Orientation="Vertical" Grid.Column="1">
 		</StackPanel>
 
-		<StackPanel Orientation="Vertical" Grid.Column="1">
-			<TextBlock x:Name="HeroNameBlock" Text="{Binding Path=Name, StringFormat='Name: \{0\}'}"/>
-			<TextBlock x:Name="HeroClassBlock" Text="{Binding Path=ThisHeroClass, StringFormat='Class: \{0\}'}"/>
-			<TextBlock x:Name="ExperienceBlock" Text="{Binding Path=Experience, StringFormat='Experience: \{0\}'}"/>
-			<TextBlock x:Name="LevelBlock" Text="{Binding Path=Level, StringFormat='Level: \{0\}'}"/>
-			<TextBlock x:Name="GoldBlock" Text="{Binding Path=Gold, StringFormat='Gold: \{0\}'}"/>
-			<TextBlock x:Name="ClickDamageBlock" Text="{Binding Path=ClickDamage, StringFormat='Damage: \{0\}'}"/>
-			<TextBlock x:Name="CritChanBlock" Text="{Binding Path=CritChance, StringFormat='Critical Chance: \{0:P1\}'}"/>
-			<TextBlock x:Name="PoisonDamageBlock" Text="{Binding Path=PoisonDamage, StringFormat='Poison Damage: \{0\}'}"/>
-		</StackPanel>
+		
 	</Grid>
 </Page>
