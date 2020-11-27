@@ -26,7 +26,7 @@ namespace ClickQuest.Enemies
 		private int _currentHealth;
 		private string _image;
 		private List<MonsterType> _types;
-		private List<(Material Material, double Frequency)> _loot;
+		private List<(Item Item, ItemType ItemType, double Frequency)> _loot;
 
 		#endregion
 
@@ -109,7 +109,7 @@ namespace ClickQuest.Enemies
 			}
 		}
 
-		public List<(Material Material, double Frequency)> Loot
+		public List<(Item Item, ItemType ItemType, double Frequency)> Loot
 		{
 			get
 			{
@@ -124,7 +124,7 @@ namespace ClickQuest.Enemies
 
 		#endregion
 
-		public Monster(int id, string name, int health, string image, List<MonsterType> types, List<(Material, double)> loot)
+		public Monster(int id, string name, int health, string image, List<MonsterType> types, List<(Item, ItemType, double)> loot)
 		{
 			Id = id;
 			Name = name;

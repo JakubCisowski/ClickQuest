@@ -7,7 +7,7 @@ namespace ClickQuest.Account
 	public static partial class User
 	{
 		private static List<Hero> _heroes;
-        private static List<Material> _materials;
+        private static List<Item> _items;
 
         private static Hero _currentHero;
 
@@ -23,15 +23,15 @@ namespace ClickQuest.Account
 			}
 		}
 
-		public static List<Material> Materials
+		public static List<Item> Items
 		{
 			get
 			{
-                return _materials;
+                return _items;
             }
 			set
 			{
-                _materials = value;
+                _items = value;
             }
 		}
 
@@ -50,7 +50,7 @@ namespace ClickQuest.Account
 		static User()
 		{
 			_heroes = new List<Hero>();
-            _materials = new List<Material>();
+            _items = new List<Item>();
             Data.Database.Load();
 		}
 	}

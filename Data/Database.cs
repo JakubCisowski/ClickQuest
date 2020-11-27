@@ -13,19 +13,28 @@ namespace ClickQuest.Data
 {
 	public static partial class Database
 	{
+		#region Private Fields
 		public static List<Material> Materials { get; set; }
-		public static List<Monster> Monsters { get; set; }
+		public static List<Recipe> Recipes { get; set; }
+		public static List<Artifact> Artifacts { get; set; }
+        public static List<Monster> Monsters { get; set; }
 		public static List<Region> Regions { get; set; }
 		public static Dictionary<string,Page> Pages{ get; set;}
+		
+		#endregion
 
         public static void Load()
 		{
 			Materials = new List<Material>();
+			Recipes = new List<Recipe>();
+			Artifacts = new List<Artifact>();
 			Monsters = new List<Monster>();
 			Regions = new List<Region>();
             Pages = new Dictionary<string, Page>();
 
             LoadMaterials();
+			LoadRecipes();
+			LoadArtifacts();
 			LoadMonsters();
 			LoadRegions();
 			LoadPages();
@@ -46,6 +55,40 @@ namespace ClickQuest.Data
 
 				var newMaterial = new Material(id, name, rarity, value);
 				Materials.Add(newMaterial);
+			}
+		}
+		public static void LoadRecipes()
+		{
+			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Recipes.json");
+			var parsedObject = JObject.Parse(File.ReadAllText(path));
+			var jArray = (JArray)parsedObject["Recipes"];
+
+			for (var i = 0; i < jArray.Count; i++)
+			{
+				var id = int.Parse(parsedObject["Recipes"][i]["Id"].ToString());
+				var name = parsedObject["Recipes"][i]["Name"].ToString();
+                var rarity = (Rarity)int.Parse(parsedObject["Recipes"][i]["Rarity"].ToString());
+                var value = int.Parse(parsedObject["Recipes"][i]["Value"].ToString());
+
+				var newRecipe = new Recipe(id, name, rarity, value);
+				Recipes.Add(newRecipe);
+			}
+		}
+		public static void LoadArtifacts()
+		{
+			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Artifacts.json");
+			var parsedObject = JObject.Parse(File.ReadAllText(path));
+			var jArray = (JArray)parsedObject["Artifacts"];
+
+			for (var i = 0; i < jArray.Count; i++)
+			{
+				var id = int.Parse(parsedObject["Artifacts"][i]["Id"].ToString());
+				var name = parsedObject["Artifacts"][i]["Name"].ToString();
+                var rarity = (Rarity)int.Parse(parsedObject["Artifacts"][i]["Rarity"].ToString());
+                var value = int.Parse(parsedObject["Artifacts"][i]["Value"].ToString());
+
+				var newArtifact = new Artifact(id, name, rarity, value);
+				Artifacts.Add(newArtifact);
 			}
 		}
 		public static void LoadMonsters()
@@ -73,7 +116,7 @@ namespace ClickQuest.Data
 					typesTemp.Add(monsterType);
 				}
 
-				var lootTemp = new List<(Material, double)>();
+				var lootTemp = new List<(Item,ItemType, double)>();
 				var lootArray = (JArray)parsedObject["Monsters"][i]["Loot"];
 
 				// Error check
@@ -81,13 +124,32 @@ namespace ClickQuest.Data
 
 				for (int j = 0; j < lootArray.Count; j++)
 				{
-					var materialId = int.Parse(parsedObject["Monsters"][i]["Loot"][j]["Id"].ToString());
-					var material = Materials.Where(x => x.Id == materialId).FirstOrDefault();
+                    //! przebudować
+                    var itemType = (ItemType)Enum.Parse(typeof(ItemType), parsedObject["Monsters"][i]["Loot"][j]["Type"].ToString());
+                    var itemId = int.Parse(parsedObject["Monsters"][i]["Loot"][j]["Id"].ToString());
+
+                    Item item = null;
+					
+                    switch (itemType)
+					{
+						case ItemType.Material:
+                            item = Materials.Where(x => x.Id == itemId).FirstOrDefault();
+							break;
+
+						case ItemType.Recipe:
+							item = Recipes.Where(x=>x.Id==itemId).FirstOrDefault();
+                            break;
+
+						case ItemType.Artifact:
+                            item = Artifacts.Where(x => x.Id == itemId).FirstOrDefault();
+							break;
+                    }
+
 					var frequency = Double.Parse(parsedObject["Monsters"][i]["Loot"][j]["Frequency"].ToString());
 
 					frequencySum+=frequency;
 
-					lootTemp.Add((material, frequency));
+					lootTemp.Add((item,ItemType.Material, frequency));
 				}
 
 				if(frequencySum != 1)

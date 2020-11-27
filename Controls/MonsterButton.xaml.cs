@@ -100,12 +100,12 @@ namespace ClickQuest.Controls
 				num -= _monster.Loot[i].Frequency;
 				i++;
 			}
-            _regionPage.TestRewardsBlock.Text="Loot: " + _monster.Loot[i].Material.Name + ", Exp: " + Experience.CalculateMonsterXpReward(_monster.Health);
+            _regionPage.TestRewardsBlock.Text="Loot: " + _monster.Loot[i].Item.Name + ", Exp: " + Experience.CalculateMonsterXpReward(_monster.Health);
 
 			// Not adding "empty loot" to inventory
-			if (_monster.Loot[i].Material.Id!=0)
+			if (_monster.Loot[i].Item.Id!=0)
 			{
-				Account.User.Materials.Add(_monster.Loot[i].Material);
+				Account.User.Items.Add(_monster.Loot[i].Item);
 			}
         }
 	}
