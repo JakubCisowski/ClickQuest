@@ -36,9 +36,10 @@ namespace ClickQuest.Data
 			{
 				var id = int.Parse(parsedObject["Materials"][i]["Id"].ToString());
 				var name = parsedObject["Materials"][i]["Name"].ToString();
-				var value = int.Parse(parsedObject["Materials"][i]["Value"].ToString());
+                var rarity = (Rarity)int.Parse(parsedObject["Materials"][i]["Rarity"].ToString());
+                var value = int.Parse(parsedObject["Materials"][i]["Value"].ToString());
 
-				var newMaterial = new Material(id, name, value);
+				var newMaterial = new Material(id, name, rarity, value);
 				Materials.Add(newMaterial);
 			}
 		}

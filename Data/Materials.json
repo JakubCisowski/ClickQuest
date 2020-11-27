@@ -3,16 +3,19 @@
         {
             "Id": 0,
             "Name": "Empty loot",
+            "Rarity": 0,
             "Value": 0
         },
         {
             "Id": 1,
-            "Name": "Leather",
+            "Name": "Wolf Leather",
+            "Rarity": 1,
             "Value": 1
         },
         {
             "Id": 2,
             "Name": "Bat wing",
+            "Rarity": 0,
             "Value": 2
         }
     ]

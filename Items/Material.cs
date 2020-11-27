@@ -17,12 +17,13 @@ namespace ClickQuest.Items
 		private int _id;
 		private string _name;
 		private int _value;
+        private Rarity _rarity;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		public int Id
+        public int Id
 		{
 			get
 			{
@@ -60,13 +61,28 @@ namespace ClickQuest.Items
 				OnPropertyChanged();
 			}
 		}
+
+		public Rarity Rarity
+		{
+			get
+			{
+				return _rarity;
+			}
+			set
+			{
+                _rarity = value;
+				OnPropertyChanged();
+            }
+		}
+
 		#endregion
 
-		public Material(int id, string name, int value)
+		public Material(int id, string name, Rarity rarity, int value)
 		{
 			Id = id;
 			Name = name;
-			Value = value;
+            Rarity = rarity;
+            Value = value;
 		}
 
 	}
