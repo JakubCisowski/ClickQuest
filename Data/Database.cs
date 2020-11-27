@@ -54,6 +54,9 @@ namespace ClickQuest.Data
 			var parsedObject = JObject.Parse(File.ReadAllText(path));
 			var jArray = (JArray)parsedObject["Monsters"];
 
+			// Error check
+			var errorLog = new List<string>();
+
 			for (var i = 0; i < jArray.Count; i++)
 			{
 				var id = int.Parse(parsedObject["Monsters"][i]["Id"].ToString());
@@ -73,17 +76,32 @@ namespace ClickQuest.Data
 				var lootTemp = new List<(Material, double)>();
 				var lootArray = (JArray)parsedObject["Monsters"][i]["Loot"];
 
+				// Error check
+				double frequencySum = 0;
+
 				for (int j = 0; j < lootArray.Count; j++)
 				{
 					var materialId = int.Parse(parsedObject["Monsters"][i]["Loot"][j]["Id"].ToString());
 					var material = Materials.Where(x => x.Id == materialId).FirstOrDefault();
 					var frequency = Double.Parse(parsedObject["Monsters"][i]["Loot"][j]["Frequency"].ToString());
 
+					frequencySum+=frequency;
+
 					lootTemp.Add((material, frequency));
+				}
+
+				if(frequencySum != 1)
+				{
+					errorLog.Add($"Error: {name} - loot frequency sums up to {frequencySum} instead of 1.");
 				}
 
 				var newMonster = new Monster(id, name, health, image, typesTemp, lootTemp);
 				Monsters.Add(newMonster);
+			}
+
+			if (errorLog.Count>0)
+			{
+				Logger.Log(errorLog);
 			}
 		}
 		public static void LoadRegions()
@@ -91,6 +109,9 @@ namespace ClickQuest.Data
 			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Regions.json");
 			var parsedObject = JObject.Parse(File.ReadAllText(path));
 			var jArray = (JArray)parsedObject["Regions"];
+
+			// Error check
+			var errorLog = new List<string>();
 
 			for (var i = 0; i < jArray.Count; i++)
 			{
@@ -101,6 +122,9 @@ namespace ClickQuest.Data
 				var monstersTemp = new List<(Monster, Double)>();
 				var monstersArray = (JArray)parsedObject["Regions"][i]["Monsters"];
 
+				// Error check
+				double frequencySum = 0;
+
 				for (int j = 0; j < monstersArray.Count; j++)
 				{
 					var monsterId = int.Parse(parsedObject["Regions"][i]["Monsters"][j]["Id"].ToString());
@@ -108,11 +132,23 @@ namespace ClickQuest.Data
 
 					var frequency = Double.Parse(parsedObject["Regions"][i]["Monsters"][j]["Frequency"].ToString());
 
-					monstersTemp.Add((monster, frequency));
+                    frequencySum += frequency;
+
+                    monstersTemp.Add((monster, frequency));
+				}
+				
+				if(frequencySum != 1)
+				{
+					errorLog.Add($"Error: {name} - monster frequency sums up to {frequencySum} instead of 1.");
 				}
 
 				var newRegion = new Region(id, name, background, monstersTemp);
 				Regions.Add(newRegion);
+			}
+
+			if (errorLog.Count>0)
+			{
+				Logger.Log(errorLog);
 			}
 		}
 
