@@ -1,4 +1,5 @@
 using ClickQuest.Heroes;
+using ClickQuest.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,9 +41,9 @@ namespace ClickQuest.Pages
 		private void RegionButton_Click(object sender, RoutedEventArgs e)
 		{
 			var regionId = int.Parse((sender as Button).Name.Substring(6));
-			var region = Data.Database.Regions.FirstOrDefault(x => x.Id == regionId);
+			string regionName = Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).Name;
 
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(new RegionPage(region));
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages[regionName]);
 		}
 
 	}

@@ -1,5 +1,6 @@
 using ClickQuest.Controls;
 using ClickQuest.Places;
+using ClickQuest.Data;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,7 +24,7 @@ namespace ClickQuest.Pages
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(new TownPage());
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
 		}
 
 		public void CreateMonsterButton()

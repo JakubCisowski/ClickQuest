@@ -1,11 +1,13 @@
 using ClickQuest.Enemies;
 using ClickQuest.Items;
 using ClickQuest.Places;
+using ClickQuest.Pages;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows.Controls;
 
 namespace ClickQuest.Data
 {
@@ -14,16 +16,19 @@ namespace ClickQuest.Data
 		public static List<Material> Materials { get; set; }
 		public static List<Monster> Monsters { get; set; }
 		public static List<Region> Regions { get; set; }
+		public static Dictionary<string,Page> Pages{ get; set;}
 
-		public static void Load()
+        public static void Load()
 		{
 			Materials = new List<Material>();
 			Monsters = new List<Monster>();
 			Regions = new List<Region>();
+            Pages = new Dictionary<string, Page>();
 
-			LoadMaterials();
+            LoadMaterials();
 			LoadMonsters();
 			LoadRegions();
+			LoadPages();
 		}
 
 		public static void LoadMaterials()
@@ -110,5 +115,16 @@ namespace ClickQuest.Data
 				Regions.Add(newRegion);
 			}
 		}
+
+		public static void LoadPages()
+		{
+            // Town
+            Pages.Add("Town", new TownPage());
+			// Regions
+			foreach (var region in Regions)
+			{
+                Pages.Add(region.Name, new RegionPage(region));
+            }
+        }
 	}
 }
