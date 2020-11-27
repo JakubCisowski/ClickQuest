@@ -11,11 +11,11 @@
           "Loot": [
             {
                 "Id": 0,
-                "Frequency": 0.25
+                "Frequency": 0.2500
             },
             {
                 "Id": 1,
-                "Frequency": 0.75
+                "Frequency": 0.7500
             }
           ]
         },
@@ -31,11 +31,11 @@
             "Loot": [
                 {
                     "Id": 0,
-                    "Frequency": 0.75
+                    "Frequency": 0.7500
                 },
                 {
                     "Id": 2,
-                    "Frequency": 0.25
+                    "Frequency": 0.2500
                 }
             ]
           }

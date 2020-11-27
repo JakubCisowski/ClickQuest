@@ -1,4 +1,5 @@
 using ClickQuest.Heroes;
+using ClickQuest.Items;
 using System.Collections.Generic;
 
 namespace ClickQuest.Account
@@ -6,8 +7,9 @@ namespace ClickQuest.Account
 	public static partial class User
 	{
 		private static List<Hero> _heroes;
+        private static List<Material> _materials;
 
-		private static Hero _currentHero;
+        private static Hero _currentHero;
 
 		public static List<Hero> Heroes
 		{
@@ -19,6 +21,18 @@ namespace ClickQuest.Account
 			{
 				_heroes = value;
 			}
+		}
+
+		public static List<Material> Materials
+		{
+			get
+			{
+                return _materials;
+            }
+			set
+			{
+                _materials = value;
+            }
 		}
 
 		public static Hero CurrentHero
@@ -36,7 +50,8 @@ namespace ClickQuest.Account
 		static User()
 		{
 			_heroes = new List<Hero>();
-			Data.Database.Load();
+            _materials = new List<Material>();
+            Data.Database.Load();
 		}
 	}
 }

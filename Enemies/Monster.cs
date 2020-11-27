@@ -26,7 +26,7 @@ namespace ClickQuest.Enemies
 		private int _currentHealth;
 		private string _image;
 		private List<MonsterType> _types;
-		private List<(Material, double)> _loot;
+		private List<(Material Material, double Frequency)> _loot;
 
 		#endregion
 
@@ -109,7 +109,7 @@ namespace ClickQuest.Enemies
 			}
 		}
 
-		public List<(Material, double)> Loot
+		public List<(Material Material, double Frequency)> Loot
 		{
 			get
 			{

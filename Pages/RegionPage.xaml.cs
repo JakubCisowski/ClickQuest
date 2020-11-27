@@ -28,7 +28,7 @@ namespace ClickQuest.Pages
 
 		public void CreateMonsterButton()
 		{
-			var button = new MonsterButton(_region);
+			var button = new MonsterButton(_region, this);
 			this.RegionPanel.Children.Insert(1, button);
 		}
 	}

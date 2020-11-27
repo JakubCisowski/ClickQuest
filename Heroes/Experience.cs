@@ -34,6 +34,11 @@ namespace ClickQuest.Heroes
 			return level - 1;
 		}
 
+		public static int CalculateMonsterXpReward(int monsterHp)
+		{
+            return (int)Math.Ceiling(monsterHp / 10d);
+        }
+
 		public static void CheckIfLeveledUp(Hero hero)
 		{
 			int xpToLevel = XPToLevel(hero.Experience);

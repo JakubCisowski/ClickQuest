@@ -17,6 +17,8 @@
 
                 <StackPanel x:Name="RegionPanel" Orientation="Vertical" Grid.Column="1">
                         <TextBlock x:Name="RegionNameBlock" Text="{Binding Path=Name, StringFormat='Region name: \{0\}'}"/>
+
+                        <TextBlock x:Name="TestRewardsBlock" />
                         <Button x:Name="TownButton" Grid.Column="0" Width="50" Height="50" Content="Come back to town!" Click="TownButton_Click"/>
                 </StackPanel>
 
