@@ -1,4 +1,5 @@
 using ClickQuest.Heroes;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace ClickQuest.Pages
@@ -11,8 +12,13 @@ namespace ClickQuest.Pages
 		{
 			InitializeComponent();
 
-			_hero = Account.User.CurrentHero;
+			_hero = Account.User.Instance.CurrentHero;
 			this.DataContext = _hero;
 		}
+
+		private void ShowEquipmentButton_Click(object sender, RoutedEventArgs e)
+		{
+            EquipmentWindow.Instance.Show();
+        }
 	}
 }

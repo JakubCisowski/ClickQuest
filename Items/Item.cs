@@ -18,6 +18,7 @@ namespace ClickQuest.Items
 		private string _name;
 		private int _value;
         private Rarity _rarity;
+        private int _quantity;
 
         #endregion
 
@@ -75,6 +76,34 @@ namespace ClickQuest.Items
             }
 		}
 
+		public int Quantity
+		{
+			get
+			{
+				return _quantity;
+			}
+			set
+			{
+                _quantity = value;
+                OnPropertyChanged();
+            }
+		}
+
+		public string RarityString
+		{
+			get
+			{
+				string str = Rarity.ToString() + ' ';
+
+				for (int i=0;i<(int)Rarity;i++)
+				{
+                    str += "✩";
+                }
+
+				return str;
+			}
+		}
+
 		#endregion
 
         public Item(int id, string name, Rarity rarity, int value)
@@ -83,6 +112,7 @@ namespace ClickQuest.Items
 			Name = name;
             Rarity = rarity;
             Value = value;
+			Quantity = 0;
 		}
 
     }

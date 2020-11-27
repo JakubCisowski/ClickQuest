@@ -16,10 +16,10 @@ namespace ClickQuest.Pages
 		private void CreateHeroButton_Click(object sender, RoutedEventArgs e)
 		{
 			var hero = new Hero(HeroClass.Slayer, "TestHeroName");
-			User.Heroes.Add(hero);
-			User.CurrentHero = hero;
+			User.Instance.Heroes.Add(hero);
+			User.Instance.CurrentHero = hero;
 
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(new TownPage());
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
 		}
 	}
 }

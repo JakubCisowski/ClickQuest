@@ -37,6 +37,7 @@
                                 </MultiBinding>
                         </TextBlock.Text>
                 </TextBlock>
+                <Button x:Name="ShowEquipmentButton" Click="ShowEquipmentButton_Click" Content="EQ"> </Button>
         </StackPanel> 
         
 </Page>

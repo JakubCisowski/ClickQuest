@@ -7,11 +7,11 @@
           "Monsters": [
             {
                 "Id": 1,
-                "Frequency": 0.7500
+                "Frequency": 1.0000
             },
             {
                 "Id": 2,
-                "Frequency": 0.2500
+                "Frequency": 0.0000
             }
           ]
         },
@@ -22,11 +22,11 @@
             "Monsters": [
                 {
                     "Id": 1,
-                    "Frequency": 0.2500
+                    "Frequency": 0.0000
                 },
                 {
                     "Id": 2,
-                    "Frequency": 0.7500
+                    "Frequency": 1.0000
                 }
               ]
         }

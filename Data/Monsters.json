@@ -12,12 +12,12 @@
             {
                 "Type": "Material",
                 "Id": 0,
-                "Frequency": 0.2500
+                "Frequency": 0.1000
             },
             {
-                "Type": "Material",
+                "Type": "Artifact",
                 "Id": 1,
-                "Frequency": 0.7500
+                "Frequency": 0.9000
             }
           ]
         },
@@ -34,12 +34,12 @@
                 {
                     "Type": "Material",
                     "Id": 0,
-                    "Frequency": 0.7500
+                    "Frequency": 0.1000
                 },
                 {
                     "Type": "Material",
                     "Id": 2,
-                    "Frequency": 0.2500
+                    "Frequency": 0.9000
                 }
             ]
           }

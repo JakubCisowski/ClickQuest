@@ -14,7 +14,7 @@ namespace ClickQuest.Pages
 		{
 			InitializeComponent();
 
-			_hero = Account.User.CurrentHero;
+			_hero = Account.User.Instance.CurrentHero;
 			this.DataContext = _hero;
 
 			GenerateRegionButtons();

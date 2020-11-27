@@ -10,7 +10,6 @@ namespace ClickQuest.Pages
 	public partial class RegionPage : Page
 	{
 		private Region _region;
-		private Random _rng = new Random();
 
 		public RegionPage(Region currentRegion)
 		{
