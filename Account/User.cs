@@ -36,6 +36,7 @@ namespace ClickQuest.Account
         private List<Hero> _heroes;
         private List<Item> _items;
         private Hero _currentHero;
+        private int _gold;
 
         public List<Hero> Heroes
         {
@@ -72,6 +73,21 @@ namespace ClickQuest.Account
             set
             {
                 _currentHero = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int Gold
+        {
+            get
+            {
+                return _gold;
+            }
+            set
+            {
+                _gold = value;
+                CurrentHero.Gold = _gold;
+
                 OnPropertyChanged();
             }
         }

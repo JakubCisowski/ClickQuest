@@ -24,6 +24,7 @@ namespace ClickQuest.Pages
         {
             var b=sender as Button;
             var material = b.CommandParameter as Material;
+            Account.User.Instance.Gold += material.Value;
             material.Quantity--;
 
             EquipmentWindow.Instance.UpdateEquipment();
