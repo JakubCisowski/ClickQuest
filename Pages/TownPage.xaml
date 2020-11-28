@@ -16,6 +16,7 @@
 
 
 		<StackPanel x:Name="RegionsPanel" Orientation="Vertical" Grid.Column="1">
+            <Button x:Name="ShopButton" Content="Shop" Click="ShopButton_Click"/>
 		</StackPanel>
 
 		

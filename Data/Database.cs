@@ -218,8 +218,10 @@ namespace ClickQuest.Data
 		{
             // Town
             Pages.Add("Town", new TownPage());
-			// Regions
-			foreach (var region in Regions)
+            // Shop
+            Pages.Add("Shop", new ShopPage());
+            // Regions
+            foreach (var region in Regions)
 			{
                 Pages.Add(region.Name, new RegionPage(region));
             }

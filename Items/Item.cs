@@ -87,6 +87,13 @@ namespace ClickQuest.Items
 			set
 			{
                 _quantity = value;
+
+				// If we set quantity to 0 or lower, then remove it from user's equipment
+				if (_quantity <= 0)
+				{
+                    Account.User.Instance.Items.Remove(this);					
+                }
+
                 OnPropertyChanged();
             }
 		}

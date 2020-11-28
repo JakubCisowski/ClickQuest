@@ -46,5 +46,11 @@ namespace ClickQuest.Pages
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages[regionName]);
 		}
 
+		private void ShopButton_Click(object sender, RoutedEventArgs e)
+		{
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Shop"]);
+            (Database.Pages["Shop"] as ShopPage).UpdateShop();
+        }
+
 	}
 }
