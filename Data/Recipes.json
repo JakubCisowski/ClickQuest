@@ -11,6 +11,12 @@
             "Name": "TestRecipe",
             "Rarity": 1,
             "Value": 1
+        },
+        {
+            "Id": 2,
+            "Name": "TestRecipe2",
+            "Rarity": 1,
+            "Value": 1
         }
     ]
 }

@@ -32,12 +32,24 @@ namespace ClickQuest.Pages
 
         private void BuyButton_Click(object sender, RoutedEventArgs e)
         {
+            var b=sender as Button;
+            var recipe = b.CommandParameter as Recipe;
+
+            if (recipe.Quantity <= 0)
+            {
+                Account.User.Instance.Items.Add(recipe);
+            }
+
+            recipe.Quantity++;
+
+            EquipmentWindow.Instance.UpdateEquipment();
+            UpdateShop();
         }
 
         public void UpdateShop()
         {
             ItemsListViewSell.ItemsSource = User.Instance.Items.Where(x=>x is Material).ToList();
-            ItemsListViewBuy.ItemsSource = Database.Recipes;
+            ItemsListViewBuy.ItemsSource = Database.ShopOffer.Where(x=>!Account.User.Instance.Items.Contains(x));
 
             ItemsListViewSell.Items.Refresh();
             ItemsListViewBuy.Items.Refresh();

@@ -19,6 +19,7 @@ namespace ClickQuest.Data
 		public static List<Artifact> Artifacts { get; set; }
         public static List<Monster> Monsters { get; set; }
 		public static List<Region> Regions { get; set; }
+		public static List<Recipe> ShopOffer { get; set; }
 		public static Dictionary<string,Page> Pages{ get; set;}
 		
 		#endregion
@@ -30,6 +31,8 @@ namespace ClickQuest.Data
 			Artifacts = new List<Artifact>();
 			Monsters = new List<Monster>();
 			Regions = new List<Region>();
+			ShopOffer = new List<Recipe>();
+
             Pages = new Dictionary<string, Page>();
 
             LoadMaterials();
@@ -37,7 +40,8 @@ namespace ClickQuest.Data
 			LoadArtifacts();
 			LoadMonsters();
 			LoadRegions();
-			LoadPages();
+            LoadShopOffer();
+            LoadPages();
 		}
 
 		public static void LoadMaterials()
@@ -211,6 +215,20 @@ namespace ClickQuest.Data
 			if (errorLog.Count>0)
 			{
 				Logger.Log(errorLog);
+			}
+		}
+		public static void LoadShopOffer()
+		{
+			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "ShopOffer.json");
+			var parsedObject = JObject.Parse(File.ReadAllText(path));
+			var jArray = (JArray)parsedObject["ShopOffer"];
+
+			for (var i = 0; i < jArray.Count; i++)
+			{
+				var id = int.Parse(parsedObject["ShopOffer"][i]["RecipeId"].ToString());
+                var recipe = Recipes.Where(x => x.Id == id).FirstOrDefault();
+
+				ShopOffer.Add(recipe);
 			}
 		}
 
