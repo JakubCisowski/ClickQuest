@@ -35,7 +35,6 @@ namespace ClickQuest.Account
 
         private List<Hero> _heroes;
         private List<Item> _items;
-
         private Hero _currentHero;
 
         public List<Hero> Heroes

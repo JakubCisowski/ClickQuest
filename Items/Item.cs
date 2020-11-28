@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Items
@@ -23,7 +24,8 @@ namespace ClickQuest.Items
         #endregion
 
         #region Properties
-
+		
+		[Key]
         public int Id
 		{
 			get

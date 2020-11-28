@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Heroes
@@ -36,6 +38,10 @@ namespace ClickQuest.Heroes
         #endregion
 
         #region Properties
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Int { get; set;}
 
         public int ClickDamagePerLevel { get; }
         public double CritChancePerLevel { get; }
