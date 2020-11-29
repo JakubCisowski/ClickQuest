@@ -9,16 +9,20 @@ namespace ClickQuest.Heroes
     {
         Slayer, Venom
     }
+
     // Base Hero class
     public class Hero : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-        #endregion
+
+        #endregion INotifyPropertyChanged
 
         #region Private Fields
 
@@ -35,13 +39,13 @@ namespace ClickQuest.Heroes
         // Artifacts
         // Materials
 
-        #endregion
+        #endregion Private Fields
 
         #region Properties
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Int { get; set;}
+        public int Int { get; set; }
 
         public int ClickDamagePerLevel { get; }
         public double CritChancePerLevel { get; }
@@ -105,7 +109,6 @@ namespace ClickQuest.Heroes
             get
             {
                 return _critChance;
-
             }
             set
             {
@@ -148,7 +151,7 @@ namespace ClickQuest.Heroes
             }
         }
 
-        #endregion
+        #endregion Properties
 
         public Hero(HeroClass heroClass, string heroName)
         {
@@ -168,6 +171,7 @@ namespace ClickQuest.Heroes
                     PoisonDamage = 0;
                     PoisonDamagePerLevel = 0;
                     break;
+
                 case HeroClass.Venom:
                     ClickDamage = 2;
                     CritChance = 0;
@@ -176,6 +180,10 @@ namespace ClickQuest.Heroes
                     PoisonDamagePerLevel = 2;
                     break;
             }
+        }
+
+        public Hero()
+        {
         }
 
         public void GrantLevelUpBonuses()
@@ -191,6 +199,7 @@ namespace ClickQuest.Heroes
                     ClickDamage += ClickDamagePerLevel;
                     CritChance += CritChancePerLevel;
                     break;
+
                 case HeroClass.Venom:
                     ClickDamage += ClickDamagePerLevel;
                     PoisonDamage += PoisonDamagePerLevel;

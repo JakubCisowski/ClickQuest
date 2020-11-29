@@ -10,8 +10,9 @@ namespace ClickQuest.Entity
         {
         }
 
-        public UserContext(DbContextOptions options) : base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlServer(@"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ClickQuest.Entity.UserContext;");
         }
 
         public DbSet<Hero> Heroes { get; set; }

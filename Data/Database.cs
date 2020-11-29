@@ -41,7 +41,7 @@ namespace ClickQuest.Data
 			LoadMonsters();
 			LoadRegions();
             LoadShopOffer();
-            LoadPages();
+            // LoadPages();
 		}
 
 		public static void LoadMaterials()

@@ -92,11 +92,6 @@ namespace ClickQuest.Account
             }
         }
 
-        static User()
-        {
-            Data.Database.Load();
-        }
-
         private User()
         {
             _heroes = new List<Hero>();
