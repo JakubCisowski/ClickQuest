@@ -27,7 +27,9 @@ namespace ClickQuest.Items
         #region Properties
 		
 		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.None)]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int DbKey { get; set; }
+
         public int Id
 		{
 			get

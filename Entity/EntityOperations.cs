@@ -16,8 +16,6 @@ namespace ClickQuest.Entity
                 db.Recipes.RemoveRange(db.Recipes);
                 db.Artifacts.RemoveRange(db.Artifacts);
 
-                db.SaveChanges();
-
                 foreach (var hero in Account.User.Instance.Heroes)
                 {
                     db.Heroes.Add(hero);
