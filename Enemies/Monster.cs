@@ -5,10 +5,6 @@ using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Enemies
 {
-	public enum MonsterType
-	{
-		Beast, Flying
-	}
 	public partial class Monster : INotifyPropertyChanged
 	{
 		#region INotifyPropertyChanged

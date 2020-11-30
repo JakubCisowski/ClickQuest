@@ -79,7 +79,6 @@ namespace ClickQuest.Places
 
 		#endregion
 
-
 		public Region(int id, string name, string background, List<(Monster, double)> monsters)
 		{
 			Id = id;

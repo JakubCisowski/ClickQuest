@@ -13,7 +13,7 @@ namespace ClickQuest.Data
 {
 	public static partial class Database
 	{
-		#region Private Fields
+		#region Collections
 		public static List<Material> Materials { get; set; }
 		public static List<Recipe> Recipes { get; set; }
 		public static List<Artifact> Artifacts { get; set; }
@@ -26,24 +26,28 @@ namespace ClickQuest.Data
 
         public static void Load()
 		{
+			// Create collections.
 			Materials = new List<Material>();
 			Recipes = new List<Recipe>();
 			Artifacts = new List<Artifact>();
 			Monsters = new List<Monster>();
 			Regions = new List<Region>();
 			ShopOffer = new List<Recipe>();
-
             Pages = new Dictionary<string, Page>();
 
+			// Fill collections with JSON data.
             LoadMaterials();
 			LoadRecipes();
 			LoadArtifacts();
 			LoadMonsters();
 			LoadRegions();
             LoadShopOffer();
-            // LoadPages();
+			
+			// Refresh Pages collection in order to rearrange page bindings.
+            RefreshPages();
 		}
 
+		#region JSON Load
 		public static void LoadMaterials()
 		{
 			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Materials.json");
@@ -61,6 +65,7 @@ namespace ClickQuest.Data
 				Materials.Add(newMaterial);
 			}
 		}
+
 		public static void LoadRecipes()
 		{
 			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Recipes.json");
@@ -78,6 +83,7 @@ namespace ClickQuest.Data
 				Recipes.Add(newRecipe);
 			}
 		}
+
 		public static void LoadArtifacts()
 		{
 			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Artifacts.json");
@@ -95,6 +101,7 @@ namespace ClickQuest.Data
 				Artifacts.Add(newArtifact);
 			}
 		}
+
 		public static void LoadMonsters()
 		{
 			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Monsters.json");
@@ -128,7 +135,6 @@ namespace ClickQuest.Data
 
 				for (int j = 0; j < lootArray.Count; j++)
 				{
-                    //! przebudować
                     var itemType = (ItemType)Enum.Parse(typeof(ItemType), parsedObject["Monsters"][i]["Loot"][j]["Type"].ToString());
                     var itemId = int.Parse(parsedObject["Monsters"][i]["Loot"][j]["Id"].ToString());
 
@@ -170,6 +176,7 @@ namespace ClickQuest.Data
 				Logger.Log(errorLog);
 			}
 		}
+
 		public static void LoadRegions()
 		{
 			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Regions.json");
@@ -217,6 +224,7 @@ namespace ClickQuest.Data
 				Logger.Log(errorLog);
 			}
 		}
+
 		public static void LoadShopOffer()
 		{
 			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "ShopOffer.json");
@@ -232,8 +240,11 @@ namespace ClickQuest.Data
 			}
 		}
 
-		public static void LoadPages()
+		#endregion
+		public static void RefreshPages()
 		{
+            Pages.Clear();
+
             // Town
             Pages.Add("Town", new TownPage());
             // Shop

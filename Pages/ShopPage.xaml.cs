@@ -15,6 +15,17 @@ namespace ClickQuest.Pages
             UpdateShop();
         }
 
+        public void UpdateShop()
+        {
+            ItemsListViewSell.ItemsSource = User.Instance.Items.Where(x=>x is Material).ToList();
+            ItemsListViewBuy.ItemsSource = Database.ShopOffer.Where(x=>!Account.User.Instance.Items.Contains(x));
+
+            ItemsListViewSell.Items.Refresh();
+            ItemsListViewBuy.Items.Refresh();
+        }
+
+        #region Events
+
         private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
@@ -43,13 +54,6 @@ namespace ClickQuest.Pages
             UpdateShop();
         }
 
-        public void UpdateShop()
-        {
-            ItemsListViewSell.ItemsSource = User.Instance.Items.Where(x=>x is Material).ToList();
-            ItemsListViewBuy.ItemsSource = Database.ShopOffer.Where(x=>!Account.User.Instance.Items.Contains(x));
-
-            ItemsListViewSell.Items.Refresh();
-            ItemsListViewBuy.Items.Refresh();
-        }
+        #endregion
     }
 }

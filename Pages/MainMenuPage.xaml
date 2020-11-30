@@ -6,15 +6,15 @@
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d" Title="Main Menu"
         Height="450" Width="800">
-    <Grid>
+  <Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-				<Button x:Name="CreateHeroButton"  Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click"/>
-
 		<StackPanel x:Name="HeroesPanel" Orientation="Vertical" Grid.Column="0">
 		</StackPanel>
+
+		<Button x:Name="CreateHeroButton"  Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" Grid.Column="1"/>
 	</Grid>
 </Page>

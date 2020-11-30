@@ -19,6 +19,8 @@ namespace ClickQuest.Account
 
         #endregion INotifyPropertyChanged
 
+        #region Singleton
+
         private static User _instance;
 
         public static User Instance
@@ -32,11 +34,17 @@ namespace ClickQuest.Account
                 return _instance;
             }
         }
+        #endregion
 
+        #region Private Fields
         private List<Hero> _heroes;
         private List<Item> _items;
         private Hero _currentHero;
         private int _gold;
+
+        #endregion
+
+        #region Properties
 
         public List<Hero> Heroes
         {
@@ -96,6 +104,8 @@ namespace ClickQuest.Account
             }
         }
 
+        #endregion
+
         private User()
         {
             _heroes = new List<Hero>();
@@ -104,7 +114,7 @@ namespace ClickQuest.Account
 
         public void AddItem(Item itemToAdd)
         {
-            // If user does have this item, increase quantity
+            // If user does have this item, increase quantity.
             foreach (var item in Items)
             {
                 if (item.Id==itemToAdd.Id && item.GetType() == itemToAdd.GetType())
@@ -114,24 +124,24 @@ namespace ClickQuest.Account
                 }
             }
 
-           // If user doesn't have this item, add it
+           // If user doesn't have this item, add it.
            Items.Add(itemToAdd);
         }
 
         public void RemoveItem(Item itemToAdd)
         {
-            // If user does have this item, decrease quantity
+            // If user does have this item, decrease quantity.
             foreach (var item in Items)
             {
                 if (item.Id==itemToAdd.Id && item.GetType() == itemToAdd.GetType())
                 {
                     item.Quantity--;
-                    // Item property will automatically delete it if quantity will set to 0 or lower 
+                    // Item property will automatically delete it if quantity will set to 0 or lower.
                     return;
                 }
             }
 
-           // If user doesn't have this item, don't do anything
+           // If user doesn't have this item, don't do anything.
         }
     }
 }

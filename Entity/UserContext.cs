@@ -6,10 +6,6 @@ namespace ClickQuest.Entity
 {
     public class UserContext : DbContext
     {
-        public UserContext()
-        {
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ClickQuest.Entity.UserContext;");

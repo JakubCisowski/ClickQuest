@@ -21,15 +21,19 @@ namespace ClickQuest.Pages
 			CreateMonsterButton();
 		}
 
-		private void TownButton_Click(object sender, RoutedEventArgs e)
-		{
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
-		}
-
 		public void CreateMonsterButton()
 		{
 			var button = new MonsterButton(_region, this);
 			this.RegionPanel.Children.Insert(1, button);
 		}
+
+		#region Events
+		
+		private void TownButton_Click(object sender, RoutedEventArgs e)
+		{
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
+		}
+
+		#endregion
 	}
 }

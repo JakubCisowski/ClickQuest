@@ -15,6 +15,40 @@ namespace ClickQuest.Pages
             GenerateHeroButtons();
         }
 
+        private void GenerateHeroButtons()
+        {
+            HeroesPanel.Children.Clear();
+
+            for (int i = 0; i < Account.User.Instance.Heroes.Count; i++)
+            {
+                var selectHeroButton = new Button()
+                {
+                    Name = "Hero" + Account.User.Instance.Heroes[i].Id,
+                    Content = Account.User.Instance.Heroes[i].Name + ", " + Account.User.Instance.Heroes[i].ThisHeroClass.ToString() + " [" + Account.User.Instance.Heroes[i].Level + " lvl]",
+                    Width = 250,
+                    Height = 50
+                };
+
+                  var deleteHeroButton = new Button()
+                {
+                    Name = "DeleteHero" + Account.User.Instance.Heroes[i].Id,
+                    Content = "Delete " + Account.User.Instance.Heroes[i].Name + ", " + Account.User.Instance.Heroes[i].ThisHeroClass.ToString() + " [" + Account.User.Instance.Heroes[i].Level + " lvl]",
+                    Width = 250,
+                    Height = 50
+                };
+
+
+                selectHeroButton.Click += SelectHeroButton_Click;
+
+                deleteHeroButton.Click += DeleteHeroButton_Click;
+
+                HeroesPanel.Children.Add(selectHeroButton);
+                HeroesPanel.Children.Add(deleteHeroButton);
+            }
+        }
+
+        #region Events
+
         private void CreateHeroButton_Click(object sender, RoutedEventArgs e)
         {
             // Add a random number to hero name to distinguish them
@@ -24,41 +58,9 @@ namespace ClickQuest.Pages
             User.Instance.Heroes.Add(hero);
             User.Instance.CurrentHero = hero;
 
-            Data.Database.LoadPages();
+            Data.Database.RefreshPages();
 
             (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
-        }
-
-        private void GenerateHeroButtons()
-        {
-            HeroesPanel.Children.Clear();
-
-            for (int i = 0; i < Account.User.Instance.Heroes.Count; i++)
-            {
-                var button = new Button()
-                {
-                    Name = "Hero" + Account.User.Instance.Heroes[i].Id,
-                    Content = Account.User.Instance.Heroes[i].Name + ", " + Account.User.Instance.Heroes[i].ThisHeroClass.ToString() + " [" + Account.User.Instance.Heroes[i].Level + " lvl]",
-                    Width = 250,
-                    Height = 50
-                };
-
-                  var button2 = new Button()
-                {
-                    Name = "DeleteHero" + Account.User.Instance.Heroes[i].Id,
-                    Content = "Delete " + Account.User.Instance.Heroes[i].Name + ", " + Account.User.Instance.Heroes[i].ThisHeroClass.ToString() + " [" + Account.User.Instance.Heroes[i].Level + " lvl]",
-                    Width = 250,
-                    Height = 50
-                };
-
-
-                button.Click += SelectHeroButton_Click;
-
-                button2.Click += DeleteHeroButton_Click;
-
-                HeroesPanel.Children.Add(button);
-                HeroesPanel.Children.Add(button2);
-            }
         }
 
         private void SelectHeroButton_Click(object sender, RoutedEventArgs e)
@@ -69,7 +71,7 @@ namespace ClickQuest.Pages
 
             Account.User.Instance.Gold = hero.Gold;
 
-            Data.Database.LoadPages();
+            Data.Database.RefreshPages();
             (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
         }
 
@@ -81,5 +83,7 @@ namespace ClickQuest.Pages
 
             GenerateHeroButtons();
         }
+
+        #endregion
     }
 }

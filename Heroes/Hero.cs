@@ -5,12 +5,6 @@ using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Heroes
 {
-	public enum HeroClass
-    {
-        Slayer, Venom
-    }
-
-    // Base Hero class
     public class Hero : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
@@ -162,6 +156,7 @@ namespace ClickQuest.Heroes
             Name = heroName;
             ClickDamagePerLevel = 1;
 
+            // Set class specific values.
             switch (heroClass)
             {
                 case HeroClass.Slayer:
@@ -193,6 +188,7 @@ namespace ClickQuest.Heroes
                 return;
             }
 
+            // Class specific bonuses.
             switch (_heroClass)
             {
                 case HeroClass.Slayer:

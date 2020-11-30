@@ -38,6 +38,8 @@ namespace ClickQuest.Pages
 			}
 		}
 
+		#region Events
+
 		private void RegionButton_Click(object sender, RoutedEventArgs e)
 		{
 			var regionId = int.Parse((sender as Button).Name.Substring(6));
@@ -52,5 +54,6 @@ namespace ClickQuest.Pages
             (Database.Pages["Shop"] as ShopPage).UpdateShop();
         }
 
+		#endregion
 	}
 }
