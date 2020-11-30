@@ -4,8 +4,8 @@ using System.Linq;
 
 namespace ClickQuest.Entity
 {
-	// TODO: asynchroniczne zapisywanie/wczytywanie
-	public static class EntityOperations
+    // TODO: asynchroniczne zapisywanie/wczytywanie
+    public static class EntityOperations
     {
         public static void SaveGame()
         {

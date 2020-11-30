@@ -157,7 +157,7 @@ namespace ClickQuest.Heroes
         {
             _heroClass = heroClass;
             Experience = 0;
-            Gold = 0;
+            Gold = Account.User.Instance.Gold;
             Level = 0;
             Name = heroName;
             ClickDamagePerLevel = 1;

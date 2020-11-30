@@ -107,11 +107,7 @@ namespace ClickQuest.Controls
             // Not adding "empty loot" to inventory
             if (_monster.Loot[i].Item.Id != 0)
             {
-                _monster.Loot[i].Item.Quantity++;
-                if (!Account.User.Instance.Items.Contains(_monster.Loot[i].Item))
-                {
-                    Account.User.Instance.Items.Add(_monster.Loot[i].Item);
-                }
+                Account.User.Instance.AddItem(_monster.Loot[i].Item);
                 EquipmentWindow.Instance.UpdateEquipment();
             }
         }

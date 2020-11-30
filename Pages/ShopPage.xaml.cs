@@ -24,8 +24,9 @@ namespace ClickQuest.Pages
         {
             var b=sender as Button;
             var material = b.CommandParameter as Material;
+
+            Account.User.Instance.RemoveItem(material);
             Account.User.Instance.Gold += material.Value;
-            material.Quantity--;
 
             EquipmentWindow.Instance.UpdateEquipment();
             UpdateShop();
@@ -36,12 +37,7 @@ namespace ClickQuest.Pages
             var b=sender as Button;
             var recipe = b.CommandParameter as Recipe;
 
-            if (recipe.Quantity <= 0)
-            {
-                Account.User.Instance.Items.Add(recipe);
-            }
-
-            recipe.Quantity++;
+            Account.User.Instance.AddItem(recipe);
 
             EquipmentWindow.Instance.UpdateEquipment();
             UpdateShop();

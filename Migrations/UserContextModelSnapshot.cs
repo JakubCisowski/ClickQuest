@@ -18,6 +18,21 @@ namespace ClickQuest.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
+            modelBuilder.Entity("ClickQuest.Entity.Other", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("Gold")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Other");
+                });
+
             modelBuilder.Entity("ClickQuest.Heroes.Hero", b =>
                 {
                     b.Property<int>("Id")

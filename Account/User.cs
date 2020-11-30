@@ -86,7 +86,11 @@ namespace ClickQuest.Account
             set
             {
                 _gold = value;
-                CurrentHero.Gold = _gold;
+                foreach (var Hero in Heroes)
+                {
+                    Hero.Gold = _gold;
+                }
+                //CurrentHero.Gold = _gold;
 
                 OnPropertyChanged();
             }
@@ -96,6 +100,38 @@ namespace ClickQuest.Account
         {
             _heroes = new List<Hero>();
             _items = new List<Item>();
+        }
+
+        public void AddItem(Item itemToAdd)
+        {
+            // If user does have this item, increase quantity
+            foreach (var item in Items)
+            {
+                if (item.Id==itemToAdd.Id && item.GetType() == itemToAdd.GetType())
+                {
+                    item.Quantity++;
+                    return;
+                }
+            }
+
+           // If user doesn't have this item, add it
+           Items.Add(itemToAdd);
+        }
+
+        public void RemoveItem(Item itemToAdd)
+        {
+            // If user does have this item, decrease quantity
+            foreach (var item in Items)
+            {
+                if (item.Id==itemToAdd.Id && item.GetType() == itemToAdd.GetType())
+                {
+                    item.Quantity--;
+                    // Item property will automatically delete it if quantity will set to 0 or lower 
+                    return;
+                }
+            }
+
+           // If user doesn't have this item, don't do anything
         }
     }
 }

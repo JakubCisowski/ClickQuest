@@ -16,7 +16,6 @@ namespace ClickQuest.Pages
 
         private void CreateHeroButton_Click(object sender, RoutedEventArgs e)
         {
-            Entity.EntityOperations.ClearHeroes();
             var hero = new Hero(HeroClass.Slayer, "TestHeroName");
             User.Instance.Heroes.Add(hero);
             User.Instance.CurrentHero = hero;
@@ -49,6 +48,8 @@ namespace ClickQuest.Pages
             var id = int.Parse((sender as Button).Name.Substring(4));
             var hero = Account.User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
             Account.User.Instance.CurrentHero = hero;
+
+            Account.User.Instance.Gold = hero.Gold;
 
             Data.Database.LoadPages();
             (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
