@@ -1,7 +1,7 @@
 using ClickQuest.Enemies;
 using ClickQuest.Items;
-using ClickQuest.Places;
 using ClickQuest.Pages;
+using ClickQuest.Places;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -17,14 +17,14 @@ namespace ClickQuest.Data
 		public static List<Material> Materials { get; set; }
 		public static List<Recipe> Recipes { get; set; }
 		public static List<Artifact> Artifacts { get; set; }
-        public static List<Monster> Monsters { get; set; }
+		public static List<Monster> Monsters { get; set; }
 		public static List<Region> Regions { get; set; }
 		public static List<Recipe> ShopOffer { get; set; }
-		public static Dictionary<string,Page> Pages{ get; set;}
-		
+		public static Dictionary<string, Page> Pages { get; set; }
+
 		#endregion
 
-        public static void Load()
+		public static void Load()
 		{
 			// Create collections.
 			Materials = new List<Material>();
@@ -33,18 +33,18 @@ namespace ClickQuest.Data
 			Monsters = new List<Monster>();
 			Regions = new List<Region>();
 			ShopOffer = new List<Recipe>();
-            Pages = new Dictionary<string, Page>();
+			Pages = new Dictionary<string, Page>();
 
 			// Fill collections with JSON data.
-            LoadMaterials();
+			LoadMaterials();
 			LoadRecipes();
 			LoadArtifacts();
 			LoadMonsters();
 			LoadRegions();
-            LoadShopOffer();
-			
+			LoadShopOffer();
+
 			// Refresh Pages collection in order to rearrange page bindings.
-            RefreshPages();
+			RefreshPages();
 		}
 
 		#region JSON Load
@@ -58,8 +58,8 @@ namespace ClickQuest.Data
 			{
 				var id = int.Parse(parsedObject["Materials"][i]["Id"].ToString());
 				var name = parsedObject["Materials"][i]["Name"].ToString();
-                var rarity = (Rarity)int.Parse(parsedObject["Materials"][i]["Rarity"].ToString());
-                var value = int.Parse(parsedObject["Materials"][i]["Value"].ToString());
+				var rarity = (Rarity)int.Parse(parsedObject["Materials"][i]["Rarity"].ToString());
+				var value = int.Parse(parsedObject["Materials"][i]["Value"].ToString());
 
 				var newMaterial = new Material(id, name, rarity, value);
 				Materials.Add(newMaterial);
@@ -76,8 +76,8 @@ namespace ClickQuest.Data
 			{
 				var id = int.Parse(parsedObject["Recipes"][i]["Id"].ToString());
 				var name = parsedObject["Recipes"][i]["Name"].ToString();
-                var rarity = (Rarity)int.Parse(parsedObject["Recipes"][i]["Rarity"].ToString());
-                var value = int.Parse(parsedObject["Recipes"][i]["Value"].ToString());
+				var rarity = (Rarity)int.Parse(parsedObject["Recipes"][i]["Rarity"].ToString());
+				var value = int.Parse(parsedObject["Recipes"][i]["Value"].ToString());
 
 				var newRecipe = new Recipe(id, name, rarity, value);
 				Recipes.Add(newRecipe);
@@ -94,8 +94,8 @@ namespace ClickQuest.Data
 			{
 				var id = int.Parse(parsedObject["Artifacts"][i]["Id"].ToString());
 				var name = parsedObject["Artifacts"][i]["Name"].ToString();
-                var rarity = (Rarity)int.Parse(parsedObject["Artifacts"][i]["Rarity"].ToString());
-                var value = int.Parse(parsedObject["Artifacts"][i]["Value"].ToString());
+				var rarity = (Rarity)int.Parse(parsedObject["Artifacts"][i]["Rarity"].ToString());
+				var value = int.Parse(parsedObject["Artifacts"][i]["Value"].ToString());
 
 				var newArtifact = new Artifact(id, name, rarity, value);
 				Artifacts.Add(newArtifact);
@@ -127,7 +127,7 @@ namespace ClickQuest.Data
 					typesTemp.Add(monsterType);
 				}
 
-				var lootTemp = new List<(Item,ItemType, double)>();
+				var lootTemp = new List<(Item, ItemType, double)>();
 				var lootArray = (JArray)parsedObject["Monsters"][i]["Loot"];
 
 				// Error check
@@ -135,34 +135,34 @@ namespace ClickQuest.Data
 
 				for (int j = 0; j < lootArray.Count; j++)
 				{
-                    var itemType = (ItemType)Enum.Parse(typeof(ItemType), parsedObject["Monsters"][i]["Loot"][j]["Type"].ToString());
-                    var itemId = int.Parse(parsedObject["Monsters"][i]["Loot"][j]["Id"].ToString());
+					var itemType = (ItemType)Enum.Parse(typeof(ItemType), parsedObject["Monsters"][i]["Loot"][j]["Type"].ToString());
+					var itemId = int.Parse(parsedObject["Monsters"][i]["Loot"][j]["Id"].ToString());
 
-                    Item item = null;
-					
-                    switch (itemType)
+					Item item = null;
+
+					switch (itemType)
 					{
 						case ItemType.Material:
-                            item = Materials.Where(x => x.Id == itemId).FirstOrDefault();
+							item = Materials.Where(x => x.Id == itemId).FirstOrDefault();
 							break;
 
 						case ItemType.Recipe:
-							item = Recipes.Where(x=>x.Id==itemId).FirstOrDefault();
-                            break;
+							item = Recipes.Where(x => x.Id == itemId).FirstOrDefault();
+							break;
 
 						case ItemType.Artifact:
-                            item = Artifacts.Where(x => x.Id == itemId).FirstOrDefault();
+							item = Artifacts.Where(x => x.Id == itemId).FirstOrDefault();
 							break;
-                    }
+					}
 
 					var frequency = Double.Parse(parsedObject["Monsters"][i]["Loot"][j]["Frequency"].ToString());
 
-					frequencySum+=frequency;
+					frequencySum += frequency;
 
-					lootTemp.Add((item,ItemType.Material, frequency));
+					lootTemp.Add((item, ItemType.Material, frequency));
 				}
 
-				if(frequencySum != 1)
+				if (frequencySum != 1)
 				{
 					errorLog.Add($"Error: {name} - loot frequency sums up to {frequencySum} instead of 1.");
 				}
@@ -171,7 +171,7 @@ namespace ClickQuest.Data
 				Monsters.Add(newMonster);
 			}
 
-			if (errorLog.Count>0)
+			if (errorLog.Count > 0)
 			{
 				Logger.Log(errorLog);
 			}
@@ -205,12 +205,12 @@ namespace ClickQuest.Data
 
 					var frequency = Double.Parse(parsedObject["Regions"][i]["Monsters"][j]["Frequency"].ToString());
 
-                    frequencySum += frequency;
+					frequencySum += frequency;
 
-                    monstersTemp.Add((monster, frequency));
+					monstersTemp.Add((monster, frequency));
 				}
-				
-				if(frequencySum != 1)
+
+				if (frequencySum != 1)
 				{
 					errorLog.Add($"Error: {name} - monster frequency sums up to {frequencySum} instead of 1.");
 				}
@@ -219,7 +219,7 @@ namespace ClickQuest.Data
 				Regions.Add(newRegion);
 			}
 
-			if (errorLog.Count>0)
+			if (errorLog.Count > 0)
 			{
 				Logger.Log(errorLog);
 			}
@@ -234,7 +234,7 @@ namespace ClickQuest.Data
 			for (var i = 0; i < jArray.Count; i++)
 			{
 				var id = int.Parse(parsedObject["ShopOffer"][i]["RecipeId"].ToString());
-                var recipe = Recipes.Where(x => x.Id == id).FirstOrDefault();
+				var recipe = Recipes.Where(x => x.Id == id).FirstOrDefault();
 
 				ShopOffer.Add(recipe);
 			}
@@ -243,17 +243,17 @@ namespace ClickQuest.Data
 		#endregion
 		public static void RefreshPages()
 		{
-            Pages.Clear();
+			Pages.Clear();
 
-            // Town
-            Pages.Add("Town", new TownPage());
-            // Shop
-            Pages.Add("Shop", new ShopPage());
-            // Regions
-            foreach (var region in Regions)
+			// Town
+			Pages.Add("Town", new TownPage());
+			// Shop
+			Pages.Add("Shop", new ShopPage());
+			// Regions
+			foreach (var region in Regions)
 			{
-                Pages.Add(region.Name, new RegionPage(region));
-            }
-        }
+				Pages.Add(region.Name, new RegionPage(region));
+			}
+		}
 	}
 }

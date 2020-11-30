@@ -1,6 +1,6 @@
 namespace ClickQuest.Enemies
 {
-    public enum MonsterType
+	public enum MonsterType
 	{
 		Beast, Flying
 	}

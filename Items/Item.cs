@@ -5,9 +5,9 @@ using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Items
 {
-	public partial class Item :INotifyPropertyChanged
-    {
-        #region INotifyPropertyChanged
+	public partial class Item : INotifyPropertyChanged
+	{
+		#region INotifyPropertyChanged
 		public event PropertyChangedEventHandler PropertyChanged;
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
@@ -19,18 +19,18 @@ namespace ClickQuest.Items
 		private int _id;
 		private string _name;
 		private int _value;
-        private Rarity _rarity;
-        private int _quantity;
+		private Rarity _rarity;
+		private int _quantity;
 
-        #endregion
+		#endregion
 
-        #region Properties
-		
+		#region Properties
+
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int DbKey { get; set; }
 
-        public int Id
+		public int Id
 		{
 			get
 			{
@@ -77,9 +77,9 @@ namespace ClickQuest.Items
 			}
 			set
 			{
-                _rarity = value;
+				_rarity = value;
 				OnPropertyChanged();
-            }
+			}
 		}
 
 		public int Quantity
@@ -90,16 +90,16 @@ namespace ClickQuest.Items
 			}
 			set
 			{
-                _quantity = value;
+				_quantity = value;
 
 				// If we set quantity to 0 or lower, then remove it from user's equipment
 				if (_quantity <= 0)
 				{
-                    Account.User.Instance.Items.Remove(this);					
-                }
+					Account.User.Instance.Items.Remove(this);
+				}
 
-                OnPropertyChanged();
-            }
+				OnPropertyChanged();
+			}
 		}
 
 		public string RarityString
@@ -108,10 +108,10 @@ namespace ClickQuest.Items
 			{
 				string str = Rarity.ToString() + ' ';
 
-				for (int i=0;i<(int)Rarity;i++)
+				for (int i = 0; i < (int)Rarity; i++)
 				{
-                    str += "✩";
-                }
+					str += "✩";
+				}
 
 				return str;
 			}
@@ -119,14 +119,14 @@ namespace ClickQuest.Items
 
 		#endregion
 
-        public Item(int id, string name, Rarity rarity, int value)
+		public Item(int id, string name, Rarity rarity, int value)
 		{
 			Id = id;
 			Name = name;
-            Rarity = rarity;
-            Value = value;
+			Rarity = rarity;
+			Value = value;
 			Quantity = 0;
 		}
 
-    }
+	}
 }

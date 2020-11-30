@@ -6,142 +6,142 @@ using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Account
 {
-    public partial class User : INotifyPropertyChanged
-    {
-        #region INotifyPropertyChanged
+	public partial class User : INotifyPropertyChanged
+	{
+		#region INotifyPropertyChanged
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
-        #endregion INotifyPropertyChanged
+		#endregion INotifyPropertyChanged
 
-        #region Singleton
+		#region Singleton
 
-        private static User _instance;
+		private static User _instance;
 
-        public static User Instance
-        {
-            get
-            {
-                if (_instance is null)
-                {
-                    _instance = new User();
-                }
-                return _instance;
-            }
-        }
-        #endregion
+		public static User Instance
+		{
+			get
+			{
+				if (_instance is null)
+				{
+					_instance = new User();
+				}
+				return _instance;
+			}
+		}
+		#endregion
 
-        #region Private Fields
-        private List<Hero> _heroes;
-        private List<Item> _items;
-        private Hero _currentHero;
-        private int _gold;
+		#region Private Fields
+		private List<Hero> _heroes;
+		private List<Item> _items;
+		private Hero _currentHero;
+		private int _gold;
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
 
-        public List<Hero> Heroes
-        {
-            get
-            {
-                return _heroes;
-            }
-            set
-            {
-                _heroes = value;
-                OnPropertyChanged();
-            }
-        }
+		public List<Hero> Heroes
+		{
+			get
+			{
+				return _heroes;
+			}
+			set
+			{
+				_heroes = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public List<Item> Items
-        {
-            get
-            {
-                return _items;
-            }
-            set
-            {
-                _items = value;
-                OnPropertyChanged();
-            }
-        }
+		public List<Item> Items
+		{
+			get
+			{
+				return _items;
+			}
+			set
+			{
+				_items = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public Hero CurrentHero
-        {
-            get
-            {
-                return _currentHero;
-            }
-            set
-            {
-                _currentHero = value;
-                OnPropertyChanged();
-            }
-        }
+		public Hero CurrentHero
+		{
+			get
+			{
+				return _currentHero;
+			}
+			set
+			{
+				_currentHero = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public int Gold
-        {
-            get
-            {
-                return _gold;
-            }
-            set
-            {
-                _gold = value;
-                foreach (var Hero in Heroes)
-                {
-                    Hero.Gold = _gold;
-                }
-                //CurrentHero.Gold = _gold;
+		public int Gold
+		{
+			get
+			{
+				return _gold;
+			}
+			set
+			{
+				_gold = value;
+				foreach (var Hero in Heroes)
+				{
+					Hero.Gold = _gold;
+				}
+				//CurrentHero.Gold = _gold;
 
-                OnPropertyChanged();
-            }
-        }
+				OnPropertyChanged();
+			}
+		}
 
-        #endregion
+		#endregion
 
-        private User()
-        {
-            _heroes = new List<Hero>();
-            _items = new List<Item>();
-        }
+		private User()
+		{
+			_heroes = new List<Hero>();
+			_items = new List<Item>();
+		}
 
-        public void AddItem(Item itemToAdd)
-        {
-            // If user does have this item, increase quantity.
-            foreach (var item in Items)
-            {
-                if (item.Id==itemToAdd.Id && item.GetType() == itemToAdd.GetType())
-                {
-                    item.Quantity++;
-                    return;
-                }
-            }
+		public void AddItem(Item itemToAdd)
+		{
+			// If user does have this item, increase quantity.
+			foreach (var item in Items)
+			{
+				if (item.Id == itemToAdd.Id && item.GetType() == itemToAdd.GetType())
+				{
+					item.Quantity++;
+					return;
+				}
+			}
 
-           // If user doesn't have this item, add it.
-           Items.Add(itemToAdd);
-        }
+			// If user doesn't have this item, add it.
+			Items.Add(itemToAdd);
+		}
 
-        public void RemoveItem(Item itemToAdd)
-        {
-            // If user does have this item, decrease quantity.
-            foreach (var item in Items)
-            {
-                if (item.Id==itemToAdd.Id && item.GetType() == itemToAdd.GetType())
-                {
-                    item.Quantity--;
-                    // Item property will automatically delete it if quantity will set to 0 or lower.
-                    return;
-                }
-            }
+		public void RemoveItem(Item itemToAdd)
+		{
+			// If user does have this item, decrease quantity.
+			foreach (var item in Items)
+			{
+				if (item.Id == itemToAdd.Id && item.GetType() == itemToAdd.GetType())
+				{
+					item.Quantity--;
+					// Item property will automatically delete it if quantity will set to 0 or lower.
+					return;
+				}
+			}
 
-           // If user doesn't have this item, don't do anything.
-        }
-    }
+			// If user doesn't have this item, don't do anything.
+		}
+	}
 }

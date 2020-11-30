@@ -36,8 +36,8 @@ namespace ClickQuest.Heroes
 
 		public static int CalculateMonsterXpReward(int monsterHp)
 		{
-            return (int)Math.Ceiling(monsterHp / 10d);
-        }
+			return (int)Math.Ceiling(monsterHp / 10d);
+		}
 
 		public static void CheckIfLeveledUp(Hero hero)
 		{

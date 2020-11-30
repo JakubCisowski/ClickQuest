@@ -1,5 +1,5 @@
-using ClickQuest.Heroes;
 using ClickQuest.Data;
+using ClickQuest.Heroes;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -51,8 +51,8 @@ namespace ClickQuest.Pages
 		private void ShopButton_Click(object sender, RoutedEventArgs e)
 		{
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Shop"]);
-            (Database.Pages["Shop"] as ShopPage).UpdateShop();
-        }
+			(Database.Pages["Shop"] as ShopPage).UpdateShop();
+		}
 
 		#endregion
 	}

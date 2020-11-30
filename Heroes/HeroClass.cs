@@ -1,8 +1,7 @@
 namespace ClickQuest.Heroes
 {
-    public enum HeroClass
-    {
-        Slayer, Venom
-    }
-
+	public enum HeroClass
+	{
+		Slayer, Venom
+	}
 }

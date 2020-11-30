@@ -18,7 +18,7 @@ namespace ClickQuest.Pages
 
 		private void ShowEquipmentButton_Click(object sender, RoutedEventArgs e)
 		{
-            EquipmentWindow.Instance.Show();
-        }
+			EquipmentWindow.Instance.Show();
+		}
 	}
 }
