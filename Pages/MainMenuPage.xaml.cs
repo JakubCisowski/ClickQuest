@@ -1,4 +1,5 @@
 using ClickQuest.Account;
+using ClickQuest.Data;
 using ClickQuest.Heroes;
 using System;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace ClickQuest.Pages
 				{
 					Name = "DeleteHero" + Account.User.Instance.Heroes[i].Id,
 					Content = "Delete " + Account.User.Instance.Heroes[i].Name + ", " + Account.User.Instance.Heroes[i].ThisHeroClass.ToString() + " [" + Account.User.Instance.Heroes[i].Level + " lvl]",
-					Width = 250,
+					Width = 100,
 					Height = 50
 				};
 
@@ -51,16 +52,7 @@ namespace ClickQuest.Pages
 
 		private void CreateHeroButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Add a random number to hero name to distinguish them
-			var rng = new Random();
-
-			var hero = new Hero(HeroClass.Slayer, "TestHeroName" + rng.Next(1, 1000));
-			User.Instance.Heroes.Add(hero);
-			User.Instance.CurrentHero = hero;
-
-			Data.Database.RefreshPages();
-
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["HeroCreation"]);
 		}
 
 		private void SelectHeroButton_Click(object sender, RoutedEventArgs e)

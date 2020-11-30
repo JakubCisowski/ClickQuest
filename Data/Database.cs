@@ -245,11 +245,15 @@ namespace ClickQuest.Data
 		{
 			Pages.Clear();
 
+            // Main Menu
+            Pages.Add("MainMenu", new MainMenuPage());
 			// Town
 			Pages.Add("Town", new TownPage());
 			// Shop
 			Pages.Add("Shop", new ShopPage());
-			// Regions
+            // Hero Creation Page
+            Pages.Add("HeroCreation", new HeroCreationPage());
+			
 			foreach (var region in Regions)
 			{
 				Pages.Add(region.Name, new RegionPage(region));

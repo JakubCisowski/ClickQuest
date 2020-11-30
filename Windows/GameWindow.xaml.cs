@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using ClickQuest.Data;
+using ClickQuest.Entity;
 
 namespace ClickQuest
 {
@@ -8,7 +10,7 @@ namespace ClickQuest
 		public GameWindow()
 		{
 			InitializeComponent();
-		}
+        }
 
 		protected override void OnClosing(CancelEventArgs e)
 		{
