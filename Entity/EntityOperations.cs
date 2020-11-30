@@ -4,7 +4,8 @@ using System.Linq;
 
 namespace ClickQuest.Entity
 {
-    public static class EntityOperations
+	// TODO: asynchroniczne zapisywanie/wczytywanie
+	public static class EntityOperations
     {
         public static void SaveGame()
         {
@@ -14,6 +15,8 @@ namespace ClickQuest.Entity
                 db.Materials.RemoveRange(db.Materials);
                 db.Recipes.RemoveRange(db.Recipes);
                 db.Artifacts.RemoveRange(db.Artifacts);
+
+                db.SaveChanges();
 
                 foreach (var hero in Account.User.Instance.Heroes)
                 {

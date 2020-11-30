@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace ClickQuest.Pages
 {
-    public partial class MainMenuPage : Page
+	public partial class MainMenuPage : Page
     {
         public MainMenuPage()
         {
@@ -32,7 +32,7 @@ namespace ClickQuest.Pages
             {
                 var button = new Button()
                 {
-                    Name = "Hero" + Account.User.Instance.Heroes[i].Int,
+                    Name = "Hero" + Account.User.Instance.Heroes[i].Id,
                     Content = Account.User.Instance.Heroes[i].Name + ", " + Account.User.Instance.Heroes[i].ThisHeroClass.ToString() + " [" + Account.User.Instance.Heroes[i].Level + " lvl]",
                     Width = 50,
                     Height = 50
@@ -47,7 +47,7 @@ namespace ClickQuest.Pages
         private void SelectHeroButton_Click(object sender, RoutedEventArgs e)
         {
             var id = int.Parse((sender as Button).Name.Substring(4));
-            var hero = Account.User.Instance.Heroes.Where(x => x.Int == id).FirstOrDefault();
+            var hero = Account.User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
             Account.User.Instance.CurrentHero = hero;
 
             Data.Database.LoadPages();

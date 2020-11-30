@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 
 namespace ClickQuest
 {
@@ -7,6 +8,13 @@ namespace ClickQuest
 		public GameWindow()
 		{
 			InitializeComponent();
+		}
+
+		protected override void OnClosing(CancelEventArgs e)
+		{
+			Entity.EntityOperations.SaveGame();
+
+			base.OnClosing(e);
 		}
 	}
 }

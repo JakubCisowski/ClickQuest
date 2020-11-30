@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:ClickQuest"
              StartupUri="/Windows/GameWindow.xaml"
              Startup="Application_Startup"
-             Exit="Application_Exit">
+			 ShutdownMode="OnMainWindowClose"
+             >
     <Application.Resources>
     </Application.Resources>
 </Application>

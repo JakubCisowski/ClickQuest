@@ -1,10 +1,11 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Items
 {
-    public partial class Item :INotifyPropertyChanged
+	public partial class Item :INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -26,6 +27,7 @@ namespace ClickQuest.Items
         #region Properties
 		
 		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id
 		{
 			get

@@ -10,14 +10,14 @@
           ],
           "Loot": [
             {
-                "Type": "Material",
-                "Id": 0,
-                "Frequency": 0.1000
+              "Type": "Material",
+              "Id": 0,
+              "Frequency": 0.1000
             },
             {
-                "Type": "Artifact",
-                "Id": 1,
-                "Frequency": 0.9000
+              "Type": "Artifact",
+              "Id": 1,
+              "Frequency": 0.9000
             }
           ]
         },

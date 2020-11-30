@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Heroes
 {
-    public enum HeroClass
+	public enum HeroClass
     {
         Slayer, Venom
     }
@@ -45,7 +45,7 @@ namespace ClickQuest.Heroes
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Int { get; set; }
+        public int Id { get; set; }
 
         public int ClickDamagePerLevel { get; }
         public double CritChancePerLevel { get; }
