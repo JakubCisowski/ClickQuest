@@ -12,8 +12,9 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
+				<Button x:Name="CreateHeroButton"  Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click"/>
+
 		<StackPanel x:Name="HeroesPanel" Orientation="Vertical" Grid.Column="0">
-				<Button x:Name="CreateHeroButton"  Width="50" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click"/>
 		</StackPanel>
 	</Grid>
 </Page>
