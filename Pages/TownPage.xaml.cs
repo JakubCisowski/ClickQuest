@@ -28,13 +28,13 @@ namespace ClickQuest.Pages
 				{
 					Name = "Region" + Data.Database.Regions[i].Id.ToString(),
 					Content = Data.Database.Regions[i].Name,
-					Width = 50,
+					Width = 80,
 					Height = 50
 				};
 
 				button.Click += RegionButton_Click;
 
-				RegionsPanel.Children.Add(button);
+				RegionsPanel.Children.Insert(i, button);
 			}
 		}
 
@@ -52,6 +52,12 @@ namespace ClickQuest.Pages
 		{
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Shop"]);
 			(Database.Pages["Shop"] as ShopPage).UpdateShop();
+		}
+
+		private void MainMenuButton_Click(object sender, RoutedEventArgs e)
+		{
+			(Data.Database.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
+            (Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["MainMenu"]);
 		}
 
 		#endregion
