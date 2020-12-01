@@ -16,7 +16,7 @@ namespace ClickQuest.Pages
 			GenerateHeroButtons();
 		}
 
-		private void GenerateHeroButtons()
+		public void GenerateHeroButtons()
 		{
 			HeroesPanel.Children.Clear();
 

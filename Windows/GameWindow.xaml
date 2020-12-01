@@ -6,5 +6,5 @@
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d"
         Title="GameWindow" Height="450" Width="800">
-    <Frame x:Name="CurrentFrame" Source="/Pages/MainMenuPage.xaml" NavigationUIVisibility="Hidden"/>
+    <Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden"/> 
 </Window>

@@ -13,6 +13,6 @@ namespace ClickQuest
 			}
 			Data.Database.Load();
 			Entity.EntityOperations.LoadGame();
-		}
+        }
 	}
 }
