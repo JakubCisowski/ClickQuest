@@ -14,12 +14,14 @@ namespace ClickQuest.Entity
                 db.Materials.RemoveRange(db.Materials);
                 db.Recipes.RemoveRange(db.Recipes);
                 db.Artifacts.RemoveRange(db.Artifacts);
+                db.Ingots.RemoveRange(db.Ingots);
 
                 db.Heroes.AddRange(Account.User.Instance.Heroes);
 				
     			db.Materials.AddRange(Account.User.Instance.Items.Where(x => x is Material).Cast<Material>());
                 db.Recipes.AddRange(Account.User.Instance.Items.Where(x => x is Recipe).Cast<Recipe>());
                 db.Artifacts.AddRange(Account.User.Instance.Items.Where(x => x is Artifact).Cast<Artifact>());
+                db.Ingots.AddRange(Account.User.Instance.Ingots);
 
                 db.SaveChanges();
             }
@@ -38,6 +40,8 @@ namespace ClickQuest.Entity
                 list.AddRange(db.Artifacts.ToList<Item>());
 
                 Account.User.Instance.Items = list;
+
+                Account.User.Instance.Ingots = db.Ingots.ToList();
             }
         }
 
@@ -49,6 +53,7 @@ namespace ClickQuest.Entity
                 db.Materials.RemoveRange(db.Materials);
                 db.Recipes.RemoveRange(db.Recipes);
                 db.Artifacts.RemoveRange(db.Artifacts);
+                db.Ingots.RemoveRange(db.Ingots);
                 db.SaveChanges();
             }
         }

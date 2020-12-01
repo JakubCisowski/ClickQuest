@@ -16,8 +16,9 @@
 
 
 		<StackPanel x:Name="RegionsPanel" Orientation="Vertical" Grid.Column="1">
-            <Button x:Name="ShopButton" Content="Shop" Click="ShopButton_Click" Width="150" Height="50"/>
             <Button x:Name="MainMenuButton" Content="Back to menu" Click="MainMenuButton_Click" Width="100" Height="50"/>
+            <Button x:Name="ShopButton" Content="Shop" Click="ShopButton_Click" Width="150" Height="50"/>
+            <Button x:Name="BlacksmithButton" Content="Blacksmith" Click="BlacksmithButton_Click" Width="150" Height="50"/>
 		</StackPanel>
 
 		

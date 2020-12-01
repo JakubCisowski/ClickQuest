@@ -15,5 +15,6 @@ namespace ClickQuest.Entity
 		public DbSet<Material> Materials { get; set; }
 		public DbSet<Recipe> Recipes { get; set; }
 		public DbSet<Artifact> Artifacts { get; set; }
-	}
+		public DbSet<Ingot> Ingots{ get; set; }
+    }
 }

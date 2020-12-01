@@ -7,7 +7,7 @@
         mc:Ignorable="d" Title="Stats"
         Height="450" Width="400">
 
-        <StackPanel Orientation="Vertical">
+        <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical">
                 <TextBlock x:Name="HeroNameBlock" Text="{Binding Path=Name, StringFormat='Name: \{0\}'}"/>
                 <TextBlock x:Name="HeroClassBlock" Text="{Binding Path=ThisHeroClass, StringFormat='Class: \{0\}'}"/>
                 <TextBlock x:Name="ExperienceBlock" Text="{Binding Path=Experience, StringFormat='Experience: \{0\}'}"/>
@@ -37,6 +37,7 @@
                                 </MultiBinding>
                         </TextBlock.Text>
                 </TextBlock>
+                <StackPanel  x:Name="IngotsPanel" > </StackPanel>
                 <Button x:Name="ShowEquipmentButton" Click="ShowEquipmentButton_Click" Content="EQ"> </Button>
         </StackPanel> 
         

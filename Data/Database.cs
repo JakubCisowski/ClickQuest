@@ -251,6 +251,8 @@ namespace ClickQuest.Data
 			Pages.Add("Town", new TownPage());
 			// Shop
 			Pages.Add("Shop", new ShopPage());
+			 // Blacksmith
+            Pages.Add("Blacksmith", new BlacksmithPage());
             // Hero Creation Page
             Pages.Add("HeroCreation", new HeroCreationPage());
 			

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using ClickQuest.Items;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
@@ -24,6 +26,7 @@ namespace ClickQuest.Heroes
         private int _experience;
         private int _level;
         private int _gold;
+        private List<Ingot> _ingots;
         private int _clickDamage;
         private double _critChance;
         private int _poisonDamage;
@@ -79,6 +82,19 @@ namespace ClickQuest.Heroes
             set
             {
                 _gold = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public List<Ingot> Ingots
+        {
+            get
+            {
+                return _ingots;
+            }
+            set
+            {
+                _ingots = value;
                 OnPropertyChanged();
             }
         }
@@ -153,6 +169,7 @@ namespace ClickQuest.Heroes
             Level = 0;
             Name = heroName;
             ClickDamagePerLevel = 1;
+            _ingots = new List<Ingot>();
 
             // Set class specific values.
             switch (heroClass)
