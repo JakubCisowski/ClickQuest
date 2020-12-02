@@ -4,41 +4,43 @@ using System.Windows.Controls;
 
 namespace ClickQuest.Pages
 {
-	public partial class HeroStatsPage : Page
-	{
-		private Hero _hero;
+    public partial class HeroStatsPage : Page
+    {
+        private Hero _hero;
 
-		public HeroStatsPage()
-		{
-			InitializeComponent();
+        public HeroStatsPage()
+        {
+            InitializeComponent();
 
-			_hero = Account.User.Instance.CurrentHero;
-			this.DataContext = _hero;
+            _hero = Account.User.Instance.CurrentHero;
+            this.DataContext = _hero;
 
-			GenerateIngots();
-		}
+            GenerateIngots();
+        }
 
-		private void ShowEquipmentButton_Click(object sender, RoutedEventArgs e)
-		{
-			EquipmentWindow.Instance.Show();
-		}
+        private void ShowEquipmentButton_Click(object sender, RoutedEventArgs e)
+        {
+            EquipmentWindow.Instance.Show();
+        }
 
-		private void GenerateIngots()
-		{
-			IngotsPanel.Children.Clear();
-
-			for (int i = 0; i < _hero.Ingots.Count; i++)
+        private void GenerateIngots()
+        {
+            // Make sure hero isn't null (while loading databse constructor calls this function).
+            if(_hero != null)
 			{
-				var block = new TextBlock()
-				{
-					Name = "Ingot" + i.ToString(),
-					Text = _hero.Ingots[i].Rarity + " ingots: " + _hero.Ingots[i].Quantity.ToString(),
-					Width = 100,
-					Height = 50
-				};
+				IngotsPanel.Children.Clear();
 
-				IngotsPanel.Children.Add(block);
+				for (int i = 0; i < _hero.Ingots.Count; i++)
+				{
+					var block = new TextBlock()
+					{
+						Name = "Ingot" + i.ToString(),
+						Text = _hero.Ingots[i].Rarity + " ingots: " + _hero.Ingots[i].Quantity.ToString()
+					};
+
+					IngotsPanel.Children.Add(block);
+				}
 			}
-		}
-	}
+        }
+    }
 }

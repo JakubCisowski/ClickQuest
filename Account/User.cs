@@ -135,10 +135,20 @@ namespace ClickQuest.Account
 
             var rarities = Enum.GetValues(typeof(Rarity));
 
-            for (int i = 0; i < rarities.GetLength(0); i++)
+            // for (int i = 0; i < rarities.GetLength(0); i++)
+            // {
+            //     AddIngot(new Ingot((Rarity)rarities.GetValue(i), 0));
+            // }
+        }
+
+        public void AddIngot(Ingot ingot)
+        {
+            Ingots.Add(ingot);
+            foreach (var hero in Heroes)
             {
-                _ingots.Add(new Ingot((Rarity)rarities.GetValue(i), 0));
+                hero.Ingots.Add(ingot);
             }
+
         }
 
         public void AddItem(Item itemToAdd)

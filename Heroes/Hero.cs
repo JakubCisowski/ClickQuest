@@ -194,6 +194,7 @@ namespace ClickQuest.Heroes
 
         public Hero()
         {
+            _ingots = new List<Ingot>();
         }
 
         public void GrantLevelUpBonuses()
