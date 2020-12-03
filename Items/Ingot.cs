@@ -1,11 +1,20 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Items
 {
-    public partial class Ingot
+    public partial class Ingot : INotifyPropertyChanged
     {
+        #region INotifyPropertyChanged
+		public event PropertyChangedEventHandler PropertyChanged;
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+		#endregion
+
         private Rarity _rarity;
         private int _quantity;
 
@@ -22,6 +31,7 @@ namespace ClickQuest.Items
             set
             {
                 _rarity = value;
+                OnPropertyChanged();
             }
         }
 
@@ -34,6 +44,7 @@ namespace ClickQuest.Items
             set
             {
                 _quantity = value;
+                OnPropertyChanged();
             }
         }
 

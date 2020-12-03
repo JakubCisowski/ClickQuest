@@ -1,6 +1,7 @@
 using ClickQuest.Heroes;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace ClickQuest.Pages
 {
@@ -34,9 +35,20 @@ namespace ClickQuest.Pages
 				{
 					var block = new TextBlock()
 					{
-						Name = "Ingot" + i.ToString(),
-						Text = _hero.Ingots[i].Rarity + " ingots: " + _hero.Ingots[i].Quantity.ToString()
+						Name = "Ingot" + i.ToString()
 					};
+
+                    Binding binding = new Binding("Quantity");
+                    binding.Source = _hero.Ingots[i];
+                    Binding binding2 = new Binding("Rarity");
+                    binding2.Source = _hero.Ingots[i];
+
+                    MultiBinding multiBinding = new MultiBinding();
+                    multiBinding.StringFormat="{1} ingots: {0}";
+                    multiBinding.Bindings.Add(binding);
+                    multiBinding.Bindings.Add(binding2);
+
+                    block.SetBinding(TextBlock.TextProperty, multiBinding);
 
 					IngotsPanel.Children.Add(block);
 				}
