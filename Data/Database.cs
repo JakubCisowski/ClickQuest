@@ -37,8 +37,8 @@ namespace ClickQuest.Data
 
 			// Fill collections with JSON data.
 			LoadMaterials();
-			LoadRecipes();
 			LoadArtifacts();
+			LoadRecipes();
 			LoadMonsters();
 			LoadRegions();
 			LoadShopOffer();
@@ -59,28 +59,11 @@ namespace ClickQuest.Data
 				var id = int.Parse(parsedObject["Materials"][i]["Id"].ToString());
 				var name = parsedObject["Materials"][i]["Name"].ToString();
 				var rarity = (Rarity)int.Parse(parsedObject["Materials"][i]["Rarity"].ToString());
+				var description = parsedObject["Materials"][i]["Description"].ToString();
 				var value = int.Parse(parsedObject["Materials"][i]["Value"].ToString());
 
-				var newMaterial = new Material(id, name, rarity, value);
+				var newMaterial = new Material(id, name, rarity, description, value);
 				Materials.Add(newMaterial);
-			}
-		}
-
-		public static void LoadRecipes()
-		{
-			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Recipes.json");
-			var parsedObject = JObject.Parse(File.ReadAllText(path));
-			var jArray = (JArray)parsedObject["Recipes"];
-
-			for (var i = 0; i < jArray.Count; i++)
-			{
-				var id = int.Parse(parsedObject["Recipes"][i]["Id"].ToString());
-				var name = parsedObject["Recipes"][i]["Name"].ToString();
-				var rarity = (Rarity)int.Parse(parsedObject["Recipes"][i]["Rarity"].ToString());
-				var value = int.Parse(parsedObject["Recipes"][i]["Value"].ToString());
-
-				var newRecipe = new Recipe(id, name, rarity, value);
-				Recipes.Add(newRecipe);
 			}
 		}
 
@@ -95,10 +78,44 @@ namespace ClickQuest.Data
 				var id = int.Parse(parsedObject["Artifacts"][i]["Id"].ToString());
 				var name = parsedObject["Artifacts"][i]["Name"].ToString();
 				var rarity = (Rarity)int.Parse(parsedObject["Artifacts"][i]["Rarity"].ToString());
+				var description = parsedObject["Artifacts"][i]["Description"].ToString();
 				var value = int.Parse(parsedObject["Artifacts"][i]["Value"].ToString());
 
-				var newArtifact = new Artifact(id, name, rarity, value);
+				var newArtifact = new Artifact(id, name, rarity, description, value);
 				Artifacts.Add(newArtifact);
+			}
+		}
+
+		public static void LoadRecipes()
+		{
+			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Recipes.json");
+			var parsedObject = JObject.Parse(File.ReadAllText(path));
+			var jArray = (JArray)parsedObject["Recipes"];
+
+			for (var i = 0; i < jArray.Count; i++)
+			{
+				var id = int.Parse(parsedObject["Recipes"][i]["Id"].ToString());
+				var artifactId = int.Parse(parsedObject["Recipes"][i]["ArtifactId"].ToString());
+				
+				var materialIds = new Dictionary<int, int>();
+				var materialIdsArray = (JArray)parsedObject["Recipes"][i]["MaterialIds"];
+
+				for (int j = 0; j < materialIdsArray.Count; j++)
+				{
+					var materialId = int.Parse(parsedObject["Recipes"][i]["MaterialIds"][j]["MaterialId"].ToString());
+					var materialQuantity = int.Parse(parsedObject["Recipes"][i]["MaterialIds"][j]["Quantity"].ToString());
+			
+					materialIds.Add(materialId, materialQuantity);
+				}		
+				
+				var name = parsedObject["Recipes"][i]["Name"].ToString();
+				var rarity = (Rarity)int.Parse(parsedObject["Recipes"][i]["Rarity"].ToString());
+				var artifactDescription = Artifacts.FirstOrDefault(x=>x.Id==artifactId).Description;
+				var value = int.Parse(parsedObject["Recipes"][i]["Value"].ToString());
+
+				var newRecipe = new Recipe(id, name, rarity, artifactDescription, value, artifactId);
+				newRecipe.MaterialIds=materialIds;
+				Recipes.Add(newRecipe);
 			}
 		}
 

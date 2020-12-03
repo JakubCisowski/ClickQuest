@@ -2,20 +2,36 @@
     "Recipes": [
         {
             "Id": 0,
+            "ArtifactId": 0,
+            "MaterialIds": [
+               {
+                "MaterialId": 0,
+                "Quantity": 1
+               }
+            ],
             "Name": "Empty loot",
             "Rarity": 0,
+            "ArtifactDescription": "--",
+            "RequirementsDescription": "--",
             "Value": 0
         },
         {
             "Id": 1,
+            "ArtifactId": 1,
+            "MaterialIds": [
+                {
+                 "MaterialId": 1,
+                 "Quantity": 1
+               },
+               {
+                 "MaterialId": 2,
+                 "Quantity": 1
+               }
+             ],
             "Name": "TestRecipe",
             "Rarity": 1,
-            "Value": 1
-        },
-        {
-            "Id": 2,
-            "Name": "TestRecipe2",
-            "Rarity": 1,
+            "ArtifactDescription": "--",
+            "RequirementsDescription": "--",
             "Value": 1
         }
     ]

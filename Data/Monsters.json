@@ -2,7 +2,7 @@
     "Monsters": [
         {
           "Id": 1,
-          "Name": "Wolf",
+          "Name": "Gray Wolf",
           "Health": 20,
           "Image": "/example.png",
           "Types": [
@@ -23,7 +23,7 @@
         },
         {
             "Id": 2,
-            "Name": "Bat",
+            "Name": "Cave Bat",
             "Health": 15,
             "Image": "/example.png",
             "Types": [

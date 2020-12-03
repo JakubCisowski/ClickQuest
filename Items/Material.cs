@@ -2,7 +2,7 @@ namespace ClickQuest.Items
 {
 	public partial class Material : Item
 	{
-		public Material(int id, string name, Rarity rarity, int value) : base(id, name, rarity, value)
+		public Material(int id, string name, Rarity rarity, string description, int value) : base(id, name, rarity, description, value)
 		{
 		}
 	}

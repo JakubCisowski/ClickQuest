@@ -29,6 +29,7 @@
                                 <GridViewColumn Header="Quantity" Width="150" DisplayMemberBinding="{Binding Quantity}"/>
                                 <GridViewColumn Header="Rarity" Width="50" DisplayMemberBinding="{Binding RarityString}" />
                                 <GridViewColumn Header="Value" Width="150" DisplayMemberBinding="{Binding Value}" />
+                                <GridViewColumn Header="Description" Width="120" DisplayMemberBinding="{Binding Description}" />
                                 <GridViewColumn Header="Sell" Width="200">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -45,9 +46,10 @@
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Quantity" Width="150" DisplayMemberBinding="{Binding Quantity}"/>
                                 <GridViewColumn Header="Rarity" Width="50" DisplayMemberBinding="{Binding RarityString}" />
                                 <GridViewColumn Header="Value" Width="150" DisplayMemberBinding="{Binding Value}" />
+                                <GridViewColumn Header="Description" Width="120" DisplayMemberBinding="{Binding Description}" />
+                                <GridViewColumn Header="Requirements" Width="120" DisplayMemberBinding="{Binding RequirementsDescription}" />
                                 <GridViewColumn Header="Buy" Width="200">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>

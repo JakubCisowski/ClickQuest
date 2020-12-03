@@ -36,12 +36,19 @@ namespace ClickQuest.Entity
                 var list = new List<Item>();
 
                 list.AddRange(db.Materials.ToList<Item>());
-                list.AddRange(db.Recipes.ToList<Item>());
                 list.AddRange(db.Artifacts.ToList<Item>());
+
+                var recipes = db.Recipes.ToList();
+                foreach (var recipe in recipes)
+                {
+                    recipe.MaterialIds=Data.Database.Recipes.FirstOrDefault(x=>x.Id==recipe.Id).MaterialIds;
+                }
+
+                list.AddRange(recipes.Cast<Item>());
 
                 Account.User.Instance.Items = list;
 
-                Account.User.Instance.Ingots = db.Ingots.ToList();
+                // Account.User.Instance.Ingots = db.Ingots.ToList();
             }
         }
 
