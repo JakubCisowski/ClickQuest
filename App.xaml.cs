@@ -1,5 +1,4 @@
-﻿using ClickQuest.Entity;
-using System.Windows;
+﻿using System.Windows;
 
 namespace ClickQuest
 {
@@ -7,12 +6,12 @@ namespace ClickQuest
 	{
 		protected void Application_Startup(object sender, StartupEventArgs e)
 		{
-			using (var db = new UserContext())
-			{
-				db.Database.EnsureCreated();
-			}
+			//using (var db = new UserContext())
+			//{
+			//	db.Database.EnsureCreated();
+			//}
 			Data.Database.Load();
 			Entity.EntityOperations.LoadGame();
-        }
+		}
 	}
 }
