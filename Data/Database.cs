@@ -96,7 +96,7 @@ namespace ClickQuest.Data
 			{
 				var id = int.Parse(parsedObject["Recipes"][i]["Id"].ToString());
 				var artifactId = int.Parse(parsedObject["Recipes"][i]["ArtifactId"].ToString());
-				
+
 				var materialIds = new Dictionary<int, int>();
 				var materialIdsArray = (JArray)parsedObject["Recipes"][i]["MaterialIds"];
 
@@ -104,17 +104,18 @@ namespace ClickQuest.Data
 				{
 					var materialId = int.Parse(parsedObject["Recipes"][i]["MaterialIds"][j]["MaterialId"].ToString());
 					var materialQuantity = int.Parse(parsedObject["Recipes"][i]["MaterialIds"][j]["Quantity"].ToString());
-			
+
 					materialIds.Add(materialId, materialQuantity);
-				}		
-				
+				}
+
 				var name = parsedObject["Recipes"][i]["Name"].ToString();
 				var rarity = (Rarity)int.Parse(parsedObject["Recipes"][i]["Rarity"].ToString());
-				var artifactDescription = Artifacts.FirstOrDefault(x=>x.Id==artifactId).Description;
+				var artifactDescription = Artifacts.FirstOrDefault(x => x.Id == artifactId).Description;
 				var value = int.Parse(parsedObject["Recipes"][i]["Value"].ToString());
 
 				var newRecipe = new Recipe(id, name, rarity, artifactDescription, value, artifactId);
-				newRecipe.MaterialIds=materialIds;
+				newRecipe.MaterialIds = materialIds;
+				newRecipe.UpdateRequirementsDescription();
 				Recipes.Add(newRecipe);
 			}
 		}
@@ -262,17 +263,17 @@ namespace ClickQuest.Data
 		{
 			Pages.Clear();
 
-            // Main Menu
-            Pages.Add("MainMenu", new MainMenuPage());
+			// Main Menu
+			Pages.Add("MainMenu", new MainMenuPage());
 			// Town
 			Pages.Add("Town", new TownPage());
 			// Shop
 			Pages.Add("Shop", new ShopPage());
-			 // Blacksmith
-            Pages.Add("Blacksmith", new BlacksmithPage());
-            // Hero Creation Page
-            Pages.Add("HeroCreation", new HeroCreationPage());
-			
+			// Blacksmith
+			Pages.Add("Blacksmith", new BlacksmithPage());
+			// Hero Creation Page
+			Pages.Add("HeroCreation", new HeroCreationPage());
+
 			foreach (var region in Regions)
 			{
 				Pages.Add(region.Name, new RegionPage(region));

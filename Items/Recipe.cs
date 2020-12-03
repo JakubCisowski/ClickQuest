@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
 using ClickQuest.Data;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace ClickQuest.Items
 {
@@ -13,30 +13,36 @@ namespace ClickQuest.Items
 		public int ArtifactId
 		{
 			get
-			{return _artifactId;}
-			set{_artifactId=value;}
+			{ return _artifactId; }
+			set { _artifactId = value; }
 		}
 
 		[NotMapped]
 		public Dictionary<int, int> MaterialIds
 		{
-			get {return _materialIds;}
-			set {_materialIds=value;}
+			get { return _materialIds; }
+			set { _materialIds = value; }
 		}
 
-		public string RequirementsDescription{get;}
+		[NotMapped]
+		public string RequirementsDescription { get; private set; }
 
 		public Recipe(int id, string name, Rarity rarity, string description, int value, int artifactId) : base(id, name, rarity, description, value)
 		{
-			ArtifactId=artifactId;
+			ArtifactId = artifactId;
 			MaterialIds = new Dictionary<int, int>();
 
-			RequirementsDescription="Materials required: ";
+			//UpdateRequirementsDescription();
+		}
+
+		public void UpdateRequirementsDescription()
+		{
+			RequirementsDescription = "Materials required: ";
 
 			foreach (var elem in MaterialIds)
 			{
 				// Add name
-				RequirementsDescription+=Database.Materials.FirstOrDefault(x=>x.Id==elem.Key).Name;
+				RequirementsDescription += Database.Materials.FirstOrDefault(x => x.Id == elem.Key).Name;
 				// Add quantity
 				RequirementsDescription = RequirementsDescription + ": " + elem.Value + "; ";
 			}
