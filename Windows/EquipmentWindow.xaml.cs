@@ -28,9 +28,9 @@ namespace ClickQuest
 
 		public void UpdateEquipment()
 		{
-			ItemsListViewMaterials.ItemsSource = User.Instance.Items.Where(x => x is Material).ToList();
-			ItemsListViewRecipes.ItemsSource = User.Instance.Items.Where(x => x is Recipe).ToList();
-			ItemsListViewArtifacts.ItemsSource = User.Instance.Items.Where(x => x is Artifact).ToList();
+			ItemsListViewMaterials.ItemsSource = User.Instance.Materials;
+			ItemsListViewRecipes.ItemsSource = User.Instance.Recipes;
+			ItemsListViewArtifacts.ItemsSource = User.Instance.Artifacts;
 
 			ItemsListViewMaterials.Items.Refresh();
 			ItemsListViewRecipes.Items.Refresh();

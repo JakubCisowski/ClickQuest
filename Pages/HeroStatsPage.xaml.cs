@@ -31,7 +31,7 @@ namespace ClickQuest.Pages
 			{
 				IngotsPanel.Children.Clear();
 
-				for (int i = 0; i < _hero.Ingots.Count; i++)
+				for (int i = 0; i < Account.User.Instance.Ingots.Count; i++)
 				{
 					var block = new TextBlock()
 					{
@@ -39,9 +39,9 @@ namespace ClickQuest.Pages
 					};
 
                     Binding binding = new Binding("Quantity");
-                    binding.Source = _hero.Ingots[i];
+                    binding.Source = Account.User.Instance.Ingots[i];
                     Binding binding2 = new Binding("Rarity");
-                    binding2.Source = _hero.Ingots[i];
+                    binding2.Source = Account.User.Instance.Ingots[i];
 
                     MultiBinding multiBinding = new MultiBinding();
                     multiBinding.StringFormat="{1} ingots: {0}";

@@ -61,8 +61,6 @@ namespace ClickQuest.Pages
 			var hero = Account.User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
 			Account.User.Instance.CurrentHero = hero;
 
-			Account.User.Instance.Gold = hero.Gold;
-
 			Data.Database.RefreshPages();
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
 		}

@@ -16,7 +16,7 @@ namespace ClickQuest.Pages
 
         public void UpdateBlacksmith()
         {
-            ItemsListViewMelt.ItemsSource = User.Instance.Items.Where(x => x is Material).ToList();
+            ItemsListViewMelt.ItemsSource = User.Instance.Materials;
 
 			ItemsListViewMelt.Items.Refresh();
         }

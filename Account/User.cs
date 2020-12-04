@@ -1,8 +1,12 @@
 using ClickQuest.Heroes;
 using ClickQuest.Items;
+using ClickQuest.Entity;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Account
@@ -34,6 +38,10 @@ namespace ClickQuest.Account
 				}
 				return _instance;
 			}
+			set
+			{
+				_instance=value;
+			}
 		}
 
 		#endregion Singleton
@@ -41,14 +49,20 @@ namespace ClickQuest.Account
 		#region Private Fields
 
 		private List<Hero> _heroes;
-		private List<Item> _items;
-		private List<Ingot> _ingots;
 		private Hero _currentHero;
+		private List<Material> _materials;
+		private List<Recipe> _recipes;
+		private List<Artifact> _artifacts;
+		private List<Ingot> _ingots;
 		private int _gold;
 
 		#endregion Private Fields
 
 		#region Properties
+
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int Id{get;set;}
 
 		public List<Hero> Heroes
 		{
@@ -63,15 +77,41 @@ namespace ClickQuest.Account
 			}
 		}
 
-		public List<Item> Items
+		public List<Material> Materials
 		{
 			get
 			{
-				return _items;
+				return _materials;
 			}
 			set
 			{
-				_items = value;
+				_materials = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public List<Recipe> Recipes
+		{
+			get
+			{
+				return _recipes;
+			}
+			set
+			{
+				_recipes = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public List<Artifact> Artifacts
+		{
+			get
+			{
+				return _artifacts;
+			}
+			set
+			{
+				_artifacts = value;
 				OnPropertyChanged();
 			}
 		}
@@ -85,10 +125,6 @@ namespace ClickQuest.Account
 			set
 			{
 				_ingots = value;
-				foreach (var Hero in Heroes)
-				{
-					Hero.Ingots = _ingots;
-				}
 				OnPropertyChanged();
 			}
 		}
@@ -115,11 +151,6 @@ namespace ClickQuest.Account
 			set
 			{
 				_gold = value;
-				foreach (var Hero in Heroes)
-				{
-					Hero.Gold = _gold;
-				}
-
 				OnPropertyChanged();
 			}
 		}
@@ -129,52 +160,131 @@ namespace ClickQuest.Account
 		private User()
 		{
 			_heroes = new List<Hero>();
-			_items = new List<Item>();
+			_materials = new List<Material>();
+			_recipes = new List<Recipe>();
+			_artifacts = new List<Artifact>();
 			_ingots = new List<Ingot>();
 
-			
-		}
-
-		public void AddIngot(Ingot ingot)
-		{
-			Ingots.Add(ingot);
-			foreach (var hero in Heroes)
+			// If the database is empty (eg. it was just created), then fill it with data.
+			using (var db = new UserContext())
 			{
-				hero.Ingots.Add(ingot);
+				var user = db.Users.FirstOrDefault();
+				if (user.Ingots.Count() == 0)
+				{
+					var rarities = Enum.GetValues(typeof(Rarity));
+
+					for (int i = 0; i < rarities.GetLength(0); i++)
+					{
+						user.Ingots.Add(new Ingot((Rarity)rarities.GetValue(i), 0));
+					}
+
+					db.SaveChanges();
+				}
 			}
 		}
 
-		public void AddItem(Item itemToAdd)
+        public void AddItem(Item itemToAdd)
 		{
-			// If user does have this item, increase quantity.
-			foreach (var item in Items)
+			var type = itemToAdd.GetType();
+
+			if (type == typeof(Recipe))
 			{
-				if (item.Id == itemToAdd.Id && item.GetType() == itemToAdd.GetType())
+				// Add to Recipes.
+
+				foreach (var item in Recipes)
 				{
-					item.Quantity++;
-					return;
+					if (item.Id == itemToAdd.Id)
+					{
+						item.Quantity++;
+						return;
+					}
+				}
+
+				// If user doesn't have this item, add it.
+				Recipes.Add(itemToAdd as Recipe);
+				itemToAdd.Quantity++;
+			}
+			else if (type == typeof(Artifact))
+			{
+				// Add to Artifacts.
+
+				foreach (var item in Artifacts)
+				{
+					if (item.Id == itemToAdd.Id)
+					{
+						item.Quantity++;
+						return;
+					}
+				}
+
+				// If user doesn't have this item, add it.
+				Artifacts.Add(itemToAdd as Artifact);
+				itemToAdd.Quantity++;
+			}
+			else if (type == typeof(Material))
+			{
+				// Add to Materials.
+
+				foreach (var item in Materials)
+				{
+					if (item.Id == itemToAdd.Id)
+					{
+						item.Quantity++;
+						return;
+					}
+				}
+
+				// If user doesn't have this item, add it.
+				Materials.Add(itemToAdd as Material);
+				itemToAdd.Quantity++;
+			}
+		}
+
+		public void RemoveItem(Item itemToRemove)
+		{
+			var type = itemToRemove.GetType();
+
+			if (type == typeof(Recipe))
+			{
+				// Add to Recipes.
+
+				foreach (var item in Recipes)
+				{
+					if (item.Id == itemToRemove.Id)
+					{
+						item.Quantity--;
+						return;
+					}
+				}
+			}
+			else if (type == typeof(Artifact))
+			{
+				// Add to Artifacts.
+
+				foreach (var item in Artifacts)
+				{
+					if (item.Id == itemToRemove.Id)
+					{
+						item.Quantity--;
+						return;
+					}
+				}
+			}
+			else if (type == typeof(Material))
+			{
+				// Add to Materials.
+
+				foreach (var item in Materials)
+				{
+					if (item.Id == itemToRemove.Id)
+					{
+						item.Quantity--;
+						return;
+					}
 				}
 			}
 
-			// If user doesn't have this item, add it.
-			Items.Add(itemToAdd);
-			itemToAdd.Quantity++;
-		}
-
-		public void RemoveItem(Item itemToAdd)
-		{
-			// If user does have this item, decrease quantity.
-			foreach (var item in Items)
-			{
-				if (item.Id == itemToAdd.Id && item.GetType() == itemToAdd.GetType())
-				{
-					item.Quantity--;
-					// Item property will automatically delete it if quantity will set to 0 or lower.
-					return;
-				}
-			}
-
-			// If user doesn't have this item, don't do anything.
+			// If user doesn't have this item, don't do anything (check Item.Quantity).
 		}
 	}
 }

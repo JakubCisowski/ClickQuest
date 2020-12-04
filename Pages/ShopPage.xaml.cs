@@ -17,8 +17,8 @@ namespace ClickQuest.Pages
 
 		public void UpdateShop()
 		{
-			ItemsListViewSell.ItemsSource = User.Instance.Items.Where(x => x is Material).ToList();
-			ItemsListViewBuy.ItemsSource = Database.ShopOffer.Where(x => !Account.User.Instance.Items.Contains(x));
+			ItemsListViewSell.ItemsSource = User.Instance.Materials;
+			ItemsListViewBuy.ItemsSource = Database.ShopOffer.Where(x => !Account.User.Instance.Recipes.Contains(x));
 
 			ItemsListViewSell.Items.Refresh();
 			ItemsListViewBuy.Items.Refresh();

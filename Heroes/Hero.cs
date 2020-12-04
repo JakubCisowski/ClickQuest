@@ -25,8 +25,6 @@ namespace ClickQuest.Heroes
 		private string _name;
 		private int _experience;
 		private int _level;
-		private int _gold;
-		private List<Ingot> _ingots;
 		private int _clickDamage;
 		private double _critChance;
 		private int _poisonDamage;
@@ -69,33 +67,6 @@ namespace ClickQuest.Heroes
 			{
 				_experience = value;
 				Heroes.Experience.CheckIfLeveledUp(this);
-				OnPropertyChanged();
-			}
-		}
-
-		public int Gold
-		{
-			get
-			{
-				return _gold;
-			}
-			set
-			{
-				_gold = value;
-				OnPropertyChanged();
-			}
-		}
-
-		[NotMapped]
-		public List<Ingot> Ingots
-		{
-			get
-			{
-				return _ingots;
-			}
-			set
-			{
-				_ingots = value;
 				OnPropertyChanged();
 			}
 		}
@@ -166,11 +137,9 @@ namespace ClickQuest.Heroes
 		{
 			_heroClass = heroClass;
 			Experience = 0;
-			Gold = Account.User.Instance.Gold;
 			Level = 0;
 			Name = heroName;
 			ClickDamagePerLevel = 1;
-			_ingots = Account.User.Instance.Ingots;
 
 			// Set class specific values.
 			switch (heroClass)
@@ -195,7 +164,6 @@ namespace ClickQuest.Heroes
 
 		public Hero()
 		{
-			_ingots = new List<Ingot>();
 		}
 
 		public void GrantLevelUpBonuses()
