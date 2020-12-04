@@ -1,4 +1,5 @@
 using ClickQuest.Items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,13 +32,16 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
+				// Load heroes.
 				Account.User.Instance.Heroes = db.Heroes.ToList();
 
+				// Load items - materials and artifacts.
 				var list = new List<Item>();
 
 				list.AddRange(db.Materials.ToList<Item>());
 				list.AddRange(db.Artifacts.ToList<Item>());
 
+				// Load items - recipes.
 				var recipes = db.Recipes.ToList();
 				foreach (var recipe in recipes)
 				{
@@ -46,9 +50,9 @@ namespace ClickQuest.Entity
 				}
 
 				list.AddRange(recipes.Cast<Item>());
-
 				Account.User.Instance.Items = list;
 
+				// Load ingots.
 				Account.User.Instance.Ingots = db.Ingots.ToList();
 			}
 		}

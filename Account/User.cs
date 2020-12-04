@@ -119,7 +119,6 @@ namespace ClickQuest.Account
 				{
 					Hero.Gold = _gold;
 				}
-				//CurrentHero.Gold = _gold;
 
 				OnPropertyChanged();
 			}
@@ -133,12 +132,7 @@ namespace ClickQuest.Account
 			_items = new List<Item>();
 			_ingots = new List<Ingot>();
 
-			var rarities = Enum.GetValues(typeof(Rarity));
-
-			//for (int i = 0; i < rarities.GetLength(0); i++)
-			//{
-			//	AddIngot(new Ingot((Rarity)rarities.GetValue(i), 0));
-			//}
+			
 		}
 
 		public void AddIngot(Ingot ingot)

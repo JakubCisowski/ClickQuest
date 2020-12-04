@@ -170,7 +170,7 @@ namespace ClickQuest.Heroes
 			Level = 0;
 			Name = heroName;
 			ClickDamagePerLevel = 1;
-			_ingots = new List<Ingot>();
+			_ingots = Account.User.Instance.Ingots;
 
 			// Set class specific values.
 			switch (heroClass)
