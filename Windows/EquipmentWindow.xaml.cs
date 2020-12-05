@@ -36,7 +36,7 @@ namespace ClickQuest
 			ItemsListViewArtifacts.Items.Refresh();
 		}
 
-		public void Show()
+		public new void Show()
 		{
 			_instance.Visibility=Visibility.Visible;
 		}

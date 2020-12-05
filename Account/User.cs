@@ -155,37 +155,13 @@ namespace ClickQuest.Account
 
 		#endregion Properties
 
-		private User()
+		public User()
 		{
 			_heroes = new List<Hero>();
 			_materials = new List<Material>();
 			_recipes = new List<Recipe>();
 			_artifacts = new List<Artifact>();
 			_ingots = new List<Ingot>();
-
-			//var rarities = Enum.GetValues(typeof(Rarity));
-
-			//for (int i = 0; i < rarities.GetLength(0); i++)
-			//{
-			//	Ingots.Add(new Ingot((Rarity)rarities.GetValue(i), 0));
-			//}
-
-			//If the database is empty(eg.it was just created), then fill it with data.
-			//using (var db = new UserContext())
-			//{
-			//	var user = db.Users.FirstOrDefault();
-			//	if (user.Ingots.Count() == 0)
-			//	{
-			//		var rarities = Enum.GetValues(typeof(Rarity));
-
-			//		for (int i = 0; i < rarities.GetLength(0); i++)
-			//		{
-			//			user.Ingots.Add(new Ingot((Rarity)rarities.GetValue(i), 0));
-			//		}
-
-			//		db.SaveChanges();
-			//	}
-			//}
 		}
 
 		public void AddItem(Item itemToAdd)
