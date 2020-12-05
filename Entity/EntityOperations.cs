@@ -10,17 +10,6 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
-				// OLD - remove the user and save a new one
-				//db.Users.RemoveRange(db.Users);
-
-				//db.Users.AddRange(Account.User.Instance);
-				//db.Entry(Account.User.Instance).State = EntityState.Modified;
-
-				//db.SaveChanges();
-
-				// NEW - update the user
-				// TODO: seed the database with a user
-
 				// Make sure we get the right user by Id
 				var user = db.Users.FirstOrDefault(x => x.Id == User.Instance.Id);
 

@@ -15,6 +15,7 @@ namespace ClickQuest.Entity
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			// Seed the database with a sample, empty user.
 			modelBuilder.Entity<User>().HasData(new User()
 			{
 				Id=1

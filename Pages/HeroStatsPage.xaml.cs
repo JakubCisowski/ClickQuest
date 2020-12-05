@@ -17,11 +17,21 @@ namespace ClickQuest.Pages
 			this.DataContext = _hero;
 
 			GenerateIngots();
+			GenerateGold();
 		}
 
 		private void ShowEquipmentButton_Click(object sender, RoutedEventArgs e)
 		{
 			EquipmentWindow.Instance.Show();
+		}
+
+		private void GenerateGold()
+		{
+			Binding binding = new Binding("Gold");
+			binding.Source=Account.User.Instance;
+			binding.StringFormat="Gold: {0}";
+
+			GoldBlock.SetBinding(TextBlock.TextProperty, binding);
 		}
 
 		private void GenerateIngots()

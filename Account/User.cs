@@ -38,6 +38,7 @@ namespace ClickQuest.Account
 			set
 			{
 				_instance = value;
+				_instance.OnPropertyChanged();
 			}
 		}
 

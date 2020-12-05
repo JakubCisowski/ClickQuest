@@ -12,7 +12,7 @@
                 <TextBlock x:Name="HeroClassBlock" Text="{Binding Path=ThisHeroClass, StringFormat='Class: \{0\}'}"/>
                 <TextBlock x:Name="ExperienceBlock" Text="{Binding Path=Experience, StringFormat='Experience: \{0\}'}"/>
                 <TextBlock x:Name="LevelBlock" Text="{Binding Path=Level, StringFormat='Level: \{0\}'}"/>
-                <TextBlock x:Name="GoldBlock" Text="{Binding Path=Gold, StringFormat='Gold: \{0\}'}"/>
+                <TextBlock x:Name="GoldBlock"/>
                 <TextBlock x:Name="ClickDamageBlock">
                         <TextBlock.Text>
                                 <MultiBinding StringFormat="Damage: {0} (+{1}/lvl)">
