@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d"
-        Title="EquipmentWindow" Height="600" Width="600">
+        Title="EquipmentWindow" Height="600" Width="600" Closing="EquipmentWindow_Closing">
     <TabControl>
             <TabItem Header="Materials">
                 <ListView x:Name="ItemsListViewMaterials" Margin="10">

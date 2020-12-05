@@ -14,6 +14,7 @@ namespace ClickQuest
 				{
 					_instance = new EquipmentWindow();
 				}
+				
 				return _instance;
 			}
 		}
@@ -33,6 +34,17 @@ namespace ClickQuest
 			ItemsListViewMaterials.Items.Refresh();
 			ItemsListViewRecipes.Items.Refresh();
 			ItemsListViewArtifacts.Items.Refresh();
+		}
+
+		public void Show()
+		{
+			_instance.Visibility=Visibility.Visible;
+		}
+
+		private void EquipmentWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			e.Cancel=true;
+			this.Visibility = Visibility.Hidden;
 		}
 	}
 }
