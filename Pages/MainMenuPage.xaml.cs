@@ -1,7 +1,4 @@
-using ClickQuest.Account;
 using ClickQuest.Data;
-using ClickQuest.Heroes;
-using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;

@@ -1,5 +1,3 @@
-using ClickQuest.Heroes;
-using ClickQuest.Items;
 using ClickQuest.Account;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +10,6 @@ namespace ClickQuest.Entity
 			optionsBuilder.UseSqlServer(@"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ClickQuest.Entity.UserContext;");
 		}
 
-		public DbSet<User> Users {get; set;}
-    }
+		public DbSet<User> Users { get; set; }
+	}
 }

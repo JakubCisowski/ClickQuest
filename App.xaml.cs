@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using ClickQuest.Entity;
 using System.Windows;
-using ClickQuest.Entity;
-using ClickQuest.Items;
 
 namespace ClickQuest
 {

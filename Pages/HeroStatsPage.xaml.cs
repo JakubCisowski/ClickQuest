@@ -5,29 +5,29 @@ using System.Windows.Data;
 
 namespace ClickQuest.Pages
 {
-    public partial class HeroStatsPage : Page
-    {
-        private Hero _hero;
+	public partial class HeroStatsPage : Page
+	{
+		private Hero _hero;
 
-        public HeroStatsPage()
-        {
-            InitializeComponent();
+		public HeroStatsPage()
+		{
+			InitializeComponent();
 
-            _hero = Account.User.Instance.CurrentHero;
-            this.DataContext = _hero;
+			_hero = Account.User.Instance.CurrentHero;
+			this.DataContext = _hero;
 
-            GenerateIngots();
-        }
+			GenerateIngots();
+		}
 
-        private void ShowEquipmentButton_Click(object sender, RoutedEventArgs e)
-        {
-            EquipmentWindow.Instance.Show();
-        }
+		private void ShowEquipmentButton_Click(object sender, RoutedEventArgs e)
+		{
+			EquipmentWindow.Instance.Show();
+		}
 
-        private void GenerateIngots()
-        {
-            // Make sure hero isn't null (while loading databse constructor calls this function).
-            if(_hero != null)
+		private void GenerateIngots()
+		{
+			// Make sure hero isn't null (while loading databse constructor calls this function).
+			if (_hero != null)
 			{
 				IngotsPanel.Children.Clear();
 
@@ -38,21 +38,21 @@ namespace ClickQuest.Pages
 						Name = "Ingot" + i.ToString()
 					};
 
-                    Binding binding = new Binding("Quantity");
-                    binding.Source = Account.User.Instance.Ingots[i];
-                    Binding binding2 = new Binding("Rarity");
-                    binding2.Source = Account.User.Instance.Ingots[i];
+					Binding binding = new Binding("Quantity");
+					binding.Source = Account.User.Instance.Ingots[i];
+					Binding binding2 = new Binding("Rarity");
+					binding2.Source = Account.User.Instance.Ingots[i];
 
-                    MultiBinding multiBinding = new MultiBinding();
-                    multiBinding.StringFormat="{1} ingots: {0}";
-                    multiBinding.Bindings.Add(binding);
-                    multiBinding.Bindings.Add(binding2);
+					MultiBinding multiBinding = new MultiBinding();
+					multiBinding.StringFormat = "{1} ingots: {0}";
+					multiBinding.Bindings.Add(binding);
+					multiBinding.Bindings.Add(binding2);
 
-                    block.SetBinding(TextBlock.TextProperty, multiBinding);
+					block.SetBinding(TextBlock.TextProperty, multiBinding);
 
 					IngotsPanel.Children.Add(block);
 				}
 			}
-        }
-    }
+		}
+	}
 }

@@ -126,6 +126,7 @@ namespace ClickQuest.Account
 			}
 		}
 
+		[NotMapped]
 		public Hero CurrentHero
 		{
 			get

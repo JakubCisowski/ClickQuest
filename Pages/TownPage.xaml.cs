@@ -57,7 +57,7 @@ namespace ClickQuest.Pages
 		private void MainMenuButton_Click(object sender, RoutedEventArgs e)
 		{
 			(Data.Database.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
-            (Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["MainMenu"]);
+			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["MainMenu"]);
 		}
 
 		private void BlacksmithButton_Click(object sender, RoutedEventArgs e)

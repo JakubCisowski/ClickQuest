@@ -1,6 +1,4 @@
 using ClickQuest.Account;
-using ClickQuest.Items;
-using System.Linq;
 using System.Windows;
 
 namespace ClickQuest

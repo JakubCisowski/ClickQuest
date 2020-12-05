@@ -113,7 +113,7 @@ namespace ClickQuest.Items
 			}
 			set
 			{
-				_description=value;
+				_description = value;
 				OnPropertyChanged();
 			}
 		}
@@ -141,7 +141,7 @@ namespace ClickQuest.Items
 			Name = name;
 			Rarity = rarity;
 			Value = value;
-			Description=description;
+			Description = description;
 			Quantity = 0;
 		}
 

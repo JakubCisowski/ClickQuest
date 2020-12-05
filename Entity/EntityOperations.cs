@@ -1,3 +1,4 @@
+using ClickQuest.Account;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
@@ -9,11 +10,27 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
-				db.Users.RemoveRange(db.Users);
+				// OLD - remove the user and save a new one
+				//db.Users.RemoveRange(db.Users);
 
-				db.Users.AddRange(Account.User.Instance);
-				db.Entry(Account.User.Instance).State = EntityState.Modified;
+				//db.Users.AddRange(Account.User.Instance);
+				//db.Entry(Account.User.Instance).State = EntityState.Modified;
 
+				//db.SaveChanges();
+
+				// NEW - update the user
+				// TODO: seed the database with a user
+
+				// Make sure we get the right user by Id
+				var user = db.Users.FirstOrDefault(x => x.Id == User.Instance.Id);
+
+				user.Gold = User.Instance.Gold;
+				user.Artifacts = User.Instance.Artifacts;
+				user.Recipes = User.Instance.Recipes;
+				user.Materials = User.Instance.Materials;
+				user.Heroes = User.Instance.Heroes;
+
+				db.Users.Update(user);
 				db.SaveChanges();
 			}
 		}
@@ -22,10 +39,10 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
-				// Load user.
+				// Load user. Include all collections in it.
 				var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots)
 					.FirstOrDefault();
-				Account.User.Instance = user;
+				User.Instance = user;
 			}
 		}
 	}

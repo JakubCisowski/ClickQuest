@@ -1,8 +1,6 @@
-﻿using System.ComponentModel;
+﻿using ClickQuest.Pages;
+using System.ComponentModel;
 using System.Windows;
-using ClickQuest.Data;
-using ClickQuest.Entity;
-using ClickQuest.Pages;
 
 namespace ClickQuest
 {
@@ -12,9 +10,9 @@ namespace ClickQuest
 		{
 			InitializeComponent();
 
-            (Data.Database.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
-            (Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["MainMenu"]);
-        }
+			(Data.Database.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
+			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["MainMenu"]);
+		}
 
 		protected override void OnClosing(CancelEventArgs e)
 		{
