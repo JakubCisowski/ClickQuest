@@ -1,8 +1,5 @@
-using ClickQuest.Items;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace ClickQuest.Entity
 {
@@ -15,7 +12,7 @@ namespace ClickQuest.Entity
 				db.Users.RemoveRange(db.Users);
 
 				db.Users.AddRange(Account.User.Instance);
-				db.Entry(Account.User.Instance).State=EntityState.Modified;
+				db.Entry(Account.User.Instance).State = EntityState.Modified;
 
 				db.SaveChanges();
 			}
@@ -26,7 +23,9 @@ namespace ClickQuest.Entity
 			using (var db = new UserContext())
 			{
 				// Load user.
-				Account.User.Instance = db.Users.FirstOrDefault();
+				var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots)
+					.FirstOrDefault();
+				Account.User.Instance = user;
 			}
 		}
 	}

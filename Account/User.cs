@@ -1,8 +1,5 @@
 using ClickQuest.Heroes;
 using ClickQuest.Items;
-using ClickQuest.Entity;
-using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -40,7 +37,7 @@ namespace ClickQuest.Account
 			}
 			set
 			{
-				_instance=value;
+				_instance = value;
 			}
 		}
 
@@ -62,7 +59,7 @@ namespace ClickQuest.Account
 
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id{get;set;}
+		public int Id { get; set; }
 
 		public List<Hero> Heroes
 		{
@@ -165,25 +162,32 @@ namespace ClickQuest.Account
 			_artifacts = new List<Artifact>();
 			_ingots = new List<Ingot>();
 
-			// If the database is empty (eg. it was just created), then fill it with data.
-			using (var db = new UserContext())
-			{
-				var user = db.Users.FirstOrDefault();
-				if (user.Ingots.Count() == 0)
-				{
-					var rarities = Enum.GetValues(typeof(Rarity));
+			//var rarities = Enum.GetValues(typeof(Rarity));
 
-					for (int i = 0; i < rarities.GetLength(0); i++)
-					{
-						user.Ingots.Add(new Ingot((Rarity)rarities.GetValue(i), 0));
-					}
+			//for (int i = 0; i < rarities.GetLength(0); i++)
+			//{
+			//	Ingots.Add(new Ingot((Rarity)rarities.GetValue(i), 0));
+			//}
 
-					db.SaveChanges();
-				}
-			}
+			//If the database is empty(eg.it was just created), then fill it with data.
+			//using (var db = new UserContext())
+			//{
+			//	var user = db.Users.FirstOrDefault();
+			//	if (user.Ingots.Count() == 0)
+			//	{
+			//		var rarities = Enum.GetValues(typeof(Rarity));
+
+			//		for (int i = 0; i < rarities.GetLength(0); i++)
+			//		{
+			//			user.Ingots.Add(new Ingot((Rarity)rarities.GetValue(i), 0));
+			//		}
+
+			//		db.SaveChanges();
+			//	}
+			//}
 		}
 
-        public void AddItem(Item itemToAdd)
+		public void AddItem(Item itemToAdd)
 		{
 			var type = itemToAdd.GetType();
 
