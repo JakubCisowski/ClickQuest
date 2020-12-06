@@ -1,21 +1,6 @@
 {
     "Recipes": [
         {
-            "Id": 0,
-            "ArtifactId": 0,
-            "MaterialIds": [
-               {
-                "MaterialId": 0,
-                "Quantity": 1
-               }
-            ],
-            "Name": "Empty loot",
-            "Rarity": 0,
-            "ArtifactDescription": "--",
-            "RequirementsDescription": "--",
-            "Value": 0
-        },
-        {
             "Id": 1,
             "ArtifactId": 1,
             "MaterialIds": [

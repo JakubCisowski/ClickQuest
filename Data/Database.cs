@@ -43,12 +43,15 @@ namespace ClickQuest.Data
 			LoadRegions();
 			LoadShopOffer();
 
+			// Check if Ids exist and are unique.
+			ValidateData();
+
 			// Refresh Pages collection in order to rearrange page bindings.
 			RefreshPages();
 		}
 
-		#region JSON Load
-		public static void LoadMaterials()
+        #region JSON Load
+        public static void LoadMaterials()
 		{
 			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Materials.json");
 			var parsedObject = JObject.Parse(File.ReadAllText(path));
@@ -257,6 +260,68 @@ namespace ClickQuest.Data
 				ShopOffer.Add(recipe);
 			}
 		}
+
+        private static void ValidateData()
+        {
+			var errorLog = new List<string>();
+
+            // Check if all Ids are unique.
+			var materials = Materials.Select(x=>x.Id).Distinct();
+			if (materials.Count() != Materials.Count())
+			{
+				errorLog.Add($"Error: Id duplicates detected in Materials.JSON");
+			}
+
+			var artifacts = Artifacts.Select(x=>x.Id).Distinct();
+			if (artifacts.Count()!=Artifacts.Count())
+			{
+				errorLog.Add($"Error: Id duplicates detected in Artifacts.JSON");
+			}
+			
+			var recipes = Recipes.Select(x=>x.Id).Distinct();
+			if (recipes.Count()!=Recipes.Count())
+			{
+				errorLog.Add($"Error: Id duplicates detected in Recipes.JSON");
+			}
+
+			var regions = Regions.Select(x=>x.Id).Distinct();
+			if (regions.Count()!=Regions.Count())
+			{
+				errorLog.Add($"Error: Id duplicates detected in Regions.JSON");
+			}
+
+			var monsters = Monsters.Select(x=>x.Id).Distinct();
+			if (monsters.Count()!=Monsters.Count())
+			{
+				errorLog.Add($"Error: Id duplicates detected in Monsters.JSON");
+			}
+
+			// Check if every recipe components' and artifact's IDs exist.
+			foreach (var recipe in Recipes)
+			{
+				var artifact = Artifacts.FirstOrDefault(x=>x.Id==recipe.ArtifactId);
+				if (artifact is null)
+				{
+					errorLog.Add($"Error: Recipe Id: {recipe.Id} - There is no artifact with Id: {recipe.ArtifactId}");
+				}
+
+				foreach (var pair in recipe.MaterialIds)
+				{
+					var material = Materials.FirstOrDefault(x=>x.Id==pair.Key);
+					if (materials is null)
+					{
+						errorLog.Add($"Error: Recipe Id: {recipe.Id} - There is no material with Id: {pair.Key}");
+					}
+
+					if (pair.Value<=0)
+					{
+						errorLog.Add($"Error: Recipe Id: {recipe.Id} - Invalid count of material with Id: {pair.Key}");
+					}
+				}
+			}
+
+			Logger.Log(errorLog);
+        }
 
 		#endregion
 		public static void RefreshPages()

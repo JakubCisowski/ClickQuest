@@ -1,13 +1,6 @@
 {
     "Artifacts": [
         {
-            "Id": 0,
-            "Name": "Empty loot",
-            "Rarity": 0,
-            "Description": "This text shouldn't be visible.",
-            "Value": 0
-        },
-        {
             "Id": 1,
             "Name": "TestArtifact",
             "Rarity": 1,
