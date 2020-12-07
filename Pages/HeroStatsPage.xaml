@@ -21,22 +21,8 @@
                                 </MultiBinding>
                         </TextBlock.Text>
                 </TextBlock>
-                <TextBlock x:Name="CritChanceBlock">
-                        <TextBlock.Text>
-                                <MultiBinding StringFormat="Crit chance: {0:P1} (+{1:P1}/lvl)">
-                                        <Binding Path="CritChance"/>
-                                        <Binding Path="CritChancePerLevel"/>
-                                </MultiBinding>
-                        </TextBlock.Text>
-                </TextBlock>
-                <TextBlock x:Name="PoisonDamageBlock">
-                        <TextBlock.Text>
-                                <MultiBinding StringFormat="Poison damage: {0} (+{1}/lvl)">
-                                        <Binding Path="PoisonDamage"/>
-                                        <Binding Path="PoisonDamagePerLevel"/>
-                                </MultiBinding>
-                        </TextBlock.Text>
-                </TextBlock>
+                <TextBlock x:Name="CritChanceBlock" Text="{Binding Path=CritChanceText}"/>
+                <TextBlock x:Name="PoisonDamageBlock" Text="{Binding Path=PoisonDamageText}"/>
                 <StackPanel  x:Name="IngotsPanel" > </StackPanel>
                 <Button x:Name="ShowEquipmentButton" Click="ShowEquipmentButton_Click" Content="EQ"> </Button>
         </StackPanel> 

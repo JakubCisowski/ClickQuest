@@ -320,7 +320,10 @@ namespace ClickQuest.Data
 				}
 			}
 
-			Logger.Log(errorLog);
+			if (errorLog.Count > 0)
+			{
+				Logger.Log(errorLog);
+			}
         }
 
 		#endregion
