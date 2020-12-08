@@ -24,6 +24,15 @@ namespace ClickQuest.Pages
 			// Check if hero name is chosen.
 			if (!string.IsNullOrEmpty(HeroNameBox.Text))
 			{
+				// Validate name - it can contain only letters and digits.
+				bool isValid = HeroNameBox.Text.All(x=>Char.IsLetterOrDigit(x));
+
+				if (!isValid)
+				{
+					// Display an error.
+					return;
+				}
+
 				// Create hero based on user inputs and select it.
 				var hero = new Hero((HeroClass)Enum.Parse(typeof(HeroClass), HeroClassBox.SelectedValue.ToString()), HeroNameBox.Text);
 				User.Instance.Heroes.Add(hero);
