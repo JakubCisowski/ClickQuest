@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d"
-        Title="Shop Page" Height="450" Width="800">
+        Title="Shop Page" Height="768" Width="1024">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,16 +19,16 @@
 
          <Frame x:Name="CurrentFrame" Grid.Column="0" Grid.RowSpan="2" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden"/>
 
-        <Button x:Name="TownButton" Grid.Column="1" Grid.Row="0" Width="50" Height="50" Content="Come back to town!" Click="TownButton_Click"/>
+        <Button x:Name="TownButton" Grid.Column="1" Grid.Row="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click"/>
         <TabControl Grid.Row="1" Grid.Column="1">
                 <TabItem Header="Sell">
                     <ListView x:Name="ItemsListViewSell" Margin="10">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Quantity" Width="150" DisplayMemberBinding="{Binding Quantity}"/>
-                                <GridViewColumn Header="Rarity" Width="50" DisplayMemberBinding="{Binding RarityString}" />
-                                <GridViewColumn Header="Value" Width="150" DisplayMemberBinding="{Binding Value}" />
+                                <GridViewColumn Header="Quantity" Width="60" DisplayMemberBinding="{Binding Quantity}"/>
+                                <GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
+                                <GridViewColumn Header="Value" Width="60" DisplayMemberBinding="{Binding Value}" />
                                 <GridViewColumn Header="Description" Width="120" DisplayMemberBinding="{Binding Description}" />
                                 <GridViewColumn Header="Sell" Width="200">
                                     <GridViewColumn.CellTemplate>
@@ -46,8 +46,8 @@
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Rarity" Width="50" DisplayMemberBinding="{Binding RarityString}" />
-                                <GridViewColumn Header="Value" Width="150" DisplayMemberBinding="{Binding Value}" />
+                                <GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
+                                <GridViewColumn Header="Value" Width="60" DisplayMemberBinding="{Binding Value}" />
                                 <GridViewColumn Header="Description" Width="120" DisplayMemberBinding="{Binding Description}" />
                                 <GridViewColumn Header="Requirements" Width="120" DisplayMemberBinding="{Binding RequirementsDescription}" />
                                 <GridViewColumn Header="Buy" Width="200">

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d" Title="Stats"
-        Height="450" Width="400">
+        Height="768" Width="340">
 
         <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical">
                 <TextBlock x:Name="HeroNameBlock" Text="{Binding Path=Name, StringFormat='Name: \{0\}'}"/>

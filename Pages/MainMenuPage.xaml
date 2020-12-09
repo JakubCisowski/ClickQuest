@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d" Title="Main Menu"
-        Height="450" Width="800">
+        Height="768" Width="1024">
   <Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<StackPanel x:Name="HeroesPanel" Orientation="Vertical" Grid.Column="0">
+		<StackPanel x:Name="HeroesPanel" Orientation="Vertical" Grid.Column="0" VerticalAlignment="Center">
 		</StackPanel>
 
 		<Button x:Name="CreateHeroButton"  Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" Grid.Column="1"/>

@@ -5,22 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d" Title="Region"
-        Height="450" Width="800">
+        Height="768" Width="1024">
 
-        <Grid>
-                <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-                <Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" />
 
-                <StackPanel x:Name="RegionPanel" Orientation="Vertical" Grid.Column="1">
-                        <TextBlock x:Name="RegionNameBlock" Text="{Binding Path=Name, StringFormat='Region name: \{0\}'}"/>
+        <StackPanel x:Name="RegionPanel" Orientation="Vertical" Grid.Column="1">
+            <TextBlock x:Name="RegionNameBlock" Text="{Binding Path=Name, StringFormat='Region name: \{0\}'}" />
 
-                        <TextBlock x:Name="TestRewardsBlock" />
-                        <Button x:Name="TownButton" Grid.Column="0" Width="50" Height="50" Content="Come back to town!" Click="TownButton_Click"/>
-                </StackPanel>
-
-        </Grid>
+            <TextBlock x:Name="TestRewardsBlock" />
+            <Button x:Name="TownButton" Grid.Column="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
+        </StackPanel>
+    </Grid>
 </Page>

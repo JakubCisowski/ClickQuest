@@ -5,25 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d"
-        Height="200" Width="200">
+        Height="200" Width="300">
 
-        <Button Click="MonsterButton_Click">
-                <Grid>
-                        <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+    <Button Click="MonsterButton_Click">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-                        <TextBlock x:Name="MonsterName" Grid.Row="0" Text="{Binding Path=Name}"/>
-                        <TextBlock x:Name="MonsterHealth" Grid.Row="1">
-                                <TextBlock.Text>
-                                        <MultiBinding StringFormat="Health: {0} / {1}">
-                                                <Binding Path="CurrentHealth"/>
-                                                <Binding Path="Health"/>
-                                        </MultiBinding>
-                                </TextBlock.Text>
-                        </TextBlock>
-                </Grid>
-        </Button>
-
+            <TextBlock x:Name="MonsterName" Grid.Row="0" Text="{Binding Path=Name}" />
+            <TextBlock x:Name="MonsterHealth" Grid.Row="1">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Health: {0} / {1}">
+                        <Binding Path="CurrentHealth" />
+                        <Binding Path="Health" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </Grid>
+    </Button>
 </UserControl>
