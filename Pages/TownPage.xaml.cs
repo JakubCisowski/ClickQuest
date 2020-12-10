@@ -1,3 +1,4 @@
+using ClickQuest.Account;
 using ClickQuest.Data;
 using ClickQuest.Heroes;
 using System.Linq;
@@ -45,7 +46,10 @@ namespace ClickQuest.Pages
 			var regionId = int.Parse((sender as Button).Name.Substring(6));
 			string regionName = Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).Name;
 
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages[regionName]);
+			if(User.Instance.CurrentHero.Level>=Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement)
+			{
+				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages[regionName]);
+			}
 		}
 
 		private void ShopButton_Click(object sender, RoutedEventArgs e)
