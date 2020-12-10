@@ -20,6 +20,7 @@ namespace ClickQuest.Places
 		private string _name;
 		private string _background;
 		private List<(Monster Monster, double Frequency)> _monsters;
+		private int _levelRequirement;
 
 		#endregion
 
@@ -77,14 +78,28 @@ namespace ClickQuest.Places
 			}
 		}
 
+		public int LevelRequirement
+		{
+			get
+			{
+				return _levelRequirement;
+			}
+			set
+			{
+				_levelRequirement=value;
+				OnPropertyChanged();
+			}
+		}
+
 		#endregion
 
-		public Region(int id, string name, string background, List<(Monster, double)> monsters)
+		public Region(int id, string name, string background, List<(Monster, double)> monsters, int requirement)
 		{
 			Id = id;
 			Name = name;
 			Background = background;
 			Monsters = monsters;
+			LevelRequirement=requirement;
 		}
 	}
 

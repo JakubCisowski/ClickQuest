@@ -210,6 +210,7 @@ namespace ClickQuest.Data
 			for (var i = 0; i < jArray.Count; i++)
 			{
 				var id = int.Parse(parsedObject["Regions"][i]["Id"].ToString());
+				var levelRequirement = int.Parse(parsedObject["Regions"][i]["LevelRequirement"].ToString());
 				var name = parsedObject["Regions"][i]["Name"].ToString();
 				var background = parsedObject["Regions"][i]["Background"].ToString();
 
@@ -236,7 +237,7 @@ namespace ClickQuest.Data
 					errorLog.Add($"Error: {name} - monster frequency sums up to {frequencySum} instead of 1.");
 				}
 
-				var newRegion = new Region(id, name, background, monstersTemp);
+				var newRegion = new Region(id, name, background, monstersTemp, levelRequirement);
 				Regions.Add(newRegion);
 			}
 
