@@ -235,6 +235,11 @@ namespace ClickQuest.Account
 					if (item.Id == itemToRemove.Id)
 					{
 						item.Quantity--;
+						if (item.Quantity <= 0)
+						{
+							// Remove item from database.
+							Entity.EntityOperations.RemoveItem(item);
+						}
 						return;
 					}
 				}
@@ -248,6 +253,11 @@ namespace ClickQuest.Account
 					if (item.Id == itemToRemove.Id)
 					{
 						item.Quantity--;
+						if (item.Quantity <= 0)
+						{
+							// Remove item from database.
+							Entity.EntityOperations.RemoveItem(item);
+						}
 						return;
 					}
 				}
@@ -261,6 +271,11 @@ namespace ClickQuest.Account
 					if (item.Id == itemToRemove.Id)
 					{
 						item.Quantity--;
+						if (item.Quantity <= 0)
+						{
+							// Remove item from database.
+							Entity.EntityOperations.RemoveItem(item);
+						}
 						return;
 					}
 				}
