@@ -15,6 +15,9 @@
 		<StackPanel x:Name="HeroesPanel" Orientation="Vertical" Grid.Column="0" VerticalAlignment="Center">
 		</StackPanel>
 
-		<Button x:Name="CreateHeroButton"  Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" Grid.Column="1"/>
+            <StackPanel x:Name="ActionsPanel" Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center">
+		      <Button x:Name="CreateHeroButton"  Width="250" Height="50" Margin="5" Content="Create a new hero!" Click="CreateHeroButton_Click"/>
+                  <Button x:Name="ResetProgressButton"  Width="250" Height="50" Margin="5" Content="Reset all your progress" Click="ResetProgressButton_Click"/>
+            </StackPanel>
 	</Grid>
 </Page>

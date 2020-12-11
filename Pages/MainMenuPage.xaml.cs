@@ -72,6 +72,12 @@ namespace ClickQuest.Pages
             GenerateHeroButtons();
         }
 
+        private void ResetProgressButton_Click(object sender, RoutedEventArgs e)
+        {
+            Entity.EntityOperations.ResetProgress();
+            GenerateHeroButtons();
+        }
+
         #endregion Events
     }
 }

@@ -71,5 +71,39 @@ namespace ClickQuest.Entity
 				db.SaveChanges();
 			}
 		}
+
+		public static void ResetProgress()
+		{
+			using (var db = new UserContext())
+			{
+				var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots)
+					.FirstOrDefault();
+					while(user.Materials.Count > 0)
+					{
+						user.Materials.RemoveAt(0);
+					}
+					while(user.Artifacts.Count > 0)
+					{
+						user.Artifacts.RemoveAt(0);
+					}
+					while(user.Recipes.Count > 0)
+					{
+						user.Recipes.RemoveAt(0);
+					}
+					for(int i=0; i<user.Ingots.Count(); i++)
+					{
+						user.Ingots[i].Quantity=0;
+					}
+					while(user.Heroes.Count > 0)
+					{
+						user.Heroes.RemoveAt(0);
+					}
+					user.Gold=0;
+
+					db.SaveChanges();
+			}
+
+			LoadGame();
+		}
 	}
 }
