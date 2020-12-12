@@ -69,6 +69,12 @@ namespace ClickQuest.Pages
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Blacksmith"]);
 			(Database.Pages["Blacksmith"] as BlacksmithPage).UpdateBlacksmith();
 		}
+		private void PriestButton_Click(object sender, RoutedEventArgs e)
+		{
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Priest"]);
+			(Database.Pages["Priest"] as PriestPage).UpdatePriest();
+		}
+		
 
 		#endregion
 	}

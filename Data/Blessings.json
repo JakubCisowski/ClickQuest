@@ -1,0 +1,14 @@
+{
+    "Blessings": [
+        {
+            "Id": 1,
+            "Name": "TestBlessing",
+            "Type": "ClickDamage", 
+            "Rarity": 1,
+            "Duration": 15,
+            "Description": "Test blessing - gives 5 click damage.",
+            "Buff": 5,
+            "Value": 1
+        }
+    ]
+}

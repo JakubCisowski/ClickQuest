@@ -19,6 +19,7 @@ namespace ClickQuest.Entity
 				user.Recipes = User.Instance.Recipes;
 				user.Materials = User.Instance.Materials;
 				user.Heroes = User.Instance.Heroes;
+				user.Blessings = User.Instance.Blessings;
 
 				db.Users.Update(user);
 				db.SaveChanges();
@@ -30,7 +31,7 @@ namespace ClickQuest.Entity
 			using (var db = new UserContext())
 			{
 				// Load user. Include all collections in it.
-				var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots)
+				var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots).Include(x=>x.Blessings)
 					.FirstOrDefault();
 				User.Instance = user;
 			}
@@ -40,7 +41,7 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
-				var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots)
+				var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots).Include(x=>x.Blessings)
 					.FirstOrDefault();
 
 				if (item is Material)
@@ -76,7 +77,7 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
-				var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots)
+				var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots).Include(x=>x.Blessings)
 					.FirstOrDefault();
 					while(user.Materials.Count > 0)
 					{
@@ -97,6 +98,10 @@ namespace ClickQuest.Entity
 					while(user.Heroes.Count > 0)
 					{
 						user.Heroes.RemoveAt(0);
+					}
+					while(user.Blessings.Count > 0)
+					{
+						user.Blessings.RemoveAt(0);
 					}
 					user.Gold=0;
 

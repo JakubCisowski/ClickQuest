@@ -19,7 +19,9 @@ namespace ClickQuest.Data
 		public static List<Artifact> Artifacts { get; set; }
 		public static List<Monster> Monsters { get; set; }
 		public static List<Region> Regions { get; set; }
+		public static List<Blessing> Blessings { get; set; }
 		public static List<Recipe> ShopOffer { get; set; }
+		public static List<Blessing> PriestOffer { get; set; }
 		public static Dictionary<string, Page> Pages { get; set; }
 
 		#endregion
@@ -32,7 +34,9 @@ namespace ClickQuest.Data
 			Artifacts = new List<Artifact>();
 			Monsters = new List<Monster>();
 			Regions = new List<Region>();
+			Blessings = new List<Blessing>();
 			ShopOffer = new List<Recipe>();
+			PriestOffer = new List<Blessing>();
 			Pages = new Dictionary<string, Page>();
 
 			// Fill collections with JSON data.
@@ -41,7 +45,9 @@ namespace ClickQuest.Data
 			LoadRecipes();
 			LoadMonsters();
 			LoadRegions();
+			LoadBlessings();
 			LoadShopOffer();
+			LoadPriestOffer();
 
 			// Check if Ids exist and are unique.
 			ValidateData();
@@ -246,7 +252,28 @@ namespace ClickQuest.Data
 				Logger.Log(errorLog);
 			}
 		}
+		public static void LoadBlessings()
+		{
+			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Blessings.json");
+			var parsedObject = JObject.Parse(File.ReadAllText(path));
+			var jArray = (JArray)parsedObject["Blessings"];
 
+			for (var i = 0; i < jArray.Count; i++)
+			{
+				var id = int.Parse(parsedObject["Blessings"][i]["Id"].ToString());
+				var name = parsedObject["Blessings"][i]["Name"].ToString();
+				var type = 	(BlessingType)Enum.Parse(typeof(BlessingType), parsedObject["Blessings"][i]["Type"].ToString());
+				var rarity = (Rarity)int.Parse(parsedObject["Blessings"][i]["Rarity"].ToString());
+				var duration = int.Parse(parsedObject["Blessings"][i]["Duration"].ToString());
+				var description = parsedObject["Blessings"][i]["Description"].ToString();
+				var buff = int.Parse(parsedObject["Blessings"][i]["Buff"].ToString());
+				var value = int.Parse(parsedObject["Blessings"][i]["Value"].ToString());
+
+				var newBlessing = new Blessing(id, name, type, rarity, duration, description, buff, value);
+				Blessings.Add(newBlessing);
+			}
+		}
+		
 		public static void LoadShopOffer()
 		{
 			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "ShopOffer.json");
@@ -259,6 +286,21 @@ namespace ClickQuest.Data
 				var recipe = Recipes.Where(x => x.Id == id).FirstOrDefault();
 
 				ShopOffer.Add(recipe);
+			}
+		}
+
+		public static void LoadPriestOffer()
+		{
+			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "PriestOffer.json");
+			var parsedObject = JObject.Parse(File.ReadAllText(path));
+			var jArray = (JArray)parsedObject["PriestOffer"];
+
+			for (var i = 0; i < jArray.Count; i++)
+			{
+				var id = int.Parse(parsedObject["PriestOffer"][i]["BlessingId"].ToString());
+				var blessing = Blessings.Where(x => x.Id == id).FirstOrDefault();
+
+				PriestOffer.Add(blessing);
 			}
 		}
 
@@ -295,6 +337,12 @@ namespace ClickQuest.Data
 			if (monsters.Count()!=Monsters.Count())
 			{
 				errorLog.Add($"Error: Id duplicates detected in Monsters.JSON");
+			}
+
+			var blessings = Blessings.Select(x=>x.Id).Distinct();
+			if (blessings.Count()!=Blessings.Count())
+			{
+				errorLog.Add($"Error: Id duplicates detected in Blessings.JSON");
 			}
 
 			// Check if every recipe components' and artifact's IDs exist.
@@ -342,6 +390,8 @@ namespace ClickQuest.Data
 			Pages.Add("Blacksmith", new BlacksmithPage());
 			// Hero Creation Page
 			Pages.Add("HeroCreation", new HeroCreationPage());
+			// Priest Page
+			Pages.Add("Priest",new PriestPage());
 
 			foreach (var region in Regions)
 			{
