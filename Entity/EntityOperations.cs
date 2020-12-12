@@ -1,4 +1,5 @@
 using ClickQuest.Account;
+using ClickQuest.Heroes;
 using ClickQuest.Items;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -67,6 +68,23 @@ namespace ClickQuest.Entity
 					{
 						user.Artifacts.Remove(artifact);
 					}
+				}
+
+				db.SaveChanges();
+			}
+		}
+
+		public static void RemoveHero(Hero heroToRemove)
+		{
+			using (var db = new UserContext())
+			{
+				var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots).Include(x => x.Blessings)
+					.FirstOrDefault();
+
+				var hero = user.Heroes.FirstOrDefault(x => x.Id == heroToRemove.Id);
+				if (hero != null)
+				{
+					user.Heroes.Remove(hero);
 				}
 
 				db.SaveChanges();
