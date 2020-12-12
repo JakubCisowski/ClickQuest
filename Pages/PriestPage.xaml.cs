@@ -31,8 +31,14 @@ namespace ClickQuest.Pages
 		{
 			var b = sender as Button;
 			var blessing = b.CommandParameter as Blessing;
-			// remove gold, start blessing
-            User.Instance.Blessings.Add(blessing);
+			// Remove gold, start blessing
+            
+			if (User.Instance.Gold>=blessing.Value)
+			{
+				User.Instance.Gold-=blessing.Value;
+				User.Instance.Blessings.Add(blessing);
+				blessing.ChangeBuffStatus(true);
+			}
 
 			UpdatePriest();
 		}

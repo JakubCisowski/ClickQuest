@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using System;
+using System.Timers;
+using ClickQuest.Account;
 
 namespace ClickQuest.Items
 {
@@ -30,6 +32,7 @@ namespace ClickQuest.Items
         private int _value;
         private int _duration;
         private int _buff;
+        private Timer _timer;
 
         #endregion
 
@@ -183,6 +186,55 @@ namespace ClickQuest.Items
             Description=description;
             Buff=buff;
             Value=value;
+        }
+        public void ChangeBuffStatus(bool add)
+        {
+            if (add)
+            {
+                switch (Type)
+                {
+                    case BlessingType.ClickDamage:
+                        foreach (var hero in User.Instance.Heroes)
+                        {
+                            hero.ClickDamage+=Buff;
+                        }
+
+                        _timer = new Timer();
+                        _timer.Interval = 1000;
+                        _timer.AutoReset=true;
+                        _timer.Elapsed+=OnTimedEvent;
+                        _timer.Start();
+
+                        break;
+                }
+            }
+            else
+            {
+                switch (Type)
+                {
+                    case BlessingType.ClickDamage:
+                        foreach (var hero in User.Instance.Heroes)
+                        {
+                            hero.ClickDamage-=Buff;
+                        }
+
+                        _timer.Stop();
+                        User.Instance.Blessings.Remove(this);
+
+                        break;
+                }
+            }
+        }
+
+        private void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            Duration--;
+
+            if (Duration<=0)
+            {
+                // End the blessing.
+                ChangeBuffStatus(false);
+            }
         }
     }
 }

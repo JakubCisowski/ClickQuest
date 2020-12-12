@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using ClickQuest.Account;
 
 namespace ClickQuest
 {
@@ -35,6 +36,12 @@ namespace ClickQuest
 
             Data.Database.Load();
             Entity.EntityOperations.LoadGame();
+
+            // Start blessings again.
+            foreach (var blessing in User.Instance.Blessings)
+            {
+                blessing.ChangeBuffStatus(true);
+            }
         }
     }
 }
