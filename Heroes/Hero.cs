@@ -1,8 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
-using System;
 
 namespace ClickQuest.Heroes
 {
@@ -41,9 +41,9 @@ namespace ClickQuest.Heroes
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 
-		public int ClickDamagePerLevel { get; }
-		public double CritChancePerLevel { get; }
-		public int PoisonDamagePerLevel { get; }
+		public int ClickDamagePerLevel { get; set; }
+		public double CritChancePerLevel { get; set; }
+		public int PoisonDamagePerLevel { get; set; }
 
 		public string Name
 		{
@@ -140,7 +140,7 @@ namespace ClickQuest.Heroes
 			}
 			set
 			{
-				_critChanceText=value;
+				_critChanceText = value;
 				OnPropertyChanged();
 			}
 		}
@@ -153,7 +153,7 @@ namespace ClickQuest.Heroes
 			}
 			set
 			{
-				_poisonDamageText=value;
+				_poisonDamageText = value;
 				OnPropertyChanged();
 			}
 		}
@@ -177,8 +177,8 @@ namespace ClickQuest.Heroes
 					CritChancePerLevel = 0.004;
 					PoisonDamage = 0;
 					PoisonDamagePerLevel = 0;
-					CritChanceText=String.Format("Crit chance: {0:P1} (+{1:P1}/lvl)",CritChance,CritChancePerLevel);
-					PoisonDamageText=String.Format("Poison damage: {0}", PoisonDamage);
+					CritChanceText = String.Format("Crit chance: {0:P1} (+{1:P1}/lvl)", CritChance, CritChancePerLevel);
+					PoisonDamageText = String.Format("Poison damage: {0}", PoisonDamage);
 					break;
 
 				case HeroClass.Venom:
@@ -187,8 +187,8 @@ namespace ClickQuest.Heroes
 					CritChancePerLevel = 0;
 					PoisonDamage = 1;
 					PoisonDamagePerLevel = 2;
-					CritChanceText=String.Format("Crit chance: {0:P1}",CritChance);
-					PoisonDamageText=String.Format("Poison damage: {0} (+{1}/lvl)", PoisonDamage, PoisonDamagePerLevel);
+					CritChanceText = String.Format("Crit chance: {0:P1}", CritChance);
+					PoisonDamageText = String.Format("Poison damage: {0} (+{1}/lvl)", PoisonDamage, PoisonDamagePerLevel);
 					break;
 			}
 		}
@@ -199,23 +199,23 @@ namespace ClickQuest.Heroes
 
 		public void GrantLevelUpBonuses()
 		{
-			if (Level==100)
+			if (Level == 100)
 			{
 				// Set tooltips once and never set them again after lvl100.
 				switch (_heroClass)
 				{
 					case HeroClass.Slayer:
-						CritChanceText=String.Format("Crit chance: {0:P1}",CritChance);
-						PoisonDamageText=String.Format("Poison damage: {0}", PoisonDamage);
+						CritChanceText = String.Format("Crit chance: {0:P1}", CritChance);
+						PoisonDamageText = String.Format("Poison damage: {0}", PoisonDamage);
 						break;
 
 					case HeroClass.Venom:
-						CritChanceText=String.Format("Crit chance: {0:P1}",CritChance);
-						PoisonDamageText=String.Format("Poison damage: {0}", PoisonDamage);
+						CritChanceText = String.Format("Crit chance: {0:P1}", CritChance);
+						PoisonDamageText = String.Format("Poison damage: {0}", PoisonDamage);
 						break;
 				}
 			}
-			else if (Level<100)
+			else if (Level < 100)
 			{
 				// Class specific bonuses.
 				switch (_heroClass)
@@ -223,20 +223,20 @@ namespace ClickQuest.Heroes
 					case HeroClass.Slayer:
 						ClickDamage += ClickDamagePerLevel;
 						CritChance += CritChancePerLevel;
-						CritChanceText=String.Format("Crit chance: {0:P1} (+{1:P1}/lvl)",CritChance,CritChancePerLevel);
-						PoisonDamageText=String.Format("Poison damage: {0}", PoisonDamage);
+						CritChanceText = String.Format("Crit chance: {0:P1} (+{1:P1}/lvl)", CritChance, CritChancePerLevel);
+						PoisonDamageText = String.Format("Poison damage: {0}", PoisonDamage);
 						break;
 
 					case HeroClass.Venom:
 						ClickDamage += ClickDamagePerLevel;
 						PoisonDamage += PoisonDamagePerLevel;
-						CritChanceText=String.Format("Crit chance: {0:P1}",CritChance);
-						PoisonDamageText=String.Format("Poison damage: {0} (+{1}/lvl)", PoisonDamage, PoisonDamagePerLevel);
+						CritChanceText = String.Format("Crit chance: {0:P1}", CritChance);
+						PoisonDamageText = String.Format("Poison damage: {0} (+{1}/lvl)", PoisonDamage, PoisonDamagePerLevel);
 						break;
 				}
 			}
 
-			
+
 		}
 	}
 }
