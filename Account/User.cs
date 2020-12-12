@@ -177,6 +177,7 @@ namespace ClickQuest.Account
 			_recipes = new List<Recipe>();
 			_artifacts = new List<Artifact>();
 			_ingots = new List<Ingot>();
+			_blessings = new List<Blessing>();
 		}
 
 		public void AddItem(Item itemToAdd)

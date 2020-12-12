@@ -1,5 +1,5 @@
-﻿using ClickQuest.Pages;
-using ClickQuest.Account;
+﻿using ClickQuest.Account;
+using ClickQuest.Pages;
 using System.ComponentModel;
 using System.Windows;
 
@@ -18,9 +18,9 @@ namespace ClickQuest
 		protected override void OnClosing(CancelEventArgs e)
 		{
 			// End current blessings.
-			foreach (var blessing in User.Instance.Blessings)
+			for (int i = 0; i < User.Instance.Blessings.Count; i++)
 			{
-				blessing.ChangeBuffStatus(false);
+				User.Instance.Blessings[0].ChangeBuffStatus(false);
 			}
 
 			Entity.EntityOperations.SaveGame();
