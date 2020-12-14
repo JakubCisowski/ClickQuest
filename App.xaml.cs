@@ -15,6 +15,7 @@ namespace ClickQuest
         {
             using (var db = new UserContext())
             {
+                // Ensure the database exists.
                 db.Database.EnsureCreated();
 
                 var user = db.Users.Include(x=>x.Ingots).FirstOrDefault();
@@ -34,10 +35,11 @@ namespace ClickQuest
 				}
             }
 
+            // Load JSONs and Entity.
             Data.Database.Load();
             Entity.EntityOperations.LoadGame();
 
-            // Start blessings again.
+            // Resume blessings (if there are any left).
             foreach (var blessing in User.Instance.Blessings)
             {
                 blessing.ChangeBuffStatus(true);

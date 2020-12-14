@@ -17,6 +17,7 @@ namespace ClickQuest.Items
 			set { _artifactId = value; }
 		}
 
+		// Key is the Id of the material; value is the amount needed.
 		[NotMapped]
 		public Dictionary<int, int> MaterialIds
 		{
@@ -31,8 +32,6 @@ namespace ClickQuest.Items
 		{
 			ArtifactId = artifactId;
 			MaterialIds = new Dictionary<int, int>();
-
-			//UpdateRequirementsDescription();
 		}
 
 		public void UpdateRequirementsDescription()

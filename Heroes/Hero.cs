@@ -201,7 +201,7 @@ namespace ClickQuest.Heroes
 		{
 			if (Level == 100)
 			{
-				// Set tooltips once and never set them again after lvl100.
+				// Set tooltips once and never set them again after lvl 100.
 				switch (_heroClass)
 				{
 					case HeroClass.Slayer:
@@ -217,7 +217,7 @@ namespace ClickQuest.Heroes
 			}
 			else if (Level < 100)
 			{
-				// Class specific bonuses.
+				// Class specific bonuses and hero stats panel update.
 				switch (_heroClass)
 				{
 					case HeroClass.Slayer:

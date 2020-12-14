@@ -45,6 +45,8 @@ namespace ClickQuest.Entity
 				var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots).Include(x => x.Blessings)
 					.FirstOrDefault();
 
+				// Remove the item from the right collection.
+
 				if (item is Material)
 				{
 					var material = user.Materials.FirstOrDefault(x => x.Id == item.Id);
@@ -114,6 +116,9 @@ namespace ClickQuest.Entity
 			{
 				var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots).Include(x => x.Blessings)
 					.FirstOrDefault();
+
+				// Delete all items and heroes (except for ingots - only set their quantity to 0).
+
 				while (user.Materials.Count > 0)
 				{
 					user.Materials.RemoveAt(0);
@@ -143,6 +148,7 @@ namespace ClickQuest.Entity
 				db.SaveChanges();
 			}
 
+			// Load the empty collections.
 			LoadGame();
 		}
 	}

@@ -243,7 +243,7 @@ namespace ClickQuest.Account
 
 			if (type == typeof(Recipe))
 			{
-				// Add to Recipes.
+				// Revmove from Recipes.
 
 				foreach (var item in Recipes)
 				{
@@ -261,7 +261,7 @@ namespace ClickQuest.Account
 			}
 			else if (type == typeof(Artifact))
 			{
-				// Add to Artifacts.
+				// Revmove from Artifacts.
 
 				foreach (var item in Artifacts)
 				{
@@ -279,7 +279,7 @@ namespace ClickQuest.Account
 			}
 			else if (type == typeof(Material))
 			{
-				// Add to Materials.
+				// Revmove from Materials.
 
 				foreach (var item in Materials)
 				{

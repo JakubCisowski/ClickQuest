@@ -41,6 +41,7 @@ namespace ClickQuest.Heroes
 
 		public static void CheckIfLeveledUp(Hero hero)
 		{
+			// Check if hero leveled up - if so, grant him level up bonuses and increment his lvl.
 			int xpToLevel = XPToLevel(hero.Experience);
 			int lvlDifference = xpToLevel - hero.Level;
 

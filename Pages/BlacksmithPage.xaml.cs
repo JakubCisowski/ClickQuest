@@ -16,6 +16,7 @@ namespace ClickQuest.Pages
 
 		public void UpdateBlacksmith()
 		{
+			// Refresh list of items.
 			ItemsListViewMelt.ItemsSource = User.Instance.Materials;
 			ItemsListViewCraft.ItemsSource = User.Instance.Recipes;
 
@@ -29,13 +30,14 @@ namespace ClickQuest.Pages
 			var b = sender as Button;
 			var material = b.CommandParameter as Material;
 
-			// Remove X items (for now only 1)
+			// Remove X materials (for now only 1)
 			Account.User.Instance.RemoveItem(material);
 
-			// Add an ingot of that rarity
+			// Add an ingot of that rarity.
 			var ingot = Account.User.Instance.Ingots.Where(x => x.Rarity == material.Rarity).FirstOrDefault();
 			ingot.Quantity++;
 
+			// Update both equipment and blacksmith page.
 			EquipmentWindow.Instance.UpdateEquipment();
 			UpdateBlacksmith();
 		}
@@ -51,11 +53,10 @@ namespace ClickQuest.Pages
 				var material = User.Instance.Materials.FirstOrDefault(x=>x.Id==pair.Key);
 				if (! (material!=null && material.Quantity>=pair.Value))
 				{
-					// Error - no materials.
+					// Error - no materials - stop this function.
 					return;
 				}
 			}
-			
 			
 			// If he has, remove them.
 			foreach (var pair in recipe.MaterialIds)

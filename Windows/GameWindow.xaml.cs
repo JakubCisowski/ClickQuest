@@ -17,7 +17,7 @@ namespace ClickQuest
 
 		protected override void OnClosing(CancelEventArgs e)
 		{
-			// End current blessings.
+			// End current blessings and save them to the database.
 			for (int i = 0; i < User.Instance.Blessings.Count; i++)
 			{
 				User.Instance.Blessings[0].ChangeBuffStatus(false);

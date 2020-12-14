@@ -21,6 +21,7 @@ namespace ClickQuest.Pages
 			ItemsListViewBuy.Items.Refresh();
 		}
 
+		#region Events
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
@@ -30,11 +31,12 @@ namespace ClickQuest.Pages
 		{
 			var b = sender as Button;
 			var blessingBlueprint = b.CommandParameter as Blessing;
-			// Remove gold, start blessing
 
+			// Remove gold, start blessing
 			if (User.Instance.Gold >= blessingBlueprint.Value)
 			{
 				User.Instance.Gold -= blessingBlueprint.Value;
+
 				// Create a new Blessing.
 				var blessing = new Blessing(blessingBlueprint);
 				User.Instance.Blessings.Add(blessing);
@@ -43,5 +45,6 @@ namespace ClickQuest.Pages
 
 			UpdatePriest();
 		}
+		#endregion
 	}
 }

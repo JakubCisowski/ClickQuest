@@ -198,6 +198,7 @@ namespace ClickQuest.Items
 
 		public void ChangeBuffStatus(bool add)
 		{
+			// Assign buff to every hero.
 			if (add)
 			{
 				switch (Type)
@@ -217,6 +218,7 @@ namespace ClickQuest.Items
 						break;
 				}
 			}
+			// Cancel buff.
 			else
 			{
 				switch (Type)

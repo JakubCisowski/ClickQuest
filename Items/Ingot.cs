@@ -15,8 +15,13 @@ namespace ClickQuest.Items
 		}
 		#endregion
 
+		#region Private Fields
 		private Rarity _rarity;
 		private int _quantity;
+
+		#endregion
+
+		#region Properties
 
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -47,6 +52,8 @@ namespace ClickQuest.Items
 				OnPropertyChanged();
 			}
 		}
+
+		#endregion
 
 		public Ingot(Rarity rarity, int quantity)
 		{

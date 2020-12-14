@@ -5,6 +5,7 @@ namespace ClickQuest
 {
 	public partial class EquipmentWindow : Window
 	{
+		#region Singleton
 		private static EquipmentWindow _instance;
 		public static EquipmentWindow Instance
 		{
@@ -18,6 +19,7 @@ namespace ClickQuest
 				return _instance;
 			}
 		}
+		#endregion
 		private EquipmentWindow()
 		{
 			InitializeComponent();
@@ -43,6 +45,7 @@ namespace ClickQuest
 
 		private void EquipmentWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
+			// If the window is closed, keep it open but hide it instead.
 			e.Cancel=true;
 			this.Visibility = Visibility.Hidden;
 		}

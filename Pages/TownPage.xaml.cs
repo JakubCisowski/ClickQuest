@@ -23,6 +23,7 @@ namespace ClickQuest.Pages
 
 		private void GenerateRegionButtons()
 		{
+			// Create a button for each region.
 			for (int i = 0; i < Data.Database.Regions.Count; i++)
 			{
 				var button = new Button()
@@ -46,10 +47,12 @@ namespace ClickQuest.Pages
 			var regionId = int.Parse((sender as Button).Name.Substring(6));
 			string regionName = Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).Name;
 
+			// Check if the current hero can enter this location (level requirement).
 			if(User.Instance.CurrentHero.Level>=Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement)
 			{
 				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages[regionName]);
 			}
+			// Else display a warning.
 		}
 
 		private void ShopButton_Click(object sender, RoutedEventArgs e)
@@ -74,7 +77,6 @@ namespace ClickQuest.Pages
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Priest"]);
 			(Database.Pages["Priest"] as PriestPage).UpdatePriest();
 		}
-		
 
 		#endregion
 	}
