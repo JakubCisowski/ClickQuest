@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using ClickQuest.Account;
-using ClickQuest.Items;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClickQuest.Entity
@@ -18,7 +15,7 @@ namespace ClickQuest.Entity
 			// Seed the database with a sample, empty user.
 			modelBuilder.Entity<User>().HasData(new User()
 			{
-				Id=1
+				Id = 1
 			});
 
 			base.OnModelCreating(modelBuilder);

@@ -86,7 +86,7 @@ namespace ClickQuest.Places
 			}
 			set
 			{
-				_levelRequirement=value;
+				_levelRequirement = value;
 				OnPropertyChanged();
 			}
 		}
@@ -99,7 +99,7 @@ namespace ClickQuest.Places
 			Name = name;
 			Background = background;
 			Monsters = monsters;
-			LevelRequirement=requirement;
+			LevelRequirement = requirement;
 		}
 	}
 

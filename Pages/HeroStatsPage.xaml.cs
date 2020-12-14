@@ -28,8 +28,8 @@ namespace ClickQuest.Pages
 		private void GenerateGold()
 		{
 			Binding binding = new Binding("Gold");
-			binding.Source=Account.User.Instance;
-			binding.StringFormat="Gold: {0}";
+			binding.Source = Account.User.Instance;
+			binding.StringFormat = "Gold: {0}";
 
 			GoldBlock.SetBinding(TextBlock.TextProperty, binding);
 		}

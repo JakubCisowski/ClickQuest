@@ -59,8 +59,8 @@ namespace ClickQuest.Controls
 
 			// Setup Timer to tick every 0.5s.
 			_poisonTimer = new DispatcherTimer();
-			_poisonTimer.Interval = new TimeSpan(0,0,0,0,500);
-			_poisonTimer.Tick+=PoisonTimer_Tick;
+			_poisonTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+			_poisonTimer.Tick += PoisonTimer_Tick;
 
 			SpawnMonster();
 		}
@@ -140,7 +140,7 @@ namespace ClickQuest.Controls
 			// Check if monster is dead now.
 			CheckIfMonsterDied();
 		}
-		
+
 		private void PoisonTimer_Tick(object source, EventArgs e)
 		{
 			// When poison ends, stop poison timer.
