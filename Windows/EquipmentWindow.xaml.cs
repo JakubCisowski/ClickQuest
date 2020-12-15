@@ -15,7 +15,7 @@ namespace ClickQuest
 				{
 					_instance = new EquipmentWindow();
 				}
-				
+
 				return _instance;
 			}
 		}
@@ -40,13 +40,13 @@ namespace ClickQuest
 
 		public new void Show()
 		{
-			_instance.Visibility=Visibility.Visible;
+			_instance.Visibility = Visibility.Visible;
 		}
 
 		private void EquipmentWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			// If the window is closed, keep it open but hide it instead.
-			e.Cancel=true;
+			e.Cancel = true;
 			this.Visibility = Visibility.Hidden;
 		}
 	}

@@ -25,7 +25,7 @@ namespace ClickQuest.Pages
 			if (!string.IsNullOrEmpty(HeroNameBox.Text))
 			{
 				// Validate name - it can contain only letters and digits.
-				bool isValid = HeroNameBox.Text.All(x=>Char.IsLetterOrDigit(x));
+				bool isValid = HeroNameBox.Text.All(x => Char.IsLetterOrDigit(x));
 
 				if (!isValid)
 				{

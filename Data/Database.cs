@@ -56,8 +56,8 @@ namespace ClickQuest.Data
 			RefreshPages();
 		}
 
-        #region JSON Load
-        public static void LoadMaterials()
+		#region JSON Load
+		public static void LoadMaterials()
 		{
 			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Materials.json");
 			var parsedObject = JObject.Parse(File.ReadAllText(path));
@@ -262,7 +262,7 @@ namespace ClickQuest.Data
 			{
 				var id = int.Parse(parsedObject["Blessings"][i]["Id"].ToString());
 				var name = parsedObject["Blessings"][i]["Name"].ToString();
-				var type = 	(BlessingType)Enum.Parse(typeof(BlessingType), parsedObject["Blessings"][i]["Type"].ToString());
+				var type = (BlessingType)Enum.Parse(typeof(BlessingType), parsedObject["Blessings"][i]["Type"].ToString());
 				var rarity = (Rarity)int.Parse(parsedObject["Blessings"][i]["Rarity"].ToString());
 				var duration = int.Parse(parsedObject["Blessings"][i]["Duration"].ToString());
 				var description = parsedObject["Blessings"][i]["Description"].ToString();
@@ -273,7 +273,7 @@ namespace ClickQuest.Data
 				Blessings.Add(newBlessing);
 			}
 		}
-		
+
 		public static void LoadShopOffer()
 		{
 			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "ShopOffer.json");
@@ -304,43 +304,43 @@ namespace ClickQuest.Data
 			}
 		}
 
-        private static void ValidateData()
-        {
+		private static void ValidateData()
+		{
 			var errorLog = new List<string>();
 
-            // Check if all Ids are unique.
-			var materials = Materials.Select(x=>x.Id).Distinct();
+			// Check if all Ids are unique.
+			var materials = Materials.Select(x => x.Id).Distinct();
 			if (materials.Count() != Materials.Count())
 			{
 				errorLog.Add($"Error: Id duplicates detected in Materials.JSON");
 			}
 
-			var artifacts = Artifacts.Select(x=>x.Id).Distinct();
-			if (artifacts.Count()!=Artifacts.Count())
+			var artifacts = Artifacts.Select(x => x.Id).Distinct();
+			if (artifacts.Count() != Artifacts.Count())
 			{
 				errorLog.Add($"Error: Id duplicates detected in Artifacts.JSON");
 			}
-			
-			var recipes = Recipes.Select(x=>x.Id).Distinct();
-			if (recipes.Count()!=Recipes.Count())
+
+			var recipes = Recipes.Select(x => x.Id).Distinct();
+			if (recipes.Count() != Recipes.Count())
 			{
 				errorLog.Add($"Error: Id duplicates detected in Recipes.JSON");
 			}
 
-			var regions = Regions.Select(x=>x.Id).Distinct();
-			if (regions.Count()!=Regions.Count())
+			var regions = Regions.Select(x => x.Id).Distinct();
+			if (regions.Count() != Regions.Count())
 			{
 				errorLog.Add($"Error: Id duplicates detected in Regions.JSON");
 			}
 
-			var monsters = Monsters.Select(x=>x.Id).Distinct();
-			if (monsters.Count()!=Monsters.Count())
+			var monsters = Monsters.Select(x => x.Id).Distinct();
+			if (monsters.Count() != Monsters.Count())
 			{
 				errorLog.Add($"Error: Id duplicates detected in Monsters.JSON");
 			}
 
-			var blessings = Blessings.Select(x=>x.Id).Distinct();
-			if (blessings.Count()!=Blessings.Count())
+			var blessings = Blessings.Select(x => x.Id).Distinct();
+			if (blessings.Count() != Blessings.Count())
 			{
 				errorLog.Add($"Error: Id duplicates detected in Blessings.JSON");
 			}
@@ -348,7 +348,7 @@ namespace ClickQuest.Data
 			// Check if every recipe components' and artifact's IDs exist.
 			foreach (var recipe in Recipes)
 			{
-				var artifact = Artifacts.FirstOrDefault(x=>x.Id==recipe.ArtifactId);
+				var artifact = Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
 				if (artifact is null)
 				{
 					errorLog.Add($"Error: Recipe Id: {recipe.Id} - There is no artifact with Id: {recipe.ArtifactId}");
@@ -356,13 +356,13 @@ namespace ClickQuest.Data
 
 				foreach (var pair in recipe.MaterialIds)
 				{
-					var material = Materials.FirstOrDefault(x=>x.Id==pair.Key);
+					var material = Materials.FirstOrDefault(x => x.Id == pair.Key);
 					if (materials is null)
 					{
 						errorLog.Add($"Error: Recipe Id: {recipe.Id} - There is no material with Id: {pair.Key}");
 					}
 
-					if (pair.Value<=0)
+					if (pair.Value <= 0)
 					{
 						errorLog.Add($"Error: Recipe Id: {recipe.Id} - Invalid count of material with Id: {pair.Key}");
 					}
@@ -373,7 +373,7 @@ namespace ClickQuest.Data
 			{
 				Logger.Log(errorLog);
 			}
-        }
+		}
 
 		#endregion
 		public static void RefreshPages()
@@ -391,7 +391,7 @@ namespace ClickQuest.Data
 			// Hero Creation Page
 			Pages.Add("HeroCreation", new HeroCreationPage());
 			// Priest Page
-			Pages.Add("Priest",new PriestPage());
+			Pages.Add("Priest", new PriestPage());
 
 			foreach (var region in Regions)
 			{

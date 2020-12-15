@@ -48,7 +48,7 @@ namespace ClickQuest.Pages
 			string regionName = Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).Name;
 
 			// Check if the current hero can enter this location (level requirement).
-			if(User.Instance.CurrentHero.Level>=Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement)
+			if (User.Instance.CurrentHero.Level >= Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement)
 			{
 				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages[regionName]);
 			}
