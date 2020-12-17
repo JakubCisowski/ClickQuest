@@ -1,4 +1,6 @@
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Account
@@ -60,6 +62,10 @@ namespace ClickQuest.Account
         #endregion Private Fields
 
         #region Properties
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id{get;set;}
 
         public int SpecBuyingAmount
         {
@@ -296,5 +302,26 @@ namespace ClickQuest.Account
         }
 
         #endregion
+
+        public Specialization()
+        {
+            SpecBlessingThreshold = 1;
+            SpecBlessingBuff = 1;
+            
+            SpecBuyingThreshold = 1;
+            SpecBuyingBuff = 1;
+
+            SpecQuestingThreshold = 1;
+            SpecQuestingBuff = 1;
+
+            SpecKillingThreshold = 1;
+            SpecKillingBuff = 1;
+
+            SpecCraftingThreshold = 1;
+            SpecCraftingBuff = 1;
+
+            SpecMeltingThreshold = 1;
+            SpecMeltingBuff = 1;
+        }
     }
 }

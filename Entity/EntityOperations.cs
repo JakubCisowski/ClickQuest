@@ -21,6 +21,7 @@ namespace ClickQuest.Entity
 				user.Materials = User.Instance.Materials;
 				user.Heroes = User.Instance.Heroes;
 				user.Blessings = User.Instance.Blessings;
+				user.Specialization=User.Instance.Specialization;
 
 				db.Users.Update(user);
 				db.SaveChanges();

@@ -54,6 +54,7 @@ namespace ClickQuest.Account
 		private List<Ingot> _ingots;
 		private List<Blessing> _blessings;
 		private int _gold;
+		private Specialization _specialization;
 
 		#endregion Private Fields
 
@@ -168,6 +169,19 @@ namespace ClickQuest.Account
 			}
 		}
 
+		public Specialization Specialization
+		{
+			get
+			{
+				return _specialization;
+			}
+			set
+			{
+				_specialization = value;
+				OnPropertyChanged();
+			}
+		}
+
 		#endregion Properties
 
 		public User()
@@ -178,6 +192,8 @@ namespace ClickQuest.Account
 			_artifacts = new List<Artifact>();
 			_ingots = new List<Ingot>();
 			_blessings = new List<Blessing>();
+
+			_specialization=Specialization.Instance;
 		}
 
 		public void AddItem(Item itemToAdd)
