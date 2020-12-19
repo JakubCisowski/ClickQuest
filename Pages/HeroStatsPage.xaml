@@ -23,7 +23,8 @@
                 </TextBlock>
                 <TextBlock x:Name="CritChanceBlock" Text="{Binding Path=CritChanceText}"/>
                 <TextBlock x:Name="PoisonDamageBlock" Text="{Binding Path=PoisonDamageText}"/>
-                <StackPanel  x:Name="IngotsPanel" > </StackPanel>
+                <StackPanel x:Name="SpecializationsPanel" > </StackPanel>
+                <StackPanel x:Name="IngotsPanel" > </StackPanel>
                 <Button x:Name="ShowEquipmentButton" Click="ShowEquipmentButton_Click" Content="EQ"> </Button>
         </StackPanel> 
         
