@@ -73,6 +73,7 @@ namespace ClickQuest.Account
             set
             {
                 specBuyingAmount = value;
+                UpdateBuffs();
                 OnPropertyChanged();
             }
         }
@@ -112,6 +113,7 @@ namespace ClickQuest.Account
             set
             {
                 specMeltingAmount = value;
+                UpdateBuffs();
                 OnPropertyChanged();
             }
         }
@@ -151,6 +153,7 @@ namespace ClickQuest.Account
             set
             {
                 specCraftingAmount = value;
+                UpdateBuffs();
                 OnPropertyChanged();
             }
         }
@@ -190,6 +193,7 @@ namespace ClickQuest.Account
             set
             {
                 specQuestingAmount = value;
+                UpdateBuffs();
                 OnPropertyChanged();
             }
         }
@@ -229,6 +233,7 @@ namespace ClickQuest.Account
             set
             {
                 specBlessingAmount = value;
+                UpdateBuffs();
                 OnPropertyChanged();
             }
         }
@@ -268,6 +273,7 @@ namespace ClickQuest.Account
             set
             {
                 specKillingAmount = value;
+                UpdateBuffs();
                 OnPropertyChanged();
             }
         }
@@ -302,23 +308,34 @@ namespace ClickQuest.Account
 
         public Specialization()
         {
-            SpecBlessingThreshold = 1;
-            SpecBlessingBuff = 1;
-            
-            SpecBuyingThreshold = 1;
-            SpecBuyingBuff = 1;
+            UpdateBuffs();
+        }
 
-            SpecQuestingThreshold = 1;
-            SpecQuestingBuff = 1;
+        public void UpdateBuffs()
+        {
+            // Const buff value for reaching every threshold.
+            var SpecBlessingBuffConst = 15; // Increases blessings duration in seconds.
+            var SpecKillingBuffConst = 1; // Increases click damage (after effects like crit, poison are applied - const value).
+            var SpecCraftingBuffConst = 1; 
+            var SpecBuyingBuffConst = 15; 
+            var SpecMeltingBuffConst = 1;
+            var SpecQuestingBuffConst = 1;
 
-            SpecKillingThreshold = 1;
-            SpecKillingBuff = 1;
+            // Buff gains thresholds.
+            SpecBlessingThreshold = 10; // Amount increases every time a Blessing is bought.
+            SpecKillingThreshold = 3;   // Amount increases every time a monster is killed.
+            SpecCraftingThreshold = 10;
+            SpecBuyingThreshold = 10;
+            SpecMeltingThreshold = 10;
+            SpecQuestingThreshold = 10;
 
-            SpecCraftingThreshold = 1;
-            SpecCraftingBuff = 1;
-
-            SpecMeltingThreshold = 1;
-            SpecMeltingBuff = 1;
+            // Updating current buff value based on constants and amount (which is not constant).
+            SpecBlessingBuff = SpecBlessingAmount / SpecBlessingThreshold * SpecBlessingBuffConst;
+            SpecKillingBuff = SpecKillingAmount / SpecKillingThreshold * SpecKillingBuffConst;
+            SpecCraftingBuff = SpecCraftingAmount / SpecCraftingThreshold * SpecCraftingBuffConst;
+            SpecBuyingBuff = SpecBuyingAmount / SpecBuyingThreshold * SpecBuyingBuffConst;
+            SpecMeltingBuff = SpecMeltingAmount / SpecMeltingThreshold * SpecMeltingBuffConst;
+            SpecQuestingBuff = SpecQuestingAmount / SpecQuestingThreshold * SpecQuestingBuffConst;
         }
     }
 }

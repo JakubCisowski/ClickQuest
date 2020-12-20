@@ -103,6 +103,9 @@ namespace ClickQuest.Controls
 
 			// Display exp and loot for testing purposes.
 			_regionPage.TestRewardsBlock.Text = "Loot: " + _monster.Loot[i].Item.Name + ", Exp: " + Experience.CalculateMonsterXpReward(_monster.Health);
+
+			// Increase killing specialization amount (it will update buffs in setter).
+			Account.User.Instance.Specialization.SpecKillingAmount++;
 		}
 
 		private void CheckIfMonsterDied()
@@ -125,16 +128,21 @@ namespace ClickQuest.Controls
 		#region Events
 		private void MonsterButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Deal damage to monster.
+			// Reset poison ticks.
 			_poisonTicks = 0;
 			_poisonTimer.Start();
 
+			// Calculate damage dealt to monster.
 			int damage = Account.User.Instance.CurrentHero.ClickDamage;
+			// Calculate crit.
 			double num = _rng.Next(1, 101) / 100d;
 			if (num <= Account.User.Instance.CurrentHero.CritChance)
 			{
 				damage *= 2;
 			}
+			// Apply specialization killing buff.
+			damage+=Account.User.Instance.Specialization.SpecKillingBuff;
+			// Deal damage to monster.
 			Monster.CurrentHealth -= damage;
 
 			// Check if monster is dead now.

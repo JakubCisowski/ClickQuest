@@ -29,17 +29,17 @@ namespace ClickQuest.Entity
 					SpecQuestingAmount = 0,
 					SpecMeltingAmount = 0,
 					SpecBlessingThreshold = 1,
-					SpecBlessingBuff = 1,
+					SpecBlessingBuff = 0,
 					SpecBuyingThreshold = 1,
-					SpecBuyingBuff = 1,
+					SpecBuyingBuff = 0,
 					SpecQuestingThreshold = 1,
-					SpecQuestingBuff = 1,
+					SpecQuestingBuff = 0,
 					SpecKillingThreshold = 1,
-					SpecKillingBuff = 1,
+					SpecKillingBuff = 0,
 					SpecCraftingThreshold = 1,
-					SpecCraftingBuff = 1,
+					SpecCraftingBuff = 0,
 					SpecMeltingThreshold = 1,
-					SpecMeltingBuff = 1
+					SpecMeltingBuff = 0
 				});
 			});
 

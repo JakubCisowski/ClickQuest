@@ -57,7 +57,6 @@ namespace ClickQuest.Pages
 
 		private void ShopButton_Click(object sender, RoutedEventArgs e)
 		{
-			Account.User.Instance.Specialization.SpecBlessingAmount++;
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Shop"]);
 			(Database.Pages["Shop"] as ShopPage).UpdateShop();
 		}

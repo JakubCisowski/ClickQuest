@@ -36,9 +36,14 @@ namespace ClickQuest.Pages
 			if (User.Instance.Gold >= blessingBlueprint.Value)
 			{
 				User.Instance.Gold -= blessingBlueprint.Value;
-
+				
+				// Increase Blessing Specialization amount.
+				Account.User.Instance.Specialization.SpecBlessingAmount++;
+				
 				// Create a new Blessing.
 				var blessing = new Blessing(blessingBlueprint);
+				// Increase his duration based on Blessing Specialization buff.
+				blessing.Duration += Account.User.Instance.Specialization.SpecBlessingBuff;
 				User.Instance.Blessings.Add(blessing);
 				blessing.ChangeBuffStatus(true);
 			}
