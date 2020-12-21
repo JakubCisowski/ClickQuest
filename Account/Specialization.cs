@@ -313,27 +313,31 @@ namespace ClickQuest.Account
 
         public void UpdateBuffs()
         {
+            // Base values for each buff.
+            var SpecCraftingBuffBase = 1;
+            var SpecBuyingBuffBase = 5;
+
             // Const buff value for reaching every threshold.
-            var SpecBlessingBuffConst = 15; // Increases blessings duration in seconds.
-            var SpecKillingBuffConst = 1; // Increases click damage (after effects like crit, poison are applied - const value).
-            var SpecCraftingBuffConst = 1; 
-            var SpecBuyingBuffConst = 15; 
-            var SpecMeltingBuffConst = 1;
-            var SpecQuestingBuffConst = 1;
+            var SpecBlessingBuffConst = 15; // Increases blessings duration in seconds. <Base - 0>
+            var SpecKillingBuffConst = 1; // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
+            var SpecCraftingBuffConst = 1; // Increases crafting rarity limit. <Base - 1> <Limit - 5>
+            var SpecBuyingBuffConst = 1; // Increases shop offer size. <Base - 5>
+            var SpecMeltingBuffConst = 5; // Increases % chance to get additional ingots when melting. <Base - 0%>
+            var SpecQuestingBuffConst = 5; // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
 
             // Buff gains thresholds.
             SpecBlessingThreshold = 10; // Amount increases every time a Blessing is bought.
             SpecKillingThreshold = 3;   // Amount increases every time a monster is killed.
-            SpecCraftingThreshold = 10;
-            SpecBuyingThreshold = 10;
-            SpecMeltingThreshold = 10;
-            SpecQuestingThreshold = 10;
+            SpecCraftingThreshold = 10; // Amount increases every time an artifact is crafted using recipe.
+            SpecBuyingThreshold = 10;   // Amount increases every time a Recipe is bought.
+            SpecMeltingThreshold = 10;  // Amount increases every time a material is melted.
+            SpecQuestingThreshold = 10; // Amount increases every time a quest is completed.
 
             // Updating current buff value based on constants and amount (which is not constant).
             SpecBlessingBuff = SpecBlessingAmount / SpecBlessingThreshold * SpecBlessingBuffConst;
             SpecKillingBuff = SpecKillingAmount / SpecKillingThreshold * SpecKillingBuffConst;
-            SpecCraftingBuff = SpecCraftingAmount / SpecCraftingThreshold * SpecCraftingBuffConst;
-            SpecBuyingBuff = SpecBuyingAmount / SpecBuyingThreshold * SpecBuyingBuffConst;
+            SpecCraftingBuff = SpecCraftingBuffBase + SpecCraftingAmount / SpecCraftingThreshold * SpecCraftingBuffConst;
+            SpecBuyingBuff = SpecBuyingBuffBase + SpecBuyingAmount / SpecBuyingThreshold * SpecBuyingBuffConst;
             SpecMeltingBuff = SpecMeltingAmount / SpecMeltingThreshold * SpecMeltingBuffConst;
             SpecQuestingBuff = SpecQuestingAmount / SpecQuestingThreshold * SpecQuestingBuffConst;
         }

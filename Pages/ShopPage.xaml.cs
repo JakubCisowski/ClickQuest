@@ -18,7 +18,9 @@ namespace ClickQuest.Pages
 		public void UpdateShop()
 		{
 			ItemsListViewSell.ItemsSource = User.Instance.Materials;
-			ItemsListViewBuy.ItemsSource = Database.ShopOffer.Where(x => !Account.User.Instance.Recipes.Contains(x));
+			
+			// Calculate shop offer size according to specialization bonus (base bonus: 5).
+			ItemsListViewBuy.ItemsSource = Database.ShopOffer.Take(Account.User.Instance.Specialization.SpecBuyingBuff);
 
 			ItemsListViewSell.Items.Refresh();
 			ItemsListViewBuy.Items.Refresh();
@@ -48,10 +50,22 @@ namespace ClickQuest.Pages
 			var b = sender as Button;
 			var recipe = b.CommandParameter as Recipe;
 
-			Account.User.Instance.AddItem(recipe);
+			// Check if user has enough gold.
+			if (Account.User.Instance.Gold>=recipe.Value)
+			{
+				Account.User.Instance.AddItem(recipe);
+				Account.User.Instance.Gold-=recipe.Value;
 
-			EquipmentWindow.Instance.UpdateEquipment();
-			UpdateShop();
+				EquipmentWindow.Instance.UpdateEquipment();
+				UpdateShop();
+
+				// Increase Specialization Buying amount.
+				Account.User.Instance.Specialization.SpecBuyingAmount++;
+			}
+			else
+			{
+				// Error
+			}
 		}
 
 		#endregion
