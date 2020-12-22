@@ -17,7 +17,7 @@ namespace ClickQuest.Pages
 
 		public void UpdateShop()
 		{
-			ItemsListViewSell.ItemsSource = User.Instance.Materials;
+			ItemsListViewSell.ItemsSource = User.Instance.Materials.Cast<Item>().Concat(User.Instance.Recipes.Cast<Item>());
 			
 			// Calculate shop offer size according to specialization bonus (base bonus: 5).
 			ItemsListViewBuy.ItemsSource = Database.ShopOffer.Take(Account.User.Instance.Specialization.SpecBuyingBuff);
@@ -36,10 +36,10 @@ namespace ClickQuest.Pages
 		private void SellButton_Click(object sender, RoutedEventArgs e)
 		{
 			var b = sender as Button;
-			var material = b.CommandParameter as Material;
+			var item = b.CommandParameter as Item;
 
-			Account.User.Instance.RemoveItem(material);
-			Account.User.Instance.Gold += material.Value;
+			Account.User.Instance.RemoveItem(item);
+			Account.User.Instance.Gold += item.Value;
 
 			EquipmentWindow.Instance.UpdateEquipment();
 			UpdateShop();
