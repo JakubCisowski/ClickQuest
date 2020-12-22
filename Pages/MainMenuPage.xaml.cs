@@ -63,6 +63,8 @@ namespace ClickQuest.Pages
 			var id = int.Parse((sender as Button).Name.Substring(4));
 			var hero = Account.User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
 			Account.User.Instance.CurrentHero = hero;
+			// Refresh hero stats panel info.
+			hero.ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(hero);
 
 			Data.Database.RefreshPages();
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);

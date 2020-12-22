@@ -10,8 +10,8 @@
         <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical">
                 <TextBlock x:Name="HeroNameBlock" Text="{Binding Path=Name, StringFormat='Name: \{0\}'}"/>
                 <TextBlock x:Name="HeroClassBlock" Text="{Binding Path=ThisHeroClass, StringFormat='Class: \{0\}'}"/>
-                <TextBlock x:Name="ExperienceBlock" Text="{Binding Path=Experience, StringFormat='Experience: \{0\}'}"/>
                 <TextBlock x:Name="LevelBlock" Text="{Binding Path=Level, StringFormat='Level: \{0\}'}"/>
+                <TextBlock x:Name="ExperienceBlock" Text="{Binding Path=ExperienceToNextLvl, StringFormat='Experience to next level: \{0\}'}"/>
                 <TextBlock x:Name="GoldBlock"/>
                 <TextBlock x:Name="ClickDamageBlock">
                         <TextBlock.Text>

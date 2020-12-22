@@ -54,5 +54,11 @@ namespace ClickQuest.Heroes
 				}
 			}
 		}
+
+		public static int CalculateXpToNextLvl(Hero hero)
+		{
+			// Calculate how many experience is needed to level up (for hero stats panel info).
+			return LevelToXP(hero.Level + 1) - hero.Experience;
+		}
 	}
 }

@@ -23,6 +23,7 @@ namespace ClickQuest.Heroes
 
 		private string _name;
 		private int _experience;
+		private int _experienceToNextLvl;
 		private int _level;
 		private int _clickDamage;
 		private double _critChance;
@@ -68,6 +69,21 @@ namespace ClickQuest.Heroes
 			{
 				_experience = value;
 				Heroes.Experience.CheckIfLeveledUp(this);
+				ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
+				OnPropertyChanged();
+			}
+		}
+
+		[NotMapped]
+		public int ExperienceToNextLvl
+		{
+			get
+			{
+				return _experienceToNextLvl;
+			}
+			set
+			{
+				_experienceToNextLvl=value;
 				OnPropertyChanged();
 			}
 		}
