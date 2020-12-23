@@ -392,6 +392,8 @@ namespace ClickQuest.Data
 			Pages.Add("HeroCreation", new HeroCreationPage());
 			// Priest Page
 			Pages.Add("Priest", new PriestPage());
+			// Quest Menu Page
+			Pages.Add("QuestMenu", new QuestMenuPage());
 
 			foreach (var region in Regions)
 			{

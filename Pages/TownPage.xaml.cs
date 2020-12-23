@@ -67,6 +67,11 @@ namespace ClickQuest.Pages
 			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["MainMenu"]);
 		}
 
+		private void QuestMenuButton_Click(object sender, RoutedEventArgs e)
+		{
+			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["QuestMenu"]);
+		}
+
 		private void BlacksmithButton_Click(object sender, RoutedEventArgs e)
 		{
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Blacksmith"]);
