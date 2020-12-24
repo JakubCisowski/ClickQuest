@@ -1,0 +1,28 @@
+{
+    "Quests": [
+        {
+            "Id": 0,
+            "Rare": "false",
+            "HeroClass": "All",
+            "Name": "TestQuest1",
+            "Duration": 60,
+            "Description": "TestQuest1Description"
+        },
+        {
+            "Id": 1,
+            "Rare": "false",
+            "HeroClass": "All",
+            "Name": "TestQuest2",
+            "Duration": 30,
+            "Description": "TestQuest2Description"
+        },
+        {
+            "Id": 2,
+            "Rare": "false",
+            "HeroClass": "All",
+            "Name": "TestQuest3",
+            "Duration": 15,
+            "Description": "TestQuest3Description"
+        }
+    ]
+}

@@ -22,6 +22,7 @@ namespace ClickQuest.Data
 		public static List<Blessing> Blessings { get; set; }
 		public static List<Recipe> ShopOffer { get; set; }
 		public static List<Blessing> PriestOffer { get; set; }
+		public static List<Quest> Quests {get;set;}
 		public static Dictionary<string, Page> Pages { get; set; }
 
 		#endregion
@@ -37,6 +38,7 @@ namespace ClickQuest.Data
 			Blessings = new List<Blessing>();
 			ShopOffer = new List<Recipe>();
 			PriestOffer = new List<Blessing>();
+			Quests = new List<Quest>();
 			Pages = new Dictionary<string, Page>();
 
 			// Fill collections with JSON data.
