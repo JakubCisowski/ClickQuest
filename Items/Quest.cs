@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using ClickQuest.Heroes;
+using System.Collections.Generic;
+using System.Windows.Threading;
 
 namespace ClickQuest.Items
 {
@@ -23,6 +25,11 @@ namespace ClickQuest.Items
         private string _name;
         private int _duration;
         private string _description;
+        private List<int> _rewardRecipeIds;
+        private List<int> _rewardMaterialIds;
+        private List<int> _rewardBlessingIds;
+        private List<Rarity> _rewardIngots;
+        private DispatcherTimer _timer;
         #endregion
 
         #region Properties
@@ -41,6 +48,7 @@ namespace ClickQuest.Items
                 OnPropertyChanged();
             }
         }
+        [NotMapped]
         public bool Rare
         {
             get
@@ -53,6 +61,7 @@ namespace ClickQuest.Items
                 OnPropertyChanged();
             }
         }
+        [NotMapped]
         public HeroClass HeroClass
         {
             get
@@ -65,6 +74,7 @@ namespace ClickQuest.Items
                 OnPropertyChanged();
             }
         }
+        [NotMapped]
         public string Name
         {
             get
@@ -89,6 +99,7 @@ namespace ClickQuest.Items
                 OnPropertyChanged();
             }
         }
+        [NotMapped]
         public string Description
         {
             get
@@ -99,6 +110,54 @@ namespace ClickQuest.Items
             {
                 _description=value;
                 OnPropertyChanged();
+            }
+        }
+        [NotMapped]
+        public List<int> RewardRecipeIds
+        {
+            get
+            {
+                return _rewardRecipeIds;
+            }
+            set
+            {
+                _rewardRecipeIds=value;
+            }
+        }
+        [NotMapped]
+        public List<int> RewardMaterialIds
+        {
+            get
+            {
+                return _rewardMaterialIds;
+            }
+            set
+            {
+                _rewardMaterialIds=value;
+            }
+        }
+        [NotMapped]
+        public List<int> RewardBlessingIds
+        {
+            get
+            {
+                return _rewardBlessingIds;
+            }
+            set
+            {
+                _rewardBlessingIds=value;
+            }
+        }
+        [NotMapped]
+        public List<Rarity> RewardIngots
+        {
+            get
+            {
+                return _rewardIngots;
+            }
+            set
+            {
+                _rewardIngots=value;
             }
         }
         #endregion
