@@ -50,6 +50,7 @@ namespace ClickQuest.Data
 			LoadBlessings();
 			LoadShopOffer();
 			LoadPriestOffer();
+			LoadQuests();
 
 			// Check if Ids exist and are unique.
 			ValidateData();
@@ -303,6 +304,27 @@ namespace ClickQuest.Data
 				var blessing = Blessings.Where(x => x.Id == id).FirstOrDefault();
 
 				PriestOffer.Add(blessing);
+			}
+		}
+		public static void LoadQuests()
+		{
+			var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Quests.json");
+			var parsedObject = JObject.Parse(File.ReadAllText(path));
+			var jArray = (JArray)parsedObject["Quests"];
+
+			for (var i = 0; i < jArray.Count; i++)
+			{
+				// Load: id(int), rare(string to bool), hero class(string to hero class), name(string), duration(int), description(string)
+				// + interpret rewards, add them to rewards id lists
+
+				// var id = int.Parse(parsedObject["Quests"][i]["Id"].ToString());
+				// var name = parsedObject["Quests"][i]["Name"].ToString();
+				// var rarity = (Rarity)int.Parse(parsedObject["Quests"][i]["Rarity"].ToString());
+				// var description = parsedObject["Quests"][i]["Description"].ToString();
+				// var value = int.Parse(parsedObject["Quests"][i]["Value"].ToString());
+
+				// var newQuest = new Quest(id, name, rarity, description, value);
+				// Quests.Add(newQuest);
 			}
 		}
 
