@@ -1,4 +1,5 @@
 using ClickQuest.Enemies;
+using ClickQuest.Heroes;
 using ClickQuest.Items;
 using ClickQuest.Pages;
 using ClickQuest.Places;
@@ -317,14 +318,51 @@ namespace ClickQuest.Data
 				// Load: id(int), rare(string to bool), hero class(string to hero class), name(string), duration(int), description(string)
 				// + interpret rewards, add them to rewards id lists
 
-				// var id = int.Parse(parsedObject["Quests"][i]["Id"].ToString());
-				// var name = parsedObject["Quests"][i]["Name"].ToString();
-				// var rarity = (Rarity)int.Parse(parsedObject["Quests"][i]["Rarity"].ToString());
-				// var description = parsedObject["Quests"][i]["Description"].ToString();
-				// var value = int.Parse(parsedObject["Quests"][i]["Value"].ToString());
+				var id = int.Parse(parsedObject["Quests"][i]["Id"].ToString());
+				var name = parsedObject["Quests"][i]["Name"].ToString();
+				var duration = int.Parse(parsedObject["Quests"][i]["Duration"].ToString());
+				var description = parsedObject["Quests"][i]["Description"].ToString();
+				var heroClass = (HeroClass)Enum.Parse(typeof(HeroClass), parsedObject["Quests"][i]["HeroClass"].ToString());
+				var rarity = bool.Parse(parsedObject["Quests"][i]["Rarity"].ToString());
 
-				// var newQuest = new Quest(id, name, rarity, description, value);
-				// Quests.Add(newQuest);
+				var jArrayBlessings = (JArray)parsedObject["Quests"][i]["RewardBlessingIds"];
+				var blessingIds = new List<int>();
+				foreach(var BlessingId in jArrayBlessings)
+				{
+					blessingIds.Add(int.Parse(BlessingId.ToString()));
+				}
+
+				var jArrayRecipes = (JArray)parsedObject["Quests"][i]["RewardRecipeIds"];
+				var recipeIds = new List<int>();
+				foreach(var RecipeId in jArrayRecipes)
+				{
+					recipeIds.Add(int.Parse(RecipeId.ToString()));
+				}
+
+				var jArrayMaterials = (JArray)parsedObject["Quests"][i]["RewardMaterialIds"];
+				var materialIds = new List<int>();
+				foreach(var MaterialId in jArrayRecipes)
+				{
+					materialIds.Add(int.Parse(MaterialId.ToString()));
+				}
+				
+				var jArrayIngots = (JArray)parsedObject["Quests"][i]["RewardIngotsIds"];
+				var ingotRarities = new List<Rarity>();
+				foreach(var IngotRarity in jArrayRecipes)
+				{
+					var actualIngotRarity = (Rarity)int.Parse(IngotRarity.ToString());
+					ingotRarities.Add(actualIngotRarity);
+				}
+
+				var newQuest = new Quest(id, rarity,heroClass,name,duration,description)
+				{
+					RewardRecipeIds=recipeIds,
+					RewardBlessingIds=blessingIds,
+					RewardMaterialIds=materialIds,
+					RewardIngots = ingotRarities
+				};
+
+				Quests.Add(newQuest);
 			}
 		}
 

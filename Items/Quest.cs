@@ -170,6 +170,11 @@ namespace ClickQuest.Items
             Name=name;
             Duration=duration;
             Description=description;
+
+            RewardRecipeIds = new List<int>();
+            RewardMaterialIds = new List<int>();
+            RewardBlessingIds = new List<int>();
+            RewardIngots = new List<Rarity>();
         }
     }
 }

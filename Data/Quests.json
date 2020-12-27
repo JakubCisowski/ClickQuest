@@ -6,7 +6,11 @@
             "HeroClass": "All",
             "Name": "TestQuest1",
             "Duration": 60,
-            "Description": "TestQuest1Description"
+            "Description": "TestQuest1Description",
+            "RewardRecipeIds": [1,2],
+            "RewardBlessingIds" : [],
+            "RewardMaterialsIds" : [],
+            "RewardIngots" : []
         },
         {
             "Id": 1,
@@ -14,7 +18,11 @@
             "HeroClass": "All",
             "Name": "TestQuest2",
             "Duration": 30,
-            "Description": "TestQuest2Description"
+            "Description": "TestQuest2Description",
+            "RewardRecipeIds": [],
+            "RewardBlessingIds" : [],
+            "RewardMaterialsIds" : [],
+            "RewardIngots" : ["0"]
         },
         {
             "Id": 2,
@@ -22,7 +30,11 @@
             "HeroClass": "All",
             "Name": "TestQuest3",
             "Duration": 15,
-            "Description": "TestQuest3Description"
+            "Description": "TestQuest3Description",
+            "RewardRecipeIds": [],
+            "RewardBlessingIds" : [],
+            "RewardMaterialsIds" : [],
+            "RewardIngots" : []
         }
     ]
 }
