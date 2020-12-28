@@ -323,7 +323,7 @@ namespace ClickQuest.Data
 				var duration = int.Parse(parsedObject["Quests"][i]["Duration"].ToString());
 				var description = parsedObject["Quests"][i]["Description"].ToString();
 				var heroClass = (HeroClass)Enum.Parse(typeof(HeroClass), parsedObject["Quests"][i]["HeroClass"].ToString());
-				var rarity = bool.Parse(parsedObject["Quests"][i]["Rarity"].ToString());
+				var rarity = bool.Parse(parsedObject["Quests"][i]["Rare"].ToString());
 
 				var jArrayBlessings = (JArray)parsedObject["Quests"][i]["RewardBlessingIds"];
 				var blessingIds = new List<int>();
