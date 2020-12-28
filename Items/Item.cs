@@ -5,145 +5,148 @@ using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Items
 {
-	public partial class Item : INotifyPropertyChanged
-	{
-		#region INotifyPropertyChanged
-		public event PropertyChangedEventHandler PropertyChanged;
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-		#endregion
+    public partial class Item : INotifyPropertyChanged
+    {
+        #region INotifyPropertyChanged
 
-		#region Private Fields
-		private int _id;
-		private string _name;
-		private int _value;
-		private Rarity _rarity;
-		private int _quantity;
-		private string _description;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
-		#region Properties
+        #endregion INotifyPropertyChanged
 
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int DbKey { get; set; }
+        #region Private Fields
 
-		public int Id
-		{
-			get
-			{
-				return _id;
-			}
-			set
-			{
-				_id = value;
-				OnPropertyChanged();
-			}
-		}
+        private int _id;
+        private string _name;
+        private int _value;
+        private Rarity _rarity;
+        private int _quantity;
+        private string _description;
 
-		public string Name
-		{
-			get
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-				OnPropertyChanged();
-			}
-		}
+        #endregion Private Fields
 
-		public int Value
-		{
-			get
-			{
-				return _value;
-			}
-			set
-			{
-				_value = value;
-				OnPropertyChanged();
-			}
-		}
+        #region Properties
 
-		public Rarity Rarity
-		{
-			get
-			{
-				return _rarity;
-			}
-			set
-			{
-				_rarity = value;
-				OnPropertyChanged();
-			}
-		}
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int DbKey { get; set; }
 
-		public int Quantity
-		{
-			get
-			{
-				return _quantity;
-			}
-			set
-			{
-				_quantity = value;
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
 
-				// If we set quantity to 0 or lower, then remove it from user's equipment
-				if (_quantity <= 0)
-				{
-					Account.User.Instance.Recipes.Remove(this as Recipe);
-					Account.User.Instance.Materials.Remove(this as Material);
-					Account.User.Instance.Artifacts.Remove(this as Artifact);
-				}
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
 
-				OnPropertyChanged();
-			}
-		}
+        public int Value
+        {
+            get
+            {
+                return _value;
+            }
+            set
+            {
+                _value = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public string Description
-		{
-			get
-			{
-				return _description;
-			}
-			set
-			{
-				_description = value;
-				OnPropertyChanged();
-			}
-		}
+        public Rarity Rarity
+        {
+            get
+            {
+                return _rarity;
+            }
+            set
+            {
+                _rarity = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public string RarityString
-		{
-			get
-			{
-				string str = Rarity.ToString() + ' ';
+        public int Quantity
+        {
+            get
+            {
+                return _quantity;
+            }
+            set
+            {
+                _quantity = value;
 
-				for (int i = 0; i < (int)Rarity; i++)
-				{
-					str += "✩";
-				}
+                // If we set quantity to 0 or lower, then remove it from user's equipment
+                if (_quantity <= 0)
+                {
+                    Account.User.Instance.Recipes.Remove(this as Recipe);
+                    Account.User.Instance.Materials.Remove(this as Material);
+                    Account.User.Instance.Artifacts.Remove(this as Artifact);
+                }
 
-				return str;
-			}
-		}
+                OnPropertyChanged();
+            }
+        }
 
-		#endregion
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                _description = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public Item(int id, string name, Rarity rarity, string description, int value)
-		{
-			Id = id;
-			Name = name;
-			Rarity = rarity;
-			Value = value;
-			Description = description;
-			Quantity = 0;
-		}
+        public string RarityString
+        {
+            get
+            {
+                string str = Rarity.ToString() + ' ';
 
-	}
+                for (int i = 0; i < (int)Rarity; i++)
+                {
+                    str += "✩";
+                }
+
+                return str;
+            }
+        }
+
+        #endregion Properties
+
+        public Item(int id, string name, Rarity rarity, string description, int value)
+        {
+            Id = id;
+            Name = name;
+            Rarity = rarity;
+            Value = value;
+            Description = description;
+            Quantity = 0;
+        }
+    }
 }

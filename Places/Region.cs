@@ -5,102 +5,105 @@ using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Places
 {
-	public class Region : INotifyPropertyChanged
-	{
-		#region INotifyPropertyChanged
-		public event PropertyChangedEventHandler PropertyChanged;
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-		#endregion
+    public class Region : INotifyPropertyChanged
+    {
+        #region INotifyPropertyChanged
 
-		#region Private Fields
-		private int _id;
-		private string _name;
-		private string _background;
-		private List<(Monster Monster, double Frequency)> _monsters;
-		private int _levelRequirement;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
-		#region Properties
+        #endregion INotifyPropertyChanged
 
-		public int Id
-		{
-			get
-			{
-				return _id;
-			}
-			set
-			{
-				_id = value;
-				OnPropertyChanged();
-			}
-		}
+        #region Private Fields
 
-		public string Name
-		{
-			get
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-				OnPropertyChanged();
-			}
-		}
+        private int _id;
+        private string _name;
+        private string _background;
+        private List<(Monster Monster, double Frequency)> _monsters;
+        private int _levelRequirement;
 
-		public string Background
-		{
-			get
-			{
-				return _background;
-			}
-			set
-			{
-				_background = value;
-				OnPropertyChanged();
-			}
-		}
+        #endregion Private Fields
 
-		public List<(Monster Monster, double Frequency)> Monsters
-		{
-			get
-			{
-				return _monsters;
-			}
-			set
-			{
-				_monsters = value;
-				OnPropertyChanged();
-			}
-		}
+        #region Properties
 
-		public int LevelRequirement
-		{
-			get
-			{
-				return _levelRequirement;
-			}
-			set
-			{
-				_levelRequirement = value;
-				OnPropertyChanged();
-			}
-		}
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
 
-		#endregion
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public Region(int id, string name, string background, List<(Monster, double)> monsters, int requirement)
-		{
-			Id = id;
-			Name = name;
-			Background = background;
-			Monsters = monsters;
-			LevelRequirement = requirement;
-		}
-	}
+        public string Background
+        {
+            get
+            {
+                return _background;
+            }
+            set
+            {
+                _background = value;
+                OnPropertyChanged();
+            }
+        }
 
+        public List<(Monster Monster, double Frequency)> Monsters
+        {
+            get
+            {
+                return _monsters;
+            }
+            set
+            {
+                _monsters = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int LevelRequirement
+        {
+            get
+            {
+                return _levelRequirement;
+            }
+            set
+            {
+                _levelRequirement = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion Properties
+
+        public Region(int id, string name, string background, List<(Monster, double)> monsters, int requirement)
+        {
+            Id = id;
+            Name = name;
+            Background = background;
+            Monsters = monsters;
+            LevelRequirement = requirement;
+        }
+    }
 }

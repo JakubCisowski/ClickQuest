@@ -8,248 +8,252 @@ using System.Windows.Threading;
 
 namespace ClickQuest.Items
 {
-	public enum BlessingType
-	{
-		ClickDamage = 0
-	}
+    public enum BlessingType
+    {
+        ClickDamage = 0
+    }
 
-	public partial class Blessing : INotifyPropertyChanged
-	{
-		#region INotifyPropertyChanged
-		public event PropertyChangedEventHandler PropertyChanged;
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-		#endregion
+    public partial class Blessing : INotifyPropertyChanged
+    {
+        #region INotifyPropertyChanged
 
-		#region Private Fields
-		private int _id;
-		private string _name;
-		private string _description;
-		private Rarity _rarity;
-		public BlessingType _type;
-		private int _value;
-		private int _duration;
-		private int _buff;
-		private DispatcherTimer _timer;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
-		#region Properties
+        #endregion INotifyPropertyChanged
 
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int DbKey { get; set; }
+        #region Private Fields
 
-		public int Id
-		{
-			get
-			{
-				return _id;
-			}
-			set
-			{
-				_id = value;
-				OnPropertyChanged();
-			}
-		}
+        private int _id;
+        private string _name;
+        private string _description;
+        private Rarity _rarity;
+        public BlessingType _type;
+        private int _value;
+        private int _duration;
+        private int _buff;
+        private DispatcherTimer _timer;
 
-		public string Name
-		{
-			get
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-				OnPropertyChanged();
-			}
-		}
+        #endregion Private Fields
 
-		public string Description
-		{
-			get
-			{
-				return _description;
-			}
-			set
-			{
-				_description = value;
-				OnPropertyChanged();
-			}
-		}
+        #region Properties
 
-		public Rarity Rarity
-		{
-			get
-			{
-				return _rarity;
-			}
-			set
-			{
-				_rarity = value;
-				OnPropertyChanged();
-			}
-		}
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int DbKey { get; set; }
 
-		public int Value
-		{
-			get
-			{
-				return _value;
-			}
-			set
-			{
-				_value = value;
-				OnPropertyChanged();
-			}
-		}
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public BlessingType Type
-		{
-			get
-			{
-				return _type;
-			}
-			set
-			{
-				_type = value;
-				OnPropertyChanged();
-			}
-		}
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public int Duration
-		{
-			get
-			{
-				return _duration;
-			}
-			set
-			{
-				_duration = value;
-				OnPropertyChanged();
-			}
-		}
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                _description = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public int Buff
-		{
-			get
-			{
-				return _buff;
-			}
-			set
-			{
-				_buff = value;
-				OnPropertyChanged();
-			}
-		}
+        public Rarity Rarity
+        {
+            get
+            {
+                return _rarity;
+            }
+            set
+            {
+                _rarity = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public string TypeString
-		{
-			get
-			{
-				return Type.ToString();
-			}
-		}
+        public int Value
+        {
+            get
+            {
+                return _value;
+            }
+            set
+            {
+                _value = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public string RarityString
-		{
-			get
-			{
-				string str = Rarity.ToString() + ' ';
+        public BlessingType Type
+        {
+            get
+            {
+                return _type;
+            }
+            set
+            {
+                _type = value;
+                OnPropertyChanged();
+            }
+        }
 
-				for (int i = 0; i < (int)Rarity; i++)
-				{
-					str += "✩";
-				}
+        public int Duration
+        {
+            get
+            {
+                return _duration;
+            }
+            set
+            {
+                _duration = value;
+                OnPropertyChanged();
+            }
+        }
 
-				return str;
-			}
-		}
+        public int Buff
+        {
+            get
+            {
+                return _buff;
+            }
+            set
+            {
+                _buff = value;
+                OnPropertyChanged();
+            }
+        }
 
-		#endregion
+        public string TypeString
+        {
+            get
+            {
+                return Type.ToString();
+            }
+        }
 
-		// Copy constructor
-		public Blessing(Blessing blessing)
-		{
-			Id = blessing.Id;
-			Name = blessing.Name;
-			Type = blessing.Type;
-			Rarity = blessing.Rarity;
-			Duration = blessing.Duration;
-			Description = blessing.Description;
-			Buff = blessing.Buff;
-			Value = blessing.Value;
-		}
+        public string RarityString
+        {
+            get
+            {
+                string str = Rarity.ToString() + ' ';
 
-		public Blessing(int id, string name, BlessingType type, Rarity rarity, int duration, string description, int buff, int value)
-		{
-			Id = id;
-			Name = name;
-			Type = type;
-			Rarity = rarity;
-			Duration = duration;
-			Description = description;
-			Buff = buff;
-			Value = value;
-		}
+                for (int i = 0; i < (int)Rarity; i++)
+                {
+                    str += "✩";
+                }
 
-		public void ChangeBuffStatus(bool add)
-		{
-			// Assign buff to every hero.
-			if (add)
-			{
-				switch (Type)
-				{
-					case BlessingType.ClickDamage:
+                return str;
+            }
+        }
 
-						foreach (var hero in User.Instance.Heroes)
-						{
-							hero.ClickDamage += Buff;
-						}
+        #endregion Properties
 
-						_timer = new DispatcherTimer();
-						_timer.Interval = new TimeSpan(0, 0, 1);
-						_timer.Tick += Timer_Tick;
-						_timer.Start();
+        // Copy constructor
+        public Blessing(Blessing blessing)
+        {
+            Id = blessing.Id;
+            Name = blessing.Name;
+            Type = blessing.Type;
+            Rarity = blessing.Rarity;
+            Duration = blessing.Duration;
+            Description = blessing.Description;
+            Buff = blessing.Buff;
+            Value = blessing.Value;
+        }
 
-						break;
-				}
-			}
-			// Cancel buff.
-			else
-			{
-				switch (Type)
-				{
-					case BlessingType.ClickDamage:
+        public Blessing(int id, string name, BlessingType type, Rarity rarity, int duration, string description, int buff, int value)
+        {
+            Id = id;
+            Name = name;
+            Type = type;
+            Rarity = rarity;
+            Duration = duration;
+            Description = description;
+            Buff = buff;
+            Value = value;
+        }
 
-						_timer.Stop();
+        public void ChangeBuffStatus(bool add)
+        {
+            // Assign buff to every hero.
+            if (add)
+            {
+                switch (Type)
+                {
+                    case BlessingType.ClickDamage:
 
-						foreach (var hero in User.Instance.Heroes)
-						{
-							hero.ClickDamage -= Buff;
-						}
+                        foreach (var hero in User.Instance.Heroes)
+                        {
+                            hero.ClickDamage += Buff;
+                        }
 
-						break;
-				}
-			}
-		}
+                        _timer = new DispatcherTimer();
+                        _timer.Interval = new TimeSpan(0, 0, 1);
+                        _timer.Tick += Timer_Tick;
+                        _timer.Start();
 
-		private void Timer_Tick(object source, EventArgs e)
-		{
-			Duration--;
+                        break;
+                }
+            }
+            // Cancel buff.
+            else
+            {
+                switch (Type)
+                {
+                    case BlessingType.ClickDamage:
 
-			if (Duration <= 0)
-			{
-				// End the blessing.
-				ChangeBuffStatus(false);
+                        _timer.Stop();
 
-				// Remove it from User and Database (if it's saved there).
-				User.Instance.Blessings.Remove(this);
-				Entity.EntityOperations.RemoveBlessing(this);
-			}
-		}
-	}
+                        foreach (var hero in User.Instance.Heroes)
+                        {
+                            hero.ClickDamage -= Buff;
+                        }
+
+                        break;
+                }
+            }
+        }
+
+        private void Timer_Tick(object source, EventArgs e)
+        {
+            Duration--;
+
+            if (Duration <= 0)
+            {
+                // End the blessing.
+                ChangeBuffStatus(false);
+
+                // Remove it from User and Database (if it's saved there).
+                User.Instance.Blessings.Remove(this);
+                Entity.EntityOperations.RemoveBlessing(this);
+            }
+        }
+    }
 }
