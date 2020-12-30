@@ -162,6 +162,11 @@ namespace ClickQuest.Items
         }
         #endregion
 
+        public Quest()
+        {
+
+        }
+
         public Quest(int id, bool rare, HeroClass heroClass, string name, int duration, string description)
         {
             Id=id;

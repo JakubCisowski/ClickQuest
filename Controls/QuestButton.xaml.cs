@@ -5,6 +5,7 @@ using System.Windows.Data;
 using System.Linq;
 using ClickQuest.Items;
 using ClickQuest.Data;
+using System.Windows;
 
 namespace ClickQuest.Controls
 {
@@ -154,5 +155,10 @@ namespace ClickQuest.Controls
             }
             #endregion
         }
+
+        private void QuestButton_Click(object sender, RoutedEventArgs e)
+		{
+			
+		}
     }
 }

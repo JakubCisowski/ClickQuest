@@ -6,7 +6,16 @@
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d" Title="Quest Menu"
         Height="768" Width="1024">
-  <Grid>
-		<Button x:Name="TownButton" Grid.Column="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+      <Button x:Name="TownButton" Grid.Row="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
+      <StackPanel x:Name="QuestPanel" Orientation="Horizontal" Grid.Row="1">
+
+      </StackPanel>
+      <Button x:Name="RerollButton" Grid.Row="2" Width="150" Height="50" Content="Reroll" Click="RerollButton_Click" />
     </Grid>
 </Page>
