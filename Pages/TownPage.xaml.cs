@@ -69,6 +69,7 @@ namespace ClickQuest.Pages
 
 		private void QuestMenuButton_Click(object sender, RoutedEventArgs e)
 		{
+			(Data.Database.Pages["QuestMenu"] as QuestMenuPage).LoadPage();
 			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["QuestMenu"]);
 		}
 

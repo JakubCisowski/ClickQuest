@@ -28,6 +28,7 @@ namespace ClickQuest.Pages
 
         private void RerollButton_Click(object sender, RoutedEventArgs e)
         {
+            // Later: add price.
             RerollQuests();
         }
 
@@ -69,6 +70,18 @@ namespace ClickQuest.Pages
                 var button = new QuestButton(Account.User.Instance.CurrentHero.Quests[i]);
 
                 QuestPanel.Children.Add(button);
+            }
+        }
+
+        public void LoadPage()
+        {
+            if (Account.User.Instance.CurrentHero.Quests.Count>=3)
+            {
+                RefreshQuests();
+            }
+            else
+            {
+                RerollQuests();
             }
         }
     }
