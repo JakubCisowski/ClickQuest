@@ -75,12 +75,22 @@ namespace ClickQuest.Pages
 
         public void LoadPage()
         {
-            if (Account.User.Instance.CurrentHero.Quests.Count>=3)
+            // Copy 3 quests from json to hero (because Entity Framework is ..).
+            for (int i=0;i<Account.User.Instance.CurrentHero.Quests.Count;i++)
             {
+                var questFromDb = Data.Database.Quests.FirstOrDefault(x=>x.Id==Account.User.Instance.CurrentHero.Quests[i].Id);
+                Account.User.Instance.CurrentHero.Quests[i].CopyQuest(questFromDb);
+            }
+
+            // Either refresh or reroll quests.
+            if (Account.User.Instance.CurrentHero.Quests.Count >= 3)
+            {
+                // User already has 3 quests - only refresh the quest page.
                 RefreshQuests();
             }
             else
             {
+                // No quests assigned - reroll them.
                 RerollQuests();
             }
         }

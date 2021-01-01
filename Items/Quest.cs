@@ -1,4 +1,5 @@
 using ClickQuest.Heroes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -30,6 +31,7 @@ namespace ClickQuest.Items
         private List<int> _rewardBlessingIds;
         private List<Rarity> _rewardIngots;
         private DispatcherTimer _timer;
+        private DateTime _endDate;
         #endregion
 
         #region Properties
@@ -87,6 +89,7 @@ namespace ClickQuest.Items
                 OnPropertyChanged();
             }
         }
+        [NotMapped]
         public int Duration
         {
             get
@@ -160,11 +163,40 @@ namespace ClickQuest.Items
                 _rewardIngots=value;
             }
         }
+        public DateTime EndDate
+        {
+            get
+            {
+                return _endDate;
+            }
+            set
+            {
+                _endDate=value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
+
+        public void CopyQuest(Quest quest)
+        {
+            Rare=quest.Rare;
+            HeroClass=quest.HeroClass;
+            Name=quest.Name;
+            Duration=quest.Duration;
+            Description=quest.Description;
+
+            RewardRecipeIds=quest.RewardRecipeIds;
+            RewardMaterialIds=quest.RewardMaterialIds;
+            RewardBlessingIds=quest.RewardBlessingIds;
+            RewardIngots=quest.RewardIngots;
+        }
 
         public Quest()
         {
-
+            RewardRecipeIds = new List<int>();
+            RewardMaterialIds = new List<int>();
+            RewardBlessingIds = new List<int>();
+            RewardIngots = new List<Rarity>();
         }
 
         public Quest(int id, bool rare, HeroClass heroClass, string name, int duration, string description)
