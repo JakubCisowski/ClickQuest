@@ -111,7 +111,7 @@ namespace ClickQuest.Entity
             }
         }
 
-        public static void RemoveQuest(Quest quest)
+        public static void RemoveQuests()
         {
             using (var db = new UserContext())
             {
@@ -119,13 +119,12 @@ namespace ClickQuest.Entity
                     .FirstOrDefault();
                     
                 var hero = user.Heroes.FirstOrDefault(x=>x.Id==Account.User.Instance.CurrentHero.Id);
-                var questFromDb = hero.Quests.FirstOrDefault(x=>x.Id==quest.Id);
 
-                if (questFromDb != null)
+                while (hero.Quests.Count>0)
                 {
-                    hero.Quests.Remove(questFromDb);
+                    hero.Quests.RemoveAt(0);
                 }
-
+                
                 db.SaveChanges();
             }
         }

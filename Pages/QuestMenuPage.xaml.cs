@@ -36,8 +36,9 @@ namespace ClickQuest.Pages
         // When: User finishes quest / There is a new hero without quests / User clicks reroll button.
         private void RerollQuests()
         {
-            // Remove current hero quests.
+            // Remove current hero quests - both from hero and Entity database.
             Account.User.Instance.CurrentHero.Quests.Clear();
+            Entity.EntityOperations.RemoveQuests();
 
             // Generate 3 quest ids.
             var questsForCurrentHeroClass = Data.Database.Quests.Where(x => x.HeroClass == Account.User.Instance.CurrentHero.HeroClass || x.HeroClass == HeroClass.All).ToList();
