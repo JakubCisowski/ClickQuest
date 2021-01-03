@@ -1,4 +1,5 @@
 using ClickQuest.Data;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -65,6 +66,10 @@ namespace ClickQuest.Pages
 			Account.User.Instance.CurrentHero = hero;
 			// Refresh hero stats panel info.
 			hero.ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(hero);
+
+			// Resume quests for the selected hero.
+            var quest = Account.User.Instance.CurrentHero.Quests.FirstOrDefault(x=>x.EndDate!=default(DateTime));
+			quest.StartQuest();
 
 			Data.Database.RefreshPages();
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);

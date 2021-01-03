@@ -28,13 +28,17 @@ namespace ClickQuest.Pages
 
         private void RerollButton_Click(object sender, RoutedEventArgs e)
         {
-            // Later: add price.
-            RerollQuests();
+            // Check if any quest is currently assigned - if so, user can't reroll quests.
+            if(Account.User.Instance.CurrentHero.Quests.All(x=>x.EndDate==default(DateTime)))
+            {
+                // Later: add price.
+                RerollQuests();
+            }
         }
 
         // Generate 3 random quests based on class.
         // When: User finishes quest / There is a new hero without quests / User clicks reroll button.
-        private void RerollQuests()
+        public void RerollQuests()
         {
             // Remove current hero quests - both from hero and Entity database.
             Account.User.Instance.CurrentHero.Quests.Clear();
@@ -62,7 +66,7 @@ namespace ClickQuest.Pages
 
         // Create buttons using Quests in current Hero
         // When: User switches to a different hero.
-        private void RefreshQuests()
+        public void RefreshQuests()
         {
             QuestPanel.Children.Clear();
 

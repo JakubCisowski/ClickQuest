@@ -4,6 +4,7 @@ using ClickQuest.Heroes;
 using ClickQuest.Pages;
 using ClickQuest.Places;
 using System;
+using System.Linq;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -128,25 +129,29 @@ namespace ClickQuest.Controls
 		#region Events
 		private void MonsterButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Reset poison ticks.
-			_poisonTicks = 0;
-			_poisonTimer.Start();
+			// Check if any quest is currently assigned to this hero (if so, hero can't fight).
+			if(Account.User.Instance.CurrentHero.Quests.All(x=>x.EndDate==default(DateTime)))
+            {
+				// Reset poison ticks.
+				_poisonTicks = 0;
+				_poisonTimer.Start();
 
-			// Calculate damage dealt to monster.
-			int damage = Account.User.Instance.CurrentHero.ClickDamage;
-			// Calculate crit.
-			double num = _rng.Next(1, 101) / 100d;
-			if (num <= Account.User.Instance.CurrentHero.CritChance)
-			{
-				damage *= 2;
+				// Calculate damage dealt to monster.
+				int damage = Account.User.Instance.CurrentHero.ClickDamage;
+				// Calculate crit.
+				double num = _rng.Next(1, 101) / 100d;
+				if (num <= Account.User.Instance.CurrentHero.CritChance)
+				{
+					damage *= 2;
+				}
+				// Apply specialization killing buff.
+				damage+=Account.User.Instance.Specialization.SpecKillingBuff;
+				// Deal damage to monster.
+				Monster.CurrentHealth -= damage;
+
+				// Check if monster is dead now.
+				CheckIfMonsterDied();
 			}
-			// Apply specialization killing buff.
-			damage+=Account.User.Instance.Specialization.SpecKillingBuff;
-			// Deal damage to monster.
-			Monster.CurrentHealth -= damage;
-
-			// Check if monster is dead now.
-			CheckIfMonsterDied();
 		}
 
 		private void PoisonTimer_Tick(object source, EventArgs e)

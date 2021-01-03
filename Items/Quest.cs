@@ -1,4 +1,5 @@
 using ClickQuest.Heroes;
+using ClickQuest.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -191,12 +192,47 @@ namespace ClickQuest.Items
             RewardIngots=quest.RewardIngots;
         }
 
+        public void StartQuest()
+        {
+            // Set quest end date (if not yet set).
+            if (EndDate!=default(DateTime))
+            {
+                this.EndDate = DateTime.Now.AddSeconds(Duration);
+            }
+            
+            // Start timer (checks if quest is finished).
+            _timer.Start();
+        }
+
+        public void StopQuest()
+        {   
+            // Stop timer.
+            _timer.Stop();
+
+            // todo: Assign rewards.
+
+            // Reroll new set of 3 quests.
+            (Data.Database.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
+        }
+
+        private void Timer_Tick(object source, EventArgs e)
+        {
+            // Check if quest is finished.
+            if (DateTime.Now>=EndDate)
+            {
+                StopQuest();
+            }
+        }
+
         public Quest()
         {
             RewardRecipeIds = new List<int>();
             RewardMaterialIds = new List<int>();
             RewardBlessingIds = new List<int>();
             RewardIngots = new List<Rarity>();
+            _timer = new DispatcherTimer();
+            _timer.Interval=new TimeSpan(0,0,0,1);
+            _timer.Tick+=Timer_Tick;
         }
 
         public Quest(int id, bool rare, HeroClass heroClass, string name, int duration, string description)
@@ -212,6 +248,9 @@ namespace ClickQuest.Items
             RewardMaterialIds = new List<int>();
             RewardBlessingIds = new List<int>();
             RewardIngots = new List<Rarity>();
+            _timer = new DispatcherTimer();
+            _timer.Interval=new TimeSpan(0,0,0,1);
+            _timer.Tick+=Timer_Tick;
         }
     }
 }

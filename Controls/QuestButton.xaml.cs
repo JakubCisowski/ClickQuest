@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Linq;
+using System;
 using ClickQuest.Items;
 using ClickQuest.Data;
 using System.Windows;
@@ -158,7 +159,11 @@ namespace ClickQuest.Controls
 
         private void QuestButton_Click(object sender, RoutedEventArgs e)
 		{
-			
+			// Start this quest (if another one isnt currently assigned).
+            if(Account.User.Instance.CurrentHero.Quests.All(x=>x.EndDate==default(DateTime)))
+            {
+                _quest.StartQuest();
+            }
 		}
     }
 }
