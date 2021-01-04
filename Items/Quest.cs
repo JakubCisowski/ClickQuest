@@ -195,7 +195,7 @@ namespace ClickQuest.Items
         public void StartQuest()
         {
             // Set quest end date (if not yet set).
-            if (EndDate!=default(DateTime))
+            if (EndDate==default(DateTime))
             {
                 this.EndDate = DateTime.Now.AddSeconds(Duration);
             }

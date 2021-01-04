@@ -55,8 +55,10 @@ namespace ClickQuest.Pages
                     index = _rng.Next(0, questsForCurrentHeroClass.Count());
                 }
 
-                // Add selected quest id to the list.
-                Account.User.Instance.CurrentHero.Quests.Add(questsForCurrentHeroClass.ElementAt(index));
+                // Add selected quest id to the list (create copy to keep database clean).
+                var quest = new Quest();
+                quest.CopyQuest(questsForCurrentHeroClass.ElementAt(index));
+                Account.User.Instance.CurrentHero.Quests.Add(quest);
                 questsForCurrentHeroClass.RemoveAt(index);
             }
 
