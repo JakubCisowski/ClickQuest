@@ -343,16 +343,16 @@ namespace ClickQuest.Data
                     recipeIds.Add(int.Parse(RecipeId.ToString()));
                 }
 
-                var jArrayMaterials = (JArray)parsedObject["Quests"][i]["RewardMaterialIds"];
+                var jArrayMaterials = (JArray)parsedObject["Quests"][i]["RewardMaterialsIds"];
                 var materialIds = new List<int>();
-                foreach (var MaterialId in jArrayRecipes)
+                foreach (var MaterialId in jArrayMaterials)
                 {
                     materialIds.Add(int.Parse(MaterialId.ToString()));
                 }
 
-                var jArrayIngots = (JArray)parsedObject["Quests"][i]["RewardIngotsIds"];
+                var jArrayIngots = (JArray)parsedObject["Quests"][i]["RewardIngots"];
                 var ingotRarities = new List<Rarity>();
-                foreach (var IngotRarity in jArrayRecipes)
+                foreach (var IngotRarity in jArrayIngots)
                 {
                     var actualIngotRarity = (Rarity)int.Parse(IngotRarity.ToString());
                     ingotRarities.Add(actualIngotRarity);

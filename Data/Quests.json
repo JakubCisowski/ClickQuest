@@ -7,7 +7,7 @@
             "Name": "TestQuest1",
             "Duration": 5,
             "Description": "TestQuest1Description",
-            "RewardRecipeIds": [1],
+            "RewardRecipeIds": [1, 1],
             "RewardBlessingIds" : [],
             "RewardMaterialsIds" : [],
             "RewardIngots" : []

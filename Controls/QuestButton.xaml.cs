@@ -38,7 +38,7 @@ namespace ClickQuest.Controls
         public void GenerateRewards()
         {
             #region Blessings
-            var counter = 0;
+            var counter = 1;
             var previousId = 0;
 
             for (int i = 0; i < _quest.RewardBlessingIds.Count; i++)
@@ -59,7 +59,7 @@ namespace ClickQuest.Controls
                     block.Text=$"{counter}x {Database.Blessings.FirstOrDefault(x=>x.Id==_quest.RewardBlessingIds[i]).Name}";
                     QuestRewardsPanel.Children.Add(block);
 
-                    counter = 0;
+                    counter = 1;
                 }
                 
                 previousId = _quest.RewardBlessingIds[i];
@@ -68,7 +68,7 @@ namespace ClickQuest.Controls
 
             #region Materials
 
-            counter = 0;
+            counter = 1;
             previousId = 0;
 
             for (int i = 0; i < _quest.RewardMaterialIds.Count; i++)
@@ -89,7 +89,7 @@ namespace ClickQuest.Controls
                     block.Text=$"{counter}x {Database.Materials.FirstOrDefault(x=>x.Id==_quest.RewardMaterialIds[i]).Name}";
                     QuestRewardsPanel.Children.Add(block);
 
-                    counter = 0;
+                    counter = 1;
                 }
                 
                 previousId = _quest.RewardMaterialIds[i];
@@ -98,7 +98,7 @@ namespace ClickQuest.Controls
 
             #region Recipes
 
-            counter = 0;
+            counter = 1;
             previousId = 0;
 
             for (int i = 0; i < _quest.RewardRecipeIds.Count; i++)
@@ -119,7 +119,7 @@ namespace ClickQuest.Controls
                     block.Text=$"{counter}x {Database.Recipes.FirstOrDefault(x=>x.Id==_quest.RewardRecipeIds[i]).Name}";
                     QuestRewardsPanel.Children.Add(block);
 
-                    counter = 0;
+                    counter = 1;
                 }
                 
                 previousId = _quest.RewardRecipeIds[i];
@@ -128,7 +128,7 @@ namespace ClickQuest.Controls
 
             #region Ingots
 
-            counter = 0;
+            counter = 1;
             previousId = 0;
 
             for (int i = 0; i < _quest.RewardIngots.Count; i++)
@@ -149,7 +149,7 @@ namespace ClickQuest.Controls
                     block.Text=counter>1 ? $"{counter}x {_quest.RewardIngots[i].ToString()} Ingots" : $"{counter}x {_quest.RewardIngots[i].ToString()} Ingot";
                     QuestRewardsPanel.Children.Add(block);
 
-                    counter = 0;
+                    counter = 1;
                 }
                 
                 previousId = (int)_quest.RewardIngots[i];
