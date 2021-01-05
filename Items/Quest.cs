@@ -196,14 +196,18 @@ namespace ClickQuest.Items
 
         public void StartQuest()
         {
+            // Create copy of this quest (to make doing the same quest possible on other heroes at the same time).
+            var questCopy = new Quest();
+            questCopy.CopyQuest(this);
+
             // Set quest end date (if not yet set).
-            if (EndDate==default(DateTime))
+            if (questCopy.EndDate==default(DateTime))
             {
-                this.EndDate = DateTime.Now.AddSeconds(Duration);
+                questCopy.EndDate = DateTime.Now.AddSeconds(Duration);
             }
             
             // Start timer (checks if quest is finished).
-            _timer.Start();
+            questCopy._timer.Start();
         }
 
         public void StopQuest()
@@ -213,9 +217,6 @@ namespace ClickQuest.Items
 
             // Assign rewards.
             AssignRewards();
-
-            // Set EndDate to default value (to avoid re-using the same quest many times).
-            EndDate=default(DateTime);
 
             // Reroll new set of 3 quests.
             (Data.Database.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
@@ -233,7 +234,7 @@ namespace ClickQuest.Items
             // Assign recipes.
             foreach (var recipeId in RewardRecipeIds)
             {
-                var recipe = Data.Database.Materials.FirstOrDefault(x=>x.Id==recipeId);
+                var recipe = Data.Database.Recipes.FirstOrDefault(x=>x.Id==recipeId);
                 Account.User.Instance.AddItem(recipe);
             }
 
