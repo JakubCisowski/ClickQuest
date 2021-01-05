@@ -7,9 +7,9 @@
             "Name": "TestQuest1",
             "Duration": 5,
             "Description": "TestQuest1Description",
-            "RewardRecipeIds": [1, 1],
+            "RewardRecipeIds": [1],
             "RewardBlessingIds" : [],
-            "RewardMaterialsIds" : [],
+            "RewardMaterialsIds" : [1],
             "RewardIngots" : []
         },
         {
@@ -20,9 +20,9 @@
             "Duration": 5,
             "Description": "TestQuest2Description",
             "RewardRecipeIds": [],
-            "RewardBlessingIds" : [],
+            "RewardBlessingIds" : [1],
             "RewardMaterialsIds" : [],
-            "RewardIngots" : ["0"]
+            "RewardIngots" : []
         },
         {
             "Id": 2,
@@ -34,7 +34,7 @@
             "RewardRecipeIds": [],
             "RewardBlessingIds" : [],
             "RewardMaterialsIds" : [],
-            "RewardIngots" : []
+            "RewardIngots" : [0]
         }
     ]
 }

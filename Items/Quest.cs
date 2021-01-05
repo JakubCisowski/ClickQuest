@@ -1,12 +1,14 @@
 using ClickQuest.Heroes;
 using ClickQuest.Pages;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using System.Windows.Threading;
+using ClickQuest.Account;
 
 namespace ClickQuest.Items
 {
@@ -209,10 +211,51 @@ namespace ClickQuest.Items
             // Stop timer.
             _timer.Stop();
 
-            // todo: Assign rewards.
+            // Assign rewards.
+            AssignRewards();
+
+            // Set EndDate to default value (to avoid re-using the same quest many times).
+            EndDate=default(DateTime);
 
             // Reroll new set of 3 quests.
             (Data.Database.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
+        }
+
+        private void AssignRewards()
+        {
+            // Assign materials.
+            foreach (var materialId in RewardMaterialIds)
+            {
+                var material = Data.Database.Materials.FirstOrDefault(x=>x.Id==materialId);
+                Account.User.Instance.AddItem(material);
+            }
+
+            // Assign recipes.
+            foreach (var recipeId in RewardRecipeIds)
+            {
+                var recipe = Data.Database.Materials.FirstOrDefault(x=>x.Id==recipeId);
+                Account.User.Instance.AddItem(recipe);
+            }
+
+            // Assign ingots.
+            foreach (var ingotRarity in RewardIngots)
+            {
+                var ingot = Account.User.Instance.Ingots.FirstOrDefault(x=>x.Rarity==ingotRarity);
+                ingot.Quantity++;
+            }
+
+            // Start blessings.
+            foreach (var blessingId in RewardBlessingIds)
+            {
+                // Select right blessing.
+                var blessingBlueprint = Data.Database.Blessings.FirstOrDefault(x=>x.Id==blessingId);
+                // Create a new Blessing.
+                var blessing = new Blessing(blessingBlueprint);
+                // Increase his duration based on Blessing Specialization buff.
+                blessing.Duration += Account.User.Instance.Specialization.SpecBlessingBuff;
+                User.Instance.Blessings.Add(blessing);
+                blessing.ChangeBuffStatus(true);
+            }
         }
 
         private void Timer_Tick(object source, EventArgs e)
