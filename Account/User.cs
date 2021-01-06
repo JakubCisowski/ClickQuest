@@ -53,6 +53,7 @@ namespace ClickQuest.Account
         private List<Artifact> _artifacts;
         private List<Ingot> _ingots;
         private List<Blessing> _blessings;
+        private List<DungeonKey> _dungeonKeys;
         private int _gold;
         private Specialization _specialization;
 
@@ -142,6 +143,19 @@ namespace ClickQuest.Account
             }
         }
 
+        public List<DungeonKey> DungeonKeys
+        {
+            get
+            {
+                return _dungeonKeys;
+            }
+            set
+            {
+                _dungeonKeys = value;
+                OnPropertyChanged();
+            }
+        }
+
         [NotMapped]
         public Hero CurrentHero
         {
@@ -186,12 +200,13 @@ namespace ClickQuest.Account
 
         public User()
         {
-            _heroes = new List<Hero>();
-            _materials = new List<Material>();
-            _recipes = new List<Recipe>();
-            _artifacts = new List<Artifact>();
-            _ingots = new List<Ingot>();
-            _blessings = new List<Blessing>();
+            Heroes = new List<Hero>();
+            Materials = new List<Material>();
+            Recipes = new List<Recipe>();
+            Artifacts = new List<Artifact>();
+            Ingots = new List<Ingot>();
+            Blessings = new List<Blessing>();
+            DungeonKeys = new List<DungeonKey>();
 
             _specialization = Specialization.Instance;
         }
