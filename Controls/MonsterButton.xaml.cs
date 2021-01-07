@@ -182,7 +182,7 @@ namespace ClickQuest.Controls
 				Account.User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity==(Rarity)(i-1)).Quantity++;
 
 				// Display dungeon key drop.
-				_regionPage.TestRewardsBlock.Text += $"You've got a {(Rarity)(i-1)} Dungeon Key!";
+				_regionPage.TestRewardsBlock.Text += $". You've got a {(Rarity)(i-1)} Dungeon Key!";
 			}
 		}
 

@@ -22,6 +22,7 @@ namespace ClickQuest.Entity
                 user.Heroes = User.Instance.Heroes;
                 user.Blessings = User.Instance.Blessings;
                 user.Specialization = User.Instance.Specialization;
+                user.DungeonKeys = User.Instance.DungeonKeys;
 
                 db.Users.Update(user);
                 db.SaveChanges();
@@ -34,7 +35,7 @@ namespace ClickQuest.Entity
             {
                 // Load user. Include all collections in it.
                 var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).ThenInclude(x => x.Quests).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots).Include(x => x.Blessings)
-                    .FirstOrDefault();
+                    .Include(x=>x.DungeonKeys).FirstOrDefault();
                 User.Instance = user;
             }
         }
@@ -137,7 +138,7 @@ namespace ClickQuest.Entity
             using (var db = new UserContext())
             {
                 var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots).Include(x => x.Blessings)
-                    .FirstOrDefault();
+                    .Include(x=>x.DungeonKeys).FirstOrDefault();
 
                 // Delete all items and heroes (except for ingots - only set their quantity to 0).
 
@@ -156,6 +157,10 @@ namespace ClickQuest.Entity
                 for (int i = 0; i < user.Ingots.Count(); i++)
                 {
                     user.Ingots[i].Quantity = 0;
+                }
+                for (int i = 0; i < user.DungeonKeys.Count(); i++)
+                {
+                    user.DungeonKeys[i].Quantity = 0;
                 }
                 while (user.Heroes.Count > 0)
                 {
