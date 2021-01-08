@@ -1,0 +1,22 @@
+{
+    "Dungeons": [
+        {
+          "Id": 0,
+          "RarityGroup": 0,
+          "Name": "Forest",
+          "Background": "/example.png",
+          "Description": "",
+          "KeyRequirement": [0],
+          "BossIds": [0]
+        },
+        {
+            "Id": 1,
+            "RarityGroup": 1,
+            "Name": "Cave",
+            "Background": "/example2.png",
+            "Description": "",
+            "KeyRequirement": [1],
+            "BossIds": [1]
+        }
+    ]
+}

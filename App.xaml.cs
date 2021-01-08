@@ -40,9 +40,6 @@ namespace ClickQuest
                     {
                         user.Ingots.Add(new Ingot((Rarity)rarities.GetValue(i), 0));
                     }
-
-                    //db.Users.Update(user);
-                    //db.SaveChanges();
                 }
 
                 db.Users.Update(user);
