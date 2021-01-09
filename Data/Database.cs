@@ -26,6 +26,7 @@ namespace ClickQuest.Data
         public static List<Blessing> PriestOffer { get; set; }
         public static List<Quest> Quests { get; set; }
         public static Dictionary<string, Page> Pages { get; set; }
+        public static List<Monster> Bosses{get;set;}
 
         #endregion Collections
 
@@ -42,6 +43,7 @@ namespace ClickQuest.Data
             PriestOffer = new List<Blessing>();
             Quests = new List<Quest>();
             Pages = new Dictionary<string, Page>();
+            Bosses = new List<Monster>();
 
             // Fill collections with JSON data.
             LoadMaterials();
@@ -53,6 +55,7 @@ namespace ClickQuest.Data
             LoadShopOffer();
             LoadPriestOffer();
             LoadQuests();
+            LoadBosses();
 
             // Check if Ids exist and are unique.
             ValidateData();
@@ -151,15 +154,6 @@ namespace ClickQuest.Data
                 var health = int.Parse(parsedObject["Monsters"][i]["Health"].ToString());
                 var image = parsedObject["Monsters"][i]["Image"].ToString();
 
-                var typesTemp = new List<MonsterType>();
-                var typeArray = (JArray)parsedObject["Monsters"][i]["Types"];
-
-                for (int j = 0; j < typeArray.Count; j++)
-                {
-                    var monsterType = (MonsterType)Enum.Parse(typeof(MonsterType), parsedObject["Monsters"][i]["Types"][j].ToString());
-                    typesTemp.Add(monsterType);
-                }
-
                 var lootTemp = new List<(Item, ItemType, double)>();
                 var lootArray = (JArray)parsedObject["Monsters"][i]["Loot"];
 
@@ -192,7 +186,7 @@ namespace ClickQuest.Data
 
                     frequencySum += frequency;
 
-                    lootTemp.Add((item, ItemType.Material, frequency));
+                    lootTemp.Add((item, itemType, frequency));
                 }
 
                 if (frequencySum != 1)
@@ -200,7 +194,7 @@ namespace ClickQuest.Data
                     errorLog.Add($"Error: {name} - loot frequency sums up to {frequencySum} instead of 1.");
                 }
 
-                var newMonster = new Monster(id, name, health, image, typesTemp, lootTemp);
+                var newMonster = new Monster(id, name, health, image, lootTemp);
                 Monsters.Add(newMonster);
             }
 
@@ -441,6 +435,61 @@ namespace ClickQuest.Data
             }
         }
 
+        public static void LoadBosses()
+        {
+            var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Bosses.json");
+            var parsedObject = JObject.Parse(File.ReadAllText(path));
+            var jArray = (JArray)parsedObject["Bosses"];
+
+            for (var i = 0; i < jArray.Count; i++)
+            {
+                var id = int.Parse(parsedObject["Bosses"][i]["Id"].ToString());
+                var name = parsedObject["Bosses"][i]["Name"].ToString();
+                var health = int.Parse(parsedObject["Bosses"][i]["Health"].ToString());
+                var image = parsedObject["Bosses"][i]["Image"].ToString();
+                var description = parsedObject["Bosses"][i]["Description"].ToString();
+
+                var lootTemp = new List<(Item, ItemType, List<double>)>();
+                var lootArray = (JArray)parsedObject["Bosses"][i]["Loot"];
+
+                for (int j = 0; j < lootArray.Count; j++)
+                {
+                    var itemType = (ItemType)Enum.Parse(typeof(ItemType), parsedObject["Bosses"][i]["Loot"][j]["Type"].ToString());
+                    var itemId = int.Parse(parsedObject["Bosses"][i]["Loot"][j]["Id"].ToString());
+
+                    Item item = null;
+
+                    switch (itemType)
+                    {
+                        case ItemType.Material:
+                            item = Materials.Where(x => x.Id == itemId).FirstOrDefault();
+                            break;
+
+                        case ItemType.Recipe:
+                            item = Recipes.Where(x => x.Id == itemId).FirstOrDefault();
+                            break;
+
+                        case ItemType.Artifact:
+                            item = Artifacts.Where(x => x.Id == itemId).FirstOrDefault();
+                            break;
+                    }
+
+                    var frequencies = (JArray)parsedObject["Bosses"][i]["Loot"][j]["Frequency"];
+                    var frequencyList = new List<double>();
+
+                    for (int k=0;k<frequencies.Count;k++)
+                    {
+                        frequencyList.Add(double.Parse(frequencies[k].ToString()));
+                    }
+
+                    lootTemp.Add((item, itemType, frequencyList));
+                }
+
+                var newBoss = new Monster(id, name, health, image, lootTemp, description);
+                Bosses.Add(newBoss);
+            }
+        }
+
         #endregion JSON Load
 
         public static void RefreshPages()
@@ -461,6 +510,10 @@ namespace ClickQuest.Data
             Pages.Add("Priest", new PriestPage());
             // Quest Menu Page
             Pages.Add("QuestMenu", new QuestMenuPage());
+            // Dungeon Select Page
+            Pages.Add("DungeonSelect", new DungeonBossPage());
+            // Dungeon Boss Page
+            Pages.Add("DungeonBoss", new DungeonBossPage());
 
             foreach (var region in Regions)
             {

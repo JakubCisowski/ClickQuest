@@ -25,8 +25,9 @@ namespace ClickQuest.Enemies
         private int _health;
         private int _currentHealth;
         private string _image;
-        private List<MonsterType> _types;
+        private string _description;
         private List<(Item Item, ItemType ItemType, double Frequency)> _loot;
+        private List<(Item Item, ItemType ItemType, List <double> Frequencies)> _bossLoot;
 
         #endregion Private Fields
 
@@ -54,6 +55,19 @@ namespace ClickQuest.Enemies
             set
             {
                 _name = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                _description=value;
                 OnPropertyChanged();
             }
         }
@@ -97,19 +111,6 @@ namespace ClickQuest.Enemies
             }
         }
 
-        public List<MonsterType> Types
-        {
-            get
-            {
-                return _types;
-            }
-            set
-            {
-                _types = value;
-                OnPropertyChanged();
-            }
-        }
-
         public List<(Item Item, ItemType ItemType, double Frequency)> Loot
         {
             get
@@ -123,16 +124,39 @@ namespace ClickQuest.Enemies
             }
         }
 
+        public List<(Item Item, ItemType ItemType, List<double> Frequencies)> BossLoot
+        {
+            get
+            {
+                return _bossLoot;
+            }
+            set
+            {
+                _bossLoot = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion Properties
 
-        public Monster(int id, string name, int health, string image, List<MonsterType> types, List<(Item, ItemType, double)> loot)
+        // Common monster constructor.
+        public Monster(int id, string name, int health, string image, List<(Item, ItemType, double)> loot)
         {
             Id = id;
             Name = name;
             Health = health;
             CurrentHealth = health;
-            Types = types;
             Loot = loot;
+        }
+
+        // Boss constructor.
+        public Monster(int id, string name, int health, string image, List<(Item, ItemType, List<double>)> bossLoot, string description)
+        {
+            Id = id;
+            Name = name;
+            Health = health;
+            CurrentHealth = health;
+            BossLoot = bossLoot;
         }
 
         public Monster(Monster monsterToCopy)
@@ -141,8 +165,9 @@ namespace ClickQuest.Enemies
             Name = monsterToCopy.Name;
             Health = monsterToCopy.Health;
             CurrentHealth = monsterToCopy.Health;
-            Types = monsterToCopy.Types;
             Loot = monsterToCopy.Loot;
+            BossLoot=monsterToCopy.BossLoot;
+            Description=monsterToCopy.Description;
         }
     }
 }

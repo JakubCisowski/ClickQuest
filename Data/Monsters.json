@@ -5,9 +5,6 @@
           "Name": "Gray Wolf",
           "Health": 20,
           "Image": "/example.png",
-          "Types": [
-            "Beast"
-          ],
           "Loot": [
             {
               "Type": "Material",
@@ -26,10 +23,6 @@
             "Name": "Cave Bat",
             "Health": 15,
             "Image": "/example.png",
-            "Types": [
-              "Beast",
-              "Flying"
-            ],
             "Loot": [
                 {
                     "Type": "Material",
