@@ -14,13 +14,13 @@
 
         <Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden"/>
 
-
 		<StackPanel x:Name="RegionsPanel" Orientation="Vertical" Grid.Column="1">
             <Button x:Name="MainMenuButton" Content="Back to menu" Click="MainMenuButton_Click" Width="100" Height="50"/>
             <Button x:Name="QuestMenuButton" Content="Quests" Click="QuestMenuButton_Click" Width="100" Height="50"/>
             <Button x:Name="ShopButton" Content="Shop" Click="ShopButton_Click" Width="150" Height="50"/>
             <Button x:Name="BlacksmithButton" Content="Blacksmith" Click="BlacksmithButton_Click" Width="150" Height="50"/>
             <Button x:Name="PriestButton" Content="Priest" Click="PriestButton_Click" Width="150" Height="50"/>
+            <Button x:Name="DungeonSelectButton" Content="Dungeons" Click="DungeonSelectButton_Click" Width="150" Height="50"/>
 		</StackPanel>
 
 		

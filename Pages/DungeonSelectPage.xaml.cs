@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.Data;
 
 namespace ClickQuest.Pages
 {
@@ -9,5 +10,10 @@ namespace ClickQuest.Pages
         {
             InitializeComponent();
         }
+
+        private void TownButton_Click(object sender, RoutedEventArgs e)
+		{
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
+		}
     }
 }

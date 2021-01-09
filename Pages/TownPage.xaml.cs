@@ -83,6 +83,10 @@ namespace ClickQuest.Pages
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Priest"]);
 			(Database.Pages["Priest"] as PriestPage).UpdatePriest();
 		}
+		private void DungeonSelectButton_Click(object sender, RoutedEventArgs e)
+		{
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["DungeonSelect"]);
+		}
 
 		#endregion
 	}

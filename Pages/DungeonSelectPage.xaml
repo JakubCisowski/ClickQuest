@@ -6,7 +6,18 @@
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d" Title="Dungeon Select"
         Height="768" Width="1024">
+        
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" />
+
+        <StackPanel x:Name="DungeonSelectPanel" Orientation="Vertical" Grid.Column="1">
+            <Button x:Name="TownButton" Grid.Column="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
+        </StackPanel>
     </Grid>
 </Page>
