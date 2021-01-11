@@ -5,42 +5,42 @@
           "Name": "General dungeons",
           "Colour": "Grey",
           "Description": "-",
-          "DungeonKeyRequirementIds": [0]
+          "DungeonKeyRequirementRarities": [0]
         },
         {
             "Id": 1,
             "Name": "Fine dungeons",
             "Colour": "White",
             "Description": "-",
-            "DungeonKeyRequirementIds": [1]
+            "DungeonKeyRequirementRarities": [1]
         },
         {
             "Id": 2,
             "Name": "Superior dungeons",
             "Colour": "Green",
             "Description": "-",
-            "DungeonKeyRequirementIds": [2]
+            "DungeonKeyRequirementRarities": [2]
         },
         {
             "Id": 3,
             "Name": "Exceptional dungeons",
             "Colour": "Blue",
             "Description": "-",
-            "DungeonKeyRequirementIds": [3]
+            "DungeonKeyRequirementRarities": [3]
         },
         {
             "Id": 4,
             "Name": "Mythic dungeons",
             "Colour": "Purple",
             "Description": "-",
-            "DungeonKeyRequirementIds": [4]
+            "DungeonKeyRequirementRarities": [4]
         },
         {
             "Id": 5,
             "Name": "Masterwork dungeons",
             "Colour": "Gold",
             "Description": "-",
-            "DungeonKeyRequirementIds": [5]
+            "DungeonKeyRequirementRarities": [5]
         }
     ]
 }

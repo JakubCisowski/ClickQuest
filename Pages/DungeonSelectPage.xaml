@@ -16,10 +16,13 @@
 
         <Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" />
 
-        <StackPanel x:Name="NavigationPanel" Orientation="Vertical" Grid.Column="1">
-            <Button x:Name="TownButton" Grid.Column="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
-        </StackPanel>
-        <StackPanel x:Name="DungeonSelectPanel" Orientation="Vertical" Grid.Column="1">
+        <StackPanel Grid.Column="1">
+            <StackPanel x:Name="NavigationPanel" Orientation="Vertical">
+                <Button x:Name="TownButton" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
+                <Button x:Name="UndoButton" Width="150" Height="50" Content="Undo" Visibility="Hidden"/>
+            </StackPanel>
+            <StackPanel x:Name="DungeonSelectPanel" Orientation="Vertical">
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

@@ -2,7 +2,7 @@
     "Dungeons": [
         {
           "Id": 0,
-          "RarityGroup": 0,
+          "DungeonGroupId": 0,
           "Name": "Forest",
           "Background": "/example.png",
           "Description": "",
@@ -10,7 +10,7 @@
         },
         {
             "Id": 1,
-            "RarityGroup": 1,
+            "DungeonGroupId": 1,
             "Name": "Cave",
             "Background": "/example2.png",
             "Description": "",

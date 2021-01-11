@@ -6,6 +6,7 @@ using ClickQuest.Places;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Controls;
@@ -26,8 +27,9 @@ namespace ClickQuest.Data
         public static List<Blessing> PriestOffer { get; set; }
         public static List<Quest> Quests { get; set; }
         public static Dictionary<string, Page> Pages { get; set; }
-        public static List<Monster> Bosses{get;set;}
-        public static List<Dungeon> Dungeons{get;set;}
+        public static List<Monster> Bosses { get; set; }
+        public static List<Dungeon> Dungeons { get; set; }
+        public static List<DungeonGroup> DungeonGroups { get; set; }
 
         #endregion Collections
 
@@ -45,7 +47,8 @@ namespace ClickQuest.Data
             Quests = new List<Quest>();
             Pages = new Dictionary<string, Page>();
             Bosses = new List<Monster>();
-            Dungeons=new List<Dungeon>();
+            Dungeons = new List<Dungeon>();
+            DungeonGroups = new List<DungeonGroup>();
 
             // Fill collections with JSON data.
             LoadMaterials();
@@ -58,6 +61,7 @@ namespace ClickQuest.Data
             LoadPriestOffer();
             LoadQuests();
             LoadBosses();
+            LoadDungeonGroups();
             LoadDungeons();
 
             // Check if Ids exist and are unique.
@@ -409,7 +413,7 @@ namespace ClickQuest.Data
                     var frequencies = (JArray)parsedObject["Bosses"][i]["Loot"][j]["Frequency"];
                     var frequencyList = new List<double>();
 
-                    for (int k=0;k<frequencies.Count;k++)
+                    for (int k = 0; k < frequencies.Count; k++)
                     {
                         frequencyList.Add(double.Parse(frequencies[k].ToString()));
                     }
@@ -422,6 +426,34 @@ namespace ClickQuest.Data
             }
         }
 
+        public static void LoadDungeonGroups()
+        {
+            var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "DungeonGroups.json");
+            var parsedObject = JObject.Parse(File.ReadAllText(path));
+            var jArray = (JArray)parsedObject["DungeonGroups"];
+
+            for (var i = 0; i < jArray.Count; i++)
+            {
+                var id = int.Parse(parsedObject["DungeonGroups"][i]["Id"].ToString());
+                var name = parsedObject["DungeonGroups"][i]["Name"].ToString();
+                var colour = parsedObject["DungeonGroups"][i]["Colour"].ToString();
+                var description = parsedObject["DungeonGroups"][i]["Description"].ToString();
+
+                var keysTemp = new List<int>();
+                var keysArray = (JArray)parsedObject["DungeonGroups"][i]["DungeonKeyRequirementRarities"];
+
+                for (int j = 0; j < keysArray.Count; j++)
+                {
+                    var keyRarity = int.Parse(parsedObject["DungeonGroups"][i]["DungeonKeyRequirementRarities"][j].ToString());
+
+                    keysTemp.Add(keyRarity);
+                }
+
+                var newDungeonGroup = new DungeonGroup(id, name, description, keysTemp, Color.FromName(colour));
+                DungeonGroups.Add(newDungeonGroup);
+            }
+        }
+
         public static void LoadDungeons()
         {
             var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Dungeons.json");
@@ -431,7 +463,7 @@ namespace ClickQuest.Data
             for (var i = 0; i < jArray.Count; i++)
             {
                 var id = int.Parse(parsedObject["Dungeons"][i]["Id"].ToString());
-                var rarityGroup = int.Parse(parsedObject["Dungeons"][i]["RarityGroup"].ToString());
+                var dungeonGroupId = int.Parse(parsedObject["Dungeons"][i]["DungeonGroupId"].ToString());
                 var name = parsedObject["Dungeons"][i]["Name"].ToString();
                 var background = parsedObject["Dungeons"][i]["Background"].ToString();
                 var description = parsedObject["Dungeons"][i]["Description"].ToString();
@@ -447,7 +479,7 @@ namespace ClickQuest.Data
                     bossesTemp.Add(boss);
                 }
 
-                var newDungeon = new Dungeon(id, rarityGroup, name, background, description, bossesTemp);
+                var newDungeon = new Dungeon(id, DungeonGroups.FirstOrDefault(x => x.Id == dungeonGroupId), name, background, description, bossesTemp);
                 Dungeons.Add(newDungeon);
             }
         }

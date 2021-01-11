@@ -22,7 +22,7 @@ namespace ClickQuest.Places
         #region Private Fields
 
         private int _id;
-        private int _rarityGroup;
+        private DungeonGroup _dungeonGroup;
         private string _name;
         private string _background;
         private string _description;
@@ -45,15 +45,15 @@ namespace ClickQuest.Places
             }
         }
 
-        public int RarityGroup
+        public DungeonGroup DungeonGroup
         {
             get
             {
-                return _rarityGroup;
+                return _dungeonGroup;
             }
             set
             {
-                _rarityGroup=value;
+                _dungeonGroup=value;
                 OnPropertyChanged();
             }
         }
@@ -112,10 +112,10 @@ namespace ClickQuest.Places
 
         #endregion Properties
 
-        public Dungeon(int id, int rarityGroup, string name, string background, string description, List<Monster> bosses)
+        public Dungeon(int id, DungeonGroup dungeonGroup, string name, string background, string description, List<Monster> bosses)
         {
             Id = id;
-            RarityGroup=rarityGroup;
+            DungeonGroup=dungeonGroup;
             Name = name;
             Background = background;
             Description=description;
