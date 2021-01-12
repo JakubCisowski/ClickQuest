@@ -2,6 +2,7 @@ using ClickQuest.Data;
 using ClickQuest.Enemies;
 using ClickQuest.Items;
 using ClickQuest.Places;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -113,11 +114,15 @@ namespace ClickQuest.Pages
 
         private void DungeonGroupButton_Click(object sender, RoutedEventArgs e)
         {
-            // Select dungeon group.
-            _dungeonGroupSelected = Data.Database.DungeonGroups.FirstOrDefault(x => x.Id == int.Parse((sender as Button).Name.Substring(12)));
+            // Check if any quest is currently assigned to this hero (if so, hero can't enter the dungeon).
+            if (Account.User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
+            {
+                // Select dungeon group.
+                _dungeonGroupSelected = Data.Database.DungeonGroups.FirstOrDefault(x => x.Id == int.Parse((sender as Button).Name.Substring(12)));
 
-            // Now let user select dungeon in that group.
-            LoadDungeonSelection();
+                // Now let user select dungeon in that group.
+                LoadDungeonSelection();
+            }
         }
 
         private void DungeonButton_Click(object sender, RoutedEventArgs e)
@@ -151,16 +156,18 @@ namespace ClickQuest.Pages
             }
 
             // Start boss fight.
-            // Start boss fight function.
+            (Data.Database.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(_bossSelected);
             // Navigate to boss fight page.
             (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["DungeonBoss"]);
 
-            // Reset selections.
+            // Reset selections (for future use).
             _bossSelected = null;
             _dungeonGroupSelected = null;
             _dungeonSelected = null;
             // Hide undo button.
             UndoButton.Visibility = Visibility.Hidden;
+            // Reset selection page.
+            LoadDungeonGroupSelection();
         }
 
         private void UndoButtonGroup_Click(object sender, RoutedEventArgs e)
