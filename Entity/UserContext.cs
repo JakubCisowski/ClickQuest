@@ -30,6 +30,7 @@ namespace ClickQuest.Entity
                     SpecCraftingAmount = 0,
                     SpecQuestingAmount = 0,
                     SpecMeltingAmount = 0,
+                    SpecDungeonAmount = 0,
                     SpecBlessingThreshold = 1,
                     SpecBlessingBuff = 0,
                     SpecBuyingThreshold = 1,
@@ -41,7 +42,9 @@ namespace ClickQuest.Entity
                     SpecCraftingThreshold = 1,
                     SpecCraftingBuff = 0,
                     SpecMeltingThreshold = 1,
-                    SpecMeltingBuff = 0
+                    SpecMeltingBuff = 0,
+                    SpecDungeonThreshold = 1,
+                    SpecDungeonBuff = 0
                 });
             });
 

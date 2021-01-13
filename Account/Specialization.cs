@@ -60,6 +60,10 @@ namespace ClickQuest.Account
         private int specKillingThreshold;
         private int specKillingBuff;
 
+        private int specDungeonAmount;
+        private int specDungeonThreshold;
+        private int specDungeonBuff;
+
         #endregion Private Fields
 
         #region Properties
@@ -304,6 +308,46 @@ namespace ClickQuest.Account
             }
         }
 
+        public int SpecDungeonAmount
+        {
+            get
+            {
+                return specDungeonAmount;
+            }
+            set
+            {
+                specDungeonAmount = value;
+                OnPropertyChanged();
+                UpdateBuffs();
+            }
+        }
+
+        public int SpecDungeonThreshold
+        {
+            get
+            {
+                return specDungeonThreshold;
+            }
+            set
+            {
+                specDungeonThreshold = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int SpecDungeonBuff
+        {
+            get
+            {
+                return specDungeonBuff;
+            }
+            set
+            {
+                specDungeonBuff = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         public Specialization()
@@ -316,14 +360,16 @@ namespace ClickQuest.Account
             // Base values for each buff.
             var SpecCraftingBuffBase = 1;
             var SpecBuyingBuffBase = 5;
+            var SpecDungeonBuffBase = 30;
 
             // Const buff value for reaching every threshold.
             var SpecBlessingBuffConst = 15; // Increases blessings duration in seconds. <Base - 0>
-            var SpecKillingBuffConst = 1; // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
-            var SpecCraftingBuffConst = 1; // Increases crafting rarity limit. <Base - 1> <Limit - 5>
-            var SpecBuyingBuffConst = 1; // Increases shop offer size. <Base - 5>
-            var SpecMeltingBuffConst = 5; // Increases % chance to get additional ingots when melting. <Base - 0%>
-            var SpecQuestingBuffConst = 5; // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
+            var SpecKillingBuffConst = 1;   // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
+            var SpecCraftingBuffConst = 1;  // Increases crafting rarity limit. <Base - 1> <Limit - 5>
+            var SpecBuyingBuffConst = 1;    // Increases shop offer size. <Base - 5>
+            var SpecMeltingBuffConst = 5;   // Increases % chance to get additional ingots when melting. <Base - 0%>
+            var SpecQuestingBuffConst = 5;  // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
+            var SpecDungeonBuffConst = 1;   // Increases amount of time to defeat dungeon boss in seconds <Base - 30s>
 
             // Buff gains thresholds.
             SpecBlessingThreshold = 10; // Amount increases every time a Blessing is bought.
@@ -332,6 +378,8 @@ namespace ClickQuest.Account
             SpecBuyingThreshold = 10;   // Amount increases every time a Recipe is bought.
             SpecMeltingThreshold = 10;  // Amount increases every time a material is melted.
             SpecQuestingThreshold = 10; // Amount increases every time a quest is completed.
+            SpecDungeonThreshold = 10;  // Amount increases every time a dungeon is finished.
+
 
             // Updating current buff value based on constants and amount (which is not constant).
             SpecBlessingBuff = SpecBlessingAmount / SpecBlessingThreshold * SpecBlessingBuffConst;
@@ -340,6 +388,7 @@ namespace ClickQuest.Account
             SpecBuyingBuff = SpecBuyingBuffBase + SpecBuyingAmount / SpecBuyingThreshold * SpecBuyingBuffConst;
             SpecMeltingBuff = SpecMeltingAmount / SpecMeltingThreshold * SpecMeltingBuffConst;
             SpecQuestingBuff = SpecQuestingAmount / SpecQuestingThreshold * SpecQuestingBuffConst;
+            SpecDungeonBuff = SpecDungeonBuffBase + SpecDungeonAmount / SpecDungeonThreshold * SpecDungeonBuffConst;
         }
     }
 }

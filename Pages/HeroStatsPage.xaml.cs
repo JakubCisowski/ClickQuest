@@ -221,6 +221,30 @@ namespace ClickQuest.Pages
 
 				SpecializationsPanel.Children.Add(block);
 			}
-		}
+
+			{
+				var block = new TextBlock()
+				{
+					Name = "SpecDungeon"
+				};
+
+				Binding binding = new Binding("SpecDungeonAmount");
+				binding.Source = Account.User.Instance.Specialization;
+				Binding binding2 = new Binding("SpecDungeonThreshold");
+				binding2.Source = Account.User.Instance.Specialization;
+				Binding binding3 = new Binding("SpecDungeonBuff");
+				binding3.Source = Account.User.Instance.Specialization;
+
+				MultiBinding multiBinding = new MultiBinding();
+				multiBinding.StringFormat = "Dungeon - Amount: {0}; Buff: {2}; Threshold: {1}";
+				multiBinding.Bindings.Add(binding);
+				multiBinding.Bindings.Add(binding2);
+				multiBinding.Bindings.Add(binding3);
+
+				block.SetBinding(TextBlock.TextProperty, multiBinding);
+
+				SpecializationsPanel.Children.Add(block);
+			}
 		}
 	}
+}
