@@ -15,7 +15,7 @@ namespace ClickQuest.Pages
 			InitializeComponent();
 
 			// Populate ComboBox with hero classes and pre-select the first element.
-			HeroClassBox.ItemsSource = Enum.GetValues(typeof(HeroClass)).Cast<HeroClass>();
+			HeroClassBox.ItemsSource = Enum.GetValues(typeof(HeroClass)).Cast<HeroClass>().Skip(1);
 			HeroClassBox.SelectedIndex = 0;
 		}
 
