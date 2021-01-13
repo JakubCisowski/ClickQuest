@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using System;
 
 namespace ClickQuest.Account
 {
@@ -362,6 +363,10 @@ namespace ClickQuest.Account
             var SpecBuyingBuffBase = 5;
             var SpecDungeonBuffBase = 30;
 
+            // Value limits for each buff.
+            var SpecCraftingBuffLimit = 5;
+            var SpecQuestingBuffLimit = 50;
+
             // Const buff value for reaching every threshold.
             var SpecBlessingBuffConst = 15; // Increases blessings duration in seconds. <Base - 0>
             var SpecKillingBuffConst = 1;   // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
@@ -384,10 +389,10 @@ namespace ClickQuest.Account
             // Updating current buff value based on constants and amount (which is not constant).
             SpecBlessingBuff = SpecBlessingAmount / SpecBlessingThreshold * SpecBlessingBuffConst;
             SpecKillingBuff = SpecKillingAmount / SpecKillingThreshold * SpecKillingBuffConst;
-            SpecCraftingBuff = SpecCraftingBuffBase + SpecCraftingAmount / SpecCraftingThreshold * SpecCraftingBuffConst;
+            SpecCraftingBuff = Math.Min(SpecCraftingBuffBase + SpecCraftingAmount / SpecCraftingThreshold * SpecCraftingBuffConst, SpecCraftingBuffLimit);
             SpecBuyingBuff = SpecBuyingBuffBase + SpecBuyingAmount / SpecBuyingThreshold * SpecBuyingBuffConst;
             SpecMeltingBuff = SpecMeltingAmount / SpecMeltingThreshold * SpecMeltingBuffConst;
-            SpecQuestingBuff = SpecQuestingAmount / SpecQuestingThreshold * SpecQuestingBuffConst;
+            SpecQuestingBuff = Math.Min(SpecQuestingAmount / SpecQuestingThreshold * SpecQuestingBuffConst, SpecQuestingBuffLimit);
             SpecDungeonBuff = SpecDungeonBuffBase + SpecDungeonAmount / SpecDungeonThreshold * SpecDungeonBuffConst;
         }
     }
