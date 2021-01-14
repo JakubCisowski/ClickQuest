@@ -6,33 +6,33 @@ using System.Windows.Controls;
 
 namespace ClickQuest.Pages
 {
-	public partial class RegionPage : Page
-	{
-		private Region _region;
+    public partial class RegionPage : Page
+    {
+        private Region _region;
 
-		public RegionPage(Region currentRegion)
-		{
-			InitializeComponent();
+        public RegionPage(Region currentRegion)
+        {
+            InitializeComponent();
 
-			_region = currentRegion;
-			this.DataContext = _region;
+            _region = currentRegion;
+            this.DataContext = _region;
 
-			CreateMonsterButton();
-		}
+            CreateMonsterButton();
+        }
 
-		public void CreateMonsterButton()
-		{
-			var button = new MonsterButton(_region, this);
-			this.RegionPanel.Children.Insert(1, button);
-		}
+        public void CreateMonsterButton()
+        {
+            var button = new MonsterButton(_region, this);
+            this.RegionPanel.Children.Insert(1, button);
+        }
 
-		#region Events
+        #region Events
 
-		private void TownButton_Click(object sender, RoutedEventArgs e)
-		{
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
-		}
+        private void TownButton_Click(object sender, RoutedEventArgs e)
+        {
+            (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -1,4 +1,3 @@
-using ClickQuest.Account;
 using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Heroes;
@@ -29,7 +28,7 @@ namespace ClickQuest.Pages
         private void RerollButton_Click(object sender, RoutedEventArgs e)
         {
             // Check if any quest is currently assigned - if so, user can't reroll quests.
-            if(Account.User.Instance.CurrentHero.Quests.All(x=>x.EndDate==default(DateTime)))
+            if (Account.User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
             {
                 // Later: add price.
                 RerollQuests();

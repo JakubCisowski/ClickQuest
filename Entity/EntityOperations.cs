@@ -35,7 +35,7 @@ namespace ClickQuest.Entity
             {
                 // Load user. Include all collections in it.
                 var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).ThenInclude(x => x.Quests).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots).Include(x => x.Blessings)
-                    .Include(x=>x.DungeonKeys).FirstOrDefault();
+                    .Include(x => x.DungeonKeys).FirstOrDefault();
                 User.Instance = user;
             }
         }
@@ -138,7 +138,7 @@ namespace ClickQuest.Entity
             using (var db = new UserContext())
             {
                 var user = db.Users.Include(x => x.Materials).Include(x => x.Heroes).Include(x => x.Artifacts).Include(x => x.Recipes).Include(x => x.Ingots).Include(x => x.Blessings)
-                    .Include(x=>x.DungeonKeys).FirstOrDefault();
+                    .Include(x => x.DungeonKeys).FirstOrDefault();
 
                 // Delete all items and heroes (except for ingots - only set their quantity to 0).
 

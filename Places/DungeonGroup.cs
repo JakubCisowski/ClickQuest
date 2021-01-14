@@ -1,4 +1,3 @@
-using ClickQuest.Items;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -44,7 +43,7 @@ namespace ClickQuest.Places
             }
             set
             {
-                _description=value;
+                _description = value;
             }
         }
 
@@ -56,7 +55,7 @@ namespace ClickQuest.Places
             }
             set
             {
-                _keyRequirements=value;
+                _keyRequirements = value;
             }
         }
 
@@ -74,11 +73,11 @@ namespace ClickQuest.Places
 
         public DungeonGroup(int id, string name, string description, List<int> keyRequirements, Color color)
         {
-            Id=id;
-            Name=name;
-            Description=description;
-            KeyRequirements=keyRequirements;
-            Color=color;
+            Id = id;
+            Name = name;
+            Description = description;
+            KeyRequirements = keyRequirements;
+            Color = color;
         }
     }
 }

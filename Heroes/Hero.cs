@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ClickQuest.Items;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
-using ClickQuest.Items;
 
 namespace ClickQuest.Heroes
 {
@@ -98,7 +98,7 @@ namespace ClickQuest.Heroes
             }
             set
             {
-                _heroClass=value;
+                _heroClass = value;
                 OnPropertyChanged();
             }
         }
@@ -197,7 +197,7 @@ namespace ClickQuest.Heroes
             }
             set
             {
-                _quests=value;
+                _quests = value;
                 OnPropertyChanged();
             }
         }
@@ -206,7 +206,7 @@ namespace ClickQuest.Heroes
 
         public Hero(HeroClass heroClass, string heroName)
         {
-            Quests=new List<Quest>();
+            Quests = new List<Quest>();
             HeroClass = heroClass;
             Experience = 0;
             Level = 0;

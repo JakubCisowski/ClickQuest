@@ -1,5 +1,4 @@
 using ClickQuest.Enemies;
-using ClickQuest.Items;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -53,7 +52,7 @@ namespace ClickQuest.Places
             }
             set
             {
-                _dungeonGroup=value;
+                _dungeonGroup = value;
                 OnPropertyChanged();
             }
         }
@@ -115,11 +114,11 @@ namespace ClickQuest.Places
         public Dungeon(int id, DungeonGroup dungeonGroup, string name, string background, string description, List<Monster> bosses)
         {
             Id = id;
-            DungeonGroup=dungeonGroup;
+            DungeonGroup = dungeonGroup;
             Name = name;
             Background = background;
-            Description=description;
-            Bosses=bosses;
+            Description = description;
+            Bosses = bosses;
         }
     }
 }

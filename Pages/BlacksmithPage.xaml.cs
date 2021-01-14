@@ -8,113 +8,151 @@ using System.Windows.Controls;
 
 namespace ClickQuest.Pages
 {
-	public partial class BlacksmithPage : Page
-	{
-		private Random _rng = new Random();
-		public BlacksmithPage()
-		{
-			InitializeComponent();
-		}
+    public partial class BlacksmithPage : Page
+    {
+        private Random _rng = new Random();
 
-		public void UpdateBlacksmith()
-		{
-			// Refresh list of items.
-			ItemsListViewMelt.ItemsSource = User.Instance.Materials;
-			ItemsListViewCraft.ItemsSource = User.Instance.Recipes;
+        public BlacksmithPage()
+        {
+            InitializeComponent();
+        }
 
-			ItemsListViewMelt.Items.Refresh();
-		}
+        public void UpdateBlacksmith()
+        {
+            // Refresh list of items.
+            ItemsListViewMelt.ItemsSource = User.Instance.Materials;
+            ItemsListViewCraft.ItemsSource = User.Instance.Recipes;
 
-		#region Events
+            ItemsListViewMelt.Items.Refresh();
+        }
 
-		private void MeltButton_Click(object sender, RoutedEventArgs e)
-		{
-			var b = sender as Button;
-			var material = b.CommandParameter as Material;
+        #region Events
 
-			// Remove X materials (for now only 1)
-			Account.User.Instance.RemoveItem(material);
+        private void MeltButton_Click(object sender, RoutedEventArgs e)
+        {
+            var b = sender as Button;
+            var material = b.CommandParameter as Material;
 
-			// Add ingots of that rarity.
-			var ingot = Account.User.Instance.Ingots.Where(x => x.Rarity == material.Rarity).FirstOrDefault();
-			// Calculate ingot bonus based on Melting Specialization.
-			var ingotAmount = 1;
-			var meltingBuff = Account.User.Instance.Specialization.SpecMeltingBuff;
-			while(meltingBuff >= 100)
-			{
-				ingotAmount++;
-				meltingBuff -= 100;
-			}
-			if(meltingBuff > 0)
-			{
-				int num = _rng.Next(1, 101);
-				if(num <= meltingBuff)
-				{
-					ingotAmount++;
-				}
-			}
-			ingot.Quantity += ingotAmount;
+            // Remove X materials (for now only 1)
+            Account.User.Instance.RemoveItem(material);
 
-			// Update both equipment and blacksmith page.
-			EquipmentWindow.Instance.UpdateEquipment();
-			UpdateBlacksmith();
+            // Add ingots of that rarity.
+            var ingot = Account.User.Instance.Ingots.Where(x => x.Rarity == material.Rarity).FirstOrDefault();
+            // Calculate ingot bonus based on Melting Specialization.
+            var ingotAmount = 1;
+            var meltingBuff = Account.User.Instance.Specialization.SpecMeltingBuff;
+            while (meltingBuff >= 100)
+            {
+                ingotAmount++;
+                meltingBuff -= 100;
+            }
+            if (meltingBuff > 0)
+            {
+                int num = _rng.Next(1, 101);
+                if (num <= meltingBuff)
+                {
+                    ingotAmount++;
+                }
+            }
+            ingot.Quantity += ingotAmount;
 
-			// Increase Specialization Melting amount.
-			Account.User.Instance.Specialization.SpecMeltingAmount++;
-		}
+            // Update both equipment and blacksmith page.
+            EquipmentWindow.Instance.UpdateEquipment();
+            UpdateBlacksmith();
 
-		private void CraftButton_Click(object sender, RoutedEventArgs e)
-		{
-			var b = sender as Button;
-			var recipe = b.CommandParameter as Recipe;
+            // Increase Specialization Melting amount.
+            Account.User.Instance.Specialization.SpecMeltingAmount++;
+        }
 
-			// Check if user meets Crafting Specialization rarity requirements.
-			if(Account.User.Instance.Specialization.SpecCraftingBuff >= (int)recipe.Rarity)
-			{
-				// Error - user doesn't meet requirements - stop this function.
-				return;
-			}
+        private void CraftMaterialButton_Click(object sender, RoutedEventArgs e)
+        {
+            var b = sender as Button;
+            var recipe = b.CommandParameter as Recipe;
 
-			// Check if user has required materials to craft.
-			foreach (var pair in recipe.MaterialIds)
-			{
-				var material = User.Instance.Materials.FirstOrDefault(x => x.Id == pair.Key);
-				if (!(material != null && material.Quantity >= pair.Value))
-				{
-					// Error - no materials - stop this function.
-					return;
-				}
-			}
+            // Check if user meets Crafting Specialization rarity requirements.
+            if (Account.User.Instance.Specialization.SpecCraftingBuff < (int)recipe.Rarity)
+            {
+                // Error - user doesn't meet requirements - stop this function.
+                return;
+            }
 
-			// If he has, remove them.
-			foreach (var pair in recipe.MaterialIds)
-			{
-				var material = User.Instance.Materials.FirstOrDefault(x => x.Id == pair.Key);
-				if (material != null && material.Quantity >= pair.Value)
-				{
-					for (int i = 0; i < pair.Value; i++)
-					{
-						User.Instance.RemoveItem(material);
-					}
-				}
-			}
+            // Check if user has required materials to craft.
+            foreach (var pair in recipe.MaterialIds)
+            {
+                var material = User.Instance.Materials.FirstOrDefault(x => x.Id == pair.Key);
+                if (!(material != null && material.Quantity >= pair.Value))
+                {
+                    // Error - no materials - stop this function.
+                    return;
+                }
+            }
 
-			// Add artifact to equipment.
-			var artifact = Data.Database.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
-			User.Instance.AddItem(artifact);
+            // If he has, remove them.
+            foreach (var pair in recipe.MaterialIds)
+            {
+                var material = User.Instance.Materials.FirstOrDefault(x => x.Id == pair.Key);
+                if (material != null && material.Quantity >= pair.Value)
+                {
+                    for (int i = 0; i < pair.Value; i++)
+                    {
+                        User.Instance.RemoveItem(material);
+                    }
+                }
+            }
 
-			EquipmentWindow.Instance.UpdateEquipment();
-			UpdateBlacksmith();
+            // Add artifact to equipment.
+            var artifact = Data.Database.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
+            User.Instance.AddItem(artifact);
 
-			// Increase Specialization Crafting amount.
-			Account.User.Instance.Specialization.SpecCraftingAmount++;
-		}
+            // Remove the recipe used.
+            User.Instance.RemoveItem(recipe);
 
-		private void TownButton_Click(object sender, RoutedEventArgs e)
-		{
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
-		}
+            EquipmentWindow.Instance.UpdateEquipment();
+            UpdateBlacksmith();
 
-		#endregion
-	}
+            // Increase Specialization Crafting amount.
+            Account.User.Instance.Specialization.SpecCraftingAmount++;
+        }
+
+        private void CraftIngotButton_Click(object sender, RoutedEventArgs e)
+        {
+            var b = sender as Button;
+            var recipe = b.CommandParameter as Recipe;
+
+            // Check if user meets Crafting Specialization rarity requirements.
+            if (Account.User.Instance.Specialization.SpecCraftingBuff < (int)recipe.Rarity)
+            {
+                // Error - user doesn't meet requirements - stop this function.
+                return;
+            }
+
+            // Check if user has required ingots to craft.
+            var ingotRarityNeeded = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == recipe.Rarity);
+            if (recipe.IngotsRequired <= ingotRarityNeeded.Quantity)
+            {
+                // If he has, remove them.
+                ingotRarityNeeded.Quantity -= recipe.IngotsRequired;
+
+                // Add artifact to equipment.
+                var artifact = Data.Database.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
+                User.Instance.AddItem(artifact);
+
+                // Remove the recipe used.
+                User.Instance.RemoveItem(recipe);
+
+                EquipmentWindow.Instance.UpdateEquipment();
+                UpdateBlacksmith();
+
+                // Increase Specialization Crafting amount.
+                Account.User.Instance.Specialization.SpecCraftingAmount++;
+            }
+        }
+
+        private void TownButton_Click(object sender, RoutedEventArgs e)
+        {
+            (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
+        }
+
+        #endregion Events
+    }
 }

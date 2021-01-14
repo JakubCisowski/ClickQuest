@@ -27,7 +27,7 @@ namespace ClickQuest.Enemies
         private string _image;
         private string _description;
         private List<(Item Item, ItemType ItemType, double Frequency)> _loot;
-        private List<(Item Item, ItemType ItemType, List <double> Frequencies)> _bossLoot;
+        private List<(Item Item, ItemType ItemType, List<double> Frequencies)> _bossLoot;
 
         #endregion Private Fields
 
@@ -67,7 +67,7 @@ namespace ClickQuest.Enemies
             }
             set
             {
-                _description=value;
+                _description = value;
                 OnPropertyChanged();
             }
         }
@@ -166,8 +166,8 @@ namespace ClickQuest.Enemies
             Health = monsterToCopy.Health;
             CurrentHealth = monsterToCopy.Health;
             Loot = monsterToCopy.Loot;
-            BossLoot=monsterToCopy.BossLoot;
-            Description=monsterToCopy.Description;
+            BossLoot = monsterToCopy.BossLoot;
+            Description = monsterToCopy.Description;
         }
     }
 }

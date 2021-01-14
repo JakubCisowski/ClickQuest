@@ -7,67 +7,67 @@ using System.Windows.Controls;
 
 namespace ClickQuest.Pages
 {
-	public partial class ShopPage : Page
-	{
-		public ShopPage()
-		{
-			InitializeComponent();
-			UpdateShop();
-		}
+    public partial class ShopPage : Page
+    {
+        public ShopPage()
+        {
+            InitializeComponent();
+            UpdateShop();
+        }
 
-		public void UpdateShop()
-		{
-			ItemsListViewSell.ItemsSource = User.Instance.Materials.Cast<Item>().Concat(User.Instance.Recipes.Cast<Item>());
-			
-			// Calculate shop offer size according to specialization bonus (base bonus: 5).
-			ItemsListViewBuy.ItemsSource = Database.ShopOffer.Take(Account.User.Instance.Specialization.SpecBuyingBuff);
+        public void UpdateShop()
+        {
+            ItemsListViewSell.ItemsSource = User.Instance.Materials.Cast<Item>().Concat(User.Instance.Recipes.Cast<Item>());
 
-			ItemsListViewSell.Items.Refresh();
-			ItemsListViewBuy.Items.Refresh();
-		}
+            // Calculate shop offer size according to specialization bonus (base bonus: 5).
+            ItemsListViewBuy.ItemsSource = Database.ShopOffer.Take(Account.User.Instance.Specialization.SpecBuyingBuff);
 
-		#region Events
+            ItemsListViewSell.Items.Refresh();
+            ItemsListViewBuy.Items.Refresh();
+        }
 
-		private void TownButton_Click(object sender, RoutedEventArgs e)
-		{
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
-		}
+        #region Events
 
-		private void SellButton_Click(object sender, RoutedEventArgs e)
-		{
-			var b = sender as Button;
-			var item = b.CommandParameter as Item;
+        private void TownButton_Click(object sender, RoutedEventArgs e)
+        {
+            (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
+        }
 
-			Account.User.Instance.RemoveItem(item);
-			Account.User.Instance.Gold += item.Value;
+        private void SellButton_Click(object sender, RoutedEventArgs e)
+        {
+            var b = sender as Button;
+            var item = b.CommandParameter as Item;
 
-			EquipmentWindow.Instance.UpdateEquipment();
-			UpdateShop();
-		}
+            Account.User.Instance.RemoveItem(item);
+            Account.User.Instance.Gold += item.Value;
 
-		private void BuyButton_Click(object sender, RoutedEventArgs e)
-		{
-			var b = sender as Button;
-			var recipe = b.CommandParameter as Recipe;
+            EquipmentWindow.Instance.UpdateEquipment();
+            UpdateShop();
+        }
 
-			// Check if user has enough gold.
-			if (Account.User.Instance.Gold>=recipe.Value)
-			{
-				Account.User.Instance.AddItem(recipe);
-				Account.User.Instance.Gold-=recipe.Value;
+        private void BuyButton_Click(object sender, RoutedEventArgs e)
+        {
+            var b = sender as Button;
+            var recipe = b.CommandParameter as Recipe;
 
-				EquipmentWindow.Instance.UpdateEquipment();
-				UpdateShop();
+            // Check if user has enough gold.
+            if (Account.User.Instance.Gold >= recipe.Value)
+            {
+                Account.User.Instance.AddItem(recipe);
+                Account.User.Instance.Gold -= recipe.Value;
 
-				// Increase Specialization Buying amount.
-				Account.User.Instance.Specialization.SpecBuyingAmount++;
-			}
-			else
-			{
-				// Error
-			}
-		}
+                EquipmentWindow.Instance.UpdateEquipment();
+                UpdateShop();
 
-		#endregion
-	}
+                // Increase Specialization Buying amount.
+                Account.User.Instance.Specialization.SpecBuyingAmount++;
+            }
+            else
+            {
+                // Error
+            }
+        }
+
+        #endregion
+    }
 }

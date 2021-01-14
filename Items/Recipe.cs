@@ -28,6 +28,15 @@ namespace ClickQuest.Items
         [NotMapped]
         public string RequirementsDescription { get; private set; }
 
+        [NotMapped]
+        public int IngotsRequired
+        {
+            get
+            {
+                return (int)(Rarity + 1) * 1000;
+            }
+        }
+
         public Recipe(int id, string name, Rarity rarity, string description, int value, int artifactId) : base(id, name, rarity, description, value)
         {
             ArtifactId = artifactId;
