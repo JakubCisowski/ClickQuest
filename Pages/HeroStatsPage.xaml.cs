@@ -17,6 +17,7 @@ namespace ClickQuest.Pages
             this.DataContext = _hero;
 
             GenerateIngots();
+            GenerateDungeonKeys();
             GenerateGold();
             GenerateSpecializations();
         }
@@ -37,7 +38,7 @@ namespace ClickQuest.Pages
 
         private void GenerateIngots()
         {
-            // Make sure hero isn't null (while loading databse constructor calls this function).
+            // Make sure hero isn't null (constructor calls this function while loading database).
             if (_hero != null)
             {
                 IngotsPanel.Children.Clear();
@@ -62,6 +63,37 @@ namespace ClickQuest.Pages
                     block.SetBinding(TextBlock.TextProperty, multiBinding);
 
                     IngotsPanel.Children.Add(block);
+                }
+            }
+        }
+
+        private void GenerateDungeonKeys()
+        {
+            // Make sure hero isn't null (constructor calls this function while loading database).
+            if (_hero != null)
+            {
+                DungeonKeysPanel.Children.Clear();
+
+                for (int i = 0; i < Account.User.Instance.DungeonKeys.Count; i++)
+                {
+                    var block = new TextBlock()
+                    {
+                        Name = "Key" + i.ToString()
+                    };
+
+                    Binding binding = new Binding("Quantity");
+                    binding.Source = Account.User.Instance.DungeonKeys[i];
+                    Binding binding2 = new Binding("Rarity");
+                    binding2.Source = Account.User.Instance.DungeonKeys[i];
+
+                    MultiBinding multiBinding = new MultiBinding();
+                    multiBinding.StringFormat = "{1} keys: {0}";
+                    multiBinding.Bindings.Add(binding);
+                    multiBinding.Bindings.Add(binding2);
+
+                    block.SetBinding(TextBlock.TextProperty, multiBinding);
+
+                    DungeonKeysPanel.Children.Add(block);
                 }
             }
         }
