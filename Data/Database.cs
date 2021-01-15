@@ -117,6 +117,9 @@ namespace ClickQuest.Data
             var parsedObject = JObject.Parse(File.ReadAllText(path));
             var jArray = (JArray)parsedObject["Recipes"];
 
+            // Error check
+            var errorLog = new List<string>();
+
             for (var i = 0; i < jArray.Count; i++)
             {
                 var id = int.Parse(parsedObject["Recipes"][i]["Id"].ToString());
@@ -142,6 +145,35 @@ namespace ClickQuest.Data
                 newRecipe.MaterialIds = materialIds;
                 newRecipe.UpdateRequirementsDescription();
                 Recipes.Add(newRecipe);
+            }
+
+            // Check if every recipe components' and artifact's IDs exist.
+            foreach (var recipe in Recipes)
+            {
+                var artifact = Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
+                if (artifact is null)
+                {
+                    errorLog.Add($"Error in LoadRecipes: Recipe Id: {recipe.Id} - There is no artifact with Id: {recipe.ArtifactId}");
+                }
+
+                foreach (var pair in recipe.MaterialIds)
+                {
+                    var material = Materials.FirstOrDefault(x => x.Id == pair.Key);
+                    if (material is null)
+                    {
+                        errorLog.Add($"Error in LoadRecipes: Recipe Id: {recipe.Id} - There is no material with Id: {pair.Key}");
+                    }
+
+                    if (pair.Value <= 0)
+                    {
+                        errorLog.Add($"Error in LoadRecipes: Recipe Id: {recipe.Id} - Invalid count of material with Id: {pair.Key}");
+                    }
+                }
+            }
+
+            if (errorLog.Count > 0)
+            {
+                Logger.Log(errorLog);
             }
         }
 
@@ -189,6 +221,12 @@ namespace ClickQuest.Data
                             break;
                     }
 
+                    if (item is null)
+                    {
+                        // Item of that Id does not exist.
+                        errorLog.Add($"Error in LoadMonsters: {itemType} of id {itemId} does not exist.");
+                    }
+
                     var frequency = Double.Parse(parsedObject["Monsters"][i]["Loot"][j]["Frequency"].ToString());
 
                     frequencySum += frequency;
@@ -198,7 +236,7 @@ namespace ClickQuest.Data
 
                 if (frequencySum != 1)
                 {
-                    errorLog.Add($"Error: {name} - loot frequency sums up to {frequencySum} instead of 1.");
+                    errorLog.Add($"Error in LoadMonsters: {name} - loot frequency sums up to {frequencySum} instead of 1.");
                 }
 
                 var newMonster = new Monster(id, name, health, image, lootTemp);
@@ -238,6 +276,12 @@ namespace ClickQuest.Data
                     var monsterId = int.Parse(parsedObject["Regions"][i]["Monsters"][j]["Id"].ToString());
                     var monster = Monsters.Where(x => x.Id == monsterId).FirstOrDefault();
 
+                    if (monster is null)
+                    {
+                        // Monster of monsterId does not exist.
+                        errorLog.Add($"Error: Monster of id {monsterId} does not exist.");
+                    }
+
                     var frequency = Double.Parse(parsedObject["Regions"][i]["Monsters"][j]["Frequency"].ToString());
 
                     frequencySum += frequency;
@@ -247,7 +291,7 @@ namespace ClickQuest.Data
 
                 if (frequencySum != 1)
                 {
-                    errorLog.Add($"Error: {name} - monster frequency sums up to {frequencySum} instead of 1.");
+                    errorLog.Add($"Error in LoadRegions: {name} - monster frequency sums up to {frequencySum} instead of 1.");
                 }
 
                 var newRegion = new Region(id, name, background, monstersTemp, levelRequirement);
@@ -288,12 +332,25 @@ namespace ClickQuest.Data
             var parsedObject = JObject.Parse(File.ReadAllText(path));
             var jArray = (JArray)parsedObject["ShopOffer"];
 
+            var errorLog = new List<string>();
+
             for (var i = 0; i < jArray.Count; i++)
             {
                 var id = int.Parse(parsedObject["ShopOffer"][i]["RecipeId"].ToString());
                 var recipe = Recipes.Where(x => x.Id == id).FirstOrDefault();
 
+                if(recipe is null)
+                {
+                    // Recipe of id does not exist.
+                    errorLog.Add($"Error in LoadShopOffer: Recipe of id {id} does not exist.");
+                }
+
                 ShopOffer.Add(recipe);
+            }
+            
+            if (errorLog.Count > 0)
+            {
+                Logger.Log(errorLog);
             }
         }
 
@@ -303,12 +360,25 @@ namespace ClickQuest.Data
             var parsedObject = JObject.Parse(File.ReadAllText(path));
             var jArray = (JArray)parsedObject["PriestOffer"];
 
+            var errorLog = new List<string>();
+
             for (var i = 0; i < jArray.Count; i++)
             {
                 var id = int.Parse(parsedObject["PriestOffer"][i]["BlessingId"].ToString());
                 var blessing = Blessings.Where(x => x.Id == id).FirstOrDefault();
 
+                if(blessing is null)
+                {
+                    // Blessing of id does not exist.
+                    errorLog.Add($"Error in LoadPriestOffer: Blessing of id {id} does not exist.");
+                }
+
                 PriestOffer.Add(blessing);
+            }
+
+            if (errorLog.Count > 0)
+            {
+                Logger.Log(errorLog);
             }
         }
 
@@ -317,6 +387,8 @@ namespace ClickQuest.Data
             var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Quests.json");
             var parsedObject = JObject.Parse(File.ReadAllText(path));
             var jArray = (JArray)parsedObject["Quests"];
+
+            var errorLog = new List<string>();
 
             for (var i = 0; i < jArray.Count; i++)
             {
@@ -334,28 +406,52 @@ namespace ClickQuest.Data
                 var blessingIds = new List<int>();
                 foreach (var BlessingId in jArrayBlessings)
                 {
-                    blessingIds.Add(int.Parse(BlessingId.ToString()));
+                    var idAsInt = int.Parse(BlessingId.ToString());
+                    if (Blessings.FirstOrDefault(x=>x.Id==idAsInt) is null)
+                    {
+                        // Blessing of id Blessing id does not exist.
+                        errorLog.Add($"Error in LoadQuests: Blessing of id {idAsInt} does not exist.");
+                    }
+                    blessingIds.Add(idAsInt);
                 }
 
                 var jArrayRecipes = (JArray)parsedObject["Quests"][i]["RewardRecipeIds"];
                 var recipeIds = new List<int>();
                 foreach (var RecipeId in jArrayRecipes)
                 {
-                    recipeIds.Add(int.Parse(RecipeId.ToString()));
+                    var idAsInt = int.Parse(RecipeId.ToString());
+                    if (Recipes.FirstOrDefault(x=>x.Id==idAsInt) is null)
+                    {
+                        // Blessing of id Blessing id does not exist.
+                        errorLog.Add($"Error in LoadQuests: Recipe of id {idAsInt} does not exist.");
+                    }
+                    recipeIds.Add(idAsInt);
                 }
 
                 var jArrayMaterials = (JArray)parsedObject["Quests"][i]["RewardMaterialsIds"];
                 var materialIds = new List<int>();
                 foreach (var MaterialId in jArrayMaterials)
                 {
-                    materialIds.Add(int.Parse(MaterialId.ToString()));
+                    var idAsInt = int.Parse(MaterialId.ToString());
+                    if (Materials.FirstOrDefault(x=>x.Id==idAsInt) is null)
+                    {
+                        // Blessing of id Blessing id does not exist.
+                        errorLog.Add($"Error in LoadQuests: Material of id {idAsInt} does not exist.");
+                    }
+                    materialIds.Add(idAsInt);
                 }
 
                 var jArrayIngots = (JArray)parsedObject["Quests"][i]["RewardIngots"];
                 var ingotRarities = new List<Rarity>();
                 foreach (var IngotRarity in jArrayIngots)
                 {
-                    var actualIngotRarity = (Rarity)int.Parse(IngotRarity.ToString());
+                    var ingotRarityAsInt = int.Parse(IngotRarity.ToString());
+                    if(ingotRarityAsInt < 0 || ingotRarityAsInt > 5)
+                    {
+                        // Ingot of this rarity does not exist.
+                        errorLog.Add($"Error in LoadQuests: Ingot of rarity {ingotRarityAsInt} does not exist.");
+                    }
+                    var actualIngotRarity = (Rarity)ingotRarityAsInt;
                     ingotRarities.Add(actualIngotRarity);
                 }
 
@@ -369,6 +465,11 @@ namespace ClickQuest.Data
 
                 Quests.Add(newQuest);
             }
+
+            if (errorLog.Count > 0)
+            {
+                Logger.Log(errorLog);
+            }
         }
 
         public static void LoadBosses()
@@ -376,6 +477,8 @@ namespace ClickQuest.Data
             var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "Bosses.json");
             var parsedObject = JObject.Parse(File.ReadAllText(path));
             var jArray = (JArray)parsedObject["Bosses"];
+
+            var errorLog = new List<string>();
 
             for (var i = 0; i < jArray.Count; i++)
             {
@@ -410,6 +513,12 @@ namespace ClickQuest.Data
                             break;
                     }
 
+                    if (item is null)
+                    {
+                        // Item of that Id does not exist.
+                        errorLog.Add($"Error in LoadBosses: {itemType} of id {itemId} does not exist.");
+                    }
+
                     var frequencies = (JArray)parsedObject["Bosses"][i]["Loot"][j]["Frequency"];
                     var frequencyList = new List<double>();
 
@@ -424,6 +533,11 @@ namespace ClickQuest.Data
                 var newBoss = new Monster(id, name, health, image, lootTemp, description);
                 Bosses.Add(newBoss);
             }
+
+            if (errorLog.Count > 0)
+            {
+                Logger.Log(errorLog);
+            }
         }
 
         public static void LoadDungeonGroups()
@@ -431,6 +545,8 @@ namespace ClickQuest.Data
             var path = Path.Combine(Environment.CurrentDirectory, @"Data\", "DungeonGroups.json");
             var parsedObject = JObject.Parse(File.ReadAllText(path));
             var jArray = (JArray)parsedObject["DungeonGroups"];
+
+            var errorLog = new List<string>();
 
             for (var i = 0; i < jArray.Count; i++)
             {
@@ -446,11 +562,22 @@ namespace ClickQuest.Data
                 {
                     var keyRarity = int.Parse(parsedObject["DungeonGroups"][i]["DungeonKeyRequirementRarities"][j].ToString());
 
+                    if(keyRarity < 0 || keyRarity > 5)
+                    {
+                        // Dungeon key of this rarity does not exist.
+                        errorLog.Add($"Error in LoadDungeonGroups: Dungeon key of rarity {keyRarity} does not exist.");
+                    }
+
                     keysTemp.Add(keyRarity);
                 }
 
                 var newDungeonGroup = new DungeonGroup(id, name, description, keysTemp, Color.FromName(colour));
                 DungeonGroups.Add(newDungeonGroup);
+            }
+
+            if (errorLog.Count > 0)
+            {
+                Logger.Log(errorLog);
             }
         }
 
@@ -460,10 +587,19 @@ namespace ClickQuest.Data
             var parsedObject = JObject.Parse(File.ReadAllText(path));
             var jArray = (JArray)parsedObject["Dungeons"];
 
+            var errorLog = new List<string>();
+
             for (var i = 0; i < jArray.Count; i++)
             {
                 var id = int.Parse(parsedObject["Dungeons"][i]["Id"].ToString());
                 var dungeonGroupId = int.Parse(parsedObject["Dungeons"][i]["DungeonGroupId"].ToString());
+
+                if (DungeonGroups.FirstOrDefault(x=>x.Id==dungeonGroupId) is null)
+                {
+                    // Dungeon group of this id does not exist.
+                    errorLog.Add($"Error in LoadDungeons: Dungeon group of id {dungeonGroupId} does not exist.");
+                }
+
                 var name = parsedObject["Dungeons"][i]["Name"].ToString();
                 var background = parsedObject["Dungeons"][i]["Background"].ToString();
                 var description = parsedObject["Dungeons"][i]["Description"].ToString();
@@ -476,11 +612,22 @@ namespace ClickQuest.Data
                     var bossId = int.Parse(parsedObject["Dungeons"][i]["BossIds"][j].ToString());
                     var boss = Bosses.Where(x => x.Id == bossId).FirstOrDefault();
 
+                    if (boss is null)
+                    {
+                        // Boss of that Id does not exist.
+                        errorLog.Add($"Error in LoadDungeons: Boss of id {bossId} does not exist.");                    
+                    }
+
                     bossesTemp.Add(boss);
                 }
 
                 var newDungeon = new Dungeon(id, DungeonGroups.FirstOrDefault(x => x.Id == dungeonGroupId), name, background, description, bossesTemp);
                 Dungeons.Add(newDungeon);
+            }
+
+            if (errorLog.Count > 0)
+            {
+                Logger.Log(errorLog);
             }
         }
 
@@ -527,28 +674,28 @@ namespace ClickQuest.Data
                 errorLog.Add($"Error: Id duplicates detected in Blessings.JSON");
             }
 
-            // Check if every recipe components' and artifact's IDs exist.
-            foreach (var recipe in Recipes)
+            var quests = Quests.Select(x => x.Id).Distinct();
+            if (quests.Count() != Quests.Count())
             {
-                var artifact = Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
-                if (artifact is null)
-                {
-                    errorLog.Add($"Error: Recipe Id: {recipe.Id} - There is no artifact with Id: {recipe.ArtifactId}");
-                }
+                errorLog.Add($"Error: Id duplicates detected in Quests.JSON");
+            }
 
-                foreach (var pair in recipe.MaterialIds)
-                {
-                    var material = Materials.FirstOrDefault(x => x.Id == pair.Key);
-                    if (materials is null)
-                    {
-                        errorLog.Add($"Error: Recipe Id: {recipe.Id} - There is no material with Id: {pair.Key}");
-                    }
+            var dungeons = Dungeons.Select(x => x.Id).Distinct();
+            if (dungeons.Count() != Dungeons.Count())
+            {
+                errorLog.Add($"Error: Id duplicates detected in Dungeons.JSON");
+            }
 
-                    if (pair.Value <= 0)
-                    {
-                        errorLog.Add($"Error: Recipe Id: {recipe.Id} - Invalid count of material with Id: {pair.Key}");
-                    }
-                }
+            var bosses = Bosses.Select(x => x.Id).Distinct();
+            if (bosses.Count() != Bosses.Count())
+            {
+                errorLog.Add($"Error: Id duplicates detected in Bosses.JSON");
+            }
+
+            var dungeonGroups = DungeonGroups.Select(x => x.Id).Distinct();
+            if (dungeonGroups.Count() != DungeonGroups.Count())
+            {
+                errorLog.Add($"Error: Id duplicates detected in DungeonGroups.JSON");
             }
 
             if (errorLog.Count > 0)
