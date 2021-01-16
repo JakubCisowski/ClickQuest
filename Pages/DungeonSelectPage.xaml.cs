@@ -11,24 +11,18 @@ namespace ClickQuest.Pages
 {
     public partial class DungeonSelectPage : Page
     {
+        #region Private Fields
         private DungeonGroup _dungeonGroupSelected;
         private Dungeon _dungeonSelected;
         private Monster _bossSelected;
+
+        #endregion
 
         public DungeonSelectPage()
         {
             InitializeComponent();
 
             // Initially, display dungeon groups.
-            LoadDungeonGroupSelection();
-        }
-
-        private void TownButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Come back to town.
-            (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
-
-            // Reset selection.
             LoadDungeonGroupSelection();
         }
 
@@ -110,7 +104,14 @@ namespace ClickQuest.Pages
         }
 
         #region Events
+        private void TownButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Come back to town.
+            (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
 
+            // Reset selection.
+            LoadDungeonGroupSelection();
+        }
         private void DungeonGroupButton_Click(object sender, RoutedEventArgs e)
         {
             // Check if any quest is currently assigned to this hero (if so, hero can't enter the dungeon).

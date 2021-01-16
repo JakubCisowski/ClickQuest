@@ -20,21 +20,6 @@ namespace ClickQuest.Pages
             _rng = new Random();
         }
 
-        private void TownButton_Click(object sender, RoutedEventArgs e)
-        {
-            (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
-        }
-
-        private void RerollButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Check if any quest is currently assigned - if so, user can't reroll quests.
-            if (Account.User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
-            {
-                // Later: add price.
-                RerollQuests();
-            }
-        }
-
         // Generate 3 random quests based on class.
         // When: User finishes quest / There is a new hero without quests / User clicks reroll button.
         public void RerollQuests()
@@ -93,5 +78,24 @@ namespace ClickQuest.Pages
                 RerollQuests();
             }
         }
+
+        #region Events
+
+        private void TownButton_Click(object sender, RoutedEventArgs e)
+        {
+            (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
+        }
+
+        private void RerollButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Check if any quest is currently assigned - if so, user can't reroll quests.
+            if (Account.User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
+            {
+                // Later: add price.
+                RerollQuests();
+            }
+        }
+
+        #endregion
     }
 }

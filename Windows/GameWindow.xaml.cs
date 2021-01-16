@@ -1,4 +1,4 @@
-﻿using ClickQuest.Account;
+﻿using ClickQuest.Items;
 using ClickQuest.Pages;
 using System.ComponentModel;
 using System.Windows;
@@ -15,17 +15,16 @@ namespace ClickQuest
             (Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["MainMenu"]);
         }
 
+        #region Events
+
         protected override void OnClosing(CancelEventArgs e)
         {
-            // End current blessings and save them to the database.
-            for (int i = 0; i < User.Instance.Blessings.Count; i++)
-            {
-                User.Instance.Blessings[0].ChangeBuffStatus(false);
-            }
-
-            Entity.EntityOperations.SaveGame();
+            // Pause all blessings.
+            Blessing.PauseBlessings();
 
             base.OnClosing(e);
         }
+
+        #endregion
     }
 }

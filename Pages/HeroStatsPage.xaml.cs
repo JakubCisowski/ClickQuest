@@ -109,7 +109,7 @@ namespace ClickQuest.Pages
             };
             SpecializationsPanel.Children.Add(sectionBlock);
 
-
+            #region SpecializationBuying
             {
                 var block = new TextBlock()
                 {
@@ -133,7 +133,9 @@ namespace ClickQuest.Pages
 
                 SpecializationsPanel.Children.Add(block);
             }
+            #endregion
 
+            #region SpecializationMelting
             {
                 var block = new TextBlock()
                 {
@@ -157,7 +159,9 @@ namespace ClickQuest.Pages
 
                 SpecializationsPanel.Children.Add(block);
             }
+            #endregion
 
+            #region SpecializationCrafting
             {
                 var block = new TextBlock()
                 {
@@ -181,7 +185,9 @@ namespace ClickQuest.Pages
 
                 SpecializationsPanel.Children.Add(block);
             }
+            #endregion
 
+            #region SpecializationQuestion
             {
                 var block = new TextBlock()
                 {
@@ -205,7 +211,9 @@ namespace ClickQuest.Pages
 
                 SpecializationsPanel.Children.Add(block);
             }
+            #endregion
 
+            #region SpecializationKilling
             {
                 var block = new TextBlock()
                 {
@@ -229,7 +237,9 @@ namespace ClickQuest.Pages
 
                 SpecializationsPanel.Children.Add(block);
             }
+            #endregion
 
+            #region SpecializationBlessing
             {
                 var block = new TextBlock()
                 {
@@ -253,7 +263,9 @@ namespace ClickQuest.Pages
 
                 SpecializationsPanel.Children.Add(block);
             }
+            #endregion
 
+            #region SpecializationDungeon
             {
                 var block = new TextBlock()
                 {
@@ -277,6 +289,7 @@ namespace ClickQuest.Pages
 
                 SpecializationsPanel.Children.Add(block);
             }
+            #endregion
         }
     }
 }

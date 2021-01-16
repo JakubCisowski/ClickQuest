@@ -24,12 +24,18 @@ namespace ClickQuest.Pages
         }
 
         #endregion INotifyPropertyChanged
+
+        #region Private Fields
         private int _duration;
         private Monster _boss;
         private DispatcherTimer _fightTimer;
         private Random _rng = new Random();
         private DispatcherTimer _poisonTimer;
         private int _poisonTicks;
+
+        #endregion
+
+        #region Properties
 
         public int Duration
         {
@@ -43,6 +49,8 @@ namespace ClickQuest.Pages
                 OnPropertyChanged();
             }
         }
+
+        #endregion
 
         public DungeonBossPage()
         {
@@ -78,6 +86,62 @@ namespace ClickQuest.Pages
             // Start 30 second timer.
             _fightTimer.Start();
         }
+
+        private void CheckIfBossDied()
+        {
+            // If monster died - grant rewards and spawn another one.
+            if (_boss.CurrentHealth <= 0)
+            {
+                // Reset poison.
+                _poisonTimer.Stop();
+                _poisonTicks = 0;
+
+                // Reset fight timer.
+                _fightTimer.Stop();
+
+                // Grant exp and loot.
+                GrantVictoryBonuses();
+            }
+        }
+
+        public void GrantVictoryBonuses()
+        {
+            // Grant experience based on damage dealt to boss.
+            User.Instance.CurrentHero.Experience += Experience.CalculateMonsterXpReward(_boss.Health - _boss.CurrentHealth);
+
+            // Grant boss loot.
+            // 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
+            int threshold = 5 - (_boss.CurrentHealth / (_boss.Health / 5));
+            // 2. Iterate through every possible loot
+            string lootText = "Experience gained: " + Experience.CalculateMonsterXpReward(_boss.Health - _boss.CurrentHealth) + " \n" +
+                              "Loot: \n";
+            foreach (var loot in _boss.BossLoot)
+            {
+                double num = _rng.Next(1, 10001) / 10000d;
+                if (num < loot.Frequencies[threshold])
+                {
+                    // Grant loot after checking if it's not empty.
+                    if (loot.Item.Id != 0)
+                    {
+                        Account.User.Instance.AddItem(loot.Item);
+                        lootText += "- " + loot.Item.Name + " (" + loot.ItemType + ")\n";
+                        EquipmentWindow.Instance.UpdateEquipment();
+                    }
+                }
+            }
+
+            // Display exp and loot for testing purposes.
+            this.TestRewardsBlock.Text = lootText;
+
+            // Increase boss killing specialization amount (it will update buffs in setter).
+            Account.User.Instance.Specialization.SpecDungeonAmount++;
+
+
+            // Make TownButton visible.
+            TownButton.Visibility = Visibility.Visible;
+        }
+
+        #region Events
 
         private void FightTimer_Tick(object source, EventArgs e)
         {
@@ -141,65 +205,13 @@ namespace ClickQuest.Pages
             CheckIfBossDied();
         }
 
-        private void CheckIfBossDied()
-        {
-            // If monster died - grant rewards and spawn another one.
-            if (_boss.CurrentHealth <= 0)
-            {
-                // Reset poison.
-                _poisonTimer.Stop();
-                _poisonTicks = 0;
-
-                // Reset fight timer.
-                _fightTimer.Stop();
-
-                // Grant exp and loot.
-                GrantVictoryBonuses();
-            }
-        }
-
-        public void GrantVictoryBonuses()
-        {
-            // Grant experience based on damage dealt to boss.
-            User.Instance.CurrentHero.Experience += Experience.CalculateMonsterXpReward(_boss.Health - _boss.CurrentHealth);
-
-            // Grant boss loot.
-            // 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
-            int threshold = 5 - (_boss.CurrentHealth / (_boss.Health / 5));
-            // 2. Iterate through every possible loot
-            string lootText = "Experience gained: " + Experience.CalculateMonsterXpReward(_boss.Health - _boss.CurrentHealth) + " \n" +
-                              "Loot: \n";
-            foreach (var loot in _boss.BossLoot)
-            {
-                double num = _rng.Next(1, 10001) / 10000d;
-                if (num < loot.Frequencies[threshold])
-                {
-                    // Grant loot after checking if it's not empty.
-                    if (loot.Item.Id != 0)
-                    {
-                        Account.User.Instance.AddItem(loot.Item);
-                        lootText += "- " + loot.Item.Name + " (" + loot.ItemType + ")\n";
-                        EquipmentWindow.Instance.UpdateEquipment();
-                    }
-                }
-            }
-
-            // Display exp and loot for testing purposes.
-            this.TestRewardsBlock.Text = lootText;
-
-            // Increase boss killing specialization amount (it will update buffs in setter).
-            Account.User.Instance.Specialization.SpecDungeonAmount++;
-
-
-            // Make TownButton visible.
-            TownButton.Visibility = Visibility.Visible;
-        }
-
         private void TownButton_Click(object sender, RoutedEventArgs e)
         {
             (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
 
             TestRewardsBlock.Text = "";
         }
+
+        #endregion
     }
 }

@@ -43,11 +43,15 @@ namespace ClickQuest
             _instance.Visibility = Visibility.Visible;
         }
 
+        #region Events
+
         private void EquipmentWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // If the window is closed, keep it open but hide it instead.
             e.Cancel = true;
             this.Visibility = Visibility.Hidden;
         }
+
+        #endregion
     }
 }

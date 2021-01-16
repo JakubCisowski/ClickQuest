@@ -35,6 +35,7 @@ namespace ClickQuest.Items
         private List<Rarity> _rewardIngots;
         private DispatcherTimer _timer;
         private DateTime _endDate;
+
         #endregion
 
         #region Properties

@@ -339,7 +339,7 @@ namespace ClickQuest.Data
                 var id = int.Parse(parsedObject["ShopOffer"][i]["RecipeId"].ToString());
                 var recipe = Recipes.Where(x => x.Id == id).FirstOrDefault();
 
-                if(recipe is null)
+                if (recipe is null)
                 {
                     // Recipe of id does not exist.
                     errorLog.Add($"Error in LoadShopOffer: Recipe of id {id} does not exist.");
@@ -347,7 +347,7 @@ namespace ClickQuest.Data
 
                 ShopOffer.Add(recipe);
             }
-            
+
             if (errorLog.Count > 0)
             {
                 Logger.Log(errorLog);
@@ -367,7 +367,7 @@ namespace ClickQuest.Data
                 var id = int.Parse(parsedObject["PriestOffer"][i]["BlessingId"].ToString());
                 var blessing = Blessings.Where(x => x.Id == id).FirstOrDefault();
 
-                if(blessing is null)
+                if (blessing is null)
                 {
                     // Blessing of id does not exist.
                     errorLog.Add($"Error in LoadPriestOffer: Blessing of id {id} does not exist.");
@@ -407,7 +407,7 @@ namespace ClickQuest.Data
                 foreach (var BlessingId in jArrayBlessings)
                 {
                     var idAsInt = int.Parse(BlessingId.ToString());
-                    if (Blessings.FirstOrDefault(x=>x.Id==idAsInt) is null)
+                    if (Blessings.FirstOrDefault(x => x.Id == idAsInt) is null)
                     {
                         // Blessing of id Blessing id does not exist.
                         errorLog.Add($"Error in LoadQuests: Blessing of id {idAsInt} does not exist.");
@@ -420,7 +420,7 @@ namespace ClickQuest.Data
                 foreach (var RecipeId in jArrayRecipes)
                 {
                     var idAsInt = int.Parse(RecipeId.ToString());
-                    if (Recipes.FirstOrDefault(x=>x.Id==idAsInt) is null)
+                    if (Recipes.FirstOrDefault(x => x.Id == idAsInt) is null)
                     {
                         // Blessing of id Blessing id does not exist.
                         errorLog.Add($"Error in LoadQuests: Recipe of id {idAsInt} does not exist.");
@@ -433,7 +433,7 @@ namespace ClickQuest.Data
                 foreach (var MaterialId in jArrayMaterials)
                 {
                     var idAsInt = int.Parse(MaterialId.ToString());
-                    if (Materials.FirstOrDefault(x=>x.Id==idAsInt) is null)
+                    if (Materials.FirstOrDefault(x => x.Id == idAsInt) is null)
                     {
                         // Blessing of id Blessing id does not exist.
                         errorLog.Add($"Error in LoadQuests: Material of id {idAsInt} does not exist.");
@@ -446,7 +446,7 @@ namespace ClickQuest.Data
                 foreach (var IngotRarity in jArrayIngots)
                 {
                     var ingotRarityAsInt = int.Parse(IngotRarity.ToString());
-                    if(ingotRarityAsInt < 0 || ingotRarityAsInt > 5)
+                    if (ingotRarityAsInt < 0 || ingotRarityAsInt > 5)
                     {
                         // Ingot of this rarity does not exist.
                         errorLog.Add($"Error in LoadQuests: Ingot of rarity {ingotRarityAsInt} does not exist.");
@@ -562,7 +562,7 @@ namespace ClickQuest.Data
                 {
                     var keyRarity = int.Parse(parsedObject["DungeonGroups"][i]["DungeonKeyRequirementRarities"][j].ToString());
 
-                    if(keyRarity < 0 || keyRarity > 5)
+                    if (keyRarity < 0 || keyRarity > 5)
                     {
                         // Dungeon key of this rarity does not exist.
                         errorLog.Add($"Error in LoadDungeonGroups: Dungeon key of rarity {keyRarity} does not exist.");
@@ -594,7 +594,7 @@ namespace ClickQuest.Data
                 var id = int.Parse(parsedObject["Dungeons"][i]["Id"].ToString());
                 var dungeonGroupId = int.Parse(parsedObject["Dungeons"][i]["DungeonGroupId"].ToString());
 
-                if (DungeonGroups.FirstOrDefault(x=>x.Id==dungeonGroupId) is null)
+                if (DungeonGroups.FirstOrDefault(x => x.Id == dungeonGroupId) is null)
                 {
                     // Dungeon group of this id does not exist.
                     errorLog.Add($"Error in LoadDungeons: Dungeon group of id {dungeonGroupId} does not exist.");
@@ -615,7 +615,7 @@ namespace ClickQuest.Data
                     if (boss is null)
                     {
                         // Boss of that Id does not exist.
-                        errorLog.Add($"Error in LoadDungeons: Boss of id {bossId} does not exist.");                    
+                        errorLog.Add($"Error in LoadDungeons: Boss of id {bossId} does not exist.");
                     }
 
                     bossesTemp.Add(boss);

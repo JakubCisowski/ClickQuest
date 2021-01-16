@@ -255,5 +255,24 @@ namespace ClickQuest.Items
                 Entity.EntityOperations.RemoveBlessing(this);
             }
         }
+
+        public static void ResumeBlessings()
+        {
+            // Resume blessings (if there are any left) - used when user selects a hero.
+            foreach (var blessing in User.Instance.Blessings)
+            {
+                blessing.ChangeBuffStatus(true);
+            }
+        }
+
+        public static void PauseBlessings()
+        {
+            // Pause current blessings and save them to the database - used when user exits the game or returns to main menu page.
+            for (int i = 0; i < User.Instance.Blessings.Count; i++)
+            {
+                User.Instance.Blessings[0].ChangeBuffStatus(false);
+            }
+            Entity.EntityOperations.SaveGame();
+        }
     }
 }

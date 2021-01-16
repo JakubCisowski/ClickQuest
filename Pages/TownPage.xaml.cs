@@ -1,6 +1,7 @@
 using ClickQuest.Account;
 using ClickQuest.Data;
 using ClickQuest.Heroes;
+using ClickQuest.Items;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -64,6 +65,10 @@ namespace ClickQuest.Pages
         private void MainMenuButton_Click(object sender, RoutedEventArgs e)
         {
             (Data.Database.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
+
+            // Pause all blessings.
+            Blessing.PauseBlessings();
+
             (Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["MainMenu"]);
         }
 

@@ -1,4 +1,5 @@
 using ClickQuest.Data;
+using ClickQuest.Items;
 using System;
 using System.Linq;
 using System.Windows;
@@ -69,6 +70,9 @@ namespace ClickQuest.Pages
 
             // Resume quests for the selected hero.
             Account.User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default(DateTime))?.StartQuest();
+
+            // Resume blessings on this account.
+            Blessing.ResumeBlessings();
 
             Data.Database.RefreshPages();
             (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
