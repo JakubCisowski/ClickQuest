@@ -22,8 +22,28 @@
         <Button x:Name="TownButton" Grid.Column="1" Grid.Row="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
 
         <TabControl Grid.Row="1" Grid.Column="1" Width="600" Height="300">
-            <TabItem Header="Melt">
-                <ListView x:Name="ItemsListViewMelt" Width="600">
+            <TabItem Header="Melt Materials">
+                <ListView x:Name="ItemsListViewMeltMaterials" Width="600">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Quantity" Width="60" DisplayMemberBinding="{Binding Quantity}" />
+                            <GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
+                            <GridViewColumn Header="Description" Width="270" DisplayMemberBinding="{Binding Description}" />
+                            <GridViewColumn Header="Value" Width="60" DisplayMemberBinding="{Binding Value}" />
+                            <GridViewColumn Header="Actions" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Melt" Width="100" Click="MeltButton_Click" CommandParameter="{Binding}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Header="Melt Artifacts">
+                <ListView x:Name="ItemsListViewMeltArtifacts" Width="600">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />

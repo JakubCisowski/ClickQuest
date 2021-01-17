@@ -20,10 +20,14 @@ namespace ClickQuest.Pages
         public void UpdateBlacksmith()
         {
             // Refresh list of items.
-            ItemsListViewMelt.ItemsSource = User.Instance.Materials;
+            ItemsListViewMeltMaterials.ItemsSource = User.Instance.Materials;
+            ItemsListViewMeltArtifacts.ItemsSource = User.Instance.Artifacts;
             ItemsListViewCraft.ItemsSource = User.Instance.Recipes;
 
-            ItemsListViewMelt.Items.Refresh();
+            ItemsListViewMeltMaterials.Items.Refresh();
+            ItemsListViewMeltArtifacts.Items.Refresh();
+            ItemsListViewCraft.Items.Refresh();
+
         }
 
         #region Events
@@ -31,37 +35,77 @@ namespace ClickQuest.Pages
         private void MeltButton_Click(object sender, RoutedEventArgs e)
         {
             var b = sender as Button;
-            var material = b.CommandParameter as Material;
 
-            // Remove X materials (for now only 1)
-            Account.User.Instance.RemoveItem(material);
+            if (b.CommandParameter is Material material)
+            {
+                // A material is being melted.
 
-            // Add ingots of that rarity.
-            var ingot = Account.User.Instance.Ingots.Where(x => x.Rarity == material.Rarity).FirstOrDefault();
-            // Calculate ingot bonus based on Melting Specialization.
-            var ingotAmount = 1;
-            var meltingBuff = Account.User.Instance.Specialization.SpecMeltingBuff;
-            while (meltingBuff >= 100)
-            {
-                ingotAmount++;
-                meltingBuff -= 100;
-            }
-            if (meltingBuff > 0)
-            {
-                int num = _rng.Next(1, 101);
-                if (num <= meltingBuff)
+                // Remove the material from inventory.
+                Account.User.Instance.RemoveItem(material);
+
+                // Add ingots of that rarity.
+                var ingot = Account.User.Instance.Ingots.Where(x => x.Rarity == material.Rarity).FirstOrDefault();
+                // Calculate ingot bonus based on Melting Specialization.
+                var ingotAmount = 1;
+
+                var meltingBuff = Account.User.Instance.Specialization.SpecMeltingBuff;
+                while (meltingBuff >= 100)
                 {
                     ingotAmount++;
+                    meltingBuff -= 100;
                 }
+                if (meltingBuff > 0)
+                {
+                    int num = _rng.Next(1, 101);
+                    if (num <= meltingBuff)
+                    {
+                        ingotAmount++;
+                    }
+                }
+                ingot.Quantity += ingotAmount;
+
+                // Update both equipment and blacksmith page.
+                EquipmentWindow.Instance.UpdateEquipment();
+                UpdateBlacksmith();
+
+                // Increase Specialization Melting amount.
+                Account.User.Instance.Specialization.SpecMeltingAmount++;
             }
-            ingot.Quantity += ingotAmount;
+            else if (b.CommandParameter is Artifact artifact)
+            {
+                // An artifact is being melted.
 
-            // Update both equipment and blacksmith page.
-            EquipmentWindow.Instance.UpdateEquipment();
-            UpdateBlacksmith();
+                // Remove the artifact from inventory.
+                Account.User.Instance.RemoveItem(artifact);
 
-            // Increase Specialization Melting amount.
-            Account.User.Instance.Specialization.SpecMeltingAmount++;
+                // Add ingots of that rarity.
+                var ingot = Account.User.Instance.Ingots.Where(x => x.Rarity == artifact.Rarity).FirstOrDefault();
+                // Calculate ingot bonus based on Melting Specialization.
+                var ingotAmount = 100;
+
+                var meltingBuff = Account.User.Instance.Specialization.SpecMeltingBuff;
+                while (meltingBuff >= 100)
+                {
+                    ingotAmount += 100;
+                    meltingBuff -= 100;
+                }
+                if (meltingBuff > 0)
+                {
+                    int num = _rng.Next(1, 101);
+                    if (num <= meltingBuff)
+                    {
+                        ingotAmount += 100;
+                    }
+                }
+                ingot.Quantity += ingotAmount;
+
+                // Update both equipment and blacksmith page.
+                EquipmentWindow.Instance.UpdateEquipment();
+                UpdateBlacksmith();
+
+                // Increase Specialization Melting amount.
+                Account.User.Instance.Specialization.SpecMeltingAmount++;
+            }
         }
 
         private void CraftMaterialButton_Click(object sender, RoutedEventArgs e)
