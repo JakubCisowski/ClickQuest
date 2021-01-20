@@ -7,5 +7,13 @@
 			 ShutdownMode="OnMainWindowClose"
              >
     <Application.Resources>
+        <Style x:Key="CustomFont" TargetType="FrameworkElement">
+            <Setter Property="TextElement.FontFamily" Value="/Resources/Fonts/#Hero"/>
+        </Style>
+
+        <Style TargetType="Button" BasedOn="{StaticResource CustomFont}"></Style>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource CustomFont}"></Style>
+        <Style TargetType="ListView" BasedOn="{StaticResource CustomFont}"></Style>
+
     </Application.Resources>
 </Application>

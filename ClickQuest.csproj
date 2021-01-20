@@ -59,4 +59,8 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Resource Include="Resources\Fonts\Hero.otf" />
+  </ItemGroup>
+
 </Project>
