@@ -60,7 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Fonts\Hero.otf" />
+    <Resource Include="Resources\Fonts\GothamBook.ttf" />
   </ItemGroup>
 
 </Project>

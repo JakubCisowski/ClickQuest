@@ -7,13 +7,37 @@
 			 ShutdownMode="OnMainWindowClose"
              >
     <Application.Resources>
-        <Style x:Key="CustomFont" TargetType="FrameworkElement">
-            <Setter Property="TextElement.FontFamily" Value="/Resources/Fonts/#Hero"/>
+
+        <!-- Fonts -->
+        <Style x:Key="GameFontRegular" TargetType="FrameworkElement">
+            <Setter Property="TextElement.FontFamily" Value="/Resources/Fonts/#GothamBook"/>
+            <Setter Property="TextElement.FontSize" Value="16"/>
         </Style>
 
-        <Style TargetType="Button" BasedOn="{StaticResource CustomFont}"></Style>
-        <Style TargetType="TextBlock" BasedOn="{StaticResource CustomFont}"></Style>
-        <Style TargetType="ListView" BasedOn="{StaticResource CustomFont}"></Style>
+        <!-- Colours -->
+        <SolidColorBrush  x:Key="GameBackgroundRegular" Color="#EDF9FD"/>
+        <SolidColorBrush  x:Key="GameBackgroundSecondary" Color="#CFEFF8"/>
+        <SolidColorBrush  x:Key="GameBackgroundAdditional" Color="#7F5539"/>
+
+        <!-- Custom default styles -->
+        <Style TargetType="Button" BasedOn="{StaticResource GameFontRegular}">
+            <Setter Property="Background" Value="{StaticResource GameBackgroundSecondary}"/>
+        </Style>
+
+        <Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}"></Style>
+        <Style TargetType="ListView" BasedOn="{StaticResource GameFontRegular}"></Style>
+
+        <Style TargetType="Window" BasedOn="{StaticResource GameFontRegular}">
+            <Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+        </Style>
+
+        <Style TargetType="Frame" BasedOn="{StaticResource GameFontRegular}">
+            <Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+        </Style>
+
+        <Style TargetType="Page" BasedOn="{StaticResource GameFontRegular}">
+            <Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+        </Style>
 
     </Application.Resources>
 </Application>
