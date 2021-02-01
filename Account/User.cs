@@ -8,326 +8,326 @@ using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Account
 {
-    public partial class User : INotifyPropertyChanged
-    {
-        #region INotifyPropertyChanged
+	public partial class User : INotifyPropertyChanged
+	{
+		#region INotifyPropertyChanged
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
-        #endregion INotifyPropertyChanged
+		#endregion INotifyPropertyChanged
 
-        #region Singleton
+		#region Singleton
 
-        private static User _instance;
+		private static User _instance;
 
-        public static User Instance
-        {
-            get
-            {
-                if (_instance is null)
-                {
-                    _instance = new User();
-                }
-                return _instance;
-            }
-            set
-            {
-                _instance = value;
-                _instance.OnPropertyChanged();
-            }
-        }
+		public static User Instance
+		{
+			get
+			{
+				if (_instance is null)
+				{
+					_instance = new User();
+				}
+				return _instance;
+			}
+			set
+			{
+				_instance = value;
+				_instance.OnPropertyChanged();
+			}
+		}
 
-        #endregion Singleton
+		#endregion Singleton
 
-        #region Private Fields
+		#region Private Fields
 
-        private List<Hero> _heroes;
-        private Hero _currentHero;
-        private List<Material> _materials;
-        private List<Recipe> _recipes;
-        private List<Artifact> _artifacts;
-        private List<Ingot> _ingots;
-        private List<Blessing> _blessings;
-        private List<DungeonKey> _dungeonKeys;
-        private int _gold;
-        private Specialization _specialization;
+		private List<Hero> _heroes;
+		private Hero _currentHero;
+		private List<Material> _materials;
+		private List<Recipe> _recipes;
+		private List<Artifact> _artifacts;
+		private List<Ingot> _ingots;
+		private List<Blessing> _blessings;
+		private List<DungeonKey> _dungeonKeys;
+		private int _gold;
+		private Specialization _specialization;
 
-        #endregion Private Fields
+		#endregion Private Fields
 
-        #region Properties
+		#region Properties
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int Id { get; set; }
 
-        public List<Hero> Heroes
-        {
-            get
-            {
-                return _heroes;
-            }
-            set
-            {
-                _heroes = value;
-                OnPropertyChanged();
-            }
-        }
+		public List<Hero> Heroes
+		{
+			get
+			{
+				return _heroes;
+			}
+			set
+			{
+				_heroes = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public List<Material> Materials
-        {
-            get
-            {
-                return _materials;
-            }
-            set
-            {
-                _materials = value;
-                OnPropertyChanged();
-            }
-        }
+		public List<Material> Materials
+		{
+			get
+			{
+				return _materials;
+			}
+			set
+			{
+				_materials = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public List<Recipe> Recipes
-        {
-            get
-            {
-                return _recipes;
-            }
-            set
-            {
-                _recipes = value;
-                OnPropertyChanged();
-            }
-        }
+		public List<Recipe> Recipes
+		{
+			get
+			{
+				return _recipes;
+			}
+			set
+			{
+				_recipes = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public List<Artifact> Artifacts
-        {
-            get
-            {
-                return _artifacts;
-            }
-            set
-            {
-                _artifacts = value;
-                OnPropertyChanged();
-            }
-        }
+		public List<Artifact> Artifacts
+		{
+			get
+			{
+				return _artifacts;
+			}
+			set
+			{
+				_artifacts = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public List<Ingot> Ingots
-        {
-            get
-            {
-                return _ingots;
-            }
-            set
-            {
-                _ingots = value;
-                OnPropertyChanged();
-            }
-        }
+		public List<Ingot> Ingots
+		{
+			get
+			{
+				return _ingots;
+			}
+			set
+			{
+				_ingots = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public List<Blessing> Blessings
-        {
-            get
-            {
-                return _blessings;
-            }
-            set
-            {
-                _blessings = value;
-                OnPropertyChanged();
-            }
-        }
+		public List<Blessing> Blessings
+		{
+			get
+			{
+				return _blessings;
+			}
+			set
+			{
+				_blessings = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public List<DungeonKey> DungeonKeys
-        {
-            get
-            {
-                return _dungeonKeys;
-            }
-            set
-            {
-                _dungeonKeys = value;
-                OnPropertyChanged();
-            }
-        }
+		public List<DungeonKey> DungeonKeys
+		{
+			get
+			{
+				return _dungeonKeys;
+			}
+			set
+			{
+				_dungeonKeys = value;
+				OnPropertyChanged();
+			}
+		}
 
-        [NotMapped]
-        public Hero CurrentHero
-        {
-            get
-            {
-                return _currentHero;
-            }
-            set
-            {
-                _currentHero = value;
-                OnPropertyChanged();
-            }
-        }
+		[NotMapped]
+		public Hero CurrentHero
+		{
+			get
+			{
+				return _currentHero;
+			}
+			set
+			{
+				_currentHero = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public int Gold
-        {
-            get
-            {
-                return _gold;
-            }
-            set
-            {
-                _gold = value;
-                OnPropertyChanged();
-            }
-        }
+		public int Gold
+		{
+			get
+			{
+				return _gold;
+			}
+			set
+			{
+				_gold = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public Specialization Specialization
-        {
-            get
-            {
-                return _specialization;
-            }
-            set
-            {
-                _specialization = value;
-                OnPropertyChanged();
-            }
-        }
+		public Specialization Specialization
+		{
+			get
+			{
+				return _specialization;
+			}
+			set
+			{
+				_specialization = value;
+				OnPropertyChanged();
+			}
+		}
 
-        #endregion Properties
+		#endregion Properties
 
-        public User()
-        {
-            Heroes = new List<Hero>();
-            Materials = new List<Material>();
-            Recipes = new List<Recipe>();
-            Artifacts = new List<Artifact>();
-            Ingots = new List<Ingot>();
-            Blessings = new List<Blessing>();
-            DungeonKeys = new List<DungeonKey>();
+		public User()
+		{
+			Heroes = new List<Hero>();
+			Materials = new List<Material>();
+			Recipes = new List<Recipe>();
+			Artifacts = new List<Artifact>();
+			Ingots = new List<Ingot>();
+			Blessings = new List<Blessing>();
+			DungeonKeys = new List<DungeonKey>();
 
-            _specialization = Specialization.Instance;
-        }
+			_specialization = Specialization.Instance;
+		}
 
-        public void AddItem(Item itemToAdd)
-        {
-            var type = itemToAdd.GetType();
+		public void AddItem(Item itemToAdd)
+		{
+			var type = itemToAdd.GetType();
 
-            if (type == typeof(Recipe))
-            {
-                // Add to Recipes.
+			if (type == typeof(Recipe))
+			{
+				// Add to Recipes.
 
-                foreach (var item in Recipes)
-                {
-                    if (item.Id == itemToAdd.Id)
-                    {
-                        item.Quantity++;
-                        return;
-                    }
-                }
+				foreach (var item in Recipes)
+				{
+					if (item.Id == itemToAdd.Id)
+					{
+						item.Quantity++;
+						return;
+					}
+				}
 
-                // If user doesn't have this item, add it.
-                Recipes.Add(itemToAdd as Recipe);
-                itemToAdd.Quantity++;
-            }
-            else if (type == typeof(Artifact))
-            {
-                // Add to Artifacts.
+				// If user doesn't have this item, add it.
+				Recipes.Add(itemToAdd as Recipe);
+				itemToAdd.Quantity++;
+			}
+			else if (type == typeof(Artifact))
+			{
+				// Add to Artifacts.
 
-                foreach (var item in Artifacts)
-                {
-                    if (item.Id == itemToAdd.Id)
-                    {
-                        item.Quantity++;
-                        return;
-                    }
-                }
+				foreach (var item in Artifacts)
+				{
+					if (item.Id == itemToAdd.Id)
+					{
+						item.Quantity++;
+						return;
+					}
+				}
 
-                // If user doesn't have this item, add it.
-                Artifacts.Add(itemToAdd as Artifact);
-                itemToAdd.Quantity++;
-            }
-            else if (type == typeof(Material))
-            {
-                // Add to Materials.
+				// If user doesn't have this item, add it.
+				Artifacts.Add(itemToAdd as Artifact);
+				itemToAdd.Quantity++;
+			}
+			else if (type == typeof(Material))
+			{
+				// Add to Materials.
 
-                foreach (var item in Materials)
-                {
-                    if (item.Id == itemToAdd.Id)
-                    {
-                        item.Quantity++;
-                        return;
-                    }
-                }
+				foreach (var item in Materials)
+				{
+					if (item.Id == itemToAdd.Id)
+					{
+						item.Quantity++;
+						return;
+					}
+				}
 
-                // If user doesn't have this item, add it.
-                Materials.Add(itemToAdd as Material);
-                itemToAdd.Quantity++;
-            }
-        }
+				// If user doesn't have this item, add it.
+				Materials.Add(itemToAdd as Material);
+				itemToAdd.Quantity++;
+			}
+		}
 
-        public void RemoveItem(Item itemToRemove)
-        {
-            var type = itemToRemove.GetType();
+		public void RemoveItem(Item itemToRemove)
+		{
+			var type = itemToRemove.GetType();
 
-            if (type == typeof(Recipe))
-            {
-                // Revmove from Recipes.
+			if (type == typeof(Recipe))
+			{
+				// Revmove from Recipes.
 
-                foreach (var item in Recipes)
-                {
-                    if (item.Id == itemToRemove.Id)
-                    {
-                        item.Quantity--;
-                        if (item.Quantity <= 0)
-                        {
-                            // Remove item from database.
-                            Entity.EntityOperations.RemoveItem(item);
-                        }
-                        return;
-                    }
-                }
-            }
-            else if (type == typeof(Artifact))
-            {
-                // Revmove from Artifacts.
+				foreach (var item in Recipes)
+				{
+					if (item.Id == itemToRemove.Id)
+					{
+						item.Quantity--;
+						if (item.Quantity <= 0)
+						{
+							// Remove item from database.
+							Entity.EntityOperations.RemoveItem(item);
+						}
+						return;
+					}
+				}
+			}
+			else if (type == typeof(Artifact))
+			{
+				// Revmove from Artifacts.
 
-                foreach (var item in Artifacts)
-                {
-                    if (item.Id == itemToRemove.Id)
-                    {
-                        item.Quantity--;
-                        if (item.Quantity <= 0)
-                        {
-                            // Remove item from database.
-                            Entity.EntityOperations.RemoveItem(item);
-                        }
-                        return;
-                    }
-                }
-            }
-            else if (type == typeof(Material))
-            {
-                // Revmove from Materials.
+				foreach (var item in Artifacts)
+				{
+					if (item.Id == itemToRemove.Id)
+					{
+						item.Quantity--;
+						if (item.Quantity <= 0)
+						{
+							// Remove item from database.
+							Entity.EntityOperations.RemoveItem(item);
+						}
+						return;
+					}
+				}
+			}
+			else if (type == typeof(Material))
+			{
+				// Revmove from Materials.
 
-                foreach (var item in Materials)
-                {
-                    if (item.Id == itemToRemove.Id)
-                    {
-                        item.Quantity--;
-                        if (item.Quantity <= 0)
-                        {
-                            // Remove item from database.
-                            Entity.EntityOperations.RemoveItem(item);
-                        }
-                        return;
-                    }
-                }
-            }
+				foreach (var item in Materials)
+				{
+					if (item.Id == itemToRemove.Id)
+					{
+						item.Quantity--;
+						if (item.Quantity <= 0)
+						{
+							// Remove item from database.
+							Entity.EntityOperations.RemoveItem(item);
+						}
+						return;
+					}
+				}
+			}
 
-            // If user doesn't have this item, don't do anything (check Item.Quantity).
-        }
-    }
+			// If user doesn't have this item, don't do anything (check Item.Quantity).
+		}
+	}
 }
