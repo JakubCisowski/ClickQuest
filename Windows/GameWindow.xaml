@@ -6,6 +6,15 @@
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d"
         Title="GameWindow" Height="768" Width="1366"
-        ResizeMode="NoResize">
-    <Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden"/> 
+        ResizeMode="NoResize" WindowStyle="None">
+
+    <StackPanel>
+        <Grid>
+            <Rectangle x:Name="DragableTop" Height="25" Fill="White" MouseDown="DragableTop_MouseDown"/>
+
+            <Button x:Name="ExitButton" Width="45" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Exit" Click="ExitButton_Click"/>
+        </Grid>
+
+        <Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden"/> 
+    </StackPanel>
 </Window>

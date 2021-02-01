@@ -2,6 +2,7 @@
 using ClickQuest.Pages;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 
 namespace ClickQuest
 {
@@ -23,8 +24,21 @@ namespace ClickQuest
 			Blessing.PauseBlessings();
 
 			Entity.EntityOperations.SaveGame();
-
+			
 			base.OnClosing(e);
+		}
+		
+		private void DragableTop_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			if (e.ChangedButton == MouseButton.Left)
+			{
+				this.DragMove();
+			}
+		}
+
+		private void ExitButton_Click(object sender, RoutedEventArgs e)
+		{
+			Application.Current.Shutdown();
 		}
 
 		#endregion
