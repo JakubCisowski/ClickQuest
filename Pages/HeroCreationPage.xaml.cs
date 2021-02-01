@@ -36,11 +36,12 @@ namespace ClickQuest.Pages
 				// Create hero based on user inputs and select it.
 				var hero = new Hero((HeroClass)Enum.Parse(typeof(HeroClass), HeroClassBox.SelectedValue.ToString()), HeroNameBox.Text);
 				User.Instance.Heroes.Add(hero);
-				User.Instance.CurrentHero = hero;
 
 				// Reload the database.
 				Entity.EntityOperations.SaveGame();
 				Entity.EntityOperations.LoadGame();
+
+				User.Instance.CurrentHero = hero;
 
 				// Refresh bindings.
 				Data.Database.RefreshPages();
