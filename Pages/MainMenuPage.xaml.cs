@@ -4,6 +4,8 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace ClickQuest.Pages
 {
@@ -21,13 +23,13 @@ namespace ClickQuest.Pages
             // If max hero limit is reached, disable create hero button.
             if(Account.User.Instance.Heroes.Count==6)
             {
-                CreateHeroButton.IsEnabled=false;
                 CreateHeroButton.Content = "Can't create new hero \nMax heroes reached!";
+                CreateHeroButton.Background=Application.Current.Resources["ButtonDisabledBackground"] as SolidColorBrush;
             }
             else
             {
-                CreateHeroButton.IsEnabled=true;
                 CreateHeroButton.Content="Create a new hero!";
+                CreateHeroButton.Background=Application.Current.Resources["GameBackgroundSecondary"] as SolidColorBrush;
             }
 
             // Remove all stackpanels from the grid.
@@ -42,6 +44,7 @@ namespace ClickQuest.Pages
             // For each hero:
             for (int i = 0; i < Account.User.Instance.Heroes.Count; i++)
             {
+                var hero = Account.User.Instance.Heroes[i];
                 // Create stack panel with both select and delete hero buttons.
                 var panel = new StackPanel();
                 panel.Orientation = Orientation.Horizontal;
@@ -51,17 +54,28 @@ namespace ClickQuest.Pages
                 // Generate 'select hero' button.
                 var selectHeroButton = new Button()
                 {
-                    Name = "Hero" + Account.User.Instance.Heroes[i].Id,
-                    Content = Account.User.Instance.Heroes[i].Name + ", " + Account.User.Instance.Heroes[i].ThisHeroClass.ToString() + " [" + Account.User.Instance.Heroes[i].Level + " lvl]",
+                    Name = "Hero" + hero.Id,
                     Width = 250,
                     Height = 50,
                     Margin = new Thickness(5)
                 };
 
+                // Generate 'select hero' button content.
+                var block = new TextBlock();
+                block.TextAlignment=TextAlignment.Center;
+
+                var bold = new Bold(new Run(hero.Name));
+                block.Inlines.Add(bold);
+
+                var normal = new Run($"\n{hero.Level} lvl | {hero.HeroClass}");
+                block.Inlines.Add(normal);
+
+                selectHeroButton.Content=block;
+
                 // Generate 'delete hero' button.
                 var deleteHeroButton = new Button()
                 {
-                    Name = "DeleteHero" + Account.User.Instance.Heroes[i].Id,
+                    Name = "DeleteHero" + hero.Id,
                     Content = "Delete hero",
                     Width = 150,
                     Height = 50,
@@ -97,7 +111,11 @@ namespace ClickQuest.Pages
 
         private void CreateHeroButton_Click(object sender, RoutedEventArgs e)
         {
-            (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["HeroCreation"]);
+            // If the limit is not reached, move to hero creation page.
+            if(Account.User.Instance.Heroes.Count < 6)
+            {
+                (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["HeroCreation"]);
+            }
         }
 
         private void SelectHeroButton_Click(object sender, RoutedEventArgs e)

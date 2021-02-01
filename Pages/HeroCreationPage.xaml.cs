@@ -24,8 +24,8 @@ namespace ClickQuest.Pages
 			// Check if hero name is chosen.
 			if (!string.IsNullOrEmpty(HeroNameBox.Text))
 			{
-				// Validate name - it can contain only letters and digits, and can be up to X characters long.
-				bool isValid = HeroNameBox.Text.All(x => Char.IsLetterOrDigit(x));
+				// Validate name - it can contain only letters and digits, and can be up to 15 characters long.
+				bool isValid = HeroNameBox.Text.All(x => Char.IsLetterOrDigit(x)) && HeroNameBox.Text.Length <= 15;
 
 				if (!isValid)
 				{

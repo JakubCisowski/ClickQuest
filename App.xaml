@@ -19,6 +19,10 @@
         <SolidColorBrush  x:Key="GameBackgroundSecondary" Color="#CFEFF8"/>
         <SolidColorBrush  x:Key="GameBackgroundAdditional" Color="#7F5539"/>
 
+        <SolidColorBrush  x:Key="ButtonDisabledBackground" Color="#CFCFCF"/>
+
+        <SolidColorBrush  x:Key="ButtonDangerBackground" Color="#CFCFCF"/>
+
         <!-- Custom default styles -->
         <Style TargetType="Button" BasedOn="{StaticResource GameFontRegular}">
             <Setter Property="Background" Value="{StaticResource GameBackgroundSecondary}"/>
