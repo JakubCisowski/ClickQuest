@@ -9,153 +9,154 @@ using System.Windows.Media;
 
 namespace ClickQuest.Pages
 {
-    public partial class MainMenuPage : Page
-    {
-        public MainMenuPage()
-        {
-            InitializeComponent();
-            GenerateHeroButtons();
-        }
+	public partial class MainMenuPage : Page
+	{
+		public MainMenuPage()
+		{
+			InitializeComponent();
+			GenerateHeroButtons();
+		}
 
-        public void GenerateHeroButtons()
-        {
+		public void GenerateHeroButtons()
+		{
 
-            // If max hero limit is reached, disable create hero button.
-            if(Account.User.Instance.Heroes.Count==6)
-            {
-                CreateHeroButton.Content = "Can't create new hero \nMax heroes reached!";
-                CreateHeroButton.Background=Application.Current.Resources["ButtonDisabledBackground"] as SolidColorBrush;
-            }
-            else
-            {
-                CreateHeroButton.Content="Create a new hero!";
-                CreateHeroButton.Background=Application.Current.Resources["GameBackgroundSecondary"] as SolidColorBrush;
-            }
+			// If max hero limit is reached, disable create hero button.
+			if (Account.User.Instance.Heroes.Count == 6)
+			{
+				CreateHeroButton.Content = "Can't create new hero \nMax heroes reached!";
+				CreateHeroButton.Background = Application.Current.Resources["ButtonDisabledBackground"] as SolidColorBrush;
+			}
+			else
+			{
+				CreateHeroButton.Content = "Create a new hero!";
+				CreateHeroButton.Background = Application.Current.Resources["GameBackgroundSecondary"] as SolidColorBrush;
+			}
 
-            // Remove all stackpanels from the grid.
-            for (int i=0;i<ButtonsGrid.Children.Count;i++)
-            {
-                if (ButtonsGrid.Children[i] is StackPanel stack)
-                {
-                    ButtonsGrid.Children.Remove(stack);
-                }
-            }
-            
-            // For each hero:
-            for (int i = 0; i < Account.User.Instance.Heroes.Count; i++)
-            {
-                var hero = Account.User.Instance.Heroes[i];
-                // Create stack panel with both select and delete hero buttons.
-                var panel = new StackPanel();
-                panel.Orientation = Orientation.Horizontal;
-                panel.HorizontalAlignment=HorizontalAlignment.Center;
-                panel.VerticalAlignment=VerticalAlignment.Center;
+			// Remove all stackpanels from the grid.
+			for (int i = 0; i < ButtonsGrid.Children.Count; i++)
+			{
+				if (ButtonsGrid.Children[i] is StackPanel stack)
+				{
+					ButtonsGrid.Children.Remove(stack);
+					i--;
+				}
+			}
 
-                // Generate 'select hero' button.
-                var selectHeroButton = new Button()
-                {
-                    Name = "Hero" + hero.Id,
-                    Width = 250,
-                    Height = 50,
-                    Margin = new Thickness(5)
-                };
+			// For each hero:
+			for (int i = 0; i < Account.User.Instance.Heroes.Count; i++)
+			{
+				var hero = Account.User.Instance.Heroes[i];
+				// Create stack panel with both select and delete hero buttons.
+				var panel = new StackPanel();
+				panel.Orientation = Orientation.Horizontal;
+				panel.HorizontalAlignment = HorizontalAlignment.Center;
+				panel.VerticalAlignment = VerticalAlignment.Center;
 
-                // Generate 'select hero' button content.
-                var block = new TextBlock();
-                block.TextAlignment=TextAlignment.Center;
+				// Generate 'select hero' button.
+				var selectHeroButton = new Button()
+				{
+					Name = "Hero" + hero.Id,
+					Width = 250,
+					Height = 50,
+					Margin = new Thickness(5)
+				};
 
-                var bold = new Bold(new Run(hero.Name));
-                block.Inlines.Add(bold);
+				// Generate 'select hero' button content.
+				var block = new TextBlock();
+				block.TextAlignment = TextAlignment.Center;
 
-                var normal = new Run($"\n{hero.Level} lvl | {hero.HeroClass}");
-                block.Inlines.Add(normal);
+				var bold = new Bold(new Run(hero.Name));
+				block.Inlines.Add(bold);
 
-                selectHeroButton.Content=block;
+				var normal = new Run($"\n{hero.Level} lvl | {hero.HeroClass}");
+				block.Inlines.Add(normal);
 
-                // Generate 'delete hero' button.
-                var deleteHeroButton = new Button()
-                {
-                    Name = "DeleteHero" + hero.Id,
-                    Content = "Delete hero",
-                    Width = 150,
-                    Height = 50,
-                    Margin = new Thickness(5)
-                };
+				selectHeroButton.Content = block;
 
-                // Assign click events to them.
-                selectHeroButton.Click += SelectHeroButton_Click;
-                deleteHeroButton.Click += DeleteHeroButton_Click;
+				// Generate 'delete hero' button.
+				var deleteHeroButton = new Button()
+				{
+					Name = "DeleteHero" + hero.Id,
+					Content = "Delete hero",
+					Width = 150,
+					Height = 50,
+					Margin = new Thickness(5)
+				};
 
-                panel.Children.Add(selectHeroButton);
-                panel.Children.Add(deleteHeroButton);
+				// Assign click events to them.
+				selectHeroButton.Click += SelectHeroButton_Click;
+				deleteHeroButton.Click += DeleteHeroButton_Click;
 
-                // Add them to the button grid in main menu page.
-                // If there is only one hero, center its buttons.
-                if (Account.User.Instance.Heroes.Count < 4)
-                {
-                    ButtonsGrid.Children.Add(panel);
-                    Grid.SetRow(panel, i + 1);
-                    Grid.SetColumnSpan(panel, 2);
-                }
-                // Else, create two columns.
-                else
-                {
-                    ButtonsGrid.Children.Add(panel);
-                    Grid.SetRow(panel, (i % 3) + 1);
-                    Grid.SetColumn(panel, i / 3);
-                }
-            }
-        }
+				panel.Children.Add(selectHeroButton);
+				panel.Children.Add(deleteHeroButton);
 
-        #region Events
+				// Add them to the button grid in main menu page.
+				// If there is only one hero, center its buttons.
+				if (Account.User.Instance.Heroes.Count < 4)
+				{
+					ButtonsGrid.Children.Add(panel);
+					Grid.SetRow(panel, i + 1);
+					Grid.SetColumnSpan(panel, 2);
+				}
+				// Else, create two columns.
+				else
+				{
+					ButtonsGrid.Children.Add(panel);
+					Grid.SetRow(panel, (i % 3) + 1);
+					Grid.SetColumn(panel, i / 3);
+				}
+			}
+		}
 
-        private void CreateHeroButton_Click(object sender, RoutedEventArgs e)
-        {
-            // If the limit is not reached, move to hero creation page.
-            if(Account.User.Instance.Heroes.Count < 6)
-            {
-                (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["HeroCreation"]);
-            }
-        }
+		#region Events
 
-        private void SelectHeroButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Select this hero as current hero and navigate to town.
-            var id = int.Parse((sender as Button).Name.Substring(4));
-            var hero = Account.User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
-            Account.User.Instance.CurrentHero = hero;
-            // Refresh hero stats panel info.
-            hero.ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(hero);
+		private void CreateHeroButton_Click(object sender, RoutedEventArgs e)
+		{
+			// If the limit is not reached, move to hero creation page.
+			if (Account.User.Instance.Heroes.Count < 6)
+			{
+				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["HeroCreation"]);
+			}
+		}
 
-            // Resume quests for the selected hero.
-            Account.User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default(DateTime))?.StartQuest();
+		private void SelectHeroButton_Click(object sender, RoutedEventArgs e)
+		{
+			// Select this hero as current hero and navigate to town.
+			var id = int.Parse((sender as Button).Name.Substring(4));
+			var hero = Account.User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
+			Account.User.Instance.CurrentHero = hero;
+			// Refresh hero stats panel info.
+			hero.ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(hero);
 
-            // Resume blessings on this account.
-            Blessing.ResumeBlessings();
+			// Resume quests for the selected hero.
+			Account.User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default(DateTime))?.StartQuest();
 
-            Data.Database.RefreshPages();
-            (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
-        }
+			// Resume blessings on this account.
+			Blessing.ResumeBlessings();
 
-        private void DeleteHeroButton_Click(object sender, RoutedEventArgs e)
-        {
-            var id = int.Parse((sender as Button).Name.Substring(10));
-            var hero = Account.User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
+			Data.Database.RefreshPages();
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
+		}
 
-            // Remove the hero from User and Database.
-            Account.User.Instance.Heroes.Remove(hero);
-            Entity.EntityOperations.RemoveHero(hero);
+		private void DeleteHeroButton_Click(object sender, RoutedEventArgs e)
+		{
+			var id = int.Parse((sender as Button).Name.Substring(10));
+			var hero = Account.User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
 
-            GenerateHeroButtons();
-        }
+			// Remove the hero from User and Database.
+			Account.User.Instance.Heroes.Remove(hero);
+			Entity.EntityOperations.RemoveHero(hero);
 
-        private void ResetProgressButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Reset all progress - only account isn't removed.
-            Entity.EntityOperations.ResetProgress();
-            GenerateHeroButtons();
-        }
+			GenerateHeroButtons();
+		}
 
-        #endregion Events
-    }
+		private void ResetProgressButton_Click(object sender, RoutedEventArgs e)
+		{
+			// Reset all progress - only account isn't removed.
+			Entity.EntityOperations.ResetProgress();
+			GenerateHeroButtons();
+		}
+
+		#endregion Events
+	}
 }

@@ -38,6 +38,10 @@ namespace ClickQuest.Pages
 				User.Instance.Heroes.Add(hero);
 				User.Instance.CurrentHero = hero;
 
+				// Reload the database.
+				Entity.EntityOperations.SaveGame();
+				Entity.EntityOperations.LoadGame();
+
 				// Refresh bindings.
 				Data.Database.RefreshPages();
 
