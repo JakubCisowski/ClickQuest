@@ -17,11 +17,24 @@ namespace ClickQuest.Pages
 
         public void GenerateHeroButtons()
         {
-            HeroesPanel.Children.Clear();
+            // Remove all stackpanels from the grid.
+            for (int i=0;i<ButtonsGrid.Children.Count;i++)
+            {
+                if (ButtonsGrid.Children[i] is StackPanel stack)
+                {
+                    ButtonsGrid.Children.Remove(stack);
+                }
+            }
 
             // For each hero:
             for (int i = 0; i < Account.User.Instance.Heroes.Count; i++)
             {
+                // Create stack panel with both select and delete hero buttons.
+                var panel = new StackPanel();
+                panel.Orientation = Orientation.Horizontal;
+                panel.HorizontalAlignment=HorizontalAlignment.Center;
+                panel.VerticalAlignment=VerticalAlignment.Center;
+
                 // Generate 'select hero' button.
                 var selectHeroButton = new Button()
                 {
@@ -36,7 +49,7 @@ namespace ClickQuest.Pages
                 var deleteHeroButton = new Button()
                 {
                     Name = "DeleteHero" + Account.User.Instance.Heroes[i].Id,
-                    Content = "Delete " + Account.User.Instance.Heroes[i].Name + ", " + Account.User.Instance.Heroes[i].ThisHeroClass.ToString() + " [" + Account.User.Instance.Heroes[i].Level + " lvl]",
+                    Content = "Delete hero",
                     Width = 150,
                     Height = 50,
                     Margin = new Thickness(5)
@@ -46,9 +59,24 @@ namespace ClickQuest.Pages
                 selectHeroButton.Click += SelectHeroButton_Click;
                 deleteHeroButton.Click += DeleteHeroButton_Click;
 
-                // Add them to the  heroes panel in main menu page.
-                HeroesPanel.Children.Add(selectHeroButton);
-                HeroesPanel.Children.Add(deleteHeroButton);
+                panel.Children.Add(selectHeroButton);
+                panel.Children.Add(deleteHeroButton);
+
+                // Add them to the button grid in main menu page.
+                // If there is only one hero, center its buttons.
+                if (Account.User.Instance.Heroes.Count < 4)
+                {
+                    ButtonsGrid.Children.Add(panel);
+                    Grid.SetRow(panel, i + 1);
+                    Grid.SetColumnSpan(panel, 2);
+                }
+                // Else, create two columns.
+                else
+                {
+                    ButtonsGrid.Children.Add(panel);
+                    Grid.SetRow(panel, (i % 3) + 1);
+                    Grid.SetColumn(panel, i / 3);
+                }
             }
         }
 
