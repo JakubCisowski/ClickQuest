@@ -17,6 +17,19 @@ namespace ClickQuest.Pages
 
         public void GenerateHeroButtons()
         {
+
+            // If max hero limit is reached, disable create hero button.
+            if(Account.User.Instance.Heroes.Count==6)
+            {
+                CreateHeroButton.IsEnabled=false;
+                CreateHeroButton.Content = "Can't create new hero \nMax heroes reached!";
+            }
+            else
+            {
+                CreateHeroButton.IsEnabled=true;
+                CreateHeroButton.Content="Create a new hero!";
+            }
+
             // Remove all stackpanels from the grid.
             for (int i=0;i<ButtonsGrid.Children.Count;i++)
             {
@@ -25,7 +38,7 @@ namespace ClickQuest.Pages
                     ButtonsGrid.Children.Remove(stack);
                 }
             }
-
+            
             // For each hero:
             for (int i = 0; i < Account.User.Instance.Heroes.Count; i++)
             {
