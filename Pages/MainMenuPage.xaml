@@ -5,17 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d" Title="Main Menu"
-        Height="768" Width="1024">
+        Width="1024" Height="768" >
   <Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<StackPanel x:Name="HeroesPanel" Orientation="Vertical" Grid.Column="0" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+			<RowDefinition Height="4*"/>
+			<RowDefinition Height="5*"/>
+		</Grid.RowDefinitions>
+
+            <!-- Game logo -->
+            <Image Grid.Row="0" Grid.ColumnSpan="2" Height="350" Width="560" Source="/Resources/Images/logo.png"/>
+
+            <!-- Heroes panel -->
+		<StackPanel x:Name="HeroesPanel" Orientation="Vertical" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
 		</StackPanel>
 
-            <StackPanel x:Name="ActionsPanel" Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center">
+            <!-- Actions panel -->
+            <StackPanel x:Name="ActionsPanel" Orientation="Vertical" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
 		      <Button x:Name="CreateHeroButton" Width="250" Height="50" Margin="5" Content="Create a new hero!" Click="CreateHeroButton_Click"/>
                   <Button x:Name="ResetProgressButton"  Width="250" Height="50" Margin="5" Content="Reset all your progress" Click="ResetProgressButton_Click"/>
             </StackPanel>

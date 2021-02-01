@@ -61,6 +61,7 @@
 
   <ItemGroup>
     <Resource Include="Resources\Fonts\GothamBook.ttf" />
+    <Resource Include="Resources\Images\logo.png" />
   </ItemGroup>
 
 </Project>
