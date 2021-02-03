@@ -1,11 +1,13 @@
 using ClickQuest.Data;
 using ClickQuest.Items;
+using ClickQuest.Controls;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.Pages
 {
@@ -19,17 +21,22 @@ namespace ClickQuest.Pages
 
 		public void GenerateHeroButtons()
 		{
-
 			// If max hero limit is reached, disable create hero button.
 			if (Account.User.Instance.Heroes.Count == 6)
 			{
-				CreateHeroButton.Content = "Can't create new hero \nMax heroes reached!";
-				CreateHeroButton.Background = Application.Current.Resources["ButtonDisabledBackground"] as SolidColorBrush;
+				var block = new TextBlock();
+				block.TextAlignment = TextAlignment.Center;
+
+				var italic = new Italic(new Run("Can't create new hero\nMax heroes reached!"));
+				block.Inlines.Add(italic);
+
+				CreateHeroButton.Content = block;
+				CreateHeroButton.Style = this.FindResource("ButtonStyleDisabled") as Style;
 			}
 			else
 			{
 				CreateHeroButton.Content = "Create a new hero!";
-				CreateHeroButton.Background = Application.Current.Resources["GameBackgroundSecondary"] as SolidColorBrush;
+				CreateHeroButton.Style = this.FindResource("ButtonStyleGeneral") as Style;
 			}
 
 			// Remove all stackpanels from the grid.
@@ -77,11 +84,21 @@ namespace ClickQuest.Pages
 				var deleteHeroButton = new Button()
 				{
 					Name = "DeleteHero" + hero.Id,
-					Content = "Delete hero",
-					Width = 150,
+					Width = 50,
 					Height = 50,
 					Margin = new Thickness(5)
 				};
+
+				var icon = new PackIcon();
+				icon.Width=30;
+				icon.Height=30;
+				icon.Kind=PackIconKind.DeleteForever;
+				icon.Foreground=new SolidColorBrush(Colors.Gray);
+				deleteHeroButton.Content=icon;
+
+				// Set deleteHeroButton's style to danger
+				var style = this.FindResource("ButtonStyleDanger") as Style;
+				deleteHeroButton.Style=style;
 
 				// Assign click events to them.
 				selectHeroButton.Click += SelectHeroButton_Click;
@@ -143,11 +160,16 @@ namespace ClickQuest.Pages
 			var id = int.Parse((sender as Button).Name.Substring(10));
 			var hero = Account.User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
 
-			// Remove the hero from User and Database.
-			Account.User.Instance.Heroes.Remove(hero);
-			Entity.EntityOperations.RemoveHero(hero);
+			var result = AlertBox.Show($"Press OK to delete {hero.Name}.");
 
-			GenerateHeroButtons();
+			if (result == MessageBoxResult.OK)
+			{
+				// Remove the hero from User and Database.
+				Account.User.Instance.Heroes.Remove(hero);
+				Entity.EntityOperations.RemoveHero(hero);
+
+				GenerateHeroButtons();
+			}
 		}
 
 		private void ResetProgressButton_Click(object sender, RoutedEventArgs e)

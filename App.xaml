@@ -19,15 +19,13 @@
         <SolidColorBrush  x:Key="GameBackgroundSecondary" Color="#CFEFF8"/>
         <SolidColorBrush  x:Key="GameBackgroundAdditional" Color="#7F5539"/>
 
-        <SolidColorBrush  x:Key="ButtonDisabledBackground" Color="#CFCFCF"/>
+        <SolidColorBrush  x:Key="ButtonGreyBackground" Color="#CCDCE1"/>
 
-        <SolidColorBrush  x:Key="ButtonDangerBackground" Color="#CFCFCF"/>
+        <SolidColorBrush  x:Key="ButtonDangerBrush" Color="#FFD3D3"/>
+        <SolidColorBrush  x:Key="ButtonDangerBrushHover" Color="#FF0000"/>
 
         <!-- Custom default styles -->
-        <Style TargetType="Button" BasedOn="{StaticResource GameFontRegular}">
-            <Setter Property="Background" Value="{StaticResource GameBackgroundSecondary}"/>
-        </Style>
-
+        
         <Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}"></Style>
         <Style TargetType="ListView" BasedOn="{StaticResource GameFontRegular}"></Style>
 
@@ -41,6 +39,86 @@
 
         <Style TargetType="Page" BasedOn="{StaticResource GameFontRegular}">
             <Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+        </Style>
+
+        <!-- Custom button style -->
+        <Style x:Key="ButtonStyleGeneral" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="{StaticResource GameBackgroundSecondary}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                            BorderThickness="1"
+                            Padding="4,2" 
+                            BorderBrush="DarkGray" 
+                            CornerRadius="3" 
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ButtonStyleDisabled" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="{StaticResource ButtonGreyBackground}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                            BorderThickness="1"
+                            Padding="4,2" 
+                            BorderBrush="DarkGray" 
+                            CornerRadius="3" 
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ButtonStyleDanger" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="{StaticResource ButtonGreyBackground}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                            BorderThickness="2"
+                            Padding="4,2" 
+                            BorderBrush="{StaticResource ButtonDangerBrush}" 
+                            CornerRadius="3" 
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ButtonDangerBrushHover}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--Global custom button style-->
+        <Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}">
         </Style>
 
     </Application.Resources>
