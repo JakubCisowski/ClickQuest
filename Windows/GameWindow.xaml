@@ -3,18 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d"
         Title="GameWindow" Height="768" Width="1366"
         ResizeMode="NoResize" WindowStyle="None">
 
     <StackPanel>
-        <Grid>
-            <Rectangle x:Name="DragableTop" Height="25" Fill="White" MouseDown="DragableTop_MouseDown"/>
+        <Grid Height="40">
+            <Rectangle x:Name="DragableTop" Height="40" Fill="White" MouseDown="DragableTop_MouseDown" />
 
-            <Button x:Name="ExitButton" Width="45" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Exit" Click="ExitButton_Click"/>
+            <Border x:Name="LocationInfoBorder" BorderThickness="0" BorderBrush="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+                <TextBlock x:Name="LocationInfoBlock" Text="{Binding LocationInfo}" FontWeight="DemiBold" FontSize="18" VerticalAlignment="Center" Margin="3"/>
+            </Border>
+
+            <Button x:Name="ExitButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleDanger}" Click="ExitButton_Click"
+                Padding="0" Margin="5">
+                <Button.Content>
+                    <materialDesign:PackIcon Kind="CloseBox" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Gray" Margin="0" />
+                </Button.Content>
+            </Button>
+
+            <Image Source="/Resources/Images/GameIcon.png" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" RenderOptions.EdgeMode="Aliased"
+                RenderOptions.BitmapScalingMode="Fant" Margin="5,0,0,0">
+            </Image>
         </Grid>
 
-        <Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden"/> 
+        <Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden" />
     </StackPanel>
 </Window>

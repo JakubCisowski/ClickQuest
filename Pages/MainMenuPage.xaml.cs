@@ -133,6 +133,7 @@ namespace ClickQuest.Pages
 			if (Account.User.Instance.Heroes.Count < 6)
 			{
 				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["HeroCreation"]);
+				(Window.GetWindow(this) as GameWindow).LocationInfo = "Hero creation";
 			}
 		}
 
@@ -151,8 +152,10 @@ namespace ClickQuest.Pages
 			// Resume blessings on this account.
 			Blessing.ResumeBlessings();
 
+			// Refresh pages, move to town and change location text.
 			Data.Database.RefreshPages();
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
+			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
 		}
 
 		private void DeleteHeroButton_Click(object sender, RoutedEventArgs e)

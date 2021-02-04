@@ -53,6 +53,7 @@ namespace ClickQuest.Pages
 		public void CancelButton_Click(object sender, RoutedEventArgs e)
 		{
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["MainMenu"]);
+			(Window.GetWindow(this) as GameWindow).LocationInfo = "";
 		}
 	}
 }

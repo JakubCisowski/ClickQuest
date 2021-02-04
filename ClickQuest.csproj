@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>GameIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -63,6 +64,8 @@
   <ItemGroup>
     <Resource Include="Resources\Fonts\GothamBook.ttf" />
     <Resource Include="Resources\Images\logo.png" />
+    <Resource Include="Resources\Images\GameIcon.png" />
+    <Resource Include="Resources\Images\GameIcon.ico" />
   </ItemGroup>
 
 </Project>

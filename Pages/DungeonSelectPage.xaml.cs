@@ -108,6 +108,7 @@ namespace ClickQuest.Pages
 		{
 			// Come back to town.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
+			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
 
 			// Reset selection.
 			LoadDungeonGroupSelection();
@@ -122,6 +123,9 @@ namespace ClickQuest.Pages
 
 				// Now let user select dungeon in that group.
 				LoadDungeonSelection();
+
+				// Change info bar
+				(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting dungeon";
 			}
 		}
 
@@ -132,6 +136,9 @@ namespace ClickQuest.Pages
 
 			// Now let user select boss in that dungeon.
 			LoadBossSelection();
+
+			// Change info bar
+			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting boss";
 		}
 
 		private void BossButton_Click(object sender, RoutedEventArgs e)
@@ -159,6 +166,8 @@ namespace ClickQuest.Pages
 			(Data.Database.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(_bossSelected);
 			// Navigate to boss fight page.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["DungeonBoss"]);
+			// Change info bar
+			(Window.GetWindow(this) as GameWindow).LocationInfo = "Boss fight";
 
 			// Reset selections (for future use).
 			_bossSelected = null;
@@ -174,12 +183,14 @@ namespace ClickQuest.Pages
 		{
 			_dungeonGroupSelected = null;
 			LoadDungeonGroupSelection();
+			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting dungeon group";
 		}
 
 		private void UndoButtonDungeon_Click(object sender, RoutedEventArgs e)
 		{
 			_dungeonSelected = null;
 			LoadDungeonSelection();
+			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting dungeon";
 		}
 
 		#endregion Events

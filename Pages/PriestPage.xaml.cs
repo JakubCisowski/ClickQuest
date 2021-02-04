@@ -25,6 +25,7 @@ namespace ClickQuest.Pages
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
+			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
 		}
 
 		private void BuyButton_Click(object sender, RoutedEventArgs e)
