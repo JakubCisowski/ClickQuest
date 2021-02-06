@@ -47,7 +47,15 @@
 
           <Separator Height="2" Width="500" Margin="20"/>
             
-            <Button x:Name="CreateHeroButton" HorizontalAlignment="Center" Click="CreateHeroButton_Click" Content="Create!" Margin="30" Width="180" Height="60" FontSize="32.0"/>
-            <Button x:Name="CancelButton" Margin="0,100,0,0" HorizontalAlignment="Center" Click="CancelButton_Click" Content="Back to menu" Width="180" Height="60" FontSize="26.0"/>
+            <Button x:Name="CreateHeroButton" HorizontalAlignment="Center" Click="CreateHeroButton_Click" Margin="30" Width="180" Height="60">
+			<Button.Content>
+				<TextBlock FontSize="22" Text="Create!"/>
+			</Button.Content>
+		</Button>
+            <Button x:Name="CancelButton" Margin="0,100,0,0" HorizontalAlignment="Center" Click="CancelButton_Click" Width="180" Height="60">
+               <Button.Content>
+                   <TextBlock FontSize="22" Text="Back to menu"/>
+               </Button.Content>
+            </Button>
        </StackPanel>
 </Page>

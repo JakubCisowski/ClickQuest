@@ -45,6 +45,8 @@
         <Style x:Key="ButtonStyleGeneral" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="/Resources/Fonts/#GothamBook"/>
             <Setter Property="Background" Value="{StaticResource GameBackgroundSecondary}"/>
             <Setter Property="Template">
                 <Setter.Value>
