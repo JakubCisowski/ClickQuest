@@ -3,18 +3,51 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d"
         Title="HeroCreationPage" Height="768" Width="1024">
 
-       <StackPanel Orientation="Vertical">
-            <TextBlock Text="Hero name:"/>
-            <TextBox x:Name="HeroNameBox" Margin="30"/>
+        <Page.Resources>
+           <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+               <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="LightBlue" SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListView.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+          </ResourceDictionary>
+        </Page.Resources>
 
-            <TextBlock Text="Class:"/>
-            <ComboBox x:Name="HeroClassBox" Margin="30"/>
+       <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Center" FontSize="28" Text="Name"/>
+
+            <TextBox x:Name="HeroNameBox" HorizontalAlignment="Center" Width="200" Margin="30" HorizontalContentAlignment="Center" FontSize="20" Style="{StaticResource MaterialDesignTextBox}"/>
+
+            <Separator Height="2" Width="500" Margin="20"/>
+
+            <TextBlock HorizontalAlignment="Center" FontSize="28" Text="Class"/>
             
-            <Button x:Name="CreateHeroButton" Click="CreateHeroButton_Click" Content="Create!" Margin="30"/>
-            <Button x:Name="CancelButton" Click="CancelButton_Click" Content="Back to menu"/>
+          <Border Margin="0,10" BorderThickness="2" BorderBrush="Gray" Width="150">
+               <ListView x:Name="HeroClassBox" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
+                    <ListView.ItemTemplate>
+                         <DataTemplate>
+                              <StackPanel>
+                                   <TextBlock FontSize="20" Text="{Binding}"/>
+                              </StackPanel>
+                         </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                         <Style TargetType="ListViewItem">
+                              <Setter Property="HorizontalContentAlignment" Value="Center" />
+                              <Setter Property="Width" Value="146" />
+                         </Style>
+                    </ListView.ItemContainerStyle>
+               </ListView>
+          </Border>
+
+          <Separator Height="2" Width="500" Margin="20"/>
+            
+            <Button x:Name="CreateHeroButton" HorizontalAlignment="Center" Click="CreateHeroButton_Click" Content="Create!" Margin="30" Width="180" Height="60" FontSize="32.0"/>
+            <Button x:Name="CancelButton" Margin="0,100,0,0" HorizontalAlignment="Center" Click="CancelButton_Click" Content="Back to menu" Width="180" Height="60" FontSize="26.0"/>
        </StackPanel>
 </Page>
