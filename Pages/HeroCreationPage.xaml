@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d"
-        Title="HeroCreationPage" Height="768" Width="1024">
+        Title="HeroCreationPage" Height="728" Width="1366">
 
         <Page.Resources>
            <ResourceDictionary>

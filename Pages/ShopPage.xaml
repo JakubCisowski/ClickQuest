@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d"
-        Title="Shop Page" Height="768" Width="1024">
+        Title="Shop Page" Height="728" Width="1366">
 
     <Grid>
         <Grid.RowDefinitions>

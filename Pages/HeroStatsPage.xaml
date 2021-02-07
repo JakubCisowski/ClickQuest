@@ -5,28 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d" Title="Stats"
-        Height="768" Width="340">
+        Height="728" Width="341">
 
-        <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical">
-                <TextBlock x:Name="HeroNameBlock" Text="{Binding Path=Name, StringFormat='Name: \{0\}'}"/>
-                <TextBlock x:Name="HeroClassBlock" Text="{Binding Path=ThisHeroClass, StringFormat='Class: \{0\}'}"/>
-                <TextBlock x:Name="LevelBlock" Text="{Binding Path=Level, StringFormat='Level: \{0\}'}"/>
-                <TextBlock x:Name="ExperienceBlock" Text="{Binding Path=ExperienceToNextLvl, StringFormat='Experience to next level: \{0\}'}"/>
-                <TextBlock x:Name="GoldBlock"/>
-                <TextBlock x:Name="ClickDamageBlock">
-                        <TextBlock.Text>
-                                <MultiBinding StringFormat="Damage: {0} (+{1}/lvl)">
-                                        <Binding Path="ClickDamage"/>
-                                        <Binding Path="ClickDamagePerLevel"/>
-                                </MultiBinding>
-                        </TextBlock.Text>
-                </TextBlock>
-                <TextBlock x:Name="CritChanceBlock" Text="{Binding Path=CritChanceText}"/>
-                <TextBlock x:Name="PoisonDamageBlock" Text="{Binding Path=PoisonDamageText}"/>
-                <StackPanel x:Name="SpecializationsPanel" > </StackPanel>
-                <StackPanel x:Name="IngotsPanel" > </StackPanel>
-                <StackPanel x:Name="DungeonKeysPanel" > </StackPanel>
-                <Button x:Name="ShowEquipmentButton" Click="ShowEquipmentButton_Click" Content="EQ"> </Button>
-        </StackPanel> 
-        
+        <Border BorderThickness="3" BorderBrush="Gray" Margin="1" Padding="3">
+                <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical" HorizontalAlignment="Left">
+                        <TextBlock x:Name="HeroNameBlock" Text="{Binding Path=Name, StringFormat='Name: \{0\}'}"/>
+                        <TextBlock x:Name="HeroClassBlock" Text="{Binding Path=ThisHeroClass, StringFormat='Class: \{0\}'}"/>
+                        <TextBlock x:Name="LevelBlock" Text="{Binding Path=Level, StringFormat='Level: \{0\}'}"/>
+                        <TextBlock x:Name="ExperienceBlock" Text="{Binding Path=ExperienceToNextLvl, StringFormat='Experience to next level: \{0\}'}"/>
+                        <TextBlock x:Name="GoldBlock"/>
+
+                        <Separator Height="2" Width="200" Margin="10"/>
+
+                        <TextBlock x:Name="ClickDamageBlock">
+                                <TextBlock.Text>
+                                        <MultiBinding StringFormat="Damage: {0} (+{1}/lvl)">
+                                                <Binding Path="ClickDamage"/>
+                                                <Binding Path="ClickDamagePerLevel"/>
+                                        </MultiBinding>
+                                </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock x:Name="CritChanceBlock" Text="{Binding Path=CritChanceText}"/>
+                        <TextBlock x:Name="PoisonDamageBlock" Text="{Binding Path=PoisonDamageText}"/>
+
+                        <Separator Height="2" Width="200" Margin="10"/>
+
+                        <StackPanel x:Name="SpecializationsPanel" > </StackPanel>
+
+                        <Separator Height="2" Width="200" Margin="10" />
+                        
+                        <StackPanel x:Name="IngotsPanel" > </StackPanel>
+                        <StackPanel x:Name="DungeonKeysPanel" > </StackPanel>
+                        <Button x:Name="ShowEquipmentButton" Click="ShowEquipmentButton_Click" Content="EQ"> </Button>
+                </StackPanel> 
+        </Border>
 </Page>

@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d" Title="Town"
-        Height="768" Width="1024">
+        Height="728" Width="1366">
     <Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
 		<StackPanel x:Name="RegionsPanel" Orientation="Vertical" Grid.Column="1">
             <Button x:Name="MainMenuButton" Content="Back to menu" Click="MainMenuButton_Click" Width="100" Height="50"/>
@@ -22,7 +23,6 @@
             <Button x:Name="PriestButton" Content="Priest" Click="PriestButton_Click" Width="150" Height="50"/>
             <Button x:Name="DungeonSelectButton" Content="Dungeons" Click="DungeonSelectButton_Click" Width="150" Height="50"/>
 		</StackPanel>
-
 		
 	</Grid>
 </Page>

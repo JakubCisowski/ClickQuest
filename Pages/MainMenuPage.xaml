@@ -3,13 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controlzEx="urn:controlzex"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d" Title="Main Menu"
-        Width="1024" Height="768">
+        Width="1366" Height="728">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="6*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="7*" />
         </Grid.RowDefinitions>
 
         <!-- Game logo -->
@@ -32,7 +33,21 @@
             </Grid.ColumnDefinitions>
 
             <!-- Create hero button -->
-            <Button x:Name="CreateHeroButton" Grid.Row="0" Grid.ColumnSpan="2" Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" VerticalAlignment="Center"/>
+            <Button x:Name="CreateHeroButton" Grid.Row="0" Grid.ColumnSpan="2" Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" VerticalAlignment="Center"
+                ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
+                <Button.ToolTip>
+                    <ToolTip controlzEx:ToolTipAssist.AutoMove="True">
+                        <ToolTip.Template>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Border Style="{StaticResource ToolTipBorderBase}"/>
+                                    <TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="JD"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </ToolTip.Template>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
 
             <!-- Hero list -->
 

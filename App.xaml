@@ -123,19 +123,43 @@
         <Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}">
         </Style>
 
-        <!--MaterialDesign controls-->
-        <!-- <ComboBox x:Class="MyComboBox">
-            <ComboBox.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
-            </ComboBox.Resources>
-        </ComboBox> -->
+        <Style x:Key="ToolTipBorderBase" TargetType="Border">
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Opacity" Value="0.9"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <Style x:Key="ToolTipTextBlockBase" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+            <Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
+        </Style>
+
+<!-- 
+        <Style x:Key="ToolTipBase" TargetType="ToolTip">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid>
+                            <Border Background="Gray"
+                                    BorderBrush="Black"
+                                    BorderThickness="1"
+                                    Opacity="0.9"
+                                    SnapsToDevicePixels="True" />
+                            <TextBlock Margin="5"
+                                        Foreground="WhiteSmoke"
+                                        FontSize="22"
+                                        Text="ToolTipHelper AutoMove sample"
+                                        TextOptions.TextFormattingMode="Display"
+                                        TextOptions.TextRenderingMode="ClearType" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style> -->
 
        
 
