@@ -5,64 +5,64 @@ using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Items
 {
-	public partial class DungeonKey : INotifyPropertyChanged
-	{
-		#region INotifyPropertyChanged
+    public partial class DungeonKey : INotifyPropertyChanged
+    {
+        #region INotifyPropertyChanged
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
-		#endregion INotifyPropertyChanged
+        #endregion INotifyPropertyChanged
 
-		#region Private Fields
+        #region Private Fields
 
-		private Rarity _rarity;
-		private int _quantity;
+        private Rarity _rarity;
+        private int _quantity;
 
-		#endregion Private Fields
+        #endregion Private Fields
 
-		#region Properties
+        #region Properties
 
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
 
-		public Rarity Rarity
-		{
-			get
-			{
-				return _rarity;
-			}
-			set
-			{
-				_rarity = value;
-				OnPropertyChanged();
-			}
-		}
+        public Rarity Rarity
+        {
+            get
+            {
+                return _rarity;
+            }
+            set
+            {
+                _rarity = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public int Quantity
-		{
-			get
-			{
-				return _quantity;
-			}
-			set
-			{
-				_quantity = value;
-				OnPropertyChanged();
-			}
-		}
+        public int Quantity
+        {
+            get
+            {
+                return _quantity;
+            }
+            set
+            {
+                _quantity = value;
+                OnPropertyChanged();
+            }
+        }
 
-		#endregion Properties
+        #endregion Properties
 
-		public DungeonKey(Rarity rarity, int quantity)
-		{
-			Rarity = rarity;
-			Quantity = quantity;
-		}
-	}
+        public DungeonKey(Rarity rarity, int quantity)
+        {
+            Rarity = rarity;
+            Quantity = quantity;
+        }
+    }
 }

@@ -5,120 +5,120 @@ using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Places
 {
-	public class Dungeon : INotifyPropertyChanged
-	{
-		#region INotifyPropertyChanged
+    public class Dungeon : INotifyPropertyChanged
+    {
+        #region INotifyPropertyChanged
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
-		#endregion INotifyPropertyChanged
+        #endregion INotifyPropertyChanged
 
-		#region Private Fields
+        #region Private Fields
 
-		private int _id;
-		private DungeonGroup _dungeonGroup;
-		private string _name;
-		private string _background;
-		private string _description;
-		private List<Monster> _bosses;
+        private int _id;
+        private DungeonGroup _dungeonGroup;
+        private string _name;
+        private string _background;
+        private string _description;
+        private List<Monster> _bosses;
 
-		#endregion Private Fields
+        #endregion Private Fields
 
-		#region Properties
+        #region Properties
 
-		public int Id
-		{
-			get
-			{
-				return _id;
-			}
-			set
-			{
-				_id = value;
-				OnPropertyChanged();
-			}
-		}
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public DungeonGroup DungeonGroup
-		{
-			get
-			{
-				return _dungeonGroup;
-			}
-			set
-			{
-				_dungeonGroup = value;
-				OnPropertyChanged();
-			}
-		}
+        public DungeonGroup DungeonGroup
+        {
+            get
+            {
+                return _dungeonGroup;
+            }
+            set
+            {
+                _dungeonGroup = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public string Name
-		{
-			get
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-				OnPropertyChanged();
-			}
-		}
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public string Description
-		{
-			get
-			{
-				return _description;
-			}
-			set
-			{
-				_description = value;
-				OnPropertyChanged();
-			}
-		}
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                _description = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public string Background
-		{
-			get
-			{
-				return _background;
-			}
-			set
-			{
-				_background = value;
-				OnPropertyChanged();
-			}
-		}
+        public string Background
+        {
+            get
+            {
+                return _background;
+            }
+            set
+            {
+                _background = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public List<Monster> Bosses
-		{
-			get
-			{
-				return _bosses;
-			}
-			set
-			{
-				_bosses = value;
-				OnPropertyChanged();
-			}
-		}
+        public List<Monster> Bosses
+        {
+            get
+            {
+                return _bosses;
+            }
+            set
+            {
+                _bosses = value;
+                OnPropertyChanged();
+            }
+        }
 
-		#endregion Properties
+        #endregion Properties
 
-		public Dungeon(int id, DungeonGroup dungeonGroup, string name, string background, string description, List<Monster> bosses)
-		{
-			Id = id;
-			DungeonGroup = dungeonGroup;
-			Name = name;
-			Background = background;
-			Description = description;
-			Bosses = bosses;
-		}
-	}
+        public Dungeon(int id, DungeonGroup dungeonGroup, string name, string background, string description, List<Monster> bosses)
+        {
+            Id = id;
+            DungeonGroup = dungeonGroup;
+            Name = name;
+            Background = background;
+            Description = description;
+            Bosses = bosses;
+        }
+    }
 }
