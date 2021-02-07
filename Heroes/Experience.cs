@@ -26,7 +26,7 @@ namespace ClickQuest.Heroes
         {
             int level = 1;
 
-            while (LevelToXP(level) < xp)
+            while (LevelToXP(level) <= xp)
             {
                 level++;
             }
@@ -59,6 +59,12 @@ namespace ClickQuest.Heroes
         {
             // Calculate how many experience is needed to level up (for hero stats panel info).
             return LevelToXP(hero.Level + 1) - hero.Experience;
+        }
+
+        public static int CalculateXpProgress(Hero hero)
+        {
+            // Calculate progress to next level in % (for progress bar on hero stats panel).
+            return (int)(100 - (((double)hero.ExperienceToNextLvl / (LevelToXP(hero.Level+1) - LevelToXP(hero.Level))) * 100));
         }
     }
 }

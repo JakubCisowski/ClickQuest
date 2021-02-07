@@ -3,40 +3,78 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:controlzEx="urn:controlzex"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d" Title="Stats"
         Height="728" Width="341">
 
-        <Border BorderThickness="3" BorderBrush="Gray" Margin="1" Padding="3">
-                <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical" HorizontalAlignment="Left">
-                        <TextBlock x:Name="HeroNameBlock" Text="{Binding Path=Name, StringFormat='Name: \{0\}'}"/>
-                        <TextBlock x:Name="HeroClassBlock" Text="{Binding Path=ThisHeroClass, StringFormat='Class: \{0\}'}"/>
-                        <TextBlock x:Name="LevelBlock" Text="{Binding Path=Level, StringFormat='Level: \{0\}'}"/>
-                        <TextBlock x:Name="ExperienceBlock" Text="{Binding Path=ExperienceToNextLvl, StringFormat='Experience to next level: \{0\}'}"/>
-                        <TextBlock x:Name="GoldBlock"/>
+        <Page.Resources>
+                <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                        <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="LightBlue" SecondaryColor="Lime" />
+                                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ProgressBar.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+        </Page.Resources>
 
-                        <Separator Height="2" Width="200" Margin="10"/>
+    <Border BorderThickness="3" BorderBrush="Gray" Margin="1" Padding="6">
+        <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical" HorizontalAlignment="Left">
+            <TextBlock x:Name="HeroNameBlock" FontSize="22" TextAlignment="Center">
+                    <Run Text="{Binding Path=Name}" FontWeight="DemiBold" />
+                    <LineBreak/>
+                    <Run Text="{Binding Level, StringFormat='\{0\} lvl -'}" FontWeight="Normal" />
+                    <Run Text="{Binding Mode=OneWay, Path=ThisHeroClass}" FontWeight="Normal" FontStyle="Italic" />
+            </TextBlock>
 
-                        <TextBlock x:Name="ClickDamageBlock">
-                                <TextBlock.Text>
-                                        <MultiBinding StringFormat="Damage: {0} (+{1}/lvl)">
-                                                <Binding Path="ClickDamage"/>
-                                                <Binding Path="ClickDamagePerLevel"/>
-                                        </MultiBinding>
-                                </TextBlock.Text>
-                        </TextBlock>
-                        <TextBlock x:Name="CritChanceBlock" Text="{Binding Path=CritChanceText}"/>
-                        <TextBlock x:Name="PoisonDamageBlock" Text="{Binding Path=PoisonDamageText}"/>
+            <Grid>
+                <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16">
+                        <ProgressBar.ToolTip>
+                                <ToolTip controlzEx:ToolTipAssist.AutoMove="True">
+                                        <ToolTip.Template>
+                                                <ControlTemplate>
+                                                        <Grid>
+                                                                <Border Style="{StaticResource ToolTipBorderBase}"/>
+                                                                <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+                                                                        <Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}"/>
+                                                                        <Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}"/>
+                                                                        <LineBreak/>
+                                                                        <Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='To next lvl: \{0\}'}"/>                                                                        
+                                                                </TextBlock>
+                                                        </Grid>
+                                                </ControlTemplate>
+                                        </ToolTip.Template>
+                                </ToolTip>
+                        </ProgressBar.ToolTip>
+                </ProgressBar>
 
-                        <Separator Height="2" Width="200" Margin="10"/>
+                <TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold"/>
+            </Grid>
 
-                        <StackPanel x:Name="SpecializationsPanel" > </StackPanel>
+            <Separator Height="2" Width="200" Margin="10" />
 
-                        <Separator Height="2" Width="200" Margin="10" />
-                        
-                        <StackPanel x:Name="IngotsPanel" > </StackPanel>
-                        <StackPanel x:Name="DungeonKeysPanel" > </StackPanel>
-                        <Button x:Name="ShowEquipmentButton" Click="ShowEquipmentButton_Click" Content="EQ"> </Button>
-                </StackPanel> 
-        </Border>
+            <TextBlock x:Name="ClickDamageBlock">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Damage: {0} (+{1}/lvl)">
+                        <Binding Path="ClickDamage" />
+                        <Binding Path="ClickDamagePerLevel" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock x:Name="CritChanceBlock" Text="{Binding Path=CritChanceText}" />
+            <TextBlock x:Name="PoisonDamageBlock" Text="{Binding Path=PoisonDamageText}" />
+
+            <Separator Height="2" Width="200" Margin="10" />
+
+            <StackPanel x:Name="SpecializationsPanel" ></StackPanel>
+
+            <Separator Height="2" Width="200" Margin="10" />
+            
+            <TextBlock x:Name="GoldBlock" />
+
+            <StackPanel x:Name="IngotsPanel" ></StackPanel>
+            <StackPanel x:Name="DungeonKeysPanel" ></StackPanel>
+            <Button x:Name="ShowEquipmentButton" Click="ShowEquipmentButton_Click" Content="EQ"></Button>
+        </StackPanel>
+    </Border>
 </Page>

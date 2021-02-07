@@ -26,6 +26,8 @@ namespace ClickQuest.Heroes
         private string _name;
         private int _experience;
         private int _experienceToNextLvl;
+        private int _experienceProgress;
+        private int _experienceToNextLvlTotal;
         private int _level;
         private int _clickDamage;
         private double _critChance;
@@ -63,7 +65,7 @@ namespace ClickQuest.Heroes
         }
 
         public int Experience
-        {
+        { 
             get
             {
                 return _experience;
@@ -73,6 +75,8 @@ namespace ClickQuest.Heroes
                 _experience = value;
                 Heroes.Experience.CheckIfLeveledUp(this);
                 ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
+                ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
+                ExperienceProgress = Heroes.Experience.CalculateXpProgress(this);
                 OnPropertyChanged();
             }
         }
@@ -90,6 +94,35 @@ namespace ClickQuest.Heroes
                 OnPropertyChanged();
             }
         }
+
+        [NotMapped]
+        public int ExperienceToNextLvlTotal
+        {
+            get
+            {
+                return _experienceToNextLvlTotal;
+            }
+            set
+            {
+                _experienceToNextLvlTotal = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [NotMapped]
+        public int ExperienceProgress
+        {
+            get
+            {
+                return _experienceProgress;
+            }
+            set
+            {
+                _experienceProgress = value;
+                OnPropertyChanged();
+            }
+        }
+
         public HeroClass HeroClass
         {
             get
@@ -236,10 +269,20 @@ namespace ClickQuest.Heroes
                     PoisonDamageText = String.Format("Poison damage: {0} (+{1}/lvl)", PoisonDamage, PoisonDamagePerLevel);
                     break;
             }
+            
+            UpdateHero();
         }
 
         public Hero()
         {
+            UpdateHero();
+        }
+
+        public void UpdateHero()
+        {
+            ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
+            ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
+            ExperienceProgress = Heroes.Experience.CalculateXpProgress(this);
         }
 
         public void GrantLevelUpBonuses()

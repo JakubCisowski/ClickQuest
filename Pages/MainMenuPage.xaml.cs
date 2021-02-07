@@ -155,7 +155,7 @@ namespace ClickQuest.Pages
             var hero = Account.User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
             Account.User.Instance.CurrentHero = hero;
             // Refresh hero stats panel info.
-            hero.ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(hero);
+            hero.UpdateHero();
 
             // Resume quests for the selected hero.
             Account.User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default(DateTime))?.StartQuest();
