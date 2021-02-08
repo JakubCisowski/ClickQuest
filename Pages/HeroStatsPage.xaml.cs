@@ -201,25 +201,23 @@ namespace ClickQuest.Pages
 
         private void GenerateSpecializations()
         {
-            SpecializationsPanel.Children.Clear();
-
-            var sectionBlock = new TextBlock()
-            {
-                Name = "Specializations",
-                Text = "Specializations:",
-                FontSize=20,
-                FontWeight = FontWeights.Medium,
-                HorizontalAlignment=HorizontalAlignment.Center,
-                Margin = new Thickness(0,3,0,10)
-            };
-            SpecializationsPanel.Children.Add(sectionBlock);
+            SpecializationsGrid.Children.Clear();
 
             #region SpecializationBuying
             {
+                var nameBlock = new TextBlock()
+                {
+                    Name = "SpecBuyingName",
+                    Text="Tradesman",
+                    FontSize = 18,
+                    Margin=new Thickness(0,1,0,1)
+                };
+
                 var block = new TextBlock()
                 {
                     Name = "SpecBuying",
-                    FontSize = 18
+                    FontSize = 18,
+                    Margin=new Thickness(0,1,0,1)
                 };
 
                 Binding binding = new Binding("SpecBuyingAmount");
@@ -230,23 +228,38 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Tradesman → Shop offer size + {2}";
+                multiBinding.StringFormat = " → Shop offer size +{2}";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
 
                 block.SetBinding(TextBlock.TextProperty, multiBinding);
 
-                SpecializationsPanel.Children.Add(block);
+                Grid.SetRow(nameBlock, 0);
+                Grid.SetRow(block, 0);
+                Grid.SetColumn(nameBlock, 0);
+                Grid.SetColumn(block, 1);
+
+                SpecializationsGrid.Children.Add(nameBlock);
+                SpecializationsGrid.Children.Add(block);
             }
             #endregion
 
             #region SpecializationMelting
             {
+                var nameBlock = new TextBlock()
+                {
+                    Name = "SpecMeltingName",
+                    Text="Melter",
+                    FontSize = 18,
+                    Margin=new Thickness(0,1,0,1)
+                };
+
                 var block = new TextBlock()
                 {
                     Name = "SpecMelting",
-                    FontSize = 18
+                    FontSize = 18,
+                    Margin=new Thickness(0,1,0,1)
                 };
 
                 Binding binding = new Binding("SpecMeltingAmount");
@@ -257,23 +270,38 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Melter → Extra ingot + {2}%";
+                multiBinding.StringFormat = " → Extra ingot +{2}%";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
 
                 block.SetBinding(TextBlock.TextProperty, multiBinding);
 
-                SpecializationsPanel.Children.Add(block);
+                Grid.SetRow(nameBlock, 1);
+                Grid.SetRow(block, 1);
+                Grid.SetColumn(nameBlock, 0);
+                Grid.SetColumn(block, 1);
+
+                SpecializationsGrid.Children.Add(nameBlock);
+                SpecializationsGrid.Children.Add(block);
             }
             #endregion
 
             #region SpecializationCrafting
             {
+                var nameBlock = new TextBlock()
+                {
+                    Name = "SpecCraftingName",
+                    Text="Craftsman",
+                    FontSize = 18,
+                    Margin = new Thickness(0,1,0,1)
+                };
+
                 var block = new TextBlock()
                 {
                     Name = "SpecCrafting",
-                    FontSize = 18
+                    FontSize = 18,
+                    Margin=new Thickness(0,1,0,1)
                 };
 
                 Binding binding = new Binding("SpecCraftingAmount");
@@ -284,23 +312,38 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Craftsman → Can craft + {2}";
+                multiBinding.StringFormat = " → Can craft +{2}";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
 
                 block.SetBinding(TextBlock.TextProperty, multiBinding);
 
-                SpecializationsPanel.Children.Add(block);
+                Grid.SetRow(nameBlock, 2);
+                Grid.SetRow(block, 2);
+                Grid.SetColumn(nameBlock, 0);
+                Grid.SetColumn(block, 1);
+
+                SpecializationsGrid.Children.Add(nameBlock);
+                SpecializationsGrid.Children.Add(block);
             }
             #endregion
 
             #region SpecializationQuesting
             {
+                var nameBlock = new TextBlock()
+                {
+                    Name = "SpecQuestingName",
+                    Text="Adventurer",
+                    FontSize = 18,
+                    Margin=new Thickness(0,1,0,1)
+                };
+                
                 var block = new TextBlock()
                 {
                     Name = "SpecQuesting",
-                    FontSize = 18
+                    FontSize = 18,
+                    Margin=new Thickness(0,1,0,1)
                 };
 
                 Binding binding = new Binding("SpecQuestingAmount");
@@ -311,23 +354,38 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Adventurer → Quest time - {2}%";
+                multiBinding.StringFormat = " → Quest time -{2}%";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
 
                 block.SetBinding(TextBlock.TextProperty, multiBinding);
 
-                SpecializationsPanel.Children.Add(block);
+                Grid.SetRow(nameBlock, 3);
+                Grid.SetRow(block, 3);
+                Grid.SetColumn(nameBlock, 0);
+                Grid.SetColumn(block, 1);
+
+                SpecializationsGrid.Children.Add(nameBlock);
+                SpecializationsGrid.Children.Add(block);
             }
             #endregion
 
             #region SpecializationKilling
             {
+                var nameBlock = new TextBlock()
+                {
+                    Name = "SpedKillingName",
+                    Text="Clicker",
+                    FontSize = 18,
+                    Margin=new Thickness(0,1,0,1)
+                };
+
                 var block = new TextBlock()
                 {
                     Name = "SpecKilling",
-                    FontSize = 18
+                    FontSize = 18,
+                    Margin=new Thickness(0,1,0,1)
                 };
 
                 Binding binding = new Binding("SpecKillingAmount");
@@ -338,23 +396,38 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Clicker → Click damage + {2}";
+                multiBinding.StringFormat = " → Click damage +{2}";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
 
                 block.SetBinding(TextBlock.TextProperty, multiBinding);
 
-                SpecializationsPanel.Children.Add(block);
+                Grid.SetRow(nameBlock, 4);
+                Grid.SetRow(block, 4);
+                Grid.SetColumn(nameBlock, 0);
+                Grid.SetColumn(block, 1);
+
+                SpecializationsGrid.Children.Add(nameBlock);
+                SpecializationsGrid.Children.Add(block);
             }
             #endregion
 
             #region SpecializationBlessing
             {
+                var nameBlock = new TextBlock()
+                {
+                    Name = "SpecBlessingName",
+                    Text="Prayer",
+                    FontSize = 18,
+                    Margin=new Thickness(0,1,0,1)
+                };
+
                 var block = new TextBlock()
                 {
                     Name = "SpecBlessing",
-                    FontSize = 18
+                    FontSize = 18,
+                    Margin=new Thickness(0,1,0,1)
                 };
 
                 Binding binding = new Binding("SpecBlessingAmount");
@@ -365,23 +438,38 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Prayer → Blessing duration + {2}s";
+                multiBinding.StringFormat = " → Blessing duration +{2}s";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
 
                 block.SetBinding(TextBlock.TextProperty, multiBinding);
 
-                SpecializationsPanel.Children.Add(block);
+                Grid.SetRow(nameBlock, 5);
+                Grid.SetRow(block, 5);
+                Grid.SetColumn(nameBlock, 0);
+                Grid.SetColumn(block, 1);
+
+                SpecializationsGrid.Children.Add(nameBlock);
+                SpecializationsGrid.Children.Add(block);
             }
             #endregion
 
             #region SpecializationDungeon
             {
+                var nameBlock = new TextBlock()
+                {
+                    Name = "SpecDungeonName",
+                    Text="Daredevil",
+                    FontSize = 18,
+                    Margin=new Thickness(0,1,0,1)
+                };
+
                 var block = new TextBlock()
                 {
                     Name = "SpecDungeon",
-                    FontSize = 18
+                    FontSize = 18,
+                    Margin=new Thickness(0,1,0,1)
                 };
 
                 Binding binding = new Binding("SpecDungeonAmount");
@@ -392,14 +480,20 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Daredevil → Bossfight timer + {2}s";
+                multiBinding.StringFormat = " → Bossfight timer +{2}s";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
 
                 block.SetBinding(TextBlock.TextProperty, multiBinding);
 
-                SpecializationsPanel.Children.Add(block);
+                Grid.SetRow(nameBlock, 6);
+                Grid.SetRow(block, 6);
+                Grid.SetColumn(nameBlock, 0);
+                Grid.SetColumn(block, 1);
+
+                SpecializationsGrid.Children.Add(nameBlock);
+                SpecializationsGrid.Children.Add(block);
             }
             #endregion
         }

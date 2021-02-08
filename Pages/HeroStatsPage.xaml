@@ -9,52 +9,52 @@
         mc:Ignorable="d" Title="Stats"
         Height="728" Width="341">
 
-        <Page.Resources>
-                <ResourceDictionary>
-                        <ResourceDictionary.MergedDictionaries>
-                        <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="LightBlue" SecondaryColor="Lime" />
-                                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ProgressBar.xaml" />
-                        </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
-        </Page.Resources>
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="LightBlue" SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ProgressBar.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
 
     <Border BorderThickness="3" BorderBrush="Gray" Margin="1" Padding="6">
         <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical" HorizontalAlignment="Left" Width="323">
             <TextBlock x:Name="HeroNameBlock" FontSize="22" TextAlignment="Center">
                     <Run Text="{Binding Path=Name}" FontWeight="DemiBold" />
-                    <LineBreak/>
+                    <LineBreak />
                     <Run Text="{Binding Level, StringFormat='\{0\} lvl -'}" FontWeight="Normal" />
                     <Run Text="{Binding Mode=OneWay, Path=ThisHeroClass}" FontWeight="Normal" FontStyle="Italic" />
             </TextBlock>
 
             <Grid>
                 <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16">
-					<ProgressBar.ToolTip>
-						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
-							<ToolTip.Template>
-								<ControlTemplate>
-									<Grid>
-										<Border Style="{StaticResource ToolTipBorderBase}"/>
-										<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-												<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}"/>
+                    <ProgressBar.ToolTip>
+                        <ToolTip controlzEx:ToolTipAssist.AutoMove="True">
+                            <ToolTip.Template>
+                                <ControlTemplate>
+                                    <Grid>
+                                        <Border Style="{StaticResource ToolTipBorderBase}" />
+                                        <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+												<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}" />
 												<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" />
-												<LineBreak/>
-												<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='To next lvl: \{0\}'}"/>                                                                        
-										</TextBlock>
-									</Grid>
-								</ControlTemplate>
-							</ToolTip.Template>
-						</ToolTip>
-					</ProgressBar.ToolTip>
+												<LineBreak />
+												<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='To next lvl: \{0\}'}" />
+                                        </TextBlock>
+                                    </Grid>
+                                </ControlTemplate>
+                            </ToolTip.Template>
+                        </ToolTip>
+                    </ProgressBar.ToolTip>
                 </ProgressBar>
 
-                <TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold"/>
+                <TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold" />
             </Grid>
 
             <Separator Height="2" Width="200" Margin="10" />
 
             <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="Gray" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="Gray" VerticalAlignment="Center" />
                 <TextBlock FontSize="18" Margin="3" Text="Damage:" VerticalAlignment="Center" />
                 <TextBlock x:Name="ClickDamageBlock" FontSize="18" Margin="0,2,2,2" VerticalAlignment="Center">
                     <TextBlock.Text>
@@ -67,31 +67,31 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefaultClick" Foreground="Black" VerticalAlignment="Center"/>
-                <TextBlock x:Name="CritChanceBlock" Text="{Binding Path=CritChanceText}" FontSize="18" Margin="3" VerticalAlignment="Center"/>
-            </StackPanel> 
+                <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefaultClick" Foreground="Black" VerticalAlignment="Center" />
+                <TextBlock x:Name="CritChanceBlock" Text="{Binding Path=CritChanceText}" FontSize="18" Margin="3" VerticalAlignment="Center" />
+            </StackPanel>
 
-             <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Width="22" Height="22" Kind="Water" Foreground="Green" VerticalAlignment="Center"/>
-                <TextBlock x:Name="PoisonDamageBlock" Text="{Binding Path=PoisonDamageText}" FontSize="18" Margin="3" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Width="22" Height="22" Kind="Water" Foreground="Green" VerticalAlignment="Center" />
+                <TextBlock x:Name="PoisonDamageBlock" Text="{Binding Path=PoisonDamageText}" FontSize="18" Margin="3" VerticalAlignment="Center" />
             </StackPanel>
 
             <Separator Height="2" Width="200" Margin="10" />
-            
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <materialDesign:PackIcon Width="22" Height="22" Kind="CheckboxMultipleBlankCircle" Foreground="#FFD700" VerticalAlignment="Center"/>
-                <TextBlock x:Name="GoldBlock" FontSize="18" Margin="3" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Width="22" Height="22" Kind="CheckboxMultipleBlankCircle" Foreground="#FFD700" VerticalAlignment="Center" />
+                <TextBlock x:Name="GoldBlock" FontSize="18" Margin="3" VerticalAlignment="Center" />
             </StackPanel>
 
             <StackPanel>
                 <Grid x:Name="IngotKeyGrid">
-                     <Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
-                        <RowDefinition Height="*" /> 
-                        <RowDefinition Height="*" /> 
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -107,8 +107,24 @@
 
             <Separator Height="2" Width="200" Margin="10" />
 
-            <StackPanel x:Name="SpecializationsPanel" >
-            </StackPanel>
+            <TextBlock Text="Specializations" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" Margin="0,3,0,10" />
+
+            <Grid x:Name="SpecializationsGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+            </Grid>
         </StackPanel>
     </Border>
 </Page>
