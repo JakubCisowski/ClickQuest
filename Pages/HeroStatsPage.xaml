@@ -19,7 +19,7 @@
         </Page.Resources>
 
     <Border BorderThickness="3" BorderBrush="Gray" Margin="1" Padding="6">
-        <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical" HorizontalAlignment="Left">
+        <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical" HorizontalAlignment="Left" Width="323">
             <TextBlock x:Name="HeroNameBlock" FontSize="22" TextAlignment="Center">
                     <Run Text="{Binding Path=Name}" FontWeight="DemiBold" />
                     <LineBreak/>
@@ -29,23 +29,23 @@
 
             <Grid>
                 <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16">
-                        <ProgressBar.ToolTip>
-                                <ToolTip controlzEx:ToolTipAssist.AutoMove="True">
-                                        <ToolTip.Template>
-                                                <ControlTemplate>
-                                                        <Grid>
-                                                                <Border Style="{StaticResource ToolTipBorderBase}"/>
-                                                                <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-                                                                        <Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}"/>
-                                                                        <Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}"/>
-                                                                        <LineBreak/>
-                                                                        <Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='To next lvl: \{0\}'}"/>                                                                        
-                                                                </TextBlock>
-                                                        </Grid>
-                                                </ControlTemplate>
-                                        </ToolTip.Template>
-                                </ToolTip>
-                        </ProgressBar.ToolTip>
+					<ProgressBar.ToolTip>
+						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
+							<ToolTip.Template>
+								<ControlTemplate>
+									<Grid>
+										<Border Style="{StaticResource ToolTipBorderBase}"/>
+										<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+												<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}"/>
+												<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" />
+												<LineBreak/>
+												<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='To next lvl: \{0\}'}"/>                                                                        
+										</TextBlock>
+									</Grid>
+								</ControlTemplate>
+							</ToolTip.Template>
+						</ToolTip>
+					</ProgressBar.ToolTip>
                 </ProgressBar>
 
                 <TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold"/>
@@ -53,28 +53,62 @@
 
             <Separator Height="2" Width="200" Margin="10" />
 
-            <TextBlock x:Name="ClickDamageBlock">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="Damage: {0} (+{1}/lvl)">
-                        <Binding Path="ClickDamage" />
-                        <Binding Path="ClickDamagePerLevel" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-            <TextBlock x:Name="CritChanceBlock" Text="{Binding Path=CritChanceText}" />
-            <TextBlock x:Name="PoisonDamageBlock" Text="{Binding Path=PoisonDamageText}" />
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="Gray" VerticalAlignment="Center"/>
+                <TextBlock FontSize="18" Margin="3" Text="Damage:" VerticalAlignment="Center" />
+                <TextBlock x:Name="ClickDamageBlock" FontSize="18" Margin="0,2,2,2" VerticalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="  {0} (+{1}/lvl)">
+                            <Binding Path="ClickDamage" />
+                            <Binding Path="ClickDamagePerLevel" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
 
-            <Separator Height="2" Width="200" Margin="10" />
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefaultClick" Foreground="Black" VerticalAlignment="Center"/>
+                <TextBlock x:Name="CritChanceBlock" Text="{Binding Path=CritChanceText}" FontSize="18" Margin="3" VerticalAlignment="Center"/>
+            </StackPanel> 
 
-            <StackPanel x:Name="SpecializationsPanel" ></StackPanel>
+             <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Width="22" Height="22" Kind="Water" Foreground="Green" VerticalAlignment="Center"/>
+                <TextBlock x:Name="PoisonDamageBlock" Text="{Binding Path=PoisonDamageText}" FontSize="18" Margin="3" VerticalAlignment="Center"/>
+            </StackPanel>
 
             <Separator Height="2" Width="200" Margin="10" />
             
-            <TextBlock x:Name="GoldBlock" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <materialDesign:PackIcon Width="22" Height="22" Kind="CheckboxMultipleBlankCircle" Foreground="#FFD700" VerticalAlignment="Center"/>
+                <TextBlock x:Name="GoldBlock" FontSize="18" Margin="3" VerticalAlignment="Center"/>
+            </StackPanel>
 
-            <StackPanel x:Name="IngotsPanel" ></StackPanel>
-            <StackPanel x:Name="DungeonKeysPanel" ></StackPanel>
+            <StackPanel>
+                <Grid x:Name="IngotKeyGrid">
+                     <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" /> 
+                        <RowDefinition Height="*" /> 
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <!-- <StackPanel x:Name="IngotsPanel" ></StackPanel>
+                <StackPanel x:Name="DungeonKeysPanel" ></StackPanel> -->
+            </StackPanel>
+
             <Button x:Name="ShowEquipmentButton" Click="ShowEquipmentButton_Click" Content="EQ"></Button>
+
+            <Separator Height="2" Width="200" Margin="10" />
+
+            <StackPanel x:Name="SpecializationsPanel" >
+            </StackPanel>
         </StackPanel>
     </Border>
 </Page>

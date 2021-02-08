@@ -2,6 +2,9 @@ using ClickQuest.Heroes;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using MaterialDesignThemes.Wpf;
+using System.Windows.Media;
+using System.Windows.Documents;
 
 namespace ClickQuest.Pages
 {
@@ -41,59 +44,157 @@ namespace ClickQuest.Pages
             // Make sure hero isn't null (constructor calls this function while loading database).
             if (_hero != null)
             {
-                IngotsPanel.Children.Clear();
+                IngotKeyGrid.Children.Clear();
 
                 for (int i = 0; i < Account.User.Instance.Ingots.Count; i++)
                 {
+                    var panel = new StackPanel()
+                    {
+                        Orientation=Orientation.Horizontal,
+                        Margin= new Thickness(50,0,0,0)
+                    };
+
+                    var icon = new PackIcon()
+                    {
+                        Kind=PackIconKind.Gold,
+                        Width=22,
+                        Height=22,
+                        VerticalAlignment=VerticalAlignment.Center
+                    };
+
+                    switch (i)
+                    {
+                        case 0:
+                            icon.Foreground=new SolidColorBrush(Colors.Gray);
+                            break;
+
+                        case 1:
+                            icon.Foreground=new SolidColorBrush(Colors.Brown);
+                            break;
+
+                        case 2:
+                            icon.Foreground=new SolidColorBrush(Colors.Green);
+                            break;
+
+                        case 3:
+                            icon.Foreground=new SolidColorBrush(Colors.Blue);
+                            break;
+                            
+                        case 4:
+                            icon.Foreground=new SolidColorBrush(Colors.Purple);
+                            break;
+
+                        case 5:
+                            icon.Foreground=new SolidColorBrush(Colors.Gold);
+                            break;
+                    }
+                    
+                    panel.Children.Add(icon);
+
                     var block = new TextBlock()
                     {
-                        Name = "Ingot" + i.ToString()
+                        Name = "Ingot" + i.ToString(),
+                        FontSize = 18,
+                        VerticalAlignment=VerticalAlignment.Center
                     };
 
                     Binding binding = new Binding("Quantity");
                     binding.Source = Account.User.Instance.Ingots[i];
-                    Binding binding2 = new Binding("Rarity");
-                    binding2.Source = Account.User.Instance.Ingots[i];
+                    // Binding binding2 = new Binding("Rarity");
+                    // binding2.Source = Account.User.Instance.Ingots[i];
 
                     MultiBinding multiBinding = new MultiBinding();
-                    multiBinding.StringFormat = "{1} ingots: {0}";
+                    multiBinding.StringFormat = "   {0}";
                     multiBinding.Bindings.Add(binding);
-                    multiBinding.Bindings.Add(binding2);
+                    // multiBinding.Bindings.Add(binding2);
 
                     block.SetBinding(TextBlock.TextProperty, multiBinding);
 
-                    IngotsPanel.Children.Add(block);
+                    panel.Children.Add(block);
+
+                    IngotKeyGrid.Children.Add(panel);
+
+                    Grid.SetColumn(panel, 0);
+                    Grid.SetRow(panel, i);
                 }
             }
         }
 
         private void GenerateDungeonKeys()
         {
-            // Make sure hero isn't null (constructor calls this function while loading database).
+            //Make sure hero isn't null (constructor calls this function while loading database).
             if (_hero != null)
             {
-                DungeonKeysPanel.Children.Clear();
-
                 for (int i = 0; i < Account.User.Instance.DungeonKeys.Count; i++)
                 {
+                    var panel = new StackPanel()
+                    {
+                        Orientation=Orientation.Horizontal,
+                        Margin= new Thickness(50,0,0,0)
+                    };
+
+                    var icon = new PackIcon()
+                    {
+                        Kind=PackIconKind.Key,
+                        Width=22,
+                        Height=22,
+                        VerticalAlignment=VerticalAlignment.Center
+                    };
+
+                    switch (i)
+                    {
+                        case 0:
+                            icon.Foreground=new SolidColorBrush(Colors.Gray);
+                            break;
+
+                        case 1:
+                            icon.Foreground=new SolidColorBrush(Colors.Brown);
+                            break;
+
+                        case 2:
+                            icon.Foreground=new SolidColorBrush(Colors.Green);
+                            break;
+
+                        case 3:
+                            icon.Foreground=new SolidColorBrush(Colors.Blue);
+                            break;
+                            
+                        case 4:
+                            icon.Foreground=new SolidColorBrush(Colors.Purple);
+                            break;
+
+                        case 5:
+                            icon.Foreground=new SolidColorBrush(Colors.Gold);
+                            break;
+                    }
+
+                    panel.Children.Add(icon);
+
                     var block = new TextBlock()
                     {
-                        Name = "Key" + i.ToString()
+                        Name = "Key" + i.ToString(),
+                        FontSize = 18,
+                        VerticalAlignment=VerticalAlignment.Center
                     };
 
                     Binding binding = new Binding("Quantity");
                     binding.Source = Account.User.Instance.DungeonKeys[i];
-                    Binding binding2 = new Binding("Rarity");
-                    binding2.Source = Account.User.Instance.DungeonKeys[i];
+                    // Binding binding2 = new Binding("Rarity");
+                    // binding2.Source = Account.User.Instance.DungeonKeys[i];
 
                     MultiBinding multiBinding = new MultiBinding();
-                    multiBinding.StringFormat = "{1} keys: {0}";
+                    multiBinding.StringFormat = "   {0}";
                     multiBinding.Bindings.Add(binding);
-                    multiBinding.Bindings.Add(binding2);
+                    // multiBinding.Bindings.Add(binding2);
 
                     block.SetBinding(TextBlock.TextProperty, multiBinding);
 
-                    DungeonKeysPanel.Children.Add(block);
+                    panel.Children.Add(block);
+
+                    IngotKeyGrid.Children.Add(panel);
+
+                    Grid.SetColumn(panel, 1);
+                    Grid.SetRow(panel, i);
                 }
             }
         }
@@ -105,7 +206,11 @@ namespace ClickQuest.Pages
             var sectionBlock = new TextBlock()
             {
                 Name = "Specializations",
-                Text = "Specializations:"
+                Text = "Specializations:",
+                FontSize=20,
+                FontWeight = FontWeights.Medium,
+                HorizontalAlignment=HorizontalAlignment.Center,
+                Margin = new Thickness(0,3,0,10)
             };
             SpecializationsPanel.Children.Add(sectionBlock);
 
@@ -113,7 +218,8 @@ namespace ClickQuest.Pages
             {
                 var block = new TextBlock()
                 {
-                    Name = "SpecBuying"
+                    Name = "SpecBuying",
+                    FontSize = 18
                 };
 
                 Binding binding = new Binding("SpecBuyingAmount");
@@ -124,7 +230,7 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Buying - Amount: {0}; Buff: {2}; Threshold: {1}";
+                multiBinding.StringFormat = "Tradesman → Shop offer size + {2}";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
@@ -139,7 +245,8 @@ namespace ClickQuest.Pages
             {
                 var block = new TextBlock()
                 {
-                    Name = "SpecMelting"
+                    Name = "SpecMelting",
+                    FontSize = 18
                 };
 
                 Binding binding = new Binding("SpecMeltingAmount");
@@ -150,7 +257,7 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Melting - Amount: {0}; Buff: {2}; Threshold: {1}";
+                multiBinding.StringFormat = "Melter → Extra ingot + {2}%";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
@@ -165,7 +272,8 @@ namespace ClickQuest.Pages
             {
                 var block = new TextBlock()
                 {
-                    Name = "SpecCrafting"
+                    Name = "SpecCrafting",
+                    FontSize = 18
                 };
 
                 Binding binding = new Binding("SpecCraftingAmount");
@@ -176,7 +284,7 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Crafting - Amount: {0}; Buff: {2}; Threshold: {1}";
+                multiBinding.StringFormat = "Craftsman → Can craft + {2}";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
@@ -187,11 +295,12 @@ namespace ClickQuest.Pages
             }
             #endregion
 
-            #region SpecializationQuestion
+            #region SpecializationQuesting
             {
                 var block = new TextBlock()
                 {
-                    Name = "SpecQuesting"
+                    Name = "SpecQuesting",
+                    FontSize = 18
                 };
 
                 Binding binding = new Binding("SpecQuestingAmount");
@@ -202,7 +311,7 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Questing - Amount: {0}; Buff: {2}; Threshold: {1}";
+                multiBinding.StringFormat = "Adventurer → Quest time - {2}%";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
@@ -217,7 +326,8 @@ namespace ClickQuest.Pages
             {
                 var block = new TextBlock()
                 {
-                    Name = "SpecKilling"
+                    Name = "SpecKilling",
+                    FontSize = 18
                 };
 
                 Binding binding = new Binding("SpecKillingAmount");
@@ -228,7 +338,7 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Killing - Amount: {0}; Buff: {2}; Threshold: {1}";
+                multiBinding.StringFormat = "Clicker → Click damage + {2}";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
@@ -243,7 +353,8 @@ namespace ClickQuest.Pages
             {
                 var block = new TextBlock()
                 {
-                    Name = "SpecBlessing"
+                    Name = "SpecBlessing",
+                    FontSize = 18
                 };
 
                 Binding binding = new Binding("SpecBlessingAmount");
@@ -254,7 +365,7 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Blessing - Amount: {0}; Buff: {2}; Threshold: {1}";
+                multiBinding.StringFormat = "Prayer → Blessing duration + {2}s";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
@@ -269,7 +380,8 @@ namespace ClickQuest.Pages
             {
                 var block = new TextBlock()
                 {
-                    Name = "SpecDungeon"
+                    Name = "SpecDungeon",
+                    FontSize = 18
                 };
 
                 Binding binding = new Binding("SpecDungeonAmount");
@@ -280,7 +392,7 @@ namespace ClickQuest.Pages
                 binding3.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = "Dungeon - Amount: {0}; Buff: {2}; Threshold: {1}";
+                multiBinding.StringFormat = "Daredevil → Bossfight timer + {2}s";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
