@@ -34,7 +34,6 @@ namespace ClickQuest.Heroes
         private int _poisonDamage;
         private HeroClass _heroClass;
         private string _critChanceText;
-        private string _poisonDamageText;
         private List<Quest> _quests;
 
         // Specialisations/Professions
@@ -209,19 +208,6 @@ namespace ClickQuest.Heroes
             }
         }
 
-        public string PoisonDamageText
-        {
-            get
-            {
-                return _poisonDamageText;
-            }
-            set
-            {
-                _poisonDamageText = value;
-                OnPropertyChanged();
-            }
-        }
-
         public List<Quest> Quests
         {
             get
@@ -255,8 +241,7 @@ namespace ClickQuest.Heroes
                     CritChancePerLevel = 0.004;
                     PoisonDamage = 0;
                     PoisonDamagePerLevel = 0;
-                    CritChanceText = String.Format("Crit chance:   {0:P1} (+{1:P1}/lvl)", CritChance, CritChancePerLevel);
-                    PoisonDamageText = String.Format("Poison damage:   {0}", PoisonDamage);
+                    CritChanceText = String.Format("{0:P1}", CritChance);
                     break;
 
                 case HeroClass.Venom:
@@ -265,8 +250,7 @@ namespace ClickQuest.Heroes
                     CritChancePerLevel = 0;
                     PoisonDamage = 1;
                     PoisonDamagePerLevel = 2;
-                    CritChanceText = String.Format("Crit chance:   {0:P1}", CritChance);
-                    PoisonDamageText = String.Format("Poison damage:   {0} (+{1}/lvl)", PoisonDamage, PoisonDamagePerLevel);
+                    CritChanceText = String.Format("{0:P1}", CritChance);
                     break;
             }
             
@@ -294,12 +278,10 @@ namespace ClickQuest.Heroes
                 {
                     case HeroClass.Slayer:
                         CritChanceText = String.Format("Crit chance:   {0:P1}", CritChance);
-                        PoisonDamageText = String.Format("Poison damage:   {0}", PoisonDamage);
                         break;
 
                     case HeroClass.Venom:
                         CritChanceText = String.Format("Crit chance:   {0:P1}", CritChance);
-                        PoisonDamageText = String.Format("Poison damage:   {0}", PoisonDamage);
                         break;
                 }
             }
@@ -311,15 +293,13 @@ namespace ClickQuest.Heroes
                     case HeroClass.Slayer:
                         ClickDamage += ClickDamagePerLevel;
                         CritChance += CritChancePerLevel;
-                        CritChanceText = String.Format("Crit chance:   {0:P1} (+{1:P1}/lvl)", CritChance, CritChancePerLevel);
-                        PoisonDamageText = String.Format("Poison damage:   {0}", PoisonDamage);
+                        CritChanceText = String.Format("Crit chance:   {0:P1}", CritChance, CritChancePerLevel);
                         break;
 
                     case HeroClass.Venom:
                         ClickDamage += ClickDamagePerLevel;
                         PoisonDamage += PoisonDamagePerLevel;
                         CritChanceText = String.Format("Crit chance:   {0:P1}", CritChance);
-                        PoisonDamageText = String.Format("Poison damage:   {0} (+{1}/lvl)", PoisonDamage, PoisonDamagePerLevel);
                         break;
                 }
             }

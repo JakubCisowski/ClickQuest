@@ -310,12 +310,15 @@ namespace ClickQuest.Pages
                 binding2.Source = Account.User.Instance.Specialization;
                 Binding binding3 = new Binding("SpecCraftingBuff");
                 binding3.Source = Account.User.Instance.Specialization;
+                Binding binding4 = new Binding("SpecCraftingText");
+                binding4.Source = Account.User.Instance.Specialization;
 
                 MultiBinding multiBinding = new MultiBinding();
-                multiBinding.StringFormat = " → Can craft +{2}";
+                multiBinding.StringFormat = " → Can craft {3} recipes";
                 multiBinding.Bindings.Add(binding);
                 multiBinding.Bindings.Add(binding2);
                 multiBinding.Bindings.Add(binding3);
+                multiBinding.Bindings.Add(binding4);
 
                 block.SetBinding(TextBlock.TextProperty, multiBinding);
 

@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using ClickQuest.Items;
 
 namespace ClickQuest.Account
 {
@@ -61,6 +62,8 @@ namespace ClickQuest.Account
         private int specDungeonAmount;
         private int specDungeonThreshold;
         private int specDungeonBuff;
+
+        private string _specCraftingText;
 
         #endregion Private Fields
 
@@ -346,6 +349,19 @@ namespace ClickQuest.Account
             }
         }
 
+        public string SpecCraftingText
+        {
+            get
+            {
+                return _specCraftingText;
+            }
+            set
+            {
+                _specCraftingText=value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         public Specialization()
@@ -390,6 +406,9 @@ namespace ClickQuest.Account
             SpecMeltingBuff = (SpecMeltingAmount / SpecMeltingThreshold) * SpecMeltingBuffConst;
             SpecQuestingBuff = Math.Min((SpecQuestingAmount / SpecQuestingThreshold) * SpecQuestingBuffConst, SpecQuestingBuffLimit);
             SpecDungeonBuff = SpecDungeonBuffBase + (SpecDungeonAmount / SpecDungeonThreshold) * SpecDungeonBuffConst;
+
+            // Update crafting text (used in hero stats panel).
+            SpecCraftingText=((Rarity)SpecCraftingBuff).ToString();
         }
     }
 }

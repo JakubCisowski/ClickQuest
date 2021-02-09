@@ -44,7 +44,8 @@ namespace ClickQuest.Entity
                     SpecMeltingThreshold = 1,
                     SpecMeltingBuff = 0,
                     SpecDungeonThreshold = 1,
-                    SpecDungeonBuff = 0
+                    SpecDungeonBuff = 0,
+                    SpecCraftingText = "Fine"
                 });
             });
 
