@@ -65,6 +65,7 @@ namespace ClickQuest.Pages
 
                 // Update both equipment and blacksmith page.
                 EquipmentWindow.Instance.UpdateEquipment();
+                (Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
                 UpdateBlacksmith();
 
                 // Increase Specialization Melting amount.
@@ -100,6 +101,7 @@ namespace ClickQuest.Pages
 
                 // Update both equipment and blacksmith page.
                 EquipmentWindow.Instance.UpdateEquipment();
+                (Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
                 UpdateBlacksmith();
 
                 // Increase Specialization Melting amount.
@@ -151,6 +153,7 @@ namespace ClickQuest.Pages
             User.Instance.RemoveItem(recipe);
 
             EquipmentWindow.Instance.UpdateEquipment();
+            (Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
             UpdateBlacksmith();
 
             // Increase Specialization Crafting amount.
@@ -184,6 +187,7 @@ namespace ClickQuest.Pages
                 User.Instance.RemoveItem(recipe);
 
                 EquipmentWindow.Instance.UpdateEquipment();
+                (Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
                 UpdateBlacksmith();
 
                 // Increase Specialization Crafting amount.

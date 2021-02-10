@@ -7,60 +7,67 @@
         mc:Ignorable="d"
         Title="Shop Page" Height="728" Width="1366">
 
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-         <Frame x:Name="CurrentFrame" Grid.Column="0" Grid.RowSpan="2" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
-        <Button x:Name="TownButton" Grid.Column="1" Grid.Row="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click"/>
-        <TabControl Grid.Row="1" Grid.Column="1">
-                <TabItem Header="Sell">
-                    <ListView x:Name="ItemsListViewSell" Margin="10">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Quantity" Width="60" DisplayMemberBinding="{Binding Quantity}"/>
-                                <GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
-                                <GridViewColumn Header="Value" Width="60" DisplayMemberBinding="{Binding Value}" />
-                                <GridViewColumn Header="Description" Width="120" DisplayMemberBinding="{Binding Description}" />
-                                <GridViewColumn Header="Sell" Width="200">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Content="Sell" Click="SellButton_Click" CommandParameter="{Binding}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </TabItem>
-                <TabItem Header="Buy" >
-                    <ListView x:Name="ItemsListViewBuy" Margin="10">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
-                                <GridViewColumn Header="Value" Width="60" DisplayMemberBinding="{Binding Value}" />
-                                <GridViewColumn Header="Description" Width="120" DisplayMemberBinding="{Binding Description}" />
-                                <GridViewColumn Header="Requirements" Width="120" DisplayMemberBinding="{Binding RequirementsDescription}" />
-                                <GridViewColumn Header="Buy" Width="200">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Content="Buy" Click="BuyButton_Click" CommandParameter="{Binding}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </TabItem>
-        </TabControl>
-    </Grid>
+        <Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
+		
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="TownButton" Grid.Row="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click"/>
+            <TabControl Grid.Row="1">
+                    <TabItem Header="Sell">
+                        <ListView x:Name="ItemsListViewSell" Margin="10">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
+                                    <GridViewColumn Header="Quantity" Width="60" DisplayMemberBinding="{Binding Quantity}"/>
+                                    <GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
+                                    <GridViewColumn Header="Value" Width="60" DisplayMemberBinding="{Binding Value}" />
+                                    <GridViewColumn Header="Description" Width="120" DisplayMemberBinding="{Binding Description}" />
+                                    <GridViewColumn Header="Sell" Width="200">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="Sell" Click="SellButton_Click" CommandParameter="{Binding}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </TabItem>
+                    <TabItem Header="Buy" >
+                        <ListView x:Name="ItemsListViewBuy" Margin="10">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
+                                    <GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
+                                    <GridViewColumn Header="Value" Width="60" DisplayMemberBinding="{Binding Value}" />
+                                    <GridViewColumn Header="Description" Width="120" DisplayMemberBinding="{Binding Description}" />
+                                    <GridViewColumn Header="Requirements" Width="120" DisplayMemberBinding="{Binding RequirementsDescription}" />
+                                    <GridViewColumn Header="Buy" Width="200">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="Buy" Click="BuyButton_Click" CommandParameter="{Binding}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </TabItem>
+            </TabControl>
+        </Grid>
+	</Grid>
 </Page>

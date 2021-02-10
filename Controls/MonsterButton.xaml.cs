@@ -102,6 +102,7 @@ namespace ClickQuest.Controls
             {
                 Account.User.Instance.AddItem(_monster.Loot[i].Item);
                 EquipmentWindow.Instance.UpdateEquipment();
+                _regionPage.EquipmentFrame.Refresh();
             }
 
             // Display exp and loot for testing purposes.

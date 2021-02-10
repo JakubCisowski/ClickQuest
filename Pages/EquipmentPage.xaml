@@ -17,6 +17,10 @@
                         <TextBlock Text="Materials" FontSize="17" Margin="2,0,0,0"/>
                     </StackPanel>
                 </TabItem.Header>
+
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="MaterialsPanel"/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Background="{StaticResource GameBackgroundSecondary}">
                 <TabItem.Header>
@@ -25,6 +29,10 @@
                         <TextBlock Text="Recipes" FontSize="17" Margin="2,0,0,0"/>
                     </StackPanel>
                 </TabItem.Header>
+                
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="RecipesPanel"/>
+                </ScrollViewer>
             </TabItem>
             <TabItem Background="{StaticResource GameBackgroundSecondary}">
                 <TabItem.Header>
@@ -33,6 +41,10 @@
                         <TextBlock Text="Artifacts" FontSize="17" Margin="2,0,0,0"/>
                     </StackPanel>
                 </TabItem.Header>
+                
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="ArtifactsPanel"/>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </Border>

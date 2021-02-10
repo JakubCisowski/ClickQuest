@@ -43,6 +43,7 @@ namespace ClickQuest.Pages
             Account.User.Instance.Gold += item.Value;
 
             EquipmentWindow.Instance.UpdateEquipment();
+            (Data.Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
             UpdateShop();
         }
 
@@ -58,6 +59,7 @@ namespace ClickQuest.Pages
                 Account.User.Instance.Gold -= recipe.Value;
 
                 EquipmentWindow.Instance.UpdateEquipment();
+                (Data.Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
                 UpdateShop();
 
                 // Increase Specialization Buying amount.

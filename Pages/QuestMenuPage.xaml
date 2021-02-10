@@ -6,16 +6,29 @@
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d" Title="Quest Menu"
         Height="728" Width="1366">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-      <Button x:Name="TownButton" Grid.Row="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
-      <StackPanel x:Name="QuestPanel" Orientation="Horizontal" Grid.Row="1">
 
-      </StackPanel>
-      <Button x:Name="RerollButton" Grid.Row="2" Width="150" Height="50" Content="Reroll" Click="RerollButton_Click" />
+    <Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
+
+        <Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
+        
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+        <Button x:Name="TownButton" Grid.Row="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
+        <StackPanel x:Name="QuestPanel" Orientation="Horizontal" Grid.Row="1">
+
+        </StackPanel>
+        <Button x:Name="RerollButton" Grid.Row="2" Width="150" Height="50" Content="Reroll" Click="RerollButton_Click" />
+        </Grid>
     </Grid>
 </Page>

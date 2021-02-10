@@ -126,6 +126,7 @@ namespace ClickQuest.Pages
                         Account.User.Instance.AddItem(loot.Item);
                         lootText += "- " + loot.Item.Name + " (" + loot.ItemType + ")\n";
                         EquipmentWindow.Instance.UpdateEquipment();
+                        (Data.Database.Pages["DungeonBoss"] as DungeonBossPage).EquipmentFrame.Refresh();
                     }
                 }
             }
