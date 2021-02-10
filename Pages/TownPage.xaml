@@ -23,6 +23,8 @@
             <Button x:Name="PriestButton" Content="Priest" Click="PriestButton_Click" Width="150" Height="50"/>
             <Button x:Name="DungeonSelectButton" Content="Dungeons" Click="DungeonSelectButton_Click" Width="150" Height="50"/>
 		</StackPanel>
+
+        <Frame Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 		
 	</Grid>
 </Page>

@@ -119,6 +119,10 @@
             </Setter>
         </Style>
 
+        <Style x:Key="TabControlStyleGeneral" TargetType="TabControl">
+            <Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+        </Style>
+
         <!--Global custom button style-->
         <Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}">
         </Style>
