@@ -21,14 +21,21 @@
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="6*"/>
+                <RowDefinition Height="8*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-        <Button x:Name="TownButton" Grid.Row="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
-        <StackPanel x:Name="QuestPanel" Orientation="Horizontal" Grid.Row="1">
 
-        </StackPanel>
-        <Button x:Name="RerollButton" Grid.Row="2" Width="150" Height="50" Content="Reroll" Click="RerollButton_Click" />
+            <Button x:Name="RerollButton" Grid.Row="0" HorizontalAlignment="Center" Width="450" Height="50" Click="RerollButton_Click">
+                    <TextBlock Text="Reroll" FontSize="22"/>
+            </Button>
+
+            <StackPanel x:Name="QuestPanel" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+
+            </StackPanel>
+
+            <Button x:Name="MainMenuButton" Grid.Row="2"  HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
+                    <TextBlock Text="Come back to town!" FontSize="22"/>
+            </Button>
         </Grid>
     </Grid>
 </Page>

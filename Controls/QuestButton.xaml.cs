@@ -53,7 +53,8 @@ namespace ClickQuest.Controls
                 {
                     var block = new TextBlock()
                     {
-                        Name = "RewardBlessing" + i.ToString()
+                        Name = "RewardBlessing" + i.ToString(),
+                        FontSize=20
                     };
 
                     block.Text = $"{counter}x {Database.Blessings.FirstOrDefault(x => x.Id == _quest.RewardBlessingIds[i]).Name}";
@@ -84,7 +85,8 @@ namespace ClickQuest.Controls
                 {
                     var block = new TextBlock()
                     {
-                        Name = "RewardNaterial" + i.ToString()
+                        Name = "RewardNaterial" + i.ToString(),
+                        FontSize=20
                     };
 
                     block.Text = $"{counter}x {Database.Materials.FirstOrDefault(x => x.Id == _quest.RewardMaterialIds[i]).Name}";
@@ -115,7 +117,8 @@ namespace ClickQuest.Controls
                 {
                     var block = new TextBlock()
                     {
-                        Name = "RewardRecipe" + i.ToString()
+                        Name = "RewardRecipe" + i.ToString(),
+                        FontSize=20
                     };
 
                     block.Text = $"{counter}x {Database.Recipes.FirstOrDefault(x => x.Id == _quest.RewardRecipeIds[i]).Name}";
@@ -146,7 +149,8 @@ namespace ClickQuest.Controls
                 {
                     var block = new TextBlock()
                     {
-                        Name = "RewardIngot" + i.ToString()
+                        Name = "RewardIngot" + i.ToString(),
+                        FontSize=20
                     };
 
                     block.Text = counter > 1 ? $"{counter}x {_quest.RewardIngots[i].ToString()} Ingots" : $"{counter}x {_quest.RewardIngots[i].ToString()} Ingot";
