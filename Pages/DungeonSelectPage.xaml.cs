@@ -109,6 +109,7 @@ namespace ClickQuest.Pages
             // Come back to town.
             (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
             (Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
+            (Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
 
             // Reset selection.
             LoadDungeonGroupSelection();
@@ -166,6 +167,7 @@ namespace ClickQuest.Pages
             (Data.Database.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(_bossSelected);
             // Navigate to boss fight page.
             (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["DungeonBoss"]);
+            (Database.Pages["DungeonBoss"] as DungeonBossPage).EquipmentFrame.Refresh();
             // Change info bar
             (Window.GetWindow(this) as GameWindow).LocationInfo = "Boss fight";
 

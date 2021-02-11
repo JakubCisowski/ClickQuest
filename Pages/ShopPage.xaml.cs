@@ -31,6 +31,7 @@ namespace ClickQuest.Pages
         private void TownButton_Click(object sender, RoutedEventArgs e)
         {
             (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
+            (Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
             (Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
         }
 

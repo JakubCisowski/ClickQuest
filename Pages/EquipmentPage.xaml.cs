@@ -2,6 +2,7 @@ using ClickQuest.Account;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace ClickQuest.Pages
 {
@@ -21,17 +22,26 @@ namespace ClickQuest.Pages
 
             foreach (var material in User.Instance.Materials)
             {
+                var border = new Border()
+                {
+                    BorderThickness = new Thickness(0.5),
+                    BorderBrush=new SolidColorBrush(Colors.Gray),
+                    Padding = new Thickness(6),
+                    Margin = new Thickness(4),
+                    Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
+                };
+                
                 var grid = new Grid();
 
                 var nameBlock = new TextBlock()
                 {
-                    FontSize=16,
+                    FontSize=18,
                     HorizontalAlignment=HorizontalAlignment.Left
                 };
 
                 var quantityBlock = new TextBlock()
                 {
-                    FontSize=16,
+                    FontSize=18,
                     HorizontalAlignment=HorizontalAlignment.Right
                 };
 
@@ -49,31 +59,42 @@ namespace ClickQuest.Pages
                 grid.Children.Add(nameBlock);
                 grid.Children.Add(quantityBlock);
 
-                MaterialsPanel.Children.Add(grid);
+                border.Child = grid;
+
+                MaterialsPanel.Children.Add(border);
             }
 
-            foreach (var material in User.Instance.Recipes)
+            foreach (var recipe in User.Instance.Recipes)
             {
+                var border = new Border()
+                {
+                    BorderThickness = new Thickness(0.5),
+                    BorderBrush=new SolidColorBrush(Colors.Gray),
+                    Padding = new Thickness(6),
+                    Margin = new Thickness(4),
+                    Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
+                };
+
                 var grid = new Grid();
                 
                 var nameBlock = new TextBlock()
                 {
-                    FontSize=16,
+                    FontSize=18,
                     HorizontalAlignment=HorizontalAlignment.Left
                 };
 
                 var quantityBlock = new TextBlock()
                 {
-                    FontSize=16,
+                    FontSize=18,
                     HorizontalAlignment=HorizontalAlignment.Right
                 };
 
                 var binding = new Binding("Name");
-                binding.Source=material;
+                binding.Source=recipe;
                 binding.StringFormat="{0}";
                 
                 var binding2 = new Binding("Quantity");
-                binding2.Source=material;
+                binding2.Source=recipe;
                 binding2.StringFormat="x{0}";
 
                 nameBlock.SetBinding(TextBlock.TextProperty, binding);
@@ -82,31 +103,42 @@ namespace ClickQuest.Pages
                 grid.Children.Add(nameBlock);
                 grid.Children.Add(quantityBlock);
 
-                RecipesPanel.Children.Add(grid);
+                border.Child = grid;
+
+                RecipesPanel.Children.Add(border);
             }
 
-            foreach (var material in User.Instance.Artifacts)
+            foreach (var artifact in User.Instance.Artifacts)
             {
+                var border = new Border()
+                {
+                    BorderThickness = new Thickness(1),
+                    BorderBrush=new SolidColorBrush(Colors.Gray),
+                    Padding = new Thickness(6),
+                    Margin = new Thickness(4),
+                    Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
+                };
+
                 var grid = new Grid();
                 
                 var nameBlock = new TextBlock()
                 {
-                    FontSize=16,
+                    FontSize=18,
                     HorizontalAlignment=HorizontalAlignment.Left
                 };
 
                 var quantityBlock = new TextBlock()
                 {
-                    FontSize=16,
+                    FontSize=18,
                     HorizontalAlignment=HorizontalAlignment.Right
                 };
 
                 var binding = new Binding("Name");
-                binding.Source=material;
+                binding.Source=artifact;
                 binding.StringFormat="{0}";
                 
                 var binding2 = new Binding("Quantity");
-                binding2.Source=material;
+                binding2.Source=artifact;
                 binding2.StringFormat="x{0}";
 
                 nameBlock.SetBinding(TextBlock.TextProperty, binding);
@@ -115,7 +147,9 @@ namespace ClickQuest.Pages
                 grid.Children.Add(nameBlock);
                 grid.Children.Add(quantityBlock);
 
-                ArtifactsPanel.Children.Add(grid);
+                border.Child=grid;
+
+                ArtifactsPanel.Children.Add(border);
             }
         }
     }

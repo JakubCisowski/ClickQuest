@@ -32,6 +32,7 @@ namespace ClickQuest.Pages
         {
             (Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
             (Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
+            (Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
         }
 
         #endregion
