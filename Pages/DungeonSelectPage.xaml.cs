@@ -41,10 +41,17 @@ namespace ClickQuest.Pages
                 var button = new Button()
                 {
                     Name = "DungeonGroup" + Data.Database.DungeonGroups[i].Id.ToString(),
-                    Content = Data.Database.DungeonGroups[i].Name + "\n" + Data.Database.DungeonGroups[i].Description,
-                    Width = 150,
-                    Height = 80
+                    Width = 250,
+                    Height = 80,
                 };
+
+                var block = new TextBlock()
+                {
+                    FontSize = 22,
+                    Text = Data.Database.DungeonGroups[i].Name + "\n" + Data.Database.DungeonGroups[i].Description
+                };
+
+                button.Content=block;
 
                 button.Click += DungeonGroupButton_Click;
 
@@ -68,10 +75,17 @@ namespace ClickQuest.Pages
                 var button = new Button()
                 {
                     Name = "Dungeon" + dungeonsOfThisGroup[i].Id.ToString(),
-                    Content = dungeonsOfThisGroup[i].Name + "\n" + dungeonsOfThisGroup[i].Description,
-                    Width = 150,
+                    Width = 250,
                     Height = 80
                 };
+
+                var block = new TextBlock()
+                {
+                    FontSize = 22,
+                    Text = dungeonsOfThisGroup[i].Name + "\n" + dungeonsOfThisGroup[i].Description
+                };
+
+                button.Content=block;
 
                 button.Click += DungeonButton_Click;
 
@@ -92,10 +106,17 @@ namespace ClickQuest.Pages
                 var button = new Button()
                 {
                     Name = "Boss" + _dungeonSelected.Bosses[i].Id.ToString(),
-                    Content = _dungeonSelected.Bosses[i].Name + "\n" + _dungeonSelected.Bosses[i].Description,
-                    Width = 150,
+                    Width = 250,
                     Height = 80
                 };
+                
+                var block = new TextBlock()
+                {
+                    FontSize = 22,
+                    Text = _dungeonSelected.Bosses[i].Name + "\n" + _dungeonSelected.Bosses[i].Description
+                };
+
+                button.Content=block;
 
                 button.Click += BossButton_Click;
 

@@ -19,13 +19,24 @@
         
         <Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
-        <StackPanel Grid.Column="1">
-            <StackPanel x:Name="NavigationPanel" Orientation="Vertical">
-                <Button x:Name="TownButton" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
-                <Button x:Name="UndoButton" Width="150" Height="50" Content="Undo" Visibility="Hidden"/>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Button x:Name="UndoButton" Grid.Row="0" Width="450" Height="50" Visibility="Hidden">
+                    <TextBlock Text="Undo" FontSize="22"/>
+            </Button>
+
+            <StackPanel x:Name="DungeonSelectPanel" Grid.Row="1" Orientation="Vertical">
             </StackPanel>
-            <StackPanel x:Name="DungeonSelectPanel" Orientation="Vertical">
-            </StackPanel>
-        </StackPanel>
+
+            <Button x:Name="TownButton" Grid.Row="2" Width="450" Height="50" Click="TownButton_Click">
+                    <TextBlock Text="Come back to town!" FontSize="22"/>
+            </Button>
+            
+        </Grid>
     </Grid>
 </Page>

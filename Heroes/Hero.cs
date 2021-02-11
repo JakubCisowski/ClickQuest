@@ -277,11 +277,11 @@ namespace ClickQuest.Heroes
                 switch (_heroClass)
                 {
                     case HeroClass.Slayer:
-                        CritChanceText = String.Format("Crit chance:   {0:P1}", CritChance);
+                        CritChanceText = String.Format("{0:P1}", CritChance);
                         break;
 
                     case HeroClass.Venom:
-                        CritChanceText = String.Format("Crit chance:   {0:P1}", CritChance);
+                        CritChanceText = String.Format("{0:P1}", CritChance);
                         break;
                 }
             }
@@ -293,13 +293,13 @@ namespace ClickQuest.Heroes
                     case HeroClass.Slayer:
                         ClickDamage += ClickDamagePerLevel;
                         CritChance += CritChancePerLevel;
-                        CritChanceText = String.Format("Crit chance:   {0:P1}", CritChance, CritChancePerLevel);
+                        CritChanceText = String.Format("{0:P1}", CritChance);
                         break;
 
                     case HeroClass.Venom:
                         ClickDamage += ClickDamagePerLevel;
                         PoisonDamage += PoisonDamagePerLevel;
-                        CritChanceText = String.Format("Crit chance:   {0:P1}", CritChance);
+                        CritChanceText = String.Format("{0:P1}", CritChance);
                         break;
                 }
             }

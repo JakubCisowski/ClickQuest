@@ -18,11 +18,20 @@
 
         <Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
-        <StackPanel x:Name="RegionPanel" Orientation="Vertical" Grid.Column="1">
-            <TextBlock x:Name="RegionNameBlock" Text="{Binding Path=Name, StringFormat='Region name: \{0\}'}" />
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <TextBlock x:Name="TestRewardsBlock" />
-            <Button x:Name="TownButton" Grid.Column="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
-        </StackPanel>
+            <StackPanel x:Name="RegionPanel" Orientation="Vertical" VerticalAlignment="Center" Grid.Row="0">
+                <TextBlock x:Name="TestRewardsBlock" />
+            </StackPanel>
+            
+            <Button x:Name="TownButton" Grid.Row="1" HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
+                    <TextBlock Text="Come back to town!" FontSize="22"/>
+            </Button>
+        </Grid>
+        
     </Grid>
 </Page>

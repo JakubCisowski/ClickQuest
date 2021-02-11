@@ -24,6 +24,7 @@ namespace ClickQuest.Enemies
         private string _name;
         private int _health;
         private int _currentHealth;
+        private int _currentHealthProgress;
         private string _image;
         private string _description;
         private List<(Item Item, ItemType ItemType, double Frequency)> _loot;
@@ -94,6 +95,20 @@ namespace ClickQuest.Enemies
             set
             {
                 _currentHealth = value;
+                CurrentHealthProgress = this.CalculateCurrentHealthProgress();
+                OnPropertyChanged();
+            }
+        }
+
+        public int CurrentHealthProgress
+        {
+            get
+            {
+                return _currentHealthProgress;
+            }
+            set
+            {
+                _currentHealthProgress = value;
                 OnPropertyChanged();
             }
         }
@@ -147,6 +162,7 @@ namespace ClickQuest.Enemies
             Health = health;
             CurrentHealth = health;
             Loot = loot;
+            CurrentHealthProgress=100;
         }
 
         // Boss constructor.
@@ -157,6 +173,7 @@ namespace ClickQuest.Enemies
             Health = health;
             CurrentHealth = health;
             BossLoot = bossLoot;
+            CurrentHealthProgress=100;
         }
 
         public Monster(Monster monsterToCopy)
@@ -168,6 +185,13 @@ namespace ClickQuest.Enemies
             Loot = monsterToCopy.Loot;
             BossLoot = monsterToCopy.BossLoot;
             Description = monsterToCopy.Description;
+            CurrentHealthProgress=monsterToCopy.CurrentHealthProgress;
+        }
+
+        private int CalculateCurrentHealthProgress()
+        {
+            // Calculate killing progress in % (for progress bar on monster button).
+            return (int)(((double)this.CurrentHealth / this.Health) * 100);
         }
     }
 }

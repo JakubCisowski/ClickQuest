@@ -3,26 +3,43 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ClickQuest"
         mc:Ignorable="d"
-        Height="200" Width="300">
+        Height="350" Width="350">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Red" SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ProgressBar.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
 
     <Button Click="MonsterButton_Click">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock x:Name="MonsterName" Grid.Row="0" Text="{Binding Path=Name}" />
-            <TextBlock x:Name="MonsterHealth" Grid.Row="1">
+            <TextBlock x:Name="MonsterName" Grid.Row="0" Text="{Binding Path=Name}" FontSize="28" HorizontalAlignment="Center"/>
+
+            <Grid Grid.Row="1" Margin="6">
+                <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=CurrentHealthProgress, UpdateSourceTrigger=PropertyChanged}" Height="25" Width="150"/>
+                <TextBlock x:Name="MonsterHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold" FontSize="18">
                 <TextBlock.Text>
-                    <MultiBinding StringFormat="Health: {0} / {1}">
+                    <MultiBinding StringFormat=" {0} / {1} ">
                         <Binding Path="CurrentHealth" />
                         <Binding Path="Health" />
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
+            </Grid>
+
+            
         </Grid>
     </Button>
 </UserControl>
