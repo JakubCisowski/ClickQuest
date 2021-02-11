@@ -17,14 +17,49 @@
 
         <Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
-		<StackPanel x:Name="RegionsPanel" Orientation="Vertical" Grid.Column="1">
-            <Button x:Name="MainMenuButton" Content="Back to menu" Click="MainMenuButton_Click" Width="100" Height="50"/>
-            <Button x:Name="QuestMenuButton" Content="Quests" Click="QuestMenuButton_Click" Width="100" Height="50"/>
-            <Button x:Name="ShopButton" Content="Shop" Click="ShopButton_Click" Width="150" Height="50"/>
-            <Button x:Name="BlacksmithButton" Content="Blacksmith" Click="BlacksmithButton_Click" Width="150" Height="50"/>
-            <Button x:Name="PriestButton" Content="Priest" Click="PriestButton_Click" Width="150" Height="50"/>
-            <Button x:Name="DungeonSelectButton" Content="Dungeons" Click="DungeonSelectButton_Click" Width="150" Height="50"/>
-		</StackPanel>
+		<Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel x:Name="TownPanel" Orientation="Vertical" Grid.Column="0" Grid.Row="0">
+                <TextBlock FontSize="22" FontWeight="DemiBold" Text="Districts" HorizontalAlignment="Center" Margin="0,10,0,20"/>
+                
+                <Button x:Name="ShopButton" Click="ShopButton_Click" Width="150" Height="50">
+                    <TextBlock Text="Shop" FontSize="20"/>
+                </Button>
+                
+                <Button x:Name="BlacksmithButton" Click="BlacksmithButton_Click" Width="150" Height="50">
+                    <TextBlock Text="Blacksmith" FontSize="20"/>
+                </Button>
+
+                <Button x:Name="PriestButton" Click="PriestButton_Click" Width="150" Height="50">
+                    <TextBlock Text="Priest" FontSize="20"/>
+                </Button>
+
+                <Button x:Name="QuestMenuButton" Click="QuestMenuButton_Click" Width="150" Height="50">
+                    <TextBlock Text="Quests" FontSize="20"/>
+                </Button>
+
+                <Button x:Name="DungeonSelectButton" Click="DungeonSelectButton_Click" Width="150" Height="50">
+                    <TextBlock Text="Dungeons" FontSize="20"/>
+                </Button>
+            </StackPanel>
+            
+            <StackPanel x:Name="RegionsPanel" Orientation="Vertical" Grid.Column="1" Grid.Row="0">
+                <TextBlock FontSize="22" FontWeight="DemiBold" Text="Regions" HorizontalAlignment="Center" Margin="0,10,0,20"/>
+		    </StackPanel>
+            
+            <Button x:Name="MainMenuButton" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="MainMenuButton_Click" Width="450" Height="50">
+                <TextBlock Text="Back to menu" FontSize="22"/>
+            </Button>
+		</Grid>
 
 	</Grid>
 </Page>

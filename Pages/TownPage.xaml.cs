@@ -30,14 +30,21 @@ namespace ClickQuest.Pages
                 var button = new Button()
                 {
                     Name = "Region" + Data.Database.Regions[i].Id.ToString(),
-                    Content = Data.Database.Regions[i].Name,
-                    Width = 80,
-                    Height = 50
+                    Width = 150,
+                    Height = 50,
                 };
+
+                var block = new TextBlock()
+                {
+                    Text=Data.Database.Regions[i].Name,
+                    FontSize=20
+                };
+
+                button.Content=block;
 
                 button.Click += RegionButton_Click;
 
-                RegionsPanel.Children.Insert(i, button);
+                RegionsPanel.Children.Insert(i+1, button);
             }
         }
 
