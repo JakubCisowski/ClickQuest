@@ -6,151 +6,151 @@ using System.Windows.Media;
 
 namespace ClickQuest.Pages
 {
-    public partial class EquipmentPage : Page
-    {
-        public EquipmentPage()
-        {
-            InitializeComponent(); 
-            UpdateEquipment();
-        }
+	public partial class EquipmentPage : Page
+	{
+		public EquipmentPage()
+		{
+			InitializeComponent();
+			UpdateEquipment();
+		}
 
-        public void UpdateEquipment()
-        {
-            MaterialsPanel.Children.Clear();
-            RecipesPanel.Children.Clear();
-            ArtifactsPanel.Children.Clear();
+		public void UpdateEquipment()
+		{
+			MaterialsPanel.Children.Clear();
+			RecipesPanel.Children.Clear();
+			ArtifactsPanel.Children.Clear();
 
-            foreach (var material in User.Instance.Materials)
-            {
-                var border = new Border()
-                {
-                    BorderThickness = new Thickness(0.5),
-                    BorderBrush=new SolidColorBrush(Colors.Gray),
-                    Padding = new Thickness(6),
-                    Margin = new Thickness(4),
-                    Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
-                };
-                
-                var grid = new Grid();
+			foreach (var material in User.Instance.Materials)
+			{
+				var border = new Border()
+				{
+					BorderThickness = new Thickness(0.5),
+					BorderBrush = new SolidColorBrush(Colors.Gray),
+					Padding = new Thickness(6),
+					Margin = new Thickness(4),
+					Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
+				};
 
-                var nameBlock = new TextBlock()
-                {
-                    FontSize=18,
-                    HorizontalAlignment=HorizontalAlignment.Left
-                };
+				var grid = new Grid();
 
-                var quantityBlock = new TextBlock()
-                {
-                    FontSize=18,
-                    HorizontalAlignment=HorizontalAlignment.Right
-                };
+				var nameBlock = new TextBlock()
+				{
+					FontSize = 18,
+					HorizontalAlignment = HorizontalAlignment.Left
+				};
 
-                var binding = new Binding("Name");
-                binding.Source=material;
-                binding.StringFormat="{0}";
-                
-                var binding2 = new Binding("Quantity");
-                binding2.Source=material;
-                binding2.StringFormat="x{0}";
+				var quantityBlock = new TextBlock()
+				{
+					FontSize = 18,
+					HorizontalAlignment = HorizontalAlignment.Right
+				};
 
-                nameBlock.SetBinding(TextBlock.TextProperty, binding);
-                quantityBlock.SetBinding(TextBlock.TextProperty, binding2);
+				var binding = new Binding("Name");
+				binding.Source = material;
+				binding.StringFormat = "{0}";
 
-                grid.Children.Add(nameBlock);
-                grid.Children.Add(quantityBlock);
+				var binding2 = new Binding("Quantity");
+				binding2.Source = material;
+				binding2.StringFormat = "x{0}";
 
-                border.Child = grid;
+				nameBlock.SetBinding(TextBlock.TextProperty, binding);
+				quantityBlock.SetBinding(TextBlock.TextProperty, binding2);
 
-                MaterialsPanel.Children.Add(border);
-            }
+				grid.Children.Add(nameBlock);
+				grid.Children.Add(quantityBlock);
 
-            foreach (var recipe in User.Instance.Recipes)
-            {
-                var border = new Border()
-                {
-                    BorderThickness = new Thickness(0.5),
-                    BorderBrush=new SolidColorBrush(Colors.Gray),
-                    Padding = new Thickness(6),
-                    Margin = new Thickness(4),
-                    Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
-                };
+				border.Child = grid;
 
-                var grid = new Grid();
-                
-                var nameBlock = new TextBlock()
-                {
-                    FontSize=18,
-                    HorizontalAlignment=HorizontalAlignment.Left
-                };
+				MaterialsPanel.Children.Add(border);
+			}
 
-                var quantityBlock = new TextBlock()
-                {
-                    FontSize=18,
-                    HorizontalAlignment=HorizontalAlignment.Right
-                };
+			foreach (var recipe in User.Instance.Recipes)
+			{
+				var border = new Border()
+				{
+					BorderThickness = new Thickness(0.5),
+					BorderBrush = new SolidColorBrush(Colors.Gray),
+					Padding = new Thickness(6),
+					Margin = new Thickness(4),
+					Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
+				};
 
-                var binding = new Binding("Name");
-                binding.Source=recipe;
-                binding.StringFormat="{0}";
-                
-                var binding2 = new Binding("Quantity");
-                binding2.Source=recipe;
-                binding2.StringFormat="x{0}";
+				var grid = new Grid();
 
-                nameBlock.SetBinding(TextBlock.TextProperty, binding);
-                quantityBlock.SetBinding(TextBlock.TextProperty, binding2);
+				var nameBlock = new TextBlock()
+				{
+					FontSize = 18,
+					HorizontalAlignment = HorizontalAlignment.Left
+				};
 
-                grid.Children.Add(nameBlock);
-                grid.Children.Add(quantityBlock);
+				var quantityBlock = new TextBlock()
+				{
+					FontSize = 18,
+					HorizontalAlignment = HorizontalAlignment.Right
+				};
 
-                border.Child = grid;
+				var binding = new Binding("Name");
+				binding.Source = recipe;
+				binding.StringFormat = "{0}";
 
-                RecipesPanel.Children.Add(border);
-            }
+				var binding2 = new Binding("Quantity");
+				binding2.Source = recipe;
+				binding2.StringFormat = "x{0}";
 
-            foreach (var artifact in User.Instance.Artifacts)
-            {
-                var border = new Border()
-                {
-                    BorderThickness = new Thickness(1),
-                    BorderBrush=new SolidColorBrush(Colors.Gray),
-                    Padding = new Thickness(6),
-                    Margin = new Thickness(4),
-                    Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
-                };
+				nameBlock.SetBinding(TextBlock.TextProperty, binding);
+				quantityBlock.SetBinding(TextBlock.TextProperty, binding2);
 
-                var grid = new Grid();
-                
-                var nameBlock = new TextBlock()
-                {
-                    FontSize=18,
-                    HorizontalAlignment=HorizontalAlignment.Left
-                };
+				grid.Children.Add(nameBlock);
+				grid.Children.Add(quantityBlock);
 
-                var quantityBlock = new TextBlock()
-                {
-                    FontSize=18,
-                    HorizontalAlignment=HorizontalAlignment.Right
-                };
+				border.Child = grid;
 
-                var binding = new Binding("Name");
-                binding.Source=artifact;
-                binding.StringFormat="{0}";
-                
-                var binding2 = new Binding("Quantity");
-                binding2.Source=artifact;
-                binding2.StringFormat="x{0}";
+				RecipesPanel.Children.Add(border);
+			}
 
-                nameBlock.SetBinding(TextBlock.TextProperty, binding);
-                quantityBlock.SetBinding(TextBlock.TextProperty, binding2);
+			foreach (var artifact in User.Instance.Artifacts)
+			{
+				var border = new Border()
+				{
+					BorderThickness = new Thickness(1),
+					BorderBrush = new SolidColorBrush(Colors.Gray),
+					Padding = new Thickness(6),
+					Margin = new Thickness(4),
+					Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
+				};
 
-                grid.Children.Add(nameBlock);
-                grid.Children.Add(quantityBlock);
+				var grid = new Grid();
 
-                border.Child=grid;
+				var nameBlock = new TextBlock()
+				{
+					FontSize = 18,
+					HorizontalAlignment = HorizontalAlignment.Left
+				};
 
-                ArtifactsPanel.Children.Add(border);
-            }
-        }
-    }
+				var quantityBlock = new TextBlock()
+				{
+					FontSize = 18,
+					HorizontalAlignment = HorizontalAlignment.Right
+				};
+
+				var binding = new Binding("Name");
+				binding.Source = artifact;
+				binding.StringFormat = "{0}";
+
+				var binding2 = new Binding("Quantity");
+				binding2.Source = artifact;
+				binding2.StringFormat = "x{0}";
+
+				nameBlock.SetBinding(TextBlock.TextProperty, binding);
+				quantityBlock.SetBinding(TextBlock.TextProperty, binding2);
+
+				grid.Children.Add(nameBlock);
+				grid.Children.Add(quantityBlock);
+
+				border.Child = grid;
+
+				ArtifactsPanel.Children.Add(border);
+			}
+		}
+	}
 }
