@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Height="350" Width="350">
 
+	<!-- Material design resources for progress bar -->
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,6 +18,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
+	<!-- Monster button -->
     <Button Click="MonsterButton_Click">
         <Grid>
             <Grid.RowDefinitions>
@@ -25,11 +27,15 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
+			<!-- Text with name -->
             <TextBlock x:Name="MonsterName" Grid.Row="0" Text="{Binding Path=Name}" FontSize="28" HorizontalAlignment="Center"/>
 
+			<!-- Health info-->
             <Grid Grid.Row="1" Margin="6">
+				<!-- Health progress bar -->
                 <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=CurrentHealthProgress, UpdateSourceTrigger=PropertyChanged}" Height="25" Width="150"/>
-                <TextBlock x:Name="MonsterHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold" FontSize="18">
+                <!-- Text on progress bar -->
+				<TextBlock x:Name="MonsterHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold" FontSize="18">
                 <TextBlock.Text>
                     <MultiBinding StringFormat=" {0} / {1} ">
                         <Binding Path="CurrentHealth" />

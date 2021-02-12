@@ -22,7 +22,10 @@ namespace ClickQuest.Controls
 
 		#endregion INotifyPropertyChanged
 
+		#region Private Fields
 		private Quest _quest;
+
+		#endregion
 
 		public QuestButton(Quest quest)
 		{

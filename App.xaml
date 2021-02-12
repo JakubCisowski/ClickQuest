@@ -24,10 +24,12 @@
 		<SolidColorBrush  x:Key="ButtonDangerBrush" Color="#FFD3D3"/>
 		<SolidColorBrush  x:Key="ButtonDangerBrushHover" Color="#FF0000"/>
 
-		<!-- Custom default styles -->
-		
+		<!-- Custom global styles -->
 		<Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}"></Style>
 		<Style TargetType="ListView" BasedOn="{StaticResource GameFontRegular}"></Style>
+
+		<Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}">
+		</Style>
 
 		<Style TargetType="Window" BasedOn="{StaticResource GameFontRegular}">
 			<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
@@ -41,7 +43,7 @@
 			<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
 		</Style>
 
-		<!-- Custom button style -->
+		<!-- Custom button styles -->
 		<Style x:Key="ButtonStyleGeneral" TargetType="Button">
 			<Setter Property="OverridesDefaultStyle" Value="True"/>
 			<Setter Property="Margin" Value="5"/>
@@ -117,16 +119,14 @@
 					</ControlTemplate>
 				</Setter.Value>
 			</Setter>
-		</Style>
+		</Style>		
 
+		<!-- Custom TabControl style -->
 		<Style x:Key="TabControlStyleGeneral" TargetType="TabControl">
 			<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
 		</Style>
 
-		<!--Global custom button style-->
-		<Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}">
-		</Style>
-
+		<!-- Custom ToolTip styles -->
 		<Style x:Key="ToolTipBorderBase" TargetType="Border">
 			<Setter Property="Background" Value="Gray"/>
 			<Setter Property="BorderBrush" Value="Black"/>
@@ -141,31 +141,5 @@
 			<Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
 			<Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
 		</Style>
-
-<!-- 
-		<Style x:Key="ToolTipBase" TargetType="ToolTip">
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate>
-						<Grid>
-							<Border Background="Gray"
-									BorderBrush="Black"
-									BorderThickness="1"
-									Opacity="0.9"
-									SnapsToDevicePixels="True" />
-							<TextBlock Margin="5"
-										Foreground="WhiteSmoke"
-										FontSize="22"
-										Text="ToolTipHelper AutoMove sample"
-										TextOptions.TextFormattingMode="Display"
-										TextOptions.TextRenderingMode="ClearType" />
-						</Grid>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style> -->
-
-	   
-
 	</Application.Resources>
 </Application>

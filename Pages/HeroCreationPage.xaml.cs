@@ -45,6 +45,7 @@ namespace ClickQuest.Pages
 				// Refresh bindings.
 				Data.Database.RefreshPages();
 
+				// Go to Town.
 				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
 				(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
 			}
@@ -52,6 +53,7 @@ namespace ClickQuest.Pages
 
 		public void CancelButton_Click(object sender, RoutedEventArgs e)
 		{
+			// Go back to Menu.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["MainMenu"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "";
 		}

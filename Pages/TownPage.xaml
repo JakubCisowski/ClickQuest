@@ -13,10 +13,13 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
+		<!-- Hero stats frame-->
 		<Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
+		<!-- Equipment frame-->
 		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
+		<!-- Main grid - regions and districts -->
 		<Grid Grid.Column="1">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
@@ -28,34 +31,46 @@
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 
+			<!-- Districts panel -->
 			<StackPanel x:Name="TownPanel" Orientation="Vertical" Grid.Column="0" Grid.Row="0">
+				<!-- Districts text -->
 				<TextBlock FontSize="22" FontWeight="DemiBold" Text="Districts" HorizontalAlignment="Center" Margin="0,10,0,20"/>
 				
+				<!-- Shop button -->
 				<Button x:Name="ShopButton" Click="ShopButton_Click" Width="150" Height="50">
 					<TextBlock Text="Shop" FontSize="20"/>
 				</Button>
 				
+				<!-- Blacksmith button -->
 				<Button x:Name="BlacksmithButton" Click="BlacksmithButton_Click" Width="150" Height="50">
 					<TextBlock Text="Blacksmith" FontSize="20"/>
 				</Button>
 
+				<!-- Priest button -->
 				<Button x:Name="PriestButton" Click="PriestButton_Click" Width="150" Height="50">
 					<TextBlock Text="Priest" FontSize="20"/>
 				</Button>
 
+				<!-- Quest menu button -->
 				<Button x:Name="QuestMenuButton" Click="QuestMenuButton_Click" Width="150" Height="50">
 					<TextBlock Text="Quests" FontSize="20"/>
 				</Button>
 
+				<!-- Dungeon select button -->
 				<Button x:Name="DungeonSelectButton" Click="DungeonSelectButton_Click" Width="150" Height="50">
 					<TextBlock Text="Dungeons" FontSize="20"/>
 				</Button>
 			</StackPanel>
 			
+			<!-- Districts panel -->
 			<StackPanel x:Name="RegionsPanel" Orientation="Vertical" Grid.Column="1" Grid.Row="0">
+				<!-- Districts text -->
 				<TextBlock FontSize="22" FontWeight="DemiBold" Text="Regions" HorizontalAlignment="Center" Margin="0,10,0,20"/>
+
+				<!-- [Here region buttons are dynamically generated] -->
 			</StackPanel>
 			
+			<!-- Back to town button -->
 			<Button x:Name="MainMenuButton" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="MainMenuButton_Click" Width="450" Height="50">
 				<TextBlock Text="Back to menu" FontSize="22"/>
 			</Button>

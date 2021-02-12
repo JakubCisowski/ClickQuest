@@ -3,49 +3,56 @@ using System.Windows.Input;
 
 namespace ClickQuest.Controls
 {
-	public partial class AlertBox : Window
-	{
-		private static MessageBoxResult Result = MessageBoxResult.OK;
-		private static AlertBox MessageBox;
+    public partial class AlertBox : Window
+    {
+		#region Private Fields
+        private static MessageBoxResult Result = MessageBoxResult.OK;
+        private static AlertBox MessageBox;
 
-		public AlertBox()
-		{
-			InitializeComponent();
-			this.Owner = Application.Current.MainWindow;
-		}
+		#endregion
 
-		public static MessageBoxResult Show(string content)
-		{
-			MessageBox = new AlertBox()
-			{
-				ContentBox = { Text = content }
-			};
+        public AlertBox()
+        {
+            InitializeComponent();
+            this.Owner = Application.Current.MainWindow;
+        }
 
-			MessageBox.ShowDialog();
+        public static MessageBoxResult Show(string content)
+        {
+            MessageBox = new AlertBox()
+            {
+                ContentBox = { Text = content }
+            };
 
-			return Result;
-		}
+            MessageBox.ShowDialog();
 
-		private void OkButton_Click(object sender, RoutedEventArgs e)
-		{
-			Result = MessageBoxResult.OK;
-			MessageBox.Close();
-			MessageBox = null;
-		}
+            return Result;
+        }
 
-		private void CancelButton_Click(object sender, RoutedEventArgs e)
-		{
-			Result = MessageBoxResult.Cancel;
-			MessageBox.Close();
-			MessageBox = null;
-		}
+		#region Events
 
-		private void AlertBox_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (e.ChangedButton == MouseButton.Left)
-			{
-				this.DragMove();
-			}
-		}
-	}
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            Result = MessageBoxResult.OK;
+            MessageBox.Close();
+            MessageBox = null;
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Result = MessageBoxResult.Cancel;
+            MessageBox.Close();
+            MessageBox = null;
+        }
+
+        private void AlertBox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+
+		#endregion
+    }
 }

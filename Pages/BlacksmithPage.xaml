@@ -15,8 +15,10 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
+		<!-- Hero stats frame-->
 		<Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
+		<!-- Equipment frame-->
 		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
 		<Grid Grid.Column="1">
@@ -25,8 +27,10 @@
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
+			<!-- Back to town button -->
 			<Button x:Name="TownButton" Grid.Row="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
 
+			<!-- Blacksmith panel-->
 			<TabControl Grid.Row="1" Width="600" Height="300">
 				<TabItem Header="Melt Materials">
 					<ListView x:Name="ItemsListViewMeltMaterials" Width="600">

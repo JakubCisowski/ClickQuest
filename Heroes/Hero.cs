@@ -264,6 +264,7 @@ namespace ClickQuest.Heroes
 
 		public void UpdateHero()
 		{
+			// Updates hero experience to make sure panels are updated at startup.
 			ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
 			ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
 			ExperienceProgress = Heroes.Experience.CalculateXpProgress(this);

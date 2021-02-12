@@ -16,6 +16,8 @@ namespace ClickQuest.Pages
 
 		public void UpdateEquipment()
 		{
+			// Refresh equipment.
+
 			MaterialsPanel.Children.Clear();
 			RecipesPanel.Children.Clear();
 			ArtifactsPanel.Children.Clear();

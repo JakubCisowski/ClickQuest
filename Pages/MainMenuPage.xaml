@@ -35,6 +35,7 @@
 			<!-- Create hero button -->
 			<Button x:Name="CreateHeroButton" Grid.Row="0" Grid.ColumnSpan="2" Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" VerticalAlignment="Center"
 				ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
+				<!-- Create hero test tooltip -->
 				<Button.ToolTip>
 					<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
 						<ToolTip.Template>

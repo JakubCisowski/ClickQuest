@@ -9,6 +9,7 @@
 		mc:Ignorable="d" Title="Stats"
 		Height="728" Width="341">
 
+	<!-- Material design resources for progres bar -->
 	<Page.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -18,17 +19,25 @@
 		</ResourceDictionary>
 	</Page.Resources>
 
+	<!-- Stats panel -->
 	<Border BorderThickness="3" BorderBrush="Gray" Margin="1" Padding="6">
 		<StackPanel x:Name="HeroStatsPanel" Orientation="Vertical" HorizontalAlignment="Left" Width="323">
+			<!-- Hero info block -->
 			<TextBlock x:Name="HeroNameBlock" FontSize="22" TextAlignment="Center">
+					<!-- Hero name text-->
 					<Run Text="{Binding Path=Name}" FontWeight="DemiBold" />
 					<LineBreak />
+					<!-- Hero level text-->
 					<Run Text="{Binding Level, StringFormat='\{0\} lvl -'}" FontWeight="Normal" />
+					<!-- Hero class text-->
 					<Run Text="{Binding Mode=OneWay, Path=ThisHeroClass}" FontWeight="Normal" FontStyle="Italic" />
 			</TextBlock>
 
+			<!-- Experience grid -->
 			<Grid>
+				<!-- Experience progress bar -->
 				<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16">
+					<!-- Experience progress bar tooltip -->
 					<ProgressBar.ToolTip>
 						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
 							<ToolTip.Template>
@@ -48,11 +57,13 @@
 					</ProgressBar.ToolTip>
 				</ProgressBar>
 
+				<!-- Progress text on experience progress bar -->
 				<TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold" />
 			</Grid>
 
 			<Separator Height="2" Width="200" Margin="10" />
 
+			<!-- Hero stats grid -->
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="*" />
@@ -64,8 +75,10 @@
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="*" />
 				</Grid.ColumnDefinitions>
-
+				
+				<!-- Click damage panel-->
 				<StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+					<!-- Click damage info tooltip -->
 					<StackPanel.ToolTip>
 						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
 							<ToolTip.Template>
@@ -86,13 +99,18 @@
 						</ToolTip>
 					</StackPanel.ToolTip>
 
+					<!-- Click damage icon-->
 					<materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="Gray" VerticalAlignment="Center" />
+					<!-- Click damage text-->
 					<TextBlock FontSize="18" Margin="3" Text="Damage:" VerticalAlignment="Center" />
 				</StackPanel>
 
+				<!-- Click damage value (binding) -->
 				<TextBlock x:Name="ClickDamageBlock" Grid.Row="0" Grid.Column="1" FontSize="18" Margin="3" VerticalAlignment="Center" Text="{Binding Path=ClickDamage}"/>
 
+				<!-- Crit panel -->
 				<StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+					<!-- Crit info tooltip -->
 					<StackPanel.ToolTip>
 						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
 							<ToolTip.Template>
@@ -113,13 +131,18 @@
 						</ToolTip>
 					</StackPanel.ToolTip>
 
+					<!-- Crit icon-->
 					<materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefaultClick" Foreground="Black" VerticalAlignment="Center" />
+					<!-- Crit text-->
 					<TextBlock Text="Crit chance:" FontSize="18" Margin="3" VerticalAlignment="Center" />
 				</StackPanel>
 
+				<!-- Crit value (binding) -->
 				<TextBlock x:Name="CritChanceBlock" Grid.Row="1" Grid.Column="1" Text="{Binding Path=CritChanceText}" FontSize="18" Margin="3" VerticalAlignment="Center" />
 
+				<!-- Poison damage panel -->
 				<StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+					<!-- Poison damage tooltip -->
 					<StackPanel.ToolTip>
 						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
 							<ToolTip.Template>
@@ -142,20 +165,27 @@
 						</ToolTip>
 					</StackPanel.ToolTip>
 					
+					<!-- Poison damage icon-->
 					<materialDesign:PackIcon Width="22" Height="22" Kind="Water" Foreground="Green" VerticalAlignment="Center" />
+					<!-- Poison damage text-->
 					<TextBlock Text="Poison damage:" FontSize="18" Margin="3" VerticalAlignment="Center" />
 				</StackPanel>
 
+				<!-- Poison damage value (binding) -->
 				<TextBlock x:Name="PoisonDamageBlock" Grid.Row="2" Grid.Column="1" Text="{Binding Path=PoisonDamage}" FontSize="18" Margin="3" VerticalAlignment="Center" />
 			</Grid>
 
 			<Separator Height="2" Width="200" Margin="10" />
 
+			<!-- Gold panel -->
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<!-- Gold icon-->
 				<materialDesign:PackIcon Width="22" Height="22" Kind="CheckboxMultipleBlankCircle" Foreground="#FFD700" VerticalAlignment="Center" />
+				<!-- Gold text-->
 				<TextBlock x:Name="GoldBlock" FontSize="18" Margin="3" VerticalAlignment="Center" />
 			</StackPanel>
 
+			<!-- Ingots & Dungeon keys panel-->
 			<StackPanel>
 				<Grid x:Name="IngotKeyGrid">
 					<Grid.RowDefinitions>
@@ -172,16 +202,19 @@
 						<ColumnDefinition Width="*" />
 					</Grid.ColumnDefinitions>
 				</Grid>
-				<!-- <StackPanel x:Name="IngotsPanel" ></StackPanel>
-				<StackPanel x:Name="DungeonKeysPanel" ></StackPanel> -->
+
+				<!-- [Here ingots and dungeon keys are dyanmically generated] -->
 			</StackPanel>
 
+			<!-- Debug show equipment button-->
 			<Button x:Name="ShowEquipmentButton" Click="ShowEquipmentButton_Click" Content="EQ"></Button>
 
 			<Separator Height="2" Width="200" Margin="10" />
 
+			<!-- Specializations text -->
 			<TextBlock Text="Specializations" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" Margin="0,3,0,10" />
 
+			<!-- Specializations grid-->
 			<Grid x:Name="SpecializationsGrid">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="*" />
@@ -197,6 +230,7 @@
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="2*" />
 				</Grid.ColumnDefinitions>
+				<!-- [Here specializations info is dyanmically generated] -->
 			</Grid>
 		</StackPanel>
 	</Border>

@@ -14,8 +14,10 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
+		<!-- Hero stats frame-->
 		<Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
+		<!-- Equipment frame-->
 		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
 		<Grid Grid.Column="1">
@@ -24,10 +26,15 @@
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 
+			<!-- Region panel-->
 			<StackPanel x:Name="RegionPanel" Orientation="Vertical" VerticalAlignment="Center" Grid.Row="0">
+				<!-- Rewards debug text(will be deleted) -->
 				<TextBlock x:Name="TestRewardsBlock" />
+
+				<!-- [Here monster button is dynamically generated] -->
 			</StackPanel>
 			
+			<!-- Back to town button -->
 			<Button x:Name="TownButton" Grid.Row="1" HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
 					<TextBlock Text="Come back to town!" FontSize="22"/>
 			</Button>

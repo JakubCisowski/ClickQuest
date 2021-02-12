@@ -6,7 +6,6 @@
 		xmlns:local="clr-namespace:ClickQuest"
 		mc:Ignorable="d" Title="Dungeon Select"
 		Height="728" Width="1366">
-		
 
 	<Grid>
 		<Grid.ColumnDefinitions>
@@ -15,10 +14,13 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
+		<!-- Hero stats frame-->
 		<Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 		
+		<!-- Equipment frame-->
 		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
+		<!-- Main Grid -->
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*"/>
@@ -26,13 +28,16 @@
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 			
+			<!-- Undo selection (of DungeonGroup/Dungeon) button -->
 			<Button x:Name="UndoButton" Grid.Row="0" Width="450" Height="50" Visibility="Hidden">
 					<TextBlock Text="Undo" FontSize="22"/>
 			</Button>
 
+			<!-- Panel for displaying DungeonGroup, Dungeon and Boss choices -->
 			<StackPanel x:Name="DungeonSelectPanel" Grid.Row="1" Orientation="Vertical">
 			</StackPanel>
 
+			<!-- Back to town button -->
 			<Button x:Name="TownButton" Grid.Row="2" Width="450" Height="50" Click="TownButton_Click">
 					<TextBlock Text="Come back to town!" FontSize="22"/>
 			</Button>

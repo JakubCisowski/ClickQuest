@@ -14,12 +14,16 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
+		<!-- Hero stats frame-->
 		<Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 		
+		<!-- Equipment frame-->
 		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
+		<!-- Main panel -->
 		<StackPanel Grid.Column="1">
 		
+			<!-- Dungeon boss button -->
 			<Button x:Name="BossButton" Click="BossButton_Click" Width="400" Height="400">
 				<Grid>
 					<Grid.RowDefinitions>
@@ -53,6 +57,7 @@
 
 				<TextBlock x:Name="TestRewardsBlock" />
 
+				<!-- Back to town button -->
 				<Button x:Name="TownButton" Grid.Column="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" Visibility="Hidden"/>
 			</StackPanel>
 		</StackPanel>

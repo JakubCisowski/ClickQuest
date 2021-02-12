@@ -22,6 +22,7 @@ namespace ClickQuest.Pages
 
 		public void CreateMonsterButton()
 		{
+			// Create a new MonsterButton control.
 			var button = new MonsterButton(_region, this);
 			this.RegionPanel.Children.Insert(1, button);
 		}
@@ -30,6 +31,7 @@ namespace ClickQuest.Pages
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
+			// Go back to Town.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
 			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();

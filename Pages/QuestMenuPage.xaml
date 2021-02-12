@@ -14,10 +14,13 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
+		<!-- Hero stats frame-->
 		<Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
+		<!-- Equipment frame-->
 		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 		
+		<!-- Main Grid -->
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*"/>
@@ -25,14 +28,16 @@
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 
+			<!-- Quest reroll button -->
 			<Button x:Name="RerollButton" Grid.Row="0" HorizontalAlignment="Center" Width="450" Height="50" Click="RerollButton_Click">
 					<TextBlock Text="Reroll" FontSize="22"/>
 			</Button>
 
+			<!-- Quest list -->
 			<StackPanel x:Name="QuestPanel" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
-
 			</StackPanel>
 
+			<!-- Back to town button -->
 			<Button x:Name="MainMenuButton" Grid.Row="2"  HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
 					<TextBlock Text="Come back to town!" FontSize="22"/>
 			</Button>

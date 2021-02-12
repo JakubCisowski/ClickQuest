@@ -16,9 +16,16 @@
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
+			<!-- Name text -->
 			<TextBlock x:Name="QuestName" Grid.Row="0" Text="{Binding Path=Name}" FontSize="20"/>
+
+			<!-- Description text -->
 			<TextBlock x:Name="QuestDescription" Grid.Row="1" Text="{Binding Path=Description}" FontSize="20"/>
+
+			<!-- Duration info text -->
 			<TextBlock x:Name="QuestDuration" Grid.Row="2" Text="{Binding Path=Duration}" FontSize="20"/>
+
+			<!-- Panel for rewards-->
 			<StackPanel x:Name="QuestRewardsPanel" Grid.Row="3"/>
 		</Grid>
 	</Button>

@@ -9,7 +9,9 @@ namespace ClickQuest.Pages
 {
 	public partial class HeroStatsPage : Page
 	{
+		#region Private Fields
 		private Hero _hero;
+		#endregion
 
 		public HeroStatsPage()
 		{
@@ -24,13 +26,9 @@ namespace ClickQuest.Pages
 			GenerateSpecializations();
 		}
 
-		private void ShowEquipmentButton_Click(object sender, RoutedEventArgs e)
-		{
-			EquipmentWindow.Instance.Show();
-		}
-
 		private void GenerateGold()
 		{
+			// Create a binding for the amount of Gold.
 			Binding binding = new Binding("Gold");
 			binding.Source = Account.User.Instance;
 			binding.StringFormat = "Gold: {0}";
@@ -499,5 +497,12 @@ namespace ClickQuest.Pages
 			}
 			#endregion
 		}
+
+		#region Events
+		private void ShowEquipmentButton_Click(object sender, RoutedEventArgs e)
+		{
+			EquipmentWindow.Instance.Show();
+		}
+		#endregion
 	}
 }

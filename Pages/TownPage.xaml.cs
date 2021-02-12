@@ -52,6 +52,7 @@ namespace ClickQuest.Pages
 
 		private void RegionButton_Click(object sender, RoutedEventArgs e)
 		{
+			// Enter the chosen Region page.
 			var regionId = int.Parse((sender as Button).Name.Substring(6));
 			string regionName = Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).Name;
 
@@ -67,6 +68,7 @@ namespace ClickQuest.Pages
 
 		private void ShopButton_Click(object sender, RoutedEventArgs e)
 		{
+			// Enter Shop page.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Shop"]);
 			(Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Shop";
@@ -86,6 +88,7 @@ namespace ClickQuest.Pages
 
 		private void QuestMenuButton_Click(object sender, RoutedEventArgs e)
 		{
+			// Enter Quests page.
 			(Data.Database.Pages["QuestMenu"] as QuestMenuPage).LoadPage();
 			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["QuestMenu"]);
 			(Database.Pages["QuestMenu"] as QuestMenuPage).EquipmentFrame.Refresh();
@@ -94,6 +97,7 @@ namespace ClickQuest.Pages
 
 		private void BlacksmithButton_Click(object sender, RoutedEventArgs e)
 		{
+			// Enter Blacksmith page.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Blacksmith"]);
 			(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Blacksmith";
@@ -102,6 +106,7 @@ namespace ClickQuest.Pages
 
 		private void PriestButton_Click(object sender, RoutedEventArgs e)
 		{
+			// Enter Priest page.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Priest"]);
 			(Database.Pages["Priest"] as PriestPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Priest";
@@ -110,6 +115,7 @@ namespace ClickQuest.Pages
 
 		private void DungeonSelectButton_Click(object sender, RoutedEventArgs e)
 		{
+			// Enter DungeonSelect page.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["DungeonSelect"]);
 			(Database.Pages["DungeonSelect"] as DungeonSelectPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting dungeon group";
