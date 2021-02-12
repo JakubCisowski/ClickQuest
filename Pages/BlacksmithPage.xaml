@@ -1,101 +1,101 @@
 <Page x:Class="ClickQuest.Pages.BlacksmithPage"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ClickQuest"
-        mc:Ignorable="d"
-        Title="Blacksmith Page" Height="728" Width="1366">
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:ClickQuest"
+		mc:Ignorable="d"
+		Title="Blacksmith Page" Height="728" Width="1366">
 
 
-     <Grid>
+	 <Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
 
-        <Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
+		<Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
-        <Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
+		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+		<Grid Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="50" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
 
-            <Button x:Name="TownButton" Grid.Row="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
+			<Button x:Name="TownButton" Grid.Row="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
 
-            <TabControl Grid.Row="1" Width="600" Height="300">
-                <TabItem Header="Melt Materials">
-                    <ListView x:Name="ItemsListViewMeltMaterials" Width="600">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Quantity" Width="60" DisplayMemberBinding="{Binding Quantity}" />
-                                <GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
-                                <GridViewColumn Header="Description" Width="270" DisplayMemberBinding="{Binding Description}" />
-                                <GridViewColumn Header="Value" Width="60" DisplayMemberBinding="{Binding Value}" />
-                                <GridViewColumn Header="Actions" Width="100">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Content="Melt" Width="100" Click="MeltButton_Click" CommandParameter="{Binding}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </TabItem>
-                <TabItem Header="Melt Artifacts">
-                    <ListView x:Name="ItemsListViewMeltArtifacts" Width="600">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Quantity" Width="60" DisplayMemberBinding="{Binding Quantity}" />
-                                <GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
-                                <GridViewColumn Header="Description" Width="270" DisplayMemberBinding="{Binding Description}" />
-                                <GridViewColumn Header="Value" Width="60" DisplayMemberBinding="{Binding Value}" />
-                                <GridViewColumn Header="Actions" Width="100">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Content="Melt" Width="100" Click="MeltButton_Click" CommandParameter="{Binding}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </TabItem>
-                <TabItem Header="Craft">
-                    <ListView x:Name="ItemsListViewCraft" Margin="10" Width="600">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
-                                <GridViewColumn Header="Description" Width="270" DisplayMemberBinding="{Binding Description}" />
-                                <GridViewColumn Header="Requirements" Width="110" DisplayMemberBinding="{Binding RequirementsDescription}" />
-                                <GridViewColumn Header="Craft with materials" Width="100">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Content="Craft mat" Width="100" Click="CraftMaterialButton_Click" CommandParameter="{Binding}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="Craft with ingots" Width="100">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button Content="Craft ing" Width="100" Click="CraftIngotButton_Click" CommandParameter="{Binding}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                    
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </TabItem>
-            </TabControl>
-        </Grid>
-    </Grid>
+			<TabControl Grid.Row="1" Width="600" Height="300">
+				<TabItem Header="Melt Materials">
+					<ListView x:Name="ItemsListViewMeltMaterials" Width="600">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
+								<GridViewColumn Header="Quantity" Width="60" DisplayMemberBinding="{Binding Quantity}" />
+								<GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
+								<GridViewColumn Header="Description" Width="270" DisplayMemberBinding="{Binding Description}" />
+								<GridViewColumn Header="Value" Width="60" DisplayMemberBinding="{Binding Value}" />
+								<GridViewColumn Header="Actions" Width="100">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<Button Content="Melt" Width="100" Click="MeltButton_Click" CommandParameter="{Binding}" />
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+							</GridView>
+						</ListView.View>
+					</ListView>
+				</TabItem>
+				<TabItem Header="Melt Artifacts">
+					<ListView x:Name="ItemsListViewMeltArtifacts" Width="600">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
+								<GridViewColumn Header="Quantity" Width="60" DisplayMemberBinding="{Binding Quantity}" />
+								<GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
+								<GridViewColumn Header="Description" Width="270" DisplayMemberBinding="{Binding Description}" />
+								<GridViewColumn Header="Value" Width="60" DisplayMemberBinding="{Binding Value}" />
+								<GridViewColumn Header="Actions" Width="100">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<Button Content="Melt" Width="100" Click="MeltButton_Click" CommandParameter="{Binding}" />
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+							</GridView>
+						</ListView.View>
+					</ListView>
+				</TabItem>
+				<TabItem Header="Craft">
+					<ListView x:Name="ItemsListViewCraft" Margin="10" Width="600">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
+								<GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
+								<GridViewColumn Header="Description" Width="270" DisplayMemberBinding="{Binding Description}" />
+								<GridViewColumn Header="Requirements" Width="110" DisplayMemberBinding="{Binding RequirementsDescription}" />
+								<GridViewColumn Header="Craft with materials" Width="100">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<Button Content="Craft mat" Width="100" Click="CraftMaterialButton_Click" CommandParameter="{Binding}" />
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+								<GridViewColumn Header="Craft with ingots" Width="100">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<Button Content="Craft ing" Width="100" Click="CraftIngotButton_Click" CommandParameter="{Binding}" />
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+									
+								</GridViewColumn>
+							</GridView>
+						</ListView.View>
+					</ListView>
+				</TabItem>
+			</TabControl>
+		</Grid>
+	</Grid>
 </Page>

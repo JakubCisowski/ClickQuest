@@ -1,60 +1,60 @@
 <Page x:Class="ClickQuest.Pages.DungeonBossPage"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ClickQuest"
-        mc:Ignorable="d" Title="Dungeon Boss"
-        Height="728" Width="1366">
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:ClickQuest"
+		mc:Ignorable="d" Title="Dungeon Boss"
+		Height="728" Width="1366">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="2*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
 
-        <Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
-        
-        <Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
+		<Frame x:Name="CurrentFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
+		
+		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
-        <StackPanel Grid.Column="1">
-        
-            <Button x:Name="BossButton" Click="BossButton_Click" Width="400" Height="400">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+		<StackPanel Grid.Column="1">
+		
+			<Button x:Name="BossButton" Click="BossButton_Click" Width="400" Height="400">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
 
-                    <TextBlock x:Name="BossName" Grid.Row="0" Text="{Binding Path=Name}" />
-                    <TextBlock x:Name="BossHealth" Grid.Row="1">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="Health: {0} / {1}">
-                                <Binding Path="CurrentHealth" />
-                                <Binding Path="Health" />
-                            </MultiBinding>
-                            <!-- % health -->
-                        </TextBlock.Text>
-                    </TextBlock>
-                </Grid>
-            </Button>
+					<TextBlock x:Name="BossName" Grid.Row="0" Text="{Binding Path=Name}" />
+					<TextBlock x:Name="BossHealth" Grid.Row="1">
+						<TextBlock.Text>
+							<MultiBinding StringFormat="Health: {0} / {1}">
+								<Binding Path="CurrentHealth" />
+								<Binding Path="Health" />
+							</MultiBinding>
+							<!-- % health -->
+						</TextBlock.Text>
+					</TextBlock>
+				</Grid>
+			</Button>
 
-            <StackPanel x:Name="BossPanel" Orientation="Vertical" >
-                <TextBlock x:Name="BossInfoBlock">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="Description: {0}">
-                                <Binding Path="Description" />
-                            </MultiBinding>
-                        </TextBlock.Text>
-                </TextBlock>
+			<StackPanel x:Name="BossPanel" Orientation="Vertical" >
+				<TextBlock x:Name="BossInfoBlock">
+						<TextBlock.Text>
+							<MultiBinding StringFormat="Description: {0}">
+								<Binding Path="Description" />
+							</MultiBinding>
+						</TextBlock.Text>
+				</TextBlock>
 
-                <TextBlock x:Name="TimeRemainingBlock" />
+				<TextBlock x:Name="TimeRemainingBlock" />
 
-                <TextBlock x:Name="TestRewardsBlock" />
+				<TextBlock x:Name="TestRewardsBlock" />
 
-                <Button x:Name="TownButton" Grid.Column="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" Visibility="Hidden"/>
-            </StackPanel>
-        </StackPanel>
-    </Grid>
+				<Button x:Name="TownButton" Grid.Column="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" Visibility="Hidden"/>
+			</StackPanel>
+		</StackPanel>
+	</Grid>
 </Page>
