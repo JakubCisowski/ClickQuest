@@ -46,7 +46,7 @@
 			   </Button.Content>
 			</Button>
 
-			<!-- Shop tab -->
+			<!-- Shop panel -->
 			<TabControl Grid.Row="0" Background="{StaticResource GameBackgroundRegular}" Width="550" Height="550">
 					<!-- Sell tab-->
 					<TabItem Background="{StaticResource GameBackgroundSecondary}">
@@ -104,7 +104,7 @@
 									</GridViewColumn>
 
 									<!-- Sell column-->
-									<GridViewColumn Header="Sell" Width="60">
+									<GridViewColumn Width="60">
 										<GridViewColumn.HeaderContainerStyle>
 											<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 												<Setter Property="IsHitTestVisible" Value="False"/>
@@ -169,7 +169,7 @@
 									</GridViewColumn>
 
 									<!-- Buy column -->
-									<GridViewColumn Header="Buy" Width="60">
+									<GridViewColumn Width="60">
 										<GridViewColumn.HeaderContainerStyle>
 											<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 												<Setter Property="IsHitTestVisible" Value="False"/>

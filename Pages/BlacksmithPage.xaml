@@ -3,11 +3,22 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 		xmlns:local="clr-namespace:ClickQuest"
 		mc:Ignorable="d"
 		Title="Blacksmith Page" Height="728" Width="1366">
 
-
+	<!-- Material design resources for List View -->
+	<Page.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="LightBlue" SecondaryColor="Lime" />
+				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListView.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Page.Resources>
+	
+	<!-- Blacksmith page grid-->
 	 <Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
@@ -21,30 +32,91 @@
 		<!-- Equipment frame-->
 		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
 
+		<!-- Main blacksmith grid -->
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="50" />
+				<RowDefinition Height="9*" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
-			<!-- Back to town button -->
-			<Button x:Name="TownButton" Grid.Row="0" Width="150" Height="50" Content="Come back to town!" Click="TownButton_Click" />
+			<!-- Town button -->
+			<Button x:Name="TownButton" Grid.Row="1" Width="450" Height="50" Click="TownButton_Click">
+				<Button.Content>
+				   <TextBlock FontSize="22" Text="Come back to town!"/>
+			   </Button.Content>
+			</Button>
 
 			<!-- Blacksmith panel-->
-			<TabControl Grid.Row="1" Width="600" Height="300">
-				<TabItem Header="Melt Materials">
-					<ListView x:Name="ItemsListViewMeltMaterials" Width="600">
+			<TabControl Grid.Row="0" Background="{StaticResource GameBackgroundRegular}" Width="550" Height="550">
+				<!-- Melt tab -->
+				<TabItem Background="{StaticResource GameBackgroundSecondary}">
+					<!-- Header melt -->
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Width="133" HorizontalAlignment="Center">
+							<materialDesign:PackIcon Kind="Cog" Width="20" Height="20" Margin="5,0,0,0"/>
+							<TextBlock Text="Melt Materials" FontSize="17" Margin="2,0,0,0"/>
+						</StackPanel>
+					</TabItem.Header>
+
+					<!-- List view melt -->
+					<ListView x:Name="ItemsListViewMeltMaterials" Margin="10">
+						<!-- Styles -->
+						<ListView.ItemContainerStyle>
+							<Style TargetType="ListViewItem">
+								<Setter Property="HorizontalContentAlignment" Value="Center"/>
+							</Style>
+						</ListView.ItemContainerStyle>
+
+						<!-- List view -->
 						<ListView.View>
 							<GridView>
-								<GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
-								<GridViewColumn Header="Quantity" Width="60" DisplayMemberBinding="{Binding Quantity}" />
-								<GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
-								<GridViewColumn Header="Description" Width="270" DisplayMemberBinding="{Binding Description}" />
-								<GridViewColumn Header="Value" Width="60" DisplayMemberBinding="{Binding Value}" />
-								<GridViewColumn Header="Actions" Width="100">
+								<!-- Name column-->
+								<GridViewColumn Header="Name" Width="194" DisplayMemberBinding="{Binding Name}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False"/>
+											<Setter Property="HorizontalContentAlignment" Value="Center"/>
+											<Setter Property="Padding" Value="1,5,1,5"/>
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
+								
+								<!-- Quantity column-->
+								<GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Quantity}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False"/>
+											<Setter Property="HorizontalContentAlignment" Value="Center"/>
+											<Setter Property="Padding" Value="1,5,1,5"/>
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
+
+								<!-- Value column-->
+								<GridViewColumn Header="Value" Width="100" DisplayMemberBinding="{Binding Value}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False"/>
+											<Setter Property="HorizontalContentAlignment" Value="Center"/>
+											<Setter Property="Padding" Value="1,5,1,5"/>
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
+								
+								<!-- Melt column-->
+								<GridViewColumn Width="120">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False"/>
+											<Setter Property="HorizontalContentAlignment" Value="Center"/>
+											<Setter Property="Padding" Value="1,5,1,5"/>
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+
+									<!-- Melt button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Melt" Width="100" Click="MeltButton_Click" CommandParameter="{Binding}" />
+											<Button Content="Melt" Click="MeltButton_Click" CommandParameter="{Binding}"/>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -52,19 +124,76 @@
 						</ListView.View>
 					</ListView>
 				</TabItem>
-				<TabItem Header="Melt Artifacts">
-					<ListView x:Name="ItemsListViewMeltArtifacts" Width="600">
+				
+				<!-- Melt artifacts tab -->
+				<TabItem Background="{StaticResource GameBackgroundSecondary}">
+					<!-- Header melt artifacts -->
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Width="133" HorizontalAlignment="Center">
+							<materialDesign:PackIcon Kind="DiamondStone" Width="20" Height="20" Margin="5,0,0,0"/>
+							<TextBlock Text="Melt Artifacts" FontSize="17" Margin="2,0,0,0"/>
+						</StackPanel>
+					</TabItem.Header>
+					
+					<!-- List view melt artifacts -->
+					<ListView x:Name="ItemsListViewMeltArtifacts" Margin="10">
+						<!-- Styles -->
+						<ListView.ItemContainerStyle>
+							<Style TargetType="ListViewItem">
+								<Setter Property="HorizontalContentAlignment" Value="Center"/>
+							</Style>
+						</ListView.ItemContainerStyle>
+
+						<!-- List view -->
 						<ListView.View>
 							<GridView>
-								<GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
-								<GridViewColumn Header="Quantity" Width="60" DisplayMemberBinding="{Binding Quantity}" />
-								<GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
-								<GridViewColumn Header="Description" Width="270" DisplayMemberBinding="{Binding Description}" />
-								<GridViewColumn Header="Value" Width="60" DisplayMemberBinding="{Binding Value}" />
-								<GridViewColumn Header="Actions" Width="100">
+								<!-- Name column-->
+								<GridViewColumn Header="Name" Width="194" DisplayMemberBinding="{Binding Name}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False"/>
+											<Setter Property="HorizontalContentAlignment" Value="Center"/>
+											<Setter Property="Padding" Value="1,5,1,5"/>
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
+
+								<!-- Quantity column-->
+								<GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Quantity}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False"/>
+											<Setter Property="HorizontalContentAlignment" Value="Center"/>
+											<Setter Property="Padding" Value="1,5,1,5"/>
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
+
+								<!-- Value column-->
+								<GridViewColumn Header="Value" Width="100" DisplayMemberBinding="{Binding Value}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False"/>
+											<Setter Property="HorizontalContentAlignment" Value="Center"/>
+											<Setter Property="Padding" Value="1,5,1,5"/>
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
+
+								<!-- Melt artifact column-->
+								<GridViewColumn Width="120">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False"/>
+											<Setter Property="HorizontalContentAlignment" Value="Center"/>
+											<Setter Property="Padding" Value="1,5,1,5"/>
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+
+									<!-- Melt button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Melt" Width="100" Click="MeltButton_Click" CommandParameter="{Binding}" />
+											<Button Content="Melt" Click="MeltButton_Click" CommandParameter="{Binding}" />
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -72,28 +201,87 @@
 						</ListView.View>
 					</ListView>
 				</TabItem>
-				<TabItem Header="Craft">
-					<ListView x:Name="ItemsListViewCraft" Margin="10" Width="600">
+
+				<!-- Craft tab -->
+				<TabItem Background="{StaticResource GameBackgroundSecondary}">
+					<!-- Header craft -->
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Width="133" HorizontalAlignment="Center">
+							<materialDesign:PackIcon Kind="Anvil" Width="20" Height="20" Margin="5,0,0,0"/>
+							<TextBlock Text="Craft Artifacts" FontSize="17" Margin="2,0,0,0"/>
+						</StackPanel>
+					</TabItem.Header>
+
+					<!-- List view craft -->
+					<ListView x:Name="ItemsListViewCraft" Margin="10">
+						<!-- Styles -->
+						<ListView.ItemContainerStyle>
+							<Style TargetType="ListViewItem">
+								<Setter Property="HorizontalContentAlignment" Value="Center"/>
+							</Style>
+						</ListView.ItemContainerStyle>
+							
+						<!-- List view -->
 						<ListView.View>
 							<GridView>
-								<GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
-								<GridViewColumn Header="Rarity" Width="70" DisplayMemberBinding="{Binding RarityString}" />
-								<GridViewColumn Header="Description" Width="270" DisplayMemberBinding="{Binding Description}" />
-								<GridViewColumn Header="Requirements" Width="110" DisplayMemberBinding="{Binding RequirementsDescription}" />
-								<GridViewColumn Header="Craft with materials" Width="100">
+								<!-- Name column-->
+								<GridViewColumn Header="Name" Width="274" DisplayMemberBinding="{Binding Name}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False"/>
+											<Setter Property="HorizontalContentAlignment" Value="Center"/>
+											<Setter Property="Padding" Value="1,5,1,5"/>
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
+
+								<!-- Craft with materials column-->
+								<GridViewColumn Width="120">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False"/>
+											<Setter Property="HorizontalContentAlignment" Value="Center"/>
+											<Setter Property="Padding" Value="1,5,1,5"/>
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+									<!-- Craft with materials button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Craft mat" Width="100" Click="CraftMaterialButton_Click" CommandParameter="{Binding}" />
+											<Button Click="CraftMaterialButton_Click" CommandParameter="{Binding}">
+												<Button.Content>
+													<StackPanel Orientation="Horizontal">
+														<TextBlock Text="Craft" FontSize="17" Margin="2,0,0,0"/>
+														<materialDesign:PackIcon Kind="Cog" Width="20" Height="20" Margin="5,0,0,0"/>
+													</StackPanel>
+												</Button.Content>
+											</Button>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
-								<GridViewColumn Header="Craft with ingots" Width="100">
+
+								<!-- Craft with ingots column-->
+								<GridViewColumn Width="120">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False"/>
+											<Setter Property="HorizontalContentAlignment" Value="Center"/>
+											<Setter Property="Padding" Value="1,5,1,5"/>
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>								
+
+									<!-- Craft with ingots column-->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Craft ing" Width="100" Click="CraftIngotButton_Click" CommandParameter="{Binding}" />
+											<Button Click="CraftIngotButton_Click" CommandParameter="{Binding}">
+												<Button.Content>
+													<StackPanel Orientation="Horizontal">
+														<TextBlock Text="Craft" FontSize="17" Margin="2,0,0,0"/>
+														<materialDesign:PackIcon Kind="Gold" Width="20" Height="20" Margin="5,0,0,0"/>
+													</StackPanel>
+												</Button.Content>
+											</Button>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
-									
 								</GridViewColumn>
 							</GridView>
 						</ListView.View>
