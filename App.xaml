@@ -24,25 +24,6 @@
 		<SolidColorBrush  x:Key="ButtonDangerBrush" Color="#FFD3D3"/>
 		<SolidColorBrush  x:Key="ButtonDangerBrushHover" Color="#FF0000"/>
 
-		<!-- Custom global styles -->
-		<Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}"></Style>
-		<Style TargetType="ListView" BasedOn="{StaticResource GameFontRegular}"></Style>
-
-		<Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}">
-		</Style>
-
-		<Style TargetType="Window" BasedOn="{StaticResource GameFontRegular}">
-			<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
-		</Style>
-
-		<Style TargetType="Frame" BasedOn="{StaticResource GameFontRegular}">
-			<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
-		</Style>
-
-		<Style TargetType="Page" BasedOn="{StaticResource GameFontRegular}">
-			<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
-		</Style>
-
 		<!-- Custom button styles -->
 		<Style x:Key="ButtonStyleGeneral" TargetType="Button">
 			<Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -140,6 +121,25 @@
 			<Setter Property="FontSize" Value="22"/>
 			<Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
 			<Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
+		</Style>
+
+		<!-- Custom global styles -->
+		<Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}"></Style>
+		<Style TargetType="ListView" BasedOn="{StaticResource GameFontRegular}"></Style>
+
+		<Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}">
+		</Style>
+
+		<Style TargetType="Window" BasedOn="{StaticResource GameFontRegular}">
+			<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+		</Style>
+
+		<Style TargetType="Frame" BasedOn="{StaticResource GameFontRegular}">
+			<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+		</Style>
+
+		<Style TargetType="Page" BasedOn="{StaticResource GameFontRegular}">
+			<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
 		</Style>
 	</Application.Resources>
 </Application>
