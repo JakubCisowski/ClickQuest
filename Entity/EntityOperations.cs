@@ -173,11 +173,22 @@ namespace ClickQuest.Entity
 				}
 				user.Gold = 0;
 
+				// Reset Specializations.
+				user.Specialization.SpecBuyingAmount = 0;
+				user.Specialization.SpecKillingAmount = 0;
+				user.Specialization.SpecBlessingAmount = 0;
+				user.Specialization.SpecCraftingAmount = 0;
+				user.Specialization.SpecQuestingAmount = 0;
+				user.Specialization.SpecMeltingAmount = 0;
+				user.Specialization.SpecDungeonAmount = 0;
+
 				db.SaveChanges();
 			}
 
 			// Load the empty collections.
 			LoadGame();
+
+			Account.User.Instance.Specialization.UpdateBuffs();
 		}
 
 		public static void CreateAndSeedDatabase()
