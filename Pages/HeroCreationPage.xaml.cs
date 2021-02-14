@@ -1,4 +1,5 @@
 using ClickQuest.Account;
+using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Heroes;
 using System;
@@ -29,6 +30,7 @@ namespace ClickQuest.Pages
 				if (!isValid)
 				{
 					// Display an error.
+					AlertBox.Show($"Hero name can contain up to 15 characters.\nValid characters: A-Z, a-z, 0-9, space.", MessageBoxButton.OK);
 					return;
 				}
 

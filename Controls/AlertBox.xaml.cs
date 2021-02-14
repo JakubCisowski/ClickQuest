@@ -17,12 +17,27 @@ namespace ClickQuest.Controls
             this.Owner = Application.Current.MainWindow;
         }
 
-        public static MessageBoxResult Show(string content)
+        public static MessageBoxResult Show(string content, MessageBoxButton buttons = MessageBoxButton.YesNo)
         {
             MessageBox = new AlertBox()
             {
                 ContentBox = { Text = content }
             };
+			
+			// Switch button layout
+            switch(buttons)
+            {
+                case MessageBoxButton.YesNo:
+                    break;
+
+                case MessageBoxButton.OK:
+                    {
+                        MessageBox.OkButton2.Visibility=Visibility.Visible;
+                        MessageBox.OkButton.Visibility=Visibility.Hidden;
+                        MessageBox.CancelButton.Visibility=Visibility.Hidden;
+                    }
+                    break;
+            }
 
             MessageBox.ShowDialog();
 
