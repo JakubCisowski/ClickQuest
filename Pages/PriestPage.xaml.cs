@@ -1,4 +1,5 @@
 using ClickQuest.Account;
+using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Items;
 using System.Windows;
@@ -35,9 +36,19 @@ namespace ClickQuest.Pages
 			var b = sender as Button;
 			var blessingBlueprint = b.CommandParameter as Blessing;
 
-			// Remove gold, start blessing
+			// Check if user has enough gold.
 			if (User.Instance.Gold >= blessingBlueprint.Value)
 			{
+				// Show buy alert.
+				var result = AlertBox.Show($"Are you sure you want to buy {blessingBlueprint.Name} for {blessingBlueprint.Value} gold?", MessageBoxButton.YesNo);
+
+				// If user clicked cancel on buy alert - return.
+				if (result == MessageBoxResult.Cancel)
+				{
+					return;
+				}
+				
+				// Remove gold, start blessing
 				User.Instance.Gold -= blessingBlueprint.Value;
 
 				// Increase Blessing Specialization amount.
@@ -49,9 +60,14 @@ namespace ClickQuest.Pages
 				blessing.Duration += Account.User.Instance.Specialization.SpecBlessingBuff;
 				User.Instance.Blessings.Add(blessing);
 				blessing.ChangeBuffStatus(true);
-			}
 
-			UpdatePriest();
+				UpdatePriest();
+			}
+			else
+			{
+				// Display an error.
+				AlertBox.Show($"You do not have enough gold to buy this blessing.\nIt costs {blessingBlueprint.Value} gold.\nYou can get more gold by completing quests and selling loot from monsters and bosses.", MessageBoxButton.OK);
+			}
 		}
 		#endregion
 	}

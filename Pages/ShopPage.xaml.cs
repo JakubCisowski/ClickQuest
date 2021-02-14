@@ -1,4 +1,5 @@
 using ClickQuest.Account;
+using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Items;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace ClickQuest.Pages
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
+			// Go back to Town.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
 			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
@@ -56,6 +58,15 @@ namespace ClickQuest.Pages
 			// Check if user has enough gold.
 			if (Account.User.Instance.Gold >= recipe.Value)
 			{
+				// Show buy alert.
+				var result = AlertBox.Show($"Are you sure you want to buy {recipe.Name} for {recipe.Value} gold?", MessageBoxButton.YesNo);
+
+				// If user clicked cancel on buy alert - return.
+				if (result == MessageBoxResult.Cancel)
+				{
+					return;
+				}
+			
 				Account.User.Instance.AddItem(recipe);
 				Account.User.Instance.Gold -= recipe.Value;
 
@@ -68,7 +79,8 @@ namespace ClickQuest.Pages
 			}
 			else
 			{
-				// Error
+				// Display an error.
+				AlertBox.Show($"You do not have enough gold to buy this item.\nIt costs {recipe.Value} gold.\nYou can get more gold by completing quests and selling loot from monsters and bosses.", MessageBoxButton.OK);
 			}
 		}
 

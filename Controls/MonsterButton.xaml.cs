@@ -213,6 +213,11 @@ namespace ClickQuest.Controls
 				// Check if monster is dead now.
 				CheckIfMonsterDied();
 			}
+			else
+			{
+				// Display warning - you can't fight when your hero is completing quest.
+				AlertBox.Show($"Your hero is busy completing quest!\nCheck back when it's finished.", MessageBoxButton.OK);
+			}
 		}
 
 		private void PoisonTimer_Tick(object source, EventArgs e)

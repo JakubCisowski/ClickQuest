@@ -1,3 +1,4 @@
+using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Enemies;
 using ClickQuest.Items;
@@ -175,6 +176,7 @@ namespace ClickQuest.Pages
 				if (Account.User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)pair.Key).Quantity < pair.Value)
 				{
 					// Display error - not enough dungeon keys.
+					AlertBox.Show($"Not enough {(Rarity)pair.Key} dungeon keys to enter.\nTry to get them by completing quests and killing monsters!", MessageBoxButton.OK);
 					return;
 				}
 			}

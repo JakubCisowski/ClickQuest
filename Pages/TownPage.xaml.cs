@@ -1,4 +1,5 @@
 using ClickQuest.Account;
+using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Heroes;
 using ClickQuest.Items;
@@ -64,6 +65,10 @@ namespace ClickQuest.Pages
 				(Window.GetWindow(this) as GameWindow).LocationInfo = $"{regionName}";
 			}
 			// Else display a warning.
+			else
+			{
+				AlertBox.Show($"To enter this location you need to be {Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement} lvl.\nGain experience by completing quests, and defeating monsters in previous regions!", MessageBoxButton.OK);
+			}
 		}
 
 		private void ShopButton_Click(object sender, RoutedEventArgs e)

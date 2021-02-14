@@ -1,4 +1,5 @@
 using ClickQuest.Account;
+using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Items;
 using System;
@@ -35,6 +36,16 @@ namespace ClickQuest.Pages
 		{
 			var b = sender as Button;
 
+			// Show melt alert
+			var result = AlertBox.Show($"Are you sure you want to melt {(b.CommandParameter as Item).Name}?\nThis action will destroy this item and create at least X {(b.CommandParameter as Item).Rarity} ingots.\nYou can get bonus ingots if you master Melter specialization (by melting more items).", MessageBoxButton.YesNo);
+
+			// If user clicked cancel on melt alert - return.
+			if (result == MessageBoxResult.Cancel)
+			{
+				return;
+			}
+
+			// If user clicked ok - melt item.
 			if (b.CommandParameter is Material material)
 			{
 				// A material is being melted.
@@ -118,6 +129,7 @@ namespace ClickQuest.Pages
 			if (Account.User.Instance.Specialization.SpecCraftingBuff < (int)recipe.Rarity)
 			{
 				// Error - user doesn't meet requirements - stop this function.
+				AlertBox.Show($"You dont meet Craftsmen specialization requirements to craft {(int)recipe.Rarity} artifacts.\nCraft more common items in order to master it.", MessageBoxButton.OK);
 				return;
 			}
 
@@ -127,9 +139,18 @@ namespace ClickQuest.Pages
 				var material = User.Instance.Materials.FirstOrDefault(x => x.Id == pair.Key);
 				if (!(material != null && material.Quantity >= pair.Value))
 				{
-					// Error - no materials - stop this function.
+					AlertBox.Show($"You don't have enough materials to craft {recipe.Name}.\n{recipe.RequirementsDescription}\nGet more materials by completing quests and killing monsters and boses or try to craft this artifact using ingots.", MessageBoxButton.OK);
 					return;
 				}
+			}
+
+			// Show craft alert.
+			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using materials?\n{recipe.RequirementsDescription}\nThis action will destroy all materials and this recipe.", MessageBoxButton.YesNo);
+
+			// If user clicked cancel on craft alert - return.
+			if (result == MessageBoxResult.Cancel)
+			{
+				return;
 			}
 
 			// If he has, remove them.
@@ -169,6 +190,7 @@ namespace ClickQuest.Pages
 			if (Account.User.Instance.Specialization.SpecCraftingBuff < (int)recipe.Rarity)
 			{
 				// Error - user doesn't meet requirements - stop this function.
+				AlertBox.Show($"You dont meet Craftsmen specialization requirements to craft {(int)recipe.Rarity} artifacts.\nCraft more common items in order to master it.", MessageBoxButton.OK);
 				return;
 			}
 
@@ -176,6 +198,15 @@ namespace ClickQuest.Pages
 			var ingotRarityNeeded = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == recipe.Rarity);
 			if (recipe.IngotsRequired <= ingotRarityNeeded.Quantity)
 			{
+				// Show craft alert.
+				var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using ingots?\nIngots needed: {recipe.IngotsRequired} {recipe.RarityString} ingots.\nThis action will destroy all ingots and this recipe.", MessageBoxButton.YesNo);
+
+				// If user clicked cancel on craft alert - return.
+				if (result == MessageBoxResult.Cancel)
+				{
+					return;
+				}
+
 				// If he has, remove them.
 				ingotRarityNeeded.Quantity -= recipe.IngotsRequired;
 
@@ -193,10 +224,16 @@ namespace ClickQuest.Pages
 				// Increase Specialization Crafting amount.
 				Account.User.Instance.Specialization.SpecCraftingAmount++;
 			}
+			else
+			{
+				// Alert - User does not have enough Ingots.
+				AlertBox.Show($"You dont have {recipe.IngotsRequired} {recipe.RarityString}ingots to craft {recipe.Name}.\nGet more ingots by melting materials/artifacts or try to craft this artifact using materials.", MessageBoxButton.OK);
+			}
 		}
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
+			// Go back to Town.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
 			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
