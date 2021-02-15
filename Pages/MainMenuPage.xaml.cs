@@ -157,6 +157,13 @@ namespace ClickQuest.Pages
 			// Refresh hero stats panel info.
 			hero.UpdateHero();
 
+			// Clone hero's quests using those from Database.
+			foreach (var heroQuest in hero.Quests)
+			{
+				var databaseQuest = Database.Quests.FirstOrDefault(x => x.Id == heroQuest.Id);
+				heroQuest.CopyQuest(databaseQuest);
+			}
+
 			// Resume quests for the selected hero.
 			Account.User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default(DateTime))?.StartQuest();
 
@@ -168,6 +175,7 @@ namespace ClickQuest.Pages
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
 			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
+			(Database.Pages["Town"] as TownPage).StatsFrame.Refresh();
 		}
 
 		private void DeleteHeroButton_Click(object sender, RoutedEventArgs e)

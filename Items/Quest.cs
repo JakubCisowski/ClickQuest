@@ -190,7 +190,7 @@ namespace ClickQuest.Items
 			}
 			set
 			{
-				_timeDifference=value;
+				_timeDifference = value;
 				OnPropertyChanged();
 			}
 		}
@@ -198,6 +198,8 @@ namespace ClickQuest.Items
 
 		public void CopyQuest(Quest quest)
 		{
+			// Copy only the Database Id, not the Entity Id.
+			Id = quest.Id;
 			Rare = quest.Rare;
 			HeroClass = quest.HeroClass;
 			Name = quest.Name;
@@ -216,6 +218,10 @@ namespace ClickQuest.Items
 			var questCopy = new Quest();
 			questCopy.CopyQuest(this);
 
+			// Change that quest in Hero's Quests collection to the newly copied quest.
+			User.Instance.CurrentHero?.Quests.RemoveAll(x => x.Id == questCopy.Id);
+			User.Instance.CurrentHero?.Quests.Add(questCopy);
+
 			// Set quest end date (if not yet set).
 			if (questCopy.EndDate == default(DateTime))
 			{
@@ -223,7 +229,7 @@ namespace ClickQuest.Items
 			}
 
 			// Set time difference (for hero stats page info).
-			questCopy.TimeDifference = (questCopy.EndDate - DateTime.Now).ToString();
+			questCopy.TimeDifference = (questCopy.EndDate - DateTime.Now).ToString("hh\\:mm\\:ss");
 
 			// Start timer (checks if quest is finished).
 			questCopy._timer.Start();
@@ -242,6 +248,13 @@ namespace ClickQuest.Items
 
 			// Assign rewards.
 			AssignRewards();
+
+			// Refresh all stats panel bindings.
+			foreach (var page in Database.Pages.Skip(2))
+			{
+				dynamic p = page.Value;
+				p.StatsFrame.Refresh();
+			}
 
 			// Reroll new set of 3 quests.
 			(Data.Database.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
@@ -282,6 +295,14 @@ namespace ClickQuest.Items
 				User.Instance.Blessings.Add(blessing);
 				blessing.ChangeBuffStatus(true);
 			}
+
+			// Refresh all equipment pages (skip 2 pages - MainMenu and HeroCreation, because they don't have an EquipmentFrame).
+			// Alternative to .Skip(2) - try catch and continue the loop if an exception is caught (that is, if EquipmnetFrame does not exist).
+			foreach (var page in Database.Pages.Skip(2))
+			{
+				dynamic p = page.Value;
+				p.EquipmentFrame.Refresh();
+			}
 		}
 
 		private void Timer_Tick(object source, EventArgs e)
@@ -294,7 +315,7 @@ namespace ClickQuest.Items
 			else
 			{
 				// Else, calculate new Time difference for hero stats panel.
-				TimeDifference =  (EndDate - DateTime.Now).ToString();
+				TimeDifference = (EndDate - DateTime.Now).ToString("hh\\:mm\\:ss");
 			}
 		}
 

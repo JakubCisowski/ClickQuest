@@ -1,11 +1,11 @@
 using ClickQuest.Heroes;
 using MaterialDesignThemes.Wpf;
+using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using System.Linq;
-using System;
 
 namespace ClickQuest.Pages
 {
@@ -202,14 +202,15 @@ namespace ClickQuest.Pages
 		private void RefreshQuestTimer()
 		{
 			// Find quest that is currently being completed.
-			var quest = Account.User.Instance.CurrentHero?.Quests.FirstOrDefault(x=>x.EndDate!=default(DateTime));
-			
-			if(quest != null)
+			var quest = Account.User.Instance.CurrentHero?.Quests.FirstOrDefault(x => x.EndDate != default(DateTime));
+
+			if (quest != null)
 			{
 				// Bind its duration to the panel.
 				var binding = new Binding("TimeDifference");
 
-				binding.Source=quest;
+				binding.Source = quest;
+				binding.StringFormat = "Test: {0}";
 				testQuestDuration.SetBinding(TextBlock.TextProperty, binding);
 			}
 			else

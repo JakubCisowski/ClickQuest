@@ -710,14 +710,14 @@ namespace ClickQuest.Data
 
 			// Main Menu
 			Pages.Add("MainMenu", new MainMenuPage());
+			// Hero Creation Page
+			Pages.Add("HeroCreation", new HeroCreationPage());
 			// Town
 			Pages.Add("Town", new TownPage());
 			// Shop
 			Pages.Add("Shop", new ShopPage());
 			// Blacksmith
 			Pages.Add("Blacksmith", new BlacksmithPage());
-			// Hero Creation Page
-			Pages.Add("HeroCreation", new HeroCreationPage());
 			// Priest Page
 			Pages.Add("Priest", new PriestPage());
 			// Quest Menu Page

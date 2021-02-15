@@ -34,6 +34,7 @@ namespace ClickQuest.Pages
 			// Go back to Town.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
 			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
+			(Database.Pages["Town"] as TownPage).StatsFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
 		}
 
@@ -65,7 +66,7 @@ namespace ClickQuest.Pages
 				{
 					return;
 				}
-			
+
 				Account.User.Instance.AddItem(recipe);
 				Account.User.Instance.Gold -= recipe.Value;
 

@@ -50,6 +50,7 @@ namespace ClickQuest.Pages
 				// Go to Town.
 				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
 				(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
+				(Database.Pages["Town"] as TownPage).StatsFrame.Refresh();
 			}
 		}
 

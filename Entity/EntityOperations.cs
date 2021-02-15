@@ -25,6 +25,12 @@ namespace ClickQuest.Entity
 				user.Specialization = User.Instance.Specialization;
 				user.DungeonKeys = User.Instance.DungeonKeys;
 
+				// Save quests for each hero.
+				foreach (var heroFromDb in user.Heroes)
+				{
+					heroFromDb.Quests = User.Instance.Heroes.FirstOrDefault(x => x.Id == heroFromDb.Id).Quests;
+				}
+
 				db.Users.Update(user);
 				db.SaveChanges();
 			}

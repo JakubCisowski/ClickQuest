@@ -29,6 +29,7 @@ namespace ClickQuest.Pages
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
 			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
+			(Database.Pages["Town"] as TownPage).StatsFrame.Refresh();
 		}
 
 		private void BuyButton_Click(object sender, RoutedEventArgs e)
@@ -47,7 +48,7 @@ namespace ClickQuest.Pages
 				{
 					return;
 				}
-				
+
 				// Remove gold, start blessing
 				User.Instance.Gold -= blessingBlueprint.Value;
 
