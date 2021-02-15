@@ -18,7 +18,7 @@ namespace ClickQuest.Pages
 		{
 			// Refresh equipment.
 
-			MaterialsPanel.Children.Clear();
+			// MaterialsPanel.Children.Clear();
 			RecipesPanel.Children.Clear();
 			ArtifactsPanel.Children.Clear();
 

@@ -7,139 +7,49 @@
 			 ShutdownMode="OnMainWindowClose"
 			 >
 	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/Styles/ScrollBar.xaml" />
+				<ResourceDictionary Source="/Styles/Button.xaml" />
+				<ResourceDictionary Source="/Styles/ToolTip.xaml" />
+				<ResourceDictionary Source="/Styles/TabControl.xaml" />
+			</ResourceDictionary.MergedDictionaries>
 
-		<!-- Fonts -->
-		<Style x:Key="GameFontRegular" TargetType="FrameworkElement">
-			<Setter Property="TextElement.FontFamily" Value="/Resources/Fonts/#GothamBook"/>
-			<Setter Property="TextElement.FontSize" Value="16"/>
-		</Style>
+			<!-- Fonts -->
+			<Style x:Key="GameFontRegular" TargetType="FrameworkElement">
+				<Setter Property="TextElement.FontFamily" Value="/Resources/Fonts/#GothamBook"/>
+				<Setter Property="TextElement.FontSize" Value="16"/>
+			</Style>
 
-		<!-- Colours -->
-		<SolidColorBrush  x:Key="GameBackgroundRegular" Color="#EDF9FD"/>
-		<SolidColorBrush  x:Key="GameBackgroundSecondary" Color="#CFEFF8"/>
-		<SolidColorBrush  x:Key="GameBackgroundAdditional" Color="#ADD5E0"/>
+			<!-- Colours -->
+			<SolidColorBrush  x:Key="GameBackgroundRegular" Color="#EDF9FD"/>
+			<SolidColorBrush  x:Key="GameBackgroundSecondary" Color="#CFEFF8"/>
+			<SolidColorBrush  x:Key="GameBackgroundAdditional" Color="#ADD5E0"/>
 
-		<SolidColorBrush  x:Key="ButtonGreyBackground" Color="#CCDCE1"/>
+			<SolidColorBrush  x:Key="ButtonGreyBackground" Color="#CCDCE1"/>
 
-		<SolidColorBrush  x:Key="ButtonDangerBrush" Color="#FFD3D3"/>
-		<SolidColorBrush  x:Key="ButtonDangerBrushHover" Color="#FF0000"/>
+			<SolidColorBrush  x:Key="ButtonDangerBrush" Color="#FFD3D3"/>
+			<SolidColorBrush  x:Key="ButtonDangerBrushHover" Color="#FF0000"/>
+				
+			<!-- Custom global styles -->
+			<Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}"></Style>
+			<Style TargetType="ListView" BasedOn="{StaticResource GameFontRegular}"></Style>
 
-		<!-- Custom button styles -->
-		<Style x:Key="ButtonStyleGeneral" TargetType="Button">
-			<Setter Property="OverridesDefaultStyle" Value="True"/>
-			<Setter Property="Margin" Value="5"/>
-			<Setter Property="FontSize" Value="16"/>
-			<Setter Property="FontFamily" Value="/Resources/Fonts/#GothamBook"/>
-			<Setter Property="Background" Value="{StaticResource GameBackgroundSecondary}"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Button">
-						<Border Name="border" 
-							BorderThickness="1"
-							Padding="4,2" 
-							BorderBrush="DarkGray" 
-							CornerRadius="3" 
-							Background="{TemplateBinding Background}">
-							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-						</Border>
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsMouseOver" Value="True">
-								<Setter TargetName="border" Property="BorderBrush" Value="Black" />
-							</Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
+			<Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}">
+			</Style>
 
-		<Style x:Key="ButtonStyleDisabled" TargetType="Button">
-			<Setter Property="OverridesDefaultStyle" Value="True"/>
-			<Setter Property="Margin" Value="5"/>
-			<Setter Property="Background" Value="{StaticResource ButtonGreyBackground}"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Button">
-						<Border Name="border" 
-							BorderThickness="1"
-							Padding="4,2" 
-							BorderBrush="DarkGray" 
-							CornerRadius="3" 
-							Background="{TemplateBinding Background}">
-							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-						</Border>
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsMouseOver" Value="True">
-								<Setter TargetName="border" Property="BorderBrush" Value="Black" />
-							</Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
+			<Style TargetType="Window" BasedOn="{StaticResource GameFontRegular}">
+				<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+			</Style>
 
-		<Style x:Key="ButtonStyleDanger" TargetType="Button">
-			<Setter Property="OverridesDefaultStyle" Value="True"/>
-			<Setter Property="Margin" Value="5"/>
-			<Setter Property="Background" Value="{StaticResource ButtonGreyBackground}"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Button">
-						<Border Name="border" 
-							BorderThickness="2"
-							Padding="4,2" 
-							BorderBrush="{StaticResource ButtonDangerBrush}" 
-							CornerRadius="3" 
-							Background="{TemplateBinding Background}">
-							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-						</Border>
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsMouseOver" Value="True">
-								<Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ButtonDangerBrushHover}" />
-							</Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>		
+			<Style TargetType="Frame" BasedOn="{StaticResource GameFontRegular}">
+				<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+			</Style>
 
-		<!-- Custom TabControl style -->
-		<Style x:Key="TabControlStyleGeneral" TargetType="TabControl">
-			<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
-		</Style>
+			<Style TargetType="Page" BasedOn="{StaticResource GameFontRegular}">
+				<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+			</Style>
 
-		<!-- Custom ToolTip styles -->
-		<Style x:Key="ToolTipBorderBase" TargetType="Border">
-			<Setter Property="Background" Value="Gray"/>
-			<Setter Property="BorderBrush" Value="Black"/>
-			<Setter Property="BorderThickness" Value="1"/>
-			<Setter Property="Opacity" Value="0.9"/>
-			<Setter Property="SnapsToDevicePixels" Value="True"/>
-		</Style>
-
-		<Style x:Key="ToolTipTextBlockBase" TargetType="TextBlock">
-			<Setter Property="Foreground" Value="WhiteSmoke"/>
-			<Setter Property="FontSize" Value="22"/>
-			<Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
-			<Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
-		</Style>
-
-		<!-- Custom global styles -->
-		<Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}"></Style>
-		<Style TargetType="ListView" BasedOn="{StaticResource GameFontRegular}"></Style>
-
-		<Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}">
-		</Style>
-
-		<Style TargetType="Window" BasedOn="{StaticResource GameFontRegular}">
-			<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
-		</Style>
-
-		<Style TargetType="Frame" BasedOn="{StaticResource GameFontRegular}">
-			<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
-		</Style>
-
-		<Style TargetType="Page" BasedOn="{StaticResource GameFontRegular}">
-			<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
-		</Style>
+      	</ResourceDictionary>
 	</Application.Resources>
 </Application>
