@@ -1,4 +1,5 @@
 using ClickQuest.Account;
+using ClickQuest.Data;
 using ClickQuest.Heroes;
 using ClickQuest.Pages;
 using System;
@@ -35,6 +36,7 @@ namespace ClickQuest.Items
 		private List<Rarity> _rewardIngots;
 		private DispatcherTimer _timer;
 		private DateTime _endDate;
+		private string _timeDifference;
 
 		#endregion
 
@@ -179,6 +181,19 @@ namespace ClickQuest.Items
 				OnPropertyChanged();
 			}
 		}
+		[NotMapped]
+		public string TimeDifference
+		{
+			get
+			{
+				return _timeDifference;
+			}
+			set
+			{
+				_timeDifference=value;
+				OnPropertyChanged();
+			}
+		}
 		#endregion
 
 		public void CopyQuest(Quest quest)
@@ -207,14 +222,23 @@ namespace ClickQuest.Items
 				questCopy.EndDate = DateTime.Now.AddSeconds(Duration);
 			}
 
+			// Set time difference (for hero stats page info).
+			questCopy.TimeDifference = (questCopy.EndDate - DateTime.Now).ToString();
+
 			// Start timer (checks if quest is finished).
 			questCopy._timer.Start();
+
+			// Refresh hero stats panel (for timer).
+			(Database.Pages["QuestMenu"] as QuestMenuPage).StatsFrame.Refresh();
 		}
 
 		public void StopQuest()
 		{
 			// Stop timer.
 			_timer.Stop();
+
+			// Set TimeDifference to empty string so that it stops displaying.
+			TimeDifference = "";
 
 			// Assign rewards.
 			AssignRewards();
@@ -266,6 +290,11 @@ namespace ClickQuest.Items
 			if (DateTime.Now >= EndDate)
 			{
 				StopQuest();
+			}
+			else
+			{
+				// Else, calculate new Time difference for hero stats panel.
+				TimeDifference =  (EndDate - DateTime.Now).ToString();
 			}
 		}
 

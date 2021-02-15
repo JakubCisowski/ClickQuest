@@ -101,7 +101,6 @@ namespace ClickQuest.Controls
 			if (_monster.Loot[i].Item.Id != 0)
 			{
 				Account.User.Instance.AddItem(_monster.Loot[i].Item);
-				EquipmentWindow.Instance.UpdateEquipment();
 				_regionPage.EquipmentFrame.Refresh();
 			}
 

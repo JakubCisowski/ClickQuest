@@ -74,8 +74,7 @@ namespace ClickQuest.Pages
 				}
 				ingot.Quantity += ingotAmount;
 
-				// Update both equipment and blacksmith page.
-				EquipmentWindow.Instance.UpdateEquipment();
+				// Update blacksmith page.
 				(Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 				UpdateBlacksmith();
 
@@ -110,8 +109,7 @@ namespace ClickQuest.Pages
 				}
 				ingot.Quantity += ingotAmount;
 
-				// Update both equipment and blacksmith page.
-				EquipmentWindow.Instance.UpdateEquipment();
+				// Update blacksmith page.
 				(Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 				UpdateBlacksmith();
 
@@ -173,7 +171,6 @@ namespace ClickQuest.Pages
 			// Remove the recipe used.
 			User.Instance.RemoveItem(recipe);
 
-			EquipmentWindow.Instance.UpdateEquipment();
 			(Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 			UpdateBlacksmith();
 
@@ -217,7 +214,6 @@ namespace ClickQuest.Pages
 				// Remove the recipe used.
 				User.Instance.RemoveItem(recipe);
 
-				EquipmentWindow.Instance.UpdateEquipment();
 				(Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 				UpdateBlacksmith();
 

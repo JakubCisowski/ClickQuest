@@ -45,7 +45,6 @@ namespace ClickQuest.Pages
 			Account.User.Instance.RemoveItem(item);
 			Account.User.Instance.Gold += item.Value;
 
-			EquipmentWindow.Instance.UpdateEquipment();
 			(Data.Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
 			UpdateShop();
 		}
@@ -70,7 +69,6 @@ namespace ClickQuest.Pages
 				Account.User.Instance.AddItem(recipe);
 				Account.User.Instance.Gold -= recipe.Value;
 
-				EquipmentWindow.Instance.UpdateEquipment();
 				(Data.Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
 				UpdateShop();
 

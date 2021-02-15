@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Linq;
+using System;
 
 namespace ClickQuest.Pages
 {
@@ -24,6 +26,7 @@ namespace ClickQuest.Pages
 			GenerateDungeonKeys();
 			GenerateGold();
 			GenerateSpecializations();
+			RefreshQuestTimer();
 		}
 
 		private void GenerateGold()
@@ -193,6 +196,26 @@ namespace ClickQuest.Pages
 					Grid.SetColumn(panel, 1);
 					Grid.SetRow(panel, i);
 				}
+			}
+		}
+
+		private void RefreshQuestTimer()
+		{
+			// Find quest that is currently being completed.
+			var quest = Account.User.Instance.CurrentHero?.Quests.FirstOrDefault(x=>x.EndDate!=default(DateTime));
+			
+			if(quest != null)
+			{
+				// Bind its duration to the panel.
+				var binding = new Binding("TimeDifference");
+
+				binding.Source=quest;
+				testQuestDuration.SetBinding(TextBlock.TextProperty, binding);
+			}
+			else
+			{
+				// No quest is currently running - remove timer.
+				testQuestDuration.Text = "";
 			}
 		}
 
@@ -497,12 +520,5 @@ namespace ClickQuest.Pages
 			}
 			#endregion
 		}
-
-		#region Events
-		private void ShowEquipmentButton_Click(object sender, RoutedEventArgs e)
-		{
-			EquipmentWindow.Instance.Show();
-		}
-		#endregion
 	}
 }

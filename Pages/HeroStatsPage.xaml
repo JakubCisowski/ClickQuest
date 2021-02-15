@@ -206,9 +206,6 @@
 				<!-- [Here ingots and dungeon keys are dyanmically generated] -->
 			</StackPanel>
 
-			<!-- Debug show equipment button-->
-			<Button x:Name="ShowEquipmentButton" Click="ShowEquipmentButton_Click" Content="EQ"></Button>
-
 			<Separator Height="2" Width="200" Margin="10" />
 
 			<!-- Specializations text -->
@@ -232,6 +229,14 @@
 				</Grid.ColumnDefinitions>
 				<!-- [Here specializations info is dyanmically generated] -->
 			</Grid>
+
+			<Separator Height="2" Width="200" Margin="10" />
+
+			<!-- Quests and blessing timers -->
+			<StackPanel>
+				<TextBlock x:Name="testQuestDuration" Text=""/>
+			</StackPanel>
+
 		</StackPanel>
 	</Border>
 </Page>
