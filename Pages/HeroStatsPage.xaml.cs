@@ -216,7 +216,7 @@ namespace ClickQuest.Pages
 			else
 			{
 				// No quest is currently running - remove timer.
-				testQuestDuration.Text = "";
+				//testQuestDuration.Text = "";
 			}
 		}
 

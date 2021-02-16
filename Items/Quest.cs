@@ -13,7 +13,7 @@ using System.Windows.Threading;
 
 namespace ClickQuest.Items
 {
-	public partial class Quest
+	public partial class Quest : INotifyPropertyChanged
 	{
 		#region INotifyPropertyChanged
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -36,6 +36,7 @@ namespace ClickQuest.Items
 		private List<Rarity> _rewardIngots;
 		private DispatcherTimer _timer;
 		private DateTime _endDate;
+		private TimeSpan _timeToEnd;
 		private string _timeDifference;
 
 		#endregion
@@ -182,6 +183,19 @@ namespace ClickQuest.Items
 			}
 		}
 		[NotMapped]
+		public TimeSpan TimeToEnd
+		{
+			get
+			{
+				return _timeToEnd;
+			}
+			set
+			{
+				_timeToEnd = value;
+				OnPropertyChanged();
+			}
+		}
+		[NotMapped]
 		public string TimeDifference
 		{
 			get
@@ -229,7 +243,8 @@ namespace ClickQuest.Items
 			}
 
 			// Set time difference (for hero stats page info).
-			questCopy.TimeDifference = (questCopy.EndDate - DateTime.Now).ToString("hh\\:mm\\:ss");
+			var baseSpan = questCopy.EndDate - DateTime.Now;
+			TimeDifference = string.Format("{0}h {1}m {2}s", baseSpan.Hours, baseSpan.Minutes, baseSpan.Seconds);
 
 			// Start timer (checks if quest is finished).
 			questCopy._timer.Start();
@@ -315,7 +330,8 @@ namespace ClickQuest.Items
 			else
 			{
 				// Else, calculate new Time difference for hero stats panel.
-				TimeDifference = (EndDate - DateTime.Now).ToString("hh\\:mm\\:ss");
+				var baseSpan = EndDate - DateTime.Now;
+				TimeDifference = string.Format("{0}h {1}m {2}s", baseSpan.Hours, baseSpan.Minutes, baseSpan.Seconds);
 			}
 		}
 
