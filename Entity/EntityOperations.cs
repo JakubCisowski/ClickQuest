@@ -23,6 +23,7 @@ namespace ClickQuest.Entity
 				user.Heroes = User.Instance.Heroes;
 				user.Blessings = User.Instance.Blessings;
 				user.Specialization = User.Instance.Specialization;
+				user.Ingots = User.Instance.Ingots;
 				user.DungeonKeys = User.Instance.DungeonKeys;
 
 				// Save quests for each hero.

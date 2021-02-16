@@ -207,16 +207,9 @@ namespace ClickQuest.Pages
 			if (quest != null)
 			{
 				// Bind its duration to the panel.
-				var binding = new Binding("TimeDifference");
-
+				var binding = new Binding("TicksCountText");
 				binding.Source = quest;
-				binding.StringFormat = "Test: {0}";
 				testQuestDuration.SetBinding(TextBlock.TextProperty, binding);
-			}
-			else
-			{
-				// No quest is currently running - remove timer.
-				//testQuestDuration.Text = "";
 			}
 		}
 

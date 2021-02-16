@@ -34,7 +34,7 @@
             "RewardRecipeIds": [],
             "RewardBlessingIds" : [],
             "RewardMaterialsIds" : [],
-            "RewardIngots" : [0]
+            "RewardIngots" : [2,2]
         }
     ]
 }

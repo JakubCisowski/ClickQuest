@@ -36,8 +36,8 @@ namespace ClickQuest.Items
 		private List<Rarity> _rewardIngots;
 		private DispatcherTimer _timer;
 		private DateTime _endDate;
-		private TimeSpan _timeToEnd;
-		private string _timeDifference;
+		private int _ticksCountNumber;
+		private string _ticksCountText;
 
 		#endregion
 
@@ -183,28 +183,28 @@ namespace ClickQuest.Items
 			}
 		}
 		[NotMapped]
-		public TimeSpan TimeToEnd
+		public int TicksCountNumber
 		{
 			get
 			{
-				return _timeToEnd;
+				return _ticksCountNumber;
 			}
 			set
 			{
-				_timeToEnd = value;
+				_ticksCountNumber = value;
 				OnPropertyChanged();
 			}
 		}
 		[NotMapped]
-		public string TimeDifference
+		public string TicksCountText
 		{
 			get
 			{
-				return _timeDifference;
+				return _ticksCountText;
 			}
 			set
 			{
-				_timeDifference = value;
+				_ticksCountText = value;
 				OnPropertyChanged();
 			}
 		}
@@ -230,6 +230,7 @@ namespace ClickQuest.Items
 		{
 			// Create copy of this quest (to make doing the same quest possible on other heroes at the same time).
 			var questCopy = new Quest();
+			questCopy.EndDate = this.EndDate;
 			questCopy.CopyQuest(this);
 
 			// Change that quest in Hero's Quests collection to the newly copied quest.
@@ -242,9 +243,20 @@ namespace ClickQuest.Items
 				questCopy.EndDate = DateTime.Now.AddSeconds(Duration);
 			}
 
-			// Set time difference (for hero stats page info).
-			var baseSpan = questCopy.EndDate - DateTime.Now;
-			TimeDifference = string.Format("{0}h {1}m {2}s", baseSpan.Hours, baseSpan.Minutes, baseSpan.Seconds);
+			// Initially set TicksCountText (for hero stats page info).
+			// Reset to 'Duration', it will count from Duration to 0.
+			questCopy.TicksCountNumber = (int)(questCopy.EndDate - DateTime.Now).TotalSeconds;
+
+			// If quest is already finished
+			if (questCopy.TicksCountNumber<=0)
+			{
+				questCopy.TicksCountText="";
+			}
+			else
+			{
+				// Convert to text.
+				questCopy.TicksCountText = $"{questCopy.TicksCountNumber / 60}m {questCopy.TicksCountNumber % 60 + 1}s";
+			}
 
 			// Start timer (checks if quest is finished).
 			questCopy._timer.Start();
@@ -258,8 +270,8 @@ namespace ClickQuest.Items
 			// Stop timer.
 			_timer.Stop();
 
-			// Set TimeDifference to empty string so that it stops displaying.
-			TimeDifference = "";
+			// Set TicksCountText to empty string so that it stops displaying.
+			TicksCountText = "";
 
 			// Assign rewards.
 			AssignRewards();
@@ -323,15 +335,15 @@ namespace ClickQuest.Items
 		private void Timer_Tick(object source, EventArgs e)
 		{
 			// Check if quest is finished.
-			if (DateTime.Now >= EndDate)
+			if (TicksCountNumber <= 0)
 			{
 				StopQuest();
 			}
 			else
 			{
-				// Else, calculate new Time difference for hero stats panel.
-				var baseSpan = EndDate - DateTime.Now;
-				TimeDifference = string.Format("{0}h {1}m {2}s", baseSpan.Hours, baseSpan.Minutes, baseSpan.Seconds);
+				// Else, decrement TicksCountNumber, and convert it to text.
+				TicksCountNumber--;
+				TicksCountText = $"{TicksCountNumber / 60}m {TicksCountNumber % 60 + 1}s";
 			}
 		}
 
