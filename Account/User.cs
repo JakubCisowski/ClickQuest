@@ -52,7 +52,6 @@ namespace ClickQuest.Account
 		private List<Recipe> _recipes;
 		private List<Artifact> _artifacts;
 		private List<Ingot> _ingots;
-		private List<Blessing> _blessings;
 		private List<DungeonKey> _dungeonKeys;
 		private int _gold;
 		private Specialization _specialization;
@@ -130,19 +129,6 @@ namespace ClickQuest.Account
 			}
 		}
 
-		public List<Blessing> Blessings
-		{
-			get
-			{
-				return _blessings;
-			}
-			set
-			{
-				_blessings = value;
-				OnPropertyChanged();
-			}
-		}
-
 		public List<DungeonKey> DungeonKeys
 		{
 			get
@@ -205,7 +191,6 @@ namespace ClickQuest.Account
 			Recipes = new List<Recipe>();
 			Artifacts = new List<Artifact>();
 			Ingots = new List<Ingot>();
-			Blessings = new List<Blessing>();
 			DungeonKeys = new List<DungeonKey>();
 
 			_specialization = Specialization.Instance;

@@ -35,6 +35,7 @@ namespace ClickQuest.Heroes
 		private HeroClass _heroClass;
 		private string _critChanceText;
 		private List<Quest> _quests;
+		private List<Blessing> _blessings;
 
 		// Specialisations/Professions
 
@@ -220,12 +221,25 @@ namespace ClickQuest.Heroes
 				OnPropertyChanged();
 			}
 		}
+		public List<Blessing> Blessings
+		{
+			get
+			{
+				return _blessings;
+			}
+			set
+			{
+				_blessings = value;
+				OnPropertyChanged();
+			}
+		}
 
 		#endregion Properties
 
 		public Hero(HeroClass heroClass, string heroName)
 		{
 			Quests = new List<Quest>();
+			Blessings = new List<Blessing>();
 			HeroClass = heroClass;
 			Experience = 0;
 			Level = 0;

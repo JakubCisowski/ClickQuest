@@ -167,7 +167,7 @@ namespace ClickQuest.Pages
 			// Resume quests for the selected hero.
 			Account.User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default(DateTime))?.StartQuest();
 
-			// Resume blessings on this account.
+			// Resume blessings for dis hero (it resumes only for current hero).
 			Blessing.ResumeBlessings();
 
 			// Refresh pages, move to town and change location text.

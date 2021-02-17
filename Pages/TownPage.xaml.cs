@@ -3,6 +3,7 @@ using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Heroes;
 using ClickQuest.Items;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -86,6 +87,9 @@ namespace ClickQuest.Pages
 
 			// Pause all blessings.
 			Blessing.PauseBlessings();
+
+			// Pause all quest timers (so that quest doesn't finish while current hero is not selected).
+			Account.User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate == default(DateTime))?.PauseTimer();
 
 			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["MainMenu"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "";

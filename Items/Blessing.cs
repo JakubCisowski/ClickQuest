@@ -209,10 +209,8 @@ namespace ClickQuest.Items
 				{
 					case BlessingType.ClickDamage:
 
-						foreach (var hero in User.Instance.Heroes)
-						{
-							hero.ClickDamage += Buff;
-						}
+						// Assign buff.
+						User.Instance.CurrentHero.ClickDamage += Buff;
 
 						_timer = new DispatcherTimer();
 						_timer.Interval = new TimeSpan(0, 0, 1);
@@ -231,10 +229,8 @@ namespace ClickQuest.Items
 
 						_timer.Stop();
 
-						foreach (var hero in User.Instance.Heroes)
-						{
-							hero.ClickDamage -= Buff;
-						}
+						// Cancel buff.
+						User.Instance.CurrentHero.ClickDamage -= Buff;
 
 						break;
 				}
@@ -251,7 +247,7 @@ namespace ClickQuest.Items
 				ChangeBuffStatus(false);
 
 				// Remove it from User and Database (if it's saved there).
-				User.Instance.Blessings.Remove(this);
+				User.Instance.CurrentHero.Blessings.Remove(this);
 				Entity.EntityOperations.RemoveBlessing(this);
 			}
 		}
@@ -259,7 +255,7 @@ namespace ClickQuest.Items
 		public static void ResumeBlessings()
 		{
 			// Resume blessings (if there are any left) - used when user selects a hero.
-			foreach (var blessing in User.Instance.Blessings)
+			foreach (var blessing in User.Instance.CurrentHero.Blessings)
 			{
 				blessing.ChangeBuffStatus(true);
 			}
@@ -268,9 +264,9 @@ namespace ClickQuest.Items
 		public static void PauseBlessings()
 		{
 			// Pause current blessings and save them to the database - used when user exits the game or returns to main menu page.
-			for (int i = 0; i < User.Instance.Blessings.Count; i++)
+			for (int i = 0; i < User.Instance.CurrentHero.Blessings.Count; i++)
 			{
-				User.Instance.Blessings[0].ChangeBuffStatus(false);
+				User.Instance.CurrentHero.Blessings[i].ChangeBuffStatus(false);
 			}
 		}
 	}

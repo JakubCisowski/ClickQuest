@@ -59,7 +59,7 @@ namespace ClickQuest.Pages
 				var blessing = new Blessing(blessingBlueprint);
 				// Increase his duration based on Blessing Specialization buff.
 				blessing.Duration += Account.User.Instance.Specialization.SpecBlessingBuff;
-				User.Instance.Blessings.Add(blessing);
+				User.Instance.CurrentHero.Blessings.Add(blessing);
 				blessing.ChangeBuffStatus(true);
 
 				UpdatePriest();

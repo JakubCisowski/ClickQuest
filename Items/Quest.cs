@@ -287,6 +287,11 @@ namespace ClickQuest.Items
 			(Data.Database.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
 		}
 
+		public void PauseTimer()
+		{
+			_timer.Stop();
+		}
+
 		private void AssignRewards()
 		{
 			// Assign materials.
@@ -319,7 +324,7 @@ namespace ClickQuest.Items
 				var blessing = new Blessing(blessingBlueprint);
 				// Increase his duration based on Blessing Specialization buff.
 				blessing.Duration += Account.User.Instance.Specialization.SpecBlessingBuff;
-				User.Instance.Blessings.Add(blessing);
+				User.Instance.CurrentHero.Blessings.Add(blessing);
 				blessing.ChangeBuffStatus(true);
 			}
 
