@@ -100,9 +100,9 @@ namespace ClickQuest.Items
 				// If we set quantity to 0 or lower, then remove it from user's equipment
 				if (_quantity <= 0)
 				{
-					Account.User.Instance.Recipes.Remove(this as Recipe);
-					Account.User.Instance.Materials.Remove(this as Material);
-					Account.User.Instance.Artifacts.Remove(this as Artifact);
+					Account.User.Instance.CurrentHero?.Recipes.Remove(this as Recipe);
+					Account.User.Instance.CurrentHero?.Materials.Remove(this as Material);
+					Account.User.Instance.CurrentHero?.Artifacts.Remove(this as Artifact);
 				}
 
 				OnPropertyChanged();

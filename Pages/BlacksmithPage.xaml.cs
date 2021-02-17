@@ -21,9 +21,9 @@ namespace ClickQuest.Pages
 		public void UpdateBlacksmith()
 		{
 			// Refresh list of items.
-			ItemsListViewMeltMaterials.ItemsSource = User.Instance.Materials;
-			ItemsListViewMeltArtifacts.ItemsSource = User.Instance.Artifacts;
-			ItemsListViewCraft.ItemsSource = User.Instance.Recipes;
+			ItemsListViewMeltMaterials.ItemsSource = User.Instance.CurrentHero.Materials;
+			ItemsListViewMeltArtifacts.ItemsSource = User.Instance.CurrentHero.Artifacts;
+			ItemsListViewCraft.ItemsSource = User.Instance.CurrentHero.Recipes;
 
 			ItemsListViewMeltMaterials.Items.Refresh();
 			ItemsListViewMeltArtifacts.Items.Refresh();
@@ -51,7 +51,7 @@ namespace ClickQuest.Pages
 				// A material is being melted.
 
 				// Remove the material from inventory.
-				Account.User.Instance.RemoveItem(material);
+				Account.User.Instance.CurrentHero.RemoveItem(material);
 
 				// Add ingots of that rarity.
 				var ingot = Account.User.Instance.Ingots.Where(x => x.Rarity == material.Rarity).FirstOrDefault();
@@ -86,7 +86,7 @@ namespace ClickQuest.Pages
 				// An artifact is being melted.
 
 				// Remove the artifact from inventory.
-				Account.User.Instance.RemoveItem(artifact);
+				Account.User.Instance.CurrentHero.RemoveItem(artifact);
 
 				// Add ingots of that rarity.
 				var ingot = Account.User.Instance.Ingots.Where(x => x.Rarity == artifact.Rarity).FirstOrDefault();
@@ -134,7 +134,7 @@ namespace ClickQuest.Pages
 			// Check if user has required materials to craft.
 			foreach (var pair in recipe.MaterialIds)
 			{
-				var material = User.Instance.Materials.FirstOrDefault(x => x.Id == pair.Key);
+				var material = User.Instance.CurrentHero.Materials.FirstOrDefault(x => x.Id == pair.Key);
 				if (!(material != null && material.Quantity >= pair.Value))
 				{
 					AlertBox.Show($"You don't have enough materials to craft {recipe.Name}.\n{recipe.RequirementsDescription}\nGet more materials by completing quests and killing monsters and boses or try to craft this artifact using ingots.", MessageBoxButton.OK);
@@ -154,22 +154,22 @@ namespace ClickQuest.Pages
 			// If he has, remove them.
 			foreach (var pair in recipe.MaterialIds)
 			{
-				var material = User.Instance.Materials.FirstOrDefault(x => x.Id == pair.Key);
+				var material = User.Instance.CurrentHero.Materials.FirstOrDefault(x => x.Id == pair.Key);
 				if (material != null && material.Quantity >= pair.Value)
 				{
 					for (int i = 0; i < pair.Value; i++)
 					{
-						User.Instance.RemoveItem(material);
+						User.Instance.CurrentHero.RemoveItem(material);
 					}
 				}
 			}
 
 			// Add artifact to equipment.
 			var artifact = Data.Database.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
-			User.Instance.AddItem(artifact);
+			User.Instance.CurrentHero.AddItem(artifact);
 
 			// Remove the recipe used.
-			User.Instance.RemoveItem(recipe);
+			User.Instance.CurrentHero.RemoveItem(recipe);
 
 			(Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 			UpdateBlacksmith();
@@ -209,10 +209,10 @@ namespace ClickQuest.Pages
 
 				// Add artifact to equipment.
 				var artifact = Data.Database.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
-				User.Instance.AddItem(artifact);
+				User.Instance.CurrentHero.AddItem(artifact);
 
 				// Remove the recipe used.
-				User.Instance.RemoveItem(recipe);
+				User.Instance.CurrentHero.RemoveItem(recipe);
 
 				(Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 				UpdateBlacksmith();

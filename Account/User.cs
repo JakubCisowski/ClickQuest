@@ -48,9 +48,6 @@ namespace ClickQuest.Account
 
 		private List<Hero> _heroes;
 		private Hero _currentHero;
-		private List<Material> _materials;
-		private List<Recipe> _recipes;
-		private List<Artifact> _artifacts;
 		private List<Ingot> _ingots;
 		private List<DungeonKey> _dungeonKeys;
 		private int _gold;
@@ -63,7 +60,7 @@ namespace ClickQuest.Account
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
-
+ 
 		public List<Hero> Heroes
 		{
 			get
@@ -73,45 +70,6 @@ namespace ClickQuest.Account
 			set
 			{
 				_heroes = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public List<Material> Materials
-		{
-			get
-			{
-				return _materials;
-			}
-			set
-			{
-				_materials = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public List<Recipe> Recipes
-		{
-			get
-			{
-				return _recipes;
-			}
-			set
-			{
-				_recipes = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public List<Artifact> Artifacts
-		{
-			get
-			{
-				return _artifacts;
-			}
-			set
-			{
-				_artifacts = value;
 				OnPropertyChanged();
 			}
 		}
@@ -187,132 +145,10 @@ namespace ClickQuest.Account
 		public User()
 		{
 			Heroes = new List<Hero>();
-			Materials = new List<Material>();
-			Recipes = new List<Recipe>();
-			Artifacts = new List<Artifact>();
 			Ingots = new List<Ingot>();
 			DungeonKeys = new List<DungeonKey>();
 
 			_specialization = Specialization.Instance;
-		}
-
-		public void AddItem(Item itemToAdd)
-		{
-			var type = itemToAdd.GetType();
-
-			if (type == typeof(Recipe))
-			{
-				// Add to Recipes.
-
-				foreach (var item in Recipes)
-				{
-					if (item.Id == itemToAdd.Id)
-					{
-						item.Quantity++;
-						return;
-					}
-				}
-
-				// If user doesn't have this item, add it.
-				Recipes.Add(itemToAdd as Recipe);
-				itemToAdd.Quantity++;
-			}
-			else if (type == typeof(Artifact))
-			{
-				// Add to Artifacts.
-
-				foreach (var item in Artifacts)
-				{
-					if (item.Id == itemToAdd.Id)
-					{
-						item.Quantity++;
-						return;
-					}
-				}
-
-				// If user doesn't have this item, add it.
-				Artifacts.Add(itemToAdd as Artifact);
-				itemToAdd.Quantity++;
-			}
-			else if (type == typeof(Material))
-			{
-				// Add to Materials.
-
-				foreach (var item in Materials)
-				{
-					if (item.Id == itemToAdd.Id)
-					{
-						item.Quantity++;
-						return;
-					}
-				}
-
-				// If user doesn't have this item, add it.
-				Materials.Add(itemToAdd as Material);
-				itemToAdd.Quantity++;
-			}
-		}
-
-		public void RemoveItem(Item itemToRemove)
-		{
-			var type = itemToRemove.GetType();
-
-			if (type == typeof(Recipe))
-			{
-				// Revmove from Recipes.
-
-				foreach (var item in Recipes)
-				{
-					if (item.Id == itemToRemove.Id)
-					{
-						item.Quantity--;
-						if (item.Quantity <= 0)
-						{
-							// Remove item from database.
-							Entity.EntityOperations.RemoveItem(item);
-						}
-						return;
-					}
-				}
-			}
-			else if (type == typeof(Artifact))
-			{
-				// Revmove from Artifacts.
-
-				foreach (var item in Artifacts)
-				{
-					if (item.Id == itemToRemove.Id)
-					{
-						item.Quantity--;
-						if (item.Quantity <= 0)
-						{
-							// Remove item from database.
-							Entity.EntityOperations.RemoveItem(item);
-						}
-						return;
-					}
-				}
-			}
-			else if (type == typeof(Material))
-			{
-				// Revmove from Materials.
-
-				foreach (var item in Materials)
-				{
-					if (item.Id == itemToRemove.Id)
-					{
-						item.Quantity--;
-						if (item.Quantity <= 0)
-						{
-							// Remove item from database.
-							Entity.EntityOperations.RemoveItem(item);
-						}
-						return;
-					}
-				}
-			}
-
-			// If user doesn't have this item, don't do anything (check Item.Quantity).
 		}
 	}
 }

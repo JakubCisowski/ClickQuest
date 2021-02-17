@@ -298,14 +298,14 @@ namespace ClickQuest.Items
 			foreach (var materialId in RewardMaterialIds)
 			{
 				var material = Data.Database.Materials.FirstOrDefault(x => x.Id == materialId);
-				Account.User.Instance.AddItem(material);
+				Account.User.Instance.CurrentHero.AddItem(material);
 			}
 
 			// Assign recipes.
 			foreach (var recipeId in RewardRecipeIds)
 			{
 				var recipe = Data.Database.Recipes.FirstOrDefault(x => x.Id == recipeId);
-				Account.User.Instance.AddItem(recipe);
+				Account.User.Instance.CurrentHero.AddItem(recipe);
 			}
 
 			// Assign ingots.

@@ -34,6 +34,9 @@ namespace ClickQuest.Heroes
 		private int _poisonDamage;
 		private HeroClass _heroClass;
 		private string _critChanceText;
+		private List<Material> _materials;
+		private List<Recipe> _recipes;
+		private List<Artifact> _artifacts;
 		private List<Quest> _quests;
 		private List<Blessing> _blessings;
 
@@ -208,6 +211,42 @@ namespace ClickQuest.Heroes
 				OnPropertyChanged();
 			}
 		}
+		public List<Material> Materials
+		{
+			get
+			{
+				return _materials;
+			}
+			set
+			{
+				_materials=value;
+				OnPropertyChanged();
+			}
+		}
+		public List<Recipe> Recipes
+		{
+			get
+			{
+				return _recipes;
+			}
+			set
+			{
+				_recipes=value;
+				OnPropertyChanged();
+			}
+		}
+		public List<Artifact> Artifacts
+		{
+			get
+			{
+				return _artifacts;
+			}
+			set
+			{
+				_artifacts=value;
+				OnPropertyChanged();
+			}
+		}
 
 		public List<Quest> Quests
 		{
@@ -238,6 +277,9 @@ namespace ClickQuest.Heroes
 
 		public Hero(HeroClass heroClass, string heroName)
 		{
+			Materials = new List<Material>();
+			Recipes = new List<Recipe>();
+			Artifacts = new List<Artifact>();
 			Quests = new List<Quest>();
 			Blessings = new List<Blessing>();
 			HeroClass = heroClass;
@@ -318,6 +360,124 @@ namespace ClickQuest.Heroes
 						break;
 				}
 			}
+		}
+		public void AddItem(Item itemToAdd)
+		{
+			var type = itemToAdd.GetType();
+
+			if (type == typeof(Recipe))
+			{
+				// Add to Recipes.
+
+				foreach (var item in Recipes)
+				{
+					if (item.Id == itemToAdd.Id)
+					{
+						item.Quantity++;
+						return;
+					}
+				}
+
+				// If user doesn't have this item, add it.
+				Recipes.Add(itemToAdd as Recipe);
+				itemToAdd.Quantity++;
+			}
+			else if (type == typeof(Artifact))
+			{
+				// Add to Artifacts.
+
+				foreach (var item in Artifacts)
+				{
+					if (item.Id == itemToAdd.Id)
+					{
+						item.Quantity++;
+						return;
+					}
+				}
+
+				// If user doesn't have this item, add it.
+				Artifacts.Add(itemToAdd as Artifact);
+				itemToAdd.Quantity++;
+			}
+			else if (type == typeof(Material))
+			{
+				// Add to Materials.
+
+				foreach (var item in Materials)
+				{
+					if (item.Id == itemToAdd.Id)
+					{
+						item.Quantity++;
+						return;
+					}
+				}
+
+				// If user doesn't have this item, add it.
+				Materials.Add(itemToAdd as Material);
+				itemToAdd.Quantity++;
+			}
+		}
+
+		public void RemoveItem(Item itemToRemove)
+		{
+			var type = itemToRemove.GetType();
+
+			if (type == typeof(Recipe))
+			{
+				// Revmove from Recipes.
+
+				foreach (var item in Recipes)
+				{
+					if (item.Id == itemToRemove.Id)
+					{
+						item.Quantity--;
+						if (item.Quantity <= 0)
+						{
+							// Remove item from database.
+							Entity.EntityOperations.RemoveItem(item);
+						}
+						return;
+					}
+				}
+			}
+			else if (type == typeof(Artifact))
+			{
+				// Revmove from Artifacts.
+
+				foreach (var item in Artifacts)
+				{
+					if (item.Id == itemToRemove.Id)
+					{
+						item.Quantity--;
+						if (item.Quantity <= 0)
+						{
+							// Remove item from database.
+							Entity.EntityOperations.RemoveItem(item);
+						}
+						return;
+					}
+				}
+			}
+			else if (type == typeof(Material))
+			{
+				// Revmove from Materials.
+
+				foreach (var item in Materials)
+				{
+					if (item.Id == itemToRemove.Id)
+					{
+						item.Quantity--;
+						if (item.Quantity <= 0)
+						{
+							// Remove item from database.
+							Entity.EntityOperations.RemoveItem(item);
+						}
+						return;
+					}
+				}
+			}
+
+			// If user doesn't have this item, don't do anything (check Item.Quantity).
 		}
 	}
 }

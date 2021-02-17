@@ -18,11 +18,11 @@ namespace ClickQuest.Pages
 		{
 			// Refresh equipment.
 
-			// MaterialsPanel.Children.Clear();
+			MaterialsPanel.Children.Clear();
 			RecipesPanel.Children.Clear();
 			ArtifactsPanel.Children.Clear();
 
-			foreach (var material in User.Instance.Materials)
+			foreach (var material in User.Instance.CurrentHero?.Materials)
 			{
 				var border = new Border()
 				{
@@ -66,7 +66,7 @@ namespace ClickQuest.Pages
 				MaterialsPanel.Children.Add(border);
 			}
 
-			foreach (var recipe in User.Instance.Recipes)
+			foreach (var recipe in User.Instance.CurrentHero?.Recipes)
 			{
 				var border = new Border()
 				{
@@ -110,7 +110,7 @@ namespace ClickQuest.Pages
 				RecipesPanel.Children.Add(border);
 			}
 
-			foreach (var artifact in User.Instance.Artifacts)
+			foreach (var artifact in User.Instance.CurrentHero?.Artifacts)
 			{
 				var border = new Border()
 				{

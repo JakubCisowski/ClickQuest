@@ -18,7 +18,7 @@ namespace ClickQuest.Pages
 
 		public void UpdateShop()
 		{
-			ItemsListViewSell.ItemsSource = User.Instance.Materials.Cast<Item>().Concat(User.Instance.Recipes.Cast<Item>());
+			ItemsListViewSell.ItemsSource = User.Instance.CurrentHero?.Materials.Cast<Item>().Concat(User.Instance.CurrentHero.Recipes.Cast<Item>());
 
 			// Calculate shop offer size according to specialization bonus (base bonus: 5).
 			ItemsListViewBuy.ItemsSource = Database.ShopOffer.Take(Account.User.Instance.Specialization.SpecBuyingBuff);
@@ -43,7 +43,7 @@ namespace ClickQuest.Pages
 			var b = sender as Button;
 			var item = b.CommandParameter as Item;
 
-			Account.User.Instance.RemoveItem(item);
+			Account.User.Instance.CurrentHero.RemoveItem(item);
 			Account.User.Instance.Gold += item.Value;
 
 			(Data.Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
@@ -67,7 +67,7 @@ namespace ClickQuest.Pages
 					return;
 				}
 
-				Account.User.Instance.AddItem(recipe);
+				Account.User.Instance.CurrentHero.AddItem(recipe);
 				Account.User.Instance.Gold -= recipe.Value;
 
 				(Data.Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
@@ -83,6 +83,6 @@ namespace ClickQuest.Pages
 			}
 		}
 
-		#endregion
+		#endregion Events
 	}
 }

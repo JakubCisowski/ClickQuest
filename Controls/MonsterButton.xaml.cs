@@ -100,7 +100,7 @@ namespace ClickQuest.Controls
 			// Grant loot after checking if it's not empty.
 			if (_monster.Loot[i].Item.Id != 0)
 			{
-				Account.User.Instance.AddItem(_monster.Loot[i].Item);
+				Account.User.Instance.CurrentHero.AddItem(_monster.Loot[i].Item);
 				_regionPage.EquipmentFrame.Refresh();
 			}
 

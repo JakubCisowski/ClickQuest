@@ -123,7 +123,7 @@ namespace ClickQuest.Pages
 					// Grant loot after checking if it's not empty.
 					if (loot.Item.Id != 0)
 					{
-						Account.User.Instance.AddItem(loot.Item);
+						Account.User.Instance.CurrentHero.AddItem(loot.Item);
 						lootText += "- " + loot.Item.Name + " (" + loot.ItemType + ")\n";
 						(Data.Database.Pages["DungeonBoss"] as DungeonBossPage).EquipmentFrame.Refresh();
 					}
