@@ -62,6 +62,7 @@ namespace ClickQuest.Pages
 			if (User.Instance.CurrentHero.Level >= Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement)
 			{
 				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages[regionName]);
+				(Database.Pages[regionName] as RegionPage).StatsFrame.Refresh();
 				(Database.Pages[regionName] as RegionPage).EquipmentFrame.Refresh();
 				(Window.GetWindow(this) as GameWindow).LocationInfo = $"{regionName}";
 			}
@@ -76,6 +77,7 @@ namespace ClickQuest.Pages
 		{
 			// Enter Shop page.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Shop"]);
+			(Database.Pages["Shop"] as ShopPage).StatsFrame.Refresh();
 			(Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Shop";
 			(Database.Pages["Shop"] as ShopPage).UpdateShop();
@@ -100,6 +102,7 @@ namespace ClickQuest.Pages
 			// Enter Quests page.
 			(Data.Database.Pages["QuestMenu"] as QuestMenuPage).LoadPage();
 			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["QuestMenu"]);
+			(Database.Pages["QuestMenu"] as QuestMenuPage).StatsFrame.Refresh();
 			(Database.Pages["QuestMenu"] as QuestMenuPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Quests";
 		}
@@ -108,6 +111,7 @@ namespace ClickQuest.Pages
 		{
 			// Enter Blacksmith page.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Blacksmith"]);
+			(Database.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
 			(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Blacksmith";
 			(Database.Pages["Blacksmith"] as BlacksmithPage).UpdateBlacksmith();
@@ -117,6 +121,7 @@ namespace ClickQuest.Pages
 		{
 			// Enter Priest page.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Priest"]);
+			(Database.Pages["Priest"] as PriestPage).StatsFrame.Refresh();
 			(Database.Pages["Priest"] as PriestPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Priest";
 			(Database.Pages["Priest"] as PriestPage).UpdatePriest();
@@ -126,6 +131,7 @@ namespace ClickQuest.Pages
 		{
 			// Enter DungeonSelect page.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["DungeonSelect"]);
+			(Database.Pages["DungeonSelect"] as DungeonSelectPage).StatsFrame.Refresh();
 			(Database.Pages["DungeonSelect"] as DungeonSelectPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting dungeon group";
 		}

@@ -264,9 +264,12 @@ namespace ClickQuest.Items
 		public static void PauseBlessings()
 		{
 			// Pause current blessings and save them to the database - used when user exits the game or returns to main menu page.
-			for (int i = 0; i < User.Instance.CurrentHero.Blessings.Count; i++)
+			if (User.Instance.CurrentHero != null)
 			{
-				User.Instance.CurrentHero.Blessings[i].ChangeBuffStatus(false);
+				for (int i = 0; i < User.Instance.CurrentHero.Blessings.Count; i++)
+				{
+					User.Instance.CurrentHero.Blessings[i].ChangeBuffStatus(false);
+				}
 			}
 		}
 	}

@@ -174,8 +174,8 @@ namespace ClickQuest.Pages
 			Data.Database.RefreshPages();
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
-			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
 			(Database.Pages["Town"] as TownPage).StatsFrame.Refresh();
+			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
 		}
 
 		private void DeleteHeroButton_Click(object sender, RoutedEventArgs e)

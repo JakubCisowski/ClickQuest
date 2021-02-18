@@ -112,6 +112,8 @@ namespace ClickQuest.Controls
 
 			// Increase killing specialization amount (it will update buffs in setter).
 			Account.User.Instance.Specialization.SpecKillingAmount++;
+
+			_regionPage.StatsFrame.Refresh();
 		}
 
 		private void CheckIfMonsterDied()
