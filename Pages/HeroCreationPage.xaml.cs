@@ -79,7 +79,7 @@ namespace ClickQuest.Pages
 				User.Instance.CurrentHero = User.Instance.Heroes.FirstOrDefault(x=>x.Id==hero.Id);
 
 				// Refresh Specialization buffs.
-				hero.Specialization.UpdateBuffs();
+				Account.User.Instance.CurrentHero.Specialization.UpdateBuffs();
 
 				// Refresh bindings.
 				Data.Database.RefreshPages();

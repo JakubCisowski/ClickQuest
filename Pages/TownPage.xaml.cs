@@ -93,6 +93,9 @@ namespace ClickQuest.Pages
 			// Pause all quest timers (so that quest doesn't finish while current hero is not selected).
 			Account.User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate == default(DateTime))?.PauseTimer();
 
+			// Set current hero to null.
+			//Account.User.Instance.CurrentHero = null;
+
 			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["MainMenu"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "";
 		}

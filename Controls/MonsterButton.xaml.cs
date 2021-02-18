@@ -121,7 +121,7 @@ namespace ClickQuest.Controls
 			// If monster died - grant rewards and spawn another one.
 			if (Monster.CurrentHealth <= 0)
 			{
-				// Reset poison.
+				// Stop poison.
 				_poisonTimer.Stop();
 				_poisonTicks = 0;
 

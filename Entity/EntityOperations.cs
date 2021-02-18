@@ -179,7 +179,6 @@ namespace ClickQuest.Entity
 
 		public static void ResetProgress()
 		{
-			// todo usunac questy
 			using (var db = new UserContext())
 			{
 				var user = db.Users.Include(x=>x.Heroes).ThenInclude(x=>x.Materials)

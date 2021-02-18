@@ -55,5 +55,15 @@ namespace ClickQuest.Items
 				RequirementsDescription = RequirementsDescription + ": " + elem.Value + "; ";
 			}
 		}
+
+		public Recipe(Item itemToCopy) : base(itemToCopy)
+		{
+			if (itemToCopy is Recipe recipe)
+			{
+				ArtifactId = recipe.ArtifactId;
+				MaterialIds = recipe.MaterialIds;
+				RequirementsDescription = recipe.RequirementsDescription;
+			}
+		}
 	}
 }

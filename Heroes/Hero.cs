@@ -393,9 +393,11 @@ namespace ClickQuest.Heroes
 					}
 				}
 
-				// If user doesn't have this item, add it.
-				Recipes.Add(itemToAdd as Recipe);
-				itemToAdd.Quantity++;
+				// If user doesn't have this item, clone and add it.
+				var copy = new Recipe(itemToAdd);
+
+				Recipes.Add(copy);
+				copy.Quantity++;
 			}
 			else if (type == typeof(Artifact))
 			{
@@ -411,8 +413,10 @@ namespace ClickQuest.Heroes
 				}
 
 				// If user doesn't have this item, add it.
-				Artifacts.Add(itemToAdd as Artifact);
-				itemToAdd.Quantity++;
+				var copy = new Artifact(itemToAdd);
+
+				Artifacts.Add(copy);
+				copy.Quantity++;
 			}
 			else if (type == typeof(Material))
 			{
@@ -428,8 +432,10 @@ namespace ClickQuest.Heroes
 				}
 
 				// If user doesn't have this item, add it.
-				Materials.Add(itemToAdd as Material);
-				itemToAdd.Quantity++;
+				var copy = new Material(itemToAdd);
+
+				Materials.Add(copy);
+				copy.Quantity++;
 			}
 		}
 
