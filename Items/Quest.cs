@@ -229,8 +229,10 @@ namespace ClickQuest.Items
 		public void StartQuest()
 		{
 			// Create copy of this quest (to make doing the same quest possible on other heroes at the same time).
-			var questCopy = new Quest();
-			questCopy.EndDate = this.EndDate;
+			var questCopy = new Quest
+			{
+				EndDate = this.EndDate
+			};
 			questCopy.CopyQuest(this);
 
 			// Change that quest in Hero's Quests collection to the newly copied quest.
@@ -248,9 +250,9 @@ namespace ClickQuest.Items
 			questCopy.TicksCountNumber = (int)(questCopy.EndDate - DateTime.Now).TotalSeconds;
 
 			// If quest is already finished
-			if (questCopy.TicksCountNumber<=0)
+			if (questCopy.TicksCountNumber <= 0)
 			{
-				questCopy.TicksCountText="";
+				questCopy.TicksCountText = "";
 			}
 			else
 			{
@@ -284,7 +286,7 @@ namespace ClickQuest.Items
 			}
 
 			// Reroll new set of 3 quests.
-			(Data.Database.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
+			(Database.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
 		}
 
 		public void PauseTimer()
@@ -297,21 +299,21 @@ namespace ClickQuest.Items
 			// Assign materials.
 			foreach (var materialId in RewardMaterialIds)
 			{
-				var material = Data.Database.Materials.FirstOrDefault(x => x.Id == materialId);
-				Account.User.Instance.CurrentHero.AddItem(material);
+				var material = Database.Materials.FirstOrDefault(x => x.Id == materialId);
+				User.Instance.CurrentHero.AddItem(material);
 			}
 
 			// Assign recipes.
 			foreach (var recipeId in RewardRecipeIds)
 			{
-				var recipe = Data.Database.Recipes.FirstOrDefault(x => x.Id == recipeId);
-				Account.User.Instance.CurrentHero.AddItem(recipe);
+				var recipe = Database.Recipes.FirstOrDefault(x => x.Id == recipeId);
+				User.Instance.CurrentHero.AddItem(recipe);
 			}
 
 			// Assign ingots.
 			foreach (var ingotRarity in RewardIngots)
 			{
-				var ingot = Account.User.Instance.Ingots.FirstOrDefault(x => x.Rarity == ingotRarity);
+				var ingot = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == ingotRarity);
 				ingot.Quantity++;
 			}
 
@@ -319,11 +321,11 @@ namespace ClickQuest.Items
 			foreach (var blessingId in RewardBlessingIds)
 			{
 				// Select right blessing.
-				var blessingBlueprint = Data.Database.Blessings.FirstOrDefault(x => x.Id == blessingId);
+				var blessingBlueprint = Database.Blessings.FirstOrDefault(x => x.Id == blessingId);
 				// Create a new Blessing.
 				var blessing = new Blessing(blessingBlueprint);
 				// Increase his duration based on Blessing Specialization buff.
-				blessing.Duration += Account.User.Instance.CurrentHero.Specialization.SpecBlessingBuff;
+				blessing.Duration += User.Instance.CurrentHero.Specialization.SpecBlessingBuff;
 				User.Instance.CurrentHero.Blessings.Add(blessing);
 				blessing.ChangeBuffStatus(true);
 			}
@@ -358,8 +360,11 @@ namespace ClickQuest.Items
 			RewardMaterialIds = new List<int>();
 			RewardBlessingIds = new List<int>();
 			RewardIngots = new List<Rarity>();
-			_timer = new DispatcherTimer();
-			_timer.Interval = new TimeSpan(0, 0, 0, 1);
+
+			_timer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 0, 1)
+			};
 			_timer.Tick += Timer_Tick;
 		}
 
@@ -376,8 +381,11 @@ namespace ClickQuest.Items
 			RewardMaterialIds = new List<int>();
 			RewardBlessingIds = new List<int>();
 			RewardIngots = new List<Rarity>();
-			_timer = new DispatcherTimer();
-			_timer.Interval = new TimeSpan(0, 0, 0, 1);
+
+			_timer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 0, 1)
+			};
 			_timer.Tick += Timer_Tick;
 		}
 	}

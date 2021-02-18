@@ -51,14 +51,14 @@ namespace ClickQuest.Pages
 				// A material is being melted.
 
 				// Remove the material from inventory.
-				Account.User.Instance.CurrentHero.RemoveItem(material);
+				User.Instance.CurrentHero.RemoveItem(material);
 
 				// Add ingots of that rarity.
-				var ingot = Account.User.Instance.Ingots.Where(x => x.Rarity == material.Rarity).FirstOrDefault();
+				var ingot = User.Instance.Ingots.Where(x => x.Rarity == material.Rarity).FirstOrDefault();
 				// Calculate ingot bonus based on Melting Specialization.
 				var ingotAmount = 1;
 
-				var meltingBuff = Account.User.Instance.CurrentHero.Specialization.SpecMeltingBuff;
+				var meltingBuff = User.Instance.CurrentHero.Specialization.SpecMeltingBuff;
 				while (meltingBuff >= 100)
 				{
 					ingotAmount++;
@@ -75,25 +75,25 @@ namespace ClickQuest.Pages
 				ingot.Quantity += ingotAmount;
 
 				// Update blacksmith page.
-				(Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
+				(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 				UpdateBlacksmith();
 
 				// Increase Specialization Melting amount.
-				Account.User.Instance.CurrentHero.Specialization.SpecMeltingAmount++;
+				User.Instance.CurrentHero.Specialization.SpecMeltingAmount++;
 			}
 			else if (b.CommandParameter is Artifact artifact)
 			{
 				// An artifact is being melted.
 
 				// Remove the artifact from inventory.
-				Account.User.Instance.CurrentHero.RemoveItem(artifact);
+				User.Instance.CurrentHero.RemoveItem(artifact);
 
 				// Add ingots of that rarity.
-				var ingot = Account.User.Instance.Ingots.Where(x => x.Rarity == artifact.Rarity).FirstOrDefault();
+				var ingot = User.Instance.Ingots.Where(x => x.Rarity == artifact.Rarity).FirstOrDefault();
 				// Calculate ingot bonus based on Melting Specialization.
 				var ingotAmount = 100;
 
-				var meltingBuff = Account.User.Instance.CurrentHero.Specialization.SpecMeltingBuff;
+				var meltingBuff = User.Instance.CurrentHero.Specialization.SpecMeltingBuff;
 				while (meltingBuff >= 100)
 				{
 					ingotAmount += 100;
@@ -110,11 +110,11 @@ namespace ClickQuest.Pages
 				ingot.Quantity += ingotAmount;
 
 				// Update blacksmith page.
-				(Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
+				(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 				UpdateBlacksmith();
 
 				// Increase Specialization Melting amount.
-				Account.User.Instance.CurrentHero.Specialization.SpecMeltingAmount++;
+				User.Instance.CurrentHero.Specialization.SpecMeltingAmount++;
 			}
 		}
 
@@ -124,7 +124,7 @@ namespace ClickQuest.Pages
 			var recipe = b.CommandParameter as Recipe;
 
 			// Check if user meets Crafting Specialization rarity requirements.
-			if (Account.User.Instance.CurrentHero.Specialization.SpecCraftingBuff < (int)recipe.Rarity)
+			if (User.Instance.CurrentHero.Specialization.SpecCraftingBuff < (int)recipe.Rarity)
 			{
 				// Error - user doesn't meet requirements - stop this function.
 				AlertBox.Show($"You dont meet Craftsmen specialization requirements to craft {(int)recipe.Rarity} artifacts.\nCraft more common items in order to master it.", MessageBoxButton.OK);
@@ -165,17 +165,17 @@ namespace ClickQuest.Pages
 			}
 
 			// Add artifact to equipment.
-			var artifact = Data.Database.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
+			var artifact = Database.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
 			User.Instance.CurrentHero.AddItem(artifact);
 
 			// Remove the recipe used.
 			User.Instance.CurrentHero.RemoveItem(recipe);
 
-			(Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
+			(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 			UpdateBlacksmith();
 
 			// Increase Specialization Crafting amount.
-			Account.User.Instance.CurrentHero.Specialization.SpecCraftingAmount++;
+			User.Instance.CurrentHero.Specialization.SpecCraftingAmount++;
 		}
 
 		private void CraftIngotButton_Click(object sender, RoutedEventArgs e)
@@ -184,7 +184,7 @@ namespace ClickQuest.Pages
 			var recipe = b.CommandParameter as Recipe;
 
 			// Check if user meets Crafting Specialization rarity requirements.
-			if (Account.User.Instance.CurrentHero.Specialization.SpecCraftingBuff < (int)recipe.Rarity)
+			if (User.Instance.CurrentHero.Specialization.SpecCraftingBuff < (int)recipe.Rarity)
 			{
 				// Error - user doesn't meet requirements - stop this function.
 				AlertBox.Show($"You dont meet Craftsmen specialization requirements to craft {(int)recipe.Rarity} artifacts.\nCraft more common items in order to master it.", MessageBoxButton.OK);
@@ -208,17 +208,17 @@ namespace ClickQuest.Pages
 				ingotRarityNeeded.Quantity -= recipe.IngotsRequired;
 
 				// Add artifact to equipment.
-				var artifact = Data.Database.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
+				var artifact = Database.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
 				User.Instance.CurrentHero.AddItem(artifact);
 
 				// Remove the recipe used.
 				User.Instance.CurrentHero.RemoveItem(recipe);
 
-				(Data.Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
+				(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 				UpdateBlacksmith();
 
 				// Increase Specialization Crafting amount.
-				Account.User.Instance.CurrentHero.Specialization.SpecCraftingAmount++;
+				User.Instance.CurrentHero.Specialization.SpecCraftingAmount++;
 			}
 			else
 			{

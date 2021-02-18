@@ -192,11 +192,11 @@ namespace ClickQuest.Entity
 
 				// Delete all items and heroes (except for ingots - only set their quantity to 0).
 
-				for (int i = 0; i < user.Ingots.Count(); i++)
+				for (int i = 0; i < user.Ingots.Count; i++)
 				{
 					user.Ingots[i].Quantity = 0;
 				}
-				for (int i = 0; i < user.DungeonKeys.Count(); i++)
+				for (int i = 0; i < user.DungeonKeys.Count; i++)
 				{
 					user.DungeonKeys[i].Quantity = 0;
 				}
@@ -259,7 +259,7 @@ namespace ClickQuest.Entity
 				// The seeding has to be done here, because otherwise we would need to set up relationships manually (using foreign keys, etc.)
 
 				// If there are no dungeon keys in the database, add them (seed).
-				if (user.DungeonKeys.Count() == 0)
+				if (user.DungeonKeys.Count == 0)
 				{
 					var rarities = Enum.GetValues(typeof(Rarity));
 					for (int i = 0; i < rarities.GetLength(0); i++)
@@ -269,7 +269,7 @@ namespace ClickQuest.Entity
 				}
 
 				// If there are no ingots in the database, add them (seed).
-				if (user.Ingots.Count() == 0)
+				if (user.Ingots.Count == 0)
 				{
 					var rarities = Enum.GetValues(typeof(Rarity));
 					for (int i = 0; i < rarities.GetLength(0); i++)

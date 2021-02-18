@@ -1,7 +1,6 @@
 using ClickQuest.Account;
 using ClickQuest.Controls;
 using ClickQuest.Data;
-using ClickQuest.Entity;
 using ClickQuest.Heroes;
 using System;
 using System.Linq;
@@ -20,7 +19,7 @@ namespace ClickQuest.Pages
 			HeroClassBox.ItemsSource = Enum.GetValues(typeof(HeroClass)).Cast<HeroClass>().Skip(1);
 		}
 
-		private void SeedSpecializations(Hero hero)
+		private static void SeedSpecializations(Hero hero)
 		{
 			hero.Specialization = new Specialization()
 			{
@@ -55,7 +54,7 @@ namespace ClickQuest.Pages
 			if (!string.IsNullOrEmpty(HeroNameBox.Text))
 			{
 				// Validate name - it can contain only letters, digits or spaces (not at the front or back) and can be up to 15 characters long.
-				bool isValid = HeroNameBox.Text.Trim().All(x => Char.IsLetterOrDigit(x) || x == ' ') && HeroNameBox.Text.Trim().Length <= 15;
+				bool isValid = HeroNameBox.Text.Trim().All(x => char.IsLetterOrDigit(x) || x == ' ') && HeroNameBox.Text.Trim().Length <= 15;
 
 				if (!isValid)
 				{
@@ -76,13 +75,13 @@ namespace ClickQuest.Pages
 				Entity.EntityOperations.LoadGame();
 
 				// Select current hero from entity database, because variable 'hero' doesn't represent the same hero that was loaded from entity in LoadGame().
-				User.Instance.CurrentHero = User.Instance.Heroes.FirstOrDefault(x=>x.Id==hero.Id);
+				User.Instance.CurrentHero = User.Instance.Heroes.FirstOrDefault(x => x.Id == hero.Id);
 
 				// Refresh Specialization buffs.
-				Account.User.Instance.CurrentHero.Specialization.UpdateBuffs();
+				User.Instance.CurrentHero.Specialization.UpdateBuffs();
 
 				// Refresh bindings.
-				Data.Database.RefreshPages();
+				Database.RefreshPages();
 
 				// Go to Town.
 				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);

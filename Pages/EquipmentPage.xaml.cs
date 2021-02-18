@@ -49,13 +49,17 @@ namespace ClickQuest.Pages
 						HorizontalAlignment = HorizontalAlignment.Right
 					};
 
-					var binding = new Binding("Name");
-					binding.Source = material;
-					binding.StringFormat = "{0}";
+					var binding = new Binding("Name")
+					{
+						Source = material,
+						StringFormat = "{0}"
+					};
 
-					var binding2 = new Binding("Quantity");
-					binding2.Source = material;
-					binding2.StringFormat = "x{0}";
+					var binding2 = new Binding("Quantity")
+					{
+						Source = material,
+						StringFormat = "x{0}"
+					};
 
 					nameBlock.SetBinding(TextBlock.TextProperty, binding);
 					quantityBlock.SetBinding(TextBlock.TextProperty, binding2);
@@ -68,9 +72,9 @@ namespace ClickQuest.Pages
 					MaterialsPanel.Children.Add(border);
 				}
 			}
-			
 
-			if (User.Instance.CurrentHero?.Recipes !=null)
+
+			if (User.Instance.CurrentHero?.Recipes != null)
 			{
 				foreach (var recipe in User.Instance.CurrentHero.Recipes)
 				{
@@ -97,13 +101,17 @@ namespace ClickQuest.Pages
 						HorizontalAlignment = HorizontalAlignment.Right
 					};
 
-					var binding = new Binding("Name");
-					binding.Source = recipe;
-					binding.StringFormat = "{0}";
+					var binding = new Binding("Name")
+					{
+						Source = recipe,
+						StringFormat = "{0}"
+					};
 
-					var binding2 = new Binding("Quantity");
-					binding2.Source = recipe;
-					binding2.StringFormat = "x{0}";
+					var binding2 = new Binding("Quantity")
+					{
+						Source = recipe,
+						StringFormat = "x{0}"
+					};
 
 					nameBlock.SetBinding(TextBlock.TextProperty, binding);
 					quantityBlock.SetBinding(TextBlock.TextProperty, binding2);
@@ -144,13 +152,17 @@ namespace ClickQuest.Pages
 						HorizontalAlignment = HorizontalAlignment.Right
 					};
 
-					var binding = new Binding("Name");
-					binding.Source = artifact;
-					binding.StringFormat = "{0}";
+					var binding = new Binding("Name")
+					{
+						Source = artifact,
+						StringFormat = "{0}"
+					};
 
-					var binding2 = new Binding("Quantity");
-					binding2.Source = artifact;
-					binding2.StringFormat = "x{0}";
+					var binding2 = new Binding("Quantity")
+					{
+						Source = artifact,
+						StringFormat = "x{0}"
+					};
 
 					nameBlock.SetBinding(TextBlock.TextProperty, binding);
 					quantityBlock.SetBinding(TextBlock.TextProperty, binding2);

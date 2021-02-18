@@ -21,9 +21,9 @@ namespace ClickQuest.Pages
 			ItemsListViewSell.ItemsSource = User.Instance.CurrentHero?.Materials.Cast<Item>().Concat(User.Instance.CurrentHero.Recipes.Cast<Item>());
 
 			// Calculate shop offer size according to specialization bonus (base bonus: 5).
-			if(Account.User.Instance.CurrentHero != null)
+			if (User.Instance.CurrentHero != null)
 			{
-				ItemsListViewBuy.ItemsSource = Database.ShopOffer.Take(Account.User.Instance.CurrentHero.Specialization.SpecBuyingBuff);
+				ItemsListViewBuy.ItemsSource = Database.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecBuyingBuff);
 			}
 
 			ItemsListViewSell.Items.Refresh();
@@ -46,10 +46,10 @@ namespace ClickQuest.Pages
 			var b = sender as Button;
 			var item = b.CommandParameter as Item;
 
-			Account.User.Instance.CurrentHero.RemoveItem(item);
-			Account.User.Instance.Gold += item.Value;
+			User.Instance.CurrentHero.RemoveItem(item);
+			User.Instance.Gold += item.Value;
 
-			(Data.Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
+			(Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
 			UpdateShop();
 		}
 
@@ -59,7 +59,7 @@ namespace ClickQuest.Pages
 			var recipe = b.CommandParameter as Recipe;
 
 			// Check if user has enough gold.
-			if (Account.User.Instance.Gold >= recipe.Value)
+			if (User.Instance.Gold >= recipe.Value)
 			{
 				// Show buy alert.
 				var result = AlertBox.Show($"Are you sure you want to buy {recipe.Name} for {recipe.Value} gold?", MessageBoxButton.YesNo);
@@ -70,14 +70,14 @@ namespace ClickQuest.Pages
 					return;
 				}
 
-				Account.User.Instance.CurrentHero.AddItem(recipe);
-				Account.User.Instance.Gold -= recipe.Value;
+				User.Instance.CurrentHero.AddItem(recipe);
+				User.Instance.Gold -= recipe.Value;
 
-				(Data.Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
+				(Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
 				UpdateShop();
 
 				// Increase Specialization Buying amount.
-				Account.User.Instance.CurrentHero.Specialization.SpecBuyingAmount++;
+				User.Instance.CurrentHero.Specialization.SpecBuyingAmount++;
 			}
 			else
 			{

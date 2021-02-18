@@ -18,7 +18,7 @@ namespace ClickQuest.Pages
 		{
 			InitializeComponent();
 
-			_hero = Account.User.Instance.CurrentHero;
+			_hero = User.Instance.CurrentHero;
 			this.DataContext = _hero;
 
 			GenerateRegionButtons();
@@ -27,18 +27,18 @@ namespace ClickQuest.Pages
 		private void GenerateRegionButtons()
 		{
 			// Create a button for each region.
-			for (int i = 0; i < Data.Database.Regions.Count; i++)
+			for (int i = 0; i < Database.Regions.Count; i++)
 			{
 				var button = new Button()
 				{
-					Name = "Region" + Data.Database.Regions[i].Id.ToString(),
+					Name = "Region" + Database.Regions[i].Id.ToString(),
 					Width = 150,
 					Height = 50,
 				};
 
 				var block = new TextBlock()
 				{
-					Text = Data.Database.Regions[i].Name,
+					Text = Database.Regions[i].Name,
 					FontSize = 20
 				};
 
@@ -56,10 +56,10 @@ namespace ClickQuest.Pages
 		{
 			// Enter the chosen Region page.
 			var regionId = int.Parse((sender as Button).Name.Substring(6));
-			string regionName = Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).Name;
+			string regionName = Database.Regions.FirstOrDefault(x => x.Id == regionId).Name;
 
 			// Check if the current hero can enter this location (level requirement).
-			if (User.Instance.CurrentHero.Level >= Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement)
+			if (User.Instance.CurrentHero.Level >= Database.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement)
 			{
 				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages[regionName]);
 				(Database.Pages[regionName] as RegionPage).StatsFrame.Refresh();
@@ -69,7 +69,7 @@ namespace ClickQuest.Pages
 			// Else display a warning.
 			else
 			{
-				AlertBox.Show($"To enter this location you need to be {Data.Database.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement} lvl.\nGain experience by completing quests, and defeating monsters in previous regions!", MessageBoxButton.OK);
+				AlertBox.Show($"To enter this location you need to be {Database.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement} lvl.\nGain experience by completing quests, and defeating monsters in previous regions!", MessageBoxButton.OK);
 			}
 		}
 
@@ -85,26 +85,26 @@ namespace ClickQuest.Pages
 
 		private void MainMenuButton_Click(object sender, RoutedEventArgs e)
 		{
-			(Data.Database.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
+			(Database.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
 
 			// Pause all blessings.
 			Blessing.PauseBlessings();
 
 			// Pause all quest timers (so that quest doesn't finish while current hero is not selected).
-			Account.User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate == default(DateTime))?.PauseTimer();
+			User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate == default(DateTime))?.PauseTimer();
 
 			// Set current hero to null.
-			Account.User.Instance.CurrentHero = null;
+			User.Instance.CurrentHero = null;
 
-			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["MainMenu"]);
+			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Database.Pages["MainMenu"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "";
 		}
 
 		private void QuestMenuButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Enter Quests page.
-			(Data.Database.Pages["QuestMenu"] as QuestMenuPage).LoadPage();
-			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["QuestMenu"]);
+			(Database.Pages["QuestMenu"] as QuestMenuPage).LoadPage();
+			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Database.Pages["QuestMenu"]);
 			(Database.Pages["QuestMenu"] as QuestMenuPage).StatsFrame.Refresh();
 			(Database.Pages["QuestMenu"] as QuestMenuPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Quests";

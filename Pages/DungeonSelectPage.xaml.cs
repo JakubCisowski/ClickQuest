@@ -1,3 +1,4 @@
+using ClickQuest.Account;
 using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Enemies;
@@ -37,11 +38,11 @@ namespace ClickQuest.Pages
 			UndoButton.Click -= UndoButtonDungeon_Click;
 
 			// Create buttons for selecting dungeon groups.
-			for (int i = 0; i < Data.Database.DungeonGroups.Count; i++)
+			for (int i = 0; i < Database.DungeonGroups.Count; i++)
 			{
 				var button = new Button()
 				{
-					Name = "DungeonGroup" + Data.Database.DungeonGroups[i].Id.ToString(),
+					Name = "DungeonGroup" + Database.DungeonGroups[i].Id.ToString(),
 					Width = 250,
 					Height = 80,
 				};
@@ -49,7 +50,7 @@ namespace ClickQuest.Pages
 				var block = new TextBlock()
 				{
 					FontSize = 22,
-					Text = Data.Database.DungeonGroups[i].Name + "\n" + Data.Database.DungeonGroups[i].Description
+					Text = Database.DungeonGroups[i].Name + "\n" + Database.DungeonGroups[i].Description
 				};
 
 				button.Content = block;
@@ -68,7 +69,7 @@ namespace ClickQuest.Pages
 
 			UndoButton.Click += UndoButtonGroup_Click;
 
-			var dungeonsOfThisGroup = Data.Database.Dungeons.Where(x => x.DungeonGroup == _dungeonGroupSelected).ToList();
+			var dungeonsOfThisGroup = Database.Dungeons.Where(x => x.DungeonGroup == _dungeonGroupSelected).ToList();
 
 			// Create buttons for selecting dungeon groups.
 			for (int i = 0; i < dungeonsOfThisGroup.Count; i++)
@@ -140,10 +141,10 @@ namespace ClickQuest.Pages
 		private void DungeonGroupButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Check if any quest is currently assigned to this hero (if so, hero can't enter the dungeon).
-			if (Account.User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
+			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
 			{
 				// Select dungeon group.
-				_dungeonGroupSelected = Data.Database.DungeonGroups.FirstOrDefault(x => x.Id == int.Parse((sender as Button).Name.Substring(12)));
+				_dungeonGroupSelected = Database.DungeonGroups.FirstOrDefault(x => x.Id == int.Parse((sender as Button).Name.Substring(12)));
 
 				// Now let user select dungeon in that group.
 				LoadDungeonSelection();
@@ -156,7 +157,7 @@ namespace ClickQuest.Pages
 		private void DungeonButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Select dungeon.
-			_dungeonSelected = Data.Database.Dungeons.FirstOrDefault(x => x.Id == int.Parse((sender as Button).Name.Substring(7)));
+			_dungeonSelected = Database.Dungeons.FirstOrDefault(x => x.Id == int.Parse((sender as Button).Name.Substring(7)));
 
 			// Now let user select boss in that dungeon.
 			LoadBossSelection();
@@ -174,7 +175,7 @@ namespace ClickQuest.Pages
 			var counts = _dungeonGroupSelected.KeyRequirements.GroupBy(x => x).ToDictionary(k => k.Key, v => v.Count());
 			foreach (var pair in counts)
 			{
-				if (Account.User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)pair.Key).Quantity < pair.Value)
+				if (User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)pair.Key).Quantity < pair.Value)
 				{
 					// Display error - not enough dungeon keys.
 					AlertBox.Show($"Not enough {(Rarity)pair.Key} dungeon keys to enter.\nTry to get them by completing quests and killing monsters!", MessageBoxButton.OK);
@@ -184,11 +185,11 @@ namespace ClickQuest.Pages
 			// Remove dungeon keys from account.
 			foreach (var pair in counts)
 			{
-				Account.User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)pair.Key).Quantity -= pair.Value;
+				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)pair.Key).Quantity -= pair.Value;
 			}
 
 			// Start boss fight.
-			(Data.Database.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(_bossSelected);
+			(Database.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(_bossSelected);
 			// Navigate to boss fight page.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["DungeonBoss"]);
 			(Database.Pages["DungeonBoss"] as DungeonBossPage).EquipmentFrame.Refresh();

@@ -212,8 +212,10 @@ namespace ClickQuest.Items
 						// Assign buff.
 						User.Instance.CurrentHero.ClickDamage += Buff;
 
-						_timer = new DispatcherTimer();
-						_timer.Interval = new TimeSpan(0, 0, 1);
+						_timer = new DispatcherTimer
+						{
+							Interval = new TimeSpan(0, 0, 1)
+						};
 						_timer.Tick += Timer_Tick;
 						_timer.Start();
 

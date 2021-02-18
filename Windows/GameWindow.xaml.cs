@@ -1,4 +1,6 @@
 ﻿using ClickQuest.Controls;
+using ClickQuest.Data;
+using ClickQuest.Entity;
 using ClickQuest.Items;
 using ClickQuest.Pages;
 using System.ComponentModel;
@@ -59,7 +61,7 @@ namespace ClickQuest
 
 			this.DataContext = this;
 
-			(Data.Database.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
+			(Database.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
 			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["MainMenu"]);
 		}
 
@@ -70,7 +72,7 @@ namespace ClickQuest
 			// Pause all blessings.
 			Blessing.PauseBlessings();
 
-			Entity.EntityOperations.SaveGame();
+			EntityOperations.SaveGame();
 
 			base.OnClosing(e);
 		}

@@ -1,4 +1,5 @@
-﻿using ClickQuest.Entity;
+﻿using ClickQuest.Data;
+using ClickQuest.Entity;
 using System.Windows;
 
 namespace ClickQuest
@@ -10,8 +11,8 @@ namespace ClickQuest
 			EntityOperations.CreateAndSeedDatabase();
 
 			// Load JSONs and Entity.
-			Data.Database.Load();
-			Entity.EntityOperations.LoadGame();
+			Database.Load();
+			EntityOperations.LoadGame();
 		}
 	}
 }

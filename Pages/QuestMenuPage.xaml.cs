@@ -1,5 +1,7 @@
+using ClickQuest.Account;
 using ClickQuest.Controls;
 using ClickQuest.Data;
+using ClickQuest.Entity;
 using ClickQuest.Heroes;
 using ClickQuest.Items;
 using System;
@@ -25,11 +27,11 @@ namespace ClickQuest.Pages
 		public void RerollQuests()
 		{
 			// Remove current hero quests - both from hero and Entity database.
-			Account.User.Instance.CurrentHero.Quests.Clear();
-			Entity.EntityOperations.RemoveQuests();
+			User.Instance.CurrentHero.Quests.Clear();
+			EntityOperations.RemoveQuests();
 
 			// Generate 3 quest ids.
-			var questsForCurrentHeroClass = Data.Database.Quests.Where(x => x.HeroClass == Account.User.Instance.CurrentHero.HeroClass || x.HeroClass == HeroClass.All).ToList();
+			var questsForCurrentHeroClass = Database.Quests.Where(x => x.HeroClass == User.Instance.CurrentHero.HeroClass || x.HeroClass == HeroClass.All).ToList();
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -42,7 +44,7 @@ namespace ClickQuest.Pages
 				// Add selected quest id to the list (create copy to keep database clean).
 				var quest = new Quest();
 				quest.CopyQuest(questsForCurrentHeroClass.ElementAt(index));
-				Account.User.Instance.CurrentHero.Quests.Add(quest);
+				User.Instance.CurrentHero.Quests.Add(quest);
 				questsForCurrentHeroClass.RemoveAt(index);
 			}
 
@@ -56,9 +58,9 @@ namespace ClickQuest.Pages
 		{
 			QuestPanel.Children.Clear();
 
-			for (int i = 0; i < Account.User.Instance.CurrentHero.Quests.Count; i++)
+			for (int i = 0; i < User.Instance.CurrentHero.Quests.Count; i++)
 			{
-				var button = new QuestButton(Account.User.Instance.CurrentHero.Quests[i]);
+				var button = new QuestButton(User.Instance.CurrentHero.Quests[i]);
 
 				QuestPanel.Children.Add(button);
 			}
@@ -67,7 +69,7 @@ namespace ClickQuest.Pages
 		public void LoadPage()
 		{
 			// Either refresh or reroll quests.
-			if (Account.User.Instance.CurrentHero.Quests.Count >= 3)
+			if (User.Instance.CurrentHero.Quests.Count >= 3)
 			{
 				// User already has 3 quests - only refresh the quest page.
 				RefreshQuests();
@@ -93,7 +95,7 @@ namespace ClickQuest.Pages
 		private void RerollButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Check if any quest is currently assigned - if so, user can't reroll quests.
-			if (Account.User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
+			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
 			{
 				// Later: add price.
 				RerollQuests();

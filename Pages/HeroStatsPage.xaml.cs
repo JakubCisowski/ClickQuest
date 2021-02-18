@@ -1,3 +1,4 @@
+using ClickQuest.Account;
 using ClickQuest.Heroes;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -19,7 +20,7 @@ namespace ClickQuest.Pages
 		{
 			InitializeComponent();
 
-			_hero = Account.User.Instance.CurrentHero;
+			_hero = User.Instance.CurrentHero;
 			this.DataContext = _hero;
 
 			GenerateIngots();
@@ -32,9 +33,11 @@ namespace ClickQuest.Pages
 		private void GenerateGold()
 		{
 			// Create a binding for the amount of Gold.
-			Binding binding = new Binding("Gold");
-			binding.Source = Account.User.Instance;
-			binding.StringFormat = "Gold: {0}";
+			Binding binding = new Binding("Gold")
+			{
+				Source = User.Instance,
+				StringFormat = "Gold: {0}"
+			};
 
 			GoldBlock.SetBinding(TextBlock.TextProperty, binding);
 		}
@@ -46,7 +49,7 @@ namespace ClickQuest.Pages
 			{
 				IngotKeyGrid.Children.Clear();
 
-				for (int i = 0; i < Account.User.Instance.Ingots.Count; i++)
+				for (int i = 0; i < User.Instance.Ingots.Count; i++)
 				{
 					var panel = new StackPanel()
 					{
@@ -98,13 +101,17 @@ namespace ClickQuest.Pages
 						VerticalAlignment = VerticalAlignment.Center
 					};
 
-					Binding binding = new Binding("Quantity");
-					binding.Source = Account.User.Instance.Ingots[i];
+					Binding binding = new Binding("Quantity")
+					{
+						Source = User.Instance.Ingots[i]
+					};
 					// Binding binding2 = new Binding("Rarity");
 					// binding2.Source = Account.User.Instance.Ingots[i];
 
-					MultiBinding multiBinding = new MultiBinding();
-					multiBinding.StringFormat = "   {0}";
+					MultiBinding multiBinding = new MultiBinding
+					{
+						StringFormat = "   {0}"
+					};
 					multiBinding.Bindings.Add(binding);
 					// multiBinding.Bindings.Add(binding2);
 
@@ -125,7 +132,7 @@ namespace ClickQuest.Pages
 			//Make sure hero isn't null (constructor calls this function while loading database).
 			if (_hero != null)
 			{
-				for (int i = 0; i < Account.User.Instance.DungeonKeys.Count; i++)
+				for (int i = 0; i < User.Instance.DungeonKeys.Count; i++)
 				{
 					var panel = new StackPanel()
 					{
@@ -177,13 +184,17 @@ namespace ClickQuest.Pages
 						VerticalAlignment = VerticalAlignment.Center
 					};
 
-					Binding binding = new Binding("Quantity");
-					binding.Source = Account.User.Instance.DungeonKeys[i];
+					Binding binding = new Binding("Quantity")
+					{
+						Source = User.Instance.DungeonKeys[i]
+					};
 					// Binding binding2 = new Binding("Rarity");
 					// binding2.Source = Account.User.Instance.DungeonKeys[i];
 
-					MultiBinding multiBinding = new MultiBinding();
-					multiBinding.StringFormat = "   {0}";
+					MultiBinding multiBinding = new MultiBinding
+					{
+						StringFormat = "   {0}"
+					};
 					multiBinding.Bindings.Add(binding);
 					// multiBinding.Bindings.Add(binding2);
 
@@ -202,7 +213,7 @@ namespace ClickQuest.Pages
 		private void RefreshQuestTimer()
 		{
 			// Find quest that is currently being completed.
-			var quest = Account.User.Instance.CurrentHero?.Quests.FirstOrDefault(x => x.EndDate != default(DateTime));
+			var quest = User.Instance.CurrentHero?.Quests.FirstOrDefault(x => x.EndDate != default(DateTime));
 
 			if (quest != null)
 			{
@@ -215,7 +226,7 @@ namespace ClickQuest.Pages
 
 		private void GenerateSpecializations()
 		{
-			if (Account.User.Instance.CurrentHero is null)
+			if (User.Instance.CurrentHero is null)
 			{
 				// This function was called before selecting a hero - return.
 				return;
@@ -240,15 +251,23 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecBuyingAmount");
-				binding.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding2 = new Binding("SpecBuyingThreshold");
-				binding2.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding3 = new Binding("SpecBuyingBuff");
-				binding3.Source = Account.User.Instance.CurrentHero.Specialization;
+				Binding binding = new Binding("SpecBuyingAmount")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding2 = new Binding("SpecBuyingThreshold")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding3 = new Binding("SpecBuyingBuff")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
 
-				MultiBinding multiBinding = new MultiBinding();
-				multiBinding.StringFormat = " → Shop offer size +{2}";
+				MultiBinding multiBinding = new MultiBinding
+				{
+					StringFormat = " → Shop offer size +{2}"
+				};
 				multiBinding.Bindings.Add(binding);
 				multiBinding.Bindings.Add(binding2);
 				multiBinding.Bindings.Add(binding3);
@@ -282,15 +301,23 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecMeltingAmount");
-				binding.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding2 = new Binding("SpecMeltingThreshold");
-				binding2.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding3 = new Binding("SpecMeltingBuff");
-				binding3.Source = Account.User.Instance.CurrentHero.Specialization;
+				Binding binding = new Binding("SpecMeltingAmount")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding2 = new Binding("SpecMeltingThreshold")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding3 = new Binding("SpecMeltingBuff")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
 
-				MultiBinding multiBinding = new MultiBinding();
-				multiBinding.StringFormat = " → Extra ingot +{2}%";
+				MultiBinding multiBinding = new MultiBinding
+				{
+					StringFormat = " → Extra ingot +{2}%"
+				};
 				multiBinding.Bindings.Add(binding);
 				multiBinding.Bindings.Add(binding2);
 				multiBinding.Bindings.Add(binding3);
@@ -324,17 +351,27 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecCraftingAmount");
-				binding.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding2 = new Binding("SpecCraftingThreshold");
-				binding2.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding3 = new Binding("SpecCraftingBuff");
-				binding3.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding4 = new Binding("SpecCraftingText");
-				binding4.Source = Account.User.Instance.CurrentHero.Specialization;
+				Binding binding = new Binding("SpecCraftingAmount")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding2 = new Binding("SpecCraftingThreshold")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding3 = new Binding("SpecCraftingBuff")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding4 = new Binding("SpecCraftingText")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
 
-				MultiBinding multiBinding = new MultiBinding();
-				multiBinding.StringFormat = " → Can craft {3} recipes";
+				MultiBinding multiBinding = new MultiBinding
+				{
+					StringFormat = " → Can craft {3} recipes"
+				};
 				multiBinding.Bindings.Add(binding);
 				multiBinding.Bindings.Add(binding2);
 				multiBinding.Bindings.Add(binding3);
@@ -369,15 +406,23 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecQuestingAmount");
-				binding.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding2 = new Binding("SpecQuestingThreshold");
-				binding2.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding3 = new Binding("SpecQuestingBuff");
-				binding3.Source = Account.User.Instance.CurrentHero.Specialization;
+				Binding binding = new Binding("SpecQuestingAmount")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding2 = new Binding("SpecQuestingThreshold")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding3 = new Binding("SpecQuestingBuff")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
 
-				MultiBinding multiBinding = new MultiBinding();
-				multiBinding.StringFormat = " → Quest time -{2}%";
+				MultiBinding multiBinding = new MultiBinding
+				{
+					StringFormat = " → Quest time -{2}%"
+				};
 				multiBinding.Bindings.Add(binding);
 				multiBinding.Bindings.Add(binding2);
 				multiBinding.Bindings.Add(binding3);
@@ -411,15 +456,23 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecKillingAmount");
-				binding.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding2 = new Binding("SpecKillingThreshold");
-				binding2.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding3 = new Binding("SpecKillingBuff");
-				binding3.Source = Account.User.Instance.CurrentHero.Specialization;
+				Binding binding = new Binding("SpecKillingAmount")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding2 = new Binding("SpecKillingThreshold")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding3 = new Binding("SpecKillingBuff")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
 
-				MultiBinding multiBinding = new MultiBinding();
-				multiBinding.StringFormat = " → Click damage +{2}";
+				MultiBinding multiBinding = new MultiBinding
+				{
+					StringFormat = " → Click damage +{2}"
+				};
 				multiBinding.Bindings.Add(binding);
 				multiBinding.Bindings.Add(binding2);
 				multiBinding.Bindings.Add(binding3);
@@ -453,15 +506,23 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecBlessingAmount");
-				binding.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding2 = new Binding("SpecBlessingThreshold");
-				binding2.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding3 = new Binding("SpecBlessingBuff");
-				binding3.Source = Account.User.Instance.CurrentHero.Specialization;
+				Binding binding = new Binding("SpecBlessingAmount")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding2 = new Binding("SpecBlessingThreshold")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding3 = new Binding("SpecBlessingBuff")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
 
-				MultiBinding multiBinding = new MultiBinding();
-				multiBinding.StringFormat = " → Blessing duration +{2}s";
+				MultiBinding multiBinding = new MultiBinding
+				{
+					StringFormat = " → Blessing duration +{2}s"
+				};
 				multiBinding.Bindings.Add(binding);
 				multiBinding.Bindings.Add(binding2);
 				multiBinding.Bindings.Add(binding3);
@@ -495,15 +556,23 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecDungeonAmount");
-				binding.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding2 = new Binding("SpecDungeonThreshold");
-				binding2.Source = Account.User.Instance.CurrentHero.Specialization;
-				Binding binding3 = new Binding("SpecDungeonBuff");
-				binding3.Source = Account.User.Instance.CurrentHero.Specialization;
+				Binding binding = new Binding("SpecDungeonAmount")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding2 = new Binding("SpecDungeonThreshold")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
+				Binding binding3 = new Binding("SpecDungeonBuff")
+				{
+					Source = User.Instance.CurrentHero.Specialization
+				};
 
-				MultiBinding multiBinding = new MultiBinding();
-				multiBinding.StringFormat = " → Bossfight timer +{2}s";
+				MultiBinding multiBinding = new MultiBinding
+				{
+					StringFormat = " → Bossfight timer +{2}s"
+				};
 				multiBinding.Bindings.Add(binding);
 				multiBinding.Bindings.Add(binding2);
 				multiBinding.Bindings.Add(binding3);

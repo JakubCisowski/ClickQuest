@@ -1,3 +1,4 @@
+using ClickQuest.Account;
 using ClickQuest.Data;
 using ClickQuest.Items;
 using System;
@@ -171,7 +172,7 @@ namespace ClickQuest.Controls
 		private void QuestButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Start this quest (if another one isnt currently assigned).
-			if (Account.User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
+			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
 			{
 				_quest.StartQuest();
 			}

@@ -57,13 +57,17 @@ namespace ClickQuest.Pages
 			InitializeComponent();
 
 			// Setup 30 second timer for boss fight
-			_fightTimer = new DispatcherTimer();
-			_fightTimer.Interval = new System.TimeSpan(0, 0, 0, 1);
+			_fightTimer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 0, 1)
+			};
 			_fightTimer.Tick += FightTimer_Tick;
 
 			// Setup poison Timer to tick every 0.5s.
-			_poisonTimer = new DispatcherTimer();
-			_poisonTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+			_poisonTimer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 0, 0, 500)
+			};
 			_poisonTimer.Tick += PoisonTimer_Tick;
 		}
 
@@ -72,15 +76,17 @@ namespace ClickQuest.Pages
 			BossButton.IsEnabled = true;
 
 			// SpecDungeonBuff's base value is 30 - the fight's duration will always be 30s or more.
-			Duration = Account.User.Instance.CurrentHero.Specialization.SpecDungeonBuff;
+			Duration = User.Instance.CurrentHero.Specialization.SpecDungeonBuff;
 
 			// Select the boss, and bind it to interface.
 			_boss = boss;
 			this.DataContext = _boss;
 
 			// Bind the remaining Duration to interface.
-			var binding = new Binding("Duration");
-			binding.Source = this;
+			var binding = new Binding("Duration")
+			{
+				Source = this
+			};
 			TimeRemainingBlock.SetBinding(TextBlock.TextProperty, binding);
 
 			// Start 30 second timer.
@@ -123,9 +129,9 @@ namespace ClickQuest.Pages
 					// Grant loot after checking if it's not empty.
 					if (loot.Item.Id != 0)
 					{
-						Account.User.Instance.CurrentHero.AddItem(loot.Item);
+						User.Instance.CurrentHero.AddItem(loot.Item);
 						lootText += "- " + loot.Item.Name + " (" + loot.ItemType + ")\n";
-						(Data.Database.Pages["DungeonBoss"] as DungeonBossPage).EquipmentFrame.Refresh();
+						(Database.Pages["DungeonBoss"] as DungeonBossPage).EquipmentFrame.Refresh();
 					}
 				}
 			}
@@ -134,10 +140,10 @@ namespace ClickQuest.Pages
 			this.TestRewardsBlock.Text = lootText;
 
 			// Increase boss killing specialization amount (it will update buffs in setter).
-			Account.User.Instance.CurrentHero.Specialization.SpecDungeonAmount++;
+			User.Instance.CurrentHero.Specialization.SpecDungeonAmount++;
 
 			// Make TownButton visible.
-			TownButton.Visibility = Visibility.Visible;
+			this.TownButton.Visibility = Visibility.Visible;
 		}
 
 		#region Events
@@ -190,10 +196,10 @@ namespace ClickQuest.Pages
 			_poisonTimer.Start();
 
 			// Calculate damage dealt to boss.
-			int damage = Account.User.Instance.CurrentHero.ClickDamage;
+			int damage = User.Instance.CurrentHero.ClickDamage;
 			// Calculate crit.
 			double num = _rng.Next(1, 101) / 100d;
-			if (num <= Account.User.Instance.CurrentHero.CritChance)
+			if (num <= User.Instance.CurrentHero.CritChance)
 			{
 				damage *= 2;
 			}

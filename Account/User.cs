@@ -59,7 +59,7 @@ namespace ClickQuest.Account
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
- 
+
 		public List<Hero> Heroes
 		{
 			get

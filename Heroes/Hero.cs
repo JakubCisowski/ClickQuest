@@ -1,12 +1,11 @@
-﻿using ClickQuest.Items;
-using ClickQuest.Account;
+﻿using ClickQuest.Account;
+using ClickQuest.Items;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
-using Microsoft.EntityFrameworkCore;
 
 namespace ClickQuest.Heroes
 {
@@ -222,7 +221,7 @@ namespace ClickQuest.Heroes
 			}
 			set
 			{
-				_materials=value;
+				_materials = value;
 				OnPropertyChanged();
 			}
 		}
@@ -234,7 +233,7 @@ namespace ClickQuest.Heroes
 			}
 			set
 			{
-				_recipes=value;
+				_recipes = value;
 				OnPropertyChanged();
 			}
 		}
@@ -246,7 +245,7 @@ namespace ClickQuest.Heroes
 			}
 			set
 			{
-				_artifacts=value;
+				_artifacts = value;
 				OnPropertyChanged();
 			}
 		}
@@ -283,7 +282,7 @@ namespace ClickQuest.Heroes
 			}
 			set
 			{
-				_specialization=value;
+				_specialization = value;
 				OnPropertyChanged();
 			}
 		}

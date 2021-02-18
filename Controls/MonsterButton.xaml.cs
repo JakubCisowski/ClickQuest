@@ -100,7 +100,7 @@ namespace ClickQuest.Controls
 			// Grant loot after checking if it's not empty.
 			if (_monster.Loot[i].Item.Id != 0)
 			{
-				Account.User.Instance.CurrentHero.AddItem(_monster.Loot[i].Item);
+				User.Instance.CurrentHero.AddItem(_monster.Loot[i].Item);
 				_regionPage.EquipmentFrame.Refresh();
 			}
 
@@ -111,7 +111,7 @@ namespace ClickQuest.Controls
 			CheckForDungeonKeyDrop();
 
 			// Increase killing specialization amount (it will update buffs in setter).
-			Account.User.Instance.CurrentHero.Specialization.SpecKillingAmount++;
+			User.Instance.CurrentHero.Specialization.SpecKillingAmount++;
 
 			_regionPage.StatsFrame.Refresh();
 		}
@@ -186,7 +186,7 @@ namespace ClickQuest.Controls
 			if (i != 0)
 			{
 				// Add new key to account.
-				Account.User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)(i - 1)).Quantity++;
+				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)(i - 1)).Quantity++;
 
 				// Display dungeon key drop.
 				_regionPage.TestRewardsBlock.Text += $". You've got a {(Rarity)(i - 1)} Dungeon Key!";
@@ -197,22 +197,22 @@ namespace ClickQuest.Controls
 		private void MonsterButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Check if any quest is currently assigned to this hero (if so, hero can't fight).
-			if (Account.User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
+			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
 			{
 				// Reset poison ticks.
 				_poisonTicks = 0;
 				_poisonTimer.Start();
 
 				// Calculate damage dealt to monster.
-				int damage = Account.User.Instance.CurrentHero.ClickDamage;
+				int damage = User.Instance.CurrentHero.ClickDamage;
 				// Calculate crit.
 				double num = _rng.Next(1, 101) / 100d;
-				if (num <= Account.User.Instance.CurrentHero.CritChance)
+				if (num <= User.Instance.CurrentHero.CritChance)
 				{
 					damage *= 2;
 				}
 				// Apply specialization killing buff.
-				damage += Account.User.Instance.CurrentHero.Specialization.SpecKillingBuff;
+				damage += User.Instance.CurrentHero.Specialization.SpecKillingBuff;
 				// Deal damage to monster.
 				Monster.CurrentHealth -= damage;
 
@@ -236,7 +236,7 @@ namespace ClickQuest.Controls
 			// Otherwise deal poison damage and check if monster died.
 			else
 			{
-				int poisonDamage = Account.User.Instance.CurrentHero.PoisonDamage;
+				int poisonDamage = User.Instance.CurrentHero.PoisonDamage;
 				_poisonTicks++;
 				Monster.CurrentHealth -= poisonDamage;
 				// Check if monster is dead now.

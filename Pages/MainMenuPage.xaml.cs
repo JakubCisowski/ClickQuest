@@ -1,5 +1,7 @@
+using ClickQuest.Account;
 using ClickQuest.Controls;
 using ClickQuest.Data;
+using ClickQuest.Entity;
 using ClickQuest.Items;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -22,10 +24,12 @@ namespace ClickQuest.Pages
 		public void GenerateHeroButtons()
 		{
 			// If max hero limit is reached, disable create hero button.
-			if (Account.User.Instance.Heroes.Count == 6)
+			if (User.Instance.Heroes.Count == 6)
 			{
-				var block = new TextBlock();
-				block.TextAlignment = TextAlignment.Center;
+				var block = new TextBlock
+				{
+					TextAlignment = TextAlignment.Center
+				};
 
 				var italic = new Italic(new Run("Can't create new hero\nMax heroes reached!"));
 				block.Inlines.Add(italic);
@@ -50,14 +54,16 @@ namespace ClickQuest.Pages
 			}
 
 			// For each hero:
-			for (int i = 0; i < Account.User.Instance.Heroes.Count; i++)
+			for (int i = 0; i < User.Instance.Heroes.Count; i++)
 			{
-				var hero = Account.User.Instance.Heroes[i];
+				var hero = User.Instance.Heroes[i];
 				// Create stack panel with both select and delete hero buttons.
-				var panel = new StackPanel();
-				panel.Orientation = Orientation.Horizontal;
-				panel.HorizontalAlignment = HorizontalAlignment.Center;
-				panel.VerticalAlignment = VerticalAlignment.Center;
+				var panel = new StackPanel
+				{
+					Orientation = Orientation.Horizontal,
+					HorizontalAlignment = HorizontalAlignment.Center,
+					VerticalAlignment = VerticalAlignment.Center
+				};
 
 				// Generate 'select hero' button.
 				var selectHeroButton = new Button()
@@ -69,8 +75,10 @@ namespace ClickQuest.Pages
 				};
 
 				// Generate 'select hero' button content.
-				var block = new TextBlock();
-				block.TextAlignment = TextAlignment.Center;
+				var block = new TextBlock
+				{
+					TextAlignment = TextAlignment.Center
+				};
 
 				var bold = new Bold(new Run(hero.Name));
 				block.Inlines.Add(bold);
@@ -109,7 +117,7 @@ namespace ClickQuest.Pages
 
 				// Add them to the button grid in main menu page.
 				// If there is only one hero, center its buttons.
-				if (Account.User.Instance.Heroes.Count < 4)
+				if (User.Instance.Heroes.Count < 4)
 				{
 					ButtonsGrid.Children.Add(panel);
 					Grid.SetRow(panel, i + 1);
@@ -141,7 +149,7 @@ namespace ClickQuest.Pages
 		private void CreateHeroButton_Click(object sender, RoutedEventArgs e)
 		{
 			// If the limit is not reached, move to hero creation page.
-			if (Account.User.Instance.Heroes.Count < 6)
+			if (User.Instance.Heroes.Count < 6)
 			{
 				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["HeroCreation"]);
 				(Window.GetWindow(this) as GameWindow).LocationInfo = "Hero creation";
@@ -152,8 +160,8 @@ namespace ClickQuest.Pages
 		{
 			// Select this hero as current hero and navigate to town.
 			var id = int.Parse((sender as Button).Name.Substring(4));
-			var hero = Account.User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
-			Account.User.Instance.CurrentHero = hero;
+			var hero = User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
+			User.Instance.CurrentHero = hero;
 			// Refresh hero stats panel info.
 			hero.UpdateHero();
 
@@ -165,13 +173,13 @@ namespace ClickQuest.Pages
 			}
 
 			// Resume quests for the selected hero.
-			Account.User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default(DateTime))?.StartQuest();
+			User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default(DateTime))?.StartQuest();
 
 			// Resume blessings for dis hero (it resumes only for current hero).
 			Blessing.ResumeBlessings();
 
 			// Refresh pages, move to town and change location text.
-			Data.Database.RefreshPages();
+			Database.RefreshPages();
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
 			(Database.Pages["Town"] as TownPage).StatsFrame.Refresh();
@@ -181,15 +189,15 @@ namespace ClickQuest.Pages
 		private void DeleteHeroButton_Click(object sender, RoutedEventArgs e)
 		{
 			var id = int.Parse((sender as Button).Name.Substring(10));
-			var hero = Account.User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
+			var hero = User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
 
 			var result = AlertBox.Show($"Press OK to delete {hero.Name}.");
 
 			if (result == MessageBoxResult.OK)
 			{
 				// Remove the hero from User and Database.
-				Account.User.Instance.Heroes.Remove(hero);
-				Entity.EntityOperations.RemoveHero(hero);
+				User.Instance.Heroes.Remove(hero);
+				EntityOperations.RemoveHero(hero);
 
 				GenerateHeroButtons();
 			}
@@ -198,7 +206,7 @@ namespace ClickQuest.Pages
 		private void ResetProgressButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Reset all progress - only account isn't removed.
-			Entity.EntityOperations.ResetProgress();
+			EntityOperations.ResetProgress();
 			GenerateHeroButtons();
 		}
 
