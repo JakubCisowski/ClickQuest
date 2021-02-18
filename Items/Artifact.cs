@@ -8,7 +8,7 @@ namespace ClickQuest.Items
 
 		public Artifact(Item itemToCopy) : base(itemToCopy)
 		{
-			
+
 		}
 	}
 }

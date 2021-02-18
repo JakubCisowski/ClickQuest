@@ -8,7 +8,7 @@ namespace ClickQuest.Items
 
 		public Material(Item itemToCopy) : base(itemToCopy)
 		{
-			
+
 		}
 	}
 }
