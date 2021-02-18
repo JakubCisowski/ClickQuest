@@ -323,7 +323,7 @@ namespace ClickQuest.Items
 				// Create a new Blessing.
 				var blessing = new Blessing(blessingBlueprint);
 				// Increase his duration based on Blessing Specialization buff.
-				blessing.Duration += Account.User.Instance.Specialization.SpecBlessingBuff;
+				blessing.Duration += Account.User.Instance.CurrentHero.Specialization.SpecBlessingBuff;
 				User.Instance.CurrentHero.Blessings.Add(blessing);
 				blessing.ChangeBuffStatus(true);
 			}

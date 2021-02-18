@@ -1,6 +1,7 @@
 using ClickQuest.Account;
 using ClickQuest.Controls;
 using ClickQuest.Data;
+using ClickQuest.Entity;
 using ClickQuest.Heroes;
 using System;
 using System.Linq;
@@ -17,6 +18,35 @@ namespace ClickQuest.Pages
 
 			// Populate ComboBox with hero classes and pre-select the first element.
 			HeroClassBox.ItemsSource = Enum.GetValues(typeof(HeroClass)).Cast<HeroClass>().Skip(1);
+		}
+
+		private void SeedSpecializations(Hero hero)
+		{
+			hero.Specialization = new Specialization()
+			{
+				SpecBuyingAmount = 0,
+				SpecKillingAmount = 0,
+				SpecBlessingAmount = 0,
+				SpecCraftingAmount = 0,
+				SpecQuestingAmount = 0,
+				SpecMeltingAmount = 0,
+				SpecDungeonAmount = 0,
+				SpecBlessingThreshold = 1,
+				SpecBlessingBuff = 0,
+				SpecBuyingThreshold = 1,
+				SpecBuyingBuff = 0,
+				SpecQuestingThreshold = 1,
+				SpecQuestingBuff = 0,
+				SpecKillingThreshold = 1,
+				SpecKillingBuff = 0,
+				SpecCraftingThreshold = 1,
+				SpecCraftingBuff = 0,
+				SpecMeltingThreshold = 1,
+				SpecMeltingBuff = 0,
+				SpecDungeonThreshold = 1,
+				SpecDungeonBuff = 0,
+				SpecCraftingText = "Fine"
+			};
 		}
 
 		public void CreateHeroButton_Click(object sender, RoutedEventArgs e)
@@ -38,11 +68,18 @@ namespace ClickQuest.Pages
 				var hero = new Hero((HeroClass)Enum.Parse(typeof(HeroClass), HeroClassBox.SelectedValue.ToString()), HeroNameBox.Text);
 				User.Instance.Heroes.Add(hero);
 
+				// Seed specializations for the new hero.
+				SeedSpecializations(hero);
+
 				// Reload the database.
 				Entity.EntityOperations.SaveGame();
 				Entity.EntityOperations.LoadGame();
 
-				User.Instance.CurrentHero = hero;
+				// Select current hero from entity database, because variable 'hero' doesn't represent the same hero that was loaded from entity in LoadGame().
+				User.Instance.CurrentHero = User.Instance.Heroes.FirstOrDefault(x=>x.Id==hero.Id);
+
+				// Refresh Specialization buffs.
+				hero.Specialization.UpdateBuffs();
 
 				// Refresh bindings.
 				Data.Database.RefreshPages();

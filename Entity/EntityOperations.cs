@@ -18,11 +18,10 @@ namespace ClickQuest.Entity
 
 				user.Gold = User.Instance.Gold;
 				user.Heroes = User.Instance.Heroes;
-				user.Specialization = User.Instance.Specialization;
 				user.Ingots = User.Instance.Ingots;
 				user.DungeonKeys = User.Instance.DungeonKeys;
 
-				// Save every equipment.
+				// Save every equipment, quests, blessings and specializations for each hero.
 				foreach (var heroFromDb in user.Heroes)
 				{
 					var heroFromApp = User.Instance.Heroes.FirstOrDefault(x=>x.Id==heroFromDb.Id);
@@ -30,20 +29,10 @@ namespace ClickQuest.Entity
 					heroFromDb.Materials=heroFromApp.Materials;
 					heroFromDb.Recipes=heroFromApp.Recipes;
 					heroFromDb.Artifacts=heroFromApp.Artifacts;
+					heroFromDb.Specialization = heroFromApp.Specialization;
+					heroFromDb.Quests = heroFromApp.Quests;
+					heroFromDb.Blessings = heroFromApp.Blessings;
 				}
-
-				// Save quests for each hero.
-				foreach (var heroFromDb in user.Heroes)
-				{
-					heroFromDb.Quests = User.Instance.Heroes.FirstOrDefault(x => x.Id == heroFromDb.Id).Quests;
-				}
-
-				// Save blessings for each hero.
-				foreach (var heroFromDb in user.Heroes)
-				{
-					heroFromDb.Blessings = User.Instance.Heroes.FirstOrDefault(x => x.Id == heroFromDb.Id).Blessings;
-				}
-
 
 				db.Users.Update(user);
 				db.SaveChanges();
@@ -232,7 +221,17 @@ namespace ClickQuest.Entity
 					while (hero.Blessings.Count > 0)
 					{
 						hero.Blessings.RemoveAt(0);
-					}	
+					}
+
+					// Reset Specializations.
+					hero.Specialization.SpecBuyingAmount = 0;
+					hero.Specialization.SpecKillingAmount = 0;
+					hero.Specialization.SpecBlessingAmount = 0;
+					hero.Specialization.SpecCraftingAmount = 0;
+					hero.Specialization.SpecQuestingAmount = 0;
+					hero.Specialization.SpecMeltingAmount = 0;
+					hero.Specialization.SpecDungeonAmount = 0;
+
 				}
 				while (user.Heroes.Count > 0)
 				{
@@ -240,22 +239,11 @@ namespace ClickQuest.Entity
 				}
 				user.Gold = 0;
 
-				// Reset Specializations.
-				user.Specialization.SpecBuyingAmount = 0;
-				user.Specialization.SpecKillingAmount = 0;
-				user.Specialization.SpecBlessingAmount = 0;
-				user.Specialization.SpecCraftingAmount = 0;
-				user.Specialization.SpecQuestingAmount = 0;
-				user.Specialization.SpecMeltingAmount = 0;
-				user.Specialization.SpecDungeonAmount = 0;
-
 				db.SaveChanges();
 			}
 
 			// Load the empty collections.
 			LoadGame();
-
-			Account.User.Instance.Specialization.UpdateBuffs();
 		}
 
 		public static void CreateAndSeedDatabase()

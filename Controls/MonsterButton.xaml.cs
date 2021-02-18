@@ -111,7 +111,7 @@ namespace ClickQuest.Controls
 			CheckForDungeonKeyDrop();
 
 			// Increase killing specialization amount (it will update buffs in setter).
-			Account.User.Instance.Specialization.SpecKillingAmount++;
+			Account.User.Instance.CurrentHero.Specialization.SpecKillingAmount++;
 
 			_regionPage.StatsFrame.Refresh();
 		}
@@ -207,7 +207,7 @@ namespace ClickQuest.Controls
 					damage *= 2;
 				}
 				// Apply specialization killing buff.
-				damage += Account.User.Instance.Specialization.SpecKillingBuff;
+				damage += Account.User.Instance.CurrentHero.Specialization.SpecKillingBuff;
 				// Deal damage to monster.
 				Monster.CurrentHealth -= damage;
 

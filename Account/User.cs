@@ -51,7 +51,6 @@ namespace ClickQuest.Account
 		private List<Ingot> _ingots;
 		private List<DungeonKey> _dungeonKeys;
 		private int _gold;
-		private Specialization _specialization;
 
 		#endregion Private Fields
 
@@ -127,19 +126,6 @@ namespace ClickQuest.Account
 			}
 		}
 
-		public Specialization Specialization
-		{
-			get
-			{
-				return _specialization;
-			}
-			set
-			{
-				_specialization = value;
-				OnPropertyChanged();
-			}
-		}
-
 		#endregion Properties
 
 		public User()
@@ -147,8 +133,6 @@ namespace ClickQuest.Account
 			Heroes = new List<Hero>();
 			Ingots = new List<Ingot>();
 			DungeonKeys = new List<DungeonKey>();
-
-			_specialization = Specialization.Instance;
 		}
 	}
 }

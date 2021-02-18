@@ -72,7 +72,7 @@ namespace ClickQuest.Pages
 			BossButton.IsEnabled = true;
 
 			// SpecDungeonBuff's base value is 30 - the fight's duration will always be 30s or more.
-			Duration = Account.User.Instance.Specialization.SpecDungeonBuff;
+			Duration = Account.User.Instance.CurrentHero.Specialization.SpecDungeonBuff;
 
 			// Select the boss, and bind it to interface.
 			_boss = boss;
@@ -134,7 +134,7 @@ namespace ClickQuest.Pages
 			this.TestRewardsBlock.Text = lootText;
 
 			// Increase boss killing specialization amount (it will update buffs in setter).
-			Account.User.Instance.Specialization.SpecDungeonAmount++;
+			Account.User.Instance.CurrentHero.Specialization.SpecDungeonAmount++;
 
 			// Make TownButton visible.
 			TownButton.Visibility = Visibility.Visible;

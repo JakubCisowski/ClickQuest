@@ -1,10 +1,12 @@
 ﻿using ClickQuest.Items;
+using ClickQuest.Account;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClickQuest.Heroes
 {
@@ -39,6 +41,7 @@ namespace ClickQuest.Heroes
 		private List<Artifact> _artifacts;
 		private List<Quest> _quests;
 		private List<Blessing> _blessings;
+		private Specialization _specialization;
 
 		// Specialisations/Professions
 
@@ -269,6 +272,18 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_blessings = value;
+				OnPropertyChanged();
+			}
+		}
+		public Specialization Specialization
+		{
+			get
+			{
+				return _specialization;
+			}
+			set
+			{
+				_specialization=value;
 				OnPropertyChanged();
 			}
 		}

@@ -1,10 +1,12 @@
 using ClickQuest.Items;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Account
 {
+	[Owned]
 	public partial class Specialization : INotifyPropertyChanged
 	{
 		#region INotifyPropertyChanged
