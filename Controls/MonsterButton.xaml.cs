@@ -116,6 +116,11 @@ namespace ClickQuest.Controls
 			_regionPage.StatsFrame.Refresh();
 		}
 
+		public void StopTimer()
+		{
+			_poisonTimer.Stop();
+		}
+
 		private void CheckIfMonsterDied()
 		{
 			// If monster died - grant rewards and spawn another one.

@@ -31,6 +31,17 @@ namespace ClickQuest.Pages
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
+			// Stop poison's ticks (so that the monster doesn't die when we're outside of RegionPage; and so that there's no exception when Timer attempts to tick in MainMenu).
+			foreach (var ctrl in RegionPanel.Children)
+			{
+				if (ctrl is MonsterButton m)
+				{
+					m.StopTimer();
+					// Break - there should never be more than one MonsterButton.
+					break;
+				}
+			}
+
 			// Go back to Town.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
