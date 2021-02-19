@@ -142,6 +142,9 @@ namespace ClickQuest.Pages
 			// Increase boss killing specialization amount (it will update buffs in setter).
 			User.Instance.CurrentHero.Specialization.SpecDungeonAmount++;
 
+			// Disable clicking on BossButton.
+			BossButton.IsEnabled = false;
+
 			// Make TownButton visible.
 			this.TownButton.Visibility = Visibility.Visible;
 		}
