@@ -1,3 +1,4 @@
+using ClickQuest.Heroes;
 using ClickQuest.Items;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -399,6 +400,29 @@ namespace ClickQuest.Account
 			SpecMeltingThreshold = 10;  // Amount increases every time a material is melted.
 			SpecQuestingThreshold = 10; // Amount increases every time a quest is completed.
 			SpecDungeonThreshold = 10;  // Amount increases every time a dungeon is finished.
+
+			// Changes that depend on hero class.
+			// Changing thresholds is easier to balance than changing buffconst.
+			switch(Account.User.Instance.CurrentHero?.HeroRace)
+			{
+				case HeroRace.Human:
+					SpecCraftingThreshold = 5;
+					SpecBuyingThreshold = 5;
+
+					break;
+
+				case HeroRace.Elf:
+					SpecQuestingThreshold = 5;
+					SpecBlessingThreshold = 5;
+
+					break;
+					
+				case HeroRace.Dwarf:
+					SpecMeltingThreshold = 5;
+					SpecDungeonThreshold = 5;
+
+					break;
+			}
 
 			// Updating current buff value based on constants and amount (which is not constant).
 			SpecBlessingBuff = (SpecBlessingAmount / SpecBlessingThreshold) * SpecBlessingBuffConst;

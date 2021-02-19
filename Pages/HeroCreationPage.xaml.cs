@@ -15,8 +15,9 @@ namespace ClickQuest.Pages
 		{
 			InitializeComponent();
 
-			// Populate ComboBox with hero classes and pre-select the first element.
+			// Populate ComboBox with hero classes and races and pre-select the first element.
 			HeroClassBox.ItemsSource = Enum.GetValues(typeof(HeroClass)).Cast<HeroClass>().Skip(1);
+			HeroRaceBox.ItemsSource = Enum.GetValues(typeof(HeroRace)).Cast<HeroRace>();
 		}
 
 		private static void SeedSpecializations(Hero hero)
@@ -64,7 +65,7 @@ namespace ClickQuest.Pages
 				}
 
 				// Create hero based on user inputs and select it.
-				var hero = new Hero((HeroClass)Enum.Parse(typeof(HeroClass), HeroClassBox.SelectedValue.ToString()), HeroNameBox.Text);
+				var hero = new Hero((HeroClass)Enum.Parse(typeof(HeroClass), HeroClassBox.SelectedValue.ToString()), (HeroRace)Enum.Parse(typeof(HeroRace), HeroRaceBox.SelectedValue.ToString()), HeroNameBox.Text);
 				User.Instance.Heroes.Add(hero);
 
 				// Seed specializations for the new hero.

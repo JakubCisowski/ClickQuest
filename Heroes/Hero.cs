@@ -33,6 +33,7 @@ namespace ClickQuest.Heroes
 		private int _clickDamage;
 		private double _critChance;
 		private int _poisonDamage;
+		private HeroRace _heroRace;
 		private HeroClass _heroClass;
 		private string _critChanceText;
 		private List<Material> _materials;
@@ -127,7 +128,18 @@ namespace ClickQuest.Heroes
 				OnPropertyChanged();
 			}
 		}
-
+		public HeroRace HeroRace
+		{
+			get
+			{
+				return _heroRace;
+			}
+			set
+			{
+				_heroRace = value;
+				OnPropertyChanged();
+			}
+		}
 		public HeroClass HeroClass
 		{
 			get
@@ -198,6 +210,13 @@ namespace ClickQuest.Heroes
 			get
 			{
 				return _heroClass.ToString();
+			}
+		}
+		public string ThisHeroRace
+		{
+			get
+			{
+				return _heroRace.ToString();
 			}
 		}
 
@@ -289,14 +308,16 @@ namespace ClickQuest.Heroes
 
 		#endregion Properties
 
-		public Hero(HeroClass heroClass, string heroName)
+		public Hero(HeroClass heroClass, HeroRace heroRace, string heroName)
 		{
 			Materials = new List<Material>();
 			Recipes = new List<Recipe>();
 			Artifacts = new List<Artifact>();
 			Quests = new List<Quest>();
 			Blessings = new List<Blessing>();
+
 			HeroClass = heroClass;
+			HeroRace = heroRace;
 			Experience = 0;
 			Level = 0;
 			Name = heroName;

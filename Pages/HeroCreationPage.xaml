@@ -23,30 +23,57 @@
 			<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Name"/>
 
 			<!-- Hero name input -->
-			<TextBox x:Name="HeroNameBox" HorizontalAlignment="Center" Width="200" Margin="30" HorizontalContentAlignment="Center" FontSize="20" Style="{StaticResource MaterialDesignTextBox}"/>
+			<TextBox x:Name="HeroNameBox" HorizontalAlignment="Center" Width="200" Margin="30" HorizontalContentAlignment="Center" FontSize="24" Style="{StaticResource MaterialDesignTextBox}"/>
 
 			<Separator Height="2" Width="500" Margin="20"/>
 
-			<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Class"/>
-			
-			<!-- Hero class selection (filled in dynamically) -->
-			<Border Margin="0,10" BorderThickness="2" BorderBrush="Gray" Width="150">
-				<ListView x:Name="HeroClassBox" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
-						<ListView.ItemTemplate>
-							<DataTemplate>
-								<StackPanel>
-									<TextBlock FontSize="20" Text="{Binding}"/>
-								</StackPanel>
-							</DataTemplate>
-						</ListView.ItemTemplate>
-						<ListView.ItemContainerStyle>
-							<Style TargetType="ListViewItem">
-								<Setter Property="HorizontalContentAlignment" Value="Center" />
-								<Setter Property="Width" Value="146" />
-							</Style>
-						</ListView.ItemContainerStyle>
-				</ListView>
-			</Border>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<StackPanel>
+					<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Class"/>
+					
+					<!-- Hero class selection (filled in dynamically) -->
+					<Border Margin="0,10" BorderThickness="2" BorderBrush="Gray" Width="150">
+						<ListView x:Name="HeroClassBox" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
+								<ListView.ItemTemplate>
+									<DataTemplate>
+										<StackPanel>
+											<TextBlock FontSize="20" Text="{Binding}"/>
+										</StackPanel>
+									</DataTemplate>
+								</ListView.ItemTemplate>
+								<ListView.ItemContainerStyle>
+									<Style TargetType="ListViewItem">
+										<Setter Property="HorizontalContentAlignment" Value="Center" />
+										<Setter Property="Width" Value="146" />
+									</Style>
+								</ListView.ItemContainerStyle>
+						</ListView>
+					</Border>
+				</StackPanel>
+
+				<StackPanel Margin="80,0,0,0">
+					<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Race"/>
+
+					<!-- Hero race selection (filled in dynamically) -->
+					<Border Margin="0,10" BorderThickness="2" BorderBrush="Gray" Width="150">
+						<ListView x:Name="HeroRaceBox" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
+								<ListView.ItemTemplate>
+									<DataTemplate>
+										<StackPanel>
+											<TextBlock FontSize="20" Text="{Binding}"/>
+										</StackPanel>
+									</DataTemplate>
+								</ListView.ItemTemplate>
+								<ListView.ItemContainerStyle>
+									<Style TargetType="ListViewItem">
+										<Setter Property="HorizontalContentAlignment" Value="Center" />
+										<Setter Property="Width" Value="146" />
+									</Style>
+								</ListView.ItemContainerStyle>
+						</ListView>
+					</Border>
+				</StackPanel>
+			</StackPanel>
 
 			<Separator Height="2" Width="500" Margin="20"/>
 			

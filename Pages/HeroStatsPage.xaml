@@ -29,6 +29,8 @@
 					<LineBreak />
 					<!-- Hero level text-->
 					<Run Text="{Binding Level, StringFormat='\{0\} lvl -'}" FontWeight="Normal" />
+					<!-- Hero race text-->
+					<Run Text="{Binding Mode=OneWay, Path=ThisHeroRace}" FontWeight="Normal" FontStyle="Italic" />
 					<!-- Hero class text-->
 					<Run Text="{Binding Mode=OneWay, Path=ThisHeroClass}" FontWeight="Normal" FontStyle="Italic" />
 			</TextBlock>
