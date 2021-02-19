@@ -1,4 +1,5 @@
 using ClickQuest.Account;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,6 +9,7 @@ namespace ClickQuest.Pages
 {
 	public partial class EquipmentPage : Page
 	{
+		private static int _activeTab;
 		public EquipmentPage()
 		{
 			InitializeComponent();
@@ -174,6 +176,18 @@ namespace ClickQuest.Pages
 
 					ArtifactsPanel.Children.Add(border);
 				}
+			}
+
+			// Change ActiveTab to what was selected before.
+			EquipmentTabControl.SelectedIndex = _activeTab;
+		}
+
+		private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs  e)
+		{
+			if (e.Source is TabControl)
+			{
+				// Save ActiveTab selection (to set it after updating equipment page).
+				_activeTab = EquipmentTabControl.SelectedIndex;
 			}
 		}
 	}
