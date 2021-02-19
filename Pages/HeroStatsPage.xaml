@@ -38,7 +38,7 @@
 			<!-- Experience grid -->
 			<Grid>
 				<!-- Experience progress bar -->
-				<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16">
+				<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16" materialDesign:TransitionAssist.DisableTransitions="True">
 					<!-- Experience progress bar tooltip -->
 					<ProgressBar.ToolTip>
 						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">

@@ -33,7 +33,7 @@
 			<!-- Health info-->
             <Grid Grid.Row="1" Margin="6">
 				<!-- Health progress bar -->
-                <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=CurrentHealthProgress, UpdateSourceTrigger=PropertyChanged}" Height="25" Width="150"/>
+                <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=CurrentHealthProgress, UpdateSourceTrigger=PropertyChanged}" Height="25" Width="150" materialDesign:TransitionAssist.DisableTransitions="True"/>
                 <!-- Text on progress bar -->
 				<TextBlock x:Name="MonsterHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold" FontSize="18">
                 <TextBlock.Text>
