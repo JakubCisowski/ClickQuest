@@ -190,6 +190,7 @@ namespace ClickQuest.Data
 			{
 				var id = int.Parse(parsedObject["Monsters"][i]["Id"].ToString());
 				var name = parsedObject["Monsters"][i]["Name"].ToString();
+				var description = parsedObject["Monsters"][i]["Description"].ToString();
 				var health = int.Parse(parsedObject["Monsters"][i]["Health"].ToString());
 				var image = parsedObject["Monsters"][i]["Image"].ToString();
 
@@ -239,7 +240,7 @@ namespace ClickQuest.Data
 					errorLog.Add($"Error in LoadMonsters: {name} - loot frequency sums up to {frequencySum} instead of 1.");
 				}
 
-				var newMonster = new Monster(id, name, health, image, lootTemp);
+				var newMonster = new Monster(id, name, health, image, lootTemp, description);
 				Monsters.Add(newMonster);
 			}
 
@@ -263,6 +264,7 @@ namespace ClickQuest.Data
 				var id = int.Parse(parsedObject["Regions"][i]["Id"].ToString());
 				var levelRequirement = int.Parse(parsedObject["Regions"][i]["LevelRequirement"].ToString());
 				var name = parsedObject["Regions"][i]["Name"].ToString();
+				var description = parsedObject["Regions"][i]["Description"].ToString();
 				var background = parsedObject["Regions"][i]["Background"].ToString();
 
 				var monstersTemp = new List<(Monster, Double)>();
@@ -294,7 +296,7 @@ namespace ClickQuest.Data
 					errorLog.Add($"Error in LoadRegions: {name} - monster frequency sums up to {frequencySum} instead of 1.");
 				}
 
-				var newRegion = new Region(id, name, background, monstersTemp, levelRequirement);
+				var newRegion = new Region(id, name,description, background, monstersTemp, levelRequirement);
 				Regions.Add(newRegion);
 			}
 

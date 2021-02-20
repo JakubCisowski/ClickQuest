@@ -35,19 +35,25 @@
 		<!-- Main blacksmith grid -->
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="9*" />
+				<RowDefinition Height="1*" />
+				<RowDefinition Height="8*" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
+			<!-- Page description -->
+			<Border Grid.Row="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Background="{StaticResource GameBackgroundAdditional}">
+				<TextBlock FontSize="18" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Text=""/>
+			</Border>
+
 			<!-- Town button -->
-			<Button x:Name="TownButton" Grid.Row="1" Width="450" Height="50" Click="TownButton_Click">
+			<Button x:Name="TownButton" Grid.Row="2" Width="450" Height="50" Click="TownButton_Click">
 				<Button.Content>
 				   <TextBlock FontSize="22" Text="Come back to town!"/>
 			   </Button.Content>
 			</Button>
 
 			<!-- Blacksmith panel-->
-			<TabControl Grid.Row="0" Background="{StaticResource GameBackgroundRegular}" Width="550" Height="550">
+			<TabControl Grid.Row="1" Background="{StaticResource GameBackgroundRegular}" Width="550" Height="550">
 				<!-- Melt tab -->
 				<TabItem Background="{StaticResource GameBackgroundSecondary}">
 					<!-- Header melt -->

@@ -3,6 +3,7 @@
         {
           "Id": 1,
           "Name": "Gray Wolf",
+          "Description": "",
           "Health": 20,
           "Image": "/example.png",
           "Loot": [
@@ -21,6 +22,7 @@
         {
             "Id": 2,
             "Name": "Cave Bat",
+            "Description": "",
             "Health": 15,
             "Image": "/example.png",
             "Loot": [

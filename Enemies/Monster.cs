@@ -155,10 +155,11 @@ namespace ClickQuest.Enemies
 		#endregion Properties
 
 		// Common monster constructor.
-		public Monster(int id, string name, int health, string image, List<(Item, ItemType, double)> loot)
+		public Monster(int id, string name, int health, string image, List<(Item, ItemType, double)> loot, string description)
 		{
 			Id = id;
 			Name = name;
+			Description = description;
 			Health = health;
 			CurrentHealth = health;
 			Loot = loot;
@@ -170,6 +171,7 @@ namespace ClickQuest.Enemies
 		{
 			Id = id;
 			Name = name;
+			Description = description;
 			Health = health;
 			CurrentHealth = health;
 			BossLoot = bossLoot;
