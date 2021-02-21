@@ -32,6 +32,9 @@
 			<!-- Game icon-->
 			<Image Source="/Resources/Images/GameIcon.png" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" RenderOptions.EdgeMode="Aliased"
 				RenderOptions.BitmapScalingMode="Fant" Margin="5,0,0,0">
+				<Image.RenderTransform>
+					<ScaleTransform ScaleX="1.5"/>
+				</Image.RenderTransform>
 			</Image>
 		</Grid>
 		
