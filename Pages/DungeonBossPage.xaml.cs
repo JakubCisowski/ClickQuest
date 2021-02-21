@@ -123,12 +123,14 @@ namespace ClickQuest.Pages
 			// Grant experience based on damage dealt to boss.
 			User.Instance.CurrentHero.Experience += Experience.CalculateMonsterXpReward(_boss.Health - _boss.CurrentHealth);
 
+
 			// Grant boss loot.
 			// 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
 			int threshold = 5 - (_boss.CurrentHealth / (_boss.Health / 5));
-			// 2. Iterate through every possible loot
+			// 2. Iterate through every possible loot.
 			string lootText = "Experience gained: " + Experience.CalculateMonsterXpReward(_boss.Health - _boss.CurrentHealth) + " \n" +
 							  "Loot: \n";
+
 			foreach (var loot in _boss.BossLoot)
 			{
 				double num = _rng.Next(1, 10001) / 10000d;
@@ -143,6 +145,10 @@ namespace ClickQuest.Pages
 					}
 				}
 			}
+
+			// Grant gold reward.
+			User.Instance.Gold += 2137; // (change value later)
+			lootText += "- " + "2137" + " (gold)\n";
 
 			// Display exp and loot for testing purposes.
 			this.TestRewardsBlock.Text = lootText;
