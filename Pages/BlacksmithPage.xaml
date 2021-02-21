@@ -41,8 +41,12 @@
 			</Grid.RowDefinitions>
 
 			<!-- Page description -->
-			<Border Grid.Row="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Background="{StaticResource GameBackgroundAdditional}">
-				<TextBlock FontSize="18" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Text=""/>
+			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Background="{StaticResource GameBackgroundAdditional}">
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center">
+					<Run Text="Here you can melt your materials or use them to craft artifacts"/>
+					<LineBreak/>
+					<Run Text="Melting gives you ingots that can be used instead of materials to craft artifacts"/>
+				</TextBlock>
 			</Border>
 
 			<!-- Town button -->

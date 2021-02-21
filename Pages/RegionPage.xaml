@@ -22,12 +22,18 @@
 
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="9*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="8*"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 
+			<!-- Page description -->
+			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Background="{StaticResource GameBackgroundAdditional}">
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" Text="{Binding Description}"/>
+			</Border>
+
 			<!-- Region panel-->
-			<StackPanel x:Name="RegionPanel" Orientation="Vertical" VerticalAlignment="Center" Grid.Row="0">
+			<StackPanel x:Name="RegionPanel" Orientation="Vertical" VerticalAlignment="Center" Grid.Row="1">
 				<!-- Rewards debug text(will be deleted) -->
 				<TextBlock x:Name="TestRewardsBlock" />
 
@@ -35,7 +41,7 @@
 			</StackPanel>
 			
 			<!-- Back to town button -->
-			<Button x:Name="TownButton" Grid.Row="1" HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
+			<Button x:Name="TownButton" Grid.Row="2" HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
 					<TextBlock Text="Come back to town!" FontSize="22"/>
 			</Button>
 		</Grid>

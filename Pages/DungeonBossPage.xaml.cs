@@ -4,6 +4,7 @@ using ClickQuest.Enemies;
 using ClickQuest.Heroes;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -88,6 +89,13 @@ namespace ClickQuest.Pages
 				Source = this
 			};
 			TimeRemainingBlock.SetBinding(TextBlock.TextProperty, binding);
+
+			// Bind Dungeon's description
+			var binding2 = new Binding("Description")
+			{
+				Source = Database.Dungeons.FirstOrDefault(x=>x.Bosses.Select(y=>y.Id).Contains(boss.Id))
+			};
+			DungeonDescriptionBlock.SetBinding(TextBlock.TextProperty, binding2);
 
 			// Start 30 second timer.
 			_fightTimer.Start();

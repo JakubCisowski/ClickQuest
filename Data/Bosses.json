@@ -5,7 +5,7 @@
           "Name": "TestBoss0",
           "Health": 2000,
           "Image": "/example.png",
-          "Description": "",
+          "Description": "TestBoss0Desc",
           "Loot": [
             {
               "Type": "Material",
@@ -24,7 +24,7 @@
             "Name": "TestBoss1",
             "Health": 1500,
             "Image": "/example.png",
-            "Description": "",
+            "Description": "TestBoss1Desc",
             "Loot": [
                 {
                     "Type": "Material",

@@ -23,22 +23,34 @@
 		<!-- Main Grid -->
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
+				<RowDefinition Height="1.1*"/>
 				<RowDefinition Height="*"/>
-				<RowDefinition Height="8*"/>
+				<RowDefinition Height="7*"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 
+			<!-- Page description -->
+			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Background="{StaticResource GameBackgroundAdditional}">
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center">
+					<Run Text="Here you can complete quests that give you different rewards"/>
+					<LineBreak/>
+					<Run Text="You can't fight during quests, and they are running even if you exit the game"/>
+					<LineBreak/>
+					<Run Text="Rerolling gives you a new set of three quests"/>
+				</TextBlock>
+			</Border>
+
 			<!-- Quest reroll button -->
-			<Button x:Name="RerollButton" Grid.Row="0" HorizontalAlignment="Center" Width="450" Height="50" Click="RerollButton_Click">
+			<Button x:Name="RerollButton" Grid.Row="1" HorizontalAlignment="Center" Width="450" Height="50" Click="RerollButton_Click">
 					<TextBlock Text="Reroll" FontSize="22"/>
 			</Button>
 
 			<!-- Quest list -->
-			<StackPanel x:Name="QuestPanel" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+			<StackPanel x:Name="QuestPanel" Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
 			</StackPanel>
 
 			<!-- Back to town button -->
-			<Button x:Name="MainMenuButton" Grid.Row="2"  HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
+			<Button x:Name="MainMenuButton" Grid.Row="3"  HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
 					<TextBlock Text="Come back to town!" FontSize="22"/>
 			</Button>
 		</Grid>

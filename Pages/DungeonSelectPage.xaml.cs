@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ClickQuest.Pages
 {
@@ -37,6 +38,37 @@ namespace ClickQuest.Pages
 			UndoButton.Click -= UndoButtonGroup_Click;
 			UndoButton.Click -= UndoButtonDungeon_Click;
 
+			var grid = new Grid();
+
+			var col1 = new ColumnDefinition()
+			{
+				Width = new GridLength(1, GridUnitType.Star)
+			};
+			var col2 = new ColumnDefinition()
+			{
+				Width = new GridLength(1, GridUnitType.Star)
+			};
+
+			var row1 = new RowDefinition()
+			{
+				Height = new GridLength(1, GridUnitType.Star)
+			};
+			var row2 = new RowDefinition()
+			{
+				Height = new GridLength(1, GridUnitType.Star)
+			};
+			var row3 = new RowDefinition()
+			{
+				Height = new GridLength(1, GridUnitType.Star)
+			};
+
+			grid.ColumnDefinitions.Add(col1);
+			grid.ColumnDefinitions.Add(col2);
+
+			grid.RowDefinitions.Add(row1);
+			grid.RowDefinitions.Add(row2);
+			grid.RowDefinitions.Add(row3);
+
 			// Create buttons for selecting dungeon groups.
 			for (int i = 0; i < Database.DungeonGroups.Count; i++)
 			{
@@ -44,21 +76,47 @@ namespace ClickQuest.Pages
 				{
 					Name = "DungeonGroup" + Database.DungeonGroups[i].Id.ToString(),
 					Width = 250,
-					Height = 80,
+					Height = 100,
 				};
+
+				var panel = new StackPanel();
 
 				var block = new TextBlock()
 				{
 					FontSize = 22,
-					Text = Database.DungeonGroups[i].Name + "\n" + Database.DungeonGroups[i].Description
+					Text = Database.DungeonGroups[i].Name,
+					TextAlignment=TextAlignment.Center
 				};
 
-				button.Content = block;
+				var border = new Border()
+				{
+					BorderThickness = new Thickness(0.5),
+					BorderBrush = new SolidColorBrush(Colors.LightGray),
+					Margin=new Thickness(0,5,0,0)
+				};
+
+				var block2 = new TextBlock()
+				{
+					FontSize = 16,
+					FontStyle=FontStyles.Italic,
+					Text = Database.DungeonGroups[i].Description,
+					TextAlignment=TextAlignment.Center
+				};
+
+				border.Child = block2;
+
+				panel.Children.Add(block);
+				panel.Children.Add(border);
+
+				button.Content = panel;
 
 				button.Click += DungeonGroupButton_Click;
 
-				DungeonSelectPanel.Children.Insert(i, button);
+				grid.Children.Add(button);
+				Grid.SetColumn(button, i / 3);
+				Grid.SetRow(button, i % 3);
 			}
+			DungeonSelectPanel.Children.Add(grid);
 		}
 
 		public void LoadDungeonSelection()
@@ -70,7 +128,7 @@ namespace ClickQuest.Pages
 			UndoButton.Click += UndoButtonGroup_Click;
 
 			var dungeonsOfThisGroup = Database.Dungeons.Where(x => x.DungeonGroup == _dungeonGroupSelected).ToList();
-
+			
 			// Create buttons for selecting dungeon groups.
 			for (int i = 0; i < dungeonsOfThisGroup.Count; i++)
 			{
@@ -81,17 +139,40 @@ namespace ClickQuest.Pages
 					Height = 80
 				};
 
+				var panel = new StackPanel();
+
 				var block = new TextBlock()
 				{
 					FontSize = 22,
-					Text = dungeonsOfThisGroup[i].Name + "\n" + dungeonsOfThisGroup[i].Description
+					Text = dungeonsOfThisGroup[i].Name,
+					TextAlignment=TextAlignment.Center
 				};
 
-				button.Content = block;
+				var border = new Border()
+				{
+					BorderThickness = new Thickness(0.5),
+					BorderBrush = new SolidColorBrush(Colors.LightGray),
+					Margin=new Thickness(0,5,0,0)
+				};
+
+				var block2 = new TextBlock()
+				{
+					FontSize = 16,
+					FontStyle=FontStyles.Italic,
+					Text =  dungeonsOfThisGroup[i].Description,
+					TextAlignment=TextAlignment.Center
+				};
+
+				border.Child = block2;
+
+				panel.Children.Add(block);
+				panel.Children.Add(border);
+
+				button.Content = panel;
 
 				button.Click += DungeonButton_Click;
 
-				DungeonSelectPanel.Children.Insert(i, button);
+				DungeonSelectPanel.Children.Add(button);
 			}
 		}
 
@@ -112,17 +193,40 @@ namespace ClickQuest.Pages
 					Height = 80
 				};
 
+				var panel = new StackPanel();
+
 				var block = new TextBlock()
 				{
 					FontSize = 22,
-					Text = _dungeonSelected.Bosses[i].Name + "\n" + _dungeonSelected.Bosses[i].Description
+					Text = _dungeonSelected.Bosses[i].Name,
+					TextAlignment=TextAlignment.Center
 				};
 
-				button.Content = block;
+				var border = new Border()
+				{
+					BorderThickness = new Thickness(0.5),
+					BorderBrush = new SolidColorBrush(Colors.LightGray),
+					Margin=new Thickness(0,5,0,0)
+				};
+
+				var block2 = new TextBlock()
+				{
+					FontSize = 16,
+					FontStyle=FontStyles.Italic,
+					Text =  _dungeonSelected.Bosses[i].Description,
+					TextAlignment=TextAlignment.Center
+				};
+
+				border.Child = block2;
+
+				panel.Children.Add(block);
+				panel.Children.Add(border);
+
+				button.Content = panel;
 
 				button.Click += BossButton_Click;
 
-				DungeonSelectPanel.Children.Insert(i, button);
+				DungeonSelectPanel.Children.Add(button);
 			}
 		}
 

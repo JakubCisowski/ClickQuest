@@ -4,7 +4,7 @@
           "Id": 1,
           "LevelRequirement": 0,
           "Name": "Forest",
-          "Description": "",
+          "Description": "ForestDescription",
           "Background": "/example.png",
           "Monsters": [
             {
@@ -21,7 +21,7 @@
             "Id": 2,
             "LevelRequirement": 0,
             "Name": "Cave",
-            "Description": "",
+            "Description": "CaveDescription",
             "Background": "/example2.png",
             "Monsters": [
                 {

@@ -35,7 +35,7 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Background="{StaticResource GameBackgroundAdditional}">
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center">
-					<Run Text="Town Dis Tricts are JD"/>
+					<Run Text="Town Districts are where you can buy and craft upgrades or go on an adventure"/>
 					<LineBreak/>
 					<Run Text="Regions are where your hero can fight monsters for experience and loot"/>
 				</TextBlock>

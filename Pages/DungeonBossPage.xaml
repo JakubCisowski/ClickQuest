@@ -33,12 +33,18 @@
 
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="9*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="8*"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 
+			<!-- Dungeon description -->
+			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Background="{StaticResource GameBackgroundAdditional}">
+				<TextBlock x:Name="DungeonDescriptionBlock" FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center"/>
+			</Border>
+
 			<!-- Main panel -->
-			<StackPanel Grid.Row="0" Orientation="Vertical" VerticalAlignment="Center">
+			<StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
 			
 				<!-- Dungeon boss button -->
 				<Button x:Name="BossButton" Click="BossButton_Click" Width="400" Height="400">
@@ -66,6 +72,11 @@
 								</TextBlock.Text>
 							</TextBlock>
 						</Grid>
+
+						<!-- Boss description -->
+						<Border Grid.Row="2" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5">
+							<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" Text="{Binding Description}"/>
+						</Border>
 					</Grid>
 				</Button>
 
@@ -86,7 +97,7 @@
 			</StackPanel>
 
 			<!-- Back to town button -->
-			<Button x:Name="TownButton" Grid.Row="1" HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
+			<Button x:Name="TownButton" Grid.Row="2" HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
 					<TextBlock Text="Come back to town!" FontSize="22"/>
 			</Button>
 		</Grid>

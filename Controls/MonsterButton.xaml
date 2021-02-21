@@ -36,15 +36,19 @@
                 <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=CurrentHealthProgress, UpdateSourceTrigger=PropertyChanged}" Height="25" Width="150" materialDesign:TransitionAssist.DisableTransitions="True"/>
                 <!-- Text on progress bar -->
 				<TextBlock x:Name="MonsterHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold" FontSize="18">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat=" {0} / {1} ">
-                        <Binding Path="CurrentHealth" />
-                        <Binding Path="Health" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
+					<TextBlock.Text>
+						<MultiBinding StringFormat=" {0} / {1} ">
+							<Binding Path="CurrentHealth" />
+							<Binding Path="Health" />
+						</MultiBinding>
+					</TextBlock.Text>
+				</TextBlock>
             </Grid>
 
+			<!-- Monster description -->
+			<Border Grid.Row="2" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5">
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" Text="{Binding Description}"/>
+			</Border>
             
         </Grid>
     </Button>
