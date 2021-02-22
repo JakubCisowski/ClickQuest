@@ -1,4 +1,5 @@
 using ClickQuest.Account;
+using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Heroes;
 using ClickQuest.Pages;
@@ -9,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace ClickQuest.Items
@@ -257,7 +259,7 @@ namespace ClickQuest.Items
 			else
 			{
 				// Convert to text.
-				questCopy.TicksCountText = $"{questCopy.TicksCountNumber / 60}m {questCopy.TicksCountNumber % 60 + 1}s";
+				questCopy.TicksCountText = $"{questCopy.Name}\n{questCopy.TicksCountNumber / 60}m {questCopy.TicksCountNumber % 60 + 1}s";
 			}
 
 			// Start timer (checks if quest is finished).
@@ -296,6 +298,9 @@ namespace ClickQuest.Items
 
 		private void AssignRewards()
 		{
+			// Inform the user about rewards.
+			AlertBox.Show($"Quest {this.Name} finished.\nRewards granted.", MessageBoxButton.OK);
+			
 			// Assign materials.
 			foreach (var materialId in RewardMaterialIds)
 			{
@@ -322,20 +327,40 @@ namespace ClickQuest.Items
 			{
 				// Select right blessing.
 				var blessingBlueprint = Database.Blessings.FirstOrDefault(x => x.Id == blessingId);
-				// Create a new Blessing.
-				var blessing = new Blessing(blessingBlueprint);
-				// Increase his duration based on Blessing Specialization buff.
-				blessing.Duration += User.Instance.CurrentHero.Specialization.SpecBlessingBuff;
-				User.Instance.CurrentHero.Blessings.Add(blessing);
-				blessing.ChangeBuffStatus(true);
-			}
 
-			// Refresh all equipment pages (skip 2 pages - MainMenu and HeroCreation, because they don't have an EquipmentFrame).
-			// Alternative to .Skip(2) - try catch and continue the loop if an exception is caught (that is, if EquipmnetFrame does not exist).
+				MessageBoxResult result;
+
+				// If there are any blessings active, ask if user wants to swap.
+				if (User.Instance.CurrentHero.Blessings.Any())
+				{
+					// Ask user if he wants to swap current blessing.
+					result = AlertBox.Show($"Do you want to swap current blessing to {blessingBlueprint.Name}?\n{blessingBlueprint.Description}",MessageBoxButton.YesNo);
+				}
+				else
+				{
+					// Else, set default option to yes.
+					result = MessageBoxResult.OK;
+				}
+				
+				// If user wants to change his blessing to a new one.
+				if(result == MessageBoxResult.OK)
+				{
+					// Create a new Blessing.
+					var blessing = new Blessing(blessingBlueprint);
+					// Increase his duration based on Blessing Specialization buff.
+					blessing.Duration += User.Instance.CurrentHero.Specialization.SpecBlessingBuff;
+					User.Instance.CurrentHero.Blessings.Add(blessing);
+					blessing.ChangeBuffStatus(true);
+				}
+			}
+			
+			// Refresh all stats and equipment pages (skip 2 pages - MainMenu and HeroCreation, because they don't have an EquipmentFrame).
+			// Alternative to .Skip(2) - try catch and continue the loop if an exception is caught (that is, if EquipmentFrame does not exist).
 			foreach (var page in Database.Pages.Skip(2))
 			{
 				dynamic p = page.Value;
 				p.EquipmentFrame.Refresh();
+				p.StatsFrame.Refresh();
 			}
 		}
 
@@ -350,7 +375,7 @@ namespace ClickQuest.Items
 			{
 				// Else, decrement TicksCountNumber, and convert it to text.
 				TicksCountNumber--;
-				TicksCountText = $"{TicksCountNumber / 60}m {TicksCountNumber % 60 + 1}s";
+				TicksCountText = $"{Name}\n{TicksCountNumber / 60}m {TicksCountNumber % 60 + 1}s";
 			}
 		}
 

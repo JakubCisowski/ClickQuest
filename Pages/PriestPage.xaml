@@ -47,7 +47,7 @@
 					<LineBreak/>
 					<Run Text="If you exit this hero or game all blessings are paused"/>
 					<LineBreak/>
-					<Run Text="Blessing timer is started right when you buy it"/>
+					<Run Text="Blessing timer is started right when you buy it, you can only have one blessing at a time"/>
 				</TextBlock>
 			</Border>
 

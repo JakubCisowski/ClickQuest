@@ -151,6 +151,7 @@ namespace ClickQuest.Entity
 
 				if (bless != null)
 				{
+					db.Entry(bless).State = EntityState.Deleted;
 					currentHero.Blessings.Remove(bless);
 				}
 

@@ -1,8 +1,10 @@
 using ClickQuest.Account;
+using ClickQuest.Data;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Threading;
 
@@ -35,6 +37,7 @@ namespace ClickQuest.Items
 		public BlessingType _type;
 		private int _value;
 		private int _duration;
+		private string _durationText;
 		private int _buff;
 		private DispatcherTimer _timer;
 
@@ -137,6 +140,20 @@ namespace ClickQuest.Items
 			}
 		}
 
+		[NotMapped]
+		public string DurationText
+		{
+			get
+			{
+				return _durationText;
+			}
+			set
+			{
+				_durationText = value;
+				OnPropertyChanged();
+			}
+		}
+
 		public int Buff
 		{
 			get
@@ -209,15 +226,36 @@ namespace ClickQuest.Items
 				{
 					case BlessingType.ClickDamage:
 
+						// Remove all blessings except the last one added.
+						for (var i = 0; i < User.Instance.CurrentHero.Blessings.Count - 1; i++)
+						{
+							var bless = User.Instance.CurrentHero.Blessings[i];
+
+							bless.ChangeBuffStatus(false);
+							User.Instance.CurrentHero.Blessings.Remove(bless);
+							Entity.EntityOperations.RemoveBlessing(bless);
+						}
+
 						// Assign buff.
 						User.Instance.CurrentHero.ClickDamage += Buff;
 
+						// Start timer.
 						_timer = new DispatcherTimer
 						{
 							Interval = new TimeSpan(0, 0, 1)
 						};
 						_timer.Tick += Timer_Tick;
 						_timer.Start();
+
+						// Set duration text for hero stats panel.
+						DurationText = $"{Name}\n{Duration / 60}m {Duration % 60}s";
+
+						// Refresh all stats panel bindings.
+						foreach (var page in Database.Pages.Skip(2))
+						{
+							dynamic p = page.Value;
+							p.StatsFrame.Refresh();
+						}
 
 						break;
 				}
@@ -242,6 +280,7 @@ namespace ClickQuest.Items
 		private void Timer_Tick(object source, EventArgs e)
 		{
 			Duration--;
+			DurationText = $"{Name}\n{Duration / 60}m {Duration % 60}s";
 
 			if (Duration <= 0)
 			{
@@ -251,6 +290,16 @@ namespace ClickQuest.Items
 				// Remove it from User and Database (if it's saved there).
 				User.Instance.CurrentHero.Blessings.Remove(this);
 				Entity.EntityOperations.RemoveBlessing(this);
+
+				// Reset DurationText.
+				DurationText = "";
+
+				// Refresh all stats panel bindings.
+				foreach (var page in Database.Pages.Skip(2))
+				{
+					dynamic p = page.Value;
+					p.StatsFrame.Refresh();
+				}
 			}
 		}
 

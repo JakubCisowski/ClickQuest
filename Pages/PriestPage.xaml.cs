@@ -1,6 +1,7 @@
 using ClickQuest.Account;
 using ClickQuest.Controls;
 using ClickQuest.Data;
+using ClickQuest.Entity;
 using ClickQuest.Items;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,7 +42,7 @@ namespace ClickQuest.Pages
 			if (User.Instance.Gold >= blessingBlueprint.Value)
 			{
 				// Show buy alert.
-				var result = AlertBox.Show($"Are you sure you want to buy {blessingBlueprint.Name} for {blessingBlueprint.Value} gold?", MessageBoxButton.YesNo);
+				var result = AlertBox.Show($"Are you sure you want to buy {blessingBlueprint.Name} for {blessingBlueprint.Value} gold?\nThis action will remove all your current blessings.", MessageBoxButton.YesNo);
 
 				// If user clicked cancel on buy alert - return.
 				if (result == MessageBoxResult.Cancel)
@@ -55,14 +56,28 @@ namespace ClickQuest.Pages
 				// Increase Blessing Specialization amount.
 				User.Instance.CurrentHero.Specialization.SpecBlessingAmount++;
 
+				// Cancel current blessings.
+				foreach (var bless in User.Instance.CurrentHero.Blessings)
+				{
+					bless.ChangeBuffStatus(false);
+					EntityOperations.RemoveBlessing(bless);
+				}
+				// And remove them.
+				User.Instance.CurrentHero.Blessings.Clear();
+
 				// Create a new Blessing.
 				var blessing = new Blessing(blessingBlueprint);
+
 				// Increase his duration based on Blessing Specialization buff.
 				blessing.Duration += User.Instance.CurrentHero.Specialization.SpecBlessingBuff;
+
 				User.Instance.CurrentHero.Blessings.Add(blessing);
 				blessing.ChangeBuffStatus(true);
 
 				UpdatePriest();
+
+				// Update StatsPage.
+				this.StatsFrame.Refresh();
 			}
 			else
 			{

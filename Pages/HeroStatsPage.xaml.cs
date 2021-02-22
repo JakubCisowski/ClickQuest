@@ -28,6 +28,7 @@ namespace ClickQuest.Pages
 			GenerateGold();
 			GenerateSpecializations();
 			RefreshQuestTimer();
+			RefreshBlessingTimer();
 		}
 
 		private void GenerateGold()
@@ -220,7 +221,21 @@ namespace ClickQuest.Pages
 				// Bind its duration to the panel.
 				var binding = new Binding("TicksCountText");
 				binding.Source = quest;
-				testQuestDuration.SetBinding(TextBlock.TextProperty, binding);
+				QuestDuration.SetBinding(TextBlock.TextProperty, binding);
+			}
+		}
+
+		private void RefreshBlessingTimer()
+		{
+			// Find blessing that is currently active.
+			var blessing = User.Instance.CurrentHero?.Blessings.FirstOrDefault();
+
+			if (blessing != null)
+			{
+				// Bind its duration to the panel.
+				var binding = new Binding("DurationText");
+				binding.Source = blessing;
+				BlessingDuration.SetBinding(TextBlock.TextProperty, binding);
 			}
 		}
 
