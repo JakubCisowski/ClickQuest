@@ -38,23 +38,16 @@
 			<!-- Experience grid -->
 			<Grid>
 				<!-- Experience progress bar -->
-				<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16" materialDesign:TransitionAssist.DisableTransitions="True">
+				<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16" materialDesign:TransitionAssist.DisableTransitions="True" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
 					<!-- Experience progress bar tooltip -->
 					<ProgressBar.ToolTip>
 						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
-							<ToolTip.Template>
-								<ControlTemplate>
-									<Grid>
-										<Border Style="{StaticResource ToolTipBorderBase}" />
-										<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-												<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}" />
-												<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" />
-												<LineBreak />
-												<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='To next lvl: \{0\}'}" />
-										</TextBlock>
-									</Grid>
-								</ControlTemplate>
-							</ToolTip.Template>
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+									<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}" />
+									<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" />
+									<LineBreak />
+									<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='To next lvl: \{0\}'}" />
+							</TextBlock>
 						</ToolTip>
 					</ProgressBar.ToolTip>
 				</ProgressBar>
@@ -79,25 +72,18 @@
 				</Grid.ColumnDefinitions>
 				
 				<!-- Click damage panel-->
-				<StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+				<StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
 					<!-- Click damage info tooltip -->
 					<StackPanel.ToolTip>
 						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
-							<ToolTip.Template>
-								<ControlTemplate>
-									<Grid>
-										<Border Style="{StaticResource ToolTipBorderBase}" />
-										<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
-											Damage you deal with every click on a monster/boss
-											<LineBreak/>
-											<LineBreak/>
-											You can increase damage by: killing monsters (Clicker specialization), using blessings or damage artifacts
-											<LineBreak/>
-											Also, you get bonus click damage when you level up
-										</TextBlock>
-									</Grid>
-								</ControlTemplate>
-							</ToolTip.Template>
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
+								<Run Text="Damage you deal with every click on a monster/boss"/>
+								<LineBreak/>
+								<LineBreak/>
+								<Run Text="You can increase damage by: killing monsters (Clicker specialization), using blessings or damage artifacts"/>
+								<LineBreak/>
+								<Run Text="Also, you get bonus click damage when you level up"/>
+							</TextBlock>
 						</ToolTip>
 					</StackPanel.ToolTip>
 
@@ -111,25 +97,18 @@
 				<TextBlock x:Name="ClickDamageBlock" Grid.Row="0" Grid.Column="1" FontSize="18" Margin="3" VerticalAlignment="Center" Text="{Binding Path=ClickDamage}"/>
 
 				<!-- Crit panel -->
-				<StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+				<StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
 					<!-- Crit info tooltip -->
 					<StackPanel.ToolTip>
 						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
-							<ToolTip.Template>
-								<ControlTemplate>
-									<Grid>
-										<Border Style="{StaticResource ToolTipBorderBase}" />
-										<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
-											Chance to deal double damage when clicking on a monster/boss
-											<LineBreak/>
-											<LineBreak/>
-											You can increase crit chance by: using blessings or crit artifacts
-											<LineBreak/>
-											Also, you get bonus crit chance (+0.4%) when you level up if your class is Slayer
-										</TextBlock>
-									</Grid>
-								</ControlTemplate>
-							</ToolTip.Template>
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
+								<Run Text="Chance to deal double damage when clicking on a monster/boss"/>
+								<LineBreak/>
+								<LineBreak/>
+								<Run Text="You can increase crit chance by: using blessings or crit artifacts"/>
+								<LineBreak/>
+								<Run Text="Also, you get bonus crit chance (+0.4%) when you level up if your class is Slayer"/>
+							</TextBlock>
 						</ToolTip>
 					</StackPanel.ToolTip>
 
@@ -143,27 +122,20 @@
 				<TextBlock x:Name="CritChanceBlock" Grid.Row="1" Grid.Column="1" Text="{Binding Path=CritChanceText}" FontSize="18" Margin="3" VerticalAlignment="Center" />
 
 				<!-- Poison damage panel -->
-				<StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+				<StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
 					<!-- Poison damage tooltip -->
 					<StackPanel.ToolTip>
 						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
-							<ToolTip.Template>
-								<ControlTemplate>
-									<Grid>
-										<Border Style="{StaticResource ToolTipBorderBase}" />
-										<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
-											Damage over time you deal after every click on a monster/boss
-											<LineBreak/>
-											There are 5 ticks over 2.5s
-											<LineBreak/>
-											<LineBreak/>
-											You can increase poison damage by: using blessings or poison artifacts
-											<LineBreak/>
-											Also, you get bonus poison damage (+2) when you level up if your class is Venom
-										</TextBlock>
-									</Grid>
-								</ControlTemplate>
-							</ToolTip.Template>
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
+								<Run Text="Damage over time you deal after every click on a monster/boss"/>
+								<LineBreak/>
+								<Run Text="There are 5 ticks over 2.5s"/>
+								<LineBreak/>
+								<LineBreak/>
+								<Run Text="You can increase poison damage by: using blessings or poison artifacts"/>
+								<LineBreak/>
+								<Run Text="Also, you get bonus poison damage (+2) when you level up if your class is Venom"/>
+							</TextBlock>
 						</ToolTip>
 					</StackPanel.ToolTip>
 					

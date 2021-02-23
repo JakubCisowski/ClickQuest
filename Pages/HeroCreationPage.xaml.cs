@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ControlzEx;
 
 namespace ClickQuest.Pages
 {
@@ -16,9 +17,45 @@ namespace ClickQuest.Pages
 			InitializeComponent();
 
 			// Populate ComboBox with hero classes and races and pre-select the first element.
-			HeroClassBox.ItemsSource = Enum.GetValues(typeof(HeroClass)).Cast<HeroClass>().Skip(1);
+			//HeroClassBox.ItemsSource = Enum.GetValues(typeof(HeroClass)).Cast<HeroClass>().Skip(1);
 			HeroRaceBox.ItemsSource = Enum.GetValues(typeof(HeroRace)).Cast<HeroRace>();
-		}
+
+			// Populate ComboBox with hero classes
+			var heroClasses = Enum.GetValues(typeof(HeroClass)).Cast<HeroClass>().Skip(1);
+
+			foreach (var heroClass in heroClasses)
+			{
+				
+			}
+
+
+			// Add list view item tooltips. 
+			// foreach(var item in HeroClassBox.Items)
+			// {
+			// 	string toolTipText = "";
+
+			// 	switch(item.ToString())
+			// 	{
+			// 		case "Slayer":
+			// 			toolTipText = "xd";
+			// 			break;
+			// 	}
+
+			// 	var toolTip = new ToolTip();
+			// 	ToolTipService.SetShowDuration(item as ListViewItem, 20000);
+			// 	ToolTipService.SetInitialShowDelay(item  as ListViewItem, 100);
+			// 	ToolTipAssist.SetAutoMove(toolTip,true);
+
+			// 	var block = new TextBlock()
+			// 	{
+			// 		Text = toolTipText
+			// 	};
+
+			// 	toolTip.Content = block;
+
+			// 	(item as ListViewItem).ToolTip = toolTip;	
+			// }
+		}	
 
 		private static void SeedSpecializations(Hero hero)
 		{

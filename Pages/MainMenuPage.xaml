@@ -33,27 +33,23 @@
 			</Grid.ColumnDefinitions>
 
 			<!-- Create hero button -->
-			<Button x:Name="CreateHeroButton" Grid.Row="0" Grid.ColumnSpan="2" Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" VerticalAlignment="Center"
-				ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
-				<!-- Create hero test tooltip -->
-				<Button.ToolTip>
-					<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
-						<ToolTip.Template>
-							<ControlTemplate>
-								<Grid>
-									<Border Style="{StaticResource ToolTipBorderBase}"/>
-									<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="JD"/>
-								</Grid>
-							</ControlTemplate>
-						</ToolTip.Template>
-					</ToolTip>
-				</Button.ToolTip>
-			</Button>
+			<Button x:Name="CreateHeroButton" Grid.Row="0" Grid.ColumnSpan="2" Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" VerticalAlignment="Center"/>
 
 			<!-- Hero list -->
 
 			<!-- Reset progress button -->
-			<Button x:Name="ResetProgressButton" Style="{StaticResource ButtonStyleDanger}" Grid.Row="4" Grid.ColumnSpan="2" Width="250" Height="50" Content="Reset all your progress" Click="ResetProgressButton_Click" Margin="0,0,0,20"/>
+			<Button x:Name="ResetProgressButton" Style="{StaticResource ButtonStyleDanger}" Grid.Row="4" Grid.ColumnSpan="2" Width="250" Height="50" Content="Reset all your progress" Click="ResetProgressButton_Click" Margin="0,0,0,20" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
+				<!-- Tooltip -->
+				<Button.ToolTip>
+					<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
+						<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+							<Run Text="This will remove: heroes (with their equipments), gold, ingots and keys"/>
+							<LineBreak/>
+							<Run Text="This action is irreversible!"/>
+						</TextBlock>
+					</ToolTip>
+				</Button.ToolTip>
+			</Button>
 		</Grid>
 	</Grid>
 </Page>

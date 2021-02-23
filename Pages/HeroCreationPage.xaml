@@ -4,6 +4,7 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+		xmlns:controlzEx="urn:controlzex"
 		xmlns:local="clr-namespace:ClickQuest"
 		mc:Ignorable="d"
 		Title="HeroCreationPage" Height="728" Width="1366">
@@ -20,16 +21,43 @@
 
 		<!-- Main StackPanel -->
 	   	<StackPanel Orientation="Vertical" VerticalAlignment="Center">
+
+		   <!-- Hero name -->
 			<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Name"/>
 
 			<!-- Hero name input -->
-			<TextBox x:Name="HeroNameBox" HorizontalAlignment="Center" Width="200" Margin="30" HorizontalContentAlignment="Center" FontSize="24" Style="{StaticResource MaterialDesignTextBox}"/>
+			<TextBox x:Name="HeroNameBox" HorizontalAlignment="Center" Width="200" Margin="30" HorizontalContentAlignment="Center" FontSize="24" Style="{StaticResource MaterialDesignTextBox}" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
+				<!-- Tooltip -->
+				<TextBox.ToolTip>
+					<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
+						<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+							<Run Text="Hero name can contain up to 15 characters"/>
+							<LineBreak/>
+							<Run Text="Valid characters: A-Z, a-z, 0-9, space"/>
+						</TextBlock>
+					</ToolTip>
+				</TextBox.ToolTip>
+			</TextBox>
 
 			<Separator Height="2" Width="500" Margin="20"/>
 
+			<!-- Class and race panel -->
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<!-- Class panel-->
 				<StackPanel>
-					<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Class"/>
+					<!-- Class text-->
+					<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Class" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
+						<!-- Tooltip -->
+						<TextBlock.ToolTip>
+							<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
+								<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+									<Run Text="Each class defines a specific playstyle"/>
+									<LineBreak/>
+									<Run Text="Hover over classes for more info"/>
+								</TextBlock>
+							</ToolTip>
+						</TextBlock.ToolTip>
+					</TextBlock>
 					
 					<!-- Hero class selection (filled in dynamically) -->
 					<Border Margin="0,10" BorderThickness="2" BorderBrush="Gray" Width="150">
@@ -51,8 +79,20 @@
 					</Border>
 				</StackPanel>
 
+				<!-- Race panel-->
 				<StackPanel Margin="80,0,0,0">
-					<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Race"/>
+					<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Race" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
+						<!-- Tooltip -->
+						<TextBlock.ToolTip>
+							<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
+								<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+									<Run Text="Each race excels in particular specializations"/>
+									<LineBreak/>
+									<Run Text="Hover over races for more info"/>
+								</TextBlock>
+							</ToolTip>
+						</TextBlock.ToolTip>
+					</TextBlock>
 
 					<!-- Hero race selection (filled in dynamically) -->
 					<Border Margin="0,10" BorderThickness="2" BorderBrush="Gray" Width="150">

@@ -50,6 +50,13 @@
 				<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
 			</Style>
 
+			<Style TargetType="ToolTip" BasedOn="{StaticResource GameFontRegular}">
+				<Setter Property="Background" Value="Gray"/>
+				<Setter Property="Opacity" Value="0.9"/>
+				<Setter Property="Padding" Value="5"/>
+				<Setter Property="BorderBrush" Value="Black"/>
+			</Style>
+
       	</ResourceDictionary>
 	</Application.Resources>
 </Application>
