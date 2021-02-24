@@ -386,12 +386,14 @@ namespace ClickQuest.Heroes
 						ClickDamage += ClickDamagePerLevel;
 						CritChance += CritChancePerLevel;
 						CritChanceText = String.Format("{0:P1}", CritChance);
+						
 						break;
 
 					case HeroClass.Venom:
 						ClickDamage += ClickDamagePerLevel;
 						PoisonDamage += PoisonDamagePerLevel;
 						CritChanceText = String.Format("{0:P1}", CritChance);
+
 						break;
 				}
 			}

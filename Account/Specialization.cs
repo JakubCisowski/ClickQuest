@@ -58,9 +58,9 @@ namespace ClickQuest.Account
 		private int specBlessingThreshold;
 		private int specBlessingBuff;
 
-		private int specKillingAmount;
-		private int specKillingThreshold;
-		private int specKillingBuff;
+		private int specClickingAmount;
+		private int specClickingThreshold;
+		private int specClickingBuff;
 
 		private int specDungeonAmount;
 		private int specDungeonThreshold;
@@ -272,42 +272,42 @@ namespace ClickQuest.Account
 			}
 		}
 
-		public int SpecKillingAmount
+		public int SpecClickingAmount
 		{
 			get
 			{
-				return specKillingAmount;
+				return specClickingAmount;
 			}
 			set
 			{
-				specKillingAmount = value;
+				specClickingAmount = value;
 				UpdateBuffs();
 				OnPropertyChanged();
 			}
 		}
 
-		public int SpecKillingThreshold
+		public int SpecClickingThreshold
 		{
 			get
 			{
-				return specKillingThreshold;
+				return specClickingThreshold;
 			}
 			set
 			{
-				specKillingThreshold = value;
+				specClickingThreshold = value;
 				OnPropertyChanged();
 			}
 		}
 
-		public int SpecKillingBuff
+		public int SpecClickingBuff
 		{
 			get
 			{
-				return specKillingBuff;
+				return specClickingBuff;
 			}
 			set
 			{
-				specKillingBuff = value;
+				specClickingBuff = value;
 				OnPropertyChanged();
 			}
 		}
@@ -385,7 +385,7 @@ namespace ClickQuest.Account
 
 			// Const buff value for reaching every threshold.
 			var SpecBlessingBuffConst = 15; // Increases blessings duration in seconds. <Base - 0>
-			var SpecKillingBuffConst = 1;   // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
+			var SpecClickingBuffConst = 1;   // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
 			var SpecCraftingBuffConst = 1;  // Increases crafting rarity limit. <Base - 1> <Limit - 5>
 			var SpecBuyingBuffConst = 1;    // Increases shop offer size. <Base - 5>
 			var SpecMeltingBuffConst = 5;   // Increases % chance to get additional ingots when melting. <Base - 0%>
@@ -394,7 +394,7 @@ namespace ClickQuest.Account
 
 			// Buff gains thresholds.
 			SpecBlessingThreshold = 10; // Amount increases every time a Blessing is bought.
-			SpecKillingThreshold = 3;   // Amount increases every time a monster is killed.
+			SpecClickingThreshold = 10;  // Amount increases every time user clicks on monster or boss.
 			SpecCraftingThreshold = 10; // Amount increases every time an artifact is crafted using recipe.
 			SpecBuyingThreshold = 10;   // Amount increases every time a Recipe is bought.
 			SpecMeltingThreshold = 10;  // Amount increases every time a material is melted.
@@ -426,7 +426,7 @@ namespace ClickQuest.Account
 
 			// Updating current buff value based on constants and amount (which is not constant).
 			SpecBlessingBuff = (SpecBlessingAmount / SpecBlessingThreshold) * SpecBlessingBuffConst;
-			SpecKillingBuff = (SpecKillingAmount / SpecKillingThreshold) * SpecKillingBuffConst;
+			SpecClickingBuff = (SpecClickingAmount / SpecClickingThreshold) * SpecClickingBuffConst;
 			SpecCraftingBuff = Math.Min(SpecCraftingBuffBase + (SpecCraftingAmount / SpecCraftingThreshold) * SpecCraftingBuffConst, SpecCraftingBuffLimit);
 			SpecBuyingBuff = SpecBuyingBuffBase + (SpecBuyingAmount / SpecBuyingThreshold) * SpecBuyingBuffConst;
 			SpecMeltingBuff = (SpecMeltingAmount / SpecMeltingThreshold) * SpecMeltingBuffConst;

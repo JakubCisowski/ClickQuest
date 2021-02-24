@@ -5,7 +5,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 		xmlns:controlzEx="urn:controlzex"
-		xmlns:local="clr-namespace:ClickQuest"
+		xmlns:local="clr-namespace:ClickQuest.Heroes"
 		mc:Ignorable="d"
 		Title="HeroCreationPage" Height="728" Width="1366">
 
@@ -59,7 +59,7 @@
 						</TextBlock.ToolTip>
 					</TextBlock>
 					
-					<!-- Hero class selection (filled in dynamically) -->
+					<!-- Hero class selection -->
 					<Border Margin="0,10" BorderThickness="2" BorderBrush="Gray" Width="150">
 						<ListView x:Name="HeroClassBox" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
 								<ListView.ItemTemplate>
@@ -69,10 +69,49 @@
 										</StackPanel>
 									</DataTemplate>
 								</ListView.ItemTemplate>
+								
 								<ListView.ItemContainerStyle>
 									<Style TargetType="ListViewItem">
 										<Setter Property="HorizontalContentAlignment" Value="Center" />
 										<Setter Property="Width" Value="146" />
+										<Setter Property="ToolTip" Value="default"/>
+										<Setter Property="ToolTipService.ShowDuration" Value="20000"/>
+										<Setter Property="ToolTipService.InitialShowDelay" Value="100"/>
+										<Style.Triggers>
+											<!-- Slayer class -->
+											<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroClass.Slayer}">
+												<!-- Tooltip -->
+												<Setter Property="ToolTip">
+													<Setter.Value>
+														<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+															<Run Text="This class specializes in powerful critical clicks that deal double damage"/>
+															<LineBreak/>
+															<LineBreak/>
+															<Run Text="Click damage: 2 (+1/lvl)"/>
+															<LineBreak/>
+															<Run Text="Crit chance: 25% (+0.4%/lvl)"/>
+														</TextBlock>
+													</Setter.Value>
+												</Setter>
+											</DataTrigger>
+											
+											<!-- Venom class -->
+											<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroClass.Venom}">
+												<!-- Tooltip -->
+												<Setter Property="ToolTip">
+													<Setter.Value>
+														<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+															<Run Text="This class specializes in poisonous clicks that deal additional damage over time"/>
+															<LineBreak/>
+															<LineBreak/>
+															<Run Text="Click damage: 2 (+1/lvl)"/>
+															<LineBreak/>
+															<Run Text="Poison damage: 1 (+2/lvl) per tick (5 ticks over 2.5s)"/>
+														</TextBlock>
+													</Setter.Value>
+												</Setter>
+											</DataTrigger>
+										</Style.Triggers>
 									</Style>
 								</ListView.ItemContainerStyle>
 						</ListView>
@@ -86,7 +125,9 @@
 						<TextBlock.ToolTip>
 							<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
 								<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-									<Run Text="Each race excels in particular specializations"/>
+									<Run Text="Each race excels in two particular specializations"/>
+									<LineBreak/>
+									<Run Text="They can still specialize in every field"/>
 									<LineBreak/>
 									<Run Text="Hover over races for more info"/>
 								</TextBlock>
@@ -94,7 +135,7 @@
 						</TextBlock.ToolTip>
 					</TextBlock>
 
-					<!-- Hero race selection (filled in dynamically) -->
+					<!-- Hero race selection -->
 					<Border Margin="0,10" BorderThickness="2" BorderBrush="Gray" Width="150">
 						<ListView x:Name="HeroRaceBox" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
 								<ListView.ItemTemplate>
@@ -104,10 +145,72 @@
 										</StackPanel>
 									</DataTemplate>
 								</ListView.ItemTemplate>
+
 								<ListView.ItemContainerStyle>
 									<Style TargetType="ListViewItem">
 										<Setter Property="HorizontalContentAlignment" Value="Center" />
 										<Setter Property="Width" Value="146" />
+										<Setter Property="ToolTip" Value="default"/>
+										<Setter Property="ToolTipService.ShowDuration" Value="20000"/>
+										<Setter Property="ToolTipService.InitialShowDelay" Value="100"/>
+										<Style.Triggers>
+											<!-- Human race -->
+											<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroRace.Human}">
+												<!-- Tooltip -->
+												<Setter Property="ToolTip">
+													<Setter.Value>
+														<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+															<Run Text="Human race specializes in buying and crafting"/>
+															<LineBreak/>
+															<LineBreak/>
+															<Run Text="Tradesman specialization threshold: 5 (instead of 10)"/>
+															<LineBreak/>
+															<Run Text="Craftsman specialization threshold: 5 (instead of 10)"/>
+															<LineBreak/>
+															<Run Text="This means that human progresses these specializations two times faster than other races."/>
+														</TextBlock>
+													</Setter.Value>
+												</Setter>
+											</DataTrigger>
+											
+											<!-- Elf race -->
+											<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroRace.Elf}">
+												<!-- Tooltip -->
+												<Setter Property="ToolTip">
+													<Setter.Value>
+														<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+															<Run Text="Elf race specializes in questing and blessings"/>
+															<LineBreak/>
+															<LineBreak/>
+															<Run Text="Adventurer specialization threshold: 5 (instead of 10)"/>
+															<LineBreak/>
+															<Run Text="Prayer specialization threshold: 5 (instead of 10)"/>
+															<LineBreak/>
+															<Run Text="This means that elf progresses these specializations two times faster than other races."/>
+														</TextBlock>
+													</Setter.Value>
+												</Setter>
+											</DataTrigger>
+
+											<!-- Dwarf race -->
+											<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroRace.Dwarf}">
+												<!-- Tooltip -->
+												<Setter Property="ToolTip">
+													<Setter.Value>
+														<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+															<Run Text="Dwarf race specializes in melting and fighting bosses"/>
+															<LineBreak/>
+															<LineBreak/>
+															<Run Text="Melter specialization threshold: 5 (instead of 10)"/>
+															<LineBreak/>
+															<Run Text="Daredevil specialization threshold: 5 (instead of 10)"/>
+															<LineBreak/>
+															<Run Text="This means that dwarf progresses these specializations two times faster than other races."/>
+														</TextBlock>
+													</Setter.Value>
+												</Setter>
+											</DataTrigger>
+										</Style.Triggers>
 									</Style>
 								</ListView.ItemContainerStyle>
 						</ListView>

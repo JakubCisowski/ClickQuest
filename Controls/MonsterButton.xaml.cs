@@ -110,9 +110,6 @@ namespace ClickQuest.Controls
 			// Check if hero got dungeon key.
 			CheckForDungeonKeyDrop();
 
-			// Increase killing specialization amount (it will update buffs in setter).
-			User.Instance.CurrentHero.Specialization.SpecKillingAmount++;
-
 			_regionPage.StatsFrame.Refresh();
 		}
 
@@ -211,10 +208,13 @@ namespace ClickQuest.Controls
 				{
 					damage *= 2;
 				}
-				// Apply specialization killing buff.
-				damage += User.Instance.CurrentHero.Specialization.SpecKillingBuff;
+				// Apply specialization clicking buff.
+				damage += User.Instance.CurrentHero.Specialization.SpecClickingBuff;
 				// Deal damage to monster.
 				Monster.CurrentHealth -= damage;
+
+				// Increase Clicking specialization.
+				User.Instance.CurrentHero.Specialization.SpecClickingAmount++;
 
 				// Check if monster is dead now.
 				CheckIfMonsterDied();

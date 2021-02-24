@@ -220,8 +220,14 @@ namespace ClickQuest.Pages
 			{
 				damage *= 2;
 			}
+			// Apply specialization clicking buff.
+			damage += User.Instance.CurrentHero.Specialization.SpecClickingBuff;
+
 			// Deal damage to boss.
 			_boss.CurrentHealth -= damage;
+
+			// Increase Clicking specialization.
+			User.Instance.CurrentHero.Specialization.SpecClickingAmount++;
 
 			// Check if boss is dead now.
 			CheckIfBossDied();

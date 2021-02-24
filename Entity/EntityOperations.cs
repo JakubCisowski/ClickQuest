@@ -226,7 +226,7 @@ namespace ClickQuest.Entity
 
 					// Reset Specializations.
 					hero.Specialization.SpecBuyingAmount = 0;
-					hero.Specialization.SpecKillingAmount = 0;
+					hero.Specialization.SpecClickingAmount = 0;
 					hero.Specialization.SpecBlessingAmount = 0;
 					hero.Specialization.SpecCraftingAmount = 0;
 					hero.Specialization.SpecQuestingAmount = 0;

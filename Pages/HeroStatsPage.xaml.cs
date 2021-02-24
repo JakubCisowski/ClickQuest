@@ -454,11 +454,11 @@ namespace ClickQuest.Pages
 			}
 			#endregion
 
-			#region SpecializationKilling
+			#region SpecializationClicking
 			{
 				var nameBlock = new TextBlock()
 				{
-					Name = "SpedKillingName",
+					Name = "SpecClickingName",
 					Text = "Clicker",
 					FontSize = 18,
 					Margin = new Thickness(0, 1, 0, 1)
@@ -466,20 +466,20 @@ namespace ClickQuest.Pages
 
 				var block = new TextBlock()
 				{
-					Name = "SpecKilling",
+					Name = "SpecClicking",
 					FontSize = 18,
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecKillingAmount")
+				Binding binding = new Binding("SpecClickingAmount")
 				{
 					Source = User.Instance.CurrentHero.Specialization
 				};
-				Binding binding2 = new Binding("SpecKillingThreshold")
+				Binding binding2 = new Binding("SpecClickingThreshold")
 				{
 					Source = User.Instance.CurrentHero.Specialization
 				};
-				Binding binding3 = new Binding("SpecKillingBuff")
+				Binding binding3 = new Binding("SpecClickingBuff")
 				{
 					Source = User.Instance.CurrentHero.Specialization
 				};

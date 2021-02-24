@@ -36,11 +36,15 @@
 			</TextBlock>
 
 			<!-- Experience grid -->
-			<Grid>
+			<Grid ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
 				<!-- Experience progress bar -->
-				<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16" materialDesign:TransitionAssist.DisableTransitions="True" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
+				<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16" materialDesign:TransitionAssist.DisableTransitions="True">
+				</ProgressBar>
+
+				<!-- Progress text on experience progress bar -->
+				<TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold" />
 					<!-- Experience progress bar tooltip -->
-					<ProgressBar.ToolTip>
+					<Grid.ToolTip>
 						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
 									<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}" />
@@ -49,11 +53,7 @@
 									<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='To next lvl: \{0\}'}" />
 							</TextBlock>
 						</ToolTip>
-					</ProgressBar.ToolTip>
-				</ProgressBar>
-
-				<!-- Progress text on experience progress bar -->
-				<TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold" />
+					</Grid.ToolTip>
 			</Grid>
 
 			<Separator Height="2" Width="200" Margin="10" />
