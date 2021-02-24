@@ -76,6 +76,9 @@ namespace ClickQuest.Pages
 
 				// Update blacksmith page.
 				(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
+				
+				// Refresh stats frame (for specialization update).
+				(Database.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
 				UpdateBlacksmith();
 
 				// Increase Specialization Melting amount.
@@ -172,6 +175,8 @@ namespace ClickQuest.Pages
 			User.Instance.CurrentHero.RemoveItem(recipe);
 
 			(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
+			// Refresh stats frame (for specialization update).
+			(Database.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
 			UpdateBlacksmith();
 
 			// Increase Specialization Crafting amount.

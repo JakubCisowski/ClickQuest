@@ -280,13 +280,6 @@ namespace ClickQuest.Items
 			// Assign rewards.
 			AssignRewards();
 
-			// Refresh all stats panel bindings.
-			foreach (var page in Database.Pages.Skip(2))
-			{
-				dynamic p = page.Value;
-				p.StatsFrame.Refresh();
-			}
-
 			// Reroll new set of 3 quests.
 			(Database.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
 		}
@@ -353,7 +346,10 @@ namespace ClickQuest.Items
 					blessing.ChangeBuffStatus(true);
 				}
 			}
-			
+
+			// Grant Specialization Questing progress.
+			User.Instance.CurrentHero.Specialization.SpecQuestingAmount++;
+
 			// Refresh all stats and equipment pages (skip 2 pages - MainMenu and HeroCreation, because they don't have an EquipmentFrame).
 			// Alternative to .Skip(2) - try catch and continue the loop if an exception is caught (that is, if EquipmentFrame does not exist).
 			foreach (var page in Database.Pages.Skip(2))

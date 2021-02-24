@@ -161,6 +161,9 @@ namespace ClickQuest.Pages
 
 			// Make TownButton visible.
 			this.TownButton.Visibility = Visibility.Visible;
+
+			// Refresh stats frame (for specialization update).
+			(Database.Pages["DungeonBoss"] as DungeonBossPage).StatsFrame.Refresh();
 		}
 
 		#region Events

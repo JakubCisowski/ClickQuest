@@ -6,17 +6,18 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
-using ControlzEx;
 using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace ClickQuest.Pages
 {
 	public partial class HeroStatsPage : Page
 	{
 		#region Private Fields
+
 		private Hero _hero;
-		#endregion
+
+		#endregion Private Fields
 
 		public HeroStatsPage()
 		{
@@ -71,23 +72,23 @@ namespace ClickQuest.Pages
 
 				for (int i = 0; i < User.Instance.Ingots.Count; i++)
 				{
-					// Generate ingots tooltips.
-					var tooltip = new ToolTip();
-					ToolTipService.SetInitialShowDelay(GoldPanel, 100);
-					ToolTipService.SetShowDuration(GoldPanel, 20000);
-					ControlzEx.ToolTipAssist.SetAutoMove(tooltip, true);
-
-					var block = new TextBlock()
-					{
-						Style = (Style)this.FindResource("ToolTipTextBlockBase")
-					};
-
 					// Ingot panel for icon and amount.
 					var panel = new StackPanel()
 					{
 						Orientation = Orientation.Horizontal,
 						Margin = new Thickness(50, 0, 0, 0),
 						Background = new SolidColorBrush(Colors.Transparent)
+					};
+
+					// Generate ingots tooltips.
+					var tooltip = new ToolTip();
+					ToolTipService.SetInitialShowDelay(panel, 100);
+					ToolTipService.SetShowDuration(panel, 20000);
+					ControlzEx.ToolTipAssist.SetAutoMove(tooltip, true);
+
+					var block = new TextBlock()
+					{
+						Style = (Style)this.FindResource("ToolTipTextBlockBase")
 					};
 
 					// Ingot icon.
@@ -176,23 +177,23 @@ namespace ClickQuest.Pages
 			{
 				for (int i = 0; i < User.Instance.DungeonKeys.Count; i++)
 				{
-					// Generate ingots tooltips.
-					var tooltip = new ToolTip();
-					ToolTipService.SetInitialShowDelay(GoldPanel, 100);
-					ToolTipService.SetShowDuration(GoldPanel, 20000);
-					ControlzEx.ToolTipAssist.SetAutoMove(tooltip, true);
-
-					var block = new TextBlock()
-					{
-						Style = (Style)this.FindResource("ToolTipTextBlockBase")
-					};
-
 					// Ingot panel for icon and amount.
 					var panel = new StackPanel()
 					{
 						Orientation = Orientation.Horizontal,
 						Margin = new Thickness(50, 0, 0, 0),
 						Background = new SolidColorBrush(Colors.Transparent)
+					};
+
+					// Generate ingots tooltips.
+					var tooltip = new ToolTip();
+					ToolTipService.SetInitialShowDelay(panel, 100);
+					ToolTipService.SetShowDuration(panel, 20000);
+					ControlzEx.ToolTipAssist.SetAutoMove(tooltip, true);
+
+					var block = new TextBlock()
+					{
+						Style = (Style)this.FindResource("ToolTipTextBlockBase")
 					};
 
 					// Ingot icon.
@@ -253,7 +254,7 @@ namespace ClickQuest.Pages
 					Binding binding = new Binding("Quantity")
 					{
 						Source = User.Instance.DungeonKeys[i],
-						StringFormat="   {0}"
+						StringFormat = "   {0}"
 					};
 					block2.SetBinding(TextBlock.TextProperty, binding);
 
@@ -266,7 +267,7 @@ namespace ClickQuest.Pages
 					// Set its row and column.
 					Grid.SetColumn(panel, 1);
 					Grid.SetRow(panel, i);
-					
+
 					// Add tooltip to the panel.
 					tooltip.Content = block;
 					panel.ToolTip = tooltip;
@@ -313,6 +314,7 @@ namespace ClickQuest.Pages
 			SpecializationsGrid.Children.Clear();
 
 			#region SpecializationBuying
+
 			{
 				var nameBlock = new TextBlock()
 				{
@@ -329,28 +331,44 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecBuyingAmount")
+				Binding binding = new Binding("SpecBuyingBuff")
 				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding2 = new Binding("SpecBuyingThreshold")
-				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding3 = new Binding("SpecBuyingBuff")
-				{
-					Source = User.Instance.CurrentHero.Specialization
+					Source = User.Instance.CurrentHero.Specialization,
+					StringFormat = " → Shop offer size +{0}"
 				};
 
-				MultiBinding multiBinding = new MultiBinding
-				{
-					StringFormat = " → Shop offer size +{2}"
-				};
-				multiBinding.Bindings.Add(binding);
-				multiBinding.Bindings.Add(binding2);
-				multiBinding.Bindings.Add(binding3);
+				block.SetBinding(TextBlock.TextProperty, binding);
 
-				block.SetBinding(TextBlock.TextProperty, multiBinding);
+				// Generate SpecBuying tooltips.
+				var toolTip = new ToolTip();
+				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
+				ToolTipService.SetShowDuration(GoldPanel, 20000);
+				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
+
+				// Calculate remaining amount to upgrade specialization.
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecBuyingAmount;
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecBuyingThreshold)
+				{
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecBuyingThreshold;
+				}
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecBuyingThreshold - nextUpgrade;
+
+				var toolTipBlock = new TextBlock()
+				{
+					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+				};
+				toolTipBlock.Inlines.Add(new Run("Increases shop offer size (base size is 5)"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run("You can master Tradesman by buying recipes in shop"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run($"Next upgrade (+1 shop offer size) in"));
+				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+				toolTipBlock.Inlines.Add(new Run($"bought recipes"));
+
+				toolTip.Content = toolTipBlock;
+
+				nameBlock.ToolTip = toolTip;
+				block.ToolTip = toolTip;
 
 				Grid.SetRow(nameBlock, 0);
 				Grid.SetRow(block, 0);
@@ -360,9 +378,11 @@ namespace ClickQuest.Pages
 				SpecializationsGrid.Children.Add(nameBlock);
 				SpecializationsGrid.Children.Add(block);
 			}
-			#endregion
+
+			#endregion SpecializationBuying
 
 			#region SpecializationMelting
+
 			{
 				var nameBlock = new TextBlock()
 				{
@@ -379,28 +399,46 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecMeltingAmount")
+				Binding binding = new Binding("SpecMeltingBuff")
 				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding2 = new Binding("SpecMeltingThreshold")
-				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding3 = new Binding("SpecMeltingBuff")
-				{
-					Source = User.Instance.CurrentHero.Specialization
+					Source = Account.User.Instance.CurrentHero.Specialization,
+					StringFormat = " → Extra ingot +{0}%"
 				};
 
-				MultiBinding multiBinding = new MultiBinding
-				{
-					StringFormat = " → Extra ingot +{2}%"
-				};
-				multiBinding.Bindings.Add(binding);
-				multiBinding.Bindings.Add(binding2);
-				multiBinding.Bindings.Add(binding3);
+				block.SetBinding(TextBlock.TextProperty, binding);
 
-				block.SetBinding(TextBlock.TextProperty, multiBinding);
+				// Generate SpecBuying tooltips.
+				var toolTip = new ToolTip();
+				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
+				ToolTipService.SetShowDuration(GoldPanel, 20000);
+				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
+
+				// Calculate remaining amount to upgrade specialization.
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecMeltingAmount;
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecMeltingThreshold)
+				{
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecMeltingThreshold;
+				}
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecMeltingThreshold - nextUpgrade;
+
+				var toolTipBlock = new TextBlock()
+				{
+					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+				};
+				toolTipBlock.Inlines.Add(new Run("Increases % chance to get bonus ingots when melting (base chance is 0%)"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run("You can master Melter by melting materials in Blacksmith"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run("Each 100% guarantees additional ingot"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run($"Next upgrade (+5% chance) in"));
+				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+				toolTipBlock.Inlines.Add(new Run($"melted materials"));
+
+				toolTip.Content = toolTipBlock;
+
+				nameBlock.ToolTip = toolTip;
+				block.ToolTip = toolTip;
 
 				Grid.SetRow(nameBlock, 1);
 				Grid.SetRow(block, 1);
@@ -410,9 +448,11 @@ namespace ClickQuest.Pages
 				SpecializationsGrid.Children.Add(nameBlock);
 				SpecializationsGrid.Children.Add(block);
 			}
-			#endregion
+
+			#endregion SpecializationMelting
 
 			#region SpecializationCrafting
+
 			{
 				var nameBlock = new TextBlock()
 				{
@@ -429,33 +469,44 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecCraftingAmount")
+				Binding binding = new Binding("SpecCraftingText")
 				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding2 = new Binding("SpecCraftingThreshold")
-				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding3 = new Binding("SpecCraftingBuff")
-				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding4 = new Binding("SpecCraftingText")
-				{
-					Source = User.Instance.CurrentHero.Specialization
+					Source = User.Instance.CurrentHero.Specialization,
+					StringFormat = " → Can craft {0} recipes"
 				};
 
-				MultiBinding multiBinding = new MultiBinding
-				{
-					StringFormat = " → Can craft {3} recipes"
-				};
-				multiBinding.Bindings.Add(binding);
-				multiBinding.Bindings.Add(binding2);
-				multiBinding.Bindings.Add(binding3);
-				multiBinding.Bindings.Add(binding4);
+				block.SetBinding(TextBlock.TextProperty, binding);
 
-				block.SetBinding(TextBlock.TextProperty, multiBinding);
+				// Generate SpecBuying tooltips.
+				var toolTip = new ToolTip();
+				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
+				ToolTipService.SetShowDuration(GoldPanel, 20000);
+				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
+
+				// Calculate remaining amount to upgrade specialization.
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecCraftingAmount;
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecCraftingThreshold)
+				{
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecCraftingThreshold;
+				}
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecCraftingThreshold - nextUpgrade;
+
+				var toolTipBlock = new TextBlock()
+				{
+					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+				};
+				toolTipBlock.Inlines.Add(new Run("Increases crafting rarity limit (base limit is Fine rarity)"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run("You can master Craftsman by crafting artifacts in Blacksmith"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run($"Next rarity limit upgrade in"));
+				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+				toolTipBlock.Inlines.Add(new Run($"crafted artifacts"));
+
+				toolTip.Content = toolTipBlock;
+
+				nameBlock.ToolTip = toolTip;
+				block.ToolTip = toolTip;
 
 				Grid.SetRow(nameBlock, 2);
 				Grid.SetRow(block, 2);
@@ -465,9 +516,11 @@ namespace ClickQuest.Pages
 				SpecializationsGrid.Children.Add(nameBlock);
 				SpecializationsGrid.Children.Add(block);
 			}
-			#endregion
+
+			#endregion SpecializationCrafting
 
 			#region SpecializationQuesting
+
 			{
 				var nameBlock = new TextBlock()
 				{
@@ -484,28 +537,44 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecQuestingAmount")
+				Binding binding = new Binding("SpecQuestingBuff")
 				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding2 = new Binding("SpecQuestingThreshold")
-				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding3 = new Binding("SpecQuestingBuff")
-				{
-					Source = User.Instance.CurrentHero.Specialization
+					Source = User.Instance.CurrentHero.Specialization,
+					StringFormat = " → Quest time -{0}%"
 				};
 
-				MultiBinding multiBinding = new MultiBinding
-				{
-					StringFormat = " → Quest time -{2}%"
-				};
-				multiBinding.Bindings.Add(binding);
-				multiBinding.Bindings.Add(binding2);
-				multiBinding.Bindings.Add(binding3);
+				block.SetBinding(TextBlock.TextProperty, binding);
 
-				block.SetBinding(TextBlock.TextProperty, multiBinding);
+				// Generate SpecBuying tooltips.
+				var toolTip = new ToolTip();
+				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
+				ToolTipService.SetShowDuration(GoldPanel, 20000);
+				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
+
+				// Calculate remaining amount to upgrade specialization.
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecQuestingAmount;
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecQuestingThreshold)
+				{
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecQuestingThreshold;
+				}
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecQuestingThreshold - nextUpgrade;
+
+				var toolTipBlock = new TextBlock()
+				{
+					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+				};
+				toolTipBlock.Inlines.Add(new Run("Reduces % time to complete quests (limit is 50%)"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run("You can master Adventurer by completing quests"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run($"Next upgrade (+5% reduced time) in"));
+				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+				toolTipBlock.Inlines.Add(new Run($"completed quests"));
+
+				toolTip.Content = toolTipBlock;
+
+				nameBlock.ToolTip = toolTip;
+				block.ToolTip = toolTip;
 
 				Grid.SetRow(nameBlock, 3);
 				Grid.SetRow(block, 3);
@@ -515,9 +584,11 @@ namespace ClickQuest.Pages
 				SpecializationsGrid.Children.Add(nameBlock);
 				SpecializationsGrid.Children.Add(block);
 			}
-			#endregion
+
+			#endregion SpecializationQuesting
 
 			#region SpecializationClicking
+
 			{
 				var nameBlock = new TextBlock()
 				{
@@ -534,28 +605,46 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecClickingAmount")
+				Binding binding = new Binding("SpecClickingBuff")
 				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding2 = new Binding("SpecClickingThreshold")
-				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding3 = new Binding("SpecClickingBuff")
-				{
-					Source = User.Instance.CurrentHero.Specialization
+					Source = User.Instance.CurrentHero.Specialization,
+					StringFormat = " → Click damage +{0}"
 				};
 
-				MultiBinding multiBinding = new MultiBinding
-				{
-					StringFormat = " → Click damage +{2}"
-				};
-				multiBinding.Bindings.Add(binding);
-				multiBinding.Bindings.Add(binding2);
-				multiBinding.Bindings.Add(binding3);
+				block.SetBinding(TextBlock.TextProperty, binding);
 
-				block.SetBinding(TextBlock.TextProperty, multiBinding);
+				// Generate SpecBuying tooltips.
+				var toolTip = new ToolTip();
+				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
+				ToolTipService.SetShowDuration(GoldPanel, 20000);
+				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
+
+				// Calculate remaining amount to upgrade specialization.
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecClickingAmount;
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecClickingThreshold)
+				{
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecClickingThreshold;
+				}
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecClickingThreshold - nextUpgrade;
+
+				var toolTipBlock = new TextBlock()
+				{
+					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+				};
+				toolTipBlock.Inlines.Add(new Run("Increases click damage"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run("You can master Clicker by clicking on monsters and bosses"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run("Click damage from this specialization is applied after other effects eg. crit"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run($"Next upgrade (+1 click damage) in"));
+				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+				toolTipBlock.Inlines.Add(new Run($"clicks"));
+
+				toolTip.Content = toolTipBlock;
+
+				nameBlock.ToolTip = toolTip;
+				block.ToolTip = toolTip;
 
 				Grid.SetRow(nameBlock, 4);
 				Grid.SetRow(block, 4);
@@ -565,9 +654,11 @@ namespace ClickQuest.Pages
 				SpecializationsGrid.Children.Add(nameBlock);
 				SpecializationsGrid.Children.Add(block);
 			}
-			#endregion
+
+			#endregion SpecializationClicking
 
 			#region SpecializationBlessing
+
 			{
 				var nameBlock = new TextBlock()
 				{
@@ -584,28 +675,44 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecBlessingAmount")
+				Binding binding = new Binding("SpecBlessingBuff")
 				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding2 = new Binding("SpecBlessingThreshold")
-				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding3 = new Binding("SpecBlessingBuff")
-				{
-					Source = User.Instance.CurrentHero.Specialization
+					Source = User.Instance.CurrentHero.Specialization,
+					StringFormat = " → Blessing duration +{0}s"
 				};
 
-				MultiBinding multiBinding = new MultiBinding
-				{
-					StringFormat = " → Blessing duration +{2}s"
-				};
-				multiBinding.Bindings.Add(binding);
-				multiBinding.Bindings.Add(binding2);
-				multiBinding.Bindings.Add(binding3);
+				block.SetBinding(TextBlock.TextProperty, binding);
 
-				block.SetBinding(TextBlock.TextProperty, multiBinding);
+				// Generate SpecBuying tooltips.
+				var toolTip = new ToolTip();
+				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
+				ToolTipService.SetShowDuration(GoldPanel, 20000);
+				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
+
+				// Calculate remaining amount to upgrade specialization.
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecBlessingAmount;
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecBlessingThreshold)
+				{
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecBlessingThreshold;
+				}
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecBlessingThreshold - nextUpgrade;
+
+				var toolTipBlock = new TextBlock()
+				{
+					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+				};
+				toolTipBlock.Inlines.Add(new Run("Increases blessing duration in seconds"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run("You can master Prayer by buying blessings in Priest"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run($"Next upgrade (+15s duration) in"));
+				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+				toolTipBlock.Inlines.Add(new Run($"bought blessings"));
+
+				toolTip.Content = toolTipBlock;
+
+				nameBlock.ToolTip = toolTip;
+				block.ToolTip = toolTip;
 
 				Grid.SetRow(nameBlock, 5);
 				Grid.SetRow(block, 5);
@@ -615,9 +722,11 @@ namespace ClickQuest.Pages
 				SpecializationsGrid.Children.Add(nameBlock);
 				SpecializationsGrid.Children.Add(block);
 			}
-			#endregion
+
+			#endregion SpecializationBlessing
 
 			#region SpecializationDungeon
+
 			{
 				var nameBlock = new TextBlock()
 				{
@@ -634,28 +743,44 @@ namespace ClickQuest.Pages
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				Binding binding = new Binding("SpecDungeonAmount")
+				Binding binding = new Binding("SpecDungeonBuff")
 				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding2 = new Binding("SpecDungeonThreshold")
-				{
-					Source = User.Instance.CurrentHero.Specialization
-				};
-				Binding binding3 = new Binding("SpecDungeonBuff")
-				{
-					Source = User.Instance.CurrentHero.Specialization
+					Source = User.Instance.CurrentHero.Specialization,
+					StringFormat = " → Bossfight timer +{0}s"
 				};
 
-				MultiBinding multiBinding = new MultiBinding
-				{
-					StringFormat = " → Bossfight timer +{2}s"
-				};
-				multiBinding.Bindings.Add(binding);
-				multiBinding.Bindings.Add(binding2);
-				multiBinding.Bindings.Add(binding3);
+				block.SetBinding(TextBlock.TextProperty, binding);
 
-				block.SetBinding(TextBlock.TextProperty, multiBinding);
+				// Generate SpecBuying tooltips.
+				var toolTip = new ToolTip();
+				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
+				ToolTipService.SetShowDuration(GoldPanel, 20000);
+				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
+
+				// Calculate remaining amount to upgrade specialization.
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecDungeonAmount;
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecDungeonThreshold)
+				{
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecDungeonThreshold;
+				}
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecDungeonThreshold - nextUpgrade;
+
+				var toolTipBlock = new TextBlock()
+				{
+					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+				};
+				toolTipBlock.Inlines.Add(new Run("Increases amount of time to defeat boss in seconds (base time is 30s)"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run("You can master Daredevil by buying recipes in shop"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run($"Next upgrade (+1 second) in"));
+				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+				toolTipBlock.Inlines.Add(new Run($"finished dungeons"));
+
+				toolTip.Content = toolTipBlock;
+
+				nameBlock.ToolTip = toolTip;
+				block.ToolTip = toolTip;
 
 				Grid.SetRow(nameBlock, 6);
 				Grid.SetRow(block, 6);
@@ -665,9 +790,10 @@ namespace ClickQuest.Pages
 				SpecializationsGrid.Children.Add(nameBlock);
 				SpecializationsGrid.Children.Add(block);
 			}
-			#endregion
+
+			#endregion SpecializationDungeon
 		}
-	
+
 		private void GenerateTooltips()
 		{
 			// Generate hero info tooltip.
@@ -694,6 +820,7 @@ namespace ClickQuest.Pages
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new LineBreak());
 					break;
+
 				case HeroClass.Venom:
 					block.Inlines.Add(new Run("This class specializes in poisonous clicks that deal additional damage over time"));
 					block.Inlines.Add(new LineBreak());
@@ -717,6 +844,7 @@ namespace ClickQuest.Pages
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new Run("This means that human progresses these specializations two times faster than other races"));
 					break;
+
 				case HeroRace.Elf:
 					block.Inlines.Add(new Run("Elf race specializes in questing and blessings"));
 					block.Inlines.Add(new LineBreak());
@@ -726,6 +854,7 @@ namespace ClickQuest.Pages
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new Run("This means that elf progresses these specializations two times faster than other races"));
 					break;
+
 				case HeroRace.Dwarf:
 					block.Inlines.Add(new Run("Dwarf race specializes in melting and fighting bosses"));
 					block.Inlines.Add(new LineBreak());

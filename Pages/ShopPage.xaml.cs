@@ -74,6 +74,9 @@ namespace ClickQuest.Pages
 				User.Instance.Gold -= recipe.Value;
 
 				(Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
+				
+				// Refresh stats frame (for specialization update).
+				(Database.Pages["Shop"] as ShopPage).StatsFrame.Refresh();
 				UpdateShop();
 
 				// Increase Specialization Buying amount.

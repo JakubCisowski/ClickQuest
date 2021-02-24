@@ -218,6 +218,8 @@ namespace ClickQuest.Controls
 
 				// Check if monster is dead now.
 				CheckIfMonsterDied();
+
+				_regionPage.StatsFrame.Refresh();
 			}
 			else
 			{
