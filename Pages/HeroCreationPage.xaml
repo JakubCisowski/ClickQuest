@@ -167,7 +167,7 @@
 															<LineBreak/>
 															<Run Text="Craftsman specialization threshold: 5 (instead of 10)"/>
 															<LineBreak/>
-															<Run Text="This means that human progresses these specializations two times faster than other races."/>
+															<Run Text="This means that human progresses these specializations two times faster than other races"/>
 														</TextBlock>
 													</Setter.Value>
 												</Setter>
@@ -186,7 +186,7 @@
 															<LineBreak/>
 															<Run Text="Prayer specialization threshold: 5 (instead of 10)"/>
 															<LineBreak/>
-															<Run Text="This means that elf progresses these specializations two times faster than other races."/>
+															<Run Text="This means that elf progresses these specializations two times faster than other races"/>
 														</TextBlock>
 													</Setter.Value>
 												</Setter>
@@ -205,7 +205,7 @@
 															<LineBreak/>
 															<Run Text="Daredevil specialization threshold: 5 (instead of 10)"/>
 															<LineBreak/>
-															<Run Text="This means that dwarf progresses these specializations two times faster than other races."/>
+															<Run Text="This means that dwarf progresses these specializations two times faster than other races"/>
 														</TextBlock>
 													</Setter.Value>
 												</Setter>

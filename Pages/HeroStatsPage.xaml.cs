@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using ControlzEx;
+using System.Windows.Documents;
 
 namespace ClickQuest.Pages
 {
@@ -29,6 +31,7 @@ namespace ClickQuest.Pages
 			GenerateSpecializations();
 			RefreshQuestTimer();
 			RefreshBlessingTimer();
+			GenerateTooltips();
 		}
 
 		private void GenerateGold()
@@ -37,10 +40,26 @@ namespace ClickQuest.Pages
 			Binding binding = new Binding("Gold")
 			{
 				Source = User.Instance,
-				StringFormat = "Gold: {0}"
+				StringFormat = "{0}"
 			};
 
 			GoldBlock.SetBinding(TextBlock.TextProperty, binding);
+
+			// Generate gold tooltip.
+			var tooltip = new ToolTip();
+
+			ToolTipService.SetInitialShowDelay(GoldPanel, 400);
+			ToolTipService.SetShowDuration(GoldPanel, 20000);
+			ControlzEx.ToolTipAssist.SetAutoMove(tooltip, true);
+
+			var block = new TextBlock()
+			{
+				Style = (Style)this.FindResource("ToolTipTextBlockBase"),
+				Text = "Gold"
+			};
+
+			tooltip.Content = block;
+			GoldPanel.ToolTip = tooltip;
 		}
 
 		private void GenerateIngots()
@@ -52,12 +71,26 @@ namespace ClickQuest.Pages
 
 				for (int i = 0; i < User.Instance.Ingots.Count; i++)
 				{
+					// Generate ingots tooltips.
+					var tooltip = new ToolTip();
+					ToolTipService.SetInitialShowDelay(GoldPanel, 100);
+					ToolTipService.SetShowDuration(GoldPanel, 20000);
+					ControlzEx.ToolTipAssist.SetAutoMove(tooltip, true);
+
+					var block = new TextBlock()
+					{
+						Style = (Style)this.FindResource("ToolTipTextBlockBase")
+					};
+
+					// Ingot panel for icon and amount.
 					var panel = new StackPanel()
 					{
 						Orientation = Orientation.Horizontal,
-						Margin = new Thickness(50, 0, 0, 0)
+						Margin = new Thickness(50, 0, 0, 0),
+						Background = new SolidColorBrush(Colors.Transparent)
 					};
 
+					// Ingot icon.
 					var icon = new PackIcon()
 					{
 						Kind = PackIconKind.Gold,
@@ -66,64 +99,72 @@ namespace ClickQuest.Pages
 						VerticalAlignment = VerticalAlignment.Center
 					};
 
+					// Select ingot icon color and tooltip text.
 					switch (i)
 					{
 						case 0:
 							icon.Foreground = new SolidColorBrush(Colors.Gray);
+							block.Text = "General Ingots";
 							break;
 
 						case 1:
 							icon.Foreground = new SolidColorBrush(Colors.Brown);
+							block.Text = "Fine Ingots";
 							break;
 
 						case 2:
 							icon.Foreground = new SolidColorBrush(Colors.Green);
+							block.Text = "Superior Ingots";
 							break;
 
 						case 3:
 							icon.Foreground = new SolidColorBrush(Colors.Blue);
+							block.Text = "Exceptional Ingots";
 							break;
 
 						case 4:
 							icon.Foreground = new SolidColorBrush(Colors.Purple);
+							block.Text = "Mythic Ingots";
 							break;
 
 						case 5:
 							icon.Foreground = new SolidColorBrush(Colors.Gold);
+							block.Text = "Masterwork Ingots";
 							break;
 					}
 
+					// Add ingot icon to the panel.
 					panel.Children.Add(icon);
 
-					var block = new TextBlock()
+					// Create ingot amount textblock.
+					var block2 = new TextBlock()
 					{
 						Name = "Ingot" + i.ToString(),
 						FontSize = 18,
 						VerticalAlignment = VerticalAlignment.Center
 					};
 
+					// Add ingot binding.
 					Binding binding = new Binding("Quantity")
 					{
-						Source = User.Instance.Ingots[i]
-					};
-					// Binding binding2 = new Binding("Rarity");
-					// binding2.Source = Account.User.Instance.Ingots[i];
-
-					MultiBinding multiBinding = new MultiBinding
-					{
+						Source = User.Instance.Ingots[i],
 						StringFormat = "   {0}"
 					};
-					multiBinding.Bindings.Add(binding);
-					// multiBinding.Bindings.Add(binding2);
+					block2.SetBinding(TextBlock.TextProperty, binding);
 
-					block.SetBinding(TextBlock.TextProperty, multiBinding);
+					// Add ingot amount text to the panel.
+					panel.Children.Add(block2);
 
-					panel.Children.Add(block);
-
+					// Add the panel to IngotKey grid.
 					IngotKeyGrid.Children.Add(panel);
 
+					// Set its row and column.
 					Grid.SetColumn(panel, 0);
 					Grid.SetRow(panel, i);
+
+					// Add tooltip to the panel.
+					tooltip.Content = block;
+					panel.ToolTip = tooltip;
 				}
 			}
 		}
@@ -135,12 +176,26 @@ namespace ClickQuest.Pages
 			{
 				for (int i = 0; i < User.Instance.DungeonKeys.Count; i++)
 				{
+					// Generate ingots tooltips.
+					var tooltip = new ToolTip();
+					ToolTipService.SetInitialShowDelay(GoldPanel, 100);
+					ToolTipService.SetShowDuration(GoldPanel, 20000);
+					ControlzEx.ToolTipAssist.SetAutoMove(tooltip, true);
+
+					var block = new TextBlock()
+					{
+						Style = (Style)this.FindResource("ToolTipTextBlockBase")
+					};
+
+					// Ingot panel for icon and amount.
 					var panel = new StackPanel()
 					{
 						Orientation = Orientation.Horizontal,
-						Margin = new Thickness(50, 0, 0, 0)
+						Margin = new Thickness(50, 0, 0, 0),
+						Background = new SolidColorBrush(Colors.Transparent)
 					};
 
+					// Ingot icon.
 					var icon = new PackIcon()
 					{
 						Kind = PackIconKind.Key,
@@ -149,64 +204,72 @@ namespace ClickQuest.Pages
 						VerticalAlignment = VerticalAlignment.Center
 					};
 
+					// Select ingot icon color and tooltip text.
 					switch (i)
 					{
 						case 0:
 							icon.Foreground = new SolidColorBrush(Colors.Gray);
+							block.Text = "General dungeon keys";
 							break;
 
 						case 1:
 							icon.Foreground = new SolidColorBrush(Colors.Brown);
+							block.Text = "Fine dungeon keys";
 							break;
 
 						case 2:
 							icon.Foreground = new SolidColorBrush(Colors.Green);
+							block.Text = "Superior dungeon keys";
 							break;
 
 						case 3:
 							icon.Foreground = new SolidColorBrush(Colors.Blue);
+							block.Text = "Exceptional dungeon keys";
 							break;
 
 						case 4:
 							icon.Foreground = new SolidColorBrush(Colors.Purple);
+							block.Text = "Mythic dungeon keys";
 							break;
 
 						case 5:
 							icon.Foreground = new SolidColorBrush(Colors.Gold);
+							block.Text = "Masterwork dungeon keys";
 							break;
 					}
 
+					// Add dungeon key icon to the panel.
 					panel.Children.Add(icon);
 
-					var block = new TextBlock()
+					// Create dungeon key amount textblock.
+					var block2 = new TextBlock()
 					{
 						Name = "Key" + i.ToString(),
 						FontSize = 18,
 						VerticalAlignment = VerticalAlignment.Center
 					};
 
+					// Add dungeon key binding.
 					Binding binding = new Binding("Quantity")
 					{
-						Source = User.Instance.DungeonKeys[i]
+						Source = User.Instance.DungeonKeys[i],
+						StringFormat="   {0}"
 					};
-					// Binding binding2 = new Binding("Rarity");
-					// binding2.Source = Account.User.Instance.DungeonKeys[i];
+					block2.SetBinding(TextBlock.TextProperty, binding);
 
-					MultiBinding multiBinding = new MultiBinding
-					{
-						StringFormat = "   {0}"
-					};
-					multiBinding.Bindings.Add(binding);
-					// multiBinding.Bindings.Add(binding2);
+					// Add dungeon key amount text to the panel.
+					panel.Children.Add(block2);
 
-					block.SetBinding(TextBlock.TextProperty, multiBinding);
-
-					panel.Children.Add(block);
-
+					// Add the panel to IngotKey grid.
 					IngotKeyGrid.Children.Add(panel);
 
+					// Set its row and column.
 					Grid.SetColumn(panel, 1);
 					Grid.SetRow(panel, i);
+					
+					// Add tooltip to the panel.
+					tooltip.Content = block;
+					panel.ToolTip = tooltip;
 				}
 			}
 		}
@@ -603,6 +666,79 @@ namespace ClickQuest.Pages
 				SpecializationsGrid.Children.Add(block);
 			}
 			#endregion
+		}
+	
+		private void GenerateTooltips()
+		{
+			// Generate hero info tooltip.
+			var tooltip = new ToolTip();
+
+			ToolTipService.SetInitialShowDelay(HeroNameBlock, 400);
+			ToolTipService.SetShowDuration(HeroNameBlock, 20000);
+			ControlzEx.ToolTipAssist.SetAutoMove(tooltip, true);
+
+			var block = new TextBlock()
+			{
+				Style = (Style)this.FindResource("ToolTipTextBlockBase")
+			};
+
+			switch (Account.User.Instance.CurrentHero?.HeroClass)
+			{
+				case HeroClass.Slayer:
+					block.Inlines.Add(new Run("This class specializes in powerful critical clicks that deal double damage"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("Click damage: 2 (+1/lvl)"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("Crit chance: 25% (+0.4%/lvl)"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new LineBreak());
+					break;
+				case HeroClass.Venom:
+					block.Inlines.Add(new Run("This class specializes in poisonous clicks that deal additional damage over time"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("Click damage: 2 (+1/lvl)"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("Poison damage: 1 (+2/lvl) per tick (5 ticks over 2.5s)"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new LineBreak());
+					break;
+			}
+
+			switch (Account.User.Instance.CurrentHero?.HeroRace)
+			{
+				case HeroRace.Human:
+					block.Inlines.Add(new Run("Human race specializes in buying and crafting"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("Tradesman specialization threshold: 5 (instead of 10)"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("Craftsman specialization threshold: 5 (instead of 10)"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("This means that human progresses these specializations two times faster than other races"));
+					break;
+				case HeroRace.Elf:
+					block.Inlines.Add(new Run("Elf race specializes in questing and blessings"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("Adventurer specialization threshold: 5 (instead of 10)"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("Prayer specialization threshold: 5 (instead of 10)"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("This means that elf progresses these specializations two times faster than other races"));
+					break;
+				case HeroRace.Dwarf:
+					block.Inlines.Add(new Run("Dwarf race specializes in melting and fighting bosses"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("Melter specialization threshold: 5 (instead of 10)"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("Daredevil specialization threshold: 5 (instead of 10)"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("This means that dwarf progresses these specializations two times faster than other races"));
+					break;
+			}
+
+			tooltip.Content = block;
+			HeroNameBlock.ToolTip = tooltip;
 		}
 	}
 }

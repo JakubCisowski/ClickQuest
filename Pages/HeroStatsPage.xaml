@@ -36,24 +36,26 @@
 			</TextBlock>
 
 			<!-- Experience grid -->
-			<Grid ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
+			<Grid ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
+				<!-- Experience progress bar tooltip -->
+				<Grid.ToolTip>
+					<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
+						<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}" />
+								<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" />
+								<LineBreak />
+								<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='To next lvl: \{0\}'}" />
+						</TextBlock>
+					</ToolTip>
+				</Grid.ToolTip>
+
 				<!-- Experience progress bar -->
 				<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16" materialDesign:TransitionAssist.DisableTransitions="True">
 				</ProgressBar>
 
 				<!-- Progress text on experience progress bar -->
 				<TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold" />
-					<!-- Experience progress bar tooltip -->
-					<Grid.ToolTip>
-						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
-							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-									<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}" />
-									<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" />
-									<LineBreak />
-									<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='To next lvl: \{0\}'}" />
-							</TextBlock>
-						</ToolTip>
-					</Grid.ToolTip>
+					
 			</Grid>
 
 			<Separator Height="2" Width="200" Margin="10" />
@@ -72,17 +74,19 @@
 				</Grid.ColumnDefinitions>
 				
 				<!-- Click damage panel-->
-				<StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
+				<StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
 					<!-- Click damage info tooltip -->
 					<StackPanel.ToolTip>
 						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
-								<Run Text="Damage you deal with every click on a monster/boss"/>
+								<Run Text="Damage you deal with every click on a monster/boss (doubled when critting)"/>
 								<LineBreak/>
 								<LineBreak/>
-								<Run Text="You can increase damage by: killing monsters (Clicker specialization), using blessings or damage artifacts"/>
+								<Run Text="You can increase damage by: using blessings or damage artifacts"/>
 								<LineBreak/>
 								<Run Text="Also, you get bonus click damage when you level up"/>
+								<LineBreak/>
+								<Run Text="There is also on-hit click damage from Clicker Specialization, but it doesn't get multiplied upon critting"/>
 							</TextBlock>
 						</ToolTip>
 					</StackPanel.ToolTip>
@@ -97,7 +101,7 @@
 				<TextBlock x:Name="ClickDamageBlock" Grid.Row="0" Grid.Column="1" FontSize="18" Margin="3" VerticalAlignment="Center" Text="{Binding Path=ClickDamage}"/>
 
 				<!-- Crit panel -->
-				<StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
+				<StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
 					<!-- Crit info tooltip -->
 					<StackPanel.ToolTip>
 						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
@@ -106,6 +110,8 @@
 								<LineBreak/>
 								<LineBreak/>
 								<Run Text="You can increase crit chance by: using blessings or crit artifacts"/>
+								<LineBreak/>
+								<Run Text="This does not multiply damage from Clicker Specialization"/>
 								<LineBreak/>
 								<Run Text="Also, you get bonus crit chance (+0.4%) when you level up if your class is Slayer"/>
 							</TextBlock>
@@ -122,7 +128,7 @@
 				<TextBlock x:Name="CritChanceBlock" Grid.Row="1" Grid.Column="1" Text="{Binding Path=CritChanceText}" FontSize="18" Margin="3" VerticalAlignment="Center" />
 
 				<!-- Poison damage panel -->
-				<StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
+				<StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
 					<!-- Poison damage tooltip -->
 					<StackPanel.ToolTip>
 						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
@@ -152,7 +158,7 @@
 			<Separator Height="2" Width="200" Margin="10" />
 
 			<!-- Gold panel -->
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+			<StackPanel x:Name="GoldPanel" Orientation="Horizontal" HorizontalAlignment="Center" Background="Transparent">
 				<!-- Gold icon-->
 				<materialDesign:PackIcon Width="22" Height="22" Kind="CheckboxMultipleBlankCircle" Foreground="#FFD700" VerticalAlignment="Center" />
 				<!-- Gold text-->
