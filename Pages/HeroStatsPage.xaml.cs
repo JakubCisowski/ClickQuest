@@ -280,13 +280,41 @@ namespace ClickQuest.Pages
 			// Find quest that is currently being completed.
 			var quest = User.Instance.CurrentHero?.Quests.FirstOrDefault(x => x.EndDate != default(DateTime));
 
+			// Generate Quest tooltips.
+			var toolTip = new ToolTip();
+			ToolTipService.SetInitialShowDelay(QuestDuration, 100);
+			ToolTipService.SetShowDuration(QuestDuration, 20000);
+			ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
+
+			var toolTipBlock = new TextBlock()
+			{
+				Style = (Style)this.FindResource("ToolTipTextBlockBase")
+			};
+
 			if (quest != null)
 			{
 				// Bind its duration to the panel.
 				var binding = new Binding("TicksCountText");
 				binding.Source = quest;
 				QuestDuration.SetBinding(TextBlock.TextProperty, binding);
+
+				// Create quest tooltip
+				toolTipBlock.Inlines.Add(new Run($"{quest.Name}"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run($"{(quest.Rare?"*Rare quest*":"")}"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run($"{quest.Description}"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run($"Class: {quest.HeroClass}"));
 			}
+			else
+			{
+				toolTipBlock.Text="No quest is currently active";
+			}
+
+			toolTip.Content = toolTipBlock;
+			QuestDuration.ToolTip = toolTip;
 		}
 
 		private void RefreshBlessingTimer()
@@ -294,13 +322,38 @@ namespace ClickQuest.Pages
 			// Find blessing that is currently active.
 			var blessing = User.Instance.CurrentHero?.Blessings.FirstOrDefault();
 
+			// Generate Blessing tooltips.
+			var toolTip = new ToolTip();
+			ToolTipService.SetInitialShowDelay(BlessingDuration, 100);
+			ToolTipService.SetShowDuration(BlessingDuration, 20000);
+			ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
+
+			var toolTipBlock = new TextBlock()
+			{
+				Style = (Style)this.FindResource("ToolTipTextBlockBase")
+			};
+
 			if (blessing != null)
 			{
 				// Bind its duration to the panel.
 				var binding = new Binding("DurationText");
 				binding.Source = blessing;
 				BlessingDuration.SetBinding(TextBlock.TextProperty, binding);
+				
+				// Create blessing tooltip
+				toolTipBlock.Inlines.Add(new Run($"{blessing.Name}"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run($"*{blessing.Rarity.ToString()}*"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run($"{blessing.Description}"));
 			}
+			else
+			{
+				toolTipBlock.Text="No blessing is currently active";
+			}
+
+			toolTip.Content = toolTipBlock;
+			BlessingDuration.ToolTip = toolTip;
 		}
 
 		private void GenerateSpecializations()
