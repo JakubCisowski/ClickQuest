@@ -43,7 +43,6 @@ namespace ClickQuest.Pages
 					var toolTip = new ToolTip();
 					ToolTipService.SetInitialShowDelay(border, 100);
 					ToolTipService.SetShowDuration(border, 20000);
-					ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
 
 					var toolTipBlock = new TextBlock()
 					{
@@ -120,7 +119,6 @@ namespace ClickQuest.Pages
 					var toolTip = new ToolTip();
 					ToolTipService.SetInitialShowDelay(border, 100);
 					ToolTipService.SetShowDuration(border, 20000);
-					ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
 
 					var toolTipBlock = new TextBlock()
 					{
@@ -197,7 +195,6 @@ namespace ClickQuest.Pages
 					var toolTip = new ToolTip();
 					ToolTipService.SetInitialShowDelay(border, 100);
 					ToolTipService.SetShowDuration(border, 20000);
-					ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
 
 					var toolTipBlock = new TextBlock()
 					{

@@ -39,7 +39,7 @@
 			<Grid ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
 				<!-- Experience progress bar tooltip -->
 				<Grid.ToolTip>
-					<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
+					<ToolTip>
 						<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
 								<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}" />
 								<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" />
@@ -77,7 +77,7 @@
 				<StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
 					<!-- Click damage info tooltip -->
 					<StackPanel.ToolTip>
-						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
+						<ToolTip>
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
 								<Run Text="Damage you deal with every click on a monster/boss (doubled when critting)"/>
 								<LineBreak/>
@@ -104,7 +104,7 @@
 				<StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
 					<!-- Crit info tooltip -->
 					<StackPanel.ToolTip>
-						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
+						<ToolTip>
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
 								<Run Text="Chance to deal double damage when clicking on a monster/boss"/>
 								<LineBreak/>
@@ -129,7 +129,7 @@
 				<StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
 					<!-- Poison damage tooltip -->
 					<StackPanel.ToolTip>
-						<ToolTip controlzEx:ToolTipAssist.AutoMove="True">
+						<ToolTip>
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
 								<Run Text="Damage over time you deal after every click on a monster/boss"/>
 								<LineBreak/>

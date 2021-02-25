@@ -78,20 +78,22 @@
 									<Setter Property="ToolTipService.InitialShowDelay" Value="100"/>
 									<Setter Property="ToolTip">
 										<Setter.Value>
-											<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-												<Run Text="{Binding Name}"/>
-												<LineBreak/>
-												<Run Text="*"/>
-												<Run Text="{Binding RarityString, Mode=OneWay}"/>
-												<Run Text="*"/>
-												<LineBreak/>
-												<LineBreak/>
-												<Run Text="{Binding Description}"/>
-												<LineBreak/>
-												<Run Text="Value:"/>
-												<Run Text="{Binding Value}"/>
-												<Run Text="gold"/>
-											</TextBlock>
+											<ToolTip>
+												<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+													<Run Text="{Binding Name}"/>
+													<LineBreak/>
+													<Run Text="*"/>
+													<Run Text="{Binding RarityString, Mode=OneWay}"/>
+													<Run Text="*"/>
+													<LineBreak/>
+													<LineBreak/>
+													<Run Text="{Binding Description}"/>
+													<LineBreak/>
+													<Run Text="Value:"/>
+													<Run Text="{Binding Value}"/>
+													<Run Text="gold"/>
+												</TextBlock>
+											</ToolTip>
 										</Setter.Value>
 									</Setter>
 								</Style>
@@ -175,18 +177,20 @@
 									<Setter Property="ToolTipService.InitialShowDelay" Value="100"/>
 									<Setter Property="ToolTip">
 										<Setter.Value>
-											<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-												<Run Text="{Binding Name}"/>
-												<LineBreak/>
-												<Run Text="*"/>
-												<Run Text="{Binding RarityString, Mode=OneWay}"/>
-												<Run Text="*"/>
-												<LineBreak/>
-												<LineBreak/>
-												<Run Text="{Binding Description}"/>
-												<LineBreak/>
-												<Run Text="{Binding RequirementsDescription, Mode=OneWay}"/>
-											</TextBlock>
+											<ToolTip>
+												<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+													<Run Text="{Binding Name}"/>
+													<LineBreak/>
+													<Run Text="*"/>
+													<Run Text="{Binding RarityString, Mode=OneWay}"/>
+													<Run Text="*"/>
+													<LineBreak/>
+													<LineBreak/>
+													<Run Text="{Binding Description}"/>
+													<LineBreak/>
+													<Run Text="{Binding RequirementsDescription, Mode=OneWay}"/>
+												</TextBlock>
+											</ToolTip>
 										</Setter.Value>
 									</Setter>
 								</Style>
@@ -270,18 +274,20 @@
 									<Setter Property="ToolTipService.InitialShowDelay" Value="100"/>
 									<Setter Property="ToolTip">
 										<Setter.Value>
-											<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-												<Run Text="{Binding Name}"/>
-												<LineBreak/>
-												<Run Text="*"/>
-												<Run Text="{Binding RarityString, Mode=OneWay}"/>
-												<Run Text="*"/>
-												<LineBreak/>
-												<LineBreak/>
-												<Run Text="{Binding Description}"/>
-												<LineBreak/>
-												<Run Text="{Binding RequirementsDescription, Mode=OneWay}"/>
-											</TextBlock>
+											<ToolTip>
+												<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+													<Run Text="{Binding Name}"/>
+													<LineBreak/>
+													<Run Text="*"/>
+													<Run Text="{Binding RarityString, Mode=OneWay}"/>
+													<Run Text="*"/>
+													<LineBreak/>
+													<LineBreak/>
+													<Run Text="{Binding Description}"/>
+													<LineBreak/>
+													<Run Text="{Binding RequirementsDescription, Mode=OneWay}"/>
+												</TextBlock>
+											</ToolTip>
 										</Setter.Value>
 									</Setter>
 								</Style>

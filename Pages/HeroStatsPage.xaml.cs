@@ -51,7 +51,6 @@ namespace ClickQuest.Pages
 
 			ToolTipService.SetInitialShowDelay(GoldPanel, 400);
 			ToolTipService.SetShowDuration(GoldPanel, 20000);
-			ControlzEx.ToolTipAssist.SetAutoMove(tooltip, true);
 
 			var block = new TextBlock()
 			{
@@ -84,7 +83,6 @@ namespace ClickQuest.Pages
 					var tooltip = new ToolTip();
 					ToolTipService.SetInitialShowDelay(panel, 100);
 					ToolTipService.SetShowDuration(panel, 20000);
-					ControlzEx.ToolTipAssist.SetAutoMove(tooltip, true);
 
 					var block = new TextBlock()
 					{
@@ -189,7 +187,6 @@ namespace ClickQuest.Pages
 					var tooltip = new ToolTip();
 					ToolTipService.SetInitialShowDelay(panel, 100);
 					ToolTipService.SetShowDuration(panel, 20000);
-					ControlzEx.ToolTipAssist.SetAutoMove(tooltip, true);
 
 					var block = new TextBlock()
 					{
@@ -284,7 +281,6 @@ namespace ClickQuest.Pages
 			var toolTip = new ToolTip();
 			ToolTipService.SetInitialShowDelay(QuestDuration, 100);
 			ToolTipService.SetShowDuration(QuestDuration, 20000);
-			ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
 
 			var toolTipBlock = new TextBlock()
 			{
@@ -326,7 +322,6 @@ namespace ClickQuest.Pages
 			var toolTip = new ToolTip();
 			ToolTipService.SetInitialShowDelay(BlessingDuration, 100);
 			ToolTipService.SetShowDuration(BlessingDuration, 20000);
-			ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
 
 			var toolTipBlock = new TextBlock()
 			{
@@ -396,7 +391,6 @@ namespace ClickQuest.Pages
 				var toolTip = new ToolTip();
 				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
-				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
 
 				// Calculate remaining amount to upgrade specialization.
 				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecBuyingAmount;
@@ -464,7 +458,6 @@ namespace ClickQuest.Pages
 				var toolTip = new ToolTip();
 				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
-				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
 
 				// Calculate remaining amount to upgrade specialization.
 				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecMeltingAmount;
@@ -534,7 +527,6 @@ namespace ClickQuest.Pages
 				var toolTip = new ToolTip();
 				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
-				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
 
 				// Calculate remaining amount to upgrade specialization.
 				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecCraftingAmount;
@@ -602,7 +594,6 @@ namespace ClickQuest.Pages
 				var toolTip = new ToolTip();
 				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
-				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
 
 				// Calculate remaining amount to upgrade specialization.
 				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecQuestingAmount;
@@ -670,7 +661,6 @@ namespace ClickQuest.Pages
 				var toolTip = new ToolTip();
 				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
-				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
 
 				// Calculate remaining amount to upgrade specialization.
 				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecClickingAmount;
@@ -740,7 +730,6 @@ namespace ClickQuest.Pages
 				var toolTip = new ToolTip();
 				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
-				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
 
 				// Calculate remaining amount to upgrade specialization.
 				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecBlessingAmount;
@@ -808,7 +797,6 @@ namespace ClickQuest.Pages
 				var toolTip = new ToolTip();
 				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
-				ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
 
 				// Calculate remaining amount to upgrade specialization.
 				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecDungeonAmount;
@@ -854,7 +842,6 @@ namespace ClickQuest.Pages
 
 			ToolTipService.SetInitialShowDelay(HeroNameBlock, 400);
 			ToolTipService.SetShowDuration(HeroNameBlock, 20000);
-			ControlzEx.ToolTipAssist.SetAutoMove(tooltip, true);
 
 			var block = new TextBlock()
 			{
@@ -929,7 +916,6 @@ namespace ClickQuest.Pages
 
 			ToolTipService.SetInitialShowDelay(ClickDamageBlock, 400);
 			ToolTipService.SetShowDuration(ClickDamageBlock, 20000);
-			ControlzEx.ToolTipAssist.SetAutoMove(tooltipDamage, true);
 
 			var blockDamage = new TextBlock()
 			{
@@ -1032,7 +1018,6 @@ namespace ClickQuest.Pages
 
 			ToolTipService.SetInitialShowDelay(CritChanceBlock, 400);
 			ToolTipService.SetShowDuration(CritChanceBlock, 20000);
-			ControlzEx.ToolTipAssist.SetAutoMove(toolTipCrit, true);
 
 			var blockCrit = new TextBlock()
 			{
@@ -1125,7 +1110,6 @@ namespace ClickQuest.Pages
 
 			ToolTipService.SetInitialShowDelay(PoisonDamageBlock, 400);
 			ToolTipService.SetShowDuration(PoisonDamageBlock, 20000);
-			ControlzEx.ToolTipAssist.SetAutoMove(toolTipPoison, true);
 
 			var blockPoison = new TextBlock()
 			{
