@@ -343,7 +343,7 @@ namespace ClickQuest.Pages
 				// Create blessing tooltip
 				toolTipBlock.Inlines.Add(new Run($"{blessing.Name}"));
 				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"*{blessing.Rarity.ToString()}*"));
+				toolTipBlock.Inlines.Add(new Run($"*{blessing.RarityString}*"));
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(new Run($"{blessing.Description}"));
 			}

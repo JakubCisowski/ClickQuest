@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace ClickQuest.Pages
@@ -24,6 +25,7 @@ namespace ClickQuest.Pages
 			RecipesPanel.Children.Clear();
 			ArtifactsPanel.Children.Clear();
 
+			#region Materials
 			if (User.Instance.CurrentHero?.Materials != null)
 			{
 				foreach (var material in User.Instance.CurrentHero.Materials)
@@ -36,6 +38,30 @@ namespace ClickQuest.Pages
 						Margin = new Thickness(4),
 						Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
 					};
+
+					// Generate Materials tooltips.
+					var toolTip = new ToolTip();
+					ToolTipService.SetInitialShowDelay(border, 100);
+					ToolTipService.SetShowDuration(border, 20000);
+					ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
+
+					var toolTipBlock = new TextBlock()
+					{
+						Style = (Style)this.FindResource("ToolTipTextBlockBase")
+					};
+
+					// Create blessing tooltip
+					toolTipBlock.Inlines.Add(new Run($"{material.Name}"));
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new Run($"* {material.RarityString} *"));
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new Run($"{material.Description}"));
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new Run($"Value: {material.Value} gold"));
+
+					toolTip.Content = toolTipBlock;
+					border.ToolTip = toolTip;
 
 					var grid = new Grid();
 
@@ -74,8 +100,9 @@ namespace ClickQuest.Pages
 					MaterialsPanel.Children.Add(border);
 				}
 			}
+			#endregion
 
-
+			#region Recipes
 			if (User.Instance.CurrentHero?.Recipes != null)
 			{
 				foreach (var recipe in User.Instance.CurrentHero.Recipes)
@@ -88,6 +115,30 @@ namespace ClickQuest.Pages
 						Margin = new Thickness(4),
 						Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
 					};
+
+					// Generate Recipes tooltip.
+					var toolTip = new ToolTip();
+					ToolTipService.SetInitialShowDelay(border, 100);
+					ToolTipService.SetShowDuration(border, 20000);
+					ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
+
+					var toolTipBlock = new TextBlock()
+					{
+						Style = (Style)this.FindResource("ToolTipTextBlockBase")
+					};
+
+					// Create blessing tooltip
+					toolTipBlock.Inlines.Add(new Run($"{recipe.Name}"));
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new Run($"* {recipe.RarityString} *"));
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new Run($"{recipe.Description}"));
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new Run($"{recipe.RequirementsDescription}"));
+
+					toolTip.Content = toolTipBlock;
+					border.ToolTip = toolTip;
 
 					var grid = new Grid();
 
@@ -126,7 +177,9 @@ namespace ClickQuest.Pages
 					RecipesPanel.Children.Add(border);
 				}
 			}
+			#endregion
 
+			#region Artifacts
 			if (User.Instance.CurrentHero?.Artifacts != null)
 			{
 				foreach (var artifact in User.Instance.CurrentHero.Artifacts)
@@ -139,6 +192,29 @@ namespace ClickQuest.Pages
 						Margin = new Thickness(4),
 						Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
 					};
+
+					// Generate Artifact tooltip.
+					var toolTip = new ToolTip();
+					ToolTipService.SetInitialShowDelay(border, 100);
+					ToolTipService.SetShowDuration(border, 20000);
+					ControlzEx.ToolTipAssist.SetAutoMove(toolTip, true);
+
+					var toolTipBlock = new TextBlock()
+					{
+						Style = (Style)this.FindResource("ToolTipTextBlockBase")
+					};
+
+					// Create blessing tooltip
+					toolTipBlock.Inlines.Add(new Run($"{artifact.Name}"));
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new Run($"* {artifact.RarityString} *"));
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new Run($"{artifact.Description}"));
+
+					toolTip.Content = toolTipBlock;
+					border.ToolTip = toolTip;
+
 
 					var grid = new Grid();
 
@@ -177,6 +253,7 @@ namespace ClickQuest.Pages
 					ArtifactsPanel.Children.Add(border);
 				}
 			}
+			#endregion
 
 			// Change ActiveTab to what was selected before.
 			EquipmentTabControl.SelectedIndex = _activeTab;
