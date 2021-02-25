@@ -849,7 +849,7 @@ namespace ClickQuest.Pages
 
 		private void GenerateTooltips()
 		{
-			// Generate hero info tooltip.
+			#region HeroInfoTooltip
 			var tooltip = new ToolTip();
 
 			ToolTipService.SetInitialShowDelay(HeroNameBlock, 400);
@@ -921,6 +921,293 @@ namespace ClickQuest.Pages
 
 			tooltip.Content = block;
 			HeroNameBlock.ToolTip = tooltip;
+			#endregion
+
+			#region StatValueDamageTooltip
+			
+			var tooltipDamage = new ToolTip();
+
+			ToolTipService.SetInitialShowDelay(ClickDamageBlock, 400);
+			ToolTipService.SetShowDuration(ClickDamageBlock, 20000);
+			ControlzEx.ToolTipAssist.SetAutoMove(tooltipDamage, true);
+
+			var blockDamage = new TextBlock()
+			{
+				Style = (Style)this.FindResource("ToolTipTextBlockBase")
+			};
+
+			// ["You deal X damage per click"]
+			var bindingDamageTotal = new Binding("ClickDamage")
+			{
+				Source = User.Instance.CurrentHero
+			};
+			var runDamageTotal = new Run();
+			runDamageTotal.SetBinding(Run.TextProperty,bindingDamageTotal);
+			blockDamage.Inlines.Add("You deal ");
+			blockDamage.Inlines.Add(new Bold(runDamageTotal));
+			blockDamage.Inlines.Add(" damage per click");
+
+			blockDamage.Inlines.Add(new LineBreak());
+			blockDamage.Inlines.Add(new LineBreak());
+
+			// ["Click damage: X (base) + X (X/lvl) = X"]
+			var bindingDamagePerLevel = new Binding("ClickDamagePerLevel")
+			{
+				Source = User.Instance.CurrentHero
+			};
+			var runDamagePerLevel = new Run();
+			runDamagePerLevel.SetBinding(Run.TextProperty,bindingDamagePerLevel);
+			var bindingLevelDamageBonus = new Binding("LevelDamageBonus")
+			{
+				Source = User.Instance.CurrentHero,
+				Mode = BindingMode.OneWay
+			};
+			var runLevelDamageBonus = new Run();
+			runLevelDamageBonus.SetBinding(Run.TextProperty,bindingLevelDamageBonus);
+			var bindingLevelDamageBonusTotal= new Binding("LevelDamageBonusTotal")
+			{
+				Source = User.Instance.CurrentHero,
+				Mode = BindingMode.OneWay
+			};
+			var runLevelDamageBonusTotal = new Run();
+			runLevelDamageBonusTotal.SetBinding(Run.TextProperty,bindingLevelDamageBonusTotal);
+			blockDamage.Inlines.Add("Click damage: ");
+			blockDamage.Inlines.Add(new Bold(new Run("2")));
+			blockDamage.Inlines.Add(new Italic(new Run(" (base)")));
+			blockDamage.Inlines.Add(" + ");
+			blockDamage.Inlines.Add(new Bold(runLevelDamageBonus));
+			blockDamage.Inlines.Add(new Italic(new Run(" (")));
+			blockDamage.Inlines.Add(new Italic(runDamagePerLevel));
+			blockDamage.Inlines.Add(new Italic(new Run("/lvl)")));
+			blockDamage.Inlines.Add(" = ");
+			blockDamage.Inlines.Add(new Bold(runLevelDamageBonusTotal));
+
+
+			blockDamage.Inlines.Add(new LineBreak());
+			
+			// ["BlessingName, damage: X"]
+			if(Account.User.Instance.CurrentHero != null)
+			{
+				if(Account.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.ClickDamage))
+				{
+					var bindingBlessingName = new Binding("Name")
+					{
+						Source = User.Instance.CurrentHero.Blessings[0]
+					};
+					var runBlessingName = new Run();
+					runBlessingName.SetBinding(Run.TextProperty,bindingBlessingName);
+					var bindingBlessingBuff = new Binding("Buff")
+					{
+						Source = User.Instance.CurrentHero.Blessings[0]
+					};
+					var runBlessingBuff = new Run();
+					runBlessingBuff.SetBinding(Run.TextProperty,bindingBlessingBuff);
+					blockDamage.Inlines.Add(new Bold(runBlessingName));
+					blockDamage.Inlines.Add(new Run(", damage: "));
+					blockDamage.Inlines.Add(new Bold(runBlessingBuff));
+				}
+			}
+			var bindingSpecClicking = new Binding("SpecClickingBuff")
+			{
+				Source = User.Instance.CurrentHero?.Specialization
+			};
+			var runSpecClicking = new Run();
+			runSpecClicking.SetBinding(Run.TextProperty,bindingSpecClicking);
+			blockDamage.Inlines.Add(new LineBreak());
+			blockDamage.Inlines.Add(new LineBreak());
+			blockDamage.Inlines.Add(new Run("Damage from artifacts is not displayed here"));
+			blockDamage.Inlines.Add(new LineBreak());
+			blockDamage.Inlines.Add(new Italic(new Run("You also deal ")));
+			blockDamage.Inlines.Add(new Italic(new Bold(runSpecClicking)));
+			blockDamage.Inlines.Add(new Italic(new Run(" on-hit damage from Clicker Specialization, but it doesn't get multiplied upon critting")));
+
+			tooltipDamage.Content = blockDamage;
+			ClickDamageBlock.ToolTip = tooltipDamage;
+
+			#endregion
+
+			#region StatValueCritTooltip
+			
+			var toolTipCrit = new ToolTip();
+
+			ToolTipService.SetInitialShowDelay(CritChanceBlock, 400);
+			ToolTipService.SetShowDuration(CritChanceBlock, 20000);
+			ControlzEx.ToolTipAssist.SetAutoMove(toolTipCrit, true);
+
+			var blockCrit = new TextBlock()
+			{
+				Style = (Style)this.FindResource("ToolTipTextBlockBase")
+			};
+
+			// ["You have X% chance to crit (deal double damage) when clicking"]
+			var bindingCritTotal = new Binding("CritChanceText")
+			{
+				Source = User.Instance.CurrentHero
+			};
+			var runCritTotal = new Run();
+			runCritTotal.SetBinding(Run.TextProperty,bindingCritTotal);
+			blockCrit.Inlines.Add("You have ");
+			blockCrit.Inlines.Add(new Bold(runCritTotal));
+			blockCrit.Inlines.Add(" chance to crit (deal double damage) when clicking");
+
+			blockCrit.Inlines.Add(new LineBreak());
+
+			// Section only for slayer since its the only class with built-in crit bonuses.
+			// ["Crit chance: X (base) + X (X/lvl) = X"]
+			var bindingLevelCritBonus = new Binding("LevelCritBonus")
+			{
+				Source = User.Instance.CurrentHero,
+				Mode = BindingMode.OneWay
+			};
+			var runLevelCritBonus = new Run();
+			runLevelCritBonus.SetBinding(Run.TextProperty,bindingLevelCritBonus);
+			var bindingLevelCritBonusTotal= new Binding("LevelCritBonusTotal")
+			{
+				Source = User.Instance.CurrentHero,
+				Mode = BindingMode.OneWay
+			};
+			var runLevelCritBonusTotal = new Run();
+			runLevelCritBonusTotal.SetBinding(Run.TextProperty,bindingLevelCritBonusTotal);
+			if(User.Instance.CurrentHero != null)
+			{
+				if (User.Instance.CurrentHero.HeroClass == HeroClass.Slayer)
+				{
+					blockCrit.Inlines.Add(new LineBreak());
+					blockCrit.Inlines.Add("Crit chance: ");
+					blockCrit.Inlines.Add(new Bold(new Run("25% ")));
+					blockCrit.Inlines.Add(new Italic(new Run("(base)")));
+					blockCrit.Inlines.Add(new Run(" + "));
+					blockCrit.Inlines.Add(new Bold(runLevelCritBonus));
+					blockCrit.Inlines.Add(new Bold(new Run("%")));
+					blockCrit.Inlines.Add(new Italic(new Run(" (0.4%/lvl)")));
+					blockCrit.Inlines.Add(" = ");
+					blockCrit.Inlines.Add(new Bold(runLevelCritBonusTotal));
+					blockCrit.Inlines.Add(new Bold(new Run("%")));
+					blockCrit.Inlines.Add(new LineBreak());
+				}
+			}
+			
+			// ["BlessingName, damage: X"]
+			if(Account.User.Instance.CurrentHero != null)
+			{
+				if(Account.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.CritChance))
+				{
+					var bindingBlessingName = new Binding("Name")
+					{
+						Source = User.Instance.CurrentHero.Blessings[0]
+					};
+					var runBlessingName = new Run();
+					runBlessingName.SetBinding(Run.TextProperty,bindingBlessingName);
+					var bindingBlessingBuff = new Binding("Buff")
+					{
+						Source = User.Instance.CurrentHero.Blessings[0]
+					};
+					var runBlessingBuff = new Run();
+					runBlessingBuff.SetBinding(Run.TextProperty,bindingBlessingBuff);
+					blockCrit.Inlines.Add(new Bold(runBlessingName));
+					blockCrit.Inlines.Add(new Run(", crit chance: "));
+					blockCrit.Inlines.Add(new Bold(runBlessingBuff));
+					blockCrit.Inlines.Add(new Bold(new Run("%")));
+				}
+			}
+			blockCrit.Inlines.Add(new LineBreak());
+			blockCrit.Inlines.Add(new LineBreak());
+			blockCrit.Inlines.Add(new Run("Crit chance from artifacts is not displayed here"));
+
+			toolTipCrit.Content = blockCrit;
+			CritChanceBlock.ToolTip = toolTipCrit;
+
+			#endregion
+
+			#region StatValuePoisonTooltip
+			
+			var toolTipPoison = new ToolTip();
+
+			ToolTipService.SetInitialShowDelay(PoisonDamageBlock, 400);
+			ToolTipService.SetShowDuration(PoisonDamageBlock, 20000);
+			ControlzEx.ToolTipAssist.SetAutoMove(toolTipPoison, true);
+
+			var blockPoison = new TextBlock()
+			{
+				Style = (Style)this.FindResource("ToolTipTextBlockBase")
+			};
+
+			// ["You deal X bonus poison damage per tick"]
+			var bindingPoisonTotal = new Binding("PoisonDamage")
+			{
+				Source = User.Instance.CurrentHero
+			};
+			var runPoisonTotal = new Run();
+			runPoisonTotal.SetBinding(Run.TextProperty,bindingPoisonTotal);
+			blockPoison.Inlines.Add("You deal ");
+			blockPoison.Inlines.Add(new Bold(runPoisonTotal));
+			blockPoison.Inlines.Add(" bonus poison damage per tick");
+
+			blockPoison.Inlines.Add(new LineBreak());
+			
+			// Section only for Venom since its the only class with built-in poison bonuses.
+			// ["Poison damage: X (base) + X (X/lvl) = X"]
+			var bindingLevelPoisonBonus = new Binding("LevelPoisonBonus")
+			{
+				Source = User.Instance.CurrentHero,
+				Mode = BindingMode.OneWay
+			};
+			var runLevelPoisonBonus = new Run();
+			runLevelPoisonBonus.SetBinding(Run.TextProperty,bindingLevelPoisonBonus);
+			var bindingLevelPoisonBonusTotal= new Binding("LevelPoisonBonusTotal")
+			{
+				Source = User.Instance.CurrentHero,
+				Mode = BindingMode.OneWay
+			};
+			var runLevelPoisonBonusTotal = new Run();
+			runLevelPoisonBonusTotal.SetBinding(Run.TextProperty,bindingLevelPoisonBonusTotal);
+			if(User.Instance.CurrentHero != null)
+			{
+				if (User.Instance.CurrentHero.HeroClass == HeroClass.Venom)
+				{
+					blockPoison.Inlines.Add(new LineBreak());
+					blockPoison.Inlines.Add("Poison damage: ");
+					blockPoison.Inlines.Add(new Bold(new Run("1 ")));
+					blockPoison.Inlines.Add(new Italic(new Run("(base)")));
+					blockPoison.Inlines.Add(new Run(" + "));
+					blockPoison.Inlines.Add(new Bold(runLevelPoisonBonus));
+					blockPoison.Inlines.Add(new Italic(new Run(" (2/lvl)")));
+					blockPoison.Inlines.Add(" = ");
+					blockPoison.Inlines.Add(new Bold(runLevelPoisonBonusTotal));
+					blockPoison.Inlines.Add(new LineBreak());
+				}
+			}
+			
+			// ["BlessingName, damage: X"]
+			if(Account.User.Instance.CurrentHero != null)
+			{
+				if(Account.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.PoisonDamage))
+				{
+					var bindingBlessingName = new Binding("Name")
+					{
+						Source = User.Instance.CurrentHero.Blessings[0]
+					};
+					var runBlessingName = new Run();
+					runBlessingName.SetBinding(Run.TextProperty,bindingBlessingName);
+					var bindingBlessingBuff = new Binding("Buff")
+					{
+						Source = User.Instance.CurrentHero.Blessings[0]
+					};
+					var runBlessingBuff = new Run();
+					runBlessingBuff.SetBinding(Run.TextProperty,bindingBlessingBuff);
+					blockPoison.Inlines.Add(new Bold(runBlessingName));
+					blockPoison.Inlines.Add(new Run(", poison damage: "));
+					blockPoison.Inlines.Add(new Bold(runBlessingBuff));
+				}
+			}
+			blockPoison.Inlines.Add(new LineBreak());
+			blockPoison.Inlines.Add(new LineBreak());
+			blockPoison.Inlines.Add(new Run("Posion damage from artifacts is not displayed here"));
+
+			toolTipPoison.Content = blockPoison;
+			PoisonDamageBlock.ToolTip = toolTipPoison;
+
+			#endregion
 		}
 	}
 }

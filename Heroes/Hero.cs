@@ -305,6 +305,48 @@ namespace ClickQuest.Heroes
 				OnPropertyChanged();
 			}
 		}
+		public int LevelDamageBonus
+		{
+			get
+			{
+				return ClickDamagePerLevel * Level;
+			}
+		}
+		public int LevelDamageBonusTotal
+		{
+			get
+			{
+				return ClickDamagePerLevel * Level + 2;
+			}
+		}
+		public double LevelCritBonus
+		{
+			get
+			{
+				return CritChancePerLevel * Level * 100;
+			}
+		}
+		public double LevelCritBonusTotal
+		{
+			get
+			{
+				return CritChancePerLevel * Level * 100 + 25;
+			}
+		}
+		public int LevelPoisonBonus
+		{
+			get
+			{
+				return PoisonDamagePerLevel * Level;
+			}
+		}
+		public int LevelPoisonBonusTotal
+		{
+			get
+			{
+				return PoisonDamagePerLevel * Level + 1;
+			}
+		}
 
 		#endregion Properties
 

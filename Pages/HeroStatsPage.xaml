@@ -112,8 +112,6 @@
 								<Run Text="You can increase crit chance by: using blessings or crit artifacts"/>
 								<LineBreak/>
 								<Run Text="This does not multiply damage from Clicker Specialization"/>
-								<LineBreak/>
-								<Run Text="Also, you get bonus crit chance (+0.4%) when you level up if your class is Slayer"/>
 							</TextBlock>
 						</ToolTip>
 					</StackPanel.ToolTip>
@@ -139,8 +137,6 @@
 								<LineBreak/>
 								<LineBreak/>
 								<Run Text="You can increase poison damage by: using blessings or poison artifacts"/>
-								<LineBreak/>
-								<Run Text="Also, you get bonus poison damage (+2) when you level up if your class is Venom"/>
 							</TextBlock>
 						</ToolTip>
 					</StackPanel.ToolTip>
