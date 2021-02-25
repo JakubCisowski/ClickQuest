@@ -18,7 +18,8 @@ namespace ClickQuest.Pages
 
 		public void UpdateShop()
 		{
-			ItemsListViewSell.ItemsSource = User.Instance.CurrentHero?.Materials.Cast<Item>().Concat(User.Instance.CurrentHero.Recipes.Cast<Item>());
+			ItemsListViewSellMaterials.ItemsSource = User.Instance.CurrentHero?.Materials;
+			ItemsListViewSellRecipes.ItemsSource = User.Instance.CurrentHero?.Recipes;
 
 			// Calculate shop offer size according to specialization bonus (base bonus: 5).
 			if (User.Instance.CurrentHero != null)
@@ -26,7 +27,8 @@ namespace ClickQuest.Pages
 				ItemsListViewBuy.ItemsSource = Database.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecBuyingBuff);
 			}
 
-			ItemsListViewSell.Items.Refresh();
+			ItemsListViewSellMaterials.Items.Refresh();
+			ItemsListViewSellRecipes.Items.Refresh();
 			ItemsListViewBuy.Items.Refresh();
 		}
 

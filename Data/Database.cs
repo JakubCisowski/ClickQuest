@@ -143,8 +143,8 @@ namespace ClickQuest.Data
 
 				var newRecipe = new Recipe(id, name, rarity, artifactDescription, value, artifactId);
 				newRecipe.MaterialIds = materialIds;
-				newRecipe.UpdateRequirementsDescription();
 				Recipes.Add(newRecipe);
+				newRecipe.UpdateRequirementsDescription();
 			}
 
 			// Check if every recipe components' and artifact's IDs exist.

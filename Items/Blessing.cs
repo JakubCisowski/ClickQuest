@@ -179,14 +179,7 @@ namespace ClickQuest.Items
 		{
 			get
 			{
-				string str = Rarity.ToString() + ' ';
-
-				for (int i = 0; i < (int)Rarity; i++)
-				{
-					str += "✩";
-				}
-
-				return str;
+				return Rarity.ToString();
 			}
 		}
 

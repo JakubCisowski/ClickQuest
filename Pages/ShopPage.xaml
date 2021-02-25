@@ -58,22 +58,137 @@
 
 			<!-- Shop panel -->
 			<TabControl Grid.Row="1" Background="{StaticResource GameBackgroundRegular}" Width="550" Height="550">
-					<!-- Sell tab-->
+					<!-- Sell materials tab-->
 					<TabItem Background="{StaticResource GameBackgroundSecondary}">
 						<!-- Header sell -->
 						<TabItem.Header>
 							<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
-								<materialDesign:PackIcon Kind="AlphaSCircle" Width="20" Height="20" Margin="20,0,0,0"/>
+								<materialDesign:PackIcon Kind="Cog" Width="20" Height="20" Margin="20,0,0,0"/>
 								<TextBlock Text="Sell" FontSize="17" Margin="2,0,0,0"/>
 							</StackPanel>
 						</TabItem.Header>
 
 						<!-- List view sell -->
-						<ListView x:Name="ItemsListViewSell" Margin="10">
+						<ListView x:Name="ItemsListViewSellMaterials" Margin="10">
 							<!-- Styles -->
 							<ListView.ItemContainerStyle>
 								<Style TargetType="ListViewItem">
 									<Setter Property="HorizontalContentAlignment" Value="Center"/>
+									<Setter Property="ToolTipService.ShowDuration" Value="20000"/>
+									<Setter Property="ToolTipService.InitialShowDelay" Value="100"/>
+									<Setter Property="ToolTip">
+										<Setter.Value>
+											<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+												<Run Text="{Binding Name}"/>
+												<LineBreak/>
+												<Run Text="*"/>
+												<Run Text="{Binding RarityString, Mode=OneWay}"/>
+												<Run Text="*"/>
+												<LineBreak/>
+												<LineBreak/>
+												<Run Text="{Binding Description}"/>
+												<LineBreak/>
+												<Run Text="Value:"/>
+												<Run Text="{Binding Value}"/>
+												<Run Text="gold"/>
+											</TextBlock>
+										</Setter.Value>
+									</Setter>
+								</Style>
+							</ListView.ItemContainerStyle>
+
+							<!-- List view -->
+							<ListView.View>
+								<GridView>
+									<!-- Name column-->
+									<GridViewColumn Header="Name" Width="254" DisplayMemberBinding="{Binding Name}">
+										<GridViewColumn.HeaderContainerStyle>
+											<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+												<Setter Property="IsHitTestVisible" Value="False"/>
+												<Setter Property="HorizontalContentAlignment" Value="Center"/>
+												<Setter Property="Padding" Value="1,5,1,5"/>
+											</Style>
+										</GridViewColumn.HeaderContainerStyle>
+									</GridViewColumn>
+
+									<!-- Quantity column-->
+									<GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Quantity}">
+										<GridViewColumn.HeaderContainerStyle>
+											<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+												<Setter Property="IsHitTestVisible" Value="False"/>
+												<Setter Property="HorizontalContentAlignment" Value="Center"/>
+												<Setter Property="Padding" Value="1,5,1,5"/>
+											</Style>
+										</GridViewColumn.HeaderContainerStyle>
+									</GridViewColumn>
+
+									<!-- Value column-->
+									<GridViewColumn Header="Value" Width="100" DisplayMemberBinding="{Binding Value}">
+										<GridViewColumn.HeaderContainerStyle>
+											<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+												<Setter Property="IsHitTestVisible" Value="False"/>
+												<Setter Property="HorizontalContentAlignment" Value="Center"/>
+												<Setter Property="Padding" Value="1,5,1,5"/>
+											</Style>
+										</GridViewColumn.HeaderContainerStyle>
+									</GridViewColumn>
+
+									<!-- Sell column-->
+									<GridViewColumn Width="60">
+										<GridViewColumn.HeaderContainerStyle>
+											<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+												<Setter Property="IsHitTestVisible" Value="False"/>
+												<Setter Property="HorizontalContentAlignment" Value="Center"/>
+												<Setter Property="Padding" Value="1,5,1,5"/>
+											</Style>
+										</GridViewColumn.HeaderContainerStyle>
+
+										<!-- Sell button -->
+										<GridViewColumn.CellTemplate>
+											<DataTemplate>
+												<Button Content="Sell" Click="SellButton_Click" CommandParameter="{Binding}"/>
+											</DataTemplate>
+										</GridViewColumn.CellTemplate>
+									</GridViewColumn>
+								</GridView>
+							</ListView.View>
+						</ListView>
+					</TabItem>
+
+					<!-- Sell recipes tab-->
+					<TabItem Background="{StaticResource GameBackgroundSecondary}">
+						<!-- Header sell -->
+						<TabItem.Header>
+							<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
+								<materialDesign:PackIcon Kind="ScriptText" Width="20" Height="20" Margin="20,0,0,0"/>
+								<TextBlock Text="Sell" FontSize="17" Margin="2,0,0,0"/>
+							</StackPanel>
+						</TabItem.Header>
+
+						<!-- List view sell -->
+						<ListView x:Name="ItemsListViewSellRecipes" Margin="10">
+							<!-- Styles -->
+							<ListView.ItemContainerStyle>
+								<Style TargetType="ListViewItem">
+									<Setter Property="HorizontalContentAlignment" Value="Center"/>
+									<Setter Property="ToolTipService.ShowDuration" Value="20000"/>
+									<Setter Property="ToolTipService.InitialShowDelay" Value="100"/>
+									<Setter Property="ToolTip">
+										<Setter.Value>
+											<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+												<Run Text="{Binding Name}"/>
+												<LineBreak/>
+												<Run Text="*"/>
+												<Run Text="{Binding RarityString, Mode=OneWay}"/>
+												<Run Text="*"/>
+												<LineBreak/>
+												<LineBreak/>
+												<Run Text="{Binding Description}"/>
+												<LineBreak/>
+												<Run Text="{Binding RequirementsDescription, Mode=OneWay}"/>
+											</TextBlock>
+										</Setter.Value>
+									</Setter>
 								</Style>
 							</ListView.ItemContainerStyle>
 
@@ -140,7 +255,7 @@
 						<!-- Header -->
 						<TabItem.Header>
 							<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
-								<materialDesign:PackIcon Kind="AlphaBCircle" Width="20" Height="20" Margin="20,0,0,0"/>
+								<materialDesign:PackIcon Kind="ScriptText" Width="20" Height="20" Margin="20,0,0,0"/>
 								<TextBlock Text="Buy" FontSize="17" Margin="2,0,0,0"/>
 							</StackPanel>
 						</TabItem.Header>
@@ -151,6 +266,24 @@
 							<ListView.ItemContainerStyle>
 								<Style TargetType="ListViewItem">
 									<Setter Property="HorizontalContentAlignment" Value="Center"/>
+									<Setter Property="ToolTipService.ShowDuration" Value="20000"/>
+									<Setter Property="ToolTipService.InitialShowDelay" Value="100"/>
+									<Setter Property="ToolTip">
+										<Setter.Value>
+											<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+												<Run Text="{Binding Name}"/>
+												<LineBreak/>
+												<Run Text="*"/>
+												<Run Text="{Binding RarityString, Mode=OneWay}"/>
+												<Run Text="*"/>
+												<LineBreak/>
+												<LineBreak/>
+												<Run Text="{Binding Description}"/>
+												<LineBreak/>
+												<Run Text="{Binding RequirementsDescription, Mode=OneWay}"/>
+											</TextBlock>
+										</Setter.Value>
+									</Setter>
 								</Style>
 							</ListView.ItemContainerStyle>
 							

@@ -76,6 +76,25 @@
 							<ListView.ItemContainerStyle>
 								<Style TargetType="ListViewItem">
 									<Setter Property="HorizontalContentAlignment" Value="Center"/>
+									<Setter Property="ToolTipService.ShowDuration" Value="20000"/>
+									<Setter Property="ToolTipService.InitialShowDelay" Value="100"/>
+									<Setter Property="ToolTip">
+										<Setter.Value>
+											<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+												<Run Text="{Binding Name}"/>
+												<LineBreak/>
+												<Run Text="*"/>
+												<Run Text="{Binding RarityString, Mode=OneWay}"/>
+												<Run Text="*"/>
+												<LineBreak/>
+												<LineBreak/>
+												<Run Text="{Binding Description}"/>
+												<LineBreak/>
+												<Run Text="Duration:"/>
+												<Run Text="{Binding Duration}"/><Run Text="s"/>
+											</TextBlock>
+										</Setter.Value>
+									</Setter>
 								</Style>
 							</ListView.ItemContainerStyle>
 

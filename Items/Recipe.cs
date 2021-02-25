@@ -45,6 +45,8 @@ namespace ClickQuest.Items
 
 		public void UpdateRequirementsDescription()
 		{
+			MaterialIds = Database.Recipes.FirstOrDefault(x => x.Id == this.Id)?.MaterialIds;
+
 			RequirementsDescription = "Materials required: ";
 
 			foreach (var elem in MaterialIds)

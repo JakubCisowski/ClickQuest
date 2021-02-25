@@ -51,6 +51,15 @@ namespace ClickQuest.Entity
 					Include(x => x.Heroes).ThenInclude(x => x.Blessings).
 					Include(x => x.Ingots).Include(x => x.DungeonKeys).FirstOrDefault();
 				User.Instance = user;
+
+				// Update MaterialIds dictionary and RequirementsDescription for each recipe.
+				foreach (var hero in User.Instance.Heroes)
+				{
+					foreach (var recipe in hero.Recipes)
+					{
+						recipe.UpdateRequirementsDescription();
+					}
+				}
 			}
 		}
 
