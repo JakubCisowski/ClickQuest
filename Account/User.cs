@@ -51,6 +51,7 @@ namespace ClickQuest.Account
 		private List<Ingot> _ingots;
 		private List<DungeonKey> _dungeonKeys;
 		private int _gold;
+		private Achievements _achievements;
 
 		#endregion Private Fields
 
@@ -126,6 +127,19 @@ namespace ClickQuest.Account
 			}
 		}
 
+		public Achievements Achievements
+		{
+			get
+			{
+				return _achievements;
+			}
+			set
+			{
+				_achievements=value;
+				OnPropertyChanged();
+			}
+		}
+
 		#endregion Properties
 
 		public User()
@@ -133,6 +147,7 @@ namespace ClickQuest.Account
 			Heroes = new List<Hero>();
 			Ingots = new List<Ingot>();
 			DungeonKeys = new List<DungeonKey>();
+			Achievements = new Achievements();
 		}
 	}
 }

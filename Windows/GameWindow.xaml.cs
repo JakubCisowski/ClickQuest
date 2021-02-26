@@ -3,6 +3,7 @@ using ClickQuest.Data;
 using ClickQuest.Entity;
 using ClickQuest.Items;
 using ClickQuest.Pages;
+using ClickQuest.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -83,6 +84,11 @@ namespace ClickQuest
 			{
 				this.DragMove();
 			}
+		}
+
+		private void AchievementsButton_Click(object sender, RoutedEventArgs e)
+		{
+			(new AchievementsWindow()).Show();
 		}
 
 		private void ExitButton_Click(object sender, RoutedEventArgs e)

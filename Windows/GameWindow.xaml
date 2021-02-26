@@ -20,6 +20,15 @@
 				<TextBlock x:Name="LocationInfoBlock" Text="{Binding LocationInfo}" FontWeight="DemiBold" FontSize="18" VerticalAlignment="Center" Margin="3"/>
 			</Border>
 
+			<!-- Achievements button-->
+			<Button x:Name="AchievementsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="AchievementsButton_Click"
+				Padding="0" Margin="5,5,40,5">
+				<!-- Exit button icon -->
+				<Button.Content>
+					<materialDesign:PackIcon Kind="Trophy" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Gray" Margin="0" />
+				</Button.Content>
+			</Button>
+
 			<!-- Exit button-->
 			<Button x:Name="ExitButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleDanger}" Click="ExitButton_Click"
 				Padding="0" Margin="5">

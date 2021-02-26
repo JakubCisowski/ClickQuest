@@ -23,7 +23,7 @@
 				</TabItem.Header>
 
 				<!-- ScrollViewer displaying Materials (generated dynamically) -->
-				<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+				<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
 					<StackPanel x:Name="MaterialsPanel">
 					</StackPanel>
 				</ScrollViewer>

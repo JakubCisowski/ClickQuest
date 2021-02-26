@@ -18,24 +18,6 @@ namespace ClickQuest.Account
 		}
 		#endregion
 
-		#region Singleton
-
-		private static Specialization _instance;
-
-		public static Specialization Instance
-		{
-			get
-			{
-				if (_instance is null)
-				{
-					_instance = new Specialization();
-				}
-				return _instance;
-			}
-		}
-
-		#endregion Singleton
-
 		#region Private Fields
 
 		private int specBuyingAmount;

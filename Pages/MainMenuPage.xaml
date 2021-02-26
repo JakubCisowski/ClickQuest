@@ -43,7 +43,7 @@
 				<Button.ToolTip>
 					<ToolTip>
 						<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-							<Run Text="This will remove: heroes (with their equipments), gold, ingots and keys"/>
+							<Run Text="This will remove: heroes (with their equipments), gold, ingots, keys and achievements"/>
 							<LineBreak/>
 							<Run Text="This action is irreversible!"/>
 						</TextBlock>

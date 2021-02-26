@@ -1,0 +1,38 @@
+﻿<Window x:Class="ClickQuest.Windows.AchievementsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClickQuest.Windows"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner" WindowStyle="None" ResizeMode="NoResize" Background="{StaticResource GameBackgroundRegular}"
+        Title="AchievementsWindow" Height="500" Width="600" MouseDown="AchievementsWindow_MouseDown">
+    <Grid>
+        <Border BorderThickness="3" BorderBrush="DarkGray" CornerRadius="3">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="7.5*"/>
+					<RowDefinition Height="1.5*"/>
+				</Grid.RowDefinitions>
+
+				<!-- Window title-->
+				<TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="410" TextAlignment="Center" TextWrapping="Wrap" FontWeight="DemiBold" Text="Achievements" FontSize="24"/>
+
+				<!-- Achievemets list text -->
+				<Border Grid.Row="1" BorderThickness="3" BorderBrush="DarkGray" CornerRadius="3" Width="500">
+					<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+						<StackPanel x:Name="AchievementsList">
+						</StackPanel>
+					</ScrollViewer>
+				</Border>
+
+				<!-- Close button -->
+				<Button x:Name="CloseButton" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="50" Click="CloseButton_Click">
+					<Button.Content>
+						<TextBlock FontSize="18" Text="Close"/>
+					</Button.Content>
+				</Button>
+			</Grid>
+		</Border>
+    </Grid>
+</Window>
