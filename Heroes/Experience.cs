@@ -1,4 +1,6 @@
 using System;
+using ClickQuest.Account;
+using ClickQuest.Windows;
 
 namespace ClickQuest.Heroes
 {
@@ -36,7 +38,13 @@ namespace ClickQuest.Heroes
 
 		public static int CalculateMonsterXpReward(int monsterHp)
 		{
-			return (int)Math.Ceiling(monsterHp / 10d);
+			var experience = (int)Math.Ceiling(monsterHp / 10d);
+			
+			// Increase achievement amount.
+			User.Instance.Achievements.ExperienceGained += experience;
+			AchievementsWindow.Instance.UpdateAchievements();
+			
+			return experience;
 		}
 
 		public static void CheckIfLeveledUp(Hero hero)

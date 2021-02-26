@@ -47,6 +47,7 @@ namespace ClickQuest.Account
 		private int _monstersDefeated;
 
 		// Dungeons
+		private int _dungeonsCompleted;
 		private int _bossesDefeated;
 
 		// Quests
@@ -306,6 +307,18 @@ namespace ClickQuest.Account
 			set 
 			{
 				_monstersDefeated = value;
+				OnPropertyChanged();
+			}
+		}
+		public int DungeonsCompleted 
+		{ 
+			get 
+			{
+				return _dungeonsCompleted;
+			}  
+			set 
+			{
+				_dungeonsCompleted = value;
 				OnPropertyChanged();
 			}
 		}

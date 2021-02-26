@@ -2,6 +2,7 @@ using ClickQuest.Account;
 using ClickQuest.Data;
 using ClickQuest.Enemies;
 using ClickQuest.Heroes;
+using ClickQuest.Windows;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -110,6 +111,10 @@ namespace ClickQuest.Pages
 				_poisonTimer.Stop();
 				_poisonTicks = 0;
 
+				// Increase achievement amount.
+				User.Instance.Achievements.BossesDefeated++;
+				AchievementsWindow.Instance.UpdateAchievements();
+
 				// Reset fight timer.
 				_fightTimer.Stop();
 
@@ -122,7 +127,6 @@ namespace ClickQuest.Pages
 		{
 			// Grant experience based on damage dealt to boss.
 			User.Instance.CurrentHero.Experience += Experience.CalculateMonsterXpReward(_boss.Health - _boss.CurrentHealth);
-
 
 			// Grant boss loot.
 			// 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
@@ -155,6 +159,10 @@ namespace ClickQuest.Pages
 
 			// Increase boss killing specialization amount (it will update buffs in setter).
 			User.Instance.CurrentHero.Specialization.SpecDungeonAmount++;
+
+			// Increase achievement amount.
+			User.Instance.Achievements.DungeonsCompleted++;
+			AchievementsWindow.Instance.UpdateAchievements();
 
 			// Disable clicking on BossButton.
 			BossButton.IsEnabled = false;
@@ -203,6 +211,11 @@ namespace ClickQuest.Pages
 			{
 				int poisonDamage = Account.User.Instance.CurrentHero.PoisonDamage;
 				_poisonTicks++;
+
+				// Increase achievement amount.
+				User.Instance.Achievements.PoisonTicksAmount++;
+				AchievementsWindow.Instance.UpdateAchievements();
+
 				_boss.CurrentHealth -= poisonDamage;
 				// Check if boss is dead now.
 				CheckIfBossDied();
@@ -211,9 +224,13 @@ namespace ClickQuest.Pages
 
 		private void BossButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Reset poison ticks.
-			_poisonTicks = 0;
-			_poisonTimer.Start();
+			// Start PoisonTimer only if hero has any PoisonDamage.
+			if (User.Instance.CurrentHero.PoisonDamage>0)
+			{
+				// Reset poison ticks.
+				_poisonTicks = 0;
+				_poisonTimer.Start();
+			}
 
 			// Calculate damage dealt to boss.
 			int damage = User.Instance.CurrentHero.ClickDamage;
@@ -222,6 +239,10 @@ namespace ClickQuest.Pages
 			if (num <= User.Instance.CurrentHero.CritChance)
 			{
 				damage *= 2;
+				
+				// Increase achievement amount.
+				User.Instance.Achievements.CritsAmount++;
+				AchievementsWindow.Instance.UpdateAchievements();
 			}
 			// Apply specialization clicking buff.
 			damage += User.Instance.CurrentHero.Specialization.SpecClickingBuff;

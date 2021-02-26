@@ -1,6 +1,8 @@
 ﻿using ClickQuest.Data;
 using ClickQuest.Entity;
 using System.Windows;
+using System;
+using ClickQuest.Account;
 
 namespace ClickQuest
 {
@@ -13,6 +15,9 @@ namespace ClickQuest
 			// Load JSONs and Entity.
 			Database.Load();
 			EntityOperations.LoadGame();
+
+			// Save current time as the application's start time (for achievement tracking).
+			User.SessionStartDate = DateTime.Now;
 		}
 	}
 }

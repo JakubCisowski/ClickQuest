@@ -1,5 +1,6 @@
 ﻿using ClickQuest.Account;
 using ClickQuest.Items;
+using ClickQuest.Windows;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -462,6 +463,10 @@ namespace ClickQuest.Heroes
 
 				Recipes.Add(copy);
 				copy.Quantity++;
+
+				// Increase achievement amount.
+				User.Instance.Achievements.RecipesGained++;
+				AchievementsWindow.Instance.UpdateAchievements();
 			}
 			else if (type == typeof(Artifact))
 			{
@@ -481,6 +486,30 @@ namespace ClickQuest.Heroes
 
 				Artifacts.Add(copy);
 				copy.Quantity++;
+
+				// Increase achievement amount.
+				switch(itemToAdd.Rarity)
+				{
+					case Rarity.General:
+						User.Instance.Achievements.GeneralArtifactsGained++;
+						break;
+					case Rarity.Fine:
+						User.Instance.Achievements.FineArtifactsGained++; 
+						break;
+					case Rarity.Superior:
+						User.Instance.Achievements.SuperiorArtifactsGained++;
+						break;
+					case Rarity.Exceptional:
+						User.Instance.Achievements.ExceptionalArtifactsGained++;
+						break;
+					case Rarity.Mythic:
+						User.Instance.Achievements.MythicArtifactsGained++;
+						break;
+					case Rarity.Masterwork:
+						User.Instance.Achievements.MasterworkArtifactsGained++;
+						break;
+				}
+				AchievementsWindow.Instance.UpdateAchievements();
 			}
 			else if (type == typeof(Material))
 			{
@@ -500,6 +529,10 @@ namespace ClickQuest.Heroes
 
 				Materials.Add(copy);
 				copy.Quantity++;
+
+				// Increase achievement amount.
+				User.Instance.Achievements.MaterialsGained++;
+				AchievementsWindow.Instance.UpdateAchievements();
 			}
 		}
 

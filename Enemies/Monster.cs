@@ -1,4 +1,6 @@
+using ClickQuest.Account;
 using ClickQuest.Items;
+using ClickQuest.Windows;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -94,6 +96,13 @@ namespace ClickQuest.Enemies
 			}
 			set
 			{
+				if(_currentHealth - value > 0)
+				{
+					// Increase achievement amount.
+					User.Instance.Achievements.TotalDamageDealt += _currentHealth - value;
+					AchievementsWindow.Instance.UpdateAchievements();
+				}
+
 				_currentHealth = value;
 				CurrentHealthProgress = this.CalculateCurrentHealthProgress();
 				OnPropertyChanged();

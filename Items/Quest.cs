@@ -3,6 +3,7 @@ using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Heroes;
 using ClickQuest.Pages;
+using ClickQuest.Windows;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -293,7 +294,10 @@ namespace ClickQuest.Items
 		{
 			// Inform the user about rewards.
 			AlertBox.Show($"Quest {this.Name} finished.\nRewards granted.", MessageBoxButton.OK);
-			
+
+			// Increase achievement amount.
+			User.Instance.Achievements.QuestsCompleted++;
+
 			// Assign materials.
 			foreach (var materialId in RewardMaterialIds)
 			{
@@ -313,6 +317,30 @@ namespace ClickQuest.Items
 			{
 				var ingot = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == ingotRarity);
 				ingot.Quantity++;
+
+				// Increase achievement amount.
+				switch(ingotRarity)
+				{
+					case Rarity.General:
+						User.Instance.Achievements.GeneralIngotsEarned++;
+						break;
+					case 
+						Rarity.Fine:User.Instance.Achievements.FineIngotsEarned++; 
+						break;
+					case Rarity.Superior:
+						User.Instance.Achievements.SuperiorIngotsEarned++;
+						break;
+					case Rarity.Exceptional:
+						User.Instance.Achievements.ExceptionalIngotsEarned++;
+						break;
+					case Rarity.Mythic:
+						User.Instance.Achievements.MythicIngotsEarned++;
+						break;
+					case Rarity.Masterwork:
+						User.Instance.Achievements.MasterworkIngotsEarned++;
+						break;
+				}
+				AchievementsWindow.Instance.UpdateAchievements();
 			}
 
 			// Start blessings.

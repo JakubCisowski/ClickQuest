@@ -2,6 +2,7 @@ using ClickQuest.Account;
 using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Items;
+using ClickQuest.Windows;
 using System;
 using System.Linq;
 using System.Windows;
@@ -74,6 +75,30 @@ namespace ClickQuest.Pages
 				}
 				ingot.Quantity += ingotAmount;
 
+				// Increase achievement amount.
+				switch(material.Rarity)
+				{
+					case Rarity.General:
+						User.Instance.Achievements.GeneralIngotsEarned += ingotAmount;
+						break;
+					case 
+						Rarity.Fine:User.Instance.Achievements.FineIngotsEarned += ingotAmount; 
+						break;
+					case Rarity.Superior:
+						User.Instance.Achievements.SuperiorIngotsEarned += ingotAmount;
+						break;
+					case Rarity.Exceptional:
+						User.Instance.Achievements.ExceptionalIngotsEarned += ingotAmount;
+						break;
+					case Rarity.Mythic:
+						User.Instance.Achievements.MythicIngotsEarned += ingotAmount;
+						break;
+					case Rarity.Masterwork:
+						User.Instance.Achievements.MasterworkIngotsEarned += ingotAmount;
+						break;
+				}
+				AchievementsWindow.Instance.UpdateAchievements();
+
 				// Update blacksmith page.
 				(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 				
@@ -111,6 +136,30 @@ namespace ClickQuest.Pages
 					}
 				}
 				ingot.Quantity += ingotAmount;
+
+				// Increase achievement amount.
+				switch(artifact.Rarity)
+				{
+					case Rarity.General:
+						User.Instance.Achievements.GeneralIngotsEarned += ingotAmount;
+						break;
+					case 
+						Rarity.Fine:User.Instance.Achievements.FineIngotsEarned += ingotAmount; 
+						break;
+					case Rarity.Superior:
+						User.Instance.Achievements.SuperiorIngotsEarned += ingotAmount;
+						break;
+					case Rarity.Exceptional:
+						User.Instance.Achievements.ExceptionalIngotsEarned += ingotAmount;
+						break;
+					case Rarity.Mythic:
+						User.Instance.Achievements.MythicIngotsEarned += ingotAmount;
+						break;
+					case Rarity.Masterwork:
+						User.Instance.Achievements.MasterworkIngotsEarned += ingotAmount;
+						break;
+				}
+				AchievementsWindow.Instance.UpdateAchievements();
 
 				// Update blacksmith page.
 				(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();

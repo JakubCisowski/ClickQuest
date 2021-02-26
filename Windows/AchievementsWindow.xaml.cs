@@ -18,6 +18,22 @@ namespace ClickQuest.Windows
 {
 	public partial class AchievementsWindow : Window
 	{
+		#region Singleton
+		private static AchievementsWindow _instance;
+		public static AchievementsWindow Instance
+		{
+			get
+			{
+				if (_instance is null)
+				{
+					_instance = new AchievementsWindow();
+				}
+				return _instance;
+			}
+		}
+		
+		#endregion
+		
 		public AchievementsWindow()
 		{
 			InitializeComponent();
@@ -77,6 +93,12 @@ namespace ClickQuest.Windows
 					Text = amount.ToString()
 				};
 
+				if (property.Name == "TotalTimePlayed")
+				{
+					var time = (TimeSpan)amount;
+					amountBlock.Text = $"{Math.Floor(time.TotalHours)}h {time.Minutes}m {time.Seconds}s";
+				}
+
 				grid.Children.Add(nameBlock);
 				grid.Children.Add(amountBlock);
 
@@ -86,5 +108,21 @@ namespace ClickQuest.Windows
 
 			}
 		}
+
+		public new void Show()
+		{
+			_instance.Visibility = Visibility.Visible;
+		}
+
+		#region Events
+
+		private void AchievementsWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			// If the window is closed, keep it open but hide it instead.
+			e.Cancel = true;
+			this.Visibility = Visibility.Hidden;
+		}
+
+		#endregion
 	}
 }

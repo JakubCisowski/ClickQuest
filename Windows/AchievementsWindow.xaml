@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickQuest.Windows"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner" WindowStyle="None" ResizeMode="NoResize" Background="{StaticResource GameBackgroundRegular}"
-        Title="AchievementsWindow" Height="500" Width="600" MouseDown="AchievementsWindow_MouseDown">
+        Title="AchievementsWindow" Height="500" Width="600" MouseDown="AchievementsWindow_MouseDown" Closing="AchievementsWindow_Closing">
     <Grid>
         <Border BorderThickness="3" BorderBrush="DarkGray" CornerRadius="3">
 			<Grid>

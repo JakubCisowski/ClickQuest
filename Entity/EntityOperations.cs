@@ -20,6 +20,7 @@ namespace ClickQuest.Entity
 				user.Heroes = User.Instance.Heroes;
 				user.Ingots = User.Instance.Ingots;
 				user.DungeonKeys = User.Instance.DungeonKeys;
+				user.Achievements = User.Instance.Achievements;
 
 				// Save every equipment, quests, blessings and specializations for each hero.
 				foreach (var heroFromDb in user.Heroes)
@@ -249,6 +250,14 @@ namespace ClickQuest.Entity
 					user.Heroes.RemoveAt(0);
 				}
 				user.Gold = 0;
+
+				// Reset Achievements.
+				var achievements = user.Achievements;
+				var properties = typeof(Achievements).GetProperties();
+				foreach (var property in properties)
+				{
+					property.SetValue(achievements,default);
+				}
 
 				db.SaveChanges();
 			}

@@ -1,5 +1,7 @@
 using ClickQuest.Heroes;
 using ClickQuest.Items;
+using ClickQuest.Windows;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -113,6 +115,7 @@ namespace ClickQuest.Account
 				OnPropertyChanged();
 			}
 		}
+		public static DateTime SessionStartDate{ get; set;}
 
 		public int Gold
 		{
@@ -122,6 +125,19 @@ namespace ClickQuest.Account
 			}
 			set
 			{
+				if(value - _gold > 0)
+				{
+					// Increase achievement amount.
+					Achievements.GoldEarned += value - _gold;
+					AchievementsWindow.Instance.UpdateAchievements();
+				}
+				else
+				{
+					// Increase achievement amount.
+					Achievements.GoldSpent += value - _gold;
+					AchievementsWindow.Instance.UpdateAchievements();
+				}
+				
 				_gold = value;
 				OnPropertyChanged();
 			}

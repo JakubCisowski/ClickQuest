@@ -99,6 +99,9 @@ namespace ClickQuest.Pages
 			{
 				// Later: add price.
 				RerollQuests();
+
+				// Increase achievement amount.
+				User.Instance.Achievements.QuestRerollsAmount++;
 			}
 		}
 

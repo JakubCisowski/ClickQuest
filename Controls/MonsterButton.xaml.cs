@@ -4,6 +4,7 @@ using ClickQuest.Heroes;
 using ClickQuest.Items;
 using ClickQuest.Pages;
 using ClickQuest.Places;
+using ClickQuest.Windows;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -127,6 +128,10 @@ namespace ClickQuest.Controls
 				_poisonTimer.Stop();
 				_poisonTicks = 0;
 
+				// Increase achievement amount.
+				User.Instance.Achievements.MonstersDefeated++;
+				AchievementsWindow.Instance.UpdateAchievements();
+
 				// Grant exp and loot.
 				GrantVictoryBonuses();
 
@@ -185,6 +190,30 @@ namespace ClickQuest.Controls
 				// Add new key to account.
 				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)(i - 1)).Quantity++;
 
+				// Increase achievement amount.
+				switch((Rarity)i - 1)
+				{
+					case Rarity.General:
+						User.Instance.Achievements.GeneralDungeonKeysEarned++;
+						break;
+					case 
+						Rarity.Fine:User.Instance.Achievements.FineDungeonKeysEarned++; 
+						break;
+					case Rarity.Superior:
+						User.Instance.Achievements.SuperiorIngotsEarned++;
+						break;
+					case Rarity.Exceptional:
+						User.Instance.Achievements.ExceptionalDungeonKeysEarned++;
+						break;
+					case Rarity.Mythic:
+						User.Instance.Achievements.MythicDungeonKeysEarned++;
+						break;
+					case Rarity.Masterwork:
+						User.Instance.Achievements.MasterworkDungeonKeysEarned++; 
+						break;
+				}
+				AchievementsWindow.Instance.UpdateAchievements();
+
 				// Display dungeon key drop.
 				_regionPage.TestRewardsBlock.Text += $". You've got a {(Rarity)(i - 1)} Dungeon Key!";
 			}
@@ -196,9 +225,13 @@ namespace ClickQuest.Controls
 			// Check if any quest is currently assigned to this hero (if so, hero can't fight).
 			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
 			{
-				// Reset poison ticks.
-				_poisonTicks = 0;
-				_poisonTimer.Start();
+				// Start PoisonTimer only if hero has any PoisonDamage.
+				if (User.Instance.CurrentHero.PoisonDamage>0)
+				{
+					// Reset poison ticks.
+					_poisonTicks = 0;
+					_poisonTimer.Start();
+				}
 
 				// Calculate damage dealt to monster.
 				int damage = User.Instance.CurrentHero.ClickDamage;
@@ -207,6 +240,10 @@ namespace ClickQuest.Controls
 				if (num <= User.Instance.CurrentHero.CritChance)
 				{
 					damage *= 2;
+
+					// Increase achievement amount.
+					User.Instance.Achievements.CritsAmount++;
+					AchievementsWindow.Instance.UpdateAchievements();
 				}
 				// Apply specialization clicking buff.
 				damage += User.Instance.CurrentHero.Specialization.SpecClickingBuff;
@@ -241,6 +278,11 @@ namespace ClickQuest.Controls
 				int poisonDamage = User.Instance.CurrentHero.PoisonDamage;
 				_poisonTicks++;
 				Monster.CurrentHealth -= poisonDamage;
+
+				// Increase achievement amount.
+				User.Instance.Achievements.PoisonTicksAmount++;
+				AchievementsWindow.Instance.UpdateAchievements();
+
 				// Check if monster is dead now.
 				CheckIfMonsterDied();
 			}
