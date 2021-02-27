@@ -73,7 +73,7 @@ namespace ClickQuest.Windows
 					BorderThickness = new Thickness(0.5),
 					BorderBrush = new SolidColorBrush(Colors.Gray),
 					Padding = new Thickness(6),
-					Margin = new Thickness(4),
+					Margin = new Thickness(1),
 					Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
 				};
 

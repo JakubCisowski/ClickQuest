@@ -69,7 +69,7 @@
 						</TabItem.Header>
 
 						<!-- List view sell -->
-						<ListView x:Name="ItemsListViewSellMaterials" Margin="10">
+						<ListView x:Name="ItemsListViewSellMaterials" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible">
 							<!-- Styles -->
 							<ListView.ItemContainerStyle>
 								<Style TargetType="ListViewItem">
@@ -103,7 +103,7 @@
 							<ListView.View>
 								<GridView>
 									<!-- Name column-->
-									<GridViewColumn Header="Name" Width="254" DisplayMemberBinding="{Binding Name}">
+									<GridViewColumn Header="Name" Width="250" DisplayMemberBinding="{Binding Name}">
 										<GridViewColumn.HeaderContainerStyle>
 											<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 												<Setter Property="IsHitTestVisible" Value="False"/>
@@ -168,7 +168,7 @@
 						</TabItem.Header>
 
 						<!-- List view sell -->
-						<ListView x:Name="ItemsListViewSellRecipes" Margin="10">
+						<ListView x:Name="ItemsListViewSellRecipes" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible">
 							<!-- Styles -->
 							<ListView.ItemContainerStyle>
 								<Style TargetType="ListViewItem">
@@ -200,7 +200,7 @@
 							<ListView.View>
 								<GridView>
 									<!-- Name column-->
-									<GridViewColumn Header="Name" Width="254" DisplayMemberBinding="{Binding Name}">
+									<GridViewColumn Header="Name" Width="250" DisplayMemberBinding="{Binding Name}">
 										<GridViewColumn.HeaderContainerStyle>
 											<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 												<Setter Property="IsHitTestVisible" Value="False"/>
@@ -265,7 +265,7 @@
 						</TabItem.Header>
 
 						<!-- List view buy -->
-						<ListView x:Name="ItemsListViewBuy" Margin="10">
+						<ListView x:Name="ItemsListViewBuy" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible">
 							<!-- Styles -->
 							<ListView.ItemContainerStyle>
 								<Style TargetType="ListViewItem">
@@ -296,7 +296,7 @@
 							<ListView.View>
 								<GridView>
 									<!-- Name column -->
-									<GridViewColumn Header="Name" Width="354" DisplayMemberBinding="{Binding Name}">
+									<GridViewColumn Header="Name" Width="350" DisplayMemberBinding="{Binding Name}">
 										<GridViewColumn.HeaderContainerStyle>
 											<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 												<Setter Property="IsHitTestVisible" Value="False"/>

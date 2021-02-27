@@ -20,7 +20,7 @@
 
 				<!-- Achievemets list text -->
 				<Border Grid.Row="1" BorderThickness="3" BorderBrush="DarkGray" CornerRadius="3" Width="500">
-					<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+					<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
 						<StackPanel x:Name="AchievementsList">
 						</StackPanel>
 					</ScrollViewer>

@@ -358,7 +358,7 @@ namespace ClickQuest.Account
 		{
 			// Base values for each buff.
 			var SpecCraftingBuffBase = 1;
-			var SpecBuyingBuffBase = 5;
+			var SpecBuyingBuffBase = 50;
 			var SpecDungeonBuffBase = 30;
 
 			// Value limits for each buff.
