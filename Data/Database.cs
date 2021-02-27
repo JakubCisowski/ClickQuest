@@ -465,6 +465,8 @@ namespace ClickQuest.Data
 					RewardIngots = ingotRarities
 				};
 
+				newQuest.UpdateRewardsDescription();
+
 				Quests.Add(newQuest);
 			}
 

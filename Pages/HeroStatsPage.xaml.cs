@@ -296,13 +296,19 @@ namespace ClickQuest.Pages
 
 				// Create quest tooltip
 				toolTipBlock.Inlines.Add(new Run($"{quest.Name}"));
+				if (quest.Rare)
+				{
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new Run("*Rare quest*"));
+				}
 				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"{(quest.Rare?"*Rare quest*":"")}"));
+				toolTipBlock.Inlines.Add(new Run($"Class: {quest.HeroClass}"));
+				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(new Run($"{quest.Description}"));
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"Class: {quest.HeroClass}"));
+				toolTipBlock.Inlines.Add(new Run($"{quest.RewardsDescription}"));
 			}
 			else
 			{

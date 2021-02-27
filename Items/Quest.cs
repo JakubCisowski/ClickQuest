@@ -211,6 +211,8 @@ namespace ClickQuest.Items
 				OnPropertyChanged();
 			}
 		}
+		[NotMapped]
+		public string RewardsDescription { get; private set; }
 		#endregion
 
 		public void CopyQuest(Quest quest)
@@ -222,11 +224,113 @@ namespace ClickQuest.Items
 			Name = quest.Name;
 			Duration = quest.Duration;
 			Description = quest.Description;
+			RewardsDescription = quest.RewardsDescription;
 
 			RewardRecipeIds = quest.RewardRecipeIds;
 			RewardMaterialIds = quest.RewardMaterialIds;
 			RewardBlessingIds = quest.RewardBlessingIds;
 			RewardIngots = quest.RewardIngots;
+		}
+
+		public void UpdateRewardsDescription()
+		{
+			RewardsDescription = "Rewards:";
+			
+			#region Blessings
+
+			var counter = 1;
+			var previousId = 0;
+
+			for (int i = 0; i < RewardBlessingIds.Count; i++)
+			{
+				// If reward id stays the same (or it's first id in the list) - increment the counter.
+				if ((i == 0 || previousId == RewardBlessingIds[i]) && (i != RewardBlessingIds.Count - 1))
+				{
+					counter++;
+				}
+				// New reward id / last id in the list - display reward info on the button.
+				else
+				{
+					RewardsDescription += $"\n{counter}x {Database.Blessings.FirstOrDefault(x => x.Id == RewardBlessingIds[i]).Name}";
+					counter = 1;
+				}
+
+				previousId = RewardBlessingIds[i];
+			}
+
+			#endregion Blessings
+
+			#region Materials
+
+			counter = 1;
+			previousId = 0;
+
+			for (int i = 0; i < RewardMaterialIds.Count; i++)
+			{
+				// If reward id stays the same (or it's first id in the list) - increment the counter.
+				if ((i == 0 || previousId == RewardMaterialIds[i]) && (i != RewardMaterialIds.Count - 1))
+				{
+					counter++;
+				}
+				// New reward id / last id in the list - display reward info on the button.
+				else
+				{
+					RewardsDescription += $"\n{counter}x {Database.Materials.FirstOrDefault(x => x.Id == RewardMaterialIds[i]).Name}";
+					counter = 1;
+				}
+
+				previousId = RewardMaterialIds[i];
+			}
+
+			#endregion Materials
+
+			#region Recipes
+
+			counter = 1;
+			previousId = 0;
+
+			for (int i = 0; i < RewardRecipeIds.Count; i++)
+			{
+				// If reward id stays the same (or it's first id in the list) - increment the counter.
+				if ((i == 0 || previousId == RewardRecipeIds[i]) && (i != RewardRecipeIds.Count - 1))
+				{
+					counter++;
+				}
+				// New reward id / last id in the list - display reward info on the button.
+				else
+				{
+					RewardsDescription += $"\n{counter}x {Database.Recipes.FirstOrDefault(x => x.Id == RewardRecipeIds[i]).Name}";
+					counter = 1;
+				}
+
+				previousId = RewardRecipeIds[i];
+			}
+
+			#endregion Recipes
+
+			#region Ingots
+
+			counter = 1;
+			previousId = 0;
+
+			for (int i = 0; i < RewardIngots.Count; i++)
+			{
+				// If reward id stays the same (or it's first id in the list) - increment the counter.
+				if ((i == 0 || previousId == (int)RewardIngots[i]) && (i != RewardIngots.Count - 1))
+				{
+					counter++;
+				}
+				// New reward id / last id in the list - display reward info on the button.
+				else
+				{
+					RewardsDescription += counter > 1 ? $"\n{counter}x {RewardIngots[i].ToString()} Ingots" : $"\n{counter}x {RewardIngots[i].ToString()} Ingot";
+					counter = 1;
+				}
+
+				previousId = (int)RewardIngots[i];
+			}
+
+			#endregion Ingots
 		}
 
 		public void StartQuest()

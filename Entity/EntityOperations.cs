@@ -60,6 +60,11 @@ namespace ClickQuest.Entity
 					{
 						recipe.UpdateRequirementsDescription();
 					}
+
+					foreach (var quest in hero.Quests)
+					{
+						quest.UpdateRewardsDescription();
+					}
 				}
 			}
 		}

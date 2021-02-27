@@ -26,7 +26,7 @@
 			<TextBlock x:Name="QuestDuration" Grid.Row="2" Text="{Binding Path=Duration}" FontSize="20"/>
 
 			<!-- Panel for rewards-->
-			<StackPanel x:Name="QuestRewardsPanel" Grid.Row="3"/>
+			<TextBlock x:Name="QuestRewardsPanel" Grid.Row="3" Text="{Binding Path=RewardsDescription}" FontSize="20"/>
 		</Grid>
 	</Button>
 </UserControl>
