@@ -235,7 +235,7 @@ namespace ClickQuest.Controls
 
 				// Calculate damage dealt to monster.
 				int damage = User.Instance.CurrentHero.ClickDamage;
-				// Calculate crit.
+				// Calculate crit (max 100%).
 				double num = _rng.Next(1, 101) / 100d;
 				if (num <= User.Instance.CurrentHero.CritChance)
 				{

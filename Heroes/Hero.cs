@@ -375,7 +375,8 @@ namespace ClickQuest.Heroes
 					CritChancePerLevel = 0.004;
 					PoisonDamage = 0;
 					PoisonDamagePerLevel = 0;
-					CritChanceText = String.Format("{0:P1}", CritChance);
+					// Make sure displayed crit value is not above 100%.
+					CritChanceText = String.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
 					break;
 
 				case HeroClass.Venom:
@@ -384,7 +385,8 @@ namespace ClickQuest.Heroes
 					CritChancePerLevel = 0;
 					PoisonDamage = 1;
 					PoisonDamagePerLevel = 2;
-					CritChanceText = String.Format("{0:P1}", CritChance);
+					// Make sure displayed crit value is not above 100%.
+					CritChanceText = String.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
 					break;
 			}
 
@@ -412,11 +414,13 @@ namespace ClickQuest.Heroes
 				switch (_heroClass)
 				{
 					case HeroClass.Slayer:
-						CritChanceText = String.Format("{0:P1}", CritChance);
+						// Make sure displayed crit value is not above 100%.
+						CritChanceText = String.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
 						break;
 
 					case HeroClass.Venom:
-						CritChanceText = String.Format("{0:P1}", CritChance);
+						// Make sure displayed crit value is not above 100%.
+						CritChanceText = String.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
 						break;
 				}
 			}
@@ -428,14 +432,16 @@ namespace ClickQuest.Heroes
 					case HeroClass.Slayer:
 						ClickDamage += ClickDamagePerLevel;
 						CritChance += CritChancePerLevel;
-						CritChanceText = String.Format("{0:P1}", CritChance);
+						// Make sure displayed crit value is not above 100%.
+						CritChanceText = String.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
 						
 						break;
 
 					case HeroClass.Venom:
 						ClickDamage += ClickDamagePerLevel;
 						PoisonDamage += PoisonDamagePerLevel;
-						CritChanceText = String.Format("{0:P1}", CritChance);
+						// Make sure displayed crit value is not above 100%.
+						CritChanceText = String.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
 
 						break;
 				}
