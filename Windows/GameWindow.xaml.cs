@@ -75,6 +75,9 @@ namespace ClickQuest
 			// Calculate time spent in game.
 			User.Instance.Achievements.TotalTimePlayed += DateTime.Now - User.SessionStartDate;
 
+			// Calculate time played on CurrentHero.
+			User.Instance.CurrentHero?.UpdateTimePlayed();
+
 			// Pause all blessings.
 			Blessing.PauseBlessings();
 

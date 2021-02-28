@@ -13,7 +13,7 @@ namespace ClickQuest.Items
 {
 	public enum BlessingType
 	{
-		ClickDamage = 0, CritChance, PoisonDamage
+		ClickDamage = 0, CritChance, PoisonDamage, AuraDamage, AuraSpeed
 	}
 
 	public partial class Blessing : INotifyPropertyChanged

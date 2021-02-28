@@ -35,6 +35,7 @@ namespace ClickQuest.Controls
 		private Random _rng = new Random();
 		private RegionPage _regionPage;
 		private DispatcherTimer _poisonTimer;
+		private DispatcherTimer _auraTimer;
 		private int _poisonTicks;
 		#endregion
 
@@ -61,10 +62,14 @@ namespace ClickQuest.Controls
 			_region = region;
 			_regionPage = regionPage;
 
-			// Setup Timer to tick every 0.5s.
+			// Setup PoisonTimer to tick every 0.5s.
 			_poisonTimer = new DispatcherTimer();
 			_poisonTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
 			_poisonTimer.Tick += PoisonTimer_Tick;
+
+			// Setup AuraTimer.
+			_auraTimer = new DispatcherTimer();
+			_auraTimer.Tick+=AuraTimer_Tick;
 
 			SpawnMonster();
 		}
@@ -83,6 +88,15 @@ namespace ClickQuest.Controls
 			// Spawn selected monster.
 			Monster = new Monster(_region.Monsters[i].Monster);
 			this.DataContext = Monster;
+
+			// Start Aura Timer if no quest is active.
+			if (User.Instance.CurrentHero != null)
+			{
+				if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)) && (Application.Current.MainWindow as GameWindow).CurrentFrame.Content is RegionPage regionPage)
+				{
+					StartAuraTimer();
+				}
+			}
 		}
 
 		public void GrantVictoryBonuses()
@@ -114,9 +128,20 @@ namespace ClickQuest.Controls
 			_regionPage.StatsFrame.Refresh();
 		}
 
-		public void StopTimer()
+		public void StopTimers()
 		{
 			_poisonTimer.Stop();
+			_auraTimer.Stop();
+		}
+
+		public void StartAuraTimer()
+		{
+			if (User.Instance.CurrentHero != null)
+			{
+				_auraTimer.Interval = TimeSpan.FromSeconds(1d / User.Instance.CurrentHero.AuraAttackSpeed);
+
+				_auraTimer.Start();
+			}
 		}
 
 		private void CheckIfMonsterDied()
@@ -282,6 +307,22 @@ namespace ClickQuest.Controls
 				// Increase achievement amount.
 				User.Instance.Achievements.PoisonTicksAmount++;
 				AchievementsWindow.Instance.UpdateAchievements();
+
+				// Check if monster is dead now.
+				CheckIfMonsterDied();
+			}
+		}
+
+		private void AuraTimer_Tick(object source, EventArgs e)
+		{
+			if(User.Instance.CurrentHero != null)
+			{
+				int auraDamage = (int)Math.Ceiling(User.Instance.CurrentHero.AuraDamage * Monster.Health);
+				Monster.CurrentHealth -= auraDamage;
+
+				// // Increase achievement amount.
+				// User.Instance.Achievements.PoisonTicksAmount++;
+				// AchievementsWindow.Instance.UpdateAchievements();
 
 				// Check if monster is dead now.
 				CheckIfMonsterDied();

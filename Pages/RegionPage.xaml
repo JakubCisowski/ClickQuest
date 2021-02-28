@@ -34,10 +34,10 @@
 
 			<!-- Region panel-->
 			<StackPanel x:Name="RegionPanel" Orientation="Vertical" VerticalAlignment="Center" Grid.Row="1">
+				<!-- [Here monster button is dynamically generated] -->
+
 				<!-- Rewards debug text(will be deleted) -->
 				<TextBlock x:Name="TestRewardsBlock" />
-
-				<!-- [Here monster button is dynamically generated] -->
 			</StackPanel>
 			
 			<!-- Back to town button -->

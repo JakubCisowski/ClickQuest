@@ -36,14 +36,14 @@ namespace ClickQuest.Heroes
 		private int _poisonDamage;
 		private HeroRace _heroRace;
 		private HeroClass _heroClass;
-		private string _critChanceText;
 		private List<Material> _materials;
 		private List<Recipe> _recipes;
 		private List<Artifact> _artifacts;
 		private List<Quest> _quests;
 		private List<Blessing> _blessings;
 		private Specialization _specialization;
-
+		private double _auraDamage;
+		private double _auraAttackSpeed;
 		// Specialisations/Professions
 
 		#endregion Private Fields
@@ -224,13 +224,9 @@ namespace ClickQuest.Heroes
 		public string CritChanceText
 		{
 			get
-			{
-				return _critChanceText;
-			}
-			set
-			{
-				_critChanceText = value;
-				OnPropertyChanged();
+			{	
+				var critChanceText = string.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
+				return critChanceText[critChanceText.Length - 2] == '0' ? critChanceText.Remove(critChanceText.Length - 3, 2) : critChanceText;
 			}
 		}
 		public List<Material> Materials
@@ -348,6 +344,66 @@ namespace ClickQuest.Heroes
 				return PoisonDamagePerLevel * Level + 1;
 			}
 		}
+		public TimeSpan TimePlayed{ get; set;}
+
+		[NotMapped]
+		public DateTime SessionStartDate{ get; set;}
+		public double AuraDamage
+		{
+			get
+			{
+				return _auraDamage;
+			}
+			set
+			{
+				_auraDamage = value;
+				OnPropertyChanged();
+			}
+		}
+		public double AuraAttackSpeed
+		{
+			get
+			{
+				return _auraAttackSpeed;
+			}
+			set
+			{
+				_auraAttackSpeed = value;
+				OnPropertyChanged();
+			}
+		}
+		public string AuraDamageText
+		{
+			get
+			{
+				var auraDamageText = string.Format("{0:P1}", AuraDamage);
+				return auraDamageText[auraDamageText.Length - 2] == '0' ? auraDamageText.Remove(auraDamageText.Length - 3, 2) : auraDamageText;
+			}
+		}
+		public string AuraDps
+		{
+			get
+			{
+				var auraDps = string.Format("{0:P1}", Math.Round(_auraDamage * _auraAttackSpeed, 1));
+				return auraDps[auraDps.Length - 2] == '0' ? auraDps.Remove(auraDps.Length - 3, 2) : auraDps;
+			}
+		}
+		public double LevelAuraBonus
+		{
+			get
+			{
+				// AuraAttackSpeed per level * Level
+				return 1 * Level;
+			}
+		}
+		public double LevelAuraBonusTotal
+		{
+			get
+			{
+				// AuraAttackSpeed per level * Level + AuraBaseAttackSpeed
+				return 1 * Level + 1;
+			}
+		}
 
 		#endregion Properties
 
@@ -365,6 +421,8 @@ namespace ClickQuest.Heroes
 			Level = 0;
 			Name = heroName;
 			ClickDamagePerLevel = 1;
+			AuraDamage = 0.1;
+			AuraAttackSpeed = 1;
 
 			// Set class specific values.
 			switch (heroClass)
@@ -375,8 +433,6 @@ namespace ClickQuest.Heroes
 					CritChancePerLevel = 0.004;
 					PoisonDamage = 0;
 					PoisonDamagePerLevel = 0;
-					// Make sure displayed crit value is not above 100%.
-					CritChanceText = String.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
 					break;
 
 				case HeroClass.Venom:
@@ -385,8 +441,6 @@ namespace ClickQuest.Heroes
 					CritChancePerLevel = 0;
 					PoisonDamage = 1;
 					PoisonDamagePerLevel = 2;
-					// Make sure displayed crit value is not above 100%.
-					CritChanceText = String.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
 					break;
 			}
 
@@ -406,23 +460,28 @@ namespace ClickQuest.Heroes
 			ExperienceProgress = Heroes.Experience.CalculateXpProgress(this);
 		}
 
+		public void UpdateTimePlayed()
+		{
+			if (SessionStartDate!=default)
+			{
+				TimePlayed+= DateTime.Now - SessionStartDate;
+				SessionStartDate=default(DateTime);
+			}
+		}
+
 		public void GrantLevelUpBonuses()
 		{
 			if (Level == 100)
 			{
-				// Set tooltips once and never set them again after lvl 100.
-				switch (_heroClass)
-				{
-					case HeroClass.Slayer:
-						// Make sure displayed crit value is not above 100%.
-						CritChanceText = String.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
-						break;
+				// // Set tooltips once and never set them again after lvl 100.
+				// switch (_heroClass)
+				// {
+				// 	case HeroClass.Slayer:
+				// 		break;
 
-					case HeroClass.Venom:
-						// Make sure displayed crit value is not above 100%.
-						CritChanceText = String.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
-						break;
-				}
+				// 	case HeroClass.Venom:
+				// 		break;
+				// }
 			}
 			else if (Level < 100)
 			{
@@ -432,16 +491,12 @@ namespace ClickQuest.Heroes
 					case HeroClass.Slayer:
 						ClickDamage += ClickDamagePerLevel;
 						CritChance += CritChancePerLevel;
-						// Make sure displayed crit value is not above 100%.
-						CritChanceText = String.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
 						
 						break;
 
 					case HeroClass.Venom:
 						ClickDamage += ClickDamagePerLevel;
 						PoisonDamage += PoisonDamagePerLevel;
-						// Make sure displayed crit value is not above 100%.
-						CritChanceText = String.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
 
 						break;
 				}

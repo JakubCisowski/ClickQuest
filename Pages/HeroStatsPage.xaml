@@ -66,6 +66,7 @@
 					<RowDefinition Height="*" />
 					<RowDefinition Height="*" />
 					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
 				</Grid.RowDefinitions>
 
 				<Grid.ColumnDefinitions>
@@ -125,7 +126,7 @@
 				</StackPanel>
 
 				<!-- Crit value (binding) -->
-				<TextBlock x:Name="CritChanceBlock" Grid.Row="1" Grid.Column="1" Text="{Binding Path=CritChanceText}" FontSize="18" Margin="3" VerticalAlignment="Center" />
+				<TextBlock x:Name="CritChanceBlock" Grid.Row="1" Grid.Column="1" Text="{Binding Path=CritChanceText, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" />
 
 				<!-- Poison damage panel -->
 				<StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
@@ -151,6 +152,33 @@
 
 				<!-- Poison damage value (binding) -->
 				<TextBlock x:Name="PoisonDamageBlock" Grid.Row="2" Grid.Column="1" Text="{Binding Path=PoisonDamage}" FontSize="18" Margin="3" VerticalAlignment="Center" />
+
+				<!-- Aura panel -->
+				<StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
+					<!-- Aura tooltip -->
+					<StackPanel.ToolTip>
+						<ToolTip>
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
+								<Run Text="Idle damage you deal while fighting monsters (doesn't work in dungeons)"/>
+								<LineBreak/>
+								<Run Text="Damage scales with monster's max health"/>
+								<LineBreak/>
+								<LineBreak/>
+								<Run Text="You can increase Aura DPS by: using blessings or Aura artifacts"/>
+								<LineBreak/>
+								<Run Text="Also, you get bonus Aura DPS when you level up"/>
+							</TextBlock>
+						</ToolTip>
+					</StackPanel.ToolTip>
+					
+					<!-- Aura icon-->
+					<materialDesign:PackIcon Width="22" Height="22" Kind="Brightness5" Foreground="Yellow" VerticalAlignment="Center" />
+					<!-- Aura text-->
+					<TextBlock Text="Aura DPS:" FontSize="18" Margin="3" VerticalAlignment="Center" />
+				</StackPanel>
+
+				<!-- Aura value (binding) -->
+				<TextBlock x:Name="AuraDamageBlock" Grid.Row="3" Grid.Column="1" Text="{Binding Path=AuraDps, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" />
 			</Grid>
 
 			<Separator Height="2" Width="200" Margin="10" />
@@ -208,7 +236,7 @@
 				<!-- [Here specializations info is dyanmically generated] -->
 			</Grid>
 
-			<Separator Height="2" Width="200" Margin="10" />
+			<Separator Height="2" Width="200" Margin="5" />
 
 			<!-- Quests and blessing timers -->
 			<Grid>
@@ -223,7 +251,7 @@
 					<!-- Icon -->
 					<materialDesign:PackIcon Width="30" Height="30" Kind="BookCross" Foreground="Black" HorizontalAlignment="Center" />
 					<!-- Name and timer -->
-					<TextBlock x:Name="BlessingDuration" Text="" TextAlignment="Center" FontSize="18" Margin="0,10,0,0"/>
+					<TextBlock x:Name="BlessingDuration" Text="" TextAlignment="Center" FontSize="18" Margin="0,5,0,0"/>
 				</StackPanel>
 				
 				<Separator Grid.Column="1" Width="170" Height="2" Margin="5">
@@ -237,7 +265,7 @@
 					<!-- Icon -->
 					<materialDesign:PackIcon Width="30" Height="30" Kind="ProgressQuestion" Foreground="Black" HorizontalAlignment="Center"/>
 					<!-- Name and timer -->
-					<TextBlock x:Name="QuestDuration" Text="" TextAlignment="Center" FontSize="18" Margin="0,10,0,0"/>
+					<TextBlock x:Name="QuestDuration" Text="" TextAlignment="Center" FontSize="18" Margin="0,5,0,0"/>
 				</StackPanel>
 
 			</Grid>

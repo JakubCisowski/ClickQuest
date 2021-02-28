@@ -1033,7 +1033,8 @@ namespace ClickQuest.Pages
 			// ["You have X% chance to crit (deal double damage) when clicking"]
 			var bindingCritTotal = new Binding("CritChanceText")
 			{
-				Source = User.Instance.CurrentHero
+				Source = User.Instance.CurrentHero,
+				Mode = BindingMode.OneWay
 			};
 			var runCritTotal = new Run();
 			runCritTotal.SetBinding(Run.TextProperty,bindingCritTotal);
@@ -1196,6 +1197,147 @@ namespace ClickQuest.Pages
 
 			toolTipPoison.Content = blockPoison;
 			PoisonDamageBlock.ToolTip = toolTipPoison;
+
+			#endregion
+		
+			#region StatValueAuraTooltip
+			
+			var tooltipAura = new ToolTip();
+
+			ToolTipService.SetInitialShowDelay(AuraDamageBlock, 400);
+			ToolTipService.SetShowDuration(AuraDamageBlock, 20000);
+
+			var blockAura = new TextBlock()
+			{
+				Style = (Style)this.FindResource("ToolTipTextBlockBase")
+			};
+
+			// ["You deal X% of monster's hp Aura damage per second"]
+			var bindingAuraDpsTotal = new Binding("AuraDps")
+			{
+				Source = User.Instance.CurrentHero,
+				Mode = BindingMode.OneWay
+			};
+			var runAuraDpsTotal = new Run();
+			runAuraDpsTotal.SetBinding(Run.TextProperty,bindingAuraDpsTotal);
+			blockAura.Inlines.Add("You deal ");
+			blockAura.Inlines.Add(new Bold(runAuraDpsTotal));
+			blockAura.Inlines.Add(" of monster's hp Aura damage per second");
+			blockAura.Inlines.Add(new LineBreak());
+
+			// ["Your Aura tick damage is X%; Your Aura tick speed is X/s"]
+			var bindingAuraDamageTotal = new Binding("AuraDamageText")
+			{
+				Source = User.Instance.CurrentHero,
+				Mode = BindingMode.OneWay
+			};
+			var runAuraDamageTotal = new Run();
+			runAuraDamageTotal.SetBinding(Run.TextProperty,bindingAuraDamageTotal);
+			var bindingAuraAttackSpeedTotal = new Binding("AuraAttackSpeed")
+			{
+				Source = User.Instance.CurrentHero
+			};
+			var runAuraAttackSpeedTotal = new Run();
+			runAuraAttackSpeedTotal.SetBinding(Run.TextProperty,bindingAuraAttackSpeedTotal);
+			blockAura.Inlines.Add("Your Aura tick damage is ");
+			blockAura.Inlines.Add(new Bold(runAuraDamageTotal));
+			blockAura.Inlines.Add(new LineBreak());
+			blockAura.Inlines.Add("Your Aura tick speed is ");
+			blockAura.Inlines.Add(new Bold(runAuraAttackSpeedTotal));
+			blockAura.Inlines.Add(new Bold(new Run("/s")));
+			blockAura.Inlines.Add(new LineBreak());
+			blockAura.Inlines.Add(new LineBreak());
+
+			// ["Aura tick damage: X% (base)"]
+			blockAura.Inlines.Add("Aura tick damage: ");
+			blockAura.Inlines.Add(new Bold(new Run("10%")));
+			blockAura.Inlines.Add(new Italic(new Run(" (base)")));
+			
+			blockAura.Inlines.Add(new LineBreak());
+
+			// ["Aura tick speed: X/s (base) + X/s (X/s/lvl) = X/s"]
+			var bindingAuraSpeedLevelBonus = new Binding("LevelAuraBonus")
+			{
+				Source = User.Instance.CurrentHero,
+				Mode = BindingMode.OneWay
+			};
+			var runAuraSpeedLevelBonus = new Run();
+			runAuraSpeedLevelBonus.SetBinding(Run.TextProperty,bindingAuraSpeedLevelBonus);
+			var bindingAuraSpeedLevelBonusTotal = new Binding("LevelAuraBonusTotal")
+			{
+				Source = User.Instance.CurrentHero,
+				Mode = BindingMode.OneWay
+			};
+			var runAuraSpeedLevelBonusTotal = new Run();
+			runAuraSpeedLevelBonusTotal.SetBinding(Run.TextProperty,bindingAuraSpeedLevelBonusTotal);
+			blockAura.Inlines.Add("Aura tick speed: ");
+			blockAura.Inlines.Add(new Bold(new Run("1/s")));
+			blockAura.Inlines.Add(new Italic(new Run(" (base)")));
+			blockAura.Inlines.Add(" + ");
+			blockAura.Inlines.Add(new Bold(runAuraSpeedLevelBonus));
+			blockAura.Inlines.Add(new Bold(new Run("/s")));
+			blockAura.Inlines.Add(new Italic(new Run(" (1/s/lvl)")));
+			blockAura.Inlines.Add(" = ");
+			blockAura.Inlines.Add(new Bold(runAuraSpeedLevelBonusTotal));
+			blockAura.Inlines.Add(new Bold(new Run("/s")));
+			blockAura.Inlines.Add(new LineBreak());
+			
+			// ["BlessingName, tick damage: X%"]
+			if(Account.User.Instance.CurrentHero != null)
+			{
+				if(Account.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.AuraDamage))
+				{
+					var bindingBlessingName = new Binding("Name")
+					{
+						Source = User.Instance.CurrentHero.Blessings[0]
+					};
+					var runBlessingName = new Run();
+					runBlessingName.SetBinding(Run.TextProperty,bindingBlessingName);
+					var bindingBlessingBuff = new Binding("Buff")
+					{
+						Source = User.Instance.CurrentHero.Blessings[0]
+					};
+					var runBlessingBuff = new Run();
+					runBlessingBuff.SetBinding(Run.TextProperty,bindingBlessingBuff);
+					blockAura.Inlines.Add(new Bold(runBlessingName));
+					blockAura.Inlines.Add(new Run(", Aura tick damage: "));
+					blockAura.Inlines.Add(new Bold(runBlessingBuff));
+					blockAura.Inlines.Add(new Run("%"));
+				}
+			}
+
+			blockAura.Inlines.Add(new LineBreak());
+			
+			// ["BlessingName, tick speed: X/s"]
+			if(Account.User.Instance.CurrentHero != null)
+			{
+				if(Account.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.AuraSpeed))
+				{
+					var bindingBlessingName = new Binding("Name")
+					{
+						Source = User.Instance.CurrentHero.Blessings[0]
+					};
+					var runBlessingName = new Run();
+					runBlessingName.SetBinding(Run.TextProperty,bindingBlessingName);
+					var bindingBlessingBuff = new Binding("Buff")
+					{
+						Source = User.Instance.CurrentHero.Blessings[0]
+					};
+					var runBlessingBuff = new Run();
+					runBlessingBuff.SetBinding(Run.TextProperty,bindingBlessingBuff);
+					blockAura.Inlines.Add(new Bold(runBlessingName));
+					blockAura.Inlines.Add(new Run(", Aura tick speed: "));
+					blockAura.Inlines.Add(new Bold(runBlessingBuff));
+					blockAura.Inlines.Add(new Run("/s"));
+				}
+			}
+
+			blockAura.Inlines.Add(new LineBreak());
+			blockAura.Inlines.Add(new LineBreak());
+			blockAura.Inlines.Add(new Run("Aura tick damage and speed from artifacts is not displayed here"));
+
+			tooltipAura.Content = blockAura;
+			AuraDamageBlock.ToolTip = tooltipAura;
 
 			#endregion
 		}

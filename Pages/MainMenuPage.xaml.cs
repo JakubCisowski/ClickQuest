@@ -83,8 +83,11 @@ namespace ClickQuest.Pages
 				var bold = new Bold(new Run(hero.Name));
 				block.Inlines.Add(bold);
 
-				var normal = new Run($"\n{hero.Level} lvl | {hero.HeroClass}");
+				var normal = new Run($"\n{hero.Level} lvl | {hero.HeroClass} | ");
 				block.Inlines.Add(normal);
+
+				// Add time played.
+				block.Inlines.Add(new Italic(new Run($"{Math.Floor(hero.TimePlayed.TotalHours)}h {hero.TimePlayed.Minutes}m")));
 
 				selectHeroButton.Content = block;
 
@@ -177,6 +180,9 @@ namespace ClickQuest.Pages
 
 			// Resume blessings for dis hero (it resumes only for current hero).
 			Blessing.ResumeBlessings();
+
+			// Set hero session start date.
+			hero.SessionStartDate = DateTime.Now;
 
 			// Refresh pages, move to town and change location text.
 			Database.RefreshPages();

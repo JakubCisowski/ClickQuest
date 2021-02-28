@@ -33,6 +33,7 @@ namespace ClickQuest.Entity
 					heroFromDb.Specialization = heroFromApp.Specialization;
 					heroFromDb.Quests = heroFromApp.Quests;
 					heroFromDb.Blessings = heroFromApp.Blessings;
+					heroFromDb.TimePlayed = heroFromApp.TimePlayed;
 				}
 
 				db.Users.Update(user);

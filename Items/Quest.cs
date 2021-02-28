@@ -387,6 +387,19 @@ namespace ClickQuest.Items
 
 			// Reroll new set of 3 quests.
 			(Database.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
+
+			// Start AuraTimer if user is on RegionPage.
+			if ((Application.Current.MainWindow as GameWindow).CurrentFrame.Content is RegionPage regionPage)
+			{
+				foreach (var ctrl in regionPage.RegionPanel.Children)
+				{
+					if (ctrl is MonsterButton monsterButton)
+					{
+						monsterButton.StartAuraTimer();
+						break;
+					}
+				}
+			}
 		}
 
 		public void PauseTimer()

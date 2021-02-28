@@ -86,6 +86,9 @@ namespace ClickQuest.Pages
 				// Refresh bindings.
 				Database.RefreshPages();
 
+				// Set hero session start date.
+				hero.SessionStartDate = DateTime.Now;
+
 				// Go to Town.
 				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
 				(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();

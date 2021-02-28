@@ -64,6 +64,18 @@ namespace ClickQuest.Pages
 				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages[regionName]);
 				(Database.Pages[regionName] as RegionPage).StatsFrame.Refresh();
 				(Database.Pages[regionName] as RegionPage).EquipmentFrame.Refresh();
+				// Start AuraTimer if no quest is active.
+				if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
+				{
+					foreach (var ctrl in ((Database.Pages[regionName] as RegionPage).RegionPanel.Children))
+					{
+						if (ctrl is MonsterButton monsterButton)
+						{
+							monsterButton.StartAuraTimer();
+							break;
+						}
+					}
+				}
 				(Window.GetWindow(this) as GameWindow).LocationInfo = $"{regionName}";
 			}
 			// Else display a warning.
@@ -92,6 +104,9 @@ namespace ClickQuest.Pages
 
 			// Pause all quest timers (so that quest doesn't finish while current hero is not selected).
 			User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate == default(DateTime))?.PauseTimer();
+
+			// Calculate time played on that hero.
+			User.Instance.CurrentHero.UpdateTimePlayed();
 
 			// Set current hero to null.
 			User.Instance.CurrentHero = null;
