@@ -31,6 +31,17 @@
 
 			<SolidColorBrush  x:Key="ButtonDangerBrush" Color="#FFD3D3"/>
 			<SolidColorBrush  x:Key="ButtonDangerBrushHover" Color="#FF0000"/>
+
+			<SolidColorBrush  x:Key="ColorRarity0" Color="#8C8C8C"/> <!-- General - Gray -->
+			<SolidColorBrush  x:Key="ColorRarity1" Color="#D79E4B"/> <!-- Fine - Light brown -->
+			<SolidColorBrush  x:Key="ColorRarity2" Color="#61B05A"/> <!-- Superior - Green -->
+			<SolidColorBrush  x:Key="ColorRarity3" Color="#508CDA"/> <!-- Exceptional - Blue -->
+			<SolidColorBrush  x:Key="ColorRarity4" Color="#A950DA"/> <!-- Mythic - Purple -->
+			<SolidColorBrush  x:Key="ColorRarity5" Color="#E9DB50"/> <!-- Masterwork - Gold -->
+
+			<SolidColorBrush  x:Key="ColorQuestRare" Color="#FFA237"/> <!-- Rare quest - Orange? -->
+
+			<SolidColorBrush  x:Key="ToolTipBackground" Color="Black" Opacity="0.7"/>
 				
 			<!-- Custom global styles -->
 			<Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}"></Style>
@@ -52,8 +63,8 @@
 			</Style>
 
 			<Style TargetType="ToolTip" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="Gray"/>
-				<Setter Property="Opacity" Value="0.9"/>
+				<Setter Property="Background" Value="{StaticResource ToolTipBackground}"/>
+				<!-- <Setter Property="Opacity" Value="0.6"/> -->
 				<Setter Property="Padding" Value="5"/>
 				<Setter Property="BorderBrush" Value="Black"/>
 				<Setter Property="controlzEx:ToolTipAssist.AutoMove" Value="True"/>

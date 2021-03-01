@@ -1,5 +1,6 @@
 using ClickQuest.Account;
 using ClickQuest.Heroes;
+using ClickQuest.Items;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Linq;
@@ -86,7 +87,8 @@ namespace ClickQuest.Pages
 
 					var block = new TextBlock()
 					{
-						Style = (Style)this.FindResource("ToolTipTextBlockBase")
+						Style = (Style)this.FindResource("ToolTipTextBlockBase"),
+						FontWeight=FontWeights.DemiBold
 					};
 
 					// Ingot icon.
@@ -99,35 +101,32 @@ namespace ClickQuest.Pages
 					};
 
 					// Select ingot icon color and tooltip text.
+					var color = Styles.Colors.GetRarityColor((Rarity)i);
+					icon.Foreground = color;
+					block.Foreground = color;
 					switch (i)
 					{
 						case 0:
-							icon.Foreground = new SolidColorBrush(Colors.Gray);
 							block.Text = "General Ingots";
 							break;
 
 						case 1:
-							icon.Foreground = new SolidColorBrush(Colors.Brown);
 							block.Text = "Fine Ingots";
 							break;
 
 						case 2:
-							icon.Foreground = new SolidColorBrush(Colors.Green);
 							block.Text = "Superior Ingots";
 							break;
 
 						case 3:
-							icon.Foreground = new SolidColorBrush(Colors.Blue);
 							block.Text = "Exceptional Ingots";
 							break;
 
 						case 4:
-							icon.Foreground = new SolidColorBrush(Colors.Purple);
 							block.Text = "Mythic Ingots";
 							break;
 
 						case 5:
-							icon.Foreground = new SolidColorBrush(Colors.Gold);
 							block.Text = "Masterwork Ingots";
 							break;
 					}
@@ -190,7 +189,8 @@ namespace ClickQuest.Pages
 
 					var block = new TextBlock()
 					{
-						Style = (Style)this.FindResource("ToolTipTextBlockBase")
+						Style = (Style)this.FindResource("ToolTipTextBlockBase"),
+						FontWeight=FontWeights.DemiBold
 					};
 
 					// Ingot icon.
@@ -203,36 +203,33 @@ namespace ClickQuest.Pages
 					};
 
 					// Select ingot icon color and tooltip text.
+					var color = Styles.Colors.GetRarityColor((Rarity)i);
+					icon.Foreground = color;
+					block.Foreground = color;
 					switch (i)
 					{
 						case 0:
-							icon.Foreground = new SolidColorBrush(Colors.Gray);
-							block.Text = "General dungeon keys";
+							block.Text = "General Dungeon Keys";
 							break;
 
 						case 1:
-							icon.Foreground = new SolidColorBrush(Colors.Brown);
-							block.Text = "Fine dungeon keys";
+							block.Text = "Fine Dungeon Keys";
 							break;
 
 						case 2:
-							icon.Foreground = new SolidColorBrush(Colors.Green);
-							block.Text = "Superior dungeon keys";
+							block.Text = "Superior Dungeon Keys";
 							break;
 
 						case 3:
-							icon.Foreground = new SolidColorBrush(Colors.Blue);
-							block.Text = "Exceptional dungeon keys";
+							block.Text = "Exceptional Dungeon Keys";
 							break;
 
 						case 4:
-							icon.Foreground = new SolidColorBrush(Colors.Purple);
-							block.Text = "Mythic dungeon keys";
+							block.Text = "Mythic Dungeon Keys";
 							break;
 
 						case 5:
-							icon.Foreground = new SolidColorBrush(Colors.Gold);
-							block.Text = "Masterwork dungeon keys";
+							block.Text = "Masterwork Dungeon Keys";
 							break;
 					}
 
@@ -299,7 +296,7 @@ namespace ClickQuest.Pages
 				if (quest.Rare)
 				{
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run("*Rare quest*"));
+					toolTipBlock.Inlines.Add(new Bold(new Run("*Rare Quest*"){ Foreground = (SolidColorBrush)this.FindResource("ColorQuestRare") }));
 				}
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(new Run($"Class: {quest.HeroClass}"));
@@ -344,7 +341,8 @@ namespace ClickQuest.Pages
 				// Create blessing tooltip
 				toolTipBlock.Inlines.Add(new Run($"{blessing.Name}"));
 				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"*{blessing.RarityString}*"));
+				toolTipBlock.Inlines.Add(new Run($"*{blessing.RarityString}*") { Foreground = Styles.Colors.GetRarityColor(blessing.Rarity), FontWeight = FontWeights.DemiBold });
+				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(new Run($"{blessing.Description}"));
 			}

@@ -26,7 +26,7 @@
         },
         {
             "Id": 2,
-            "Rare": "false",
+            "Rare": "true",
             "HeroClass": "All",
             "Name": "TestQuest3",
             "Duration": 5,

@@ -76,10 +76,13 @@ namespace ClickQuest.Pages
 				{
 					Name = "DungeonGroup" + Database.DungeonGroups[i].Id.ToString(),
 					Width = 250,
-					Height = 100,
+					Height = 100
 				};
 
-				var panel = new StackPanel();
+				var panel = new StackPanel()
+				{
+					VerticalAlignment = VerticalAlignment.Center
+				};
 
 				var block = new TextBlock()
 				{
@@ -90,9 +93,10 @@ namespace ClickQuest.Pages
 
 				var border = new Border()
 				{
-					BorderThickness = new Thickness(0.5),
-					BorderBrush = new SolidColorBrush(Colors.LightGray),
-					Margin=new Thickness(0,5,0,0)
+					BorderThickness = new Thickness(3),
+					BorderBrush = Styles.Colors.GetRarityColor((Rarity)i),
+					Width = 240,
+					Height=90
 				};
 
 				var block2 = new TextBlock()
@@ -103,12 +107,11 @@ namespace ClickQuest.Pages
 					TextAlignment=TextAlignment.Center
 				};
 
-				border.Child = block2;
+				border.Child = panel;
 
 				panel.Children.Add(block);
-				panel.Children.Add(border);
-
-				button.Content = panel;
+				panel.Children.Add(block2);
+				button.Content = border;
 
 				button.Click += DungeonGroupButton_Click;
 
