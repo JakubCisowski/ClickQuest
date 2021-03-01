@@ -52,7 +52,7 @@ namespace ClickQuest.Pages
 					// Create blessing tooltip
 					toolTipBlock.Inlines.Add(new Run($"{material.Name}"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run($"* {material.RarityString} *"));
+					toolTipBlock.Inlines.Add(new Run($"*{material.RarityString}*") { Foreground = Styles.Colors.GetRarityColor(material.Rarity), FontWeight = FontWeights.DemiBold });
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run($"{material.Description}"));
@@ -128,7 +128,7 @@ namespace ClickQuest.Pages
 					// Create blessing tooltip
 					toolTipBlock.Inlines.Add(new Run($"{recipe.Name}"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run($"* {recipe.RarityString} *"));
+					toolTipBlock.Inlines.Add(new Run($"*{recipe.RarityString}*") { Foreground = Styles.Colors.GetRarityColor(recipe.Rarity), FontWeight = FontWeights.DemiBold });
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run($"{recipe.Description}"));
@@ -204,7 +204,7 @@ namespace ClickQuest.Pages
 					// Create blessing tooltip
 					toolTipBlock.Inlines.Add(new Run($"{artifact.Name}"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run($"* {artifact.RarityString} *"));
+					toolTipBlock.Inlines.Add(new Run($"*{artifact.RarityString}*") { Foreground = Styles.Colors.GetRarityColor(artifact.Rarity), FontWeight = FontWeights.DemiBold });
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run($"{artifact.Description}"));
