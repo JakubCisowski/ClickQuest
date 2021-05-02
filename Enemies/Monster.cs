@@ -7,133 +7,9 @@ using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Enemies
 {
-	public partial class Monster : INotifyPropertyChanged
+	public partial class Monster : Enemy
 	{
-		#region INotifyPropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-
-		#endregion INotifyPropertyChanged
-
-		#region Private Fields
-
-		private int _id;
-		private string _name;
-		private int _health;
-		private int _currentHealth;
-		private int _currentHealthProgress;
-		private string _image;
-		private string _description;
 		private List<(Item Item, ItemType ItemType, double Frequency)> _loot;
-		private List<(Item Item, ItemType ItemType, List<double> Frequencies)> _bossLoot;
-
-		#endregion Private Fields
-
-		#region Properties
-
-		public int Id
-		{
-			get
-			{
-				return _id;
-			}
-			set
-			{
-				_id = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public string Name
-		{
-			get
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public string Description
-		{
-			get
-			{
-				return _description;
-			}
-			set
-			{
-				_description = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public int Health
-		{
-			get
-			{
-				return _health;
-			}
-			set
-			{
-				_health = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public int CurrentHealth
-		{
-			get
-			{
-				return _currentHealth;
-			}
-			set
-			{
-				if(_currentHealth - value > 0)
-				{
-					// Increase achievement amount.
-					User.Instance.Achievements.TotalDamageDealt += _currentHealth - value;
-					AchievementsWindow.Instance.UpdateAchievements();
-				}
-
-				_currentHealth = value;
-				CurrentHealthProgress = this.CalculateCurrentHealthProgress();
-				OnPropertyChanged();
-			}
-		}
-
-		public int CurrentHealthProgress
-		{
-			get
-			{
-				return _currentHealthProgress;
-			}
-			set
-			{
-				_currentHealthProgress = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public string Image
-		{
-			get
-			{
-				return _image;
-			}
-			set
-			{
-				_image = value;
-				OnPropertyChanged();
-			}
-		}
 
 		public List<(Item Item, ItemType ItemType, double Frequency)> Loot
 		{
@@ -148,61 +24,15 @@ namespace ClickQuest.Enemies
 			}
 		}
 
-		public List<(Item Item, ItemType ItemType, List<double> Frequencies)> BossLoot
-		{
-			get
-			{
-				return _bossLoot;
-			}
-			set
-			{
-				_bossLoot = value;
-				OnPropertyChanged();
-			}
-		}
-
-		#endregion Properties
-
 		// Common monster constructor.
-		public Monster(int id, string name, int health, string image, List<(Item, ItemType, double)> loot, string description)
+		public Monster(int id, string name, int health, string image, string description, List<(Item, ItemType, double)> loot) : base(id, name, health, image, description)
 		{
-			Id = id;
-			Name = name;
-			Description = description;
-			Health = health;
-			CurrentHealth = health;
 			Loot = loot;
-			CurrentHealthProgress = 100;
 		}
 
-		// Boss constructor.
-		public Monster(int id, string name, int health, string image, List<(Item, ItemType, List<double>)> bossLoot, string description)
+		public Monster(Monster monsterToCopy) : base(monsterToCopy)
 		{
-			Id = id;
-			Name = name;
-			Description = description;
-			Health = health;
-			CurrentHealth = health;
-			BossLoot = bossLoot;
-			CurrentHealthProgress = 100;
-		}
-
-		public Monster(Monster monsterToCopy)
-		{
-			Id = monsterToCopy.Id;
-			Name = monsterToCopy.Name;
-			Health = monsterToCopy.Health;
-			CurrentHealth = monsterToCopy.Health;
 			Loot = monsterToCopy.Loot;
-			BossLoot = monsterToCopy.BossLoot;
-			Description = monsterToCopy.Description;
-			CurrentHealthProgress = monsterToCopy.CurrentHealthProgress;
-		}
-
-		private int CalculateCurrentHealthProgress()
-		{
-			// Calculate killing progress in % (for progress bar on monster button).
-			return (int)(((double)this.CurrentHealth / this.Health) * 100);
 		}
 	}
 }

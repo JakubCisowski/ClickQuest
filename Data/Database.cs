@@ -27,7 +27,7 @@ namespace ClickQuest.Data
 		public static List<Blessing> PriestOffer { get; set; }
 		public static List<Quest> Quests { get; set; }
 		public static Dictionary<string, Page> Pages { get; set; }
-		public static List<Monster> Bosses { get; set; }
+		public static List<Boss> Bosses { get; set; }
 		public static List<Dungeon> Dungeons { get; set; }
 		public static List<DungeonGroup> DungeonGroups { get; set; }
 
@@ -46,7 +46,7 @@ namespace ClickQuest.Data
 			PriestOffer = new List<Blessing>();
 			Quests = new List<Quest>();
 			Pages = new Dictionary<string, Page>();
-			Bosses = new List<Monster>();
+			Bosses = new List<Boss>();
 			Dungeons = new List<Dungeon>();
 			DungeonGroups = new List<DungeonGroup>();
 
@@ -240,7 +240,7 @@ namespace ClickQuest.Data
 					errorLog.Add($"Error in LoadMonsters: {name} - loot frequency sums up to {frequencySum} instead of 1.");
 				}
 
-				var newMonster = new Monster(id, name, health, image, lootTemp, description);
+				var newMonster = new Monster(id, name, health, image,description, lootTemp);
 				Monsters.Add(newMonster);
 			}
 
@@ -534,7 +534,7 @@ namespace ClickQuest.Data
 					lootTemp.Add((item, itemType, frequencyList));
 				}
 
-				var newBoss = new Monster(id, name, health, image, lootTemp, description);
+				var newBoss = new Boss(id, name, health, image, description, lootTemp);
 				Bosses.Add(newBoss);
 			}
 
@@ -608,7 +608,7 @@ namespace ClickQuest.Data
 				var background = parsedObject["Dungeons"][i]["Background"].ToString();
 				var description = parsedObject["Dungeons"][i]["Description"].ToString();
 
-				var bossesTemp = new List<Monster>();
+				var bossesTemp = new List<Boss>();
 				var bossesArray = (JArray)parsedObject["Dungeons"][i]["BossIds"];
 
 				for (int j = 0; j < bossesArray.Count; j++)

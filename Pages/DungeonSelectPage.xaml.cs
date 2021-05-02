@@ -17,7 +17,7 @@ namespace ClickQuest.Pages
 		#region Private Fields
 		private DungeonGroup _dungeonGroupSelected;
 		private Dungeon _dungeonSelected;
-		private Monster _bossSelected;
+		private Boss _bossSelected;
 
 		#endregion
 
@@ -297,7 +297,7 @@ namespace ClickQuest.Pages
 
 			// Start boss fight.
 			(Database.Pages["DungeonBoss"] as DungeonBossPage).TownButton.Visibility = Visibility.Hidden;
-			(Database.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(new Monster(_bossSelected));
+			(Database.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(new Boss(_bossSelected));
 			// Navigate to boss fight page.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["DungeonBoss"]);
 			(Database.Pages["DungeonBoss"] as DungeonBossPage).EquipmentFrame.Refresh();

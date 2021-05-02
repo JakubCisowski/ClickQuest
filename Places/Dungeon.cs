@@ -25,7 +25,7 @@ namespace ClickQuest.Places
 		private string _name;
 		private string _background;
 		private string _description;
-		private List<Monster> _bosses;
+		private List<Boss> _bosses;
 
 		#endregion Private Fields
 
@@ -96,7 +96,7 @@ namespace ClickQuest.Places
 			}
 		}
 
-		public List<Monster> Bosses
+		public List<Boss> Bosses
 		{
 			get
 			{
@@ -111,7 +111,7 @@ namespace ClickQuest.Places
 
 		#endregion Properties
 
-		public Dungeon(int id, DungeonGroup dungeonGroup, string name, string background, string description, List<Monster> bosses)
+		public Dungeon(int id, DungeonGroup dungeonGroup, string name, string background, string description, List<Boss> bosses)
 		{
 			Id = id;
 			DungeonGroup = dungeonGroup;

@@ -29,7 +29,7 @@ namespace ClickQuest.Pages
 
 		#region Private Fields
 		private int _duration;
-		private Monster _boss;
+		private Boss _boss;
 		private DispatcherTimer _fightTimer;
 		private Random _rng = new Random();
 		private DispatcherTimer _poisonTimer;
@@ -73,7 +73,7 @@ namespace ClickQuest.Pages
 			_poisonTimer.Tick += PoisonTimer_Tick;
 		}
 
-		public void StartBossFight(Monster boss)
+		public void StartBossFight(Boss boss)
 		{
 			BossButton.IsEnabled = true;
 
