@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Items
 {
-	public partial class Item : INotifyPropertyChanged
+	public abstract partial class Item : INotifyPropertyChanged
 	{
 		#region INotifyPropertyChanged
 
