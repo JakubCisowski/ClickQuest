@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using ClickQuest.Items;
 using ClickQuest.Windows;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using ClickQuest.Data;
 using ClickQuest.Windows;
 using System;
@@ -233,7 +233,7 @@ namespace ClickQuest.Items
 						// Increase achievement amount.
 						if (Duration == Database.Blessings.FirstOrDefault(x=>x.Id==this.Id).Duration)
 						{
-							User.Instance.Achievements.BlessingsUsed++;
+							User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.BlessingsUsed]++;
 							AchievementsWindow.Instance.UpdateAchievements();
 						}
 						

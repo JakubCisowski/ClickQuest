@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
-namespace ClickQuest.Account
+namespace ClickQuest.Player
 {
 	public partial class User : INotifyPropertyChanged
 	{
@@ -128,13 +128,13 @@ namespace ClickQuest.Account
 				if(value - _gold > 0)
 				{
 					// Increase achievement amount.
-					Achievements.GoldEarned += value - _gold;
+					Achievements.NumericAchievementCollection[NumericAchievementType.GoldEarned] += value - _gold;
 					AchievementsWindow.Instance.UpdateAchievements();
 				}
 				else
 				{
 					// Increase achievement amount.
-					Achievements.GoldSpent += value - _gold;
+					Achievements.NumericAchievementCollection[NumericAchievementType.GoldSpent] += value - _gold;
 					AchievementsWindow.Instance.UpdateAchievements();
 				}
 				

@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using ClickQuest.Enemies;
 using ClickQuest.Heroes;
 using ClickQuest.Items;
@@ -154,7 +154,7 @@ namespace ClickQuest.Controls
 				_poisonTicks = 0;
 
 				// Increase achievement amount.
-				User.Instance.Achievements.MonstersDefeated++;
+				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MonstersDefeated]++;
 				AchievementsWindow.Instance.UpdateAchievements();
 
 				// Grant exp and loot.
@@ -212,29 +212,29 @@ namespace ClickQuest.Controls
 			// Grant dungeon key after if algorithm didn't roll empty loot.
 			if (i != 0)
 			{
-				// Add new key to account.
+				// Add new key to Player.
 				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)(i - 1)).Quantity++;
 
 				// Increase achievement amount.
 				switch((Rarity)i - 1)
 				{
 					case Rarity.General:
-						User.Instance.Achievements.GeneralDungeonKeysEarned++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.GeneralDungeonKeysEarned]++;
 						break;
-					case 
-						Rarity.Fine:User.Instance.Achievements.FineDungeonKeysEarned++; 
+					case Rarity.Fine:
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.FineDungeonKeysEarned]++; 
 						break;
 					case Rarity.Superior:
-						User.Instance.Achievements.SuperiorIngotsEarned++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.SuperiorIngotsEarned]++;
 						break;
 					case Rarity.Exceptional:
-						User.Instance.Achievements.ExceptionalDungeonKeysEarned++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.ExceptionalDungeonKeysEarned]++;
 						break;
 					case Rarity.Mythic:
-						User.Instance.Achievements.MythicDungeonKeysEarned++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MythicDungeonKeysEarned]++;
 						break;
 					case Rarity.Masterwork:
-						User.Instance.Achievements.MasterworkDungeonKeysEarned++; 
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MasterworkDungeonKeysEarned]++; 
 						break;
 				}
 				AchievementsWindow.Instance.UpdateAchievements();
@@ -267,7 +267,7 @@ namespace ClickQuest.Controls
 					damage *= 2;
 
 					// Increase achievement amount.
-					User.Instance.Achievements.CritsAmount++;
+					User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.CritsAmount]++;
 					AchievementsWindow.Instance.UpdateAchievements();
 				}
 				// Apply specialization clicking buff.
@@ -305,7 +305,7 @@ namespace ClickQuest.Controls
 				Monster.CurrentHealth -= poisonDamage;
 
 				// Increase achievement amount.
-				User.Instance.Achievements.PoisonTicksAmount++;
+				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.PoisonTicksAmount]++;
 				AchievementsWindow.Instance.UpdateAchievements();
 
 				// Check if monster is dead now.

@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ClickQuest.Account
+namespace ClickQuest.Player
 {
 	[Owned]
 	public partial class Specialization : INotifyPropertyChanged
@@ -385,7 +385,7 @@ namespace ClickQuest.Account
 
 			// Changes that depend on hero class.
 			// Changing thresholds is easier to balance than changing buffconst.
-			switch(Account.User.Instance.CurrentHero?.HeroRace)
+			switch(Player.User.Instance.CurrentHero?.HeroRace)
 			{
 				case HeroRace.Human:
 					SpecCraftingThreshold = 5;

@@ -1,4 +1,4 @@
-﻿using ClickQuest.Account;
+﻿using ClickQuest.Player;
 using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Entity;

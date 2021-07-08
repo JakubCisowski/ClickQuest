@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using ClickQuest.Data;
 using ClickQuest.Enemies;
 using ClickQuest.Heroes;
@@ -112,7 +112,7 @@ namespace ClickQuest.Pages
 				_poisonTicks = 0;
 
 				// Increase achievement amount.
-				User.Instance.Achievements.BossesDefeated++;
+				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.BossesDefeated]++;
 				AchievementsWindow.Instance.UpdateAchievements();
 
 				// Reset fight timer.
@@ -161,7 +161,7 @@ namespace ClickQuest.Pages
 			User.Instance.CurrentHero.Specialization.SpecDungeonAmount++;
 
 			// Increase achievement amount.
-			User.Instance.Achievements.DungeonsCompleted++;
+			User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.DungeonsCompleted]++;
 			AchievementsWindow.Instance.UpdateAchievements();
 
 			// Disable clicking on BossButton.
@@ -209,11 +209,11 @@ namespace ClickQuest.Pages
 			// Otherwise deal poison damage and check if monster died.
 			else
 			{
-				int poisonDamage = Account.User.Instance.CurrentHero.PoisonDamage;
+				int poisonDamage = Player.User.Instance.CurrentHero.PoisonDamage;
 				_poisonTicks++;
 
 				// Increase achievement amount.
-				User.Instance.Achievements.PoisonTicksAmount++;
+				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.PoisonTicksAmount]++;
 				AchievementsWindow.Instance.UpdateAchievements();
 
 				_boss.CurrentHealth -= poisonDamage;
@@ -241,7 +241,7 @@ namespace ClickQuest.Pages
 				damage *= 2;
 				
 				// Increase achievement amount.
-				User.Instance.Achievements.CritsAmount++;
+				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.CritsAmount]++;
 				AchievementsWindow.Instance.UpdateAchievements();
 			}
 			// Apply specialization clicking buff.

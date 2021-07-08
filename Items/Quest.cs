@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Heroes;
@@ -413,7 +413,7 @@ namespace ClickQuest.Items
 			AlertBox.Show($"Quest {this.Name} finished.\nRewards granted.", MessageBoxButton.OK);
 
 			// Increase achievement amount.
-			User.Instance.Achievements.QuestsCompleted++;
+			User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.QuestsCompleted]++;
 
 			// Assign materials.
 			foreach (var materialId in RewardMaterialIds)
@@ -439,22 +439,22 @@ namespace ClickQuest.Items
 				switch(ingotRarity)
 				{
 					case Rarity.General:
-						User.Instance.Achievements.GeneralIngotsEarned++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.GeneralIngotsEarned]++;
 						break;
-					case 
-						Rarity.Fine:User.Instance.Achievements.FineIngotsEarned++; 
+					case Rarity.Fine:
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.FineIngotsEarned]++; 
 						break;
 					case Rarity.Superior:
-						User.Instance.Achievements.SuperiorIngotsEarned++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.SuperiorIngotsEarned]++;
 						break;
 					case Rarity.Exceptional:
-						User.Instance.Achievements.ExceptionalIngotsEarned++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.ExceptionalIngotsEarned]++;
 						break;
 					case Rarity.Mythic:
-						User.Instance.Achievements.MythicIngotsEarned++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MythicIngotsEarned]++;
 						break;
 					case Rarity.Masterwork:
-						User.Instance.Achievements.MasterworkIngotsEarned++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MasterworkIngotsEarned]++;
 						break;
 				}
 				AchievementsWindow.Instance.UpdateAchievements();

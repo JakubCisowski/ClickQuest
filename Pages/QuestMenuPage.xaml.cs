@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Entity;
@@ -101,7 +101,7 @@ namespace ClickQuest.Pages
 				RerollQuests();
 
 				// Increase achievement amount.
-				User.Instance.Achievements.QuestRerollsAmount++;
+				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.QuestRerollsAmount]++;
 			}
 		}
 

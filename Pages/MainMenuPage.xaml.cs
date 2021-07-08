@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Entity;
@@ -211,7 +211,7 @@ namespace ClickQuest.Pages
 
 		private void ResetProgressButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Reset all progress - only account isn't removed.
+			// Reset all progress - only Player isn't removed.
 			EntityOperations.ResetProgress();
 			GenerateHeroButtons();
 		}

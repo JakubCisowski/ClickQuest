@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClickQuest.Entity

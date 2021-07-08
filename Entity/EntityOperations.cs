@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using ClickQuest.Heroes;
 using ClickQuest.Items;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +11,9 @@ namespace ClickQuest.Entity
 	{
 		public static void SaveGame()
 		{
+			// Serialize Achievements.
+			User.Instance.Achievements.SerializeAchievements();
+
 			using (var db = new UserContext())
 			{
 				// Make sure we get the right user by Id
@@ -68,6 +71,9 @@ namespace ClickQuest.Entity
 					}
 				}
 			}
+
+			// Deserualize achievements.
+			User.Instance.Achievements.DeserializeAchievements();
 		}
 
 		public static void RemoveItem(Item item)
@@ -181,7 +187,7 @@ namespace ClickQuest.Entity
 			{
 				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Quests).FirstOrDefault();
 
-				var hero = user.Heroes.FirstOrDefault(x => x.Id == Account.User.Instance.CurrentHero.Id);
+				var hero = user.Heroes.FirstOrDefault(x => x.Id == Player.User.Instance.CurrentHero.Id);
 
 				if (hero != null)
 				{

@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using ClickQuest.Heroes;
 using ClickQuest.Items;
 using MaterialDesignThemes.Wpf;
@@ -452,7 +452,7 @@ namespace ClickQuest.Pages
 
 				Binding binding = new Binding("SpecMeltingBuff")
 				{
-					Source = Account.User.Instance.CurrentHero.Specialization,
+					Source = Player.User.Instance.CurrentHero.Specialization,
 					StringFormat = " → Extra ingot +{0}%"
 				};
 
@@ -852,7 +852,7 @@ namespace ClickQuest.Pages
 				Style = (Style)this.FindResource("ToolTipTextBlockBase")
 			};
 
-			switch (Account.User.Instance.CurrentHero?.HeroClass)
+			switch (Player.User.Instance.CurrentHero?.HeroClass)
 			{
 				case HeroClass.Slayer:
 					block.Inlines.Add(new Run("This class specializes in powerful critical clicks that deal double damage"));
@@ -877,7 +877,7 @@ namespace ClickQuest.Pages
 					break;
 			}
 
-			switch (Account.User.Instance.CurrentHero?.HeroRace)
+			switch (Player.User.Instance.CurrentHero?.HeroRace)
 			{
 				case HeroRace.Human:
 					block.Inlines.Add(new Run("Human race specializes in buying and crafting"));
@@ -976,9 +976,9 @@ namespace ClickQuest.Pages
 			blockDamage.Inlines.Add(new LineBreak());
 			
 			// ["BlessingName, damage: X"]
-			if(Account.User.Instance.CurrentHero != null)
+			if(Player.User.Instance.CurrentHero != null)
 			{
-				if(Account.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.ClickDamage))
+				if(Player.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.ClickDamage))
 				{
 					var bindingBlessingName = new Binding("Name")
 					{
@@ -1078,9 +1078,9 @@ namespace ClickQuest.Pages
 			}
 			
 			// ["BlessingName, damage: X"]
-			if(Account.User.Instance.CurrentHero != null)
+			if(Player.User.Instance.CurrentHero != null)
 			{
-				if(Account.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.CritChance))
+				if(Player.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.CritChance))
 				{
 					var bindingBlessingName = new Binding("Name")
 					{
@@ -1168,9 +1168,9 @@ namespace ClickQuest.Pages
 			}
 			
 			// ["BlessingName, damage: X"]
-			if(Account.User.Instance.CurrentHero != null)
+			if(Player.User.Instance.CurrentHero != null)
 			{
-				if(Account.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.PoisonDamage))
+				if(Player.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.PoisonDamage))
 				{
 					var bindingBlessingName = new Binding("Name")
 					{
@@ -1281,9 +1281,9 @@ namespace ClickQuest.Pages
 			blockAura.Inlines.Add(new LineBreak());
 			
 			// ["BlessingName, tick damage: X%"]
-			if(Account.User.Instance.CurrentHero != null)
+			if(Player.User.Instance.CurrentHero != null)
 			{
-				if(Account.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.AuraDamage))
+				if(Player.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.AuraDamage))
 				{
 					var bindingBlessingName = new Binding("Name")
 					{
@@ -1307,9 +1307,9 @@ namespace ClickQuest.Pages
 			blockAura.Inlines.Add(new LineBreak());
 			
 			// ["BlessingName, tick speed: X/s"]
-			if(Account.User.Instance.CurrentHero != null)
+			if(Player.User.Instance.CurrentHero != null)
 			{
-				if(Account.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.AuraSpeed))
+				if(Player.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.AuraSpeed))
 				{
 					var bindingBlessingName = new Binding("Name")
 					{

@@ -1,5 +1,5 @@
 using System;
-using ClickQuest.Account;
+using ClickQuest.Player;
 using ClickQuest.Windows;
 
 namespace ClickQuest.Heroes
@@ -41,7 +41,7 @@ namespace ClickQuest.Heroes
 			var experience = (int)Math.Ceiling(monsterHp / 10d);
 			
 			// Increase achievement amount.
-			User.Instance.Achievements.ExperienceGained += experience;
+			User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.ExperienceGained] += experience;
 			AchievementsWindow.Instance.UpdateAchievements();
 			
 			return experience;

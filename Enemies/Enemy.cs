@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using ClickQuest.Items;
 using ClickQuest.Windows;
 using System.Collections.Generic;
@@ -98,7 +98,7 @@ public abstract partial class Enemy : INotifyPropertyChanged
 			if (_currentHealth - value > 0)
 			{
 				// Increase achievement amount.
-				User.Instance.Achievements.TotalDamageDealt += _currentHealth - value;
+				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.TotalDamageDealt] += _currentHealth - value;
 				AchievementsWindow.Instance.UpdateAchievements();
 			}
 

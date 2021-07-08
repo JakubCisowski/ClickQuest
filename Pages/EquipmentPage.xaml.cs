@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using System;
 using System.Windows;
 using System.Windows.Controls;

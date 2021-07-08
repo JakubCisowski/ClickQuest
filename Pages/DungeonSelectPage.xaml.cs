@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Enemies;
@@ -289,7 +289,7 @@ namespace ClickQuest.Pages
 					return;
 				}
 			}
-			// Remove dungeon keys from account.
+			// Remove dungeon keys from Player.
 			foreach (var pair in counts)
 			{
 				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)pair.Key).Quantity -= pair.Value;

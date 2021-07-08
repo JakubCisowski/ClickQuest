@@ -1,4 +1,4 @@
-using ClickQuest.Account;
+using ClickQuest.Player;
 using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Items;
@@ -79,22 +79,22 @@ namespace ClickQuest.Pages
 				switch(material.Rarity)
 				{
 					case Rarity.General:
-						User.Instance.Achievements.GeneralIngotsEarned += ingotAmount;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.GeneralIngotsEarned] += ingotAmount;
 						break;
-					case 
-						Rarity.Fine:User.Instance.Achievements.FineIngotsEarned += ingotAmount; 
+					case Rarity.Fine:
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.FineIngotsEarned] += ingotAmount; 
 						break;
 					case Rarity.Superior:
-						User.Instance.Achievements.SuperiorIngotsEarned += ingotAmount;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.SuperiorIngotsEarned] += ingotAmount;
 						break;
 					case Rarity.Exceptional:
-						User.Instance.Achievements.ExceptionalIngotsEarned += ingotAmount;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.ExceptionalIngotsEarned] += ingotAmount;
 						break;
 					case Rarity.Mythic:
-						User.Instance.Achievements.MythicIngotsEarned += ingotAmount;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MythicIngotsEarned] += ingotAmount;
 						break;
 					case Rarity.Masterwork:
-						User.Instance.Achievements.MasterworkIngotsEarned += ingotAmount;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MasterworkIngotsEarned] += ingotAmount;
 						break;
 				}
 				AchievementsWindow.Instance.UpdateAchievements();
@@ -141,22 +141,22 @@ namespace ClickQuest.Pages
 				switch(artifact.Rarity)
 				{
 					case Rarity.General:
-						User.Instance.Achievements.GeneralIngotsEarned += ingotAmount;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.GeneralIngotsEarned] += ingotAmount;
 						break;
-					case 
-						Rarity.Fine:User.Instance.Achievements.FineIngotsEarned += ingotAmount; 
+					case Rarity.Fine:
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.FineIngotsEarned] += ingotAmount; 
 						break;
 					case Rarity.Superior:
-						User.Instance.Achievements.SuperiorIngotsEarned += ingotAmount;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.SuperiorIngotsEarned] += ingotAmount;
 						break;
 					case Rarity.Exceptional:
-						User.Instance.Achievements.ExceptionalIngotsEarned += ingotAmount;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.ExceptionalIngotsEarned] += ingotAmount;
 						break;
 					case Rarity.Mythic:
-						User.Instance.Achievements.MythicIngotsEarned += ingotAmount;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MythicIngotsEarned] += ingotAmount;
 						break;
 					case Rarity.Masterwork:
-						User.Instance.Achievements.MasterworkIngotsEarned += ingotAmount;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MasterworkIngotsEarned] += ingotAmount;
 						break;
 				}
 				AchievementsWindow.Instance.UpdateAchievements();

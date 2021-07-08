@@ -2,7 +2,7 @@
 using ClickQuest.Entity;
 using System.Windows;
 using System;
-using ClickQuest.Account;
+using ClickQuest.Player;
 
 namespace ClickQuest
 {

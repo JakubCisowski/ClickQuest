@@ -1,4 +1,4 @@
-﻿using ClickQuest.Account;
+﻿using ClickQuest.Player;
 using ClickQuest.Items;
 using ClickQuest.Windows;
 using System;
@@ -526,7 +526,7 @@ namespace ClickQuest.Heroes
 				copy.Quantity++;
 
 				// Increase achievement amount.
-				User.Instance.Achievements.RecipesGained++;
+				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.RecipesGained]++;
 				AchievementsWindow.Instance.UpdateAchievements();
 			}
 			else if (type == typeof(Artifact))
@@ -552,22 +552,22 @@ namespace ClickQuest.Heroes
 				switch(itemToAdd.Rarity)
 				{
 					case Rarity.General:
-						User.Instance.Achievements.GeneralArtifactsGained++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.GeneralArtifactsGained]++;
 						break;
 					case Rarity.Fine:
-						User.Instance.Achievements.FineArtifactsGained++; 
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.FineArtifactsGained]++; 
 						break;
 					case Rarity.Superior:
-						User.Instance.Achievements.SuperiorArtifactsGained++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.SuperiorArtifactsGained]++;
 						break;
 					case Rarity.Exceptional:
-						User.Instance.Achievements.ExceptionalArtifactsGained++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.ExceptionalArtifactsGained]++;
 						break;
 					case Rarity.Mythic:
-						User.Instance.Achievements.MythicArtifactsGained++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MythicArtifactsGained]++;
 						break;
 					case Rarity.Masterwork:
-						User.Instance.Achievements.MasterworkArtifactsGained++;
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MasterworkArtifactsGained]++;
 						break;
 				}
 				AchievementsWindow.Instance.UpdateAchievements();
@@ -592,7 +592,7 @@ namespace ClickQuest.Heroes
 				copy.Quantity++;
 
 				// Increase achievement amount.
-				User.Instance.Achievements.MaterialsGained++;
+				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MaterialsGained]++;
 				AchievementsWindow.Instance.UpdateAchievements();
 			}
 		}
