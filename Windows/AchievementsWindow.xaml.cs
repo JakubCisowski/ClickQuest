@@ -60,52 +60,19 @@ namespace ClickQuest.Windows
 
 			var achievements = User.Instance.Achievements;
 
-			var properties = typeof(Achievements).GetProperties();
-			foreach (var property in properties)
+			var time = achievements.TotalTimePlayed;
+			AppendAchievementToAchievementsList("TotalTimePlayed", $"{Math.Floor(time.TotalHours)}h {time.Minutes}m {time.Seconds}s");
+
+			foreach (var pair in achievements.NumericAchievementCollection)
 			{
-				var name = property.Name;
+				string name = pair.Key.ToString();
+
+				// Add spaces in between words.
 				name = string.Concat(name.Select(x => Char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
-				var amount = property.GetValue(achievements);
+				
+				string amount = pair.Value.ToString();
 
-				// Create a TextBlock.
-				var border = new Border()
-				{
-					BorderThickness = new Thickness(0.5),
-					BorderBrush = new SolidColorBrush(Colors.Gray),
-					Padding = new Thickness(6),
-					Margin = new Thickness(1),
-					Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
-				};
-
-				var grid = new Grid();
-
-				var nameBlock = new TextBlock()
-				{
-					FontSize = 18,
-					HorizontalAlignment = HorizontalAlignment.Left,
-					Text = name
-				};
-
-				var amountBlock = new TextBlock()
-				{
-					FontSize = 18,
-					HorizontalAlignment = HorizontalAlignment.Right,
-					Text = amount.ToString()
-				};
-
-				if (property.Name == "TotalTimePlayed")
-				{
-					var time = (TimeSpan)amount;
-					amountBlock.Text = $"{Math.Floor(time.TotalHours)}h {time.Minutes}m {time.Seconds}s";
-				}
-
-				grid.Children.Add(nameBlock);
-				grid.Children.Add(amountBlock);
-
-				border.Child = grid;
-
-				AchievementsList.Children.Add(border);
-
+				AppendAchievementToAchievementsList(name, amount);
 			}
 		}
 
@@ -121,6 +88,42 @@ namespace ClickQuest.Windows
 			// If the window is closed, keep it open but hide it instead.
 			e.Cancel = true;
 			this.Visibility = Visibility.Hidden;
+		}
+
+		private void AppendAchievementToAchievementsList(string name, string amount)
+		{
+			// Create a TextBlock.
+			var border = new Border()
+			{
+				BorderThickness = new Thickness(0.5),
+				BorderBrush = new SolidColorBrush(Colors.Gray),
+				Padding = new Thickness(6),
+				Margin = new Thickness(1),
+				Background = this.FindResource("GameBackgroundAdditional") as SolidColorBrush
+			};
+
+			var grid = new Grid();
+
+			var nameBlock = new TextBlock()
+			{
+				FontSize = 18,
+				HorizontalAlignment = HorizontalAlignment.Left,
+				Text = name
+			};
+
+			var amountBlock = new TextBlock()
+			{
+				FontSize = 18,
+				HorizontalAlignment = HorizontalAlignment.Right,
+				Text = amount.ToString()
+			};
+
+			grid.Children.Add(nameBlock);
+			grid.Children.Add(amountBlock);
+
+			border.Child = grid;
+
+			AchievementsList.Children.Add(border);
 		}
 
 		#endregion
