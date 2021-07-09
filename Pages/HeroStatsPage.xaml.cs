@@ -30,10 +30,10 @@ namespace ClickQuest.Pages
 			GenerateIngots();
 			GenerateDungeonKeys();
 			GenerateGold();
-			GenerateSpecializations();
 			RefreshQuestTimer();
 			RefreshBlessingTimer();
 			GenerateTooltips();
+			UpdateSpecializationsInterface();
 		}
 
 		private void GenerateGold()
@@ -355,7 +355,7 @@ namespace ClickQuest.Pages
 			BlessingDuration.ToolTip = toolTip;
 		}
 
-		private void GenerateSpecializations()
+		private void GenerateSpecializationsTooltips()
 		{
 			if (User.Instance.CurrentHero is null)
 			{
@@ -363,66 +363,208 @@ namespace ClickQuest.Pages
 				return;
 			}
 
-			SpecializationsGrid.Children.Clear();
+			var specializationTypes = Enum.GetValues(typeof(SpecializationType));
 
-			#region SpecializationBuying
-
+			for(int i =0;i<specializationTypes.Length;i++)
 			{
-				var nameBlock = new TextBlock()
-				{
-					Name = "SpecBuyingName",
-					Text = "Tradesman",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				var block = new TextBlock()
-				{
-					Name = "SpecBuying",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				Binding binding = new Binding("SpecBuyingBuff")
-				{
-					Source = User.Instance.CurrentHero.Specialization,
-					StringFormat = " → Shop offer size +{0}"
-				};
-
-				block.SetBinding(TextBlock.TextProperty, binding);
-
 				// Generate SpecBuying tooltips.
 				var toolTip = new ToolTip();
 				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
 
 				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Buying];
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Buying])
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[(SpecializationType)specializationTypes.GetValue(1)];
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(1)])
 				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Buying];
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(1)];
 				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Buying] - nextUpgrade;
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(1)] - nextUpgrade;
 
 				var toolTipBlock = new TextBlock()
 				{
 					Style = (Style)this.FindResource("ToolTipTextBlockBase")
 				};
-				toolTipBlock.Inlines.Add(new Run("Increases shop offer size (base size is 5)"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run("You can master Tradesman by buying recipes in shop"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"Next upgrade (+1 shop offer size) in"));
-				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-				toolTipBlock.Inlines.Add(new Run($"bought recipes"));
+
+				switch (specializationTypes.GetValue(i))
+				{
+					case SpecializationType.Blessing:
+						{
+							toolTipBlock.Inlines.Add(new Run("Increases blessing duration in seconds"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run("You can master Prayer by buying blessings in Priest"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run($"Next upgrade (+15s duration) in"));
+							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+							toolTipBlock.Inlines.Add(new Run($"bought blessings"));
+						}
+						break;
+
+					case SpecializationType.Clicking:
+						{
+							toolTipBlock.Inlines.Add(new Run("Increases click damage"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run("You can master Clicker by clicking on monsters and bosses"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run("Click damage from this specialization is applied after other effects eg. crit"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run($"Next upgrade (+1 click damage) in"));
+							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+							toolTipBlock.Inlines.Add(new Run($"clicks"));
+						}
+						break;
+
+					case SpecializationType.Crafting:
+						{
+							toolTipBlock.Inlines.Add(new Run("Increases crafting rarity limit (base limit is Fine rarity)"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run("You can master Craftsman by crafting artifacts in Blacksmith"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run($"Next rarity limit upgrade in"));
+							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+							toolTipBlock.Inlines.Add(new Run($"crafted artifacts"));
+						}
+						break;
+
+					case SpecializationType.Buying:
+						{
+							toolTipBlock.Inlines.Add(new Run("Increases shop offer size (base size is 5)"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run("You can master Tradesman by buying recipes in shop"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run($"Next upgrade (+1 shop offer size) in"));
+							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+							toolTipBlock.Inlines.Add(new Run($"bought recipes"));
+						}
+						break;
+
+					case SpecializationType.Melting:
+						{
+							toolTipBlock.Inlines.Add(new Run("Increases % chance to get bonus ingots when melting (base chance is 0%)"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run("You can master Melter by melting materials in Blacksmith"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run("Each 100% guarantees additional ingot"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run($"Next upgrade (+5% chance) in"));
+							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+							toolTipBlock.Inlines.Add(new Run($"melted materials"));
+						}
+						break;
+
+					case SpecializationType.Questing:
+						{
+							toolTipBlock.Inlines.Add(new Run("Reduces % time to complete quests (limit is 50%)"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run("You can master Adventurer by completing quests"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run($"Next upgrade (+5% reduced time) in"));
+							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+							toolTipBlock.Inlines.Add(new Run($"completed quests"));
+						}
+						break;
+
+					case SpecializationType.Dungeon:
+						{
+							toolTipBlock.Inlines.Add(new Run("Increases amount of time to defeat boss in seconds (base time is 30s)"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run("You can master Daredevil by buying recipes in shop"));
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run($"Next upgrade (+1 second) in"));
+							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
+							toolTipBlock.Inlines.Add(new Run($"finished dungeons"));
+						}
+						break;
+
+				}
 
 				toolTip.Content = toolTipBlock;
 
-				nameBlock.ToolTip = toolTip;
-				block.ToolTip = toolTip;
+				// var nameBlock = (TextBlock)this.FindName("Spec" + specializationTypes.GetValue(i).ToString() + "Name");
+				// var buffBlock = (TextBlock)this.FindName("Spec" + specializationTypes.GetValue(i).ToString() + "Buff");
+				var nameBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationTypes.GetValue(i).ToString() + "Name");
+				var buffBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationTypes.GetValue(i).ToString() + "Buff");
 
-				Grid.SetRow(nameBlock, 0);
-				Grid.SetRow(block, 0);
+				nameBlock.ToolTip = toolTip;
+				buffBlock.ToolTip = toolTip;
+
+			}
+		}
+
+		public void UpdateSpecializationsInterface()
+		{
+			if (User.Instance.CurrentHero is null)
+			{
+				// This function was called before selecting a hero - return.
+				return;
+			}
+
+			// SpecializationsGrid.Children.Clear();
+
+			var specializationTypes = Enum.GetValues(typeof(SpecializationType));
+
+			for(int i =0;i<specializationTypes.Length;i++)
+			{
+				string nameText = "";
+				string buffText = "";
+
+				switch (specializationTypes.GetValue(i))
+				{
+					case SpecializationType.Blessing:
+							nameText = "Prayer";
+							buffText = " → Blessing duration +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing] + "s";
+						break;
+
+						case SpecializationType.Clicking:
+							nameText = "Clicker";
+							buffText = " → Click damage +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
+						break;
+
+						case SpecializationType.Crafting:
+							nameText = "Craftsman";
+							buffText = " → Can craft " + User.Instance.CurrentHero.Specialization.SpecCraftingText + " recipes";
+						break;
+
+						case SpecializationType.Buying:
+							nameText = "Tradesman";
+							buffText = " → Shop offer size +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Buying];
+						break;
+
+						case SpecializationType.Melting:
+							nameText = "Melter";
+							buffText = " → Extra ingot +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%";
+						break;
+
+						case SpecializationType.Questing:
+							nameText = "Adventurer";
+							buffText = " → Quest time -" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Questing] + "%";
+						break;
+
+						case SpecializationType.Dungeon:
+							nameText = "Daredevil";
+							buffText = " → Bossfight timer +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon] + "s";
+						break;
+
+				}
+
+				var nameBlock = new TextBlock()
+				{
+					Name = "Spec"+specializationTypes.GetValue(i).ToString()+"Name",
+					Text = nameText,
+					FontSize = 18,
+					Margin = new Thickness(0, 1, 0, 1)
+				};
+
+				var block = new TextBlock()
+				{
+					Name = "Spec" + specializationTypes.GetValue(i).ToString() + "Buff",
+					Text = buffText,
+					FontSize = 18,
+					Margin = new Thickness(0, 1, 0, 1)
+				};
+
+				
+				Grid.SetRow(nameBlock, i);
+				Grid.SetRow(block, i);
 				Grid.SetColumn(nameBlock, 0);
 				Grid.SetColumn(block, 1);
 
@@ -430,413 +572,7 @@ namespace ClickQuest.Pages
 				SpecializationsGrid.Children.Add(block);
 			}
 
-			#endregion SpecializationBuying
-
-			#region SpecializationMelting
-
-			{
-				var nameBlock = new TextBlock()
-				{
-					Name = "SpecMeltingName",
-					Text = "Melter",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				var block = new TextBlock()
-				{
-					Name = "SpecMelting",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				Binding binding = new Binding("SpecMeltingBuff")
-				{
-					Source = Player.User.Instance.CurrentHero.Specialization,
-					StringFormat = " → Extra ingot +{0}%"
-				};
-
-				block.SetBinding(TextBlock.TextProperty, binding);
-
-				// Generate SpecBuying tooltips.
-				var toolTip = new ToolTip();
-				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
-				ToolTipService.SetShowDuration(GoldPanel, 20000);
-
-				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Melting];
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Melting])
-				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Melting];
-				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Melting] - nextUpgrade;
-
-				var toolTipBlock = new TextBlock()
-				{
-					Style = (Style)this.FindResource("ToolTipTextBlockBase")
-				};
-				toolTipBlock.Inlines.Add(new Run("Increases % chance to get bonus ingots when melting (base chance is 0%)"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run("You can master Melter by melting materials in Blacksmith"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run("Each 100% guarantees additional ingot"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"Next upgrade (+5% chance) in"));
-				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-				toolTipBlock.Inlines.Add(new Run($"melted materials"));
-
-				toolTip.Content = toolTipBlock;
-
-				nameBlock.ToolTip = toolTip;
-				block.ToolTip = toolTip;
-
-				Grid.SetRow(nameBlock, 1);
-				Grid.SetRow(block, 1);
-				Grid.SetColumn(nameBlock, 0);
-				Grid.SetColumn(block, 1);
-
-				SpecializationsGrid.Children.Add(nameBlock);
-				SpecializationsGrid.Children.Add(block);
-			}
-
-			#endregion SpecializationMelting
-
-			#region SpecializationCrafting
-
-			{
-				var nameBlock = new TextBlock()
-				{
-					Name = "SpecCraftingName",
-					Text = "Craftsman",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				var block = new TextBlock()
-				{
-					Name = "SpecCrafting",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				Binding binding = new Binding("SpecCraftingText")
-				{
-					Source = User.Instance.CurrentHero.Specialization,
-					StringFormat = " → Can craft {0} recipes"
-				};
-
-				block.SetBinding(TextBlock.TextProperty, binding);
-
-				// Generate SpecBuying tooltips.
-				var toolTip = new ToolTip();
-				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
-				ToolTipService.SetShowDuration(GoldPanel, 20000);
-
-				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting];
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Crafting])
-				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Crafting];
-				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Crafting] - nextUpgrade;
-
-				var toolTipBlock = new TextBlock()
-				{
-					Style = (Style)this.FindResource("ToolTipTextBlockBase")
-				};
-				toolTipBlock.Inlines.Add(new Run("Increases crafting rarity limit (base limit is Fine rarity)"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run("You can master Craftsman by crafting artifacts in Blacksmith"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"Next rarity limit upgrade in"));
-				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-				toolTipBlock.Inlines.Add(new Run($"crafted artifacts"));
-
-				toolTip.Content = toolTipBlock;
-
-				nameBlock.ToolTip = toolTip;
-				block.ToolTip = toolTip;
-
-				Grid.SetRow(nameBlock, 2);
-				Grid.SetRow(block, 2);
-				Grid.SetColumn(nameBlock, 0);
-				Grid.SetColumn(block, 1);
-
-				SpecializationsGrid.Children.Add(nameBlock);
-				SpecializationsGrid.Children.Add(block);
-			}
-
-			#endregion SpecializationCrafting
-
-			#region SpecializationQuesting
-
-			{
-				var nameBlock = new TextBlock()
-				{
-					Name = "SpecQuestingName",
-					Text = "Adventurer",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				var block = new TextBlock()
-				{
-					Name = "SpecQuesting",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				Binding binding = new Binding("SpecQuestingBuff")
-				{
-					Source = User.Instance.CurrentHero.Specialization,
-					StringFormat = " → Quest time -{0}%"
-				};
-
-				block.SetBinding(TextBlock.TextProperty, binding);
-
-				// Generate SpecBuying tooltips.
-				var toolTip = new ToolTip();
-				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
-				ToolTipService.SetShowDuration(GoldPanel, 20000);
-
-				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Questing];
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Questing])
-				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Questing];
-				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Questing] - nextUpgrade;
-
-				var toolTipBlock = new TextBlock()
-				{
-					Style = (Style)this.FindResource("ToolTipTextBlockBase")
-				};
-				toolTipBlock.Inlines.Add(new Run("Reduces % time to complete quests (limit is 50%)"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run("You can master Adventurer by completing quests"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"Next upgrade (+5% reduced time) in"));
-				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-				toolTipBlock.Inlines.Add(new Run($"completed quests"));
-
-				toolTip.Content = toolTipBlock;
-
-				nameBlock.ToolTip = toolTip;
-				block.ToolTip = toolTip;
-
-				Grid.SetRow(nameBlock, 3);
-				Grid.SetRow(block, 3);
-				Grid.SetColumn(nameBlock, 0);
-				Grid.SetColumn(block, 1);
-
-				SpecializationsGrid.Children.Add(nameBlock);
-				SpecializationsGrid.Children.Add(block);
-			}
-
-			#endregion SpecializationQuesting
-
-			#region SpecializationClicking
-
-			{
-				var nameBlock = new TextBlock()
-				{
-					Name = "SpecClickingName",
-					Text = "Clicker",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				var block = new TextBlock()
-				{
-					Name = "SpecClicking",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				Binding binding = new Binding("SpecClickingBuff")
-				{
-					Source = User.Instance.CurrentHero.Specialization,
-					StringFormat = " → Click damage +{0}"
-				};
-
-				block.SetBinding(TextBlock.TextProperty, binding);
-
-				// Generate SpecBuying tooltips.
-				var toolTip = new ToolTip();
-				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
-				ToolTipService.SetShowDuration(GoldPanel, 20000);
-
-				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking];
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Clicking])
-				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Clicking];
-				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Clicking] - nextUpgrade;
-
-				var toolTipBlock = new TextBlock()
-				{
-					Style = (Style)this.FindResource("ToolTipTextBlockBase")
-				};
-				toolTipBlock.Inlines.Add(new Run("Increases click damage"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run("You can master Clicker by clicking on monsters and bosses"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run("Click damage from this specialization is applied after other effects eg. crit"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"Next upgrade (+1 click damage) in"));
-				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-				toolTipBlock.Inlines.Add(new Run($"clicks"));
-
-				toolTip.Content = toolTipBlock;
-
-				nameBlock.ToolTip = toolTip;
-				block.ToolTip = toolTip;
-
-				Grid.SetRow(nameBlock, 4);
-				Grid.SetRow(block, 4);
-				Grid.SetColumn(nameBlock, 0);
-				Grid.SetColumn(block, 1);
-
-				SpecializationsGrid.Children.Add(nameBlock);
-				SpecializationsGrid.Children.Add(block);
-			}
-
-			#endregion SpecializationClicking
-
-			#region SpecializationBlessing
-
-			{
-				var nameBlock = new TextBlock()
-				{
-					Name = "SpecBlessingName",
-					Text = "Prayer",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				var block = new TextBlock()
-				{
-					Name = "SpecBlessing",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				Binding binding = new Binding("SpecBlessingBuff")
-				{
-					Source = User.Instance.CurrentHero.Specialization,
-					StringFormat = " → Blessing duration +{0}s"
-				};
-
-				block.SetBinding(TextBlock.TextProperty, binding);
-
-				// Generate SpecBuying tooltips.
-				var toolTip = new ToolTip();
-				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
-				ToolTipService.SetShowDuration(GoldPanel, 20000);
-
-				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Blessing];
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Blessing])
-				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Blessing];
-				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Blessing] - nextUpgrade;
-
-				var toolTipBlock = new TextBlock()
-				{
-					Style = (Style)this.FindResource("ToolTipTextBlockBase")
-				};
-				toolTipBlock.Inlines.Add(new Run("Increases blessing duration in seconds"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run("You can master Prayer by buying blessings in Priest"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"Next upgrade (+15s duration) in"));
-				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-				toolTipBlock.Inlines.Add(new Run($"bought blessings"));
-
-				toolTip.Content = toolTipBlock;
-
-				nameBlock.ToolTip = toolTip;
-				block.ToolTip = toolTip;
-
-				Grid.SetRow(nameBlock, 5);
-				Grid.SetRow(block, 5);
-				Grid.SetColumn(nameBlock, 0);
-				Grid.SetColumn(block, 1);
-
-				SpecializationsGrid.Children.Add(nameBlock);
-				SpecializationsGrid.Children.Add(block);
-			}
-
-			#endregion SpecializationBlessing
-
-			#region SpecializationDungeon
-
-			{
-				var nameBlock = new TextBlock()
-				{
-					Name = "SpecDungeonName",
-					Text = "Daredevil",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				var block = new TextBlock()
-				{
-					Name = "SpecDungeon",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				Binding binding = new Binding("SpecDungeonBuff")
-				{
-					Source = User.Instance.CurrentHero.Specialization,
-					StringFormat = " → Bossfight timer +{0}s"
-				};
-
-				block.SetBinding(TextBlock.TextProperty, binding);
-
-				// Generate SpecBuying tooltips.
-				var toolTip = new ToolTip();
-				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
-				ToolTipService.SetShowDuration(GoldPanel, 20000);
-
-				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Dungeon];
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Dungeon])
-				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Dungeon];
-				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Dungeon] - nextUpgrade;
-
-				var toolTipBlock = new TextBlock()
-				{
-					Style = (Style)this.FindResource("ToolTipTextBlockBase")
-				};
-				toolTipBlock.Inlines.Add(new Run("Increases amount of time to defeat boss in seconds (base time is 30s)"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run("You can master Daredevil by buying recipes in shop"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"Next upgrade (+1 second) in"));
-				toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-				toolTipBlock.Inlines.Add(new Run($"finished dungeons"));
-
-				toolTip.Content = toolTipBlock;
-
-				nameBlock.ToolTip = toolTip;
-				block.ToolTip = toolTip;
-
-				Grid.SetRow(nameBlock, 6);
-				Grid.SetRow(block, 6);
-				Grid.SetColumn(nameBlock, 0);
-				Grid.SetColumn(block, 1);
-
-				SpecializationsGrid.Children.Add(nameBlock);
-				SpecializationsGrid.Children.Add(block);
-			}
-
-			#endregion SpecializationDungeon
+			GenerateSpecializationsTooltips();
 		}
 
 		private void GenerateTooltips()

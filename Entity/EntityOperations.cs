@@ -4,6 +4,8 @@ using ClickQuest.Items;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using ClickQuest.Data;
+using ClickQuest.Pages;
 
 namespace ClickQuest.Entity
 {

@@ -77,7 +77,7 @@ namespace ClickQuest.Heroes
 		{
 			SpecializationBuffs = new ObservableDictionary<SpecializationType, int>();
 			SpecializationThresholds = new ObservableDictionary<SpecializationType, int>();
-			SpecializationAmounts = new ObservableDictionary<SpecializationType, int>();
+			SpecializationAmounts = new ObservableDictionary<SpecializationType, int>(true);
 
 			CollectionInitializer.InitializeDictionary<SpecializationType, int>(SpecializationBuffs);
 			CollectionInitializer.InitializeDictionary<SpecializationType, int>(SpecializationThresholds);
