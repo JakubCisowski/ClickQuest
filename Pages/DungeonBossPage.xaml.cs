@@ -78,7 +78,7 @@ namespace ClickQuest.Pages
 			BossButton.IsEnabled = true;
 
 			// SpecDungeonBuff's base value is 30 - the fight's duration will always be 30s or more.
-			Duration = User.Instance.CurrentHero.Specialization.SpecDungeonBuff;
+			Duration = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon];
 
 			// Select the boss, and bind it to interface.
 			_boss = boss;
@@ -158,7 +158,7 @@ namespace ClickQuest.Pages
 			this.TestRewardsBlock.Text = lootText;
 
 			// Increase boss killing specialization amount (it will update buffs in setter).
-			User.Instance.CurrentHero.Specialization.SpecDungeonAmount++;
+			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Dungeon]++;
 
 			// Increase achievement amount.
 			User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.DungeonsCompleted]++;
@@ -245,13 +245,13 @@ namespace ClickQuest.Pages
 				AchievementsWindow.Instance.UpdateAchievements();
 			}
 			// Apply specialization clicking buff.
-			damage += User.Instance.CurrentHero.Specialization.SpecClickingBuff;
+			damage += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
 
 			// Deal damage to boss.
 			_boss.CurrentHealth -= damage;
 
 			// Increase Clicking specialization.
-			User.Instance.CurrentHero.Specialization.SpecClickingAmount++;
+			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
 
 			// Check if boss is dead now.
 			CheckIfBossDied();

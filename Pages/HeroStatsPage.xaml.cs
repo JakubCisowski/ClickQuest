@@ -397,12 +397,12 @@ namespace ClickQuest.Pages
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
 
 				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecBuyingAmount;
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecBuyingThreshold)
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Buying];
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Buying])
 				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecBuyingThreshold;
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Buying];
 				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecBuyingThreshold - nextUpgrade;
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Buying] - nextUpgrade;
 
 				var toolTipBlock = new TextBlock()
 				{
@@ -464,12 +464,12 @@ namespace ClickQuest.Pages
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
 
 				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecMeltingAmount;
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecMeltingThreshold)
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Melting];
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Melting])
 				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecMeltingThreshold;
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Melting];
 				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecMeltingThreshold - nextUpgrade;
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Melting] - nextUpgrade;
 
 				var toolTipBlock = new TextBlock()
 				{
@@ -533,12 +533,12 @@ namespace ClickQuest.Pages
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
 
 				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecCraftingAmount;
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecCraftingThreshold)
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting];
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Crafting])
 				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecCraftingThreshold;
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Crafting];
 				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecCraftingThreshold - nextUpgrade;
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Crafting] - nextUpgrade;
 
 				var toolTipBlock = new TextBlock()
 				{
@@ -600,12 +600,12 @@ namespace ClickQuest.Pages
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
 
 				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecQuestingAmount;
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecQuestingThreshold)
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Questing];
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Questing])
 				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecQuestingThreshold;
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Questing];
 				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecQuestingThreshold - nextUpgrade;
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Questing] - nextUpgrade;
 
 				var toolTipBlock = new TextBlock()
 				{
@@ -667,12 +667,12 @@ namespace ClickQuest.Pages
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
 
 				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecClickingAmount;
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecClickingThreshold)
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking];
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Clicking])
 				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecClickingThreshold;
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Clicking];
 				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecClickingThreshold - nextUpgrade;
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Clicking] - nextUpgrade;
 
 				var toolTipBlock = new TextBlock()
 				{
@@ -736,12 +736,12 @@ namespace ClickQuest.Pages
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
 
 				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecBlessingAmount;
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecBlessingThreshold)
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Blessing];
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Blessing])
 				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecBlessingThreshold;
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Blessing];
 				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecBlessingThreshold - nextUpgrade;
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Blessing] - nextUpgrade;
 
 				var toolTipBlock = new TextBlock()
 				{
@@ -803,12 +803,12 @@ namespace ClickQuest.Pages
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
 
 				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecDungeonAmount;
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecDungeonThreshold)
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Dungeon];
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Dungeon])
 				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecDungeonThreshold;
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Dungeon];
 				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecDungeonThreshold - nextUpgrade;
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[SpecializationType.Dungeon] - nextUpgrade;
 
 				var toolTipBlock = new TextBlock()
 				{

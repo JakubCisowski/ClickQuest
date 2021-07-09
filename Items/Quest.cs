@@ -486,14 +486,14 @@ namespace ClickQuest.Items
 					// Create a new Blessing.
 					var blessing = new Blessing(blessingBlueprint);
 					// Increase his duration based on Blessing Specialization buff.
-					blessing.Duration += User.Instance.CurrentHero.Specialization.SpecBlessingBuff;
+					blessing.Duration += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing];
 					User.Instance.CurrentHero.Blessings.Add(blessing);
 					blessing.ChangeBuffStatus(true);
 				}
 			}
 
 			// Grant Specialization Questing progress.
-			User.Instance.CurrentHero.Specialization.SpecQuestingAmount++;
+			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Questing]++;
 
 			// Refresh all stats and equipment pages (skip 2 pages - MainMenu and HeroCreation, because they don't have an EquipmentFrame).
 			// Alternative to .Skip(2) - try catch and continue the loop if an exception is caught (that is, if EquipmentFrame does not exist).

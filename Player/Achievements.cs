@@ -54,52 +54,17 @@ namespace ClickQuest.Player
 
 			NumericAchievementCollection = new ObservableDictionary<NumericAchievementType, long>();
 
-			for (int i=0;i<amountOfNumericAchievements;i++)
-			{
-				NumericAchievementCollection.Add((NumericAchievementType)i,0);
-			}
+			CollectionInitializer.InitializeDictionary<NumericAchievementType, long>(NumericAchievementCollection);
 		}
 
 		public void SerializeAchievements()
 		{
-			var builder = new StringBuilder();
-
-			int i = 0;
-
-			foreach (var pair in NumericAchievementCollection)
-			{
-				builder.Append($"{pair.Value.ToString()}");
-
-				if (i != NumericAchievementCollection.Count() - 1)
-				{
-					builder.Append(',');
-				}
-
-				i++;
-			}
-
-			AchievementCollectionString = builder.ToString();
+			AchievementCollectionString = Serialization.SerializeData<NumericAchievementType, long>(NumericAchievementCollection);
 		}
 
 		public void DeserializeAchievements()
 		{
-			if (string.IsNullOrEmpty(AchievementCollectionString))
-			{
-				return;
-			}
-
-			int indexOfComma = -1;
-			int i = 0;
-
-			while ((indexOfComma = AchievementCollectionString.IndexOf(',')) != -1)
-			{
-				string value = AchievementCollectionString.Substring(0, indexOfComma);
-				AchievementCollectionString = AchievementCollectionString.Remove(0, indexOfComma+1);
-				NumericAchievementCollection[(NumericAchievementType)i] = long.Parse(value);
-				i++;
-			}
-
-			NumericAchievementCollection[(NumericAchievementType)i]=long.Parse(AchievementCollectionString);			
+			Serialization.DeserializeData<NumericAchievementType, long>(AchievementCollectionString, NumericAchievementCollection);	
 		}
 	}
 }

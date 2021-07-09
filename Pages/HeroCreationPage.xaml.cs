@@ -24,31 +24,7 @@ namespace ClickQuest.Pages
 
 		private static void SeedSpecializations(Hero hero)
 		{
-			hero.Specialization = new Specialization()
-			{
-				SpecBuyingAmount = 0,
-				SpecClickingAmount = 0,
-				SpecBlessingAmount = 0,
-				SpecCraftingAmount = 0,
-				SpecQuestingAmount = 0,
-				SpecMeltingAmount = 0,
-				SpecDungeonAmount = 0,
-				SpecBlessingThreshold = 1,
-				SpecBlessingBuff = 0,
-				SpecBuyingThreshold = 1,
-				SpecBuyingBuff = 0,
-				SpecQuestingThreshold = 1,
-				SpecQuestingBuff = 0,
-				SpecClickingThreshold = 1,
-				SpecClickingBuff = 0,
-				SpecCraftingThreshold = 1,
-				SpecCraftingBuff = 0,
-				SpecMeltingThreshold = 1,
-				SpecMeltingBuff = 0,
-				SpecDungeonThreshold = 1,
-				SpecDungeonBuff = 0,
-				SpecCraftingText = "Fine"
-			};
+			hero.Specialization = new Specialization();
 		}
 
 		public void CreateHeroButton_Click(object sender, RoutedEventArgs e)

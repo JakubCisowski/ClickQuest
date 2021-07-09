@@ -2,6 +2,7 @@ using ClickQuest.Player;
 using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Items;
+using ClickQuest.Heroes;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,7 +25,7 @@ namespace ClickQuest.Pages
 			// Calculate shop offer size according to specialization bonus (base bonus: 5).
 			if (User.Instance.CurrentHero != null)
 			{
-				ItemsListViewBuy.ItemsSource = Database.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecBuyingBuff);
+				ItemsListViewBuy.ItemsSource = Database.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Buying]);
 			}
 
 			ItemsListViewSellMaterials.Items.Refresh();
@@ -82,7 +83,7 @@ namespace ClickQuest.Pages
 				UpdateShop();
 
 				// Increase Specialization Buying amount.
-				User.Instance.CurrentHero.Specialization.SpecBuyingAmount++;
+				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Buying]++;
 			}
 			else
 			{

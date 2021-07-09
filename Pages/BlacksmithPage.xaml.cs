@@ -3,6 +3,7 @@ using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Items;
 using ClickQuest.Windows;
+using ClickQuest.Heroes;
 using System;
 using System.Linq;
 using System.Windows;
@@ -59,7 +60,7 @@ namespace ClickQuest.Pages
 				// Calculate ingot bonus based on Melting Specialization.
 				var ingotAmount = 1;
 
-				var meltingBuff = User.Instance.CurrentHero.Specialization.SpecMeltingBuff;
+				var meltingBuff = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting];
 				while (meltingBuff >= 100)
 				{
 					ingotAmount++;
@@ -107,7 +108,7 @@ namespace ClickQuest.Pages
 				UpdateBlacksmith();
 
 				// Increase Specialization Melting amount.
-				User.Instance.CurrentHero.Specialization.SpecMeltingAmount++;
+				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Melting]++;
 			}
 			else if (b.CommandParameter is Artifact artifact)
 			{
@@ -121,7 +122,7 @@ namespace ClickQuest.Pages
 				// Calculate ingot bonus based on Melting Specialization.
 				var ingotAmount = 100;
 
-				var meltingBuff = User.Instance.CurrentHero.Specialization.SpecMeltingBuff;
+				var meltingBuff = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting];
 				while (meltingBuff >= 100)
 				{
 					ingotAmount += 100;
@@ -166,7 +167,7 @@ namespace ClickQuest.Pages
 				UpdateBlacksmith();
 
 				// Increase Specialization Melting amount.
-				User.Instance.CurrentHero.Specialization.SpecMeltingAmount++;
+				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Melting]++;
 			}
 		}
 
@@ -176,7 +177,7 @@ namespace ClickQuest.Pages
 			var recipe = b.CommandParameter as Recipe;
 
 			// Check if user meets Crafting Specialization rarity requirements.
-			if (User.Instance.CurrentHero.Specialization.SpecCraftingBuff < (int)recipe.Rarity)
+			if (User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting] < (int)recipe.Rarity)
 			{
 				// Error - user doesn't meet requirements - stop this function.
 				AlertBox.Show($"You dont meet Craftsmen specialization requirements to craft {(int)recipe.Rarity} artifacts.\nCraft more common items in order to master it.", MessageBoxButton.OK);
@@ -229,7 +230,7 @@ namespace ClickQuest.Pages
 			UpdateBlacksmith();
 
 			// Increase Specialization Crafting amount.
-			User.Instance.CurrentHero.Specialization.SpecCraftingAmount++;
+			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting]++;
 		}
 
 		private void CraftIngotButton_Click(object sender, RoutedEventArgs e)
@@ -238,7 +239,7 @@ namespace ClickQuest.Pages
 			var recipe = b.CommandParameter as Recipe;
 
 			// Check if user meets Crafting Specialization rarity requirements.
-			if (User.Instance.CurrentHero.Specialization.SpecCraftingBuff < (int)recipe.Rarity)
+			if (User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting] < (int)recipe.Rarity)
 			{
 				// Error - user doesn't meet requirements - stop this function.
 				AlertBox.Show($"You dont meet Craftsmen specialization requirements to craft {(int)recipe.Rarity} artifacts.\nCraft more common items in order to master it.", MessageBoxButton.OK);
@@ -272,7 +273,7 @@ namespace ClickQuest.Pages
 				UpdateBlacksmith();
 
 				// Increase Specialization Crafting amount.
-				User.Instance.CurrentHero.Specialization.SpecCraftingAmount++;
+				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting]++;
 			}
 			else
 			{

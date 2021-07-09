@@ -271,12 +271,12 @@ namespace ClickQuest.Controls
 					AchievementsWindow.Instance.UpdateAchievements();
 				}
 				// Apply specialization clicking buff.
-				damage += User.Instance.CurrentHero.Specialization.SpecClickingBuff;
+				damage += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
 				// Deal damage to monster.
 				Monster.CurrentHealth -= damage;
 
 				// Increase Clicking specialization.
-				User.Instance.CurrentHero.Specialization.SpecClickingAmount++;
+				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
 
 				// Check if monster is dead now.
 				CheckIfMonsterDied();
