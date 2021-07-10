@@ -5,7 +5,10 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations.Schema;
+using ClickQuest.Data;
 using ClickQuest.Extensions;
+using ClickQuest.Pages;
+using ClickQuest.Player;
 
 namespace ClickQuest.Heroes
 {
@@ -73,15 +76,37 @@ namespace ClickQuest.Heroes
 
 		#endregion
 
+		#region Event handlers
+
+		private void SpecializationAmounts_Updated(object sender, EventArgs e)
+		{
+			User.Instance.CurrentHero?.Specialization.UpdateBuffs();
+		}
+
+		// Po co to było wszędzie?
+		private void SpecializationCollections_Updated(object sender, EventArgs e)
+		{
+			(Database.Pages["Town"] as TownPage)?.StatsFrame.Refresh();
+		}
+		
+		#endregion
+		
 		public Specialization()
 		{
 			SpecializationBuffs = new ObservableDictionary<SpecializationType, int>();
 			SpecializationThresholds = new ObservableDictionary<SpecializationType, int>();
-			SpecializationAmounts = new ObservableDictionary<SpecializationType, int>(true);
+			SpecializationAmounts = new ObservableDictionary<SpecializationType, int>();
 
 			CollectionInitializer.InitializeDictionary<SpecializationType, int>(SpecializationBuffs);
 			CollectionInitializer.InitializeDictionary<SpecializationType, int>(SpecializationThresholds);
 			CollectionInitializer.InitializeDictionary<SpecializationType, int>(SpecializationAmounts);
+			
+			// Assign event handlers.
+			SpecializationAmounts.SpecializationCollectionUpdated += SpecializationAmounts_Updated;
+
+			SpecializationBuffs.SpecializationCollectionUpdated += SpecializationCollections_Updated;
+			SpecializationThresholds.SpecializationCollectionUpdated += SpecializationCollections_Updated;
+			SpecializationAmounts.SpecializationCollectionUpdated += SpecializationCollections_Updated;
 
 			UpdateThresholds();
 
