@@ -82,12 +82,6 @@ namespace ClickQuest.Heroes
 		{
 			User.Instance.CurrentHero?.Specialization.UpdateBuffs();
 		}
-
-		// Po co to było wszędzie?
-		private void SpecializationCollections_Updated(object sender, EventArgs e)
-		{
-			(Database.Pages["Town"] as TownPage)?.StatsFrame.Refresh();
-		}
 		
 		#endregion
 		
@@ -103,10 +97,6 @@ namespace ClickQuest.Heroes
 			
 			// Assign event handlers.
 			SpecializationAmounts.SpecializationCollectionUpdated += SpecializationAmounts_Updated;
-
-			SpecializationBuffs.SpecializationCollectionUpdated += SpecializationCollections_Updated;
-			SpecializationThresholds.SpecializationCollectionUpdated += SpecializationCollections_Updated;
-			SpecializationAmounts.SpecializationCollectionUpdated += SpecializationCollections_Updated;
 
 			UpdateThresholds();
 
