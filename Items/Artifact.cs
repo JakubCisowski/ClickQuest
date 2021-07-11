@@ -10,5 +10,10 @@ namespace ClickQuest.Items
 		{
 
 		}
+
+		public Artifact() : base()
+		{
+			
+		}
 	}
 }

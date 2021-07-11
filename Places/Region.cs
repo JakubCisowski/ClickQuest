@@ -24,7 +24,7 @@ namespace ClickQuest.Places
 		private string _name;
 		private string _description;
 		private string _background;
-		private List<(Monster Monster, double Frequency)> _monsters;
+		private List<MonsterSpawnPattern> _monsters;
 		private int _levelRequirement;
 
 		#endregion Private Fields
@@ -82,7 +82,7 @@ namespace ClickQuest.Places
 			}
 		}
 
-		public List<(Monster Monster, double Frequency)> Monsters
+		public List<MonsterSpawnPattern> Monsters
 		{
 			get
 			{
@@ -110,7 +110,7 @@ namespace ClickQuest.Places
 
 		#endregion Properties
 
-		public Region(int id, string name, string description, string background, List<(Monster, double)> monsters, int requirement)
+		public Region(int id, string name, string description, string background, List<MonsterSpawnPattern> monsters, int requirement)
 		{
 			Id = id;
 			Name = name;
@@ -118,6 +118,11 @@ namespace ClickQuest.Places
 			Background = background;
 			Monsters = monsters;
 			LevelRequirement = requirement;
+		}
+
+		public Region()
+		{
+
 		}
 	}
 }

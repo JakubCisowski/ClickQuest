@@ -6,6 +6,7 @@ using ClickQuest.Heroes;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.Generic;
 
 namespace ClickQuest.Pages
 {
@@ -25,7 +26,7 @@ namespace ClickQuest.Pages
 			// Calculate shop offer size according to specialization bonus (base bonus: 5).
 			if (User.Instance.CurrentHero != null)
 			{
-				ItemsListViewBuy.ItemsSource = Database.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Buying]);
+				ItemsListViewBuy.ItemsSource = GetShopOfferAsRecipes();
 			}
 
 			ItemsListViewSellMaterials.Items.Refresh();
@@ -38,9 +39,9 @@ namespace ClickQuest.Pages
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Go back to Town.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
-			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
-			(Database.Pages["Town"] as TownPage).StatsFrame.Refresh();
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Town"]);
+			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
+			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
 		}
 
@@ -52,7 +53,7 @@ namespace ClickQuest.Pages
 			User.Instance.CurrentHero.RemoveItem(item);
 			User.Instance.Gold += item.Value;
 
-			(Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
+			(GameData.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
 			UpdateShop();
 		}
 
@@ -76,10 +77,10 @@ namespace ClickQuest.Pages
 				User.Instance.CurrentHero.AddItem(recipe);
 				User.Instance.Gold -= recipe.Value;
 
-				(Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
+				(GameData.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
 				
 				// Refresh stats frame (for specialization update).
-				(Database.Pages["Shop"] as ShopPage).StatsFrame.Refresh();
+				(GameData.Pages["Shop"] as ShopPage).StatsFrame.Refresh();
 				UpdateShop();
 
 				// Increase Specialization Buying amount.
@@ -93,5 +94,18 @@ namespace ClickQuest.Pages
 		}
 
 		#endregion Events
+
+		public List<Recipe> GetShopOfferAsRecipes()
+		{
+			var result = new List<Recipe>();
+			var listOfIds = GameData.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Buying]);
+
+			foreach (var id in listOfIds)
+			{
+				result.Add(GameData.Recipes.FirstOrDefault(x => x.Id == id));
+			}
+
+			return result;
+		}
 	}
 }

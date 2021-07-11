@@ -8,8 +8,8 @@ namespace ClickQuest.Places
 		private int _id;
 		private string _name;
 		private string _description;
-		private List<int> _keyRequirements;
-		private Color _color;
+		private List<int> _keyRequirementRarities;
+		private string _color;
 
 		public int Id
 		{
@@ -47,19 +47,19 @@ namespace ClickQuest.Places
 			}
 		}
 
-		public List<int> KeyRequirements
+		public List<int> KeyRequirementRarities
 		{
 			get
 			{
-				return _keyRequirements;
+				return _keyRequirementRarities;
 			}
 			set
 			{
-				_keyRequirements = value;
+				_keyRequirementRarities = value;
 			}
 		}
 
-		public Color Color
+		public string Color
 		{
 			get
 			{
@@ -71,13 +71,18 @@ namespace ClickQuest.Places
 			}
 		}
 
-		public DungeonGroup(int id, string name, string description, List<int> keyRequirements, Color color)
+		public DungeonGroup(int id, string name, string description, List<int> keyRequirements, string color)
 		{
 			Id = id;
 			Name = name;
 			Description = description;
-			KeyRequirements = keyRequirements;
+			KeyRequirementRarities = keyRequirements;
 			Color = color;
+		}
+
+		public DungeonGroup()
+		{
+
 		}
 	}
 }

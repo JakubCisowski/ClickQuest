@@ -1,0 +1,36 @@
+[
+    {
+        "Id": 1,
+        "LevelRequirement": 0,
+        "Name": "Forest",
+        "Description": "ForestDescription",
+        "Background": "/example.png",
+        "Monsters": [
+        {
+            "MonsterId": 1,
+            "Frequency": 1.0000
+        },
+        {
+            "MonsterId": 2,
+            "Frequency": 0.0000
+        }
+        ]
+    },
+    {
+        "Id": 2,
+        "LevelRequirement": 0,
+        "Name": "Cave",
+        "Description": "CaveDescription",
+        "Background": "/example2.png",
+        "Monsters": [
+            {
+                "MonsterId": 1,
+                "Frequency": 0.0000
+            },
+            {
+                "MonsterId": 2,
+                "Frequency": 1.0000
+            }
+            ]
+    }
+]

@@ -21,40 +21,40 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Data\Artifacts.json">
+    <None Update="Data\GameAssets\Artifacts.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Materials.json">
+    <None Update="Data\GameAssets\Materials.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Monsters.json">
+    <None Update="Data\GameAssets\Monsters.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Recipes.json">
+    <None Update="Data\GameAssets\Recipes.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Regions.json">
+    <None Update="Data\GameAssets\Regions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\ShopOffer.json">
+    <None Update="Data\GameAssets\ShopOffer.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Blessings.json">
+    <None Update="Data\GameAssets\Blessings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\PriestOffer.json">
+    <None Update="Data\GameAssets\PriestOffer.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Quests.json">
+    <None Update="Data\GameAssets\Quests.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Bosses.json">
+    <None Update="Data\GameAssets\Bosses.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Dungeons.json">
+    <None Update="Data\GameAssets\Dungeons.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\DungeonGroups.json">
+    <None Update="Data\GameAssets\DungeonGroups.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

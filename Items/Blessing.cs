@@ -210,6 +210,11 @@ namespace ClickQuest.Items
 			Buff = buff;
 			Value = value;
 		}
+		
+		public Blessing()
+		{
+
+		}
 
 		public void ChangeBuffStatus(bool add)
 		{
@@ -231,7 +236,7 @@ namespace ClickQuest.Items
 						}
 
 						// Increase achievement amount.
-						if (Duration == Database.Blessings.FirstOrDefault(x=>x.Id==this.Id).Duration)
+						if (Duration == GameData.Blessings.FirstOrDefault(x=>x.Id==this.Id).Duration)
 						{
 							User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.BlessingsUsed]++;
 							AchievementsWindow.Instance.UpdateAchievements();
@@ -252,7 +257,7 @@ namespace ClickQuest.Items
 						DurationText = $"{Name}\n{Duration / 60}m {Duration % 60}s";
 
 						// Refresh all stats panel bindings.
-						foreach (var page in Database.Pages.Skip(2))
+						foreach (var page in GameData.Pages.Skip(2))
 						{
 							dynamic p = page.Value;
 							p.StatsFrame.Refresh();
@@ -296,7 +301,7 @@ namespace ClickQuest.Items
 				DurationText = "";
 
 				// Refresh all stats panel bindings.
-				foreach (var page in Database.Pages.Skip(2))
+				foreach (var page in GameData.Pages.Skip(2))
 				{
 					dynamic p = page.Value;
 					p.StatsFrame.Refresh();

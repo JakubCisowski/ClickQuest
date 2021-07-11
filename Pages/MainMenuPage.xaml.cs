@@ -154,7 +154,7 @@ namespace ClickQuest.Pages
 			// If the limit is not reached, move to hero creation page.
 			if (User.Instance.Heroes.Count < 6)
 			{
-				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["HeroCreation"]);
+				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["HeroCreation"]);
 				(Window.GetWindow(this) as GameWindow).LocationInfo = "Hero creation";
 			}
 		}
@@ -171,7 +171,7 @@ namespace ClickQuest.Pages
 			// Clone hero's quests using those from Database.
 			foreach (var heroQuest in hero.Quests)
 			{
-				var databaseQuest = Database.Quests.FirstOrDefault(x => x.Id == heroQuest.Id);
+				var databaseQuest = GameData.Quests.FirstOrDefault(x => x.Id == heroQuest.Id);
 				heroQuest.CopyQuest(databaseQuest);
 			}
 
@@ -185,11 +185,11 @@ namespace ClickQuest.Pages
 			hero.SessionStartDate = DateTime.Now;
 
 			// Refresh pages, move to town and change location text.
-			Database.RefreshPages();
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
+			GameData.RefreshPages();
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.GameData.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
-			(Database.Pages["Town"] as TownPage).StatsFrame.Refresh();
-			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
+			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
+			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
 		}
 
 		private void DeleteHeroButton_Click(object sender, RoutedEventArgs e)

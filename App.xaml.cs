@@ -13,7 +13,7 @@ namespace ClickQuest
 			EntityOperations.CreateAndSeedDatabase();
 
 			// Load JSONs and Entity.
-			Database.Load();
+			DataLoader.Load();
 			EntityOperations.LoadGame();
 
 			// Save current time as the application's start time (for achievement tracking).

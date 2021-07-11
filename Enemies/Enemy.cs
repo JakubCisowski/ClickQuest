@@ -156,6 +156,11 @@ public abstract partial class Enemy : INotifyPropertyChanged
 		CurrentHealthProgress = enemyToCopy.CurrentHealthProgress;
 	}
 
+	public Enemy()
+	{
+		CurrentHealthProgress = 100;
+	}
+
 	private int CalculateCurrentHealthProgress()
 	{
 		// Calculate killing progress in % (for progress bar on monster button).

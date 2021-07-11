@@ -6,6 +6,7 @@ using System.Linq;
 namespace ClickQuest.Items
 {
 	public partial class Recipe : Item
+
 	{
 		private int _artifactId;
 		private Dictionary<int, int> _materialIds;
@@ -37,25 +38,31 @@ namespace ClickQuest.Items
 			}
 		}
 
-		public Recipe(int id, string name, Rarity rarity, string description, int value, int artifactId) : base(id, name, rarity, description, value)
-		{
-			ArtifactId = artifactId;
-			MaterialIds = new Dictionary<int, int>();
-		}
-
 		public void UpdateRequirementsDescription()
 		{
-			MaterialIds = Database.Recipes.FirstOrDefault(x => x.Id == this.Id)?.MaterialIds;
+			MaterialIds = GameData.Recipes.FirstOrDefault(x => x.Id == this.Id)?.MaterialIds;
 
 			RequirementsDescription = "Materials required: ";
 
 			foreach (var elem in MaterialIds)
 			{
 				// Add name
-				RequirementsDescription += Database.Materials.FirstOrDefault(x => x.Id == elem.Key).Name;
+				RequirementsDescription += GameData.Materials.FirstOrDefault(x => x.Id == elem.Key).Name;
 				// Add quantity
 				RequirementsDescription = RequirementsDescription + ": " + elem.Value + "; ";
 			}
+		}
+
+		public void UpdateDescription()
+		{
+			Description = GameData.Artifacts.FirstOrDefault(x => x.Id == ArtifactId)?.Description;
+		}
+
+
+		public Recipe(int id, string name, Rarity rarity, string description, int value, int artifactId) : base(id, name, rarity, description, value)
+		{
+			ArtifactId = artifactId;
+			MaterialIds = new Dictionary<int, int>();
 		}
 
 		public Recipe(Item itemToCopy) : base(itemToCopy)
@@ -66,6 +73,11 @@ namespace ClickQuest.Items
 				MaterialIds = recipe.MaterialIds;
 				RequirementsDescription = recipe.RequirementsDescription;
 			}
+		}
+
+		public Recipe() : base ()
+		{
+
 		}
 	}
 }

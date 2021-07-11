@@ -31,7 +31,7 @@ namespace ClickQuest.Pages
 			EntityOperations.RemoveQuests();
 
 			// Generate 3 quest ids.
-			var questsForCurrentHeroClass = Database.Quests.Where(x => x.HeroClass == User.Instance.CurrentHero.HeroClass || x.HeroClass == HeroClass.All).ToList();
+			var questsForCurrentHeroClass = GameData.Quests.Where(x => x.HeroClass == User.Instance.CurrentHero.HeroClass || x.HeroClass == HeroClass.All).ToList();
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -86,10 +86,10 @@ namespace ClickQuest.Pages
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Go back to Town.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
-			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
-			(Database.Pages["Town"] as TownPage).StatsFrame.Refresh();
+			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
+			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
 		}
 
 		private void RerollButton_Click(object sender, RoutedEventArgs e)

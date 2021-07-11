@@ -1,0 +1,40 @@
+[
+    {
+      "Id": 1,
+      "Name": "Gray Wolf",
+      "Description": "GrayWolfDesc",
+      "Health": 20,
+      "Image": "/example.png",
+      "Loot": [
+        {
+          "ItemType": "Material",
+          "ItemId": 1,
+          "Frequency": 0.5000
+        },
+        {
+          "ItemType": "Recipe",
+          "ItemId": 1,
+          "Frequency": 0.5000
+        }
+      ]
+    },
+    {
+        "Id": 2,
+        "Name": "Cave Bat",
+        "Description": "CaveBatDesc",
+        "Health": 15,
+        "Image": "/example.png",
+        "Loot": [
+            {
+                "ItemType": "Material",
+                "ItemId": 0,
+                "Frequency": 0.1000
+            },
+            {
+                "ItemType": "Material",
+                "ItemId": 2,
+                "Frequency": 0.9000
+            }
+        ]
+      }
+]

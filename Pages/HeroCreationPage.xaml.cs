@@ -60,22 +60,22 @@ namespace ClickQuest.Pages
 				User.Instance.CurrentHero.Specialization.UpdateBuffs();
 
 				// Refresh bindings.
-				Database.RefreshPages();
+				GameData.RefreshPages();
 
 				// Set hero session start date.
 				hero.SessionStartDate = DateTime.Now;
 
 				// Go to Town.
-				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["Town"]);
-				(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
-				(Database.Pages["Town"] as TownPage).StatsFrame.Refresh();
+				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.GameData.Pages["Town"]);
+				(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
+				(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
 			}
 		}
 
 		public void CancelButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Go back to Menu.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["MainMenu"]);
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["MainMenu"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "";
 		}
 	}

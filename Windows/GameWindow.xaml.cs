@@ -64,8 +64,8 @@ namespace ClickQuest
 
 			this.DataContext = this;
 
-			(Database.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
-			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.Database.Pages["MainMenu"]);
+			(GameData.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
+			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.GameData.Pages["MainMenu"]);
 		}
 
 		#region Events

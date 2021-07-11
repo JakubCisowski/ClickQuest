@@ -101,10 +101,10 @@ namespace ClickQuest.Pages
 				AchievementsWindow.Instance.UpdateAchievements();
 
 				// Update blacksmith page.
-				(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
+				(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 				
 				// Refresh stats frame (for specialization update).
-				(Database.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
+				(GameData.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
 				UpdateBlacksmith();
 
 				// Increase Specialization Melting amount.
@@ -163,7 +163,7 @@ namespace ClickQuest.Pages
 				AchievementsWindow.Instance.UpdateAchievements();
 
 				// Update blacksmith page.
-				(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
+				(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 				UpdateBlacksmith();
 
 				// Increase Specialization Melting amount.
@@ -218,15 +218,15 @@ namespace ClickQuest.Pages
 			}
 
 			// Add artifact to equipment.
-			var artifact = Database.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
+			var artifact = GameData.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
 			User.Instance.CurrentHero.AddItem(artifact);
 
 			// Remove the recipe used.
 			User.Instance.CurrentHero.RemoveItem(recipe);
 
-			(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
+			(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 			// Refresh stats frame (for specialization update).
-			(Database.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
+			(GameData.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
 			UpdateBlacksmith();
 
 			// Increase Specialization Crafting amount.
@@ -263,13 +263,13 @@ namespace ClickQuest.Pages
 				ingotRarityNeeded.Quantity -= recipe.IngotsRequired;
 
 				// Add artifact to equipment.
-				var artifact = Database.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
+				var artifact = GameData.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
 				User.Instance.CurrentHero.AddItem(artifact);
 
 				// Remove the recipe used.
 				User.Instance.CurrentHero.RemoveItem(recipe);
 
-				(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
+				(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 				UpdateBlacksmith();
 
 				// Increase Specialization Crafting amount.
@@ -285,10 +285,10 @@ namespace ClickQuest.Pages
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Go back to Town.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
-			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
-			(Database.Pages["Town"] as TownPage).StatsFrame.Refresh();
+			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
+			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
 		}
 
 		#endregion Events

@@ -251,7 +251,7 @@ namespace ClickQuest.Items
 				// New reward id / last id in the list - display reward info on the button.
 				else
 				{
-					RewardsDescription += $"\n{counter}x {Database.Blessings.FirstOrDefault(x => x.Id == RewardBlessingIds[i]).Name}";
+					RewardsDescription += $"\n{counter}x {GameData.Blessings.FirstOrDefault(x => x.Id == RewardBlessingIds[i]).Name}";
 					counter = 1;
 				}
 
@@ -275,7 +275,7 @@ namespace ClickQuest.Items
 				// New reward id / last id in the list - display reward info on the button.
 				else
 				{
-					RewardsDescription += $"\n{counter}x {Database.Materials.FirstOrDefault(x => x.Id == RewardMaterialIds[i]).Name}";
+					RewardsDescription += $"\n{counter}x {GameData.Materials.FirstOrDefault(x => x.Id == RewardMaterialIds[i]).Name}";
 					counter = 1;
 				}
 
@@ -299,7 +299,7 @@ namespace ClickQuest.Items
 				// New reward id / last id in the list - display reward info on the button.
 				else
 				{
-					RewardsDescription += $"\n{counter}x {Database.Recipes.FirstOrDefault(x => x.Id == RewardRecipeIds[i]).Name}";
+					RewardsDescription += $"\n{counter}x {GameData.Recipes.FirstOrDefault(x => x.Id == RewardRecipeIds[i]).Name}";
 					counter = 1;
 				}
 
@@ -371,7 +371,7 @@ namespace ClickQuest.Items
 			questCopy._timer.Start();
 
 			// Refresh hero stats panel (for timer).
-			(Database.Pages["QuestMenu"] as QuestMenuPage).StatsFrame.Refresh();
+			(GameData.Pages["QuestMenu"] as QuestMenuPage).StatsFrame.Refresh();
 		}
 
 		public void StopQuest()
@@ -386,7 +386,7 @@ namespace ClickQuest.Items
 			AssignRewards();
 
 			// Reroll new set of 3 quests.
-			(Database.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
+			(GameData.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
 
 			// Start AuraTimer if user is on RegionPage.
 			if ((Application.Current.MainWindow as GameWindow).CurrentFrame.Content is RegionPage regionPage)
@@ -418,14 +418,14 @@ namespace ClickQuest.Items
 			// Assign materials.
 			foreach (var materialId in RewardMaterialIds)
 			{
-				var material = Database.Materials.FirstOrDefault(x => x.Id == materialId);
+				var material = GameData.Materials.FirstOrDefault(x => x.Id == materialId);
 				User.Instance.CurrentHero.AddItem(material);
 			}
 
 			// Assign recipes.
 			foreach (var recipeId in RewardRecipeIds)
 			{
-				var recipe = Database.Recipes.FirstOrDefault(x => x.Id == recipeId);
+				var recipe = GameData.Recipes.FirstOrDefault(x => x.Id == recipeId);
 				User.Instance.CurrentHero.AddItem(recipe);
 			}
 
@@ -464,7 +464,7 @@ namespace ClickQuest.Items
 			foreach (var blessingId in RewardBlessingIds)
 			{
 				// Select right blessing.
-				var blessingBlueprint = Database.Blessings.FirstOrDefault(x => x.Id == blessingId);
+				var blessingBlueprint = GameData.Blessings.FirstOrDefault(x => x.Id == blessingId);
 
 				MessageBoxResult result;
 
@@ -497,7 +497,7 @@ namespace ClickQuest.Items
 
 			// Refresh all stats and equipment pages (skip 2 pages - MainMenu and HeroCreation, because they don't have an EquipmentFrame).
 			// Alternative to .Skip(2) - try catch and continue the loop if an exception is caught (that is, if EquipmentFrame does not exist).
-			foreach (var page in Database.Pages.Skip(2))
+			foreach (var page in GameData.Pages.Skip(2))
 			{
 				dynamic p = page.Value;
 				p.EquipmentFrame.Refresh();

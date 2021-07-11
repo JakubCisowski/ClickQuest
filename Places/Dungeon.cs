@@ -1,6 +1,8 @@
+using ClickQuest.Data;
 using ClickQuest.Enemies;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace ClickQuest.Places
@@ -21,11 +23,11 @@ namespace ClickQuest.Places
 		#region Private Fields
 
 		private int _id;
-		private DungeonGroup _dungeonGroup;
+		private int _dungeonGroupId;
 		private string _name;
 		private string _background;
 		private string _description;
-		private List<Boss> _bosses;
+		private List<int> _bossIds;
 
 		#endregion Private Fields
 
@@ -44,15 +46,15 @@ namespace ClickQuest.Places
 			}
 		}
 
-		public DungeonGroup DungeonGroup
+		public int DungeonGroupId
 		{
 			get
 			{
-				return _dungeonGroup;
+				return _dungeonGroupId;
 			}
 			set
 			{
-				_dungeonGroup = value;
+				_dungeonGroupId = value;
 				OnPropertyChanged();
 			}
 		}
@@ -96,29 +98,39 @@ namespace ClickQuest.Places
 			}
 		}
 
-		public List<Boss> Bosses
+		public List<int> BossIds
 		{
 			get
 			{
-				return _bosses;
+				return _bossIds;
 			}
 			set
 			{
-				_bosses = value;
+				_bossIds = value;
 				OnPropertyChanged();
 			}
 		}
 
 		#endregion Properties
 
-		public Dungeon(int id, DungeonGroup dungeonGroup, string name, string background, string description, List<Boss> bosses)
+		public Dungeon(int id, int dungeonGroupId, string name, string background, string description, List<int> bossIds)
 		{
 			Id = id;
-			DungeonGroup = dungeonGroup;
+			DungeonGroupId = dungeonGroupId;
 			Name = name;
 			Background = background;
 			Description = description;
-			Bosses = bosses;
+			BossIds = bossIds;
+		}
+
+		public Dungeon()
+		{
+
+		}
+
+		public DungeonGroup GetDungeonGroup()
+		{
+			return GameData.DungeonGroups.FirstOrDefault(x => x.Id == DungeonGroupId);
 		}
 	}
 }

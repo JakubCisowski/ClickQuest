@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace ClickQuest.Data
+namespace ClickQuest.Extensions
 {
 	public static partial class Logger
 	{

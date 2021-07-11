@@ -151,5 +151,10 @@ namespace ClickQuest.Items
 			Description = itemToCopy.Description;
 			Quantity = itemToCopy.Quantity;
 		}
+
+		public Item()
+		{
+
+		}
 	}
 }

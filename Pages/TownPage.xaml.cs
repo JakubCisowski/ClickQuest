@@ -27,18 +27,18 @@ namespace ClickQuest.Pages
 		private void GenerateRegionButtons()
 		{
 			// Create a button for each region.
-			for (int i = 0; i < Database.Regions.Count; i++)
+			for (int i = 0; i < GameData.Regions.Count; i++)
 			{
 				var button = new Button()
 				{
-					Name = "Region" + Database.Regions[i].Id.ToString(),
+					Name = "Region" + GameData.Regions[i].Id.ToString(),
 					Width = 150,
 					Height = 50,
 				};
 
 				var block = new TextBlock()
 				{
-					Text = Database.Regions[i].Name,
+					Text = GameData.Regions[i].Name,
 					FontSize = 20
 				};
 
@@ -56,18 +56,18 @@ namespace ClickQuest.Pages
 		{
 			// Enter the chosen Region page.
 			var regionId = int.Parse((sender as Button).Name.Substring(6));
-			string regionName = Database.Regions.FirstOrDefault(x => x.Id == regionId).Name;
+			string regionName = GameData.Regions.FirstOrDefault(x => x.Id == regionId).Name;
 
 			// Check if the current hero can enter this location (level requirement).
-			if (User.Instance.CurrentHero.Level >= Database.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement)
+			if (User.Instance.CurrentHero.Level >= GameData.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement)
 			{
-				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages[regionName]);
-				(Database.Pages[regionName] as RegionPage).StatsFrame.Refresh();
-				(Database.Pages[regionName] as RegionPage).EquipmentFrame.Refresh();
+				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages[regionName]);
+				(GameData.Pages[regionName] as RegionPage).StatsFrame.Refresh();
+				(GameData.Pages[regionName] as RegionPage).EquipmentFrame.Refresh();
 				// Start AuraTimer if no quest is active.
 				if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
 				{
-					foreach (var ctrl in ((Database.Pages[regionName] as RegionPage).RegionPanel.Children))
+					foreach (var ctrl in ((GameData.Pages[regionName] as RegionPage).RegionPanel.Children))
 					{
 						if (ctrl is MonsterButton monsterButton)
 						{
@@ -81,23 +81,23 @@ namespace ClickQuest.Pages
 			// Else display a warning.
 			else
 			{
-				AlertBox.Show($"To enter this location you need to be {Database.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement} lvl.\nGain experience by completing quests, and defeating monsters in previous regions!", MessageBoxButton.OK);
+				AlertBox.Show($"To enter this location you need to be {GameData.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement} lvl.\nGain experience by completing quests, and defeating monsters in previous regions!", MessageBoxButton.OK);
 			}
 		}
 
 		private void ShopButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Enter Shop page.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Shop"]);
-			(Database.Pages["Shop"] as ShopPage).StatsFrame.Refresh();
-			(Database.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Shop"]);
+			(GameData.Pages["Shop"] as ShopPage).StatsFrame.Refresh();
+			(GameData.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Shop";
-			(Database.Pages["Shop"] as ShopPage).UpdateShop();
+			(GameData.Pages["Shop"] as ShopPage).UpdateShop();
 		}
 
 		private void MainMenuButton_Click(object sender, RoutedEventArgs e)
 		{
-			(Database.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
+			(GameData.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
 
 			// Pause all blessings.
 			Blessing.PauseBlessings();
@@ -111,46 +111,46 @@ namespace ClickQuest.Pages
 			// Set current hero to null.
 			User.Instance.CurrentHero = null;
 
-			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Database.Pages["MainMenu"]);
+			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(GameData.Pages["MainMenu"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "";
 		}
 
 		private void QuestMenuButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Enter Quests page.
-			(Database.Pages["QuestMenu"] as QuestMenuPage).LoadPage();
-			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Database.Pages["QuestMenu"]);
-			(Database.Pages["QuestMenu"] as QuestMenuPage).StatsFrame.Refresh();
-			(Database.Pages["QuestMenu"] as QuestMenuPage).EquipmentFrame.Refresh();
+			(GameData.Pages["QuestMenu"] as QuestMenuPage).LoadPage();
+			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(GameData.Pages["QuestMenu"]);
+			(GameData.Pages["QuestMenu"] as QuestMenuPage).StatsFrame.Refresh();
+			(GameData.Pages["QuestMenu"] as QuestMenuPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Quests";
 		}
 
 		private void BlacksmithButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Enter Blacksmith page.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Blacksmith"]);
-			(Database.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
-			(Database.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Blacksmith"]);
+			(GameData.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
+			(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Blacksmith";
-			(Database.Pages["Blacksmith"] as BlacksmithPage).UpdateBlacksmith();
+			(GameData.Pages["Blacksmith"] as BlacksmithPage).UpdateBlacksmith();
 		}
 
 		private void PriestButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Enter Priest page.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Priest"]);
-			(Database.Pages["Priest"] as PriestPage).StatsFrame.Refresh();
-			(Database.Pages["Priest"] as PriestPage).EquipmentFrame.Refresh();
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Priest"]);
+			(GameData.Pages["Priest"] as PriestPage).StatsFrame.Refresh();
+			(GameData.Pages["Priest"] as PriestPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Priest";
-			(Database.Pages["Priest"] as PriestPage).UpdatePriest();
+			(GameData.Pages["Priest"] as PriestPage).UpdatePriest();
 		}
 
 		private void DungeonSelectButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Enter DungeonSelect page.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["DungeonSelect"]);
-			(Database.Pages["DungeonSelect"] as DungeonSelectPage).StatsFrame.Refresh();
-			(Database.Pages["DungeonSelect"] as DungeonSelectPage).EquipmentFrame.Refresh();
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["DungeonSelect"]);
+			(GameData.Pages["DungeonSelect"] as DungeonSelectPage).StatsFrame.Refresh();
+			(GameData.Pages["DungeonSelect"] as DungeonSelectPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting dungeon group";
 		}
 

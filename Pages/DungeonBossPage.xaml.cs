@@ -94,7 +94,7 @@ namespace ClickQuest.Pages
 			// Bind Dungeon's description
 			var binding2 = new Binding("Description")
 			{
-				Source = Database.Dungeons.FirstOrDefault(x=>x.Bosses.Select(y=>y.Id).Contains(boss.Id))
+				Source = GameData.Dungeons.FirstOrDefault(x=>x.BossIds.Contains(boss.Id))
 			};
 			DungeonDescriptionBlock.SetBinding(TextBlock.TextProperty, binding2);
 
@@ -141,11 +141,11 @@ namespace ClickQuest.Pages
 				if (num < loot.Frequencies[threshold])
 				{
 					// Grant loot after checking if it's not empty.
-					if (loot.Item.Id != 0)
+					if (loot.GetItem().Id != 0)
 					{
-						User.Instance.CurrentHero.AddItem(loot.Item);
-						lootText += "- " + loot.Item.Name + " (" + loot.ItemType + ")\n";
-						(Database.Pages["DungeonBoss"] as DungeonBossPage).EquipmentFrame.Refresh();
+						User.Instance.CurrentHero.AddItem(loot.GetItem());
+						lootText += "- " + loot.GetItem().Name + " (" + loot.ItemType + ")\n";
+						(GameData.Pages["DungeonBoss"] as DungeonBossPage).EquipmentFrame.Refresh();
 					}
 				}
 			}
@@ -171,7 +171,7 @@ namespace ClickQuest.Pages
 			this.TownButton.Visibility = Visibility.Visible;
 
 			// Refresh stats frame (for specialization update).
-			(Database.Pages["DungeonBoss"] as DungeonBossPage).StatsFrame.Refresh();
+			(GameData.Pages["DungeonBoss"] as DungeonBossPage).StatsFrame.Refresh();
 		}
 
 		#region Events
@@ -259,10 +259,10 @@ namespace ClickQuest.Pages
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
-			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
-			(Database.Pages["Town"] as TownPage).StatsFrame.Refresh();
+			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
+			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
 
 			TestRewardsBlock.Text = "";
 		}

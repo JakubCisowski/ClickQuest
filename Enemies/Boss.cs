@@ -9,9 +9,9 @@ namespace ClickQuest.Enemies
 {
 	public partial class Boss : Enemy
 	{
-		private List<(Item Item, ItemType ItemType, List<double> Frequencies)> _bossLoot;
+		private List<BossLootPattern> _bossLoot;
 
-		public List<(Item Item, ItemType ItemType, List<double> Frequencies)> BossLoot
+		public List<BossLootPattern> BossLoot
 		{
 			get
 			{
@@ -25,7 +25,7 @@ namespace ClickQuest.Enemies
 		}
 
 		// Boss constructor.
-		public Boss(int id, string name, int health, string image, string description, List<(Item, ItemType, List<double>)> bossLoot) : base(id, name, health, image, description)
+		public Boss(int id, string name, int health, string image, string description, List<BossLootPattern> bossLoot) : base(id, name, health, image, description)
 		{
 			BossLoot = bossLoot;
 		}
@@ -33,6 +33,11 @@ namespace ClickQuest.Enemies
 		public Boss(Boss bossToCopy) : base(bossToCopy)
 		{
 			BossLoot = bossToCopy.BossLoot;
+		}
+
+		public Boss() : base()
+		{
+
 		}
 	}
 }

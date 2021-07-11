@@ -6,6 +6,8 @@ using ClickQuest.Items;
 using ClickQuest.Heroes;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClickQuest.Pages
 {
@@ -20,18 +22,31 @@ namespace ClickQuest.Pages
 
 		public void UpdatePriest()
 		{
-			ItemsListViewBuy.ItemsSource = Database.PriestOffer;
+			ItemsListViewBuy.ItemsSource = GetPriestOfferAsBlessings();
 			ItemsListViewBuy.Items.Refresh();
+		}
+
+		public List<Blessing> GetPriestOfferAsBlessings()
+		{
+			var result = new List<Blessing>();
+			var listOfIds = GameData.PriestOffer;
+
+			foreach (var id in listOfIds)
+			{
+				result.Add(GameData.Blessings.FirstOrDefault(x => x.Id == id));
+			}
+
+			return result;
 		}
 
 		#region Events
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Go back to Town.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Database.Pages["Town"]);
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
-			(Database.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
-			(Database.Pages["Town"] as TownPage).StatsFrame.Refresh();
+			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
+			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
 		}
 
 		private void BuyButton_Click(object sender, RoutedEventArgs e)

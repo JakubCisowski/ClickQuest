@@ -1,0 +1,38 @@
+[
+    {
+        "Id": 0,
+        "Rare": false,
+        "HeroClass": "All",
+        "Name": "TestQuest1",
+        "Duration": 5,
+        "Description": "TestQuest1Description",
+        "RewardRecipeIds": [1],
+        "RewardBlessingIds" : [],
+        "RewardMaterialsIds" : [1],
+        "RewardIngots" : []
+    },
+    {
+        "Id": 1,
+        "Rare": false,
+        "HeroClass": "All",
+        "Name": "TestQuest2",
+        "Duration": 5,
+        "Description": "TestQuest2Description",
+        "RewardRecipeIds": [],
+        "RewardBlessingIds" : [1],
+        "RewardMaterialsIds" : [],
+        "RewardIngots" : []
+    },
+    {
+        "Id": 2,
+        "Rare": true,
+        "HeroClass": "All",
+        "Name": "TestQuest3",
+        "Duration": 5,
+        "Description": "TestQuest3Description",
+        "RewardRecipeIds": [],
+        "RewardBlessingIds" : [],
+        "RewardMaterialsIds" : [],
+        "RewardIngots" : [2,2]
+    }
+]

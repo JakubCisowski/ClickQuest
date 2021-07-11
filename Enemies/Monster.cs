@@ -9,9 +9,9 @@ namespace ClickQuest.Enemies
 {
 	public partial class Monster : Enemy
 	{
-		private List<(Item Item, ItemType ItemType, double Frequency)> _loot;
+		private List<MonsterLootPattern> _loot;
 
-		public List<(Item Item, ItemType ItemType, double Frequency)> Loot
+		public List<MonsterLootPattern> Loot
 		{
 			get
 			{
@@ -25,7 +25,7 @@ namespace ClickQuest.Enemies
 		}
 
 		// Common monster constructor.
-		public Monster(int id, string name, int health, string image, string description, List<(Item, ItemType, double)> loot) : base(id, name, health, image, description)
+		public Monster(int id, string name, int health, string image, string description, List<MonsterLootPattern> loot) : base(id, name, health, image, description)
 		{
 			Loot = loot;
 		}
@@ -33,6 +33,11 @@ namespace ClickQuest.Enemies
 		public Monster(Monster monsterToCopy) : base(monsterToCopy)
 		{
 			Loot = monsterToCopy.Loot;
+		}
+
+		public Monster() : base()
+		{
+
 		}
 	}
 }
