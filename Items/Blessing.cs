@@ -198,18 +198,6 @@ namespace ClickQuest.Items
 			Buff = blessing.Buff;
 			Value = blessing.Value;
 		}
-
-		public Blessing(int id, string name, BlessingType type, Rarity rarity, int duration, string description, int buff, int value)
-		{
-			Id = id;
-			Name = name;
-			Type = type;
-			Rarity = rarity;
-			Duration = duration;
-			Description = description;
-			Buff = buff;
-			Value = value;
-		}
 		
 		public Blessing()
 		{

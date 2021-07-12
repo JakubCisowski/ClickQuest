@@ -533,26 +533,5 @@ namespace ClickQuest.Items
 			};
 			_timer.Tick += Timer_Tick;
 		}
-
-		public Quest(int id, bool rare, HeroClass heroClass, string name, int duration, string description)
-		{
-			Id = id;
-			Rare = rare;
-			HeroClass = heroClass;
-			Name = name;
-			Duration = duration;
-			Description = description;
-
-			RewardRecipeIds = new List<int>();
-			RewardMaterialIds = new List<int>();
-			RewardBlessingIds = new List<int>();
-			RewardIngots = new List<Rarity>();
-
-			_timer = new DispatcherTimer
-			{
-				Interval = new TimeSpan(0, 0, 0, 1)
-			};
-			_timer.Tick += Timer_Tick;
-		}
 	}
 }

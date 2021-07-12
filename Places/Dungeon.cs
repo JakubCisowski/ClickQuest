@@ -121,16 +121,6 @@ namespace ClickQuest.Places
 
 		#endregion Properties
 
-		public Dungeon(int id, int dungeonGroupId, string name, string background, string description, List<int> bossIds)
-		{
-			Id = id;
-			DungeonGroupId = dungeonGroupId;
-			Name = name;
-			Background = background;
-			Description = description;
-			BossIds = bossIds;
-		}
-
 		public Dungeon()
 		{
 

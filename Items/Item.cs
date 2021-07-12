@@ -132,16 +132,6 @@ namespace ClickQuest.Items
 
 		#endregion Properties
 
-		public Item(int id, string name, Rarity rarity, string description, int value)
-		{
-			Id = id;
-			Name = name;
-			Rarity = rarity;
-			Value = value;
-			Description = description;
-			Quantity = 0;
-		}
-
 		public Item(Item itemToCopy)
 		{
 			Id = itemToCopy.Id;

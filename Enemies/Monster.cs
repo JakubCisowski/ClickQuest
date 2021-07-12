@@ -24,12 +24,6 @@ namespace ClickQuest.Enemies
 			}
 		}
 
-		// Common monster constructor.
-		public Monster(int id, string name, int health, string image, string description, List<MonsterLootPattern> loot) : base(id, name, health, image, description)
-		{
-			Loot = loot;
-		}
-
 		public Monster(Monster monsterToCopy) : base(monsterToCopy)
 		{
 			Loot = monsterToCopy.Loot;

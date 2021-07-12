@@ -136,16 +136,6 @@ public abstract partial class Enemy : INotifyPropertyChanged
 
 	#endregion Properties
 
-	public Enemy(int id, string name, int health, string image, string description)
-	{
-		Id = id;
-		Name = name;
-		Description = description;
-		Health = health;
-		CurrentHealth = health;
-		CurrentHealthProgress = 100;
-	}
-
 	public Enemy(Enemy enemyToCopy)
 	{
 		Id = enemyToCopy.Id;

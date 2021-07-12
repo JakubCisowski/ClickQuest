@@ -71,15 +71,6 @@ namespace ClickQuest.Places
 			}
 		}
 
-		public DungeonGroup(int id, string name, string description, List<int> keyRequirements, string color)
-		{
-			Id = id;
-			Name = name;
-			Description = description;
-			KeyRequirementRarities = keyRequirements;
-			Color = color;
-		}
-
 		public DungeonGroup()
 		{
 

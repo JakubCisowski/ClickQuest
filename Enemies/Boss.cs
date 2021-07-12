@@ -24,12 +24,6 @@ namespace ClickQuest.Enemies
 			}
 		}
 
-		// Boss constructor.
-		public Boss(int id, string name, int health, string image, string description, List<BossLootPattern> bossLoot) : base(id, name, health, image, description)
-		{
-			BossLoot = bossLoot;
-		}
-
 		public Boss(Boss bossToCopy) : base(bossToCopy)
 		{
 			BossLoot = bossToCopy.BossLoot;

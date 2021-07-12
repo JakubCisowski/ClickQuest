@@ -66,13 +66,6 @@ namespace ClickQuest.Items
 			Description = GameData.Artifacts.FirstOrDefault(x => x.Id == ArtifactId)?.Description;
 		}
 
-
-		public Recipe(int id, string name, Rarity rarity, string description, int value, int artifactId) : base(id, name, rarity, description, value)
-		{
-			ArtifactId = artifactId;
-			MaterialIds = new Dictionary<int, int>();
-		}
-
 		public Recipe(Item itemToCopy) : base(itemToCopy)
 		{
 			if (itemToCopy is Recipe recipe)

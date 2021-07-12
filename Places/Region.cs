@@ -110,16 +110,6 @@ namespace ClickQuest.Places
 
 		#endregion Properties
 
-		public Region(int id, string name, string description, string background, List<MonsterSpawnPattern> monsters, int requirement)
-		{
-			Id = id;
-			Name = name;
-			Description = description;
-			Background = background;
-			Monsters = monsters;
-			LevelRequirement = requirement;
-		}
-
 		public Region()
 		{
 
