@@ -130,7 +130,7 @@ namespace ClickQuest.Pages
 
 			UndoButton.Click += UndoButtonGroup_Click;
 
-			var dungeonsOfThisGroup = GameData.Dungeons.Where(x => x.GetDungeonGroup() == _dungeonGroupSelected).ToList();
+			var dungeonsOfThisGroup = GameData.Dungeons.Where(x => x.DungeonGroup == _dungeonGroupSelected).ToList();
 			
 			// Create buttons for selecting dungeon groups.
 			for (int i = 0; i < dungeonsOfThisGroup.Count; i++)

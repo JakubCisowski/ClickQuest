@@ -111,6 +111,14 @@ namespace ClickQuest.Places
 			}
 		}
 
+		public DungeonGroup DungeonGroup
+		{
+			get
+			{
+				return GameData.DungeonGroups.FirstOrDefault(x => x.Id == DungeonGroupId);
+			}
+		}
+
 		#endregion Properties
 
 		public Dungeon(int id, int dungeonGroupId, string name, string background, string description, List<int> bossIds)
@@ -126,11 +134,6 @@ namespace ClickQuest.Places
 		public Dungeon()
 		{
 
-		}
-
-		public DungeonGroup GetDungeonGroup()
-		{
-			return GameData.DungeonGroups.FirstOrDefault(x => x.Id == DungeonGroupId);
 		}
 	}
 }

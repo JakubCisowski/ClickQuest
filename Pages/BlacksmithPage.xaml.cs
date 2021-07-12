@@ -218,7 +218,7 @@ namespace ClickQuest.Pages
 			}
 
 			// Add artifact to equipment.
-			var artifact = GameData.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
+			var artifact = recipe.Artifact;
 			User.Instance.CurrentHero.AddItem(artifact);
 
 			// Remove the recipe used.
@@ -263,7 +263,7 @@ namespace ClickQuest.Pages
 				ingotRarityNeeded.Quantity -= recipe.IngotsRequired;
 
 				// Add artifact to equipment.
-				var artifact = GameData.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
+				var artifact = recipe.Artifact;
 				User.Instance.CurrentHero.AddItem(artifact);
 
 				// Remove the recipe used.

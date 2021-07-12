@@ -10,26 +10,29 @@ namespace ClickQuest.Items
 		public ItemType ItemType{ get; set;}
 		public List<double> Frequencies{ get; set;}
 
-		public Item GetItem()
+		public Item Item 
 		{
-			Item item = null;
-
-			switch (ItemType)
+			get
 			{
-				case ItemType.Material:
-					item = GameData.Materials.FirstOrDefault(x => x.Id == ItemId);
-					break;
+				Item item = null;
 
-				case ItemType.Recipe:
-					item = GameData.Recipes.FirstOrDefault(x => x.Id == ItemId);
-					break;
+				switch (ItemType)
+				{
+					case ItemType.Material:
+						item = GameData.Materials.FirstOrDefault(x => x.Id == ItemId);
+						break;
 
-				case ItemType.Artifact:
-					item = GameData.Artifacts.FirstOrDefault(x => x.Id == ItemId);
-					break;
+					case ItemType.Recipe:
+						item = GameData.Recipes.FirstOrDefault(x => x.Id == ItemId);
+						break;
+
+					case ItemType.Artifact:
+						item = GameData.Artifacts.FirstOrDefault(x => x.Id == ItemId);
+						break;
+				}
+
+				return item;
 			}
-
-			return item;
 		}
 	}
 }

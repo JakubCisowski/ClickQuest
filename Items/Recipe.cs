@@ -18,6 +18,14 @@ namespace ClickQuest.Items
 			set { _artifactId = value; }
 		}
 
+		public Artifact Artifact
+		{
+			get
+			{
+				return GameData.Artifacts.FirstOrDefault(x => x.Id == ArtifactId);
+			}
+		}
+
 		// Key is the Id of the material; value is the amount needed.
 		[NotMapped]
 		public Dictionary<int, int> MaterialIds
