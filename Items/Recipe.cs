@@ -1,4 +1,5 @@
 using ClickQuest.Data;
+using ClickQuest.Player;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -66,19 +67,31 @@ namespace ClickQuest.Items
 			Description = GameData.Artifacts.FirstOrDefault(x => x.Id == ArtifactId)?.Description;
 		}
 
-		public Recipe(Item itemToCopy) : base(itemToCopy)
-		{
-			if (itemToCopy is Recipe recipe)
-			{
-				ArtifactId = recipe.ArtifactId;
-				MaterialIds = recipe.MaterialIds;
-				RequirementsDescription = recipe.RequirementsDescription;
-			}
-		}
-
 		public Recipe() : base ()
 		{
 
+		}
+
+		public override Recipe CopyItem()
+		{
+			Recipe copy = new Recipe();
+
+			copy.Id = Id;
+			copy.Name = Name;
+			copy.Rarity = Rarity;
+			copy.Value = Value;
+			copy.Description = Description;
+			copy.Quantity = 1;
+			copy.ArtifactId = ArtifactId;
+			copy.MaterialIds = MaterialIds;
+			copy.RequirementsDescription = RequirementsDescription;
+
+			return copy;
+		}
+
+		public override void AddAcheievementProgress()
+		{
+			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.RecipesGained, 1);
 		}
 	}
 }

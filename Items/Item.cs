@@ -132,19 +132,12 @@ namespace ClickQuest.Items
 
 		#endregion Properties
 
-		public Item(Item itemToCopy)
-		{
-			Id = itemToCopy.Id;
-			Name = itemToCopy.Name;
-			Rarity = itemToCopy.Rarity;
-			Value = itemToCopy.Value;
-			Description = itemToCopy.Description;
-			Quantity = itemToCopy.Quantity;
-		}
-
 		public Item()
 		{
 
 		}
+
+		public abstract Item CopyItem();
+		public abstract void AddAcheievementProgress();
 	}
 }

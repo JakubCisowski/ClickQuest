@@ -166,7 +166,7 @@ namespace ClickQuest.Pages
 			var hero = User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
 			User.Instance.CurrentHero = hero;
 			// Refresh hero stats panel info.
-			hero.UpdateHero();
+			hero.RefreshHeroExperience();
 
 			// Clone hero's quests using those from Database.
 			foreach (var heroQuest in hero.Quests)

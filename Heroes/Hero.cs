@@ -25,6 +25,7 @@ namespace ClickQuest.Heroes
 
 		#region Private Fields
 
+		private const int MAX_LEVEL = 100;
 		private string _name;
 		private int _experience;
 		private int _experienceToNextLvl;
@@ -424,35 +425,16 @@ namespace ClickQuest.Heroes
 			AuraDamage = 0.1;
 			AuraAttackSpeed = 1;
 
-			// Set class specific values.
-			switch (heroClass)
-			{
-				case HeroClass.Slayer:
-					ClickDamage = 2;
-					CritChance = 0.25;
-					CritChancePerLevel = 0.004;
-					PoisonDamage = 0;
-					PoisonDamagePerLevel = 0;
-					break;
-
-				case HeroClass.Venom:
-					ClickDamage = 2;
-					CritChance = 0;
-					CritChancePerLevel = 0;
-					PoisonDamage = 1;
-					PoisonDamagePerLevel = 2;
-					break;
-			}
-
-			UpdateHero();
+			SetClassSpecificValues();
+			RefreshHeroExperience();
 		}
 
 		public Hero()
 		{
-			UpdateHero();
+			RefreshHeroExperience();
 		}
 
-		public void UpdateHero()
+		public void RefreshHeroExperience()
 		{
 			// Updates hero experience to make sure panels are updated at startup.
 			ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
@@ -471,19 +453,7 @@ namespace ClickQuest.Heroes
 
 		public void GrantLevelUpBonuses()
 		{
-			if (Level == 100)
-			{
-				// // Set tooltips once and never set them again after lvl 100.
-				// switch (_heroClass)
-				// {
-				// 	case HeroClass.Slayer:
-				// 		break;
-
-				// 	case HeroClass.Venom:
-				// 		break;
-				// }
-			}
-			else if (Level < 100)
+			if (Level < MAX_LEVEL)
 			{
 				// Class specific bonuses and hero stats panel update.
 				switch (_heroClass)
@@ -508,92 +478,35 @@ namespace ClickQuest.Heroes
 
 			if (type == typeof(Recipe))
 			{
-				// Add to Recipes.
-
-				foreach (var item in Recipes)
-				{
-					if (item.Id == itemToAdd.Id)
-					{
-						item.Quantity++;
-						return;
-					}
-				}
-
-				// If user doesn't have this item, clone and add it.
-				var copy = new Recipe(itemToAdd);
-
-				Recipes.Add(copy);
-				copy.Quantity++;
-
-				// Increase achievement amount.
-				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.RecipesGained, 1);
+				AddItemToCollection<Recipe>(itemToAdd, Recipes);
 			}
 			else if (type == typeof(Artifact))
 			{
-				// Add to Artifacts.
-
-				foreach (var item in Artifacts)
-				{
-					if (item.Id == itemToAdd.Id)
-					{
-						item.Quantity++;
-						return;
-					}
-				}
-
-				// If user doesn't have this item, add it.
-				var copy = new Artifact(itemToAdd);
-
-				Artifacts.Add(copy);
-				copy.Quantity++;
-
-				NumericAchievementType achievementType = 0;
-				// Increase achievement amount.
-				switch(itemToAdd.Rarity)
-				{
-					case Rarity.General:
-						achievementType=NumericAchievementType.GeneralArtifactsGained;
-						break;
-					case Rarity.Fine:
-						achievementType=NumericAchievementType.FineArtifactsGained;
-						break;
-					case Rarity.Superior:
-						achievementType=NumericAchievementType.SuperiorArtifactsGained;
-						break;
-					case Rarity.Exceptional:
-						achievementType=NumericAchievementType.ExceptionalArtifactsGained;
-						break;
-					case Rarity.Mythic:
-						achievementType=NumericAchievementType.MythicArtifactsGained;
-						break;
-					case Rarity.Masterwork:
-						achievementType = NumericAchievementType.MasterworkArtifactsGained;
-						break;
-				}
-				User.Instance.Achievements.IncreaseAchievementValue(achievementType, 1);
+				AddItemToCollection<Artifact>(itemToAdd, Artifacts);
 			}
 			else if (type == typeof(Material))
 			{
-				// Add to Materials.
-
-				foreach (var item in Materials)
-				{
-					if (item.Id == itemToAdd.Id)
-					{
-						item.Quantity++;
-						return;
-					}
-				}
-
-				// If user doesn't have this item, add it.
-				var copy = new Material(itemToAdd);
-
-				Materials.Add(copy);
-				copy.Quantity++;
-
-				// Increase achievement amount.
-				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.MaterialsGained, 1);
+				AddItemToCollection<Material>(itemToAdd, Materials);
 			}
+
+			itemToAdd.AddAcheievementProgress();
+		}
+
+		public void AddItemToCollection<T>(Item itemToAdd, List<T> itemCollection) where T : Item, new()
+		{
+			foreach (var item in itemCollection)
+			{
+				if (item.Id == itemToAdd.Id)
+				{
+					item.Quantity++;
+					return;
+				}
+			}
+
+			// If user doesn't have this item, clone and add it.
+			var copy = itemToAdd.CopyItem();
+
+			itemCollection.Add((T)copy);
 		}
 
 		public void RemoveItem(Item itemToRemove)
@@ -602,60 +515,56 @@ namespace ClickQuest.Heroes
 
 			if (type == typeof(Recipe))
 			{
-				// Revmove from Recipes.
-
-				foreach (var item in Recipes)
-				{
-					if (item.Id == itemToRemove.Id)
-					{
-						item.Quantity--;
-						if (item.Quantity <= 0)
-						{
-							// Remove item from database.
-							Entity.EntityOperations.RemoveItem(item);
-						}
-						return;
-					}
-				}
+				RemoveItemFromCollection<Recipe>(itemToRemove, Recipes);
 			}
 			else if (type == typeof(Artifact))
 			{
-				// Revmove from Artifacts.
-
-				foreach (var item in Artifacts)
-				{
-					if (item.Id == itemToRemove.Id)
-					{
-						item.Quantity--;
-						if (item.Quantity <= 0)
-						{
-							// Remove item from database.
-							Entity.EntityOperations.RemoveItem(item);
-						}
-						return;
-					}
-				}
+				RemoveItemFromCollection<Artifact>(itemToRemove, Artifacts);
 			}
 			else if (type == typeof(Material))
 			{
-				// Revmove from Materials.
+				RemoveItemFromCollection<Material>(itemToRemove, Materials);
+			}
+		}
 
-				foreach (var item in Materials)
+		public void RemoveItemFromCollection<T> (Item itemToRemove, List<T> itemCollection) where T:Item
+		{
+			foreach (Item item in itemCollection)
+			{
+				if (item.Id == itemToRemove.Id)
 				{
-					if (item.Id == itemToRemove.Id)
+					item.Quantity--;
+					if (item.Quantity <= 0)
 					{
-						item.Quantity--;
-						if (item.Quantity <= 0)
-						{
-							// Remove item from database.
-							Entity.EntityOperations.RemoveItem(item);
-						}
-						return;
+						// Remove item from database.
+						Entity.EntityOperations.RemoveItem(item);
 					}
+					return;
 				}
 			}
-
 			// If user doesn't have this item, don't do anything (check Item.Quantity).
+		}
+
+		public void SetClassSpecificValues()
+		{
+			switch (HeroClass)
+			{
+				case HeroClass.Slayer:
+					ClickDamage = 2;
+					CritChance = 0.25;
+					CritChancePerLevel = 0.004;
+					PoisonDamage = 0;
+					PoisonDamagePerLevel = 0;
+					break;
+
+				case HeroClass.Venom:
+					ClickDamage = 2;
+					CritChance = 0;
+					CritChancePerLevel = 0;
+					PoisonDamage = 1;
+					PoisonDamagePerLevel = 2;
+					break;
+			}
 		}
 	}
 }

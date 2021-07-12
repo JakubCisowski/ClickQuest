@@ -133,7 +133,7 @@ namespace ClickQuest.Player
 				else
 				{
 					// Increase achievement amount.
-					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.GoldSpent, value - _gold);
+					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.GoldSpent, _gold - value);
 				}
 				
 				_gold = value;
