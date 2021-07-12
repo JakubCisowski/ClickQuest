@@ -37,7 +37,7 @@ namespace ClickQuest.Windows
 		public AchievementsWindow()
 		{
 			InitializeComponent();
-			UpdateAchievements();
+			RefreshAchievementsPanel();
 		}
 
 		private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -53,9 +53,8 @@ namespace ClickQuest.Windows
 			}
 		}
 
-		public void UpdateAchievements()
+		public void RefreshAchievementsPanel()
 		{
-			// Refresh achievements panel.
 			AchievementsList.Children.Clear();
 
 			var achievements = User.Instance.Achievements;

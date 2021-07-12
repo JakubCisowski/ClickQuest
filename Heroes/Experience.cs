@@ -39,15 +39,11 @@ namespace ClickQuest.Heroes
 		public static int CalculateMonsterXpReward(int monsterHp)
 		{
 			var experience = (int)Math.Ceiling(monsterHp / 10d);
-			
-			// Increase achievement amount.
-			User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.ExperienceGained] += experience;
-			AchievementsWindow.Instance.UpdateAchievements();
-			
+						
 			return experience;
 		}
 
-		public static void CheckIfLeveledUp(Hero hero)
+		public static void CheckIfLeveledUpAndGrantBonuses(Hero hero)
 		{
 			// Check if hero leveled up - if so, grant him level up bonuses and increment his lvl.
 			int xpToLevel = XPToLevel(hero.Experience);

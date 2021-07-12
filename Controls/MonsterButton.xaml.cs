@@ -102,8 +102,13 @@ namespace ClickQuest.Controls
 
 		public void GrantVictoryBonuses()
 		{
+			int experienceGained = Experience.CalculateMonsterXpReward(_monster.Health);
+
 			// Grant experience based on moster hp.
-			User.Instance.CurrentHero.Experience += Experience.CalculateMonsterXpReward(_monster.Health);
+			User.Instance.CurrentHero.Experience += experienceGained;
+
+			// Grant achievement progress.
+			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.ExperienceGained, experienceGained);
 
 			// Randomize loot.
 			double num = _rng.Next(1, 10001) / 10000d;
@@ -121,7 +126,7 @@ namespace ClickQuest.Controls
 			}
 
 			// Display exp and loot for testing purposes.
-			_regionPage.TestRewardsBlock.Text = "Loot: " + _monster.Loot[i].Item.Name + ", Exp: " + Experience.CalculateMonsterXpReward(_monster.Health);
+			_regionPage.TestRewardsBlock.Text = "Loot: " + _monster.Loot[i].Item.Name + ", Exp: " + experienceGained;
 
 			// Check if hero got dungeon key.
 			CheckForDungeonKeyDrop();
@@ -155,8 +160,7 @@ namespace ClickQuest.Controls
 				_poisonTicks = 0;
 
 				// Increase achievement amount.
-				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MonstersDefeated]++;
-				AchievementsWindow.Instance.UpdateAchievements();
+				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.MonstersDefeated, 1);
 
 				// Grant exp and loot.
 				GrantVictoryBonuses();
@@ -216,29 +220,30 @@ namespace ClickQuest.Controls
 				// Add new key to Player.
 				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)(i - 1)).Quantity++;
 
+				NumericAchievementType achievementType = 0;
 				// Increase achievement amount.
 				switch((Rarity)i - 1)
 				{
 					case Rarity.General:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.GeneralDungeonKeysEarned]++;
+						achievementType = NumericAchievementType.GeneralDungeonKeysEarned;
 						break;
 					case Rarity.Fine:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.FineDungeonKeysEarned]++; 
+						achievementType = NumericAchievementType.FineDungeonKeysEarned;
 						break;
 					case Rarity.Superior:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.SuperiorIngotsEarned]++;
+						achievementType = NumericAchievementType.SuperiorDungeonKeysEarned;
 						break;
 					case Rarity.Exceptional:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.ExceptionalDungeonKeysEarned]++;
+						achievementType = NumericAchievementType.ExceptionalDungeonKeysEarned;
 						break;
 					case Rarity.Mythic:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MythicDungeonKeysEarned]++;
+						achievementType = NumericAchievementType.MythicDungeonKeysEarned;
 						break;
 					case Rarity.Masterwork:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MasterworkDungeonKeysEarned]++; 
+						achievementType = NumericAchievementType.MasterworkDungeonKeysEarned;
 						break;
 				}
-				AchievementsWindow.Instance.UpdateAchievements();
+				User.Instance.Achievements.IncreaseAchievementValue(achievementType, 1);
 
 				// Display dungeon key drop.
 				_regionPage.TestRewardsBlock.Text += $". You've got a {(Rarity)(i - 1)} Dungeon Key!";
@@ -268,8 +273,7 @@ namespace ClickQuest.Controls
 					damage *= 2;
 
 					// Increase achievement amount.
-					User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.CritsAmount]++;
-					AchievementsWindow.Instance.UpdateAchievements();
+					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.CritsAmount, 1);
 				}
 				// Apply specialization clicking buff.
 				damage += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
@@ -306,8 +310,7 @@ namespace ClickQuest.Controls
 				Monster.CurrentHealth -= poisonDamage;
 
 				// Increase achievement amount.
-				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.PoisonTicksAmount]++;
-				AchievementsWindow.Instance.UpdateAchievements();
+				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.PoisonTicksAmount, 1);
 
 				// Check if monster is dead now.
 				CheckIfMonsterDied();

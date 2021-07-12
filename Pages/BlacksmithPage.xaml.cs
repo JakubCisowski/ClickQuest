@@ -76,29 +76,30 @@ namespace ClickQuest.Pages
 				}
 				ingot.Quantity += ingotAmount;
 
+				NumericAchievementType achievementType = 0;
 				// Increase achievement amount.
 				switch(material.Rarity)
 				{
 					case Rarity.General:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.GeneralIngotsEarned] += ingotAmount;
+						achievementType=NumericAchievementType.GeneralIngotsEarned;
 						break;
 					case Rarity.Fine:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.FineIngotsEarned] += ingotAmount; 
+						achievementType=NumericAchievementType.FineIngotsEarned;
 						break;
 					case Rarity.Superior:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.SuperiorIngotsEarned] += ingotAmount;
+						achievementType=NumericAchievementType.SuperiorIngotsEarned;
 						break;
 					case Rarity.Exceptional:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.ExceptionalIngotsEarned] += ingotAmount;
+						achievementType=NumericAchievementType.ExceptionalIngotsEarned;
 						break;
 					case Rarity.Mythic:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MythicIngotsEarned] += ingotAmount;
+						achievementType=NumericAchievementType.MythicIngotsEarned;
 						break;
 					case Rarity.Masterwork:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MasterworkIngotsEarned] += ingotAmount;
+						achievementType=NumericAchievementType.MasterworkIngotsEarned;
 						break;
 				}
-				AchievementsWindow.Instance.UpdateAchievements();
+				User.Instance.Achievements.IncreaseAchievementValue(achievementType, ingotAmount);
 
 				// Update blacksmith page.
 				(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
@@ -138,29 +139,31 @@ namespace ClickQuest.Pages
 				}
 				ingot.Quantity += ingotAmount;
 
+
+				NumericAchievementType achievementType = 0;
 				// Increase achievement amount.
 				switch(artifact.Rarity)
 				{
 					case Rarity.General:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.GeneralIngotsEarned] += ingotAmount;
+						achievementType=NumericAchievementType.GeneralIngotsEarned;
 						break;
 					case Rarity.Fine:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.FineIngotsEarned] += ingotAmount; 
+						achievementType=NumericAchievementType.FineIngotsEarned;
 						break;
 					case Rarity.Superior:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.SuperiorIngotsEarned] += ingotAmount;
+						achievementType=NumericAchievementType.SuperiorIngotsEarned;
 						break;
 					case Rarity.Exceptional:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.ExceptionalIngotsEarned] += ingotAmount;
+						achievementType=NumericAchievementType.ExceptionalIngotsEarned;
 						break;
 					case Rarity.Mythic:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MythicIngotsEarned] += ingotAmount;
+						achievementType=NumericAchievementType.MythicIngotsEarned;
 						break;
 					case Rarity.Masterwork:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MasterworkIngotsEarned] += ingotAmount;
+						achievementType=NumericAchievementType.MasterworkIngotsEarned;
 						break;
 				}
-				AchievementsWindow.Instance.UpdateAchievements();
+				User.Instance.Achievements.IncreaseAchievementValue(achievementType, ingotAmount);
 
 				// Update blacksmith page.
 				(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();

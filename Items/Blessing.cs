@@ -226,8 +226,7 @@ namespace ClickQuest.Items
 						// Increase achievement amount.
 						if (Duration == GameData.Blessings.FirstOrDefault(x=>x.Id==this.Id).Duration)
 						{
-							User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.BlessingsUsed]++;
-							AchievementsWindow.Instance.UpdateAchievements();
+							User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.BlessingsUsed, 1);
 						}
 						
 						// Assign buff.

@@ -80,7 +80,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_experience = value;
-				Heroes.Experience.CheckIfLeveledUp(this);
+				Heroes.Experience.CheckIfLeveledUpAndGrantBonuses(this);
 				ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
 				ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
 				ExperienceProgress = Heroes.Experience.CalculateXpProgress(this);
@@ -526,8 +526,7 @@ namespace ClickQuest.Heroes
 				copy.Quantity++;
 
 				// Increase achievement amount.
-				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.RecipesGained]++;
-				AchievementsWindow.Instance.UpdateAchievements();
+				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.RecipesGained, 1);
 			}
 			else if (type == typeof(Artifact))
 			{
@@ -548,29 +547,30 @@ namespace ClickQuest.Heroes
 				Artifacts.Add(copy);
 				copy.Quantity++;
 
+				NumericAchievementType achievementType = 0;
 				// Increase achievement amount.
 				switch(itemToAdd.Rarity)
 				{
 					case Rarity.General:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.GeneralArtifactsGained]++;
+						achievementType=NumericAchievementType.GeneralArtifactsGained;
 						break;
 					case Rarity.Fine:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.FineArtifactsGained]++; 
+						achievementType=NumericAchievementType.FineArtifactsGained;
 						break;
 					case Rarity.Superior:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.SuperiorArtifactsGained]++;
+						achievementType=NumericAchievementType.SuperiorArtifactsGained;
 						break;
 					case Rarity.Exceptional:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.ExceptionalArtifactsGained]++;
+						achievementType=NumericAchievementType.ExceptionalArtifactsGained;
 						break;
 					case Rarity.Mythic:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MythicArtifactsGained]++;
+						achievementType=NumericAchievementType.MythicArtifactsGained;
 						break;
 					case Rarity.Masterwork:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MasterworkArtifactsGained]++;
+						achievementType = NumericAchievementType.MasterworkArtifactsGained;
 						break;
 				}
-				AchievementsWindow.Instance.UpdateAchievements();
+				User.Instance.Achievements.IncreaseAchievementValue(achievementType, 1);
 			}
 			else if (type == typeof(Material))
 			{
@@ -592,8 +592,7 @@ namespace ClickQuest.Heroes
 				copy.Quantity++;
 
 				// Increase achievement amount.
-				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MaterialsGained]++;
-				AchievementsWindow.Instance.UpdateAchievements();
+				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.MaterialsGained, 1);
 			}
 		}
 

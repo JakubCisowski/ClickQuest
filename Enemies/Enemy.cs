@@ -98,8 +98,7 @@ public abstract partial class Enemy : INotifyPropertyChanged
 			if (_currentHealth - value > 0)
 			{
 				// Increase achievement amount.
-				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.TotalDamageDealt] += _currentHealth - value;
-				AchievementsWindow.Instance.UpdateAchievements();
+				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.TotalDamageDealt, _currentHealth - value);
 			}
 
 			_currentHealth = value;

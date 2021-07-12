@@ -435,29 +435,30 @@ namespace ClickQuest.Items
 				var ingot = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == ingotRarity);
 				ingot.Quantity++;
 
+				NumericAchievementType achievementType = 0;
 				// Increase achievement amount.
 				switch(ingotRarity)
 				{
 					case Rarity.General:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.GeneralIngotsEarned]++;
+						achievementType = NumericAchievementType.GeneralIngotsEarned;
 						break;
 					case Rarity.Fine:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.FineIngotsEarned]++; 
+						achievementType = NumericAchievementType.FineIngotsEarned;
 						break;
 					case Rarity.Superior:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.SuperiorIngotsEarned]++;
+						achievementType = NumericAchievementType.SuperiorIngotsEarned;
 						break;
 					case Rarity.Exceptional:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.ExceptionalIngotsEarned]++;
+						achievementType = NumericAchievementType.ExceptionalIngotsEarned;
 						break;
 					case Rarity.Mythic:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MythicIngotsEarned]++;
+						achievementType = NumericAchievementType.MythicIngotsEarned;
 						break;
 					case Rarity.Masterwork:
-						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.MasterworkIngotsEarned]++;
+						achievementType = NumericAchievementType.MasterworkIngotsEarned;
 						break;
 				}
-				AchievementsWindow.Instance.UpdateAchievements();
+				User.Instance.Achievements.IncreaseAchievementValue(achievementType, 1);
 			}
 
 			// Start blessings.

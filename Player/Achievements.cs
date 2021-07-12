@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations.Schema;
 using ClickQuest.Extensions;
 using System.Text;
+using ClickQuest.Windows;
 
 namespace ClickQuest.Player
 {
@@ -65,6 +66,12 @@ namespace ClickQuest.Player
 		public void DeserializeAchievements()
 		{
 			Serialization.DeserializeData<NumericAchievementType, long>(AchievementCollectionString, NumericAchievementCollection);	
+		}
+
+		public void IncreaseAchievementValue (NumericAchievementType achievementType, long value)
+		{
+			NumericAchievementCollection[achievementType]+=value;
+			AchievementsWindow.Instance.RefreshAchievementsPanel();
 		}
 	}
 }
