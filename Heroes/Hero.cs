@@ -489,10 +489,10 @@ namespace ClickQuest.Heroes
 				AddItemToCollection<Material>(itemToAdd, Materials);
 			}
 
-			itemToAdd.AddAcheievementProgress();
+			itemToAdd.AddAchievementProgress();
 		}
 
-		public void AddItemToCollection<T>(Item itemToAdd, List<T> itemCollection) where T : Item, new()
+		private void AddItemToCollection<T>(Item itemToAdd, List<T> itemCollection) where T : Item
 		{
 			foreach (var item in itemCollection)
 			{
@@ -527,7 +527,7 @@ namespace ClickQuest.Heroes
 			}
 		}
 
-		public void RemoveItemFromCollection<T> (Item itemToRemove, List<T> itemCollection) where T:Item
+		private void RemoveItemFromCollection<T> (Item itemToRemove, List<T> itemCollection) where T:Item
 		{
 			foreach (Item item in itemCollection)
 			{

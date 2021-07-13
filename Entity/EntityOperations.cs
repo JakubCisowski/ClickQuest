@@ -249,8 +249,8 @@ namespace ClickQuest.Entity
 					}
 
 					// Reset Specializations.
-					hero.Specialization.SpecializationAmounts = new Extensions.ObservableDictionary<SpecializationType, int>();
-					Extensions.CollectionInitializer.InitializeDictionary<SpecializationType, int>(hero.Specialization.SpecializationAmounts);
+					hero.Specialization.SpecializationAmounts = new Extensions.CollectionsManager.ObservableDictionary<SpecializationType, int>();
+					Extensions.CollectionsManager.CollectionInitializer.InitializeDictionary<SpecializationType, int>(hero.Specialization.SpecializationAmounts);
 
 				}
 				while (user.Heroes.Count > 0)
@@ -262,8 +262,8 @@ namespace ClickQuest.Entity
 
 				// Reset Achievements.
 				var achievements = user.Achievements;
-				achievements.NumericAchievementCollection = new Extensions.ObservableDictionary<NumericAchievementType, long>();
-				Extensions.CollectionInitializer.InitializeDictionary<NumericAchievementType, long>(achievements.NumericAchievementCollection);
+				achievements.NumericAchievementCollection = new Extensions.CollectionsManager.ObservableDictionary<NumericAchievementType, long>();
+				Extensions.CollectionsManager.CollectionInitializer.InitializeDictionary<NumericAchievementType, long>(achievements.NumericAchievementCollection);
 				achievements.TotalTimePlayed = default;
 
 				db.SaveChanges();

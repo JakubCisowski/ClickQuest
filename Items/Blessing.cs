@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Threading;
+using ClickQuest.Extensions.InterfaceManager;
 
 namespace ClickQuest.Items
 {
@@ -40,6 +41,7 @@ namespace ClickQuest.Items
 		private int _duration;
 		private string _durationText;
 		private int _buff;
+		private bool _achievementBonusGranted;
 		private DispatcherTimer _timer;
 
 		#endregion Private Fields
@@ -184,115 +186,114 @@ namespace ClickQuest.Items
 			}
 		}
 
-		#endregion Properties
-
-		// Copy constructor
-		public Blessing(Blessing blessing)
+		public bool AchievementBonusGranted
 		{
-			Id = blessing.Id;
-			Name = blessing.Name;
-			Type = blessing.Type;
-			Rarity = blessing.Rarity;
-			Duration = blessing.Duration;
-			Description = blessing.Description;
-			Buff = blessing.Buff;
-			Value = blessing.Value;
+			get
+			{
+				return _achievementBonusGranted;
+			}
+			set
+			{
+				_achievementBonusGranted = value;
+				OnPropertyChanged();
+			}
 		}
+
+		#endregion Properties
 		
 		public Blessing()
 		{
 
 		}
 
-		public void ChangeBuffStatus(bool add)
+		public Blessing CopyBlessing()
 		{
-			// Assign buff to every hero.
-			if (add)
+			Blessing copy = new Blessing();
+
+			copy.Id = Id;
+			copy.Name = Name;
+			copy.Type = Type;
+			copy.Rarity = Rarity;
+			copy.Duration = Duration;
+			copy.Description = Description;
+			copy.Buff = Buff;
+			copy.Value = Value;
+			copy.AchievementBonusGranted = false;
+
+			return copy;
+		}
+
+		public void CheckAndAddAchievementProgress()
+		{
+			if (!AchievementBonusGranted)
 			{
-				switch (Type)
-				{
-					case BlessingType.ClickDamage:
-
-						// Remove all blessings except the last one added.
-						for (var i = 0; i < User.Instance.CurrentHero.Blessings.Count - 1; i++)
-						{
-							var bless = User.Instance.CurrentHero.Blessings[i];
-
-							bless.ChangeBuffStatus(false);
-							User.Instance.CurrentHero.Blessings.Remove(bless);
-							Entity.EntityOperations.RemoveBlessing(bless);
-						}
-
-						// Increase achievement amount.
-						if (Duration == GameData.Blessings.FirstOrDefault(x=>x.Id==this.Id).Duration)
-						{
-							User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.BlessingsUsed, 1);
-						}
-						
-						// Assign buff.
-						User.Instance.CurrentHero.ClickDamage += Buff;
-
-						// Start timer.
-						_timer = new DispatcherTimer
-						{
-							Interval = new TimeSpan(0, 0, 1)
-						};
-						_timer.Tick += Timer_Tick;
-						_timer.Start();
-
-						// Set duration text for hero stats panel.
-						DurationText = $"{Name}\n{Duration / 60}m {Duration % 60}s";
-
-						// Refresh all stats panel bindings.
-						foreach (var page in GameData.Pages.Skip(2))
-						{
-							dynamic p = page.Value;
-							p.StatsFrame.Refresh();
-						}
-
-						break;
-				}
+				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.BlessingsUsed, 1);
+				AchievementBonusGranted = true;
 			}
-			// Cancel buff.
-			else
+		}
+
+		public void EnableBuff()
+		{
+			// Increase hero stat.
+			switch (Type)
 			{
-				switch (Type)
-				{
-					case BlessingType.ClickDamage:
-
-						_timer.Stop();
-
-						// Cancel buff.
-						User.Instance.CurrentHero.ClickDamage -= Buff;
-
-						break;
-				}
+				case BlessingType.ClickDamage:
+					User.Instance.CurrentHero.ClickDamage += Buff;
+					break;
 			}
+
+			InitializeAndStartTimer();
+			UpdateDurationText();
+			CheckAndAddAchievementProgress();
+			InterfaceController.RefreshStatPanels();
+		}
+
+		public void DisableBuff()
+		{
+			_timer?.Stop();
+
+			// Reduce hero stat to its original value.
+			switch (Type)
+			{
+				case BlessingType.ClickDamage:
+					User.Instance.CurrentHero.ClickDamage -= Buff;
+					break;
+			}
+
+			// Reset DurationText.
+			DurationText = "";
+
+			InterfaceController.RefreshStatPanels();
+		}
+
+		private void InitializeAndStartTimer()
+		{
+			_timer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 1)
+			};
+			_timer.Tick += Timer_Tick;
+			_timer.Start();
+		}
+
+		private void UpdateDurationText()
+		{
+			DurationText = $"{Name}\n{Duration / 60}m {Duration % 60}s";
 		}
 
 		private void Timer_Tick(object source, EventArgs e)
 		{
 			Duration--;
-			DurationText = $"{Name}\n{Duration / 60}m {Duration % 60}s";
+			UpdateDurationText();
 
 			if (Duration <= 0)
 			{
 				// End the blessing.
-				ChangeBuffStatus(false);
+				DisableBuff();
 
 				// Remove it from User and Database (if it's saved there).
 				User.Instance.CurrentHero.Blessings.Remove(this);
 				Entity.EntityOperations.RemoveBlessing(this);
-
-				// Reset DurationText.
-				DurationText = "";
-
-				// Refresh all stats panel bindings.
-				foreach (var page in GameData.Pages.Skip(2))
-				{
-					dynamic p = page.Value;
-					p.StatsFrame.Refresh();
-				}
 			}
 		}
 
@@ -301,7 +302,7 @@ namespace ClickQuest.Items
 			// Resume blessings (if there are any left) - used when user selects a hero.
 			foreach (var blessing in User.Instance.CurrentHero.Blessings)
 			{
-				blessing.ChangeBuffStatus(true);
+				blessing.EnableBuff();
 			}
 		}
 
@@ -312,7 +313,7 @@ namespace ClickQuest.Items
 			{
 				for (int i = 0; i < User.Instance.CurrentHero.Blessings.Count; i++)
 				{
-					User.Instance.CurrentHero.Blessings[i].ChangeBuffStatus(false);
+					User.Instance.CurrentHero.Blessings[i].DisableBuff();
 				}
 			}
 		}

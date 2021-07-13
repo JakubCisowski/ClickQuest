@@ -75,20 +75,20 @@ namespace ClickQuest.Pages
 				// Cancel current blessings.
 				foreach (var bless in User.Instance.CurrentHero.Blessings)
 				{
-					bless.ChangeBuffStatus(false);
+					bless.DisableBuff();
 					EntityOperations.RemoveBlessing(bless);
 				}
 				// And remove them.
 				User.Instance.CurrentHero.Blessings.Clear();
 
 				// Create a new Blessing.
-				var blessing = new Blessing(blessingBlueprint);
+				var blessing = blessingBlueprint.CopyBlessing();
 
 				// Increase his duration based on Blessing Specialization buff.
 				blessing.Duration += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing];
 
 				User.Instance.CurrentHero.Blessings.Add(blessing);
-				blessing.ChangeBuffStatus(true);
+				blessing.EnableBuff();
 
 				UpdatePriest();
 

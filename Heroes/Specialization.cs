@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations.Schema;
 using ClickQuest.Data;
-using ClickQuest.Extensions;
+using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Pages;
 using ClickQuest.Player;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ClickQuest.Extensions
+namespace ClickQuest.Extensions.CollectionsManager
 {
 	public static class Serialization
 	{

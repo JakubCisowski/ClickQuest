@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations.Schema;
-using ClickQuest.Extensions;
+using ClickQuest.Extensions.CollectionsManager;
 using System.Text;
 using ClickQuest.Windows;
 

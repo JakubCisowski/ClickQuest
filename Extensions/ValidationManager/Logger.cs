@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace ClickQuest.Extensions
+namespace ClickQuest.Extensions.ValidationManager
 {
 	public static partial class Logger
 	{

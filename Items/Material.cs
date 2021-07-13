@@ -23,7 +23,7 @@ namespace ClickQuest.Items
 			return copy;
 		}
 
-		public override void AddAcheievementProgress()
+		public override void AddAchievementProgress()
 		{
 			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.MaterialsGained, 1);
 		}

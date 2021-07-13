@@ -10,8 +10,9 @@ using System.Diagnostics;
 using ClickQuest.Data;
 using ClickQuest.Pages;
 using ClickQuest.Player;
+using ClickQuest.Extensions.EventsManager;
 
-namespace ClickQuest.Extensions
+namespace ClickQuest.Extensions.CollectionsManager
 {
 	[DebuggerDisplay("Count={Count}")]
 	public class ObservableDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TValue>>,

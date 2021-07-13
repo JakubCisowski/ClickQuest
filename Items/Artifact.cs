@@ -23,7 +23,7 @@ namespace ClickQuest.Items
 			return copy;
 		}
 
-		public override void AddAcheievementProgress()
+		public override void AddAchievementProgress()
 		{
 			NumericAchievementType achievementType = 0;
 			// Increase achievement amount.
