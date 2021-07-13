@@ -9,14 +9,17 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Threading;
 using ClickQuest.Extensions.InterfaceManager;
+using Microsoft.EntityFrameworkCore;
+using ClickQuest.Items;
 
-namespace ClickQuest.Items
+namespace ClickQuest.Heroes.Buffs
 {
 	public enum BlessingType
 	{
 		ClickDamage = 0, CritChance, PoisonDamage, AuraDamage, AuraSpeed
 	}
 
+	[Owned]
 	public partial class Blessing : INotifyPropertyChanged
 	{
 		#region INotifyPropertyChanged
@@ -47,10 +50,6 @@ namespace ClickQuest.Items
 		#endregion Private Fields
 
 		#region Properties
-
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int DbKey { get; set; }
 
 		public int Id
 		{
@@ -286,36 +285,13 @@ namespace ClickQuest.Items
 			Duration--;
 			UpdateDurationText();
 
+			// If blessing is finished.
 			if (Duration <= 0)
 			{
-				// End the blessing.
-				DisableBuff();
-
-				// Remove it from User and Database (if it's saved there).
-				User.Instance.CurrentHero.Blessings.Remove(this);
-				Entity.EntityOperations.RemoveBlessing(this);
+				User.Instance.CurrentHero.RemoveBlessing();
 			}
 		}
 
-		public static void ResumeBlessings()
-		{
-			// Resume blessings (if there are any left) - used when user selects a hero.
-			foreach (var blessing in User.Instance.CurrentHero.Blessings)
-			{
-				blessing.EnableBuff();
-			}
-		}
-
-		public static void PauseBlessings()
-		{
-			// Pause current blessings and save them to the database - used when user exits the game or returns to main menu page.
-			if (User.Instance.CurrentHero != null)
-			{
-				for (int i = 0; i < User.Instance.CurrentHero.Blessings.Count; i++)
-				{
-					User.Instance.CurrentHero.Blessings[i].DisableBuff();
-				}
-			}
-		}
+		
 	}
 }

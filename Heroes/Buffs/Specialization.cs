@@ -10,7 +10,7 @@ using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Pages;
 using ClickQuest.Player;
 
-namespace ClickQuest.Heroes
+namespace ClickQuest.Heroes.Buffs
 {
 	public enum SpecializationType
 	{
@@ -56,23 +56,23 @@ namespace ClickQuest.Heroes
 
 		#region Constants
 
-			// Base values for each buff.
-			const int SpecCraftingBuffBase = 1;
-			const int SpecBuyingBuffBase = 50;
-			const int SpecDungeonBuffBase = 30;
+		// Base values for each buff.
+		const int SpecCraftingBuffBase = 1;
+		const int SpecBuyingBuffBase = 50;
+		const int SpecDungeonBuffBase = 30;
 
-			// Value limits for each buff.
-			const int SpecCraftingBuffLimit = 5;
-			const int SpecQuestingBuffLimit = 50;
+		// Value limits for each buff.
+		const int SpecCraftingBuffLimit = 5;
+		const int SpecQuestingBuffLimit = 50;
 
-			// Const buff value for reaching every threshold.
-			const int SpecBlessingBuffBonus = 15; // Increases blessings duration in seconds. <Base - 0>
-			const int SpecClickingBuffBonus = 1;   // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
-			const int SpecCraftingBuffBonus = 1;  // Increases crafting rarity limit. <Base - 1> <Limit - 5>
-			const int SpecBuyingBuffBonus = 1;    // Increases shop offer size. <Base - 5>
-			const int SpecMeltingBuffBonus = 5;   // Increases % chance to get additional ingots when melting. <Base - 0%>
-			const int SpecQuestingBuffBonus = 5;  // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
-			const int SpecDungeonBuffBonus = 1;   // Increases amount of time to defeat dungeon boss in seconds <Base - 30s>
+		// Const buff value for reaching every threshold.
+		const int SpecBlessingBuffBonus = 15; // Increases blessings duration in seconds. <Base - 0>
+		const int SpecClickingBuffBonus = 1;   // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
+		const int SpecCraftingBuffBonus = 1;  // Increases crafting rarity limit. <Base - 1> <Limit - 5>
+		const int SpecBuyingBuffBonus = 1;    // Increases shop offer size. <Base - 5>
+		const int SpecMeltingBuffBonus = 5;   // Increases % chance to get additional ingots when melting. <Base - 0%>
+		const int SpecQuestingBuffBonus = 5;  // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
+		const int SpecDungeonBuffBonus = 1;   // Increases amount of time to defeat dungeon boss in seconds <Base - 30s>
 
 		#endregion
 

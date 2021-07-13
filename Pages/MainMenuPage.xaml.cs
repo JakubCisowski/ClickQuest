@@ -179,7 +179,7 @@ namespace ClickQuest.Pages
 			User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default(DateTime))?.StartQuest();
 
 			// Resume blessings for dis hero (it resumes only for current hero).
-			Blessing.ResumeBlessings();
+			User.Instance.CurrentHero.ResumeBlessing();
 
 			// Set hero session start date.
 			hero.SessionStartDate = DateTime.Now;

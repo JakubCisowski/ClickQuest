@@ -4,6 +4,7 @@ using ClickQuest.Data;
 using ClickQuest.Items;
 using ClickQuest.Windows;
 using ClickQuest.Heroes;
+using ClickQuest.Heroes.Buffs;
 using System;
 using System.Linq;
 using System.Windows;

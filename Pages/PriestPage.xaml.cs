@@ -3,6 +3,7 @@ using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Entity;
 using ClickQuest.Items;
+using ClickQuest.Heroes.Buffs;
 using ClickQuest.Heroes;
 using System.Windows;
 using System.Windows.Controls;
@@ -73,22 +74,16 @@ namespace ClickQuest.Pages
 				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Blessing] ++;
 
 				// Cancel current blessings.
-				foreach (var bless in User.Instance.CurrentHero.Blessings)
-				{
-					bless.DisableBuff();
-					EntityOperations.RemoveBlessing(bless);
-				}
-				// And remove them.
-				User.Instance.CurrentHero.Blessings.Clear();
+				User.Instance.CurrentHero.RemoveBlessing();
 
 				// Create a new Blessing.
-				var blessing = blessingBlueprint.CopyBlessing();
+				var newBlessing = blessingBlueprint.CopyBlessing();
 
 				// Increase his duration based on Blessing Specialization buff.
-				blessing.Duration += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing];
+				newBlessing.Duration += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing];
 
-				User.Instance.CurrentHero.Blessings.Add(blessing);
-				blessing.EnableBuff();
+				User.Instance.CurrentHero.Blessing = newBlessing;
+				newBlessing.EnableBuff();
 
 				UpdatePriest();
 

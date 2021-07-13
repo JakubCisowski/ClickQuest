@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using ClickQuest.Data;
 using ClickQuest.Pages;
+using ClickQuest.Heroes.Buffs;
 
 namespace ClickQuest.Entity
 {
@@ -37,7 +38,7 @@ namespace ClickQuest.Entity
 					heroFromDb.Artifacts = heroFromApp.Artifacts;
 					heroFromDb.Specialization = heroFromApp.Specialization;
 					heroFromDb.Quests = heroFromApp.Quests;
-					heroFromDb.Blessings = heroFromApp.Blessings;
+					heroFromDb.Blessing = heroFromApp.Blessing;
 					heroFromDb.TimePlayed = heroFromApp.TimePlayed;
 				}
 
@@ -55,7 +56,7 @@ namespace ClickQuest.Entity
 					Include(x => x.Heroes).ThenInclude(x => x.Recipes).
 					Include(x => x.Heroes).ThenInclude(x => x.Artifacts).
 					Include(x => x.Heroes).ThenInclude(x => x.Quests).
-					Include(x => x.Heroes).ThenInclude(x => x.Blessings).
+					Include(x => x.Heroes).
 					Include(x => x.Ingots).Include(x => x.DungeonKeys).FirstOrDefault();
 				User.Instance = user;
 
@@ -127,7 +128,7 @@ namespace ClickQuest.Entity
 					.Include(x => x.Heroes).ThenInclude(x => x.Recipes)
 					.Include(x => x.Heroes).ThenInclude(x => x.Artifacts)
 					.Include(x => x.Heroes).ThenInclude(x => x.Quests)
-					.Include(x => x.Heroes).ThenInclude(x => x.Blessings)
+					.Include(x => x.Heroes)
 					.FirstOrDefault();
 
 				var hero = user.Heroes.FirstOrDefault(x => x.Id == heroToRemove.Id);
@@ -150,33 +151,10 @@ namespace ClickQuest.Entity
 					{
 						hero.Quests.RemoveAt(0);
 					}
-					while (hero.Blessings.Count > 0)
-					{
-						hero.Blessings.RemoveAt(0);
-					}
 
 					// Remove hero.
 					db.Entry(hero).State = EntityState.Deleted;
 					user.Heroes.Remove(hero);
-				}
-
-				db.SaveChanges();
-			}
-		}
-
-		public static void RemoveBlessing(Blessing blessing)
-		{
-			using (var db = new UserContext())
-			{
-				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Blessings).FirstOrDefault();
-
-				var currentHero = user.Heroes.FirstOrDefault(x => x.Id == User.Instance.CurrentHero.Id);
-				var bless = currentHero?.Blessings.FirstOrDefault(x => x.Id == blessing.Id);
-
-				if (bless != null)
-				{
-					db.Entry(bless).State = EntityState.Deleted;
-					currentHero.Blessings.Remove(bless);
 				}
 
 				db.SaveChanges();
@@ -211,7 +189,7 @@ namespace ClickQuest.Entity
 					.Include(x => x.Heroes).ThenInclude(x => x.Recipes)
 					.Include(x => x.Heroes).ThenInclude(x => x.Artifacts)
 					.Include(x => x.Heroes).ThenInclude(x => x.Quests)
-					.Include(x => x.Heroes).ThenInclude(x => x.Blessings)
+					.Include(x => x.Heroes)
 					.Include(x => x.Ingots).Include(x => x.DungeonKeys)
 					.FirstOrDefault();
 
@@ -242,10 +220,6 @@ namespace ClickQuest.Entity
 					while (hero.Quests.Count > 0)
 					{
 						hero.Quests.RemoveAt(0);
-					}
-					while (hero.Blessings.Count > 0)
-					{
-						hero.Blessings.RemoveAt(0);
 					}
 
 					// Reset Specializations.

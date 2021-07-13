@@ -79,7 +79,7 @@ namespace ClickQuest
 			User.Instance.CurrentHero?.UpdateTimePlayed();
 
 			// Pause all blessings.
-			Blessing.PauseBlessings();
+			User.Instance.CurrentHero?.PauseBlessing();
 
 			EntityOperations.SaveGame();
 

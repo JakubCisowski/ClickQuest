@@ -13,6 +13,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
+using ClickQuest.Heroes.Buffs;
 
 namespace ClickQuest.Items
 {
@@ -470,7 +471,7 @@ namespace ClickQuest.Items
 				MessageBoxResult result;
 
 				// If there are any blessings active, ask if user wants to swap.
-				if (User.Instance.CurrentHero.Blessings.Any())
+				if (User.Instance.CurrentHero.Blessing != null)
 				{
 					// Ask user if he wants to swap current blessing.
 					result = AlertBox.Show($"Do you want to swap current blessing to {blessingBlueprint.Name}?\n{blessingBlueprint.Description}",MessageBoxButton.YesNo);
@@ -488,7 +489,7 @@ namespace ClickQuest.Items
 					var blessing = blessingBlueprint.CopyBlessing();
 					// Increase his duration based on Blessing Specialization buff.
 					blessing.Duration += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing];
-					User.Instance.CurrentHero.Blessings.Add(blessing);
+					User.Instance.CurrentHero.Blessing = blessing;
 					blessing.EnableBuff();
 				}
 			}

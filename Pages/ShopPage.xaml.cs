@@ -3,6 +3,7 @@ using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Items;
 using ClickQuest.Heroes;
+using ClickQuest.Heroes.Buffs;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;

@@ -2,6 +2,7 @@ using ClickQuest.Player;
 using ClickQuest.Data;
 using ClickQuest.Enemies;
 using ClickQuest.Heroes;
+using ClickQuest.Heroes.Buffs;
 using ClickQuest.Windows;
 using System;
 using System.ComponentModel;

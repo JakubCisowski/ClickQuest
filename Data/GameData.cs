@@ -4,6 +4,7 @@ using ClickQuest.Enemies;
 using ClickQuest.Items;
 using ClickQuest.Pages;
 using ClickQuest.Places;
+using ClickQuest.Heroes.Buffs;
 
 namespace ClickQuest.Data
 {

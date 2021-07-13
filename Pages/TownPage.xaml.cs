@@ -100,7 +100,7 @@ namespace ClickQuest.Pages
 			(GameData.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
 
 			// Pause all blessings.
-			Blessing.PauseBlessings();
+			User.Instance.CurrentHero.PauseBlessing();
 
 			// Pause all quest timers (so that quest doesn't finish while current hero is not selected).
 			User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate == default(DateTime))?.PauseTimer();

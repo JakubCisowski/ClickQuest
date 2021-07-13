@@ -14,6 +14,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using ClickQuest.Data;
+using ClickQuest.Heroes.Buffs;
 
 namespace ClickQuest.Controls
 {

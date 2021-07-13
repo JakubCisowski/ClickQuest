@@ -1,5 +1,6 @@
 using ClickQuest.Player;
 using ClickQuest.Heroes;
+using ClickQuest.Heroes.Buffs;
 using ClickQuest.Items;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -319,7 +320,7 @@ namespace ClickQuest.Pages
 		private void RefreshBlessingTimer()
 		{
 			// Find blessing that is currently active.
-			var blessing = User.Instance.CurrentHero?.Blessings.FirstOrDefault();
+			var blessing = User.Instance.CurrentHero?.Blessing;
 
 			// Generate Blessing tooltips.
 			var toolTip = new ToolTip();
@@ -714,17 +715,17 @@ namespace ClickQuest.Pages
 			// ["BlessingName, damage: X"]
 			if(Player.User.Instance.CurrentHero != null)
 			{
-				if(Player.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.ClickDamage))
+				if(Player.User.Instance.CurrentHero.Blessing?.Type == BlessingType.ClickDamage)
 				{
 					var bindingBlessingName = new Binding("Name")
 					{
-						Source = User.Instance.CurrentHero.Blessings[0]
+						Source = User.Instance.CurrentHero.Blessing
 					};
 					var runBlessingName = new Run();
 					runBlessingName.SetBinding(Run.TextProperty,bindingBlessingName);
 					var bindingBlessingBuff = new Binding("Buff")
 					{
-						Source = User.Instance.CurrentHero.Blessings[0]
+						Source = User.Instance.CurrentHero.Blessing
 					};
 					var runBlessingBuff = new Run();
 					runBlessingBuff.SetBinding(Run.TextProperty,bindingBlessingBuff);
@@ -816,17 +817,17 @@ namespace ClickQuest.Pages
 			// ["BlessingName, damage: X"]
 			if(Player.User.Instance.CurrentHero != null)
 			{
-				if(Player.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.CritChance))
+				if(Player.User.Instance.CurrentHero.Blessing?.Type == BlessingType.CritChance)
 				{
 					var bindingBlessingName = new Binding("Name")
 					{
-						Source = User.Instance.CurrentHero.Blessings[0]
+						Source = User.Instance.CurrentHero.Blessing
 					};
 					var runBlessingName = new Run();
 					runBlessingName.SetBinding(Run.TextProperty,bindingBlessingName);
 					var bindingBlessingBuff = new Binding("Buff")
 					{
-						Source = User.Instance.CurrentHero.Blessings[0]
+						Source = User.Instance.CurrentHero.Blessing
 					};
 					var runBlessingBuff = new Run();
 					runBlessingBuff.SetBinding(Run.TextProperty,bindingBlessingBuff);
@@ -906,17 +907,17 @@ namespace ClickQuest.Pages
 			// ["BlessingName, damage: X"]
 			if(Player.User.Instance.CurrentHero != null)
 			{
-				if(Player.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.PoisonDamage))
+				if(Player.User.Instance.CurrentHero.Blessing?.Type == BlessingType.PoisonDamage)
 				{
 					var bindingBlessingName = new Binding("Name")
 					{
-						Source = User.Instance.CurrentHero.Blessings[0]
+						Source = User.Instance.CurrentHero.Blessing
 					};
 					var runBlessingName = new Run();
 					runBlessingName.SetBinding(Run.TextProperty,bindingBlessingName);
 					var bindingBlessingBuff = new Binding("Buff")
 					{
-						Source = User.Instance.CurrentHero.Blessings[0]
+						Source = User.Instance.CurrentHero.Blessing
 					};
 					var runBlessingBuff = new Run();
 					runBlessingBuff.SetBinding(Run.TextProperty,bindingBlessingBuff);
@@ -1019,17 +1020,17 @@ namespace ClickQuest.Pages
 			// ["BlessingName, tick damage: X%"]
 			if(Player.User.Instance.CurrentHero != null)
 			{
-				if(Player.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.AuraDamage))
+				if(Player.User.Instance.CurrentHero.Blessing?.Type==BlessingType.AuraDamage)
 				{
 					var bindingBlessingName = new Binding("Name")
 					{
-						Source = User.Instance.CurrentHero.Blessings[0]
+						Source = User.Instance.CurrentHero.Blessing
 					};
 					var runBlessingName = new Run();
 					runBlessingName.SetBinding(Run.TextProperty,bindingBlessingName);
 					var bindingBlessingBuff = new Binding("Buff")
 					{
-						Source = User.Instance.CurrentHero.Blessings[0]
+						Source = User.Instance.CurrentHero.Blessing
 					};
 					var runBlessingBuff = new Run();
 					runBlessingBuff.SetBinding(Run.TextProperty,bindingBlessingBuff);
@@ -1045,17 +1046,17 @@ namespace ClickQuest.Pages
 			// ["BlessingName, tick speed: X/s"]
 			if(Player.User.Instance.CurrentHero != null)
 			{
-				if(Player.User.Instance.CurrentHero.Blessings.Any(x=>x.Type==Items.BlessingType.AuraSpeed))
+				if(Player.User.Instance.CurrentHero.Blessing?.Type==BlessingType.AuraSpeed)
 				{
 					var bindingBlessingName = new Binding("Name")
 					{
-						Source = User.Instance.CurrentHero.Blessings[0]
+						Source = User.Instance.CurrentHero.Blessing
 					};
 					var runBlessingName = new Run();
 					runBlessingName.SetBinding(Run.TextProperty,bindingBlessingName);
 					var bindingBlessingBuff = new Binding("Buff")
 					{
-						Source = User.Instance.CurrentHero.Blessings[0]
+						Source = User.Instance.CurrentHero.Blessing
 					};
 					var runBlessingBuff = new Run();
 					runBlessingBuff.SetBinding(Run.TextProperty,bindingBlessingBuff);
