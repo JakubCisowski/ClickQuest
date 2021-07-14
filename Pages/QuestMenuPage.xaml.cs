@@ -42,8 +42,7 @@ namespace ClickQuest.Pages
 				}
 
 				// Add selected quest id to the list (create copy to keep database clean).
-				var quest = new Quest();
-				quest.CopyQuest(questsForCurrentHeroClass.ElementAt(index));
+				var quest = questsForCurrentHeroClass.ElementAt(index).CopyQuest();
 				User.Instance.CurrentHero.Quests.Add(quest);
 				questsForCurrentHeroClass.RemoveAt(index);
 			}

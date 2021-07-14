@@ -168,11 +168,12 @@ namespace ClickQuest.Pages
 			// Refresh hero stats panel info.
 			hero.RefreshHeroExperience();
 
-			// Clone hero's quests using those from Database.
-			foreach (var heroQuest in hero.Quests)
+			// Clone hero's quests using those from Database - rewards are not stored in Entity.
+			for (int i = 0; i < User.Instance.CurrentHero.Quests.Count; i++)
 			{
+				var heroQuest = User.Instance.CurrentHero.Quests[i];
 				var databaseQuest = GameData.Quests.FirstOrDefault(x => x.Id == heroQuest.Id);
-				heroQuest.CopyQuest(databaseQuest);
+				User.Instance.CurrentHero.Quests[i] = databaseQuest.CopyQuest();
 			}
 
 			// Resume quests for the selected hero.

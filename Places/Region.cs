@@ -2,10 +2,11 @@ using ClickQuest.Enemies;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using ClickQuest.Interfaces;
 
 namespace ClickQuest.Places
 {
-	public class Region : INotifyPropertyChanged
+	public class Region : INotifyPropertyChanged, IIdentifiable
 	{
 		#region INotifyPropertyChanged
 

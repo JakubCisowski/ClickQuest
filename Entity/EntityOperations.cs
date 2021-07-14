@@ -70,7 +70,7 @@ namespace ClickQuest.Entity
 
 					foreach (var quest in hero.Quests)
 					{
-						quest.UpdateRewardsDescription();
+						quest.UpdateAllRewardsDescription();
 					}
 				}
 			}

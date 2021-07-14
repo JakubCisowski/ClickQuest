@@ -11,6 +11,7 @@ using System.Windows.Threading;
 using ClickQuest.Extensions.InterfaceManager;
 using Microsoft.EntityFrameworkCore;
 using ClickQuest.Items;
+using ClickQuest.Interfaces;
 
 namespace ClickQuest.Heroes.Buffs
 {
@@ -20,7 +21,7 @@ namespace ClickQuest.Heroes.Buffs
 	}
 
 	[Owned]
-	public partial class Blessing : INotifyPropertyChanged
+	public partial class Blessing : INotifyPropertyChanged, IIdentifiable
 	{
 		#region INotifyPropertyChanged
 

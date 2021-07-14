@@ -2,10 +2,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using ClickQuest.Interfaces;
 
 namespace ClickQuest.Items
 {
-	public abstract partial class Item : INotifyPropertyChanged
+	public abstract partial class Item : INotifyPropertyChanged, IIdentifiable
 	{
 		#region INotifyPropertyChanged
 

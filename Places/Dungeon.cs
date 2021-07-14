@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using ClickQuest.Interfaces;
 
 namespace ClickQuest.Places
 {
-	public class Dungeon : INotifyPropertyChanged
+	public class Dungeon : INotifyPropertyChanged, IIdentifiable
 	{
 		#region INotifyPropertyChanged
 

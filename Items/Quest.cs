@@ -14,10 +14,11 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
 using ClickQuest.Heroes.Buffs;
+using ClickQuest.Interfaces;
 
 namespace ClickQuest.Items
 {
-	public partial class Quest : INotifyPropertyChanged
+	public partial class Quest : INotifyPropertyChanged, IIdentifiable
 	{
 		#region INotifyPropertyChanged
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -214,136 +215,75 @@ namespace ClickQuest.Items
 		}
 		[NotMapped]
 		public string RewardsDescription { get; private set; }
+		public bool IsFinished{ 
+			get{
+				return TicksCountNumber<=0;
+			}
+		}
 		#endregion
 
-		public void CopyQuest(Quest quest)
+		public Quest CopyQuest()
 		{
-			// Copy only the Database Id, not the Entity Id.
-			Id = quest.Id;
-			Rare = quest.Rare;
-			HeroClass = quest.HeroClass;
-			Name = quest.Name;
-			Duration = quest.Duration;
-			Description = quest.Description;
-			RewardsDescription = quest.RewardsDescription;
+			Quest copy = new Quest();
 
-			RewardRecipeIds = quest.RewardRecipeIds;
-			RewardMaterialIds = quest.RewardMaterialIds;
-			RewardBlessingIds = quest.RewardBlessingIds;
-			RewardIngots = quest.RewardIngots;
+			// Copy only the Database Id, not the Entity Id.
+			copy.Id = Id;
+			copy.Rare = Rare;
+			copy.HeroClass = HeroClass;
+			copy.Name = Name;
+			copy.Duration = Duration;
+			copy.Description = Description;
+			copy.RewardsDescription = RewardsDescription;
+
+			copy.RewardRecipeIds = RewardRecipeIds;
+			copy.RewardMaterialIds = RewardMaterialIds;
+			copy.RewardBlessingIds = RewardBlessingIds;
+			copy.RewardIngots = RewardIngots;
+
+			return copy;
 		}
 
-		public void UpdateRewardsDescription()
+		public void UpdateAllRewardsDescription()
 		{
 			RewardsDescription = "Rewards:";
-			
-			#region Blessings
 
-			var counter = 1;
-			var previousId = 0;
+			UpdateOtherRewardsDescription<Blessing>(RewardBlessingIds, GameData.Blessings);
+			UpdateOtherRewardsDescription<Recipe>(RewardRecipeIds, GameData.Recipes);
+			UpdateOtherRewardsDescription<Material>(RewardMaterialIds, GameData.Materials);
+			UpdateIngotRewardDescription();
+		}
 
-			for (int i = 0; i < RewardBlessingIds.Count; i++)
+		private void UpdateOtherRewardsDescription<T>(List<int> questRewardIdsCollection, List<T> rewardsGameDataCollection) where T : IIdentifiable
+		{
+			var rewardIdAndCountPairs = questRewardIdsCollection
+                .GroupBy(id => id)
+                .Select(g => new { Value = g.Key, Count = g.Count() });
+
+			foreach (var rewardGroup in rewardIdAndCountPairs)
 			{
-				// If reward id stays the same (or it's first id in the list) - increment the counter.
-				if ((i == 0 || previousId == RewardBlessingIds[i]) && (i != RewardBlessingIds.Count - 1))
-				{
-					counter++;
-				}
-				// New reward id / last id in the list - display reward info on the button.
-				else
-				{
-					RewardsDescription += $"\n{counter}x {GameData.Blessings.FirstOrDefault(x => x.Id == RewardBlessingIds[i]).Name}";
-					counter = 1;
-				}
-
-				previousId = RewardBlessingIds[i];
+				RewardsDescription += $"\n{rewardGroup.Count}x {rewardsGameDataCollection.FirstOrDefault(x => x.Id == rewardGroup.Value).Name}";
 			}
+		}
 
-			#endregion Blessings
+		private void UpdateIngotRewardDescription()
+		{
+			var rewardIdAndCountPairs = RewardIngots
+                .GroupBy(rarity => rarity)
+                .Select(g => new { Value = g.Key, Count = g.Count() });
 
-			#region Materials
-
-			counter = 1;
-			previousId = 0;
-
-			for (int i = 0; i < RewardMaterialIds.Count; i++)
+			foreach (var rewardGroup in rewardIdAndCountPairs)
 			{
-				// If reward id stays the same (or it's first id in the list) - increment the counter.
-				if ((i == 0 || previousId == RewardMaterialIds[i]) && (i != RewardMaterialIds.Count - 1))
-				{
-					counter++;
-				}
-				// New reward id / last id in the list - display reward info on the button.
-				else
-				{
-					RewardsDescription += $"\n{counter}x {GameData.Materials.FirstOrDefault(x => x.Id == RewardMaterialIds[i]).Name}";
-					counter = 1;
-				}
-
-				previousId = RewardMaterialIds[i];
+				RewardsDescription += rewardGroup.Count > 1 ? $"\n{rewardGroup.Count}x {rewardGroup.Value.ToString()} Ingots" : $"\n{rewardGroup.Count}x {rewardGroup.Value.ToString()} Ingot";
 			}
-
-			#endregion Materials
-
-			#region Recipes
-
-			counter = 1;
-			previousId = 0;
-
-			for (int i = 0; i < RewardRecipeIds.Count; i++)
-			{
-				// If reward id stays the same (or it's first id in the list) - increment the counter.
-				if ((i == 0 || previousId == RewardRecipeIds[i]) && (i != RewardRecipeIds.Count - 1))
-				{
-					counter++;
-				}
-				// New reward id / last id in the list - display reward info on the button.
-				else
-				{
-					RewardsDescription += $"\n{counter}x {GameData.Recipes.FirstOrDefault(x => x.Id == RewardRecipeIds[i]).Name}";
-					counter = 1;
-				}
-
-				previousId = RewardRecipeIds[i];
-			}
-
-			#endregion Recipes
-
-			#region Ingots
-
-			counter = 1;
-			previousId = 0;
-
-			for (int i = 0; i < RewardIngots.Count; i++)
-			{
-				// If reward id stays the same (or it's first id in the list) - increment the counter.
-				if ((i == 0 || previousId == (int)RewardIngots[i]) && (i != RewardIngots.Count - 1))
-				{
-					counter++;
-				}
-				// New reward id / last id in the list - display reward info on the button.
-				else
-				{
-					RewardsDescription += counter > 1 ? $"\n{counter}x {RewardIngots[i].ToString()} Ingots" : $"\n{counter}x {RewardIngots[i].ToString()} Ingot";
-					counter = 1;
-				}
-
-				previousId = (int)RewardIngots[i];
-			}
-
-			#endregion Ingots
 		}
 
 		public void StartQuest()
 		{
 			// Create copy of this quest (to make doing the same quest possible on other heroes at the same time).
-			var questCopy = new Quest
-			{
-				EndDate = this.EndDate
-			};
-			questCopy.CopyQuest(this);
+			var questCopy = CopyQuest();
+			questCopy.EndDate = this.EndDate;
 
-			// Change that quest in Hero's Quests collection to the newly copied quest.
+			// Replace that quest in Hero's Quests collection with the newly copied quest.
 			User.Instance.CurrentHero?.Quests.RemoveAll(x => x.Id == questCopy.Id);
 			User.Instance.CurrentHero?.Quests.Add(questCopy);
 
@@ -357,50 +297,21 @@ namespace ClickQuest.Items
 			// Reset to 'Duration', it will count from Duration to 0.
 			questCopy.TicksCountNumber = (int)(questCopy.EndDate - DateTime.Now).TotalSeconds;
 
-			// If quest is already finished
-			if (questCopy.TicksCountNumber <= 0)
-			{
-				questCopy.TicksCountText = "";
-			}
-			else
-			{
-				// Convert to text.
-				questCopy.TicksCountText = $"{questCopy.Name}\n{questCopy.TicksCountNumber / 60}m {questCopy.TicksCountNumber % 60 + 1}s";
-			}
+			UpdateTicksCountText(questCopy);
 
-			// Start timer (checks if quest is finished).
+			// Start timer (to check if quest is finished during next tick).
 			questCopy._timer.Start();
 
-			// Refresh hero stats panel (for timer).
-			(GameData.Pages["QuestMenu"] as QuestMenuPage).StatsFrame.Refresh();
+			Extensions.InterfaceManager.InterfaceController.RefreshStatPanels();
 		}
 
-		public void StopQuest()
+		public void FinishQuest()
 		{
-			// Stop timer.
 			_timer.Stop();
-
-			// Set TicksCountText to empty string so that it stops displaying.
 			TicksCountText = "";
-
-			// Assign rewards.
 			AssignRewards();
-
-			// Reroll new set of 3 quests.
-			(GameData.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
-
-			// Start AuraTimer if user is on RegionPage.
-			if ((Application.Current.MainWindow as GameWindow).CurrentFrame.Content is RegionPage regionPage)
-			{
-				foreach (var ctrl in regionPage.RegionPanel.Children)
-				{
-					if (ctrl is MonsterButton monsterButton)
-					{
-						monsterButton.StartAuraTimer();
-						break;
-					}
-				}
-			}
+			Extensions.QuestManager.QuestController.RerollQuests();
+			Extensions.CombatManager.CombatController.StartAuraTimerOnEachRegion();
 		}
 
 		public void PauseTimer()
@@ -408,12 +319,21 @@ namespace ClickQuest.Items
 			_timer.Stop();
 		}
 
+		private void UpdateTicksCountText(Quest quest)
+		{
+			if (quest.IsFinished)
+			{
+				quest.TicksCountText = "";
+			}
+			else
+			{
+				quest.TicksCountText = $"{quest.Name}\n{quest.TicksCountNumber / 60}m {quest.TicksCountNumber % 60 + 1}s";
+			}
+		}
+
 		private void AssignRewards()
 		{
-			// Inform the user about rewards.
 			AlertBox.Show($"Quest {this.Name} finished.\nRewards granted.", MessageBoxButton.OK);
-
-			// Increase achievement amount.
 			User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.QuestsCompleted]++;
 
 			// Assign materials.
@@ -509,16 +429,14 @@ namespace ClickQuest.Items
 
 		private void Timer_Tick(object source, EventArgs e)
 		{
-			// Check if quest is finished.
-			if (TicksCountNumber <= 0)
+			if (IsFinished)
 			{
-				StopQuest();
+				FinishQuest();
 			}
 			else
 			{
-				// Else, decrement TicksCountNumber, and convert it to text.
 				TicksCountNumber--;
-				TicksCountText = $"{Name}\n{TicksCountNumber / 60}m {TicksCountNumber % 60 + 1}s";
+				UpdateTicksCountText(this);
 			}
 		}
 

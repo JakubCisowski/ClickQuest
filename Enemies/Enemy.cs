@@ -4,11 +4,12 @@ using ClickQuest.Windows;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using ClickQuest.Interfaces;
 
 namespace ClickQuest.Enemies
 {
 	
-public abstract partial class Enemy : INotifyPropertyChanged
+public abstract partial class Enemy : INotifyPropertyChanged, IIdentifiable
 {
 	#region INotifyPropertyChanged
 

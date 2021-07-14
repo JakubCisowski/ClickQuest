@@ -48,7 +48,7 @@ namespace ClickQuest.Data
 
 			foreach (var quest in GameData.Quests)
 			{
-				quest.UpdateRewardsDescription();
+				quest.UpdateAllRewardsDescription();
 			}
         }
 
