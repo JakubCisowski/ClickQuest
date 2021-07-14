@@ -89,9 +89,9 @@ namespace ClickQuest.Items
 			return copy;
 		}
 
-		public override void AddAchievementProgress()
+		public override void AddAchievementProgress(int amount)
 		{
-			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.RecipesGained, 1);
+			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.RecipesGained, amount);
 		}
 	}
 }

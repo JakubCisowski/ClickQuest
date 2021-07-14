@@ -23,7 +23,7 @@ namespace ClickQuest.Items
 			return copy;
 		}
 
-		public override void AddAchievementProgress()
+		public override void AddAchievementProgress(int amount)
 		{
 			NumericAchievementType achievementType = 0;
 			// Increase achievement amount.
@@ -48,7 +48,7 @@ namespace ClickQuest.Items
 					achievementType = NumericAchievementType.MasterworkArtifactsGained;
 					break;
 			}
-			User.Instance.Achievements.IncreaseAchievementValue(achievementType, 1);
+			User.Instance.Achievements.IncreaseAchievementValue(achievementType, amount);
 		}
 	}
 }

@@ -510,7 +510,7 @@ namespace ClickQuest.Heroes
                 AddItemToCollection<Material>(itemToAdd, Materials);
             }
 
-            itemToAdd.AddAchievementProgress();
+            itemToAdd.AddAchievementProgress(1);
         }
 
         private void AddItemToCollection<T>(Item itemToAdd, List<T> itemCollection) where T : Item

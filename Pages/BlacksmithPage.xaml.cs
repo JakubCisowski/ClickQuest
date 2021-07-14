@@ -77,30 +77,7 @@ namespace ClickQuest.Pages
 				}
 				ingot.Quantity += ingotAmount;
 
-				NumericAchievementType achievementType = 0;
-				// Increase achievement amount.
-				switch(material.Rarity)
-				{
-					case Rarity.General:
-						achievementType=NumericAchievementType.GeneralIngotsEarned;
-						break;
-					case Rarity.Fine:
-						achievementType=NumericAchievementType.FineIngotsEarned;
-						break;
-					case Rarity.Superior:
-						achievementType=NumericAchievementType.SuperiorIngotsEarned;
-						break;
-					case Rarity.Exceptional:
-						achievementType=NumericAchievementType.ExceptionalIngotsEarned;
-						break;
-					case Rarity.Mythic:
-						achievementType=NumericAchievementType.MythicIngotsEarned;
-						break;
-					case Rarity.Masterwork:
-						achievementType=NumericAchievementType.MasterworkIngotsEarned;
-						break;
-				}
-				User.Instance.Achievements.IncreaseAchievementValue(achievementType, ingotAmount);
+				ingot.AddAchievementProgress(ingotAmount);
 
 				// Update blacksmith page.
 				(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
@@ -140,31 +117,7 @@ namespace ClickQuest.Pages
 				}
 				ingot.Quantity += ingotAmount;
 
-
-				NumericAchievementType achievementType = 0;
-				// Increase achievement amount.
-				switch(artifact.Rarity)
-				{
-					case Rarity.General:
-						achievementType=NumericAchievementType.GeneralIngotsEarned;
-						break;
-					case Rarity.Fine:
-						achievementType=NumericAchievementType.FineIngotsEarned;
-						break;
-					case Rarity.Superior:
-						achievementType=NumericAchievementType.SuperiorIngotsEarned;
-						break;
-					case Rarity.Exceptional:
-						achievementType=NumericAchievementType.ExceptionalIngotsEarned;
-						break;
-					case Rarity.Mythic:
-						achievementType=NumericAchievementType.MythicIngotsEarned;
-						break;
-					case Rarity.Masterwork:
-						achievementType=NumericAchievementType.MasterworkIngotsEarned;
-						break;
-				}
-				User.Instance.Achievements.IncreaseAchievementValue(achievementType, ingotAmount);
+				ingot.AddAchievementProgress(ingotAmount);
 
 				// Update blacksmith page.
 				(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
