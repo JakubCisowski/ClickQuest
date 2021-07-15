@@ -10,10 +10,10 @@ namespace ClickQuest
 	{
 		protected void Application_Startup(object sender, StartupEventArgs e)
 		{
-			EntityOperations.CreateAndSeedDatabase();
 
 			// Load JSONs and Entity.
 			DataLoader.Load();
+			EntityOperations.CreateAndSeedDatabase();
 			EntityOperations.LoadGame();
 
 			// Save current time as the application's start time (for achievement tracking).

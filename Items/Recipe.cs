@@ -72,7 +72,7 @@ namespace ClickQuest.Items
 
 		}
 
-		public override Recipe CopyItem()
+		public override Recipe CopyItem(int quantity)
 		{
 			Recipe copy = new Recipe();
 
@@ -81,7 +81,7 @@ namespace ClickQuest.Items
 			copy.Rarity = Rarity;
 			copy.Value = Value;
 			copy.Description = Description;
-			copy.Quantity = 1;
+			copy.Quantity = quantity;
 			copy.ArtifactId = ArtifactId;
 			copy.MaterialIds = MaterialIds;
 			copy.RequirementsDescription = RequirementsDescription;

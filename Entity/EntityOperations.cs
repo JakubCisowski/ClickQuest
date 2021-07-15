@@ -75,7 +75,7 @@ namespace ClickQuest.Entity
 				}
 			}
 
-			// Deserualize achievements.
+			// Deserialize achievements.
 			User.Instance.Achievements.DeserializeAchievements();
 		}
 
@@ -271,14 +271,13 @@ namespace ClickQuest.Entity
 				// If there are no ingots in the database, add them (seed).
 				if (user.Ingots.Count == 0)
 				{
-					var rarities = Enum.GetValues(typeof(Rarity));
-					for (int i = 0; i < rarities.GetLength(0); i++)
+					foreach (var ingot in GameData.Ingots)
 					{
-						user.Ingots.Add(new Ingot((Rarity)rarities.GetValue(i), 0));
+						user.Ingots.Add(ingot.CopyItem(0));
 					}
 				}
 
-				db.Users.Update(user);
+			db.Users.Update(user);
 				db.SaveChanges();
 			}
 		}

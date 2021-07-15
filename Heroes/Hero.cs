@@ -525,7 +525,7 @@ namespace ClickQuest.Heroes
             }
 
             // If user doesn't have this item, clone and add it.
-            var copy = itemToAdd.CopyItem();
+            var copy = itemToAdd.CopyItem(1);
 
             itemCollection.Add((T)copy);
         }

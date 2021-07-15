@@ -13,7 +13,7 @@ namespace ClickQuest.Items
 
 		}
 
-		public override Ingot CopyItem()
+		public override Ingot CopyItem(int quantity)
 		{
 			Ingot copy = new Ingot();
 
@@ -22,7 +22,7 @@ namespace ClickQuest.Items
 			copy.Rarity = Rarity;
 			copy.Value = Value;
 			copy.Description = Description;
-			copy.Quantity = 1;
+			copy.Quantity = quantity;
 
 			return copy;
 		}

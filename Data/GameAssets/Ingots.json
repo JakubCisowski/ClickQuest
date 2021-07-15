@@ -1,0 +1,44 @@
+[
+    {
+        "Id": 0,
+        "Name": "General ingot",
+        "Rarity": 0,
+        "Description": "[...]",
+        "Value": 0
+    },
+    {
+        "Id": 1,
+        "Name": "Fine ingot",
+        "Rarity": 1,
+        "Description": "[...]",
+        "Value": 0
+    },
+    {
+        "Id": 2,
+        "Name": "Superior ingot",
+        "Rarity": 2,
+        "Description": "[...]",
+        "Value": 0
+    },
+    {
+        "Id": 3,
+        "Name": "Exceptional ingot",
+        "Rarity": 3,
+        "Description": "[...]",
+        "Value": 0
+    },
+    {
+        "Id": 4,
+        "Name": "Mythic ingot",
+        "Rarity": 4,
+        "Description": "[...]",
+        "Value": 0
+    },
+    {
+        "Id": 5,
+        "Name": "Masterwork ingot",
+        "Rarity": 5,
+        "Description": "[...]",
+        "Value": 0
+    }
+]

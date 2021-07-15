@@ -15,7 +15,8 @@ namespace ClickQuest.Data
         public static List<Material> Materials { get; set; }
         public static List<Recipe> Recipes { get; set; }
         public static List<Artifact> Artifacts { get; set; }
-        public static List<Monster> Monsters { get; set; }
+        public static List<Ingot> Ingots{ get; set; }
+		public static List<Monster> Monsters { get; set; }
         public static List<Region> Regions { get; set; }
         public static List<Blessing> Blessings { get; set; }
         public static List<int> ShopOffer { get; set; }
@@ -34,7 +35,8 @@ namespace ClickQuest.Data
             Materials = new List<Material>();
             Recipes = new List<Recipe>();
             Artifacts = new List<Artifact>();
-            Monsters = new List<Monster>();
+			Ingots = new List<Ingot>();
+			Monsters = new List<Monster>();
             Regions = new List<Region>();
             Blessings = new List<Blessing>();
             ShopOffer = new List<int>();

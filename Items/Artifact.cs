@@ -9,7 +9,7 @@ namespace ClickQuest.Items
 			
 		}
 
-		public override Artifact CopyItem()
+		public override Artifact CopyItem(int quantity)
 		{
 			Artifact copy = new Artifact();
 
@@ -18,7 +18,7 @@ namespace ClickQuest.Items
 			copy.Rarity = Rarity;
 			copy.Value = Value;
 			copy.Description = Description;
-			copy.Quantity = 1;
+			copy.Quantity = quantity;
 
 			return copy;
 		}

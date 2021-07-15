@@ -9,7 +9,7 @@ namespace ClickQuest.Items
 
 		}
 
-		public override Material CopyItem()
+		public override Material CopyItem(int quantity)
 		{
 			Material copy = new Material();
 
@@ -18,7 +18,7 @@ namespace ClickQuest.Items
 			copy.Rarity = Rarity;
 			copy.Value = Value;
 			copy.Description = Description;
-			copy.Quantity = 1;
+			copy.Quantity = quantity;
 
 			return copy;
 		}
