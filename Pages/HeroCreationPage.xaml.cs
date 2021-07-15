@@ -30,8 +30,8 @@ namespace ClickQuest.Pages
 
 		public void CreateHeroButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Check if hero name is chosen.
-			if (!string.IsNullOrEmpty(HeroNameBox.Text))
+			// Check if hero name, race and class are chosen.
+			if (!string.IsNullOrEmpty(HeroNameBox.Text) && HeroClassBox.SelectedItems.Count > 0 && HeroRaceBox.SelectedItems.Count > 0)
 			{
 				// Validate name - it can contain only letters, digits or spaces (not at the front or back) and can be up to 15 characters long.
 				bool isValid = HeroNameBox.Text.Trim().All(x => char.IsLetterOrDigit(x) || x == ' ') && HeroNameBox.Text.Trim().Length <= 15;
