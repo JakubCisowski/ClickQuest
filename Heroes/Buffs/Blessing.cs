@@ -12,6 +12,8 @@ using ClickQuest.Extensions.InterfaceManager;
 using Microsoft.EntityFrameworkCore;
 using ClickQuest.Items;
 using ClickQuest.Interfaces;
+using System.Windows;
+using ClickQuest.Controls;
 
 namespace ClickQuest.Heroes.Buffs
 {
@@ -199,6 +201,12 @@ namespace ClickQuest.Heroes.Buffs
 			}
 		}
 
+		public bool IsFinished{ 
+			get{
+				return Duration<=0;
+			}
+		}
+
 		#endregion Properties
 		
 		public Blessing()
@@ -260,7 +268,6 @@ namespace ClickQuest.Heroes.Buffs
 					break;
 			}
 
-			// Reset DurationText.
 			DurationText = "";
 
 			InterfaceController.RefreshStatPanels();
@@ -286,13 +293,46 @@ namespace ClickQuest.Heroes.Buffs
 			Duration--;
 			UpdateDurationText();
 
-			// If blessing is finished.
-			if (Duration <= 0)
+			if (IsFinished)
 			{
 				User.Instance.CurrentHero.RemoveBlessing();
 			}
 		}
-
 		
+		public static bool AskUserAndSwapBlessing(int newBlessingId)
+		{
+			var blessingBlueprint = GameData.Blessings.FirstOrDefault(x => x.Id == newBlessingId);
+
+			MessageBoxResult result = MessageBoxResult.OK;
+
+			if (User.Instance.CurrentHero.Blessing != null)
+			{
+				result = AlertBox.Show($"Do you want to swap current blessing to {blessingBlueprint.Name}?\n{blessingBlueprint.Description}",MessageBoxButton.YesNo);
+			}
+			
+			if(result == MessageBoxResult.OK)
+			{
+				AddOrReplaceBlessing(newBlessingId);
+				return true;
+			}
+
+			return false;
+		}
+
+		public static void AddOrReplaceBlessing(int newBlessingId)
+		{
+			var blessingBlueprint = GameData.Blessings.FirstOrDefault(x => x.Id == newBlessingId);
+
+			User.Instance.CurrentHero.RemoveBlessing();
+
+			var newBlessing = blessingBlueprint.CopyBlessing();
+			newBlessing.Duration += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing];
+			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Blessing]++;
+
+			User.Instance.CurrentHero.Blessing = newBlessing;
+			newBlessing.EnableBuff();
+			
+			Extensions.InterfaceManager.InterfaceController.RefreshStatPanels();
+		}
 	}
 }

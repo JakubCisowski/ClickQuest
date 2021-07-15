@@ -23,5 +23,23 @@ namespace ClickQuest.Extensions.InterfaceManager
 				} 
 			}
 		}
+
+		public static void RefreshEquipmentPanels()
+		{
+			foreach (var page in GameData.Pages)
+			{
+				try
+				{
+					dynamic p = page.Value;
+					p.EquipmentFrame.Refresh();
+				}
+				catch (RuntimeBinderException)
+				{
+					// No stats frame on this page!
+					// Best solution according to:
+					// https://stackoverflow.com/a/5768449/14770235
+				} 
+			}
+		}
 	}
 }

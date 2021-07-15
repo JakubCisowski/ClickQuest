@@ -174,6 +174,9 @@ namespace ClickQuest.Pages
 				var heroQuest = User.Instance.CurrentHero.Quests[i];
 				var databaseQuest = GameData.Quests.FirstOrDefault(x => x.Id == heroQuest.Id);
 				User.Instance.CurrentHero.Quests[i] = databaseQuest.CopyQuest();
+				
+				// CopyQuest sets EndDate from GameData, so we need to get EndDate from Entity instead.
+				User.Instance.CurrentHero.Quests[i].EndDate = heroQuest.EndDate;
 			}
 
 			// Resume quests for the selected hero.

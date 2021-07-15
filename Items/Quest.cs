@@ -38,7 +38,7 @@ namespace ClickQuest.Items
 		private List<int> _rewardRecipeIds;
 		private List<int> _rewardMaterialIds;
 		private List<int> _rewardBlessingIds;
-		private List<Rarity> _rewardIngots;
+		private List<int> _rewardIngotIds;
 		private DispatcherTimer _timer;
 		private DateTime _endDate;
 		private int _ticksCountNumber;
@@ -164,15 +164,15 @@ namespace ClickQuest.Items
 			}
 		}
 		[NotMapped]
-		public List<Rarity> RewardIngots
+		public List<int> RewardIngotIds
 		{
 			get
 			{
-				return _rewardIngots;
+				return _rewardIngotIds;
 			}
 			set
 			{
-				_rewardIngots = value;
+				_rewardIngotIds = value;
 			}
 		}
 		public DateTime EndDate
@@ -238,7 +238,7 @@ namespace ClickQuest.Items
 			copy.RewardRecipeIds = RewardRecipeIds;
 			copy.RewardMaterialIds = RewardMaterialIds;
 			copy.RewardBlessingIds = RewardBlessingIds;
-			copy.RewardIngots = RewardIngots;
+			copy.RewardIngotIds = RewardIngotIds;
 
 			return copy;
 		}
@@ -247,13 +247,13 @@ namespace ClickQuest.Items
 		{
 			RewardsDescription = "Rewards:";
 
-			UpdateOtherRewardsDescription<Blessing>(RewardBlessingIds, GameData.Blessings);
-			UpdateOtherRewardsDescription<Recipe>(RewardRecipeIds, GameData.Recipes);
-			UpdateOtherRewardsDescription<Material>(RewardMaterialIds, GameData.Materials);
-			UpdateIngotRewardDescription();
+			UpdateSpecificRewardsDescription<Blessing>(RewardBlessingIds, GameData.Blessings);
+			UpdateSpecificRewardsDescription<Recipe>(RewardRecipeIds, GameData.Recipes);
+			UpdateSpecificRewardsDescription<Material>(RewardMaterialIds, GameData.Materials);
+			UpdateSpecificRewardsDescription<Ingot>(RewardIngotIds, GameData.Ingots);
 		}
 
-		private void UpdateOtherRewardsDescription<T>(List<int> questRewardIdsCollection, List<T> rewardsGameDataCollection) where T : IIdentifiable
+		private void UpdateSpecificRewardsDescription<T>(List<int> questRewardIdsCollection, List<T> rewardsGameDataCollection) where T : IIdentifiable
 		{
 			var rewardIdAndCountPairs = questRewardIdsCollection
                 .GroupBy(id => id)
@@ -264,19 +264,7 @@ namespace ClickQuest.Items
 				RewardsDescription += $"\n{rewardGroup.Count}x {rewardsGameDataCollection.FirstOrDefault(x => x.Id == rewardGroup.Value).Name}";
 			}
 		}
-
-		private void UpdateIngotRewardDescription()
-		{
-			var rewardIdAndCountPairs = RewardIngots
-                .GroupBy(rarity => rarity)
-                .Select(g => new { Value = g.Key, Count = g.Count() });
-
-			foreach (var rewardGroup in rewardIdAndCountPairs)
-			{
-				RewardsDescription += rewardGroup.Count > 1 ? $"\n{rewardGroup.Count}x {rewardGroup.Value.ToString()} Ingots" : $"\n{rewardGroup.Count}x {rewardGroup.Value.ToString()} Ingot";
-			}
-		}
-
+		
 		public void StartQuest()
 		{
 			// Create copy of this quest (to make doing the same quest possible on other heroes at the same time).
@@ -309,6 +297,7 @@ namespace ClickQuest.Items
 		{
 			_timer.Stop();
 			TicksCountText = "";
+			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Questing]++;
 			AssignRewards();
 			Extensions.QuestManager.QuestController.RerollQuests();
 			Extensions.CombatManager.CombatController.StartAuraTimerOnEachRegion();
@@ -321,122 +310,46 @@ namespace ClickQuest.Items
 
 		private void UpdateTicksCountText(Quest quest)
 		{
-			if (quest.IsFinished)
-			{
-				quest.TicksCountText = "";
-			}
-			else
-			{
-				quest.TicksCountText = $"{quest.Name}\n{quest.TicksCountNumber / 60}m {quest.TicksCountNumber % 60 + 1}s";
-			}
+			quest.TicksCountText = $"{quest.Name}\n{quest.TicksCountNumber / 60}m {quest.TicksCountNumber % 60}s";
 		}
 
 		private void AssignRewards()
 		{
 			AlertBox.Show($"Quest {this.Name} finished.\nRewards granted.", MessageBoxButton.OK);
 			User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.QuestsCompleted]++;
+			
+			GrantSpecificReward<Material>(RewardMaterialIds, GameData.Materials);
+			GrantSpecificReward<Recipe>(RewardRecipeIds, GameData.Recipes);
+			GrantSpecificReward<Ingot>(RewardIngotIds, GameData.Ingots);
 
-			// Assign materials.
-			foreach (var materialId in RewardMaterialIds)
-			{
-				var material = GameData.Materials.FirstOrDefault(x => x.Id == materialId);
-				User.Instance.CurrentHero.AddItem(material);
-			}
-
-			// Assign recipes.
-			foreach (var recipeId in RewardRecipeIds)
-			{
-				var recipe = GameData.Recipes.FirstOrDefault(x => x.Id == recipeId);
-				User.Instance.CurrentHero.AddItem(recipe);
-			}
-
-			// Assign ingots.
-			foreach (var ingotRarity in RewardIngots)
-			{
-				var ingot = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == ingotRarity);
-				ingot.Quantity++;
-
-				NumericAchievementType achievementType = 0;
-				// Increase achievement amount.
-				switch(ingotRarity)
-				{
-					case Rarity.General:
-						achievementType = NumericAchievementType.GeneralIngotsEarned;
-						break;
-					case Rarity.Fine:
-						achievementType = NumericAchievementType.FineIngotsEarned;
-						break;
-					case Rarity.Superior:
-						achievementType = NumericAchievementType.SuperiorIngotsEarned;
-						break;
-					case Rarity.Exceptional:
-						achievementType = NumericAchievementType.ExceptionalIngotsEarned;
-						break;
-					case Rarity.Mythic:
-						achievementType = NumericAchievementType.MythicIngotsEarned;
-						break;
-					case Rarity.Masterwork:
-						achievementType = NumericAchievementType.MasterworkIngotsEarned;
-						break;
-				}
-				User.Instance.Achievements.IncreaseAchievementValue(achievementType, 1);
-			}
-
-			// Start blessings.
 			foreach (var blessingId in RewardBlessingIds)
 			{
-				// Select right blessing.
-				var blessingBlueprint = GameData.Blessings.FirstOrDefault(x => x.Id == blessingId);
-
-				MessageBoxResult result;
-
-				// If there are any blessings active, ask if user wants to swap.
-				if (User.Instance.CurrentHero.Blessing != null)
-				{
-					// Ask user if he wants to swap current blessing.
-					result = AlertBox.Show($"Do you want to swap current blessing to {blessingBlueprint.Name}?\n{blessingBlueprint.Description}",MessageBoxButton.YesNo);
-				}
-				else
-				{
-					// Else, set default option to yes.
-					result = MessageBoxResult.OK;
-				}
-				
-				// If user wants to change his blessing to a new one.
-				if(result == MessageBoxResult.OK)
-				{
-					// Create a new Blessing.
-					var blessing = blessingBlueprint.CopyBlessing();
-					// Increase his duration based on Blessing Specialization buff.
-					blessing.Duration += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing];
-					User.Instance.CurrentHero.Blessing = blessing;
-					blessing.EnableBuff();
-				}
+				Blessing.AskUserAndSwapBlessing(blessingId);
 			}
 
-			// Grant Specialization Questing progress.
-			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Questing]++;
+			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
+		}
 
-			// Refresh all stats and equipment pages (skip 2 pages - MainMenu and HeroCreation, because they don't have an EquipmentFrame).
-			// Alternative to .Skip(2) - try catch and continue the loop if an exception is caught (that is, if EquipmentFrame does not exist).
-			foreach (var page in GameData.Pages.Skip(2))
+		private void GrantSpecificReward<T>(List<int> questRewardIdsCollection, List<T> rewardsGameDataCollection) where T:Item
+		{
+			foreach (var id in questRewardIdsCollection)
 			{
-				dynamic p = page.Value;
-				p.EquipmentFrame.Refresh();
-				p.StatsFrame.Refresh();
+				var item = rewardsGameDataCollection.FirstOrDefault(x => x.Id == id);
+				User.Instance.CurrentHero.AddItem(item);
+				item.AddAchievementProgress(1);
 			}
 		}
 
+
 		private void Timer_Tick(object source, EventArgs e)
 		{
+			TicksCountNumber--;
+			UpdateTicksCountText(this);
+
 			if (IsFinished)
 			{
 				FinishQuest();
-			}
-			else
-			{
-				TicksCountNumber--;
-				UpdateTicksCountText(this);
+				TicksCountText = "";
 			}
 		}
 
@@ -445,7 +358,7 @@ namespace ClickQuest.Items
 			RewardRecipeIds = new List<int>();
 			RewardMaterialIds = new List<int>();
 			RewardBlessingIds = new List<int>();
-			RewardIngots = new List<Rarity>();
+			RewardIngotIds = new List<int>();
 
 			_timer = new DispatcherTimer
 			{

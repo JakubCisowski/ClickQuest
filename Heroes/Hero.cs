@@ -509,6 +509,11 @@ namespace ClickQuest.Heroes
             {
                 AddItemToCollection<Material>(itemToAdd, Materials);
             }
+			// Ingots unfortunately are also here. :(
+			else if (type == typeof(Ingot))
+            {
+				AddItemToCollection<Ingot>(itemToAdd, User.Instance.Ingots);
+			}
 
             itemToAdd.AddAchievementProgress(1);
         }

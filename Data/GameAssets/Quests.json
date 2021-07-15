@@ -9,7 +9,7 @@
         "RewardRecipeIds": [1],
         "RewardBlessingIds" : [],
         "RewardMaterialsIds" : [1],
-        "RewardIngots" : []
+        "RewardIngotIds" : []
     },
     {
         "Id": 1,
@@ -21,7 +21,7 @@
         "RewardRecipeIds": [],
         "RewardBlessingIds" : [1],
         "RewardMaterialsIds" : [],
-        "RewardIngots" : []
+        "RewardIngotIds" : []
     },
     {
         "Id": 2,
@@ -33,6 +33,6 @@
         "RewardRecipeIds": [],
         "RewardBlessingIds" : [],
         "RewardMaterialsIds" : [],
-        "RewardIngots" : [2,2]
+        "RewardIngotIds" : [2,2]
     }
 ]

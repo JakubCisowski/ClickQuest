@@ -58,37 +58,32 @@ namespace ClickQuest.Pages
 			// Check if user has enough gold.
 			if (User.Instance.Gold >= blessingBlueprint.Value)
 			{
-				// Show buy alert.
-				var result = AlertBox.Show($"Are you sure you want to buy {blessingBlueprint.Name} for {blessingBlueprint.Value} gold?\nThis action will remove all your current blessings.", MessageBoxButton.YesNo);
+				var result = AlertBox.Show($"Are you sure you want to buy {blessingBlueprint.Name} for {blessingBlueprint.Value} gold?", MessageBoxButton.YesNo);
 
-				// If user clicked cancel on buy alert - return.
 				if (result == MessageBoxResult.Cancel)
 				{
 					return;
 				}
 
-				// Remove gold, start blessing
+				bool hasBlessingActive = User.Instance.CurrentHero.Blessing != null;
+
+				if(hasBlessingActive)
+				{
+					bool doesUserWantToSwap = Blessing.AskUserAndSwapBlessing(blessingBlueprint.Id);
+
+					if (doesUserWantToSwap == false)
+					{
+						return;
+					}
+				}
+				else
+				{
+					Blessing.AddOrReplaceBlessing(blessingBlueprint.Id);
+				}
+
 				User.Instance.Gold -= blessingBlueprint.Value;
 
-				// Increase Blessing Specialization amount.
-				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Blessing] ++;
-
-				// Cancel current blessings.
-				User.Instance.CurrentHero.RemoveBlessing();
-
-				// Create a new Blessing.
-				var newBlessing = blessingBlueprint.CopyBlessing();
-
-				// Increase his duration based on Blessing Specialization buff.
-				newBlessing.Duration += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing];
-
-				User.Instance.CurrentHero.Blessing = newBlessing;
-				newBlessing.EnableBuff();
-
 				UpdatePriest();
-
-				// Update StatsPage.
-				this.StatsFrame.Refresh();
 			}
 			else
 			{
