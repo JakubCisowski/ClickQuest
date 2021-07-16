@@ -16,7 +16,7 @@
 			<Rectangle x:Name="DragableTop" Height="40" Fill="White" MouseDown="DragableTop_MouseDown" />
 
 			<!-- Location info block-->
-			<Border x:Name="LocationInfoBorder" BorderThickness="0" BorderBrush="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+			<Border x:Name="LocationInfoBorder" BorderThickness="2" Visibility="Hidden" BorderBrush="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
 				<TextBlock x:Name="LocationInfoBlock" Text="{Binding LocationInfo}" FontWeight="DemiBold" FontSize="18" VerticalAlignment="Center" Margin="3"/>
 			</Border>
 

@@ -43,19 +43,16 @@ namespace ClickQuest
 			{
 				_locationInfo = value;
 
-				// If empty, set border thickness to 0 to make it invisible in main menu.
-				if (_locationInfo == "")
-				{
-					LocationInfoBorder.BorderThickness = new Thickness(0);
-				}
-				else
-				{
-					LocationInfoBorder.BorderThickness = new Thickness(2);
-				}
-
+				SwitchLocationInfoBorderVisibility();
 				OnPropertyChanged();
 			}
 		}
+
+		private void SwitchLocationInfoBorderVisibility()
+		{
+			LocationInfoBorder.Visibility = LocationInfo == "" ? Visibility.Hidden : Visibility.Visible;
+		}
+		
 		#endregion
 
 		public GameWindow()
@@ -72,13 +69,8 @@ namespace ClickQuest
 
 		protected override void OnClosing(CancelEventArgs e)
 		{
-			// Calculate time spent in game.
 			User.Instance.Achievements.TotalTimePlayed += DateTime.Now - User.SessionStartDate;
-
-			// Calculate time played on CurrentHero.
 			User.Instance.CurrentHero?.UpdateTimePlayed();
-
-			// Pause all blessings.
 			User.Instance.CurrentHero?.PauseBlessing();
 
 			EntityOperations.SaveGame();
