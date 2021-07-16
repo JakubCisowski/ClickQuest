@@ -1,6 +1,7 @@
 using ClickQuest.Player;
 using ClickQuest.Data;
 using ClickQuest.Items;
+using ClickQuest.Adventures;
 using System;
 using System.ComponentModel;
 using System.Linq;

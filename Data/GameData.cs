@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using ClickQuest.Enemies;
 using ClickQuest.Items;
 using ClickQuest.Pages;
+using ClickQuest.Adventures;
 using ClickQuest.Places;
 using ClickQuest.Heroes.Buffs;
 

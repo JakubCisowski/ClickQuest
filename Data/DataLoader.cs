@@ -1,6 +1,7 @@
 using ClickQuest.Enemies;
 using ClickQuest.Items;
 using ClickQuest.Places;
+using ClickQuest.Adventures;
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -1,6 +1,7 @@
 ﻿using ClickQuest.Heroes.Buffs;
 using ClickQuest.Items;
 using ClickQuest.Player;
+using ClickQuest.Adventures;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

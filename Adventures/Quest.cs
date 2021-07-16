@@ -1,6 +1,7 @@
 using ClickQuest.Player;
 using ClickQuest.Controls;
 using ClickQuest.Data;
+using ClickQuest.Items;
 using ClickQuest.Heroes;
 using ClickQuest.Pages;
 using ClickQuest.Windows;
@@ -16,7 +17,7 @@ using System.Windows.Threading;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Interfaces;
 
-namespace ClickQuest.Items
+namespace ClickQuest.Adventures
 {
 	public partial class Quest : INotifyPropertyChanged, IIdentifiable
 	{
@@ -216,7 +217,8 @@ namespace ClickQuest.Items
 		[NotMapped]
 		public string RewardsDescription { get; private set; }
 		public bool IsFinished{ 
-			get{
+			get
+			{
 				return TicksCountNumber<=0;
 			}
 		}

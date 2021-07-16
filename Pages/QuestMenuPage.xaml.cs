@@ -4,6 +4,7 @@ using ClickQuest.Data;
 using ClickQuest.Entity;
 using ClickQuest.Heroes;
 using ClickQuest.Items;
+using ClickQuest.Adventures;
 using System;
 using System.Linq;
 using System.Windows;
