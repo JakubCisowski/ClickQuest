@@ -24,14 +24,24 @@ namespace ClickQuest.Enemies
 			}
 		}
 
-		public Monster(Monster monsterToCopy) : base(monsterToCopy)
-		{
-			Loot = monsterToCopy.Loot;
-		}
-
 		public Monster() : base()
 		{
 
+		}
+
+		public override Monster CopyEnemy()
+		{
+			var copy = new Monster();
+
+			copy.Id = Id;
+			copy.Name = Name;
+			copy.Health = Health;
+			copy.CurrentHealth = Health;
+			copy.Description = Description;
+			copy.CurrentHealthProgress = CurrentHealthProgress;
+			copy.Loot = Loot;
+
+			return copy;
 		}
 	}
 }

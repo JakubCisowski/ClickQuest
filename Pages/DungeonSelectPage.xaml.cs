@@ -299,7 +299,7 @@ namespace ClickQuest.Pages
 
 			// Start boss fight.
 			(GameData.Pages["DungeonBoss"] as DungeonBossPage).TownButton.Visibility = Visibility.Hidden;
-			(GameData.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(new Boss(_bossSelected));
+			(GameData.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(_bossSelected.CopyEnemy());
 			// Navigate to boss fight page.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["DungeonBoss"]);
 			(GameData.Pages["DungeonBoss"] as DungeonBossPage).EquipmentFrame.Refresh();

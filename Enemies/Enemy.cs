@@ -96,13 +96,22 @@ public abstract partial class Enemy : INotifyPropertyChanged, IIdentifiable
 		}
 		set
 		{
-			if (_currentHealth - value > 0)
+			// value - new current health
+			if (value == Health)
 			{
-				// Increase achievement amount.
+				_currentHealth = value;
+			}
+			else if (value < 0)
+			{
+				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.TotalDamageDealt, _currentHealth);
+				_currentHealth = 0;
+			}
+			else
+			{
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.TotalDamageDealt, _currentHealth - value);
+				_currentHealth = value;
 			}
 
-			_currentHealth = value;
 			CurrentHealthProgress = this.CalculateCurrentHealthProgress();
 			OnPropertyChanged();
 		}
@@ -134,17 +143,9 @@ public abstract partial class Enemy : INotifyPropertyChanged, IIdentifiable
 		}
 	}
 
-	#endregion Properties
+		#endregion Properties
 
-	public Enemy(Enemy enemyToCopy)
-	{
-		Id = enemyToCopy.Id;
-		Name = enemyToCopy.Name;
-		Health = enemyToCopy.Health;
-		CurrentHealth = enemyToCopy.Health;
-		Description = enemyToCopy.Description;
-		CurrentHealthProgress = enemyToCopy.CurrentHealthProgress;
-	}
+	public abstract Enemy CopyEnemy();
 
 	public Enemy()
 	{

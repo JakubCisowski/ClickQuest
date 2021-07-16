@@ -88,7 +88,7 @@ namespace ClickQuest.Controls
 			}
 
 			// Spawn selected monster.
-			Monster = new Monster(_region.Monsters[i].GetMonster());
+			Monster = _region.Monsters[i].GetMonster().CopyEnemy();
 			this.DataContext = Monster;
 
 			// Start Aura Timer if no quest is active.
