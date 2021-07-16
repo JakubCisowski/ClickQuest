@@ -24,10 +24,14 @@ namespace ClickQuest.Controls
 				ContentBox = { Text = content }
 			};
 
-			// Switch button layout
 			switch (buttons)
 			{
 				case MessageBoxButton.YesNo:
+					{
+						MessageBox.OkButton2.Visibility = Visibility.Hidden;
+						MessageBox.OkButton.Visibility = Visibility.Visible;
+						MessageBox.CancelButton.Visibility = Visibility.Visible;
+					}
 					break;
 
 				case MessageBoxButton.OK:
