@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Player;
 
 namespace ClickQuest.Items
@@ -52,6 +53,19 @@ namespace ClickQuest.Items
 			copy.Quantity = quantity;
 
 			return copy;
+		}
+
+		public override void AddItem()
+		{
+			CollectionsController.AddItemToCollection<DungeonKey>(this, User.Instance.DungeonKeys);
+
+			this.AddAchievementProgress(1);
+			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
+		}
+		
+		public override void RemoveItem()
+		{
+			CollectionsController.RemoveItemFromCollection<DungeonKey>(this, User.Instance.DungeonKeys);
 		}
 	}
 }

@@ -110,7 +110,7 @@ namespace ClickQuest.Controls
 			
 			if (selectedLoot.Id != 0)
 			{
-				User.Instance.CurrentHero.AddItem(selectedLoot);
+				selectedLoot.AddItem();
 			}
 
 			// [PRERELEASE] Display exp and loot for testing purposes.

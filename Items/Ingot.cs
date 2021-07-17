@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Player;
 
 namespace ClickQuest.Items
@@ -54,6 +55,19 @@ namespace ClickQuest.Items
 						break;
 				}
 				User.Instance.Achievements.IncreaseAchievementValue(achievementType, amount);
+		}
+		
+		public override void AddItem()
+		{
+			CollectionsController.AddItemToCollection<Ingot>(this, User.Instance.Ingots);
+
+			this.AddAchievementProgress(1);
+			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
+		}
+		
+		public override void RemoveItem()
+		{
+			CollectionsController.RemoveItemFromCollection<Ingot>(this, User.Instance.Ingots);
 		}
 	}
 }

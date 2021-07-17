@@ -140,5 +140,8 @@ namespace ClickQuest.Items
 
 		public abstract Item CopyItem(int quantity);
 		public abstract void AddAchievementProgress(int amount);
+
+		public abstract void AddItem();
+		public abstract void RemoveItem();
 	}
 }

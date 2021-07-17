@@ -1,3 +1,4 @@
+using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Player;
 
 namespace ClickQuest.Items
@@ -49,6 +50,19 @@ namespace ClickQuest.Items
 					break;
 			}
 			User.Instance.Achievements.IncreaseAchievementValue(achievementType, amount);
+		}
+
+		public override void AddItem()
+		{
+			CollectionsController.AddItemToCollection<Artifact>(this, User.Instance.CurrentHero.Artifacts);
+
+			this.AddAchievementProgress(1);
+			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
+		}
+		
+		public override void RemoveItem()
+		{
+			CollectionsController.RemoveItemFromCollection<Material>(this, User.Instance.CurrentHero.Materials);
 		}
 	}
 }

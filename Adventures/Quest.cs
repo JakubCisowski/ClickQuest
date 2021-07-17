@@ -337,7 +337,7 @@ namespace ClickQuest.Adventures
 			foreach (var id in questRewardIdsCollection)
 			{
 				var item = rewardsGameDataCollection.FirstOrDefault(x => x.Id == id);
-				User.Instance.CurrentHero.AddItem(item);
+				item.AddItem();
 				item.AddAchievementProgress(1);
 			}
 		}

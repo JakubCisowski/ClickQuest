@@ -501,48 +501,6 @@ namespace ClickQuest.Heroes
             }
         }
 
-        public void AddItem(Item itemToAdd)
-        {
-            var type = itemToAdd.GetType();
-
-            if (type == typeof(Recipe))
-            {
-                CollectionsController.AddItemToCollection<Recipe>(itemToAdd, Recipes);
-            }
-            else if (type == typeof(Artifact))
-            {
-                CollectionsController.AddItemToCollection<Artifact>(itemToAdd, Artifacts);
-            }
-            else if (type == typeof(Material))
-            {
-                CollectionsController.AddItemToCollection<Material>(itemToAdd, Materials);
-            }
-
-            itemToAdd.AddAchievementProgress(1);
-			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
-		}
-
-        
-
-        public void RemoveItem(Item itemToRemove)
-        {
-            var type = itemToRemove.GetType();
-
-            if (type == typeof(Recipe))
-            {
-                CollectionsController.RemoveItemFromCollection<Recipe>(itemToRemove, Recipes);
-            }
-            else if (type == typeof(Artifact))
-            {
-                CollectionsController.RemoveItemFromCollection<Artifact>(itemToRemove, Artifacts);
-            }
-            else if (type == typeof(Material))
-            {
-                CollectionsController.RemoveItemFromCollection<Material>(itemToRemove, Materials);
-            }
-        }
-
-
 
         public void SetClassSpecificValues()
         {

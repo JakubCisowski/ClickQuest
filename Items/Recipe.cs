@@ -1,4 +1,5 @@
 using ClickQuest.Data;
+using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Player;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -92,6 +93,19 @@ namespace ClickQuest.Items
 		public override void AddAchievementProgress(int amount)
 		{
 			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.RecipesGained, amount);
+		}
+
+		public override void AddItem()
+		{
+			CollectionsController.AddItemToCollection<Recipe>(this, User.Instance.CurrentHero.Recipes);
+
+			this.AddAchievementProgress(1);
+			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
+		}
+		
+		public override void RemoveItem()
+		{
+			CollectionsController.RemoveItemFromCollection<Recipe>(this, User.Instance.CurrentHero.Recipes);
 		}
 	}
 }

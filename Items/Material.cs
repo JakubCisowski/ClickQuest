@@ -1,3 +1,4 @@
+using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Player;
 
 namespace ClickQuest.Items
@@ -26,6 +27,19 @@ namespace ClickQuest.Items
 		public override void AddAchievementProgress(int amount)
 		{
 			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.MaterialsGained, amount);
+		}
+
+		public override void AddItem()
+		{
+			CollectionsController.AddItemToCollection<Material>(this, User.Instance.CurrentHero.Materials);
+
+			this.AddAchievementProgress(1);
+			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
+		}
+		
+		public override void RemoveItem()
+		{
+			CollectionsController.RemoveItemFromCollection<Material>(this, User.Instance.CurrentHero.Materials);
 		}
 	}
 }

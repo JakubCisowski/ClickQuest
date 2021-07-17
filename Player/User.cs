@@ -165,22 +165,5 @@ namespace ClickQuest.Player
 			DungeonKeys = new List<DungeonKey>();
 			Achievements = new Achievements();
 		}
-
-		 public void AddItem(Item itemToAdd)
-        {
-            var type = itemToAdd.GetType();
-
-            if (type == typeof(Ingot))
-            {
-                CollectionsController.AddItemToCollection<Ingot>(itemToAdd, Ingots);
-            }
-            else if (type == typeof(DungeonKey))
-            {
-                CollectionsController.AddItemToCollection<DungeonKey>(itemToAdd, DungeonKeys);
-            }
-
-            itemToAdd.AddAchievementProgress(1);
-			InterfaceController.RefreshEquipmentPanels();
-		}
 	}
 }

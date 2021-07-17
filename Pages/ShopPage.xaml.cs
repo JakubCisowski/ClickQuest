@@ -51,7 +51,7 @@ namespace ClickQuest.Pages
 			var b = sender as Button;
 			var item = b.CommandParameter as Item;
 
-			User.Instance.CurrentHero.RemoveItem(item);
+			item.RemoveItem();
 			User.Instance.Gold += item.Value;
 
 			(GameData.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
@@ -75,7 +75,7 @@ namespace ClickQuest.Pages
 					return;
 				}
 
-				User.Instance.CurrentHero.AddItem(recipe);
+				recipe.AddItem();
 				User.Instance.Gold -= recipe.Value;
 
 				(GameData.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();

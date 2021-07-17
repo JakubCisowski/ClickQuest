@@ -54,7 +54,7 @@ namespace ClickQuest.Pages
 				// A material is being melted.
 
 				// Remove the material from inventory.
-				User.Instance.CurrentHero.RemoveItem(material);
+				material.RemoveItem();
 
 				// Add ingots of that rarity.
 				var ingot = User.Instance.Ingots.Where(x => x.Rarity == material.Rarity).FirstOrDefault();
@@ -94,7 +94,7 @@ namespace ClickQuest.Pages
 				// An artifact is being melted.
 
 				// Remove the artifact from inventory.
-				User.Instance.CurrentHero.RemoveItem(artifact);
+				artifact.RemoveItem();
 
 				// Add ingots of that rarity.
 				var ingot = User.Instance.Ingots.Where(x => x.Rarity == artifact.Rarity).FirstOrDefault();
@@ -169,17 +169,17 @@ namespace ClickQuest.Pages
 				{
 					for (int i = 0; i < pair.Value; i++)
 					{
-						User.Instance.CurrentHero.RemoveItem(material);
+						material.RemoveItem();
 					}
 				}
 			}
 
 			// Add artifact to equipment.
 			var artifact = recipe.Artifact;
-			User.Instance.CurrentHero.AddItem(artifact);
+			artifact.AddItem();
 
 			// Remove the recipe used.
-			User.Instance.CurrentHero.RemoveItem(recipe);
+			recipe.RemoveItem();
 
 			(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 			// Refresh stats frame (for specialization update).
@@ -221,10 +221,10 @@ namespace ClickQuest.Pages
 
 				// Add artifact to equipment.
 				var artifact = recipe.Artifact;
-				User.Instance.CurrentHero.AddItem(artifact);
+				artifact.AddItem();
 
 				// Remove the recipe used.
-				User.Instance.CurrentHero.RemoveItem(recipe);
+				recipe.RemoveItem();
 
 				(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 				UpdateBlacksmith();
