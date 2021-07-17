@@ -155,73 +155,17 @@ namespace ClickQuest.Controls
 
 		private void CheckForDungeonKeyDrop()
 		{
-			var DungeonKeyRarityChances = new List<double>();
-			double EmptyLootChance = 1;
-			double DungeonKeyRarity0Chance = 0;
-			double DungeonKeyRarity1Chance = 0;
-			double DungeonKeyRarity2Chance = 0;
-			double DungeonKeyRarity3Chance = 0;
-			double DungeonKeyRarity4Chance = 0;
-			double DungeonKeyRarity5Chance = 0;
-
-			// Set dungeon key drop rates.
-			if (Monster.Health < 100)
-			{
-				EmptyLootChance = 0.05000;
-				DungeonKeyRarity0Chance = 0.8000;
-				DungeonKeyRarity1Chance = 0.1500;
-			}
-			else if (Monster.Health < 200)
-			{
-				EmptyLootChance = 0.05000;
-				DungeonKeyRarity0Chance = 0.4500;
-				DungeonKeyRarity1Chance = 0.5000;
-			}
-
-			// Set drop rates in list for randomizing algorithm.
-			// Note that index 0 is for empty loot, rarities start with index 1 up to 6.
-			DungeonKeyRarityChances.Add(EmptyLootChance);
-			DungeonKeyRarityChances.Add(DungeonKeyRarity0Chance);
-			DungeonKeyRarityChances.Add(DungeonKeyRarity1Chance);
-			DungeonKeyRarityChances.Add(DungeonKeyRarity2Chance);
-			DungeonKeyRarityChances.Add(DungeonKeyRarity3Chance);
-			DungeonKeyRarityChances.Add(DungeonKeyRarity4Chance);
-			DungeonKeyRarityChances.Add(DungeonKeyRarity5Chance);
+			var DungeonKeyRarityChances = DungeonKey.CreateRarityChancesList(Monster.Health);
 
 			var position = RandomizeFreqenciesListPosition(DungeonKeyRarityChances);
 			
 			// Grant dungeon key after if algorithm didn't roll empty loot.
 			if (position != 0)
 			{
-				// Add new key to Player.
-				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)(position - 1)).Quantity++;
+				var dungeonKey = User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)(position - 1));
+				dungeonKey.AddItem();
 
-				NumericAchievementType achievementType = 0;
-				// Increase achievement amount.
-				switch((Rarity)position - 1)
-				{
-					case Rarity.General:
-						achievementType = NumericAchievementType.GeneralDungeonKeysEarned;
-						break;
-					case Rarity.Fine:
-						achievementType = NumericAchievementType.FineDungeonKeysEarned;
-						break;
-					case Rarity.Superior:
-						achievementType = NumericAchievementType.SuperiorDungeonKeysEarned;
-						break;
-					case Rarity.Exceptional:
-						achievementType = NumericAchievementType.ExceptionalDungeonKeysEarned;
-						break;
-					case Rarity.Mythic:
-						achievementType = NumericAchievementType.MythicDungeonKeysEarned;
-						break;
-					case Rarity.Masterwork:
-						achievementType = NumericAchievementType.MasterworkDungeonKeysEarned;
-						break;
-				}
-				User.Instance.Achievements.IncreaseAchievementValue(achievementType, 1);
-
-				// Display dungeon key drop.
+				// [PRERELEASE] Display dungeon key drop.
 				_regionPage.TestRewardsBlock.Text += $". You've got a {(Rarity)(position - 1)} Dungeon Key!";
 			}
 		}
