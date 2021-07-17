@@ -61,21 +61,18 @@ namespace ClickQuest.Pages
 			// Check if the current hero can enter this location (level requirement).
 			if (User.Instance.CurrentHero.Level >= GameData.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement)
 			{
-				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages[regionName]);
+				var selectedRegionPage = GameData.Pages[regionName] as RegionPage;
+				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(selectedRegionPage);
 				(GameData.Pages[regionName] as RegionPage).StatsFrame.Refresh();
 				(GameData.Pages[regionName] as RegionPage).EquipmentFrame.Refresh();
+
 				// Start AuraTimer if no quest is active.
 				if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
 				{
-					foreach (var ctrl in ((GameData.Pages[regionName] as RegionPage).RegionPanel.Children))
-					{
-						if (ctrl is MonsterButton monsterButton)
-						{
-							monsterButton.StartAuraTimer();
-							break;
-						}
-					}
+					var monsterButton = selectedRegionPage.RegionPanel.Children.OfType<MonsterButton>().FirstOrDefault();
+					monsterButton.StartAuraTimer();
 				}
+				
 				(Window.GetWindow(this) as GameWindow).LocationInfo = $"{regionName}";
 			}
 			// Else display a warning.

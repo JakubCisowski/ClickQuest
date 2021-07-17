@@ -27,7 +27,7 @@ public abstract partial class Enemy : INotifyPropertyChanged, IIdentifiable
 	private int _id;
 	private string _name;
 	private int _health;
-	private int _currentHealth;
+	protected int _currentHealth;
 	private int _currentHealthProgress;
 	private string _image;
 	private string _description;
@@ -88,34 +88,7 @@ public abstract partial class Enemy : INotifyPropertyChanged, IIdentifiable
 		}
 	}
 
-	public int CurrentHealth
-	{
-		get
-		{
-			return _currentHealth;
-		}
-		set
-		{
-			// value - new current health
-			if (value == Health)
-			{
-				_currentHealth = value;
-			}
-			else if (value < 0)
-			{
-				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.TotalDamageDealt, _currentHealth);
-				_currentHealth = 0;
-			}
-			else
-			{
-				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.TotalDamageDealt, _currentHealth - value);
-				_currentHealth = value;
-			}
-
-			CurrentHealthProgress = this.CalculateCurrentHealthProgress();
-			OnPropertyChanged();
-		}
-	}
+	public abstract int CurrentHealth { get; set;}
 
 	public int CurrentHealthProgress
 	{
@@ -152,7 +125,7 @@ public abstract partial class Enemy : INotifyPropertyChanged, IIdentifiable
 		CurrentHealthProgress = 100;
 	}
 
-	private int CalculateCurrentHealthProgress()
+	protected int CalculateCurrentHealthProgress()
 	{
 		// Calculate killing progress in % (for progress bar on monster button).
 		return (int)(((double)this.CurrentHealth / this.Health) * 100);

@@ -9,6 +9,35 @@ namespace ClickQuest.Enemies
 {
 	public partial class Boss : Enemy
 	{
+		public override int CurrentHealth
+		{
+			get
+			{
+				return _currentHealth;
+			}
+			set
+			{
+				// value - new current health
+				if (value == Health)
+				{
+					_currentHealth = value;
+				}
+				else if (value <= 0)
+				{
+					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.TotalDamageDealt, _currentHealth);
+					_currentHealth = 0;
+					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.BossesDefeated, 1);
+				}
+				else
+				{
+					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.TotalDamageDealt, _currentHealth - value);
+					_currentHealth = value;
+				}
+
+				CurrentHealthProgress = this.CalculateCurrentHealthProgress();
+				OnPropertyChanged();
+			}
+		}
 		private List<BossLootPattern> _bossLoot;
 
 		public List<BossLootPattern> BossLoot

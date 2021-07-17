@@ -10,6 +10,18 @@ namespace ClickQuest.Pages
 	{
 		private Region _region;
 
+		public Region Region
+		{
+			get
+			{
+				return _region;
+			}
+			set
+			{
+				_region = value;
+			}
+		}
+
 		public RegionPage(Region currentRegion)
 		{
 			InitializeComponent();
@@ -23,7 +35,7 @@ namespace ClickQuest.Pages
 		public void CreateMonsterButton()
 		{
 			// Create a new MonsterButton control.
-			var button = new MonsterButton(_region, this);
+			var button = new MonsterButton(this);
 			this.RegionPanel.Children.Insert(1, button);
 		}
 
@@ -36,7 +48,7 @@ namespace ClickQuest.Pages
 			{
 				if (ctrl is MonsterButton m)
 				{
-					m.StopTimers();
+					m.StopCombatTimers();
 					// Break - there should never be more than one MonsterButton.
 					break;
 				}

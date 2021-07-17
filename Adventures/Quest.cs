@@ -302,7 +302,7 @@ namespace ClickQuest.Adventures
 			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Questing]++;
 			AssignRewards();
 			Extensions.QuestManager.QuestController.RerollQuests();
-			Extensions.CombatManager.CombatController.StartAuraTimerOnEachRegion();
+			Extensions.CombatManager.CombatController.StartAuraTimerOnCurrentRegion();
 		}
 
 		public void PauseTimer()

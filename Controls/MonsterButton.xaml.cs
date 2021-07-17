@@ -33,7 +33,6 @@ namespace ClickQuest.Controls
 
 		#region Private Fields
 		private Monster _monster;
-		private Region _region;
 		private Random _rng = new Random();
 		private RegionPage _regionPage;
 		private DispatcherTimer _poisonTimer;
@@ -54,91 +53,84 @@ namespace ClickQuest.Controls
 				OnPropertyChanged();
 			}
 		}
+
+		public Region Region 
+		{
+			get
+			{
+				return _regionPage.Region;
+			}
+		}
 		#endregion
 
-		public MonsterButton(Region region, RegionPage regionPage)
+		public MonsterButton(RegionPage regionPage)
 		{
 			InitializeComponent();
 
-			// Set Region and RegionPage to which the monster belongs.
-			_region = region;
 			_regionPage = regionPage;
 
-			// Setup PoisonTimer to tick every 0.5s.
-			_poisonTimer = new DispatcherTimer();
-			_poisonTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
-			_poisonTimer.Tick += PoisonTimer_Tick;
-
-			// Setup AuraTimer.
-			_auraTimer = new DispatcherTimer();
-			_auraTimer.Tick+=AuraTimer_Tick;
-
+			SetupPoisonTimer();
+			SetupAuraTimer();
 			SpawnMonster();
 		}
 
 		public void SpawnMonster()
 		{
-			// Randomize new monster to spawn.
-			double num = _rng.Next(1, 10001) / 10000d;
+			var frequencyList = Region.Monsters.Select(x=>x.Frequency).ToList();
+			int position = RandomizeFreqenciesListPosition(frequencyList);
+			Monster = Region.Monsters[position].GetMonster().CopyEnemy();
+			
+			this.DataContext = Monster;
+			
+			Extensions.CombatManager.CombatController.StartAuraTimerOnCurrentRegion();
+		}
+
+		private int RandomizeFreqenciesListPosition(List<double> frequencies)
+		{
+			double randomizedValue = _rng.Next(1, 10001) / 10000d;
 			int i = 0;
-			while (num > _region.Monsters[i].Frequency)
+
+			while (randomizedValue > frequencies[i])
 			{
-				num -= _region.Monsters[i].Frequency;
+				randomizedValue -= frequencies[i];
 				i++;
 			}
 
-			// Spawn selected monster.
-			Monster = _region.Monsters[i].GetMonster().CopyEnemy();
-			this.DataContext = Monster;
-
-			// Start Aura Timer if no quest is active.
-			if (User.Instance.CurrentHero != null)
-			{
-				if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)) && (Application.Current.MainWindow as GameWindow).CurrentFrame.Content is RegionPage regionPage)
-				{
-					StartAuraTimer();
-				}
-			}
+			return i;
 		}
 
 		public void GrantVictoryBonuses()
 		{
 			int experienceGained = Experience.CalculateMonsterXpReward(_monster.Health);
-
-			// Grant experience based on moster hp.
 			User.Instance.CurrentHero.Experience += experienceGained;
 
-			// Grant achievement progress.
-			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.ExperienceGained, experienceGained);
-
-			// Randomize loot.
-			double num = _rng.Next(1, 10001) / 10000d;
-			int i = 0;
-			while (num > _monster.Loot[i].Frequency)
+			var frequencyList = _monster.Loot.Select(x => x.Frequency).ToList();
+			int position = RandomizeFreqenciesListPosition(frequencyList);
+			var selectedLoot = _monster.Loot[position].Item;
+			
+			if (selectedLoot.Id != 0)
 			{
-				num -= _monster.Loot[i].Frequency;
-				i++;
-			}
-			// Grant loot after checking if it's not empty.
-			if (_monster.Loot[i].Item.Id != 0)
-			{
-				User.Instance.CurrentHero.AddItem(_monster.Loot[i].Item);
-				_regionPage.EquipmentFrame.Refresh();
+				User.Instance.CurrentHero.AddItem(selectedLoot);
 			}
 
-			// Display exp and loot for testing purposes.
-			_regionPage.TestRewardsBlock.Text = "Loot: " + _monster.Loot[i].Item.Name + ", Exp: " + experienceGained;
+			// [PRERELEASE] Display exp and loot for testing purposes.
+			_regionPage.TestRewardsBlock.Text = "Loot: " + selectedLoot.Name + ", Exp: " + experienceGained;
 
-			// Check if hero got dungeon key.
 			CheckForDungeonKeyDrop();
 
-			_regionPage.StatsFrame.Refresh();
+			Extensions.InterfaceManager.InterfaceController.RefreshStatPanels();
 		}
 
-		public void StopTimers()
+		public void StopCombatTimers()
+		{
+			StopPoisonTimer();
+			_auraTimer.Stop();
+		}
+
+		public void StopPoisonTimer()
 		{
 			_poisonTimer.Stop();
-			_auraTimer.Stop();
+			_poisonTicks = 0;
 		}
 
 		public void StartAuraTimer()
@@ -151,22 +143,12 @@ namespace ClickQuest.Controls
 			}
 		}
 
-		private void CheckIfMonsterDied()
+		private void HandleMonsterDeathIfDefeated()
 		{
-			// If monster died - grant rewards and spawn another one.
 			if (Monster.CurrentHealth <= 0)
 			{
-				// Stop poison.
-				_poisonTimer.Stop();
-				_poisonTicks = 0;
-
-				// Increase achievement amount.
-				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.MonstersDefeated, 1);
-
-				// Grant exp and loot.
+				StopPoisonTimer();
 				GrantVictoryBonuses();
-
-				// Spawn new monster.
 				SpawnMonster();
 			}
 		}
@@ -254,67 +236,75 @@ namespace ClickQuest.Controls
 		#region Events
 		private void MonsterButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Check if any quest is currently assigned to this hero (if so, hero can't fight).
-			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
+			bool isNoQuestActive = User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime));
+
+			if (isNoQuestActive)
 			{
-				// Start PoisonTimer only if hero has any PoisonDamage.
-				if (User.Instance.CurrentHero.PoisonDamage>0)
-				{
-					// Reset poison ticks.
-					_poisonTicks = 0;
-					_poisonTimer.Start();
-				}
+				StartPoisonTimer();
 
-				// Calculate damage dealt to monster.
-				int damage = User.Instance.CurrentHero.ClickDamage;
-				// Calculate crit (max 100%).
-				double num = _rng.Next(1, 101) / 100d;
-				if (num <= User.Instance.CurrentHero.CritChance)
-				{
-					damage *= 2;
-
-					// Increase achievement amount.
-					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.CritsAmount, 1);
-				}
-				// Apply specialization clicking buff.
-				damage += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
-				// Deal damage to monster.
+				int damage = CalculateClickDamage();
 				Monster.CurrentHealth -= damage;
 
-				// Increase Clicking specialization.
 				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
 
-				// Check if monster is dead now.
-				CheckIfMonsterDied();
+				HandleMonsterDeathIfDefeated();
 
-				_regionPage.StatsFrame.Refresh();
+				Extensions.InterfaceManager.InterfaceController.RefreshStatPanels();
 			}
 			else
 			{
-				// Display warning - you can't fight when your hero is completing quest.
 				AlertBox.Show($"Your hero is busy completing quest!\nCheck back when it's finished.", MessageBoxButton.OK);
+			}
+		}
+
+		private int CalculateClickDamage()
+		{
+			int damage = User.Instance.CurrentHero.ClickDamage;
+
+			// Calculate crit (max 100%).
+			double randomizedValue = _rng.Next(1, 101) / 100d;
+			if (randomizedValue <= User.Instance.CurrentHero.CritChance)
+			{
+				damage *= 2;
+
+				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.CritsAmount, 1);
+			}
+
+			damage += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
+
+			return damage;
+		}
+		private int CalculateAuraTickDamage()
+		{
+			return (int)Math.Ceiling(User.Instance.CurrentHero.AuraDamage * Monster.Health);
+		}
+		private void StartPoisonTimer()
+		{
+			if (User.Instance.CurrentHero.PoisonDamage>0)
+			{
+				_poisonTicks = 0;
+				_poisonTimer.Start();
 			}
 		}
 
 		private void PoisonTimer_Tick(object source, EventArgs e)
 		{
-			// When poison ends, stop poison timer.
-			if (_poisonTicks >= 5)
+			var poisonTicksMax = 5;
+			
+			if (_poisonTicks >= poisonTicksMax)
 			{
 				_poisonTimer.Stop();
 			}
-			// Otherwise deal poison damage and check if monster died.
 			else
 			{
 				int poisonDamage = User.Instance.CurrentHero.PoisonDamage;
-				_poisonTicks++;
 				Monster.CurrentHealth -= poisonDamage;
 
-				// Increase achievement amount.
+				_poisonTicks++;
+
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.PoisonTicksAmount, 1);
 
-				// Check if monster is dead now.
-				CheckIfMonsterDied();
+				HandleMonsterDeathIfDefeated();
 			}
 		}
 
@@ -322,17 +312,26 @@ namespace ClickQuest.Controls
 		{
 			if(User.Instance.CurrentHero != null)
 			{
-				int auraDamage = (int)Math.Ceiling(User.Instance.CurrentHero.AuraDamage * Monster.Health);
+				int auraDamage = CalculateAuraTickDamage();
 				Monster.CurrentHealth -= auraDamage;
-
-				// // Increase achievement amount.
-				// User.Instance.Achievements.PoisonTicksAmount++;
-				// AchievementsWindow.Instance.UpdateAchievements();
-
-				// Check if monster is dead now.
-				CheckIfMonsterDied();
+				HandleMonsterDeathIfDefeated();
 			}
+		}
+
+		private void SetupAuraTimer()
+		{
+			_auraTimer = new DispatcherTimer();
+			_auraTimer.Tick+=AuraTimer_Tick;
+		}
+
+		private void SetupPoisonTimer()
+		{
+			var poisonIntervalMs = 500;
+			_poisonTimer = new DispatcherTimer();
+			_poisonTimer.Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs);
+			_poisonTimer.Tick += PoisonTimer_Tick;
+			_poisonTicks = 0;
 		}
 		#endregion
 	}
-}
+}	

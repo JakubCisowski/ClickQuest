@@ -9,6 +9,36 @@ namespace ClickQuest.Enemies
 {
 	public partial class Monster : Enemy
 	{
+		public override int CurrentHealth
+		{
+			get
+			{
+				return _currentHealth;
+			}
+			set
+			{
+				// value - new current health
+				if (value == Health)
+				{
+					_currentHealth = value;
+				}
+				else if (value <= 0)
+				{
+					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.TotalDamageDealt, _currentHealth);
+					_currentHealth = 0;
+					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.MonstersDefeated, 1);
+				}
+				else
+				{
+					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.TotalDamageDealt, _currentHealth - value);
+					_currentHealth = value;
+				}
+
+				CurrentHealthProgress = this.CalculateCurrentHealthProgress();
+				OnPropertyChanged();
+			}
+		}
+
 		private List<MonsterLootPattern> _loot;
 
 		public List<MonsterLootPattern> Loot

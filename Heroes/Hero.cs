@@ -81,6 +81,12 @@ namespace ClickQuest.Heroes
             }
             set
             {
+				// Dirty code! Only when ExperienceToNextLvl is 0, we can be sure that we are loading Entity AND not killing any monster/boss.
+				if(ExperienceToNextLvl != 0)
+				{
+                    User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.ExperienceGained, value - _experience);
+				}
+
                 _experience = value;
                 Heroes.Experience.CheckIfLeveledUpAndGrantBonuses(this);
                 ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
@@ -517,7 +523,8 @@ namespace ClickQuest.Heroes
 			}
 
             itemToAdd.AddAchievementProgress(1);
-        }
+			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
+		}
 
         private void AddItemToCollection<T>(Item itemToAdd, List<T> itemCollection) where T : Item
         {
