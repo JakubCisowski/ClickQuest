@@ -188,24 +188,17 @@ namespace ClickQuest.Controls
 			DungeonKeyRarityChances.Add(DungeonKeyRarity4Chance);
 			DungeonKeyRarityChances.Add(DungeonKeyRarity5Chance);
 
-			// Check if hero got dungeon key.
-			// Randomize loot.
-			double num = _rng.Next(1, 10001) / 10000d;
-			int i = 0;
-			while (num > DungeonKeyRarityChances[i])
-			{
-				num -= DungeonKeyRarityChances[i];
-				i++;
-			}
+			var position = RandomizeFreqenciesListPosition(DungeonKeyRarityChances);
+			
 			// Grant dungeon key after if algorithm didn't roll empty loot.
-			if (i != 0)
+			if (position != 0)
 			{
 				// Add new key to Player.
-				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)(i - 1)).Quantity++;
+				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)(position - 1)).Quantity++;
 
 				NumericAchievementType achievementType = 0;
 				// Increase achievement amount.
-				switch((Rarity)i - 1)
+				switch((Rarity)position - 1)
 				{
 					case Rarity.General:
 						achievementType = NumericAchievementType.GeneralDungeonKeysEarned;
@@ -229,7 +222,7 @@ namespace ClickQuest.Controls
 				User.Instance.Achievements.IncreaseAchievementValue(achievementType, 1);
 
 				// Display dungeon key drop.
-				_regionPage.TestRewardsBlock.Text += $". You've got a {(Rarity)(i - 1)} Dungeon Key!";
+				_regionPage.TestRewardsBlock.Text += $". You've got a {(Rarity)(position - 1)} Dungeon Key!";
 			}
 		}
 

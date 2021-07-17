@@ -2,6 +2,7 @@
 using ClickQuest.Items;
 using ClickQuest.Player;
 using ClickQuest.Adventures;
+using ClickQuest.Extensions.CollectionsManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -506,42 +507,22 @@ namespace ClickQuest.Heroes
 
             if (type == typeof(Recipe))
             {
-                AddItemToCollection<Recipe>(itemToAdd, Recipes);
+                CollectionsController.AddItemToCollection<Recipe>(itemToAdd, Recipes);
             }
             else if (type == typeof(Artifact))
             {
-                AddItemToCollection<Artifact>(itemToAdd, Artifacts);
+                CollectionsController.AddItemToCollection<Artifact>(itemToAdd, Artifacts);
             }
             else if (type == typeof(Material))
             {
-                AddItemToCollection<Material>(itemToAdd, Materials);
+                CollectionsController.AddItemToCollection<Material>(itemToAdd, Materials);
             }
-			// Ingots unfortunately are also here. :(
-			else if (type == typeof(Ingot))
-            {
-				AddItemToCollection<Ingot>(itemToAdd, User.Instance.Ingots);
-			}
 
             itemToAdd.AddAchievementProgress(1);
 			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
 		}
 
-        private void AddItemToCollection<T>(Item itemToAdd, List<T> itemCollection) where T : Item
-        {
-            foreach (var item in itemCollection)
-            {
-                if (item.Id == itemToAdd.Id)
-                {
-                    item.Quantity++;
-                    return;
-                }
-            }
-
-            // If user doesn't have this item, clone and add it.
-            var copy = itemToAdd.CopyItem(1);
-
-            itemCollection.Add((T)copy);
-        }
+        
 
         public void RemoveItem(Item itemToRemove)
         {
@@ -549,35 +530,19 @@ namespace ClickQuest.Heroes
 
             if (type == typeof(Recipe))
             {
-                RemoveItemFromCollection<Recipe>(itemToRemove, Recipes);
+                CollectionsController.RemoveItemFromCollection<Recipe>(itemToRemove, Recipes);
             }
             else if (type == typeof(Artifact))
             {
-                RemoveItemFromCollection<Artifact>(itemToRemove, Artifacts);
+                CollectionsController.RemoveItemFromCollection<Artifact>(itemToRemove, Artifacts);
             }
             else if (type == typeof(Material))
             {
-                RemoveItemFromCollection<Material>(itemToRemove, Materials);
+                CollectionsController.RemoveItemFromCollection<Material>(itemToRemove, Materials);
             }
         }
 
-        private void RemoveItemFromCollection<T>(Item itemToRemove, List<T> itemCollection) where T : Item
-        {
-            foreach (Item item in itemCollection)
-            {
-                if (item.Id == itemToRemove.Id)
-                {
-                    item.Quantity--;
-                    if (item.Quantity <= 0)
-                    {
-                        // Remove item from database.
-                        Entity.EntityOperations.RemoveItem(item);
-                    }
-                    return;
-                }
-            }
-            // If user doesn't have this item, don't do anything (check Item.Quantity).
-        }
+
 
         public void SetClassSpecificValues()
         {

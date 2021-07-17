@@ -19,6 +19,7 @@ namespace ClickQuest.Data
             GameData.Artifacts = DeserializeType<Artifact>(Path.Combine(Environment.CurrentDirectory, @"Data\", @"GameAssets\", "Artifacts.json"));
             GameData.Recipes = DeserializeType<Recipe>(Path.Combine(Environment.CurrentDirectory, @"Data\", @"GameAssets\", "Recipes.json"));
 			GameData.Ingots = DeserializeType<Ingot>(Path.Combine(Environment.CurrentDirectory, @"Data\", @"GameAssets\", "Ingots.json"));
+			GameData.DungeonKeys = DeserializeType<DungeonKey>(Path.Combine(Environment.CurrentDirectory, @"Data\", @"GameAssets\", "DungeonKeys.json"));
 			GameData.Monsters = DeserializeType<Monster>(Path.Combine(Environment.CurrentDirectory, @"Data\", @"GameAssets\", "Monsters.json"));
             GameData.Regions = DeserializeType<Region>(Path.Combine(Environment.CurrentDirectory, @"Data\", @"GameAssets\", "Regions.json"));
             GameData.Blessings = DeserializeType<Blessing>(Path.Combine(Environment.CurrentDirectory, @"Data\", @"GameAssets\", "Blessings.json"));

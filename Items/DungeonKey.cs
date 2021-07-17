@@ -2,67 +2,56 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using ClickQuest.Player;
 
 namespace ClickQuest.Items
 {
-	public partial class DungeonKey : INotifyPropertyChanged
+	public partial class DungeonKey : Item
 	{
-		#region INotifyPropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		public DungeonKey() : base()
 		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 
-		#endregion INotifyPropertyChanged
-
-		#region Private Fields
-
-		private Rarity _rarity;
-		private int _quantity;
-
-		#endregion Private Fields
-
-		#region Properties
-
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
-
-		public Rarity Rarity
+		public override void AddAchievementProgress(int amount)
 		{
-			get
+			NumericAchievementType achievementType = 0;
+			// Increase achievement amount.
+			switch(Rarity)
 			{
-				return _rarity;
+				case Rarity.General:
+					achievementType = NumericAchievementType.GeneralDungeonKeysEarned;
+					break;
+				case Rarity.Fine:
+					achievementType = NumericAchievementType.FineDungeonKeysEarned;
+					break;
+				case Rarity.Superior:
+					achievementType = NumericAchievementType.SuperiorDungeonKeysEarned;
+					break;
+				case Rarity.Exceptional:
+					achievementType = NumericAchievementType.ExceptionalDungeonKeysEarned;
+					break;
+				case Rarity.Mythic:
+					achievementType = NumericAchievementType.MythicDungeonKeysEarned;
+					break;
+				case Rarity.Masterwork:
+					achievementType = NumericAchievementType.MasterworkDungeonKeysEarned;
+					break;
 			}
-			set
-			{
-				_rarity = value;
-				OnPropertyChanged();
-			}
+			User.Instance.Achievements.IncreaseAchievementValue(achievementType, amount);
 		}
 
-		public int Quantity
+		public override DungeonKey CopyItem(int quantity)
 		{
-			get
-			{
-				return _quantity;
-			}
-			set
-			{
-				_quantity = value;
-				OnPropertyChanged();
-			}
-		}
+			var copy = new DungeonKey();
 
-		#endregion Properties
+			copy.Id = Id;
+			copy.Name = Name;
+			copy.Rarity = Rarity;
+			copy.Value = Value;
+			copy.Description = Description;
+			copy.Quantity = quantity;
 
-		public DungeonKey(Rarity rarity, int quantity)
-		{
-			Rarity = rarity;
-			Quantity = quantity;
+			return copy;
 		}
 	}
 }

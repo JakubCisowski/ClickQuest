@@ -26,11 +26,6 @@ namespace ClickQuest.Items
 
 			return copy;
 		}
-		public Ingot(Rarity rarity, int quantity)
-		{
-			Rarity = rarity;
-			Quantity = quantity;
-		}
 
 		public override void AddAchievementProgress(int amount)
 		{

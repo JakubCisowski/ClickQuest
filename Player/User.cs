@@ -1,6 +1,8 @@
 using ClickQuest.Heroes;
 using ClickQuest.Items;
 using ClickQuest.Windows;
+using ClickQuest.Extensions.CollectionsManager;
+using ClickQuest.Extensions.InterfaceManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -162,6 +164,23 @@ namespace ClickQuest.Player
 			Ingots = new List<Ingot>();
 			DungeonKeys = new List<DungeonKey>();
 			Achievements = new Achievements();
+		}
+
+		 public void AddItem(Item itemToAdd)
+        {
+            var type = itemToAdd.GetType();
+
+            if (type == typeof(Ingot))
+            {
+                CollectionsController.AddItemToCollection<Ingot>(itemToAdd, Ingots);
+            }
+            else if (type == typeof(DungeonKey))
+            {
+                CollectionsController.AddItemToCollection<DungeonKey>(itemToAdd, DungeonKeys);
+            }
+
+            itemToAdd.AddAchievementProgress(1);
+			InterfaceController.RefreshEquipmentPanels();
 		}
 	}
 }

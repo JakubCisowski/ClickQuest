@@ -261,10 +261,9 @@ namespace ClickQuest.Entity
 				// If there are no dungeon keys in the database, add them (seed).
 				if (user.DungeonKeys.Count == 0)
 				{
-					var rarities = Enum.GetValues(typeof(Rarity));
-					for (int i = 0; i < rarities.GetLength(0); i++)
+					foreach (var dungeonKey in GameData.DungeonKeys)
 					{
-						user.DungeonKeys.Add(new DungeonKey((Rarity)rarities.GetValue(i), 0));
+						user.DungeonKeys.Add(dungeonKey.CopyItem(0));
 					}
 				}
 

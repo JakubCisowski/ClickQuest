@@ -27,6 +27,7 @@ namespace ClickQuest.Data
         public static List<Boss> Bosses { get; set; }
         public static List<Dungeon> Dungeons { get; set; }
         public static List<DungeonGroup> DungeonGroups { get; set; }
+        public static List<DungeonKey> DungeonKeys { get; set; }
 
         #endregion Collections
 
@@ -47,6 +48,7 @@ namespace ClickQuest.Data
             Bosses = new List<Boss>();
             Dungeons = new List<Dungeon>();
             DungeonGroups = new List<DungeonGroup>();
+            DungeonKeys = new List<DungeonKey>();
 		}
 
         public static void RefreshPages()
