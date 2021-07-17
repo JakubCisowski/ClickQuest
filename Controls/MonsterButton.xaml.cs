@@ -118,7 +118,7 @@ namespace ClickQuest.Controls
 
 			CheckForDungeonKeyDrop();
 
-			Extensions.InterfaceManager.InterfaceController.RefreshStatPanels();
+			_regionPage.StatsFrame.Refresh();
 		}
 
 		public void StopCombatTimers()
@@ -249,7 +249,7 @@ namespace ClickQuest.Controls
 
 				HandleMonsterDeathIfDefeated();
 
-				Extensions.InterfaceManager.InterfaceController.RefreshStatPanels();
+				_regionPage.StatsFrame.Refresh();
 			}
 			else
 			{

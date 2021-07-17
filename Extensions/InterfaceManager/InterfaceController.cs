@@ -35,7 +35,7 @@ namespace ClickQuest.Extensions.InterfaceManager
 				}
 				catch (RuntimeBinderException)
 				{
-					// No stats frame on this page!
+					// No equipment frame on this page!
 					// Best solution according to:
 					// https://stackoverflow.com/a/5768449/14770235
 				} 
