@@ -129,7 +129,7 @@ namespace ClickQuest.Pages
 			(GameData.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
 			(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Blacksmith";
-			(GameData.Pages["Blacksmith"] as BlacksmithPage).UpdateBlacksmith();
+			(GameData.Pages["Blacksmith"] as BlacksmithPage).UpdateBlacksmithItems();
 		}
 
 		private void PriestButton_Click(object sender, RoutedEventArgs e)

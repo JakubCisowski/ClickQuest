@@ -4,11 +4,13 @@ using ClickQuest.Data;
 using ClickQuest.Items;
 using ClickQuest.Windows;
 using ClickQuest.Heroes;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes.Buffs;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.Interfaces;
 
 namespace ClickQuest.Pages
 {
@@ -21,7 +23,7 @@ namespace ClickQuest.Pages
 			InitializeComponent();
 		}
 
-		public void UpdateBlacksmith()
+		public void UpdateBlacksmithItems()
 		{
 			// Refresh list of items.
 			ItemsListViewMeltMaterials.ItemsSource = User.Instance.CurrentHero.Materials;
@@ -39,7 +41,6 @@ namespace ClickQuest.Pages
 		{
 			var b = sender as Button;
 
-			// Show melt alert
 			var result = AlertBox.Show($"Are you sure you want to melt {(b.CommandParameter as Item).Name}?\nThis action will destroy this item and create at least X {(b.CommandParameter as Item).Rarity} ingots.\nYou can get bonus ingots if you master Melter specialization (by melting more items).", MessageBoxButton.YesNo);
 
 			// If user clicked cancel on melt alert - return.
@@ -48,84 +49,52 @@ namespace ClickQuest.Pages
 				return;
 			}
 
-			// If user clicked ok - melt item.
 			if (b.CommandParameter is Material material)
 			{
-				// A material is being melted.
-
-				// Remove the material from inventory.
-				material.RemoveItem();
-
-				// Add ingots of that rarity.
-				var ingot = User.Instance.Ingots.Where(x => x.Rarity == material.Rarity).FirstOrDefault();
-				// Calculate ingot bonus based on Melting Specialization.
-				var ingotAmount = 1;
-
-				var meltingBuff = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting];
-				while (meltingBuff >= 100)
-				{
-					ingotAmount++;
-					meltingBuff -= 100;
-				}
-				if (meltingBuff > 0)
-				{
-					int num = _rng.Next(1, 101);
-					if (num <= meltingBuff)
-					{
-						ingotAmount++;
-					}
-				}
-				ingot.Quantity += ingotAmount;
-
-				ingot.AddAchievementProgress(ingotAmount);
-
-				// Update blacksmith page.
-				(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
-				
-				// Refresh stats frame (for specialization update).
-				(GameData.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
-				UpdateBlacksmith();
-
-				// Increase Specialization Melting amount.
-				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Melting]++;
+				MeltItem<Material>(material);
 			}
 			else if (b.CommandParameter is Artifact artifact)
 			{
-				// An artifact is being melted.
-
-				// Remove the artifact from inventory.
-				artifact.RemoveItem();
-
-				// Add ingots of that rarity.
-				var ingot = User.Instance.Ingots.Where(x => x.Rarity == artifact.Rarity).FirstOrDefault();
-				// Calculate ingot bonus based on Melting Specialization.
-				var ingotAmount = 100;
-
-				var meltingBuff = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting];
-				while (meltingBuff >= 100)
-				{
-					ingotAmount += 100;
-					meltingBuff -= 100;
-				}
-				if (meltingBuff > 0)
-				{
-					int num = _rng.Next(1, 101);
-					if (num <= meltingBuff)
-					{
-						ingotAmount += 100;
-					}
-				}
-				ingot.Quantity += ingotAmount;
-
-				ingot.AddAchievementProgress(ingotAmount);
-
-				// Update blacksmith page.
-				(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
-				UpdateBlacksmith();
-
-				// Increase Specialization Melting amount.
-				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Melting]++;
+				MeltItem<Artifact>(artifact);
 			}
+
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Blacksmith"]);
+			UpdateBlacksmithItems();
+
+			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Melting]++;
+		}
+
+		public void MeltItem<T>(T meltedItem) where T:Item, IMeltable
+		{
+			meltedItem.RemoveItem();
+
+			var ingotAmount = CalculateIngotAmount(meltedItem.BaseIngotBonus);
+
+			var ingot = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == meltedItem.Rarity);
+			ingot.Quantity += ingotAmount;
+
+			ingot.AddAchievementProgress(ingotAmount);
+		}
+
+		private int CalculateIngotAmount(int baseIngotBonus)
+		{
+			var ingotAmount = baseIngotBonus;
+			var meltingBuffPercent = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting];
+			while (meltingBuffPercent >= 100)
+			{
+				ingotAmount += baseIngotBonus;
+				meltingBuffPercent -= 100;
+			}
+			if (meltingBuffPercent > 0)
+			{
+				int randomizedValue = _rng.Next(1, 101);
+				if (randomizedValue <= meltingBuffPercent)
+				{
+					ingotAmount += baseIngotBonus;
+				}
+			}
+
+			return ingotAmount;
 		}
 
 		private void CraftMaterialButton_Click(object sender, RoutedEventArgs e)
@@ -184,7 +153,7 @@ namespace ClickQuest.Pages
 			(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 			// Refresh stats frame (for specialization update).
 			(GameData.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
-			UpdateBlacksmith();
+			UpdateBlacksmithItems();
 
 			// Increase Specialization Crafting amount.
 			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting]++;
@@ -227,7 +196,7 @@ namespace ClickQuest.Pages
 				recipe.RemoveItem();
 
 				(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
-				UpdateBlacksmith();
+				UpdateBlacksmithItems();
 
 				// Increase Specialization Crafting amount.
 				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting]++;
@@ -244,8 +213,7 @@ namespace ClickQuest.Pages
 			// Go back to Town.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
-			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
-			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Town"]);
 		}
 
 		#endregion Events

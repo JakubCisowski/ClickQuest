@@ -1,10 +1,13 @@
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Player;
+using ClickQuest.Interfaces;
 
 namespace ClickQuest.Items
 {
-	public partial class Artifact : Item
+	public partial class Artifact : Item, IMeltable
 	{
+		public int BaseIngotBonus => 100;
+
 		public Artifact() : base()
 		{
 			
