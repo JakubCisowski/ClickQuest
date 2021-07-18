@@ -374,12 +374,12 @@ namespace ClickQuest.Pages
 				ToolTipService.SetShowDuration(GoldPanel, 20000);
 
 				// Calculate remaining amount to upgrade specialization.
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[(SpecializationType)specializationTypes.GetValue(1)];
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(1)])
+				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[(SpecializationType)specializationTypes.GetValue(i)];
+				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(i)])
 				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(1)];
+					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(i)];
 				}
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(1)] - nextUpgrade;
+				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(i)] - nextUpgrade;
 
 				var toolTipBlock = new TextBlock()
 				{
@@ -480,8 +480,6 @@ namespace ClickQuest.Pages
 
 				toolTip.Content = toolTipBlock;
 
-				// var nameBlock = (TextBlock)this.FindName("Spec" + specializationTypes.GetValue(i).ToString() + "Name");
-				// var buffBlock = (TextBlock)this.FindName("Spec" + specializationTypes.GetValue(i).ToString() + "Buff");
 				var nameBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationTypes.GetValue(i).ToString() + "Name");
 				var buffBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationTypes.GetValue(i).ToString() + "Buff");
 
