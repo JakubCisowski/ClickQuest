@@ -102,27 +102,44 @@ namespace ClickQuest.Pages
 			var b = sender as Button;
 			var recipe = b.CommandParameter as Recipe;
 
-			// Check if user meets Crafting Specialization rarity requirements.
-			if (User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting] < (int)recipe.Rarity)
+			HandleCrafting<Material>(recipe);
+		}
+
+		private void HandleCrafting<T>(Recipe recipe)
+		{
+			if(!MeetsCraftingRequirement(recipe))
 			{
-				// Error - user doesn't meet requirements - stop this function.
-				AlertBox.Show($"You dont meet Craftsmen specialization requirements to craft {(int)recipe.Rarity} artifacts.\nCraft more common items in order to master it.", MessageBoxButton.OK);
+				AlertBox.Show($"You dont meet Craftsmen specialization requirements to craft {recipe.Rarity.ToString()} artifacts.\nCraft more common items in order to master it.", MessageBoxButton.OK);
+				return;
+			}			
+
+			if(typeof(T) == typeof(Material))
+			{
+				CheckAndRemoveMaterials(recipe);
+			}
+			else
+			{
+				CheckAndRemoveIngots(recipe);
+			}
+
+			recipe.Artifact.AddItem();
+			recipe.RemoveItem();
+
+			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting]++;
+
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Blacksmith"]);
+			UpdateBlacksmithItems();
+		}
+
+		private void CheckAndRemoveIngots(Recipe recipe)
+		{
+			if (!CheckIfUserHasEnoughIngots(recipe))
+			{
+				AlertBox.Show($"You dont have {recipe.IngotsRequired} {recipe.RarityString} ingots to craft {recipe.Name}.\nGet more ingots by melting materials/artifacts or try to craft this artifact using materials.", MessageBoxButton.OK);
 				return;
 			}
 
-			// Check if user has required materials to craft.
-			foreach (var pair in recipe.MaterialIds)
-			{
-				var material = User.Instance.CurrentHero.Materials.FirstOrDefault(x => x.Id == pair.Key);
-				if (!(material != null && material.Quantity >= pair.Value))
-				{
-					AlertBox.Show($"You don't have enough materials to craft {recipe.Name}.\n{recipe.RequirementsDescription}\nGet more materials by completing quests and killing monsters and boses or try to craft this artifact using ingots.", MessageBoxButton.OK);
-					return;
-				}
-			}
-
-			// Show craft alert.
-			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using materials?\n{recipe.RequirementsDescription}\nThis action will destroy all materials and this recipe.", MessageBoxButton.YesNo);
+			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using ingots?\nIngots needed: {recipe.IngotsRequired} {recipe.RarityString} ingots.\nThis action will destroy all ingots and this recipe.", MessageBoxButton.YesNo);
 
 			// If user clicked cancel on craft alert - return.
 			if (result == MessageBoxResult.Cancel)
@@ -130,7 +147,40 @@ namespace ClickQuest.Pages
 				return;
 			}
 
-			// If he has, remove them.
+			RemoveIngots(recipe);
+		}
+
+		private void RemoveIngots(Recipe recipe)
+		{
+			User.Instance.Ingots.FirstOrDefault(x => x.Rarity == recipe.Rarity).Quantity -= recipe.IngotsRequired;
+		}
+
+		private bool CheckIfUserHasEnoughIngots(Recipe recipe)
+		{
+			var ingotRarityNeeded = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == recipe.Rarity);
+			return recipe.IngotsRequired <= ingotRarityNeeded.Quantity;
+		}
+
+		private void CheckAndRemoveMaterials(Recipe recipe)
+		{
+			if (!CheckIfHeroHasEnoughMaterials(recipe))
+			{
+				AlertBox.Show($"You don't have enough materials to craft {recipe.Name}.\n{recipe.RequirementsDescription}\nGet more materials by completing quests and killing monsters and boses or try to craft this artifact using ingots.", MessageBoxButton.OK);
+				return;
+			}
+
+			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using materials?\n{recipe.RequirementsDescription}\nThis action will destroy all materials and this recipe.", MessageBoxButton.YesNo);
+
+			if (result == MessageBoxResult.Cancel)
+			{
+				return;
+			}
+
+			RemoveMaterials(recipe);
+		}
+
+		private void RemoveMaterials(Recipe recipe)
+		{
 			foreach (var pair in recipe.MaterialIds)
 			{
 				var material = User.Instance.CurrentHero.Materials.FirstOrDefault(x => x.Id == pair.Key);
@@ -142,21 +192,25 @@ namespace ClickQuest.Pages
 					}
 				}
 			}
+		}
 
-			// Add artifact to equipment.
-			var artifact = recipe.Artifact;
-			artifact.AddItem();
+		private bool CheckIfHeroHasEnoughMaterials(Recipe recipe)
+		{
+			foreach (var pair in recipe.MaterialIds)
+			{
+				var material = User.Instance.CurrentHero.Materials.FirstOrDefault(x => x.Id == pair.Key);
+				if (!(material != null && material.Quantity >= pair.Value))
+				{
+					return false;
+				}
+			}
 
-			// Remove the recipe used.
-			recipe.RemoveItem();
+			return true;
+		}
 
-			(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
-			// Refresh stats frame (for specialization update).
-			(GameData.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
-			UpdateBlacksmithItems();
-
-			// Increase Specialization Crafting amount.
-			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting]++;
+		private bool MeetsCraftingRequirement(Recipe recipe)
+		{
+			return User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting] >= (int)recipe.Rarity;
 		}
 
 		private void CraftIngotButton_Click(object sender, RoutedEventArgs e)
@@ -164,48 +218,7 @@ namespace ClickQuest.Pages
 			var b = sender as Button;
 			var recipe = b.CommandParameter as Recipe;
 
-			// Check if user meets Crafting Specialization rarity requirements.
-			if (User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting] < (int)recipe.Rarity)
-			{
-				// Error - user doesn't meet requirements - stop this function.
-				AlertBox.Show($"You dont meet Craftsmen specialization requirements to craft {(int)recipe.Rarity} artifacts.\nCraft more common items in order to master it.", MessageBoxButton.OK);
-				return;
-			}
-
-			// Check if user has required ingots to craft.
-			var ingotRarityNeeded = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == recipe.Rarity);
-			if (recipe.IngotsRequired <= ingotRarityNeeded.Quantity)
-			{
-				// Show craft alert.
-				var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using ingots?\nIngots needed: {recipe.IngotsRequired} {recipe.RarityString} ingots.\nThis action will destroy all ingots and this recipe.", MessageBoxButton.YesNo);
-
-				// If user clicked cancel on craft alert - return.
-				if (result == MessageBoxResult.Cancel)
-				{
-					return;
-				}
-
-				// If he has, remove them.
-				ingotRarityNeeded.Quantity -= recipe.IngotsRequired;
-
-				// Add artifact to equipment.
-				var artifact = recipe.Artifact;
-				artifact.AddItem();
-
-				// Remove the recipe used.
-				recipe.RemoveItem();
-
-				(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
-				UpdateBlacksmithItems();
-
-				// Increase Specialization Crafting amount.
-				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting]++;
-			}
-			else
-			{
-				// Alert - User does not have enough Ingots.
-				AlertBox.Show($"You dont have {recipe.IngotsRequired} {recipe.RarityString}ingots to craft {recipe.Name}.\nGet more ingots by melting materials/artifacts or try to craft this artifact using materials.", MessageBoxButton.OK);
-			}
+			HandleCrafting<Ingot>(recipe);
 		}
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
