@@ -17,6 +17,12 @@ namespace ClickQuest.Entity
 			// Serialize Achievements.
 			User.Instance.Achievements.SerializeAchievements();
 
+			// Setialize Specializations.
+			foreach (var hero in User.Instance.Heroes)
+			{
+				hero.Specialization.SerializeSpecializationAmounts();
+			}
+
 			using (var db = new UserContext())
 			{
 				// Make sure we get the right user by Id
@@ -77,6 +83,13 @@ namespace ClickQuest.Entity
 
 			// Deserialize achievements.
 			User.Instance.Achievements.DeserializeAchievements();
+
+			// Desetialize Specializations.
+			foreach (var hero in User.Instance.Heroes)
+			{
+				hero.Specialization.DeserializeSpecializationAmounts();
+				hero.Specialization.UpdateSpecialization();
+			}
 		}
 
 		public static void RemoveItem(Item item)

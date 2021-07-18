@@ -98,9 +98,7 @@ namespace ClickQuest.Heroes.Buffs
 			// Assign event handlers.
 			SpecializationAmounts.SpecializationCollectionUpdated += SpecializationAmounts_Updated;
 
-			UpdateThresholds();
-
-			UpdateBuffs();
+			UpdateSpecialization();
 		}
 
 		public void UpdateThresholds()
@@ -158,6 +156,12 @@ namespace ClickQuest.Heroes.Buffs
 			
 			// Update crafting text (used in hero stats panel).
 			SpecCraftingText = ((Rarity)SpecializationBuffs[SpecializationType.Crafting]).ToString();
+		}
+
+		public void UpdateSpecialization()
+		{
+			UpdateThresholds();
+			UpdateBuffs();
 		}
 
 		public void SerializeSpecializationAmounts()
