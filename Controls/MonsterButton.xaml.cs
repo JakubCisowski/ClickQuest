@@ -179,7 +179,7 @@ namespace ClickQuest.Controls
 			{
 				StartPoisonTimer();
 
-				int damage = CalculateClickDamage();
+				int damage =  User.Instance.CurrentHero.CalculateClickDamage();
 				Monster.CurrentHealth -= damage;
 
 				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
@@ -194,23 +194,8 @@ namespace ClickQuest.Controls
 			}
 		}
 
-		private int CalculateClickDamage()
-		{
-			int damage = User.Instance.CurrentHero.ClickDamage;
+		
 
-			// Calculate crit (max 100%).
-			double randomizedValue = _rng.Next(1, 101) / 100d;
-			if (randomizedValue <= User.Instance.CurrentHero.CritChance)
-			{
-				damage *= 2;
-
-				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.CritsAmount, 1);
-			}
-
-			damage += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
-
-			return damage;
-		}
 		private int CalculateAuraTickDamage()
 		{
 			return (int)Math.Ceiling(User.Instance.CurrentHero.AuraDamage * Monster.Health);

@@ -43,7 +43,6 @@ namespace ClickQuest.Pages
 
 			var result = AlertBox.Show($"Are you sure you want to melt {(b.CommandParameter as Item).Name}?\nThis action will destroy this item and create at least X {(b.CommandParameter as Item).Rarity} ingots.\nYou can get bonus ingots if you master Melter specialization (by melting more items).", MessageBoxButton.YesNo);
 
-			// If user clicked cancel on melt alert - return.
 			if (result == MessageBoxResult.Cancel)
 			{
 				return;
@@ -141,7 +140,6 @@ namespace ClickQuest.Pages
 
 			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using ingots?\nIngots needed: {recipe.IngotsRequired} {recipe.RarityString} ingots.\nThis action will destroy all ingots and this recipe.", MessageBoxButton.YesNo);
 
-			// If user clicked cancel on craft alert - return.
 			if (result == MessageBoxResult.Cancel)
 			{
 				return;

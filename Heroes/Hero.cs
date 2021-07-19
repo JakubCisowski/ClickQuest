@@ -47,13 +47,14 @@ namespace ClickQuest.Heroes
         private Specialization _specialization;
         private double _auraDamage;
         private double _auraAttackSpeed;
-        // Specialisations/Professions
+		private Random _rng;
+		// Specialisations/Professions
 
-        #endregion Private Fields
+		#endregion Private Fields
 
-        #region Properties
+		#region Properties
 
-        [Key]
+		[Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
@@ -444,6 +445,8 @@ namespace ClickQuest.Heroes
             Artifacts = new List<Artifact>();
             Quests = new List<Quest>();
 
+            _rng = new Random();
+
             HeroClass = heroClass;
             HeroRace = heroRace;
             Experience = 0;
@@ -460,7 +463,9 @@ namespace ClickQuest.Heroes
         public Hero()
         {
             RefreshHeroExperience();
-        }
+
+			_rng = new Random();
+		}
 
         public void RefreshHeroExperience()
         {
@@ -541,5 +546,22 @@ namespace ClickQuest.Heroes
             User.Instance.CurrentHero.Blessing?.DisableBuff();
             User.Instance.CurrentHero.Blessing = null;
         }
+		public int CalculateClickDamage()
+		{
+			int damage = ClickDamage;
+
+			// Calculate crit (max 100%).
+			double randomizedValue = _rng.Next(1, 101) / 100d;
+			if (randomizedValue <= CritChance)
+			{
+				damage *= 2;
+
+				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.CritsAmount, 1);
+			}
+
+			damage += Specialization.SpecializationBuffs[SpecializationType.Clicking];
+
+			return damage;
+		}
     }
 }

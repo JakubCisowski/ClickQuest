@@ -3,6 +3,7 @@ using ClickQuest.Data;
 using ClickQuest.Enemies;
 using ClickQuest.Heroes;
 using ClickQuest.Heroes.Buffs;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Windows;
 using System;
 using System.ComponentModel;
@@ -59,19 +60,29 @@ namespace ClickQuest.Pages
 		{
 			InitializeComponent();
 
-			// Setup 30 second timer for boss fight
+			SetupFightTimer();
+			SetupPoisonTimer();
+		}
+
+		private void SetupFightTimer()
+		{
 			_fightTimer = new DispatcherTimer
 			{
 				Interval = new TimeSpan(0, 0, 0, 1)
 			};
 			_fightTimer.Tick += FightTimer_Tick;
+		}
 
-			// Setup poison Timer to tick every 0.5s.
+		private void SetupPoisonTimer()
+		{
+			var poisonIntervalMs = 500;
+
 			_poisonTimer = new DispatcherTimer
 			{
-				Interval = new TimeSpan(0, 0, 0, 0, 500)
+				Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs)
 			};
 			_poisonTimer.Tick += PoisonTimer_Tick;
+			_poisonTicks = 0;
 		}
 
 		public void StartBossFight(Boss boss)
@@ -81,186 +92,170 @@ namespace ClickQuest.Pages
 			// SpecDungeonBuff's base value is 30 - the fight's duration will always be 30s or more.
 			Duration = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon];
 
-			// Select the boss, and bind it to interface.
+			BindFightInfoToInterface(boss);
+
+			_fightTimer.Start();
+		}
+
+		private void BindFightInfoToInterface(Boss boss)
+		{
 			_boss = boss;
 			this.DataContext = _boss;
 
-			// Bind the remaining Duration to interface.
 			var binding = new Binding("Duration")
 			{
 				Source = this
 			};
 			TimeRemainingBlock.SetBinding(TextBlock.TextProperty, binding);
 
-			// Bind Dungeon's description
 			var binding2 = new Binding("Description")
 			{
 				Source = GameData.Dungeons.FirstOrDefault(x=>x.BossIds.Contains(boss.Id))
 			};
 			DungeonDescriptionBlock.SetBinding(TextBlock.TextProperty, binding2);
-
-			// Start 30 second timer.
-			_fightTimer.Start();
 		}
 
-		private void CheckIfBossDied()
+		private void HandleBossDeathIfDefeated()
 		{
-			// If monster died - grant rewards and spawn another one.
 			if (_boss.CurrentHealth <= 0)
 			{
-				// Reset poison.
-				_poisonTimer.Stop();
-				_poisonTicks = 0;
-
-				// Increase achievement amount.
-				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.BossesDefeated, 1);
-
-				// Reset fight timer.
+				StopPoisonTimer();
 				_fightTimer.Stop();
 
-				// Grant exp and loot.
+				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.BossesDefeated, 1);
+
 				GrantVictoryBonuses();
+				HandleInterfaceAfterBossDeath();
 			}
+		}
+
+		private void StopPoisonTimer()
+		{
+			_poisonTimer.Stop();
+			_poisonTicks = 0;
 		}
 
 		public void GrantVictoryBonuses()
 		{
-			// Grant experience based on damage dealt to boss.
-			User.Instance.CurrentHero.Experience += Experience.CalculateMonsterXpReward(_boss.Health - _boss.CurrentHealth);
+			GrantBossReward();
+
+			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Dungeon]++;
+
+			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.DungeonsCompleted, 1);
+		}
+
+		private void HandleInterfaceAfterBossDeath()
+		{
+			BossButton.IsEnabled = false;
+			this.TownButton.Visibility = Visibility.Visible;
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["DungeonBoss"]);
+		}
+
+		private void GrantBossReward()
+		{
+			var damageDealtToBoss = _boss.Health - _boss.CurrentHealth;
+			var experienceGained = Experience.CalculateMonsterXpReward(damageDealtToBoss);
+			User.Instance.CurrentHero.Experience += experienceGained;
 
 			// Grant boss loot.
 			// 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
 			int threshold = 5 - (_boss.CurrentHealth / (_boss.Health / 5));
 			// 2. Iterate through every possible loot.
-			string lootText = "Experience gained: " + Experience.CalculateMonsterXpReward(_boss.Health - _boss.CurrentHealth) + " \n" +
+			string lootText = "Experience gained: " + experienceGained + " \n" +
 							  "Loot: \n";
 
 			foreach (var loot in _boss.BossLoot)
 			{
-				double num = _rng.Next(1, 10001) / 10000d;
-				if (num < loot.Frequencies[threshold])
+				double randomizedValue = _rng.Next(1, 10001) / 10000d;
+				if (randomizedValue < loot.Frequencies[threshold])
 				{
 					// Grant loot after checking if it's not empty.
 					if (loot.Item.Id != 0)
 					{
 						loot.Item.AddItem();
 						lootText += "- " + loot.Item.Name + " (" + loot.ItemType + ")\n";
-						(GameData.Pages["DungeonBoss"] as DungeonBossPage).EquipmentFrame.Refresh();
 					}
 				}
 			}
 
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["DungeonBoss"]);
+
 			// Grant gold reward.
-			User.Instance.Gold += 2137; // (change value later)
-			lootText += "- " + "2137" + " (gold)\n";
+			var goldReward = 2137; // (change value later)
+			User.Instance.Gold += goldReward; 
+			lootText += "- " + goldReward.ToString() + " (gold)\n";
 
-			// Display exp and loot for testing purposes.
+			// [PRERELEASE] Display exp and loot for testing purposes.
 			this.TestRewardsBlock.Text = lootText;
+		}
 
-			// Increase boss killing specialization amount (it will update buffs in setter).
-			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Dungeon]++;
-
-			// Increase achievement amount.
-			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.DungeonsCompleted, 1);
-
-			// Disable clicking on BossButton.
-			BossButton.IsEnabled = false;
-
-			// Make TownButton visible.
-			this.TownButton.Visibility = Visibility.Visible;
-
-			// Refresh stats frame (for specialization update).
-			(GameData.Pages["DungeonBoss"] as DungeonBossPage).StatsFrame.Refresh();
+		private void StartPoisonTimer()
+		{
+			if (User.Instance.CurrentHero.PoisonDamage>0)
+			{
+				_poisonTicks = 0;
+				_poisonTimer.Start();
+			}
 		}
 
 		#region Events
 
 		private void FightTimer_Tick(object source, EventArgs e)
 		{
-			// Every 1 second, reduce the remaining fight duration.
 			Duration--;
 
 			// Check if time is up.
 			if (Duration <= 0)
 			{
-				// Make it unable to click the boss.
-				BossButton.IsEnabled = false;
+				StopPoisonTimer();
 
-				// Reset poison.
-				_poisonTimer.Stop();
-				_poisonTicks = 0;
-
-				// End the fight.
 				_fightTimer.Stop();
 
-				// Grant bonuses.
 				GrantVictoryBonuses();
+				HandleInterfaceAfterBossDeath();
 			}
 		}
 
 		private void PoisonTimer_Tick(object source, EventArgs e)
 		{
-			// When poison ends, stop poison timer.
-			if (_poisonTicks >= 5)
+			var poisonTicksMax = 5;
+
+			if (_poisonTicks >= poisonTicksMax)
 			{
 				_poisonTimer.Stop();
 			}
-			// Otherwise deal poison damage and check if monster died.
 			else
 			{
 				int poisonDamage = Player.User.Instance.CurrentHero.PoisonDamage;
+				_boss.CurrentHealth -= poisonDamage;
+				
 				_poisonTicks++;
 
-				// Increase achievement amount.
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.PoisonTicksAmount, 1);
 
-				_boss.CurrentHealth -= poisonDamage;
-				// Check if boss is dead now.
-				CheckIfBossDied();
+				HandleBossDeathIfDefeated();
 			}
 		}
 
 		private void BossButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Start PoisonTimer only if hero has any PoisonDamage.
-			if (User.Instance.CurrentHero.PoisonDamage>0)
-			{
-				// Reset poison ticks.
-				_poisonTicks = 0;
-				_poisonTimer.Start();
-			}
+			StartPoisonTimer();
 
-			// Calculate damage dealt to boss.
-			int damage = User.Instance.CurrentHero.ClickDamage;
-			// Calculate crit.
-			double num = _rng.Next(1, 101) / 100d;
-			if (num <= User.Instance.CurrentHero.CritChance)
-			{
-				damage *= 2;
-
-				// Increase achievement amount.
-				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.CritsAmount, 1);
-			}
-			// Apply specialization clicking buff.
-			damage += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
-
-			// Deal damage to boss.
+			int damage = User.Instance.CurrentHero.CalculateClickDamage();			
 			_boss.CurrentHealth -= damage;
 
-			// Increase Clicking specialization.
-			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
+			HandleBossDeathIfDefeated();
 
-			// Check if boss is dead now.
-			CheckIfBossDied();
+			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
 		}
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
-			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
-			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Town"]);
 
+			// [PRERELEASE]
 			TestRewardsBlock.Text = "";
 		}
 
