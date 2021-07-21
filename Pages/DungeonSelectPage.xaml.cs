@@ -9,6 +9,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using ClickQuest.Extensions.InterfaceManager;
 
 namespace ClickQuest.Pages
 {
@@ -25,14 +26,13 @@ namespace ClickQuest.Pages
 		{
 			InitializeComponent();
 
-			// Initially, display dungeon groups.
-			LoadDungeonGroupSelection();
+			ResetAndLoadDungeonGroupSelectionInterface();
 		}
 
-		public void LoadDungeonGroupSelection()
+		public void ResetAndLoadDungeonGroupSelectionInterface()
 		{
-			UndoButton.Visibility = Visibility.Hidden;
-
+			ResetSelection();
+			
 			DungeonSelectPanel.Children.Clear();
 
 			UndoButton.Click -= UndoButtonGroup_Click;
@@ -122,7 +122,15 @@ namespace ClickQuest.Pages
 			DungeonSelectPanel.Children.Add(grid);
 		}
 
-		public void LoadDungeonSelection()
+		private void ResetSelection()
+		{
+			_bossSelected = null;
+			_dungeonGroupSelected = null;
+			_dungeonSelected = null;
+			UndoButton.Visibility = Visibility.Hidden;
+		}
+
+		public void LoadDungeonSelectionInterface()
 		{
 			DungeonSelectPanel.Children.Clear();
 
@@ -179,7 +187,7 @@ namespace ClickQuest.Pages
 			}
 		}
 
-		public void LoadBossSelection()
+		public void LoadBossSelectionInterface()
 		{
 			DungeonSelectPanel.Children.Clear();
 
@@ -238,95 +246,108 @@ namespace ClickQuest.Pages
 		#region Events
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Come back to town.
 			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Town"]);
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
-			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
-			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
+			
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Town"]);
 
 			// Reset selection.
-			LoadDungeonGroupSelection();
+			ResetAndLoadDungeonGroupSelectionInterface();
 		}
+		
 		private void DungeonGroupButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Check if any quest is currently assigned to this hero (if so, hero can't enter the dungeon).
 			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
 			{
-				// Select dungeon group.
-				_dungeonGroupSelected = GameData.DungeonGroups.FirstOrDefault(x => x.Id == int.Parse((sender as Button).Name.Substring(12)));
+				_dungeonGroupSelected = GetDungeonGroup(sender as Button);
+				LoadDungeonSelectionInterface();
 
-				// Now let user select dungeon in that group.
-				LoadDungeonSelection();
-
-				// Change info bar
 				(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting dungeon";
 			}
 		}
 
-		private void DungeonButton_Click(object sender, RoutedEventArgs e)
+		private DungeonGroup GetDungeonGroup(Button dungeonGroupButton)
 		{
-			// Select dungeon.
-			_dungeonSelected = GameData.Dungeons.FirstOrDefault(x => x.Id == int.Parse((sender as Button).Name.Substring(7)));
-
-			// Now let user select boss in that dungeon.
-			LoadBossSelection();
-
-			// Change info bar
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting boss";
+			return GameData.DungeonGroups.FirstOrDefault(x => x.Id == int.Parse(dungeonGroupButton.Name.Substring(12)));
 		}
 
+		private void DungeonButton_Click(object sender, RoutedEventArgs e)
+		{
+			_dungeonSelected = GetDungeon(sender as Button);
+			LoadBossSelectionInterface();
+
+			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting boss";
+		}
+		
+		private Dungeon GetDungeon(Button dungeonButton)
+		{
+			return GameData.Dungeons.FirstOrDefault(x => x.Id == int.Parse(dungeonButton.Name.Substring(7)));
+		}
+		
 		private void BossButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Select boss.
-			_bossSelected = GameData.Bosses.FirstOrDefault(x => x.Id == _dungeonSelected.BossIds.FirstOrDefault(y => y == int.Parse((sender as Button).Name.Substring(4))));
+			_bossSelected = GetBoss(sender as Button);
 
+			if(!CheckAndRemoveDungeonKeys())
+			{
+				AlertBox.Show($"Not enough dungeon keys to enter.\nTry to get them by completing quests and killing monsters!", MessageBoxButton.OK);
+				return;
+			}
+
+			SetupBossFight();
+
+			ResetAndLoadDungeonGroupSelectionInterface();
+		}
+
+		private bool CheckAndRemoveDungeonKeys()
+		{
 			// Check if user has enough dungoen keys to enter boss fight.
 			var counts = _dungeonGroupSelected.KeyRequirementRarities.GroupBy(x => x).ToDictionary(k => k.Key, v => v.Count());
+
 			foreach (var pair in counts)
 			{
 				if (User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)pair.Key).Quantity < pair.Value)
 				{
-					// Display error - not enough dungeon keys.
-					AlertBox.Show($"Not enough {(Rarity)pair.Key} dungeon keys to enter.\nTry to get them by completing quests and killing monsters!", MessageBoxButton.OK);
-					return;
+					return false;
 				}
 			}
+
 			// Remove dungeon keys from Player.
 			foreach (var pair in counts)
 			{
 				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)pair.Key).Quantity -= pair.Value;
 			}
 
-			// Start boss fight.
-			(GameData.Pages["DungeonBoss"] as DungeonBossPage).TownButton.Visibility = Visibility.Hidden;
-			(GameData.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(_bossSelected.CopyEnemy());
-			// Navigate to boss fight page.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["DungeonBoss"]);
-			(GameData.Pages["DungeonBoss"] as DungeonBossPage).EquipmentFrame.Refresh();
-			// Change info bar
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "Boss fight";
+			return true;
+		}
 
-			// Reset selections (for future use).
-			_bossSelected = null;
-			_dungeonGroupSelected = null;
-			_dungeonSelected = null;
-			// Hide undo button.
-			UndoButton.Visibility = Visibility.Hidden;
-			// Reset selection page.
-			LoadDungeonGroupSelection();
+		private void SetupBossFight()
+		{
+			(GameData.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(_bossSelected.CopyEnemy());
+
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["DungeonBoss"]);
+
+			(Window.GetWindow(this) as GameWindow).LocationInfo = "Boss fight";
+			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["DungeonBoss"]);
+		}
+
+		private Boss GetBoss(Button bossButton)
+		{
+			return GameData.Bosses.FirstOrDefault(x => x.Id == _dungeonSelected.BossIds.FirstOrDefault(y => y == int.Parse(bossButton.Name.Substring(4))));
 		}
 
 		private void UndoButtonGroup_Click(object sender, RoutedEventArgs e)
 		{
 			_dungeonGroupSelected = null;
-			LoadDungeonGroupSelection();
+			ResetAndLoadDungeonGroupSelectionInterface();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting dungeon group";
 		}
 
 		private void UndoButtonDungeon_Click(object sender, RoutedEventArgs e)
 		{
 			_dungeonSelected = null;
-			LoadDungeonSelection();
+			LoadDungeonSelectionInterface();
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting dungeon";
 		}
 

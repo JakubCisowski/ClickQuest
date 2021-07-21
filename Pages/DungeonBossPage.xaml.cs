@@ -88,6 +88,7 @@ namespace ClickQuest.Pages
 		public void StartBossFight(Boss boss)
 		{
 			BossButton.IsEnabled = true;
+			TownButton.Visibility = Visibility.Hidden;
 
 			// SpecDungeonBuff's base value is 30 - the fight's duration will always be 30s or more.
 			Duration = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon];
