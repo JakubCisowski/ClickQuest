@@ -252,8 +252,7 @@ namespace ClickQuest.Pages
 		#region Events
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Town"]);
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
+			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
 			
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Town"]);
 
@@ -334,8 +333,7 @@ namespace ClickQuest.Pages
 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["DungeonBoss"]);
 
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "Boss fight";
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["DungeonBoss"]);
+			InterfaceController.ChangePage(Data.GameData.Pages["DungeonBoss"], "Boss fight");
 		}
 
 		private Boss GetBoss(Button bossButton)

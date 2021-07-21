@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using ControlzEx;
 using System.Windows.Data;
+using ClickQuest.Extensions.InterfaceManager;
 
 namespace ClickQuest.Pages
 {
@@ -67,7 +68,7 @@ namespace ClickQuest.Pages
 				hero.SessionStartDate = DateTime.Now;
 
 				// Go to Town.
-				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.GameData.Pages["Town"]);
+				InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
 				(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
 				(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
 			}
@@ -76,8 +77,7 @@ namespace ClickQuest.Pages
 		public void CancelButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Go back to Menu.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["MainMenu"]);
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "";
+			InterfaceController.ChangePage(Data.GameData.Pages["MainMenu"], "");
 		}
 	}
 }

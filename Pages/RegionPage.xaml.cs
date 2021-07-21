@@ -1,5 +1,6 @@
 using ClickQuest.Controls;
 using ClickQuest.Data;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Places;
 using System.Windows;
 using System.Windows.Controls;
@@ -55,8 +56,7 @@ namespace ClickQuest.Pages
 			}
 
 			// Go back to Town.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Town"]);
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
+			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
 			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
 			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
 		}

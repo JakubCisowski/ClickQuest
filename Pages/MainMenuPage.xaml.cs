@@ -3,6 +3,7 @@ using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Entity;
 using ClickQuest.Items;
+using ClickQuest.Extensions.InterfaceManager;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Linq;
@@ -154,8 +155,7 @@ namespace ClickQuest.Pages
 			// If the limit is not reached, move to hero creation page.
 			if (User.Instance.Heroes.Count < 6)
 			{
-				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["HeroCreation"]);
-				(Window.GetWindow(this) as GameWindow).LocationInfo = "Hero creation";
+				InterfaceController.ChangePage(Data.GameData.Pages["HeroCreation"], "Hero Creation");
 			}
 		}
 
@@ -190,8 +190,7 @@ namespace ClickQuest.Pages
 
 			// Refresh pages, move to town and change location text.
 			GameData.RefreshPages();
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(Data.GameData.Pages["Town"]);
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
+			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
 			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
 			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
 		}

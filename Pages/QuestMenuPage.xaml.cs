@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.Extensions.InterfaceManager;
 
 namespace ClickQuest.Pages
 {
@@ -86,8 +87,7 @@ namespace ClickQuest.Pages
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Go back to Town.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Town"]);
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "Town";
+			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
 			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
 			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
 		}

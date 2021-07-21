@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.Extensions.InterfaceManager;
 
 namespace ClickQuest.Pages
 {
@@ -62,7 +63,6 @@ namespace ClickQuest.Pages
 			if (User.Instance.CurrentHero.Level >= GameData.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement)
 			{
 				var selectedRegionPage = GameData.Pages[regionName] as RegionPage;
-				(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(selectedRegionPage);
 				(GameData.Pages[regionName] as RegionPage).StatsFrame.Refresh();
 				(GameData.Pages[regionName] as RegionPage).EquipmentFrame.Refresh();
 
@@ -73,7 +73,7 @@ namespace ClickQuest.Pages
 					monsterButton.StartAuraTimer();
 				}
 				
-				(Window.GetWindow(this) as GameWindow).LocationInfo = $"{regionName}";
+				InterfaceController.ChangePage(selectedRegionPage, $"{regionName}");
 			}
 			// Else display a warning.
 			else
@@ -85,10 +85,9 @@ namespace ClickQuest.Pages
 		private void ShopButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Enter Shop page.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Shop"]);
+			InterfaceController.ChangePage(Data.GameData.Pages["Shop"], "Shop");
 			(GameData.Pages["Shop"] as ShopPage).StatsFrame.Refresh();
 			(GameData.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "Shop";
 			(GameData.Pages["Shop"] as ShopPage).UpdateShop();
 		}
 
@@ -108,47 +107,42 @@ namespace ClickQuest.Pages
 			// Set current hero to null.
 			User.Instance.CurrentHero = null;
 
-			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(GameData.Pages["MainMenu"]);
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "";
+			InterfaceController.ChangePage(Data.GameData.Pages["MainMenu"], "");
 		}
 
 		private void QuestMenuButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Enter Quests page.
 			(GameData.Pages["QuestMenu"] as QuestMenuPage).LoadPage();
-			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(GameData.Pages["QuestMenu"]);
+			InterfaceController.ChangePage(Data.GameData.Pages["QuestMenu"], "Quests");
 			(GameData.Pages["QuestMenu"] as QuestMenuPage).StatsFrame.Refresh();
 			(GameData.Pages["QuestMenu"] as QuestMenuPage).EquipmentFrame.Refresh();
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "Quests";
 		}
 
 		private void BlacksmithButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Enter Blacksmith page.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Blacksmith"]);
+			InterfaceController.ChangePage(Data.GameData.Pages["Blacksmith"], "Blacksmith");
 			(GameData.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
 			(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "Blacksmith";
 			(GameData.Pages["Blacksmith"] as BlacksmithPage).UpdateBlacksmithItems();
 		}
 
 		private void PriestButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Enter Priest page.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["Priest"]);
+			InterfaceController.ChangePage(Data.GameData.Pages["Priest"], "Priest");
 			(GameData.Pages["Priest"] as PriestPage).StatsFrame.Refresh();
 			(GameData.Pages["Priest"] as PriestPage).EquipmentFrame.Refresh();
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "Priest";
 			(GameData.Pages["Priest"] as PriestPage).UpdatePriest();
 		}
 
 		private void DungeonSelectButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Enter DungeonSelect page.
-			(Window.GetWindow(this) as GameWindow).CurrentFrame.Navigate(GameData.Pages["DungeonSelect"]);
+			InterfaceController.ChangePage(Data.GameData.Pages["DungeonSelect"], "Selecting dungeon group");
 			(GameData.Pages["DungeonSelect"] as DungeonSelectPage).StatsFrame.Refresh();
 			(GameData.Pages["DungeonSelect"] as DungeonSelectPage).EquipmentFrame.Refresh();
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting dungeon group";
 		}
 
 		#endregion Events

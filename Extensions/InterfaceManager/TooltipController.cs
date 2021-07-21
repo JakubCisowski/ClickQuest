@@ -14,7 +14,6 @@ namespace ClickQuest.Extensions.InterfaceManager
 		public static ToolTip GenerateEquipmentItemTooltip<T>(T itemToGenerateTooltipFor) where T:Item
 		{
 			var toolTip = new ToolTip();
-			
 
 			var toolTipBlock = new TextBlock()
 			{

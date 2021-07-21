@@ -1,6 +1,7 @@
 using ClickQuest.Data;
 using Microsoft.CSharp.RuntimeBinder;
 using System.Dynamic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace ClickQuest.Extensions.InterfaceManager
@@ -51,6 +52,13 @@ namespace ClickQuest.Extensions.InterfaceManager
 				{
 				} 
 			}
+		}
+
+		public static void ChangePage(Page destinationPage, string locationInfoText)
+		{
+			var window = Application.Current.MainWindow as GameWindow;
+			window.CurrentFrame.Navigate(destinationPage);
+			window.LocationInfo = locationInfoText;
 		}
 	}
 }

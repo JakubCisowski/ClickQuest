@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System;
 using System.Windows.Input;
+using ClickQuest.Extensions.InterfaceManager;
 
 namespace ClickQuest
 {
@@ -62,7 +63,8 @@ namespace ClickQuest
 			this.DataContext = this;
 
 			(GameData.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
-			(Application.Current.MainWindow as GameWindow).CurrentFrame.Navigate(Data.GameData.Pages["MainMenu"]);
+			
+			InterfaceController.ChangePage(Data.GameData.Pages["MainMenu"], "");
 		}
 
 		#region Events
