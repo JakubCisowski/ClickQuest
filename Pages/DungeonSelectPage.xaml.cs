@@ -113,6 +113,8 @@ namespace ClickQuest.Pages
 				panel.Children.Add(block2);
 				button.Content = border;
 
+				button.Tag = GameData.DungeonGroups[i];
+
 				button.Click += DungeonGroupButton_Click;
 
 				grid.Children.Add(button);
@@ -181,6 +183,8 @@ namespace ClickQuest.Pages
 
 				button.Content = panel;
 
+				button.Tag = dungeonsOfThisGroup[i];
+
 				button.Click += DungeonButton_Click;
 
 				DungeonSelectPanel.Children.Add(button);
@@ -237,6 +241,8 @@ namespace ClickQuest.Pages
 
 				button.Content = panel;
 
+				button.Tag = boss;
+
 				button.Click += BossButton_Click;
 
 				DungeonSelectPanel.Children.Add(button);
@@ -269,7 +275,7 @@ namespace ClickQuest.Pages
 
 		private DungeonGroup GetDungeonGroup(Button dungeonGroupButton)
 		{
-			return GameData.DungeonGroups.FirstOrDefault(x => x.Id == int.Parse(dungeonGroupButton.Name.Substring(12)));
+			return dungeonGroupButton.Tag as DungeonGroup;
 		}
 
 		private void DungeonButton_Click(object sender, RoutedEventArgs e)
@@ -282,7 +288,7 @@ namespace ClickQuest.Pages
 		
 		private Dungeon GetDungeon(Button dungeonButton)
 		{
-			return GameData.Dungeons.FirstOrDefault(x => x.Id == int.Parse(dungeonButton.Name.Substring(7)));
+			return dungeonButton.Tag as Dungeon;
 		}
 		
 		private void BossButton_Click(object sender, RoutedEventArgs e)
@@ -334,7 +340,7 @@ namespace ClickQuest.Pages
 
 		private Boss GetBoss(Button bossButton)
 		{
-			return GameData.Bosses.FirstOrDefault(x => x.Id == _dungeonSelected.BossIds.FirstOrDefault(y => y == int.Parse(bossButton.Name.Substring(4))));
+			return bossButton.Tag as Boss;
 		}
 
 		private void UndoButtonGroup_Click(object sender, RoutedEventArgs e)
