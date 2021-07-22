@@ -445,7 +445,9 @@ namespace ClickQuest.Heroes
             Artifacts = new List<Artifact>();
             Quests = new List<Quest>();
 
-            _rng = new Random();
+			Specialization = new Specialization();
+
+			_rng = new Random();
 
             HeroClass = heroClass;
             HeroRace = heroRace;
