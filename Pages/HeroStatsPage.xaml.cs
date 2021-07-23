@@ -2,6 +2,7 @@ using ClickQuest.Player;
 using ClickQuest.Heroes;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Items;
+using ClickQuest.Extensions.InterfaceManager;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Linq;
@@ -10,6 +11,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
+using System.Collections.Generic;
+using ClickQuest.Adventures;
 
 namespace ClickQuest.Pages
 {
@@ -28,332 +31,195 @@ namespace ClickQuest.Pages
 			_hero = User.Instance.CurrentHero;
 			this.DataContext = _hero;
 
-			GenerateIngots();
-			GenerateDungeonKeys();
-			GenerateGold();
-			RefreshQuestTimer();
-			RefreshBlessingTimer();
-			GenerateTooltips();
+			UpdateGoldInterface();
+			UpdateIngotOrDungeonKeyInterface<Ingot>(User.Instance.Ingots);
+			UpdateIngotOrDungeonKeyInterface<DungeonKey>(User.Instance.DungeonKeys);
+			UpdateQuestTimer();
+			UpdateBlessingTimer();
 			UpdateSpecializationsInterface();
+			GenerateHeroInfoTooltip();
+			GenerateStatValueAuraTooltip();
+			GenerateStatValueDamageTooltip();
+			GenerateStatValuePoisonTooltip();
+			GenerateStatValueCritTooltip();
 		}
 
-		private void GenerateGold()
+		private void UpdateGoldInterface()
 		{
-			// Create a binding for the amount of Gold.
-			Binding binding = new Binding("Gold")
+			Binding goldAmountBinding = new Binding("Gold")
 			{
 				Source = User.Instance,
 				StringFormat = "{0}"
 			};
 
-			GoldBlock.SetBinding(TextBlock.TextProperty, binding);
+			GoldBlock.SetBinding(TextBlock.TextProperty, goldAmountBinding);
+			
+			GoldPanel.ToolTip = GenerateGoldTooltip();
+		}
 
-			// Generate gold tooltip.
-			var tooltip = new ToolTip();
+		private ToolTip GenerateGoldTooltip()
+		{
+			var goldInfoTooltip = new ToolTip();
 
-			ToolTipService.SetInitialShowDelay(GoldPanel, 400);
-			ToolTipService.SetShowDuration(GoldPanel, 20000);
+			TooltipController.SetTooltipDelayAndDuration(GoldPanel);
 
-			var block = new TextBlock()
+			var tooltipTextBlock = new TextBlock()
 			{
 				Style = (Style)this.FindResource("ToolTipTextBlockBase"),
 				Text = "Gold"
 			};
 
-			tooltip.Content = block;
-			GoldPanel.ToolTip = tooltip;
+			goldInfoTooltip.Content = tooltipTextBlock;
+
+			return goldInfoTooltip;
 		}
 
-		private void GenerateIngots()
+		private void UpdateIngotOrDungeonKeyInterface<T>(List<T> currencyList) where T:Item
 		{
-			// Make sure hero isn't null (constructor calls this function while loading database).
-			if (_hero != null)
+			for (int currencyRarityValue = 0; currencyRarityValue < currencyList.Count; currencyRarityValue++)
 			{
-				IngotKeyGrid.Children.Clear();
-
-				for (int i = 0; i < User.Instance.Ingots.Count; i++)
+				var currencyPanel = new StackPanel()
 				{
-					// Ingot panel for icon and amount.
-					var panel = new StackPanel()
-					{
-						Orientation = Orientation.Horizontal,
-						Margin = new Thickness(50, 0, 0, 0),
-						Background = new SolidColorBrush(Colors.Transparent)
-					};
+					Orientation = Orientation.Horizontal,
+					Margin = new Thickness(50, 0, 0, 0),
+					Background = new SolidColorBrush(Colors.Transparent)
+				};
 
-					// Generate ingots tooltips.
-					var tooltip = new ToolTip();
-					ToolTipService.SetInitialShowDelay(panel, 100);
-					ToolTipService.SetShowDuration(panel, 20000);
+				TooltipController.SetTooltipDelayAndDuration(currencyPanel);
 
-					var block = new TextBlock()
-					{
-						Style = (Style)this.FindResource("ToolTipTextBlockBase"),
-						FontWeight=FontWeights.DemiBold
-					};
+				currencyPanel.Children.Add(GenerateCurrencyIcon<T>(currencyRarityValue));
 
-					// Ingot icon.
-					var icon = new PackIcon()
-					{
-						Kind = PackIconKind.Gold,
-						Width = 22,
-						Height = 22,
-						VerticalAlignment = VerticalAlignment.Center
-					};
+				var currencyAmountTextBlock = new TextBlock()
+				{
+					Name = (typeof(T) == typeof(Ingot) ? "Ingot": "DungeonKey") + currencyRarityValue.ToString(),
+					FontSize = 18,
+					VerticalAlignment = VerticalAlignment.Center
+				};
 
-					// Select ingot icon color and tooltip text.
-					var color = Styles.Colors.GetRarityColor((Rarity)i);
-					icon.Foreground = color;
-					block.Foreground = color;
-					switch (i)
-					{
-						case 0:
-							block.Text = "General Ingots";
-							break;
+				Binding currencyAmountBinding = new Binding("Quantity")
+				{
+					Source = currencyList[currencyRarityValue],
+					StringFormat = "   {0}"
+				};
+				currencyAmountTextBlock.SetBinding(TextBlock.TextProperty, currencyAmountBinding);
 
-						case 1:
-							block.Text = "Fine Ingots";
-							break;
+				currencyPanel.Children.Add(currencyAmountTextBlock);
+				IngotKeyGrid.Children.Add(currencyPanel);
 
-						case 2:
-							block.Text = "Superior Ingots";
-							break;
+				var column = typeof(T) == typeof(Ingot) ? 0 : 1;
+				Grid.SetColumn(currencyPanel, column);
+				Grid.SetRow(currencyPanel, currencyRarityValue);
 
-						case 3:
-							block.Text = "Exceptional Ingots";
-							break;
-
-						case 4:
-							block.Text = "Mythic Ingots";
-							break;
-
-						case 5:
-							block.Text = "Masterwork Ingots";
-							break;
-					}
-
-					// Add ingot icon to the panel.
-					panel.Children.Add(icon);
-
-					// Create ingot amount textblock.
-					var block2 = new TextBlock()
-					{
-						Name = "Ingot" + i.ToString(),
-						FontSize = 18,
-						VerticalAlignment = VerticalAlignment.Center
-					};
-
-					// Add ingot binding.
-					Binding binding = new Binding("Quantity")
-					{
-						Source = User.Instance.Ingots[i],
-						StringFormat = "   {0}"
-					};
-					block2.SetBinding(TextBlock.TextProperty, binding);
-
-					// Add ingot amount text to the panel.
-					panel.Children.Add(block2);
-
-					// Add the panel to IngotKey grid.
-					IngotKeyGrid.Children.Add(panel);
-
-					// Set its row and column.
-					Grid.SetColumn(panel, 0);
-					Grid.SetRow(panel, i);
-
-					// Add tooltip to the panel.
-					tooltip.Content = block;
-					panel.ToolTip = tooltip;
-				}
+				currencyPanel.ToolTip = TooltipController.GenerateCurrencyTooltip<T>(currencyRarityValue);
 			}
 		}
 
-		private void GenerateDungeonKeys()
+		private PackIcon GenerateCurrencyIcon<T>(int rarityValue) where T:Item
 		{
-			//Make sure hero isn't null (constructor calls this function while loading database).
-			if (_hero != null)
+			var currencyIcon = new PackIcon()
 			{
-				for (int i = 0; i < User.Instance.DungeonKeys.Count; i++)
-				{
-					// Ingot panel for icon and amount.
-					var panel = new StackPanel()
-					{
-						Orientation = Orientation.Horizontal,
-						Margin = new Thickness(50, 0, 0, 0),
-						Background = new SolidColorBrush(Colors.Transparent)
-					};
+				Kind = typeof(T) == typeof(Ingot) ? PackIconKind.Gold : PackIconKind.Key,
+				Width = 22,
+				Height = 22,
+				VerticalAlignment = VerticalAlignment.Center
+			};
 
-					// Generate ingots tooltips.
-					var tooltip = new ToolTip();
-					ToolTipService.SetInitialShowDelay(panel, 100);
-					ToolTipService.SetShowDuration(panel, 20000);
+			var curerncyIconColor = Styles.Colors.GetRarityColor((Rarity)rarityValue);
+			currencyIcon.Foreground = curerncyIconColor;
 
-					var block = new TextBlock()
-					{
-						Style = (Style)this.FindResource("ToolTipTextBlockBase"),
-						FontWeight=FontWeights.DemiBold
-					};
+			return currencyIcon;
+		}
+	
+		private void UpdateQuestTimer()
+		{
+			var currentQuest = User.Instance.CurrentHero?.Quests.FirstOrDefault(x => x.EndDate != default(DateTime));
 
-					// Ingot icon.
-					var icon = new PackIcon()
-					{
-						Kind = PackIconKind.Key,
-						Width = 22,
-						Height = 22,
-						VerticalAlignment = VerticalAlignment.Center
-					};
+			var questDurationBinding = new Binding("TicksCountText")
+			{
+				Source = currentQuest
+			};
+			QuestDurationBlock.SetBinding(TextBlock.TextProperty, questDurationBinding);
 
-					// Select ingot icon color and tooltip text.
-					var color = Styles.Colors.GetRarityColor((Rarity)i);
-					icon.Foreground = color;
-					block.Foreground = color;
-					switch (i)
-					{
-						case 0:
-							block.Text = "General Dungeon Keys";
-							break;
-
-						case 1:
-							block.Text = "Fine Dungeon Keys";
-							break;
-
-						case 2:
-							block.Text = "Superior Dungeon Keys";
-							break;
-
-						case 3:
-							block.Text = "Exceptional Dungeon Keys";
-							break;
-
-						case 4:
-							block.Text = "Mythic Dungeon Keys";
-							break;
-
-						case 5:
-							block.Text = "Masterwork Dungeon Keys";
-							break;
-					}
-
-					// Add dungeon key icon to the panel.
-					panel.Children.Add(icon);
-
-					// Create dungeon key amount textblock.
-					var block2 = new TextBlock()
-					{
-						Name = "Key" + i.ToString(),
-						FontSize = 18,
-						VerticalAlignment = VerticalAlignment.Center
-					};
-
-					// Add dungeon key binding.
-					Binding binding = new Binding("Quantity")
-					{
-						Source = User.Instance.DungeonKeys[i],
-						StringFormat = "   {0}"
-					};
-					block2.SetBinding(TextBlock.TextProperty, binding);
-
-					// Add dungeon key amount text to the panel.
-					panel.Children.Add(block2);
-
-					// Add the panel to IngotKey grid.
-					IngotKeyGrid.Children.Add(panel);
-
-					// Set its row and column.
-					Grid.SetColumn(panel, 1);
-					Grid.SetRow(panel, i);
-
-					// Add tooltip to the panel.
-					tooltip.Content = block;
-					panel.ToolTip = tooltip;
-				}
-			}
+			QuestDurationBlock.ToolTip = GenerateQuestTooltip(currentQuest);
 		}
 
-		private void RefreshQuestTimer()
+		private ToolTip GenerateQuestTooltip(Quest currentQuest)
 		{
-			// Find quest that is currently being completed.
-			var quest = User.Instance.CurrentHero?.Quests.FirstOrDefault(x => x.EndDate != default(DateTime));
+			var questTooltip = new ToolTip();
+			TooltipController.SetTooltipDelayAndDuration(QuestDurationBlock);
 
-			// Generate Quest tooltips.
-			var toolTip = new ToolTip();
-			ToolTipService.SetInitialShowDelay(QuestDuration, 100);
-			ToolTipService.SetShowDuration(QuestDuration, 20000);
-
-			var toolTipBlock = new TextBlock()
+			var questToolTipTextBlock = new TextBlock()
 			{
 				Style = (Style)this.FindResource("ToolTipTextBlockBase")
 			};
 
-			if (quest != null)
+			if (currentQuest != null)
 			{
-				// Bind its duration to the panel.
-				var binding = new Binding("TicksCountText");
-				binding.Source = quest;
-				QuestDuration.SetBinding(TextBlock.TextProperty, binding);
-
-				// Create quest tooltip
-				toolTipBlock.Inlines.Add(new Run($"{quest.Name}"));
-				if (quest.Rare)
+				questToolTipTextBlock.Inlines.Add(new Run($"{currentQuest.Name}"));
+				if (currentQuest.Rare)
 				{
-					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Bold(new Run("*Rare Quest*"){ Foreground = (SolidColorBrush)this.FindResource("ColorQuestRare") }));
+					questToolTipTextBlock.Inlines.Add(new LineBreak());
+					questToolTipTextBlock.Inlines.Add(new Bold(new Run("*Rare Quest*"){ Foreground = (SolidColorBrush)this.FindResource("ColorQuestRare") }));
 				}
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"Class: {quest.HeroClass}"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"{quest.Description}"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"{quest.RewardsDescription}"));
+				questToolTipTextBlock.Inlines.Add(new LineBreak());
+				questToolTipTextBlock.Inlines.Add(new Run($"Class: {currentQuest.HeroClass}"));
+				questToolTipTextBlock.Inlines.Add(new LineBreak());
+				questToolTipTextBlock.Inlines.Add(new LineBreak());
+				questToolTipTextBlock.Inlines.Add(new Run($"{currentQuest.Description}"));
+				questToolTipTextBlock.Inlines.Add(new LineBreak());
+				questToolTipTextBlock.Inlines.Add(new LineBreak());
+				questToolTipTextBlock.Inlines.Add(new Run($"{currentQuest.RewardsDescription}"));
 			}
 			else
 			{
-				toolTipBlock.Text="No quest is currently active";
+				questToolTipTextBlock.Text="No quest is currently active";
 			}
 
-			toolTip.Content = toolTipBlock;
-			QuestDuration.ToolTip = toolTip;
+			questTooltip.Content = questToolTipTextBlock;
+			
+			return questTooltip;
 		}
 
-		private void RefreshBlessingTimer()
+		private void UpdateBlessingTimer()
 		{
-			// Find blessing that is currently active.
-			var blessing = User.Instance.CurrentHero?.Blessing;
+			var currentBlessing = User.Instance.CurrentHero?.Blessing;
 
-			// Generate Blessing tooltips.
-			var toolTip = new ToolTip();
-			ToolTipService.SetInitialShowDelay(BlessingDuration, 100);
-			ToolTipService.SetShowDuration(BlessingDuration, 20000);
+			var binding = new Binding("DurationText")
+			{
+				Source = currentBlessing
+			};
+			BlessingDurationBlock.SetBinding(TextBlock.TextProperty, binding);
 
-			var toolTipBlock = new TextBlock()
+			BlessingDurationBlock.ToolTip = GenerateBlessingTooltip(currentBlessing);
+		}
+
+		private ToolTip GenerateBlessingTooltip(Blessing currentBlessing)
+		{
+			var blessingToolTip = new ToolTip();
+			TooltipController.SetTooltipDelayAndDuration(BlessingDurationBlock);
+
+			var blessingToolTipBlock = new TextBlock()
 			{
 				Style = (Style)this.FindResource("ToolTipTextBlockBase")
 			};
 
-			if (blessing != null)
+			if (currentBlessing != null)
 			{
-				// Bind its duration to the panel.
-				var binding = new Binding("DurationText");
-				binding.Source = blessing;
-				BlessingDuration.SetBinding(TextBlock.TextProperty, binding);
-				
-				// Create blessing tooltip
-				toolTipBlock.Inlines.Add(new Run($"{blessing.Name}"));
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"*{blessing.RarityString}*") { Foreground = Styles.Colors.GetRarityColor(blessing.Rarity), FontWeight = FontWeights.DemiBold });
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"{blessing.Description}"));
+				blessingToolTipBlock.Inlines.Add(new Run($"{currentBlessing.Name}"));
+				blessingToolTipBlock.Inlines.Add(new LineBreak());
+				blessingToolTipBlock.Inlines.Add(new Run($"*{currentBlessing.RarityString}*") { Foreground = Styles.Colors.GetRarityColor(currentBlessing.Rarity), FontWeight = FontWeights.DemiBold });
+				blessingToolTipBlock.Inlines.Add(new LineBreak());
+				blessingToolTipBlock.Inlines.Add(new LineBreak());
+				blessingToolTipBlock.Inlines.Add(new Run($"{currentBlessing.Description}"));
 			}
 			else
 			{
-				toolTipBlock.Text="No blessing is currently active";
+				blessingToolTipBlock.Text="No blessing is currently active";
 			}
 
-			toolTip.Content = toolTipBlock;
-			BlessingDuration.ToolTip = toolTip;
+			blessingToolTip.Content = blessingToolTipBlock;
+
+			return blessingToolTip;
 		}
 
 		private void GenerateSpecializationsTooltips()
@@ -366,14 +232,10 @@ namespace ClickQuest.Pages
 
 			var specializationTypes = Enum.GetValues(typeof(SpecializationType));
 
+			TooltipController.SetTooltipDelayAndDuration(SpecializationsGrid);
+
 			for(int i =0;i<specializationTypes.Length;i++)
 			{
-				// Generate SpecBuying tooltips.
-				var toolTip = new ToolTip();
-				ToolTipService.SetInitialShowDelay(GoldPanel, 100);
-				ToolTipService.SetShowDuration(GoldPanel, 20000);
-
-				// Calculate remaining amount to upgrade specialization.
 				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[(SpecializationType)specializationTypes.GetValue(i)];
 				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(i)])
 				{
@@ -381,111 +243,13 @@ namespace ClickQuest.Pages
 				}
 				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(i)] - nextUpgrade;
 
-				var toolTipBlock = new TextBlock()
-				{
-					Style = (Style)this.FindResource("ToolTipTextBlockBase")
-				};
-
-				switch (specializationTypes.GetValue(i))
-				{
-					case SpecializationType.Blessing:
-						{
-							toolTipBlock.Inlines.Add(new Run("Increases blessing duration in seconds"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run("You can master Prayer by buying blessings in Priest"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run($"Next upgrade (+15s duration) in"));
-							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-							toolTipBlock.Inlines.Add(new Run($"bought blessings"));
-						}
-						break;
-
-					case SpecializationType.Clicking:
-						{
-							toolTipBlock.Inlines.Add(new Run("Increases click damage"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run("You can master Clicker by clicking on monsters and bosses"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run("Click damage from this specialization is applied after other effects eg. crit"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run($"Next upgrade (+1 click damage) in"));
-							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-							toolTipBlock.Inlines.Add(new Run($"clicks"));
-						}
-						break;
-
-					case SpecializationType.Crafting:
-						{
-							toolTipBlock.Inlines.Add(new Run("Increases crafting rarity limit (base limit is Fine rarity)"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run("You can master Craftsman by crafting artifacts in Blacksmith"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run($"Next rarity limit upgrade in"));
-							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-							toolTipBlock.Inlines.Add(new Run($"crafted artifacts"));
-						}
-						break;
-
-					case SpecializationType.Buying:
-						{
-							toolTipBlock.Inlines.Add(new Run("Increases shop offer size (base size is 5)"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run("You can master Tradesman by buying recipes in shop"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run($"Next upgrade (+1 shop offer size) in"));
-							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-							toolTipBlock.Inlines.Add(new Run($"bought recipes"));
-						}
-						break;
-
-					case SpecializationType.Melting:
-						{
-							toolTipBlock.Inlines.Add(new Run("Increases % chance to get bonus ingots when melting (base chance is 0%)"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run("You can master Melter by melting materials in Blacksmith"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run("Each 100% guarantees additional ingot"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run($"Next upgrade (+5% chance) in"));
-							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-							toolTipBlock.Inlines.Add(new Run($"melted materials"));
-						}
-						break;
-
-					case SpecializationType.Questing:
-						{
-							toolTipBlock.Inlines.Add(new Run("Reduces % time to complete quests (limit is 50%)"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run("You can master Adventurer by completing quests"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run($"Next upgrade (+5% reduced time) in"));
-							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-							toolTipBlock.Inlines.Add(new Run($"completed quests"));
-						}
-						break;
-
-					case SpecializationType.Dungeon:
-						{
-							toolTipBlock.Inlines.Add(new Run("Increases amount of time to defeat boss in seconds (base time is 30s)"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run("You can master Daredevil by buying recipes in shop"));
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run($"Next upgrade (+1 second) in"));
-							toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-							toolTipBlock.Inlines.Add(new Run($"finished dungeons"));
-						}
-						break;
-
-				}
-
-				toolTip.Content = toolTipBlock;
+				var toolTip = TooltipController.GenerateSpecizaltionTooltip((SpecializationType)specializationTypes.GetValue(i), nextUpgrade);
 
 				var nameBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationTypes.GetValue(i).ToString() + "Name");
 				var buffBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationTypes.GetValue(i).ToString() + "Buff");
 
 				nameBlock.ToolTip = toolTip;
 				buffBlock.ToolTip = toolTip;
-
 			}
 		}
 
@@ -496,8 +260,6 @@ namespace ClickQuest.Pages
 				// This function was called before selecting a hero - return.
 				return;
 			}
-
-			// SpecializationsGrid.Children.Clear();
 
 			var specializationTypes = Enum.GetValues(typeof(SpecializationType));
 
@@ -574,13 +336,11 @@ namespace ClickQuest.Pages
 			GenerateSpecializationsTooltips();
 		}
 
-		private void GenerateTooltips()
+		private void GenerateHeroInfoTooltip()
 		{
-			#region HeroInfoTooltip
 			var tooltip = new ToolTip();
 
-			ToolTipService.SetInitialShowDelay(HeroNameBlock, 400);
-			ToolTipService.SetShowDuration(HeroNameBlock, 20000);
+			TooltipController.SetTooltipDelayAndDuration(HeroNameBlock);
 
 			var block = new TextBlock()
 			{
@@ -647,14 +407,13 @@ namespace ClickQuest.Pages
 
 			tooltip.Content = block;
 			HeroNameBlock.ToolTip = tooltip;
-			#endregion
-
-			#region StatValueDamageTooltip
-			
+		}
+	
+		private void GenerateStatValueDamageTooltip()
+		{
 			var tooltipDamage = new ToolTip();
 
-			ToolTipService.SetInitialShowDelay(ClickDamageBlock, 400);
-			ToolTipService.SetShowDuration(ClickDamageBlock, 20000);
+			TooltipController.SetTooltipDelayAndDuration(ClickDamageBlock);
 
 			var blockDamage = new TextBlock()
 			{
@@ -748,15 +507,13 @@ namespace ClickQuest.Pages
 
 			tooltipDamage.Content = blockDamage;
 			ClickDamageBlock.ToolTip = tooltipDamage;
+		}
 
-			#endregion
-
-			#region StatValueCritTooltip
-			
+		private void GenerateStatValueCritTooltip()
+		{ 
 			var toolTipCrit = new ToolTip();
 
-			ToolTipService.SetInitialShowDelay(CritChanceBlock, 400);
-			ToolTipService.SetShowDuration(CritChanceBlock, 20000);
+			TooltipController.SetTooltipDelayAndDuration(CritChanceBlock);
 
 			var blockCrit = new TextBlock()
 			{
@@ -841,15 +598,13 @@ namespace ClickQuest.Pages
 
 			toolTipCrit.Content = blockCrit;
 			CritChanceBlock.ToolTip = toolTipCrit;
+		}
 
-			#endregion
-
-			#region StatValuePoisonTooltip
-			
+		private void GenerateStatValuePoisonTooltip()
+		{
 			var toolTipPoison = new ToolTip();
 
-			ToolTipService.SetInitialShowDelay(PoisonDamageBlock, 400);
-			ToolTipService.SetShowDuration(PoisonDamageBlock, 20000);
+			TooltipController.SetTooltipDelayAndDuration(PoisonDamageBlock);
 
 			var blockPoison = new TextBlock()
 			{
@@ -930,15 +685,13 @@ namespace ClickQuest.Pages
 
 			toolTipPoison.Content = blockPoison;
 			PoisonDamageBlock.ToolTip = toolTipPoison;
-
-			#endregion
-		
-			#region StatValueAuraTooltip
-			
+		}
+	
+		private void GenerateStatValueAuraTooltip()
+		{
 			var tooltipAura = new ToolTip();
 
-			ToolTipService.SetInitialShowDelay(AuraDamageBlock, 400);
-			ToolTipService.SetShowDuration(AuraDamageBlock, 20000);
+			TooltipController.SetTooltipDelayAndDuration(AuraDamageBlock);
 
 			var blockAura = new TextBlock()
 			{
@@ -1071,8 +824,6 @@ namespace ClickQuest.Pages
 
 			tooltipAura.Content = blockAura;
 			AuraDamageBlock.ToolTip = tooltipAura;
-
-			#endregion
 		}
 	}
 }
