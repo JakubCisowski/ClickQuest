@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using ClickQuest.Heroes;
 
 namespace ClickQuest.Pages
 {
@@ -19,23 +20,149 @@ namespace ClickQuest.Pages
 		public MainMenuPage()
 		{
 			InitializeComponent();
-			GenerateHeroButtons();
+			UpdateCreateHeroButton();
+			UpdateSelectOrDeleteHeroButtons();
 		}
 
-		public void GenerateHeroButtons()
+		public void UpdateSelectOrDeleteHeroButtons()
 		{
-			// If max hero limit is reached, disable create hero button.
-			if (User.Instance.Heroes.Count == 6)
+			ClearSelectOrDeletePanels();
+			
+			for (int i = 0; i < User.Instance.Heroes.Count; i++)
 			{
-				var block = new TextBlock
+				SelectOrDeleteHeroButtonsGrid.Children.Add(GenerateSelectOrDeletePanel(i));
+			}
+		}
+
+		private StackPanel GenerateSelectOrDeletePanel(int heroPosition)
+		{
+			var hero = User.Instance.Heroes[heroPosition];
+			var selectHeroButton = GenerateSelectHeroButton(hero);
+			var deleteHeroButton = GenerateDeleteHeroButton(hero);
+
+			var panel = new StackPanel
+			{
+				Orientation = Orientation.Horizontal,
+				HorizontalAlignment = HorizontalAlignment.Center,
+				VerticalAlignment = VerticalAlignment.Center
+			};
+
+			panel.Children.Add(selectHeroButton);
+			panel.Children.Add(deleteHeroButton);
+
+			OrganizeSelectOrDeleteGrid(panel, heroPosition);
+
+			return panel;
+		}
+
+		private Button GenerateDeleteHeroButton(Hero hero)
+		{
+			var deleteHeroButton = new Button()
+			{
+				Name = "DeleteHero" + hero.Id,
+				Width = 50,
+				Height = 50,
+				Margin = new Thickness(5),
+				Tag = hero
+			};
+
+			var deleteHeroIcon = new PackIcon()
+			{
+				Width = 30,
+				Height = 30,
+				Kind = PackIconKind.DeleteForever,
+				Foreground = new SolidColorBrush(Colors.Gray)
+			};
+
+			deleteHeroButton.Content = deleteHeroIcon;
+
+			var deleteHeroButtonStyle = this.FindResource("ButtonStyleDanger") as Style;
+			deleteHeroButton.Style = deleteHeroButtonStyle;
+
+			deleteHeroButton.Click += DeleteHeroButton_Click;
+
+			return deleteHeroButton;
+		}
+
+		private void OrganizeSelectOrDeleteGrid(StackPanel panel, int heroPosition)
+		{
+			if (User.Instance.Heroes.Count < 4)
+			{
+				Grid.SetRow(panel, heroPosition + 1);
+				Grid.SetColumnSpan(panel, 2);
+			}
+			else
+			{
+				if (heroPosition / 3 == 0)
+				{
+					panel.HorizontalAlignment = HorizontalAlignment.Right;
+					panel.Margin = new Thickness(0, 0, 20, 0);
+				}
+				else
+				{
+					panel.HorizontalAlignment = HorizontalAlignment.Left;
+					panel.Margin = new Thickness(20, 0, 0, 0);
+				}
+
+				Grid.SetRow(panel, (heroPosition % 3) + 1);
+				Grid.SetColumn(panel, heroPosition / 3);
+			}
+		}
+
+		private void ClearSelectOrDeletePanels()
+		{
+			var selectOrDeletePanels = SelectOrDeleteHeroButtonsGrid.Children.OfType<StackPanel>();
+
+			for (int i = 0; i < selectOrDeletePanels.Count();i++)
+			{
+				SelectOrDeleteHeroButtonsGrid.Children.Remove(selectOrDeletePanels.ElementAt(i--));
+			}
+		}
+
+		private Button GenerateSelectHeroButton(Hero hero)
+		{
+			var selectHeroButton = new Button()
+			{
+				Name = "Hero" + hero.Id,
+				Width = 250,
+				Height = 50,
+				Margin = new Thickness(5),
+				Tag = hero
+			};
+
+			var selectHeroButtonBlock = new TextBlock
+			{
+				TextAlignment = TextAlignment.Center
+			};
+
+			var heroNameText = new Bold(new Run(hero.Name));
+			var heroLevelAndClassText = new Run($"\n{hero.Level} lvl | {hero.HeroClass} | ");
+			var heroTotalTimePlayedText = new Italic(new Run($"{Math.Floor(hero.TimePlayed.TotalHours)}h {hero.TimePlayed.Minutes}m"));
+
+			selectHeroButtonBlock.Inlines.Add(heroNameText);
+			selectHeroButtonBlock.Inlines.Add(heroLevelAndClassText);
+			selectHeroButtonBlock.Inlines.Add(heroTotalTimePlayedText);
+
+			selectHeroButton.Content = selectHeroButtonBlock;
+			
+			selectHeroButton.Click += SelectHeroButton_Click;
+
+			return selectHeroButton;
+		}
+		
+		private void UpdateCreateHeroButton()
+		{
+			if (User.Instance.Heroes.Count == User.HERO_LIMIT)
+			{
+				var disabledInfoBlock = new TextBlock
 				{
 					TextAlignment = TextAlignment.Center
 				};
 
-				var italic = new Italic(new Run("Can't create new hero\nMax heroes reached!"));
-				block.Inlines.Add(italic);
+				var disabledText = new Italic(new Run("Can't create new hero\nMax heroes reached!"));
+				disabledInfoBlock.Inlines.Add(disabledText);
 
-				CreateHeroButton.Content = block;
+				CreateHeroButton.Content = disabledInfoBlock;
 				CreateHeroButton.Style = this.FindResource("ButtonStyleDisabled") as Style;
 			}
 			else
@@ -43,117 +170,13 @@ namespace ClickQuest.Pages
 				CreateHeroButton.Content = "Create a new hero!";
 				CreateHeroButton.Style = this.FindResource("ButtonStyleGeneral") as Style;
 			}
-
-			// Remove all stackpanels from the grid.
-			for (int i = 0; i < ButtonsGrid.Children.Count; i++)
-			{
-				if (ButtonsGrid.Children[i] is StackPanel stack)
-				{
-					ButtonsGrid.Children.Remove(stack);
-					i--;
-				}
-			}
-
-			// For each hero:
-			for (int i = 0; i < User.Instance.Heroes.Count; i++)
-			{
-				var hero = User.Instance.Heroes[i];
-				// Create stack panel with both select and delete hero buttons.
-				var panel = new StackPanel
-				{
-					Orientation = Orientation.Horizontal,
-					HorizontalAlignment = HorizontalAlignment.Center,
-					VerticalAlignment = VerticalAlignment.Center
-				};
-
-				// Generate 'select hero' button.
-				var selectHeroButton = new Button()
-				{
-					Name = "Hero" + hero.Id,
-					Width = 250,
-					Height = 50,
-					Margin = new Thickness(5)
-				};
-
-				// Generate 'select hero' button content.
-				var block = new TextBlock
-				{
-					TextAlignment = TextAlignment.Center
-				};
-
-				var bold = new Bold(new Run(hero.Name));
-				block.Inlines.Add(bold);
-
-				var normal = new Run($"\n{hero.Level} lvl | {hero.HeroClass} | ");
-				block.Inlines.Add(normal);
-
-				// Add time played.
-				block.Inlines.Add(new Italic(new Run($"{Math.Floor(hero.TimePlayed.TotalHours)}h {hero.TimePlayed.Minutes}m")));
-
-				selectHeroButton.Content = block;
-
-				// Generate 'delete hero' button.
-				var deleteHeroButton = new Button()
-				{
-					Name = "DeleteHero" + hero.Id,
-					Width = 50,
-					Height = 50,
-					Margin = new Thickness(5)
-				};
-
-				var icon = new PackIcon();
-				icon.Width = 30;
-				icon.Height = 30;
-				icon.Kind = PackIconKind.DeleteForever;
-				icon.Foreground = new SolidColorBrush(Colors.Gray);
-				deleteHeroButton.Content = icon;
-
-				// Set deleteHeroButton's style to danger
-				var style = this.FindResource("ButtonStyleDanger") as Style;
-				deleteHeroButton.Style = style;
-
-				// Assign click events to them.
-				selectHeroButton.Click += SelectHeroButton_Click;
-				deleteHeroButton.Click += DeleteHeroButton_Click;
-
-				panel.Children.Add(selectHeroButton);
-				panel.Children.Add(deleteHeroButton);
-
-				// Add them to the button grid in main menu page.
-				// If there is only one hero, center its buttons.
-				if (User.Instance.Heroes.Count < 4)
-				{
-					ButtonsGrid.Children.Add(panel);
-					Grid.SetRow(panel, i + 1);
-					Grid.SetColumnSpan(panel, 2);
-				}
-				// Else, create two columns.
-				else
-				{
-					if (i / 3 == 0)
-					{
-						panel.HorizontalAlignment = HorizontalAlignment.Right;
-						panel.Margin = new Thickness(0, 0, 20, 0);
-					}
-					else
-					{
-						panel.HorizontalAlignment = HorizontalAlignment.Left;
-						panel.Margin = new Thickness(20, 0, 0, 0);
-					}
-
-					ButtonsGrid.Children.Add(panel);
-					Grid.SetRow(panel, (i % 3) + 1);
-					Grid.SetColumn(panel, i / 3);
-				}
-			}
 		}
 
 		#region Events
 
 		private void CreateHeroButton_Click(object sender, RoutedEventArgs e)
 		{
-			// If the limit is not reached, move to hero creation page.
-			if (User.Instance.Heroes.Count < 6)
+			if (User.Instance.Heroes.Count < User.HERO_LIMIT)
 			{
 				InterfaceController.ChangePage(Data.GameData.Pages["HeroCreation"], "Hero Creation");
 			}
@@ -161,62 +184,40 @@ namespace ClickQuest.Pages
 
 		private void SelectHeroButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Select this hero as current hero and navigate to town.
-			var id = int.Parse((sender as Button).Name.Substring(4));
-			var hero = User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
-			User.Instance.CurrentHero = hero;
-			// Refresh hero stats panel info.
-			hero.RefreshHeroExperience();
+			var selectedHero = (sender as Button).Tag as Hero;
+			User.Instance.CurrentHero = selectedHero;
+			
+			selectedHero.LoadQuests();
+			selectedHero.ResumeQuest();
+			selectedHero.ResumeBlessing();
+			selectedHero.SessionStartDate = DateTime.Now;
 
-			// Clone hero's quests using those from Database - rewards are not stored in Entity.
-			for (int i = 0; i < User.Instance.CurrentHero.Quests.Count; i++)
-			{
-				var heroQuest = User.Instance.CurrentHero.Quests[i];
-				var databaseQuest = GameData.Quests.FirstOrDefault(x => x.Id == heroQuest.Id);
-				User.Instance.CurrentHero.Quests[i] = databaseQuest.CopyQuest();
-				
-				// CopyQuest sets EndDate from GameData, so we need to get EndDate from Entity instead.
-				User.Instance.CurrentHero.Quests[i].EndDate = heroQuest.EndDate;
-			}
-
-			// Resume quests for the selected hero.
-			User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default(DateTime))?.StartQuest();
-
-			// Resume blessings for dis hero (it resumes only for current hero).
-			User.Instance.CurrentHero.ResumeBlessing();
-
-			// Set hero session start date.
-			hero.SessionStartDate = DateTime.Now;
-
-			// Refresh pages, move to town and change location text.
+			selectedHero.RefreshHeroExperience();
 			GameData.RefreshPages();
+
 			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
-			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
-			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Town"]);
 		}
 
 		private void DeleteHeroButton_Click(object sender, RoutedEventArgs e)
 		{
-			var id = int.Parse((sender as Button).Name.Substring(10));
-			var hero = User.Instance.Heroes.Where(x => x.Id == id).FirstOrDefault();
+			var hero = (sender as Button).Tag as Hero;
 
 			var result = AlertBox.Show($"Press OK to delete {hero.Name}.");
-
 			if (result == MessageBoxResult.OK)
 			{
-				// Remove the hero from User and Database.
 				User.Instance.Heroes.Remove(hero);
 				EntityOperations.RemoveHero(hero);
 
-				GenerateHeroButtons();
+				UpdateSelectOrDeleteHeroButtons();
+				UpdateCreateHeroButton();
 			}
 		}
 
 		private void ResetProgressButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Reset all progress - only Player isn't removed.
 			EntityOperations.ResetProgress();
-			GenerateHeroButtons();
+			UpdateSelectOrDeleteHeroButtons();
 		}
 
 		#endregion Events

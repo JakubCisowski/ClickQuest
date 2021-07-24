@@ -17,7 +17,7 @@
 		<Image Grid.Row="0" Height="350" Width="560" Source="/Resources/Images/logo.png" />
 
 		<!-- Buttons grid -->
-		<Grid x:Name="ButtonsGrid" Grid.Row="1">
+		<Grid x:Name="SelectOrDeleteHeroButtonsGrid" Grid.Row="1">
 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="2*" />

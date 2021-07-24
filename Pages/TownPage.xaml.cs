@@ -93,7 +93,7 @@ namespace ClickQuest.Pages
 
 		private void MainMenuButton_Click(object sender, RoutedEventArgs e)
 		{
-			(GameData.Pages["MainMenu"] as MainMenuPage).GenerateHeroButtons();
+			(GameData.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
 
 			// Pause all blessings.
 			User.Instance.CurrentHero.PauseBlessing();

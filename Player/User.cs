@@ -56,6 +56,7 @@ namespace ClickQuest.Player
 		private List<DungeonKey> _dungeonKeys;
 		private int _gold;
 		private Achievements _achievements;
+		public const int HERO_LIMIT = 6;
 
 		#endregion Private Fields
 

@@ -9,6 +9,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using System.Linq;
+using ClickQuest.Data;
 
 namespace ClickQuest.Heroes
 {
@@ -205,7 +207,7 @@ namespace ClickQuest.Heroes
             }
         }
 
-        public int Level
+		public int Level
         {
             get
             {
@@ -548,6 +550,27 @@ namespace ClickQuest.Heroes
             User.Instance.CurrentHero.Blessing?.DisableBuff();
             User.Instance.CurrentHero.Blessing = null;
         }
+
+		public void ResumeQuest()
+		{
+			Quests.FirstOrDefault(x => x.EndDate != default(DateTime))?.StartQuest();
+		}
+		
+		public void LoadQuests()
+		{
+			// Clone hero's quests using those from Database - rewards are not stored in Entity.
+			for (int i = 0; i < Quests.Count; i++)
+			{
+				var heroQuest = Quests[i];
+				var databaseQuest = GameData.Quests.FirstOrDefault(x => x.Id == heroQuest.Id);
+
+				Quests[i] = databaseQuest.CopyQuest();
+				
+				// CopyQuest sets EndDate from GameData, so we need to get EndDate from Entity instead.
+				Quests[i].EndDate = heroQuest.EndDate;
+			}
+		}
+
 		public int CalculateClickDamage()
 		{
 			int damage = ClickDamage;
