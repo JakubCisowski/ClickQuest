@@ -62,6 +62,7 @@ namespace ClickQuest
 
 			this.DataContext = this;
 
+			(GameData.Pages["MainMenu"] as MainMenuPage).UpdateCreateHeroButton();
 			(GameData.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
 			
 			InterfaceController.ChangePage(Data.GameData.Pages["MainMenu"], "");

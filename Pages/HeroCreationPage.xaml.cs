@@ -21,6 +21,8 @@ namespace ClickQuest.Pages
 
 			HeroClassBox.ItemsSource = Enum.GetValues(typeof(HeroClass)).Cast<HeroClass>().Where(x=>x!=HeroClass.All);
 			HeroRaceBox.ItemsSource = Enum.GetValues(typeof(HeroRace)).Cast<HeroRace>();
+
+			HeroNameBox.Focus();
 		}	
 		
 		public void CreateHeroButton_Click(object sender, RoutedEventArgs e)

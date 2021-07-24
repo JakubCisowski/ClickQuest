@@ -150,7 +150,7 @@ namespace ClickQuest.Pages
 			return selectHeroButton;
 		}
 		
-		private void UpdateCreateHeroButton()
+		public void UpdateCreateHeroButton()
 		{
 			if (User.Instance.Heroes.Count == User.HERO_LIMIT)
 			{

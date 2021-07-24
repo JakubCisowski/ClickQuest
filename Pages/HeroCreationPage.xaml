@@ -20,10 +20,10 @@
 	</Page.Resources>
 
 	<!-- Main StackPanel -->
-	<StackPanel Orientation="Vertical" VerticalAlignment="Center">
+	<StackPanel Orientation="Vertical" VerticalAlignment="Center"  >
 
 		<!-- Hero name -->
-		<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Name" />
+		<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Name"/>
 
 		<!-- Hero name input -->
 		<TextBox x:Name="HeroNameBox" HorizontalAlignment="Center" Width="200" Margin="30" HorizontalContentAlignment="Center" FontSize="24" Style="{StaticResource MaterialDesignTextBox}" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
