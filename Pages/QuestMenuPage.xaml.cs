@@ -28,34 +28,34 @@ namespace ClickQuest.Pages
 		// When: User finishes quest / There is a new hero without quests / User clicks reroll button.
 		public void RerollQuests()
 		{
-			// Remove current hero quests - both from hero and Entity database.
 			User.Instance.CurrentHero.Quests.Clear();
 			EntityOperations.RemoveQuests();
 
-			// Generate 3 quest ids.
 			var questsForCurrentHeroClass = GameData.Quests.Where(x => x.HeroClass == User.Instance.CurrentHero.HeroClass || x.HeroClass == HeroClass.All).ToList();
 
 			for (int i = 0; i < 3; i++)
 			{
-				int index = _rng.Next(0, questsForCurrentHeroClass.Count());
-				if (questsForCurrentHeroClass.ElementAt(index).Rare == true)
+				int randomizedIndex = _rng.Next(0, questsForCurrentHeroClass.Count());
+
+				bool isQuestRare = questsForCurrentHeroClass.ElementAt(randomizedIndex).Rare == true;
+				if (isQuestRare)
 				{
-					index = _rng.Next(0, questsForCurrentHeroClass.Count());
+					// Randomize once again.
+					randomizedIndex = _rng.Next(0, questsForCurrentHeroClass.Count());
 				}
 
-				// Add selected quest id to the list (create copy to keep database clean).
-				var quest = questsForCurrentHeroClass.ElementAt(index).CopyQuest();
-				User.Instance.CurrentHero.Quests.Add(quest);
-				questsForCurrentHeroClass.RemoveAt(index);
+				var randomizedQuest = questsForCurrentHeroClass.ElementAt(randomizedIndex).CopyQuest();
+				User.Instance.CurrentHero.Quests.Add(randomizedQuest);
+
+				questsForCurrentHeroClass.RemoveAt(randomizedIndex);
 			}
 
-			// Refresh quest buttons.
-			RefreshQuests();
+			RefreshQuestButtons();
 		}
 
 		// Create buttons using Quests in current Hero
 		// When: User switches to a different hero.
-		public void RefreshQuests()
+		public void RefreshQuestButtons()
 		{
 			QuestPanel.Children.Clear();
 
@@ -69,11 +69,10 @@ namespace ClickQuest.Pages
 
 		public void LoadPage()
 		{
-			// Either refresh or reroll quests.
 			if (User.Instance.CurrentHero.Quests.Count >= 3)
 			{
 				// User already has 3 quests - only refresh the quest page.
-				RefreshQuests();
+				RefreshQuestButtons();
 			}
 			else
 			{
