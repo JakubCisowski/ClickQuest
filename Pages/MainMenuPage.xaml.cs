@@ -196,7 +196,6 @@ namespace ClickQuest.Pages
 			GameData.RefreshPages();
 
 			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Town"]);
 		}
 
 		private void DeleteHeroButton_Click(object sender, RoutedEventArgs e)

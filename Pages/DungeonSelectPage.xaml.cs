@@ -254,7 +254,6 @@ namespace ClickQuest.Pages
 		{
 			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
 			
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Town"]);
 
 			// Reset selection.
 			ResetAndLoadDungeonGroupSelectionInterface();
@@ -330,8 +329,6 @@ namespace ClickQuest.Pages
 		private void SetupBossFight()
 		{
 			(GameData.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(_bossSelected.CopyEnemy());
-
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["DungeonBoss"]);
 
 			InterfaceController.ChangePage(Data.GameData.Pages["DungeonBoss"], "Boss fight");
 		}

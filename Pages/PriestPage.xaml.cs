@@ -44,10 +44,7 @@ namespace ClickQuest.Pages
 		#region Events
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Go back to Town.
 			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
-			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
-			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
 		}
 
 		private void BuyButton_Click(object sender, RoutedEventArgs e)
@@ -55,7 +52,6 @@ namespace ClickQuest.Pages
 			var b = sender as Button;
 			var blessingBlueprint = b.CommandParameter as Blessing;
 
-			// Check if user has enough gold.
 			if (User.Instance.Gold >= blessingBlueprint.Value)
 			{
 				var result = AlertBox.Show($"Are you sure you want to buy {blessingBlueprint.Name} for {blessingBlueprint.Value} gold?", MessageBoxButton.YesNo);
@@ -87,7 +83,6 @@ namespace ClickQuest.Pages
 			}
 			else
 			{
-				// Display an error.
 				AlertBox.Show($"You do not have enough gold to buy this blessing.\nIt costs {blessingBlueprint.Value} gold.\nYou can get more gold by completing quests and selling loot from monsters and bosses.", MessageBoxButton.OK);
 			}
 		}

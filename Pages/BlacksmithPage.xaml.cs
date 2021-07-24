@@ -221,9 +221,7 @@ namespace ClickQuest.Pages
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Go back to Town.
 			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Town"]);
 		}
 
 		#endregion Events

@@ -86,8 +86,6 @@ namespace ClickQuest.Pages
 		{
 			// Enter Shop page.
 			InterfaceController.ChangePage(Data.GameData.Pages["Shop"], "Shop");
-			(GameData.Pages["Shop"] as ShopPage).StatsFrame.Refresh();
-			(GameData.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
 			(GameData.Pages["Shop"] as ShopPage).UpdateShop();
 		}
 
@@ -115,16 +113,12 @@ namespace ClickQuest.Pages
 			// Enter Quests page.
 			(GameData.Pages["QuestMenu"] as QuestMenuPage).LoadPage();
 			InterfaceController.ChangePage(Data.GameData.Pages["QuestMenu"], "Quests");
-			(GameData.Pages["QuestMenu"] as QuestMenuPage).StatsFrame.Refresh();
-			(GameData.Pages["QuestMenu"] as QuestMenuPage).EquipmentFrame.Refresh();
 		}
 
 		private void BlacksmithButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Enter Blacksmith page.
 			InterfaceController.ChangePage(Data.GameData.Pages["Blacksmith"], "Blacksmith");
-			(GameData.Pages["Blacksmith"] as BlacksmithPage).StatsFrame.Refresh();
-			(GameData.Pages["Blacksmith"] as BlacksmithPage).EquipmentFrame.Refresh();
 			(GameData.Pages["Blacksmith"] as BlacksmithPage).UpdateBlacksmithItems();
 		}
 
@@ -132,8 +126,6 @@ namespace ClickQuest.Pages
 		{
 			// Enter Priest page.
 			InterfaceController.ChangePage(Data.GameData.Pages["Priest"], "Priest");
-			(GameData.Pages["Priest"] as PriestPage).StatsFrame.Refresh();
-			(GameData.Pages["Priest"] as PriestPage).EquipmentFrame.Refresh();
 			(GameData.Pages["Priest"] as PriestPage).UpdatePriest();
 		}
 
@@ -141,8 +133,6 @@ namespace ClickQuest.Pages
 		{
 			// Enter DungeonSelect page.
 			InterfaceController.ChangePage(Data.GameData.Pages["DungeonSelect"], "Selecting dungeon group");
-			(GameData.Pages["DungeonSelect"] as DungeonSelectPage).StatsFrame.Refresh();
-			(GameData.Pages["DungeonSelect"] as DungeonSelectPage).EquipmentFrame.Refresh();
 		}
 
 		#endregion Events

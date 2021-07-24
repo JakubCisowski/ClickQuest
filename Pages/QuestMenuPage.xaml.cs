@@ -88,8 +88,6 @@ namespace ClickQuest.Pages
 		{
 			// Go back to Town.
 			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
-			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
-			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
 		}
 
 		private void RerollButton_Click(object sender, RoutedEventArgs e)

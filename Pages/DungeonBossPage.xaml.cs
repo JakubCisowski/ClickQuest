@@ -253,7 +253,6 @@ namespace ClickQuest.Pages
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Town"]);
 
 			// [PRERELEASE]
 			TestRewardsBlock.Text = "";

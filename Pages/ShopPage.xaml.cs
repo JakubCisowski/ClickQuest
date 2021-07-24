@@ -40,9 +40,6 @@ namespace ClickQuest.Pages
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Go back to Town.
-			(GameData.Pages["Town"] as TownPage).EquipmentFrame.Refresh();
-			(GameData.Pages["Town"] as TownPage).StatsFrame.Refresh();
 			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
 		}
 

@@ -46,7 +46,6 @@ namespace ClickQuest.Pages
 				GameData.RefreshPages();
 
 				InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
-				InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(Data.GameData.Pages["Town"]);
 			}
 		}
 

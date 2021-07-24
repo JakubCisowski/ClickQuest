@@ -59,6 +59,8 @@ namespace ClickQuest.Extensions.InterfaceManager
 			var window = Application.Current.MainWindow as GameWindow;
 			window.CurrentFrame.Navigate(destinationPage);
 			window.LocationInfo = locationInfoText;
+
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(destinationPage);
 		}
 	}
 }
