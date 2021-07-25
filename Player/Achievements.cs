@@ -1,77 +1,102 @@
-using ClickQuest.Heroes;
-using ClickQuest.Items;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 using ClickQuest.Extensions.CollectionsManager;
-using System.Text;
 using ClickQuest.Windows;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClickQuest.Player
 {
 	public enum NumericAchievementType
 	{
-		ExperienceGained, GoldEarned, GoldSpent, GeneralIngotsEarned, FineIngotsEarned, SuperiorIngotsEarned, ExceptionalIngotsEarned, MythicIngotsEarned, MasterworkIngotsEarned, GeneralDungeonKeysEarned, FineDungeonKeysEarned, SuperiorDungeonKeysEarned, ExceptionalDungeonKeysEarned, MythicDungeonKeysEarned, MasterworkDungeonKeysEarned, TotalDamageDealt, CritsAmount, PoisonTicksAmount, MonstersDefeated, DungeonsCompleted, BossesDefeated, QuestsCompleted, QuestRerollsAmount, BlessingsUsed, MaterialsGained, RecipesGained, GeneralArtifactsGained, FineArtifactsGained, SuperiorArtifactsGained, ExceptionalArtifactsGained, MythicArtifactsGained, MasterworkArtifactsGained
+		ExperienceGained,
+		GoldEarned,
+		GoldSpent,
+		GeneralIngotsEarned,
+		FineIngotsEarned,
+		SuperiorIngotsEarned,
+		ExceptionalIngotsEarned,
+		MythicIngotsEarned,
+		MasterworkIngotsEarned,
+		GeneralDungeonKeysEarned,
+		FineDungeonKeysEarned,
+		SuperiorDungeonKeysEarned,
+		ExceptionalDungeonKeysEarned,
+		MythicDungeonKeysEarned,
+		MasterworkDungeonKeysEarned,
+		TotalDamageDealt,
+		CritsAmount,
+		PoisonTicksAmount,
+		MonstersDefeated,
+		DungeonsCompleted,
+		BossesDefeated,
+		QuestsCompleted,
+		QuestRerollsAmount,
+		BlessingsUsed,
+		MaterialsGained,
+		RecipesGained,
+		GeneralArtifactsGained,
+		FineArtifactsGained,
+		SuperiorArtifactsGained,
+		ExceptionalArtifactsGained,
+		MythicArtifactsGained,
+		MasterworkArtifactsGained
 	}
 
 	[Owned]
-	public partial class Achievements : INotifyPropertyChanged
+	public class Achievements : INotifyPropertyChanged
 	{
-		#region INotifyPropertyChanged
-		public event PropertyChangedEventHandler PropertyChanged;
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-		#endregion
-
 		private TimeSpan _totalTimePlayed;
 
-		[NotMapped]
-		public ObservableDictionary<NumericAchievementType, long> NumericAchievementCollection {get;set;}
+		public Achievements()
+		{
+			int amountOfNumericAchievements = Enum.GetNames(typeof(NumericAchievementType)).Length;
+
+			NumericAchievementCollection = new ObservableDictionary<NumericAchievementType, long>();
+
+			CollectionInitializer.InitializeDictionary(NumericAchievementCollection);
+		}
+
+		[NotMapped] public ObservableDictionary<NumericAchievementType, long> NumericAchievementCollection { get; set; }
 
 		public string AchievementCollectionString { get; set; }
 
 		public TimeSpan TotalTimePlayed
 		{
-			get
-			{
-				return _totalTimePlayed;
-			}
+			get { return _totalTimePlayed; }
 			set
 			{
-				_totalTimePlayed=value;
+				_totalTimePlayed = value;
 				OnPropertyChanged();
 			}
-		}
-	
-		public Achievements()
-		{
-			var amountOfNumericAchievements = Enum.GetNames(typeof(NumericAchievementType)).Length;
-
-			NumericAchievementCollection = new ObservableDictionary<NumericAchievementType, long>();
-
-			CollectionInitializer.InitializeDictionary<NumericAchievementType, long>(NumericAchievementCollection);
 		}
 
 		public void SerializeAchievements()
 		{
-			AchievementCollectionString = Serialization.SerializeData<NumericAchievementType, long>(NumericAchievementCollection);
+			AchievementCollectionString = Serialization.SerializeData(NumericAchievementCollection);
 		}
 
 		public void DeserializeAchievements()
 		{
-			Serialization.DeserializeData<NumericAchievementType, long>(AchievementCollectionString, NumericAchievementCollection);	
+			Serialization.DeserializeData(AchievementCollectionString, NumericAchievementCollection);
 		}
 
-		public void IncreaseAchievementValue (NumericAchievementType achievementType, long value)
+		public void IncreaseAchievementValue(NumericAchievementType achievementType, long value)
 		{
-			NumericAchievementCollection[achievementType]+=value;
+			NumericAchievementCollection[achievementType] += value;
 			AchievementsWindow.Instance.RefreshAchievementsPanel();
 		}
+
+		#region INotifyPropertyChanged
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+
+		#endregion
 	}
 }

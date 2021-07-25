@@ -1,20 +1,16 @@
-using ClickQuest.Player;
-using ClickQuest.Items;
-using ClickQuest.Windows;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using ClickQuest.Items;
+using ClickQuest.Player;
 
 namespace ClickQuest.Enemies
 {
-	public partial class Monster : Enemy
+	public class Monster : Enemy
 	{
+		private List<MonsterLootPattern> _loot;
+
 		public override int CurrentHealth
 		{
-			get
-			{
-				return _currentHealth;
-			}
+			get { return _currentHealth; }
 			set
 			{
 				// value - new current health
@@ -34,29 +30,19 @@ namespace ClickQuest.Enemies
 					_currentHealth = value;
 				}
 
-				CurrentHealthProgress = this.CalculateCurrentHealthProgress();
+				CurrentHealthProgress = CalculateCurrentHealthProgress();
 				OnPropertyChanged();
 			}
 		}
 
-		private List<MonsterLootPattern> _loot;
-
 		public List<MonsterLootPattern> Loot
 		{
-			get
-			{
-				return _loot;
-			}
+			get { return _loot; }
 			set
 			{
 				_loot = value;
 				OnPropertyChanged();
 			}
-		}
-
-		public Monster() : base()
-		{
-
 		}
 
 		public override Monster CopyEnemy()

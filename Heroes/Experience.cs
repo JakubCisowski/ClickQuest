@@ -1,6 +1,4 @@
 using System;
-using ClickQuest.Player;
-using ClickQuest.Windows;
 
 namespace ClickQuest.Heroes
 {
@@ -8,7 +6,7 @@ namespace ClickQuest.Heroes
 	{
 		public static int Equate(double xp)
 		{
-			return (int)Math.Floor(xp + (300 * Math.Pow(2, xp / 7)));
+			return (int) Math.Floor(xp + 300 * Math.Pow(2, xp / 7));
 		}
 
 		public static int LevelToXP(int level)
@@ -21,7 +19,7 @@ namespace ClickQuest.Heroes
 				xp += Equate(i);
 			}
 
-			return (int)Math.Floor(xp / 16);
+			return (int) Math.Floor(xp / 16);
 		}
 
 		public static int XPToLevel(int xp)
@@ -38,8 +36,8 @@ namespace ClickQuest.Heroes
 
 		public static int CalculateMonsterXpReward(int monsterHp)
 		{
-			var experience = (int)Math.Ceiling(monsterHp / 10d);
-						
+			int experience = (int) Math.Ceiling(monsterHp / 10d);
+
 			return experience;
 		}
 
@@ -68,7 +66,7 @@ namespace ClickQuest.Heroes
 		public static int CalculateXpProgress(Hero hero)
 		{
 			// Calculate progress to next level in % (for progress bar on hero stats panel).
-			return (int)(100 - (((double)hero.ExperienceToNextLvl / (LevelToXP(hero.Level + 1) - LevelToXP(hero.Level))) * 100));
+			return (int) (100 - (double) hero.ExperienceToNextLvl / (LevelToXP(hero.Level + 1) - LevelToXP(hero.Level)) * 100);
 		}
 	}
 }

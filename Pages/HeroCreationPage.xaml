@@ -1,13 +1,12 @@
 <Page x:Class="ClickQuest.Pages.HeroCreationPage"
-		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-		xmlns:controlzEx="urn:controlzex"
-		xmlns:local="clr-namespace:ClickQuest.Heroes"
-		mc:Ignorable="d"
-		Title="HeroCreationPage" Height="728" Width="1366">
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:ClickQuest.Heroes"
+      mc:Ignorable="d"
+      Title="HeroCreationPage" Height="728" Width="1366">
 
 	<Page.Resources>
 		<ResourceDictionary>
@@ -20,10 +19,10 @@
 	</Page.Resources>
 
 	<!-- Main StackPanel -->
-	<StackPanel Orientation="Vertical" VerticalAlignment="Center"  >
+	<StackPanel Orientation="Vertical" VerticalAlignment="Center">
 
 		<!-- Hero name -->
-		<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Name"/>
+		<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Name" />
 
 		<!-- Hero name input -->
 		<TextBox x:Name="HeroNameBox" HorizontalAlignment="Center" Width="200" Margin="30" HorizontalContentAlignment="Center" FontSize="24" Style="{StaticResource MaterialDesignTextBox}" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
@@ -31,9 +30,9 @@
 			<TextBox.ToolTip>
 				<ToolTip>
 					<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-							<Run Text="Hero name can contain up to 15 characters" />
-							<LineBreak />
-							<Run Text="Valid characters: A-Z, a-z, 0-9, space" />
+						<Run Text="Hero name can contain up to 15 characters" />
+						<LineBreak />
+						<Run Text="Valid characters: A-Z, a-z, 0-9, space" />
 					</TextBlock>
 				</ToolTip>
 			</TextBox.ToolTip>
@@ -47,17 +46,17 @@
 			<StackPanel>
 				<!-- Class text-->
 				<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Class" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
-						<!-- Tooltip -->
+					<!-- Tooltip -->
 					<TextBlock.ToolTip>
 						<ToolTip>
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-									<Run Text="Each class defines a specific playstyle" />
-									<LineBreak />
-									<Run Text="Hover over classes for more info" />
+								<Run Text="Each class defines a specific playstyle" />
+								<LineBreak />
+								<Run Text="Hover over classes for more info" />
 							</TextBlock>
 						</ToolTip>
 					</TextBlock.ToolTip>
-					</TextBlock>
+				</TextBlock>
 
 				<!-- Hero class selection -->
 				<Border Margin="0,10" BorderThickness="2" BorderBrush="Gray" Width="150">
@@ -85,12 +84,12 @@
 											<Setter.Value>
 												<ToolTip>
 													<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-																<Run Text="This class specializes in powerful critical clicks that deal double damage" />
-																<LineBreak />
-																<LineBreak />
-																<Run Text="Click damage: 2 (+1/lvl)" />
-																<LineBreak />
-																<Run Text="Crit chance: 25% (+0.4%/lvl)" />
+														<Run Text="This class specializes in powerful critical clicks that deal double damage" />
+														<LineBreak />
+														<LineBreak />
+														<Run Text="Click damage: 2 (+1/lvl)" />
+														<LineBreak />
+														<Run Text="Crit chance: 25% (+0.4%/lvl)" />
 													</TextBlock>
 												</ToolTip>
 											</Setter.Value>
@@ -104,12 +103,12 @@
 											<Setter.Value>
 												<ToolTip>
 													<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-																<Run Text="This class specializes in poisonous clicks that deal additional damage over time" />
-																<LineBreak />
-																<LineBreak />
-																<Run Text="Click damage: 2 (+1/lvl)" />
-																<LineBreak />
-																<Run Text="Poison damage: 1 (+2/lvl) per tick (5 ticks over 2.5s)" />
+														<Run Text="This class specializes in poisonous clicks that deal additional damage over time" />
+														<LineBreak />
+														<LineBreak />
+														<Run Text="Click damage: 2 (+1/lvl)" />
+														<LineBreak />
+														<Run Text="Poison damage: 1 (+2/lvl) per tick (5 ticks over 2.5s)" />
 													</TextBlock>
 												</ToolTip>
 											</Setter.Value>
@@ -125,19 +124,19 @@
 			<!-- Race panel-->
 			<StackPanel Margin="80,0,0,0">
 				<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Race" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
-						<!-- Tooltip -->
+					<!-- Tooltip -->
 					<TextBlock.ToolTip>
 						<ToolTip>
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-									<Run Text="Each race excels in two particular specializations" />
-									<LineBreak />
-									<Run Text="They can still specialize in every field" />
-									<LineBreak />
-									<Run Text="Hover over races for more info" />
+								<Run Text="Each race excels in two particular specializations" />
+								<LineBreak />
+								<Run Text="They can still specialize in every field" />
+								<LineBreak />
+								<Run Text="Hover over races for more info" />
 							</TextBlock>
 						</ToolTip>
 					</TextBlock.ToolTip>
-					</TextBlock>
+				</TextBlock>
 
 				<!-- Hero race selection -->
 				<Border Margin="0,10" BorderThickness="2" BorderBrush="Gray" Width="150">
@@ -165,14 +164,14 @@
 											<Setter.Value>
 												<ToolTip>
 													<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-																<Run Text="Human race specializes in buying and crafting" />
-																<LineBreak />
-																<LineBreak />
-																<Run Text="Tradesman specialization threshold: 5 (instead of 10)" />
-																<LineBreak />
-																<Run Text="Craftsman specialization threshold: 5 (instead of 10)" />
-																<LineBreak />
-																<Run Text="This means that human progresses these specializations two times faster than other races" />
+														<Run Text="Human race specializes in buying and crafting" />
+														<LineBreak />
+														<LineBreak />
+														<Run Text="Tradesman specialization threshold: 5 (instead of 10)" />
+														<LineBreak />
+														<Run Text="Craftsman specialization threshold: 5 (instead of 10)" />
+														<LineBreak />
+														<Run Text="This means that human progresses these specializations two times faster than other races" />
 													</TextBlock>
 												</ToolTip>
 											</Setter.Value>
@@ -186,14 +185,14 @@
 											<Setter.Value>
 												<ToolTip>
 													<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-																<Run Text="Elf race specializes in questing and blessings" />
-																<LineBreak />
-																<LineBreak />
-																<Run Text="Adventurer specialization threshold: 5 (instead of 10)" />
-																<LineBreak />
-																<Run Text="Prayer specialization threshold: 5 (instead of 10)" />
-																<LineBreak />
-																<Run Text="This means that elf progresses these specializations two times faster than other races" />
+														<Run Text="Elf race specializes in questing and blessings" />
+														<LineBreak />
+														<LineBreak />
+														<Run Text="Adventurer specialization threshold: 5 (instead of 10)" />
+														<LineBreak />
+														<Run Text="Prayer specialization threshold: 5 (instead of 10)" />
+														<LineBreak />
+														<Run Text="This means that elf progresses these specializations two times faster than other races" />
 													</TextBlock>
 												</ToolTip>
 											</Setter.Value>
@@ -207,14 +206,14 @@
 											<Setter.Value>
 												<ToolTip>
 													<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-																<Run Text="Dwarf race specializes in melting and fighting bosses" />
-																<LineBreak />
-																<LineBreak />
-																<Run Text="Melter specialization threshold: 5 (instead of 10)" />
-																<LineBreak />
-																<Run Text="Daredevil specialization threshold: 5 (instead of 10)" />
-																<LineBreak />
-																<Run Text="This means that dwarf progresses these specializations two times faster than other races" />
+														<Run Text="Dwarf race specializes in melting and fighting bosses" />
+														<LineBreak />
+														<LineBreak />
+														<Run Text="Melter specialization threshold: 5 (instead of 10)" />
+														<LineBreak />
+														<Run Text="Daredevil specialization threshold: 5 (instead of 10)" />
+														<LineBreak />
+														<Run Text="This means that dwarf progresses these specializations two times faster than other races" />
 													</TextBlock>
 												</ToolTip>
 											</Setter.Value>

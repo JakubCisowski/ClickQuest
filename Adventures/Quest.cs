@@ -1,10 +1,3 @@
-using ClickQuest.Player;
-using ClickQuest.Controls;
-using ClickQuest.Data;
-using ClickQuest.Items;
-using ClickQuest.Heroes;
-using ClickQuest.Pages;
-using ClickQuest.Windows;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,219 +7,35 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
+using ClickQuest.Controls;
+using ClickQuest.Data;
+using ClickQuest.Extensions.CombatManager;
+using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Extensions.QuestManager;
+using ClickQuest.Heroes;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Interfaces;
+using ClickQuest.Items;
+using ClickQuest.Player;
 
 namespace ClickQuest.Adventures
 {
-	public partial class Quest : INotifyPropertyChanged, IIdentifiable
+	public class Quest : INotifyPropertyChanged, IIdentifiable
 	{
-		#region INotifyPropertyChanged
-		public event PropertyChangedEventHandler PropertyChanged;
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		public Quest()
 		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-		#endregion
+			RewardRecipeIds = new List<int>();
+			RewardMaterialIds = new List<int>();
+			RewardBlessingIds = new List<int>();
+			RewardIngotIds = new List<int>();
 
-		#region Private Fields
-		private int _id;
-		private bool _rare;
-		private HeroClass _heroClass;
-		private string _name;
-		private int _duration;
-		private string _description;
-		private List<int> _rewardRecipeIds;
-		private List<int> _rewardMaterialIds;
-		private List<int> _rewardBlessingIds;
-		private List<int> _rewardIngotIds;
-		private DispatcherTimer _timer;
-		private DateTime _endDate;
-		private int _ticksCountNumber;
-		private string _ticksCountText;
-
-		#endregion
-
-		#region Properties
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int DbKey { get; set; }
-		public int Id
-		{
-			get
-			{
-				return _id;
-			}
-			set
-			{
-				_id = value;
-				OnPropertyChanged();
-			}
+			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};
+			_timer.Tick += Timer_Tick;
 		}
-		[NotMapped]
-		public bool Rare
-		{
-			get
-			{
-				return _rare;
-			}
-			set
-			{
-				_rare = value;
-				OnPropertyChanged();
-			}
-		}
-		[NotMapped]
-		public HeroClass HeroClass
-		{
-			get
-			{
-				return _heroClass;
-			}
-			set
-			{
-				_heroClass = value;
-				OnPropertyChanged();
-			}
-		}
-		[NotMapped]
-		public string Name
-		{
-			get
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-				OnPropertyChanged();
-			}
-		}
-		[NotMapped]
-		public int Duration
-		{
-			get
-			{
-				return _duration;
-			}
-			set
-			{
-				_duration = value;
-				OnPropertyChanged();
-			}
-		}
-		[NotMapped]
-		public string Description
-		{
-			get
-			{
-				return _description;
-			}
-			set
-			{
-				_description = value;
-				OnPropertyChanged();
-			}
-		}
-		[NotMapped]
-		public List<int> RewardRecipeIds
-		{
-			get
-			{
-				return _rewardRecipeIds;
-			}
-			set
-			{
-				_rewardRecipeIds = value;
-			}
-		}
-		[NotMapped]
-		public List<int> RewardMaterialIds
-		{
-			get
-			{
-				return _rewardMaterialIds;
-			}
-			set
-			{
-				_rewardMaterialIds = value;
-			}
-		}
-		[NotMapped]
-		public List<int> RewardBlessingIds
-		{
-			get
-			{
-				return _rewardBlessingIds;
-			}
-			set
-			{
-				_rewardBlessingIds = value;
-			}
-		}
-		[NotMapped]
-		public List<int> RewardIngotIds
-		{
-			get
-			{
-				return _rewardIngotIds;
-			}
-			set
-			{
-				_rewardIngotIds = value;
-			}
-		}
-		public DateTime EndDate
-		{
-			get
-			{
-				return _endDate;
-			}
-			set
-			{
-				_endDate = value;
-				OnPropertyChanged();
-			}
-		}
-		[NotMapped]
-		public int TicksCountNumber
-		{
-			get
-			{
-				return _ticksCountNumber;
-			}
-			set
-			{
-				_ticksCountNumber = value;
-				OnPropertyChanged();
-			}
-		}
-		[NotMapped]
-		public string TicksCountText
-		{
-			get
-			{
-				return _ticksCountText;
-			}
-			set
-			{
-				_ticksCountText = value;
-				OnPropertyChanged();
-			}
-		}
-		[NotMapped]
-		public string RewardsDescription { get; private set; }
-		public bool IsFinished{ 
-			get
-			{
-				return TicksCountNumber<=0;
-			}
-		}
-		#endregion
 
 		public Quest CopyQuest()
 		{
-			Quest copy = new Quest();
+			var copy = new Quest();
 
 			// Copy only the Database Id, not the Entity Id.
 			copy.Id = Id;
@@ -249,50 +58,48 @@ namespace ClickQuest.Adventures
 		{
 			RewardsDescription = "Rewards:";
 
-			UpdateSpecificRewardsDescription<Blessing>(RewardBlessingIds, GameData.Blessings);
-			UpdateSpecificRewardsDescription<Recipe>(RewardRecipeIds, GameData.Recipes);
-			UpdateSpecificRewardsDescription<Material>(RewardMaterialIds, GameData.Materials);
-			UpdateSpecificRewardsDescription<Ingot>(RewardIngotIds, GameData.Ingots);
+			UpdateSpecificRewardsDescription(RewardBlessingIds, GameData.Blessings);
+			UpdateSpecificRewardsDescription(RewardRecipeIds, GameData.Recipes);
+			UpdateSpecificRewardsDescription(RewardMaterialIds, GameData.Materials);
+			UpdateSpecificRewardsDescription(RewardIngotIds, GameData.Ingots);
 		}
 
 		private void UpdateSpecificRewardsDescription<T>(List<int> questRewardIdsCollection, List<T> rewardsGameDataCollection) where T : IIdentifiable
 		{
-			var rewardIdAndCountPairs = questRewardIdsCollection
-                .GroupBy(id => id)
-                .Select(g => new { Value = g.Key, Count = g.Count() });
+			var rewardIdAndCountPairs = questRewardIdsCollection.GroupBy(id => id).Select(g => new {Value = g.Key, Count = g.Count()});
 
 			foreach (var rewardGroup in rewardIdAndCountPairs)
 			{
 				RewardsDescription += $"\n{rewardGroup.Count}x {rewardsGameDataCollection.FirstOrDefault(x => x.Id == rewardGroup.Value).Name}";
 			}
 		}
-		
+
 		public void StartQuest()
 		{
 			// Create copy of this quest (to make doing the same quest possible on other heroes at the same time).
 			var questCopy = CopyQuest();
-			questCopy.EndDate = this.EndDate;
+			questCopy.EndDate = EndDate;
 
 			// Replace that quest in Hero's Quests collection with the newly copied quest.
 			User.Instance.CurrentHero?.Quests.RemoveAll(x => x.Id == questCopy.Id);
 			User.Instance.CurrentHero?.Quests.Add(questCopy);
 
 			// Set quest end date (if not yet set).
-			if (questCopy.EndDate == default(DateTime))
+			if (questCopy.EndDate == default)
 			{
 				questCopy.EndDate = DateTime.Now.AddSeconds(Duration);
 			}
 
 			// Initially set TicksCountText (for hero stats page info).
 			// Reset to 'Duration', it will count from Duration to 0.
-			questCopy.TicksCountNumber = (int)(questCopy.EndDate - DateTime.Now).TotalSeconds;
+			questCopy.TicksCountNumber = (int) (questCopy.EndDate - DateTime.Now).TotalSeconds;
 
 			UpdateTicksCountText(questCopy);
 
 			// Start timer (to check if quest is finished during next tick).
 			questCopy._timer.Start();
 
-			Extensions.InterfaceManager.InterfaceController.RefreshStatPanels();
+			InterfaceController.RefreshStatPanels();
 		}
 
 		public void FinishQuest()
@@ -301,8 +108,8 @@ namespace ClickQuest.Adventures
 			TicksCountText = "";
 			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Questing]++;
 			AssignRewards();
-			Extensions.QuestManager.QuestController.RerollQuests();
-			Extensions.CombatManager.CombatController.StartAuraTimerOnCurrentRegion();
+			QuestController.RerollQuests();
+			CombatController.StartAuraTimerOnCurrentRegion();
 		}
 
 		public void PauseTimer()
@@ -317,24 +124,24 @@ namespace ClickQuest.Adventures
 
 		private void AssignRewards()
 		{
-			AlertBox.Show($"Quest {this.Name} finished.\nRewards granted.", MessageBoxButton.OK);
+			AlertBox.Show($"Quest {Name} finished.\nRewards granted.", MessageBoxButton.OK);
 			User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.QuestsCompleted]++;
-			
-			GrantSpecificReward<Material>(RewardMaterialIds, GameData.Materials);
-			GrantSpecificReward<Recipe>(RewardRecipeIds, GameData.Recipes);
-			GrantSpecificReward<Ingot>(RewardIngotIds, GameData.Ingots);
 
-			foreach (var blessingId in RewardBlessingIds)
+			GrantSpecificReward(RewardMaterialIds, GameData.Materials);
+			GrantSpecificReward(RewardRecipeIds, GameData.Recipes);
+			GrantSpecificReward(RewardIngotIds, GameData.Ingots);
+
+			foreach (int blessingId in RewardBlessingIds)
 			{
 				Blessing.AskUserAndSwapBlessing(blessingId);
 			}
 
-			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
+			InterfaceController.RefreshEquipmentPanels();
 		}
 
-		private void GrantSpecificReward<T>(List<int> questRewardIdsCollection, List<T> rewardsGameDataCollection) where T:Item
+		private void GrantSpecificReward<T>(List<int> questRewardIdsCollection, List<T> rewardsGameDataCollection) where T : Item
 		{
-			foreach (var id in questRewardIdsCollection)
+			foreach (int id in questRewardIdsCollection)
 			{
 				var item = rewardsGameDataCollection.FirstOrDefault(x => x.Id == id);
 				item.AddItem();
@@ -355,18 +162,150 @@ namespace ClickQuest.Adventures
 			}
 		}
 
-		public Quest()
-		{
-			RewardRecipeIds = new List<int>();
-			RewardMaterialIds = new List<int>();
-			RewardBlessingIds = new List<int>();
-			RewardIngotIds = new List<int>();
+		#region INotifyPropertyChanged
 
-			_timer = new DispatcherTimer
-			{
-				Interval = new TimeSpan(0, 0, 0, 1)
-			};
-			_timer.Tick += Timer_Tick;
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
+
+		#endregion
+
+		#region Private Fields
+
+		private int _id;
+		private bool _rare;
+		private HeroClass _heroClass;
+		private string _name;
+		private int _duration;
+		private string _description;
+		private readonly DispatcherTimer _timer;
+		private DateTime _endDate;
+		private int _ticksCountNumber;
+		private string _ticksCountText;
+
+		#endregion
+
+		#region Properties
+
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int DbKey { get; set; }
+
+		public int Id
+		{
+			get { return _id; }
+			set
+			{
+				_id = value;
+				OnPropertyChanged();
+			}
+		}
+
+		[NotMapped]
+		public bool Rare
+		{
+			get { return _rare; }
+			set
+			{
+				_rare = value;
+				OnPropertyChanged();
+			}
+		}
+
+		[NotMapped]
+		public HeroClass HeroClass
+		{
+			get { return _heroClass; }
+			set
+			{
+				_heroClass = value;
+				OnPropertyChanged();
+			}
+		}
+
+		[NotMapped]
+		public string Name
+		{
+			get { return _name; }
+			set
+			{
+				_name = value;
+				OnPropertyChanged();
+			}
+		}
+
+		[NotMapped]
+		public int Duration
+		{
+			get { return _duration; }
+			set
+			{
+				_duration = value;
+				OnPropertyChanged();
+			}
+		}
+
+		[NotMapped]
+		public string Description
+		{
+			get { return _description; }
+			set
+			{
+				_description = value;
+				OnPropertyChanged();
+			}
+		}
+
+		[NotMapped] public List<int> RewardRecipeIds { get; set; }
+
+		[NotMapped] public List<int> RewardMaterialIds { get; set; }
+
+		[NotMapped] public List<int> RewardBlessingIds { get; set; }
+
+		[NotMapped] public List<int> RewardIngotIds { get; set; }
+
+		public DateTime EndDate
+		{
+			get { return _endDate; }
+			set
+			{
+				_endDate = value;
+				OnPropertyChanged();
+			}
+		}
+
+		[NotMapped]
+		public int TicksCountNumber
+		{
+			get { return _ticksCountNumber; }
+			set
+			{
+				_ticksCountNumber = value;
+				OnPropertyChanged();
+			}
+		}
+
+		[NotMapped]
+		public string TicksCountText
+		{
+			get { return _ticksCountText; }
+			set
+			{
+				_ticksCountText = value;
+				OnPropertyChanged();
+			}
+		}
+
+		[NotMapped] public string RewardsDescription { get; private set; }
+
+		public bool IsFinished
+		{
+			get { return TicksCountNumber <= 0; }
+		}
+
+		#endregion
 	}
 }

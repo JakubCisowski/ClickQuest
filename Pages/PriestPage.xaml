@@ -1,12 +1,11 @@
 <Page x:Class="ClickQuest.Pages.PriestPage"
-		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-		xmlns:local="clr-namespace:ClickQuest"
-		mc:Ignorable="d"
-		Title="Priest page" Height="728" Width="1366">
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d"
+      Title="Priest page" Height="728" Width="1366">
 
 	<!-- Material design resources for List View -->
 	<Page.Resources>
@@ -21,17 +20,17 @@
 	<!-- Priest page grid-->
 	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="2*"/>
-			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="2*" />
+			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
 		<!-- Hero stats frame-->
-		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
+		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" />
 
 		<!-- Equipment frame-->
-		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
-		
+		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" />
+
 		<!-- Main priest page grid -->
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
@@ -43,109 +42,109 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Background="{StaticResource GameBackgroundAdditional}">
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center">
-					<Run Text="Here you can buy temporary blessings which empower your hero"/>
-					<LineBreak/>
-					<Run Text="If you exit this hero or game all blessings are paused"/>
-					<LineBreak/>
-					<Run Text="Blessing timer is started right when you buy it, you can only have one blessing at a time"/>
+					<Run Text="Here you can buy temporary blessings which empower your hero" />
+					<LineBreak />
+					<Run Text="If you exit this hero or game all blessings are paused" />
+					<LineBreak />
+					<Run Text="Blessing timer is started right when you buy it, you can only have one blessing at a time" />
 				</TextBlock>
 			</Border>
 
 			<!-- Town button -->
 			<Button x:Name="TownButton" Grid.Row="2" Width="450" Height="50" Click="TownButton_Click">
 				<Button.Content>
-				   <TextBlock FontSize="22" Text="Come back to town!"/>
-			   </Button.Content>
+					<TextBlock FontSize="22" Text="Come back to town!" />
+				</Button.Content>
 			</Button>
 
 			<!-- Priest panel-->
 			<TabControl Grid.Row="1" Background="{StaticResource GameBackgroundRegular}" Width="550" Height="550">
-					<!-- Buy tab -->
-					<TabItem Background="{StaticResource GameBackgroundSecondary}">
-						<!-- Header buy -->
-						<TabItem.Header>
-							<StackPanel Orientation="Horizontal" Width="133" HorizontalAlignment="Center">
-								<materialDesign:PackIcon Kind="BookCross" Width="20" Height="20" Margin="5,0,0,0"/>
-								<TextBlock Text="Buy Blessing" FontSize="17" Margin="2,0,0,0"/>
-							</StackPanel>
-						</TabItem.Header>
-						
-						<!-- List view buy -->
-						<ListView x:Name="ItemsListViewBuy" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible">
-							<!-- Styles -->
-							<ListView.ItemContainerStyle>
-								<Style TargetType="ListViewItem">
-									<Setter Property="HorizontalContentAlignment" Value="Center"/>
-									<Setter Property="ToolTipService.ShowDuration" Value="20000"/>
-									<Setter Property="ToolTipService.InitialShowDelay" Value="100"/>
-									<Setter Property="ToolTip">
-										<Setter.Value>
-											<ToolTip>
-												<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-													<Run Text="{Binding Name}"/>
-													<LineBreak/>
-													<Run Text="*"/>
-													<Run Text="{Binding RarityString, Mode=OneWay}"/>
-													<Run Text="*"/>
-													<LineBreak/>
-													<LineBreak/>
-													<Run Text="{Binding Description}"/>
-													<LineBreak/>
-													<Run Text="Duration:"/>
-													<Run Text="{Binding Duration}"/><Run Text="s"/>
-												</TextBlock>
-											</ToolTip>
-										</Setter.Value>
-									</Setter>
-								</Style>
-							</ListView.ItemContainerStyle>
+				<!-- Buy tab -->
+				<TabItem Background="{StaticResource GameBackgroundSecondary}">
+					<!-- Header buy -->
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Width="133" HorizontalAlignment="Center">
+							<materialDesign:PackIcon Kind="BookCross" Width="20" Height="20" Margin="5,0,0,0" />
+							<TextBlock Text="Buy Blessing" FontSize="17" Margin="2,0,0,0" />
+						</StackPanel>
+					</TabItem.Header>
 
-							<!-- List view -->
-							<ListView.View>
-								<GridView>
-									<!-- Name column-->
-									<GridViewColumn Header="Name" Width="290" DisplayMemberBinding="{Binding Name}">
-										<GridViewColumn.HeaderContainerStyle>
-											<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
-												<Setter Property="IsHitTestVisible" Value="False"/>
-												<Setter Property="HorizontalContentAlignment" Value="Center"/>
-												<Setter Property="Padding" Value="1,5,1,5"/>
-											</Style>
-										</GridViewColumn.HeaderContainerStyle>
-									</GridViewColumn>
+					<!-- List view buy -->
+					<ListView x:Name="ItemsListViewBuy" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible">
+						<!-- Styles -->
+						<ListView.ItemContainerStyle>
+							<Style TargetType="ListViewItem">
+								<Setter Property="HorizontalContentAlignment" Value="Center" />
+								<Setter Property="ToolTipService.ShowDuration" Value="20000" />
+								<Setter Property="ToolTipService.InitialShowDelay" Value="100" />
+								<Setter Property="ToolTip">
+									<Setter.Value>
+										<ToolTip>
+											<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+												<Run Text="{Binding Name}" />
+												<LineBreak />
+												<Run Text="*" />
+												<Run Text="{Binding RarityString, Mode=OneWay}" />
+												<Run Text="*" />
+												<LineBreak />
+												<LineBreak />
+												<Run Text="{Binding Description}" />
+												<LineBreak />
+												<Run Text="Duration:" />
+												<Run Text="{Binding Duration}" /><Run Text="s" />
+											</TextBlock>
+										</ToolTip>
+									</Setter.Value>
+								</Setter>
+							</Style>
+						</ListView.ItemContainerStyle>
 
-									<!-- Value column-->
-									<GridViewColumn Header="Value" Width="100" DisplayMemberBinding="{Binding Value}">
-										<GridViewColumn.HeaderContainerStyle>
-											<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
-												<Setter Property="IsHitTestVisible" Value="False"/>
-												<Setter Property="HorizontalContentAlignment" Value="Center"/>
-												<Setter Property="Padding" Value="1,5,1,5"/>
-											</Style>
-										</GridViewColumn.HeaderContainerStyle>
-									</GridViewColumn>
+						<!-- List view -->
+						<ListView.View>
+							<GridView>
+								<!-- Name column-->
+								<GridViewColumn Header="Name" Width="290" DisplayMemberBinding="{Binding Name}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False" />
+											<Setter Property="HorizontalContentAlignment" Value="Center" />
+											<Setter Property="Padding" Value="1,5,1,5" />
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
 
-									<!-- Buy column-->
-									<GridViewColumn Width="120">
-										<GridViewColumn.HeaderContainerStyle>
-											<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
-												<Setter Property="IsHitTestVisible" Value="False"/>
-												<Setter Property="HorizontalContentAlignment" Value="Center"/>
-												<Setter Property="Padding" Value="1,5,1,5"/>
-											</Style>
-										</GridViewColumn.HeaderContainerStyle>
+								<!-- Value column-->
+								<GridViewColumn Header="Value" Width="100" DisplayMemberBinding="{Binding Value}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False" />
+											<Setter Property="HorizontalContentAlignment" Value="Center" />
+											<Setter Property="Padding" Value="1,5,1,5" />
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
 
-										<!-- Buy button -->
-										<GridViewColumn.CellTemplate>
-											<DataTemplate>
-												<Button Content="Buy" Click="BuyButton_Click" CommandParameter="{Binding}"/>
-											</DataTemplate>
-										</GridViewColumn.CellTemplate>
-									</GridViewColumn>
-								</GridView>
-							</ListView.View>
-						</ListView>
-					</TabItem>
+								<!-- Buy column-->
+								<GridViewColumn Width="120">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False" />
+											<Setter Property="HorizontalContentAlignment" Value="Center" />
+											<Setter Property="Padding" Value="1,5,1,5" />
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+
+									<!-- Buy button -->
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<Button Content="Buy" Click="BuyButton_Click" CommandParameter="{Binding}" />
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+							</GridView>
+						</ListView.View>
+					</ListView>
+				</TabItem>
 			</TabControl>
 		</Grid>
 	</Grid>

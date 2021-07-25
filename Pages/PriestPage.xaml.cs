@@ -1,15 +1,12 @@
-using ClickQuest.Player;
-using ClickQuest.Controls;
-using ClickQuest.Data;
-using ClickQuest.Entity;
-using ClickQuest.Items;
-using ClickQuest.Heroes.Buffs;
-using ClickQuest.Heroes;
-using System.Windows;
-using System.Windows.Controls;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using ClickQuest.Controls;
+using ClickQuest.Data;
 using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Heroes.Buffs;
+using ClickQuest.Player;
 
 namespace ClickQuest.Pages
 {
@@ -33,7 +30,7 @@ namespace ClickQuest.Pages
 			var result = new List<Blessing>();
 			var listOfIds = GameData.PriestOffer;
 
-			foreach (var id in listOfIds)
+			foreach (int id in listOfIds)
 			{
 				result.Add(GameData.Blessings.FirstOrDefault(x => x.Id == id));
 			}
@@ -42,9 +39,10 @@ namespace ClickQuest.Pages
 		}
 
 		#region Events
+
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
-			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
+			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
 		}
 
 		private void BuyButton_Click(object sender, RoutedEventArgs e)
@@ -54,7 +52,7 @@ namespace ClickQuest.Pages
 
 			if (User.Instance.Gold >= blessingBlueprint.Value)
 			{
-				var result = AlertBox.Show($"Are you sure you want to buy {blessingBlueprint.Name} for {blessingBlueprint.Value} gold?", MessageBoxButton.YesNo);
+				var result = AlertBox.Show($"Are you sure you want to buy {blessingBlueprint.Name} for {blessingBlueprint.Value} gold?");
 
 				if (result == MessageBoxResult.Cancel)
 				{
@@ -63,7 +61,7 @@ namespace ClickQuest.Pages
 
 				bool hasBlessingActive = User.Instance.CurrentHero.Blessing != null;
 
-				if(hasBlessingActive)
+				if (hasBlessingActive)
 				{
 					bool doesUserWantToSwap = Blessing.AskUserAndSwapBlessing(blessingBlueprint.Id);
 
@@ -86,6 +84,7 @@ namespace ClickQuest.Pages
 				AlertBox.Show($"You do not have enough gold to buy this blessing.\nIt costs {blessingBlueprint.Value} gold.\nYou can get more gold by completing quests and selling loot from monsters and bosses.", MessageBoxButton.OK);
 			}
 		}
+
 		#endregion
 	}
 }

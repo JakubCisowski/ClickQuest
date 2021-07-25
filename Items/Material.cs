@@ -1,21 +1,20 @@
 using ClickQuest.Extensions.CollectionsManager;
-using ClickQuest.Player;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Interfaces;
+using ClickQuest.Player;
 
 namespace ClickQuest.Items
 {
-	public partial class Material : Item, IMeltable
+	public class Material : Item, IMeltable
 	{
-		public int BaseIngotBonus => 1;
-
-		public Material() : base()
+		public int BaseIngotBonus
 		{
-
+			get { return 1; }
 		}
 
 		public override Material CopyItem(int quantity)
 		{
-			Material copy = new Material();
+			var copy = new Material();
 
 			copy.Id = Id;
 			copy.Name = Name;
@@ -34,15 +33,15 @@ namespace ClickQuest.Items
 
 		public override void AddItem()
 		{
-			CollectionsController.AddItemToCollection<Material>(this, User.Instance.CurrentHero.Materials);
+			CollectionsController.AddItemToCollection(this, User.Instance.CurrentHero.Materials);
 
-			this.AddAchievementProgress(1);
-			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
+			AddAchievementProgress(1);
+			InterfaceController.RefreshEquipmentPanels();
 		}
-		
+
 		public override void RemoveItem()
 		{
-			CollectionsController.RemoveItemFromCollection<Material>(this, User.Instance.CurrentHero.Materials);
+			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Materials);
 		}
 	}
 }

@@ -1,15 +1,13 @@
-using ClickQuest.Player;
-using ClickQuest.Controls;
-using ClickQuest.Data;
-using ClickQuest.Heroes;
-using ClickQuest.Heroes.Buffs;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ControlzEx;
-using System.Windows.Data;
+using ClickQuest.Controls;
+using ClickQuest.Data;
+using ClickQuest.Entity;
 using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Heroes;
+using ClickQuest.Player;
 
 namespace ClickQuest.Pages
 {
@@ -19,12 +17,12 @@ namespace ClickQuest.Pages
 		{
 			InitializeComponent();
 
-			HeroClassBox.ItemsSource = Enum.GetValues(typeof(HeroClass)).Cast<HeroClass>().Where(x=>x!=HeroClass.All);
+			HeroClassBox.ItemsSource = Enum.GetValues(typeof(HeroClass)).Cast<HeroClass>().Where(x => x != HeroClass.All);
 			HeroRaceBox.ItemsSource = Enum.GetValues(typeof(HeroRace)).Cast<HeroRace>();
 
 			HeroNameBox.Focus();
-		}	
-		
+		}
+
 		public void CreateHeroButton_Click(object sender, RoutedEventArgs e)
 		{
 			bool isHeroClassSelected = HeroClassBox.SelectedItems.Count > 0;
@@ -37,27 +35,27 @@ namespace ClickQuest.Pages
 
 				if (!isHeroNameAlphanumericWithSpaces || !isHeroNameLengthCorrect)
 				{
-					AlertBox.Show($"Hero name can contain up to 15 characters.\nValid characters: A-Z, a-z, 0-9, space.", MessageBoxButton.OK);
+					AlertBox.Show("Hero name can contain up to 15 characters.\nValid characters: A-Z, a-z, 0-9, space.", MessageBoxButton.OK);
 					return;
 				}
 
 				CreateHero();
-				
+
 				GameData.RefreshPages();
 
-				InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
+				InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
 			}
 		}
 
 		private void CreateHero()
 		{
-			var newHero = new Hero((HeroClass)Enum.Parse(typeof(HeroClass), HeroClassBox.SelectedValue.ToString()), (HeroRace)Enum.Parse(typeof(HeroRace), HeroRaceBox.SelectedValue.ToString()), HeroNameBox.Text);
-			
+			var newHero = new Hero((HeroClass) Enum.Parse(typeof(HeroClass), HeroClassBox.SelectedValue.ToString()), (HeroRace) Enum.Parse(typeof(HeroRace), HeroRaceBox.SelectedValue.ToString()), HeroNameBox.Text);
+
 			User.Instance.Heroes.Add(newHero);
 
 			// Reload the database.
-			Entity.EntityOperations.SaveGame();
-			Entity.EntityOperations.LoadGame();
+			EntityOperations.SaveGame();
+			EntityOperations.LoadGame();
 
 			// Select current hero from entity database, because variable 'hero' doesn't represent the same hero that was loaded from entity in LoadGame().
 			User.Instance.CurrentHero = User.Instance.Heroes.FirstOrDefault(x => x.Id == newHero.Id);
@@ -69,7 +67,7 @@ namespace ClickQuest.Pages
 
 		public void CancelButton_Click(object sender, RoutedEventArgs e)
 		{
-			InterfaceController.ChangePage(Data.GameData.Pages["MainMenu"], "");
+			InterfaceController.ChangePage(GameData.Pages["MainMenu"], "");
 		}
 	}
 }

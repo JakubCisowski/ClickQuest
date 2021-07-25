@@ -1,19 +1,19 @@
 <ResourceDictionary
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!-- Colours -->
-	<SolidColorBrush  x:Key="GameBackgroundRegular" Color="#EDF9FD"/>
-	<SolidColorBrush  x:Key="GameBackgroundSecondary" Color="#CFEFF8"/>
-	<SolidColorBrush  x:Key="GameBackgroundAdditional" Color="#ADD5E0"/>
+	<SolidColorBrush x:Key="GameBackgroundRegular" Color="#EDF9FD" />
+	<SolidColorBrush x:Key="GameBackgroundSecondary" Color="#CFEFF8" />
+	<SolidColorBrush x:Key="GameBackgroundAdditional" Color="#ADD5E0" />
 
-	<SolidColorBrush  x:Key="ButtonGreyBackground" Color="#CCDCE1"/>
+	<SolidColorBrush x:Key="ButtonGreyBackground" Color="#CCDCE1" />
 
-	<SolidColorBrush  x:Key="ButtonDangerBrush" Color="#FFD3D3"/>
-	<SolidColorBrush  x:Key="ButtonDangerBrushHover" Color="#FF0000"/>
+	<SolidColorBrush x:Key="ButtonDangerBrush" Color="#FFD3D3" />
+	<SolidColorBrush x:Key="ButtonDangerBrushHover" Color="#FF0000" />
 
 	<!-- Custom TabControl style -->
 	<Style x:Key="TabControlStyleGeneral" TargetType="TabControl">
-		<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+		<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}" />
 	</Style>
 </ResourceDictionary>

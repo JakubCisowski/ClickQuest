@@ -1,7 +1,7 @@
-﻿using ClickQuest.Data;
-using ClickQuest.Entity;
+﻿using System;
 using System.Windows;
-using System;
+using ClickQuest.Data;
+using ClickQuest.Entity;
 using ClickQuest.Player;
 
 namespace ClickQuest
@@ -10,7 +10,6 @@ namespace ClickQuest
 	{
 		protected void Application_Startup(object sender, StartupEventArgs e)
 		{
-
 			// Load JSONs and Entity.
 			DataLoader.Load();
 			EntityOperations.CreateAndSeedDatabase();

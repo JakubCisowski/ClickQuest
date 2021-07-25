@@ -6,11 +6,11 @@ namespace ClickQuest.Items
 {
 	public class BossLootPattern
 	{
-		public int ItemId{ get; set;}
-		public ItemType ItemType{ get; set;}
-		public List<double> Frequencies{ get; set;}
+		public int ItemId { get; set; }
+		public ItemType ItemType { get; set; }
+		public List<double> Frequencies { get; set; }
 
-		public Item Item 
+		public Item Item
 		{
 			get
 			{

@@ -1,18 +1,18 @@
 [
-    {
-        "Id": 0,
-        "DungeonGroupId": 0,
-        "Name": "Forest",
-        "Background": "/example.png",
-        "Description": "ForestDungeonDesc",
-        "BossIds": [0]
-    },
-    {
-        "Id": 1,
-        "DungeonGroupId": 1,
-        "Name": "Cave",
-        "Background": "/example2.png",
-        "Description": "CaveDungeonDesc",
-        "BossIds": [1]
-    }
+	{
+		"Id": 0,
+		"DungeonGroupId": 0,
+		"Name": "Forest",
+		"Background": "/example.png",
+		"Description": "ForestDungeonDesc",
+		"BossIds": [0]
+	},
+	{
+		"Id": 1,
+		"DungeonGroupId": 1,
+		"Name": "Cave",
+		"Background": "/example2.png",
+		"Description": "CaveDungeonDesc",
+		"BossIds": [1]
+	}
 ]

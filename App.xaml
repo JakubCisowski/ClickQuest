@@ -1,12 +1,10 @@
 ﻿<Application x:Class="ClickQuest.App"
-			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:local="clr-namespace:ClickQuest"
-			 StartupUri="/Windows/GameWindow.xaml"
-			 xmlns:controlzEx="urn:controlzex"
-			 Startup="Application_Startup"
-			 ShutdownMode="OnMainWindowClose"
-			 >
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="/Windows/GameWindow.xaml"
+             xmlns:controlzEx="urn:controlzex"
+             Startup="Application_Startup"
+             ShutdownMode="OnMainWindowClose">
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -18,58 +16,57 @@
 
 			<!-- Fonts -->
 			<Style x:Key="GameFontRegular" TargetType="FrameworkElement">
-				<Setter Property="TextElement.FontFamily" Value="/Resources/Fonts/#GothamBook"/>
-				<Setter Property="TextElement.FontSize" Value="16"/>
+				<Setter Property="TextElement.FontFamily" Value="/Resources/Fonts/#GothamBook" />
+				<Setter Property="TextElement.FontSize" Value="16" />
 			</Style>
 
 			<!-- Colours -->
-			<SolidColorBrush  x:Key="GameBackgroundRegular" Color="#EDF9FD"/>
-			<SolidColorBrush  x:Key="GameBackgroundSecondary" Color="#CFEFF8"/>
-			<SolidColorBrush  x:Key="GameBackgroundAdditional" Color="#ADD5E0"/>
+			<SolidColorBrush x:Key="GameBackgroundRegular" Color="#EDF9FD" />
+			<SolidColorBrush x:Key="GameBackgroundSecondary" Color="#CFEFF8" />
+			<SolidColorBrush x:Key="GameBackgroundAdditional" Color="#ADD5E0" />
 
-			<SolidColorBrush  x:Key="ButtonGreyBackground" Color="#CCDCE1"/>
+			<SolidColorBrush x:Key="ButtonGreyBackground" Color="#CCDCE1" />
 
-			<SolidColorBrush  x:Key="ButtonDangerBrush" Color="#FFD3D3"/>
-			<SolidColorBrush  x:Key="ButtonDangerBrushHover" Color="#FF0000"/>
+			<SolidColorBrush x:Key="ButtonDangerBrush" Color="#FFD3D3" />
+			<SolidColorBrush x:Key="ButtonDangerBrushHover" Color="#FF0000" />
 
-			<SolidColorBrush  x:Key="ColorRarity0" Color="#8C8C8C"/> <!-- General - Gray -->
-			<SolidColorBrush  x:Key="ColorRarity1" Color="#D79E4B"/> <!-- Fine - Light brown -->
-			<SolidColorBrush  x:Key="ColorRarity2" Color="#61B05A"/> <!-- Superior - Green -->
-			<SolidColorBrush  x:Key="ColorRarity3" Color="#508CDA"/> <!-- Exceptional - Blue -->
-			<SolidColorBrush  x:Key="ColorRarity4" Color="#A950DA"/> <!-- Mythic - Purple -->
-			<SolidColorBrush  x:Key="ColorRarity5" Color="#E9DB50"/> <!-- Masterwork - Gold -->
+			<SolidColorBrush x:Key="ColorRarity0" Color="#8C8C8C" /> <!-- General - Gray -->
+			<SolidColorBrush x:Key="ColorRarity1" Color="#D79E4B" /> <!-- Fine - Light brown -->
+			<SolidColorBrush x:Key="ColorRarity2" Color="#61B05A" /> <!-- Superior - Green -->
+			<SolidColorBrush x:Key="ColorRarity3" Color="#508CDA" /> <!-- Exceptional - Blue -->
+			<SolidColorBrush x:Key="ColorRarity4" Color="#A950DA" /> <!-- Mythic - Purple -->
+			<SolidColorBrush x:Key="ColorRarity5" Color="#E9DB50" /> <!-- Masterwork - Gold -->
 
-			<SolidColorBrush  x:Key="ColorQuestRare" Color="#FFA237"/> <!-- Rare quest - Orange? -->
+			<SolidColorBrush x:Key="ColorQuestRare" Color="#FFA237" /> <!-- Rare quest - Orange? -->
 
-			<SolidColorBrush  x:Key="ToolTipBackground" Color="Black" Opacity="0.7"/>
-				
+			<SolidColorBrush x:Key="ToolTipBackground" Color="Black" Opacity="0.7" />
+
 			<!-- Custom global styles -->
-			<Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}"></Style>
-			<Style TargetType="ListView" BasedOn="{StaticResource GameFontRegular}"></Style>
+			<Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}" />
+			<Style TargetType="ListView" BasedOn="{StaticResource GameFontRegular}" />
 
-			<Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}">
-			</Style>
+			<Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}" />
 
 			<Style TargetType="Window" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+				<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}" />
 			</Style>
 
 			<Style TargetType="Frame" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+				<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}" />
 			</Style>
 
 			<Style TargetType="Page" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}"/>
+				<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}" />
 			</Style>
 
 			<Style TargetType="ToolTip" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource ToolTipBackground}"/>
+				<Setter Property="Background" Value="{StaticResource ToolTipBackground}" />
 				<!-- <Setter Property="Opacity" Value="0.6"/> -->
-				<Setter Property="Padding" Value="5"/>
-				<Setter Property="BorderBrush" Value="Black"/>
-				<Setter Property="controlzEx:ToolTipAssist.AutoMove" Value="True"/>
+				<Setter Property="Padding" Value="5" />
+				<Setter Property="BorderBrush" Value="Black" />
+				<Setter Property="controlzEx:ToolTipAssist.AutoMove" Value="True" />
 			</Style>
 
-      	</ResourceDictionary>
+		</ResourceDictionary>
 	</Application.Resources>
 </Application>

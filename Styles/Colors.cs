@@ -9,31 +9,31 @@ namespace ClickQuest.Styles
 		public static SolidColorBrush GetRarityColor(Rarity rarity)
 		{
 			SolidColorBrush brush = null;
-			
+
 			switch (rarity)
 			{
 				case Rarity.General:
-					brush = (SolidColorBrush)Application.Current.FindResource("ColorRarity0");
+					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity0");
 					break;
-				
+
 				case Rarity.Fine:
-					brush = (SolidColorBrush)Application.Current.FindResource("ColorRarity1");
+					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity1");
 					break;
-					
+
 				case Rarity.Superior:
-					brush = (SolidColorBrush)Application.Current.FindResource("ColorRarity2");
+					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity2");
 					break;
-					
+
 				case Rarity.Exceptional:
-					brush = (SolidColorBrush)Application.Current.FindResource("ColorRarity3");
+					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity3");
 					break;
-					
+
 				case Rarity.Mythic:
-					brush = (SolidColorBrush)Application.Current.FindResource("ColorRarity4");
+					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity4");
 					break;
-					
+
 				case Rarity.Masterwork:
-					brush = (SolidColorBrush)Application.Current.FindResource("ColorRarity5");
+					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity5");
 					break;
 			}
 

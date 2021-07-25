@@ -1,21 +1,20 @@
 using ClickQuest.Extensions.CollectionsManager;
-using ClickQuest.Player;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Interfaces;
+using ClickQuest.Player;
 
 namespace ClickQuest.Items
 {
-	public partial class Artifact : Item, IMeltable
+	public class Artifact : Item, IMeltable
 	{
-		public int BaseIngotBonus => 100;
-
-		public Artifact() : base()
+		public int BaseIngotBonus
 		{
-			
+			get { return 100; }
 		}
 
 		public override Artifact CopyItem(int quantity)
 		{
-			Artifact copy = new Artifact();
+			var copy = new Artifact();
 
 			copy.Id = Id;
 			copy.Name = Name;
@@ -31,41 +30,42 @@ namespace ClickQuest.Items
 		{
 			NumericAchievementType achievementType = 0;
 			// Increase achievement amount.
-			switch(this.Rarity)
+			switch (Rarity)
 			{
 				case Rarity.General:
-					achievementType=NumericAchievementType.GeneralArtifactsGained;
+					achievementType = NumericAchievementType.GeneralArtifactsGained;
 					break;
 				case Rarity.Fine:
-					achievementType=NumericAchievementType.FineArtifactsGained;
+					achievementType = NumericAchievementType.FineArtifactsGained;
 					break;
 				case Rarity.Superior:
-					achievementType=NumericAchievementType.SuperiorArtifactsGained;
+					achievementType = NumericAchievementType.SuperiorArtifactsGained;
 					break;
 				case Rarity.Exceptional:
-					achievementType=NumericAchievementType.ExceptionalArtifactsGained;
+					achievementType = NumericAchievementType.ExceptionalArtifactsGained;
 					break;
 				case Rarity.Mythic:
-					achievementType=NumericAchievementType.MythicArtifactsGained;
+					achievementType = NumericAchievementType.MythicArtifactsGained;
 					break;
 				case Rarity.Masterwork:
 					achievementType = NumericAchievementType.MasterworkArtifactsGained;
 					break;
 			}
+
 			User.Instance.Achievements.IncreaseAchievementValue(achievementType, amount);
 		}
 
 		public override void AddItem()
 		{
-			CollectionsController.AddItemToCollection<Artifact>(this, User.Instance.CurrentHero.Artifacts);
+			CollectionsController.AddItemToCollection(this, User.Instance.CurrentHero.Artifacts);
 
-			this.AddAchievementProgress(1);
-			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
+			AddAchievementProgress(1);
+			InterfaceController.RefreshEquipmentPanels();
 		}
-		
+
 		public override void RemoveItem()
 		{
-			CollectionsController.RemoveItemFromCollection<Material>(this, User.Instance.CurrentHero.Materials);
+			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Materials);
 		}
 	}
 }

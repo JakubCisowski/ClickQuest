@@ -1,88 +1,87 @@
 <Page x:Class="ClickQuest.Pages.TownPage"
-		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:local="clr-namespace:ClickQuest"
-		mc:Ignorable="d" Title="Town"
-		Height="728" Width="1366">
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d" Title="Town"
+      Height="728" Width="1366">
 	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="2*"/>
-			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="2*" />
+			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
 		<!-- Hero stats frame-->
-		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
+		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" />
 
 		<!-- Equipment frame-->
-		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341"/>
+		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" />
 
 		<!-- Main grid - regions and districts -->
 		<Grid Grid.Column="1">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
 			<Grid.RowDefinitions>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="8*"/>
-				<RowDefinition Height="*"/>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="8*" />
+				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
 			<!-- Page description -->
 			<Border Grid.Row="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Background="{StaticResource GameBackgroundAdditional}">
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center">
-					<Run Text="Town Districts are where you can buy and craft upgrades or go on an adventure"/>
-					<LineBreak/>
-					<Run Text="Regions are where your hero can fight monsters for experience and loot"/>
+					<Run Text="Town Districts are where you can buy and craft upgrades or go on an adventure" />
+					<LineBreak />
+					<Run Text="Regions are where your hero can fight monsters for experience and loot" />
 				</TextBlock>
 			</Border>
 
 			<!-- Districts panel -->
 			<StackPanel x:Name="TownPanel" Orientation="Vertical" Grid.Column="0" Grid.Row="1">
 				<!-- Districts text -->
-				<TextBlock FontSize="22" FontWeight="DemiBold" Text="Districts" HorizontalAlignment="Center" Margin="0,10,0,20"/>
-				
+				<TextBlock FontSize="22" FontWeight="DemiBold" Text="Districts" HorizontalAlignment="Center" Margin="0,10,0,20" />
+
 				<!-- Shop button -->
 				<Button x:Name="ShopButton" Click="ShopButton_Click" Width="150" Height="50">
-					<TextBlock Text="Shop" FontSize="20"/>
+					<TextBlock Text="Shop" FontSize="20" />
 				</Button>
-				
+
 				<!-- Blacksmith button -->
 				<Button x:Name="BlacksmithButton" Click="BlacksmithButton_Click" Width="150" Height="50">
-					<TextBlock Text="Blacksmith" FontSize="20"/>
+					<TextBlock Text="Blacksmith" FontSize="20" />
 				</Button>
 
 				<!-- Priest button -->
 				<Button x:Name="PriestButton" Click="PriestButton_Click" Width="150" Height="50">
-					<TextBlock Text="Priest" FontSize="20"/>
+					<TextBlock Text="Priest" FontSize="20" />
 				</Button>
 
 				<!-- Quest menu button -->
 				<Button x:Name="QuestMenuButton" Click="QuestMenuButton_Click" Width="150" Height="50">
-					<TextBlock Text="Quests" FontSize="20"/>
+					<TextBlock Text="Quests" FontSize="20" />
 				</Button>
 
 				<!-- Dungeon select button -->
 				<Button x:Name="DungeonSelectButton" Click="DungeonSelectButton_Click" Width="150" Height="50">
-					<TextBlock Text="Dungeons" FontSize="20"/>
+					<TextBlock Text="Dungeons" FontSize="20" />
 				</Button>
 			</StackPanel>
-			
+
 			<!-- Districts panel -->
 			<StackPanel x:Name="RegionsPanel" Orientation="Vertical" Grid.Column="1" Grid.Row="1">
 				<!-- Districts text -->
-				<TextBlock FontSize="22" FontWeight="DemiBold" Text="Regions" HorizontalAlignment="Center" Margin="0,10,0,20"/>
+				<TextBlock FontSize="22" FontWeight="DemiBold" Text="Regions" HorizontalAlignment="Center" Margin="0,10,0,20" />
 
 				<!-- [Here region buttons are dynamically generated] -->
 			</StackPanel>
-			
+
 			<!-- Back to menu button -->
 			<Button x:Name="MainMenuButton" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="MainMenuButton_Click" Width="450" Height="50">
-				<TextBlock Text="Back to menu" FontSize="22"/>
+				<TextBlock Text="Back to menu" FontSize="22" />
 			</Button>
 		</Grid>
 

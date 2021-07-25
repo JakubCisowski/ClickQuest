@@ -1,27 +1,20 @@
-using ClickQuest.Player;
-using ClickQuest.Controls;
-using ClickQuest.Data;
-using ClickQuest.Enemies;
-using ClickQuest.Items;
-using ClickQuest.Places;
-using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using ClickQuest.Controls;
+using ClickQuest.Data;
+using ClickQuest.Enemies;
 using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Items;
+using ClickQuest.Places;
+using ClickQuest.Player;
+using Colors = ClickQuest.Styles.Colors;
 
 namespace ClickQuest.Pages
 {
 	public partial class DungeonSelectPage : Page
 	{
-		#region Private Fields
-		private DungeonGroup _dungeonGroupSelected;
-		private Dungeon _dungeonSelected;
-		private Boss _bossSelected;
-
-		#endregion
-
 		public DungeonSelectPage()
 		{
 			InitializeComponent();
@@ -32,7 +25,7 @@ namespace ClickQuest.Pages
 		public void ResetAndLoadDungeonGroupSelectionInterface()
 		{
 			ResetSelection();
-			
+
 			DungeonSelectPanel.Children.Clear();
 
 			UndoButton.Click -= UndoButtonGroup_Click;
@@ -40,27 +33,12 @@ namespace ClickQuest.Pages
 
 			var grid = new Grid();
 
-			var col1 = new ColumnDefinition()
-			{
-				Width = new GridLength(1, GridUnitType.Star)
-			};
-			var col2 = new ColumnDefinition()
-			{
-				Width = new GridLength(1, GridUnitType.Star)
-			};
+			var col1 = new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)};
+			var col2 = new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)};
 
-			var row1 = new RowDefinition()
-			{
-				Height = new GridLength(1, GridUnitType.Star)
-			};
-			var row2 = new RowDefinition()
-			{
-				Height = new GridLength(1, GridUnitType.Star)
-			};
-			var row3 = new RowDefinition()
-			{
-				Height = new GridLength(1, GridUnitType.Star)
-			};
+			var row1 = new RowDefinition {Height = new GridLength(1, GridUnitType.Star)};
+			var row2 = new RowDefinition {Height = new GridLength(1, GridUnitType.Star)};
+			var row3 = new RowDefinition {Height = new GridLength(1, GridUnitType.Star)};
 
 			grid.ColumnDefinitions.Add(col1);
 			grid.ColumnDefinitions.Add(col2);
@@ -72,40 +50,15 @@ namespace ClickQuest.Pages
 			// Create buttons for selecting dungeon groups.
 			for (int i = 0; i < GameData.DungeonGroups.Count; i++)
 			{
-				var button = new Button()
-				{
-					Name = "DungeonGroup" + GameData.DungeonGroups[i].Id.ToString(),
-					Width = 250,
-					Height = 100
-				};
+				var button = new Button {Name = "DungeonGroup" + GameData.DungeonGroups[i].Id, Width = 250, Height = 100};
 
-				var panel = new StackPanel()
-				{
-					VerticalAlignment = VerticalAlignment.Center
-				};
+				var panel = new StackPanel {VerticalAlignment = VerticalAlignment.Center};
 
-				var block = new TextBlock()
-				{
-					FontSize = 22,
-					Text = GameData.DungeonGroups[i].Name,
-					TextAlignment=TextAlignment.Center
-				};
+				var block = new TextBlock {FontSize = 22, Text = GameData.DungeonGroups[i].Name, TextAlignment = TextAlignment.Center};
 
-				var border = new Border()
-				{
-					BorderThickness = new Thickness(3),
-					BorderBrush = Styles.Colors.GetRarityColor((Rarity)i),
-					Width = 240,
-					Height=90
-				};
+				var border = new Border {BorderThickness = new Thickness(3), BorderBrush = Colors.GetRarityColor((Rarity) i), Width = 240, Height = 90};
 
-				var block2 = new TextBlock()
-				{
-					FontSize = 16,
-					FontStyle=FontStyles.Italic,
-					Text = GameData.DungeonGroups[i].Description,
-					TextAlignment=TextAlignment.Center
-				};
+				var block2 = new TextBlock {FontSize = 16, FontStyle = FontStyles.Italic, Text = GameData.DungeonGroups[i].Description, TextAlignment = TextAlignment.Center};
 
 				border.Child = panel;
 
@@ -121,6 +74,7 @@ namespace ClickQuest.Pages
 				Grid.SetColumn(button, i / 3);
 				Grid.SetRow(button, i % 3);
 			}
+
 			DungeonSelectPanel.Children.Add(grid);
 		}
 
@@ -141,40 +95,19 @@ namespace ClickQuest.Pages
 			UndoButton.Click += UndoButtonGroup_Click;
 
 			var dungeonsOfThisGroup = GameData.Dungeons.Where(x => x.DungeonGroup == _dungeonGroupSelected).ToList();
-			
+
 			// Create buttons for selecting dungeon groups.
 			for (int i = 0; i < dungeonsOfThisGroup.Count; i++)
 			{
-				var button = new Button()
-				{
-					Name = "Dungeon" + dungeonsOfThisGroup[i].Id.ToString(),
-					Width = 250,
-					Height = 80
-				};
+				var button = new Button {Name = "Dungeon" + dungeonsOfThisGroup[i].Id, Width = 250, Height = 80};
 
 				var panel = new StackPanel();
 
-				var block = new TextBlock()
-				{
-					FontSize = 22,
-					Text = dungeonsOfThisGroup[i].Name,
-					TextAlignment=TextAlignment.Center
-				};
+				var block = new TextBlock {FontSize = 22, Text = dungeonsOfThisGroup[i].Name, TextAlignment = TextAlignment.Center};
 
-				var border = new Border()
-				{
-					BorderThickness = new Thickness(0.5),
-					BorderBrush = new SolidColorBrush(Colors.LightGray),
-					Margin=new Thickness(0,5,0,0)
-				};
+				var border = new Border {BorderThickness = new Thickness(0.5), BorderBrush = new SolidColorBrush(System.Windows.Media.Colors.LightGray), Margin = new Thickness(0, 5, 0, 0)};
 
-				var block2 = new TextBlock()
-				{
-					FontSize = 16,
-					FontStyle=FontStyles.Italic,
-					Text =  dungeonsOfThisGroup[i].Description,
-					TextAlignment=TextAlignment.Center
-				};
+				var block2 = new TextBlock {FontSize = 16, FontStyle = FontStyles.Italic, Text = dungeonsOfThisGroup[i].Description, TextAlignment = TextAlignment.Center};
 
 				border.Child = block2;
 
@@ -201,38 +134,17 @@ namespace ClickQuest.Pages
 			// Create buttons for selecting dungeon groups.
 			for (int i = 0; i < _dungeonSelected.BossIds.Count; i++)
 			{
-				var boss = GameData.Bosses.FirstOrDefault(x=>x.Id == _dungeonSelected.BossIds[i]);
+				var boss = GameData.Bosses.FirstOrDefault(x => x.Id == _dungeonSelected.BossIds[i]);
 
-				var button = new Button()
-				{
-					Name = "Boss" + boss.Id.ToString(),
-					Width = 250,
-					Height = 80
-				};
+				var button = new Button {Name = "Boss" + boss.Id, Width = 250, Height = 80};
 
 				var panel = new StackPanel();
 
-				var block = new TextBlock()
-				{
-					FontSize = 22,
-					Text = boss.Name,
-					TextAlignment=TextAlignment.Center
-				};
+				var block = new TextBlock {FontSize = 22, Text = boss.Name, TextAlignment = TextAlignment.Center};
 
-				var border = new Border()
-				{
-					BorderThickness = new Thickness(0.5),
-					BorderBrush = new SolidColorBrush(Colors.LightGray),
-					Margin=new Thickness(0,5,0,0)
-				};
+				var border = new Border {BorderThickness = new Thickness(0.5), BorderBrush = new SolidColorBrush(System.Windows.Media.Colors.LightGray), Margin = new Thickness(0, 5, 0, 0)};
 
-				var block2 = new TextBlock()
-				{
-					FontSize = 16,
-					FontStyle=FontStyles.Italic,
-					Text =  boss.Description,
-					TextAlignment=TextAlignment.Center
-				};
+				var block2 = new TextBlock {FontSize = 16, FontStyle = FontStyles.Italic, Text = boss.Description, TextAlignment = TextAlignment.Center};
 
 				border.Child = block2;
 
@@ -249,20 +161,29 @@ namespace ClickQuest.Pages
 			}
 		}
 
+		#region Private Fields
+
+		private DungeonGroup _dungeonGroupSelected;
+		private Dungeon _dungeonSelected;
+		private Boss _bossSelected;
+
+		#endregion
+
 		#region Events
+
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
-			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
-			
+			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
+
 
 			// Reset selection.
 			ResetAndLoadDungeonGroupSelectionInterface();
 		}
-		
+
 		private void DungeonGroupButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Check if any quest is currently assigned to this hero (if so, hero can't enter the dungeon).
-			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
+			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
 			{
 				_dungeonGroupSelected = GetDungeonGroup(sender as Button);
 				LoadDungeonSelectionInterface();
@@ -283,19 +204,19 @@ namespace ClickQuest.Pages
 
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting boss";
 		}
-		
+
 		private Dungeon GetDungeon(Button dungeonButton)
 		{
 			return dungeonButton.Tag as Dungeon;
 		}
-		
+
 		private void BossButton_Click(object sender, RoutedEventArgs e)
 		{
 			_bossSelected = GetBoss(sender as Button);
 
-			if(!CheckAndRemoveDungeonKeys())
+			if (!CheckAndRemoveDungeonKeys())
 			{
-				AlertBox.Show($"Not enough dungeon keys to enter.\nTry to get them by completing quests and killing monsters!", MessageBoxButton.OK);
+				AlertBox.Show("Not enough dungeon keys to enter.\nTry to get them by completing quests and killing monsters!", MessageBoxButton.OK);
 				return;
 			}
 
@@ -311,7 +232,7 @@ namespace ClickQuest.Pages
 
 			foreach (var pair in counts)
 			{
-				if (User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)pair.Key).Quantity < pair.Value)
+				if (User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity) pair.Key).Quantity < pair.Value)
 				{
 					return false;
 				}
@@ -320,7 +241,7 @@ namespace ClickQuest.Pages
 			// Remove dungeon keys from Player.
 			foreach (var pair in counts)
 			{
-				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)pair.Key).Quantity -= pair.Value;
+				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity) pair.Key).Quantity -= pair.Value;
 			}
 
 			return true;
@@ -330,7 +251,7 @@ namespace ClickQuest.Pages
 		{
 			(GameData.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(_bossSelected.CopyEnemy());
 
-			InterfaceController.ChangePage(Data.GameData.Pages["DungeonBoss"], "Boss fight");
+			InterfaceController.ChangePage(GameData.Pages["DungeonBoss"], "Boss fight");
 		}
 
 		private Boss GetBoss(Button bossButton)

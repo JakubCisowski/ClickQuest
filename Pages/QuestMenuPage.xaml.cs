@@ -1,21 +1,19 @@
-using ClickQuest.Player;
-using ClickQuest.Controls;
-using ClickQuest.Data;
-using ClickQuest.Entity;
-using ClickQuest.Heroes;
-using ClickQuest.Items;
-using ClickQuest.Adventures;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.Controls;
+using ClickQuest.Data;
+using ClickQuest.Entity;
 using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Heroes;
+using ClickQuest.Player;
 
 namespace ClickQuest.Pages
 {
 	public partial class QuestMenuPage : Page
 	{
-		private Random _rng;
+		private readonly Random _rng;
 
 		public QuestMenuPage()
 		{
@@ -37,7 +35,7 @@ namespace ClickQuest.Pages
 			{
 				int randomizedIndex = _rng.Next(0, questsForCurrentHeroClass.Count());
 
-				bool isQuestRare = questsForCurrentHeroClass.ElementAt(randomizedIndex).Rare == true;
+				bool isQuestRare = questsForCurrentHeroClass.ElementAt(randomizedIndex).Rare;
 				if (isQuestRare)
 				{
 					// Randomize once again.
@@ -86,13 +84,13 @@ namespace ClickQuest.Pages
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Go back to Town.
-			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
+			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
 		}
 
 		private void RerollButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Check if any quest is currently assigned - if so, user can't reroll quests.
-			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
+			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
 			{
 				// Later: add price.
 				RerollQuests();

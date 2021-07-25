@@ -1,19 +1,24 @@
-using ClickQuest.Heroes;
-using ClickQuest.Items;
-using ClickQuest.Windows;
-using ClickQuest.Extensions.CollectionsManager;
-using ClickQuest.Extensions.InterfaceManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using ClickQuest.Heroes;
+using ClickQuest.Items;
 
 namespace ClickQuest.Player
 {
-	public partial class User : INotifyPropertyChanged
+	public class User : INotifyPropertyChanged
 	{
+		public User()
+		{
+			Heroes = new List<Hero>();
+			Ingots = new List<Ingot>();
+			DungeonKeys = new List<DungeonKey>();
+			Achievements = new Achievements();
+		}
+
 		#region INotifyPropertyChanged
 
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -37,6 +42,7 @@ namespace ClickQuest.Player
 				{
 					_instance = new User();
 				}
+
 				return _instance;
 			}
 			set
@@ -68,10 +74,7 @@ namespace ClickQuest.Player
 
 		public List<Hero> Heroes
 		{
-			get
-			{
-				return _heroes;
-			}
+			get { return _heroes; }
 			set
 			{
 				_heroes = value;
@@ -81,10 +84,7 @@ namespace ClickQuest.Player
 
 		public List<Ingot> Ingots
 		{
-			get
-			{
-				return _ingots;
-			}
+			get { return _ingots; }
 			set
 			{
 				_ingots = value;
@@ -94,10 +94,7 @@ namespace ClickQuest.Player
 
 		public List<DungeonKey> DungeonKeys
 		{
-			get
-			{
-				return _dungeonKeys;
-			}
+			get { return _dungeonKeys; }
 			set
 			{
 				_dungeonKeys = value;
@@ -108,37 +105,32 @@ namespace ClickQuest.Player
 		[NotMapped]
 		public Hero CurrentHero
 		{
-			get
-			{
-				return _currentHero;
-			}
+			get { return _currentHero; }
 			set
 			{
 				_currentHero = value;
 				OnPropertyChanged();
 			}
 		}
-		public static DateTime SessionStartDate{ get; set;}
+
+		public static DateTime SessionStartDate { get; set; }
 
 		public int Gold
 		{
-			get
-			{
-				return _gold;
-			}
+			get { return _gold; }
 			set
 			{
-				if(value - _gold > 0)
+				if (value - _gold > 0)
 				{
 					// Increase achievement amount.
-					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.GoldEarned,  value - _gold);
+					Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.GoldEarned, value - _gold);
 				}
 				else
 				{
 					// Increase achievement amount.
-					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.GoldSpent, _gold - value);
+					Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.GoldSpent, _gold - value);
 				}
-				
+
 				_gold = value;
 				OnPropertyChanged();
 			}
@@ -146,25 +138,14 @@ namespace ClickQuest.Player
 
 		public Achievements Achievements
 		{
-			get
-			{
-				return _achievements;
-			}
+			get { return _achievements; }
 			set
 			{
-				_achievements=value;
+				_achievements = value;
 				OnPropertyChanged();
 			}
 		}
 
 		#endregion Properties
-
-		public User()
-		{
-			Heroes = new List<Hero>();
-			Ingots = new List<Ingot>();
-			DungeonKeys = new List<DungeonKey>();
-			Achievements = new Achievements();
-		}
 	}
 }

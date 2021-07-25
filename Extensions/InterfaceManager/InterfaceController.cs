@@ -1,8 +1,7 @@
-using ClickQuest.Data;
-using Microsoft.CSharp.RuntimeBinder;
-using System.Dynamic;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.Data;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace ClickQuest.Extensions.InterfaceManager
 {
@@ -21,9 +20,9 @@ namespace ClickQuest.Extensions.InterfaceManager
 				// No stats frame on this page!
 				// Best solution according to:
 				// https://stackoverflow.com/a/5768449/14770235
-			} 
+			}
 		}
-		
+
 		public static void RefreshStatPanels()
 		{
 			foreach (var page in GameData.Pages)
@@ -35,7 +34,7 @@ namespace ClickQuest.Extensions.InterfaceManager
 				}
 				catch (RuntimeBinderException)
 				{
-				} 
+				}
 			}
 		}
 
@@ -50,7 +49,7 @@ namespace ClickQuest.Extensions.InterfaceManager
 				}
 				catch (RuntimeBinderException)
 				{
-				} 
+				}
 			}
 		}
 
@@ -60,7 +59,7 @@ namespace ClickQuest.Extensions.InterfaceManager
 			window.CurrentFrame.Navigate(destinationPage);
 			window.LocationInfo = locationInfoText;
 
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(destinationPage);
+			RefreshStatsAndEquipmentPanelsOnPage(destinationPage);
 		}
 	}
 }

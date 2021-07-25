@@ -1,24 +1,17 @@
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
 using ClickQuest.Extensions.CollectionsManager;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Player;
 
 namespace ClickQuest.Items
 {
-	public partial class DungeonKey : Item
+	public class DungeonKey : Item
 	{
-		public DungeonKey() : base()
-		{
-		}
-
 		public override void AddAchievementProgress(int amount)
 		{
 			NumericAchievementType achievementType = 0;
 			// Increase achievement amount.
-			switch(Rarity)
+			switch (Rarity)
 			{
 				case Rarity.General:
 					achievementType = NumericAchievementType.GeneralDungeonKeysEarned;
@@ -39,6 +32,7 @@ namespace ClickQuest.Items
 					achievementType = NumericAchievementType.MasterworkDungeonKeysEarned;
 					break;
 			}
+
 			User.Instance.Achievements.IncreaseAchievementValue(achievementType, amount);
 		}
 
@@ -58,15 +52,15 @@ namespace ClickQuest.Items
 
 		public override void AddItem()
 		{
-			CollectionsController.AddItemToCollection<DungeonKey>(this, User.Instance.DungeonKeys);
+			CollectionsController.AddItemToCollection(this, User.Instance.DungeonKeys);
 
-			this.AddAchievementProgress(1);
-			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
+			AddAchievementProgress(1);
+			InterfaceController.RefreshEquipmentPanels();
 		}
-		
+
 		public override void RemoveItem()
 		{
-			CollectionsController.RemoveItemFromCollection<DungeonKey>(this, User.Instance.DungeonKeys);
+			CollectionsController.RemoveItemFromCollection(this, User.Instance.DungeonKeys);
 		}
 
 		public static List<double> CreateRarityChancesList(int monsterHealth)

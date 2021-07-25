@@ -1,9 +1,8 @@
-using ClickQuest.Data;
-using ClickQuest.Enemies;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using ClickQuest.Data;
 using ClickQuest.Interfaces;
 
 namespace ClickQuest.Places
@@ -36,10 +35,7 @@ namespace ClickQuest.Places
 
 		public int Id
 		{
-			get
-			{
-				return _id;
-			}
+			get { return _id; }
 			set
 			{
 				_id = value;
@@ -49,10 +45,7 @@ namespace ClickQuest.Places
 
 		public int DungeonGroupId
 		{
-			get
-			{
-				return _dungeonGroupId;
-			}
+			get { return _dungeonGroupId; }
 			set
 			{
 				_dungeonGroupId = value;
@@ -62,10 +55,7 @@ namespace ClickQuest.Places
 
 		public string Name
 		{
-			get
-			{
-				return _name;
-			}
+			get { return _name; }
 			set
 			{
 				_name = value;
@@ -75,10 +65,7 @@ namespace ClickQuest.Places
 
 		public string Description
 		{
-			get
-			{
-				return _description;
-			}
+			get { return _description; }
 			set
 			{
 				_description = value;
@@ -88,10 +75,7 @@ namespace ClickQuest.Places
 
 		public string Background
 		{
-			get
-			{
-				return _background;
-			}
+			get { return _background; }
 			set
 			{
 				_background = value;
@@ -101,10 +85,7 @@ namespace ClickQuest.Places
 
 		public List<int> BossIds
 		{
-			get
-			{
-				return _bossIds;
-			}
+			get { return _bossIds; }
 			set
 			{
 				_bossIds = value;
@@ -114,17 +95,9 @@ namespace ClickQuest.Places
 
 		public DungeonGroup DungeonGroup
 		{
-			get
-			{
-				return GameData.DungeonGroups.FirstOrDefault(x => x.Id == DungeonGroupId);
-			}
+			get { return GameData.DungeonGroups.FirstOrDefault(x => x.Id == DungeonGroupId); }
 		}
 
 		#endregion Properties
-
-		public Dungeon()
-		{
-
-		}
 	}
 }

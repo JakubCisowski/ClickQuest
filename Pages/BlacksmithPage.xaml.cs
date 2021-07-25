@@ -1,22 +1,20 @@
-using ClickQuest.Player;
-using ClickQuest.Controls;
-using ClickQuest.Data;
-using ClickQuest.Items;
-using ClickQuest.Windows;
-using ClickQuest.Heroes;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Heroes.Buffs;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.Controls;
+using ClickQuest.Data;
+using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Heroes.Buffs;
 using ClickQuest.Interfaces;
+using ClickQuest.Items;
+using ClickQuest.Player;
 
 namespace ClickQuest.Pages
 {
 	public partial class BlacksmithPage : Page
 	{
-		private Random _rng = new Random();
+		private readonly Random _rng = new Random();
 
 		public BlacksmithPage()
 		{
@@ -41,7 +39,7 @@ namespace ClickQuest.Pages
 		{
 			var b = sender as Button;
 
-			var result = AlertBox.Show($"Are you sure you want to melt {(b.CommandParameter as Item).Name}?\nThis action will destroy this item and create at least X {(b.CommandParameter as Item).Rarity} ingots.\nYou can get bonus ingots if you master Melter specialization (by melting more items).", MessageBoxButton.YesNo);
+			var result = AlertBox.Show($"Are you sure you want to melt {(b.CommandParameter as Item).Name}?\nThis action will destroy this item and create at least X {(b.CommandParameter as Item).Rarity} ingots.\nYou can get bonus ingots if you master Melter specialization (by melting more items).");
 
 			if (result == MessageBoxResult.Cancel)
 			{
@@ -50,11 +48,11 @@ namespace ClickQuest.Pages
 
 			if (b.CommandParameter is Material material)
 			{
-				MeltItem<Material>(material);
+				MeltItem(material);
 			}
 			else if (b.CommandParameter is Artifact artifact)
 			{
-				MeltItem<Artifact>(artifact);
+				MeltItem(artifact);
 			}
 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Blacksmith"]);
@@ -63,11 +61,11 @@ namespace ClickQuest.Pages
 			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Melting]++;
 		}
 
-		public void MeltItem<T>(T meltedItem) where T:Item, IMeltable
+		public void MeltItem<T>(T meltedItem) where T : Item, IMeltable
 		{
 			meltedItem.RemoveItem();
 
-			var ingotAmount = CalculateIngotAmount(meltedItem.BaseIngotBonus);
+			int ingotAmount = CalculateIngotAmount(meltedItem.BaseIngotBonus);
 
 			var ingot = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == meltedItem.Rarity);
 			ingot.Quantity += ingotAmount;
@@ -77,13 +75,14 @@ namespace ClickQuest.Pages
 
 		private int CalculateIngotAmount(int baseIngotBonus)
 		{
-			var ingotAmount = baseIngotBonus;
-			var meltingBuffPercent = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting];
+			int ingotAmount = baseIngotBonus;
+			int meltingBuffPercent = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting];
 			while (meltingBuffPercent >= 100)
 			{
 				ingotAmount += baseIngotBonus;
 				meltingBuffPercent -= 100;
 			}
+
 			if (meltingBuffPercent > 0)
 			{
 				int randomizedValue = _rng.Next(1, 101);
@@ -106,13 +105,13 @@ namespace ClickQuest.Pages
 
 		private void HandleCrafting<T>(Recipe recipe)
 		{
-			if(!MeetsCraftingRequirement(recipe))
+			if (!MeetsCraftingRequirement(recipe))
 			{
 				AlertBox.Show($"You dont meet Craftsmen specialization requirements to craft {recipe.Rarity.ToString()} artifacts.\nCraft more common items in order to master it.", MessageBoxButton.OK);
 				return;
-			}			
+			}
 
-			if(typeof(T) == typeof(Material))
+			if (typeof(T) == typeof(Material))
 			{
 				CheckAndRemoveMaterials(recipe);
 			}
@@ -138,7 +137,7 @@ namespace ClickQuest.Pages
 				return;
 			}
 
-			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using ingots?\nIngots needed: {recipe.IngotsRequired} {recipe.RarityString} ingots.\nThis action will destroy all ingots and this recipe.", MessageBoxButton.YesNo);
+			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using ingots?\nIngots needed: {recipe.IngotsRequired} {recipe.RarityString} ingots.\nThis action will destroy all ingots and this recipe.");
 
 			if (result == MessageBoxResult.Cancel)
 			{
@@ -167,7 +166,7 @@ namespace ClickQuest.Pages
 				return;
 			}
 
-			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using materials?\n{recipe.RequirementsDescription}\nThis action will destroy all materials and this recipe.", MessageBoxButton.YesNo);
+			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using materials?\n{recipe.RequirementsDescription}\nThis action will destroy all materials and this recipe.");
 
 			if (result == MessageBoxResult.Cancel)
 			{
@@ -208,7 +207,7 @@ namespace ClickQuest.Pages
 
 		private bool MeetsCraftingRequirement(Recipe recipe)
 		{
-			return User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting] >= (int)recipe.Rarity;
+			return User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting] >= (int) recipe.Rarity;
 		}
 
 		private void CraftIngotButton_Click(object sender, RoutedEventArgs e)
@@ -221,7 +220,7 @@ namespace ClickQuest.Pages
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
-			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
+			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
 		}
 
 		#endregion Events

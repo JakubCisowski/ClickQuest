@@ -1,56 +1,37 @@
-using ClickQuest.Data;
-using ClickQuest.Extensions.CollectionsManager;
-using ClickQuest.Player;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using ClickQuest.Data;
+using ClickQuest.Extensions.CollectionsManager;
+using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Player;
 
 namespace ClickQuest.Items
 {
-	public partial class Recipe : Item
+	public class Recipe : Item
 
 	{
-		private int _artifactId;
-		private Dictionary<int, int> _materialIds;
-
-		public int ArtifactId
-		{
-			get
-			{ return _artifactId; }
-			set { _artifactId = value; }
-		}
+		public int ArtifactId { get; set; }
 
 		public Artifact Artifact
 		{
-			get
-			{
-				return GameData.Artifacts.FirstOrDefault(x => x.Id == ArtifactId);
-			}
+			get { return GameData.Artifacts.FirstOrDefault(x => x.Id == ArtifactId); }
 		}
 
 		// Key is the Id of the material; value is the amount needed.
-		[NotMapped]
-		public Dictionary<int, int> MaterialIds
-		{
-			get { return _materialIds; }
-			set { _materialIds = value; }
-		}
+		[NotMapped] public Dictionary<int, int> MaterialIds { get; set; }
 
-		[NotMapped]
-		public string RequirementsDescription { get; private set; }
+		[NotMapped] public string RequirementsDescription { get; private set; }
 
 		[NotMapped]
 		public int IngotsRequired
 		{
-			get
-			{
-				return (int)(Rarity + 1) * 1000;
-			}
+			get { return (int) (Rarity + 1) * 1000; }
 		}
 
 		public void UpdateRequirementsDescription()
 		{
-			MaterialIds = GameData.Recipes.FirstOrDefault(x => x.Id == this.Id)?.MaterialIds;
+			MaterialIds = GameData.Recipes.FirstOrDefault(x => x.Id == Id)?.MaterialIds;
 
 			RequirementsDescription = "Materials required: ";
 
@@ -68,14 +49,9 @@ namespace ClickQuest.Items
 			Description = GameData.Artifacts.FirstOrDefault(x => x.Id == ArtifactId)?.Description;
 		}
 
-		public Recipe() : base ()
-		{
-
-		}
-
 		public override Recipe CopyItem(int quantity)
 		{
-			Recipe copy = new Recipe();
+			var copy = new Recipe();
 
 			copy.Id = Id;
 			copy.Name = Name;
@@ -97,15 +73,15 @@ namespace ClickQuest.Items
 
 		public override void AddItem()
 		{
-			CollectionsController.AddItemToCollection<Recipe>(this, User.Instance.CurrentHero.Recipes);
+			CollectionsController.AddItemToCollection(this, User.Instance.CurrentHero.Recipes);
 
-			this.AddAchievementProgress(1);
-			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
+			AddAchievementProgress(1);
+			InterfaceController.RefreshEquipmentPanels();
 		}
-		
+
 		public override void RemoveItem()
 		{
-			CollectionsController.RemoveItemFromCollection<Recipe>(this, User.Instance.CurrentHero.Recipes);
+			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Recipes);
 		}
 	}
 }

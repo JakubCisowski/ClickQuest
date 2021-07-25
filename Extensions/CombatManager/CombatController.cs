@@ -1,12 +1,8 @@
-using ClickQuest.Controls;
-using ClickQuest.Data;
-using ClickQuest.Pages;
-using ClickQuest.Player;
-using Microsoft.CSharp.RuntimeBinder;
-using System;
-using System.Dynamic;
 using System.Linq;
 using System.Windows;
+using ClickQuest.Controls;
+using ClickQuest.Pages;
+using ClickQuest.Player;
 
 namespace ClickQuest.Extensions.CombatManager
 {
@@ -15,14 +11,14 @@ namespace ClickQuest.Extensions.CombatManager
 		public static void StartAuraTimerOnCurrentRegion()
 		{
 			bool isCurrentHeroSelected = User.Instance.CurrentHero != null;
-			
+
 			if (!isCurrentHeroSelected)
 			{
 				return;
 			}
-			
-			bool isNoQuestActive = User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime));
-			var currentFrameContent = (Application.Current.MainWindow as GameWindow).CurrentFrame.Content;
+
+			bool isNoQuestActive = User.Instance.CurrentHero.Quests.All(x => x.EndDate == default);
+			object currentFrameContent = (Application.Current.MainWindow as GameWindow).CurrentFrame.Content;
 			bool isCurrentFrameContentARegion = currentFrameContent is RegionPage;
 
 			if (isNoQuestActive && isCurrentFrameContentARegion)

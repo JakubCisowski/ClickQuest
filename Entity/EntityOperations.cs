@@ -1,12 +1,11 @@
-using ClickQuest.Player;
-using ClickQuest.Heroes;
-using ClickQuest.Items;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using ClickQuest.Data;
-using ClickQuest.Pages;
+using ClickQuest.Extensions.CollectionsManager;
+using ClickQuest.Heroes;
 using ClickQuest.Heroes.Buffs;
+using ClickQuest.Items;
+using ClickQuest.Player;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClickQuest.Entity
 {
@@ -58,12 +57,7 @@ namespace ClickQuest.Entity
 			using (var db = new UserContext())
 			{
 				// Load user. Include all collections in it.
-				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Materials).
-					Include(x => x.Heroes).ThenInclude(x => x.Recipes).
-					Include(x => x.Heroes).ThenInclude(x => x.Artifacts).
-					Include(x => x.Heroes).ThenInclude(x => x.Quests).
-					Include(x => x.Heroes).
-					Include(x => x.Ingots).Include(x => x.DungeonKeys).FirstOrDefault();
+				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Materials).Include(x => x.Heroes).ThenInclude(x => x.Recipes).Include(x => x.Heroes).ThenInclude(x => x.Artifacts).Include(x => x.Heroes).ThenInclude(x => x.Quests).Include(x => x.Heroes).Include(x => x.Ingots).Include(x => x.DungeonKeys).FirstOrDefault();
 				User.Instance = user;
 
 				// Update MaterialIds dictionary and RequirementsDescription for each recipe.
@@ -96,9 +90,7 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
-				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Materials).
-					Include(x => x.Heroes).ThenInclude(x => x.Recipes).
-					Include(x => x.Heroes).ThenInclude(x => x.Artifacts).FirstOrDefault();
+				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Materials).Include(x => x.Heroes).ThenInclude(x => x.Recipes).Include(x => x.Heroes).ThenInclude(x => x.Artifacts).FirstOrDefault();
 
 				// Get the right hero to remove from.
 				var currentHero = user.Heroes.FirstOrDefault(x => x.Id == User.Instance.CurrentHero.Id);
@@ -137,12 +129,7 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
-				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Materials)
-					.Include(x => x.Heroes).ThenInclude(x => x.Recipes)
-					.Include(x => x.Heroes).ThenInclude(x => x.Artifacts)
-					.Include(x => x.Heroes).ThenInclude(x => x.Quests)
-					.Include(x => x.Heroes)
-					.FirstOrDefault();
+				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Materials).Include(x => x.Heroes).ThenInclude(x => x.Recipes).Include(x => x.Heroes).ThenInclude(x => x.Artifacts).Include(x => x.Heroes).ThenInclude(x => x.Quests).Include(x => x.Heroes).FirstOrDefault();
 
 				var hero = user.Heroes.FirstOrDefault(x => x.Id == heroToRemove.Id);
 				if (hero != null)
@@ -152,14 +139,17 @@ namespace ClickQuest.Entity
 					{
 						hero.Materials.RemoveAt(0);
 					}
+
 					while (hero.Artifacts.Count > 0)
 					{
 						hero.Artifacts.RemoveAt(0);
 					}
+
 					while (hero.Recipes.Count > 0)
 					{
 						hero.Recipes.RemoveAt(0);
 					}
+
 					while (hero.Quests.Count > 0)
 					{
 						hero.Quests.RemoveAt(0);
@@ -180,7 +170,7 @@ namespace ClickQuest.Entity
 			{
 				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Quests).FirstOrDefault();
 
-				var hero = user.Heroes.FirstOrDefault(x => x.Id == Player.User.Instance.CurrentHero.Id);
+				var hero = user.Heroes.FirstOrDefault(x => x.Id == User.Instance.CurrentHero.Id);
 
 				if (hero != null)
 				{
@@ -198,13 +188,7 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
-				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Materials)
-					.Include(x => x.Heroes).ThenInclude(x => x.Recipes)
-					.Include(x => x.Heroes).ThenInclude(x => x.Artifacts)
-					.Include(x => x.Heroes).ThenInclude(x => x.Quests)
-					.Include(x => x.Heroes)
-					.Include(x => x.Ingots).Include(x => x.DungeonKeys)
-					.FirstOrDefault();
+				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Materials).Include(x => x.Heroes).ThenInclude(x => x.Recipes).Include(x => x.Heroes).ThenInclude(x => x.Artifacts).Include(x => x.Heroes).ThenInclude(x => x.Quests).Include(x => x.Heroes).Include(x => x.Ingots).Include(x => x.DungeonKeys).FirstOrDefault();
 
 				// Delete all items and heroes (except for ingots - only set their quantity to 0).
 
@@ -212,45 +196,51 @@ namespace ClickQuest.Entity
 				{
 					user.Ingots[i].Quantity = 0;
 				}
+
 				for (int i = 0; i < user.DungeonKeys.Count; i++)
 				{
 					user.DungeonKeys[i].Quantity = 0;
 				}
+
 				foreach (var hero in user.Heroes)
 				{
 					while (hero.Materials.Count > 0)
 					{
 						hero.Materials.RemoveAt(0);
 					}
+
 					while (hero.Artifacts.Count > 0)
 					{
 						hero.Artifacts.RemoveAt(0);
 					}
+
 					while (hero.Recipes.Count > 0)
 					{
 						hero.Recipes.RemoveAt(0);
 					}
+
 					while (hero.Quests.Count > 0)
 					{
 						hero.Quests.RemoveAt(0);
 					}
 
 					// Reset Specializations.
-					hero.Specialization.SpecializationAmounts = new Extensions.CollectionsManager.ObservableDictionary<SpecializationType, int>();
-					Extensions.CollectionsManager.CollectionInitializer.InitializeDictionary<SpecializationType, int>(hero.Specialization.SpecializationAmounts);
-
+					hero.Specialization.SpecializationAmounts = new ObservableDictionary<SpecializationType, int>();
+					CollectionInitializer.InitializeDictionary(hero.Specialization.SpecializationAmounts);
 				}
+
 				while (user.Heroes.Count > 0)
 				{
 					db.Entry(user.Heroes[0]).State = EntityState.Deleted;
 					user.Heroes.RemoveAt(0);
 				}
+
 				user.Gold = 0;
 
 				// Reset Achievements.
 				var achievements = user.Achievements;
-				achievements.NumericAchievementCollection = new Extensions.CollectionsManager.ObservableDictionary<NumericAchievementType, long>();
-				Extensions.CollectionsManager.CollectionInitializer.InitializeDictionary<NumericAchievementType, long>(achievements.NumericAchievementCollection);
+				achievements.NumericAchievementCollection = new ObservableDictionary<NumericAchievementType, long>();
+				CollectionInitializer.InitializeDictionary(achievements.NumericAchievementCollection);
 				achievements.TotalTimePlayed = default;
 
 				db.SaveChanges();
@@ -289,7 +279,7 @@ namespace ClickQuest.Entity
 					}
 				}
 
-			db.Users.Update(user);
+				db.Users.Update(user);
 				db.SaveChanges();
 			}
 		}

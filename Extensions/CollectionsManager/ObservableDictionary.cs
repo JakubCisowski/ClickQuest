@@ -7,31 +7,16 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
-using ClickQuest.Data;
-using ClickQuest.Pages;
-using ClickQuest.Player;
 using ClickQuest.Extensions.EventsManager;
 
 namespace ClickQuest.Extensions.CollectionsManager
 {
 	[DebuggerDisplay("Count={Count}")]
-	public class ObservableDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TValue>>,
-		IDictionary<TKey, TValue>, INotifyCollectionChanged, INotifyPropertyChanged
+	public class ObservableDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TValue>>, IDictionary<TKey, TValue>, INotifyCollectionChanged, INotifyPropertyChanged
 	{
 		private readonly IDictionary<TKey, TValue> _dictionary;
 
-		public event NotifyCollectionChangedEventHandler CollectionChanged = (sender, args) => { };
-
-		public event PropertyChangedEventHandler PropertyChanged = (sender, args) => { };
-		
-		// Custom events.
-		
-		// Handle updating specialization text and tooltips - only for Specialization.SpecializationAmounts.
-		// Handle specialization buffs, amounts and threshold updates - for collections in Specialization.
-		public event SpecializationCollectionUpdatedEventHandler SpecializationCollectionUpdated;
-
-		public ObservableDictionary()
-			: this(new Dictionary<TKey, TValue>())
+		public ObservableDictionary() : this(new Dictionary<TKey, TValue>())
 		{
 		}
 
@@ -39,6 +24,16 @@ namespace ClickQuest.Extensions.CollectionsManager
 		{
 			_dictionary = dictionary;
 		}
+
+		public event NotifyCollectionChangedEventHandler CollectionChanged = (sender, args) => { };
+
+		public event PropertyChangedEventHandler PropertyChanged = (sender, args) => { };
+
+		// Custom events.
+
+		// Handle updating specialization text and tooltips - only for Specialization.SpecializationAmounts.
+		// Handle specialization buffs, amounts and threshold updates - for collections in Specialization.
+		public event SpecializationCollectionUpdatedEventHandler SpecializationCollectionUpdated;
 
 		private void AddWithNotification(KeyValuePair<TKey, TValue> item)
 		{
@@ -49,8 +44,7 @@ namespace ClickQuest.Extensions.CollectionsManager
 		{
 			_dictionary.Add(key, value);
 
-			CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
-				new KeyValuePair<TKey, TValue>(key, value)));
+			CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, new KeyValuePair<TKey, TValue>(key, value)));
 			PropertyChanged(this, new PropertyChangedEventArgs("Count"));
 			PropertyChanged(this, new PropertyChangedEventArgs("Keys"));
 			PropertyChanged(this, new PropertyChangedEventArgs("Values"));
@@ -61,8 +55,7 @@ namespace ClickQuest.Extensions.CollectionsManager
 			TValue value;
 			if (_dictionary.TryGetValue(key, out value) && _dictionary.Remove(key))
 			{
-				CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
-					new KeyValuePair<TKey, TValue>(key, value)));
+				CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>(key, value)));
 				PropertyChanged(this, new PropertyChangedEventArgs("Count"));
 				PropertyChanged(this, new PropertyChangedEventArgs("Keys"));
 				PropertyChanged(this, new PropertyChangedEventArgs("Values"));
@@ -80,11 +73,9 @@ namespace ClickQuest.Extensions.CollectionsManager
 			{
 				_dictionary[key] = value;
 
-				CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace,
-					new KeyValuePair<TKey, TValue>(key, value),
-					new KeyValuePair<TKey, TValue>(key, existing)));
+				CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new KeyValuePair<TKey, TValue>(key, value), new KeyValuePair<TKey, TValue>(key, existing)));
 				PropertyChanged(this, new PropertyChangedEventArgs("Values"));
-				
+
 				// Custom events.
 
 				// Update interface when Specialization Amount is changed.
@@ -116,7 +107,10 @@ namespace ClickQuest.Extensions.CollectionsManager
 		}
 
 
-		public ICollection<TKey> Keys => _dictionary.Keys;
+		public ICollection<TKey> Keys
+		{
+			get { return _dictionary.Keys; }
+		}
 
 		public bool Remove(TKey key)
 		{
@@ -130,13 +124,16 @@ namespace ClickQuest.Extensions.CollectionsManager
 		}
 
 
-		public ICollection<TValue> Values => _dictionary.Values;
+		public ICollection<TValue> Values
+		{
+			get { return _dictionary.Values; }
+		}
 
 
 		public TValue this[TKey key]
 		{
-			get => _dictionary[key];
-			set => UpdateWithNotification(key, value);
+			get { return _dictionary[key]; }
+			set { UpdateWithNotification(key, value); }
 		}
 
 		#endregion
@@ -168,9 +165,15 @@ namespace ClickQuest.Extensions.CollectionsManager
 			_dictionary.CopyTo(array, arrayIndex);
 		}
 
-		int ICollection<KeyValuePair<TKey, TValue>>.Count => _dictionary.Count;
+		int ICollection<KeyValuePair<TKey, TValue>>.Count
+		{
+			get { return _dictionary.Count; }
+		}
 
-		bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => _dictionary.IsReadOnly;
+		bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
+		{
+			get { return _dictionary.IsReadOnly; }
+		}
 
 		bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)
 		{

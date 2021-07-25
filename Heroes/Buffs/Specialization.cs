@@ -1,51 +1,57 @@
-using ClickQuest.Heroes;
-using ClickQuest.Items;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations.Schema;
-using ClickQuest.Data;
+using System.Runtime.CompilerServices;
 using ClickQuest.Extensions.CollectionsManager;
-using ClickQuest.Pages;
+using ClickQuest.Items;
 using ClickQuest.Player;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClickQuest.Heroes.Buffs
 {
 	public enum SpecializationType
 	{
-		Blessing, Clicking, Crafting, Buying, Melting, Questing, Dungeon
+		Blessing,
+		Clicking,
+		Crafting,
+		Buying,
+		Melting,
+		Questing,
+		Dungeon
 	}
-	
+
 	[Owned]
-	public partial class Specialization : INotifyPropertyChanged
+	public class Specialization : INotifyPropertyChanged
 	{
-		#region INotifyPropertyChanged
-		public event PropertyChangedEventHandler PropertyChanged;
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		private string _specCraftingText;
+
+		public Specialization()
 		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+			SpecializationBuffs = new ObservableDictionary<SpecializationType, int>();
+			SpecializationThresholds = new ObservableDictionary<SpecializationType, int>();
+			SpecializationAmounts = new ObservableDictionary<SpecializationType, int>();
+
+			CollectionInitializer.InitializeDictionary(SpecializationBuffs);
+			CollectionInitializer.InitializeDictionary(SpecializationThresholds);
+			CollectionInitializer.InitializeDictionary(SpecializationAmounts);
+
+			// Assign event handlers.
+			SpecializationAmounts.SpecializationCollectionUpdated += SpecializationAmounts_Updated;
+
+			UpdateSpecialization();
 		}
-		#endregion
 
-		[NotMapped]
-		public ObservableDictionary<SpecializationType, int> SpecializationBuffs { get; set; }
+		[NotMapped] public ObservableDictionary<SpecializationType, int> SpecializationBuffs { get; set; }
 
-		[NotMapped]
-		public ObservableDictionary<SpecializationType, int> SpecializationThresholds { get; set; }
+		[NotMapped] public ObservableDictionary<SpecializationType, int> SpecializationThresholds { get; set; }
 
-		[NotMapped]
-		public ObservableDictionary<SpecializationType, int> SpecializationAmounts { get; set; }
+		[NotMapped] public ObservableDictionary<SpecializationType, int> SpecializationAmounts { get; set; }
 
 		public string SpecializationAmountsString { get; set; }
 
-		private string _specCraftingText;
 		public string SpecCraftingText
 		{
-			get
-			{
-				return _specCraftingText;
-			}
+			get { return _specCraftingText; }
 			set
 			{
 				_specCraftingText = value;
@@ -53,53 +59,14 @@ namespace ClickQuest.Heroes.Buffs
 			}
 		}
 
-
-		#region Constants
-
-		// Base values for each buff.
-		const int SpecCraftingBuffBase = 1;
-		const int SpecBuyingBuffBase = 50;
-		const int SpecDungeonBuffBase = 30;
-
-		// Value limits for each buff.
-		const int SpecCraftingBuffLimit = 5;
-		const int SpecQuestingBuffLimit = 50;
-
-		// Const buff value for reaching every threshold.
-		const int SpecBlessingBuffBonus = 15; // Increases blessings duration in seconds. <Base - 0>
-		const int SpecClickingBuffBonus = 1;   // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
-		const int SpecCraftingBuffBonus = 1;  // Increases crafting rarity limit. <Base - 1> <Limit - 5>
-		const int SpecBuyingBuffBonus = 1;    // Increases shop offer size. <Base - 5>
-		const int SpecMeltingBuffBonus = 5;   // Increases % chance to get additional ingots when melting. <Base - 0%>
-		const int SpecQuestingBuffBonus = 5;  // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
-		const int SpecDungeonBuffBonus = 1;   // Increases amount of time to defeat dungeon boss in seconds <Base - 30s>
-
-		#endregion
-
 		#region Event handlers
 
 		private void SpecializationAmounts_Updated(object sender, EventArgs e)
 		{
 			User.Instance.CurrentHero?.Specialization.UpdateBuffs();
 		}
-		
+
 		#endregion
-		
-		public Specialization()
-		{
-			SpecializationBuffs = new ObservableDictionary<SpecializationType, int>();
-			SpecializationThresholds = new ObservableDictionary<SpecializationType, int>();
-			SpecializationAmounts = new ObservableDictionary<SpecializationType, int>();
-
-			CollectionInitializer.InitializeDictionary<SpecializationType, int>(SpecializationBuffs);
-			CollectionInitializer.InitializeDictionary<SpecializationType, int>(SpecializationThresholds);
-			CollectionInitializer.InitializeDictionary<SpecializationType, int>(SpecializationAmounts);
-			
-			// Assign event handlers.
-			SpecializationAmounts.SpecializationCollectionUpdated += SpecializationAmounts_Updated;
-
-			UpdateSpecialization();
-		}
 
 		public void UpdateThresholds()
 		{
@@ -107,14 +74,14 @@ namespace ClickQuest.Heroes.Buffs
 			SpecializationThresholds[SpecializationType.Blessing] = 10; // Amount increases every time a Blessing is bought.
 			SpecializationThresholds[SpecializationType.Clicking] = 10; // Amount increases every time user clicks on monster or boss.
 			SpecializationThresholds[SpecializationType.Crafting] = 10; // Amount increases every time an artifact is crafted using recipe.
-			SpecializationThresholds[SpecializationType.Buying] = 10;   // Amount increases every time a Recipe is bought.
-			SpecializationThresholds[SpecializationType.Melting] = 10;  // Amount increases every time a material is melted.
+			SpecializationThresholds[SpecializationType.Buying] = 10; // Amount increases every time a Recipe is bought.
+			SpecializationThresholds[SpecializationType.Melting] = 10; // Amount increases every time a material is melted.
 			SpecializationThresholds[SpecializationType.Questing] = 10; // Amount increases every time a quest is completed.
-			SpecializationThresholds[SpecializationType.Dungeon] = 10;  // Amount increases every time a dungeon is finished.
+			SpecializationThresholds[SpecializationType.Dungeon] = 10; // Amount increases every time a dungeon is finished.
 
 			// Changes that depend on hero class.
 			// Changing thresholds is easier to balance than changing buffconst.
-			switch(Player.User.Instance.CurrentHero?.HeroRace)
+			switch (User.Instance.CurrentHero?.HeroRace)
 			{
 				case HeroRace.Human:
 					SpecializationThresholds[SpecializationType.Crafting] = 5;
@@ -127,7 +94,7 @@ namespace ClickQuest.Heroes.Buffs
 					SpecializationThresholds[SpecializationType.Blessing] = 5;
 
 					break;
-					
+
 				case HeroRace.Dwarf:
 					SpecializationThresholds[SpecializationType.Melting] = 5;
 					SpecializationThresholds[SpecializationType.Dungeon] = 5;
@@ -140,22 +107,22 @@ namespace ClickQuest.Heroes.Buffs
 		{
 			// Updating current buff values based on constants and amount (which is not constant).
 
-			SpecializationBuffs[SpecializationType.Blessing] = (SpecializationAmounts[SpecializationType.Blessing] / SpecializationThresholds[SpecializationType.Blessing]) * SpecBlessingBuffBonus;
+			SpecializationBuffs[SpecializationType.Blessing] = SpecializationAmounts[SpecializationType.Blessing] / SpecializationThresholds[SpecializationType.Blessing] * SpecBlessingBuffBonus;
 
-			SpecializationBuffs[SpecializationType.Clicking] = (SpecializationAmounts[SpecializationType.Clicking] / SpecializationThresholds[SpecializationType.Clicking]) * SpecClickingBuffBonus;
+			SpecializationBuffs[SpecializationType.Clicking] = SpecializationAmounts[SpecializationType.Clicking] / SpecializationThresholds[SpecializationType.Clicking] * SpecClickingBuffBonus;
 
-			SpecializationBuffs[SpecializationType.Crafting] = Math.Min(SpecCraftingBuffBase + (SpecializationAmounts[SpecializationType.Crafting] / SpecializationThresholds[SpecializationType.Crafting]) * SpecCraftingBuffBonus, SpecCraftingBuffLimit);
-			
-			SpecializationBuffs[SpecializationType.Buying] = SpecBuyingBuffBase + (SpecializationAmounts[SpecializationType.Buying] / SpecializationThresholds[SpecializationType.Buying]) * SpecBuyingBuffBonus;
+			SpecializationBuffs[SpecializationType.Crafting] = Math.Min(SpecCraftingBuffBase + SpecializationAmounts[SpecializationType.Crafting] / SpecializationThresholds[SpecializationType.Crafting] * SpecCraftingBuffBonus, SpecCraftingBuffLimit);
 
-			SpecializationBuffs[SpecializationType.Melting] = (SpecializationAmounts[SpecializationType.Melting] / SpecializationThresholds[SpecializationType.Melting]) * SpecMeltingBuffBonus;
+			SpecializationBuffs[SpecializationType.Buying] = SpecBuyingBuffBase + SpecializationAmounts[SpecializationType.Buying] / SpecializationThresholds[SpecializationType.Buying] * SpecBuyingBuffBonus;
 
-			SpecializationBuffs[SpecializationType.Questing] = Math.Min((SpecializationAmounts[SpecializationType.Questing] / SpecializationThresholds[SpecializationType.Questing]) * SpecQuestingBuffBonus, SpecQuestingBuffLimit);
-			
-			SpecializationBuffs[SpecializationType.Dungeon] = SpecDungeonBuffBase + (SpecializationAmounts[SpecializationType.Dungeon] / SpecializationThresholds[SpecializationType.Dungeon]) * SpecDungeonBuffBonus;
-			
+			SpecializationBuffs[SpecializationType.Melting] = SpecializationAmounts[SpecializationType.Melting] / SpecializationThresholds[SpecializationType.Melting] * SpecMeltingBuffBonus;
+
+			SpecializationBuffs[SpecializationType.Questing] = Math.Min(SpecializationAmounts[SpecializationType.Questing] / SpecializationThresholds[SpecializationType.Questing] * SpecQuestingBuffBonus, SpecQuestingBuffLimit);
+
+			SpecializationBuffs[SpecializationType.Dungeon] = SpecDungeonBuffBase + SpecializationAmounts[SpecializationType.Dungeon] / SpecializationThresholds[SpecializationType.Dungeon] * SpecDungeonBuffBonus;
+
 			// Update crafting text (used in hero stats panel).
-			SpecCraftingText = ((Rarity)SpecializationBuffs[SpecializationType.Crafting]).ToString();
+			SpecCraftingText = ((Rarity) SpecializationBuffs[SpecializationType.Crafting]).ToString();
 		}
 
 		public void UpdateSpecialization()
@@ -166,12 +133,46 @@ namespace ClickQuest.Heroes.Buffs
 
 		public void SerializeSpecializationAmounts()
 		{
-			SpecializationAmountsString = Serialization.SerializeData<SpecializationType, int>(SpecializationAmounts);
+			SpecializationAmountsString = Serialization.SerializeData(SpecializationAmounts);
 		}
 
 		public void DeserializeSpecializationAmounts()
 		{
-			Serialization.DeserializeData<SpecializationType, int>(SpecializationAmountsString, SpecializationAmounts);	
+			Serialization.DeserializeData(SpecializationAmountsString, SpecializationAmounts);
 		}
+
+		#region INotifyPropertyChanged
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+
+		#endregion
+
+
+		#region Constants
+
+		// Base values for each buff.
+		private const int SpecCraftingBuffBase = 1;
+		private const int SpecBuyingBuffBase = 50;
+		private const int SpecDungeonBuffBase = 30;
+
+		// Value limits for each buff.
+		private const int SpecCraftingBuffLimit = 5;
+		private const int SpecQuestingBuffLimit = 50;
+
+		// Const buff value for reaching every threshold.
+		private const int SpecBlessingBuffBonus = 15; // Increases blessings duration in seconds. <Base - 0>
+		private const int SpecClickingBuffBonus = 1; // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
+		private const int SpecCraftingBuffBonus = 1; // Increases crafting rarity limit. <Base - 1> <Limit - 5>
+		private const int SpecBuyingBuffBonus = 1; // Increases shop offer size. <Base - 5>
+		private const int SpecMeltingBuffBonus = 5; // Increases % chance to get additional ingots when melting. <Base - 0%>
+		private const int SpecQuestingBuffBonus = 5; // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
+		private const int SpecDungeonBuffBonus = 1; // Increases amount of time to defeat dungeon boss in seconds <Base - 30s>
+
+		#endregion
 	}
 }

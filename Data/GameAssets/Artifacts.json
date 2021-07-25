@@ -1,9 +1,9 @@
 [
-    {
-        "Id": 1,
-        "Name": "TestArtifact",
-        "Rarity": 1,
-        "Description": "Artifact made for testing purposes - find 'Gray wolf leather' and 'Left bat wing' to create it.",
-        "Value": 1
-    }
+	{
+		"Id": 1,
+		"Name": "TestArtifact",
+		"Rarity": 1,
+		"Description": "Artifact made for testing purposes - find 'Gray wolf leather' and 'Left bat wing' to create it.",
+		"Value": 1
+	}
 ]

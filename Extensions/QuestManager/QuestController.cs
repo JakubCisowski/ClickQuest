@@ -1,7 +1,5 @@
 using ClickQuest.Data;
 using ClickQuest.Pages;
-using Microsoft.CSharp.RuntimeBinder;
-using System.Dynamic;
 
 namespace ClickQuest.Extensions.QuestManager
 {

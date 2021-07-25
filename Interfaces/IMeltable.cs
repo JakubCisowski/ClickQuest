@@ -2,6 +2,6 @@ namespace ClickQuest.Interfaces
 {
 	public interface IMeltable
 	{
-		int BaseIngotBonus{ get; }
+		int BaseIngotBonus { get; }
 	}
 }

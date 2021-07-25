@@ -1,22 +1,14 @@
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
 using ClickQuest.Extensions.CollectionsManager;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Player;
 
 namespace ClickQuest.Items
 {
-	public partial class Ingot : Item
+	public class Ingot : Item
 	{
-		public Ingot() : base()
-		{
-
-		}
-
 		public override Ingot CopyItem(int quantity)
 		{
-			Ingot copy = new Ingot();
+			var copy = new Ingot();
 
 			copy.Id = Id;
 			copy.Name = Name;
@@ -30,44 +22,45 @@ namespace ClickQuest.Items
 
 		public override void AddAchievementProgress(int amount)
 		{
-				NumericAchievementType achievementType = 0;
-				
-				// Increase achievement amount.
-				switch(Rarity)
-				{
-					case Rarity.General:
-						achievementType=NumericAchievementType.GeneralIngotsEarned;
-						break;
-					case Rarity.Fine:
-						achievementType=NumericAchievementType.FineIngotsEarned;
-						break;
-					case Rarity.Superior:
-						achievementType=NumericAchievementType.SuperiorIngotsEarned;
-						break;
-					case Rarity.Exceptional:
-						achievementType=NumericAchievementType.ExceptionalIngotsEarned;
-						break;
-					case Rarity.Mythic:
-						achievementType=NumericAchievementType.MythicIngotsEarned;
-						break;
-					case Rarity.Masterwork:
-						achievementType=NumericAchievementType.MasterworkIngotsEarned;
-						break;
-				}
-				User.Instance.Achievements.IncreaseAchievementValue(achievementType, amount);
+			NumericAchievementType achievementType = 0;
+
+			// Increase achievement amount.
+			switch (Rarity)
+			{
+				case Rarity.General:
+					achievementType = NumericAchievementType.GeneralIngotsEarned;
+					break;
+				case Rarity.Fine:
+					achievementType = NumericAchievementType.FineIngotsEarned;
+					break;
+				case Rarity.Superior:
+					achievementType = NumericAchievementType.SuperiorIngotsEarned;
+					break;
+				case Rarity.Exceptional:
+					achievementType = NumericAchievementType.ExceptionalIngotsEarned;
+					break;
+				case Rarity.Mythic:
+					achievementType = NumericAchievementType.MythicIngotsEarned;
+					break;
+				case Rarity.Masterwork:
+					achievementType = NumericAchievementType.MasterworkIngotsEarned;
+					break;
+			}
+
+			User.Instance.Achievements.IncreaseAchievementValue(achievementType, amount);
 		}
-		
+
 		public override void AddItem()
 		{
-			CollectionsController.AddItemToCollection<Ingot>(this, User.Instance.Ingots);
+			CollectionsController.AddItemToCollection(this, User.Instance.Ingots);
 
-			this.AddAchievementProgress(1);
-			Extensions.InterfaceManager.InterfaceController.RefreshEquipmentPanels();
+			AddAchievementProgress(1);
+			InterfaceController.RefreshEquipmentPanels();
 		}
-		
+
 		public override void RemoveItem()
 		{
-			CollectionsController.RemoveItemFromCollection<Ingot>(this, User.Instance.Ingots);
+			CollectionsController.RemoveItemFromCollection(this, User.Instance.Ingots);
 		}
 	}
 }

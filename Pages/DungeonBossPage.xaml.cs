@@ -1,10 +1,3 @@
-using ClickQuest.Player;
-using ClickQuest.Data;
-using ClickQuest.Enemies;
-using ClickQuest.Heroes;
-using ClickQuest.Heroes.Buffs;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Windows;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -13,40 +6,30 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Threading;
+using ClickQuest.Data;
+using ClickQuest.Enemies;
+using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Heroes;
+using ClickQuest.Heroes.Buffs;
+using ClickQuest.Player;
 
 namespace ClickQuest.Pages
 {
 	public partial class DungeonBossPage : Page, INotifyPropertyChanged
 	{
-		#region INotifyPropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		public DungeonBossPage()
 		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+			InitializeComponent();
+
+			SetupFightTimer();
+			SetupPoisonTimer();
 		}
-
-		#endregion INotifyPropertyChanged
-
-		#region Private Fields
-		private int _duration;
-		private Boss _boss;
-		private DispatcherTimer _fightTimer;
-		private Random _rng = new Random();
-		private DispatcherTimer _poisonTimer;
-		private int _poisonTicks;
-
-		#endregion
 
 		#region Properties
 
 		public int Duration
 		{
-			get
-			{
-				return _duration;
-			}
+			get { return _duration; }
 			set
 			{
 				_duration = value;
@@ -56,31 +39,17 @@ namespace ClickQuest.Pages
 
 		#endregion
 
-		public DungeonBossPage()
-		{
-			InitializeComponent();
-
-			SetupFightTimer();
-			SetupPoisonTimer();
-		}
-
 		private void SetupFightTimer()
 		{
-			_fightTimer = new DispatcherTimer
-			{
-				Interval = new TimeSpan(0, 0, 0, 1)
-			};
+			_fightTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};
 			_fightTimer.Tick += FightTimer_Tick;
 		}
 
 		private void SetupPoisonTimer()
 		{
-			var poisonIntervalMs = 500;
+			int poisonIntervalMs = 500;
 
-			_poisonTimer = new DispatcherTimer
-			{
-				Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs)
-			};
+			_poisonTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs)};
 			_poisonTimer.Tick += PoisonTimer_Tick;
 			_poisonTicks = 0;
 		}
@@ -101,18 +70,12 @@ namespace ClickQuest.Pages
 		private void BindFightInfoToInterface(Boss boss)
 		{
 			_boss = boss;
-			this.DataContext = _boss;
+			DataContext = _boss;
 
-			var binding = new Binding("Duration")
-			{
-				Source = this
-			};
+			var binding = new Binding("Duration") {Source = this};
 			TimeRemainingBlock.SetBinding(TextBlock.TextProperty, binding);
 
-			var binding2 = new Binding("Description")
-			{
-				Source = GameData.Dungeons.FirstOrDefault(x=>x.BossIds.Contains(boss.Id))
-			};
+			var binding2 = new Binding("Description") {Source = GameData.Dungeons.FirstOrDefault(x => x.BossIds.Contains(boss.Id))};
 			DungeonDescriptionBlock.SetBinding(TextBlock.TextProperty, binding2);
 		}
 
@@ -148,22 +111,21 @@ namespace ClickQuest.Pages
 		private void HandleInterfaceAfterBossDeath()
 		{
 			BossButton.IsEnabled = false;
-			this.TownButton.Visibility = Visibility.Visible;
+			TownButton.Visibility = Visibility.Visible;
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["DungeonBoss"]);
 		}
 
 		private void GrantBossReward()
 		{
-			var damageDealtToBoss = _boss.Health - _boss.CurrentHealth;
-			var experienceGained = Experience.CalculateMonsterXpReward(damageDealtToBoss);
+			int damageDealtToBoss = _boss.Health - _boss.CurrentHealth;
+			int experienceGained = Experience.CalculateMonsterXpReward(damageDealtToBoss);
 			User.Instance.CurrentHero.Experience += experienceGained;
 
 			// Grant boss loot.
 			// 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
-			int threshold = 5 - (_boss.CurrentHealth / (_boss.Health / 5));
+			int threshold = 5 - _boss.CurrentHealth / (_boss.Health / 5);
 			// 2. Iterate through every possible loot.
-			string lootText = "Experience gained: " + experienceGained + " \n" +
-							  "Loot: \n";
+			string lootText = "Experience gained: " + experienceGained + " \n" + "Loot: \n";
 
 			foreach (var loot in _boss.BossLoot)
 			{
@@ -182,22 +144,44 @@ namespace ClickQuest.Pages
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["DungeonBoss"]);
 
 			// Grant gold reward.
-			var goldReward = 2137; // (change value later)
-			User.Instance.Gold += goldReward; 
-			lootText += "- " + goldReward.ToString() + " (gold)\n";
+			int goldReward = 2137; // (change value later)
+			User.Instance.Gold += goldReward;
+			lootText += "- " + goldReward + " (gold)\n";
 
 			// [PRERELEASE] Display exp and loot for testing purposes.
-			this.TestRewardsBlock.Text = lootText;
+			TestRewardsBlock.Text = lootText;
 		}
 
 		private void StartPoisonTimer()
 		{
-			if (User.Instance.CurrentHero.PoisonDamage>0)
+			if (User.Instance.CurrentHero.PoisonDamage > 0)
 			{
 				_poisonTicks = 0;
 				_poisonTimer.Start();
 			}
 		}
+
+		#region INotifyPropertyChanged
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+
+		#endregion INotifyPropertyChanged
+
+		#region Private Fields
+
+		private int _duration;
+		private Boss _boss;
+		private DispatcherTimer _fightTimer;
+		private readonly Random _rng = new Random();
+		private DispatcherTimer _poisonTimer;
+		private int _poisonTicks;
+
+		#endregion
 
 		#region Events
 
@@ -219,7 +203,7 @@ namespace ClickQuest.Pages
 
 		private void PoisonTimer_Tick(object source, EventArgs e)
 		{
-			var poisonTicksMax = 5;
+			int poisonTicksMax = 5;
 
 			if (_poisonTicks >= poisonTicksMax)
 			{
@@ -227,9 +211,9 @@ namespace ClickQuest.Pages
 			}
 			else
 			{
-				int poisonDamage = Player.User.Instance.CurrentHero.PoisonDamage;
+				int poisonDamage = User.Instance.CurrentHero.PoisonDamage;
 				_boss.CurrentHealth -= poisonDamage;
-				
+
 				_poisonTicks++;
 
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.PoisonTicksAmount, 1);
@@ -242,7 +226,7 @@ namespace ClickQuest.Pages
 		{
 			StartPoisonTimer();
 
-			int damage = User.Instance.CurrentHero.CalculateClickDamage();			
+			int damage = User.Instance.CurrentHero.CalculateClickDamage();
 			_boss.CurrentHealth -= damage;
 
 			HandleBossDeathIfDefeated();
@@ -252,7 +236,7 @@ namespace ClickQuest.Pages
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
-			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
+			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
 
 			// [PRERELEASE]
 			TestRewardsBlock.Text = "";

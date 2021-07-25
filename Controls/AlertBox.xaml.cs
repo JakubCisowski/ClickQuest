@@ -5,41 +5,32 @@ namespace ClickQuest.Controls
 {
 	public partial class AlertBox : Window
 	{
-		#region Private Fields
-		private static MessageBoxResult Result = MessageBoxResult.OK;
-		private static AlertBox MessageBox;
-
-		#endregion
-
 		public AlertBox()
 		{
 			InitializeComponent();
-			this.Owner = Application.Current.MainWindow;
+			Owner = Application.Current.MainWindow;
 		}
 
 		public static MessageBoxResult Show(string content, MessageBoxButton buttons = MessageBoxButton.YesNo)
 		{
-			MessageBox = new AlertBox()
-			{
-				ContentBox = { Text = content }
-			};
+			MessageBox = new AlertBox {ContentBox = {Text = content}};
 
 			switch (buttons)
 			{
 				case MessageBoxButton.YesNo:
-					{
-						MessageBox.OkButton2.Visibility = Visibility.Hidden;
-						MessageBox.OkButton.Visibility = Visibility.Visible;
-						MessageBox.CancelButton.Visibility = Visibility.Visible;
-					}
+				{
+					MessageBox.OkButton2.Visibility = Visibility.Hidden;
+					MessageBox.OkButton.Visibility = Visibility.Visible;
+					MessageBox.CancelButton.Visibility = Visibility.Visible;
+				}
 					break;
 
 				case MessageBoxButton.OK:
-					{
-						MessageBox.OkButton2.Visibility = Visibility.Visible;
-						MessageBox.OkButton.Visibility = Visibility.Hidden;
-						MessageBox.CancelButton.Visibility = Visibility.Hidden;
-					}
+				{
+					MessageBox.OkButton2.Visibility = Visibility.Visible;
+					MessageBox.OkButton.Visibility = Visibility.Hidden;
+					MessageBox.CancelButton.Visibility = Visibility.Hidden;
+				}
 					break;
 			}
 
@@ -47,6 +38,13 @@ namespace ClickQuest.Controls
 
 			return Result;
 		}
+
+		#region Private Fields
+
+		private static MessageBoxResult Result = MessageBoxResult.OK;
+		private static AlertBox MessageBox;
+
+		#endregion
 
 		#region Events
 
@@ -68,7 +66,7 @@ namespace ClickQuest.Controls
 		{
 			if (e.ChangedButton == MouseButton.Left)
 			{
-				this.DragMove();
+				DragMove();
 			}
 		}
 

@@ -5,6 +5,8 @@ namespace ClickQuest.Entity
 {
 	public class UserContext : DbContext
 	{
+		public DbSet<User> Users { get; set; }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer(@"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ClickQuest.Entity.UserContext;");
@@ -13,18 +15,9 @@ namespace ClickQuest.Entity
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			// Seed the database with a sample, empty user.
-			modelBuilder.Entity<User>(u =>
-			{
-				u.HasData(new
-				{
-					Id = 1,
-					Gold = 0
-				});
-			});
+			modelBuilder.Entity<User>(u => { u.HasData(new {Id = 1, Gold = 0}); });
 
 			base.OnModelCreating(modelBuilder);
 		}
-
-		public DbSet<User> Users { get; set; }
 	}
 }

@@ -1,13 +1,11 @@
 <Page x:Class="ClickQuest.Pages.HeroStatsPage"
-		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-		xmlns:controlzEx="urn:controlzex"
-		xmlns:local="clr-namespace:ClickQuest"
-		mc:Ignorable="d" Title="Stats"
-		Height="728" Width="341">
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" Title="Stats"
+      Height="728" Width="341">
 
 	<!-- Material design resources for progres bar -->
 	<Page.Resources>
@@ -24,15 +22,15 @@
 		<StackPanel x:Name="HeroStatsPanel" Orientation="Vertical" HorizontalAlignment="Left" Width="323">
 			<!-- Hero info block -->
 			<TextBlock x:Name="HeroNameBlock" FontSize="22" TextAlignment="Center">
-					<!-- Hero name text-->
-					<Run Text="{Binding Path=Name}" FontWeight="DemiBold" />
-					<LineBreak />
-					<!-- Hero level text-->
-					<Run Text="{Binding Level, StringFormat='\{0\} lvl -'}" FontWeight="Normal" />
-					<!-- Hero race text-->
-					<Run Text="{Binding Mode=OneWay, Path=ThisHeroRace}" FontWeight="Normal" FontStyle="Italic" />
-					<!-- Hero class text-->
-					<Run Text="{Binding Mode=OneWay, Path=ThisHeroClass}" FontWeight="Normal" FontStyle="Italic" />
+				<!-- Hero name text-->
+				<Run Text="{Binding Path=Name}" FontWeight="DemiBold" />
+				<LineBreak />
+				<!-- Hero level text-->
+				<Run Text="{Binding Level, StringFormat='\{0\} lvl -'}" FontWeight="Normal" />
+				<!-- Hero race text-->
+				<Run Text="{Binding Mode=OneWay, Path=ThisHeroRace}" FontWeight="Normal" FontStyle="Italic" />
+				<!-- Hero class text-->
+				<Run Text="{Binding Mode=OneWay, Path=ThisHeroClass}" FontWeight="Normal" FontStyle="Italic" />
 			</TextBlock>
 
 			<!-- Experience grid -->
@@ -41,21 +39,20 @@
 				<Grid.ToolTip>
 					<ToolTip>
 						<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-								<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}" />
-								<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" />
-								<LineBreak />
-								<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='To next lvl: \{0\}'}" />
+							<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}" />
+							<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" />
+							<LineBreak />
+							<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='To next lvl: \{0\}'}" />
 						</TextBlock>
 					</ToolTip>
 				</Grid.ToolTip>
 
 				<!-- Experience progress bar -->
-				<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16" materialDesign:TransitionAssist.DisableTransitions="True">
-				</ProgressBar>
+				<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16" materialDesign:TransitionAssist.DisableTransitions="True" />
 
 				<!-- Progress text on experience progress bar -->
 				<TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold" />
-					
+
 			</Grid>
 
 			<Separator Height="2" Width="200" Margin="10" />
@@ -73,21 +70,21 @@
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="*" />
 				</Grid.ColumnDefinitions>
-				
+
 				<!-- Click damage panel-->
 				<StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
 					<!-- Click damage info tooltip -->
 					<StackPanel.ToolTip>
 						<ToolTip>
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
-								<Run Text="Damage you deal with every click on a monster/boss (doubled when critting)"/>
-								<LineBreak/>
-								<LineBreak/>
-								<Run Text="You can increase damage by: using blessings or damage artifacts"/>
-								<LineBreak/>
-								<Run Text="Also, you get bonus click damage when you level up"/>
-								<LineBreak/>
-								<Run Text="There is also on-hit click damage from Clicker Specialization, but it doesn't get multiplied upon critting"/>
+								<Run Text="Damage you deal with every click on a monster/boss (doubled when critting)" />
+								<LineBreak />
+								<LineBreak />
+								<Run Text="You can increase damage by: using blessings or damage artifacts" />
+								<LineBreak />
+								<Run Text="Also, you get bonus click damage when you level up" />
+								<LineBreak />
+								<Run Text="There is also on-hit click damage from Clicker Specialization, but it doesn't get multiplied upon critting" />
 							</TextBlock>
 						</ToolTip>
 					</StackPanel.ToolTip>
@@ -99,7 +96,7 @@
 				</StackPanel>
 
 				<!-- Click damage value (binding) -->
-				<TextBlock x:Name="ClickDamageBlock" Grid.Row="0" Grid.Column="1" FontSize="18" Margin="3" VerticalAlignment="Center" Text="{Binding Path=ClickDamage}"/>
+				<TextBlock x:Name="ClickDamageBlock" Grid.Row="0" Grid.Column="1" FontSize="18" Margin="3" VerticalAlignment="Center" Text="{Binding Path=ClickDamage}" />
 
 				<!-- Crit panel -->
 				<StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
@@ -107,14 +104,14 @@
 					<StackPanel.ToolTip>
 						<ToolTip>
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
-								<Run Text="Chance to deal double damage when clicking on a monster/boss"/>
-								<LineBreak/>
-								<LineBreak/>
-								<Run Text="You can increase crit chance by: using blessings or crit artifacts"/>
-								<LineBreak/>
-								<Run Text="You can't exceed 100% crit chance cap by any means'"/>
-								<LineBreak/>
-								<Run Text="This does not multiply damage from Clicker Specialization"/>
+								<Run Text="Chance to deal double damage when clicking on a monster/boss" />
+								<LineBreak />
+								<LineBreak />
+								<Run Text="You can increase crit chance by: using blessings or crit artifacts" />
+								<LineBreak />
+								<Run Text="You can't exceed 100% crit chance cap by any means'" />
+								<LineBreak />
+								<Run Text="This does not multiply damage from Clicker Specialization" />
 							</TextBlock>
 						</ToolTip>
 					</StackPanel.ToolTip>
@@ -134,16 +131,16 @@
 					<StackPanel.ToolTip>
 						<ToolTip>
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
-								<Run Text="Damage over time you deal after every click on a monster/boss"/>
-								<LineBreak/>
-								<Run Text="There are 5 ticks over 2.5s"/>
-								<LineBreak/>
-								<LineBreak/>
-								<Run Text="You can increase poison damage by: using blessings or poison artifacts"/>
+								<Run Text="Damage over time you deal after every click on a monster/boss" />
+								<LineBreak />
+								<Run Text="There are 5 ticks over 2.5s" />
+								<LineBreak />
+								<LineBreak />
+								<Run Text="You can increase poison damage by: using blessings or poison artifacts" />
 							</TextBlock>
 						</ToolTip>
 					</StackPanel.ToolTip>
-					
+
 					<!-- Poison damage icon-->
 					<materialDesign:PackIcon Width="22" Height="22" Kind="Water" Foreground="Green" VerticalAlignment="Center" />
 					<!-- Poison damage text-->
@@ -159,18 +156,18 @@
 					<StackPanel.ToolTip>
 						<ToolTip>
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
-								<Run Text="Idle damage you deal while fighting monsters (doesn't work in dungeons)"/>
-								<LineBreak/>
-								<Run Text="Damage scales with monster's max health"/>
-								<LineBreak/>
-								<LineBreak/>
-								<Run Text="You can increase Aura DPS by: using blessings or Aura artifacts"/>
-								<LineBreak/>
-								<Run Text="Also, you get bonus Aura DPS when you level up"/>
+								<Run Text="Idle damage you deal while fighting monsters (doesn't work in dungeons)" />
+								<LineBreak />
+								<Run Text="Damage scales with monster's max health" />
+								<LineBreak />
+								<LineBreak />
+								<Run Text="You can increase Aura DPS by: using blessings or Aura artifacts" />
+								<LineBreak />
+								<Run Text="Also, you get bonus Aura DPS when you level up" />
 							</TextBlock>
 						</ToolTip>
 					</StackPanel.ToolTip>
-					
+
 					<!-- Aura icon-->
 					<materialDesign:PackIcon Width="22" Height="22" Kind="Brightness5" Foreground="Yellow" VerticalAlignment="Center" />
 					<!-- Aura text-->
@@ -251,9 +248,9 @@
 					<!-- Icon -->
 					<materialDesign:PackIcon Width="30" Height="30" Kind="BookCross" Foreground="Black" HorizontalAlignment="Center" />
 					<!-- Name and timer -->
-					<TextBlock x:Name="BlessingDurationBlock" Text="" TextAlignment="Center" FontSize="18" Margin="0,5,0,0"/>
+					<TextBlock x:Name="BlessingDurationBlock" Text="" TextAlignment="Center" FontSize="18" Margin="0,5,0,0" />
 				</StackPanel>
-				
+
 				<Separator Grid.Column="1" Width="170" Height="2" Margin="5">
 					<Separator.LayoutTransform>
 						<RotateTransform Angle="90" />
@@ -263,9 +260,9 @@
 				<!-- Quest timer-->
 				<StackPanel Grid.Column="2" HorizontalAlignment="Center">
 					<!-- Icon -->
-					<materialDesign:PackIcon Width="30" Height="30" Kind="ProgressQuestion" Foreground="Black" HorizontalAlignment="Center"/>
+					<materialDesign:PackIcon Width="30" Height="30" Kind="ProgressQuestion" Foreground="Black" HorizontalAlignment="Center" />
 					<!-- Name and timer -->
-					<TextBlock x:Name="QuestDurationBlock" Text="" TextAlignment="Center" FontSize="18" Margin="0,5,0,0"/>
+					<TextBlock x:Name="QuestDurationBlock" Text="" TextAlignment="Center" FontSize="18" Margin="0,5,0,0" />
 				</StackPanel>
 
 			</Grid>

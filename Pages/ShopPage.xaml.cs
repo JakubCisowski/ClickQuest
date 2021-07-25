@@ -1,14 +1,13 @@
-using ClickQuest.Player;
-using ClickQuest.Controls;
-using ClickQuest.Data;
-using ClickQuest.Items;
-using ClickQuest.Heroes;
-using ClickQuest.Heroes.Buffs;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Collections.Generic;
+using ClickQuest.Controls;
+using ClickQuest.Data;
 using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Heroes.Buffs;
+using ClickQuest.Items;
+using ClickQuest.Player;
 
 namespace ClickQuest.Pages
 {
@@ -35,11 +34,24 @@ namespace ClickQuest.Pages
 			ItemsListViewBuy.Items.Refresh();
 		}
 
+		public List<Recipe> GetShopOfferAsRecipes()
+		{
+			var result = new List<Recipe>();
+			var listOfIds = GameData.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Buying]);
+
+			foreach (int id in listOfIds)
+			{
+				result.Add(GameData.Recipes.FirstOrDefault(x => x.Id == id));
+			}
+
+			return result;
+		}
+
 		#region Events
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
-			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
+			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
 		}
 
 		private void SellButton_Click(object sender, RoutedEventArgs e)
@@ -61,7 +73,7 @@ namespace ClickQuest.Pages
 
 			if (User.Instance.Gold >= recipe.Value)
 			{
-				var result = AlertBox.Show($"Are you sure you want to buy {recipe.Name} for {recipe.Value} gold?", MessageBoxButton.YesNo);
+				var result = AlertBox.Show($"Are you sure you want to buy {recipe.Name} for {recipe.Value} gold?");
 				if (result == MessageBoxResult.Cancel)
 				{
 					return;
@@ -82,18 +94,5 @@ namespace ClickQuest.Pages
 		}
 
 		#endregion Events
-
-		public List<Recipe> GetShopOfferAsRecipes()
-		{
-			var result = new List<Recipe>();
-			var listOfIds = GameData.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Buying]);
-
-			foreach (var id in listOfIds)
-			{
-				result.Add(GameData.Recipes.FirstOrDefault(x => x.Id == id));
-			}
-
-			return result;
-		}
 	}
 }

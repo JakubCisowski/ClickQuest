@@ -1,40 +1,40 @@
 [
   {
-    "Id": 0,
-    "Name": "TestBoss0",
-    "Health": 2000,
-    "Image": "/example.png",
-    "Description": "TestBoss0Desc",
-    "BossLoot": [
-      {
-        "ItemType": "Material",
-        "ItemId": 1,
-        "Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000, 1.0000]
-      },
-      {
-        "ItemType": "Recipe",
-        "ItemId": 1,
-        "Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
-      }
-    ]
+	"Id": 0,
+	"Name": "TestBoss0",
+	"Health": 2000,
+	"Image": "/example.png",
+	"Description": "TestBoss0Desc",
+	"BossLoot": [
+	  {
+		"ItemType": "Material",
+		"ItemId": 1,
+		"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000, 1.0000]
+	  },
+	  {
+		"ItemType": "Recipe",
+		"ItemId": 1,
+		"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+	  }
+	]
   },
   {
-      "Id": 1,
-      "Name": "TestBoss1",
-      "Health": 1500,
-      "Image": "/example.png",
-      "Description": "TestBoss1Desc",
-      "BossLoot": [
-          {
-              "ItemType": "Material",
-              "ItemId": 0,
-              "Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
-          },
-          {
-              "ItemType": "Material",
-              "ItemId": 2,
-              "Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
-          }
-      ]
-    }
+	  "Id": 1,
+	  "Name": "TestBoss1",
+	  "Health": 1500,
+	  "Image": "/example.png",
+	  "Description": "TestBoss1Desc",
+	  "BossLoot": [
+		  {
+			  "ItemType": "Material",
+			  "ItemId": 0,
+			  "Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+		  },
+		  {
+			  "ItemType": "Material",
+			  "ItemId": 2,
+			  "Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+		  }
+	  ]
+	}
   ]

@@ -5,9 +5,9 @@ namespace ClickQuest.Items
 {
 	public class MonsterLootPattern
 	{
-		public int ItemId{ get; set;}
-		public ItemType ItemType{ get; set;}
-		public double Frequency{ get; set;}
+		public int ItemId { get; set; }
+		public ItemType ItemType { get; set; }
+		public double Frequency { get; set; }
 
 		public Item Item
 		{
@@ -33,6 +33,5 @@ namespace ClickQuest.Items
 				return item;
 			}
 		}
-			
 	}
 }

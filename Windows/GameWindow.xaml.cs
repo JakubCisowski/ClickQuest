@@ -1,21 +1,38 @@
-﻿using ClickQuest.Player;
-using ClickQuest.Controls;
-using ClickQuest.Data;
-using ClickQuest.Entity;
-using ClickQuest.Items;
-using ClickQuest.Pages;
-using ClickQuest.Windows;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System;
 using System.Windows.Input;
+using ClickQuest.Controls;
+using ClickQuest.Data;
+using ClickQuest.Entity;
 using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Pages;
+using ClickQuest.Player;
+using ClickQuest.Windows;
 
 namespace ClickQuest
 {
 	public partial class GameWindow : Window, INotifyPropertyChanged
 	{
+		#region Private Fields
+
+		private string _locationInfo;
+
+		#endregion
+
+		public GameWindow()
+		{
+			InitializeComponent();
+
+			DataContext = this;
+
+			(GameData.Pages["MainMenu"] as MainMenuPage).UpdateCreateHeroButton();
+			(GameData.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
+
+			InterfaceController.ChangePage(GameData.Pages["MainMenu"], "");
+		}
+
 		#region INotifyPropertyChanged
 
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -27,19 +44,11 @@ namespace ClickQuest
 
 		#endregion INotifyPropertyChanged
 
-		#region Private Fields
-		private string _locationInfo;
-
-		#endregion
-
 		#region Properties
 
 		public string LocationInfo
 		{
-			get
-			{
-				return _locationInfo;
-			}
+			get { return _locationInfo; }
 			set
 			{
 				_locationInfo = value;
@@ -53,20 +62,8 @@ namespace ClickQuest
 		{
 			LocationInfoBorder.Visibility = LocationInfo == "" ? Visibility.Hidden : Visibility.Visible;
 		}
-		
+
 		#endregion
-
-		public GameWindow()
-		{
-			InitializeComponent();
-
-			this.DataContext = this;
-
-			(GameData.Pages["MainMenu"] as MainMenuPage).UpdateCreateHeroButton();
-			(GameData.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
-			
-			InterfaceController.ChangePage(Data.GameData.Pages["MainMenu"], "");
-		}
 
 		#region Events
 
@@ -85,7 +82,7 @@ namespace ClickQuest
 		{
 			if (e.ChangedButton == MouseButton.Left)
 			{
-				this.DragMove();
+				DragMove();
 			}
 		}
 
@@ -96,7 +93,7 @@ namespace ClickQuest
 
 		private void ExitButton_Click(object sender, RoutedEventArgs e)
 		{
-			var result = AlertBox.Show($"Are you sure you want to quit?\nAll progress will be saved.");
+			var result = AlertBox.Show("Are you sure you want to quit?\nAll progress will be saved.");
 
 			if (result == MessageBoxResult.OK)
 			{

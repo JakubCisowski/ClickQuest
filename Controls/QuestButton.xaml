@@ -1,12 +1,11 @@
 <UserControl x:Class="ClickQuest.Controls.QuestButton"
-		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:local="clr-namespace:ClickQuest"
-		mc:Ignorable="d"
-		Height="450" Width="220">
-		
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Height="450" Width="220">
+
 	<Button Click="QuestButton_Click">
 		<Grid>
 			<Grid.RowDefinitions>
@@ -17,16 +16,16 @@
 			</Grid.RowDefinitions>
 
 			<!-- Name text -->
-			<TextBlock x:Name="QuestName" Grid.Row="0" Text="{Binding Path=Name}" FontSize="20"/>
+			<TextBlock x:Name="QuestName" Grid.Row="0" Text="{Binding Path=Name}" FontSize="20" />
 
 			<!-- Description text -->
-			<TextBlock x:Name="QuestDescription" Grid.Row="1" Text="{Binding Path=Description}" FontSize="20"/>
+			<TextBlock x:Name="QuestDescription" Grid.Row="1" Text="{Binding Path=Description}" FontSize="20" />
 
 			<!-- Duration info text -->
-			<TextBlock x:Name="QuestDuration" Grid.Row="2" Text="{Binding Path=Duration}" FontSize="20"/>
+			<TextBlock x:Name="QuestDuration" Grid.Row="2" Text="{Binding Path=Duration}" FontSize="20" />
 
 			<!-- Panel for rewards-->
-			<TextBlock x:Name="QuestRewardsPanel" Grid.Row="3" Text="{Binding Path=RewardsDescription}" FontSize="20"/>
+			<TextBlock x:Name="QuestRewardsPanel" Grid.Row="3" Text="{Binding Path=RewardsDescription}" FontSize="20" />
 		</Grid>
 	</Button>
 </UserControl>
