@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Places;
 
 namespace ClickQuest.Pages
 {
@@ -27,27 +28,29 @@ namespace ClickQuest.Pages
 
 		private void GenerateRegionButtons()
 		{
-			// Create a button for each region.
 			for (int i = 0; i < GameData.Regions.Count; i++)
 			{
-				var button = new Button()
+				var region = GameData.Regions[i];
+
+				var regionButton = new Button()
 				{
-					Name = "Region" + GameData.Regions[i].Id.ToString(),
+					Name = "Region" + region.Id.ToString(),
 					Width = 150,
 					Height = 50,
+					Tag = region
 				};
 
-				var block = new TextBlock()
+				var regionBlock = new TextBlock()
 				{
-					Text = GameData.Regions[i].Name,
+					Text = region.Name,
 					FontSize = 20
 				};
 
-				button.Content = block;
+				regionButton.Content = regionBlock;
 
-				button.Click += RegionButton_Click;
+				regionButton.Click += RegionButton_Click;
 
-				RegionsPanel.Children.Insert(i + 1, button);
+				RegionsPanel.Children.Insert(i + 1, regionButton);
 			}
 		}
 
@@ -55,16 +58,14 @@ namespace ClickQuest.Pages
 
 		private void RegionButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Enter the chosen Region page.
-			var regionId = int.Parse((sender as Button).Name.Substring(6));
-			string regionName = GameData.Regions.FirstOrDefault(x => x.Id == regionId).Name;
+			var selectedRegion = (sender as Button).Tag as Region;
+			var regionName = selectedRegion.Name;
+			var selectedRegionPage = GameData.Pages[regionName] as RegionPage;
 
-			// Check if the current hero can enter this location (level requirement).
-			if (User.Instance.CurrentHero.Level >= GameData.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement)
+			bool canHeroEnterThisRegion = User.Instance.CurrentHero.Level >= selectedRegion.LevelRequirement;
+			if (canHeroEnterThisRegion)
 			{
-				var selectedRegionPage = GameData.Pages[regionName] as RegionPage;
-				(GameData.Pages[regionName] as RegionPage).StatsFrame.Refresh();
-				(GameData.Pages[regionName] as RegionPage).EquipmentFrame.Refresh();
+				InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(selectedRegionPage);
 
 				// Start AuraTimer if no quest is active.
 				if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default(DateTime)))
@@ -75,34 +76,27 @@ namespace ClickQuest.Pages
 				
 				InterfaceController.ChangePage(selectedRegionPage, $"{regionName}");
 			}
-			// Else display a warning.
 			else
 			{
-				AlertBox.Show($"To enter this location you need to be {GameData.Regions.FirstOrDefault(x => x.Id == regionId).LevelRequirement} lvl.\nGain experience by completing quests, and defeating monsters in previous regions!", MessageBoxButton.OK);
+				AlertBox.Show($"To enter this location you need to be {selectedRegion.LevelRequirement} lvl.\nGain experience by completing quests, and defeating monsters in previous regions!", MessageBoxButton.OK);
 			}
 		}
 
 		private void ShopButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Enter Shop page.
 			InterfaceController.ChangePage(Data.GameData.Pages["Shop"], "Shop");
 			(GameData.Pages["Shop"] as ShopPage).UpdateShop();
 		}
 
 		private void MainMenuButton_Click(object sender, RoutedEventArgs e)
 		{
-			(GameData.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
-
-			// Pause all blessings.
-			User.Instance.CurrentHero.PauseBlessing();
+			(GameData.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons(); 
 
 			// Pause all quest timers (so that quest doesn't finish while current hero is not selected).
 			User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate == default(DateTime))?.PauseTimer();
-
-			// Calculate time played on that hero.
+			
+			User.Instance.CurrentHero.PauseBlessing();
 			User.Instance.CurrentHero.UpdateTimePlayed();
-
-			// Set current hero to null.
 			User.Instance.CurrentHero = null;
 
 			InterfaceController.ChangePage(Data.GameData.Pages["MainMenu"], "");
@@ -110,28 +104,24 @@ namespace ClickQuest.Pages
 
 		private void QuestMenuButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Enter Quests page.
 			(GameData.Pages["QuestMenu"] as QuestMenuPage).LoadPage();
 			InterfaceController.ChangePage(Data.GameData.Pages["QuestMenu"], "Quests");
 		}
 
 		private void BlacksmithButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Enter Blacksmith page.
 			InterfaceController.ChangePage(Data.GameData.Pages["Blacksmith"], "Blacksmith");
 			(GameData.Pages["Blacksmith"] as BlacksmithPage).UpdateBlacksmithItems();
 		}
 
 		private void PriestButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Enter Priest page.
 			InterfaceController.ChangePage(Data.GameData.Pages["Priest"], "Priest");
 			(GameData.Pages["Priest"] as PriestPage).UpdatePriest();
 		}
 
 		private void DungeonSelectButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Enter DungeonSelect page.
 			InterfaceController.ChangePage(Data.GameData.Pages["DungeonSelect"], "Selecting dungeon group");
 		}
 
