@@ -2,6 +2,7 @@ using ClickQuest.Controls;
 using ClickQuest.Data;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Places;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -35,7 +36,6 @@ namespace ClickQuest.Pages
 
 		public void CreateMonsterButton()
 		{
-			// Create a new MonsterButton control.
 			var button = new MonsterButton(this);
 			this.RegionPanel.Children.Insert(1, button);
 		}
@@ -44,18 +44,9 @@ namespace ClickQuest.Pages
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Stop poison and aura ticks (so that the monster doesn't die when we're outside of RegionPage; and so that there's no exception when Timer attempts to tick in MainMenu).
-			foreach (var ctrl in RegionPanel.Children)
-			{
-				if (ctrl is MonsterButton m)
-				{
-					m.StopCombatTimers();
-					// Break - there should never be more than one MonsterButton.
-					break;
-				}
-			}
+			// Stop poison and aura ticks (so that the monster doesn't die when we're outside of RegionPage + no exception when Timer attempts to tick in MainMenu).
+			RegionPanel.Children.OfType<MonsterButton>().FirstOrDefault().StopCombatTimers();
 
-			// Go back to Town.
 			InterfaceController.ChangePage(Data.GameData.Pages["Town"], "Town");
 		}
 
