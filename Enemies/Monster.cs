@@ -10,7 +10,10 @@ namespace ClickQuest.Enemies
 
 		public override int CurrentHealth
 		{
-			get { return _currentHealth; }
+			get
+			{
+				return _currentHealth;
+			}
 			set
 			{
 				// value - new current health
@@ -37,7 +40,10 @@ namespace ClickQuest.Enemies
 
 		public List<MonsterLootPattern> Loot
 		{
-			get { return _loot; }
+			get
+			{
+				return _loot;
+			}
 			set
 			{
 				_loot = value;

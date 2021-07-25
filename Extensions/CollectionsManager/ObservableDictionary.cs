@@ -109,7 +109,10 @@ namespace ClickQuest.Extensions.CollectionsManager
 
 		public ICollection<TKey> Keys
 		{
-			get { return _dictionary.Keys; }
+			get
+			{
+				return _dictionary.Keys;
+			}
 		}
 
 		public bool Remove(TKey key)
@@ -126,14 +129,23 @@ namespace ClickQuest.Extensions.CollectionsManager
 
 		public ICollection<TValue> Values
 		{
-			get { return _dictionary.Values; }
+			get
+			{
+				return _dictionary.Values;
+			}
 		}
 
 
 		public TValue this[TKey key]
 		{
-			get { return _dictionary[key]; }
-			set { UpdateWithNotification(key, value); }
+			get
+			{
+				return _dictionary[key];
+			}
+			set
+			{
+				UpdateWithNotification(key, value);
+			}
 		}
 
 		#endregion
@@ -167,12 +179,18 @@ namespace ClickQuest.Extensions.CollectionsManager
 
 		int ICollection<KeyValuePair<TKey, TValue>>.Count
 		{
-			get { return _dictionary.Count; }
+			get
+			{
+				return _dictionary.Count;
+			}
 		}
 
 		bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
 		{
-			get { return _dictionary.IsReadOnly; }
+			get
+			{
+				return _dictionary.IsReadOnly;
+			}
 		}
 
 		bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)

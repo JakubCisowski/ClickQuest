@@ -48,7 +48,10 @@ namespace ClickQuest
 
 		public string LocationInfo
 		{
-			get { return _locationInfo; }
+			get
+			{
+				return _locationInfo;
+			}
 			set
 			{
 				_locationInfo = value;

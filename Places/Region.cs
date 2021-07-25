@@ -33,7 +33,10 @@ namespace ClickQuest.Places
 
 		public int Id
 		{
-			get { return _id; }
+			get
+			{
+				return _id;
+			}
 			set
 			{
 				_id = value;
@@ -43,7 +46,10 @@ namespace ClickQuest.Places
 
 		public string Name
 		{
-			get { return _name; }
+			get
+			{
+				return _name;
+			}
 			set
 			{
 				_name = value;
@@ -53,7 +59,10 @@ namespace ClickQuest.Places
 
 		public string Description
 		{
-			get { return _description; }
+			get
+			{
+				return _description;
+			}
 			set
 			{
 				_description = value;
@@ -63,7 +72,10 @@ namespace ClickQuest.Places
 
 		public string Background
 		{
-			get { return _background; }
+			get
+			{
+				return _background;
+			}
 			set
 			{
 				_background = value;
@@ -73,7 +85,10 @@ namespace ClickQuest.Places
 
 		public List<MonsterSpawnPattern> Monsters
 		{
-			get { return _monsters; }
+			get
+			{
+				return _monsters;
+			}
 			set
 			{
 				_monsters = value;
@@ -83,7 +98,10 @@ namespace ClickQuest.Places
 
 		public int LevelRequirement
 		{
-			get { return _levelRequirement; }
+			get
+			{
+				return _levelRequirement;
+			}
 			set
 			{
 				_levelRequirement = value;

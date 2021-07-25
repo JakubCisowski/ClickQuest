@@ -152,7 +152,10 @@ namespace ClickQuest.Controls
 
 		public Monster Monster
 		{
-			get { return _monster; }
+			get
+			{
+				return _monster;
+			}
 			set
 			{
 				_monster = value;
@@ -162,7 +165,10 @@ namespace ClickQuest.Controls
 
 		public Region Region
 		{
-			get { return _regionPage.Region; }
+			get
+			{
+				return _regionPage.Region;
+			}
 		}
 
 		#endregion

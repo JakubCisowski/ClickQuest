@@ -45,7 +45,10 @@ namespace ClickQuest.Items
 
 		public int Id
 		{
-			get { return _id; }
+			get
+			{
+				return _id;
+			}
 			set
 			{
 				_id = value;
@@ -55,7 +58,10 @@ namespace ClickQuest.Items
 
 		public string Name
 		{
-			get { return _name; }
+			get
+			{
+				return _name;
+			}
 			set
 			{
 				_name = value;
@@ -65,7 +71,10 @@ namespace ClickQuest.Items
 
 		public int Value
 		{
-			get { return _value; }
+			get
+			{
+				return _value;
+			}
 			set
 			{
 				_value = value;
@@ -75,7 +84,10 @@ namespace ClickQuest.Items
 
 		public Rarity Rarity
 		{
-			get { return _rarity; }
+			get
+			{
+				return _rarity;
+			}
 			set
 			{
 				_rarity = value;
@@ -85,7 +97,10 @@ namespace ClickQuest.Items
 
 		public int Quantity
 		{
-			get { return _quantity; }
+			get
+			{
+				return _quantity;
+			}
 			set
 			{
 				_quantity = value;
@@ -104,7 +119,10 @@ namespace ClickQuest.Items
 
 		public string Description
 		{
-			get { return _description; }
+			get
+			{
+				return _description;
+			}
 			set
 			{
 				_description = value;
@@ -114,7 +132,10 @@ namespace ClickQuest.Items
 
 		public string RarityString
 		{
-			get { return Rarity.ToString(); }
+			get
+			{
+				return Rarity.ToString();
+			}
 		}
 
 		#endregion Properties

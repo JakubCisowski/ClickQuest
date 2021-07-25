@@ -41,17 +41,23 @@ namespace ClickQuest.Heroes.Buffs
 			UpdateSpecialization();
 		}
 
-		[NotMapped] public ObservableDictionary<SpecializationType, int> SpecializationBuffs { get; set; }
+		[NotMapped]
+		public ObservableDictionary<SpecializationType, int> SpecializationBuffs { get; set; }
 
-		[NotMapped] public ObservableDictionary<SpecializationType, int> SpecializationThresholds { get; set; }
+		[NotMapped]
+		public ObservableDictionary<SpecializationType, int> SpecializationThresholds { get; set; }
 
-		[NotMapped] public ObservableDictionary<SpecializationType, int> SpecializationAmounts { get; set; }
+		[NotMapped]
+		public ObservableDictionary<SpecializationType, int> SpecializationAmounts { get; set; }
 
 		public string SpecializationAmountsString { get; set; }
 
 		public string SpecCraftingText
 		{
-			get { return _specCraftingText; }
+			get
+			{
+				return _specCraftingText;
+			}
 			set
 			{
 				_specCraftingText = value;

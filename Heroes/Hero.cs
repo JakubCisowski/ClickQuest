@@ -215,7 +215,10 @@ namespace ClickQuest.Heroes
 
 		public string Name
 		{
-			get { return _name; }
+			get
+			{
+				return _name;
+			}
 			set
 			{
 				_name = value;
@@ -225,7 +228,10 @@ namespace ClickQuest.Heroes
 
 		public int Experience
 		{
-			get { return _experience; }
+			get
+			{
+				return _experience;
+			}
 			set
 			{
 				// Dirty code! Only when ExperienceToNextLvl is 0, we can be sure that we are loading Entity AND not killing any monster/boss.
@@ -246,7 +252,10 @@ namespace ClickQuest.Heroes
 		[NotMapped]
 		public int ExperienceToNextLvl
 		{
-			get { return _experienceToNextLvl; }
+			get
+			{
+				return _experienceToNextLvl;
+			}
 			set
 			{
 				_experienceToNextLvl = value;
@@ -257,7 +266,10 @@ namespace ClickQuest.Heroes
 		[NotMapped]
 		public int ExperienceToNextLvlTotal
 		{
-			get { return _experienceToNextLvlTotal; }
+			get
+			{
+				return _experienceToNextLvlTotal;
+			}
 			set
 			{
 				_experienceToNextLvlTotal = value;
@@ -268,7 +280,10 @@ namespace ClickQuest.Heroes
 		[NotMapped]
 		public int ExperienceProgress
 		{
-			get { return _experienceProgress; }
+			get
+			{
+				return _experienceProgress;
+			}
 			set
 			{
 				_experienceProgress = value;
@@ -278,7 +293,10 @@ namespace ClickQuest.Heroes
 
 		public HeroRace HeroRace
 		{
-			get { return _heroRace; }
+			get
+			{
+				return _heroRace;
+			}
 			set
 			{
 				_heroRace = value;
@@ -288,7 +306,10 @@ namespace ClickQuest.Heroes
 
 		public HeroClass HeroClass
 		{
-			get { return _heroClass; }
+			get
+			{
+				return _heroClass;
+			}
 			set
 			{
 				_heroClass = value;
@@ -298,7 +319,10 @@ namespace ClickQuest.Heroes
 
 		public int ClickDamage
 		{
-			get { return _clickDamage; }
+			get
+			{
+				return _clickDamage;
+			}
 			set
 			{
 				_clickDamage = value;
@@ -308,7 +332,10 @@ namespace ClickQuest.Heroes
 
 		public double CritChance
 		{
-			get { return _critChance; }
+			get
+			{
+				return _critChance;
+			}
 			set
 			{
 				_critChance = value;
@@ -318,7 +345,10 @@ namespace ClickQuest.Heroes
 
 		public int PoisonDamage
 		{
-			get { return _poisonDamage; }
+			get
+			{
+				return _poisonDamage;
+			}
 			set
 			{
 				_poisonDamage = value;
@@ -328,7 +358,10 @@ namespace ClickQuest.Heroes
 
 		public int Level
 		{
-			get { return _level; }
+			get
+			{
+				return _level;
+			}
 			set
 			{
 				_level = value;
@@ -338,12 +371,18 @@ namespace ClickQuest.Heroes
 
 		public string ThisHeroClass
 		{
-			get { return _heroClass.ToString(); }
+			get
+			{
+				return _heroClass.ToString();
+			}
 		}
 
 		public string ThisHeroRace
 		{
-			get { return _heroRace.ToString(); }
+			get
+			{
+				return _heroRace.ToString();
+			}
 		}
 
 		public string CritChanceText
@@ -357,7 +396,10 @@ namespace ClickQuest.Heroes
 
 		public List<Material> Materials
 		{
-			get { return _materials; }
+			get
+			{
+				return _materials;
+			}
 			set
 			{
 				_materials = value;
@@ -367,7 +409,10 @@ namespace ClickQuest.Heroes
 
 		public List<Recipe> Recipes
 		{
-			get { return _recipes; }
+			get
+			{
+				return _recipes;
+			}
 			set
 			{
 				_recipes = value;
@@ -377,7 +422,10 @@ namespace ClickQuest.Heroes
 
 		public List<Artifact> Artifacts
 		{
-			get { return _artifacts; }
+			get
+			{
+				return _artifacts;
+			}
 			set
 			{
 				_artifacts = value;
@@ -387,7 +435,10 @@ namespace ClickQuest.Heroes
 
 		public List<Quest> Quests
 		{
-			get { return _quests; }
+			get
+			{
+				return _quests;
+			}
 			set
 			{
 				_quests = value;
@@ -397,7 +448,10 @@ namespace ClickQuest.Heroes
 
 		public Blessing Blessing
 		{
-			get { return _blessing; }
+			get
+			{
+				return _blessing;
+			}
 			set
 			{
 				_blessing = value;
@@ -407,7 +461,10 @@ namespace ClickQuest.Heroes
 
 		public Specialization Specialization
 		{
-			get { return _specialization; }
+			get
+			{
+				return _specialization;
+			}
 			set
 			{
 				_specialization = value;
@@ -417,41 +474,63 @@ namespace ClickQuest.Heroes
 
 		public int LevelDamageBonus
 		{
-			get { return ClickDamagePerLevel * Level; }
+			get
+			{
+				return ClickDamagePerLevel * Level;
+			}
 		}
 
 		public int LevelDamageBonusTotal
 		{
-			get { return ClickDamagePerLevel * Level + 2; }
+			get
+			{
+				return ClickDamagePerLevel * Level + 2;
+			}
 		}
 
 		public double LevelCritBonus
 		{
-			get { return CritChancePerLevel * Level * 100; }
+			get
+			{
+				return CritChancePerLevel * Level * 100;
+			}
 		}
 
 		public double LevelCritBonusTotal
 		{
-			get { return CritChancePerLevel * Level * 100 + 25; }
+			get
+			{
+				return CritChancePerLevel * Level * 100 + 25;
+			}
 		}
 
 		public int LevelPoisonBonus
 		{
-			get { return PoisonDamagePerLevel * Level; }
+			get
+			{
+				return PoisonDamagePerLevel * Level;
+			}
 		}
 
 		public int LevelPoisonBonusTotal
 		{
-			get { return PoisonDamagePerLevel * Level + 1; }
+			get
+			{
+				return PoisonDamagePerLevel * Level + 1;
+			}
 		}
 
 		public TimeSpan TimePlayed { get; set; }
 
-		[NotMapped] public DateTime SessionStartDate { get; set; }
+		[NotMapped]
+		public DateTime SessionStartDate { get; set; }
 
 		public double AuraDamage
 		{
-			get { return _auraDamage; }
+			get
+			{
+				return _auraDamage;
+			}
 			set
 			{
 				_auraDamage = value;
@@ -461,7 +540,10 @@ namespace ClickQuest.Heroes
 
 		public double AuraAttackSpeed
 		{
-			get { return _auraAttackSpeed; }
+			get
+			{
+				return _auraAttackSpeed;
+			}
 			set
 			{
 				_auraAttackSpeed = value;

@@ -15,18 +15,26 @@ namespace ClickQuest.Items
 
 		public Artifact Artifact
 		{
-			get { return GameData.Artifacts.FirstOrDefault(x => x.Id == ArtifactId); }
+			get
+			{
+				return GameData.Artifacts.FirstOrDefault(x => x.Id == ArtifactId);
+			}
 		}
 
 		// Key is the Id of the material; value is the amount needed.
-		[NotMapped] public Dictionary<int, int> MaterialIds { get; set; }
+		[NotMapped]
+		public Dictionary<int, int> MaterialIds { get; set; }
 
-		[NotMapped] public string RequirementsDescription { get; private set; }
+		[NotMapped]
+		public string RequirementsDescription { get; private set; }
 
 		[NotMapped]
 		public int IngotsRequired
 		{
-			get { return (int) (Rarity + 1) * 1000; }
+			get
+			{
+				return (int) (Rarity + 1) * 1000;
+			}
 		}
 
 		public void UpdateRequirementsDescription()

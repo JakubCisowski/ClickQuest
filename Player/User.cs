@@ -74,7 +74,10 @@ namespace ClickQuest.Player
 
 		public List<Hero> Heroes
 		{
-			get { return _heroes; }
+			get
+			{
+				return _heroes;
+			}
 			set
 			{
 				_heroes = value;
@@ -84,7 +87,10 @@ namespace ClickQuest.Player
 
 		public List<Ingot> Ingots
 		{
-			get { return _ingots; }
+			get
+			{
+				return _ingots;
+			}
 			set
 			{
 				_ingots = value;
@@ -94,7 +100,10 @@ namespace ClickQuest.Player
 
 		public List<DungeonKey> DungeonKeys
 		{
-			get { return _dungeonKeys; }
+			get
+			{
+				return _dungeonKeys;
+			}
 			set
 			{
 				_dungeonKeys = value;
@@ -105,7 +114,10 @@ namespace ClickQuest.Player
 		[NotMapped]
 		public Hero CurrentHero
 		{
-			get { return _currentHero; }
+			get
+			{
+				return _currentHero;
+			}
 			set
 			{
 				_currentHero = value;
@@ -117,7 +129,10 @@ namespace ClickQuest.Player
 
 		public int Gold
 		{
-			get { return _gold; }
+			get
+			{
+				return _gold;
+			}
 			set
 			{
 				if (value - _gold > 0)
@@ -138,7 +153,10 @@ namespace ClickQuest.Player
 
 		public Achievements Achievements
 		{
-			get { return _achievements; }
+			get
+			{
+				return _achievements;
+			}
 			set
 			{
 				_achievements = value;

@@ -69,7 +69,7 @@ namespace ClickQuest.Extensions.InterfaceManager
 			var currencyColor = Colors.GetRarityColor((Rarity) rarityValue);
 			currencyTooltipTextBlock.Foreground = currencyColor;
 
-			currencyTooltipTextBlock.Text = ((Rarity) rarityValue) + " " + (typeof(T) == typeof(Ingot) ? "Ingots" : "Dungeon Keys");
+			currencyTooltipTextBlock.Text = (Rarity) rarityValue + " " + (typeof(T) == typeof(Ingot) ? "Ingots" : "Dungeon Keys");
 
 			currencyTooltip.Content = currencyTooltipTextBlock;
 

@@ -196,7 +196,10 @@ namespace ClickQuest.Adventures
 
 		public int Id
 		{
-			get { return _id; }
+			get
+			{
+				return _id;
+			}
 			set
 			{
 				_id = value;
@@ -207,7 +210,10 @@ namespace ClickQuest.Adventures
 		[NotMapped]
 		public bool Rare
 		{
-			get { return _rare; }
+			get
+			{
+				return _rare;
+			}
 			set
 			{
 				_rare = value;
@@ -218,7 +224,10 @@ namespace ClickQuest.Adventures
 		[NotMapped]
 		public HeroClass HeroClass
 		{
-			get { return _heroClass; }
+			get
+			{
+				return _heroClass;
+			}
 			set
 			{
 				_heroClass = value;
@@ -229,7 +238,10 @@ namespace ClickQuest.Adventures
 		[NotMapped]
 		public string Name
 		{
-			get { return _name; }
+			get
+			{
+				return _name;
+			}
 			set
 			{
 				_name = value;
@@ -240,7 +252,10 @@ namespace ClickQuest.Adventures
 		[NotMapped]
 		public int Duration
 		{
-			get { return _duration; }
+			get
+			{
+				return _duration;
+			}
 			set
 			{
 				_duration = value;
@@ -251,7 +266,10 @@ namespace ClickQuest.Adventures
 		[NotMapped]
 		public string Description
 		{
-			get { return _description; }
+			get
+			{
+				return _description;
+			}
 			set
 			{
 				_description = value;
@@ -259,17 +277,24 @@ namespace ClickQuest.Adventures
 			}
 		}
 
-		[NotMapped] public List<int> RewardRecipeIds { get; set; }
+		[NotMapped]
+		public List<int> RewardRecipeIds { get; set; }
 
-		[NotMapped] public List<int> RewardMaterialIds { get; set; }
+		[NotMapped]
+		public List<int> RewardMaterialIds { get; set; }
 
-		[NotMapped] public List<int> RewardBlessingIds { get; set; }
+		[NotMapped]
+		public List<int> RewardBlessingIds { get; set; }
 
-		[NotMapped] public List<int> RewardIngotIds { get; set; }
+		[NotMapped]
+		public List<int> RewardIngotIds { get; set; }
 
 		public DateTime EndDate
 		{
-			get { return _endDate; }
+			get
+			{
+				return _endDate;
+			}
 			set
 			{
 				_endDate = value;
@@ -280,7 +305,10 @@ namespace ClickQuest.Adventures
 		[NotMapped]
 		public int TicksCountNumber
 		{
-			get { return _ticksCountNumber; }
+			get
+			{
+				return _ticksCountNumber;
+			}
 			set
 			{
 				_ticksCountNumber = value;
@@ -291,7 +319,10 @@ namespace ClickQuest.Adventures
 		[NotMapped]
 		public string TicksCountText
 		{
-			get { return _ticksCountText; }
+			get
+			{
+				return _ticksCountText;
+			}
 			set
 			{
 				_ticksCountText = value;
@@ -299,11 +330,15 @@ namespace ClickQuest.Adventures
 			}
 		}
 
-		[NotMapped] public string RewardsDescription { get; private set; }
+		[NotMapped]
+		public string RewardsDescription { get; private set; }
 
 		public bool IsFinished
 		{
-			get { return TicksCountNumber <= 0; }
+			get
+			{
+				return TicksCountNumber <= 0;
+			}
 		}
 
 		#endregion

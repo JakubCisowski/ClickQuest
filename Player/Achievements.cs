@@ -58,13 +58,17 @@ namespace ClickQuest.Player
 			CollectionInitializer.InitializeDictionary(NumericAchievementCollection);
 		}
 
-		[NotMapped] public ObservableDictionary<NumericAchievementType, long> NumericAchievementCollection { get; set; }
+		[NotMapped]
+		public ObservableDictionary<NumericAchievementType, long> NumericAchievementCollection { get; set; }
 
 		public string AchievementCollectionString { get; set; }
 
 		public TimeSpan TotalTimePlayed
 		{
-			get { return _totalTimePlayed; }
+			get
+			{
+				return _totalTimePlayed;
+			}
 			set
 			{
 				_totalTimePlayed = value;

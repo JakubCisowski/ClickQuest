@@ -176,7 +176,10 @@ namespace ClickQuest.Heroes.Buffs
 
 		public int Id
 		{
-			get { return _id; }
+			get
+			{
+				return _id;
+			}
 			set
 			{
 				_id = value;
@@ -186,7 +189,10 @@ namespace ClickQuest.Heroes.Buffs
 
 		public string Name
 		{
-			get { return _name; }
+			get
+			{
+				return _name;
+			}
 			set
 			{
 				_name = value;
@@ -196,7 +202,10 @@ namespace ClickQuest.Heroes.Buffs
 
 		public string Description
 		{
-			get { return _description; }
+			get
+			{
+				return _description;
+			}
 			set
 			{
 				_description = value;
@@ -206,7 +215,10 @@ namespace ClickQuest.Heroes.Buffs
 
 		public Rarity Rarity
 		{
-			get { return _rarity; }
+			get
+			{
+				return _rarity;
+			}
 			set
 			{
 				_rarity = value;
@@ -216,7 +228,10 @@ namespace ClickQuest.Heroes.Buffs
 
 		public int Value
 		{
-			get { return _value; }
+			get
+			{
+				return _value;
+			}
 			set
 			{
 				_value = value;
@@ -226,7 +241,10 @@ namespace ClickQuest.Heroes.Buffs
 
 		public BlessingType Type
 		{
-			get { return _type; }
+			get
+			{
+				return _type;
+			}
 			set
 			{
 				_type = value;
@@ -236,7 +254,10 @@ namespace ClickQuest.Heroes.Buffs
 
 		public int Duration
 		{
-			get { return _duration; }
+			get
+			{
+				return _duration;
+			}
 			set
 			{
 				_duration = value;
@@ -247,7 +268,10 @@ namespace ClickQuest.Heroes.Buffs
 		[NotMapped]
 		public string DurationText
 		{
-			get { return _durationText; }
+			get
+			{
+				return _durationText;
+			}
 			set
 			{
 				_durationText = value;
@@ -257,7 +281,10 @@ namespace ClickQuest.Heroes.Buffs
 
 		public int Buff
 		{
-			get { return _buff; }
+			get
+			{
+				return _buff;
+			}
 			set
 			{
 				_buff = value;
@@ -267,17 +294,26 @@ namespace ClickQuest.Heroes.Buffs
 
 		public string TypeString
 		{
-			get { return Type.ToString(); }
+			get
+			{
+				return Type.ToString();
+			}
 		}
 
 		public string RarityString
 		{
-			get { return Rarity.ToString(); }
+			get
+			{
+				return Rarity.ToString();
+			}
 		}
 
 		public bool AchievementBonusGranted
 		{
-			get { return _achievementBonusGranted; }
+			get
+			{
+				return _achievementBonusGranted;
+			}
 			set
 			{
 				_achievementBonusGranted = value;
@@ -287,7 +323,10 @@ namespace ClickQuest.Heroes.Buffs
 
 		public bool IsFinished
 		{
-			get { return Duration <= 0; }
+			get
+			{
+				return Duration <= 0;
+			}
 		}
 
 		#endregion Properties

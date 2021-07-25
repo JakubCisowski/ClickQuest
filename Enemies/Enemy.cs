@@ -46,7 +46,10 @@ namespace ClickQuest.Enemies
 
 		public int Id
 		{
-			get { return _id; }
+			get
+			{
+				return _id;
+			}
 			set
 			{
 				_id = value;
@@ -56,7 +59,10 @@ namespace ClickQuest.Enemies
 
 		public string Name
 		{
-			get { return _name; }
+			get
+			{
+				return _name;
+			}
 			set
 			{
 				_name = value;
@@ -66,7 +72,10 @@ namespace ClickQuest.Enemies
 
 		public string Description
 		{
-			get { return _description; }
+			get
+			{
+				return _description;
+			}
 			set
 			{
 				_description = value;
@@ -76,7 +85,10 @@ namespace ClickQuest.Enemies
 
 		public int Health
 		{
-			get { return _health; }
+			get
+			{
+				return _health;
+			}
 			set
 			{
 				_health = value;
@@ -88,7 +100,10 @@ namespace ClickQuest.Enemies
 
 		public int CurrentHealthProgress
 		{
-			get { return _currentHealthProgress; }
+			get
+			{
+				return _currentHealthProgress;
+			}
 			set
 			{
 				_currentHealthProgress = value;
@@ -98,7 +113,10 @@ namespace ClickQuest.Enemies
 
 		public string Image
 		{
-			get { return _image; }
+			get
+			{
+				return _image;
+			}
 			set
 			{
 				_image = value;

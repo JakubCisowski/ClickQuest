@@ -9,7 +9,10 @@ namespace ClickQuest.Items
 	{
 		public int BaseIngotBonus
 		{
-			get { return 100; }
+			get
+			{
+				return 100;
+			}
 		}
 
 		public override Artifact CopyItem(int quantity)

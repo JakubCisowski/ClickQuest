@@ -29,7 +29,10 @@ namespace ClickQuest.Pages
 
 		public int Duration
 		{
-			get { return _duration; }
+			get
+			{
+				return _duration;
+			}
 			set
 			{
 				_duration = value;
