@@ -19,6 +19,31 @@ namespace ClickQuest.Controls
 {
 	public partial class MonsterButton : UserControl, INotifyPropertyChanged
 	{
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		private readonly Random _rng = new Random();
+		private readonly RegionPage _regionPage;
+		private DispatcherTimer _poisonTimer;
+		private DispatcherTimer _auraTimer;
+		private int _poisonTicks;
+
+		public Monster Monster{ get; set; }
+		public Region Region
+		{
+			get
+			{
+				return _regionPage.Region;
+			}
+		}
+
+		public int AuraTickDamage
+		{
+			get
+			{
+				return (int) Math.Ceiling(User.Instance.CurrentHero.AuraDamage * Monster.Health);
+			}
+		}
+
 		public MonsterButton(RegionPage regionPage)
 		{
 			InitializeComponent();
@@ -41,28 +66,24 @@ namespace ClickQuest.Controls
 			CombatController.StartAuraTimerOnCurrentRegion();
 		}
 
-		private int RandomizeFreqenciesListPosition(List<double> frequencies)
+		private void HandleMonsterDeathIfDefeated()
 		{
-			double randomizedValue = _rng.Next(1, 10001) / 10000d;
-			int i = 0;
-
-			while (randomizedValue > frequencies[i])
+			if (Monster.CurrentHealth <= 0)
 			{
-				randomizedValue -= frequencies[i];
-				i++;
+				StopPoisonTimer();
+				GrantVictoryBonuses();
+				SpawnMonster();
 			}
-
-			return i;
 		}
 
 		public void GrantVictoryBonuses()
 		{
-			int experienceGained = Experience.CalculateMonsterXpReward(_monster.Health);
+			int experienceGained = Experience.CalculateMonsterXpReward(Monster.Health);
 			User.Instance.CurrentHero.Experience += experienceGained;
 
-			var frequencyList = _monster.Loot.Select(x => x.Frequency).ToList();
+			var frequencyList = Monster.Loot.Select(x => x.Frequency).ToList();
 			int position = RandomizeFreqenciesListPosition(frequencyList);
-			var selectedLoot = _monster.Loot[position].Item;
+			var selectedLoot = Monster.Loot[position].Item;
 
 			if (selectedLoot.Id != 0)
 			{
@@ -77,36 +98,18 @@ namespace ClickQuest.Controls
 			_regionPage.StatsFrame.Refresh();
 		}
 
-		public void StopCombatTimers()
+		private int RandomizeFreqenciesListPosition(List<double> frequencies)
 		{
-			StopPoisonTimer();
-			_auraTimer.Stop();
-		}
+			double randomizedValue = _rng.Next(1, 10001) / 10000d;
+			int i = 0;
 
-		public void StopPoisonTimer()
-		{
-			_poisonTimer.Stop();
-			_poisonTicks = 0;
-		}
-
-		public void StartAuraTimer()
-		{
-			if (User.Instance.CurrentHero != null)
+			while (randomizedValue > frequencies[i])
 			{
-				_auraTimer.Interval = TimeSpan.FromSeconds(1d / User.Instance.CurrentHero.AuraAttackSpeed);
-
-				_auraTimer.Start();
+				randomizedValue -= frequencies[i];
+				i++;
 			}
-		}
 
-		private void HandleMonsterDeathIfDefeated()
-		{
-			if (Monster.CurrentHealth <= 0)
-			{
-				StopPoisonTimer();
-				GrantVictoryBonuses();
-				SpawnMonster();
-			}
+			return i;
 		}
 
 		private void CheckForDungeonKeyDrop()
@@ -125,53 +128,6 @@ namespace ClickQuest.Controls
 				_regionPage.TestRewardsBlock.Text += $". You've got a {(Rarity) (position - 1)} Dungeon Key!";
 			}
 		}
-
-		#region INotifyPropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		
-
-		#endregion INotifyPropertyChanged
-
-		#region Private Fields
-
-		private Monster _monster;
-		private readonly Random _rng = new Random();
-		private readonly RegionPage _regionPage;
-		private DispatcherTimer _poisonTimer;
-		private DispatcherTimer _auraTimer;
-		private int _poisonTicks;
-
-		#endregion
-
-		#region Properties
-
-		public Monster Monster
-		{
-			get
-			{
-				return _monster;
-			}
-			set
-			{
-				_monster = value;
-				
-			}
-		}
-
-
-		public Region Region
-		{
-			get
-			{
-				return _regionPage.Region;
-			}
-		}
-
-		#endregion
-
-		#region Events
 
 		private void MonsterButton_Click(object sender, RoutedEventArgs e)
 		{
@@ -196,10 +152,29 @@ namespace ClickQuest.Controls
 			}
 		}
 
-
-		private int CalculateAuraTickDamage()
+		private void SetupAuraTimer()
 		{
-			return (int) Math.Ceiling(User.Instance.CurrentHero.AuraDamage * Monster.Health);
+			_auraTimer = new DispatcherTimer();
+			_auraTimer.Tick += AuraTimer_Tick;
+		}
+
+		private void SetupPoisonTimer()
+		{
+			int poisonIntervalMs = 500;
+			_poisonTimer = new DispatcherTimer();
+			_poisonTimer.Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs);
+			_poisonTimer.Tick += PoisonTimer_Tick;
+			_poisonTicks = 0;
+		}
+
+		public void StartAuraTimer()
+		{
+			if (User.Instance.CurrentHero != null)
+			{
+				_auraTimer.Interval = TimeSpan.FromSeconds(1d / User.Instance.CurrentHero.AuraAttackSpeed);
+
+				_auraTimer.Start();
+			}
 		}
 
 		private void StartPoisonTimer()
@@ -209,6 +184,18 @@ namespace ClickQuest.Controls
 				_poisonTicks = 0;
 				_poisonTimer.Start();
 			}
+		}
+
+		public void StopCombatTimers()
+		{
+			StopPoisonTimer();
+			_auraTimer.Stop();
+		}
+
+		public void StopPoisonTimer()
+		{
+			_poisonTimer.Stop();
+			_poisonTicks = 0;
 		}
 
 		private void PoisonTimer_Tick(object source, EventArgs e)
@@ -236,27 +223,9 @@ namespace ClickQuest.Controls
 		{
 			if (User.Instance.CurrentHero != null)
 			{
-				int auraDamage = CalculateAuraTickDamage();
-				Monster.CurrentHealth -= auraDamage;
+				Monster.CurrentHealth -= AuraTickDamage;
 				HandleMonsterDeathIfDefeated();
 			}
 		}
-
-		private void SetupAuraTimer()
-		{
-			_auraTimer = new DispatcherTimer();
-			_auraTimer.Tick += AuraTimer_Tick;
-		}
-
-		private void SetupPoisonTimer()
-		{
-			int poisonIntervalMs = 500;
-			_poisonTimer = new DispatcherTimer();
-			_poisonTimer.Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs);
-			_poisonTimer.Tick += PoisonTimer_Tick;
-			_poisonTicks = 0;
-		}
-
-		#endregion
 	}
 }

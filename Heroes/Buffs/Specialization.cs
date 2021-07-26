@@ -23,7 +23,43 @@ namespace ClickQuest.Heroes.Buffs
 	[Owned]
 	public class Specialization : INotifyPropertyChanged
 	{
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		// Base values for each buff.
+		private const int SpecCraftingBuffBase = 1;
+		private const int SpecBuyingBuffBase = 50;
+		private const int SpecDungeonBuffBase = 30;
+
+		// Value limits for each buff.
+		private const int SpecCraftingBuffLimit = 5;
+		private const int SpecQuestingBuffLimit = 50;
+
+		// Const buff value for reaching every threshold.
+		private const int SpecBlessingBuffBonus = 15; // Increases blessings duration in seconds. <Base - 0>
+		private const int SpecClickingBuffBonus = 1; // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
+		private const int SpecCraftingBuffBonus = 1; // Increases crafting rarity limit. <Base - 1> <Limit - 5>
+		private const int SpecBuyingBuffBonus = 1; // Increases shop offer size. <Base - 5>
+		private const int SpecMeltingBuffBonus = 5; // Increases % chance to get additional ingots when melting. <Base - 0%>
+		private const int SpecQuestingBuffBonus = 5; // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
+		private const int SpecDungeonBuffBonus = 1; // Increases amount of time to defeat dungeon boss in seconds <Base - 30s>
+
 		private string _specCraftingText;
+
+		
+
+		[NotMapped]
+		public ObservableDictionary<SpecializationType, int> SpecializationBuffs { get; set; }
+
+		[NotMapped]
+		public ObservableDictionary<SpecializationType, int> SpecializationThresholds { get; set; }
+
+		[NotMapped]
+		public ObservableDictionary<SpecializationType, int> SpecializationAmounts { get; set; }
+
+		public string SpecializationAmountsString { get; set; }
+
+		public string SpecCraftingText { get; set; }
 
 		public Specialization()
 		{
@@ -41,38 +77,11 @@ namespace ClickQuest.Heroes.Buffs
 			UpdateSpecialization();
 		}
 
-		[NotMapped]
-		public ObservableDictionary<SpecializationType, int> SpecializationBuffs { get; set; }
-
-		[NotMapped]
-		public ObservableDictionary<SpecializationType, int> SpecializationThresholds { get; set; }
-
-		[NotMapped]
-		public ObservableDictionary<SpecializationType, int> SpecializationAmounts { get; set; }
-
-		public string SpecializationAmountsString { get; set; }
-
-		public string SpecCraftingText
-		{
-			get
-			{
-				return _specCraftingText;
-			}
-			set
-			{
-				_specCraftingText = value;
-				
-			}
-		}
-
-		#region Event handlers
-
 		private void SpecializationAmounts_Updated(object sender, EventArgs e)
 		{
 			User.Instance.CurrentHero?.Specialization.UpdateBuffs();
 		}
 
-		#endregion
 
 		public void UpdateThresholds()
 		{
@@ -147,34 +156,6 @@ namespace ClickQuest.Heroes.Buffs
 			Serialization.DeserializeData(SpecializationAmountsString, SpecializationAmounts);
 		}
 
-		#region INotifyPropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-
-		#endregion
-
-
-		#region Constants
-
-		// Base values for each buff.
-		private const int SpecCraftingBuffBase = 1;
-		private const int SpecBuyingBuffBase = 50;
-		private const int SpecDungeonBuffBase = 30;
-
-		// Value limits for each buff.
-		private const int SpecCraftingBuffLimit = 5;
-		private const int SpecQuestingBuffLimit = 50;
-
-		// Const buff value for reaching every threshold.
-		private const int SpecBlessingBuffBonus = 15; // Increases blessings duration in seconds. <Base - 0>
-		private const int SpecClickingBuffBonus = 1; // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
-		private const int SpecCraftingBuffBonus = 1; // Increases crafting rarity limit. <Base - 1> <Limit - 5>
-		private const int SpecBuyingBuffBonus = 1; // Increases shop offer size. <Base - 5>
-		private const int SpecMeltingBuffBonus = 5; // Increases % chance to get additional ingots when melting. <Base - 0%>
-		private const int SpecQuestingBuffBonus = 5; // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
-		private const int SpecDungeonBuffBonus = 1; // Increases amount of time to defeat dungeon boss in seconds <Base - 30s>
-
-		#endregion
+		
 	}
 }

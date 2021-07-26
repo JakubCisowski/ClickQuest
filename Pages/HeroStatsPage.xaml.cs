@@ -18,11 +18,7 @@ namespace ClickQuest.Pages
 {
 	public partial class HeroStatsPage : Page
 	{
-		#region Private Fields
-
 		private readonly Hero _hero;
-
-		#endregion Private Fields
 
 		public HeroStatsPage()
 		{

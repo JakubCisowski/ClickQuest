@@ -6,7 +6,7 @@ namespace ClickQuest.Enemies
 {
 	public class Boss : Enemy
 	{
-		private List<BossLootPattern> _bossLoot;
+		public List<BossLootPattern> BossLoot { get; set; }
 
 		public override int CurrentHealth
 		{
@@ -37,18 +37,6 @@ namespace ClickQuest.Enemies
 			}
 		}
 
-		public List<BossLootPattern> BossLoot
-		{
-			get
-			{
-				return _bossLoot;
-			}
-			set
-			{
-				_bossLoot = value;
-			}
-		}
-
 		public override Boss CopyEnemy()
 		{
 			var copy = new Boss();
@@ -63,5 +51,10 @@ namespace ClickQuest.Enemies
 
 			return copy;
 		}
+
+		
+
+
+		
 	}
 }

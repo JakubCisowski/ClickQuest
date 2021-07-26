@@ -7,103 +7,18 @@ namespace ClickQuest.Places
 {
 	public class Region : INotifyPropertyChanged, IIdentifiable
 	{
-		#region INotifyPropertyChanged
-
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion INotifyPropertyChanged
+		public int Id{ get; set; }
 
-		#region Private Fields
+		public string Name{ get; set; }
 
-		private int _id;
-		private string _name;
-		private string _description;
-		private string _background;
-		private List<MonsterSpawnPattern> _monsters;
-		private int _levelRequirement;
+		public string Description{ get; set; }
 
-		#endregion Private Fields
+		public string Background{ get; set; }
 
-		#region Properties
+		public List<MonsterSpawnPattern> Monsters{ get; set; }
 
-		public int Id
-		{
-			get
-			{
-				return _id;
-			}
-			set
-			{
-				_id = value;
-				
-			}
-		}
-
-		public string Name
-		{
-			get
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-				
-			}
-		}
-
-		public string Description
-		{
-			get
-			{
-				return _description;
-			}
-			set
-			{
-				_description = value;
-				
-			}
-		}
-
-		public string Background
-		{
-			get
-			{
-				return _background;
-			}
-			set
-			{
-				_background = value;
-				
-			}
-		}
-
-		public List<MonsterSpawnPattern> Monsters
-		{
-			get
-			{
-				return _monsters;
-			}
-			set
-			{
-				_monsters = value;
-				
-			}
-		}
-
-		public int LevelRequirement
-		{
-			get
-			{
-				return _levelRequirement;
-			}
-			set
-			{
-				_levelRequirement = value;
-				
-			}
-		}
-
-		#endregion Properties
+		public int LevelRequirement{ get; set; }
 	}
 }

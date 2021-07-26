@@ -38,13 +38,6 @@ namespace ClickQuest.Pages
 			return result;
 		}
 
-		#region Events
-
-		private void TownButton_Click(object sender, RoutedEventArgs e)
-		{
-			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
-		}
-
 		private void BuyButton_Click(object sender, RoutedEventArgs e)
 		{
 			var b = sender as Button;
@@ -85,6 +78,9 @@ namespace ClickQuest.Pages
 			}
 		}
 
-		#endregion
+		private void TownButton_Click(object sender, RoutedEventArgs e)
+		{
+			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
+		}
 	}
 }

@@ -44,10 +44,18 @@ namespace ClickQuest.Player
 		MasterworkArtifactsGained
 	}
 
+
 	[Owned]
 	public class Achievements : INotifyPropertyChanged
 	{
-		private TimeSpan _totalTimePlayed;
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		[NotMapped]
+		public ObservableDictionary<NumericAchievementType, long> NumericAchievementCollection { get; set; }
+
+		public string AchievementCollectionString { get; set; }
+
+		public TimeSpan TotalTimePlayed{ get; set; }
 
 		public Achievements()
 		{
@@ -56,24 +64,6 @@ namespace ClickQuest.Player
 			NumericAchievementCollection = new ObservableDictionary<NumericAchievementType, long>();
 
 			CollectionInitializer.InitializeDictionary(NumericAchievementCollection);
-		}
-
-		[NotMapped]
-		public ObservableDictionary<NumericAchievementType, long> NumericAchievementCollection { get; set; }
-
-		public string AchievementCollectionString { get; set; }
-
-		public TimeSpan TotalTimePlayed
-		{
-			get
-			{
-				return _totalTimePlayed;
-			}
-			set
-			{
-				_totalTimePlayed = value;
-				
-			}
 		}
 
 		public void SerializeAchievements()
@@ -91,10 +81,5 @@ namespace ClickQuest.Player
 			NumericAchievementCollection[achievementType] += value;
 			AchievementsWindow.Instance.RefreshAchievementsPanel();
 		}
-
-		#region INotifyPropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-		#endregion
 	}
 }

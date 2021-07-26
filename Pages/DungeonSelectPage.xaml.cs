@@ -15,6 +15,10 @@ namespace ClickQuest.Pages
 {
 	public partial class DungeonSelectPage : Page
 	{
+		private DungeonGroup _dungeonGroupSelected;
+		private Dungeon _dungeonSelected;
+		private Boss _bossSelected;
+
 		public DungeonSelectPage()
 		{
 			InitializeComponent();
@@ -76,14 +80,6 @@ namespace ClickQuest.Pages
 			}
 
 			DungeonSelectPanel.Children.Add(grid);
-		}
-
-		private void ResetSelection()
-		{
-			_bossSelected = null;
-			_dungeonGroupSelected = null;
-			_dungeonSelected = null;
-			UndoButton.Visibility = Visibility.Hidden;
 		}
 
 		public void LoadDungeonSelectionInterface()
@@ -161,23 +157,27 @@ namespace ClickQuest.Pages
 			}
 		}
 
-		#region Private Fields
-
-		private DungeonGroup _dungeonGroupSelected;
-		private Dungeon _dungeonSelected;
-		private Boss _bossSelected;
-
-		#endregion
-
-		#region Events
-
-		private void TownButton_Click(object sender, RoutedEventArgs e)
+		private DungeonGroup GetDungeonGroup(Button dungeonGroupButton)
 		{
-			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
+			return dungeonGroupButton.Tag as DungeonGroup;
+		}
 
+		private Dungeon GetDungeon(Button dungeonButton)
+		{
+			return dungeonButton.Tag as Dungeon;
+		}
 
-			// Reset selection.
-			ResetAndLoadDungeonGroupSelectionInterface();
+		private Boss GetBoss(Button bossButton)
+		{
+			return bossButton.Tag as Boss;
+		}
+
+		private void ResetSelection()
+		{
+			_bossSelected = null;
+			_dungeonGroupSelected = null;
+			_dungeonSelected = null;
+			UndoButton.Visibility = Visibility.Hidden;
 		}
 
 		private void DungeonGroupButton_Click(object sender, RoutedEventArgs e)
@@ -192,22 +192,12 @@ namespace ClickQuest.Pages
 			}
 		}
 
-		private DungeonGroup GetDungeonGroup(Button dungeonGroupButton)
-		{
-			return dungeonGroupButton.Tag as DungeonGroup;
-		}
-
 		private void DungeonButton_Click(object sender, RoutedEventArgs e)
 		{
 			_dungeonSelected = GetDungeon(sender as Button);
 			LoadBossSelectionInterface();
 
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting boss";
-		}
-
-		private Dungeon GetDungeon(Button dungeonButton)
-		{
-			return dungeonButton.Tag as Dungeon;
 		}
 
 		private void BossButton_Click(object sender, RoutedEventArgs e)
@@ -254,11 +244,6 @@ namespace ClickQuest.Pages
 			InterfaceController.ChangePage(GameData.Pages["DungeonBoss"], "Boss fight");
 		}
 
-		private Boss GetBoss(Button bossButton)
-		{
-			return bossButton.Tag as Boss;
-		}
-
 		private void UndoButtonGroup_Click(object sender, RoutedEventArgs e)
 		{
 			_dungeonGroupSelected = null;
@@ -273,6 +258,10 @@ namespace ClickQuest.Pages
 			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting dungeon";
 		}
 
-		#endregion Events
+		private void TownButton_Click(object sender, RoutedEventArgs e)
+		{
+			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
+			ResetAndLoadDungeonGroupSelectionInterface();
+		}
 	}
 }

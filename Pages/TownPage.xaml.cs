@@ -42,8 +42,6 @@ namespace ClickQuest.Pages
 			}
 		}
 
-		#region Events
-
 		private void RegionButton_Click(object sender, RoutedEventArgs e)
 		{
 			var selectedRegion = (sender as Button).Tag as Region;
@@ -112,7 +110,5 @@ namespace ClickQuest.Pages
 		{
 			InterfaceController.ChangePage(GameData.Pages["DungeonSelect"], "Selecting dungeon group");
 		}
-
-		#endregion Events
 	}
 }

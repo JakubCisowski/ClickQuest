@@ -22,6 +22,20 @@ namespace ClickQuest.Pages
 			_rng = new Random();
 		}
 
+		public void LoadPage()
+		{
+			if (User.Instance.CurrentHero.Quests.Count >= 3)
+			{
+				// User already has 3 quests - only refresh the quest page.
+				RefreshQuestButtons();
+			}
+			else
+			{
+				// No quests assigned - reroll them.
+				RerollQuests();
+			}
+		}
+
 		// Generate 3 random quests based on class.
 		// When: User finishes quest / There is a new hero without quests / User clicks reroll button.
 		public void RerollQuests()
@@ -65,28 +79,6 @@ namespace ClickQuest.Pages
 			}
 		}
 
-		public void LoadPage()
-		{
-			if (User.Instance.CurrentHero.Quests.Count >= 3)
-			{
-				// User already has 3 quests - only refresh the quest page.
-				RefreshQuestButtons();
-			}
-			else
-			{
-				// No quests assigned - reroll them.
-				RerollQuests();
-			}
-		}
-
-		#region Events
-
-		private void TownButton_Click(object sender, RoutedEventArgs e)
-		{
-			// Go back to Town.
-			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
-		}
-
 		private void RerollButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Check if any quest is currently assigned - if so, user can't reroll quests.
@@ -100,6 +92,10 @@ namespace ClickQuest.Pages
 			}
 		}
 
-		#endregion
+		private void TownButton_Click(object sender, RoutedEventArgs e)
+		{
+			// Go back to Town.
+			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
+		}
 	}
 }

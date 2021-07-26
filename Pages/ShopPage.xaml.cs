@@ -47,8 +47,6 @@ namespace ClickQuest.Pages
 			return result;
 		}
 
-		#region Events
-
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
@@ -92,7 +90,5 @@ namespace ClickQuest.Pages
 				AlertBox.Show($"You do not have enough gold to buy this item.\nIt costs {recipe.Value} gold.\nYou can get more gold by completing quests and selling loot from monsters and bosses.", MessageBoxButton.OK);
 			}
 		}
-
-		#endregion Events
 	}
 }

@@ -10,6 +10,7 @@ namespace ClickQuest.Pages
 {
 	public partial class RegionPage : Page
 	{
+		public Region Region { get; set; }
 		public RegionPage(Region currentRegion)
 		{
 			InitializeComponent();
@@ -20,15 +21,11 @@ namespace ClickQuest.Pages
 			CreateMonsterButton();
 		}
 
-		public Region Region { get; set; }
-
 		public void CreateMonsterButton()
 		{
 			var button = new MonsterButton(this);
 			RegionPanel.Children.Insert(1, button);
 		}
-
-		#region Events
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
@@ -37,7 +34,5 @@ namespace ClickQuest.Pages
 
 			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
 		}
-
-		#endregion
 	}
 }

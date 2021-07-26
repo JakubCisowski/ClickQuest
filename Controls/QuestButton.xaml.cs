@@ -10,11 +10,10 @@ namespace ClickQuest.Controls
 {
 	public partial class QuestButton : UserControl, INotifyPropertyChanged
 	{
-		#region Private Fields
+
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		private readonly Quest _quest;
-
-		#endregion
 
 		public QuestButton(Quest quest)
 		{
@@ -32,12 +31,5 @@ namespace ClickQuest.Controls
 				_quest.StartQuest();
 			}
 		}
-
-		#region INotifyPropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-
-		#endregion INotifyPropertyChanged
 	}
 }

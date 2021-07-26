@@ -11,23 +11,30 @@ namespace ClickQuest.Windows
 {
 	public partial class AchievementsWindow : Window
 	{
+		private static AchievementsWindow _instance;
+
+		public static AchievementsWindow Instance
+		{
+			get
+			{
+				if (_instance is null)
+				{
+					_instance = new AchievementsWindow();
+				}
+
+				return _instance;
+			}
+		}
+
 		public AchievementsWindow()
 		{
 			InitializeComponent();
 			RefreshAchievementsPanel();
 		}
 
-		private void CloseButton_Click(object sender, RoutedEventArgs e)
+		public new void Show()
 		{
-			Close();
-		}
-
-		private void AchievementsWindow_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (e.ChangedButton == MouseButton.Left)
-			{
-				DragMove();
-			}
+			_instance.Visibility = Visibility.Visible;
 		}
 
 		public void RefreshAchievementsPanel()
@@ -50,39 +57,6 @@ namespace ClickQuest.Windows
 
 				AppendAchievementToAchievementsList(name, amount);
 			}
-		}
-
-		public new void Show()
-		{
-			_instance.Visibility = Visibility.Visible;
-		}
-
-		#region Singleton
-
-		private static AchievementsWindow _instance;
-
-		public static AchievementsWindow Instance
-		{
-			get
-			{
-				if (_instance is null)
-				{
-					_instance = new AchievementsWindow();
-				}
-
-				return _instance;
-			}
-		}
-
-		#endregion
-
-		#region Events
-
-		private void AchievementsWindow_Closing(object sender, CancelEventArgs e)
-		{
-			// If the window is closed, keep it open but hide it instead.
-			e.Cancel = true;
-			Visibility = Visibility.Hidden;
 		}
 
 		private void AppendAchievementToAchievementsList(string name, string amount)
@@ -111,6 +85,26 @@ namespace ClickQuest.Windows
 			AchievementsList.Children.Add(border);
 		}
 
-		#endregion
+		private void AchievementsWindow_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			if (e.ChangedButton == MouseButton.Left)
+			{
+				DragMove();
+			}
+		}
+
+		private void CloseButton_Click(object sender, RoutedEventArgs e)
+		{
+			Close();
+		}
+
+		private void AchievementsWindow_Closing(object sender, CancelEventArgs e)
+		{
+			// If the window is closed, keep it open but hide it instead.
+			e.Cancel = true;
+			Visibility = Visibility.Hidden;
+		}
+
+		
 	}
 }

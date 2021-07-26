@@ -64,15 +64,6 @@ namespace ClickQuest.Pages
 			}
 		}
 
-		private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			if (e.Source is TabControl)
-			{
-				// Save tab selection (to set it after updating equipment page).
-				_selectedTabIndex = EquipmentTabControl.SelectedIndex;
-			}
-		}
-
 		private Grid CreateSingleItemGrid(Item item)
 		{
 			var grid = new Grid();
@@ -92,6 +83,15 @@ namespace ClickQuest.Pages
 			grid.Children.Add(quantityBlock);
 
 			return grid;
+		}
+
+		private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (e.Source is TabControl)
+			{
+				// Save tab selection (to set it after updating equipment page).
+				_selectedTabIndex = EquipmentTabControl.SelectedIndex;
+			}
 		}
 	}
 }

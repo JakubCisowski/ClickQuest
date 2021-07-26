@@ -93,8 +93,6 @@ namespace ClickQuest.Extensions.CollectionsManager
 			PropertyChanged(this, args);
 		}
 
-		#region IDictionary<TKey,TValue> Members
-
 		public void Add(TKey key, TValue value)
 		{
 			AddWithNotification(key, value);
@@ -148,10 +146,6 @@ namespace ClickQuest.Extensions.CollectionsManager
 			}
 		}
 
-		#endregion
-
-		#region ICollection<KeyValuePair<TKey,TValue>> Members
-
 		void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)
 		{
 			AddWithNotification(item);
@@ -198,10 +192,6 @@ namespace ClickQuest.Extensions.CollectionsManager
 			return RemoveWithNotification(item.Key);
 		}
 
-		#endregion
-
-		#region IEnumerable<KeyValuePair<TKey,TValue>> Members
-
 		IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
 		{
 			return _dictionary.GetEnumerator();
@@ -211,7 +201,5 @@ namespace ClickQuest.Extensions.CollectionsManager
 		{
 			return _dictionary.GetEnumerator();
 		}
-
-		#endregion
 	}
 }

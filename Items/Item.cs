@@ -9,87 +9,21 @@ namespace ClickQuest.Items
 {
 	public abstract class Item : INotifyPropertyChanged, IIdentifiable
 	{
-		public abstract Item CopyItem(int quantity);
-		public abstract void AddAchievementProgress(int amount);
-
-		public abstract void AddItem();
-		public abstract void RemoveItem();
-
-		#region INotifyPropertyChanged
-
 		public event PropertyChangedEventHandler PropertyChanged;
-
-
-		#endregion INotifyPropertyChanged
-
-		#region Private Fields
-
-		private int _id;
-		private string _name;
-		private int _value;
-		private Rarity _rarity;
 		private int _quantity;
-		private string _description;
-
-		#endregion Private Fields
-
-		#region Properties
 
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int DbKey { get; set; }
 
-		public int Id
-		{
-			get
-			{
-				return _id;
-			}
-			set
-			{
-				_id = value;
-				
-			}
-		}
+		public int Id{ get; set; }
 
-		public string Name
-		{
-			get
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-				
-			}
-		}
+		public string Name{ get; set; }
 
-		public int Value
-		{
-			get
-			{
-				return _value;
-			}
-			set
-			{
-				_value = value;
-				
-			}
-		}
+		public int Value{ get; set; }
 
-		public Rarity Rarity
-		{
-			get
-			{
-				return _rarity;
-			}
-			set
-			{
-				_rarity = value;
-				
-			}
-		}
+		public Rarity Rarity{ get; set; }
+		public string Description{ get; set; }
 
 		public int Quantity
 		{
@@ -113,18 +47,7 @@ namespace ClickQuest.Items
 			}
 		}
 
-		public string Description
-		{
-			get
-			{
-				return _description;
-			}
-			set
-			{
-				_description = value;
-				
-			}
-		}
+		
 
 		public string RarityString
 		{
@@ -134,6 +57,13 @@ namespace ClickQuest.Items
 			}
 		}
 
-		#endregion Properties
+
+		public abstract Item CopyItem(int quantity);
+		public abstract void AddAchievementProgress(int amount);
+
+		public abstract void AddItem();
+		public abstract void RemoveItem();
+
+		
 	}
 }

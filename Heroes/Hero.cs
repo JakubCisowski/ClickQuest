@@ -15,6 +15,203 @@ namespace ClickQuest.Heroes
 {
 	public class Hero : INotifyPropertyChanged
 	{
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		private const int MAX_LEVEL = 100;
+		private int _experience;
+
+		private readonly Random _rng;
+
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int Id { get; set; }
+
+		public int ClickDamagePerLevel { get; set; }
+		public double CritChancePerLevel { get; set; }
+		public int PoisonDamagePerLevel { get; set; }
+
+		public string Name { get; set; }
+
+		
+
+		[NotMapped]
+		public int ExperienceToNextLvl { get; set; }
+
+		[NotMapped]
+		public int ExperienceToNextLvlTotal { get; set; }
+
+		[NotMapped]
+		public int ExperienceProgress { get; set; }
+
+		public HeroRace HeroRace { get; set; }
+
+		public HeroClass HeroClass { get; set; }
+
+		public int ClickDamage { get; set; }
+
+		public double CritChance { get; set; }
+
+		public int PoisonDamage { get; set; }
+
+		public int Level { get; set; }
+
+		public List<Material> Materials { get; set; }
+
+		public List<Recipe> Recipes { get; set; }
+
+		public List<Artifact> Artifacts { get; set; }
+
+		public List<Quest> Quests { get; set; }
+
+		public Blessing Blessing { get; set; }
+
+		public Specialization Specialization { get; set; }
+
+		public TimeSpan TimePlayed { get; set; }
+
+		[NotMapped]
+		public DateTime SessionStartDate { get; set; }
+
+		public double AuraDamage { get; set; }
+
+		public double AuraAttackSpeed { get; set; }
+		
+		public int Experience
+		{
+			get
+			{
+				return _experience;
+			}
+			set
+			{
+				// Dirty code! Only when ExperienceToNextLvl is 0, we can be sure that we are loading Entity AND not killing any monster/boss.
+				if (ExperienceToNextLvl != 0)
+				{
+					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.ExperienceGained, value - _experience);
+				}
+
+				_experience = value;
+				Heroes.Experience.CheckIfLeveledUpAndGrantBonuses(this);
+				ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
+				ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
+				ExperienceProgress = Heroes.Experience.CalculateXpProgress(this);
+				
+			}
+		}
+
+		public string ThisHeroClass
+		{
+			get
+			{
+				return HeroClass.ToString();
+			}
+		}
+
+		public string ThisHeroRace
+		{
+			get
+			{
+				return HeroRace.ToString();
+			}
+		}
+
+		public string CritChanceText
+		{
+			get
+			{
+				string critChanceText = string.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
+				return critChanceText[critChanceText.Length - 2] == '0' ? critChanceText.Remove(critChanceText.Length - 3, 2) : critChanceText;
+			}
+		}
+
+		
+
+		public int LevelDamageBonus
+		{
+			get
+			{
+				return ClickDamagePerLevel * Level;
+			}
+		}
+
+		public int LevelDamageBonusTotal
+		{
+			get
+			{
+				return ClickDamagePerLevel * Level + 2;
+			}
+		}
+
+		public double LevelCritBonus
+		{
+			get
+			{
+				return CritChancePerLevel * Level * 100;
+			}
+		}
+
+		public double LevelCritBonusTotal
+		{
+			get
+			{
+				return CritChancePerLevel * Level * 100 + 25;
+			}
+		}
+
+		public int LevelPoisonBonus
+		{
+			get
+			{
+				return PoisonDamagePerLevel * Level;
+			}
+		}
+
+		public int LevelPoisonBonusTotal
+		{
+			get
+			{
+				return PoisonDamagePerLevel * Level + 1;
+			}
+		}
+
+
+
+		public string AuraDamageText
+		{
+			get
+			{
+				string auraDamageText = string.Format("{0:P1}", AuraDamage);
+				return auraDamageText[auraDamageText.Length - 2] == '0' ? auraDamageText.Remove(auraDamageText.Length - 3, 2) : auraDamageText;
+			}
+		}
+
+		public string AuraDps
+		{
+			get
+			{
+				string auraDps = string.Format("{0:P1}", Math.Round(AuraDamage * AuraAttackSpeed, 1));
+				return auraDps[auraDps.Length - 2] == '0' ? auraDps.Remove(auraDps.Length - 3, 2) : auraDps;
+			}
+		}
+
+		public double LevelAuraBonus
+		{
+			get
+			{
+				// AuraAttackSpeed per level * Level
+				return 1 * Level;
+			}
+		}
+
+		public double LevelAuraBonusTotal
+		{
+			get
+			{
+				// AuraAttackSpeed per level * Level + AuraBaseAttackSpeed
+				return 1 * Level + 1;
+			}
+		}
+
 		public Hero(HeroClass heroClass, HeroRace heroRace, string heroName)
 		{
 			Materials = new List<Material>();
@@ -68,7 +265,7 @@ namespace ClickQuest.Heroes
 			if (Level < MAX_LEVEL)
 			{
 				// Class specific bonuses and hero stats panel update.
-				switch (_heroClass)
+				switch (HeroClass)
 				{
 					case HeroClass.Slayer:
 						ClickDamage += ClickDamagePerLevel;
@@ -164,425 +361,6 @@ namespace ClickQuest.Heroes
 			return damage;
 		}
 
-		#region INotifyPropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-
-		#endregion INotifyPropertyChanged
-
-		#region Private Fields
-
-		private const int MAX_LEVEL = 100;
-		private string _name;
-		private int _experience;
-		private int _experienceToNextLvl;
-		private int _experienceProgress;
-		private int _experienceToNextLvlTotal;
-		private int _level;
-		private int _clickDamage;
-		private double _critChance;
-		private int _poisonDamage;
-		private HeroRace _heroRace;
-		private HeroClass _heroClass;
-		private List<Material> _materials;
-		private List<Recipe> _recipes;
-		private List<Artifact> _artifacts;
-		private List<Quest> _quests;
-		private Blessing _blessing;
-		private Specialization _specialization;
-		private double _auraDamage;
-		private double _auraAttackSpeed;
-
-		private readonly Random _rng;
-		// Specialisations/Professions
-
-		#endregion Private Fields
-
-		#region Properties
-
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
-
-		public int ClickDamagePerLevel { get; set; }
-		public double CritChancePerLevel { get; set; }
-		public int PoisonDamagePerLevel { get; set; }
-
-		public string Name
-		{
-			get
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-				
-			}
-		}
-
-		public int Experience
-		{
-			get
-			{
-				return _experience;
-			}
-			set
-			{
-				// Dirty code! Only when ExperienceToNextLvl is 0, we can be sure that we are loading Entity AND not killing any monster/boss.
-				if (ExperienceToNextLvl != 0)
-				{
-					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.ExperienceGained, value - _experience);
-				}
-
-				_experience = value;
-				Heroes.Experience.CheckIfLeveledUpAndGrantBonuses(this);
-				ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
-				ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
-				ExperienceProgress = Heroes.Experience.CalculateXpProgress(this);
-				
-			}
-		}
-
-		[NotMapped]
-		public int ExperienceToNextLvl
-		{
-			get
-			{
-				return _experienceToNextLvl;
-			}
-			set
-			{
-				_experienceToNextLvl = value;
-				
-			}
-		}
-
-		[NotMapped]
-		public int ExperienceToNextLvlTotal
-		{
-			get
-			{
-				return _experienceToNextLvlTotal;
-			}
-			set
-			{
-				_experienceToNextLvlTotal = value;
-				
-			}
-		}
-
-		[NotMapped]
-		public int ExperienceProgress
-		{
-			get
-			{
-				return _experienceProgress;
-			}
-			set
-			{
-				_experienceProgress = value;
-				
-			}
-		}
-
-		public HeroRace HeroRace
-		{
-			get
-			{
-				return _heroRace;
-			}
-			set
-			{
-				_heroRace = value;
-				
-			}
-		}
-
-		public HeroClass HeroClass
-		{
-			get
-			{
-				return _heroClass;
-			}
-			set
-			{
-				_heroClass = value;
-				
-			}
-		}
-
-		public int ClickDamage
-		{
-			get
-			{
-				return _clickDamage;
-			}
-			set
-			{
-				_clickDamage = value;
-				
-			}
-		}
-
-		public double CritChance
-		{
-			get
-			{
-				return _critChance;
-			}
-			set
-			{
-				_critChance = value;
-				
-			}
-		}
-
-		public int PoisonDamage
-		{
-			get
-			{
-				return _poisonDamage;
-			}
-			set
-			{
-				_poisonDamage = value;
-				
-			}
-		}
-
-		public int Level
-		{
-			get
-			{
-				return _level;
-			}
-			set
-			{
-				_level = value;
-				
-			}
-		}
-
-		public string ThisHeroClass
-		{
-			get
-			{
-				return _heroClass.ToString();
-			}
-		}
-
-		public string ThisHeroRace
-		{
-			get
-			{
-				return _heroRace.ToString();
-			}
-		}
-
-		public string CritChanceText
-		{
-			get
-			{
-				string critChanceText = string.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
-				return critChanceText[critChanceText.Length - 2] == '0' ? critChanceText.Remove(critChanceText.Length - 3, 2) : critChanceText;
-			}
-		}
-
-		public List<Material> Materials
-		{
-			get
-			{
-				return _materials;
-			}
-			set
-			{
-				_materials = value;
-				
-			}
-		}
-
-		public List<Recipe> Recipes
-		{
-			get
-			{
-				return _recipes;
-			}
-			set
-			{
-				_recipes = value;
-				
-			}
-		}
-
-		public List<Artifact> Artifacts
-		{
-			get
-			{
-				return _artifacts;
-			}
-			set
-			{
-				_artifacts = value;
-				
-			}
-		}
-
-		public List<Quest> Quests
-		{
-			get
-			{
-				return _quests;
-			}
-			set
-			{
-				_quests = value;
-				
-			}
-		}
-
-		public Blessing Blessing
-		{
-			get
-			{
-				return _blessing;
-			}
-			set
-			{
-				_blessing = value;
-				
-			}
-		}
-
-		public Specialization Specialization
-		{
-			get
-			{
-				return _specialization;
-			}
-			set
-			{
-				_specialization = value;
-				
-			}
-		}
-
-		public int LevelDamageBonus
-		{
-			get
-			{
-				return ClickDamagePerLevel * Level;
-			}
-		}
-
-		public int LevelDamageBonusTotal
-		{
-			get
-			{
-				return ClickDamagePerLevel * Level + 2;
-			}
-		}
-
-		public double LevelCritBonus
-		{
-			get
-			{
-				return CritChancePerLevel * Level * 100;
-			}
-		}
-
-		public double LevelCritBonusTotal
-		{
-			get
-			{
-				return CritChancePerLevel * Level * 100 + 25;
-			}
-		}
-
-		public int LevelPoisonBonus
-		{
-			get
-			{
-				return PoisonDamagePerLevel * Level;
-			}
-		}
-
-		public int LevelPoisonBonusTotal
-		{
-			get
-			{
-				return PoisonDamagePerLevel * Level + 1;
-			}
-		}
-
-		public TimeSpan TimePlayed { get; set; }
-
-		[NotMapped]
-		public DateTime SessionStartDate { get; set; }
-
-		public double AuraDamage
-		{
-			get
-			{
-				return _auraDamage;
-			}
-			set
-			{
-				_auraDamage = value;
-				
-			}
-		}
-
-		public double AuraAttackSpeed
-		{
-			get
-			{
-				return _auraAttackSpeed;
-			}
-			set
-			{
-				_auraAttackSpeed = value;
-				
-			}
-		}
-
-		public string AuraDamageText
-		{
-			get
-			{
-				string auraDamageText = string.Format("{0:P1}", AuraDamage);
-				return auraDamageText[auraDamageText.Length - 2] == '0' ? auraDamageText.Remove(auraDamageText.Length - 3, 2) : auraDamageText;
-			}
-		}
-
-		public string AuraDps
-		{
-			get
-			{
-				string auraDps = string.Format("{0:P1}", Math.Round(_auraDamage * _auraAttackSpeed, 1));
-				return auraDps[auraDps.Length - 2] == '0' ? auraDps.Remove(auraDps.Length - 3, 2) : auraDps;
-			}
-		}
-
-		public double LevelAuraBonus
-		{
-			get
-			{
-				// AuraAttackSpeed per level * Level
-				return 1 * Level;
-			}
-		}
-
-		public double LevelAuraBonusTotal
-		{
-			get
-			{
-				// AuraAttackSpeed per level * Level + AuraBaseAttackSpeed
-				return 1 * Level + 1;
-			}
-		}
-
-		#endregion Properties
+		
 	}
 }

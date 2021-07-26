@@ -11,21 +11,7 @@ namespace ClickQuest.Player
 {
 	public class User : INotifyPropertyChanged
 	{
-		public User()
-		{
-			Heroes = new List<Hero>();
-			Ingots = new List<Ingot>();
-			DungeonKeys = new List<DungeonKey>();
-			Achievements = new Achievements();
-		}
-
-		#region INotifyPropertyChanged
-
 		public event PropertyChangedEventHandler PropertyChanged;
-
-		#endregion INotifyPropertyChanged
-
-		#region Singleton
 
 		private static User _instance;
 
@@ -46,78 +32,21 @@ namespace ClickQuest.Player
 			}
 		}
 
-		#endregion Singleton
-
-		#region Private Fields
-
-		private List<Hero> _heroes;
-		private Hero _currentHero;
-		private List<Ingot> _ingots;
-		private List<DungeonKey> _dungeonKeys;
 		private int _gold;
-		private Achievements _achievements;
 		public const int HERO_LIMIT = 6;
-
-		#endregion Private Fields
-
-		#region Properties
 
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 
-		public List<Hero> Heroes
-		{
-			get
-			{
-				return _heroes;
-			}
-			set
-			{
-				_heroes = value;
-				
-			}
-		}
+		public List<Hero> Heroes{ get; set; }
 
-		public List<Ingot> Ingots
-		{
-			get
-			{
-				return _ingots;
-			}
-			set
-			{
-				_ingots = value;
-				
-			}
-		}
+		public List<Ingot> Ingots{ get; set; }
 
-		public List<DungeonKey> DungeonKeys
-		{
-			get
-			{
-				return _dungeonKeys;
-			}
-			set
-			{
-				_dungeonKeys = value;
-				
-			}
-		}
+		public List<DungeonKey> DungeonKeys{ get; set; }
 
 		[NotMapped]
-		public Hero CurrentHero
-		{
-			get
-			{
-				return _currentHero;
-			}
-			set
-			{
-				_currentHero = value;
-				
-			}
-		}
+		public Hero CurrentHero{ get; set; }
 
 		public static DateTime SessionStartDate { get; set; }
 
@@ -145,19 +74,14 @@ namespace ClickQuest.Player
 			}
 		}
 
-		public Achievements Achievements
-		{
-			get
-			{
-				return _achievements;
-			}
-			set
-			{
-				_achievements = value;
-				
-			}
-		}
+		public Achievements Achievements{ get; set; }
 
-		#endregion Properties
+		public User()
+		{
+			Heroes = new List<Hero>();
+			Ingots = new List<Ingot>();
+			DungeonKeys = new List<DungeonKey>();
+			Achievements = new Achievements();
+		}
 	}
 }

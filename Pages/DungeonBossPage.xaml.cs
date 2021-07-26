@@ -17,44 +17,22 @@ namespace ClickQuest.Pages
 {
 	public partial class DungeonBossPage : Page, INotifyPropertyChanged
 	{
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		private Boss _boss;
+		private DispatcherTimer _fightTimer;
+		private readonly Random _rng = new Random();
+		private DispatcherTimer _poisonTimer;
+		private int _poisonTicks;
+
+		public int Duration { get; set; }
+
 		public DungeonBossPage()
 		{
 			InitializeComponent();
 
 			SetupFightTimer();
 			SetupPoisonTimer();
-		}
-
-		#region Properties
-
-		public int Duration
-		{
-			get
-			{
-				return _duration;
-			}
-			set
-			{
-				_duration = value;
-				
-			}
-		}
-
-		#endregion
-
-		private void SetupFightTimer()
-		{
-			_fightTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};
-			_fightTimer.Tick += FightTimer_Tick;
-		}
-
-		private void SetupPoisonTimer()
-		{
-			int poisonIntervalMs = 500;
-
-			_poisonTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs)};
-			_poisonTimer.Tick += PoisonTimer_Tick;
-			_poisonTicks = 0;
 		}
 
 		public void StartBossFight(Boss boss)
@@ -93,6 +71,30 @@ namespace ClickQuest.Pages
 
 				GrantVictoryBonuses();
 				HandleInterfaceAfterBossDeath();
+			}
+		}
+
+		private void SetupFightTimer()
+		{
+			_fightTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};
+			_fightTimer.Tick += FightTimer_Tick;
+		}
+
+		private void SetupPoisonTimer()
+		{
+			int poisonIntervalMs = 500;
+
+			_poisonTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs)};
+			_poisonTimer.Tick += PoisonTimer_Tick;
+			_poisonTicks = 0;
+		}
+
+		private void StartPoisonTimer()
+		{
+			if (User.Instance.CurrentHero.PoisonDamage > 0)
+			{
+				_poisonTicks = 0;
+				_poisonTimer.Start();
 			}
 		}
 
@@ -155,33 +157,6 @@ namespace ClickQuest.Pages
 			TestRewardsBlock.Text = lootText;
 		}
 
-		private void StartPoisonTimer()
-		{
-			if (User.Instance.CurrentHero.PoisonDamage > 0)
-			{
-				_poisonTicks = 0;
-				_poisonTimer.Start();
-			}
-		}
-
-		#region INotifyPropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		#endregion INotifyPropertyChanged
-
-		#region Private Fields
-
-		private int _duration;
-		private Boss _boss;
-		private DispatcherTimer _fightTimer;
-		private readonly Random _rng = new Random();
-		private DispatcherTimer _poisonTimer;
-		private int _poisonTicks;
-
-		#endregion
-
-		#region Events
 
 		private void FightTimer_Tick(object source, EventArgs e)
 		{
@@ -240,6 +215,5 @@ namespace ClickQuest.Pages
 			TestRewardsBlock.Text = "";
 		}
 
-		#endregion
 	}
 }

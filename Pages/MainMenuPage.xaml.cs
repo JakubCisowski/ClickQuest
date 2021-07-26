@@ -33,6 +33,16 @@ namespace ClickQuest.Pages
 			}
 		}
 
+		private void ClearSelectOrDeletePanels()
+		{
+			var selectOrDeletePanels = SelectOrDeleteHeroButtonsGrid.Children.OfType<StackPanel>();
+
+			for (int i = 0; i < selectOrDeletePanels.Count(); i++)
+			{
+				SelectOrDeleteHeroButtonsGrid.Children.Remove(selectOrDeletePanels.ElementAt(i--));
+			}
+		}
+
 		private StackPanel GenerateSelectOrDeletePanel(int heroPosition)
 		{
 			var hero = User.Instance.Heroes[heroPosition];
@@ -97,16 +107,6 @@ namespace ClickQuest.Pages
 			}
 		}
 
-		private void ClearSelectOrDeletePanels()
-		{
-			var selectOrDeletePanels = SelectOrDeleteHeroButtonsGrid.Children.OfType<StackPanel>();
-
-			for (int i = 0; i < selectOrDeletePanels.Count(); i++)
-			{
-				SelectOrDeleteHeroButtonsGrid.Children.Remove(selectOrDeletePanels.ElementAt(i--));
-			}
-		}
-
 		private Button GenerateSelectHeroButton(Hero hero)
 		{
 			var selectHeroButton = new Button
@@ -154,8 +154,6 @@ namespace ClickQuest.Pages
 			}
 		}
 
-		#region Events
-
 		private void CreateHeroButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (User.Instance.Heroes.Count < User.HERO_LIMIT)
@@ -200,7 +198,5 @@ namespace ClickQuest.Pages
 			EntityOperations.ResetProgress();
 			UpdateSelectOrDeleteHeroButtons();
 		}
-
-		#endregion Events
 	}
 }

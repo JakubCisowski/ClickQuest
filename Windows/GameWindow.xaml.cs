@@ -15,11 +15,22 @@ namespace ClickQuest
 {
 	public partial class GameWindow : Window, INotifyPropertyChanged
 	{
-		#region Private Fields
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		private string _locationInfo;
 
-		#endregion
+		public string LocationInfo
+		{
+			get
+			{
+				return _locationInfo;
+			}
+			set
+			{
+				_locationInfo = value;
+				SwitchLocationInfoBorderVisibility();
+			}
+		}
 
 		public GameWindow()
 		{
@@ -33,37 +44,18 @@ namespace ClickQuest
 			InterfaceController.ChangePage(GameData.Pages["MainMenu"], "");
 		}
 
-		#region INotifyPropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		#endregion INotifyPropertyChanged
-
-		#region Properties
-
-		public string LocationInfo
-		{
-			get
-			{
-				return _locationInfo;
-			}
-			set
-			{
-				_locationInfo = value;
-
-				SwitchLocationInfoBorderVisibility();
-				
-			}
-		}
-
 		private void SwitchLocationInfoBorderVisibility()
 		{
 			LocationInfoBorder.Visibility = LocationInfo == "" ? Visibility.Hidden : Visibility.Visible;
 		}
 
-		#endregion
-
-		#region Events
+		private void DragableTop_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			if (e.ChangedButton == MouseButton.Left)
+			{
+				DragMove();
+			}
+		}
 
 		protected override void OnClosing(CancelEventArgs e)
 		{
@@ -74,14 +66,6 @@ namespace ClickQuest
 			EntityOperations.SaveGame();
 
 			base.OnClosing(e);
-		}
-
-		private void DragableTop_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (e.ChangedButton == MouseButton.Left)
-			{
-				DragMove();
-			}
 		}
 
 		private void AchievementsButton_Click(object sender, RoutedEventArgs e)
@@ -98,7 +82,5 @@ namespace ClickQuest
 				Application.Current.Shutdown();
 			}
 		}
-
-		#endregion
 	}
 }

@@ -9,102 +9,18 @@ namespace ClickQuest.Places
 {
 	public class Dungeon : INotifyPropertyChanged, IIdentifiable
 	{
-		#region INotifyPropertyChanged
-
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion INotifyPropertyChanged
+		public int Id{ get; set; }
+		public int DungeonGroupId{ get; set; }
 
-		#region Private Fields
+		public string Name{ get; set; }
 
-		private int _id;
-		private int _dungeonGroupId;
-		private string _name;
-		private string _background;
-		private string _description;
-		private List<int> _bossIds;
+		public string Description{ get; set; }
 
-		#endregion Private Fields
+		public string Background{ get; set; }
 
-		#region Properties
-
-		public int Id
-		{
-			get
-			{
-				return _id;
-			}
-			set
-			{
-				_id = value;
-				
-			}
-		}
-
-		public int DungeonGroupId
-		{
-			get
-			{
-				return _dungeonGroupId;
-			}
-			set
-			{
-				_dungeonGroupId = value;
-				
-			}
-		}
-
-		public string Name
-		{
-			get
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-				
-			}
-		}
-
-		public string Description
-		{
-			get
-			{
-				return _description;
-			}
-			set
-			{
-				_description = value;
-				
-			}
-		}
-
-		public string Background
-		{
-			get
-			{
-				return _background;
-			}
-			set
-			{
-				_background = value;
-				
-			}
-		}
-
-		public List<int> BossIds
-		{
-			get
-			{
-				return _bossIds;
-			}
-			set
-			{
-				_bossIds = value;
-				
-			}
-		}
+		public List<int> BossIds{ get; set; }
 
 		public DungeonGroup DungeonGroup
 		{
@@ -113,7 +29,5 @@ namespace ClickQuest.Places
 				return GameData.DungeonGroups.FirstOrDefault(x => x.Id == DungeonGroupId);
 			}
 		}
-
-		#endregion Properties
 	}
 }

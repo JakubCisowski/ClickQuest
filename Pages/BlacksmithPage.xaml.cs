@@ -33,8 +33,6 @@ namespace ClickQuest.Pages
 			ItemsListViewCraft.Items.Refresh();
 		}
 
-		#region Events
-
 		private void MeltButton_Click(object sender, RoutedEventArgs e)
 		{
 			var b = sender as Button;
@@ -222,7 +220,5 @@ namespace ClickQuest.Pages
 		{
 			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
 		}
-
-		#endregion Events
 	}
 }

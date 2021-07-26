@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ClickQuest.Heroes.Buffs
 {
+	
 	public enum BlessingType
 	{
 		ClickDamage = 0,
@@ -27,6 +28,56 @@ namespace ClickQuest.Heroes.Buffs
 	[Owned]
 	public class Blessing : INotifyPropertyChanged, IIdentifiable
 	{
+		public event PropertyChangedEventHandler PropertyChanged;
+		private DispatcherTimer _timer;
+
+		public int Id { get; set; }
+
+		public string Name { get; set; }
+
+		public string Description { get; set; }
+
+		public Rarity Rarity { get; set; }
+
+		public int Value { get; set; }
+
+		public BlessingType Type { get; set; }
+
+		public int Duration { get; set; }
+
+		[NotMapped]
+		public string DurationText { get; set; }
+
+		public int Buff { get; set; }
+
+		public bool AchievementBonusGranted { get; set; }
+
+		public string TypeString
+		{
+			get
+			{
+				return Type.ToString();
+			}
+		}
+
+		public string RarityString
+		{
+			get
+			{
+				return Rarity.ToString();
+			}
+		}
+
+		
+
+		public bool IsFinished
+		{
+			get
+			{
+				return Duration <= 0;
+			}
+		}
+
 		public Blessing CopyBlessing()
 		{
 			var copy = new Blessing();
@@ -145,186 +196,8 @@ namespace ClickQuest.Heroes.Buffs
 			InterfaceController.RefreshStatPanels();
 		}
 
-		#region INotifyPropertyChanged
+		
 
-		public event PropertyChangedEventHandler PropertyChanged;
-
-
-		#endregion INotifyPropertyChanged
-
-		#region Private Fields
-
-		private int _id;
-		private string _name;
-		private string _description;
-		private Rarity _rarity;
-		public BlessingType _type;
-		private int _value;
-		private int _duration;
-		private string _durationText;
-		private int _buff;
-		private bool _achievementBonusGranted;
-		private DispatcherTimer _timer;
-
-		#endregion Private Fields
-
-		#region Properties
-
-		public int Id
-		{
-			get
-			{
-				return _id;
-			}
-			set
-			{
-				_id = value;
-				
-			}
-		}
-
-		public string Name
-		{
-			get
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-				
-			}
-		}
-
-		public string Description
-		{
-			get
-			{
-				return _description;
-			}
-			set
-			{
-				_description = value;
-				
-			}
-		}
-
-		public Rarity Rarity
-		{
-			get
-			{
-				return _rarity;
-			}
-			set
-			{
-				_rarity = value;
-				
-			}
-		}
-
-		public int Value
-		{
-			get
-			{
-				return _value;
-			}
-			set
-			{
-				_value = value;
-				
-			}
-		}
-
-		public BlessingType Type
-		{
-			get
-			{
-				return _type;
-			}
-			set
-			{
-				_type = value;
-				
-			}
-		}
-
-		public int Duration
-		{
-			get
-			{
-				return _duration;
-			}
-			set
-			{
-				_duration = value;
-				
-			}
-		}
-
-		[NotMapped]
-		public string DurationText
-		{
-			get
-			{
-				return _durationText;
-			}
-			set
-			{
-				_durationText = value;
-				
-			}
-		}
-
-		public int Buff
-		{
-			get
-			{
-				return _buff;
-			}
-			set
-			{
-				_buff = value;
-				
-			}
-		}
-
-		public string TypeString
-		{
-			get
-			{
-				return Type.ToString();
-			}
-		}
-
-		public string RarityString
-		{
-			get
-			{
-				return Rarity.ToString();
-			}
-		}
-
-		public bool AchievementBonusGranted
-		{
-			get
-			{
-				return _achievementBonusGranted;
-			}
-			set
-			{
-				_achievementBonusGranted = value;
-				
-			}
-		}
-
-		public bool IsFinished
-		{
-			get
-			{
-				return Duration <= 0;
-			}
-		}
-
-		#endregion Properties
+		
 	}
 }

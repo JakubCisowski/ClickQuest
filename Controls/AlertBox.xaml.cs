@@ -5,6 +5,9 @@ namespace ClickQuest.Controls
 {
 	public partial class AlertBox : Window
 	{
+		private static MessageBoxResult Result = MessageBoxResult.OK;
+		private static AlertBox MessageBox;
+
 		public AlertBox()
 		{
 			InitializeComponent();
@@ -39,14 +42,13 @@ namespace ClickQuest.Controls
 			return Result;
 		}
 
-		#region Private Fields
-
-		private static MessageBoxResult Result = MessageBoxResult.OK;
-		private static AlertBox MessageBox;
-
-		#endregion
-
-		#region Events
+		private void AlertBox_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			if (e.ChangedButton == MouseButton.Left)
+			{
+				DragMove();
+			}
+		}
 
 		private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
@@ -61,15 +63,5 @@ namespace ClickQuest.Controls
 			MessageBox.Close();
 			MessageBox = null;
 		}
-
-		private void AlertBox_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (e.ChangedButton == MouseButton.Left)
-			{
-				DragMove();
-			}
-		}
-
-		#endregion
 	}
 }
