@@ -104,7 +104,5 @@ namespace ClickQuest.Windows
 			e.Cancel = true;
 			Visibility = Visibility.Hidden;
 		}
-
-		
 	}
 }

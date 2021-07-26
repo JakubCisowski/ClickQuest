@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using ClickQuest.Adventures;
 using ClickQuest.Data;
 using ClickQuest.Heroes.Buffs;
@@ -16,7 +15,7 @@ namespace ClickQuest.Heroes
 	public class Hero : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
-		
+
 		private const int MAX_LEVEL = 100;
 		private int _experience;
 
@@ -32,7 +31,6 @@ namespace ClickQuest.Heroes
 
 		public string Name { get; set; }
 
-		
 
 		[NotMapped]
 		public int ExperienceToNextLvl { get; set; }
@@ -75,7 +73,7 @@ namespace ClickQuest.Heroes
 		public double AuraDamage { get; set; }
 
 		public double AuraAttackSpeed { get; set; }
-		
+
 		public int Experience
 		{
 			get
@@ -95,7 +93,6 @@ namespace ClickQuest.Heroes
 				ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
 				ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
 				ExperienceProgress = Heroes.Experience.CalculateXpProgress(this);
-				
 			}
 		}
 
@@ -124,7 +121,6 @@ namespace ClickQuest.Heroes
 			}
 		}
 
-		
 
 		public int LevelDamageBonus
 		{
@@ -173,7 +169,6 @@ namespace ClickQuest.Heroes
 				return PoisonDamagePerLevel * Level + 1;
 			}
 		}
-
 
 
 		public string AuraDamageText
@@ -360,7 +355,5 @@ namespace ClickQuest.Heroes
 
 			return damage;
 		}
-
-		
 	}
 }

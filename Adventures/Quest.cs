@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
 using ClickQuest.Controls;
@@ -30,22 +29,22 @@ namespace ClickQuest.Adventures
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int DbKey { get; set; }
 
-		public int Id{ get; set; }
+		public int Id { get; set; }
 
 		[NotMapped]
-		public bool Rare{ get; set; }
+		public bool Rare { get; set; }
 
 		[NotMapped]
-		public HeroClass HeroClass{ get; set; }
+		public HeroClass HeroClass { get; set; }
 
 		[NotMapped]
-		public string Name{ get; set; }
+		public string Name { get; set; }
 
 		[NotMapped]
-		public int Duration{ get; set; }
+		public int Duration { get; set; }
 
 		[NotMapped]
-		public string Description{ get; set; }
+		public string Description { get; set; }
 
 		[NotMapped]
 		public List<int> RewardRecipeIds { get; set; }
@@ -59,13 +58,13 @@ namespace ClickQuest.Adventures
 		[NotMapped]
 		public List<int> RewardIngotIds { get; set; }
 
-		public DateTime EndDate{ get; set; }
+		public DateTime EndDate { get; set; }
 
 		[NotMapped]
-		public int TicksCountNumber{ get; set; }
+		public int TicksCountNumber { get; set; }
 
 		[NotMapped]
-		public string TicksCountText{ get; set; }
+		public string TicksCountText { get; set; }
 
 		[NotMapped]
 		public string RewardsDescription { get; private set; }

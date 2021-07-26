@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using ClickQuest.Interfaces;
 
 namespace ClickQuest.Enemies
@@ -11,19 +10,19 @@ namespace ClickQuest.Enemies
 		protected int _currentHealth;
 
 
-		public int Id { get; set;}
+		public int Id { get; set; }
 
-		public string Name{ get; set;}
+		public string Name { get; set; }
 
-		public string Description{ get; set;}
+		public string Description { get; set; }
 
-		public int Health{ get; set;}
+		public int Health { get; set; }
 
 		public abstract int CurrentHealth { get; set; }
 
-		public int CurrentHealthProgress{ get; set;}
+		public int CurrentHealthProgress { get; set; }
 
-		public string Image{ get; set;}
+		public string Image { get; set; }
 
 		public Enemy()
 		{

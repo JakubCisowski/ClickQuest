@@ -1,48 +1,13 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Windows;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClickQuest.Player
 {
-	public enum NumericAchievementType
-	{
-		ExperienceGained,
-		GoldEarned,
-		GoldSpent,
-		GeneralIngotsEarned,
-		FineIngotsEarned,
-		SuperiorIngotsEarned,
-		ExceptionalIngotsEarned,
-		MythicIngotsEarned,
-		MasterworkIngotsEarned,
-		GeneralDungeonKeysEarned,
-		FineDungeonKeysEarned,
-		SuperiorDungeonKeysEarned,
-		ExceptionalDungeonKeysEarned,
-		MythicDungeonKeysEarned,
-		MasterworkDungeonKeysEarned,
-		TotalDamageDealt,
-		CritsAmount,
-		PoisonTicksAmount,
-		MonstersDefeated,
-		DungeonsCompleted,
-		BossesDefeated,
-		QuestsCompleted,
-		QuestRerollsAmount,
-		BlessingsUsed,
-		MaterialsGained,
-		RecipesGained,
-		GeneralArtifactsGained,
-		FineArtifactsGained,
-		SuperiorArtifactsGained,
-		ExceptionalArtifactsGained,
-		MythicArtifactsGained,
-		MasterworkArtifactsGained
-	}
+	public enum NumericAchievementType { ExperienceGained, GoldEarned, GoldSpent, GeneralIngotsEarned, FineIngotsEarned, SuperiorIngotsEarned, ExceptionalIngotsEarned, MythicIngotsEarned, MasterworkIngotsEarned, GeneralDungeonKeysEarned, FineDungeonKeysEarned, SuperiorDungeonKeysEarned, ExceptionalDungeonKeysEarned, MythicDungeonKeysEarned, MasterworkDungeonKeysEarned, TotalDamageDealt, CritsAmount, PoisonTicksAmount, MonstersDefeated, DungeonsCompleted, BossesDefeated, QuestsCompleted, QuestRerollsAmount, BlessingsUsed, MaterialsGained, RecipesGained, GeneralArtifactsGained, FineArtifactsGained, SuperiorArtifactsGained, ExceptionalArtifactsGained, MythicArtifactsGained, MasterworkArtifactsGained }
 
 
 	[Owned]
@@ -55,7 +20,7 @@ namespace ClickQuest.Player
 
 		public string AchievementCollectionString { get; set; }
 
-		public TimeSpan TotalTimePlayed{ get; set; }
+		public TimeSpan TotalTimePlayed { get; set; }
 
 		public Achievements()
 		{

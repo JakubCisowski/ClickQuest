@@ -11,6 +11,7 @@ namespace ClickQuest.Pages
 	public partial class RegionPage : Page
 	{
 		public Region Region { get; set; }
+
 		public RegionPage(Region currentRegion)
 		{
 			InitializeComponent();

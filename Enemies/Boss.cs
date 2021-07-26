@@ -51,10 +51,5 @@ namespace ClickQuest.Enemies
 
 			return copy;
 		}
-
-		
-
-
-		
 	}
 }

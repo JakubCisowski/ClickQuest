@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using ClickQuest.Adventures;
@@ -10,7 +9,6 @@ namespace ClickQuest.Controls
 {
 	public partial class QuestButton : UserControl, INotifyPropertyChanged
 	{
-
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		private readonly Quest _quest;

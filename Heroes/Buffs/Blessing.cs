@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
 using ClickQuest.Controls;
@@ -15,15 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ClickQuest.Heroes.Buffs
 {
-	
-	public enum BlessingType
-	{
-		ClickDamage = 0,
-		CritChance,
-		PoisonDamage,
-		AuraDamage,
-		AuraSpeed
-	}
+	public enum BlessingType { ClickDamage = 0, CritChance, PoisonDamage, AuraDamage, AuraSpeed }
 
 	[Owned]
 	public class Blessing : INotifyPropertyChanged, IIdentifiable
@@ -68,7 +59,6 @@ namespace ClickQuest.Heroes.Buffs
 			}
 		}
 
-		
 
 		public bool IsFinished
 		{
@@ -195,9 +185,5 @@ namespace ClickQuest.Heroes.Buffs
 
 			InterfaceController.RefreshStatPanels();
 		}
-
-		
-
-		
 	}
 }

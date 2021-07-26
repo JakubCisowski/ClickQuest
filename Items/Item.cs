@@ -1,7 +1,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
 using ClickQuest.Interfaces;
 using ClickQuest.Player;
 
@@ -16,14 +15,14 @@ namespace ClickQuest.Items
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int DbKey { get; set; }
 
-		public int Id{ get; set; }
+		public int Id { get; set; }
 
-		public string Name{ get; set; }
+		public string Name { get; set; }
 
-		public int Value{ get; set; }
+		public int Value { get; set; }
 
-		public Rarity Rarity{ get; set; }
-		public string Description{ get; set; }
+		public Rarity Rarity { get; set; }
+		public string Description { get; set; }
 
 		public int Quantity
 		{
@@ -42,12 +41,9 @@ namespace ClickQuest.Items
 					User.Instance.CurrentHero?.Materials.Remove(this as Material);
 					User.Instance.CurrentHero?.Artifacts.Remove(this as Artifact);
 				}
-
-				
 			}
 		}
 
-		
 
 		public string RarityString
 		{
@@ -63,7 +59,5 @@ namespace ClickQuest.Items
 
 		public abstract void AddItem();
 		public abstract void RemoveItem();
-
-		
 	}
 }

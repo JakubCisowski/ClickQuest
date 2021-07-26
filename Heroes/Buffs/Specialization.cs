@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Items;
 using ClickQuest.Player;
@@ -9,21 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ClickQuest.Heroes.Buffs
 {
-	public enum SpecializationType
-	{
-		Blessing,
-		Clicking,
-		Crafting,
-		Buying,
-		Melting,
-		Questing,
-		Dungeon
-	}
+	public enum SpecializationType { Blessing, Clicking, Crafting, Buying, Melting, Questing, Dungeon }
 
 	[Owned]
 	public class Specialization : INotifyPropertyChanged
 	{
-
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		// Base values for each buff.
@@ -46,7 +35,6 @@ namespace ClickQuest.Heroes.Buffs
 
 		private string _specCraftingText;
 
-		
 
 		[NotMapped]
 		public ObservableDictionary<SpecializationType, int> SpecializationBuffs { get; set; }
@@ -155,7 +143,5 @@ namespace ClickQuest.Heroes.Buffs
 		{
 			Serialization.DeserializeData(SpecializationAmountsString, SpecializationAmounts);
 		}
-
-		
 	}
 }

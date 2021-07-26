@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
 using ClickQuest.Heroes;
 using ClickQuest.Items;
 
@@ -39,14 +38,14 @@ namespace ClickQuest.Player
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 
-		public List<Hero> Heroes{ get; set; }
+		public List<Hero> Heroes { get; set; }
 
-		public List<Ingot> Ingots{ get; set; }
+		public List<Ingot> Ingots { get; set; }
 
-		public List<DungeonKey> DungeonKeys{ get; set; }
+		public List<DungeonKey> DungeonKeys { get; set; }
 
 		[NotMapped]
-		public Hero CurrentHero{ get; set; }
+		public Hero CurrentHero { get; set; }
 
 		public static DateTime SessionStartDate { get; set; }
 
@@ -70,11 +69,10 @@ namespace ClickQuest.Player
 				}
 
 				_gold = value;
-				
 			}
 		}
 
-		public Achievements Achievements{ get; set; }
+		public Achievements Achievements { get; set; }
 
 		public User()
 		{
