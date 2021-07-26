@@ -19,10 +19,6 @@ namespace ClickQuest.Items
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
 
 		#endregion INotifyPropertyChanged
 
@@ -52,7 +48,7 @@ namespace ClickQuest.Items
 			set
 			{
 				_id = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -65,7 +61,7 @@ namespace ClickQuest.Items
 			set
 			{
 				_name = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -78,7 +74,7 @@ namespace ClickQuest.Items
 			set
 			{
 				_value = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -91,7 +87,7 @@ namespace ClickQuest.Items
 			set
 			{
 				_rarity = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -113,7 +109,7 @@ namespace ClickQuest.Items
 					User.Instance.CurrentHero?.Artifacts.Remove(this as Artifact);
 				}
 
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -126,7 +122,7 @@ namespace ClickQuest.Items
 			set
 			{
 				_description = value;
-				OnPropertyChanged();
+				
 			}
 		}
 

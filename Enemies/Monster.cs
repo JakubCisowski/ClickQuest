@@ -34,7 +34,6 @@ namespace ClickQuest.Enemies
 				}
 
 				CurrentHealthProgress = CalculateCurrentHealthProgress();
-				OnPropertyChanged();
 			}
 		}
 
@@ -47,7 +46,6 @@ namespace ClickQuest.Enemies
 			set
 			{
 				_loot = value;
-				OnPropertyChanged();
 			}
 		}
 

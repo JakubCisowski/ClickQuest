@@ -23,10 +23,7 @@ namespace ClickQuest.Enemies
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
+
 
 		#endregion INotifyPropertyChanged
 
@@ -53,7 +50,6 @@ namespace ClickQuest.Enemies
 			set
 			{
 				_id = value;
-				OnPropertyChanged();
 			}
 		}
 
@@ -66,7 +62,6 @@ namespace ClickQuest.Enemies
 			set
 			{
 				_name = value;
-				OnPropertyChanged();
 			}
 		}
 
@@ -79,7 +74,6 @@ namespace ClickQuest.Enemies
 			set
 			{
 				_description = value;
-				OnPropertyChanged();
 			}
 		}
 
@@ -92,7 +86,6 @@ namespace ClickQuest.Enemies
 			set
 			{
 				_health = value;
-				OnPropertyChanged();
 			}
 		}
 
@@ -107,7 +100,6 @@ namespace ClickQuest.Enemies
 			set
 			{
 				_currentHealthProgress = value;
-				OnPropertyChanged();
 			}
 		}
 
@@ -120,7 +112,6 @@ namespace ClickQuest.Enemies
 			set
 			{
 				_image = value;
-				OnPropertyChanged();
 			}
 		}
 

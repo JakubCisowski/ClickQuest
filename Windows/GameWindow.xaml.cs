@@ -37,11 +37,6 @@ namespace ClickQuest
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-
 		#endregion INotifyPropertyChanged
 
 		#region Properties
@@ -57,7 +52,7 @@ namespace ClickQuest
 				_locationInfo = value;
 
 				SwitchLocationInfoBorderVisibility();
-				OnPropertyChanged();
+				
 			}
 		}
 

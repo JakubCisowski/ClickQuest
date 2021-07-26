@@ -168,10 +168,6 @@ namespace ClickQuest.Heroes
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
 
 		#endregion INotifyPropertyChanged
 
@@ -222,7 +218,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_name = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -245,7 +241,7 @@ namespace ClickQuest.Heroes
 				ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
 				ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
 				ExperienceProgress = Heroes.Experience.CalculateXpProgress(this);
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -259,7 +255,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_experienceToNextLvl = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -273,7 +269,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_experienceToNextLvlTotal = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -287,7 +283,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_experienceProgress = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -300,7 +296,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_heroRace = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -313,7 +309,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_heroClass = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -326,7 +322,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_clickDamage = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -339,7 +335,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_critChance = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -352,7 +348,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_poisonDamage = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -365,7 +361,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_level = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -403,7 +399,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_materials = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -416,7 +412,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_recipes = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -429,7 +425,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_artifacts = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -442,7 +438,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_quests = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -455,7 +451,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_blessing = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -468,7 +464,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_specialization = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -534,7 +530,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_auraDamage = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -547,7 +543,7 @@ namespace ClickQuest.Heroes
 			set
 			{
 				_auraAttackSpeed = value;
-				OnPropertyChanged();
+				
 			}
 		}
 

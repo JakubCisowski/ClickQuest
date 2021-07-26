@@ -149,10 +149,6 @@ namespace ClickQuest.Heroes.Buffs
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
 
 		#endregion INotifyPropertyChanged
 
@@ -183,7 +179,7 @@ namespace ClickQuest.Heroes.Buffs
 			set
 			{
 				_id = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -196,7 +192,7 @@ namespace ClickQuest.Heroes.Buffs
 			set
 			{
 				_name = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -209,7 +205,7 @@ namespace ClickQuest.Heroes.Buffs
 			set
 			{
 				_description = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -222,7 +218,7 @@ namespace ClickQuest.Heroes.Buffs
 			set
 			{
 				_rarity = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -235,7 +231,7 @@ namespace ClickQuest.Heroes.Buffs
 			set
 			{
 				_value = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -248,7 +244,7 @@ namespace ClickQuest.Heroes.Buffs
 			set
 			{
 				_type = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -261,7 +257,7 @@ namespace ClickQuest.Heroes.Buffs
 			set
 			{
 				_duration = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -275,7 +271,7 @@ namespace ClickQuest.Heroes.Buffs
 			set
 			{
 				_durationText = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -288,7 +284,7 @@ namespace ClickQuest.Heroes.Buffs
 			set
 			{
 				_buff = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -317,7 +313,7 @@ namespace ClickQuest.Heroes.Buffs
 			set
 			{
 				_achievementBonusGranted = value;
-				OnPropertyChanged();
+				
 			}
 		}
 

@@ -11,11 +11,6 @@ namespace ClickQuest.Places
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-
 		#endregion INotifyPropertyChanged
 
 		#region Private Fields
@@ -40,7 +35,7 @@ namespace ClickQuest.Places
 			set
 			{
 				_id = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -53,7 +48,7 @@ namespace ClickQuest.Places
 			set
 			{
 				_name = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -66,7 +61,7 @@ namespace ClickQuest.Places
 			set
 			{
 				_description = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -79,7 +74,7 @@ namespace ClickQuest.Places
 			set
 			{
 				_background = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -92,7 +87,7 @@ namespace ClickQuest.Places
 			set
 			{
 				_monsters = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -105,7 +100,7 @@ namespace ClickQuest.Places
 			set
 			{
 				_levelRequirement = value;
-				OnPropertyChanged();
+				
 			}
 		}
 

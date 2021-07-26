@@ -23,11 +23,6 @@ namespace ClickQuest.Player
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-
 		#endregion INotifyPropertyChanged
 
 		#region Singleton
@@ -48,7 +43,6 @@ namespace ClickQuest.Player
 			set
 			{
 				_instance = value;
-				_instance.OnPropertyChanged();
 			}
 		}
 
@@ -81,7 +75,7 @@ namespace ClickQuest.Player
 			set
 			{
 				_heroes = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -94,7 +88,7 @@ namespace ClickQuest.Player
 			set
 			{
 				_ingots = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -107,7 +101,7 @@ namespace ClickQuest.Player
 			set
 			{
 				_dungeonKeys = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -121,7 +115,7 @@ namespace ClickQuest.Player
 			set
 			{
 				_currentHero = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -147,7 +141,7 @@ namespace ClickQuest.Player
 				}
 
 				_gold = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -160,7 +154,7 @@ namespace ClickQuest.Player
 			set
 			{
 				_achievements = value;
-				OnPropertyChanged();
+				
 			}
 		}
 

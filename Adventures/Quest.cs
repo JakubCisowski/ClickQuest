@@ -22,6 +22,176 @@ namespace ClickQuest.Adventures
 {
 	public class Quest : INotifyPropertyChanged, IIdentifiable
 	{
+		#region Private Fields
+
+		private int _id;
+		private bool _rare;
+		private HeroClass _heroClass;
+		private string _name;
+		private int _duration;
+		private string _description;
+		private readonly DispatcherTimer _timer;
+		private DateTime _endDate;
+		private int _ticksCountNumber;
+		private string _ticksCountText;
+
+		#endregion
+
+		#region Properties
+
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int DbKey { get; set; }
+
+		public int Id
+		{
+			get
+			{
+				return _id;
+			}
+			set
+			{
+				_id = value;
+				
+			}
+		}
+
+		[NotMapped]
+		public bool Rare
+		{
+			get
+			{
+				return _rare;
+			}
+			set
+			{
+				_rare = value;
+				
+			}
+		}
+
+		[NotMapped]
+		public HeroClass HeroClass
+		{
+			get
+			{
+				return _heroClass;
+			}
+			set
+			{
+				_heroClass = value;
+				
+			}
+		}
+
+		[NotMapped]
+		public string Name
+		{
+			get
+			{
+				return _name;
+			}
+			set
+			{
+				_name = value;
+				
+			}
+		}
+
+		[NotMapped]
+		public int Duration
+		{
+			get
+			{
+				return _duration;
+			}
+			set
+			{
+				_duration = value;
+				
+			}
+		}
+
+		[NotMapped]
+		public string Description
+		{
+			get
+			{
+				return _description;
+			}
+			set
+			{
+				_description = value;
+				
+			}
+		}
+
+		[NotMapped]
+		public List<int> RewardRecipeIds { get; set; }
+
+		[NotMapped]
+		public List<int> RewardMaterialIds { get; set; }
+
+		[NotMapped]
+		public List<int> RewardBlessingIds { get; set; }
+
+		[NotMapped]
+		public List<int> RewardIngotIds { get; set; }
+
+		public DateTime EndDate
+		{
+			get
+			{
+				return _endDate;
+			}
+			set
+			{
+				_endDate = value;
+				
+			}
+		}
+
+		[NotMapped]
+		public int TicksCountNumber
+		{
+			get
+			{
+				return _ticksCountNumber;
+			}
+			set
+			{
+				_ticksCountNumber = value;
+				
+			}
+		}
+
+		[NotMapped]
+		public string TicksCountText
+		{
+			get
+			{
+				return _ticksCountText;
+			}
+			set
+			{
+				_ticksCountText = value;
+				
+			}
+		}
+
+		[NotMapped]
+		public string RewardsDescription { get; private set; }
+
+		public bool IsFinished
+		{
+			get
+			{
+				return TicksCountNumber <= 0;
+			}
+		}
+
+		#endregion
+
 		public Quest()
 		{
 			RewardRecipeIds = new List<int>();
@@ -166,181 +336,12 @@ namespace ClickQuest.Adventures
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
+		
 
 		#endregion
 
-		#region Private Fields
+		
 
-		private int _id;
-		private bool _rare;
-		private HeroClass _heroClass;
-		private string _name;
-		private int _duration;
-		private string _description;
-		private readonly DispatcherTimer _timer;
-		private DateTime _endDate;
-		private int _ticksCountNumber;
-		private string _ticksCountText;
-
-		#endregion
-
-		#region Properties
-
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int DbKey { get; set; }
-
-		public int Id
-		{
-			get
-			{
-				return _id;
-			}
-			set
-			{
-				_id = value;
-				OnPropertyChanged();
-			}
-		}
-
-		[NotMapped]
-		public bool Rare
-		{
-			get
-			{
-				return _rare;
-			}
-			set
-			{
-				_rare = value;
-				OnPropertyChanged();
-			}
-		}
-
-		[NotMapped]
-		public HeroClass HeroClass
-		{
-			get
-			{
-				return _heroClass;
-			}
-			set
-			{
-				_heroClass = value;
-				OnPropertyChanged();
-			}
-		}
-
-		[NotMapped]
-		public string Name
-		{
-			get
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-				OnPropertyChanged();
-			}
-		}
-
-		[NotMapped]
-		public int Duration
-		{
-			get
-			{
-				return _duration;
-			}
-			set
-			{
-				_duration = value;
-				OnPropertyChanged();
-			}
-		}
-
-		[NotMapped]
-		public string Description
-		{
-			get
-			{
-				return _description;
-			}
-			set
-			{
-				_description = value;
-				OnPropertyChanged();
-			}
-		}
-
-		[NotMapped]
-		public List<int> RewardRecipeIds { get; set; }
-
-		[NotMapped]
-		public List<int> RewardMaterialIds { get; set; }
-
-		[NotMapped]
-		public List<int> RewardBlessingIds { get; set; }
-
-		[NotMapped]
-		public List<int> RewardIngotIds { get; set; }
-
-		public DateTime EndDate
-		{
-			get
-			{
-				return _endDate;
-			}
-			set
-			{
-				_endDate = value;
-				OnPropertyChanged();
-			}
-		}
-
-		[NotMapped]
-		public int TicksCountNumber
-		{
-			get
-			{
-				return _ticksCountNumber;
-			}
-			set
-			{
-				_ticksCountNumber = value;
-				OnPropertyChanged();
-			}
-		}
-
-		[NotMapped]
-		public string TicksCountText
-		{
-			get
-			{
-				return _ticksCountText;
-			}
-			set
-			{
-				_ticksCountText = value;
-				OnPropertyChanged();
-			}
-		}
-
-		[NotMapped]
-		public string RewardsDescription { get; private set; }
-
-		public bool IsFinished
-		{
-			get
-			{
-				return TicksCountNumber <= 0;
-			}
-		}
-
-		#endregion
+		
 	}
 }

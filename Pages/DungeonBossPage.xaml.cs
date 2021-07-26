@@ -36,7 +36,7 @@ namespace ClickQuest.Pages
 			set
 			{
 				_duration = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -167,11 +167,6 @@ namespace ClickQuest.Pages
 		#region INotifyPropertyChanged
 
 		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
 
 		#endregion INotifyPropertyChanged
 

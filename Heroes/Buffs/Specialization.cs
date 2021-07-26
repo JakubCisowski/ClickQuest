@@ -61,7 +61,7 @@ namespace ClickQuest.Heroes.Buffs
 			set
 			{
 				_specCraftingText = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -151,10 +151,6 @@ namespace ClickQuest.Heroes.Buffs
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
 
 		#endregion
 

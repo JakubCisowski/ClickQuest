@@ -72,7 +72,7 @@ namespace ClickQuest.Player
 			set
 			{
 				_totalTimePlayed = value;
-				OnPropertyChanged();
+				
 			}
 		}
 
@@ -95,12 +95,6 @@ namespace ClickQuest.Player
 		#region INotifyPropertyChanged
 
 		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-
 		#endregion
 	}
 }
