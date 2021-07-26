@@ -98,12 +98,10 @@ namespace ClickQuest.Extensions.CollectionsManager
 			AddWithNotification(key, value);
 		}
 
-
 		public bool ContainsKey(TKey key)
 		{
 			return _dictionary.ContainsKey(key);
 		}
-
 
 		public ICollection<TKey> Keys
 		{
@@ -118,12 +116,10 @@ namespace ClickQuest.Extensions.CollectionsManager
 			return RemoveWithNotification(key);
 		}
 
-
 		public bool TryGetValue(TKey key, out TValue value)
 		{
 			return _dictionary.TryGetValue(key, out value);
 		}
-
 
 		public ICollection<TValue> Values
 		{
@@ -132,7 +128,6 @@ namespace ClickQuest.Extensions.CollectionsManager
 				return _dictionary.Values;
 			}
 		}
-
 
 		public TValue this[TKey key]
 		{

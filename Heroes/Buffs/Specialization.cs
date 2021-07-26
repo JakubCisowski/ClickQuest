@@ -35,7 +35,6 @@ namespace ClickQuest.Heroes.Buffs
 
 		private string _specCraftingText;
 
-
 		[NotMapped]
 		public ObservableDictionary<SpecializationType, int> SpecializationBuffs { get; set; }
 
@@ -69,7 +68,6 @@ namespace ClickQuest.Heroes.Buffs
 		{
 			User.Instance.CurrentHero?.Specialization.UpdateBuffs();
 		}
-
 
 		public void UpdateThresholds()
 		{

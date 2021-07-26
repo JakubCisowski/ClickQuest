@@ -31,23 +31,20 @@ namespace ClickQuest.Player
 			}
 		}
 
-		private int _gold;
-		public const int HERO_LIMIT = 6;
-
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 
-		public List<Hero> Heroes { get; set; }
-
-		public List<Ingot> Ingots { get; set; }
-
-		public List<DungeonKey> DungeonKeys { get; set; }
-
 		[NotMapped]
 		public Hero CurrentHero { get; set; }
 
+		private int _gold;
+		public const int HERO_LIMIT = 6;
+		public List<Hero> Heroes { get; set; }
+		public List<Ingot> Ingots { get; set; }
+		public List<DungeonKey> DungeonKeys { get; set; }
 		public static DateTime SessionStartDate { get; set; }
+		public Achievements Achievements { get; set; }
 
 		public int Gold
 		{
@@ -71,8 +68,6 @@ namespace ClickQuest.Player
 				_gold = value;
 			}
 		}
-
-		public Achievements Achievements { get; set; }
 
 		public User()
 		{

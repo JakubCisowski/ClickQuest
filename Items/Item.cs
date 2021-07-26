@@ -44,7 +44,6 @@ namespace ClickQuest.Items
 			}
 		}
 
-
 		public string RarityString
 		{
 			get
@@ -52,7 +51,6 @@ namespace ClickQuest.Items
 				return Rarity.ToString();
 			}
 		}
-
 
 		public abstract Item CopyItem(int quantity);
 		public abstract void AddAchievementProgress(int amount);

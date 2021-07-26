@@ -29,8 +29,6 @@ namespace ClickQuest.Adventures
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int DbKey { get; set; }
 
-		public int Id { get; set; }
-
 		[NotMapped]
 		public bool Rare { get; set; }
 
@@ -58,8 +56,6 @@ namespace ClickQuest.Adventures
 		[NotMapped]
 		public List<int> RewardIngotIds { get; set; }
 
-		public DateTime EndDate { get; set; }
-
 		[NotMapped]
 		public int TicksCountNumber { get; set; }
 
@@ -68,6 +64,9 @@ namespace ClickQuest.Adventures
 
 		[NotMapped]
 		public string RewardsDescription { get; private set; }
+
+		public DateTime EndDate { get; set; }
+		public int Id { get; set; }
 
 		public bool IsFinished
 		{

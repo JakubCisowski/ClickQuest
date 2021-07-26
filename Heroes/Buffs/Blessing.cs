@@ -22,25 +22,17 @@ namespace ClickQuest.Heroes.Buffs
 		public event PropertyChangedEventHandler PropertyChanged;
 		private DispatcherTimer _timer;
 
-		public int Id { get; set; }
-
-		public string Name { get; set; }
-
-		public string Description { get; set; }
-
-		public Rarity Rarity { get; set; }
-
-		public int Value { get; set; }
-
-		public BlessingType Type { get; set; }
-
-		public int Duration { get; set; }
-
 		[NotMapped]
 		public string DurationText { get; set; }
 
+		public int Id { get; set; }
+		public string Name { get; set; }
+		public string Description { get; set; }
+		public Rarity Rarity { get; set; }
+		public int Value { get; set; }
+		public BlessingType Type { get; set; }
+		public int Duration { get; set; }
 		public int Buff { get; set; }
-
 		public bool AchievementBonusGranted { get; set; }
 
 		public string TypeString
@@ -58,7 +50,6 @@ namespace ClickQuest.Heroes.Buffs
 				return Rarity.ToString();
 			}
 		}
-
 
 		public bool IsFinished
 		{

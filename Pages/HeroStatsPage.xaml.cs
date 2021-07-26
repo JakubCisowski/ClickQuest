@@ -268,7 +268,6 @@ namespace ClickQuest.Pages
 
 				var block = new TextBlock {Name = "Spec" + specializationTypes.GetValue(i) + "Buff", Text = buffText, FontSize = 18, Margin = new Thickness(0, 1, 0, 1)};
 
-
 				Grid.SetRow(nameBlock, i);
 				Grid.SetRow(block, i);
 				Grid.SetColumn(nameBlock, 0);
@@ -390,7 +389,6 @@ namespace ClickQuest.Pages
 			blockDamage.Inlines.Add(new Italic(new Run("/lvl)")));
 			blockDamage.Inlines.Add(" = ");
 			blockDamage.Inlines.Add(new Bold(runLevelDamageBonusTotal));
-
 
 			blockDamage.Inlines.Add(new LineBreak());
 

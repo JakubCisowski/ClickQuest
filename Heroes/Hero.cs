@@ -25,13 +25,6 @@ namespace ClickQuest.Heroes
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 
-		public int ClickDamagePerLevel { get; set; }
-		public double CritChancePerLevel { get; set; }
-		public int PoisonDamagePerLevel { get; set; }
-
-		public string Name { get; set; }
-
-
 		[NotMapped]
 		public int ExperienceToNextLvl { get; set; }
 
@@ -41,37 +34,27 @@ namespace ClickQuest.Heroes
 		[NotMapped]
 		public int ExperienceProgress { get; set; }
 
-		public HeroRace HeroRace { get; set; }
-
-		public HeroClass HeroClass { get; set; }
-
-		public int ClickDamage { get; set; }
-
-		public double CritChance { get; set; }
-
-		public int PoisonDamage { get; set; }
-
-		public int Level { get; set; }
-
-		public List<Material> Materials { get; set; }
-
-		public List<Recipe> Recipes { get; set; }
-
-		public List<Artifact> Artifacts { get; set; }
-
-		public List<Quest> Quests { get; set; }
-
-		public Blessing Blessing { get; set; }
-
-		public Specialization Specialization { get; set; }
-
-		public TimeSpan TimePlayed { get; set; }
-
 		[NotMapped]
 		public DateTime SessionStartDate { get; set; }
 
+		public int ClickDamagePerLevel { get; set; }
+		public double CritChancePerLevel { get; set; }
+		public int PoisonDamagePerLevel { get; set; }
+		public string Name { get; set; }
+		public HeroRace HeroRace { get; set; }
+		public HeroClass HeroClass { get; set; }
+		public int ClickDamage { get; set; }
+		public double CritChance { get; set; }
+		public int PoisonDamage { get; set; }
+		public int Level { get; set; }
+		public List<Material> Materials { get; set; }
+		public List<Recipe> Recipes { get; set; }
+		public List<Artifact> Artifacts { get; set; }
+		public List<Quest> Quests { get; set; }
+		public Blessing Blessing { get; set; }
+		public Specialization Specialization { get; set; }
+		public TimeSpan TimePlayed { get; set; }
 		public double AuraDamage { get; set; }
-
 		public double AuraAttackSpeed { get; set; }
 
 		public int Experience
@@ -121,7 +104,6 @@ namespace ClickQuest.Heroes
 			}
 		}
 
-
 		public int LevelDamageBonus
 		{
 			get
@@ -169,7 +151,6 @@ namespace ClickQuest.Heroes
 				return PoisonDamagePerLevel * Level + 1;
 			}
 		}
-
 
 		public string AuraDamageText
 		{
@@ -276,7 +257,6 @@ namespace ClickQuest.Heroes
 				}
 			}
 		}
-
 
 		public void SetClassSpecificValues()
 		{

@@ -6,6 +6,8 @@ namespace ClickQuest.Enemies
 {
 	public class Monster : Enemy
 	{
+		public List<MonsterLootPattern> Loot { get; set; }
+
 		public override int CurrentHealth
 		{
 			get
@@ -34,8 +36,6 @@ namespace ClickQuest.Enemies
 				CurrentHealthProgress = CalculateCurrentHealthProgress();
 			}
 		}
-
-		public List<MonsterLootPattern> Loot { get; set; }
 
 		public override Monster CopyEnemy()
 		{

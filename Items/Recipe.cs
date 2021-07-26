@@ -9,18 +9,7 @@ using ClickQuest.Player;
 namespace ClickQuest.Items
 {
 	public class Recipe : Item
-
 	{
-		public int ArtifactId { get; set; }
-
-		public Artifact Artifact
-		{
-			get
-			{
-				return GameData.Artifacts.FirstOrDefault(x => x.Id == ArtifactId);
-			}
-		}
-
 		// Key is the Id of the material; value is the amount needed.
 		[NotMapped]
 		public Dictionary<int, int> MaterialIds { get; set; }
@@ -34,6 +23,15 @@ namespace ClickQuest.Items
 			get
 			{
 				return (int) (Rarity + 1) * 1000;
+			}
+		}
+
+		public int ArtifactId { get; set; }
+		public Artifact Artifact
+		{
+			get
+			{
+				return GameData.Artifacts.FirstOrDefault(x => x.Id == ArtifactId);
 			}
 		}
 

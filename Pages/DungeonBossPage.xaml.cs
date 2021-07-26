@@ -156,7 +156,6 @@ namespace ClickQuest.Pages
 			TestRewardsBlock.Text = lootText;
 		}
 
-
 		private void FightTimer_Tick(object source, EventArgs e)
 		{
 			Duration--;
