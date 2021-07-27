@@ -31,11 +31,11 @@ namespace ClickQuest.Data
 			GameData.DungeonGroups = DeserializeType<DungeonGroup>(Path.Combine(Environment.CurrentDirectory, @"Data\", @"GameAssets\", "DungeonGroups.json"));
 			GameData.Dungeons = DeserializeType<Dungeon>(Path.Combine(Environment.CurrentDirectory, @"Data\", @"GameAssets\", "Dungeons.json"));
 
-			PostLoad();
-
 			#if DEBUG
 			DataValidator.ValidateData();
 			#endif
+
+			PostLoad();
 
 			// Refresh Pages collection in order to  rearrange page bindings.
 			GameData.RefreshPages();

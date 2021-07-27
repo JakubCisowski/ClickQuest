@@ -9,9 +9,12 @@ namespace ClickQuest.Places
 		public int MonsterId { get; set; }
 		public double Frequency { get; set; }
 
-		public Monster GetMonster()
+		public Monster Monster
 		{
-			return GameData.Monsters.FirstOrDefault(x => x.Id == MonsterId);
+			get
+			{
+				return GameData.Monsters.FirstOrDefault(x => x.Id == MonsterId);
+			}
 		}
 	}
 }

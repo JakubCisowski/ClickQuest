@@ -1,3 +1,0 @@
-Following Id's of type 'ClickQuest.Items.Material' are not unique: 2,
-'Gray Wolf' frequencies do not add up to 1
-'TestBoss0' frequency value is greater than 1

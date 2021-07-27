@@ -59,7 +59,7 @@ namespace ClickQuest.Controls
 		{
 			var frequencyList = Region.Monsters.Select(x => x.Frequency).ToList();
 			int position = RandomizeFreqenciesListPosition(frequencyList);
-			Monster = Region.Monsters[position].GetMonster().CopyEnemy();
+			Monster = Region.Monsters[position].Monster.CopyEnemy();
 
 			DataContext = Monster;
 
