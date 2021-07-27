@@ -16,5 +16,13 @@ namespace ClickQuest.Extensions.ValidationManager
 				writer.WriteLine(log);
 			}
 		}
+
+		public static void Log(string log)
+		{
+			// Log bugs in specified format.
+			using var writer = new StreamWriter(Path.Combine("C:/Programowanie/Fun/ClickQuest", "Logs", "Logs " + DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + ".txt"));
+
+			writer.WriteLine(log);
+		}
 	}
 }

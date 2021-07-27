@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using ClickQuest.Adventures;
 using ClickQuest.Enemies;
+using ClickQuest.Extensions.ValidationManager;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Items;
 using ClickQuest.Places;
@@ -32,8 +33,7 @@ namespace ClickQuest.Data
 
 			PostLoad();
 
-			// Check if Ids exist and are unique.
-			// ValidateData();
+			DataValidator.ValidateData();
 			// Unique ids, Frequency sums up to 1, Does id of referenced collection exist?
 
 			// Refresh Pages collection in order to  rearrange page bindings.
