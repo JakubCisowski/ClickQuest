@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,10 +13,29 @@ namespace ClickQuest.Extensions.ValidationManager
 	{
 		public static void ValidateData()
 		{
-			CheckIdUniqueness<Material>(GameData.Materials);
+			var dataProperties = typeof(GameData).GetProperties();
+
+			foreach (var propertyInfo in dataProperties)
+			{
+				var propertyValue = propertyInfo.GetValue(null) as IEnumerable;
+				var collectionType = propertyInfo.PropertyType.GetGenericArguments().FirstOrDefault();
+
+				InvokeIdUniquenessChecking(collectionType, propertyValue);
+			}
 		}
 
-		public static void CheckIdUniqueness<T>(List<T> collection) where T:IIdentifiable
+		private static void InvokeIdUniquenessChecking(Type collectionType, IEnumerable propertyValue)
+		{
+			bool isCollectionIdentifiable = typeof(IIdentifiable).IsAssignableFrom(collectionType);
+			if (isCollectionIdentifiable)
+			{
+				var convertedCollection = propertyValue.Cast<IIdentifiable>().ToList();
+				var methodInfo = typeof(DataValidator).GetMethod("CheckIdUniqueness");
+				methodInfo.Invoke(null, new object[] {convertedCollection, collectionType});
+			}
+		}
+
+		public static void CheckIdUniqueness(List<IIdentifiable> collection, Type collectionType)
 		{
 			var idList = collection.Select(x => x.Id);
 
@@ -27,7 +47,7 @@ namespace ClickQuest.Extensions.ValidationManager
 			bool areIdsUnique = duplicates.Count == 0;
 			if (!areIdsUnique)
 			{
-				string message = $"Following Id's of type '{typeof(T)}' are not unique: ";
+				string message = $"Following Id's of type '{collectionType}' are not unique: ";
 
 				var duplicatedValues = duplicates.Distinct();
 				foreach(var value in duplicatedValues)
