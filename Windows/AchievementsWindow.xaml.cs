@@ -44,7 +44,7 @@ namespace ClickQuest.Windows
 			var achievements = User.Instance.Achievements;
 
 			var time = achievements.TotalTimePlayed;
-			AppendAchievementToAchievementsList("Total Time Played", $"{Math.Floor(time.TotalHours)}h {time.Minutes}m {time.Seconds}s");
+			AppendAchievementToAchievementsList("Total Time Played", $"{Math.Floor(time.TotalHours)}h {time.Minutes}m");
 
 			foreach (var pair in achievements.NumericAchievementCollection)
 			{
