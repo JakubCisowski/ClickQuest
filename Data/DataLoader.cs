@@ -33,8 +33,9 @@ namespace ClickQuest.Data
 
 			PostLoad();
 
+			#if DEBUG
 			DataValidator.ValidateData();
-			// Unique ids, Frequency sums up to 1, Does id of referenced collection exist?
+			#endif
 
 			// Refresh Pages collection in order to  rearrange page bindings.
 			GameData.RefreshPages();
