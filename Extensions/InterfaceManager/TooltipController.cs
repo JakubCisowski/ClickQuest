@@ -13,7 +13,10 @@ namespace ClickQuest.Extensions.InterfaceManager
 		{
 			var toolTip = new ToolTip();
 
-			var toolTipBlock = new TextBlock {Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase")};
+			var toolTipBlock = new TextBlock
+			{
+				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase")
+			};
 
 			switch (itemToGenerateTooltipFor)
 			{
@@ -21,7 +24,11 @@ namespace ClickQuest.Extensions.InterfaceManager
 				{
 					toolTipBlock.Inlines.Add(new Run($"{material.Name}"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run($"*{material.RarityString}*") {Foreground = Colors.GetRarityColor(material.Rarity), FontWeight = FontWeights.DemiBold});
+					toolTipBlock.Inlines.Add(new Run($"*{material.RarityString}*")
+					{
+						Foreground = Colors.GetRarityColor(material.Rarity),
+						FontWeight = FontWeights.DemiBold
+					});
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run($"{material.Description}"));
@@ -34,7 +41,11 @@ namespace ClickQuest.Extensions.InterfaceManager
 				{
 					toolTipBlock.Inlines.Add(new Run($"{artifact.Name}"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run($"*{artifact.RarityString}*") {Foreground = Colors.GetRarityColor(artifact.Rarity), FontWeight = FontWeights.DemiBold});
+					toolTipBlock.Inlines.Add(new Run($"*{artifact.RarityString}*")
+					{
+						Foreground = Colors.GetRarityColor(artifact.Rarity),
+						FontWeight = FontWeights.DemiBold
+					});
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run($"{artifact.Description}"));
@@ -45,7 +56,11 @@ namespace ClickQuest.Extensions.InterfaceManager
 				{
 					toolTipBlock.Inlines.Add(new Run($"{recipe.Name}"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run($"*{recipe.RarityString}*") {Foreground = Colors.GetRarityColor(recipe.Rarity), FontWeight = FontWeights.DemiBold});
+					toolTipBlock.Inlines.Add(new Run($"*{recipe.RarityString}*")
+					{
+						Foreground = Colors.GetRarityColor(recipe.Rarity),
+						FontWeight = FontWeights.DemiBold
+					});
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run($"{recipe.Description}"));
@@ -64,7 +79,11 @@ namespace ClickQuest.Extensions.InterfaceManager
 		{
 			var currencyTooltip = new ToolTip();
 
-			var currencyTooltipTextBlock = new TextBlock {Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase"), FontWeight = FontWeights.DemiBold};
+			var currencyTooltipTextBlock = new TextBlock
+			{
+				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase"),
+				FontWeight = FontWeights.DemiBold
+			};
 
 			var currencyColor = Colors.GetRarityColor((Rarity) rarityValue);
 			currencyTooltipTextBlock.Foreground = currencyColor;
@@ -81,7 +100,10 @@ namespace ClickQuest.Extensions.InterfaceManager
 			// Generate SpecBuying tooltips.
 			var specToolTip = new ToolTip();
 
-			var toolTipBlock = new TextBlock {Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase")};
+			var toolTipBlock = new TextBlock
+			{
+				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase")
+			};
 
 			switch (typeOfGeneratedSpecialization)
 			{

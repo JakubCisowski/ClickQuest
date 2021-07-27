@@ -49,7 +49,12 @@ namespace ClickQuest.Pages
 			var selectHeroButton = GenerateSelectHeroButton(hero);
 			var deleteHeroButton = GenerateDeleteHeroButton(hero);
 
-			var panel = new StackPanel {Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center};
+			var panel = new StackPanel
+			{
+				Orientation = Orientation.Horizontal,
+				HorizontalAlignment = HorizontalAlignment.Center,
+				VerticalAlignment = VerticalAlignment.Center
+			};
 
 			panel.Children.Add(selectHeroButton);
 			panel.Children.Add(deleteHeroButton);
@@ -70,7 +75,13 @@ namespace ClickQuest.Pages
 				Tag = hero
 			};
 
-			var deleteHeroIcon = new PackIcon {Width = 30, Height = 30, Kind = PackIconKind.DeleteForever, Foreground = new SolidColorBrush(Colors.Gray)};
+			var deleteHeroIcon = new PackIcon
+			{
+				Width = 30,
+				Height = 30,
+				Kind = PackIconKind.DeleteForever,
+				Foreground = new SolidColorBrush(Colors.Gray)
+			};
 
 			deleteHeroButton.Content = deleteHeroIcon;
 
@@ -118,7 +129,10 @@ namespace ClickQuest.Pages
 				Tag = hero
 			};
 
-			var selectHeroButtonBlock = new TextBlock {TextAlignment = TextAlignment.Center};
+			var selectHeroButtonBlock = new TextBlock
+			{
+				TextAlignment = TextAlignment.Center
+			};
 
 			var heroNameText = new Bold(new Run(hero.Name));
 			var heroLevelAndClassText = new Run($"\n{hero.Level} lvl | {hero.HeroClass} | ");
@@ -139,7 +153,10 @@ namespace ClickQuest.Pages
 		{
 			if (User.Instance.Heroes.Count == User.HERO_LIMIT)
 			{
-				var disabledInfoBlock = new TextBlock {TextAlignment = TextAlignment.Center};
+				var disabledInfoBlock = new TextBlock
+				{
+					TextAlignment = TextAlignment.Center
+				};
 
 				var disabledText = new Italic(new Run("Can't create new hero\nMax heroes reached!"));
 				disabledInfoBlock.Inlines.Add(disabledText);

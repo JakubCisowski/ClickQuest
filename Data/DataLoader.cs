@@ -61,7 +61,13 @@ namespace ClickQuest.Data
 			string json = File.ReadAllText(filePath);
 
 			// Enums as strings.
-			var options = new JsonSerializerOptions {Converters = {new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)}};
+			var options = new JsonSerializerOptions
+			{
+				Converters =
+				{
+					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+				}
+			};
 
 			result = JsonSerializer.Deserialize<List<T>>(json, options);
 			return result;

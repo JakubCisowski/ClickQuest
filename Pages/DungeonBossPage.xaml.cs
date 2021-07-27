@@ -52,10 +52,16 @@ namespace ClickQuest.Pages
 			_boss = boss;
 			DataContext = _boss;
 
-			var binding = new Binding("Duration") {Source = this};
+			var binding = new Binding("Duration")
+			{
+				Source = this
+			};
 			TimeRemainingBlock.SetBinding(TextBlock.TextProperty, binding);
 
-			var binding2 = new Binding("Description") {Source = GameData.Dungeons.FirstOrDefault(x => x.BossIds.Contains(boss.Id))};
+			var binding2 = new Binding("Description")
+			{
+				Source = GameData.Dungeons.FirstOrDefault(x => x.BossIds.Contains(boss.Id))
+			};
 			DungeonDescriptionBlock.SetBinding(TextBlock.TextProperty, binding2);
 		}
 
@@ -75,7 +81,10 @@ namespace ClickQuest.Pages
 
 		private void SetupFightTimer()
 		{
-			_fightTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};
+			_fightTimer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 0, 1)
+			};
 			_fightTimer.Tick += FightTimer_Tick;
 		}
 
@@ -83,7 +92,10 @@ namespace ClickQuest.Pages
 		{
 			int poisonIntervalMs = 500;
 
-			_poisonTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs)};
+			_poisonTimer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs)
+			};
 			_poisonTimer.Tick += PoisonTimer_Tick;
 			_poisonTicks = 0;
 		}

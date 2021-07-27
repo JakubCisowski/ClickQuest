@@ -27,6 +27,7 @@ namespace ClickQuest.Items
 		}
 
 		public int ArtifactId { get; set; }
+
 		public Artifact Artifact
 		{
 			get

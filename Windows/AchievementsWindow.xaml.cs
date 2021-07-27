@@ -61,7 +61,6 @@ namespace ClickQuest.Windows
 
 		private void AppendAchievementToAchievementsList(string name, string amount)
 		{
-			// Create a TextBlock.
 			var border = new Border
 			{
 				BorderThickness = new Thickness(0.5),
@@ -73,9 +72,19 @@ namespace ClickQuest.Windows
 
 			var grid = new Grid();
 
-			var nameBlock = new TextBlock {FontSize = 18, HorizontalAlignment = HorizontalAlignment.Left, Text = name};
+			var nameBlock = new TextBlock
+			{
+				FontSize = 18,
+				HorizontalAlignment = HorizontalAlignment.Left,
+				Text = name
+			};
 
-			var amountBlock = new TextBlock {FontSize = 18, HorizontalAlignment = HorizontalAlignment.Right, Text = amount};
+			var amountBlock = new TextBlock
+			{
+				FontSize = 18,
+				HorizontalAlignment = HorizontalAlignment.Right,
+				Text = amount
+			};
 
 			grid.Children.Add(nameBlock);
 			grid.Children.Add(amountBlock);

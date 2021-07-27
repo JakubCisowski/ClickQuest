@@ -37,12 +37,27 @@ namespace ClickQuest.Pages
 
 			var grid = new Grid();
 
-			var col1 = new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)};
-			var col2 = new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)};
+			var col1 = new ColumnDefinition
+			{
+				Width = new GridLength(1, GridUnitType.Star)
+			};
+			var col2 = new ColumnDefinition
+			{
+				Width = new GridLength(1, GridUnitType.Star)
+			};
 
-			var row1 = new RowDefinition {Height = new GridLength(1, GridUnitType.Star)};
-			var row2 = new RowDefinition {Height = new GridLength(1, GridUnitType.Star)};
-			var row3 = new RowDefinition {Height = new GridLength(1, GridUnitType.Star)};
+			var row1 = new RowDefinition
+			{
+				Height = new GridLength(1, GridUnitType.Star)
+			};
+			var row2 = new RowDefinition
+			{
+				Height = new GridLength(1, GridUnitType.Star)
+			};
+			var row3 = new RowDefinition
+			{
+				Height = new GridLength(1, GridUnitType.Star)
+			};
 
 			grid.ColumnDefinitions.Add(col1);
 			grid.ColumnDefinitions.Add(col2);
@@ -54,15 +69,40 @@ namespace ClickQuest.Pages
 			// Create buttons for selecting dungeon groups.
 			for (int i = 0; i < GameData.DungeonGroups.Count; i++)
 			{
-				var button = new Button {Name = "DungeonGroup" + GameData.DungeonGroups[i].Id, Width = 250, Height = 100};
+				var button = new Button
+				{
+					Name = "DungeonGroup" + GameData.DungeonGroups[i].Id,
+					Width = 250,
+					Height = 100
+				};
 
-				var panel = new StackPanel {VerticalAlignment = VerticalAlignment.Center};
+				var panel = new StackPanel
+				{
+					VerticalAlignment = VerticalAlignment.Center
+				};
 
-				var block = new TextBlock {FontSize = 22, Text = GameData.DungeonGroups[i].Name, TextAlignment = TextAlignment.Center};
+				var block = new TextBlock
+				{
+					FontSize = 22,
+					Text = GameData.DungeonGroups[i].Name,
+					TextAlignment = TextAlignment.Center
+				};
 
-				var border = new Border {BorderThickness = new Thickness(3), BorderBrush = Colors.GetRarityColor((Rarity) i), Width = 240, Height = 90};
+				var border = new Border
+				{
+					BorderThickness = new Thickness(3),
+					BorderBrush = Colors.GetRarityColor((Rarity) i),
+					Width = 240,
+					Height = 90
+				};
 
-				var block2 = new TextBlock {FontSize = 16, FontStyle = FontStyles.Italic, Text = GameData.DungeonGroups[i].Description, TextAlignment = TextAlignment.Center};
+				var block2 = new TextBlock
+				{
+					FontSize = 16,
+					FontStyle = FontStyles.Italic,
+					Text = GameData.DungeonGroups[i].Description,
+					TextAlignment = TextAlignment.Center
+				};
 
 				border.Child = panel;
 
@@ -95,15 +135,36 @@ namespace ClickQuest.Pages
 			// Create buttons for selecting dungeon groups.
 			for (int i = 0; i < dungeonsOfThisGroup.Count; i++)
 			{
-				var button = new Button {Name = "Dungeon" + dungeonsOfThisGroup[i].Id, Width = 250, Height = 80};
+				var button = new Button
+				{
+					Name = "Dungeon" + dungeonsOfThisGroup[i].Id,
+					Width = 250,
+					Height = 80
+				};
 
 				var panel = new StackPanel();
 
-				var block = new TextBlock {FontSize = 22, Text = dungeonsOfThisGroup[i].Name, TextAlignment = TextAlignment.Center};
+				var block = new TextBlock
+				{
+					FontSize = 22,
+					Text = dungeonsOfThisGroup[i].Name,
+					TextAlignment = TextAlignment.Center
+				};
 
-				var border = new Border {BorderThickness = new Thickness(0.5), BorderBrush = new SolidColorBrush(System.Windows.Media.Colors.LightGray), Margin = new Thickness(0, 5, 0, 0)};
+				var border = new Border
+				{
+					BorderThickness = new Thickness(0.5),
+					BorderBrush = new SolidColorBrush(System.Windows.Media.Colors.LightGray),
+					Margin = new Thickness(0, 5, 0, 0)
+				};
 
-				var block2 = new TextBlock {FontSize = 16, FontStyle = FontStyles.Italic, Text = dungeonsOfThisGroup[i].Description, TextAlignment = TextAlignment.Center};
+				var block2 = new TextBlock
+				{
+					FontSize = 16,
+					FontStyle = FontStyles.Italic,
+					Text = dungeonsOfThisGroup[i].Description,
+					TextAlignment = TextAlignment.Center
+				};
 
 				border.Child = block2;
 
@@ -132,15 +193,36 @@ namespace ClickQuest.Pages
 			{
 				var boss = GameData.Bosses.FirstOrDefault(x => x.Id == _dungeonSelected.BossIds[i]);
 
-				var button = new Button {Name = "Boss" + boss.Id, Width = 250, Height = 80};
+				var button = new Button
+				{
+					Name = "Boss" + boss.Id,
+					Width = 250,
+					Height = 80
+				};
 
 				var panel = new StackPanel();
 
-				var block = new TextBlock {FontSize = 22, Text = boss.Name, TextAlignment = TextAlignment.Center};
+				var block = new TextBlock
+				{
+					FontSize = 22,
+					Text = boss.Name,
+					TextAlignment = TextAlignment.Center
+				};
 
-				var border = new Border {BorderThickness = new Thickness(0.5), BorderBrush = new SolidColorBrush(System.Windows.Media.Colors.LightGray), Margin = new Thickness(0, 5, 0, 0)};
+				var border = new Border
+				{
+					BorderThickness = new Thickness(0.5),
+					BorderBrush = new SolidColorBrush(System.Windows.Media.Colors.LightGray),
+					Margin = new Thickness(0, 5, 0, 0)
+				};
 
-				var block2 = new TextBlock {FontSize = 16, FontStyle = FontStyles.Italic, Text = boss.Description, TextAlignment = TextAlignment.Center};
+				var block2 = new TextBlock
+				{
+					FontSize = 16,
+					FontStyle = FontStyles.Italic,
+					Text = boss.Description,
+					TextAlignment = TextAlignment.Center
+				};
 
 				border.Child = block2;
 

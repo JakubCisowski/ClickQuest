@@ -30,9 +30,19 @@ namespace ClickQuest.Pages
 			{
 				var region = GameData.Regions[i];
 
-				var regionButton = new Button {Name = "Region" + region.Id, Width = 150, Height = 50, Tag = region};
+				var regionButton = new Button
+				{
+					Name = "Region" + region.Id,
+					Width = 150,
+					Height = 50,
+					Tag = region
+				};
 
-				var regionBlock = new TextBlock {Text = region.Name, FontSize = 20};
+				var regionBlock = new TextBlock
+				{
+					Text = region.Name,
+					FontSize = 20
+				};
 
 				regionButton.Content = regionBlock;
 

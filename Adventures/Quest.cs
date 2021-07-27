@@ -83,7 +83,10 @@ namespace ClickQuest.Adventures
 			RewardBlessingIds = new List<int>();
 			RewardIngotIds = new List<int>();
 
-			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};
+			_timer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 0, 1)
+			};
 			_timer.Tick += Timer_Tick;
 		}
 
@@ -158,7 +161,11 @@ namespace ClickQuest.Adventures
 
 		private void UpdateSpecificRewardsDescription<T>(List<int> questRewardIdsCollection, List<T> rewardsGameDataCollection) where T : IIdentifiable
 		{
-			var rewardIdAndCountPairs = questRewardIdsCollection.GroupBy(id => id).Select(g => new {Value = g.Key, Count = g.Count()});
+			var rewardIdAndCountPairs = questRewardIdsCollection.GroupBy(id => id).Select(g => new
+			{
+				Value = g.Key,
+				Count = g.Count()
+			});
 
 			foreach (var rewardGroup in rewardIdAndCountPairs)
 			{

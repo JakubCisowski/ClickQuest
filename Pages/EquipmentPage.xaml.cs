@@ -68,13 +68,29 @@ namespace ClickQuest.Pages
 		{
 			var grid = new Grid();
 
-			var nameBlock = new TextBlock {FontSize = 18, HorizontalAlignment = HorizontalAlignment.Left};
+			var nameBlock = new TextBlock
+			{
+				FontSize = 18,
+				HorizontalAlignment = HorizontalAlignment.Left
+			};
 
-			var quantityBlock = new TextBlock {FontSize = 18, HorizontalAlignment = HorizontalAlignment.Right};
+			var quantityBlock = new TextBlock
+			{
+				FontSize = 18,
+				HorizontalAlignment = HorizontalAlignment.Right
+			};
 
-			var binding = new Binding("Name") {Source = item, StringFormat = "{0}"};
+			var binding = new Binding("Name")
+			{
+				Source = item,
+				StringFormat = "{0}"
+			};
 
-			var binding2 = new Binding("Quantity") {Source = item, StringFormat = "x{0}"};
+			var binding2 = new Binding("Quantity")
+			{
+				Source = item,
+				StringFormat = "x{0}"
+			};
 
 			nameBlock.SetBinding(TextBlock.TextProperty, binding);
 			quantityBlock.SetBinding(TextBlock.TextProperty, binding2);
