@@ -6,6 +6,8 @@ using System.Linq;
 using ClickQuest.Adventures;
 using ClickQuest.Data;
 using ClickQuest.Enemies;
+using ClickQuest.Heroes;
+using ClickQuest.Heroes.Buffs;
 using ClickQuest.Interfaces;
 using ClickQuest.Items;
 using ClickQuest.Places;
@@ -19,14 +21,9 @@ namespace ClickQuest.Extensions.ValidationManager
 			CheckIdUniqueness();
 			CheckAllFrequenciesCorrectness();
 			CheckReferencesCorrectness();
-			CheckRarities();
+			CheckEnumBounds();
 			CheckPositiveValues();
 			CheckLevelRequirements();
-
-			// We can also validate: 
-			// -------
-			// Level requirement  			regions
-			// Buff 						blessings
 		}
 
 		private static void CheckIdUniqueness()
@@ -181,24 +178,28 @@ namespace ClickQuest.Extensions.ValidationManager
 			}
 		}
 
-		private static void CheckRarities()
+		private static void CheckEnumBounds()
 		{
-			CheckCollectionRarities("Artifacts", GameData.Artifacts.Select(x=>x.Rarity));
-			CheckCollectionRarities("Blessings", GameData.Blessings.Select(x=>x.Rarity));
-			CheckCollectionRarities("DungeonKey", GameData.DungeonKeys.Select(x=>x.Rarity));
-			CheckCollectionRarities("Ingots", GameData.Ingots.Select(x=>x.Rarity));
-			CheckCollectionRarities("Materials", GameData.Materials.Select(x=>x.Rarity));
-			CheckCollectionRarities("Recipes", GameData.Recipes.Select(x=>x.Rarity));
+			CheckEnumCollectionBounds<Rarity>("Artifacts_Rarity", GameData.Artifacts.Select(x=>x.Rarity));
+			CheckEnumCollectionBounds<Rarity>("Blessings_Rarity", GameData.Blessings.Select(x=>x.Rarity));
+			CheckEnumCollectionBounds<Rarity>("DungeonKey_Rarity", GameData.DungeonKeys.Select(x=>x.Rarity));
+			CheckEnumCollectionBounds<Rarity>("Ingots_Rarity", GameData.Ingots.Select(x=>x.Rarity));
+			CheckEnumCollectionBounds<Rarity>("Materials_Rarity", GameData.Materials.Select(x=>x.Rarity));
+			CheckEnumCollectionBounds<Rarity>("Recipes_Rarity", GameData.Recipes.Select(x=>x.Rarity));
+	
+			CheckEnumCollectionBounds<HeroClass>("Quests_HeroClass", GameData.Quests.Select(x=>x.HeroClass));
+			
+			CheckEnumCollectionBounds<BlessingType>("Blessings_BlessingType", GameData.Blessings.Select(x=>x.Type));
 
-			GameData.DungeonGroups.ForEach(x => CheckCollectionRarities("DungeonGroup", x.KeyRequirementRarities));
+			GameData.DungeonGroups.ForEach(x => CheckEnumCollectionBounds("DungeonGroup", x.KeyRequirementRarities));
 		}
 
-		private static void CheckCollectionRarities(string collectionName, IEnumerable<Rarity> rarityCollection)
+		private static void CheckEnumCollectionBounds<T>(string collectionName, IEnumerable<T> enumCollection) where T:System.Enum
 		{
-			var availableRarities = Enum.GetValues(typeof(Rarity)).OfType<Rarity>().ToList();
-			bool isEveryRarityValid = rarityCollection.All(x => availableRarities.Contains(x));
+			var availableEnumValues = Enum.GetValues(typeof(T)).OfType<T>().ToList();
+			bool isEveryEnumValueInCollectionValid = enumCollection.All(x => availableEnumValues.Contains(x));
 
-			if (!isEveryRarityValid)
+			if (!isEveryEnumValueInCollectionValid)
 			{
 				string message = $"'{collectionName}' - rarity out of scope";
 				Logger.Log(message);
@@ -219,6 +220,8 @@ namespace ClickQuest.Extensions.ValidationManager
 
 			CheckCollectionPositiveValues("Bosses_Health", GameData.Bosses.Select(x=>x.Health));
 			CheckCollectionPositiveValues("Monsters_Health", GameData.Monsters.Select(x=>x.Health));
+
+			CheckCollectionPositiveValues("Blessings_Buff", GameData.Blessings.Select(x=>x.Buff));
 		}
 
 		private static void CheckCollectionPositiveValues(string collectionValuesInfo, IEnumerable<int> valuesCollection)
