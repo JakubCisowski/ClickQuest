@@ -304,7 +304,7 @@ namespace ClickQuest.Pages
 
 			foreach (var pair in counts)
 			{
-				if (User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity) pair.Key).Quantity < pair.Value)
+				if (User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == pair.Key).Quantity < pair.Value)
 				{
 					return false;
 				}
@@ -313,7 +313,7 @@ namespace ClickQuest.Pages
 			// Remove dungeon keys from Player.
 			foreach (var pair in counts)
 			{
-				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity) pair.Key).Quantity -= pair.Value;
+				User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == pair.Key).Quantity -= pair.Value;
 			}
 
 			return true;

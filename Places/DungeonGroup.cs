@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ClickQuest.Items;
 
 namespace ClickQuest.Places
 {
@@ -7,7 +8,7 @@ namespace ClickQuest.Places
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public List<int> KeyRequirementRarities { get; set; }
+		public List<Rarity> KeyRequirementRarities { get; set; }
 		public string Color { get; set; }
 	}
 }

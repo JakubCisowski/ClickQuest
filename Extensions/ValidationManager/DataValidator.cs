@@ -19,6 +19,7 @@ namespace ClickQuest.Extensions.ValidationManager
 			CheckIdUniqueness();
 			CheckAllFrequenciesCorrectness();
 			CheckReferencesCorrectness();
+			CheckRarities();
 
 			// We can also validate: 
 			// -------
@@ -181,6 +182,21 @@ namespace ClickQuest.Extensions.ValidationManager
 					Logger.Log(message);
 				}
 			}
+		}
+
+		private static void CheckRarities()
+		{
+			
+		}
+
+		private static void CheckItemRarities(IEnumerable<Rarity> xd)
+		{
+
+		}
+
+		private static void CheckKeyRequirementRarities(IEnumerable<Rarity> xd)
+		{
+
 		}
 	}
 }
