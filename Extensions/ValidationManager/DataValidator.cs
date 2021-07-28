@@ -21,6 +21,7 @@ namespace ClickQuest.Extensions.ValidationManager
 			CheckReferencesCorrectness();
 			CheckRarities();
 			CheckPositiveValues();
+			CheckLevelRequirements();
 
 			// We can also validate: 
 			// -------
@@ -227,6 +228,19 @@ namespace ClickQuest.Extensions.ValidationManager
 			if (!isEveryValueValid)
 			{
 				string message = $"'{collectionValuesInfo}' is nonpositive";
+				Logger.Log(message);
+			}
+		}
+
+		private static void CheckLevelRequirements()
+		{
+			var levelRequirements = GameData.Regions.Select(x => x.LevelRequirement);
+
+			bool isEveryLevelRequirementValid = levelRequirements.All(x => x >= 0 && x <= 100);
+
+			if (!isEveryLevelRequirementValid)
+			{
+				string message = $"Level requirement of region is invalid";
 				Logger.Log(message);
 			}
 		}
