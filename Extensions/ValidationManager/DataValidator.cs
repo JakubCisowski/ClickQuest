@@ -186,17 +186,26 @@ namespace ClickQuest.Extensions.ValidationManager
 
 		private static void CheckRarities()
 		{
-			
+			CheckRarities("Artifacts", GameData.Artifacts.Select(x=>x.Rarity));
+			CheckRarities("Blessings", GameData.Blessings.Select(x=>x.Rarity));
+			CheckRarities("DungeonKey", GameData.DungeonKeys.Select(x=>x.Rarity));
+			CheckRarities("Ingots", GameData.Ingots.Select(x=>x.Rarity));
+			CheckRarities("Materials", GameData.Materials.Select(x=>x.Rarity));
+			CheckRarities("Recipes", GameData.Recipes.Select(x=>x.Rarity));
+
+			GameData.DungeonGroups.ForEach(x => CheckRarities("DungeonGroup", x.KeyRequirementRarities));
 		}
 
-		private static void CheckItemRarities(IEnumerable<Rarity> xd)
+		private static void CheckRarities(string collectionName, IEnumerable<Rarity> rarityCollection)
 		{
+			var availableRarities = Enum.GetValues(typeof(Rarity)).OfType<Rarity>().ToList();
+			bool isEveryRarityValid = rarityCollection.All(x => availableRarities.Contains(x));
 
-		}
-
-		private static void CheckKeyRequirementRarities(IEnumerable<Rarity> xd)
-		{
-
+			if (!isEveryRarityValid)
+			{
+				string message = $"'{collectionName}' - rarity out of scope";
+				Logger.Log(message);
+			}
 		}
 	}
 }
