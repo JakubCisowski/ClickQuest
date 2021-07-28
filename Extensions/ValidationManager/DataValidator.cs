@@ -20,16 +20,12 @@ namespace ClickQuest.Extensions.ValidationManager
 			CheckAllFrequenciesCorrectness();
 			CheckReferencesCorrectness();
 			CheckRarities();
+			CheckPositiveValues();
 
 			// We can also validate: 
 			// -------
-			// Rarity  						artifacts, blessings, dungeonkeys, ingots, materials, recipes
-			// Key requirement rarities  	dungeon group
-			// Value  						artifacts, blessings, dungeonkeys, ingots, materials, recipes
-			// Duration  					blessings, quests
-			// Buff 						blessings
-			// Health 						bosses, monsters
 			// Level requirement  			regions
+			// Buff 						blessings
 		}
 
 		private static void CheckIdUniqueness()
@@ -186,17 +182,17 @@ namespace ClickQuest.Extensions.ValidationManager
 
 		private static void CheckRarities()
 		{
-			CheckRarities("Artifacts", GameData.Artifacts.Select(x=>x.Rarity));
-			CheckRarities("Blessings", GameData.Blessings.Select(x=>x.Rarity));
-			CheckRarities("DungeonKey", GameData.DungeonKeys.Select(x=>x.Rarity));
-			CheckRarities("Ingots", GameData.Ingots.Select(x=>x.Rarity));
-			CheckRarities("Materials", GameData.Materials.Select(x=>x.Rarity));
-			CheckRarities("Recipes", GameData.Recipes.Select(x=>x.Rarity));
+			CheckCollectionRarities("Artifacts", GameData.Artifacts.Select(x=>x.Rarity));
+			CheckCollectionRarities("Blessings", GameData.Blessings.Select(x=>x.Rarity));
+			CheckCollectionRarities("DungeonKey", GameData.DungeonKeys.Select(x=>x.Rarity));
+			CheckCollectionRarities("Ingots", GameData.Ingots.Select(x=>x.Rarity));
+			CheckCollectionRarities("Materials", GameData.Materials.Select(x=>x.Rarity));
+			CheckCollectionRarities("Recipes", GameData.Recipes.Select(x=>x.Rarity));
 
-			GameData.DungeonGroups.ForEach(x => CheckRarities("DungeonGroup", x.KeyRequirementRarities));
+			GameData.DungeonGroups.ForEach(x => CheckCollectionRarities("DungeonGroup", x.KeyRequirementRarities));
 		}
 
-		private static void CheckRarities(string collectionName, IEnumerable<Rarity> rarityCollection)
+		private static void CheckCollectionRarities(string collectionName, IEnumerable<Rarity> rarityCollection)
 		{
 			var availableRarities = Enum.GetValues(typeof(Rarity)).OfType<Rarity>().ToList();
 			bool isEveryRarityValid = rarityCollection.All(x => availableRarities.Contains(x));
@@ -204,6 +200,33 @@ namespace ClickQuest.Extensions.ValidationManager
 			if (!isEveryRarityValid)
 			{
 				string message = $"'{collectionName}' - rarity out of scope";
+				Logger.Log(message);
+			}
+		}
+
+		private static void CheckPositiveValues()
+		{
+			CheckCollectionPositiveValues("Artifacts_Value", GameData.Artifacts.Select(x=>x.Value));
+			CheckCollectionPositiveValues("Blessings_Value", GameData.Blessings.Select(x=>x.Value));
+			CheckCollectionPositiveValues("DungeonKey_Value", GameData.DungeonKeys.Select(x=>x.Value));
+			CheckCollectionPositiveValues("Ingots_Value", GameData.Ingots.Select(x=>x.Value));
+			CheckCollectionPositiveValues("Materials_Value", GameData.Materials.Select(x=>x.Value));
+			CheckCollectionPositiveValues("Recipes_Value", GameData.Recipes.Select(x=>x.Value));
+
+			CheckCollectionPositiveValues("Blessings_Duration", GameData.Blessings.Select(x=>x.Duration));
+			CheckCollectionPositiveValues("Quests_Duration", GameData.Quests.Select(x=>x.Duration));
+
+			CheckCollectionPositiveValues("Bosses_Health", GameData.Bosses.Select(x=>x.Health));
+			CheckCollectionPositiveValues("Monsters_Health", GameData.Monsters.Select(x=>x.Health));
+		}
+
+		private static void CheckCollectionPositiveValues(string collectionValuesInfo, IEnumerable<int> valuesCollection)
+		{
+			bool isEveryValueValid = valuesCollection.All(x => x>0);
+
+			if (!isEveryValueValid)
+			{
+				string message = $"'{collectionValuesInfo}' is nonpositive";
 				Logger.Log(message);
 			}
 		}

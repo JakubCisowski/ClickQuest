@@ -4,7 +4,7 @@
 		"Name": "Empty loot",
 		"Rarity": 0,
 		"Description": "This text shouldn't be visible.",
-		"Value": 0
+		"Value": 1
 	},
 	{
 		"Id": 1,
