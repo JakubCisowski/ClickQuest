@@ -176,25 +176,22 @@ namespace ClickQuest.Pages
 
 		private void RemoveMaterials(Recipe recipe)
 		{
-			foreach (var pair in recipe.MaterialIds)
+			foreach (var ingredient in recipe.Ingredients)
 			{
-				var material = User.Instance.CurrentHero.Materials.FirstOrDefault(x => x.Id == pair.Key);
-				if (material != null && material.Quantity >= pair.Value)
+				var material = User.Instance.CurrentHero.Materials.FirstOrDefault(x => x.Id == ingredient.Id);
+				if (material != null && material.Quantity >= ingredient.Quantity)
 				{
-					for (int i = 0; i < pair.Value; i++)
-					{
-						material.RemoveItem();
-					}
+					material.RemoveItem(ingredient.Quantity);
 				}
 			}
 		}
 
 		private bool CheckIfHeroHasEnoughMaterials(Recipe recipe)
 		{
-			foreach (var pair in recipe.MaterialIds)
+			foreach (var ingredient in recipe.Ingredients)
 			{
-				var material = User.Instance.CurrentHero.Materials.FirstOrDefault(x => x.Id == pair.Key);
-				if (!(material != null && material.Quantity >= pair.Value))
+				var material = User.Instance.CurrentHero.Materials.FirstOrDefault(x => x.Id == ingredient.Id);
+				if (!(material != null && material.Quantity >= ingredient.Quantity))
 				{
 					return false;
 				}

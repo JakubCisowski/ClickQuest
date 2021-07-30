@@ -10,9 +10,8 @@ namespace ClickQuest.Items
 {
 	public class Recipe : Item
 	{
-		// Key is the Id of the material; value is the amount needed.
 		[NotMapped]
-		public Dictionary<int, int> MaterialIds { get; set; }
+		public List<Ingredient> Ingredients { get; set; }
 
 		[NotMapped]
 		public string RequirementsDescription { get; private set; }
@@ -38,16 +37,12 @@ namespace ClickQuest.Items
 
 		public void UpdateRequirementsDescription()
 		{
-			MaterialIds = GameData.Recipes.FirstOrDefault(x => x.Id == Id)?.MaterialIds;
-
 			RequirementsDescription = "Materials required: ";
 
-			foreach (var elem in MaterialIds)
+			foreach (var ingredient in Ingredients)
 			{
-				// Add name
-				RequirementsDescription += GameData.Materials.FirstOrDefault(x => x.Id == elem.Key).Name;
-				// Add quantity
-				RequirementsDescription = RequirementsDescription + ": " + elem.Value + "; ";
+				var relatedMaterial = ingredient.RelatedMaterial;
+				RequirementsDescription += relatedMaterial.Name + ": " + relatedMaterial.Value + "; ";
 			}
 		}
 
@@ -67,26 +62,26 @@ namespace ClickQuest.Items
 			copy.Description = Description;
 			copy.Quantity = quantity;
 			copy.ArtifactId = ArtifactId;
-			copy.MaterialIds = MaterialIds;
+			copy.Ingredients = Ingredients;
 			copy.RequirementsDescription = RequirementsDescription;
 
 			return copy;
 		}
 
-		public override void AddAchievementProgress(int amount)
+		public override void AddAchievementProgress(int amount = 1)
 		{
 			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.RecipesGained, amount);
 		}
 
-		public override void AddItem()
+		public override void AddItem(int amount = 1)
 		{
 			CollectionsController.AddItemToCollection(this, User.Instance.CurrentHero.Recipes);
 
-			AddAchievementProgress(1);
+			AddAchievementProgress();
 			InterfaceController.RefreshEquipmentPanels();
 		}
 
-		public override void RemoveItem()
+		public override void RemoveItem(int amount = 1)
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Recipes);
 		}

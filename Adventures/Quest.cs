@@ -196,7 +196,7 @@ namespace ClickQuest.Adventures
 			{
 				var item = rewardsGameDataCollection.FirstOrDefault(x => x.Id == id);
 				item.AddItem();
-				item.AddAchievementProgress(1);
+				item.AddAchievementProgress();
 			}
 		}
 

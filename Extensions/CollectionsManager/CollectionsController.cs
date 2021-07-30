@@ -6,13 +6,13 @@ namespace ClickQuest.Extensions.CollectionsManager
 {
 	public static class CollectionsController
 	{
-		public static void AddItemToCollection<T>(Item itemToAdd, List<T> itemCollection) where T : Item
+		public static void AddItemToCollection<T>(Item itemToAdd, List<T> itemCollection, int amount = 1) where T : Item
 		{
 			foreach (var item in itemCollection)
 			{
 				if (item.Id == itemToAdd.Id)
 				{
-					item.Quantity++;
+					item.Quantity += amount;
 					return;
 				}
 			}
@@ -23,13 +23,13 @@ namespace ClickQuest.Extensions.CollectionsManager
 			itemCollection.Add((T) copy);
 		}
 
-		public static void RemoveItemFromCollection<T>(Item itemToRemove, List<T> itemCollection) where T : Item
+		public static void RemoveItemFromCollection<T>(Item itemToRemove, List<T> itemCollection, int amount = 1) where T : Item
 		{
 			foreach (Item item in itemCollection)
 			{
 				if (item.Id == itemToRemove.Id)
 				{
-					item.Quantity--;
+					item.Quantity -= amount;
 					if (item.Quantity <= 0)
 					{
 						// Remove item from database.

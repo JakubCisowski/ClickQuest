@@ -29,20 +29,20 @@ namespace ClickQuest.Items
 			return copy;
 		}
 
-		public override void AddAchievementProgress(int amount)
+		public override void AddAchievementProgress(int amount = 1)
 		{
 			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.MaterialsGained, amount);
 		}
 
-		public override void AddItem()
+		public override void AddItem(int amount = 1)
 		{
 			CollectionsController.AddItemToCollection(this, User.Instance.CurrentHero.Materials);
 
-			AddAchievementProgress(1);
+			AddAchievementProgress();
 			InterfaceController.RefreshEquipmentPanels();
 		}
 
-		public override void RemoveItem()
+		public override void RemoveItem(int amount = 1)
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Materials);
 		}

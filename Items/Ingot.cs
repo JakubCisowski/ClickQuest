@@ -20,7 +20,7 @@ namespace ClickQuest.Items
 			return copy;
 		}
 
-		public override void AddAchievementProgress(int amount)
+		public override void AddAchievementProgress(int amount = 1)
 		{
 			NumericAchievementType achievementType = 0;
 
@@ -50,15 +50,15 @@ namespace ClickQuest.Items
 			User.Instance.Achievements.IncreaseAchievementValue(achievementType, amount);
 		}
 
-		public override void AddItem()
+		public override void AddItem(int amount = 1)
 		{
 			CollectionsController.AddItemToCollection(this, User.Instance.Ingots);
 
-			AddAchievementProgress(1);
+			AddAchievementProgress();
 			InterfaceController.RefreshEquipmentPanels();
 		}
 
-		public override void RemoveItem()
+		public override void RemoveItem(int amount = 1)
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.Ingots);
 		}

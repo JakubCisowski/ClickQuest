@@ -7,7 +7,7 @@ namespace ClickQuest.Items
 {
 	public class DungeonKey : Item
 	{
-		public override void AddAchievementProgress(int amount)
+		public override void AddAchievementProgress(int amount = 1)
 		{
 			NumericAchievementType achievementType = 0;
 			// Increase achievement amount.
@@ -50,15 +50,15 @@ namespace ClickQuest.Items
 			return copy;
 		}
 
-		public override void AddItem()
+		public override void AddItem(int amount = 1)
 		{
 			CollectionsController.AddItemToCollection(this, User.Instance.DungeonKeys);
 
-			AddAchievementProgress(1);
+			AddAchievementProgress();
 			InterfaceController.RefreshEquipmentPanels();
 		}
 
-		public override void RemoveItem()
+		public override void RemoveItem(int amount = 1)
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.DungeonKeys);
 		}
