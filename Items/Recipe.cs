@@ -37,6 +37,8 @@ namespace ClickQuest.Items
 
 		public void UpdateRequirementsDescription()
 		{
+			Ingredients = GameData.Recipes.FirstOrDefault(x => x.Id == Id)?.Ingredients;
+			
 			RequirementsDescription = "Materials required: ";
 
 			foreach (var ingredient in Ingredients)
