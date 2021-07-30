@@ -45,6 +45,10 @@ namespace ClickQuest.Pages
 
 				InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
 			}
+			else
+			{
+				AlertBox.Show("You must choose both race and class for your hero!", MessageBoxButton.OK);
+			}
 		}
 
 		private void CreateHero()
