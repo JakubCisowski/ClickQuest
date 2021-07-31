@@ -17,7 +17,7 @@
 		"HeroClass": "All",
 		"Name": "TestQuest2",
 		"Duration": 5,
-		"Description": "TestQuest2Description",
+		"Description": "TestQuest2Description. This ultra-long description was created to test the limits and boundaries of Microsoft and WPF. I wonder if this text will be wrapped and displayed properly.",
 		"RewardRecipeIds": [],
 		"RewardBlessingIds" : [1],
 		"RewardMaterialIds" : [],

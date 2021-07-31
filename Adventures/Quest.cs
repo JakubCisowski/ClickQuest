@@ -151,8 +151,6 @@ namespace ClickQuest.Adventures
 
 		public void UpdateAllRewardsDescription()
 		{
-			RewardsDescription = "Rewards:";
-
 			UpdateSpecificRewardsDescription(RewardBlessingIds, GameData.Blessings);
 			UpdateSpecificRewardsDescription(RewardRecipeIds, GameData.Recipes);
 			UpdateSpecificRewardsDescription(RewardMaterialIds, GameData.Materials);
@@ -169,7 +167,7 @@ namespace ClickQuest.Adventures
 
 			foreach (var rewardGroup in rewardIdAndCountPairs)
 			{
-				RewardsDescription += $"\n{rewardGroup.Count}x {rewardsGameDataCollection.FirstOrDefault(x => x.Id == rewardGroup.Value).Name}";
+				RewardsDescription += $"\n - {rewardGroup.Count}x {rewardsGameDataCollection.FirstOrDefault(x => x.Id == rewardGroup.Value).Name}";
 			}
 		}
 
