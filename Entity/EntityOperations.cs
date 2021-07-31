@@ -300,7 +300,7 @@ namespace ClickQuest.Entity
 			{
 				var databaseService = db.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
 
-				return databaseService.Exists();
+				return databaseService is not null && databaseService.Exists();
 			}
 		}
 	}
