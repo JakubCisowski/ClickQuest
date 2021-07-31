@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Windows.Media;
 using ClickQuest.Data;
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Heroes;
@@ -6,6 +7,8 @@ using ClickQuest.Heroes.Buffs;
 using ClickQuest.Items;
 using ClickQuest.Player;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace ClickQuest.Entity
 {
@@ -252,6 +255,13 @@ namespace ClickQuest.Entity
 
 		public static void CreateAndSeedDatabase()
 		{
+			bool doesDatabaseExist = CheckIfDatabaseExists();
+
+			if (doesDatabaseExist)
+			{
+				return;
+			}
+			
 			using (var db = new UserContext())
 			{
 				// Ensure the database exists - if not, create it.
@@ -281,6 +291,16 @@ namespace ClickQuest.Entity
 
 				db.Users.Update(user);
 				db.SaveChanges();
+			}
+		}
+
+		private static bool CheckIfDatabaseExists()
+		{
+			using (var db = new UserContext())
+			{
+				var databaseService = db.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+
+				return databaseService.Exists();
 			}
 		}
 	}
