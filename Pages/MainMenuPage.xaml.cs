@@ -212,8 +212,13 @@ namespace ClickQuest.Pages
 
 		private void ResetProgressButton_Click(object sender, RoutedEventArgs e)
 		{
-			EntityOperations.ResetProgress();
-			UpdateSelectOrDeleteHeroButtons();
+			var result = AlertBox.Show("This action will delete all heroes, along with their equipment, as well as all currencies and achievements. Are you sure?");
+			
+			if (result == MessageBoxResult.OK)
+			{
+				EntityOperations.ResetProgress();
+				UpdateSelectOrDeleteHeroButtons();
+			}
 		}
 	}
 }
