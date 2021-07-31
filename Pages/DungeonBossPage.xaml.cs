@@ -209,7 +209,7 @@ namespace ClickQuest.Pages
 		{
 			StartPoisonTimer();
 
-			int damage = User.Instance.CurrentHero.CalculateClickDamage();
+			int damage = User.Instance.CurrentHero.CalculateClickDamage().Damage;
 			_boss.CurrentHealth -= damage;
 
 			HandleBossDeathIfDefeated();
