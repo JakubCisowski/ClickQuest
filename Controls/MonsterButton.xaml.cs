@@ -137,7 +137,7 @@ namespace ClickQuest.Controls
 			{
 				StartPoisonTimer();
 
-				int damage = User.Instance.CurrentHero.CalculateClickDamage();
+				int damage = User.Instance.CurrentHero.CalculateClickDamage().Damage;
 				Monster.CurrentHealth -= damage;
 
 				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
