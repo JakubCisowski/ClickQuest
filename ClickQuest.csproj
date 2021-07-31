@@ -7,6 +7,10 @@
     <ApplicationIcon>GameIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <NoWarn>0067;1701;1702</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="ControlzEx" Version="4.4.0" />
     <PackageReference Include="MaterialDesignExtensions" Version="3.2.0" />
