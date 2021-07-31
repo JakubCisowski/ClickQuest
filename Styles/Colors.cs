@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Media;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Items;
 
 namespace ClickQuest.Styles
@@ -34,6 +35,32 @@ namespace ClickQuest.Styles
 
 				case Rarity.Masterwork:
 					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity5");
+					break;
+			}
+
+			return brush;
+		}
+
+		public static SolidColorBrush GetFloatingCombatTextColor(FloatingTextController.DamageType damageType)
+		{
+			SolidColorBrush brush = null;
+
+			switch (damageType)
+			{
+				case FloatingTextController.DamageType.Normal:
+					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeNormal");
+					break;
+				
+				case FloatingTextController.DamageType.Critical:
+					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeCritical");
+					break;
+				
+				case FloatingTextController.DamageType.Poison:
+					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypePoison");
+					break;
+				
+				case FloatingTextController.DamageType.Aura:
+					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeAura");
 					break;
 			}
 

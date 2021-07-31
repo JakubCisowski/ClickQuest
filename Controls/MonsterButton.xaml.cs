@@ -6,10 +6,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using ClickQuest.Enemies;
 using ClickQuest.Extensions.CombatManager;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Items;
@@ -145,7 +145,7 @@ namespace ClickQuest.Controls
  
 				var damageType = damageAndCritInfo.IsCritical ? FloatingTextController.DamageType.Critical : FloatingTextController.DamageType.Normal;
  
-				CreateFloatingTextBlock(damageAndCritInfo.Damage, damageType);
+				CreateFloatingTextBlockAndStartAnimations(damageAndCritInfo.Damage, damageType);
  
 				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
  
@@ -218,7 +218,7 @@ namespace ClickQuest.Controls
 				int poisonDamage = User.Instance.CurrentHero.PoisonDamage;
 				Monster.CurrentHealth -= poisonDamage;
  
-				CreateFloatingTextBlock(poisonDamage, FloatingTextController.DamageType.Poison);
+				CreateFloatingTextBlockAndStartAnimations(poisonDamage, FloatingTextController.DamageType.Poison);
  
 				_poisonTicks++;
  
@@ -234,59 +234,31 @@ namespace ClickQuest.Controls
 			{
 				Monster.CurrentHealth -= AuraTickDamage;
  
-				CreateFloatingTextBlock(AuraTickDamage, FloatingTextController.DamageType.Aura);
+				CreateFloatingTextBlockAndStartAnimations(AuraTickDamage, FloatingTextController.DamageType.Aura);
  
 				HandleMonsterDeathIfDefeated();
 			}
 		}
  
-		private void CreateFloatingTextBlock(int damage, FloatingTextController.DamageType damageType)
+		private void CreateFloatingTextBlockAndStartAnimations(int damage, FloatingTextController.DamageType damageType)
 		{
-			// Animation
 			double baseTextSize = 28;
+			int animationDuration = 2;
+			int maximumPositionOffset = 100;
 			var mousePosition = Mouse.GetPosition(DamageTextCanvas);
+
+			var damageBlock = FloatingTextController.CreateFloatingTextBlock(damage, damageType, baseTextSize);
+
+			var randomizedPositions = FloatingTextController.RandomizeFloatingTextBlockPosition(mousePosition, DamageTextCanvas.ActualWidth, DamageTextCanvas.ActualHeight, maximumPositionOffset);
  
-			var damageBlock = new TextBlock()
-			{
-				Text=damage.ToString(),
-				FontSize = baseTextSize,
-				HorizontalAlignment = HorizontalAlignment.Center
-			};
- 
-			switch (damageType)
-			{
-				case FloatingTextController.DamageType.Normal:
-					damageBlock.Foreground = new SolidColorBrush(Colors.Black);
-					damageBlock.FontWeight = FontWeights.DemiBold;
-					break;
- 
-				case FloatingTextController.DamageType.Poison:
-					damageBlock.Foreground = new SolidColorBrush(Colors.Green);
-					break;
- 
-				case FloatingTextController.DamageType.Aura:
-					damageBlock.Foreground = new SolidColorBrush(Colors.Gold);
-					break;
- 
-				case FloatingTextController.DamageType.Critical:
-					damageBlock.Foreground = new SolidColorBrush(Colors.Red);
-					damageBlock.FontWeight = FontWeights.Bold;
-					break;
-			}
- 
-			var randomizedPositionX = mousePosition.X + _rng.Next(-100, 101);
-			var randomizedPositionY = mousePosition.Y + _rng.Next(-100, 101);
- 
-			Canvas.SetLeft(damageBlock, randomizedPositionX);
-			Canvas.SetTop(damageBlock, randomizedPositionY);
- 
-			int duration = 2;
- 
-			var textSizeAnimation = FloatingTextController.CreateTextSizeAnimation(duration, baseTextSize);
-			var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(duration);
- 
+			Canvas.SetLeft(damageBlock, randomizedPositions.X);
+			Canvas.SetTop(damageBlock, randomizedPositions.Y);
+			
 			DamageTextCanvas.Children.Add(damageBlock);
- 
+
+			var textSizeAnimation = FloatingTextController.CreateTextSizeAnimation(animationDuration, baseTextSize);
+			var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration);
+			
 			// Smoothness potential fix: https://stackoverflow.com/questions/4559485/wpf-animation-is-not-smooth
 			damageBlock.BeginAnimation(TextBlock.FontSizeProperty, textSizeAnimation);
 			damageBlock.BeginAnimation(TextBlock.OpacityProperty, textOpacityAnimation);

@@ -78,7 +78,7 @@
 						</Border>
  
 						<!-- Canvas used for floating combat text -->
-						<Canvas Grid.Row="0" Grid.RowSpan="3" x:Name="DamageTextCanvas" Width="{Binding ActualWidth, ElementName=MainGrid}" Height="{Binding ActualHeight, ElementName=MainGrid}">
+						<Canvas Grid.Row="0" Grid.RowSpan="3" x:Name="DamageTextCanvas" Width="{Binding ActualWidth, ElementName=MainGrid}" Height="{Binding ActualHeight, ElementName=MainGrid}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 						</Canvas>
 					</Grid>
 				</Button>
