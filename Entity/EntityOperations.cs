@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
+using ClickQuest.Adventures;
 using ClickQuest.Data;
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Heroes;
@@ -167,7 +169,26 @@ namespace ClickQuest.Entity
 			}
 		}
 
-		public static void RemoveQuests()
+		public static void RemoveQuests(IEnumerable<Quest> quests)
+		{
+			using (var db = new UserContext())
+			{
+				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Quests).FirstOrDefault();
+
+				var hero = user.Heroes.FirstOrDefault(x => x.Id == User.Instance.CurrentHero.Id);
+
+				if (hero != null)
+				{
+					foreach (var quest in quests)
+					{
+						db.Entry(quest).State = EntityState.Deleted;
+						hero.Quests.Remove(quest);
+					}
+				}
+			}
+		}
+
+		public static void RemoveAllQuests()
 		{
 			using (var db = new UserContext())
 			{

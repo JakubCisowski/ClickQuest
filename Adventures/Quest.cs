@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Threading;
 using ClickQuest.Controls;
 using ClickQuest.Data;
+using ClickQuest.Entity;
 using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Extensions.QuestManager;
@@ -118,7 +119,12 @@ namespace ClickQuest.Adventures
 			questCopy.EndDate = EndDate;
 
 			// Replace that quest in Hero's Quests collection with the newly copied quest.
-			User.Instance.CurrentHero?.Quests.RemoveAll(x => x.Id == questCopy.Id);
+			var questsWithMatchingId = User.Instance.CurrentHero?.Quests.Where(x => x.Id == questCopy.Id).ToList();
+			
+			// Remove these quests from entity to prevent duplicates from being entered into the database.
+			EntityOperations.RemoveQuests(questsWithMatchingId);
+			
+			questsWithMatchingId.ForEach(x=>User.Instance.CurrentHero?.Quests.Remove(x));
 			User.Instance.CurrentHero?.Quests.Add(questCopy);
 
 			// Set quest end date (if not yet set).

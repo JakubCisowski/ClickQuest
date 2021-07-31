@@ -41,7 +41,7 @@ namespace ClickQuest.Pages
 		public void RerollQuests()
 		{
 			User.Instance.CurrentHero.Quests.Clear();
-			EntityOperations.RemoveQuests();
+			EntityOperations.RemoveAllQuests();
 
 			var questsForCurrentHeroClass = GameData.Quests.Where(x => x.HeroClass == User.Instance.CurrentHero.HeroClass || x.HeroClass == HeroClass.All).ToList();
 
