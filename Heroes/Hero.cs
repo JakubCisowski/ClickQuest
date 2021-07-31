@@ -318,22 +318,24 @@ namespace ClickQuest.Heroes
 			}
 		}
 
-		public int CalculateClickDamage()
+		public (int Damage, bool IsCritical) CalculateClickDamage()
 		{
 			int damage = ClickDamage;
+			bool isCritical = false;
 
 			// Calculate crit (max 100%).
 			double randomizedValue = _rng.Next(1, 101) / 100d;
 			if (randomizedValue <= CritChance)
 			{
 				damage *= 2;
+				isCritical = true;
 
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.CritsAmount, 1);
 			}
 
 			damage += Specialization.SpecializationBuffs[SpecializationType.Clicking];
 
-			return damage;
+			return (damage, isCritical);
 		}
 	}
 }
