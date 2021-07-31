@@ -4,81 +4,84 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 using ClickQuest.Data;
 using ClickQuest.Enemies;
+using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Player;
-
+ 
 namespace ClickQuest.Pages
 {
 	public partial class DungeonBossPage : Page, INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
-
+ 
 		private Boss _boss;
 		private DispatcherTimer _fightTimer;
 		private readonly Random _rng = new Random();
 		private DispatcherTimer _poisonTimer;
 		private int _poisonTicks;
-
+ 
 		public int Duration { get; set; }
-
+ 
 		public DungeonBossPage()
 		{
 			InitializeComponent();
-
+ 
 			SetupFightTimer();
 			SetupPoisonTimer();
 		}
-
+ 
 		public void StartBossFight(Boss boss)
 		{
 			BossButton.IsEnabled = true;
 			TownButton.Visibility = Visibility.Hidden;
-
+ 
 			// SpecDungeonBuff's base value is 30 - the fight's duration will always be 30s or more.
 			Duration = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon];
-
+ 
 			BindFightInfoToInterface(boss);
-
+ 
 			_fightTimer.Start();
 		}
-
+ 
 		private void BindFightInfoToInterface(Boss boss)
 		{
 			_boss = boss;
 			DataContext = _boss;
-
+ 
 			var binding = new Binding("Duration")
 			{
 				Source = this
 			};
 			TimeRemainingBlock.SetBinding(TextBlock.TextProperty, binding);
-
+ 
 			var binding2 = new Binding("Description")
 			{
 				Source = GameData.Dungeons.FirstOrDefault(x => x.BossIds.Contains(boss.Id))
 			};
 			DungeonDescriptionBlock.SetBinding(TextBlock.TextProperty, binding2);
 		}
-
+ 
 		private void HandleBossDeathIfDefeated()
 		{
 			if (_boss.CurrentHealth <= 0)
 			{
 				StopPoisonTimer();
 				_fightTimer.Stop();
-
+ 
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.BossesDefeated, 1);
-
+ 
 				GrantVictoryBonuses();
 				HandleInterfaceAfterBossDeath();
 			}
 		}
-
+ 
 		private void SetupFightTimer()
 		{
 			_fightTimer = new DispatcherTimer
@@ -87,11 +90,11 @@ namespace ClickQuest.Pages
 			};
 			_fightTimer.Tick += FightTimer_Tick;
 		}
-
+ 
 		private void SetupPoisonTimer()
 		{
 			int poisonIntervalMs = 500;
-
+ 
 			_poisonTimer = new DispatcherTimer
 			{
 				Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs)
@@ -99,7 +102,7 @@ namespace ClickQuest.Pages
 			_poisonTimer.Tick += PoisonTimer_Tick;
 			_poisonTicks = 0;
 		}
-
+ 
 		private void StartPoisonTimer()
 		{
 			if (User.Instance.CurrentHero.PoisonDamage > 0)
@@ -108,41 +111,41 @@ namespace ClickQuest.Pages
 				_poisonTimer.Start();
 			}
 		}
-
+ 
 		private void StopPoisonTimer()
 		{
 			_poisonTimer.Stop();
 			_poisonTicks = 0;
 		}
-
+ 
 		public void GrantVictoryBonuses()
 		{
 			GrantBossReward();
-
+ 
 			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Dungeon]++;
-
+ 
 			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.DungeonsCompleted, 1);
 		}
-
+ 
 		private void HandleInterfaceAfterBossDeath()
 		{
 			BossButton.IsEnabled = false;
 			TownButton.Visibility = Visibility.Visible;
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["DungeonBoss"]);
 		}
-
+ 
 		private void GrantBossReward()
 		{
 			int damageDealtToBoss = _boss.Health - _boss.CurrentHealth;
 			int experienceGained = Experience.CalculateMonsterXpReward(damageDealtToBoss);
 			User.Instance.CurrentHero.Experience += experienceGained;
-
+ 
 			// Grant boss loot.
 			// 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
 			int threshold = 5 - _boss.CurrentHealth / (_boss.Health / 5);
 			// 2. Iterate through every possible loot.
 			string lootText = "Experience gained: " + experienceGained + " \n" + "Loot: \n";
-
+ 
 			foreach (var loot in _boss.BossLoot)
 			{
 				double randomizedValue = _rng.Next(1, 10001) / 10000d;
@@ -156,38 +159,38 @@ namespace ClickQuest.Pages
 					}
 				}
 			}
-
+ 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["DungeonBoss"]);
-
+ 
 			// Grant gold reward.
 			int goldReward = 2137; // (change value later)
 			User.Instance.Gold += goldReward;
 			lootText += "- " + goldReward + " (gold)\n";
-
+ 
 			// [PRERELEASE] Display exp and loot for testing purposes.
 			TestRewardsBlock.Text = lootText;
 		}
-
+ 
 		private void FightTimer_Tick(object source, EventArgs e)
 		{
 			Duration--;
-
+ 
 			// Check if time is up.
 			if (Duration <= 0)
 			{
 				StopPoisonTimer();
-
+ 
 				_fightTimer.Stop();
-
+ 
 				GrantVictoryBonuses();
 				HandleInterfaceAfterBossDeath();
 			}
 		}
-
+ 
 		private void PoisonTimer_Tick(object source, EventArgs e)
 		{
 			int poisonTicksMax = 5;
-
+ 
 			if (_poisonTicks >= poisonTicksMax)
 			{
 				_poisonTimer.Stop();
@@ -196,31 +199,84 @@ namespace ClickQuest.Pages
 			{
 				int poisonDamage = User.Instance.CurrentHero.PoisonDamage;
 				_boss.CurrentHealth -= poisonDamage;
-
+ 
+				CreateFloatingTextBlock(poisonDamage, FloatingTextController.DamageType.Poison);
+ 
 				_poisonTicks++;
-
+ 
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.PoisonTicksAmount, 1);
-
+ 
 				HandleBossDeathIfDefeated();
 			}
 		}
-
+ 
 		private void BossButton_Click(object sender, RoutedEventArgs e)
 		{
 			StartPoisonTimer();
-
-			int damage = User.Instance.CurrentHero.CalculateClickDamage().Damage;
-			_boss.CurrentHealth -= damage;
-
+ 
+			var damageAndCritInfo = User.Instance.CurrentHero.CalculateClickDamage();
+			_boss.CurrentHealth -= damageAndCritInfo.Damage;
+ 
+			var damageType = damageAndCritInfo.IsCritical ? FloatingTextController.DamageType.Critical : FloatingTextController.DamageType.Normal;
+ 
+			CreateFloatingTextBlock(damageAndCritInfo.Damage, damageType);
+ 
 			HandleBossDeathIfDefeated();
-
+ 
 			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
 		}
-
+ 
+		private void CreateFloatingTextBlock(int damage, FloatingTextController.DamageType damageType)
+		{
+			// Animation
+			double baseTextSize = 28;
+			var mousePosition = Mouse.GetPosition(DamageTextCanvas);
+ 
+			var damageBlock = new TextBlock()
+			{
+				Text=damage.ToString(),
+				FontSize = baseTextSize,
+				HorizontalAlignment = HorizontalAlignment.Center
+			};
+ 
+			switch (damageType)
+			{
+				case FloatingTextController.DamageType.Normal:
+					damageBlock.Foreground = new SolidColorBrush(Colors.Black);
+					damageBlock.FontWeight = FontWeights.DemiBold;
+					break;
+ 
+				case FloatingTextController.DamageType.Poison:
+					damageBlock.Foreground = new SolidColorBrush(Colors.Green);
+					break;
+ 
+				case FloatingTextController.DamageType.Critical:
+					damageBlock.Foreground = new SolidColorBrush(Colors.Red);
+					break;
+			}
+ 
+			var randomizedPositionX = mousePosition.X + _rng.Next(-100, 101);
+			var randomizedPositionY = mousePosition.Y + _rng.Next(-100, 101);
+ 
+			Canvas.SetLeft(damageBlock, randomizedPositionX);
+			Canvas.SetTop(damageBlock, randomizedPositionY);
+ 
+			int duration = 2;
+ 
+			var textSizeAnimation = FloatingTextController.CreateTextSizeAnimation(duration, baseTextSize);
+			var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(duration);
+ 
+			DamageTextCanvas.Children.Add(damageBlock);
+ 
+			// Smoothness potential fix: https://stackoverflow.com/questions/4559485/wpf-animation-is-not-smooth
+			damageBlock.BeginAnimation(TextBlock.FontSizeProperty, textSizeAnimation);
+			damageBlock.BeginAnimation(TextBlock.OpacityProperty, textOpacityAnimation);
+		}
+ 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
-
+ 
 			// [PRERELEASE]
 			TestRewardsBlock.Text = "";
 		}

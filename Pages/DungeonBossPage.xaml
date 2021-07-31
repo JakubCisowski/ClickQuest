@@ -6,7 +6,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" Title="Dungeon Boss"
       Height="728" Width="1366">
-
+ 
 	<!-- Material design resources for progress bar -->
 	<Page.Resources>
 		<ResourceDictionary>
@@ -16,47 +16,47 @@
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Page.Resources>
-
+ 
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="2*" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-
+ 
 		<!-- Hero stats frame-->
 		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" />
-
+ 
 		<!-- Equipment frame-->
 		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" />
-
+ 
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*" />
 				<RowDefinition Height="8*" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
-
+ 
 			<!-- Dungeon description -->
 			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Background="{StaticResource GameBackgroundAdditional}">
 				<TextBlock x:Name="DungeonDescriptionBlock" FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" />
 			</Border>
-
+ 
 			<!-- Main panel -->
 			<StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
-
+ 
 				<!-- Dungeon boss button -->
 				<Button x:Name="BossButton" Click="BossButton_Click" Width="400" Height="400">
-					<Grid>
+					<Grid x:Name="MainGrid">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="*" />
 							<RowDefinition Height="*" />
 							<RowDefinition Height="*" />
 						</Grid.RowDefinitions>
-
+ 
 						<!-- Text with name -->
 						<TextBlock x:Name="BossName" Grid.Row="0" Text="{Binding Path=Name}" FontSize="28" HorizontalAlignment="Center" />
-
+ 
 						<!-- Health info-->
 						<Grid Grid.Row="1" Margin="6">
 							<!-- Health progress bar -->
@@ -71,14 +71,18 @@
 								</TextBlock.Text>
 							</TextBlock>
 						</Grid>
-
+ 
 						<!-- Boss description -->
 						<Border Grid.Row="2" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5">
 							<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" Text="{Binding Description}" />
 						</Border>
+ 
+						<!-- Canvas used for floating combat text -->
+						<Canvas Grid.Row="0" Grid.RowSpan="3" x:Name="DamageTextCanvas" Width="{Binding ActualWidth, ElementName=MainGrid}" Height="{Binding ActualHeight, ElementName=MainGrid}">
+						</Canvas>
 					</Grid>
 				</Button>
-
+ 
 				<!-- Debug boss info -->
 				<StackPanel x:Name="BossPanel" Orientation="Vertical" HorizontalAlignment="Center">
 					<TextBlock x:Name="BossInfoBlock">
@@ -88,13 +92,13 @@
 							</MultiBinding>
 						</TextBlock.Text>
 					</TextBlock>
-
+ 
 					<TextBlock x:Name="TimeRemainingBlock" />
-
+ 
 					<TextBlock x:Name="TestRewardsBlock" />
 				</StackPanel>
 			</StackPanel>
-
+ 
 			<!-- Back to town button -->
 			<Button x:Name="TownButton" Grid.Row="2" HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
 				<TextBlock Text="Come back to town!" FontSize="22" />

@@ -6,7 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              Height="350" Width="350">
-
+ 
 	<!-- Material design resources for progress bar -->
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -16,19 +16,19 @@
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</UserControl.Resources>
-
+ 
 	<!-- Monster button -->
 	<Button Click="MonsterButton_Click">
-		<Grid>
+		<Grid x:Name="MainGrid">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*" />
 				<RowDefinition Height="*" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
-
+ 
 			<!-- Text with name -->
 			<TextBlock x:Name="MonsterName" Grid.Row="0" Text="{Binding Path=Name}" FontSize="28" HorizontalAlignment="Center" />
-
+ 
 			<!-- Health info-->
 			<Grid Grid.Row="1" Margin="6">
 				<!-- Health progress bar -->
@@ -43,12 +43,16 @@
 					</TextBlock.Text>
 				</TextBlock>
 			</Grid>
-
+ 
 			<!-- Monster description -->
 			<Border Grid.Row="2" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5">
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" Text="{Binding Description}" />
 			</Border>
-
+ 
+			<!-- Canvas used for floating combat text -->
+			<Canvas Grid.Row="0" Grid.RowSpan="3" x:Name="DamageTextCanvas" Width="{Binding ActualWidth, ElementName=MainGrid}" Height="{Binding ActualHeight, ElementName=MainGrid}">
+			</Canvas>
+ 
 		</Grid>
 	</Button>
 </UserControl>
