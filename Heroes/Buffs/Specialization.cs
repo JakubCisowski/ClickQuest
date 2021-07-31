@@ -32,9 +32,7 @@ namespace ClickQuest.Heroes.Buffs
 		private const int SpecMeltingBuffBonus = 5; // Increases % chance to get additional ingots when melting. <Base - 0%>
 		private const int SpecQuestingBuffBonus = 5; // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
 		private const int SpecDungeonBuffBonus = 1; // Increases amount of time to defeat dungeon boss in seconds <Base - 30s>
-
-		private string _specCraftingText;
-
+		
 		[NotMapped]
 		public ObservableDictionary<SpecializationType, int> SpecializationBuffs { get; set; }
 
