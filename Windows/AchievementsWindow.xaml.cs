@@ -61,8 +61,11 @@ namespace ClickQuest.Windows
 
 		private void AppendAchievementToAchievementsList(string name, string amount)
 		{
+			var nameWithoutSpaces = name.Replace(" ", "");
+			
 			var border = new Border
 			{
+				Name=nameWithoutSpaces + "Border",
 				BorderThickness = new Thickness(0.5),
 				BorderBrush = new SolidColorBrush(Colors.Gray),
 				Padding = new Thickness(6),
@@ -74,6 +77,7 @@ namespace ClickQuest.Windows
 
 			var nameBlock = new TextBlock
 			{
+				Name = nameWithoutSpaces +"Name",
 				FontSize = 18,
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Text = name
@@ -81,6 +85,7 @@ namespace ClickQuest.Windows
 
 			var amountBlock = new TextBlock
 			{
+				Name = nameWithoutSpaces+"Amount",
 				FontSize = 18,
 				HorizontalAlignment = HorizontalAlignment.Right,
 				Text = amount
@@ -92,6 +97,23 @@ namespace ClickQuest.Windows
 			border.Child = grid;
 
 			AchievementsList.Children.Add(border);
+		}
+		
+		public void RefreshSingleAchievement(NumericAchievementType achievementType)
+		{
+			var achievements = User.Instance.Achievements;
+
+			var achievementBorder = AchievementsList.Children.OfType<Border>().FirstOrDefault(x=>x.Name==achievementType.ToString() + "Border");
+
+			if (achievementBorder != null)
+			{
+				var achievementAmountBlock = (achievementBorder.Child as Grid)?.Children.OfType<TextBlock>().FirstOrDefault(x=>x.Name==achievementType.ToString()+"Amount");
+
+				if (achievementAmountBlock != null)
+				{
+					achievementAmountBlock.Text = achievements.NumericAchievementCollection[achievementType].ToString();
+				}
+			}
 		}
 
 		private void AchievementsWindow_MouseDown(object sender, MouseButtonEventArgs e)

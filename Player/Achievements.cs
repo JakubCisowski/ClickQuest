@@ -42,7 +42,7 @@ namespace ClickQuest.Player
 		public void IncreaseAchievementValue(NumericAchievementType achievementType, long value)
 		{
 			NumericAchievementCollection[achievementType] += value;
-			AchievementsWindow.Instance.RefreshAchievementsPanel();
+			AchievementsWindow.Instance.RefreshSingleAchievement(achievementType);
 		}
 	}
 }
