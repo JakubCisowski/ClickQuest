@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Threading;
 using ClickQuest.Enemies;
 using ClickQuest.Extensions.CombatManager;
@@ -16,21 +15,21 @@ using ClickQuest.Items;
 using ClickQuest.Pages;
 using ClickQuest.Places;
 using ClickQuest.Player;
- 
+
 namespace ClickQuest.Controls
 {
 	public partial class MonsterButton : UserControl, INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
- 
+
 		private readonly Random _rng = new Random();
 		private readonly RegionPage _regionPage;
 		private DispatcherTimer _poisonTimer;
 		private DispatcherTimer _auraTimer;
 		private int _poisonTicks;
- 
+
 		public Monster Monster { get; set; }
- 
+
 		public Region Region
 		{
 			get
@@ -38,7 +37,7 @@ namespace ClickQuest.Controls
 				return _regionPage.Region;
 			}
 		}
- 
+
 		public int AuraTickDamage
 		{
 			get
@@ -46,29 +45,29 @@ namespace ClickQuest.Controls
 				return (int) Math.Ceiling(User.Instance.CurrentHero.AuraDamage * Monster.Health);
 			}
 		}
- 
+
 		public MonsterButton(RegionPage regionPage)
 		{
 			InitializeComponent();
- 
+
 			_regionPage = regionPage;
- 
+
 			SetupPoisonTimer();
 			SetupAuraTimer();
 			SpawnMonster();
 		}
- 
+
 		public void SpawnMonster()
 		{
 			var frequencyList = Region.Monsters.Select(x => x.Frequency).ToList();
 			int position = RandomizeFreqenciesListPosition(frequencyList);
 			Monster = Region.Monsters[position].Monster.CopyEnemy();
- 
+
 			DataContext = Monster;
- 
+
 			CombatController.StartAuraTimerOnCurrentRegion();
 		}
- 
+
 		private void HandleMonsterDeathIfDefeated()
 		{
 			if (Monster.CurrentHealth <= 0)
@@ -78,79 +77,79 @@ namespace ClickQuest.Controls
 				SpawnMonster();
 			}
 		}
- 
+
 		public void GrantVictoryBonuses()
 		{
 			int experienceGained = Experience.CalculateMonsterXpReward(Monster.Health);
 			User.Instance.CurrentHero.Experience += experienceGained;
- 
+
 			var frequencyList = Monster.Loot.Select(x => x.Frequency).ToList();
 			int position = RandomizeFreqenciesListPosition(frequencyList);
 			var selectedLoot = Monster.Loot[position].Item;
- 
+
 			if (selectedLoot.Id != 0)
 			{
 				selectedLoot.AddItem();
 			}
- 
+
 			// [PRERELEASE] Display exp and loot for testing purposes.
 			_regionPage.TestRewardsBlock.Text = "Loot: " + selectedLoot.Name + ", Exp: " + experienceGained;
- 
+
 			CheckForDungeonKeyDrop();
- 
+
 			_regionPage.StatsFrame.Refresh();
 		}
- 
+
 		private int RandomizeFreqenciesListPosition(List<double> frequencies)
 		{
 			double randomizedValue = _rng.Next(1, 10001) / 10000d;
 			int i = 0;
- 
+
 			while (randomizedValue > frequencies[i])
 			{
 				randomizedValue -= frequencies[i];
 				i++;
 			}
- 
+
 			return i;
 		}
- 
+
 		private void CheckForDungeonKeyDrop()
 		{
 			var DungeonKeyRarityChances = DungeonKey.CreateRarityChancesList(Monster.Health);
- 
+
 			int position = RandomizeFreqenciesListPosition(DungeonKeyRarityChances);
- 
+
 			// Grant dungeon key after if algorithm didn't roll empty loot.
 			if (position != 0)
 			{
 				var dungeonKey = User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity) (position - 1));
 				dungeonKey.AddItem();
- 
+
 				// [PRERELEASE] Display dungeon key drop.
 				_regionPage.TestRewardsBlock.Text += $". You've got a {(Rarity) (position - 1)} Dungeon Key!";
 			}
 		}
- 
+
 		private void MonsterButton_Click(object sender, RoutedEventArgs e)
 		{
 			bool isNoQuestActive = User.Instance.CurrentHero.Quests.All(x => x.EndDate == default);
- 
+
 			if (isNoQuestActive)
 			{
 				StartPoisonTimer();
- 
+
 				var damageAndCritInfo = User.Instance.CurrentHero.CalculateClickDamage();
 				Monster.CurrentHealth -= damageAndCritInfo.Damage;
- 
-				var damageType = damageAndCritInfo.IsCritical ? FloatingTextController.DamageType.Critical : FloatingTextController.DamageType.Normal;
- 
+
+				var damageType = damageAndCritInfo.IsCritical ? DamageType.Critical : DamageType.Normal;
+
 				CreateFloatingTextBlockAndStartAnimations(damageAndCritInfo.Damage, damageType);
- 
+
 				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
- 
+
 				HandleMonsterDeathIfDefeated();
- 
+
 				_regionPage.StatsFrame.Refresh();
 			}
 			else
@@ -158,13 +157,13 @@ namespace ClickQuest.Controls
 				AlertBox.Show("Your hero is busy completing quest!\nCheck back when it's finished.", MessageBoxButton.OK);
 			}
 		}
- 
+
 		private void SetupAuraTimer()
 		{
 			_auraTimer = new DispatcherTimer();
 			_auraTimer.Tick += AuraTimer_Tick;
 		}
- 
+
 		private void SetupPoisonTimer()
 		{
 			int poisonIntervalMs = 500;
@@ -173,17 +172,17 @@ namespace ClickQuest.Controls
 			_poisonTimer.Tick += PoisonTimer_Tick;
 			_poisonTicks = 0;
 		}
- 
+
 		public void StartAuraTimer()
 		{
 			if (User.Instance.CurrentHero != null)
 			{
 				_auraTimer.Interval = TimeSpan.FromSeconds(1d / User.Instance.CurrentHero.AuraAttackSpeed);
- 
+
 				_auraTimer.Start();
 			}
 		}
- 
+
 		private void StartPoisonTimer()
 		{
 			if (User.Instance.CurrentHero.PoisonDamage > 0)
@@ -192,23 +191,23 @@ namespace ClickQuest.Controls
 				_poisonTimer.Start();
 			}
 		}
- 
+
 		public void StopCombatTimers()
 		{
 			StopPoisonTimer();
 			_auraTimer.Stop();
 		}
- 
+
 		public void StopPoisonTimer()
 		{
 			_poisonTimer.Stop();
 			_poisonTicks = 0;
 		}
- 
+
 		private void PoisonTimer_Tick(object source, EventArgs e)
 		{
 			int poisonTicksMax = 5;
- 
+
 			if (_poisonTicks >= poisonTicksMax)
 			{
 				_poisonTimer.Stop();
@@ -217,30 +216,30 @@ namespace ClickQuest.Controls
 			{
 				int poisonDamage = User.Instance.CurrentHero.PoisonDamage;
 				Monster.CurrentHealth -= poisonDamage;
- 
-				CreateFloatingTextBlockAndStartAnimations(poisonDamage, FloatingTextController.DamageType.Poison);
- 
+
+				CreateFloatingTextBlockAndStartAnimations(poisonDamage, DamageType.Poison);
+
 				_poisonTicks++;
- 
+
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.PoisonTicksAmount, 1);
- 
+
 				HandleMonsterDeathIfDefeated();
 			}
 		}
- 
+
 		private void AuraTimer_Tick(object source, EventArgs e)
 		{
 			if (User.Instance.CurrentHero != null)
 			{
 				Monster.CurrentHealth -= AuraTickDamage;
- 
-				CreateFloatingTextBlockAndStartAnimations(AuraTickDamage, FloatingTextController.DamageType.Aura);
- 
+
+				CreateFloatingTextBlockAndStartAnimations(AuraTickDamage, DamageType.Aura);
+
 				HandleMonsterDeathIfDefeated();
 			}
 		}
- 
-		private void CreateFloatingTextBlockAndStartAnimations(int damage, FloatingTextController.DamageType damageType)
+
+		private void CreateFloatingTextBlockAndStartAnimations(int damage, DamageType damageType)
 		{
 			double baseTextSize = 28;
 			int animationDuration = 2;
@@ -250,18 +249,18 @@ namespace ClickQuest.Controls
 			var damageBlock = FloatingTextController.CreateFloatingTextBlock(damage, damageType, baseTextSize);
 
 			var randomizedPositions = FloatingTextController.RandomizeFloatingTextBlockPosition(mousePosition, DamageTextCanvas.ActualWidth, DamageTextCanvas.ActualHeight, maximumPositionOffset);
- 
+
 			Canvas.SetLeft(damageBlock, randomizedPositions.X);
 			Canvas.SetTop(damageBlock, randomizedPositions.Y);
-			
+
 			DamageTextCanvas.Children.Add(damageBlock);
 
 			var textSizeAnimation = FloatingTextController.CreateTextSizeAnimation(animationDuration, baseTextSize);
 			var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration);
-			
+
 			// Smoothness potential fix: https://stackoverflow.com/questions/4559485/wpf-animation-is-not-smooth
 			damageBlock.BeginAnimation(TextBlock.FontSizeProperty, textSizeAnimation);
-			damageBlock.BeginAnimation(TextBlock.OpacityProperty, textOpacityAnimation);
+			damageBlock.BeginAnimation(OpacityProperty, textOpacityAnimation);
 		}
 	}
 }

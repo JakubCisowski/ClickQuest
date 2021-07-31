@@ -5,9 +5,9 @@ namespace ClickQuest.Items
 {
 	public class Ingredient
 	{
-		public int Id{ get; set ;}
-		public int Quantity{ get; set; }
-		
+		public int Id { get; set; }
+		public int Quantity { get; set; }
+
 		public Material RelatedMaterial
 		{
 			get

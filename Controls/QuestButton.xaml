@@ -13,27 +13,27 @@
 				<RowDefinition Height="2*" />
 				<RowDefinition Height="0.5*" />
 				<RowDefinition Height="10" />
-				<RowDefinition Height="40"/>
+				<RowDefinition Height="40" />
 				<RowDefinition Height="1.5*" />
 			</Grid.RowDefinitions>
 
 			<!-- Name text -->
-			<TextBlock x:Name="QuestName" Grid.Row="0" Text="{Binding Path=Name}" FontSize="28" TextAlignment="Center" VerticalAlignment="Top" Margin="5"/>
+			<TextBlock x:Name="QuestName" Grid.Row="0" Text="{Binding Path=Name}" FontSize="28" TextAlignment="Center" VerticalAlignment="Top" Margin="5" />
 
 			<!-- Description text -->
 			<Border Grid.Row="1" BorderThickness="1" BorderBrush="DimGray" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="5" Margin="5">
-				<TextBlock x:Name="QuestDescription" Text="{Binding Path=Description}" FontSize="18" TextAlignment="Center" TextWrapping="Wrap"/>
+				<TextBlock x:Name="QuestDescription" Text="{Binding Path=Description}" FontSize="18" TextAlignment="Center" TextWrapping="Wrap" />
 			</Border>
 
 			<!-- Duration info text -->
-			<TextBlock x:Name="QuestDuration" Grid.Row="2" Text="{Binding Path=Duration, StringFormat=Duration: {0}}" FontSize="24" TextAlignment="Center" Margin="5"/>
-			
-			<Separator Grid.Row="3" Height="2" Width="160" Margin="10,4,10,4" HorizontalAlignment="Center"/>
-			
-			<TextBlock Grid.Row="4" Text="Rewards:" TextAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="5"/>
+			<TextBlock x:Name="QuestDuration" Grid.Row="2" Text="{Binding Path=Duration, StringFormat=Duration: {0}}" FontSize="24" TextAlignment="Center" Margin="5" />
+
+			<Separator Grid.Row="3" Height="2" Width="160" Margin="10,4,10,4" HorizontalAlignment="Center" />
+
+			<TextBlock Grid.Row="4" Text="Rewards:" TextAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="5" />
 
 			<!-- Panel for rewards-->
-			<TextBlock x:Name="QuestRewardsPanel" Grid.Row="5" Text="{Binding Path=RewardsDescription}" FontSize="16" Margin="5" VerticalAlignment="Center"/>
+			<TextBlock x:Name="QuestRewardsPanel" Grid.Row="5" Text="{Binding Path=RewardsDescription}" FontSize="16" Margin="5" VerticalAlignment="Center" />
 		</Grid>
 	</Button>
 </UserControl>

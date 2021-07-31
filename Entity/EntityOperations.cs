@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Media;
 using ClickQuest.Adventures;
 using ClickQuest.Data;
 using ClickQuest.Extensions.CollectionsManager;
@@ -62,7 +61,7 @@ namespace ClickQuest.Entity
 			using (var db = new UserContext())
 			{
 				// Load user. Include all collections in it.
-				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Materials).Include(x => x.Heroes).ThenInclude(x => x.Recipes).Include(x => x.Heroes).ThenInclude(x => x.Artifacts).Include(x => x.Heroes).ThenInclude(x => x.Quests).Include(x => x.Heroes).Include(x => x.Ingots).Include(x => x.DungeonKeys).FirstOrDefault();
+				var user = db.Users.Include(x => x.Heroes).ThenInclude<User, Hero, List<Material>>(x => x.Materials).Include(x => x.Heroes).ThenInclude<User, Hero, List<Recipe>>(x => x.Recipes).Include(x => x.Heroes).ThenInclude<User, Hero, List<Artifact>>(x => x.Artifacts).Include(x => x.Heroes).ThenInclude<User, Hero, List<Quest>>(x => x.Quests).Include(x => x.Heroes).Include(x => x.Ingots).Include(x => x.DungeonKeys).FirstOrDefault();
 				User.Instance = user;
 
 				// Update MaterialIds dictionary and RequirementsDescription for each recipe.
@@ -95,7 +94,7 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
-				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Materials).Include(x => x.Heroes).ThenInclude(x => x.Recipes).Include(x => x.Heroes).ThenInclude(x => x.Artifacts).FirstOrDefault();
+				var user = db.Users.Include(x => x.Heroes).ThenInclude<User, Hero, List<Material>>(x => x.Materials).Include(x => x.Heroes).ThenInclude<User, Hero, List<Recipe>>(x => x.Recipes).Include(x => x.Heroes).ThenInclude<User, Hero, List<Artifact>>(x => x.Artifacts).FirstOrDefault();
 
 				// Get the right hero to remove from.
 				var currentHero = user.Heroes.FirstOrDefault(x => x.Id == User.Instance.CurrentHero.Id);
@@ -134,7 +133,7 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
-				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Materials).Include(x => x.Heroes).ThenInclude(x => x.Recipes).Include(x => x.Heroes).ThenInclude(x => x.Artifacts).Include(x => x.Heroes).ThenInclude(x => x.Quests).Include(x => x.Heroes).FirstOrDefault();
+				var user = db.Users.Include(x => x.Heroes).ThenInclude<User, Hero, List<Material>>(x => x.Materials).Include(x => x.Heroes).ThenInclude<User, Hero, List<Recipe>>(x => x.Recipes).Include(x => x.Heroes).ThenInclude<User, Hero, List<Artifact>>(x => x.Artifacts).Include(x => x.Heroes).ThenInclude<User, Hero, List<Quest>>(x => x.Quests).Include(x => x.Heroes).FirstOrDefault();
 
 				var hero = user.Heroes.FirstOrDefault(x => x.Id == heroToRemove.Id);
 				if (hero != null)
@@ -173,7 +172,7 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
-				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Quests).FirstOrDefault();
+				var user = db.Users.Include(x => x.Heroes).ThenInclude<User, Hero, List<Quest>>(x => x.Quests).FirstOrDefault();
 
 				var hero = user.Heroes.FirstOrDefault(x => x.Id == User.Instance.CurrentHero.Id);
 
@@ -192,7 +191,7 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
-				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Quests).FirstOrDefault();
+				var user = db.Users.Include(x => x.Heroes).ThenInclude<User, Hero, List<Quest>>(x => x.Quests).FirstOrDefault();
 
 				var hero = user.Heroes.FirstOrDefault(x => x.Id == User.Instance.CurrentHero.Id);
 
@@ -212,7 +211,7 @@ namespace ClickQuest.Entity
 		{
 			using (var db = new UserContext())
 			{
-				var user = db.Users.Include(x => x.Heroes).ThenInclude(x => x.Materials).Include(x => x.Heroes).ThenInclude(x => x.Recipes).Include(x => x.Heroes).ThenInclude(x => x.Artifacts).Include(x => x.Heroes).ThenInclude(x => x.Quests).Include(x => x.Heroes).Include(x => x.Ingots).Include(x => x.DungeonKeys).FirstOrDefault();
+				var user = db.Users.Include(x => x.Heroes).ThenInclude<User, Hero, List<Material>>(x => x.Materials).Include(x => x.Heroes).ThenInclude<User, Hero, List<Recipe>>(x => x.Recipes).Include(x => x.Heroes).ThenInclude<User, Hero, List<Artifact>>(x => x.Artifacts).Include(x => x.Heroes).ThenInclude<User, Hero, List<Quest>>(x => x.Quests).Include(x => x.Heroes).Include(x => x.Ingots).Include(x => x.DungeonKeys).FirstOrDefault();
 
 				// Delete all items and heroes (except for ingots - only set their quantity to 0).
 
@@ -282,7 +281,7 @@ namespace ClickQuest.Entity
 			{
 				return;
 			}
-			
+
 			using (var db = new UserContext())
 			{
 				// Ensure the database exists - if not, create it.

@@ -129,10 +129,7 @@ namespace ClickQuest.Pages
 				Tag = hero
 			};
 
-			var selectHeroButtonBlock = new TextBlock
-			{
-				TextAlignment = TextAlignment.Center
-			};
+			var selectHeroButtonBlock = new TextBlock {TextAlignment = TextAlignment.Center};
 
 			var heroNameText = new Bold(new Run(hero.Name));
 			var heroLevelAndClassText = new Run($"\n{hero.Level} lvl | {hero.HeroClass} | ");
@@ -153,10 +150,7 @@ namespace ClickQuest.Pages
 		{
 			if (User.Instance.Heroes.Count == User.HERO_LIMIT)
 			{
-				var disabledInfoBlock = new TextBlock
-				{
-					TextAlignment = TextAlignment.Center
-				};
+				var disabledInfoBlock = new TextBlock {TextAlignment = TextAlignment.Center};
 
 				var disabledText = new Italic(new Run("Can't create new hero\nMax heroes reached!"));
 				disabledInfoBlock.Inlines.Add(disabledText);
@@ -213,7 +207,7 @@ namespace ClickQuest.Pages
 		private void ResetProgressButton_Click(object sender, RoutedEventArgs e)
 		{
 			var result = AlertBox.Show("This action will delete all heroes, along with their equipment, as well as all currencies and achievements. Are you sure?");
-			
+
 			if (result == MessageBoxResult.OK)
 			{
 				EntityOperations.ResetProgress();

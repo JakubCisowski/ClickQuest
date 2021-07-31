@@ -37,27 +37,12 @@ namespace ClickQuest.Pages
 
 			var grid = new Grid();
 
-			var col1 = new ColumnDefinition
-			{
-				Width = new GridLength(1, GridUnitType.Star)
-			};
-			var col2 = new ColumnDefinition
-			{
-				Width = new GridLength(1, GridUnitType.Star)
-			};
+			var col1 = new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)};
+			var col2 = new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)};
 
-			var row1 = new RowDefinition
-			{
-				Height = new GridLength(1, GridUnitType.Star)
-			};
-			var row2 = new RowDefinition
-			{
-				Height = new GridLength(1, GridUnitType.Star)
-			};
-			var row3 = new RowDefinition
-			{
-				Height = new GridLength(1, GridUnitType.Star)
-			};
+			var row1 = new RowDefinition {Height = new GridLength(1, GridUnitType.Star)};
+			var row2 = new RowDefinition {Height = new GridLength(1, GridUnitType.Star)};
+			var row3 = new RowDefinition {Height = new GridLength(1, GridUnitType.Star)};
 
 			grid.ColumnDefinitions.Add(col1);
 			grid.ColumnDefinitions.Add(col2);
@@ -76,10 +61,7 @@ namespace ClickQuest.Pages
 					Height = 100
 				};
 
-				var panel = new StackPanel
-				{
-					VerticalAlignment = VerticalAlignment.Center
-				};
+				var panel = new StackPanel {VerticalAlignment = VerticalAlignment.Center};
 
 				var block = new TextBlock
 				{

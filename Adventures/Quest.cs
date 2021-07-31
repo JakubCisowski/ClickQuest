@@ -84,10 +84,7 @@ namespace ClickQuest.Adventures
 			RewardBlessingIds = new List<int>();
 			RewardIngotIds = new List<int>();
 
-			_timer = new DispatcherTimer
-			{
-				Interval = new TimeSpan(0, 0, 0, 1)
-			};
+			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};
 			_timer.Tick += Timer_Tick;
 		}
 
@@ -120,11 +117,11 @@ namespace ClickQuest.Adventures
 
 			// Replace that quest in Hero's Quests collection with the newly copied quest.
 			var questsWithMatchingId = User.Instance.CurrentHero?.Quests.Where(x => x.Id == questCopy.Id).ToList();
-			
+
 			// Remove these quests from entity to prevent duplicates from being entered into the database.
 			EntityOperations.RemoveQuests(questsWithMatchingId);
-			
-			questsWithMatchingId.ForEach(x=>User.Instance.CurrentHero?.Quests.Remove(x));
+
+			questsWithMatchingId.ForEach(x => User.Instance.CurrentHero?.Quests.Remove(x));
 			User.Instance.CurrentHero?.Quests.Add(questCopy);
 
 			// Set quest end date (if not yet set).

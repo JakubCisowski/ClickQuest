@@ -31,9 +31,9 @@ namespace ClickQuest.Data
 			GameData.DungeonGroups = DeserializeType<DungeonGroup>(Path.Combine(Environment.CurrentDirectory, @"Data\", @"GameAssets\", "DungeonGroups.json"));
 			GameData.Dungeons = DeserializeType<Dungeon>(Path.Combine(Environment.CurrentDirectory, @"Data\", @"GameAssets\", "Dungeons.json"));
 
-			#if DEBUG
+#if DEBUG
 			DataValidator.ValidateData();
-			#endif
+#endif
 
 			PostLoad();
 
@@ -62,13 +62,7 @@ namespace ClickQuest.Data
 			string json = File.ReadAllText(filePath);
 
 			// Enums as strings.
-			var options = new JsonSerializerOptions
-			{
-				Converters =
-				{
-					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
-				}
-			};
+			var options = new JsonSerializerOptions {Converters = {new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)}};
 
 			result = JsonSerializer.Deserialize<List<T>>(json, options);
 			return result;

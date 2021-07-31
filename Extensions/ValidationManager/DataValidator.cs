@@ -1,15 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using ClickQuest.Adventures;
 using ClickQuest.Data;
 using ClickQuest.Enemies;
-using ClickQuest.Heroes;
-using ClickQuest.Heroes.Buffs;
 using ClickQuest.Interfaces;
-using ClickQuest.Items;
 using ClickQuest.Places;
 
 namespace ClickQuest.Extensions.ValidationManager
@@ -40,7 +36,7 @@ namespace ClickQuest.Extensions.ValidationManager
 				{
 					var convertedCollection = propertyValue.Cast<IIdentifiable>().ToList();
 					var methodInfo = typeof(DataValidator).GetMethod("CheckCollectionIdUniqueness");
-					methodInfo.Invoke(null, new object[] { convertedCollection, collectionType });
+					methodInfo.Invoke(null, new object[] {convertedCollection, collectionType});
 				}
 			}
 		}
@@ -49,10 +45,7 @@ namespace ClickQuest.Extensions.ValidationManager
 		{
 			var idList = collection.Select(x => x.Id);
 
-			var duplicates = idList.GroupBy(x => x)
-              .Where(g => g.Count() > 1)
-              .Select(y => y.Key)
-              .ToList();
+			var duplicates = idList.GroupBy(x => x).Where(g => g.Count() > 1).Select(y => y.Key).ToList();
 
 			bool areIdsUnique = duplicates.Count == 0;
 			if (!areIdsUnique)
@@ -60,26 +53,26 @@ namespace ClickQuest.Extensions.ValidationManager
 				string message = $"Following Id's of type '{collectionType}' are not unique: ";
 
 				var duplicatedValues = duplicates.Distinct();
-				foreach(var value in duplicatedValues)
+				foreach (int value in duplicatedValues)
 				{
 					message += value + ", ";
 				}
-				
+
 				Logger.Log(message);
 			}
 		}
 
 		private static void CheckAllFrequenciesCorrectness()
 		{
-			GameData.Monsters.ForEach(x=>CheckFrequencySum(x.Name, x.Loot.Select(y=>y.Frequency)));
-			GameData.Regions.ForEach(x=>CheckFrequencySum(x.Name, x.Monsters.Select(y=>y.Frequency)));
-			GameData.Bosses.ForEach(x=>x.BossLoot.ForEach(y=>CheckIfFrequenciesAreValid(x.Name, y.Frequencies)));
+			GameData.Monsters.ForEach(x => CheckFrequencySum(x.Name, x.Loot.Select(y => y.Frequency)));
+			GameData.Regions.ForEach(x => CheckFrequencySum(x.Name, x.Monsters.Select(y => y.Frequency)));
+			GameData.Bosses.ForEach(x => x.BossLoot.ForEach(y => CheckIfFrequenciesAreValid(x.Name, y.Frequencies)));
 		}
 
 		private static void CheckFrequencySum(string objectName, IEnumerable<double> frequencies)
 		{
 			double frequenciesSum = frequencies.Sum();
-			if(frequenciesSum != 1)
+			if (frequenciesSum != 1)
 			{
 				string message = $"'{objectName}' frequencies do not add up to 1";
 				Logger.Log(message);
@@ -90,7 +83,7 @@ namespace ClickQuest.Extensions.ValidationManager
 		{
 			bool areFrequenciesInvalid = frequencies.Any(x => x < 0 || x > 1);
 
-			if(areFrequenciesInvalid)
+			if (areFrequenciesInvalid)
 			{
 				string message = $"'{objectName}' frequency value is greater than 1";
 				Logger.Log(message);
@@ -99,10 +92,10 @@ namespace ClickQuest.Extensions.ValidationManager
 
 		private static void CheckReferencesCorrectness()
 		{
-			GameData.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameData.Materials.Select(y => y.Id), x.Ingredients.Select(z=>z.Id)));
-			GameData.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameData.Artifacts.Select(y => y.Id), new []{x.ArtifactId}));
+			GameData.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameData.Materials.Select(y => y.Id), x.Ingredients.Select(z => z.Id)));
+			GameData.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameData.Artifacts.Select(y => y.Id), new[] {x.ArtifactId}));
 			GameData.Dungeons.ForEach(x => CheckReferencedIds(x.Name, GameData.Bosses.Select(y => y.Id), x.BossIds));
-			
+
 			GameData.Bosses.ForEach(x => CheckBossReferences(x));
 			GameData.Monsters.ForEach(x => CheckMonsterReferences(x));
 			GameData.Regions.ForEach(x => CheckRegionReferences(x));
@@ -123,22 +116,22 @@ namespace ClickQuest.Extensions.ValidationManager
 		private static void CheckReferencedIds(string objectName, IEnumerable<int> availableIds, IEnumerable<int> requiredIds)
 		{
 			var notAvailable = requiredIds.Except(availableIds);
-			if(notAvailable.Count() > 0)
+			if (notAvailable.Count() > 0)
 			{
 				string message = $"Following referenced Id's in '{objectName}' are not available: ";
 
-				foreach(var value in notAvailable)
+				foreach (int value in notAvailable)
 				{
 					message += value + ", ";
 				}
-				
+
 				Logger.Log(message);
 			}
 		}
 
 		private static void CheckBossReferences(Boss boss)
 		{
-			foreach(var lootPattern in boss.BossLoot)
+			foreach (var lootPattern in boss.BossLoot)
 			{
 				var item = lootPattern.Item;
 
@@ -152,7 +145,7 @@ namespace ClickQuest.Extensions.ValidationManager
 
 		private static void CheckMonsterReferences(Monster monster)
 		{
-			foreach(var lootPattern in monster.Loot)
+			foreach (var lootPattern in monster.Loot)
 			{
 				var item = lootPattern.Item;
 
@@ -166,7 +159,7 @@ namespace ClickQuest.Extensions.ValidationManager
 
 		private static void CheckRegionReferences(Region region)
 		{
-			foreach(var spawnPattern in region.Monsters)
+			foreach (var spawnPattern in region.Monsters)
 			{
 				var monster = spawnPattern.Monster;
 
@@ -180,21 +173,21 @@ namespace ClickQuest.Extensions.ValidationManager
 
 		private static void CheckEnumBounds()
 		{
-			CheckEnumCollectionBounds<Rarity>("Artifacts_Rarity", GameData.Artifacts.Select(x=>x.Rarity));
-			CheckEnumCollectionBounds<Rarity>("Blessings_Rarity", GameData.Blessings.Select(x=>x.Rarity));
-			CheckEnumCollectionBounds<Rarity>("DungeonKey_Rarity", GameData.DungeonKeys.Select(x=>x.Rarity));
-			CheckEnumCollectionBounds<Rarity>("Ingots_Rarity", GameData.Ingots.Select(x=>x.Rarity));
-			CheckEnumCollectionBounds<Rarity>("Materials_Rarity", GameData.Materials.Select(x=>x.Rarity));
-			CheckEnumCollectionBounds<Rarity>("Recipes_Rarity", GameData.Recipes.Select(x=>x.Rarity));
-	
-			CheckEnumCollectionBounds<HeroClass>("Quests_HeroClass", GameData.Quests.Select(x=>x.HeroClass));
-			
-			CheckEnumCollectionBounds<BlessingType>("Blessings_BlessingType", GameData.Blessings.Select(x=>x.Type));
+			CheckEnumCollectionBounds("Artifacts_Rarity", GameData.Artifacts.Select(x => x.Rarity));
+			CheckEnumCollectionBounds("Blessings_Rarity", GameData.Blessings.Select(x => x.Rarity));
+			CheckEnumCollectionBounds("DungeonKey_Rarity", GameData.DungeonKeys.Select(x => x.Rarity));
+			CheckEnumCollectionBounds("Ingots_Rarity", GameData.Ingots.Select(x => x.Rarity));
+			CheckEnumCollectionBounds("Materials_Rarity", GameData.Materials.Select(x => x.Rarity));
+			CheckEnumCollectionBounds("Recipes_Rarity", GameData.Recipes.Select(x => x.Rarity));
+
+			CheckEnumCollectionBounds("Quests_HeroClass", GameData.Quests.Select(x => x.HeroClass));
+
+			CheckEnumCollectionBounds("Blessings_BlessingType", GameData.Blessings.Select(x => x.Type));
 
 			GameData.DungeonGroups.ForEach(x => CheckEnumCollectionBounds("DungeonGroup", x.KeyRequirementRarities));
 		}
 
-		private static void CheckEnumCollectionBounds<T>(string collectionName, IEnumerable<T> enumCollection) where T:System.Enum
+		private static void CheckEnumCollectionBounds<T>(string collectionName, IEnumerable<T> enumCollection) where T : Enum
 		{
 			var availableEnumValues = Enum.GetValues(typeof(T)).OfType<T>().ToList();
 			bool isEveryEnumValueInCollectionValid = enumCollection.All(x => availableEnumValues.Contains(x));
@@ -208,25 +201,25 @@ namespace ClickQuest.Extensions.ValidationManager
 
 		private static void CheckPositiveValues()
 		{
-			CheckCollectionPositiveValues("Artifacts_Value", GameData.Artifacts.Select(x=>x.Value));
-			CheckCollectionPositiveValues("Blessings_Value", GameData.Blessings.Select(x=>x.Value));
-			CheckCollectionPositiveValues("DungeonKey_Value", GameData.DungeonKeys.Select(x=>x.Value));
-			CheckCollectionPositiveValues("Ingots_Value", GameData.Ingots.Select(x=>x.Value));
-			CheckCollectionPositiveValues("Materials_Value", GameData.Materials.Select(x=>x.Value));
-			CheckCollectionPositiveValues("Recipes_Value", GameData.Recipes.Select(x=>x.Value));
+			CheckCollectionPositiveValues("Artifacts_Value", GameData.Artifacts.Select(x => x.Value));
+			CheckCollectionPositiveValues("Blessings_Value", GameData.Blessings.Select(x => x.Value));
+			CheckCollectionPositiveValues("DungeonKey_Value", GameData.DungeonKeys.Select(x => x.Value));
+			CheckCollectionPositiveValues("Ingots_Value", GameData.Ingots.Select(x => x.Value));
+			CheckCollectionPositiveValues("Materials_Value", GameData.Materials.Select(x => x.Value));
+			CheckCollectionPositiveValues("Recipes_Value", GameData.Recipes.Select(x => x.Value));
 
-			CheckCollectionPositiveValues("Blessings_Duration", GameData.Blessings.Select(x=>x.Duration));
-			CheckCollectionPositiveValues("Quests_Duration", GameData.Quests.Select(x=>x.Duration));
+			CheckCollectionPositiveValues("Blessings_Duration", GameData.Blessings.Select(x => x.Duration));
+			CheckCollectionPositiveValues("Quests_Duration", GameData.Quests.Select(x => x.Duration));
 
-			CheckCollectionPositiveValues("Bosses_Health", GameData.Bosses.Select(x=>x.Health));
-			CheckCollectionPositiveValues("Monsters_Health", GameData.Monsters.Select(x=>x.Health));
+			CheckCollectionPositiveValues("Bosses_Health", GameData.Bosses.Select(x => x.Health));
+			CheckCollectionPositiveValues("Monsters_Health", GameData.Monsters.Select(x => x.Health));
 
-			CheckCollectionPositiveValues("Blessings_Buff", GameData.Blessings.Select(x=>x.Buff));
+			CheckCollectionPositiveValues("Blessings_Buff", GameData.Blessings.Select(x => x.Buff));
 		}
 
 		private static void CheckCollectionPositiveValues(string collectionValuesInfo, IEnumerable<int> valuesCollection)
 		{
-			bool isEveryValueValid = valuesCollection.All(x => x>0);
+			bool isEveryValueValid = valuesCollection.All(x => x > 0);
 
 			if (!isEveryValueValid)
 			{
@@ -243,7 +236,7 @@ namespace ClickQuest.Extensions.ValidationManager
 
 			if (!isEveryLevelRequirementValid)
 			{
-				string message = $"Level requirement of region is invalid";
+				string message = "Level requirement of region is invalid";
 				Logger.Log(message);
 			}
 		}

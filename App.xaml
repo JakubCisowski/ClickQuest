@@ -40,12 +40,12 @@
 			<SolidColorBrush x:Key="ColorQuestRare" Color="#FFA237" /> <!-- Rare quest - Orange? -->
 
 			<SolidColorBrush x:Key="ToolTipBackground" Color="Black" Opacity="0.7" />
-			
+
 			<!-- Floating combat text colors -->
-			<SolidColorBrush x:Key="ColorDamageTypeNormal" Color="#000000"/>
-			<SolidColorBrush x:Key="ColorDamageTypeCritical" Color="#FF0000"/>
-			<SolidColorBrush x:Key="ColorDamageTypePoison" Color="#006400"/>
-			<SolidColorBrush x:Key="ColorDamageTypeAura" Color="#B8860B"/>
+			<SolidColorBrush x:Key="ColorDamageTypeNormal" Color="#000000" />
+			<SolidColorBrush x:Key="ColorDamageTypeCritical" Color="#FF0000" />
+			<SolidColorBrush x:Key="ColorDamageTypePoison" Color="#006400" />
+			<SolidColorBrush x:Key="ColorDamageTypeAura" Color="#B8860B" />
 
 			<!-- Custom global styles -->
 			<Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}" />

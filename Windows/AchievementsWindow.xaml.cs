@@ -61,11 +61,11 @@ namespace ClickQuest.Windows
 
 		private void AppendAchievementToAchievementsList(string name, string amount)
 		{
-			var nameWithoutSpaces = name.Replace(" ", "");
-			
+			string nameWithoutSpaces = name.Replace(" ", "");
+
 			var border = new Border
 			{
-				Name=nameWithoutSpaces + "Border",
+				Name = nameWithoutSpaces + "Border",
 				BorderThickness = new Thickness(0.5),
 				BorderBrush = new SolidColorBrush(Colors.Gray),
 				Padding = new Thickness(6),
@@ -77,7 +77,7 @@ namespace ClickQuest.Windows
 
 			var nameBlock = new TextBlock
 			{
-				Name = nameWithoutSpaces +"Name",
+				Name = nameWithoutSpaces + "Name",
 				FontSize = 18,
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Text = name
@@ -85,7 +85,7 @@ namespace ClickQuest.Windows
 
 			var amountBlock = new TextBlock
 			{
-				Name = nameWithoutSpaces+"Amount",
+				Name = nameWithoutSpaces + "Amount",
 				FontSize = 18,
 				HorizontalAlignment = HorizontalAlignment.Right,
 				Text = amount
@@ -98,16 +98,16 @@ namespace ClickQuest.Windows
 
 			AchievementsList.Children.Add(border);
 		}
-		
+
 		public void RefreshSingleAchievement(NumericAchievementType achievementType)
 		{
 			var achievements = User.Instance.Achievements;
 
-			var achievementBorder = AchievementsList.Children.OfType<Border>().FirstOrDefault(x=>x.Name==achievementType.ToString() + "Border");
+			var achievementBorder = AchievementsList.Children.OfType<Border>().FirstOrDefault(x => x.Name == achievementType + "Border");
 
 			if (achievementBorder != null)
 			{
-				var achievementAmountBlock = (achievementBorder.Child as Grid)?.Children.OfType<TextBlock>().FirstOrDefault(x=>x.Name==achievementType.ToString()+"Amount");
+				var achievementAmountBlock = (achievementBorder.Child as Grid)?.Children.OfType<TextBlock>().FirstOrDefault(x => x.Name == achievementType + "Amount");
 
 				if (achievementAmountBlock != null)
 				{

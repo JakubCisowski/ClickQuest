@@ -1,6 +1,6 @@
 using System.Windows;
 using System.Windows.Media;
-using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Items;
 
 namespace ClickQuest.Styles
@@ -41,25 +41,25 @@ namespace ClickQuest.Styles
 			return brush;
 		}
 
-		public static SolidColorBrush GetFloatingCombatTextColor(FloatingTextController.DamageType damageType)
+		public static SolidColorBrush GetFloatingCombatTextColor(DamageType damageType)
 		{
 			SolidColorBrush brush = null;
 
 			switch (damageType)
 			{
-				case FloatingTextController.DamageType.Normal:
+				case DamageType.Normal:
 					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeNormal");
 					break;
-				
-				case FloatingTextController.DamageType.Critical:
+
+				case DamageType.Critical:
 					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeCritical");
 					break;
-				
-				case FloatingTextController.DamageType.Poison:
+
+				case DamageType.Poison:
 					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypePoison");
 					break;
-				
-				case FloatingTextController.DamageType.Aura:
+
+				case DamageType.Aura:
 					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeAura");
 					break;
 			}

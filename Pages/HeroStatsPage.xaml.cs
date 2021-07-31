@@ -130,10 +130,7 @@ namespace ClickQuest.Pages
 		{
 			var currentQuest = User.Instance.CurrentHero?.Quests.FirstOrDefault(x => x.EndDate != default);
 
-			var questDurationBinding = new Binding("TicksCountText")
-			{
-				Source = currentQuest
-			};
+			var questDurationBinding = new Binding("TicksCountText") {Source = currentQuest};
 			QuestDurationBlock.SetBinding(TextBlock.TextProperty, questDurationBinding);
 
 			QuestDurationBlock.ToolTip = GenerateQuestTooltip(currentQuest);
@@ -144,10 +141,7 @@ namespace ClickQuest.Pages
 			var questTooltip = new ToolTip();
 			TooltipController.SetTooltipDelayAndDuration(QuestDurationBlock);
 
-			var questToolTipTextBlock = new TextBlock
-			{
-				Style = (Style) FindResource("ToolTipTextBlockBase")
-			};
+			var questToolTipTextBlock = new TextBlock {Style = (Style) FindResource("ToolTipTextBlockBase")};
 
 			if (currentQuest != null)
 			{
@@ -155,10 +149,7 @@ namespace ClickQuest.Pages
 				if (currentQuest.Rare)
 				{
 					questToolTipTextBlock.Inlines.Add(new LineBreak());
-					questToolTipTextBlock.Inlines.Add(new Bold(new Run("*Rare Quest*")
-					{
-						Foreground = (SolidColorBrush) FindResource("ColorQuestRare")
-					}));
+					questToolTipTextBlock.Inlines.Add(new Bold(new Run("*Rare Quest*") {Foreground = (SolidColorBrush) FindResource("ColorQuestRare")}));
 				}
 
 				questToolTipTextBlock.Inlines.Add(new LineBreak());
@@ -184,10 +175,7 @@ namespace ClickQuest.Pages
 		{
 			var currentBlessing = User.Instance.CurrentHero?.Blessing;
 
-			var binding = new Binding("DurationText")
-			{
-				Source = currentBlessing
-			};
+			var binding = new Binding("DurationText") {Source = currentBlessing};
 			BlessingDurationBlock.SetBinding(TextBlock.TextProperty, binding);
 
 			BlessingDurationBlock.ToolTip = GenerateBlessingTooltip(currentBlessing);
@@ -198,10 +186,7 @@ namespace ClickQuest.Pages
 			var blessingToolTip = new ToolTip();
 			TooltipController.SetTooltipDelayAndDuration(BlessingDurationBlock);
 
-			var blessingToolTipBlock = new TextBlock
-			{
-				Style = (Style) FindResource("ToolTipTextBlockBase")
-			};
+			var blessingToolTipBlock = new TextBlock {Style = (Style) FindResource("ToolTipTextBlockBase")};
 
 			if (currentBlessing != null)
 			{
@@ -345,10 +330,7 @@ namespace ClickQuest.Pages
 
 			TooltipController.SetTooltipDelayAndDuration(HeroNameBlock);
 
-			var block = new TextBlock
-			{
-				Style = (Style) FindResource("ToolTipTextBlockBase")
-			};
+			var block = new TextBlock {Style = (Style) FindResource("ToolTipTextBlockBase")};
 
 			switch (User.Instance.CurrentHero?.HeroClass)
 			{
@@ -418,16 +400,10 @@ namespace ClickQuest.Pages
 
 			TooltipController.SetTooltipDelayAndDuration(ClickDamageBlock);
 
-			var blockDamage = new TextBlock
-			{
-				Style = (Style) FindResource("ToolTipTextBlockBase")
-			};
+			var blockDamage = new TextBlock {Style = (Style) FindResource("ToolTipTextBlockBase")};
 
 			// ["You deal X damage per click"]
-			var bindingDamageTotal = new Binding("ClickDamage")
-			{
-				Source = User.Instance.CurrentHero
-			};
+			var bindingDamageTotal = new Binding("ClickDamage") {Source = User.Instance.CurrentHero};
 			var runDamageTotal = new Run();
 			runDamageTotal.SetBinding(Run.TextProperty, bindingDamageTotal);
 			blockDamage.Inlines.Add("You deal ");
@@ -438,10 +414,7 @@ namespace ClickQuest.Pages
 			blockDamage.Inlines.Add(new LineBreak());
 
 			// ["Click damage: X (base) + X (X/lvl) = X"]
-			var bindingDamagePerLevel = new Binding("ClickDamagePerLevel")
-			{
-				Source = User.Instance.CurrentHero
-			};
+			var bindingDamagePerLevel = new Binding("ClickDamagePerLevel") {Source = User.Instance.CurrentHero};
 			var runDamagePerLevel = new Run();
 			runDamagePerLevel.SetBinding(Run.TextProperty, bindingDamagePerLevel);
 			var bindingLevelDamageBonus = new Binding("LevelDamageBonus")
@@ -476,16 +449,10 @@ namespace ClickQuest.Pages
 			{
 				if (User.Instance.CurrentHero.Blessing?.Type == BlessingType.ClickDamage)
 				{
-					var bindingBlessingName = new Binding("Name")
-					{
-						Source = User.Instance.CurrentHero.Blessing
-					};
+					var bindingBlessingName = new Binding("Name") {Source = User.Instance.CurrentHero.Blessing};
 					var runBlessingName = new Run();
 					runBlessingName.SetBinding(Run.TextProperty, bindingBlessingName);
-					var bindingBlessingBuff = new Binding("Buff")
-					{
-						Source = User.Instance.CurrentHero.Blessing
-					};
+					var bindingBlessingBuff = new Binding("Buff") {Source = User.Instance.CurrentHero.Blessing};
 					var runBlessingBuff = new Run();
 					runBlessingBuff.SetBinding(Run.TextProperty, bindingBlessingBuff);
 					blockDamage.Inlines.Add(new Bold(runBlessingName));
@@ -494,10 +461,7 @@ namespace ClickQuest.Pages
 				}
 			}
 
-			var bindingSpecClicking = new Binding("SpecClickingBuff")
-			{
-				Source = User.Instance.CurrentHero?.Specialization
-			};
+			var bindingSpecClicking = new Binding("SpecClickingBuff") {Source = User.Instance.CurrentHero?.Specialization};
 			var runSpecClicking = new Run();
 			runSpecClicking.SetBinding(Run.TextProperty, bindingSpecClicking);
 			blockDamage.Inlines.Add(new LineBreak());
@@ -518,10 +482,7 @@ namespace ClickQuest.Pages
 
 			TooltipController.SetTooltipDelayAndDuration(CritChanceBlock);
 
-			var blockCrit = new TextBlock
-			{
-				Style = (Style) FindResource("ToolTipTextBlockBase")
-			};
+			var blockCrit = new TextBlock {Style = (Style) FindResource("ToolTipTextBlockBase")};
 
 			// ["You have X% chance to crit (deal double damage) when clicking"]
 			var bindingCritTotal = new Binding("CritChanceText")
@@ -577,16 +538,10 @@ namespace ClickQuest.Pages
 			{
 				if (User.Instance.CurrentHero.Blessing?.Type == BlessingType.CritChance)
 				{
-					var bindingBlessingName = new Binding("Name")
-					{
-						Source = User.Instance.CurrentHero.Blessing
-					};
+					var bindingBlessingName = new Binding("Name") {Source = User.Instance.CurrentHero.Blessing};
 					var runBlessingName = new Run();
 					runBlessingName.SetBinding(Run.TextProperty, bindingBlessingName);
-					var bindingBlessingBuff = new Binding("Buff")
-					{
-						Source = User.Instance.CurrentHero.Blessing
-					};
+					var bindingBlessingBuff = new Binding("Buff") {Source = User.Instance.CurrentHero.Blessing};
 					var runBlessingBuff = new Run();
 					runBlessingBuff.SetBinding(Run.TextProperty, bindingBlessingBuff);
 					blockCrit.Inlines.Add(new Bold(runBlessingName));
@@ -610,16 +565,10 @@ namespace ClickQuest.Pages
 
 			TooltipController.SetTooltipDelayAndDuration(PoisonDamageBlock);
 
-			var blockPoison = new TextBlock
-			{
-				Style = (Style) FindResource("ToolTipTextBlockBase")
-			};
+			var blockPoison = new TextBlock {Style = (Style) FindResource("ToolTipTextBlockBase")};
 
 			// ["You deal X bonus poison damage per tick"]
-			var bindingPoisonTotal = new Binding("PoisonDamage")
-			{
-				Source = User.Instance.CurrentHero
-			};
+			var bindingPoisonTotal = new Binding("PoisonDamage") {Source = User.Instance.CurrentHero};
 			var runPoisonTotal = new Run();
 			runPoisonTotal.SetBinding(Run.TextProperty, bindingPoisonTotal);
 			blockPoison.Inlines.Add("You deal ");
@@ -666,16 +615,10 @@ namespace ClickQuest.Pages
 			{
 				if (User.Instance.CurrentHero.Blessing?.Type == BlessingType.PoisonDamage)
 				{
-					var bindingBlessingName = new Binding("Name")
-					{
-						Source = User.Instance.CurrentHero.Blessing
-					};
+					var bindingBlessingName = new Binding("Name") {Source = User.Instance.CurrentHero.Blessing};
 					var runBlessingName = new Run();
 					runBlessingName.SetBinding(Run.TextProperty, bindingBlessingName);
-					var bindingBlessingBuff = new Binding("Buff")
-					{
-						Source = User.Instance.CurrentHero.Blessing
-					};
+					var bindingBlessingBuff = new Binding("Buff") {Source = User.Instance.CurrentHero.Blessing};
 					var runBlessingBuff = new Run();
 					runBlessingBuff.SetBinding(Run.TextProperty, bindingBlessingBuff);
 					blockPoison.Inlines.Add(new Bold(runBlessingName));
@@ -698,10 +641,7 @@ namespace ClickQuest.Pages
 
 			TooltipController.SetTooltipDelayAndDuration(AuraDamageBlock);
 
-			var blockAura = new TextBlock
-			{
-				Style = (Style) FindResource("ToolTipTextBlockBase")
-			};
+			var blockAura = new TextBlock {Style = (Style) FindResource("ToolTipTextBlockBase")};
 
 			// ["You deal X% of monster's hp Aura damage per second"]
 			var bindingAuraDpsTotal = new Binding("AuraDps")
@@ -724,10 +664,7 @@ namespace ClickQuest.Pages
 			};
 			var runAuraDamageTotal = new Run();
 			runAuraDamageTotal.SetBinding(Run.TextProperty, bindingAuraDamageTotal);
-			var bindingAuraAttackSpeedTotal = new Binding("AuraAttackSpeed")
-			{
-				Source = User.Instance.CurrentHero
-			};
+			var bindingAuraAttackSpeedTotal = new Binding("AuraAttackSpeed") {Source = User.Instance.CurrentHero};
 			var runAuraAttackSpeedTotal = new Run();
 			runAuraAttackSpeedTotal.SetBinding(Run.TextProperty, bindingAuraAttackSpeedTotal);
 			blockAura.Inlines.Add("Your Aura tick damage is ");
@@ -778,16 +715,10 @@ namespace ClickQuest.Pages
 			{
 				if (User.Instance.CurrentHero.Blessing?.Type == BlessingType.AuraDamage)
 				{
-					var bindingBlessingName = new Binding("Name")
-					{
-						Source = User.Instance.CurrentHero.Blessing
-					};
+					var bindingBlessingName = new Binding("Name") {Source = User.Instance.CurrentHero.Blessing};
 					var runBlessingName = new Run();
 					runBlessingName.SetBinding(Run.TextProperty, bindingBlessingName);
-					var bindingBlessingBuff = new Binding("Buff")
-					{
-						Source = User.Instance.CurrentHero.Blessing
-					};
+					var bindingBlessingBuff = new Binding("Buff") {Source = User.Instance.CurrentHero.Blessing};
 					var runBlessingBuff = new Run();
 					runBlessingBuff.SetBinding(Run.TextProperty, bindingBlessingBuff);
 					blockAura.Inlines.Add(new Bold(runBlessingName));
@@ -804,16 +735,10 @@ namespace ClickQuest.Pages
 			{
 				if (User.Instance.CurrentHero.Blessing?.Type == BlessingType.AuraSpeed)
 				{
-					var bindingBlessingName = new Binding("Name")
-					{
-						Source = User.Instance.CurrentHero.Blessing
-					};
+					var bindingBlessingName = new Binding("Name") {Source = User.Instance.CurrentHero.Blessing};
 					var runBlessingName = new Run();
 					runBlessingName.SetBinding(Run.TextProperty, bindingBlessingName);
-					var bindingBlessingBuff = new Binding("Buff")
-					{
-						Source = User.Instance.CurrentHero.Blessing
-					};
+					var bindingBlessingBuff = new Binding("Buff") {Source = User.Instance.CurrentHero.Blessing};
 					var runBlessingBuff = new Run();
 					runBlessingBuff.SetBinding(Run.TextProperty, bindingBlessingBuff);
 					blockAura.Inlines.Add(new Bold(runBlessingName));
