@@ -71,7 +71,7 @@ namespace ClickQuest.Heroes.Buffs
 		{
 			// Buff gains thresholds.
 			SpecializationThresholds[SpecializationType.Blessing] = 10; // Amount increases every time a Blessing is bought.
-			SpecializationThresholds[SpecializationType.Clicking] = 10; // Amount increases every time user clicks on monster or boss.
+			SpecializationThresholds[SpecializationType.Clicking] = 1000; // Amount increases every time user clicks on monster or boss.
 			SpecializationThresholds[SpecializationType.Crafting] = 10; // Amount increases every time an artifact is crafted using recipe.
 			SpecializationThresholds[SpecializationType.Buying] = 10; // Amount increases every time a Recipe is bought.
 			SpecializationThresholds[SpecializationType.Melting] = 10; // Amount increases every time a material is melted.

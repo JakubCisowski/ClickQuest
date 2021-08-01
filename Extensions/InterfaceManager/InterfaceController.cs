@@ -23,36 +23,6 @@ namespace ClickQuest.Extensions.InterfaceManager
 			}
 		}
 
-		// public static void RefreshStatPanels()
-		// {
-		// 	foreach (var page in GameData.Pages)
-		// 	{
-		// 		try
-		// 		{
-		// 			dynamic p = page.Value;
-		// 			p.StatsFrame.Refresh();
-		// 		}
-		// 		catch (RuntimeBinderException)
-		// 		{
-		// 		}
-		// 	}
-		// }
-
-		// public static void RefreshEquipmentPanels()
-		// {
-		// 	foreach (var page in GameData.Pages)
-		// 	{
-		// 		try
-		// 		{
-		// 			dynamic p = page.Value;
-		// 			p.EquipmentFrame.Refresh();
-		// 		}
-		// 		catch (RuntimeBinderException)
-		// 		{
-		// 		}
-		// 	}
-		// }
-
 		public static void ChangePage(Page destinationPage, string locationInfoText)
 		{
 			var window = Application.Current.MainWindow as GameWindow;

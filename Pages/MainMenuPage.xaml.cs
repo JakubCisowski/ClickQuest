@@ -212,6 +212,7 @@ namespace ClickQuest.Pages
 			{
 				EntityOperations.ResetProgress();
 				UpdateSelectOrDeleteHeroButtons();
+				UpdateCreateHeroButton();
 			}
 		}
 	}
