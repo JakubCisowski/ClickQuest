@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 using ClickQuest.Enemies;
 using ClickQuest.Extensions.CombatManager;
@@ -144,7 +148,7 @@ namespace ClickQuest.Controls
 
 				var damageType = damageAndCritInfo.IsCritical ? DamageType.Critical : DamageType.Normal;
 
-				CreateFloatingTextBlockAndStartAnimations(damageAndCritInfo.Damage, damageType);
+				CreateFloatingTextPathAndStartAnimations(damageAndCritInfo.Damage, damageType);
 
 				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
 
@@ -217,7 +221,7 @@ namespace ClickQuest.Controls
 				int poisonDamage = User.Instance.CurrentHero.PoisonDamage;
 				Monster.CurrentHealth -= poisonDamage;
 
-				CreateFloatingTextBlockAndStartAnimations(poisonDamage, DamageType.Poison);
+				CreateFloatingTextPathAndStartAnimations(poisonDamage, DamageType.Poison);
 
 				_poisonTicks++;
 
@@ -233,34 +237,37 @@ namespace ClickQuest.Controls
 			{
 				Monster.CurrentHealth -= AuraTickDamage;
 
-				CreateFloatingTextBlockAndStartAnimations(AuraTickDamage, DamageType.Aura);
+				CreateFloatingTextPathAndStartAnimations(AuraTickDamage, DamageType.Aura);
 
 				HandleMonsterDeathIfDefeated();
 			}
 		}
 
-		private void CreateFloatingTextBlockAndStartAnimations(int damage, DamageType damageType)
+		private void CreateFloatingTextPathAndStartAnimations(int damage, DamageType damageType)
 		{
 			double baseTextSize = 28;
 			int animationDuration = 2;
 			int maximumPositionOffset = 100;
 			var mousePosition = Mouse.GetPosition(DamageTextCanvas);
+			
+			var path = FloatingTextController.CreateFloatingTextPath(damage, damageType, baseTextSize);
+			
+			var randomizedPositions = FloatingTextController.RandomizeFloatingTextPathPosition(mousePosition, DamageTextCanvas.ActualWidth, DamageTextCanvas.ActualHeight, maximumPositionOffset);
 
-			var damageBlock = FloatingTextController.CreateFloatingTextBlock(damage, damageType, baseTextSize);
+			Canvas.SetLeft(path, randomizedPositions.X);
+			Canvas.SetTop(path, randomizedPositions.Y);
 
-			var randomizedPositions = FloatingTextController.RandomizeFloatingTextBlockPosition(mousePosition, DamageTextCanvas.ActualWidth, DamageTextCanvas.ActualHeight, maximumPositionOffset);
+			DamageTextCanvas.Children.Add(path);
 
-			Canvas.SetLeft(damageBlock, randomizedPositions.X);
-			Canvas.SetTop(damageBlock, randomizedPositions.Y);
-
-			DamageTextCanvas.Children.Add(damageBlock);
-
-			var textSizeAnimation = FloatingTextController.CreateTextSizeAnimation(animationDuration, baseTextSize);
 			var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration);
+			path.BeginAnimation(OpacityProperty, textOpacityAnimation);
 
-			// Smoothness potential fix: https://stackoverflow.com/questions/4559485/wpf-animation-is-not-smooth
-			damageBlock.BeginAnimation(TextBlock.FontSizeProperty, textSizeAnimation);
-			damageBlock.BeginAnimation(OpacityProperty, textOpacityAnimation);
+			var transform = new ScaleTransform(1, 1);
+			path.LayoutTransform = transform;
+			var animationX = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
+			transform.BeginAnimation(ScaleTransform.ScaleXProperty, animationX);
+			var animationY = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
+			transform.BeginAnimation(ScaleTransform.ScaleYProperty, animationY);
 		}
 	}
 }

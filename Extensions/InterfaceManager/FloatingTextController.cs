@@ -1,28 +1,18 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Styles;
+using Colors = ClickQuest.Styles.Colors;
 
 namespace ClickQuest.Extensions.InterfaceManager
 {
 	public static class FloatingTextController
 	{
 		private static readonly Random _rng = new Random();
-
-		public static DoubleAnimation CreateTextSizeAnimation(int durationInSeconds, double baseTextSize)
-		{
-			var textSizeAnimation = new DoubleAnimation
-			{
-				Name = "ClickTextSizeAnimation",
-				Duration = new Duration(TimeSpan.FromSeconds(durationInSeconds)),
-				From = baseTextSize,
-				To = baseTextSize / 2d
-			};
-
-			return textSizeAnimation;
-		}
 
 		public static DoubleAnimation CreateTextOpacityAnimation(int durationInSeconds)
 		{
@@ -37,27 +27,28 @@ namespace ClickQuest.Extensions.InterfaceManager
 			return textVisibilityAnimation;
 		}
 
-		public static TextBlock CreateFloatingTextBlock(int damage, DamageType damageType, double baseTextSize)
+		public static Path CreateFloatingTextPath(int damage, DamageType damageType, double baseTextSize)
 		{
-			var damageBlock = new TextBlock
-			{
-				Text = damage.ToString(),
-				FontSize = baseTextSize,
-				HorizontalAlignment = HorizontalAlignment.Center
-			};
+			// Source: https://stackoverflow.com/questions/4559485/wpf-animation-is-not-smooth
+			var path = new Path();
 
-			damageBlock.Foreground = Colors.GetFloatingCombatTextColor(damageType);
-
-			// Todo: add more styles (such as borders around crits, icons next to poison, etc)
+			var textBrush = Colors.GetFloatingCombatTextColor(damageType);
+			
+			var formattedText = new FormattedText(damage.ToString(), CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Algerian"), baseTextSize, Brushes.Black);
+			
 			if (damageType == DamageType.Critical)
 			{
-				damageBlock.FontWeight = FontWeights.DemiBold;
+				formattedText.SetFontWeight(FontWeights.DemiBold);
 			}
+			
+			// (0,0) because we'll modify the position of path anyway
+			path.Data = formattedText.BuildGeometry(new Point(0,0));
+			path.Fill = textBrush;
 
-			return damageBlock;
+			return path;
 		}
 
-		public static (double X, double Y) RandomizeFloatingTextBlockPosition(Point mousePosition, double canvasActualWidth, double canvasActualHeight, int maximumPositionOffset)
+		public static (double X, double Y) RandomizeFloatingTextPathPosition(Point mousePosition, double canvasActualWidth, double canvasActualHeight, int maximumPositionOffset)
 		{
 			double randomizedPositionX = mousePosition.X + _rng.Next(-maximumPositionOffset, maximumPositionOffset + 1);
 			double randomizedPositionY = mousePosition.Y + _rng.Next(-maximumPositionOffset, maximumPositionOffset + 1);
