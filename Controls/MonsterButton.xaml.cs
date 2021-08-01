@@ -102,6 +102,8 @@ namespace ClickQuest.Controls
 			CheckForDungeonKeyDrop();
 
 			_regionPage.StatsFrame.Refresh();
+
+			int debug = DamageTextCanvas.Children.Count;
 		}
 
 		private int RandomizeFreqenciesListPosition(List<double> frequencies)
@@ -260,6 +262,7 @@ namespace ClickQuest.Controls
 			DamageTextCanvas.Children.Add(path);
 
 			var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration);
+			textOpacityAnimation.Completed += FloatingTextAnimation_Completed;
 			path.BeginAnimation(OpacityProperty, textOpacityAnimation);
 
 			var transform = new ScaleTransform(1, 1);
@@ -268,6 +271,12 @@ namespace ClickQuest.Controls
 			transform.BeginAnimation(ScaleTransform.ScaleXProperty, animationX);
 			var animationY = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
 			transform.BeginAnimation(ScaleTransform.ScaleYProperty, animationY);
+		}
+
+		private void FloatingTextAnimation_Completed(object sender, EventArgs e)
+		{
+			// Remove invisible paths.
+			DamageTextCanvas.Children.Remove(DamageTextCanvas.Children.OfType<Path>().FirstOrDefault(x => x.Opacity == 0));
 		}
 	}
 }
