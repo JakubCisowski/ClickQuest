@@ -82,7 +82,7 @@ namespace ClickQuest.Pages
 
 				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Buying]++;
 
-				InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Shop"]);
+				InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 				UpdateShop();
 			}
 			else

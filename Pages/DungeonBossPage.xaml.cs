@@ -120,7 +120,7 @@ namespace ClickQuest.Pages
 		{
 			BossButton.IsEnabled = false;
 			TownButton.Visibility = Visibility.Visible;
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["DungeonBoss"]);
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 		}
 
 		private void GrantBossReward()
@@ -149,7 +149,7 @@ namespace ClickQuest.Pages
 				}
 			}
 
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["DungeonBoss"]);
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 
 			// Grant gold reward.
 			int goldReward = 2137; // (change value later)

@@ -55,7 +55,7 @@ namespace ClickQuest.Items
 			CollectionsController.AddItemToCollection(this, User.Instance.Ingots);
 
 			AddAchievementProgress();
-			InterfaceController.RefreshEquipmentPanels();
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 		}
 
 		public override void RemoveItem(int amount = 1)

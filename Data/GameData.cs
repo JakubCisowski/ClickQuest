@@ -11,6 +11,7 @@ namespace ClickQuest.Data
 {
 	public static class GameData
 	{
+		public static Page CurrentPage{ get; set;}
 		public static List<Material> Materials { get; set; }
 		public static List<Recipe> Recipes { get; set; }
 		public static List<Artifact> Artifacts { get; set; }

@@ -102,8 +102,6 @@ namespace ClickQuest.Controls
 			CheckForDungeonKeyDrop();
 
 			_regionPage.StatsFrame.Refresh();
-
-			int debug = DamageTextCanvas.Children.Count;
 		}
 
 		private int RandomizeFreqenciesListPosition(List<double> frequencies)

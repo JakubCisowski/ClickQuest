@@ -98,7 +98,7 @@ namespace ClickQuest.Heroes.Buffs
 			InitializeAndStartTimer();
 			UpdateDurationText();
 			CheckAndAddAchievementProgress();
-			InterfaceController.RefreshStatPanels();
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 		}
 
 		public void DisableBuff()
@@ -115,7 +115,7 @@ namespace ClickQuest.Heroes.Buffs
 
 			DurationText = "";
 
-			InterfaceController.RefreshStatPanels();
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 		}
 
 		private void InitializeAndStartTimer()
@@ -174,7 +174,7 @@ namespace ClickQuest.Heroes.Buffs
 			User.Instance.CurrentHero.Blessing = newBlessing;
 			newBlessing.EnableBuff();
 
-			InterfaceController.RefreshStatPanels();
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 		}
 	}
 }

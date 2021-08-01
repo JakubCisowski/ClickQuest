@@ -139,7 +139,7 @@ namespace ClickQuest.Adventures
 			// Start timer (to check if quest is finished during next tick).
 			questCopy._timer.Start();
 
-			InterfaceController.RefreshStatPanels();
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 		}
 
 		public void FinishQuest()
@@ -188,7 +188,7 @@ namespace ClickQuest.Adventures
 				Blessing.AskUserAndSwapBlessing(blessingId);
 			}
 
-			InterfaceController.RefreshEquipmentPanels();
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 		}
 
 		private void GrantSpecificReward<T>(List<int> questRewardIdsCollection, List<T> rewardsGameDataCollection) where T : Item

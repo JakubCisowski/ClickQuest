@@ -39,6 +39,8 @@ namespace ClickQuest.Data
 
 			// Refresh Pages collection in order to  rearrange page bindings.
 			GameData.RefreshPages();
+
+			GameData.CurrentPage = GameData.Pages["MainMenu"];
 		}
 
 		public static void PostLoad()

@@ -61,8 +61,6 @@ namespace ClickQuest.Pages
 			bool canHeroEnterThisRegion = User.Instance.CurrentHero.Level >= selectedRegion.LevelRequirement;
 			if (canHeroEnterThisRegion)
 			{
-				InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(selectedRegionPage);
-
 				// Start AuraTimer if no quest is active.
 				if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
 				{

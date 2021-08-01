@@ -63,7 +63,7 @@ namespace ClickQuest.Items
 			CollectionsController.AddItemToCollection(this, User.Instance.CurrentHero.Artifacts);
 
 			AddAchievementProgress();
-			InterfaceController.RefreshEquipmentPanels();
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 		}
 
 		public override void RemoveItem(int amount = 1)

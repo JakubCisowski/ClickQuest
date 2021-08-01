@@ -53,7 +53,7 @@ namespace ClickQuest.Pages
 				MeltItem(artifact);
 			}
 
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Blacksmith"]);
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 			UpdateBlacksmithItems();
 
 			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Melting]++;
@@ -123,7 +123,7 @@ namespace ClickQuest.Pages
 
 			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting]++;
 
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnPage(GameData.Pages["Blacksmith"]);
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();;
 			UpdateBlacksmithItems();
 		}
 
