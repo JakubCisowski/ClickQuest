@@ -644,7 +644,7 @@ namespace ClickQuest.Pages
 			var blockAura = new TextBlock {Style = (Style) FindResource("ToolTipTextBlockBase")};
 
 			// ["You deal X% of monster's hp Aura damage per second"]
-			var bindingAuraDpsTotal = new Binding("AuraDps")
+			var bindingAuraDpsTotal = new Binding("AuraDpsText")
 			{
 				Source = User.Instance.CurrentHero,
 				Mode = BindingMode.OneWay
@@ -664,7 +664,7 @@ namespace ClickQuest.Pages
 			};
 			var runAuraDamageTotal = new Run();
 			runAuraDamageTotal.SetBinding(Run.TextProperty, bindingAuraDamageTotal);
-			var bindingAuraAttackSpeedTotal = new Binding("AuraAttackSpeed") {Source = User.Instance.CurrentHero};
+			var bindingAuraAttackSpeedTotal = new Binding("AuraAttackSpeed") {Source = User.Instance.CurrentHero, Mode=BindingMode.OneWay};
 			var runAuraAttackSpeedTotal = new Run();
 			runAuraAttackSpeedTotal.SetBinding(Run.TextProperty, bindingAuraAttackSpeedTotal);
 			blockAura.Inlines.Add("Your Aura tick damage is ");
@@ -691,7 +691,7 @@ namespace ClickQuest.Pages
 			};
 			var runAuraSpeedLevelBonus = new Run();
 			runAuraSpeedLevelBonus.SetBinding(Run.TextProperty, bindingAuraSpeedLevelBonus);
-			var bindingAuraSpeedLevelBonusTotal = new Binding("LevelAuraBonusTotal")
+			var bindingAuraSpeedLevelBonusTotal = new Binding("AuraAttackSpeed")
 			{
 				Source = User.Instance.CurrentHero,
 				Mode = BindingMode.OneWay
@@ -699,12 +699,12 @@ namespace ClickQuest.Pages
 			var runAuraSpeedLevelBonusTotal = new Run();
 			runAuraSpeedLevelBonusTotal.SetBinding(Run.TextProperty, bindingAuraSpeedLevelBonusTotal);
 			blockAura.Inlines.Add("Aura tick speed: ");
-			blockAura.Inlines.Add(new Bold(new Run("1/s")));
+			blockAura.Inlines.Add(new Bold(new Run($"{Hero.AURA_SPEED_BASE}/s")));
 			blockAura.Inlines.Add(new Italic(new Run(" (base)")));
 			blockAura.Inlines.Add(" + ");
 			blockAura.Inlines.Add(new Bold(runAuraSpeedLevelBonus));
 			blockAura.Inlines.Add(new Bold(new Run("/s")));
-			blockAura.Inlines.Add(new Italic(new Run(" (1/s/lvl)")));
+			blockAura.Inlines.Add(new Italic(new Run($" ({Hero.AURA_SPEED_PER_LEVEL}/s/lvl)")));
 			blockAura.Inlines.Add(" = ");
 			blockAura.Inlines.Add(new Bold(runAuraSpeedLevelBonusTotal));
 			blockAura.Inlines.Add(new Bold(new Run("/s")));

@@ -175,7 +175,7 @@
 				</StackPanel>
 
 				<!-- Aura value (binding) -->
-				<TextBlock x:Name="AuraDamageBlock" Grid.Row="3" Grid.Column="1" Text="{Binding Path=AuraDps, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" />
+				<TextBlock x:Name="AuraDamageBlock" Grid.Row="3" Grid.Column="1" Text="{Binding Path=AuraDpsText, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" />
 			</Grid>
 
 			<Separator Height="2" Width="200" Margin="10" />

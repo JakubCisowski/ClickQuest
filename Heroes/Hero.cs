@@ -17,6 +17,8 @@ namespace ClickQuest.Heroes
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		private const int MAX_LEVEL = 100;
+		public const double AURA_SPEED_PER_LEVEL = 0.01;
+		public const double AURA_SPEED_BASE = 1;
 		private int _experience;
 
 		private readonly Random _rng;
@@ -55,7 +57,6 @@ namespace ClickQuest.Heroes
 		public Specialization Specialization { get; set; }
 		public TimeSpan TimePlayed { get; set; }
 		public double AuraDamage { get; set; }
-		public double AuraAttackSpeed { get; set; }
 
 		public int Experience
 		{
@@ -99,8 +100,9 @@ namespace ClickQuest.Heroes
 		{
 			get
 			{
-				string critChanceText = string.Format("{0:P1}", CritChance > 1 ? 1 : CritChance);
-				return critChanceText[critChanceText.Length - 2] == '0' ? critChanceText.Remove(critChanceText.Length - 3, 2) : critChanceText;
+				string critChanceText = (Math.Clamp(CritChance, 0, 1) * 100).ToString("0.##");
+				critChanceText+="%";
+				return critChanceText;
 			}
 		}
 
@@ -124,7 +126,7 @@ namespace ClickQuest.Heroes
 		{
 			get
 			{
-				return CritChancePerLevel * Level * 100;
+				return Math.Round(CritChancePerLevel * Level * 100, 2);
 			}
 		}
 
@@ -132,7 +134,7 @@ namespace ClickQuest.Heroes
 		{
 			get
 			{
-				return CritChancePerLevel * Level * 100 + 25;
+				return Math.Round(CritChancePerLevel * Level * 100 + 25, 2);
 			}
 		}
 
@@ -156,17 +158,19 @@ namespace ClickQuest.Heroes
 		{
 			get
 			{
-				string auraDamageText = string.Format("{0:P1}", AuraDamage);
-				return auraDamageText[auraDamageText.Length - 2] == '0' ? auraDamageText.Remove(auraDamageText.Length - 3, 2) : auraDamageText;
+				string auraDamageText = (AuraDamage*100).ToString("0.##");
+				auraDamageText+="%";
+				return auraDamageText;
 			}
 		}
 
-		public string AuraDps
+		public string AuraDpsText
 		{
 			get
 			{
-				string auraDps = string.Format("{0:P1}", Math.Round(AuraDamage * AuraAttackSpeed, 1));
-				return auraDps[auraDps.Length - 2] == '0' ? auraDps.Remove(auraDps.Length - 3, 2) : auraDps;
+				string auraDps = (Math.Round(AuraDamage * AuraAttackSpeed, 4) * 100).ToString("0.##");
+				auraDps += "%";
+				return auraDps;
 			}
 		}
 
@@ -174,17 +178,15 @@ namespace ClickQuest.Heroes
 		{
 			get
 			{
-				// AuraAttackSpeed per level * Level
-				return 1 * Level;
+				return AURA_SPEED_PER_LEVEL * Level;
 			}
 		}
 
-		public double LevelAuraBonusTotal
+		public double AuraAttackSpeed
 		{
 			get
 			{
-				// AuraAttackSpeed per level * Level + AuraBaseAttackSpeed
-				return 1 * Level + 1;
+				return AURA_SPEED_PER_LEVEL * Level + AURA_SPEED_BASE;
 			}
 		}
 
@@ -206,7 +208,6 @@ namespace ClickQuest.Heroes
 			Name = heroName;
 			ClickDamagePerLevel = 1;
 			AuraDamage = 0.1;
-			AuraAttackSpeed = 1;
 
 			SetClassSpecificValues();
 			RefreshHeroExperience();

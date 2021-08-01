@@ -50,6 +50,14 @@ namespace ClickQuest.Controls
 			}
 		}
 
+		public double AuraTickInterval
+		{
+			get
+			{
+				return 1d / User.Instance.CurrentHero.AuraAttackSpeed;
+			}
+		}
+
 		public MonsterButton(RegionPage regionPage)
 		{
 			InitializeComponent();
@@ -102,6 +110,7 @@ namespace ClickQuest.Controls
 			CheckForDungeonKeyDrop();
 
 			_regionPage.StatsFrame.Refresh();
+			UpdateAuraAttackSpeed();
 		}
 
 		private int RandomizeFreqenciesListPosition(List<double> frequencies)
@@ -181,6 +190,7 @@ namespace ClickQuest.Controls
 		{
 			if (User.Instance.CurrentHero != null)
 			{
+				// ex.: 1.50 aura attack speed = 1.5 aura ticks per second
 				_auraTimer.Interval = TimeSpan.FromSeconds(1d / User.Instance.CurrentHero.AuraAttackSpeed);
 
 				_auraTimer.Start();
@@ -275,6 +285,13 @@ namespace ClickQuest.Controls
 		{
 			// Remove invisible paths.
 			DamageTextCanvas.Children.Remove(DamageTextCanvas.Children.OfType<Path>().FirstOrDefault(x => x.Opacity == 0));
+		}
+
+		private void UpdateAuraAttackSpeed()
+		{
+			_auraTimer.Stop();
+			_auraTimer.Interval = TimeSpan.FromSeconds(AuraTickInterval);
+			_auraTimer.Start();
 		}
 	}
 }

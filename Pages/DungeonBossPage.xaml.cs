@@ -126,7 +126,8 @@ namespace ClickQuest.Pages
 		private void GrantBossReward()
 		{
 			int damageDealtToBoss = _boss.Health - _boss.CurrentHealth;
-			int experienceGained = Experience.CalculateMonsterXpReward(damageDealtToBoss);
+			// [PRERELEASE]
+			int experienceGained = 10;
 			User.Instance.CurrentHero.Experience += experienceGained;
 
 			// Grant boss loot.
