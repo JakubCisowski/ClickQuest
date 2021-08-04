@@ -220,23 +220,24 @@ namespace ClickQuest.Pages
 		{
 			double baseTextSize = 28;
 			int animationDuration = 2;
-			int maximumPositionOffset = 100;
+			int maximumPositionOffset = 50;
 			var mousePosition = Mouse.GetPosition(DamageTextCanvas);
 			
-			var path = FloatingTextController.CreateFloatingTextPath(damage, damageType, baseTextSize);
+			var panel = FloatingTextController.CreateFloatingTextPanel(damage, damageType);
 			
 			var randomizedPositions = FloatingTextController.RandomizeFloatingTextPathPosition(mousePosition, DamageTextCanvas.ActualWidth, DamageTextCanvas.ActualHeight, maximumPositionOffset);
 
-			Canvas.SetLeft(path, randomizedPositions.X);
-			Canvas.SetTop(path, randomizedPositions.Y);
+			Canvas.SetLeft(panel, randomizedPositions.X);
+			Canvas.SetTop(panel, randomizedPositions.Y);
 
-			DamageTextCanvas.Children.Add(path);
+			DamageTextCanvas.Children.Add(panel);
 
 			var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration);
-			path.BeginAnimation(OpacityProperty, textOpacityAnimation);
+			textOpacityAnimation.Completed += FloatingTextAnimation_Completed;
+			panel.BeginAnimation(OpacityProperty, textOpacityAnimation);
 
 			var transform = new ScaleTransform(1, 1);
-			path.LayoutTransform = transform;
+			panel.LayoutTransform = transform;
 			var animationX = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
 			transform.BeginAnimation(ScaleTransform.ScaleXProperty, animationX);
 			var animationY = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
@@ -249,6 +250,12 @@ namespace ClickQuest.Pages
 
 			// [PRERELEASE]
 			TestRewardsBlock.Text = "";
+		}
+
+		private void FloatingTextAnimation_Completed(object sender, EventArgs e)
+		{
+			// Remove invisible paths.
+			DamageTextCanvas.Children.Remove(DamageTextCanvas.Children.OfType<StackPanel>().FirstOrDefault(x => x.Opacity == 0));
 		}
 	}
 }

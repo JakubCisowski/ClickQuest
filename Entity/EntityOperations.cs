@@ -184,6 +184,8 @@ namespace ClickQuest.Entity
 						hero.Quests.Remove(quest);
 					}
 				}
+
+				db.SaveChanges();
 			}
 		}
 

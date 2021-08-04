@@ -2,6 +2,6 @@
 {
 	public enum DamageType
 	{
-		Normal, Critical, Poison, Aura
+		Normal, Critical, Poison, Aura, OnHit
 	}
 }

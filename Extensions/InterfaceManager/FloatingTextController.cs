@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using ClickQuest.Extensions.CombatManager;
+using MaterialDesignThemes.Wpf;
 using Colors = ClickQuest.Styles.Colors;
 
 namespace ClickQuest.Extensions.InterfaceManager
@@ -27,37 +28,86 @@ namespace ClickQuest.Extensions.InterfaceManager
 			return textVisibilityAnimation;
 		}
 
-		public static Path CreateFloatingTextPath(int damage, DamageType damageType, double baseTextSize)
-		{
-			// Source: https://stackoverflow.com/questions/4559485/wpf-animation-is-not-smooth
-			var path = new Path();
-
-			var textBrush = Colors.GetFloatingCombatTextColor(damageType);
-			
-			var formattedText = new FormattedText(damage.ToString(), CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Algerian"), baseTextSize, Brushes.Black);
-			
-			if (damageType == DamageType.Critical)
-			{
-				formattedText.SetFontWeight(FontWeights.DemiBold);
-			}
-			
-			// (0,0) because we'll modify the position of path anyway
-			path.Data = formattedText.BuildGeometry(new Point(0,0));
-			path.Fill = textBrush;
-
-			return path;
-		}
-
 		public static (double X, double Y) RandomizeFloatingTextPathPosition(Point mousePosition, double canvasActualWidth, double canvasActualHeight, int maximumPositionOffset)
 		{
 			double randomizedPositionX = mousePosition.X + _rng.Next(-maximumPositionOffset, maximumPositionOffset + 1);
 			double randomizedPositionY = mousePosition.Y + _rng.Next(-maximumPositionOffset, maximumPositionOffset + 1);
 
 			// Clamp the positions, so that floating numbers do not follow cursor when user hovers over stats panel, equipment panel, etc.
-			randomizedPositionX = Math.Clamp(randomizedPositionX, -maximumPositionOffset, canvasActualWidth + maximumPositionOffset);
-			randomizedPositionY = Math.Clamp(randomizedPositionY, -maximumPositionOffset, canvasActualHeight + maximumPositionOffset);
+			randomizedPositionX = Math.Clamp(randomizedPositionX, -90, canvasActualWidth + 45);
+			randomizedPositionY = Math.Clamp(randomizedPositionY, -115, canvasActualHeight + 90);
 
 			return (randomizedPositionX, randomizedPositionY);
+		}
+
+		public static StackPanel CreateFloatingTextPanel(int damageValue, DamageType damageType)
+		{
+			var stackPanel = new StackPanel()
+			{
+				Orientation	= Orientation.Horizontal
+			};
+
+			var textBrush = Colors.GetFloatingCombatTextColor(damageType);
+
+			var icon = GetFloatingCombatIcon(damageType);
+			icon.Foreground = textBrush;
+			icon.VerticalAlignment = VerticalAlignment.Center;
+
+			if (damageType != DamageType.Normal)
+			{
+				stackPanel.Children.Add(icon);
+			}
+
+			var text = new TextBlock() 
+			{
+				Text = damageValue.ToString(),
+				Foreground = textBrush,
+				FontSize = 28,
+				VerticalAlignment = VerticalAlignment.Center
+			};
+
+			if (damageType == DamageType.Critical)
+			{
+				text.FontWeight = FontWeights.DemiBold;
+			}
+
+			stackPanel.Children.Add(text);
+
+			return stackPanel;
+		}
+
+		public static PackIcon GetFloatingCombatIcon(DamageType damageType)
+		{
+			PackIcon icon = new PackIcon()
+			{
+				Width = 28,
+				Height = 28
+			};
+
+			switch (damageType)
+			{
+				case DamageType.Normal:
+					// icon.Kind = PackIconKind.CursorDefault;
+					break;
+
+				case DamageType.Critical:
+					icon.Kind = PackIconKind.CursorDefaultClick;
+					break;
+
+				case DamageType.Poison:
+					icon.Kind = PackIconKind.Water;
+					break;
+
+				case DamageType.Aura:
+					icon.Kind = PackIconKind.Brightness5;
+					break;
+
+				case DamageType.OnHit:
+					icon.Kind = PackIconKind.CursorDefaultOutline;
+					break;
+			}
+
+			return icon;
 		}
 	}
 }
