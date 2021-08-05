@@ -152,12 +152,14 @@ namespace ClickQuest.Controls
 			{
 				StartPoisonTimer();
 
-				var damageAndCritInfo = User.Instance.CurrentHero.CalculateClickDamage();
-				Monster.CurrentHealth -= damageAndCritInfo.Damage;
+				var damageBaseAndCritInfo = User.Instance.CurrentHero.CalculateClickDamage();
+				var damageOnHit = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
+				var damageTotal = damageBaseAndCritInfo.Damage + damageOnHit;
+				Monster.CurrentHealth -= damageTotal;
 
-				var damageType = damageAndCritInfo.IsCritical ? DamageType.Critical : DamageType.Normal;
-
-				CreateFloatingTextPathAndStartAnimations(damageAndCritInfo.Damage, damageType);
+				var damageType = damageBaseAndCritInfo.IsCritical ? DamageType.Critical : DamageType.Normal;
+				CreateFloatingTextPathAndStartAnimations(damageBaseAndCritInfo.Damage, damageType);
+				CreateFloatingTextPathAndStartAnimations(damageOnHit, DamageType.OnHit);
 
 				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
 
@@ -255,8 +257,12 @@ namespace ClickQuest.Controls
 
 		private void CreateFloatingTextPathAndStartAnimations(int damage, DamageType damageType)
 		{
-			double baseTextSize = 28;
-			int animationDuration = 2;
+			if (damage == 0)
+			{
+				return;
+			}
+
+			int animationDuration = 1;
 			int maximumPositionOffset = 50;
 			var mousePosition = Mouse.GetPosition(DamageTextCanvas);
 			
@@ -284,7 +290,7 @@ namespace ClickQuest.Controls
 		private void FloatingTextAnimation_Completed(object sender, EventArgs e)
 		{
 			// Remove invisible paths.
-			DamageTextCanvas.Children.Remove(DamageTextCanvas.Children.OfType<StackPanel>().FirstOrDefault(x => x.Opacity == 0));
+			DamageTextCanvas.Children.Remove(DamageTextCanvas.Children.OfType<Border>().FirstOrDefault(x => x.Opacity == 0));
 		}
 
 		private void UpdateAuraAttackSpeed()

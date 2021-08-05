@@ -334,8 +334,6 @@ namespace ClickQuest.Heroes
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.CritsAmount, 1);
 			}
 
-			damage += Specialization.SpecializationBuffs[SpecializationType.Clicking];
-
 			return (damage, isCritical);
 		}
 	}

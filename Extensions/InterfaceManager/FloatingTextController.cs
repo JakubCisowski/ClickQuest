@@ -40,8 +40,16 @@ namespace ClickQuest.Extensions.InterfaceManager
 			return (randomizedPositionX, randomizedPositionY);
 		}
 
-		public static StackPanel CreateFloatingTextPanel(int damageValue, DamageType damageType)
+		public static Border CreateFloatingTextPanel(int damageValue, DamageType damageType)
 		{
+			var border = new Border()
+			{
+				CornerRadius = new CornerRadius(20),
+				BorderThickness = new Thickness(5),
+				Background = new SolidColorBrush(Color.FromArgb(200, 255, 255, 255)),
+				Padding = new Thickness(2)
+			};
+
 			var stackPanel = new StackPanel()
 			{
 				Orientation	= Orientation.Horizontal
@@ -53,10 +61,7 @@ namespace ClickQuest.Extensions.InterfaceManager
 			icon.Foreground = textBrush;
 			icon.VerticalAlignment = VerticalAlignment.Center;
 
-			if (damageType != DamageType.Normal)
-			{
-				stackPanel.Children.Add(icon);
-			}
+			stackPanel.Children.Add(icon);
 
 			var text = new TextBlock() 
 			{
@@ -73,7 +78,9 @@ namespace ClickQuest.Extensions.InterfaceManager
 
 			stackPanel.Children.Add(text);
 
-			return stackPanel;
+			border.Child = stackPanel;
+
+			return border;
 		}
 
 		public static PackIcon GetFloatingCombatIcon(DamageType damageType)
@@ -81,13 +88,14 @@ namespace ClickQuest.Extensions.InterfaceManager
 			PackIcon icon = new PackIcon()
 			{
 				Width = 28,
-				Height = 28
+				Height = 28,
+				VerticalAlignment = VerticalAlignment.Center
 			};
 
 			switch (damageType)
 			{
 				case DamageType.Normal:
-					// icon.Kind = PackIconKind.CursorDefault;
+					icon.Kind = PackIconKind.CursorDefault;
 					break;
 
 				case DamageType.Critical:

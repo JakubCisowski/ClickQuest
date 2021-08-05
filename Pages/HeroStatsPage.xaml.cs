@@ -461,15 +461,12 @@ namespace ClickQuest.Pages
 				}
 			}
 
-			var bindingSpecClicking = new Binding("SpecClickingBuff") {Source = User.Instance.CurrentHero?.Specialization};
-			var runSpecClicking = new Run();
-			runSpecClicking.SetBinding(Run.TextProperty, bindingSpecClicking);
 			blockDamage.Inlines.Add(new LineBreak());
 			blockDamage.Inlines.Add(new LineBreak());
 			blockDamage.Inlines.Add(new Run("Damage from artifacts is not displayed here"));
 			blockDamage.Inlines.Add(new LineBreak());
 			blockDamage.Inlines.Add(new Italic(new Run("You also deal ")));
-			blockDamage.Inlines.Add(new Italic(new Bold(runSpecClicking)));
+			blockDamage.Inlines.Add(new Italic(new Bold(new Run(User.Instance.CurrentHero?.Specialization.SpecializationBuffs[SpecializationType.Clicking].ToString()))));
 			blockDamage.Inlines.Add(new Italic(new Run(" on-hit damage from Clicker Specialization, but it doesn't get multiplied upon critting")));
 
 			tooltipDamage.Content = blockDamage;
