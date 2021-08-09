@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using ClickQuest.Controls;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Interfaces;
 using ClickQuest.Items;

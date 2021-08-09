@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ClickQuest.Controls;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Entity;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;
@@ -58,8 +58,8 @@ namespace ClickQuest.Pages
 			User.Instance.Heroes.Add(newHero);
 
 			// Reload the database.
-			EntityOperations.SaveGame();
-			EntityOperations.LoadGame();
+			// EntityOperations.SaveGame();
+			// EntityOperations.LoadGame();
 
 			// Select current hero from entity database, because variable 'hero' doesn't represent the same hero that was loaded from entity in LoadGame().
 			User.Instance.CurrentHero = User.Instance.Heroes.FirstOrDefault(x => x.Id == newHero.Id);

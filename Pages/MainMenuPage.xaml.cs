@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using ClickQuest.Controls;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Entity;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;

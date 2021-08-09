@@ -1,4 +1,4 @@
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Pages;
 
 namespace ClickQuest.Extensions.QuestManager

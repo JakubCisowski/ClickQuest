@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Entity;
 using ClickQuest.Player;
 
@@ -11,9 +11,12 @@ namespace ClickQuest
 		protected void Application_Startup(object sender, StartupEventArgs e)
 		{
 			// Load JSONs and Entity.
-			DataLoader.Load();
-			EntityOperations.CreateAndSeedDatabase();
-			EntityOperations.LoadGame();
+			GameDataLoader.Load();
+			// EntityOperations.CreateAndSeedDatabase();
+			// EntityOperations.LoadGame();
+
+			// Test
+			Data.UserData.UserDataLoader.Load();
 
 			// Save current time as the application's start time (for achievement tracking).
 			User.SessionStartDate = DateTime.Now;

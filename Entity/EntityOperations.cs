@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ClickQuest.Adventures;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Heroes;
 using ClickQuest.Heroes.Buffs;

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using ClickQuest.Adventures;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Items;
 using ClickQuest.Player;

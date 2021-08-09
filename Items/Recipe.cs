@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Player;

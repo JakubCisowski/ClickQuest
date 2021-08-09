@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Interfaces;
 
 namespace ClickQuest.Places

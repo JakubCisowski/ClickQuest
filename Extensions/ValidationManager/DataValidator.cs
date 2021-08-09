@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ClickQuest.Adventures;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Enemies;
 using ClickQuest.Interfaces;
 using ClickQuest.Places;

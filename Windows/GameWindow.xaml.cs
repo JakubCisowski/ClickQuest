@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using ClickQuest.Controls;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Entity;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Pages;
@@ -62,7 +62,9 @@ namespace ClickQuest
 			User.Instance.CurrentHero?.UpdateTimePlayed();
 			User.Instance.CurrentHero?.PauseBlessing();
 
-			EntityOperations.SaveGame();
+			// EntityOperations.SaveGame();
+
+			Data.UserData.UserDataLoader.Save();
 
 			base.OnClosing(e);
 		}

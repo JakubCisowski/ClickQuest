@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using ClickQuest.Controls;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Enemies;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Items;

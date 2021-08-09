@@ -26,46 +26,46 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Data\GameAssets\Artifacts.json">
+    <None Update="Data\GameData\GameAssets\Artifacts.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\GameAssets\Materials.json">
+    <None Update="Data\GameData\GameAssets\Materials.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\GameAssets\Monsters.json">
+    <None Update="Data\GameData\GameAssets\Monsters.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\GameAssets\Recipes.json">
+    <None Update="Data\GameData\GameAssets\Recipes.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\GameAssets\Regions.json">
+    <None Update="Data\GameData\GameAssets\Regions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\GameAssets\ShopOffer.json">
+    <None Update="Data\GameData\GameAssets\ShopOffer.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\GameAssets\Blessings.json">
+    <None Update="Data\GameData\GameAssets\Blessings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\GameAssets\PriestOffer.json">
+    <None Update="Data\GameData\GameAssets\PriestOffer.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\GameAssets\Quests.json">
+    <None Update="Data\GameData\GameAssets\Quests.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\GameAssets\Bosses.json">
+    <None Update="Data\GameData\GameAssets\Bosses.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\GameAssets\Dungeons.json">
+    <None Update="Data\GameData\GameAssets\Dungeons.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\GameAssets\DungeonGroups.json">
+    <None Update="Data\GameData\GameAssets\DungeonGroups.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-	 <None Update="Data\GameAssets\DungeonKeys.json">
+	 <None Update="Data\GameData\GameAssets\DungeonKeys.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\GameAssets\Ingots.json">
+    <None Update="Data\GameData\GameAssets\Ingots.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

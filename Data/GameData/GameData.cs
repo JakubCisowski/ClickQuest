@@ -7,7 +7,7 @@ using ClickQuest.Items;
 using ClickQuest.Pages;
 using ClickQuest.Places;
 
-namespace ClickQuest.Data
+namespace ClickQuest.Data.GameData
 {
 	public static class GameData
 	{

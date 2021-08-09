@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 
 namespace ClickQuest.Items
 {

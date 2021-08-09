@@ -1,5 +1,5 @@
 using System.Linq;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Enemies;
 
 namespace ClickQuest.Places

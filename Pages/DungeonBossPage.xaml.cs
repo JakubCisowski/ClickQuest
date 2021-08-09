@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using ClickQuest.Enemies;
 using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;

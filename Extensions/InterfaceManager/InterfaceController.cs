@@ -1,6 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.Data;
+using ClickQuest.Data.GameData;
 using Microsoft.CSharp.RuntimeBinder;
 
 namespace ClickQuest.Extensions.InterfaceManager
