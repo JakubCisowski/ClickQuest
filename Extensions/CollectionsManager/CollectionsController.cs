@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using ClickQuest.Entity;
 using ClickQuest.Items;
 
 namespace ClickQuest.Extensions.CollectionsManager
@@ -33,7 +32,7 @@ namespace ClickQuest.Extensions.CollectionsManager
 					if (item.Quantity <= 0)
 					{
 						// Remove item from database.
-						EntityOperations.RemoveItem(item);
+						itemCollection.Remove(itemToRemove as T);
 					}
 
 					return;

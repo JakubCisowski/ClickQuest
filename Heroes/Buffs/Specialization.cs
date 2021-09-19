@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Items;
 using ClickQuest.Player;
@@ -33,13 +34,13 @@ namespace ClickQuest.Heroes.Buffs
 		private const int SpecQuestingBuffBonus = 5; // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
 		private const int SpecDungeonBuffBonus = 1; // Increases amount of time to defeat dungeon boss in seconds <Base - 30s>
 		
-		[NotMapped]
+		
 		public ObservableDictionary<SpecializationType, int> SpecializationBuffs { get; set; }
 
-		[NotMapped]
+		
 		public ObservableDictionary<SpecializationType, int> SpecializationThresholds { get; set; }
 
-		[NotMapped]
+		
 		public ObservableDictionary<SpecializationType, int> SpecializationAmounts { get; set; }
 
 		public string SpecializationAmountsString { get; set; }

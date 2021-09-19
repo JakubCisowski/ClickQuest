@@ -7,6 +7,8 @@ namespace ClickQuest.Items
 {
 	public class Artifact : Item, IMeltable
 	{
+		public ArtifactFunctionality ArtifactFunctionality { get; set; }
+		
 		public int BaseIngotBonus
 		{
 			get

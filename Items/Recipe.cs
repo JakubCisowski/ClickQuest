@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using ClickQuest.Data.GameData;
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Extensions.InterfaceManager;
@@ -10,13 +11,12 @@ namespace ClickQuest.Items
 {
 	public class Recipe : Item
 	{
-		[NotMapped]
 		public List<Ingredient> Ingredients { get; set; }
 
-		[NotMapped]
+		
 		public string RequirementsDescription { get; private set; }
 
-		[NotMapped]
+		
 		public int IngotsRequired
 		{
 			get

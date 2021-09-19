@@ -4,11 +4,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Threading;
 using ClickQuest.Controls;
 using ClickQuest.Data.GameData;
-using ClickQuest.Entity;
 using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Extensions.QuestManager;
@@ -30,40 +30,39 @@ namespace ClickQuest.Adventures
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int DbKey { get; set; }
 
-		[NotMapped]
+		
 		public bool Rare { get; set; }
 
-		[NotMapped]
+		
 		public HeroClass HeroClass { get; set; }
 
-		[NotMapped]
+		
 		public string Name { get; set; }
 
-		[NotMapped]
 		public int Duration { get; set; }
 
-		[NotMapped]
+		
 		public string Description { get; set; }
 
-		[NotMapped]
+		
 		public List<int> RewardRecipeIds { get; set; }
 
-		[NotMapped]
+		
 		public List<int> RewardMaterialIds { get; set; }
 
-		[NotMapped]
+		
 		public List<int> RewardBlessingIds { get; set; }
 
-		[NotMapped]
+		
 		public List<int> RewardIngotIds { get; set; }
 
-		[NotMapped]
+		
 		public int TicksCountNumber { get; set; }
 
-		[NotMapped]
+		
 		public string TicksCountText { get; set; }
 
-		[NotMapped]
+		
 		public string RewardsDescription { get; private set; }
 
 		public DateTime EndDate { get; set; }
@@ -117,9 +116,6 @@ namespace ClickQuest.Adventures
 
 			// Replace that quest in Hero's Quests collection with the newly copied quest.
 			var questsWithMatchingId = User.Instance.CurrentHero?.Quests.Where(x => x.Id == questCopy.Id).ToList();
-
-			// Remove these quests from entity to prevent duplicates from being entered into the database.
-			EntityOperations.RemoveQuests(questsWithMatchingId);
 
 			questsWithMatchingId.ForEach(x => User.Instance.CurrentHero?.Quests.Remove(x));
 			User.Instance.CurrentHero?.Quests.Add(questCopy);

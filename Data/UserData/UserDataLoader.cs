@@ -1,8 +1,7 @@
+using ClickQuest.Player;
 using System;
 using System.IO;
 using System.Text.Json;
-using ClickQuest.Player;
-using ClickQuest.Data;
 
 namespace ClickQuest.Data.UserData
 {
@@ -18,6 +17,13 @@ namespace ClickQuest.Data.UserData
 
 		public static void Load()
 		{
+			if (!File.Exists(UserDataPath))
+			{
+				SeedIngots();
+				SeedDungeonKeys();
+				return;
+			}
+
 			var json = File.ReadAllText(UserDataPath);
 			var user = JsonSerializer.Deserialize<User>(json);
 
@@ -38,7 +44,7 @@ namespace ClickQuest.Data.UserData
 			File.WriteAllText(UserDataPath, json);
 		}
 
-		private static void SeedIngots()
+		public static void SeedIngots()
 		{
 			if (User.Instance.Ingots.Count == 0)
 			{

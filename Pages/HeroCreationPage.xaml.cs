@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using ClickQuest.Controls;
 using ClickQuest.Data.GameData;
-using ClickQuest.Entity;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;
 using ClickQuest.Player;

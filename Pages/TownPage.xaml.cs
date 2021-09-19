@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.Artifacts;
 using ClickQuest.Controls;
 using ClickQuest.Data.GameData;
 using ClickQuest.Extensions.InterfaceManager;
@@ -69,6 +70,12 @@ namespace ClickQuest.Pages
 				}
 
 				InterfaceController.ChangePage(selectedRegionPage, $"{regionName}");
+				
+				// Invoke Artifacts with the "on-region-enter" effect.
+				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
+				{
+					equippedArtifact.ArtifactFunctionality.OnRegionEnter();
+				}
 			}
 			else
 			{

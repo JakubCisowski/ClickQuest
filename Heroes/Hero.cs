@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using ClickQuest.Adventures;
 using ClickQuest.Data.GameData;
 using ClickQuest.Heroes.Buffs;
+using ClickQuest.Interfaces;
 using ClickQuest.Items;
 using ClickQuest.Player;
 
@@ -27,16 +29,16 @@ namespace ClickQuest.Heroes
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 
-		[NotMapped]
+		
 		public int ExperienceToNextLvl { get; set; }
 
-		[NotMapped]
+		
 		public int ExperienceToNextLvlTotal { get; set; }
 
-		[NotMapped]
+		
 		public int ExperienceProgress { get; set; }
 
-		[NotMapped]
+		
 		public DateTime SessionStartDate { get; set; }
 
 		public int ClickDamagePerLevel { get; set; }
@@ -52,6 +54,7 @@ namespace ClickQuest.Heroes
 		public List<Material> Materials { get; set; }
 		public List<Recipe> Recipes { get; set; }
 		public List<Artifact> Artifacts { get; set; }
+		public List<Artifact> EquippedArtifacts { get; set; }
 		public List<Quest> Quests { get; set; }
 		public Blessing Blessing { get; set; }
 		public Specialization Specialization { get; set; }
@@ -195,6 +198,7 @@ namespace ClickQuest.Heroes
 			Materials = new List<Material>();
 			Recipes = new List<Recipe>();
 			Artifacts = new List<Artifact>();
+			EquippedArtifacts = new List<Artifact>();
 			Quests = new List<Quest>();
 
 			Specialization = new Specialization();

@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using ClickQuest.Controls;
 using ClickQuest.Data.GameData;
-using ClickQuest.Entity;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;
 using ClickQuest.Player;
@@ -41,7 +40,6 @@ namespace ClickQuest.Pages
 		public void RerollQuests()
 		{
 			User.Instance.CurrentHero.Quests.Clear();
-			EntityOperations.RemoveAllQuests();
 
 			var questsForCurrentHeroClass = GameData.Quests.Where(x => x.HeroClass == User.Instance.CurrentHero.HeroClass || x.HeroClass == HeroClass.All).ToList();
 

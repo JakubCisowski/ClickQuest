@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ClickQuest.Adventures;
@@ -55,6 +57,27 @@ namespace ClickQuest.Data.GameData
 			foreach (var quest in GameData.Quests)
 			{
 				quest.UpdateAllRewardsDescription();
+			}
+
+			var artifactFunctionalities = new List<ArtifactFunctionality>();
+			
+			var types = Assembly
+				.GetExecutingAssembly()
+				.GetTypes()
+				.Where(t => String.Equals(t.Namespace, "ClickQuest.Artifacts", StringComparison.Ordinal));
+
+			foreach (var type in types)
+			{
+				var artifactFunctionality = Activator.CreateInstance(type) as ArtifactFunctionality;
+				if (artifactFunctionality is not null)
+				{
+					artifactFunctionalities.Add(artifactFunctionality);
+				}
+			}
+
+			foreach (var artifact in GameData.Artifacts)
+			{
+				artifact.ArtifactFunctionality = artifactFunctionalities.FirstOrDefault(x => x.Name == artifact.Name);
 			}
 		}
 

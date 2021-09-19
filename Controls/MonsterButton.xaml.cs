@@ -86,6 +86,13 @@ namespace ClickQuest.Controls
 			{
 				StopPoisonTimer();
 				GrantVictoryBonuses();
+				
+				// Invoke Artifacts with the "on-death" effect.
+				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
+				{
+					equippedArtifact.ArtifactFunctionality.OnKill();
+				}
+
 				SpawnMonster();
 			}
 		}
@@ -154,12 +161,17 @@ namespace ClickQuest.Controls
 
 				var damageBaseAndCritInfo = User.Instance.CurrentHero.CalculateClickDamage();
 				var damageOnHit = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
-				var damageTotal = damageBaseAndCritInfo.Damage + damageOnHit;
-				Monster.CurrentHealth -= damageTotal;
 
 				var damageType = damageBaseAndCritInfo.IsCritical ? DamageType.Critical : DamageType.Normal;
-				CreateFloatingTextPathAndStartAnimations(damageBaseAndCritInfo.Damage, damageType);
-				CreateFloatingTextPathAndStartAnimations(damageOnHit, DamageType.OnHit);
+				
+				DealDamageToMonster(damageBaseAndCritInfo.Damage, damageType);
+				DealDamageToMonster(damageOnHit, DamageType.OnHit);
+				
+				// Invoke Artifacts with the "on-click" effect.
+				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
+				{
+					equippedArtifact.ArtifactFunctionality.OnClick();
+				}
 
 				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
 
@@ -171,6 +183,28 @@ namespace ClickQuest.Controls
 			{
 				AlertBox.Show("Your hero is busy completing quest!\nCheck back when it's finished.", MessageBoxButton.OK);
 			}
+		}
+
+		public void DealDamageToMonster(int damage, DamageType damageType = DamageType.Normal)
+		{
+			// Deals damage and invokes Artifacts with the "on-damage" effect.
+			Monster.CurrentHealth -= damage;
+
+			CreateFloatingTextPathAndStartAnimations(damage, damageType);
+
+			foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
+			{
+				equippedArtifact.ArtifactFunctionality.OnDealingDamage(damage);
+			}
+		}
+
+		public void DealBonusArtifactDamageToMonster(int damage)
+		{
+			// Deals damage without invoking Artifacts with the "on-damage" effect.
+			Monster.CurrentHealth -= damage;
+			
+			// todo: osobny damage type od bonusowych obrażeń?
+			CreateFloatingTextPathAndStartAnimations(damage, DamageType.Normal);
 		}
 
 		private void SetupAuraTimer()

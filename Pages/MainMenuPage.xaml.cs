@@ -6,7 +6,6 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using ClickQuest.Controls;
 using ClickQuest.Data.GameData;
-using ClickQuest.Entity;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;
 using ClickQuest.Player;
@@ -197,7 +196,6 @@ namespace ClickQuest.Pages
 			if (result == MessageBoxResult.OK)
 			{
 				User.Instance.Heroes.Remove(hero);
-				EntityOperations.RemoveHero(hero);
 
 				UpdateSelectOrDeleteHeroButtons();
 				UpdateCreateHeroButton();
@@ -210,7 +208,6 @@ namespace ClickQuest.Pages
 
 			if (result == MessageBoxResult.OK)
 			{
-				EntityOperations.ResetProgress();
 				UpdateSelectOrDeleteHeroButtons();
 				UpdateCreateHeroButton();
 			}

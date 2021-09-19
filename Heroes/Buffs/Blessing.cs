@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Threading;
 using ClickQuest.Controls;
@@ -22,7 +23,7 @@ namespace ClickQuest.Heroes.Buffs
 		public event PropertyChangedEventHandler PropertyChanged;
 		private DispatcherTimer _timer;
 
-		[NotMapped]
+		
 		public string DurationText { get; set; }
 
 		public int Id { get; set; }

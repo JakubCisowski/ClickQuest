@@ -5,6 +5,7 @@ using ClickQuest.Controls;
 using ClickQuest.Data.GameData;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Places;
+using ClickQuest.Player;
 
 namespace ClickQuest.Pages
 {
@@ -34,6 +35,12 @@ namespace ClickQuest.Pages
 			RegionPanel.Children.OfType<MonsterButton>().FirstOrDefault().StopCombatTimers();
 
 			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
+			
+			// Invoke Artifacts with the "on-region-leave" effect.
+			foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
+			{
+				equippedArtifact.ArtifactFunctionality.OnRegionLeave();
+			}
 		}
 	}
 }

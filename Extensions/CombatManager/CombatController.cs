@@ -18,7 +18,7 @@ namespace ClickQuest.Extensions.CombatManager
 			}
 
 			bool isNoQuestActive = User.Instance.CurrentHero.Quests.All(x => x.EndDate == default);
-			object currentFrameContent = (Application.Current.MainWindow as GameWindow).CurrentFrame.Content;
+			object currentFrameContent = (Application.Current.MainWindow as GameWindow)?.CurrentFrame.Content;
 			bool isCurrentFrameContentARegion = currentFrameContent is RegionPage;
 
 			if (isNoQuestActive && isCurrentFrameContentARegion)
@@ -26,6 +26,19 @@ namespace ClickQuest.Extensions.CombatManager
 				var monsterButton = (currentFrameContent as RegionPage).RegionPanel.Children.OfType<MonsterButton>().FirstOrDefault();
 				monsterButton.StartAuraTimer();
 			}
+		}
+
+		public static MonsterButton GetCurrentMonsterButton()
+		{
+			object currentFrameContent = (Application.Current.MainWindow as GameWindow).CurrentFrame.Content;
+			bool isCurrentFrameContentARegion = currentFrameContent is RegionPage;
+
+			if (isCurrentFrameContentARegion)
+			{
+				return (currentFrameContent as RegionPage).RegionPanel.Children.OfType<MonsterButton>().FirstOrDefault();
+			}
+
+			return null;
 		}
 	}
 }
