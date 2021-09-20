@@ -20,6 +20,25 @@ namespace ClickQuest.Extensions.CombatManager
 		public static DispatcherTimer _bossFightTimer;
 		private static int _poisonTicks;
 		private static int _bossFightDuration;
+
+		public static int BossFightDuration
+		{
+			get
+			{
+				return _bossFightDuration;
+			}
+			set
+			{
+				_bossFightDuration = value;
+				
+				// todo: refactor this shit
+				var bossPage = GetCurrentBossPage();
+				if (bossPage is not null)
+				{
+					GetCurrentBossPage().Duration = _bossFightDuration;
+				}
+			}
+		}
 		
 		public static int AuraTickDamage
         {
@@ -78,12 +97,11 @@ namespace ClickQuest.Extensions.CombatManager
 		
 		public static MonsterButton GetCurrentMonsterButton()
 		{
-			object currentFrameContent = (Application.Current.MainWindow as GameWindow).CurrentFrame.Content;
-			bool isCurrentFrameContentARegion = currentFrameContent is RegionPage;
+			bool isCurrentFrameContentARegion = GameData.CurrentPage is RegionPage;
 
 			if (isCurrentFrameContentARegion)
 			{
-				return (currentFrameContent as RegionPage).RegionPanel.Children.OfType<MonsterButton>().FirstOrDefault();
+				return (GameData.CurrentPage as RegionPage).RegionPanel.Children.OfType<MonsterButton>().FirstOrDefault();
 			}
 
 			return null;
@@ -91,12 +109,11 @@ namespace ClickQuest.Extensions.CombatManager
 
 		public static DungeonBossPage GetCurrentBossPage()
 		{
-			object currentFrameContent = (Application.Current.MainWindow as GameWindow).CurrentFrame.Content;
-			bool isCurrentFrameContentARegion = currentFrameContent is DungeonBossPage;
+			bool isCurrentFrameContentARegion = GameData.CurrentPage is DungeonBossPage;
 
 			if (isCurrentFrameContentARegion)
 			{
-				return currentFrameContent as DungeonBossPage;
+				return GameData.CurrentPage as DungeonBossPage;
 			}
 
 			return null;
@@ -224,10 +241,10 @@ namespace ClickQuest.Extensions.CombatManager
 		
 		private static void BossFightTimerTick(object source, EventArgs e)
 		{
-			_bossFightDuration--;
+			BossFightDuration--;
 
 			// Check if time is up.
-			if (_bossFightDuration <= 0)
+			if (BossFightDuration <= 0)
 			{
 				StopPoisonTimer();
 
@@ -261,7 +278,7 @@ namespace ClickQuest.Extensions.CombatManager
 				_bossFightTimer.Tick += BossFightTimerTick;
 
 				// SpecDungeonBuff's base value is 30 - the fight's duration will always be 30s or more.
-				_bossFightDuration = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon];
+				BossFightDuration = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon];
 			}
 		}
 

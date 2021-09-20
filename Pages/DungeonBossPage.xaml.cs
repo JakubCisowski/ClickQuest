@@ -33,13 +33,13 @@ namespace ClickQuest.Pages
 		public DungeonBossPage()
 		{
 			InitializeComponent();
-
-			CombatController.SetupFightTimer();
-			CombatController.SetupPoisonTimer();
 		}
 
 		public void StartBossFight(Boss boss)
 		{
+			CombatController.SetupFightTimer();
+			CombatController.SetupPoisonTimer();
+			
 			BossButton.IsEnabled = true;
 			TownButton.Visibility = Visibility.Hidden;
 			

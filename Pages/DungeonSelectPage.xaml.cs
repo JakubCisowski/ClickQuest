@@ -303,9 +303,9 @@ namespace ClickQuest.Pages
 
 		private void SetupBossFight()
 		{
-			(GameData.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(_bossSelected.CopyEnemy());
-
 			InterfaceController.ChangePage(GameData.Pages["DungeonBoss"], "Boss fight");
+
+			(GameData.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(_bossSelected.CopyEnemy());
 		}
 
 		private void UndoButtonGroup_Click(object sender, RoutedEventArgs e)
