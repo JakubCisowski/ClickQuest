@@ -49,6 +49,7 @@ namespace ClickQuest.Heroes
 		public HeroClass HeroClass { get; set; }
 		public int ClickDamage { get; set; }
 		public double CritChance { get; set; }
+		public double CritDamage { get; set; }
 		public int PoisonDamage { get; set; }
 		public int Level { get; set; }
 		public List<Material> Materials { get; set; }
@@ -212,6 +213,7 @@ namespace ClickQuest.Heroes
 			Name = heroName;
 			ClickDamagePerLevel = 1;
 			AuraDamage = 0.1;
+			CritDamage = 2.0;
 
 			SetClassSpecificValues();
 			RefreshHeroExperience();
