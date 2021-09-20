@@ -13,7 +13,7 @@ namespace ClickQuest.Artifacts
 		private const int DamageDealt = 10;
 		private int _clickCounter;
 
-		public override void OnClick()
+		public override void OnEnemyClick()
 		{
 			if (_clickCounter++ == 0)
 			{

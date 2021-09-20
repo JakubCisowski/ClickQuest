@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using ClickQuest.Artifacts;
 using ClickQuest.Controls;
 using ClickQuest.Data.GameData;
+using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;
 using ClickQuest.Places;
@@ -65,8 +66,7 @@ namespace ClickQuest.Pages
 				// Start AuraTimer if no quest is active.
 				if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
 				{
-					var monsterButton = selectedRegionPage.RegionPanel.Children.OfType<MonsterButton>().FirstOrDefault();
-					monsterButton.StartAuraTimer();
+					CombatController.StartAuraTimer();
 				}
 
 				InterfaceController.ChangePage(selectedRegionPage, $"{regionName}");

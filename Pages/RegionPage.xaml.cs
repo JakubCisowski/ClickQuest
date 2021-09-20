@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using ClickQuest.Controls;
 using ClickQuest.Data.GameData;
+using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Places;
 using ClickQuest.Player;
@@ -32,7 +33,7 @@ namespace ClickQuest.Pages
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Stop poison and aura ticks (so that the monster doesn't die when we're outside of RegionPage + no exception when Timer attempts to tick in MainMenu).
-			RegionPanel.Children.OfType<MonsterButton>().FirstOrDefault().StopCombatTimers();
+			CombatController.StopCombatTimers();
 
 			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
 			

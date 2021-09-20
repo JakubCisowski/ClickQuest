@@ -28,9 +28,6 @@ namespace ClickQuest.Controls
 
 		private readonly Random _rng = new Random();
 		private readonly RegionPage _regionPage;
-		private DispatcherTimer _poisonTimer;
-		private DispatcherTimer _auraTimer;
-		private int _poisonTicks;
 
 		public Monster Monster { get; set; }
 
@@ -42,30 +39,14 @@ namespace ClickQuest.Controls
 			}
 		}
 
-		public int AuraTickDamage
-		{
-			get
-			{
-				return (int) Math.Ceiling(User.Instance.CurrentHero.AuraDamage * Monster.Health);
-			}
-		}
-
-		public double AuraTickInterval
-		{
-			get
-			{
-				return 1d / User.Instance.CurrentHero.AuraAttackSpeed;
-			}
-		}
-
 		public MonsterButton(RegionPage regionPage)
 		{
 			InitializeComponent();
 
 			_regionPage = regionPage;
 
-			SetupPoisonTimer();
-			SetupAuraTimer();
+			CombatController.SetupPoisonTimer();
+			CombatController.SetupAuraTimer();
 			SpawnMonster();
 		}
 
@@ -78,23 +59,6 @@ namespace ClickQuest.Controls
 			DataContext = Monster;
 
 			CombatController.StartAuraTimerOnCurrentRegion();
-		}
-
-		private void HandleMonsterDeathIfDefeated()
-		{
-			if (Monster.CurrentHealth <= 0)
-			{
-				StopPoisonTimer();
-				GrantVictoryBonuses();
-				
-				// Invoke Artifacts with the "on-death" effect.
-				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
-				{
-					equippedArtifact.ArtifactFunctionality.OnKill();
-				}
-
-				SpawnMonster();
-			}
 		}
 
 		public void GrantVictoryBonuses()
@@ -117,7 +81,9 @@ namespace ClickQuest.Controls
 			CheckForDungeonKeyDrop();
 
 			_regionPage.StatsFrame.Refresh();
-			UpdateAuraAttackSpeed();
+			CombatController.UpdateAuraAttackSpeed();
+			
+			SpawnMonster();
 		}
 
 		private int RandomizeFreqenciesListPosition(List<double> frequencies)
@@ -157,26 +123,9 @@ namespace ClickQuest.Controls
 
 			if (isNoQuestActive)
 			{
-				StartPoisonTimer();
+				CombatController.HandleUserClickOnEnemy();
 
-				var damageBaseAndCritInfo = User.Instance.CurrentHero.CalculateClickDamage();
-				var damageOnHit = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
-
-				var damageType = damageBaseAndCritInfo.IsCritical ? DamageType.Critical : DamageType.Normal;
-				
-				DealDamageToMonster(damageBaseAndCritInfo.Damage, damageType);
-				DealDamageToMonster(damageOnHit, DamageType.OnHit);
-				
-				// Invoke Artifacts with the "on-click" effect.
-				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
-				{
-					equippedArtifact.ArtifactFunctionality.OnClick();
-				}
-
-				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
-
-				HandleMonsterDeathIfDefeated();
-
+				CombatController.HandleMonsterDeathIfDefeated();
 				_regionPage.StatsFrame.Refresh();
 			}
 			else
@@ -205,88 +154,6 @@ namespace ClickQuest.Controls
 			
 			// todo: osobny damage type od bonusowych obrażeń?
 			CreateFloatingTextPathAndStartAnimations(damage, DamageType.Normal);
-		}
-
-		private void SetupAuraTimer()
-		{
-			_auraTimer = new DispatcherTimer();
-			_auraTimer.Tick += AuraTimer_Tick;
-		}
-
-		private void SetupPoisonTimer()
-		{
-			int poisonIntervalMs = 500;
-			_poisonTimer = new DispatcherTimer();
-			_poisonTimer.Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs);
-			_poisonTimer.Tick += PoisonTimer_Tick;
-			_poisonTicks = 0;
-		}
-
-		public void StartAuraTimer()
-		{
-			if (User.Instance.CurrentHero != null)
-			{
-				// ex.: 1.50 aura attack speed = 1.5 aura ticks per second
-				_auraTimer.Interval = TimeSpan.FromSeconds(1d / User.Instance.CurrentHero.AuraAttackSpeed);
-
-				_auraTimer.Start();
-			}
-		}
-
-		private void StartPoisonTimer()
-		{
-			if (User.Instance.CurrentHero.PoisonDamage > 0)
-			{
-				_poisonTicks = 0;
-				_poisonTimer.Start();
-			}
-		}
-
-		public void StopCombatTimers()
-		{
-			StopPoisonTimer();
-			_auraTimer.Stop();
-		}
-
-		public void StopPoisonTimer()
-		{
-			_poisonTimer.Stop();
-			_poisonTicks = 0;
-		}
-
-		private void PoisonTimer_Tick(object source, EventArgs e)
-		{
-			int poisonTicksMax = 5;
-
-			if (_poisonTicks >= poisonTicksMax)
-			{
-				_poisonTimer.Stop();
-			}
-			else
-			{
-				int poisonDamage = User.Instance.CurrentHero.PoisonDamage;
-				Monster.CurrentHealth -= poisonDamage;
-
-				CreateFloatingTextPathAndStartAnimations(poisonDamage, DamageType.Poison);
-
-				_poisonTicks++;
-
-				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.PoisonTicksAmount, 1);
-
-				HandleMonsterDeathIfDefeated();
-			}
-		}
-
-		private void AuraTimer_Tick(object source, EventArgs e)
-		{
-			if (User.Instance.CurrentHero != null)
-			{
-				Monster.CurrentHealth -= AuraTickDamage;
-
-				CreateFloatingTextPathAndStartAnimations(AuraTickDamage, DamageType.Aura);
-
-				HandleMonsterDeathIfDefeated();
-			}
 		}
 
 		private void CreateFloatingTextPathAndStartAnimations(int damage, DamageType damageType)
@@ -325,13 +192,6 @@ namespace ClickQuest.Controls
 		{
 			// Remove invisible paths.
 			DamageTextCanvas.Children.Remove(DamageTextCanvas.Children.OfType<Border>().FirstOrDefault(x => x.Opacity == 0));
-		}
-
-		private void UpdateAuraAttackSpeed()
-		{
-			_auraTimer.Stop();
-			_auraTimer.Interval = TimeSpan.FromSeconds(AuraTickInterval);
-			_auraTimer.Start();
 		}
 	}
 }

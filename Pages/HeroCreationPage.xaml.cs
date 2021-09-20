@@ -56,10 +56,6 @@ namespace ClickQuest.Pages
 
 			User.Instance.Heroes.Add(newHero);
 
-			// Reload the database.
-			// EntityOperations.SaveGame();
-			// EntityOperations.LoadGame();
-
 			// Select current hero from entity database, because variable 'hero' doesn't represent the same hero that was loaded from entity in LoadGame().
 			User.Instance.CurrentHero = User.Instance.Heroes.FirstOrDefault(x => x.Id == newHero.Id);
 

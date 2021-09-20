@@ -11,7 +11,7 @@
         public virtual void OnUnequip() { }
 
         // Use to deal bonus damage upon clicking.
-        public virtual void OnClick() { }
+        public virtual void OnEnemyClick() { }
         
         // Use to increase damage dealt (eg. by a percentage).
         public virtual void OnDealingDamage(int baseDamage) { }

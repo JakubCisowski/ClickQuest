@@ -17,7 +17,7 @@ namespace ClickQuest.Artifacts
 		private DispatcherTimer _timer;
 		private int _ticksCount = 0;
 		
-		public override void OnClick()
+		public override void OnEnemyClick()
 		{
 			// Todo: include bosses
 			var monsterButton = CombatController.GetCurrentMonsterButton();

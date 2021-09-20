@@ -18,7 +18,7 @@ namespace ClickQuest.Artifacts
 			}
 		}
 
-		public override void OnClick()
+		public override void OnEnemyClick()
 		{
 			// todo: to nie działa jak intended
 			if (_isNextClickEmpowered)
