@@ -25,8 +25,8 @@ namespace ClickQuest.Heroes
 
 		private readonly Random _rng;
 
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		
+		
 		public int Id { get; set; }
 
 		
@@ -214,6 +214,8 @@ namespace ClickQuest.Heroes
 			ClickDamagePerLevel = 1;
 			AuraDamage = 0.1;
 			CritDamage = 2.0;
+
+			Id = User.Instance.Heroes.Select(x => x.Id).OrderByDescending(y=>y).FirstOrDefault() + 1;
 
 			SetClassSpecificValues();
 			RefreshHeroExperience();

@@ -11,8 +11,8 @@ namespace ClickQuest.Items
 		public event PropertyChangedEventHandler PropertyChanged;
 		private int _quantity;
 
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		
+		
 		public int DbKey { get; set; }
 
 		public int Id { get; set; }

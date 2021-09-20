@@ -26,8 +26,8 @@ namespace ClickQuest.Adventures
 
 		private readonly DispatcherTimer _timer;
 
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		
+		
 		public int DbKey { get; set; }
 
 		
