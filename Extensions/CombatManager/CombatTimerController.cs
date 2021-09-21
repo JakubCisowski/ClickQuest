@@ -83,10 +83,7 @@ namespace ClickQuest.Extensions.CombatManager
 			}
 			else
 			{
-				int poisonDamage = User.Instance.CurrentHero.PoisonDamage;
-				InterfaceController.CurrentEnemy.CurrentHealth -= poisonDamage;
-
-				// CreateFloatingTextPathAndStartAnimations(poisonDamage, DamageType.Poison);
+				CombatController.DealDamageToMonster(User.Instance.CurrentHero.PoisonDamage, DamageType.Poison);
 
 				_poisonTicks++;
 
@@ -105,11 +102,8 @@ namespace ClickQuest.Extensions.CombatManager
 		{
 			if (User.Instance.CurrentHero != null)
 			{
-				InterfaceController.CurrentEnemy.CurrentHealth -= AuraTickDamage;
-
-				// CreateFloatingTextPathAndStartAnimations(AuraTickDamage, DamageType.Aura);
+				CombatController.DealDamageToMonster(AuraTickDamage, DamageType.Aura);
 				
-				// todo: rework this shit
 				bool isMonsterDead = InterfaceController.CurrentEnemy.HandleEnemyDeathIfDefeated();
 				if (isMonsterDead)
 				{

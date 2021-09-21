@@ -23,9 +23,7 @@ namespace ClickQuest.Artifacts
 
 			_clickCounter = 0;
 
-			var monsterButton = InterfaceController.CurrentMonsterButton;
-			
-			monsterButton?.DealBonusArtifactDamageToMonster(DamageDealt);
+			CombatController.DealDamageToMonster(DamageDealt, DamageType.Artifact);
 		}
 		
 		public Skullbasher()

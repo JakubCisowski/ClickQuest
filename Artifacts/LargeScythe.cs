@@ -18,9 +18,7 @@ namespace ClickQuest.Artifacts
 
 		public override void OnDealingDamage(int baseDamage)
 		{
-			var monsterButton = InterfaceController.CurrentMonsterButton;
-
-			monsterButton?.DealBonusArtifactDamageToMonster((int)(DamageIncreasePercent * baseDamage));
+			CombatController.DealDamageToMonster((int)(DamageIncreasePercent * baseDamage), DamageType.Artifact);
 		}
 
 		public LargeScythe()

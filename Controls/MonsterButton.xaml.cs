@@ -96,15 +96,6 @@ namespace ClickQuest.Controls
 			}
 		}
 
-		public void DealBonusArtifactDamageToMonster(int damage)
-		{
-			// Deals damage without invoking Artifacts with the "on-damage" effect.
-			Monster.CurrentHealth -= damage;
-			
-			// todo: osobny damage type od bonusowych obrażeń?
-			CreateFloatingTextPathAndStartAnimations(damage, DamageType.Normal);
-		}
-
 		private void CreateFloatingTextPathAndStartAnimations(int damage, DamageType damageType)
 		{
 			if (damage == 0)

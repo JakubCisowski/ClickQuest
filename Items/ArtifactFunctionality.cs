@@ -13,11 +13,14 @@
         // Use to deal bonus damage upon clicking.
         public virtual void OnEnemyClick() { }
         
-        // Use to increase damage dealt (eg. by a percentage).
+        // Use to increase ALL damage dealt (eg. by a percentage).
         public virtual void OnDealingDamage(int baseDamage) { }
-        
-        // Use to trigger on-kill effects.
-        public virtual void OnKill() { }
+
+        // Use to increase poison damage dealt (eg. by a percentage).
+		public virtual void OnDealingPoisonDamage(int poisonDamage) { }
+
+		// Use to trigger on-kill effects.
+		public virtual void OnKill() { }
         
         // Use to trigger region-based utility effects (eg. increased drop rate).
         public virtual void OnRegionEnter() { }

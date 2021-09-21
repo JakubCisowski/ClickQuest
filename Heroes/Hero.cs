@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using ClickQuest.Adventures;
 using ClickQuest.Data.GameData;
+using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Interfaces;
 using ClickQuest.Items;
@@ -323,22 +324,22 @@ namespace ClickQuest.Heroes
 			}
 		}
 
-		public (int Damage, bool IsCritical) CalculateClickDamage()
+		public (int Damage, DamageType DamageType) CalculateBaseAndCritClickDamage()
 		{
 			int damage = ClickDamage;
-			bool isCritical = false;
+			DamageType damageType = DamageType.Normal;
 
 			// Calculate crit (max 100%).
 			double randomizedValue = RNG.Next(1, 101) / 100d;
 			if (randomizedValue <= CritChance)
 			{
-				damage *= 2;
-				isCritical = true;
+				damage = (int)(damage * CritDamage);
+				damageType = DamageType.Critical;
 
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.CritsAmount, 1);
 			}
 
-			return (damage, isCritical);
+			return (damage, damageType);
 		}
 	}
 }

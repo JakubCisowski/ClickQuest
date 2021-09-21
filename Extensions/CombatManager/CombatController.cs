@@ -23,15 +23,13 @@ namespace ClickQuest.Extensions.CombatManager
 			{
 				CombatTimerController.StartPoisonTimer();
 
-				var damageBaseAndCritInfo = User.Instance.CurrentHero.CalculateClickDamage();
+				var damageBaseAndCritInfo = User.Instance.CurrentHero.CalculateBaseAndCritClickDamage();
 				var damageOnHit = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
-
-				var damageType = damageBaseAndCritInfo.IsCritical ? DamageType.Critical : DamageType.Normal;
 				
-				DealDamageToMonster(damageBaseAndCritInfo.Damage, damageType);
+				DealDamageToMonster(damageBaseAndCritInfo.Damage, damageBaseAndCritInfo.DamageType);
 				DealDamageToMonster(damageOnHit, DamageType.OnHit);
 				
-				// Invoke Artifacts with the "on-click" effect.
+				// Invoke Artifacts with the "on-enemy-click" effect.
 				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
 				{
 					equippedArtifact.ArtifactFunctionality.OnEnemyClick();
@@ -47,14 +45,29 @@ namespace ClickQuest.Extensions.CombatManager
 		
 		public static void DealDamageToMonster(int damage, DamageType damageType = DamageType.Normal)
 		{
-			// Deals damage and invokes Artifacts with the "on-damage" effect.
 			InterfaceController.CurrentEnemy.CurrentHealth -= damage;
 
-			// CreateFloatingTextPathAndStartAnimations(damage, damageType);
+			// Invoke floating text method.
+			// e.g. CreateFloatingTextPathAndStartAnimations(damage, damageType);
 
+			// Trigger on dealing (any) damage artifact event.
+			if(damageType != DamageType.Artifact)
+			{
+				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
+				{
+					equippedArtifact.ArtifactFunctionality.OnDealingDamage(damage);
+				}
+			}
+
+			// Trigger damage type specific artifact events.
 			foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
 			{
-				equippedArtifact.ArtifactFunctionality.OnDealingDamage(damage);
+				switch (damageType)
+				{
+					case DamageType.Poison:
+						equippedArtifact.ArtifactFunctionality.OnDealingPoisonDamage(damage);
+					break;
+				}
 			}
 		}
 	}
