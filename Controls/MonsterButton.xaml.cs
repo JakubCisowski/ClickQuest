@@ -45,8 +45,8 @@ namespace ClickQuest.Controls
 
 			_regionPage = regionPage;
 
-			CombatController.SetupPoisonTimer();
-			CombatController.SetupAuraTimer();
+			CombatTimerController.SetupPoisonTimer();
+			CombatTimerController.SetupAuraTimer();
 			SpawnMonster();
 		}
 
@@ -58,7 +58,7 @@ namespace ClickQuest.Controls
 
 			DataContext = Monster;
 
-			CombatController.StartAuraTimerOnCurrentRegion();
+			CombatTimerController.StartAuraTimerOnCurrentRegion();
 		}
 
 		public void GrantVictoryBonuses()
@@ -81,7 +81,7 @@ namespace ClickQuest.Controls
 			CheckForDungeonKeyDrop();
 
 			_regionPage.StatsFrame.Refresh();
-			CombatController.UpdateAuraAttackSpeed();
+			CombatTimerController.UpdateAuraAttackSpeed();
 			
 			SpawnMonster();
 		}

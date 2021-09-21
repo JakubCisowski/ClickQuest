@@ -145,7 +145,7 @@ namespace ClickQuest.Adventures
 			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Questing]++;
 			AssignRewards();
 			QuestController.RerollQuests();
-			CombatController.StartAuraTimerOnCurrentRegion();
+			CombatTimerController.StartAuraTimerOnCurrentRegion();
 		}
 
 		public void UpdateAllRewardsDescription()

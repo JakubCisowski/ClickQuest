@@ -66,7 +66,7 @@ namespace ClickQuest.Pages
 				// Start AuraTimer if no quest is active.
 				if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
 				{
-					CombatController.StartAuraTimer();
+					CombatTimerController.StartAuraTimer();
 				}
 
 				InterfaceController.ChangePage(selectedRegionPage, $"{regionName}");

@@ -33,7 +33,7 @@ namespace ClickQuest.Pages
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Stop poison and aura ticks (so that the monster doesn't die when we're outside of RegionPage + no exception when Timer attempts to tick in MainMenu).
-			CombatController.StopCombatTimers();
+			CombatTimerController.StopCombatTimers();
 
 			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
 			

@@ -37,15 +37,15 @@ namespace ClickQuest.Pages
 
 		public void StartBossFight(Boss boss)
 		{
-			CombatController.SetupFightTimer();
-			CombatController.SetupPoisonTimer();
+			CombatTimerController.SetupFightTimer();
+			CombatTimerController.SetupPoisonTimer();
 			
 			BossButton.IsEnabled = true;
 			TownButton.Visibility = Visibility.Hidden;
 			
 			BindFightInfoToInterface(boss);
 
-			CombatController._bossFightTimer.Start();
+			CombatTimerController.BossFightTimer.Start();
 		}
 
 		private void BindFightInfoToInterface(Boss boss)
