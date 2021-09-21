@@ -5,6 +5,7 @@ using System.Windows.Input;
 using ClickQuest.Controls;
 using ClickQuest.Data.GameData;
 using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Extensions.GameManager;
 using ClickQuest.Pages;
 using ClickQuest.Player;
 using ClickQuest.Windows;
@@ -58,10 +59,8 @@ namespace ClickQuest
 		protected override void OnClosing(CancelEventArgs e)
 		{
 			User.Instance.Achievements.TotalTimePlayed += DateTime.Now - User.SessionStartDate;
-			User.Instance.CurrentHero?.UpdateTimePlayed();
-			User.Instance.CurrentHero?.PauseBlessing();
 
-			// EntityOperations.SaveGame();
+			GameController.OnHeroExit();
 
 			Data.UserData.UserDataLoader.Save();
 

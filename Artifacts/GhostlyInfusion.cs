@@ -5,6 +5,8 @@ using ClickQuest.Player;
 
 namespace ClickQuest.Artifacts
 {
+	// Has to be equipped with at least one other artifact. 
+	// After killing a monster, your next click is guaranteed to critically hit, and will deal 10% more damage.
 	public class GhostlyInfusion : ArtifactFunctionality
 	{
 		private const double DamageModifier = 1.1;

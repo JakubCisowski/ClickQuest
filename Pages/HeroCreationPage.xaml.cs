@@ -4,8 +4,10 @@ using System.Windows;
 using System.Windows.Controls;
 using ClickQuest.Controls;
 using ClickQuest.Data.GameData;
+using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;
+using ClickQuest.Items;
 using ClickQuest.Player;
 
 namespace ClickQuest.Pages
@@ -62,6 +64,17 @@ namespace ClickQuest.Pages
 			User.Instance.CurrentHero.Specialization.UpdateBuffs();
 
 			newHero.SessionStartDate = DateTime.Now;
+
+			SeedArtifacts();
+		}
+
+		// Debug only
+		private void SeedArtifacts()
+		{
+			foreach (var artifact in GameData.Artifacts)
+			{
+				CollectionsController.AddItemToCollection<Artifact>(artifact, User.Instance.CurrentHero.Artifacts);
+			}
 		}
 
 		public void CancelButton_Click(object sender, RoutedEventArgs e)

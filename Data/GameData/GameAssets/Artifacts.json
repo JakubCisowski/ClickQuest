@@ -1,9 +1,72 @@
 [
 	{
 		"Id": 1,
+		"Name": "Death-Infused Bone Talisman",
+		"Rarity": 0,
+		"Description": "Your first attack against a monster places 'Decay' on them, dealing damage every 0.5 seconds for 2.5 seconds. Damage dealt is equal to your poison damage. Deals double damage against bosses.",
+		"Value": 1
+	},
+	{
+		"Id": 2,
+		"Name": "Ghostly Infusion",
+		"Rarity": 0,
+		"Description": "Has to be equipped with at least one other artifact. After killing a monster, your next click is guaranteed to critically hit, and will deal 10% more damage.",
+		"Value": 1
+	},
+	{
+		"Id": 3,
 		"Name": "Large Scythe",
 		"Rarity": 0,
-		"Description": "Artifact made for testing purposes - find 'Gray wolf leather' and 'Left bat wing' to create it.",
+		"Description": "Your clicks deal 15% increased damages against Monsters (excluding Bosses).",
+		"Value": 1
+	},
+	{
+		"Id": 4,
+		"Name": "Meat Cleaver",
+		"Rarity": 0,
+		"Description": "Gain 20% Critical Click Damage.",
+		"Value": 1
+	},
+	{
+		"Id": 5,
+		"Name": "Mystic Clover",
+		"Rarity": 0,
+		"Description": "While on a region, you have an increased chance to find rare Monsters. The chance to find Monsters that have a spawn chance of 2% or less is doubled, while the chance to find the most common Monsters is reduced appropriately.",
+		"Value": 1
+	},
+	{
+		"Id": 6,
+		"Name": "Necronomicon",
+		"Rarity": 0,
+		"Description": "After killing a monster, your poison damage is increased by 10 for 3 seconds. This effect does not stack.",
+		"Value": 1
+	},
+	{
+		"Id": 7,
+		"Name": "Poisoned Sword",
+		"Rarity": 0,
+		"Description": "Increases your Click Damage by 10, and your Poison Damage by 5.",
+		"Value": 1
+	},
+	{
+		"Id": 8,
+		"Name": "Silver Greatsword",
+		"Rarity": 0,
+		"Description": "Your clicks deal 10% increased damage against Bosses.",
+		"Value": 1
+	},
+	{
+		"Id": 9,
+		"Name": "Skullbasher",
+		"Rarity": 0,
+		"Description": "Every other click you make deals an additional 10 (?) damage.",
+		"Value": 1
+	},
+	{
+		"Id": 10,
+		"Name": "Toxic Amulet",
+		"Rarity": 0,
+		"Description": "Your poison damage is increased by 20%.",
 		"Value": 1
 	}
 ]

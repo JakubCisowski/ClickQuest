@@ -1,7 +1,13 @@
-﻿namespace ClickQuest.Artifacts
+﻿using ClickQuest.Items;
+
+namespace ClickQuest.Artifacts
 {
-	public class SilverGreatsword
+	// Your clicks deal 10% increased damage against Bosses.
+	public class SilverGreatsword : ArtifactFunctionality
 	{
-		
+		public SilverGreatsword()
+		{
+			Name = "Silver Greatsword";
+		}
 	}
 }

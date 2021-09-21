@@ -9,6 +9,7 @@ using ClickQuest.Pages;
 
 namespace ClickQuest.Artifacts
 {
+	// Every other click you make deals an additional 10 (?) damage.
 	public class Skullbasher : ArtifactFunctionality
 	{
 		private const int DamageDealt = 10;

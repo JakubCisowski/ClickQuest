@@ -27,6 +27,7 @@ namespace ClickQuest.Items
 			copy.Value = Value;
 			copy.Description = Description;
 			copy.Quantity = quantity;
+			copy.ArtifactFunctionality = ArtifactFunctionality;
 
 			return copy;
 		}

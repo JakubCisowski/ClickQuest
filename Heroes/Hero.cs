@@ -324,6 +324,22 @@ namespace ClickQuest.Heroes
 			}
 		}
 
+		public void ReequipArtifacts()
+		{
+			foreach (var equippedArtifact in EquippedArtifacts)
+			{
+				equippedArtifact.ArtifactFunctionality.OnEquip();
+			}
+		}
+
+		public void UnequipArtfacts()
+		{
+			foreach (var equippedArtifact in EquippedArtifacts)
+			{
+				equippedArtifact.ArtifactFunctionality.OnUnequip();
+			}
+		}
+
 		public (int Damage, DamageType DamageType) CalculateBaseAndCritClickDamage()
 		{
 			int damage = ClickDamage;

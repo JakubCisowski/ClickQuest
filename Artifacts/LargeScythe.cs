@@ -10,8 +10,7 @@ using ClickQuest.Pages;
 
 namespace ClickQuest.Artifacts
 {
-	// Name
-	// Effect
+	// Your clicks deal 15% increased damages against Monsters (excluding Bosses).
 	public class LargeScythe : ArtifactFunctionality
 	{
 		private const double DamageIncreasePercent = 0.15;

@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
+using ClickQuest.Data.GameData;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Items;
 using ClickQuest.Player;
@@ -31,6 +34,8 @@ namespace ClickQuest.Pages
 			UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
 			UpdateEquipmentTab(User.Instance.CurrentHero?.Recipes, RecipesPanel);
 
+			RefreshEquippedArtifacts();
+
 			// Change ActiveTab to what was selected before.
 			EquipmentTabControl.SelectedIndex = _selectedTabIndex;
 		}
@@ -47,8 +52,11 @@ namespace ClickQuest.Pages
 						BorderBrush = new SolidColorBrush(Colors.Gray),
 						Padding = new Thickness(6),
 						Margin = new Thickness(4),
-						Background = FindResource("GameBackgroundAdditional") as SolidColorBrush
+						Background = FindResource("GameBackgroundAdditional") as SolidColorBrush,
+						Tag = item
 					};
+
+					border.PreviewMouseUp += ItemBorder_TryToEquip;
 
 					TooltipController.SetTooltipDelayAndDuration(border);
 
@@ -60,6 +68,49 @@ namespace ClickQuest.Pages
 					border.Child = grid;
 
 					equipmentTabPanel.Children.Add(border);
+				}
+			}
+		}
+
+		private void ItemBorder_TryToEquip(object sender, MouseButtonEventArgs e)
+		{
+			var item = (sender as Border).Tag;
+			bool isFighting = GameData.CurrentPage is RegionPage || GameData.CurrentPage is DungeonBossPage;
+			bool isQuesting = User.Instance.CurrentHero.Quests.Any(x => x.EndDate != default);
+
+			if (item is Artifact artifact && !isFighting && !isQuesting)
+			{
+				bool isEquipped = User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact);
+
+				if(!isEquipped)
+				{
+					bool isEquipmentFull = User.Instance.CurrentHero.EquippedArtifacts.Count >= 3;
+
+					if (!isEquipmentFull)
+					{
+						User.Instance.CurrentHero.EquippedArtifacts.Add(artifact);
+						artifact.ArtifactFunctionality.OnEquip();
+						(sender as Border).Background = FindResource("GameBackgroundSecondary") as SolidColorBrush;
+					}
+				}
+				else
+				{
+					User.Instance.CurrentHero.EquippedArtifacts.Remove(artifact);
+					artifact.ArtifactFunctionality.OnUnequip();
+					(sender as Border).Background = FindResource("GameBackgroundAdditional") as SolidColorBrush;
+				}
+				
+			}
+		}
+
+		public void RefreshEquippedArtifacts()
+		{
+			foreach(Border artifactBorder in ArtifactsPanel.Children)
+			{
+				var artifact = artifactBorder.Tag as Artifact;
+				if(User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact))
+				{
+					artifactBorder.Background = FindResource("GameBackgroundSecondary") as SolidColorBrush;
 				}
 			}
 		}

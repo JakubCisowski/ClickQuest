@@ -180,6 +180,7 @@ namespace ClickQuest.Pages
 			selectedHero.LoadQuests();
 			selectedHero.ResumeQuest();
 			selectedHero.ResumeBlessing();
+			selectedHero.ReequipArtifacts();
 			selectedHero.SessionStartDate = DateTime.Now;
 
 			selectedHero.RefreshHeroExperience();

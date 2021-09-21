@@ -3,6 +3,7 @@ using ClickQuest.Player;
 
 namespace ClickQuest.Artifacts
 {
+	// Gain 20% Critical Click Damage.
 	public class MeatCleaver : ArtifactFunctionality
 	{
 		private const double CritDamageIncrease = 0.15;

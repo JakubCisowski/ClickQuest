@@ -3,6 +3,7 @@ using ClickQuest.Player;
 
 namespace ClickQuest.Artifacts
 {
+	// Your poison damage is increased by 20%.
 	public class ToxicAmulet : ArtifactFunctionality
 	{
 		private const double PoisonDamageModifier = 1.2;

@@ -3,6 +3,7 @@ using ClickQuest.Player;
 
 namespace ClickQuest.Artifacts
 {
+	// Increases your Click Damage by 10, and your Poison Damage by 5.
 	public class PoisonedSword : ArtifactFunctionality
 	{
 		private const int ClickDamageIncrease = 10;

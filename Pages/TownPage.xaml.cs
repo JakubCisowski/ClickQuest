@@ -5,6 +5,7 @@ using ClickQuest.Artifacts;
 using ClickQuest.Controls;
 using ClickQuest.Data.GameData;
 using ClickQuest.Extensions.CombatManager;
+using ClickQuest.Extensions.GameManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;
 using ClickQuest.Places;
@@ -95,9 +96,9 @@ namespace ClickQuest.Pages
 
 			// Pause all quest timers (so that quest doesn't finish while current hero is not selected).
 			User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate == default)?.PauseTimer();
+			
+			GameController.OnHeroExit();
 
-			User.Instance.CurrentHero.PauseBlessing();
-			User.Instance.CurrentHero.UpdateTimePlayed();
 			User.Instance.CurrentHero = null;
 
 			InterfaceController.ChangePage(GameData.Pages["MainMenu"], "");
