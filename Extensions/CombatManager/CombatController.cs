@@ -47,8 +47,16 @@ namespace ClickQuest.Extensions.CombatManager
 		{
 			InterfaceController.CurrentEnemy.CurrentHealth -= damage;
 
+			// todo: zrobic to lepiej potem
 			// Invoke floating text method.
-			// e.g. CreateFloatingTextPathAndStartAnimations(damage, damageType);
+			if (InterfaceController.CurrentEnemy is Monster)
+			{
+				InterfaceController.CurrentMonsterButton.CreateFloatingTextPathAndStartAnimations(damage, damageType);
+			}
+			else if (InterfaceController.CurrentEnemy is Boss)
+			{
+				InterfaceController.CurrentBossPage.CreateFloatingTextPathAndStartAnimations(damage, damageType);
+			}
 
 			// Trigger on dealing (any) damage artifact event.
 			if(damageType != DamageType.Artifact)

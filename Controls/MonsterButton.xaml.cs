@@ -96,7 +96,7 @@ namespace ClickQuest.Controls
 			}
 		}
 
-		private void CreateFloatingTextPathAndStartAnimations(int damage, DamageType damageType)
+		public void CreateFloatingTextPathAndStartAnimations(int damage, DamageType damageType)
 		{
 			if (damage == 0)
 			{

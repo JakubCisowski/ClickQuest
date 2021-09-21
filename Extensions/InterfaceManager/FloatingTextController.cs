@@ -9,6 +9,7 @@ using ClickQuest.Extensions.CombatManager;
 using MaterialDesignThemes.Wpf;
 using Colors = ClickQuest.Styles.Colors;
 using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
+using System.Windows.Input;
 
 namespace ClickQuest.Extensions.InterfaceManager
 {

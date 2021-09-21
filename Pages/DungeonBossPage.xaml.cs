@@ -74,7 +74,7 @@ namespace ClickQuest.Pages
 			this.StatsFrame.Refresh();
 		}
 
-		private void CreateFloatingTextPathAndStartAnimations(int damage, DamageType damageType)
+		public void CreateFloatingTextPathAndStartAnimations(int damage, DamageType damageType)
 		{
 			if (damage == 0)
 			{
