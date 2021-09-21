@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using ClickQuest.Items;
+using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
 
 namespace ClickQuest.Extensions.CollectionsManager
 {
 	public static class CollectionsController
 	{
+
 		public static void AddItemToCollection<T>(Item itemToAdd, List<T> itemCollection, int amount = 1) where T : Item
 		{
 			foreach (var item in itemCollection)
@@ -39,6 +42,20 @@ namespace ClickQuest.Extensions.CollectionsManager
 				}
 			}
 			// If user doesn't have this item, don't do anything (check Item.Quantity).
+		}
+
+		public static int RandomizeFreqenciesListPosition(List<double> frequencies)
+		{
+			double randomizedValue = RNG.Next(1, 10001) / 10000d;
+			int i = 0;
+
+			while (randomizedValue > frequencies[i])
+			{
+				randomizedValue -= frequencies[i];
+				i++;
+			}
+
+			return i;
 		}
 	}
 }

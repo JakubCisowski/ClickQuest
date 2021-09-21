@@ -7,18 +7,16 @@ using ClickQuest.Data.GameData;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;
 using ClickQuest.Player;
+using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
 
 namespace ClickQuest.Pages
 {
 	public partial class QuestMenuPage : Page
 	{
-		private readonly Random _rng;
 
 		public QuestMenuPage()
 		{
 			InitializeComponent();
-
-			_rng = new Random();
 		}
 
 		public void LoadPage()
@@ -45,13 +43,13 @@ namespace ClickQuest.Pages
 
 			for (int i = 0; i < 3; i++)
 			{
-				int randomizedIndex = _rng.Next(0, questsForCurrentHeroClass.Count());
+				int randomizedIndex = RNG.Next(0, questsForCurrentHeroClass.Count());
 
 				bool isQuestRare = questsForCurrentHeroClass.ElementAt(randomizedIndex).Rare;
 				if (isQuestRare)
 				{
 					// Randomize once again.
-					randomizedIndex = _rng.Next(0, questsForCurrentHeroClass.Count());
+					randomizedIndex = RNG.Next(0, questsForCurrentHeroClass.Count());
 				}
 
 				var randomizedQuest = questsForCurrentHeroClass.ElementAt(randomizedIndex).CopyQuest();

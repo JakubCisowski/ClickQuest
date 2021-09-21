@@ -15,6 +15,7 @@ using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Player;
+using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
 
 namespace ClickQuest.Pages
 {
@@ -23,7 +24,6 @@ namespace ClickQuest.Pages
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		private DispatcherTimer _fightTimer;
-		private readonly Random _rng = new Random();
 		private DispatcherTimer _poisonTimer;
 		private int _poisonTicks;
 
@@ -60,15 +60,6 @@ namespace ClickQuest.Pages
 			DungeonDescriptionBlock.SetBinding(TextBlock.TextProperty, binding2);
 		}
 
-		public void GrantVictoryBonuses()
-		{
-			GrantBossReward();
-
-			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Dungeon]++;
-
-			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.DungeonsCompleted, 1);
-		}
-
 		public void HandleInterfaceAfterBossDeath()
 		{
 			BossButton.IsEnabled = false;
@@ -76,48 +67,10 @@ namespace ClickQuest.Pages
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 		}
 
-		private void GrantBossReward()
-		{
-			int damageDealtToBoss = Boss.Health - Boss.CurrentHealth;
-			// [PRERELEASE]
-			int experienceGained = 10;
-			User.Instance.CurrentHero.Experience += experienceGained;
-
-			// Grant boss loot.
-			// 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
-			int threshold = 5 - Boss.CurrentHealth / (Boss.Health / 5);
-			// 2. Iterate through every possible loot.
-			string lootText = "Experience gained: " + experienceGained + " \n" + "Loot: \n";
-
-			foreach (var loot in Boss.BossLoot)
-			{
-				double randomizedValue = _rng.Next(1, 10001) / 10000d;
-				if (randomizedValue < loot.Frequencies[threshold])
-				{
-					// Grant loot after checking if it's not empty.
-					if (loot.Item.Id != 0)
-					{
-						loot.Item.AddItem();
-						lootText += "- " + loot.Item.Name + " (" + loot.ItemType + ")\n";
-					}
-				}
-			}
-
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
-
-			// Grant gold reward.
-			int goldReward = 2137; // (change value later)
-			User.Instance.Gold += goldReward;
-			lootText += "- " + goldReward + " (gold)\n";
-
-			// [PRERELEASE] Display exp and loot for testing purposes.
-			TestRewardsBlock.Text = lootText;
-		}
-
 		private void BossButton_Click(object sender, RoutedEventArgs e)
 		{
 			CombatController.HandleUserClickOnEnemy();
-			CombatController.HandleBossDeathIfDefeated();
+			Boss.HandleEnemyDeathIfDefeated();
 			this.StatsFrame.Refresh();
 		}
 

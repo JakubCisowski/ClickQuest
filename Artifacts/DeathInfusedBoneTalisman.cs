@@ -2,6 +2,7 @@
 using System.Windows.Threading;
 using ClickQuest.Enemies;
 using ClickQuest.Extensions.CombatManager;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Items;
 using ClickQuest.Player;
 
@@ -20,7 +21,7 @@ namespace ClickQuest.Artifacts
 		public override void OnEnemyClick()
 		{
 			// Todo: include bosses
-			var monsterButton = CombatController.GetCurrentMonsterButton();
+			var monsterButton = InterfaceController.CurrentMonsterButton;
 
 			if (monsterButton.Monster != _affectedEnemy)
 			{
@@ -47,7 +48,7 @@ namespace ClickQuest.Artifacts
 
 			int damage = User.Instance.CurrentHero.PoisonDamage * DamageModifier;
 			
-			var monsterButton = CombatController.GetCurrentMonsterButton();
+			var monsterButton = InterfaceController.CurrentMonsterButton;
 			monsterButton.DealBonusArtifactDamageToMonster(damage);
 
 			if (_ticksCount == TicksNumber)

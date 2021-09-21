@@ -1,4 +1,5 @@
 ﻿using ClickQuest.Extensions.CombatManager;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Items;
 using ClickQuest.Player;
 
@@ -25,7 +26,7 @@ namespace ClickQuest.Artifacts
 			{
 				_isNextClickEmpowered = false;
 
-				var monsterButton = CombatController.GetCurrentMonsterButton();
+				var monsterButton = InterfaceController.CurrentMonsterButton;
 				monsterButton.DealDamageToMonster((int)(User.Instance.CurrentHero.ClickDamage * DamageModifier * User.Instance.CurrentHero.CritDamage), DamageType.Critical);
 			}
 		}

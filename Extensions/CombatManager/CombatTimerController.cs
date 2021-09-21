@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using ClickQuest.Enemies;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Pages;
 using ClickQuest.Player;
@@ -29,10 +30,10 @@ namespace ClickQuest.Extensions.CombatManager
 				_bossFightDuration = value;
 				
 				// todo: refactor this shit
-				var bossPage = CombatController.GetCurrentBossPage();
+				var bossPage = InterfaceController.CurrentBossPage;
 				if (bossPage is not null)
 				{
-					CombatController.GetCurrentBossPage().Duration = _bossFightDuration;
+					InterfaceController.CurrentBossPage.Duration = _bossFightDuration;
 				}
 			}
 		}
@@ -41,7 +42,7 @@ namespace ClickQuest.Extensions.CombatManager
         {
         	get
         	{
-        		return (int) Math.Ceiling(User.Instance.CurrentHero.AuraDamage * CombatController.GetCurrentEnemy().Health);
+        		return (int) Math.Ceiling(User.Instance.CurrentHero.AuraDamage * InterfaceController.CurrentEnemy.Health);
         	}
         }
 
@@ -83,7 +84,7 @@ namespace ClickQuest.Extensions.CombatManager
 			else
 			{
 				int poisonDamage = User.Instance.CurrentHero.PoisonDamage;
-				CombatController.GetCurrentEnemy().CurrentHealth -= poisonDamage;
+				InterfaceController.CurrentEnemy.CurrentHealth -= poisonDamage;
 
 				// CreateFloatingTextPathAndStartAnimations(poisonDamage, DamageType.Poison);
 
@@ -91,14 +92,10 @@ namespace ClickQuest.Extensions.CombatManager
 
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.PoisonTicksAmount, 1);
 
-				// todo: rework this shit
-				if (CombatController.GetCurrentEnemy() is Monster)
+				bool isMonsterDead = InterfaceController.CurrentEnemy.HandleEnemyDeathIfDefeated();
+				if (isMonsterDead)
 				{
-					CombatController.HandleMonsterDeathIfDefeated();
-				}
-				else if (CombatController.GetCurrentEnemy() is Boss)
-				{
-					CombatController.HandleBossDeathIfDefeated();
+					InterfaceController.CurrentMonsterButton?.SpawnMonster();
 				}
 
 			}
@@ -108,12 +105,16 @@ namespace ClickQuest.Extensions.CombatManager
 		{
 			if (User.Instance.CurrentHero != null)
 			{
-				CombatController.GetCurrentEnemy().CurrentHealth -= AuraTickDamage;
+				InterfaceController.CurrentEnemy.CurrentHealth -= AuraTickDamage;
 
 				// CreateFloatingTextPathAndStartAnimations(AuraTickDamage, DamageType.Aura);
 				
 				// todo: rework this shit
-				CombatController.HandleMonsterDeathIfDefeated();
+				bool isMonsterDead = InterfaceController.CurrentEnemy.HandleEnemyDeathIfDefeated();
+				if (isMonsterDead)
+				{
+					InterfaceController.CurrentMonsterButton?.SpawnMonster();
+				}
 			}
 		}
 		
@@ -128,8 +129,8 @@ namespace ClickQuest.Extensions.CombatManager
 
 				BossFightTimer.Stop();
 
-				CombatController.GetCurrentBossPage().GrantVictoryBonuses();
-				CombatController.GetCurrentBossPage().HandleInterfaceAfterBossDeath();
+				InterfaceController.CurrentEnemy.GrantVictoryBonuses();
+				InterfaceController.CurrentBossPage.HandleInterfaceAfterBossDeath();
 			}
 		}
 		

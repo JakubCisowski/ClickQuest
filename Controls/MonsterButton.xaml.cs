@@ -11,6 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using ClickQuest.Enemies;
+using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;
@@ -26,7 +27,6 @@ namespace ClickQuest.Controls
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private readonly Random _rng = new Random();
 		private readonly RegionPage _regionPage;
 
 		public Monster Monster { get; set; }
@@ -53,68 +53,12 @@ namespace ClickQuest.Controls
 		public void SpawnMonster()
 		{
 			var frequencyList = Region.Monsters.Select(x => x.Frequency).ToList();
-			int position = RandomizeFreqenciesListPosition(frequencyList);
+			int position = CollectionsController.RandomizeFreqenciesListPosition(frequencyList);
 			Monster = Region.Monsters[position].Monster.CopyEnemy();
 
 			DataContext = Monster;
 
 			CombatTimerController.StartAuraTimerOnCurrentRegion();
-		}
-
-		public void GrantVictoryBonuses()
-		{
-			int experienceGained = Experience.CalculateMonsterXpReward(Monster.Health);
-			User.Instance.CurrentHero.Experience += experienceGained;
-
-			var frequencyList = Monster.Loot.Select(x => x.Frequency).ToList();
-			int position = RandomizeFreqenciesListPosition(frequencyList);
-			var selectedLoot = Monster.Loot[position].Item;
-
-			if (selectedLoot.Id != 0)
-			{
-				selectedLoot.AddItem();
-			}
-
-			// [PRERELEASE] Display exp and loot for testing purposes.
-			_regionPage.TestRewardsBlock.Text = "Loot: " + selectedLoot.Name + ", Exp: " + experienceGained;
-
-			CheckForDungeonKeyDrop();
-
-			_regionPage.StatsFrame.Refresh();
-			CombatTimerController.UpdateAuraAttackSpeed();
-			
-			SpawnMonster();
-		}
-
-		private int RandomizeFreqenciesListPosition(List<double> frequencies)
-		{
-			double randomizedValue = _rng.Next(1, 10001) / 10000d;
-			int i = 0;
-
-			while (randomizedValue > frequencies[i])
-			{
-				randomizedValue -= frequencies[i];
-				i++;
-			}
-
-			return i;
-		}
-
-		private void CheckForDungeonKeyDrop()
-		{
-			var DungeonKeyRarityChances = DungeonKey.CreateRarityChancesList(Monster.Health);
-
-			int position = RandomizeFreqenciesListPosition(DungeonKeyRarityChances);
-
-			// Grant dungeon key after if algorithm didn't roll empty loot.
-			if (position != 0)
-			{
-				var dungeonKey = User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity) (position - 1));
-				dungeonKey.AddItem();
-
-				// [PRERELEASE] Display dungeon key drop.
-				_regionPage.TestRewardsBlock.Text += $". You've got a {(Rarity) (position - 1)} Dungeon Key!";
-			}
 		}
 
 		private void MonsterButton_Click(object sender, RoutedEventArgs e)
@@ -125,7 +69,12 @@ namespace ClickQuest.Controls
 			{
 				CombatController.HandleUserClickOnEnemy();
 
-				CombatController.HandleMonsterDeathIfDefeated();
+				bool isMonsterDead = Monster.HandleEnemyDeathIfDefeated();
+				if (isMonsterDead)
+				{
+					SpawnMonster();
+				}
+
 				_regionPage.StatsFrame.Refresh();
 			}
 			else

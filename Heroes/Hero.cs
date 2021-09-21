@@ -11,6 +11,7 @@ using ClickQuest.Heroes.Buffs;
 using ClickQuest.Interfaces;
 using ClickQuest.Items;
 using ClickQuest.Player;
+using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
 
 namespace ClickQuest.Heroes
 {
@@ -23,7 +24,6 @@ namespace ClickQuest.Heroes
 		public const double AURA_SPEED_BASE = 1;
 		private int _experience;
 
-		private readonly Random _rng;
 
 		
 		
@@ -204,8 +204,6 @@ namespace ClickQuest.Heroes
 
 			Specialization = new Specialization();
 
-			_rng = new Random();
-
 			HeroClass = heroClass;
 			HeroRace = heroRace;
 			Experience = 0;
@@ -224,8 +222,6 @@ namespace ClickQuest.Heroes
 		public Hero()
 		{
 			RefreshHeroExperience();
-
-			_rng = new Random();
 		}
 
 		public void RefreshHeroExperience()
@@ -333,7 +329,7 @@ namespace ClickQuest.Heroes
 			bool isCritical = false;
 
 			// Calculate crit (max 100%).
-			double randomizedValue = _rng.Next(1, 101) / 100d;
+			double randomizedValue = RNG.Next(1, 101) / 100d;
 			if (randomizedValue <= CritChance)
 			{
 				damage *= 2;

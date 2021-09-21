@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using ClickQuest.Controls;
 using ClickQuest.Extensions.CombatManager;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Interfaces;
 using ClickQuest.Items;
 using ClickQuest.Pages;
@@ -17,7 +18,7 @@ namespace ClickQuest.Artifacts
 
 		public override void OnDealingDamage(int baseDamage)
 		{
-			var monsterButton = CombatController.GetCurrentMonsterButton();
+			var monsterButton = InterfaceController.CurrentMonsterButton;
 
 			monsterButton?.DealBonusArtifactDamageToMonster((int)(DamageIncreasePercent * baseDamage));
 		}

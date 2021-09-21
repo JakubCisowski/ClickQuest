@@ -9,12 +9,12 @@ using ClickQuest.Heroes.Buffs;
 using ClickQuest.Interfaces;
 using ClickQuest.Items;
 using ClickQuest.Player;
+using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
 
 namespace ClickQuest.Pages
 {
 	public partial class BlacksmithPage : Page
 	{
-		private readonly Random _rng = new Random();
 
 		public BlacksmithPage()
 		{
@@ -83,7 +83,7 @@ namespace ClickQuest.Pages
 
 			if (meltingBuffPercent > 0)
 			{
-				int randomizedValue = _rng.Next(1, 101);
+				int randomizedValue = RNG.Next(1, 101);
 				if (randomizedValue <= meltingBuffPercent)
 				{
 					ingotAmount += baseIngotBonus;

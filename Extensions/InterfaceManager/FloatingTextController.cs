@@ -8,12 +8,12 @@ using System.Windows.Shapes;
 using ClickQuest.Extensions.CombatManager;
 using MaterialDesignThemes.Wpf;
 using Colors = ClickQuest.Styles.Colors;
+using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
 
 namespace ClickQuest.Extensions.InterfaceManager
 {
 	public static class FloatingTextController
 	{
-		private static readonly Random _rng = new Random();
 
 		public static DoubleAnimation CreateTextOpacityAnimation(int durationInSeconds)
 		{
@@ -30,8 +30,8 @@ namespace ClickQuest.Extensions.InterfaceManager
 
 		public static (double X, double Y) RandomizeFloatingTextPathPosition(Point mousePosition, double canvasActualWidth, double canvasActualHeight, int maximumPositionOffset)
 		{
-			double randomizedPositionX = mousePosition.X + _rng.Next(-maximumPositionOffset, maximumPositionOffset + 1);
-			double randomizedPositionY = mousePosition.Y + _rng.Next(-maximumPositionOffset, maximumPositionOffset + 1);
+			double randomizedPositionX = mousePosition.X + RNG.Next(-maximumPositionOffset, maximumPositionOffset + 1);
+			double randomizedPositionY = mousePosition.Y + RNG.Next(-maximumPositionOffset, maximumPositionOffset + 1);
 
 			// Clamp the positions, so that floating numbers do not follow cursor when user hovers over stats panel, equipment panel, etc.
 			randomizedPositionX = Math.Clamp(randomizedPositionX, -90, canvasActualWidth + 45);
