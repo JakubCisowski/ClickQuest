@@ -68,5 +68,75 @@
 		"Rarity": 0,
 		"Description": "Your poison damage is increased by 20%.",
 		"Value": 1
+	},
+	{
+		"Id": 11,
+		"Name": "Bat Wing Backpack",
+		"Rarity": 0,
+		"Description": "Increases your Aura Damage by 25%, but reduces your Click Damage by 25%.",
+		"Value": 1
+	},
+	{
+		"Id": 12,
+		"Name": "Bloodstone Staff",
+		"Rarity": 0,
+		"Description": "Killing a Monster grants a 10% increase to all non-artifact damage dealt for 5 seconds. Stacks up to 5 times. Each stack has its own duration.",
+		"Value": 1
+	},
+	{
+		"Id": 13,
+		"Name": "Cholla Spine Infusion",
+		"Rarity": 0,
+		"Description": "Has to be equipped with at least one other artifact. Causes all clicks to leave a spine in the target’s body. Click damage dealt is increased by 2 (?) for each spine in the target.",
+		"Value": 1
+	},
+	{
+		"Id": 14,
+		"Name": "Ice Golem's Heart",
+		"Rarity": 0,
+		"Description": "Your clicks leave a stack of 'Brittle' on the enemy, increasing your Critical Click Chance against them by 5%. Stacks up to 5 times. Additionally, clicks against Monsters (excluding Bosses) with 5 'Brittle' stacks and below 10% health instantly finish them.",
+		"Value": 1
+	},
+	{
+		"Id": 15,
+		"Name": "Pristine Wolf Fangs",
+		"Rarity": 0,
+		"Description": "Increases your Critical Click Chance by 10%, and your Critical Click Damage by 15%.",
+		"Value": 1
+	},
+	{
+		"Id": 16,
+		"Name": "Rakshasa's Necklace",
+		"Rarity": 0,
+		"Description": "Increases passive Aura Attack Speed by 50%.",
+		"Value": 1
+	},
+	{
+		"Id": 17,
+		"Name": "Scepter of Eternal Flame",
+		"Rarity": 0,
+		"Description": "On click, applies burning for 2 seconds that deals a total of 80 (?) damage.",
+		"Value": 1
+	},
+	{
+		"Id": 18,
+		"Name": "Scythe of the World Eater",
+		"Rarity": 0,
+		"Description": "Gain 50% Critical Click Chance. Excess critical chance is converted to Critical Click Damage (unlimited).",
+		"Value": 1
+	},
+	{
+		"Id": 19,
+		"Name": "Twin Kamas",
+		"Rarity": 0,
+		"Description": "Counts as two artifacts, therefore requires two free slots to use. After clicking on a monster, strike again after a 1s delay. The second attack can critically hit, as well as apply on-hit effects (such as poison).",
+		"Value": 1
+	},
+	{
+		"Id": 20,
+		"Name": "Will of the Ancients",
+		"Rarity": 0,
+		"Description": "Your poison damage can now critically strike, dealing 200% of its normal damage. The probability is calculated using your Critical Click Chance.",
+		"Value": 1
 	}
 ]

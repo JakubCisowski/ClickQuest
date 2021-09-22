@@ -15,7 +15,7 @@ namespace ClickQuest.Artifacts
 		
 		public override void OnEquip()
 		{
-			if (User.Instance.CurrentHero.EquippedArtifacts.Count < 0)
+			if (User.Instance.CurrentHero.EquippedArtifacts.Count < 1)
 			{
 				// todo: Do not equip this artifact.
 			}
