@@ -17,19 +17,19 @@ namespace ClickQuest.Artifacts
 		{
 			if (User.Instance.CurrentHero.EquippedArtifacts.Count < 0)
 			{
-				// Do not equip this artifact.
+				// todo: Do not equip this artifact.
 			}
 		}
 
 		public override void OnEnemyClick()
 		{
-			// todo: to nie działa jak intended
 			if (_isNextClickEmpowered)
 			{
 				_isNextClickEmpowered = false;
 
-				var monsterButton = InterfaceController.CurrentMonsterButton;
-				monsterButton.DealDamageToMonster((int)(User.Instance.CurrentHero.ClickDamage * DamageModifier * User.Instance.CurrentHero.CritDamage), DamageType.Critical);
+				int damageDealt = (int) (User.Instance.CurrentHero.ClickDamage * DamageModifier * User.Instance.CurrentHero.CritDamage);
+				
+				CombatController.DealDamageToEnemy(damageDealt, DamageType.Critical);
 			}
 		}
 

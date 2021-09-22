@@ -83,19 +83,6 @@ namespace ClickQuest.Controls
 			}
 		}
 
-		public void DealDamageToMonster(int damage, DamageType damageType = DamageType.Normal)
-		{
-			// Deals damage and invokes Artifacts with the "on-damage" effect.
-			Monster.CurrentHealth -= damage;
-
-			CreateFloatingTextPathAndStartAnimations(damage, damageType);
-
-			foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
-			{
-				equippedArtifact.ArtifactFunctionality.OnDealingDamage(damage);
-			}
-		}
-
 		public void CreateFloatingTextPathAndStartAnimations(int damage, DamageType damageType)
 		{
 			if (damage == 0)

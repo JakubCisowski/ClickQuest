@@ -114,6 +114,10 @@ namespace ClickQuest.Extensions.InterfaceManager
 				case DamageType.OnHit:
 					icon.Kind = PackIconKind.CursorDefaultOutline;
 					break;
+				
+				case DamageType.Artifact:
+					icon.Kind = PackIconKind.DiamondStone;
+					break;
 			}
 
 			return icon;

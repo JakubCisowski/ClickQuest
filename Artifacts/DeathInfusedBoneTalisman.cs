@@ -50,7 +50,7 @@ namespace ClickQuest.Artifacts
 
 			int damage = User.Instance.CurrentHero.PoisonDamage * DamageModifier;
 			
-			CombatController.DealDamageToMonster(damage, DamageType.Artifact);
+			CombatController.DealDamageToEnemy(damage, DamageType.Artifact);
 
 			if (_ticksCount == TicksNumber)
 			{

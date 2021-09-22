@@ -46,6 +46,7 @@
 			<SolidColorBrush x:Key="ColorDamageTypePoison" Color="#006400" />
 			<SolidColorBrush x:Key="ColorDamageTypeAura" Color="#B8860B" />
 			<SolidColorBrush x:Key="ColorDamageTypeOnHit" Color="#F54DC4" />
+			<SolidColorBrush x:Key="ColorDamageTypeArtifact" Color="#0053FF" />
 
 			<!-- Custom global styles -->
 			<Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}" />

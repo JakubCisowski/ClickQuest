@@ -26,8 +26,8 @@ namespace ClickQuest.Extensions.CombatManager
 				var damageBaseAndCritInfo = User.Instance.CurrentHero.CalculateBaseAndCritClickDamage();
 				var damageOnHit = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
 				
-				DealDamageToMonster(damageBaseAndCritInfo.Damage, damageBaseAndCritInfo.DamageType);
-				DealDamageToMonster(damageOnHit, DamageType.OnHit);
+				DealDamageToEnemy(damageBaseAndCritInfo.Damage, damageBaseAndCritInfo.DamageType);
+				DealDamageToEnemy(damageOnHit, DamageType.OnHit);
 				
 				// Invoke Artifacts with the "on-enemy-click" effect.
 				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
@@ -43,7 +43,7 @@ namespace ClickQuest.Extensions.CombatManager
 			}
 		}
 		
-		public static void DealDamageToMonster(int damage, DamageType damageType = DamageType.Normal)
+		public static void DealDamageToEnemy(int damage, DamageType damageType = DamageType.Normal)
 		{
 			InterfaceController.CurrentEnemy.CurrentHealth -= damage;
 

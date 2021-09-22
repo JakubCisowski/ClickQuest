@@ -13,18 +13,20 @@ namespace ClickQuest.Artifacts
 	public class Skullbasher : ArtifactFunctionality
 	{
 		private const int DamageDealt = 10;
-		private int _clickCounter;
+		
+		private bool _isNextClickEmpowered;
 
 		public override void OnEnemyClick()
 		{
-			if (_clickCounter++ == 0)
+			if (!_isNextClickEmpowered)
 			{
+				_isNextClickEmpowered = true;
 				return;
 			}
 
-			_clickCounter = 0;
+			_isNextClickEmpowered = false;
 
-			CombatController.DealDamageToMonster(DamageDealt, DamageType.Artifact);
+			CombatController.DealDamageToEnemy(DamageDealt, DamageType.Artifact);
 		}
 		
 		public Skullbasher()
