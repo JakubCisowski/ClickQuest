@@ -17,7 +17,7 @@
 		"Id": 3,
 		"Name": "Large Scythe",
 		"Rarity": 0,
-		"Description": "Your clicks deal 15% increased damages against Monsters (excluding Bosses).",
+		"Description": "All non-artifact damage dealt by you is increased by 15% against Monsters (excluding Bosses).",
 		"Value": 1
 	},
 	{
@@ -52,7 +52,7 @@
 		"Id": 8,
 		"Name": "Silver Greatsword",
 		"Rarity": 0,
-		"Description": "Your clicks deal 10% increased damage against Bosses.",
+		"Description": "All non-artifact damage dealt by you is increased by 10% against Bosses.",
 		"Value": 1
 	},
 	{
