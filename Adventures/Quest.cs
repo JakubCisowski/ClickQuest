@@ -99,6 +99,12 @@ namespace ClickQuest.Adventures
 			// Create copy of this quest (to make doing the same quest possible on other heroes at the same time).
 			var questCopy = CopyQuest();
 			questCopy.EndDate = EndDate;
+			
+			// Trigger on-quest start artifacts.
+			foreach (var artifact in User.Instance.CurrentHero.EquippedArtifacts)
+			{
+				artifact.ArtifactFunctionality.OnQuestStarted(questCopy);
+			}
 
 			// Replace that quest in Hero's Quests collection with the newly copied quest.
 			var questsWithMatchingId = User.Instance.CurrentHero?.Quests.Where(x => x.Id == questCopy.Id).ToList();
@@ -109,7 +115,7 @@ namespace ClickQuest.Adventures
 			// Set quest end date (if not yet set).
 			if (questCopy.EndDate == default)
 			{
-				questCopy.EndDate = DateTime.Now.AddSeconds(Duration);
+				questCopy.EndDate = DateTime.Now.AddSeconds(questCopy.Duration);
 			}
 
 			// Initially set TicksCountText (for hero stats page info).

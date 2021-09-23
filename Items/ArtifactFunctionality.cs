@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Windows;
+using ClickQuest.Adventures;
 using ClickQuest.Controls;
+using ClickQuest.Heroes.Buffs;
 using ClickQuest.Player;
 
 namespace ClickQuest.Items
@@ -49,5 +51,14 @@ namespace ClickQuest.Items
 
 		// Use to revert the above utility effects.
 		public virtual void OnRegionLeave() { }
+		
+		// Use for effects that trigger on experience gained (eg. bonus experience).
+		public virtual void OnExperienceGained(int experienceGained) { }
+		
+		// Use for effects that increase blessing effectiveness.
+		public virtual void OnBlessingStarted(Blessing blessing) { }
+		
+		// Use for effects that empower quests (eg. decrease duration).
+		public virtual void OnQuestStarted(Quest quest) { }
 	}
 }

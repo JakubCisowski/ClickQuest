@@ -145,5 +145,82 @@
 		"Rarity": 0,
 		"Description": "Requires three artifact slots to equip. Your click, poison and aura damage become zero. Instead, each click you make on a Monster will give you loot and instantly defeat them. Does not work on Bosses.",
 		"Value": 1
+	},
+	{
+		"Id": 22,
+		"Name": "Dull Knife",
+		"Rarity": 0,
+		"Description": "Increases your Critical Click Chance by 5%.",
+		"Value": 1
+	},
+	{
+		"Id": 23,
+		"Name": "Dull Sword",
+		"Rarity": 0,
+		"Description": "Increases your Click Damage by 3.",
+		"Value": 1
+	},
+	{
+		"Id": 24,
+		"Name": "Large Stinger",
+		"Rarity": 0,
+		"Description": "Increases your Poison Damage by 5.",
+		"Value": 1
+	},
+	{
+		"Id": 25,
+		"Name": "Lightning Bolt",
+		"Rarity": 0,
+		"Description": "Clicking on an enemy 3 times within 0.5 (?) seconds deals a bonus 20 (?) damage.",
+		"Value": 1
+	},
+	{
+		"Id": 26,
+		"Name": "Obsidian Sword",
+		"Rarity": 0,
+		"Description": "Increases your Click Damage by 20, and your Critical Click Damage by 20%.",
+		"Value": 1
+	},
+	{
+		"Id": 27,
+		"Name": "Sly Snake Orb",
+		"Rarity": 0,
+		"Description": "Increases your Click Damage by 20, and your Aura Attack Speed by 10%.",
+		"Value": 1
+	},
+	{
+		"Id": 28,
+		"Name": "Strong Badge of Luck",
+		"Rarity": 0,
+		"Description": "Increases your Click Damage by 20, and your Critical Click Chance by 10%.",
+		"Value": 1
+	},
+	{
+		"Id": 29,
+		"Name": "Tiny Venom Sac",
+		"Rarity": 0,
+		"Description": "Increases your Poison Damage by 1.",
+		"Value": 1
+	},
+	{
+		"Id": 30,
+		"Name": "Titan's Crown",
+		"Rarity": 0,
+		"Description": "All experience gained is increased by 30%.",
+		"Value": 1
+	},
+	{
+		"Id": 31,
+		"Name": "Trinket of Haste",
+		"Rarity": 0,
+		"Description": "Quests take 25% less time to complete.",
+		"Value": 1
+	},
+	{
+		"Id": 32,
+		"Name": "Writ of Excellence",
+		"Rarity": 0,
+		"Description": "Blessings on you have a doubled effectiveness.",
+		"Value": 1
 	}
 ]

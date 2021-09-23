@@ -87,6 +87,12 @@ namespace ClickQuest.Heroes.Buffs
 
 		public void EnableBuff()
 		{
+			// Trigger on-blessing artifacts.
+			foreach (var artifact in User.Instance.CurrentHero.EquippedArtifacts)
+			{
+				artifact.ArtifactFunctionality.OnBlessingStarted(this);
+			}
+			
 			// Increase hero stat.
 			switch (Type)
 			{
