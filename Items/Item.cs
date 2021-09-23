@@ -9,9 +9,7 @@ namespace ClickQuest.Items
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 		private int _quantity;
-
-		public int DbKey { get; set; }
-
+		
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public int Value { get; set; }

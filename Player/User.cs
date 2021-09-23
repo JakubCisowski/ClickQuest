@@ -29,9 +29,7 @@ namespace ClickQuest.Player
 				_instance = value;
 			}
 		}
-
-		public int Id { get; set; }
-
+		
 		[JsonIgnore]
 		public Hero CurrentHero { get; set; }
 

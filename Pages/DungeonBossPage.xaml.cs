@@ -19,10 +19,6 @@ namespace ClickQuest.Pages
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private DispatcherTimer _fightTimer;
-		private DispatcherTimer _poisonTimer;
-		private int _poisonTicks;
-
 		public Boss Boss { get; set; }
 		public int Duration { get; set; }
 
