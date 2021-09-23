@@ -16,9 +16,11 @@ namespace ClickQuest.Items
 		{
 			int equippedArtifactsSlots = User.Instance.CurrentHero.EquippedArtifacts.Sum(x => x.ArtifactFunctionality.ArtifactSlotsRequired);
 
+			string slotText = ArtifactSlotsRequired == 1 ? "slot" : "slots";
+			
 			if (3 - equippedArtifactsSlots < ArtifactSlotsRequired)
 			{
-				AlertBox.Show($"This artifact cannot be equipped right now - it requires {ArtifactSlotsRequired} free slots to use.", MessageBoxButton.OK);
+				AlertBox.Show($"This artifact cannot be equipped right now - it requires {ArtifactSlotsRequired} free {slotText} to use.", MessageBoxButton.OK);
 				return false;
 			}
 
