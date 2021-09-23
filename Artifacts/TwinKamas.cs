@@ -28,7 +28,7 @@ namespace ClickQuest.Artifacts
 
 		private void SecondStrikeTimer_Tick(object source, EventArgs e)
 		{
-			// todo: zmienić to bo teraz się będzie wywoływać w nieskończoność
+			// Instructions in this order should not trigger this artifact's effect again.
 			CombatController.HandleUserClickOnEnemy();
 			_timer.Stop();
 		}

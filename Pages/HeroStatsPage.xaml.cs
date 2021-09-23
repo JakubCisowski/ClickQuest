@@ -491,7 +491,21 @@ namespace ClickQuest.Pages
 			runCritTotal.SetBinding(Run.TextProperty, bindingCritTotal);
 			blockCrit.Inlines.Add("You have ");
 			blockCrit.Inlines.Add(new Bold(runCritTotal));
-			blockCrit.Inlines.Add(" chance to crit (deal double damage) when clicking");
+			blockCrit.Inlines.Add(" chance to crit (deal increased damage) when clicking");
+
+			blockCrit.Inlines.Add(new LineBreak());
+			
+			// ["Your crits deal X% damage"]
+			var bindingCritDamageTotal = new Binding("CritDamageText")
+			{
+				Source = User.Instance.CurrentHero,
+				Mode = BindingMode.OneWay
+			};
+			var runCritDamageTotal = new Run();
+			runCritDamageTotal.SetBinding(Run.TextProperty, bindingCritDamageTotal);
+			blockCrit.Inlines.Add("Your crits deal ");
+			blockCrit.Inlines.Add(new Bold(runCritDamageTotal));
+			blockCrit.Inlines.Add(" damage");
 
 			blockCrit.Inlines.Add(new LineBreak());
 

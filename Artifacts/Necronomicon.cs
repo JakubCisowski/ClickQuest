@@ -15,8 +15,12 @@ namespace ClickQuest.Artifacts
 
 		public override void OnKill()
 		{
+			if (_timer.IsEnabled)
+			{
+				PoisonDamageIncreaseTimer_Tick(null, null);
+			}
+			
 			User.Instance.CurrentHero.PoisonDamage += PoisonDamageIncrease;
-			// todo: co jeżeli zabijemy moba kiedy to trwa? czy to się odświeży?
 			_timer.Start();
 		}
 

@@ -32,6 +32,11 @@ namespace ClickQuest.Artifacts
 			}
 		}
 
+		public override void OnKill()
+		{
+			_timer.Stop();
+		}
+
 		public DeathInfusedBoneTalisman()
 		{
 			Name = "Death-Infused Bone Talisman";

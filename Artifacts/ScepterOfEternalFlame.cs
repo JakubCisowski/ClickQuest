@@ -9,7 +9,7 @@ namespace ClickQuest.Artifacts
 	public class ScepterOfEternalFlame : ArtifactFunctionality
 	{
 		private const int BurningDamage = 80;
-		private const int BurningDuration = 2;
+		private const double BurningDuration = 2;
 		private const int TicksNumber = 10;
 
 		private int _ticksCount;
@@ -21,10 +21,15 @@ namespace ClickQuest.Artifacts
 			_timer.Start();
 		}
 
+		public override void OnKill()
+		{
+			_timer.Stop();
+		}
+
 		public ScepterOfEternalFlame()
 		{
 			Name = "Scepter of Eternal Flame";
-			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, BurningDuration / TicksNumber * 100)};
+			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, (int)(BurningDuration / TicksNumber * 1000d))};
 			_timer.Tick += BurningTimer_Tick;
 		}
 

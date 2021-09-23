@@ -136,7 +136,7 @@
 		"Id": 20,
 		"Name": "Will of the Ancients",
 		"Rarity": 0,
-		"Description": "Your poison damage can now critically strike, dealing 200% of its normal damage. The probability is calculated using your Critical Click Chance.",
+		"Description": "Your poison damage can now critically strike. The probability is calculated using your Critical Click Chance, and the damage using your Critical Click Damage.",
 		"Value": 1
 	},
 	{

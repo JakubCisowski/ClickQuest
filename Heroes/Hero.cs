@@ -105,6 +105,16 @@ namespace ClickQuest.Heroes
 		}
 
 		[JsonIgnore]
+		public string CritDamageText
+		{
+			get
+			{
+				string critDamageText = Math.Floor(CritDamage * 100).ToString() + "%";
+				return critDamageText;
+			}
+		}
+
+		[JsonIgnore]
 		public int LevelDamageBonus
 		{
 			get

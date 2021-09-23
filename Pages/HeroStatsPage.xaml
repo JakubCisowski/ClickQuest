@@ -104,14 +104,14 @@
 					<StackPanel.ToolTip>
 						<ToolTip>
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
-								<Run Text="Chance to deal double damage when clicking on a monster/boss" />
+								<Run Text="Chance to deal increased damage when clicking on an enemy" />
 								<LineBreak />
 								<LineBreak />
 								<Run Text="You can increase crit chance by: using blessings or crit artifacts" />
 								<LineBreak />
-								<Run Text="You can't exceed 100% crit chance cap by any means'" />
+								<Run Text="Default crit damage is 200%, and can be increased by using certain artifacts" />
 								<LineBreak />
-								<Run Text="This does not multiply damage from Clicker Specialization" />
+								<Run Text="This does not multiply damage from Clicker Specialization or artifacts" />
 							</TextBlock>
 						</ToolTip>
 					</StackPanel.ToolTip>
