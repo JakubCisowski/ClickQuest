@@ -31,8 +31,8 @@ namespace ClickQuest.Pages
 			ArtifactsPanel.Children.Clear();
 
 			UpdateEquipmentTab(User.Instance.CurrentHero?.Materials, MaterialsPanel);
-			UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
 			UpdateEquipmentTab(User.Instance.CurrentHero?.Recipes, RecipesPanel);
+			UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
 
 			RefreshEquippedArtifacts();
 
@@ -44,6 +44,8 @@ namespace ClickQuest.Pages
 		{
 			if (specificEquipmentCollection != null)
 			{
+				ReorderItemsInList(ref specificEquipmentCollection);
+				
 				foreach (var item in specificEquipmentCollection)
 				{
 					var border = new Border
@@ -70,6 +72,16 @@ namespace ClickQuest.Pages
 					equipmentTabPanel.Children.Add(border);
 				}
 			}
+		}
+
+		private void ReorderItemsInList<T>(ref List<T> specificEquipmentCollection) where T:Item
+		{
+			// 1. Items should be ordered based on (name / rarity / type / something else) - currently Name.
+			// 2. Equipped Artifacts should be at the top.
+			
+			var orderedItemsList = specificEquipmentCollection.OrderByDescending(x=>User.Instance.CurrentHero.EquippedArtifacts.Contains(x as Artifact))
+				.ThenBy(y=>y.Name).ToList();
+			specificEquipmentCollection = orderedItemsList;
 		}
 
 		private void ItemBorder_TryToEquip(object sender, MouseButtonEventArgs e)
@@ -99,6 +111,11 @@ namespace ClickQuest.Pages
 					artifact.ArtifactFunctionality.OnUnequip();
 					(sender as Border).Background = FindResource("GameBackgroundAdditional") as SolidColorBrush;
 				}
+				
+				// Refresh Artifacts tab.
+				ArtifactsPanel.Children.Clear();
+				UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
+				RefreshEquippedArtifacts();
 			}
 		}
 
