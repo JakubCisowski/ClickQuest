@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.Json.Serialization;
 using ClickQuest.Adventures;
 using ClickQuest.Data.GameData;
 using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Heroes.Buffs;
-using ClickQuest.Interfaces;
 using ClickQuest.Items;
 using ClickQuest.Player;
 using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
@@ -25,21 +22,14 @@ namespace ClickQuest.Heroes
 		public const double AURA_SPEED_BASE = 1;
 		private int _experience;
 
-
-		
-		
 		public int Id { get; set; }
 
-		
 		public int ExperienceToNextLvl { get; set; }
 
-		
 		public int ExperienceToNextLvlTotal { get; set; }
 
-		
 		public int ExperienceProgress { get; set; }
 
-		
 		public DateTime SessionStartDate { get; set; }
 
 		public int ClickDamagePerLevel { get; set; }
@@ -109,11 +99,11 @@ namespace ClickQuest.Heroes
 			get
 			{
 				string critChanceText = (Math.Clamp(CritChance, 0, 1) * 100).ToString("0.##");
-				critChanceText+="%";
+				critChanceText += "%";
 				return critChanceText;
 			}
 		}
-		
+
 		[JsonIgnore]
 		public int LevelDamageBonus
 		{
@@ -173,8 +163,8 @@ namespace ClickQuest.Heroes
 		{
 			get
 			{
-				string auraDamageText = (AuraDamage*100).ToString("0.##");
-				auraDamageText+="%";
+				string auraDamageText = (AuraDamage * 100).ToString("0.##");
+				auraDamageText += "%";
 				return auraDamageText;
 			}
 		}
@@ -227,7 +217,7 @@ namespace ClickQuest.Heroes
 			AuraDamage = 0.1;
 			CritDamage = 2.0;
 
-			Id = User.Instance.Heroes.Select(x => x.Id).OrderByDescending(y=>y).FirstOrDefault() + 1;
+			Id = User.Instance.Heroes.Select(x => x.Id).OrderByDescending(y => y).FirstOrDefault() + 1;
 
 			SetClassSpecificValues();
 			RefreshHeroExperience();
@@ -356,13 +346,13 @@ namespace ClickQuest.Heroes
 		public (int Damage, DamageType DamageType) CalculateBaseAndCritClickDamage()
 		{
 			int damage = ClickDamage;
-			DamageType damageType = DamageType.Normal;
+			var damageType = DamageType.Normal;
 
 			// Calculate crit (max 100%).
 			double randomizedValue = RNG.Next(1, 101) / 100d;
 			if (randomizedValue <= CritChance)
 			{
-				damage = (int)(damage * CritDamage);
+				damage = (int) (damage * CritDamage);
 				damageType = DamageType.Critical;
 
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.CritsAmount, 1);

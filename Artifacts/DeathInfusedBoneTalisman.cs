@@ -15,11 +15,11 @@ namespace ClickQuest.Artifacts
 		private const int TicksNumber = 5;
 		private const int Interval = 500;
 		private const int DamageModifier = 2;
-		
+
 		private Enemy _affectedEnemy;
-		private DispatcherTimer _timer;
-		private int _ticksCount = 0;
-		
+		private readonly DispatcherTimer _timer;
+		private int _ticksCount;
+
 		public override void OnEnemyClick()
 		{
 			var clickedEnemy = InterfaceController.CurrentEnemy;
@@ -27,7 +27,7 @@ namespace ClickQuest.Artifacts
 			if (_affectedEnemy != clickedEnemy)
 			{
 				_affectedEnemy = clickedEnemy;
-				
+
 				_timer.Start();
 			}
 		}
@@ -35,11 +35,8 @@ namespace ClickQuest.Artifacts
 		public DeathInfusedBoneTalisman()
 		{
 			Name = "Death-Infused Bone Talisman";
-			
-			_timer = new DispatcherTimer()
-			{
-				Interval = new TimeSpan(0,0,0,0,Interval)
-			};
+
+			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, Interval)};
 			_timer.Tick += DecayTimer_Tick;
 		}
 
@@ -53,7 +50,7 @@ namespace ClickQuest.Artifacts
 			{
 				damage *= DamageModifier;
 			}
-			
+
 			CombatController.DealDamageToEnemy(damage, DamageType.Artifact);
 
 			if (_ticksCount == TicksNumber)

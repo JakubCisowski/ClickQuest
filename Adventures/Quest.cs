@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Windows;
@@ -26,43 +24,30 @@ namespace ClickQuest.Adventures
 
 		private readonly DispatcherTimer _timer;
 
-		
-		
 		public int DbKey { get; set; }
 
-		
 		public bool Rare { get; set; }
 
-		
 		public HeroClass HeroClass { get; set; }
 
-		
 		public string Name { get; set; }
 
 		public int Duration { get; set; }
 
-		
 		public string Description { get; set; }
 
-		
 		public List<int> RewardRecipeIds { get; set; }
 
-		
 		public List<int> RewardMaterialIds { get; set; }
 
-		
 		public List<int> RewardBlessingIds { get; set; }
 
-		
 		public List<int> RewardIngotIds { get; set; }
 
-		
 		public int TicksCountNumber { get; set; }
 
-		
 		public string TicksCountText { get; set; }
 
-		
 		public string RewardsDescription { get; private set; }
 
 		public DateTime EndDate { get; set; }

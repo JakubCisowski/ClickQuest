@@ -74,7 +74,7 @@ namespace ClickQuest.Pages
 
 		private void ItemBorder_TryToEquip(object sender, MouseButtonEventArgs e)
 		{
-			var item = (sender as Border).Tag;
+			object item = (sender as Border).Tag;
 			bool isFighting = GameData.CurrentPage is RegionPage || GameData.CurrentPage is DungeonBossPage;
 			bool isQuesting = User.Instance.CurrentHero.Quests.Any(x => x.EndDate != default);
 
@@ -82,7 +82,7 @@ namespace ClickQuest.Pages
 			{
 				bool isEquipped = User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact);
 
-				if(!isEquipped)
+				if (!isEquipped)
 				{
 					bool canBeEquipped = artifact.ArtifactFunctionality.CanBeEquipped();
 
@@ -99,7 +99,6 @@ namespace ClickQuest.Pages
 					artifact.ArtifactFunctionality.OnUnequip();
 					(sender as Border).Background = FindResource("GameBackgroundAdditional") as SolidColorBrush;
 				}
-				
 			}
 		}
 
@@ -108,7 +107,7 @@ namespace ClickQuest.Pages
 			foreach (Border artifactBorder in ArtifactsPanel.Children)
 			{
 				var artifact = artifactBorder.Tag as Artifact;
-				if(User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact))
+				if (User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact))
 				{
 					artifactBorder.Background = FindResource("GameBackgroundSecondary") as SolidColorBrush;
 				}

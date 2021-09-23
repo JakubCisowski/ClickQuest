@@ -661,7 +661,11 @@ namespace ClickQuest.Pages
 			};
 			var runAuraDamageTotal = new Run();
 			runAuraDamageTotal.SetBinding(Run.TextProperty, bindingAuraDamageTotal);
-			var bindingAuraAttackSpeedTotal = new Binding("AuraAttackSpeed") {Source = User.Instance.CurrentHero, Mode=BindingMode.OneWay};
+			var bindingAuraAttackSpeedTotal = new Binding("AuraAttackSpeed")
+			{
+				Source = User.Instance.CurrentHero,
+				Mode = BindingMode.OneWay
+			};
 			var runAuraAttackSpeedTotal = new Run();
 			runAuraAttackSpeedTotal.SetBinding(Run.TextProperty, bindingAuraAttackSpeedTotal);
 			blockAura.Inlines.Add("Your Aura tick damage is ");

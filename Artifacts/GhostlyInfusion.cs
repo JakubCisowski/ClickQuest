@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using ClickQuest.Controls;
 using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Items;
 using ClickQuest.Player;
 
@@ -12,12 +11,12 @@ namespace ClickQuest.Artifacts
 	public class GhostlyInfusion : ArtifactFunctionality
 	{
 		private const double DamageModifier = 1.1;
-		
-		private bool _isNextClickEmpowered = false;
+
+		private bool _isNextClickEmpowered;
 
 		public override bool CanBeEquipped()
 		{
-			bool hasEnoughFreeSlots =  base.CanBeEquipped();
+			bool hasEnoughFreeSlots = base.CanBeEquipped();
 			bool isAnArtifactEquipped = User.Instance.CurrentHero.EquippedArtifacts.Count > 0;
 
 			if (hasEnoughFreeSlots && isAnArtifactEquipped)
@@ -36,7 +35,7 @@ namespace ClickQuest.Artifacts
 				_isNextClickEmpowered = false;
 
 				int damageDealt = (int) (User.Instance.CurrentHero.ClickDamage * DamageModifier * User.Instance.CurrentHero.CritDamage);
-				
+
 				CombatController.DealDamageToEnemy(damageDealt, DamageType.Critical);
 			}
 		}

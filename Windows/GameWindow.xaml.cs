@@ -4,8 +4,9 @@ using System.Windows;
 using System.Windows.Input;
 using ClickQuest.Controls;
 using ClickQuest.Data.GameData;
-using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Data.UserData;
 using ClickQuest.Extensions.GameManager;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Pages;
 using ClickQuest.Player;
 using ClickQuest.Windows;
@@ -62,7 +63,7 @@ namespace ClickQuest
 
 			GameController.OnHeroExit();
 
-			Data.UserData.UserDataLoader.Save();
+			UserDataLoader.Save();
 
 			base.OnClosing(e);
 		}

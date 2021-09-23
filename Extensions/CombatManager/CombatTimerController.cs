@@ -1,9 +1,7 @@
-
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
-using ClickQuest.Enemies;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Pages;
@@ -28,7 +26,7 @@ namespace ClickQuest.Extensions.CombatManager
 			set
 			{
 				_bossFightDuration = value;
-				
+
 				// todo: refactor this shit
 				var bossPage = InterfaceController.CurrentBossPage;
 				if (bossPage is not null)
@@ -37,22 +35,22 @@ namespace ClickQuest.Extensions.CombatManager
 				}
 			}
 		}
-		
-		public static int AuraTickDamage
-        {
-        	get
-        	{
-        		return (int) Math.Ceiling(User.Instance.CurrentHero.AuraDamage * InterfaceController.CurrentEnemy.Health);
-        	}
-        }
 
-        public static double AuraTickInterval
-        {
-        	get
-        	{
-        		return 1d / User.Instance.CurrentHero.AuraAttackSpeed;
-        	}
-        }
+		public static int AuraTickDamage
+		{
+			get
+			{
+				return (int) Math.Ceiling(User.Instance.CurrentHero.AuraDamage * InterfaceController.CurrentEnemy.Health);
+			}
+		}
+
+		public static double AuraTickInterval
+		{
+			get
+			{
+				return 1d / User.Instance.CurrentHero.AuraAttackSpeed;
+			}
+		}
 
 		public static void StartAuraTimerOnCurrentRegion()
 		{
@@ -94,16 +92,15 @@ namespace ClickQuest.Extensions.CombatManager
 				{
 					InterfaceController.CurrentMonsterButton?.SpawnMonster();
 				}
-
 			}
 		}
-		
+
 		private static void AuraTimer_Tick(object source, EventArgs e)
 		{
 			if (User.Instance.CurrentHero != null)
 			{
 				CombatController.DealDamageToEnemy(AuraTickDamage, DamageType.Aura);
-				
+
 				bool isMonsterDead = InterfaceController.CurrentEnemy.HandleEnemyDeathIfDefeated();
 				if (isMonsterDead)
 				{
@@ -111,7 +108,7 @@ namespace ClickQuest.Extensions.CombatManager
 				}
 			}
 		}
-		
+
 		private static void BossFightTimerTick(object source, EventArgs e)
 		{
 			BossFightDuration--;
@@ -127,7 +124,7 @@ namespace ClickQuest.Extensions.CombatManager
 				InterfaceController.CurrentBossPage.HandleInterfaceAfterBossDeath();
 			}
 		}
-		
+
 		public static void SetupAuraTimer()
 		{
 			AuraTimer = new DispatcherTimer();
@@ -142,7 +139,7 @@ namespace ClickQuest.Extensions.CombatManager
 			PoisonTimer.Tick += PoisonTimer_Tick;
 			_poisonTicks = 0;
 		}
-		
+
 		public static void SetupFightTimer()
 		{
 			if (User.Instance.CurrentHero != null)
@@ -186,13 +183,12 @@ namespace ClickQuest.Extensions.CombatManager
 			PoisonTimer.Stop();
 			_poisonTicks = 0;
 		}
-		
+
 		public static void UpdateAuraAttackSpeed()
 		{
 			AuraTimer.Stop();
 			AuraTimer.Interval = TimeSpan.FromSeconds(AuraTickInterval);
 			AuraTimer.Start();
 		}
-
 	}
 }

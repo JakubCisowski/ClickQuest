@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using ClickQuest.Items;
 using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
@@ -7,7 +6,6 @@ namespace ClickQuest.Extensions.CollectionsManager
 {
 	public static class CollectionsController
 	{
-
 		public static void AddItemToCollection<T>(Item itemToAdd, List<T> itemCollection, int amount = 1) where T : Item
 		{
 			foreach (var item in itemCollection)

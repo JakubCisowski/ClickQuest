@@ -14,8 +14,8 @@ namespace ClickQuest.Artifacts
 
 		private int _ticksCount;
 
-		private DispatcherTimer _timer;
-		
+		private readonly DispatcherTimer _timer;
+
 		public override void OnEnemyClick()
 		{
 			_timer.Start();
@@ -24,16 +24,16 @@ namespace ClickQuest.Artifacts
 		public ScepterOfEternalFlame()
 		{
 			Name = "Scepter of Eternal Flame";
-			_timer = new DispatcherTimer(){Interval = new TimeSpan(0,0,0,0,BurningDuration / TicksNumber * 100)};
+			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, BurningDuration / TicksNumber * 100)};
 			_timer.Tick += BurningTimer_Tick;
 		}
-		
+
 		private void BurningTimer_Tick(object source, EventArgs e)
 		{
 			_ticksCount++;
 
 			int damage = BurningDamage / TicksNumber;
-			
+
 			CombatController.DealDamageToEnemy(damage, DamageType.Artifact);
 
 			if (_ticksCount == TicksNumber)

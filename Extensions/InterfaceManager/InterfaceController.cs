@@ -47,7 +47,6 @@ namespace ClickQuest.Extensions.InterfaceManager
 
 				return null;
 			}
-			
 		}
 
 		public static DungeonBossPage CurrentBossPage
@@ -64,7 +63,7 @@ namespace ClickQuest.Extensions.InterfaceManager
 				return null;
 			}
 		}
-		
+
 		public static void RefreshStatsAndEquipmentPanelsOnCurrentPage()
 		{
 			try
@@ -89,6 +88,6 @@ namespace ClickQuest.Extensions.InterfaceManager
 
 			GameData.CurrentPage = destinationPage;
 			RefreshStatsAndEquipmentPanelsOnCurrentPage();
-		}			
+		}
 	}
 }

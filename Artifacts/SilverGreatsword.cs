@@ -9,13 +9,13 @@ namespace ClickQuest.Artifacts
 	public class SilverGreatsword : ArtifactFunctionality
 	{
 		private const double DamageIncreasePercent = 0.10;
-		
+
 		public override void OnDealingDamage(int baseDamage)
 		{
 			if (InterfaceController.CurrentEnemy is Boss)
 			{
 				int damageDealt = (int) DamageIncreasePercent * baseDamage;
-			
+
 				CombatController.DealDamageToEnemy(damageDealt, DamageType.Artifact);
 			}
 		}

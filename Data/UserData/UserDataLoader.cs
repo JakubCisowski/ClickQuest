@@ -1,8 +1,8 @@
-using ClickQuest.Player;
 using System;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using ClickQuest.Player;
 
 namespace ClickQuest.Data.UserData
 {
@@ -25,7 +25,7 @@ namespace ClickQuest.Data.UserData
 				return;
 			}
 
-			var json = File.ReadAllText(UserDataPath);
+			string json = File.ReadAllText(UserDataPath);
 			var user = JsonSerializer.Deserialize<User>(json);
 
 			User.Instance = user;
@@ -46,9 +46,9 @@ namespace ClickQuest.Data.UserData
 			// Re-arrange references for all artifacts on all heroes using GameData.
 			foreach (var hero in User.Instance.Heroes)
 			{
-				hero.Artifacts.ForEach(x=>x.ArtifactFunctionality = GameData.GameData.Artifacts.FirstOrDefault(y=>y.Name==x.Name)?.ArtifactFunctionality);
+				hero.Artifacts.ForEach(x => x.ArtifactFunctionality = GameData.GameData.Artifacts.FirstOrDefault(y => y.Name == x.Name)?.ArtifactFunctionality);
 			}
-			
+
 			// Re-arrange references between hero's Artifacts and EquippedArtifacts.
 			foreach (var hero in User.Instance.Heroes)
 			{
@@ -59,7 +59,7 @@ namespace ClickQuest.Data.UserData
 
 		public static void Save()
 		{
-			var json = JsonSerializer.Serialize(User.Instance);
+			string json = JsonSerializer.Serialize(User.Instance);
 			File.WriteAllText(UserDataPath, json);
 		}
 

@@ -7,7 +7,7 @@ namespace ClickQuest.Artifacts
 	public class MeatCleaver : ArtifactFunctionality
 	{
 		private const double CritDamageIncrease = 0.20;
-		
+
 		public override void OnEquip()
 		{
 			User.Instance.CurrentHero.CritDamage += CritDamageIncrease;

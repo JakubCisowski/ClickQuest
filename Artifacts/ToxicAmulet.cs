@@ -9,11 +9,11 @@ namespace ClickQuest.Artifacts
 		private const double PoisonDamageModifier = 1.2;
 
 		private int _amountIncreased;
-		
+
 		public override void OnEquip()
 		{
 			// todo: jakoś to refreshować, żeby nie trzeba było re-equipować artefaktu
-			_amountIncreased = (int)(User.Instance.CurrentHero.PoisonDamage * PoisonDamageModifier);
+			_amountIncreased = (int) (User.Instance.CurrentHero.PoisonDamage * PoisonDamageModifier);
 			User.Instance.CurrentHero.PoisonDamage += _amountIncreased;
 		}
 

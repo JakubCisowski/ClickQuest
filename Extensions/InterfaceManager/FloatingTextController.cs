@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using ClickQuest.Extensions.CombatManager;
 using MaterialDesignThemes.Wpf;
-using Colors = ClickQuest.Styles.Colors;
 using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
-using System.Windows.Input;
+using Colors = ClickQuest.Styles.Colors;
 
 namespace ClickQuest.Extensions.InterfaceManager
 {
 	public static class FloatingTextController
 	{
-
 		public static DoubleAnimation CreateTextOpacityAnimation(int durationInSeconds)
 		{
 			var textVisibilityAnimation = new DoubleAnimation
@@ -43,7 +39,7 @@ namespace ClickQuest.Extensions.InterfaceManager
 
 		public static Border CreateFloatingTextPanel(int damageValue, DamageType damageType)
 		{
-			var border = new Border()
+			var border = new Border
 			{
 				CornerRadius = new CornerRadius(20),
 				BorderThickness = new Thickness(5),
@@ -51,10 +47,7 @@ namespace ClickQuest.Extensions.InterfaceManager
 				Padding = new Thickness(2)
 			};
 
-			var stackPanel = new StackPanel()
-			{
-				Orientation	= Orientation.Horizontal
-			};
+			var stackPanel = new StackPanel {Orientation = Orientation.Horizontal};
 
 			var textBrush = Colors.GetFloatingCombatTextColor(damageType);
 
@@ -64,7 +57,7 @@ namespace ClickQuest.Extensions.InterfaceManager
 
 			stackPanel.Children.Add(icon);
 
-			var text = new TextBlock() 
+			var text = new TextBlock
 			{
 				Text = damageValue.ToString(),
 				Foreground = textBrush,
@@ -86,7 +79,7 @@ namespace ClickQuest.Extensions.InterfaceManager
 
 		public static PackIcon GetFloatingCombatIcon(DamageType damageType)
 		{
-			PackIcon icon = new PackIcon()
+			var icon = new PackIcon
 			{
 				Width = 28,
 				Height = 28,
@@ -114,7 +107,7 @@ namespace ClickQuest.Extensions.InterfaceManager
 				case DamageType.OnHit:
 					icon.Kind = PackIconKind.CursorDefaultOutline;
 					break;
-				
+
 				case DamageType.Artifact:
 					icon.Kind = PackIconKind.DiamondStone;
 					break;

@@ -11,8 +11,8 @@ namespace ClickQuest.Artifacts
 		private const int PoisonDamageIncrease = 10;
 		private const int StackDuration = 5;
 
-		private DispatcherTimer _timer;
-		
+		private readonly DispatcherTimer _timer;
+
 		public override void OnKill()
 		{
 			User.Instance.CurrentHero.PoisonDamage += PoisonDamageIncrease;
@@ -23,10 +23,10 @@ namespace ClickQuest.Artifacts
 		public Necronomicon()
 		{
 			Name = "Necronomicon";
-			_timer = new DispatcherTimer() {Interval = new TimeSpan(0, 0, StackDuration)};
+			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, StackDuration)};
 			_timer.Tick += PoisonDamageIncreaseTimer_Tick;
 		}
-		
+
 		private void PoisonDamageIncreaseTimer_Tick(object source, EventArgs e)
 		{
 			_timer.Stop();

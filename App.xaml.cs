@@ -1,9 +1,9 @@
-﻿using ClickQuest.Data.GameData;
-using ClickQuest.Player;
-using System;
+﻿using System;
 using System.Windows;
-using ClickQuest.Artifacts;
+using ClickQuest.Data.GameData;
+using ClickQuest.Data.UserData;
 using ClickQuest.Pages;
+using ClickQuest.Player;
 
 namespace ClickQuest
 {
@@ -15,13 +15,13 @@ namespace ClickQuest
 			GameDataLoader.Load();
 
 			var gameWindow = new GameWindow();
-			Application.Current.MainWindow = gameWindow;
+			Current.MainWindow = gameWindow;
 			gameWindow.Show();
-			
-			Data.UserData.UserDataLoader.Load();
-			
+
+			UserDataLoader.Load();
+
 			(GameData.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
-			
+
 			// Save current time as the application's start time (for achievement tracking).
 			User.SessionStartDate = DateTime.Now;
 		}

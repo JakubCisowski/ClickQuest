@@ -65,7 +65,7 @@ namespace ClickQuest.Enemies
 				CombatTimerController.StopPoisonTimer();
 
 				GrantVictoryBonuses();
-				
+
 				// Invoke Artifacts with the "on-death" effect.
 				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
 				{

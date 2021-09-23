@@ -1,5 +1,4 @@
 ﻿using ClickQuest.Items;
-using ClickQuest.Player;
 
 namespace ClickQuest.Artifacts
 {
@@ -7,7 +6,7 @@ namespace ClickQuest.Artifacts
 	public class RakshasasNecklace : ArtifactFunctionality
 	{
 		private const double AuraAttackSpeedModifier = 1.5;
-		
+
 		public override void OnEquip()
 		{
 		}

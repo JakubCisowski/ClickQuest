@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.Json.Serialization;
 using ClickQuest.Data.GameData;
@@ -13,7 +12,6 @@ namespace ClickQuest.Items
 	{
 		public List<Ingredient> Ingredients { get; set; }
 
-		
 		public string RequirementsDescription { get; private set; }
 
 		[JsonIgnore]

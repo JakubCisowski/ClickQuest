@@ -8,7 +8,7 @@ namespace ClickQuest.Artifacts
 	{
 		private const int ClickDamageIncrease = 10;
 		private const int PoisonDamageIncrease = 5;
-		
+
 		public override void OnEquip()
 		{
 			User.Instance.CurrentHero.ClickDamage += ClickDamageIncrease;

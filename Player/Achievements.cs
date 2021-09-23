@@ -1,7 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Windows;
 
@@ -13,7 +11,6 @@ namespace ClickQuest.Player
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		
 		public ObservableDictionary<NumericAchievementType, long> NumericAchievementCollection { get; set; }
 
 		public string AchievementCollectionString { get; set; }

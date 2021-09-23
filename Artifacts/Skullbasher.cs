@@ -1,11 +1,5 @@
-﻿using System.Linq;
-using System.Windows;
-using ClickQuest.Controls;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Interfaces;
+﻿using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Items;
-using ClickQuest.Pages;
 
 namespace ClickQuest.Artifacts
 {
@@ -13,7 +7,7 @@ namespace ClickQuest.Artifacts
 	public class Skullbasher : ArtifactFunctionality
 	{
 		private const int DamageDealt = 10;
-		
+
 		private bool _isNextClickEmpowered;
 
 		public override void OnEnemyClick()
@@ -28,7 +22,7 @@ namespace ClickQuest.Artifacts
 
 			CombatController.DealDamageToEnemy(DamageDealt, DamageType.Artifact);
 		}
-		
+
 		public Skullbasher()
 		{
 			Name = "Skullbasher";

@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,7 +12,6 @@ namespace ClickQuest.Pages
 {
 	public partial class QuestMenuPage : Page
 	{
-
 		public QuestMenuPage()
 		{
 			InitializeComponent();

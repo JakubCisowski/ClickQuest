@@ -11,7 +11,6 @@ using ClickQuest.Extensions.ValidationManager;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Items;
 using ClickQuest.Places;
-using ClickQuest.Player;
 
 namespace ClickQuest.Data.GameData
 {
@@ -61,11 +60,8 @@ namespace ClickQuest.Data.GameData
 			}
 
 			var artifactFunctionalities = new List<ArtifactFunctionality>();
-			
-			var types = Assembly
-				.GetExecutingAssembly()
-				.GetTypes()
-				.Where(t => String.Equals(t.Namespace, "ClickQuest.Artifacts", StringComparison.Ordinal));
+
+			var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Artifacts", StringComparison.Ordinal));
 
 			foreach (var type in types)
 			{

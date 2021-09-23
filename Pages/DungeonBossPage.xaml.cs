@@ -12,10 +12,6 @@ using ClickQuest.Data.GameData;
 using ClickQuest.Enemies;
 using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Heroes;
-using ClickQuest.Heroes.Buffs;
-using ClickQuest.Player;
-using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
 
 namespace ClickQuest.Pages
 {
@@ -39,10 +35,10 @@ namespace ClickQuest.Pages
 		{
 			CombatTimerController.SetupFightTimer();
 			CombatTimerController.SetupPoisonTimer();
-			
+
 			BossButton.IsEnabled = true;
 			TownButton.Visibility = Visibility.Hidden;
-			
+
 			BindFightInfoToInterface(boss);
 
 			CombatTimerController.BossFightTimer.Start();
@@ -71,7 +67,7 @@ namespace ClickQuest.Pages
 		{
 			CombatController.HandleUserClickOnEnemy();
 			Boss.HandleEnemyDeathIfDefeated();
-			this.StatsFrame.Refresh();
+			StatsFrame.Refresh();
 		}
 
 		public void CreateFloatingTextPathAndStartAnimations(int damage, DamageType damageType)
@@ -84,9 +80,9 @@ namespace ClickQuest.Pages
 			int animationDuration = 1;
 			int maximumPositionOffset = 50;
 			var mousePosition = Mouse.GetPosition(DamageTextCanvas);
-			
+
 			var panel = FloatingTextController.CreateFloatingTextPanel(damage, damageType);
-			
+
 			var randomizedPositions = FloatingTextController.RandomizeFloatingTextPathPosition(mousePosition, DamageTextCanvas.ActualWidth, DamageTextCanvas.ActualHeight, maximumPositionOffset);
 
 			Canvas.SetLeft(panel, randomizedPositions.X);

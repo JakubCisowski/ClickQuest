@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using ClickQuest.Controls;
-using ClickQuest.Enemies;
+﻿using ClickQuest.Enemies;
 using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Items;
@@ -19,7 +17,7 @@ namespace ClickQuest.Artifacts
 		public override void OnEquip()
 		{
 			// todo: levelupy nadal zwiększają dmg a nie powinny
-			
+
 			_clickDamageDecreased = User.Instance.CurrentHero.ClickDamage;
 			_poisonDamageDecreased = User.Instance.CurrentHero.PoisonDamage;
 			_auraDamageDecreased = User.Instance.CurrentHero.AuraDamage;
@@ -34,7 +32,7 @@ namespace ClickQuest.Artifacts
 			User.Instance.CurrentHero.ClickDamage = _clickDamageDecreased;
 			User.Instance.CurrentHero.PoisonDamage = _poisonDamageDecreased;
 			User.Instance.CurrentHero.AuraDamage = _auraDamageDecreased;
-			
+
 			_clickDamageDecreased = 0;
 			_poisonDamageDecreased = 0;
 			_auraDamageDecreased = 0;

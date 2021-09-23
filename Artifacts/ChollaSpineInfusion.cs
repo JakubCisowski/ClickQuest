@@ -16,10 +16,10 @@ namespace ClickQuest.Artifacts
 
 		private Enemy _currentEnemy;
 		private int _spineCount;
-		
+
 		public override bool CanBeEquipped()
 		{
-			bool hasEnoughFreeSlots =  base.CanBeEquipped();
+			bool hasEnoughFreeSlots = base.CanBeEquipped();
 			bool isAnArtifactEquipped = User.Instance.CurrentHero.EquippedArtifacts.Count > 0;
 
 			if (hasEnoughFreeSlots && isAnArtifactEquipped)

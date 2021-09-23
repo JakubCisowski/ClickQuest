@@ -14,9 +14,9 @@ namespace ClickQuest.Artifacts
 		private const int MaxStacks = 5;
 		private const int StackDuration = 5;
 
-		private List<DateTime> _stackList = new List<DateTime>();
-		private DispatcherTimer _timer;
-		
+		private readonly List<DateTime> _stackList = new List<DateTime>();
+		private readonly DispatcherTimer _timer;
+
 		public override void OnKill()
 		{
 			if (_stackList.Count >= MaxStacks)
@@ -24,7 +24,7 @@ namespace ClickQuest.Artifacts
 				// Replace the oldest stack.
 				_stackList.RemoveAt(0);
 			}
-			
+
 			_stackList.Add(DateTime.Now);
 
 			_timer.Start();
@@ -32,18 +32,18 @@ namespace ClickQuest.Artifacts
 
 		public override void OnDealingDamage(int baseDamage)
 		{
-			int bonusDamage = (int)(baseDamage * _stackList.Count * DamageModifierPerStack);
-			
+			int bonusDamage = (int) (baseDamage * _stackList.Count * DamageModifierPerStack);
+
 			CombatController.DealDamageToEnemy(bonusDamage, DamageType.Artifact);
 		}
 
 		public BloodstoneStaff()
 		{
 			Name = "Bloodstone Staff";
-			_timer = new DispatcherTimer() {Interval = new TimeSpan(0, 0, 0,0,500)}; // todo: The timer might have to tick faster.
+			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, 500)}; // todo: The timer might have to tick faster.
 			_timer.Tick += EmpowermentTimer_Tick;
 		}
-		
+
 		private void EmpowermentTimer_Tick(object source, EventArgs e)
 		{
 			if (_stackList.Count > 0)

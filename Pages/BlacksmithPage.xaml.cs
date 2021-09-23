@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,7 +14,6 @@ namespace ClickQuest.Pages
 {
 	public partial class BlacksmithPage : Page
 	{
-
 		public BlacksmithPage()
 		{
 			InitializeComponent();
@@ -123,7 +121,8 @@ namespace ClickQuest.Pages
 
 			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting]++;
 
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();;
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
+			;
 			UpdateBlacksmithItems();
 		}
 

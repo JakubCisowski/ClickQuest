@@ -32,7 +32,7 @@ namespace ClickQuest.Artifacts
 					User.Instance.CurrentHero.CritChance += CritChanceIncreasePerStack;
 					_stackCount++;
 				}
-				
+
 				bool isEnemyAMonster = _currentEnemy is Monster;
 				bool isEnemyInThreshold = _currentEnemy.CurrentHealth <= ExecuteThreshold * _currentEnemy.Health;
 

@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ClickQuest.Controls;
@@ -36,7 +35,7 @@ namespace ClickQuest.Pages
 			CombatTimerController.StopCombatTimers();
 
 			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
-			
+
 			// Invoke Artifacts with the "on-region-leave" effect.
 			foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
 			{

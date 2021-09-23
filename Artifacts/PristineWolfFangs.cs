@@ -8,7 +8,7 @@ namespace ClickQuest.Artifacts
 	{
 		private const double CritChanceIncrease = 0.10;
 		private const double CritDamageIncrease = 0.15;
-		
+
 		public override void OnEquip()
 		{
 			User.Instance.CurrentHero.CritChance += CritChanceIncrease;

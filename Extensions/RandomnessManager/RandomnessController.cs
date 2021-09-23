@@ -1,6 +1,4 @@
 using System;
-using ClickQuest.Data.GameData;
-using ClickQuest.Pages;
 
 namespace ClickQuest.Extensions.RandomnessManager
 {

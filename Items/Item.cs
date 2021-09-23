@@ -1,6 +1,4 @@
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using ClickQuest.Interfaces;
 using ClickQuest.Player;
@@ -12,8 +10,6 @@ namespace ClickQuest.Items
 		public event PropertyChangedEventHandler PropertyChanged;
 		private int _quantity;
 
-		
-		
 		public int DbKey { get; set; }
 
 		public int Id { get; set; }

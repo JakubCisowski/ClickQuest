@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using ClickQuest.Data.GameData;
@@ -24,7 +22,6 @@ namespace ClickQuest.Enemies
 		public abstract int CurrentHealth { get; set; }
 		public int CurrentHealthProgress { get; set; }
 		public string Image { get; set; }
-
 
 		public Enemy()
 		{

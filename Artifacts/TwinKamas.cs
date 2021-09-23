@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Threading;
-using ClickQuest.Controls;
 using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Items;
-using ClickQuest.Player;
 
 namespace ClickQuest.Artifacts
 {
@@ -14,7 +11,7 @@ namespace ClickQuest.Artifacts
 	{
 		private const int StrikeDelay = 1;
 
-		private DispatcherTimer _timer;
+		private readonly DispatcherTimer _timer;
 
 		public override void OnEnemyClick()
 		{
@@ -25,10 +22,10 @@ namespace ClickQuest.Artifacts
 		{
 			Name = "Twin Kamas";
 			ArtifactSlotsRequired = 2;
-			_timer = new DispatcherTimer() {Interval = new TimeSpan(0, 0, StrikeDelay)};
+			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, StrikeDelay)};
 			_timer.Tick += SecondStrikeTimer_Tick;
 		}
-		
+
 		private void SecondStrikeTimer_Tick(object source, EventArgs e)
 		{
 			// todo: zmienić to bo teraz się będzie wywoływać w nieskończoność

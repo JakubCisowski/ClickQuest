@@ -10,7 +10,7 @@ namespace ClickQuest.Items
 	{
 		[JsonIgnore]
 		public ArtifactFunctionality ArtifactFunctionality { get; set; }
-		
+
 		public int BaseIngotBonus
 		{
 			get

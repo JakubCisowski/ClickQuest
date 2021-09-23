@@ -66,7 +66,7 @@ namespace ClickQuest.Styles
 				case DamageType.OnHit:
 					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeOnHit");
 					break;
-				
+
 				case DamageType.Artifact:
 					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeArtifact");
 					break;
