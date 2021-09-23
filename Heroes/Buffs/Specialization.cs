@@ -5,13 +5,11 @@ using System.Text.Json.Serialization;
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Items;
 using ClickQuest.Player;
-using Microsoft.EntityFrameworkCore;
 
 namespace ClickQuest.Heroes.Buffs
 {
 	public enum SpecializationType { Blessing, Clicking, Crafting, Buying, Melting, Questing, Dungeon }
 
-	[Owned]
 	public class Specialization : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;

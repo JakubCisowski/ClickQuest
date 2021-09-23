@@ -85,6 +85,7 @@ namespace ClickQuest.Heroes
 			}
 		}
 
+		[JsonIgnore]
 		public string ThisHeroClass
 		{
 			get
@@ -93,6 +94,7 @@ namespace ClickQuest.Heroes
 			}
 		}
 
+		[JsonIgnore]
 		public string ThisHeroRace
 		{
 			get
@@ -101,6 +103,7 @@ namespace ClickQuest.Heroes
 			}
 		}
 
+		[JsonIgnore]
 		public string CritChanceText
 		{
 			get
@@ -110,7 +113,8 @@ namespace ClickQuest.Heroes
 				return critChanceText;
 			}
 		}
-
+		
+		[JsonIgnore]
 		public int LevelDamageBonus
 		{
 			get
@@ -119,6 +123,7 @@ namespace ClickQuest.Heroes
 			}
 		}
 
+		[JsonIgnore]
 		public int LevelDamageBonusTotal
 		{
 			get
@@ -127,6 +132,7 @@ namespace ClickQuest.Heroes
 			}
 		}
 
+		[JsonIgnore]
 		public double LevelCritBonus
 		{
 			get
@@ -135,6 +141,7 @@ namespace ClickQuest.Heroes
 			}
 		}
 
+		[JsonIgnore]
 		public double LevelCritBonusTotal
 		{
 			get
@@ -143,6 +150,7 @@ namespace ClickQuest.Heroes
 			}
 		}
 
+		[JsonIgnore]
 		public int LevelPoisonBonus
 		{
 			get
@@ -151,6 +159,7 @@ namespace ClickQuest.Heroes
 			}
 		}
 
+		[JsonIgnore]
 		public int LevelPoisonBonusTotal
 		{
 			get
@@ -159,6 +168,7 @@ namespace ClickQuest.Heroes
 			}
 		}
 
+		[JsonIgnore]
 		public string AuraDamageText
 		{
 			get
@@ -169,6 +179,7 @@ namespace ClickQuest.Heroes
 			}
 		}
 
+		[JsonIgnore]
 		public string AuraDpsText
 		{
 			get
@@ -179,6 +190,7 @@ namespace ClickQuest.Heroes
 			}
 		}
 
+		[JsonIgnore]
 		public double LevelAuraBonus
 		{
 			get
@@ -187,6 +199,7 @@ namespace ClickQuest.Heroes
 			}
 		}
 
+		[JsonIgnore]
 		public double AuraAttackSpeed
 		{
 			get

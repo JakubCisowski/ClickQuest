@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Text.Json.Serialization;
 using ClickQuest.Data.GameData;
 
 namespace ClickQuest.Items
@@ -9,6 +10,7 @@ namespace ClickQuest.Items
 		public ItemType ItemType { get; set; }
 		public double Frequency { get; set; }
 
+		[JsonIgnore]
 		public Item Item
 		{
 			get

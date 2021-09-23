@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Text.Json.Serialization;
 using ClickQuest.Data.GameData;
 
 namespace ClickQuest.Items
@@ -8,6 +9,7 @@ namespace ClickQuest.Items
 		public int Id { get; set; }
 		public int Quantity { get; set; }
 
+		[JsonIgnore]
 		public Material RelatedMaterial
 		{
 			get

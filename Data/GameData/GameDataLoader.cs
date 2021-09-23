@@ -11,6 +11,7 @@ using ClickQuest.Extensions.ValidationManager;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Items;
 using ClickQuest.Places;
+using ClickQuest.Player;
 
 namespace ClickQuest.Data.GameData
 {
@@ -68,8 +69,7 @@ namespace ClickQuest.Data.GameData
 
 			foreach (var type in types)
 			{
-				var artifactFunctionality = Activator.CreateInstance(type) as ArtifactFunctionality;
-				if (artifactFunctionality is not null)
+				if (Activator.CreateInstance(type) is ArtifactFunctionality artifactFunctionality)
 				{
 					artifactFunctionalities.Add(artifactFunctionality);
 				}

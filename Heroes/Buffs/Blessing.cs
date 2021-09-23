@@ -11,13 +11,11 @@ using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Interfaces;
 using ClickQuest.Items;
 using ClickQuest.Player;
-using Microsoft.EntityFrameworkCore;
 
 namespace ClickQuest.Heroes.Buffs
 {
 	public enum BlessingType { ClickDamage = 0, CritChance, PoisonDamage, AuraDamage, AuraSpeed }
 
-	[Owned]
 	public class Blessing : INotifyPropertyChanged, IIdentifiable
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -36,6 +34,7 @@ namespace ClickQuest.Heroes.Buffs
 		public int Buff { get; set; }
 		public bool AchievementBonusGranted { get; set; }
 
+		[JsonIgnore]
 		public string TypeString
 		{
 			get
@@ -44,6 +43,7 @@ namespace ClickQuest.Heroes.Buffs
 			}
 		}
 
+		[JsonIgnore]
 		public string RarityString
 		{
 			get
@@ -52,6 +52,7 @@ namespace ClickQuest.Heroes.Buffs
 			}
 		}
 
+		[JsonIgnore]
 		public bool IsFinished
 		{
 			get

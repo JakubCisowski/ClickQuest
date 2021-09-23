@@ -105,7 +105,7 @@ namespace ClickQuest.Pages
 
 		public void RefreshEquippedArtifacts()
 		{
-			foreach(Border artifactBorder in ArtifactsPanel.Children)
+			foreach (Border artifactBorder in ArtifactsPanel.Children)
 			{
 				var artifact = artifactBorder.Tag as Artifact;
 				if(User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact))

@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Interfaces;
@@ -7,6 +8,7 @@ namespace ClickQuest.Items
 {
 	public class Material : Item, IMeltable
 	{
+		[JsonIgnore]
 		public int BaseIngotBonus
 		{
 			get

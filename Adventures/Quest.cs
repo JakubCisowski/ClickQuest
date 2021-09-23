@@ -68,6 +68,7 @@ namespace ClickQuest.Adventures
 		public DateTime EndDate { get; set; }
 		public int Id { get; set; }
 
+		[JsonIgnore]
 		public bool IsFinished
 		{
 			get

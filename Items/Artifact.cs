@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Interfaces;
@@ -7,6 +8,7 @@ namespace ClickQuest.Items
 {
 	public class Artifact : Item, IMeltable
 	{
+		[JsonIgnore]
 		public ArtifactFunctionality ArtifactFunctionality { get; set; }
 		
 		public int BaseIngotBonus

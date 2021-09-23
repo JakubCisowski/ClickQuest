@@ -16,7 +16,7 @@ namespace ClickQuest.Items
 		
 		public string RequirementsDescription { get; private set; }
 
-		
+		[JsonIgnore]
 		public int IngotsRequired
 		{
 			get
@@ -27,6 +27,7 @@ namespace ClickQuest.Items
 
 		public int ArtifactId { get; set; }
 
+		[JsonIgnore]
 		public Artifact Artifact
 		{
 			get

@@ -1,6 +1,7 @@
 using ClickQuest.Player;
 using System;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 
 namespace ClickQuest.Data.UserData
@@ -35,6 +36,24 @@ namespace ClickQuest.Data.UserData
 				SeedDungeonKeys();
 
 				Save();
+			}
+
+			PostLoad();
+		}
+
+		public static void PostLoad()
+		{
+			// Re-arrange references for all artifacts on all heroes using GameData.
+			foreach (var hero in User.Instance.Heroes)
+			{
+				hero.Artifacts.ForEach(x=>x.ArtifactFunctionality = GameData.GameData.Artifacts.FirstOrDefault(y=>y.Name==x.Name)?.ArtifactFunctionality);
+			}
+			
+			// Re-arrange references between hero's Artifacts and EquippedArtifacts.
+			foreach (var hero in User.Instance.Heroes)
+			{
+				var newEquippedArtifacts = hero.Artifacts.Where(x => hero.EquippedArtifacts.Select(y => y.Name).Contains(x.Name)).ToList();
+				hero.EquippedArtifacts = newEquippedArtifacts;
 			}
 		}
 

@@ -8,7 +8,6 @@ namespace ClickQuest.Items
 	public class ArtifactFunctionality
 	{
 		public string Name { get; set; }
-
 		public int ArtifactSlotsRequired { get; set; } = 1;
 
 		// Use when trying to equip an artifact to determine if it can be equipped.
