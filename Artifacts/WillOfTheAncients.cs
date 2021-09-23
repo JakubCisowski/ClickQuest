@@ -1,4 +1,7 @@
-﻿using ClickQuest.Items;
+﻿using ClickQuest.Extensions.CombatManager;
+using ClickQuest.Items;
+using ClickQuest.Player;
+using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
 
 namespace ClickQuest.Artifacts
 {
@@ -9,7 +12,15 @@ namespace ClickQuest.Artifacts
 
 		public override void OnDealingPoisonDamage(int poisonDamage)
 		{
-			base.OnDealingPoisonDamage(poisonDamage);
+			double critChance = User.Instance.CurrentHero.CritChance;
+			double randomizedValue = RNG.Next(1, 101) / 100d;
+
+			if (randomizedValue <= critChance)
+			{
+				int bonusPoisonDamage = (int)(poisonDamage * CritDamageModifier - poisonDamage);
+				
+				CombatController.DealDamageToEnemy(bonusPoisonDamage, DamageType.Artifact);
+			}
 		}
 
 		public WillOfTheAncients()

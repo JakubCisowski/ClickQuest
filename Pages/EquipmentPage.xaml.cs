@@ -88,9 +88,14 @@ namespace ClickQuest.Pages
 
 					if (!isEquipmentFull)
 					{
-						User.Instance.CurrentHero.EquippedArtifacts.Add(artifact);
-						artifact.ArtifactFunctionality.OnEquip();
-						(sender as Border).Background = FindResource("GameBackgroundSecondary") as SolidColorBrush;
+						bool canBeEquipped = artifact.ArtifactFunctionality.CanBeEquipped();
+
+						if (canBeEquipped)
+						{
+							User.Instance.CurrentHero.EquippedArtifacts.Add(artifact);
+							artifact.ArtifactFunctionality.OnEquip();
+							(sender as Border).Background = FindResource("GameBackgroundSecondary") as SolidColorBrush;
+						}
 					}
 				}
 				else

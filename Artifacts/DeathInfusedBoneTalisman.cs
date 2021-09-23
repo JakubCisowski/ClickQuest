@@ -22,12 +22,11 @@ namespace ClickQuest.Artifacts
 		
 		public override void OnEnemyClick()
 		{
-			// Todo: include bosses
-			var monsterButton = InterfaceController.CurrentMonsterButton;
+			var clickedEnemy = InterfaceController.CurrentEnemy;
 
-			if (monsterButton.Monster != _affectedEnemy)
+			if (_affectedEnemy != clickedEnemy)
 			{
-				_affectedEnemy = monsterButton.Monster;
+				_affectedEnemy = clickedEnemy;
 				
 				_timer.Start();
 			}
@@ -48,7 +47,12 @@ namespace ClickQuest.Artifacts
 		{
 			_ticksCount++;
 
-			int damage = User.Instance.CurrentHero.PoisonDamage * DamageModifier;
+			int damage = User.Instance.CurrentHero.PoisonDamage;
+
+			if (InterfaceController.CurrentEnemy is Boss)
+			{
+				damage *= DamageModifier;
+			}
 			
 			CombatController.DealDamageToEnemy(damage, DamageType.Artifact);
 

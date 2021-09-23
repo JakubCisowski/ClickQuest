@@ -36,7 +36,7 @@ namespace ClickQuest.Artifacts
 				bool isEnemyAMonster = _currentEnemy is Monster;
 				bool isEnemyInThreshold = _currentEnemy.CurrentHealth <= ExecuteThreshold * _currentEnemy.Health;
 
-				if (isEnemyAMonster && isEnemyInThreshold && _stackCount == 5)
+				if (isEnemyAMonster && isEnemyInThreshold && _stackCount == MaxStacks)
 				{
 					CombatController.DealDamageToEnemy(_currentEnemy.CurrentHealth, DamageType.Artifact);
 				}

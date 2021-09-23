@@ -13,7 +13,7 @@ namespace ClickQuest.Artifacts
 
 		public override void OnEquip()
 		{
-			_auraDamageIncreased = (int)(User.Instance.CurrentHero.AuraDamage * DamageModifier);
+			_auraDamageIncreased = (int) (User.Instance.CurrentHero.AuraDamage * DamageModifier);
 			_clickDamageDecreased = (int) (User.Instance.CurrentHero.ClickDamage * DamageModifier);
 
 			User.Instance.CurrentHero.AuraDamage += _auraDamageIncreased;

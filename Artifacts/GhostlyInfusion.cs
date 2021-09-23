@@ -1,4 +1,6 @@
-﻿using ClickQuest.Extensions.CombatManager;
+﻿using System.Windows;
+using ClickQuest.Controls;
+using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Items;
 using ClickQuest.Player;
@@ -12,13 +14,19 @@ namespace ClickQuest.Artifacts
 		private const double DamageModifier = 1.1;
 		
 		private bool _isNextClickEmpowered = false;
-		
-		public override void OnEquip()
+
+		public override bool CanBeEquipped()
 		{
-			if (User.Instance.CurrentHero.EquippedArtifacts.Count < 1)
+			bool hasEnoughFreeSlots =  base.CanBeEquipped();
+			bool isAnArtifactEquipped = User.Instance.CurrentHero.EquippedArtifacts.Count > 0;
+
+			if (hasEnoughFreeSlots && isAnArtifactEquipped)
 			{
-				// todo: Do not equip this artifact.
+				return true;
 			}
+
+			AlertBox.Show("This artifact cannot be equipped right now - it requires at least 1 other artifact to be equipped.", MessageBoxButton.OK);
+			return false;
 		}
 
 		public override void OnEnemyClick()

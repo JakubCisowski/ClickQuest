@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Threading;
+using ClickQuest.Controls;
 using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Items;
 using ClickQuest.Player;
@@ -14,14 +16,6 @@ namespace ClickQuest.Artifacts
 
 		private DispatcherTimer _timer;
 
-		public override void OnEquip()
-		{
-			if (User.Instance.CurrentHero.EquippedArtifacts.Count > 1)
-			{
-				// todo: unable to equip
-			}
-		}
-
 		public override void OnEnemyClick()
 		{
 			_timer.Start();
@@ -30,6 +24,7 @@ namespace ClickQuest.Artifacts
 		public TwinKamas()
 		{
 			Name = "Twin Kamas";
+			ArtifactSlotsRequired = 2;
 			_timer = new DispatcherTimer() {Interval = new TimeSpan(0, 0, StrikeDelay)};
 			_timer.Tick += SecondStrikeTimer_Tick;
 		}
