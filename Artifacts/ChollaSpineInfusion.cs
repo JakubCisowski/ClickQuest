@@ -38,11 +38,9 @@ namespace ClickQuest.Artifacts
 				_spineCount = 0;
 				_currentEnemy = InterfaceController.CurrentEnemy;
 			}
-			else
-			{
-				CombatController.DealDamageToEnemy(DamagePerSpine * _spineCount, DamageType.Artifact);
-				_spineCount++;
-			}
+			
+			CombatController.DealDamageToEnemy(DamagePerSpine * _spineCount, DamageType.Artifact);
+			_spineCount++;
 		}
 
 		public ChollaSpineInfusion()
