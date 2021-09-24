@@ -13,7 +13,7 @@ using ClickQuest.Player;
 
 namespace ClickQuest.Heroes.Buffs
 {
-	public enum BlessingType { ClickDamage = 0, CritChance, PoisonDamage, AuraDamage, AuraSpeed }
+	public enum BlessingType { ClickDamage = 0, CritChance, CritDamage, PoisonDamage, AuraDamage, AuraSpeed }
 
 	public class Blessing : INotifyPropertyChanged, IIdentifiable
 	{
@@ -99,6 +99,10 @@ namespace ClickQuest.Heroes.Buffs
 				case BlessingType.ClickDamage:
 					User.Instance.CurrentHero.ClickDamage += Buff;
 					break;
+				
+				case BlessingType.CritDamage:
+					User.Instance.CurrentHero.CritDamage += 0.01d * Buff;
+					break;
 			}
 
 			InitializeAndStartTimer();
@@ -116,6 +120,10 @@ namespace ClickQuest.Heroes.Buffs
 			{
 				case BlessingType.ClickDamage:
 					User.Instance.CurrentHero.ClickDamage -= Buff;
+					break;
+				
+				case BlessingType.CritDamage:
+					User.Instance.CurrentHero.CritDamage -= 0.01d * Buff;
 					break;
 			}
 

@@ -544,7 +544,7 @@ namespace ClickQuest.Pages
 				}
 			}
 
-			// ["BlessingName, damage: X"]
+			// ["BlessingName, damage: X"] - for crit chance
 			if (User.Instance.CurrentHero != null)
 			{
 				if (User.Instance.CurrentHero.Blessing?.Type == BlessingType.CritChance)
@@ -557,6 +557,24 @@ namespace ClickQuest.Pages
 					runBlessingBuff.SetBinding(Run.TextProperty, bindingBlessingBuff);
 					blockCrit.Inlines.Add(new Bold(runBlessingName));
 					blockCrit.Inlines.Add(new Run(", crit chance: "));
+					blockCrit.Inlines.Add(new Bold(runBlessingBuff));
+					blockCrit.Inlines.Add(new Bold(new Run("%")));
+				}
+			}
+			
+			// ["BlessingName, damage: X"] - for crit damage
+			if (User.Instance.CurrentHero != null)
+			{
+				if (User.Instance.CurrentHero.Blessing?.Type == BlessingType.CritDamage)
+				{
+					var bindingBlessingName = new Binding("Name") {Source = User.Instance.CurrentHero.Blessing};
+					var runBlessingName = new Run();
+					runBlessingName.SetBinding(Run.TextProperty, bindingBlessingName);
+					var bindingBlessingBuff = new Binding("Buff") {Source = User.Instance.CurrentHero.Blessing};
+					var runBlessingBuff = new Run();
+					runBlessingBuff.SetBinding(Run.TextProperty, bindingBlessingBuff);
+					blockCrit.Inlines.Add(new Bold(runBlessingName));
+					blockCrit.Inlines.Add(new Run(", crit damage: "));
 					blockCrit.Inlines.Add(new Bold(runBlessingBuff));
 					blockCrit.Inlines.Add(new Bold(new Run("%")));
 				}
