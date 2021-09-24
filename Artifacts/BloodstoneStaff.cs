@@ -34,7 +34,7 @@ namespace ClickQuest.Artifacts
 		{
 			int bonusDamage = (int) (baseDamage * _stackList.Count * DamageModifierPerStack);
 
-			CombatController.DealDamageToEnemy(bonusDamage, DamageType.Artifact);
+			baseDamage += bonusDamage;
 		}
 
 		public BloodstoneStaff()

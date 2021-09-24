@@ -54,6 +54,10 @@ namespace ClickQuest.Extensions.CombatManager
 			{
 				switch (damageType)
 				{
+					case DamageType.Normal:
+						equippedArtifact.ArtifactFunctionality.OnDealingClickDamage(ref damage);
+						break;
+					
 					case DamageType.Poison:
 						equippedArtifact.ArtifactFunctionality.OnDealingPoisonDamage(ref damage);
 						break;

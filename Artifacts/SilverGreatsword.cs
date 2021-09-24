@@ -14,9 +14,9 @@ namespace ClickQuest.Artifacts
 		{
 			if (InterfaceController.CurrentEnemy is Boss)
 			{
-				int damageDealt = (int) DamageIncreasePercent * baseDamage;
+				int bonusDamage = (int) (DamageIncreasePercent * baseDamage);
 
-				CombatController.DealDamageToEnemy(damageDealt, DamageType.Artifact);
+				baseDamage += bonusDamage;
 			}
 		}
 

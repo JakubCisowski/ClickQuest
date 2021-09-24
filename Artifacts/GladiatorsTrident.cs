@@ -33,7 +33,8 @@ namespace ClickQuest.Artifacts
 
 			if (_timer.IsEnabled)
 			{
-				CombatController.DealDamageToEnemy((int)(baseDamage * DamageModifier), DamageType.Artifact);
+				int bonusDamage = (int) (baseDamage * DamageModifier);
+				baseDamage += bonusDamage;
 			}
 		}
 

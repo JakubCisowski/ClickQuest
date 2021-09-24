@@ -16,9 +16,7 @@ namespace ClickQuest.Artifacts
 
 			if (randomizedValue <= critChance)
 			{
-				int bonusPoisonDamage = (int) (poisonDamage * critDamage - poisonDamage);
-
-				CombatController.DealDamageToEnemy(bonusPoisonDamage, DamageType.Artifact);
+				poisonDamage = (int) (poisonDamage * critDamage);
 			}
 		}
 

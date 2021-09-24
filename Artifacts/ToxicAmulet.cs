@@ -12,7 +12,8 @@ namespace ClickQuest.Artifacts
 		public override void OnDealingPoisonDamage(ref int poisonDamage)
 		{
 			int bonusPoisonDamage = (int) (poisonDamage * PoisonDamageModifier);
-			CombatController.DealDamageToEnemy(bonusPoisonDamage, DamageType.Artifact);
+
+			poisonDamage += bonusPoisonDamage;
 		}
 
 		public ToxicAmulet()

@@ -55,10 +55,16 @@ namespace ClickQuest.Data.UserData
 				var newEquippedArtifacts = hero.Artifacts.Where(x => hero.EquippedArtifacts.Select(y => y.Name).Contains(x.Name)).ToList();
 				hero.EquippedArtifacts = newEquippedArtifacts;
 			}
+			
+			// Reload Achievements.
+			User.Instance.Achievements.DeserializeAchievements();
 		}
 
 		public static void Save()
 		{
+			// Convert Achievements to a serializable string.
+			User.Instance.Achievements.SerializeAchievements();
+			
 			string json = JsonSerializer.Serialize(User.Instance);
 			File.WriteAllText(UserDataPath, json);
 		}
