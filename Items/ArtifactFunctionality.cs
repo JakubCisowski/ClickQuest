@@ -39,6 +39,9 @@ namespace ClickQuest.Items
 
 		// Use to increase ALL damage dealt (eg. by a percentage).
 		public virtual void OnDealingDamage(int baseDamage) { }
+		
+		// Use to increase click damage dealt (eg. by a percentage).
+		public virtual void OnDealingClickDamage(int clickDamage) { }
 
 		// Use to increase poison damage dealt (eg. by a percentage).
 		public virtual void OnDealingPoisonDamage(int poisonDamage) { }
