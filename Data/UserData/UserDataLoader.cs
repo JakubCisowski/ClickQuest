@@ -58,6 +58,9 @@ namespace ClickQuest.Data.UserData
 			
 			// Reload Achievements.
 			User.Instance.Achievements.DeserializeAchievements();
+			
+			// Reload TimePlayed for all heroes.
+			User.Instance.Heroes.ForEach(x=>x.TimePlayed = TimeSpan.Parse(x.TimePlayedString));
 		}
 
 		public static void Save()
@@ -65,6 +68,9 @@ namespace ClickQuest.Data.UserData
 			// Convert Achievements to a serializable string.
 			User.Instance.Achievements.SerializeAchievements();
 			
+			// Convert TimePlayed on all heroes to string.
+			User.Instance.Heroes.ForEach(x=>x.TimePlayedString = x.TimePlayed.ToString());
+
 			string json = JsonSerializer.Serialize(User.Instance);
 			File.WriteAllText(UserDataPath, json);
 		}

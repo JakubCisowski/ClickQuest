@@ -16,7 +16,11 @@ namespace ClickQuest.Player
 		public ObservableDictionary<NumericAchievementType, long> NumericAchievementCollection { get; set; }
 
 		public string AchievementCollectionString { get; set; }
+		
+		[JsonIgnore]
 		public TimeSpan TotalTimePlayed { get; set; }
+		
+		public string TotalTimePlayedString { get; set; }
 
 		public Achievements()
 		{
@@ -30,11 +34,13 @@ namespace ClickQuest.Player
 		public void SerializeAchievements()
 		{
 			AchievementCollectionString = Serialization.SerializeData(NumericAchievementCollection);
+			TotalTimePlayedString = TotalTimePlayed.ToString();
 		}
 
 		public void DeserializeAchievements()
 		{
 			Serialization.DeserializeData(AchievementCollectionString, NumericAchievementCollection);
+			TotalTimePlayed = TimeSpan.Parse(TotalTimePlayedString);
 		}
 
 		public void IncreaseAchievementValue(NumericAchievementType achievementType, long value)

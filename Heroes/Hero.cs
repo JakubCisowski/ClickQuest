@@ -50,7 +50,11 @@ namespace ClickQuest.Heroes
 		public List<Quest> Quests { get; set; }
 		public Blessing Blessing { get; set; }
 		public Specialization Specialization { get; set; }
+		
+		[JsonIgnore]
 		public TimeSpan TimePlayed { get; set; }
+		public string TimePlayedString { get; set; }
+		
 		public double AuraDamage { get; set; }
 
 		public int Experience
