@@ -9,7 +9,7 @@ namespace ClickQuest.Artifacts
 	{
 		private const double PoisonDamageModifier = 1.2;
 		
-		public override void OnDealingPoisonDamage(int poisonDamage)
+		public override void OnDealingPoisonDamage(ref int poisonDamage)
 		{
 			int bonusPoisonDamage = (int) (poisonDamage * PoisonDamageModifier);
 			CombatController.DealDamageToEnemy(bonusPoisonDamage, DamageType.Artifact);

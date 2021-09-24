@@ -248,7 +248,7 @@
 		"Id": 36,
 		"Name": "Bladed Fans",
 		"Rarity": 0,
-		"Description": "For the first 5 seconds in combat with an Enemy, deal no Click, Poison and Aura damage. After 5 seconds, explode dealing damage to the enemy. Damage dealt is equal to 200% of the accumulated damage.",
+		"Description": "For the first 5 seconds in combat with an Enemy, you cannot deal damage to them, and instead accumulate damage. After 5 seconds, explode dealing damage to the enemy. Damage dealt is equal to 200% of the accumulated damage.",
 		"Value": 1
 	},
 	{

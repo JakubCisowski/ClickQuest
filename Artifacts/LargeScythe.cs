@@ -10,7 +10,7 @@ namespace ClickQuest.Artifacts
 	{
 		private const double DamageIncreasePercent = 0.15;
 
-		public override void OnDealingDamage(int baseDamage)
+		public override void OnDealingDamage(ref int baseDamage)
 		{
 			if (InterfaceController.CurrentEnemy is Monster)
 			{

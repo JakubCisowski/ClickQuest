@@ -18,7 +18,7 @@ namespace ClickQuest.Artifacts
 		private Enemy _currentEnemy;
 		private DispatcherTimer _timer;
 
-		public override void OnDealingDamage(int baseDamage)
+		public override void OnDealingDamage(ref int baseDamage)
 		{
 			var newEnemy = InterfaceController.CurrentEnemy;
 
@@ -41,6 +41,7 @@ namespace ClickQuest.Artifacts
 		{
 			Name = "Gladiator's Trident";
 			_timer = new DispatcherTimer();
+			_timer.Tick += DamageIncreaseTimer_Tick;
 		}
 		
 		private void DamageIncreaseTimer_Tick(object source, EventArgs e)

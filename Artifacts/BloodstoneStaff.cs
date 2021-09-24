@@ -30,7 +30,7 @@ namespace ClickQuest.Artifacts
 			_timer.Start();
 		}
 
-		public override void OnDealingDamage(int baseDamage)
+		public override void OnDealingDamage(ref int baseDamage)
 		{
 			int bonusDamage = (int) (baseDamage * _stackList.Count * DamageModifierPerStack);
 

@@ -40,6 +40,26 @@ namespace ClickQuest.Extensions.CombatManager
 
 		public static void DealDamageToEnemy(int damage, DamageType damageType = DamageType.Normal)
 		{
+			// Trigger on dealing (any) damage artifact event.
+			if (damageType != DamageType.Artifact)
+			{
+				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
+				{
+					equippedArtifact.ArtifactFunctionality.OnDealingDamage(ref damage);
+				}
+			}
+
+			// Trigger damage type specific artifact events.
+			foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
+			{
+				switch (damageType)
+				{
+					case DamageType.Poison:
+						equippedArtifact.ArtifactFunctionality.OnDealingPoisonDamage(ref damage);
+						break;
+				}
+			}
+			
 			InterfaceController.CurrentEnemy.CurrentHealth -= damage;
 
 			// todo: zrobic to lepiej potem
@@ -51,26 +71,6 @@ namespace ClickQuest.Extensions.CombatManager
 			else if (InterfaceController.CurrentEnemy is Boss)
 			{
 				InterfaceController.CurrentBossPage.CreateFloatingTextPathAndStartAnimations(damage, damageType);
-			}
-
-			// Trigger on dealing (any) damage artifact event.
-			if (damageType != DamageType.Artifact)
-			{
-				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
-				{
-					equippedArtifact.ArtifactFunctionality.OnDealingDamage(damage);
-				}
-			}
-
-			// Trigger damage type specific artifact events.
-			foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
-			{
-				switch (damageType)
-				{
-					case DamageType.Poison:
-						equippedArtifact.ArtifactFunctionality.OnDealingPoisonDamage(damage);
-						break;
-				}
 			}
 		}
 	}

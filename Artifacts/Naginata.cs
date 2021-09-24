@@ -19,7 +19,7 @@ namespace ClickQuest.Artifacts
 
 		private DispatcherTimer _timer;
 
-		public override void OnDealingClickDamage(int clickDamage)
+		public override void OnDealingClickDamage(ref int clickDamage)
 		{
 			if (InterfaceController.CurrentEnemy is Monster monster)
 			{
