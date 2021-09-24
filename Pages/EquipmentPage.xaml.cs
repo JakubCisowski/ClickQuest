@@ -87,10 +87,11 @@ namespace ClickQuest.Pages
 		private void ItemBorder_TryToEquip(object sender, MouseButtonEventArgs e)
 		{
 			object item = (sender as Border).Tag;
-			bool isFighting = GameData.CurrentPage is RegionPage || GameData.CurrentPage is DungeonBossPage;
+			// todo: albo dodać do ArtifactFunctionality, albo wywalić w ogóle
+			// artefakty i tak będą triggerować się przy zaczęciu tylko questa
 			bool isQuesting = User.Instance.CurrentHero.Quests.Any(x => x.EndDate != default);
 
-			if (item is Artifact artifact && !isFighting && !isQuesting)
+			if (item is Artifact artifact && !isQuesting)
 			{
 				bool isEquipped = User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact);
 

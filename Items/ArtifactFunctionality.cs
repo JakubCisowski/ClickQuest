@@ -2,7 +2,9 @@
 using System.Windows;
 using ClickQuest.Adventures;
 using ClickQuest.Controls;
+using ClickQuest.Data.GameData;
 using ClickQuest.Heroes.Buffs;
+using ClickQuest.Pages;
 using ClickQuest.Player;
 
 namespace ClickQuest.Items
@@ -15,6 +17,14 @@ namespace ClickQuest.Items
 		// Use when trying to equip an artifact to determine if it can be equipped.
 		public virtual bool CanBeEquipped()
 		{
+			bool isFighting = GameData.CurrentPage is RegionPage or DungeonBossPage;
+
+			if (isFighting)
+			{
+				AlertBox.Show($"You cannot equip artifacts while in combat.", MessageBoxButton.OK);
+				return false;
+			}
+			
 			int equippedArtifactsSlots = User.Instance.CurrentHero.EquippedArtifacts.Sum(x => x.ArtifactFunctionality.ArtifactSlotsRequired);
 
 			string slotText = ArtifactSlotsRequired == 1 ? "slot" : "slots";

@@ -16,10 +16,16 @@ namespace ClickQuest.Artifacts
 
 		public override bool CanBeEquipped()
 		{
-			bool hasEnoughFreeSlots = base.CanBeEquipped();
+			bool canBeEquippedBase = base.CanBeEquipped();
+
+			if (!canBeEquippedBase)
+			{
+				return false;
+			}
+			
 			bool isAnArtifactEquipped = User.Instance.CurrentHero.EquippedArtifacts.Count > 0;
 
-			if (hasEnoughFreeSlots && isAnArtifactEquipped)
+			if (isAnArtifactEquipped)
 			{
 				return true;
 			}
