@@ -20,10 +20,11 @@ namespace ClickQuest.Heroes
 		private const int MAX_LEVEL = 100;
 		public const double AURA_SPEED_PER_LEVEL = 0.01;
 		public const double AURA_SPEED_BASE = 1;
-		private int _experience;
 
 		public int Id { get; set; }
 
+		public int Experience { get; set;}
+		
 		public int ExperienceToNextLvl { get; set; }
 
 		public int ExperienceToNextLvlTotal { get; set; }
@@ -56,18 +57,8 @@ namespace ClickQuest.Heroes
 		public string TimePlayedString { get; set; }
 		
 		public double AuraDamage { get; set; }
+		public double AuraAttackSpeed { get; set; }
 
-		public int Experience
-		{
-			get
-			{
-				return _experience;
-			}
-			set
-			{
-				_experience = value;
-			}
-		}
 
 		[JsonIgnore]
 		public string ThisHeroClass
@@ -193,14 +184,6 @@ namespace ClickQuest.Heroes
 			}
 		}
 
-		[JsonIgnore]
-		public double AuraAttackSpeed
-		{
-			get
-			{
-				return AURA_SPEED_PER_LEVEL * Level + AURA_SPEED_BASE;
-			}
-		}
 
 		public Hero(HeroClass heroClass, HeroRace heroRace, string heroName)
 		{
@@ -220,6 +203,7 @@ namespace ClickQuest.Heroes
 			ClickDamagePerLevel = 1;
 			AuraDamage = 0.1;
 			CritDamage = 2.0;
+			AuraAttackSpeed = AURA_SPEED_BASE;
 
 			Id = User.Instance.Heroes.Select(x => x.Id).OrderByDescending(y => y).FirstOrDefault() + 1;
 
@@ -259,12 +243,14 @@ namespace ClickQuest.Heroes
 					case HeroClass.Slayer:
 						ClickDamage += ClickDamagePerLevel;
 						CritChance += CritChancePerLevel;
+						AuraAttackSpeed += AURA_SPEED_PER_LEVEL;
 
 						break;
 
 					case HeroClass.Venom:
 						ClickDamage += ClickDamagePerLevel;
 						PoisonDamage += PoisonDamagePerLevel;
+						AuraAttackSpeed += AURA_SPEED_PER_LEVEL;
 
 						break;
 				}
@@ -374,7 +360,7 @@ namespace ClickQuest.Heroes
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.ExperienceGained, experienceGained);
 			}
 
-			_experience += value;
+			Experience += value;
 			Heroes.Experience.CheckIfLeveledUpAndGrantBonuses(this);
 			ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
 			ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
