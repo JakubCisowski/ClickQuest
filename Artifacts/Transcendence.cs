@@ -10,32 +10,28 @@ namespace ClickQuest.Artifacts
 	// Instead, each click you make on a Monster will give you loot and instantly defeat them. Does not work on Bosses.
 	public class Transcendence : ArtifactFunctionality
 	{
-		private int _clickDamageDecreased;
-		private int _poisonDamageDecreased;
-		private double _auraDamageDecreased;
-
-		public override void OnEquip()
+		public override void OnDealingClickDamage(ref int clickDamage)
 		{
-			// todo: levelupy nadal zwiększają dmg a nie powinny
-
-			_clickDamageDecreased = User.Instance.CurrentHero.ClickDamage;
-			_poisonDamageDecreased = User.Instance.CurrentHero.PoisonDamage;
-			_auraDamageDecreased = User.Instance.CurrentHero.AuraDamage;
-
-			User.Instance.CurrentHero.ClickDamage = 0;
-			User.Instance.CurrentHero.PoisonDamage = 0;
-			User.Instance.CurrentHero.AuraDamage = 0;
+			if (InterfaceController.CurrentEnemy is Monster)
+			{
+				clickDamage = 0;
+			}
 		}
 
-		public override void OnUnequip()
+		public override void OnDealingPoisonDamage(ref int poisonDamage)
 		{
-			User.Instance.CurrentHero.ClickDamage = _clickDamageDecreased;
-			User.Instance.CurrentHero.PoisonDamage = _poisonDamageDecreased;
-			User.Instance.CurrentHero.AuraDamage = _auraDamageDecreased;
+			if (InterfaceController.CurrentEnemy is Monster monster)
+			{
+				poisonDamage = 0;
+			}
+		}
 
-			_clickDamageDecreased = 0;
-			_poisonDamageDecreased = 0;
-			_auraDamageDecreased = 0;
+		public override void OnDealingAuraDamage(ref int auraDamage)
+		{
+			if (InterfaceController.CurrentEnemy is Monster monster)
+			{
+				auraDamage = 0;
+			}
 		}
 
 		public override void OnEnemyClick()

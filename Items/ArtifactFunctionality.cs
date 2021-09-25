@@ -48,13 +48,15 @@ namespace ClickQuest.Items
 		public virtual void OnEnemyClick() { }
 
 		// Use to increase ALL damage dealt (eg. by a percentage).
-		public virtual void OnDealingDamage(ref int baseDamage) { }
+		public virtual void OnDealingDamage(ref int damage) { }
 		
 		// Use to increase click damage dealt (eg. by a percentage).
 		public virtual void OnDealingClickDamage(ref int clickDamage) { }
 
 		// Use to increase poison damage dealt (eg. by a percentage).
 		public virtual void OnDealingPoisonDamage(ref int poisonDamage) { }
+
+		public virtual void OnDealingAuraDamage(ref int auraDamage) { }
 
 		// Use to trigger on-kill effects.
 		public virtual void OnKill() { }

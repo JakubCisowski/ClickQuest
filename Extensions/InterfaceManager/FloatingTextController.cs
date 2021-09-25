@@ -88,7 +88,7 @@ namespace ClickQuest.Extensions.InterfaceManager
 
 			switch (damageType)
 			{
-				case DamageType.Normal:
+				case DamageType.Click:
 					icon.Kind = PackIconKind.CursorDefault;
 					break;
 

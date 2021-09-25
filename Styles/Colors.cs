@@ -47,7 +47,7 @@ namespace ClickQuest.Styles
 
 			switch (damageType)
 			{
-				case DamageType.Normal:
+				case DamageType.Click:
 					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeNormal");
 					break;
 

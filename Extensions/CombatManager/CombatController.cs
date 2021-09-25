@@ -38,7 +38,7 @@ namespace ClickQuest.Extensions.CombatManager
 			}
 		}
 
-		public static void DealDamageToEnemy(int damage, DamageType damageType = DamageType.Normal)
+		public static void DealDamageToEnemy(int damage, DamageType damageType = DamageType.Click)
 		{
 			// Trigger on dealing (any) damage artifact event.
 			if (damageType != DamageType.Artifact)
@@ -54,12 +54,16 @@ namespace ClickQuest.Extensions.CombatManager
 			{
 				switch (damageType)
 				{
-					case DamageType.Normal:
+					case DamageType.Click:
 						equippedArtifact.ArtifactFunctionality.OnDealingClickDamage(ref damage);
 						break;
 					
 					case DamageType.Poison:
 						equippedArtifact.ArtifactFunctionality.OnDealingPoisonDamage(ref damage);
+						break;
+
+					case DamageType.Aura:
+						equippedArtifact.ArtifactFunctionality.OnDealingAuraDamage(ref damage);
 						break;
 				}
 			}
