@@ -65,17 +65,7 @@ namespace ClickQuest.Heroes
 			}
 			set
 			{
-				// Dirty code! Only when ExperienceToNextLvl is 0, we can be sure that we are loading Entity AND not killing any monster/boss.
-				if (ExperienceToNextLvl != 0)
-				{
-					User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.ExperienceGained, value - _experience);
-				}
-
 				_experience = value;
-				Heroes.Experience.CheckIfLeveledUpAndGrantBonuses(this);
-				ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
-				ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
-				ExperienceProgress = Heroes.Experience.CalculateXpProgress(this);
 			}
 		}
 
@@ -373,6 +363,30 @@ namespace ClickQuest.Heroes
 			}
 
 			return (damage, damageType);
+		}
+
+		public void GainExperience(int value, bool isTriggeredFromOnExperienceGained = false)
+		{
+			int experienceGained = value;
+
+			if (ExperienceToNextLvl != 0)
+			{
+				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.ExperienceGained, experienceGained);
+			}
+
+			_experience += value;
+			Heroes.Experience.CheckIfLeveledUpAndGrantBonuses(this);
+			ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
+			ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
+			ExperienceProgress = Heroes.Experience.CalculateXpProgress(this);
+
+			if (!isTriggeredFromOnExperienceGained)
+			{
+				foreach (var artifact in User.Instance.CurrentHero.EquippedArtifacts)
+				{
+					artifact.ArtifactFunctionality.OnExperienceGained(experienceGained);
+				}
+			}
 		}
 	}
 }

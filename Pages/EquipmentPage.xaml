@@ -52,7 +52,7 @@
 				</TabItem.Header>
 
 				<!-- ScrollViewer displaying Artifacts (generated dynamically) -->
-				<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+				<ScrollViewer x:Name="ArtifactsScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
 					<StackPanel x:Name="ArtifactsPanel" />
 				</ScrollViewer>
 			</TabItem>

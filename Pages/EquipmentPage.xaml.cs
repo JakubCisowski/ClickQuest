@@ -130,6 +130,8 @@ namespace ClickQuest.Pages
 					artifactBorder.Background = FindResource("GameBackgroundSecondary") as SolidColorBrush;
 				}
 			}
+
+			ArtifactsScrollViewer.ScrollToTop();
 		}
 
 		private Grid CreateSingleItemGrid(Item item)

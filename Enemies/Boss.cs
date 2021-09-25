@@ -79,7 +79,7 @@ namespace ClickQuest.Enemies
 			int damageDealtToBoss = Health - CurrentHealth;
 			// [PRERELEASE]
 			int experienceGained = 10;
-			User.Instance.CurrentHero.Experience += experienceGained;
+			User.Instance.CurrentHero.GainExperience(experienceGained);
 
 			// Grant boss loot.
 			// 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).

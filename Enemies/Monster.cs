@@ -81,7 +81,7 @@ namespace ClickQuest.Enemies
 		public override void GrantVictoryBonuses()
 		{
 			int experienceGained = Experience.CalculateMonsterXpReward(Health);
-			User.Instance.CurrentHero.Experience += experienceGained;
+			User.Instance.CurrentHero.GainExperience(experienceGained);
 
 			var frequencyList = Loot.Select(x => x.Frequency).ToList();
 			int position = CollectionsController.RandomizeFreqenciesListPosition(frequencyList);
@@ -93,7 +93,7 @@ namespace ClickQuest.Enemies
 			}
 
 			// [PRERELEASE] Display exp and loot for testing purposes.
-			(GameData.CurrentPage as RegionPage).TestRewardsBlock.Text = "Loot: " + selectedLoot.Name + ", Exp: " + experienceGained;
+			(GameData.CurrentPage as RegionPage).TestRewardsBlock.Text = "Loot: " + selectedLoot.Name + ", Base Exp: " + experienceGained;
 
 			CheckForDungeonKeyDrop();
 
