@@ -10,7 +10,7 @@ namespace ClickQuest.Artifacts
 	// After killing a monster, your next click is guaranteed to critically hit, and will deal 10% more damage.
 	public class GhostlyInfusion : ArtifactFunctionality
 	{
-		private const double DamageModifier = 1.1;
+		private const double DamageModifier = 0.1;
 
 		private bool _isNextClickEmpowered;
 
@@ -34,20 +34,24 @@ namespace ClickQuest.Artifacts
 			return false;
 		}
 
-		public override void OnEnemyClick()
+		public override void OnDealingClickDamage(ref int clickDamage, DamageType clickDamageType)
 		{
 			if (_isNextClickEmpowered)
 			{
 				_isNextClickEmpowered = false;
 
-				// todo: póki co nie działa jak intended - zadaje zwiększony crit damage POZA zwykłym kliknięciem, czyli zadaje (click damage + crit damage * 1.1)
-				// intended działanie:
-				// jeśli atak by skrytował, to zadaje 1.1* dmg
-				// jeśli atak by nie skrytował, to krytuje i zadaje 1.1* dmg
-				// ma to być jeden atak
-				int damageDealt = (int) (User.Instance.CurrentHero.ClickDamage * DamageModifier * User.Instance.CurrentHero.CritDamage);
-
-				CombatController.DealDamageToEnemy(damageDealt, DamageType.Artifact);
+				if (clickDamageType == DamageType.Normal)
+				{
+					int criticalDamageDealt = (int)(clickDamage * User.Instance.CurrentHero.CritDamage);
+					
+					CombatController.DealDamageToEnemy(criticalDamageDealt, DamageType.Critical);
+					CombatController.DealDamageToEnemy((int)(criticalDamageDealt * DamageModifier), DamageType.Artifact);
+					clickDamage = 0;
+				}
+				else if (clickDamageType == DamageType.Critical)
+				{
+					CombatController.DealDamageToEnemy((int)(clickDamage * DamageModifier), DamageType.Artifact);
+				}
 			}
 		}
 

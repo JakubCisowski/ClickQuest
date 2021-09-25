@@ -336,7 +336,7 @@ namespace ClickQuest.Heroes
 		public (int Damage, DamageType DamageType) CalculateBaseAndCritClickDamage()
 		{
 			int damage = ClickDamage;
-			var damageType = DamageType.Click;
+			var damageType = DamageType.Normal;
 
 			// Calculate crit (max 100%).
 			double randomizedValue = RNG.Next(1, 101) / 100d;

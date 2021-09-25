@@ -6,11 +6,11 @@ using ClickQuest.Player;
 
 namespace ClickQuest.Artifacts
 {
-	// Requires three artifact slots to equip. Your click, poison and aura damage become zero.
-	// Instead, each click you make on a Monster will give you loot and instantly defeat them. Does not work on Bosses.
+	// Requires three artifact slots to equip. While on a Region, you don't deal any damage.
+	// Instead, each click you make on a Monster will instantly defeat them.
 	public class Transcendence : ArtifactFunctionality
 	{
-		public override void OnDealingClickDamage(ref int clickDamage)
+		public override void OnDealingClickDamage(ref int clickDamage, DamageType clickDamageType)
 		{
 			if (InterfaceController.CurrentEnemy is Monster)
 			{

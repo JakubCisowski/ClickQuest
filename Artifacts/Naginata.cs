@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Threading;
 using ClickQuest.Enemies;
+using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Items;
 using ClickQuest.Player;
@@ -20,7 +21,7 @@ namespace ClickQuest.Artifacts
 		private DispatcherTimer _timer;
 		private bool _wasMonsterOneshot = false;
 
-		public override void OnDealingClickDamage(ref int clickDamage)
+		public override void OnDealingClickDamage(ref int clickDamage, DamageType clickDamageType)
 		{
 			if (InterfaceController.CurrentEnemy is Monster monster)
 			{

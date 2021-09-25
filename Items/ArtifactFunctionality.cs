@@ -3,6 +3,7 @@ using System.Windows;
 using ClickQuest.Adventures;
 using ClickQuest.Controls;
 using ClickQuest.Data.GameData;
+using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Heroes.Buffs;
 using ClickQuest.Pages;
 using ClickQuest.Player;
@@ -51,7 +52,7 @@ namespace ClickQuest.Items
 		public virtual void OnDealingDamage(ref int damage) { }
 		
 		// Use to increase click damage dealt (eg. by a percentage).
-		public virtual void OnDealingClickDamage(ref int clickDamage) { }
+		public virtual void OnDealingClickDamage(ref int clickDamage, DamageType clickDamageType) { }
 
 		// Use to increase poison damage dealt (eg. by a percentage).
 		public virtual void OnDealingPoisonDamage(ref int poisonDamage) { }
