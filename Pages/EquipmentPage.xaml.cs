@@ -131,7 +131,7 @@ namespace ClickQuest.Pages
 				}
 			}
 
-			ArtifactsScrollViewer.ScrollToTop();
+			//ArtifactsScrollViewer.ScrollToTop();
 		}
 
 		private Grid CreateSingleItemGrid(Item item)

@@ -7,7 +7,7 @@ using ClickQuest.Player;
 
 namespace ClickQuest.Artifacts
 {
-	// If you deal 90% or more of an Enemy's health with a single click, gain double experience, 1 Gold and a 20 increase to Click Damage for 10 seconds.
+	// If you would deal 90% or more of an Enemy's health with a single click, gain double experience, 1 Gold and a 20 increase to Click Damage for 10 seconds.
 	// The damage increase bonus does not stack.
 	public class Naginata : ArtifactFunctionality
 	{
@@ -18,6 +18,7 @@ namespace ClickQuest.Artifacts
 		private const int ClickDamageDuration = 10;
 
 		private DispatcherTimer _timer;
+		private bool _wasMonsterOneshot = false;
 
 		public override void OnDealingClickDamage(ref int clickDamage)
 		{
@@ -29,11 +30,22 @@ namespace ClickQuest.Artifacts
 				{
 					User.Instance.Gold += GoldGained;
 					
-					// todo: gain experience
+					_wasMonsterOneshot = true;
 
 					User.Instance.CurrentHero.ClickDamage += ClickDamageIncrease;
 					_timer.Start();
 				}
+			}
+		}
+
+		public override void OnExperienceGained(int experienceGained)
+		{
+			if (_wasMonsterOneshot)
+			{
+				_wasMonsterOneshot = false;
+
+				int bonusExperience = (int) (experienceGained * ExperienceModifier - experienceGained);
+				User.Instance.CurrentHero.GainExperience(bonusExperience, true);
 			}
 		}
 

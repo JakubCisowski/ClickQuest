@@ -234,7 +234,7 @@
 		"Id": 34,
 		"Name": "Naginata",
 		"Rarity": 0,
-		"Description": "If you deal 90% or more of an Enemy's health with a single click, gain double experience, 1 Gold and a 20 increase to Click Damage for 10 seconds. The damage increase bonus does not stack.",
+		"Description": "If you would deal 90% or more of an Enemy's health with a single click, gain double experience, 1 Gold and a 20 increase to Click Damage for 10 seconds. The damage increase bonus does not stack.",
 		"Value": 1
 	},
 	{
