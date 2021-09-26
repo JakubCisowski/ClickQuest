@@ -62,12 +62,12 @@
 			{
 				"ItemType": "Material",
 				"ItemId": 6,
-				"Frequency": 0.5000
+				"Frequency": 0.1000
 			},
 			{
 				"ItemType": "Material",
 				"ItemId": 7,
-				"Frequency": 0.5000
+				"Frequency": 0.1000
 			},
 			{
 				"ItemType": "Material",
@@ -155,7 +155,662 @@
 	},
 	{
 		"Id": 7,
-		"Name": "",
+		"Name": "Innate of the Brotherhood",
+		"Description": "In Brotherhood of the Assassins, the Innates are usually made up of slaves and other kidnapped civilians. They aren’t very well equipped, and are often expected by the higher-ranked members to die very fast.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 15,
+				"Frequency": 0.0100
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 6,
+				"Frequency": 0.0010
+			}
+		]
+	},
+	{
+		"Id": 8,
+		"Name": "Assassin's Shade",
+		"Description": "Only the best of Innates can ascend up to the title of “Shades”. They wear black clothing, which helps them blend in the environment, and dual wield deadly Kamas. Their blades are often poisoned, making them an even bigger threat.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 15,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 6,
+				"Frequency": 0.0100
+			}
+		]
+	},
+	{
+		"Id": 9,
+		"Name": "Bloodstone-Crazed Warg",
+		"Description": "These poor animals were exposed to the deadly effects of Bloodstone. While most canines die in pain, some survive and become much tougher – as well as easier to tame.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 16,
+				"Frequency": 0.0200
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 17,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 7,
+				"Frequency": 0.1000
+			}
+		]
+	},
+	{
+		"Id": 10,
+		"Name": "Converted Dryad",
+		"Description": "Seems like it’s not only humans that inhabit these woods. The dryads, that are normally neutral tree spirits, must have been converted by the priests, and are now seeking vengeance on you.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 18,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 19,
+				"Frequency": 0.0100
+			}
+		]
+	},
+	{
+		"Id": 11,
+		"Name": "Priest of Salvation",
+		"Description": "These masters of rhetorics are incredibly talented speakers. They spend their entire days lecturing innates, essentially brainwashing them and making them obey every order.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 20,
+				"Frequency": 0.0500
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 16,
+				"Frequency": 0.0200
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 7,
+				"Frequency": 0.0010
+			}
+		]
+	},
+	{
+		"Id": 12,
+		"Name": "Skeletal Warrior",
+		"Description": "The remains of a mighty warrior. This skeleton wields a mace, shield, a set of heavy armor, and is extremely durable. You can see some piles of bones around it, which are likely its undead companions and not just their leftovers.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 21,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 22,
+				"Frequency": 0.1500
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 23,
+				"Frequency": 0.3000
+			},
+			{
+				"ItemType": "Artifact",
+				"ItemId": 9,
+				"Frequency": 0.0500
+			}
+		]
+	},
+	{
+		"Id": 13,
+		"Name": "Plague Zombie",
+		"Description": "Judging by the rusty cleaver in the green-skinned zombie’s right hand, it was a butcher before it died. Its body had been severely wounded, and you can still see multiple cuts everywhere, even on its head.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 21,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 24,
+				"Frequency": 0.4000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 25,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 26,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Artifact",
+				"ItemId": 4,
+				"Frequency": 0.0500
+			},
+			{
+				"ItemType": "Artifact",
+				"ItemId": 10,
+				"Frequency": 0.0500
+			}
+		]
+	},
+	{
+		"Id": 14,
+		"Name": "Poltergeist",
+		"Description": "It was hard to realise you were being attacked by this transparent ghost. When it appeared in sight, however, you started hearing loud noises, and your surroundings suddenly started moving around. The creature’s red eyes stare deep into your soul, and you can see what feels like a smile on its indistinct face.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 8,
+				"Frequency": 0.0500
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 27,
+				"Frequency": 0.1400
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 23,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 26,
+				"Frequency": 0.2500
+			},
+			{
+				"ItemType": "Artifact",
+				"ItemId": 2,
+				"Frequency": 0.0500
+			},
+			{
+				"ItemType": "Artifact",
+				"ItemId": 6,
+				"Frequency": 0.0100
+			}
+		]
+	},
+	{
+		"Id": 15,
+		"Name": "Vampire Prince",
+		"Description": "This undead was clearly an aristocrat before its death – it is wearing a long sleeve shirt, loose trousers, shoulder pads and a long, white cape. It uses a two-handed sword to cripple its enemies, only to feast on them until it cannot take any more of their blood.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 28,
+				"Frequency": 0.3500
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 8,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 25,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Artifact",
+				"ItemId": 8,
+				"Frequency": 0.0500
+			}
+		]
+	},
+	{
+		"Id": 16,
+		"Name": "Wailing Banshee",
+		"Description": "This large, ethereal woman can be heard from afar due to her screaming. She is wearing a long dress, with many chains attached to it, and underneath it is a pinkish ghost. She is wielding a huge scythe in both of her hands, and it looks like she doesn’t use it for harvesting crops, but something else.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 8,
+				"Frequency": 0.1500
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 29,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 30,
+				"Frequency": 0.3000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 25,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 26,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Artifact",
+				"ItemId": 24,
+				"Frequency": 0.0500
+			},
+			{
+				"ItemType": "Artifact",
+				"ItemId": 2,
+				"Frequency": 0.0500
+			},
+			{
+				"ItemType": "Artifact",
+				"ItemId": 6,
+				"Frequency": 0.0500
+			}
+		]
+	},
+	{
+		"Id": 17,
+		"Name": "Spectral Dragon",
+		"Description": "The remains of a legendary dragon. Its bare bones are surrounded by white, magical aura that makes you shiver before you even get close.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 29,
+				"Frequency": 0.3500
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 30,
+				"Frequency": 0.3000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 31,
+				"Frequency": 0.3000
+			},
+			{
+				"ItemType": "Artifact",
+				"ItemId": 1,
+				"Frequency": 0.0500
+			}
+		]
+	},
+	{
+		"Id": 18,
+		"Name": "Ice Golem",
+		"Description": "The Ice Golem is almost entirely made of never melting ice, with just a few stones at the top of it resembling a face. By the looks of it, it is not happy to see you.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 39,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 40,
+				"Frequency": 0.2500
+			},
+			{
+				"ItemType": "Artifact",
+				"ItemId": 14,
+				"Frequency": 0.0100
+			}
+		]
+	},
+	{
+		"Id": 19,
+		"Name": "Yeti Scout",
+		"Description": "The hierarchy of the Yeti is quite complex, but this unit here is clearly just a scout. It's wearing simple brown clothes, and it's carrying a torch - to help see intruders - and a warhorn - to inform their tribe about potential threats.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 41,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 42,
+				"Frequency": 0.1000
+			}
+		]
+	},
+	{
+		"Id": 20,
+		"Name": "Enchanted Ice",
+		"Description": "This creature looks like an icy crystal floating just above the ground. It has been created by the Yeti to scout their terrains and fend off intruders.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 39,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 40,
+				"Frequency": 0.1000
+			}
+		]
+	},
+	{
+		"Id": 21,
+		"Name": "Plagued Warrior",
+		"Description": "You have a hard time telling if this human-like creature is alive or not. It has been severely impacted by some kind of a plague, leaving its gray-colored skin exposed to multiple mutations.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 24,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 21,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 25,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 43,
+				"Frequency": 0.1000
+			}
+		]
+	},
+	{
+		"Id": 22,
+		"Name": "Plagued Dog",
+		"Description": "It seems that the plague doesn't only target humans, but also some animals. This poor dog has almost no fur left - it's bare skin is covered with enourmous bumps, and it looks terrible.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 24,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 32,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 7,
+				"Frequency": 0.2000
+			}
+		]
+	},
+	{
+		"Id": 23,
+		"Name": "Angered Lynx",
+		"Description": "Lynx are the native habitants of these Highlands. This one looks furious, likely due to the Yeti's control over its homeland.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 44,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 33,
+				"Frequency": 0.1000
+			}
+		]
+	},
+	{
+		"Id": 24,
+		"Name": "Yeti Shaman",
+		"Description": "This shaman has clearly mastered the ability to conjure elementals and spread plague. You should kill it quickly, or else you'll end up like some of the other adventurers, stuck forever in half-dead bodies.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 39,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 40,
+				"Frequency": 0.0500
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 41,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 43,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 4,
+				"Frequency": 0.0500
+			}
+		]
+	},
+	{
+		"Id": 25,
+		"Name": "Yeti Leader",
+		"Description": "The leader of this Yeti tribe. It is bigger than most other Yeti. It's carrying a golden spear and multiple trophies - whether it's animal skins or just pure gold - thus it must build a lot of respect among its people.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 41,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 42,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 5,
+				"Frequency": 0.2000
+			}
+		]
+	},
+	{
+		"Id": 26,
+		"Name": "Chubby Rabbit",
+		"Description": "There's no way you would ever hurt this cute, brown rabbit. But maybe, if you scare it a bit, you will get something special?",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Artifact",
+				"ItemId": 5,
+				"Frequency": 0.0001
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 32,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 33,
+				"Frequency": 0.1000
+			}
+		]
+	},
+	{
+		"Id": 27,
+		"Name": "Sly Fox",
+		"Description": "The foxes living in these woods are the masters of stealthing. Spotting one of them among the undergrowth takes longer than actually killing it.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 34,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 33,
+				"Frequency": 0.1000
+			}
+		]
+	},
+	{
+		"Id": 28,
+		"Name": "Wolf Pup",
+		"Description": "The offspring of a wolven family. This tiny ball of gray fur still cannot hunt on its own, but it's learning from its parents every day.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 35,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 33,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 7,
+				"Frequency": 0.0500
+			}
+		]
+	},
+	{
+		"Id": 29,
+		"Name": "Pack Wolf",
+		"Description": "This is an adult wolf, its fur is mostly brown with some black and gray spots. It is attacking you because you have trespassed its territory, and threatened its offspring.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 35,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 7,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 33,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 36,
+				"Frequency": 0.2000
+			}
+		]
+	},
+	{
+		"Id": 30,
+		"Name": "Black Hawk",
+		"Description": "While normally the hawks reside high up in the canopy, this one flew down to 'greet' the intruder to its home.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 33,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 37,
+				"Frequency": 0.2000
+			}
+		]
+	},
+	{
+		"Id": 31,
+		"Name": "Wild Boar",
+		"Description": "This dark boar has seemingly been on a vegetarian diet for a long time. It might change soon, as it's about to charge and attack you.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 38,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 32,
+				"Frequency": 0.2000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 18,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 36,
+				"Frequency": 0.2000
+			}
+		]
+	},
+	{
+		"Id": 32,
+		"Name": "Storm Atronach",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -173,8 +828,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 33,
+		"Name": "Colossus",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -192,8 +847,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 34,
+		"Name": "Titan Lord",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -211,8 +866,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 35,
+		"Name": "Steel Golem",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -230,8 +885,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 36,
+		"Name": "Obsidian Gargoyle",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -249,8 +904,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 37,
+		"Name": "Electric Catfish",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -268,8 +923,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 38,
+		"Name": "Kobold Marauder",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -287,8 +942,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 39,
+		"Name": "Kobold Champion",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -306,8 +961,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 40,
+		"Name": "Freshwater Crab",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -325,8 +980,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 41,
+		"Name": "Brown Bear Cub",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -344,8 +999,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 42,
+		"Name": "Brown Bear",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -363,8 +1018,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 43,
+		"Name": "Will o' Wisp",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -382,8 +1037,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 44,
+		"Name": "Naga Queen",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -401,8 +1056,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 45,
+		"Name": "Snake Minion",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -420,8 +1075,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 46,
+		"Name": "Naga Guard",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -439,8 +1094,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 47,
+		"Name": "Naga Scout",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -458,8 +1113,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 48,
+		"Name": "Lamia",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -477,8 +1132,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 49,
+		"Name": "Naga Swordsmaster",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -496,8 +1151,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 50,
+		"Name": "50",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -515,8 +1170,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 51,
+		"Name": "51",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -534,8 +1189,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 52,
+		"Name": "52",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -553,8 +1208,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 53,
+		"Name": "53",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -572,8 +1227,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 54,
+		"Name": "54",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",
@@ -591,27 +1246,8 @@
 		]
 	},
 	{
-		"Id": 1,
-		"Name": "Gray Wolf",
-		"Description": "GrayWolfDesc",
-		"Health": 60,
-		"Image": "/example.png",
-		"Loot": [
-			{
-				"ItemType": "Material",
-				"ItemId": 1,
-				"Frequency": 0.5000
-			},
-			{
-				"ItemType": "Recipe",
-				"ItemId": 1,
-				"Frequency": 0.5000
-			}
-		]
-	},
-	{
-		"Id": 1,
-		"Name": "Gray Wolf",
+		"Id": 55,
+		"Name": "55",
 		"Description": "GrayWolfDesc",
 		"Health": 60,
 		"Image": "/example.png",

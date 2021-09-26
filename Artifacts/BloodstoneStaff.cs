@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
+using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Items;
 
 namespace ClickQuest.Artifacts
@@ -29,11 +30,25 @@ namespace ClickQuest.Artifacts
 			_timer.Start();
 		}
 
-		public override void OnDealingDamage(ref int baseDamage)
+		public override void OnDealingClickDamage(ref int clickDamage, DamageType clickDamageType)
 		{
-			int bonusDamage = (int) (baseDamage * _stackList.Count * DamageModifierPerStack);
+			int bonusDamage = (int) (clickDamage * _stackList.Count * DamageModifierPerStack);
 
-			baseDamage += bonusDamage;
+			clickDamage += bonusDamage;
+		}
+
+		public override void OnDealingPoisonDamage(ref int poisonDamage)
+		{
+			int bonusDamage = (int) (poisonDamage * _stackList.Count * DamageModifierPerStack);
+
+			poisonDamage += bonusDamage;
+		}
+
+		public override void OnDealingAuraDamage(ref int auraDamage)
+		{
+			int bonusDamage = (int) (auraDamage * _stackList.Count * DamageModifierPerStack);
+
+			auraDamage += bonusDamage;
 		}
 
 		public BloodstoneStaff()

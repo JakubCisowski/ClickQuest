@@ -105,9 +105,11 @@ namespace ClickQuest.Heroes.Buffs
 					break;
 				
 				case BlessingType.CritChance:
+					User.Instance.CurrentHero.CritChance += 0.01d * Buff;
 					break;
 				
 				case BlessingType.PoisonDamage:
+					User.Instance.CurrentHero.PoisonDamage += Buff;
 					break;
 				
 				case BlessingType.AuraDamage:
@@ -115,6 +117,7 @@ namespace ClickQuest.Heroes.Buffs
 					break;
 				
 				case BlessingType.AuraSpeed:
+					User.Instance.CurrentHero.AuraAttackSpeed += 0.01d * Buff;
 					break;
 			}
 
@@ -140,9 +143,11 @@ namespace ClickQuest.Heroes.Buffs
 					break;
 				
 				case BlessingType.CritChance:
+					User.Instance.CurrentHero.CritChance -= 0.01d * Buff;
 					break;
 				
 				case BlessingType.PoisonDamage:
+					User.Instance.CurrentHero.PoisonDamage -= Buff;
 					break;
 				
 				case BlessingType.AuraDamage:
@@ -150,6 +155,7 @@ namespace ClickQuest.Heroes.Buffs
 					break;
 				
 				case BlessingType.AuraSpeed:
+					User.Instance.CurrentHero.AuraAttackSpeed -= 0.01d * Buff;
 					break;
 			}
 

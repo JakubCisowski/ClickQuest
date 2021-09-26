@@ -225,84 +225,98 @@
 	},
 	{
 		"Id": 32,
-		"Name": "",
+		"Name": "Patch of Fur",
 		"Rarity": 1,
 		"Description": "",
 		"Value": 2
 	},
 	{
 		"Id": 33,
-		"Name": "Large Skull",
+		"Name": "Small Talon",
 		"Rarity": 1,
 		"Description": "",
 		"Value": 2
 	},
 	{
 		"Id": 34,
-		"Name": "Large Skull",
+		"Name": "Brown Fox Fur",
 		"Rarity": 1,
 		"Description": "",
 		"Value": 2
 	},
 	{
 		"Id": 35,
-		"Name": "Large Skull",
+		"Name": "Wolf Skin",
 		"Rarity": 1,
 		"Description": "",
 		"Value": 2
 	},
 	{
 		"Id": 36,
-		"Name": "Large Skull",
+		"Name": "Bone Shard",
 		"Rarity": 1,
 		"Description": "",
 		"Value": 2
 	},
 	{
 		"Id": 37,
-		"Name": "Large Skull",
+		"Name": "Hawk Feather",
 		"Rarity": 1,
 		"Description": "",
 		"Value": 2
 	},
 	{
 		"Id": 38,
-		"Name": "Large Skull",
+		"Name": "Boar Tusk",
 		"Rarity": 1,
 		"Description": "",
 		"Value": 2
 	},
 	{
 		"Id": 39,
-		"Name": "Large Skull",
+		"Name": "Ice Marble",
 		"Rarity": 1,
 		"Description": "",
 		"Value": 2
 	},
 	{
 		"Id": 40,
-		"Name": "Large Skull",
+		"Name": "Never Melting Ice",
 		"Rarity": 1,
 		"Description": "",
 		"Value": 2
 	},
 	{
 		"Id": 41,
-		"Name": "Large Skull",
+		"Name": "Patch of Yeti Fur",
 		"Rarity": 1,
 		"Description": "",
 		"Value": 2
 	},
 	{
 		"Id": 42,
-		"Name": "Large Skull",
+		"Name": "Vicious Claw",
 		"Rarity": 1,
 		"Description": "",
 		"Value": 2
 	},
 	{
 		"Id": 43,
-		"Name": "Large Skull",
+		"Name": "Vial of Unknown Medicine",
+		"Rarity": 1,
+		"Description": "",
+		"Value": 2
+	},
+	{
+		"Id": 44,
+		"Name": "Snow Lynx Fur",
+		"Rarity": 1,
+		"Description": "",
+		"Value": 2
+	},
+	{
+		"Id": 45,
+		"Name": "Bottle of Holy Water",
 		"Rarity": 1,
 		"Description": "",
 		"Value": 2

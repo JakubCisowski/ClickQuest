@@ -101,5 +101,57 @@
 		"Name": "Recipe: Cholla Spine Infusion",
 		"Rarity": 4,
 		"Value": 1
+	},
+	{
+		"Id": 4,
+		"ArtifactId": 39,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Vial of Plague",
+		"Rarity": 3,
+		"Value": 1
+	},
+	{
+		"Id": 5,
+		"ArtifactId": 38,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Gold-Tipped Spear",
+		"Rarity": 3,
+		"Value": 1
+	},
+	{
+		"Id": 6,
+		"ArtifactId": 19,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Twin Kamas",
+		"Rarity": 3,
+		"Value": 1
+	},
+	{
+		"Id": 7,
+		"ArtifactId": 12,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Bloodstone Staff",
+		"Rarity": 3,
+		"Value": 1
 	}
 ]
