@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -14,11 +15,53 @@ namespace ClickQuest.Pages
 	public partial class EquipmentPage : Page
 	{
 		private static int _selectedTabIndex;
+		private static double _verticalOffset;
 
 		public EquipmentPage()
 		{
 			InitializeComponent();
+			ReloadScrollbarOffset();
 			UpdateEquipment();
+		}
+
+		private void ReloadScrollbarOffset()
+		{
+			if (_verticalOffset != 0)
+			{
+				switch (_selectedTabIndex)
+				{
+					case 0:
+						MaterialsScrollViewer.ScrollToVerticalOffset(_verticalOffset);
+						break;
+
+					case 1:
+						RecipesScrollViewer.ScrollToVerticalOffset(_verticalOffset);
+						break;
+
+					case 2:
+						ArtifactsScrollViewer.ScrollToVerticalOffset(_verticalOffset);
+						break;
+				}
+				_verticalOffset = 0;
+			}
+		}
+
+		public void SaveScrollbarOffset()
+		{
+			switch (_selectedTabIndex)
+			{
+				case 0:
+					_verticalOffset = MaterialsScrollViewer.VerticalOffset;
+					break;
+
+				case 1:
+					_verticalOffset = RecipesScrollViewer.VerticalOffset;
+					break;
+
+				case 2:
+					_verticalOffset = ArtifactsScrollViewer.VerticalOffset;
+					break;
+			}
 		}
 
 		public void UpdateEquipment()
@@ -124,6 +167,7 @@ namespace ClickQuest.Pages
 					ArtifactsPanel.Children.Clear();
 					UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
 					RefreshEquippedArtifacts();
+					ArtifactsScrollViewer.ScrollToTop();
 				}
 			}
 		}
@@ -138,8 +182,6 @@ namespace ClickQuest.Pages
 					artifactBorder.Background = FindResource("GameBackgroundSecondary") as SolidColorBrush;
 				}
 			}
-
-			ArtifactsScrollViewer.ScrollToTop();
 		}
 
 		private Grid CreateSingleItemGrid(Item item)
@@ -185,6 +227,7 @@ namespace ClickQuest.Pages
 			{
 				// Save tab selection (to set it after updating equipment page).
 				_selectedTabIndex = EquipmentTabControl.SelectedIndex;
+				_verticalOffset = 0;
 			}
 		}
 	}

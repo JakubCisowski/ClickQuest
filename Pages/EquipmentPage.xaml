@@ -22,7 +22,7 @@
 				</TabItem.Header>
 
 				<!-- ScrollViewer displaying Materials (generated dynamically) -->
-				<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+				<ScrollViewer x:Name="MaterialsScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
 					<StackPanel x:Name="MaterialsPanel" />
 				</ScrollViewer>
 			</TabItem>
@@ -37,7 +37,7 @@
 				</TabItem.Header>
 
 				<!-- ScrollViewer displaying Recipes (generated dynamically) -->
-				<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+				<ScrollViewer x:Name="RecipesScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
 					<StackPanel x:Name="RecipesPanel" />
 				</ScrollViewer>
 			</TabItem>

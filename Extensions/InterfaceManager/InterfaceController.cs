@@ -82,6 +82,13 @@ namespace ClickQuest.Extensions.InterfaceManager
 
 		public static void ChangePage(Page destinationPage, string locationInfoText)
 		{
+			try
+			{
+				dynamic p = GameData.CurrentPage;
+				(p.EquipmentFrame.Content as EquipmentPage).SaveScrollbarOffset();
+			}
+			catch (RuntimeBinderException) { }
+			
 			var window = Application.Current.MainWindow as GameWindow;
 			window.CurrentFrame.Navigate(destinationPage);
 			window.LocationInfo = locationInfoText;
