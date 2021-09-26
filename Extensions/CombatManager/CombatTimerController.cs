@@ -86,12 +86,6 @@ namespace ClickQuest.Extensions.CombatManager
 				_poisonTicks++;
 
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.PoisonTicksAmount, 1);
-
-				bool isMonsterDead = InterfaceController.CurrentEnemy.HandleEnemyDeathIfDefeated();
-				if (isMonsterDead)
-				{
-					InterfaceController.CurrentMonsterButton?.SpawnMonster();
-				}
 			}
 		}
 
@@ -100,12 +94,6 @@ namespace ClickQuest.Extensions.CombatManager
 			if (User.Instance.CurrentHero != null)
 			{
 				CombatController.DealDamageToEnemy(AuraTickDamage, DamageType.Aura);
-
-				bool isMonsterDead = InterfaceController.CurrentEnemy.HandleEnemyDeathIfDefeated();
-				if (isMonsterDead)
-				{
-					InterfaceController.CurrentMonsterButton?.SpawnMonster();
-				}
 			}
 		}
 

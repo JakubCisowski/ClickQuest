@@ -37,7 +37,7 @@ namespace ClickQuest.Enemies
 		}
 
 		// Returns true if Enemy died.
-		public abstract bool HandleEnemyDeathIfDefeated();
+		public abstract void HandleEnemyDeathIfDefeated();
 
 		public abstract void GrantVictoryBonuses();
 

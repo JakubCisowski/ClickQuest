@@ -3,6 +3,7 @@ using System.Linq;
 using ClickQuest.Data.GameData;
 using ClickQuest.Extensions.CollectionsManager;
 using ClickQuest.Extensions.CombatManager;
+using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Heroes;
 using ClickQuest.Items;
 using ClickQuest.Pages;
@@ -58,7 +59,7 @@ namespace ClickQuest.Enemies
 			return copy;
 		}
 
-		public override bool HandleEnemyDeathIfDefeated()
+		public override void HandleEnemyDeathIfDefeated()
 		{
 			if (CurrentHealth <= 0)
 			{
@@ -72,10 +73,8 @@ namespace ClickQuest.Enemies
 					equippedArtifact.ArtifactFunctionality.OnKill();
 				}
 
-				return true;
+				InterfaceController.CurrentMonsterButton?.SpawnMonster();
 			}
-
-			return false;
 		}
 
 		public override void GrantVictoryBonuses()

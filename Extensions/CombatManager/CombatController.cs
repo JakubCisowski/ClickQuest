@@ -80,6 +80,8 @@ namespace ClickQuest.Extensions.CombatManager
 			{
 				InterfaceController.CurrentBossPage.CreateFloatingTextPathAndStartAnimations(damage, damageType);
 			}
+
+			InterfaceController.CurrentEnemy.HandleEnemyDeathIfDefeated();
 		}
 	}
 }

@@ -62,12 +62,6 @@ namespace ClickQuest.Controls
 			{
 				CombatController.HandleUserClickOnEnemy();
 
-				bool isMonsterDead = Monster.HandleEnemyDeathIfDefeated();
-				if (isMonsterDead)
-				{
-					SpawnMonster();
-				}
-
 				_regionPage.StatsFrame.Refresh();
 			}
 			else

@@ -56,7 +56,7 @@ namespace ClickQuest.Enemies
 			return copy;
 		}
 
-		public override bool HandleEnemyDeathIfDefeated()
+		public override void HandleEnemyDeathIfDefeated()
 		{
 			if (CurrentHealth <= 0)
 			{
@@ -67,11 +67,7 @@ namespace ClickQuest.Enemies
 
 				GrantVictoryBonuses();
 				InterfaceController.CurrentBossPage.HandleInterfaceAfterBossDeath();
-
-				return true;
 			}
-
-			return false;
 		}
 
 		public override void GrantVictoryBonuses()
