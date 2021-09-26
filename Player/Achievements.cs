@@ -16,10 +16,10 @@ namespace ClickQuest.Player
 		public ObservableDictionary<NumericAchievementType, long> NumericAchievementCollection { get; set; }
 
 		public string AchievementCollectionString { get; set; }
-		
+
 		[JsonIgnore]
 		public TimeSpan TotalTimePlayed { get; set; }
-		
+
 		public string TotalTimePlayedString { get; set; }
 
 		public Achievements()

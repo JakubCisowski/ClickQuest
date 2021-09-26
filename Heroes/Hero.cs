@@ -23,8 +23,8 @@ namespace ClickQuest.Heroes
 
 		public int Id { get; set; }
 
-		public int Experience { get; set;}
-		
+		public int Experience { get; set; }
+
 		public int ExperienceToNextLvl { get; set; }
 
 		public int ExperienceToNextLvlTotal { get; set; }
@@ -51,14 +51,14 @@ namespace ClickQuest.Heroes
 		public List<Quest> Quests { get; set; }
 		public Blessing Blessing { get; set; }
 		public Specialization Specialization { get; set; }
-		
+
 		[JsonIgnore]
 		public TimeSpan TimePlayed { get; set; }
+
 		public string TimePlayedString { get; set; }
-		
+
 		public double AuraDamage { get; set; }
 		public double AuraAttackSpeed { get; set; }
-
 
 		[JsonIgnore]
 		public string ThisHeroClass
@@ -94,7 +94,7 @@ namespace ClickQuest.Heroes
 		{
 			get
 			{
-				string critDamageText = Math.Floor(CritDamage * 100).ToString() + "%";
+				string critDamageText = Math.Floor(CritDamage * 100) + "%";
 				return critDamageText;
 			}
 		}
@@ -183,7 +183,6 @@ namespace ClickQuest.Heroes
 				return AURA_SPEED_PER_LEVEL * Level;
 			}
 		}
-
 
 		public Hero(HeroClass heroClass, HeroRace heroRace, string heroName)
 		{

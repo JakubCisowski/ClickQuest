@@ -18,8 +18,8 @@ namespace ClickQuest.Artifacts
 		private const int ClickDamageIncrease = 20;
 		private const int ClickDamageDuration = 10;
 
-		private DispatcherTimer _timer;
-		private bool _wasMonsterOneshot = false;
+		private readonly DispatcherTimer _timer;
+		private bool _wasMonsterOneshot;
 
 		public override void OnDealingClickDamage(ref int clickDamage, DamageType clickDamageType)
 		{
@@ -30,7 +30,7 @@ namespace ClickQuest.Artifacts
 				if (isDamageInThreshold)
 				{
 					User.Instance.Gold += GoldGained;
-					
+
 					_wasMonsterOneshot = true;
 
 					User.Instance.CurrentHero.ClickDamage += ClickDamageIncrease;
@@ -53,10 +53,13 @@ namespace ClickQuest.Artifacts
 		public Naginata()
 		{
 			Name = "Naginata";
-			_timer = new DispatcherTimer() {Interval = new TimeSpan(0, 0, ClickDamageDuration)};
+			_timer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, ClickDamageDuration)
+			};
 			_timer.Tick += DamageIncreaseTimer_Tick;
 		}
-		
+
 		private void DamageIncreaseTimer_Tick(object source, EventArgs e)
 		{
 			_timer.Stop();

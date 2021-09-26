@@ -92,14 +92,14 @@ namespace ClickQuest.Heroes.Buffs
 			{
 				artifact.ArtifactFunctionality.OnBlessingStarted(this);
 			}
-			
+
 			// Increase hero stat.
 			switch (Type)
 			{
 				case BlessingType.ClickDamage:
 					User.Instance.CurrentHero.ClickDamage += Buff;
 					break;
-				
+
 				case BlessingType.CritDamage:
 					User.Instance.CurrentHero.CritDamage += 0.01d * Buff;
 					break;
@@ -121,7 +121,7 @@ namespace ClickQuest.Heroes.Buffs
 				case BlessingType.ClickDamage:
 					User.Instance.CurrentHero.ClickDamage -= Buff;
 					break;
-				
+
 				case BlessingType.CritDamage:
 					User.Instance.CurrentHero.CritDamage -= 0.01d * Buff;
 					break;
@@ -134,7 +134,10 @@ namespace ClickQuest.Heroes.Buffs
 
 		private void InitializeAndStartTimer()
 		{
-			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 1)};
+			_timer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 1)
+			};
 			_timer.Tick += Timer_Tick;
 			_timer.Start();
 		}

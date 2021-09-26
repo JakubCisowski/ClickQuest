@@ -41,7 +41,10 @@ namespace ClickQuest.Artifacts
 		{
 			Name = "Death-Infused Bone Talisman";
 
-			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, Interval)};
+			_timer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 0, 0, Interval)
+			};
 			_timer.Tick += DecayTimer_Tick;
 		}
 

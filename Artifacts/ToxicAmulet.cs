@@ -1,6 +1,4 @@
-﻿using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Items;
-using ClickQuest.Player;
+﻿using ClickQuest.Items;
 
 namespace ClickQuest.Artifacts
 {
@@ -8,7 +6,7 @@ namespace ClickQuest.Artifacts
 	public class ToxicAmulet : ArtifactFunctionality
 	{
 		private const double PoisonDamageModifier = 1.2;
-		
+
 		public override void OnDealingPoisonDamage(ref int poisonDamage)
 		{
 			int bonusPoisonDamage = (int) (poisonDamage * PoisonDamageModifier);

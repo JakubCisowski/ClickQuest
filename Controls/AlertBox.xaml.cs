@@ -16,7 +16,13 @@ namespace ClickQuest.Controls
 
 		public static MessageBoxResult Show(string content, MessageBoxButton buttons = MessageBoxButton.YesNo)
 		{
-			MessageBox = new AlertBox {ContentBox = {Text = content}};
+			MessageBox = new AlertBox
+			{
+				ContentBox =
+				{
+					Text = content
+				}
+			};
 
 			switch (buttons)
 			{

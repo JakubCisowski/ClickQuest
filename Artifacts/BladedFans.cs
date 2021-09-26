@@ -16,7 +16,7 @@ namespace ClickQuest.Artifacts
 
 		private Enemy _currentEnemy;
 		private int _damageStored;
-		private DispatcherTimer _timer;
+		private readonly DispatcherTimer _timer;
 
 		public override void OnDealingDamage(ref int baseDamage)
 		{
@@ -36,10 +36,13 @@ namespace ClickQuest.Artifacts
 		public BladedFans()
 		{
 			Name = "Bladed Fans";
-			_timer = new DispatcherTimer() {Interval = new TimeSpan(0, 0, LockoutDuration)};
+			_timer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, LockoutDuration)
+			};
 			_timer.Tick += ExplosionTimer_Tick;
 		}
-		
+
 		private void ExplosionTimer_Tick(object source, EventArgs e)
 		{
 			_timer.Stop();

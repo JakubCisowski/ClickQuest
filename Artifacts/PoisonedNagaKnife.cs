@@ -9,12 +9,12 @@ namespace ClickQuest.Artifacts
 	public class PoisonedNagaKnife : ArtifactFunctionality
 	{
 		private const double DamageDealtPercentage = 0.05;
-		
+
 		public override void OnEnemyClick()
 		{
 			if (InterfaceController.CurrentEnemy is Monster monster)
 			{
-				CombatController.DealDamageToEnemy((int)(monster.Health * DamageDealtPercentage), DamageType.Artifact);
+				CombatController.DealDamageToEnemy((int) (monster.Health * DamageDealtPercentage), DamageType.Artifact);
 			}
 		}
 

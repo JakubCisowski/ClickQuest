@@ -30,7 +30,7 @@ namespace ClickQuest.Artifacts
 			User.Instance.CurrentHero.ClickDamage -= _stackCount * ClickDamagePerStack;
 			User.Instance.CurrentHero.CritChance -= _stackCount * CritChancePerStack;
 			User.Instance.CurrentHero.CritDamage -= _stackCount * CritDamagePerStack;
-			
+
 			_stackCount = 0;
 		}
 

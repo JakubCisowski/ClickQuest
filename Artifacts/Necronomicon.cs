@@ -19,7 +19,7 @@ namespace ClickQuest.Artifacts
 			{
 				PoisonDamageIncreaseTimer_Tick(null, null);
 			}
-			
+
 			User.Instance.CurrentHero.PoisonDamage += PoisonDamageIncrease;
 			_timer.Start();
 		}
@@ -27,7 +27,10 @@ namespace ClickQuest.Artifacts
 		public Necronomicon()
 		{
 			Name = "Necronomicon";
-			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, StackDuration)};
+			_timer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, StackDuration)
+			};
 			_timer.Tick += PoisonDamageIncreaseTimer_Tick;
 		}
 

@@ -1,5 +1,4 @@
 ﻿using ClickQuest.Enemies;
-using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Items;
 

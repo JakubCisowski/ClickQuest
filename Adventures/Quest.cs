@@ -69,7 +69,10 @@ namespace ClickQuest.Adventures
 			RewardBlessingIds = new List<int>();
 			RewardIngotIds = new List<int>();
 
-			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};
+			_timer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 0, 1)
+			};
 			_timer.Tick += Timer_Tick;
 		}
 
@@ -99,7 +102,7 @@ namespace ClickQuest.Adventures
 			// Create copy of this quest (to make doing the same quest possible on other heroes at the same time).
 			var questCopy = CopyQuest();
 			questCopy.EndDate = EndDate;
-			
+
 			// Trigger on-quest start artifacts.
 			foreach (var artifact in User.Instance.CurrentHero.EquippedArtifacts)
 			{

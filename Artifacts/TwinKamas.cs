@@ -22,7 +22,10 @@ namespace ClickQuest.Artifacts
 		{
 			Name = "Twin Kamas";
 			ArtifactSlotsRequired = 2;
-			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, StrikeDelay)};
+			_timer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, StrikeDelay)
+			};
 			_timer.Tick += SecondStrikeTimer_Tick;
 		}
 

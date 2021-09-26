@@ -5,7 +5,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using ClickQuest.Data.GameData;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Items;
 using ClickQuest.Player;
@@ -45,7 +44,7 @@ namespace ClickQuest.Pages
 			if (specificEquipmentCollection != null)
 			{
 				ReorderItemsInList(ref specificEquipmentCollection);
-				
+
 				foreach (var item in specificEquipmentCollection)
 				{
 					var border = new Border
@@ -74,13 +73,12 @@ namespace ClickQuest.Pages
 			}
 		}
 
-		private void ReorderItemsInList<T>(ref List<T> specificEquipmentCollection) where T:Item
+		private void ReorderItemsInList<T>(ref List<T> specificEquipmentCollection) where T : Item
 		{
 			// 1. Items should be ordered based on (name / rarity / type / something else) - currently Name.
 			// 2. Equipped Artifacts should be at the top.
-			
-			var orderedItemsList = specificEquipmentCollection.OrderByDescending(x=>User.Instance.CurrentHero.EquippedArtifacts.Contains(x as Artifact))
-				.ThenBy(y=>y.Name).ToList();
+
+			var orderedItemsList = specificEquipmentCollection.OrderByDescending(x => User.Instance.CurrentHero.EquippedArtifacts.Contains(x as Artifact)).ThenBy(y => y.Name).ToList();
 			specificEquipmentCollection = orderedItemsList;
 		}
 
@@ -112,7 +110,7 @@ namespace ClickQuest.Pages
 					artifact.ArtifactFunctionality.OnUnequip();
 					(sender as Border).Background = FindResource("GameBackgroundAdditional") as SolidColorBrush;
 				}
-				
+
 				// Refresh Artifacts tab.
 				ArtifactsPanel.Children.Clear();
 				UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);

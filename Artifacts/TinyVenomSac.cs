@@ -7,7 +7,7 @@ namespace ClickQuest.Artifacts
 	public class TinyVenomSac : ArtifactFunctionality
 	{
 		private const int PoisonDamageIncrease = 1;
-		
+
 		public override void OnEquip()
 		{
 			User.Instance.CurrentHero.PoisonDamage += PoisonDamageIncrease;

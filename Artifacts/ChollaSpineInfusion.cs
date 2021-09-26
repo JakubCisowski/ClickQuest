@@ -25,7 +25,7 @@ namespace ClickQuest.Artifacts
 			{
 				return false;
 			}
-			
+
 			bool isAnArtifactEquipped = User.Instance.CurrentHero.EquippedArtifacts.Count > 0;
 
 			if (isAnArtifactEquipped)
@@ -44,7 +44,7 @@ namespace ClickQuest.Artifacts
 				_spineCount = 0;
 				_currentEnemy = InterfaceController.CurrentEnemy;
 			}
-			
+
 			CombatController.DealDamageToEnemy(DamagePerSpine * _spineCount, DamageType.Artifact);
 			_spineCount++;
 		}

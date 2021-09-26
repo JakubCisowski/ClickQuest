@@ -22,7 +22,7 @@ namespace ClickQuest.Artifacts
 			{
 				return false;
 			}
-			
+
 			bool isAnArtifactEquipped = User.Instance.CurrentHero.EquippedArtifacts.Count > 0;
 
 			if (isAnArtifactEquipped)
@@ -42,15 +42,15 @@ namespace ClickQuest.Artifacts
 
 				if (clickDamageType == DamageType.Normal)
 				{
-					int criticalDamageDealt = (int)(clickDamage * User.Instance.CurrentHero.CritDamage);
-					
+					int criticalDamageDealt = (int) (clickDamage * User.Instance.CurrentHero.CritDamage);
+
 					CombatController.DealDamageToEnemy(criticalDamageDealt, DamageType.Critical);
-					CombatController.DealDamageToEnemy((int)(criticalDamageDealt * DamageModifier), DamageType.Artifact);
+					CombatController.DealDamageToEnemy((int) (criticalDamageDealt * DamageModifier), DamageType.Artifact);
 					clickDamage = 0;
 				}
 				else if (clickDamageType == DamageType.Critical)
 				{
-					CombatController.DealDamageToEnemy((int)(clickDamage * DamageModifier), DamageType.Artifact);
+					CombatController.DealDamageToEnemy((int) (clickDamage * DamageModifier), DamageType.Artifact);
 				}
 			}
 		}

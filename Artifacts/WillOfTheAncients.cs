@@ -1,5 +1,4 @@
-﻿using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Items;
+﻿using ClickQuest.Items;
 using ClickQuest.Player;
 using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
 

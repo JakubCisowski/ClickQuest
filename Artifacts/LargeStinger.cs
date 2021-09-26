@@ -7,7 +7,7 @@ namespace ClickQuest.Artifacts
 	public class LargeStinger : ArtifactFunctionality
 	{
 		private const int PoisonDamageIncrease = 5;
-		
+
 		public override void OnEquip()
 		{
 			User.Instance.CurrentHero.PoisonDamage += PoisonDamageIncrease;

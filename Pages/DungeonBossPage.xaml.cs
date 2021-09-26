@@ -7,7 +7,6 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Threading;
 using ClickQuest.Data.GameData;
 using ClickQuest.Enemies;
 using ClickQuest.Extensions.CombatManager;
@@ -45,10 +44,16 @@ namespace ClickQuest.Pages
 			Boss = boss;
 			DataContext = Boss;
 
-			var binding = new Binding("Duration") {Source = this};
+			var binding = new Binding("Duration")
+			{
+				Source = this
+			};
 			TimeRemainingBlock.SetBinding(TextBlock.TextProperty, binding);
 
-			var binding2 = new Binding("Description") {Source = GameData.Dungeons.FirstOrDefault(x => x.BossIds.Contains(boss.Id))};
+			var binding2 = new Binding("Description")
+			{
+				Source = GameData.Dungeons.FirstOrDefault(x => x.BossIds.Contains(boss.Id))
+			};
 			DungeonDescriptionBlock.SetBinding(TextBlock.TextProperty, binding2);
 		}
 

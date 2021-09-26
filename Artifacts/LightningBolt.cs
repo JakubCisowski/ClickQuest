@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Threading;
 using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Items;
 
@@ -14,12 +13,12 @@ namespace ClickQuest.Artifacts
 		private const int ClicksRequired = 3;
 		private const int DamageDealt = 20;
 
-		private List<DateTime> _clickTimes;
+		private readonly List<DateTime> _clickTimes;
 
 		public override void OnEnemyClick()
 		{
 			_clickTimes.Add(DateTime.Now);
-			
+
 			if (_clickTimes.Count == ClicksRequired)
 			{
 				var requiredTimeSpan = TimeSpan.FromMilliseconds(TimeFrame);
@@ -29,7 +28,7 @@ namespace ClickQuest.Artifacts
 				{
 					CombatController.DealDamageToEnemy(DamageDealt, DamageType.Artifact);
 				}
-				
+
 				_clickTimes.Clear();
 			}
 		}

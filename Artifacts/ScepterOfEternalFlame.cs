@@ -29,7 +29,10 @@ namespace ClickQuest.Artifacts
 		public ScepterOfEternalFlame()
 		{
 			Name = "Scepter of Eternal Flame";
-			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, (int)(BurningDuration / TicksNumber * 1000d))};
+			_timer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 0, 0, (int) (BurningDuration / TicksNumber * 1000d))
+			};
 			_timer.Tick += BurningTimer_Tick;
 		}
 

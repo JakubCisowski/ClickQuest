@@ -144,7 +144,10 @@ namespace ClickQuest.Extensions.CombatManager
 		{
 			if (User.Instance.CurrentHero != null)
 			{
-				BossFightTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 1)};
+				BossFightTimer = new DispatcherTimer
+				{
+					Interval = new TimeSpan(0, 0, 0, 1)
+				};
 				BossFightTimer.Tick += BossFightTimerTick;
 
 				// SpecDungeonBuff's base value is 30 - the fight's duration will always be 30s or more.

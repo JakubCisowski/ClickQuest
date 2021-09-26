@@ -2,7 +2,6 @@
 using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Items;
-using ClickQuest.Player;
 
 namespace ClickQuest.Artifacts
 {

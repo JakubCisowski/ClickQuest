@@ -47,7 +47,10 @@ namespace ClickQuest.Extensions.InterfaceManager
 				Padding = new Thickness(2)
 			};
 
-			var stackPanel = new StackPanel {Orientation = Orientation.Horizontal};
+			var stackPanel = new StackPanel
+			{
+				Orientation = Orientation.Horizontal
+			};
 
 			var textBrush = Colors.GetFloatingCombatTextColor(damageType);
 

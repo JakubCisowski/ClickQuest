@@ -57,7 +57,7 @@ namespace ClickQuest.Extensions.CombatManager
 					case DamageType.Normal or DamageType.Critical:
 						equippedArtifact.ArtifactFunctionality.OnDealingClickDamage(ref damage, damageType);
 						break;
-					
+
 					case DamageType.Poison:
 						equippedArtifact.ArtifactFunctionality.OnDealingPoisonDamage(ref damage);
 						break;
@@ -67,7 +67,7 @@ namespace ClickQuest.Extensions.CombatManager
 						break;
 				}
 			}
-			
+
 			InterfaceController.CurrentEnemy.CurrentHealth -= damage;
 
 			// todo: zrobic to lepiej potem

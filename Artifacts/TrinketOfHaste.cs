@@ -10,7 +10,7 @@ namespace ClickQuest.Artifacts
 
 		public override void OnQuestStarted(Quest quest)
 		{
-			quest.Duration -= (int)(quest.Duration * QuestTimeReduced);
+			quest.Duration -= (int) (quest.Duration * QuestTimeReduced);
 		}
 
 		public TrinketOfHaste()

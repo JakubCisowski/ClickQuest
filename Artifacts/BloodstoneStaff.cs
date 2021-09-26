@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
-using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Items;
 
 namespace ClickQuest.Artifacts
@@ -40,7 +39,10 @@ namespace ClickQuest.Artifacts
 		public BloodstoneStaff()
 		{
 			Name = "Bloodstone Staff";
-			_timer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, 500)}; // todo: The timer might have to tick faster.
+			_timer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 0, 0, 500)
+			}; // todo: The timer might have to tick faster.
 			_timer.Tick += EmpowermentTimer_Tick;
 		}
 

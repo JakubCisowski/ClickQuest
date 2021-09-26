@@ -13,7 +13,10 @@ namespace ClickQuest.Extensions.InterfaceManager
 		{
 			var toolTip = new ToolTip();
 
-			var toolTipBlock = new TextBlock {Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase")};
+			var toolTipBlock = new TextBlock
+			{
+				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase")
+			};
 
 			switch (itemToGenerateTooltipFor)
 			{
@@ -97,7 +100,10 @@ namespace ClickQuest.Extensions.InterfaceManager
 			// Generate SpecBuying tooltips.
 			var specToolTip = new ToolTip();
 
-			var toolTipBlock = new TextBlock {Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase")};
+			var toolTipBlock = new TextBlock
+			{
+				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase")
+			};
 
 			switch (typeOfGeneratedSpecialization)
 			{

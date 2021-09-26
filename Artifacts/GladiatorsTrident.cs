@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
 using ClickQuest.Enemies;
-using ClickQuest.Extensions.CombatManager;
 using ClickQuest.Extensions.InterfaceManager;
 using ClickQuest.Items;
 
@@ -16,7 +15,7 @@ namespace ClickQuest.Artifacts
 		private const double DamageModifier = 0.50;
 
 		private Enemy _currentEnemy;
-		private DispatcherTimer _timer;
+		private readonly DispatcherTimer _timer;
 
 		public override void OnDealingDamage(ref int baseDamage)
 		{
@@ -26,7 +25,7 @@ namespace ClickQuest.Artifacts
 			{
 				_currentEnemy = newEnemy;
 				_timer.Stop();
-				
+
 				_timer.Interval = new TimeSpan(0, 0, newEnemy is Monster ? DurationAgainstMonsters : DurationAgainstBosses);
 				_timer.Start();
 			}
@@ -44,7 +43,7 @@ namespace ClickQuest.Artifacts
 			_timer = new DispatcherTimer();
 			_timer.Tick += DamageIncreaseTimer_Tick;
 		}
-		
+
 		private void DamageIncreaseTimer_Tick(object source, EventArgs e)
 		{
 			_timer.Stop();

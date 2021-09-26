@@ -14,7 +14,7 @@ namespace ClickQuest.Artifacts
 		public override void OnEquip()
 		{
 			User.Instance.CurrentHero.ClickDamage += ClickDamageIncrease;
-		
+
 			_auraSpeedIncreased = User.Instance.CurrentHero.AuraAttackSpeed * AuraSpeedIncreaseMultiplier;
 
 			User.Instance.CurrentHero.AuraAttackSpeed += _auraSpeedIncreased;

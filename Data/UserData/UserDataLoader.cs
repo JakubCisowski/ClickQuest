@@ -55,21 +55,21 @@ namespace ClickQuest.Data.UserData
 				var newEquippedArtifacts = hero.Artifacts.Where(x => hero.EquippedArtifacts.Select(y => y.Name).Contains(x.Name)).ToList();
 				hero.EquippedArtifacts = newEquippedArtifacts;
 			}
-			
+
 			// Reload Achievements.
 			User.Instance.Achievements.DeserializeAchievements();
-			
+
 			// Reload TimePlayed for all heroes.
-			User.Instance.Heroes.ForEach(x=>x.TimePlayed = TimeSpan.Parse(x.TimePlayedString));
+			User.Instance.Heroes.ForEach(x => x.TimePlayed = TimeSpan.Parse(x.TimePlayedString));
 		}
 
 		public static void Save()
 		{
 			// Convert Achievements to a serializable string.
 			User.Instance.Achievements.SerializeAchievements();
-			
+
 			// Convert TimePlayed on all heroes to string.
-			User.Instance.Heroes.ForEach(x=>x.TimePlayedString = x.TimePlayed.ToString());
+			User.Instance.Heroes.ForEach(x => x.TimePlayedString = x.TimePlayed.ToString());
 
 			string json = JsonSerializer.Serialize(User.Instance);
 			File.WriteAllText(UserDataPath, json);
