@@ -94,7 +94,7 @@ namespace ClickQuest.Pages
 			(GameData.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
 
 			// Pause all quest timers (so that quest doesn't finish while current hero is not selected).
-			User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate == default)?.PauseTimer();
+			User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default)?.PauseTimer();
 
 			GameController.OnHeroExit();
 

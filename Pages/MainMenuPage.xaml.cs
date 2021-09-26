@@ -184,7 +184,6 @@ namespace ClickQuest.Pages
 			User.Instance.CurrentHero = selectedHero;
 
 			selectedHero.LoadQuests();
-			selectedHero.ResumeQuest();
 			selectedHero.ResumeBlessing();
 			selectedHero.ReequipArtifacts();
 			selectedHero.SessionStartDate = DateTime.Now;
@@ -193,6 +192,8 @@ namespace ClickQuest.Pages
 			GameData.RefreshPages();
 
 			InterfaceController.ChangePage(GameData.Pages["Town"], "Town");
+			
+			selectedHero.ResumeQuest();
 		}
 
 		private void DeleteHeroButton_Click(object sender, RoutedEventArgs e)

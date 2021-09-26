@@ -125,10 +125,16 @@ namespace ClickQuest.Adventures
 			// Reset to 'Duration', it will count from Duration to 0.
 			questCopy.TicksCountNumber = (int) (questCopy.EndDate - DateTime.Now).TotalSeconds;
 
-			UpdateTicksCountText(questCopy);
+			if (questCopy.IsFinished)
+			{
+				questCopy.HandleQuestIfFinished();
+			}
+			else
+			{
+				questCopy._timer.Start();
+			}
 
-			// Start timer (to check if quest is finished during next tick).
-			questCopy._timer.Start();
+			UpdateTicksCountText(questCopy);
 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 		}
@@ -206,7 +212,11 @@ namespace ClickQuest.Adventures
 		{
 			TicksCountNumber--;
 			UpdateTicksCountText(this);
+			HandleQuestIfFinished();
+		}
 
+		private void HandleQuestIfFinished()
+		{
 			if (IsFinished)
 			{
 				FinishQuest();
