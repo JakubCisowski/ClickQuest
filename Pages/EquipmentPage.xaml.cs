@@ -85,36 +85,46 @@ namespace ClickQuest.Pages
 		private void ItemBorder_TryToEquip(object sender, MouseButtonEventArgs e)
 		{
 			object item = (sender as Border).Tag;
-			// todo: albo dodać do ArtifactFunctionality, albo wywalić w ogóle
-			// artefakty i tak będą triggerować się przy zaczęciu tylko questa
-			bool isQuesting = User.Instance.CurrentHero.Quests.Any(x => x.EndDate != default);
 
-			if (item is Artifact artifact && !isQuesting)
+			if (item is Artifact artifact)
 			{
 				bool isEquipped = User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact);
+				bool equippedArtifactsChanged = false;
 
 				if (!isEquipped)
 				{
 					bool canBeEquipped = artifact.ArtifactFunctionality.CanBeEquipped();
 
-					if (canBeEquipped)
+					if(canBeEquipped)
 					{
 						User.Instance.CurrentHero.EquippedArtifacts.Add(artifact);
 						artifact.ArtifactFunctionality.OnEquip();
 						(sender as Border).Background = FindResource("GameBackgroundSecondary") as SolidColorBrush;
+						
+						equippedArtifactsChanged = true;
 					}
 				}
-				else
+				else if (isEquipped)
 				{
-					User.Instance.CurrentHero.EquippedArtifacts.Remove(artifact);
-					artifact.ArtifactFunctionality.OnUnequip();
-					(sender as Border).Background = FindResource("GameBackgroundAdditional") as SolidColorBrush;
+					bool canBeUnequipped = artifact.ArtifactFunctionality.CanBeUnequipped();
+
+					if (canBeUnequipped)
+					{
+						User.Instance.CurrentHero.EquippedArtifacts.Remove(artifact);
+						artifact.ArtifactFunctionality.OnUnequip();
+						(sender as Border).Background = FindResource("GameBackgroundAdditional") as SolidColorBrush;
+
+						equippedArtifactsChanged = true;
+					}
 				}
 
 				// Refresh Artifacts tab.
-				ArtifactsPanel.Children.Clear();
-				UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
-				RefreshEquippedArtifacts();
+				if(equippedArtifactsChanged)
+				{
+					ArtifactsPanel.Children.Clear();
+					UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
+					RefreshEquippedArtifacts();
+				}
 			}
 		}
 
@@ -129,7 +139,7 @@ namespace ClickQuest.Pages
 				}
 			}
 
-			//ArtifactsScrollViewer.ScrollToTop();
+			ArtifactsScrollViewer.ScrollToTop();
 		}
 
 		private Grid CreateSingleItemGrid(Item item)
