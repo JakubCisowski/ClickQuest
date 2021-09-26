@@ -32,5 +32,140 @@
 				"Frequency": 1.0000
 			}
 			]
+	},
+	{
+		"Id": 3,
+		"LevelRequirement": 0,
+		"Name": "3",
+		"Description": "ForestDescription",
+		"Background": "/example.png",
+		"Monsters": [
+			{
+				"MonsterId": 1,
+				"Frequency": 1.0000
+			},
+			{
+				"MonsterId": 2,
+				"Frequency": 0.0000
+			}
+		]
+	},
+	{
+		"Id": 4,
+		"LevelRequirement": 0,
+		"Name": "4",
+		"Description": "ForestDescription",
+		"Background": "/example.png",
+		"Monsters": [
+			{
+				"MonsterId": 1,
+				"Frequency": 1.0000
+			},
+			{
+				"MonsterId": 2,
+				"Frequency": 0.0000
+			}
+		]
+	},
+	{
+		"Id": 5,
+		"LevelRequirement": 0,
+		"Name": "5",
+		"Description": "ForestDescription",
+		"Background": "/example.png",
+		"Monsters": [
+			{
+				"MonsterId": 1,
+				"Frequency": 1.0000
+			},
+			{
+				"MonsterId": 2,
+				"Frequency": 0.0000
+			}
+		]
+	},
+	{
+		"Id": 6,
+		"LevelRequirement": 0,
+		"Name": "6",
+		"Description": "ForestDescription",
+		"Background": "/example.png",
+		"Monsters": [
+			{
+				"MonsterId": 1,
+				"Frequency": 1.0000
+			},
+			{
+				"MonsterId": 2,
+				"Frequency": 0.0000
+			}
+		]
+	},
+	{
+		"Id": 7,
+		"LevelRequirement": 0,
+		"Name": "7",
+		"Description": "ForestDescription",
+		"Background": "/example.png",
+		"Monsters": [
+			{
+				"MonsterId": 1,
+				"Frequency": 1.0000
+			},
+			{
+				"MonsterId": 2,
+				"Frequency": 0.0000
+			}
+		]
+	},
+	{
+		"Id": 8,
+		"LevelRequirement": 0,
+		"Name": "Desert of Desolation",
+		"Description": "Countless adventurers have ended their journey in this very desert. Will you manage the danger that awaits you on its scorching sands?",
+		"Background": "/example.png",
+		"Monsters": [
+			{
+				"MonsterId": 1,
+				"Frequency": 0.0100
+			},
+			{
+				"MonsterId": 2,
+				"Frequency": 0.2500
+			},
+			{
+				"MonsterId": 3,
+				"Frequency": 0.4000
+			},
+			{
+				"MonsterId": 4,
+				"Frequency": 0.0300
+			},
+			{
+				"MonsterId": 5,
+				"Frequency": 0.2500
+			},
+			{
+				"MonsterId": 6,
+				"Frequency": 0.0600
+			}
+		]
+	},
+	{
+		"Id": 9,
+		"LevelRequirement": 0,
+		"Name": "9",
+		"Description": "ForestDescription",
+		"Background": "/example.png",
+		"Monsters": [
+			{
+				"MonsterId": 1,
+				"Frequency": 1.0000
+			},
+			{
+				"MonsterId": 2,
+				"Frequency": 0.0000
+			}
+		]
 	}
 ]

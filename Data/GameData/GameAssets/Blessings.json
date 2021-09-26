@@ -18,5 +18,35 @@
 		"Description": "Gives 10% crit damage",
 		"Buff": 10,
 		"Value": 1
+	},
+	{
+		"Id": 3,
+		"Name": "TestCritDamageBlessing",
+		"Type": "CritDamage",
+		"Rarity": 1,
+		"Duration": 15,
+		"Description": "Gives 10% crit damage",
+		"Buff": 10,
+		"Value": 1
+	},
+	{
+		"Id": 4,
+		"Name": "Blessing of the Desolation",
+		"Type": "AuraDamage",
+		"Rarity": 1,
+		"Duration": 300,
+		"Description": "Your recent encounter in the Pyramid of Truth has left you feeling stronger, able to obliterate foes with much less effort.",
+		"Buff": 25,
+		"Value": 1
+	},
+	{
+		"Id": 5,
+		"Name": "Blessing of the Damned",
+		"Type": "CritDamage",
+		"Rarity": 1,
+		"Duration": 300,
+		"Description": "You have been infused by death itself, granting you the power you cause fatal damage to all foes around.",
+		"Buff": 50,
+		"Value": 1
 	}
 ]

@@ -1,7 +1,7 @@
 [
   {
-	"Id": 0,
-	"Name": "TestBoss0",
+	"Id": 1,
+	"Name": "Shaiiya, the Spider Queen",
 	"Health": 2000,
 	"Image": "/example.png",
 	"Description": "TestBoss0Desc",
@@ -19,8 +19,8 @@
 	]
   },
   {
-	  "Id": 1,
-	  "Name": "TestBoss1",
+	  "Id": 2,
+	  "Name": "Gurug, the Exiled Ogre",
 	  "Health": 1500,
 	  "Image": "/example.png",
 	  "Description": "TestBoss1Desc",
@@ -36,5 +36,202 @@
 			  "Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 		  }
 	  ]
+	},
+	{
+		"Id": 3,
+		"Name": "Ancient Ice Mage",
+		"Health": 1500,
+		"Image": "/example.png",
+		"Description": "TestBoss1Desc",
+		"BossLoot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 0,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 2,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			}
+		]
+	},
+	{
+		"Id": 4,
+		"Name": "Ancient Invoked Ice Hydra",
+		"Health": 1500,
+		"Image": "/example.png",
+		"Description": "TestBoss1Desc",
+		"BossLoot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 0,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 2,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			}
+		]
+	},
+	{
+		"Id": 5,
+		"Name": "Ardor, the Prior of the Assassins",
+		"Health": 1500,
+		"Image": "/example.png",
+		"Description": "This must be the individual who's the leader of all these assassins. He's sacrificing innocent people to grant himself power, which in turn has made him significantly harder to defeat.",
+		"BossLoot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 0,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 2,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			}
+		]
+	},
+	{
+		"Id": 6,
+		"Name": "Medusa",
+		"Health": 1500,
+		"Image": "/example.png",
+		"Description": "TestBoss1Desc",
+		"BossLoot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 0,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 2,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			}
+		]
+	},
+	{
+		"Id": 7,
+		"Name": "Rakshasa Raja",
+		"Health": 1500,
+		"Image": "/example.png",
+		"Description": "'Raja' stands for 'king', and it's exactly what it sounds like – Rakshasa Raja is a much bigger and more respected type among its kin. It has four arms, wields a sword in each one of them, and can turn you into pieces in the blink of an eye.",
+		"BossLoot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 2,
+				"Frequencies": [0.0000,0.1000,0.2000,0.3000,0.4000,0.5000]
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 13,
+				"Frequencies": [0.0000,0.1000,0.2000,0.3000,0.4000,0.5000]
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequencies": [0.0000,0.0000,0.0500,0.1000,0.1500,0.2000]
+			},
+			{
+				"ItemType": "Artifact",
+				"ItemId": 16,
+				"Frequencies": [0.0000,0.0000,0.0000,0.0000,0.0000,0.0100]
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 3,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			}
+		]
+	},
+	{
+		"Id": 8,
+		"Name": "Raadhu, the Ifrit Sultan",
+		"Health": 1500,
+		"Image": "/example.png",
+		"Description": "Quite like the djinn, the Ifrit are demons representing the dead. Unlike them, however, these fiery spirits have only malicious intents, and their single goal is to burn you alive. Painfully.",
+		"BossLoot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 8,
+				"Frequencies": [0.0000,0.0500,0.1000,0.1500,0.2000,0.2500]
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 14,
+				"Frequencies": [0.0000,0.0200,0.0400,0.0600,0.0800,0.1000]
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 18,
+				"Frequencies": [0.2500,0.3000,0.3500,0.4000,0.4500,0.5000]
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 9,
+				"Frequencies": [0.0000,0.1000,0.2000,0.3000,0.4000,0.5000]
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 2,
+				"Frequencies": [0.0000,0.0200,0.0400,0.0600,0.0800,0.1000]
+			},
+			{
+				"ItemType": "Artifact",
+				"ItemId": 17,
+				"Frequencies": [0.0000,0.0000,0.0000,0.0000,0.0000,0.0100]
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 3,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			}
+		]
+	},
+	{
+		"Id": 9,
+		"Name": "Itu'Zeld, the High Lich",
+		"Health": 1500,
+		"Image": "/example.png",
+		"Description": "TestBoss1Desc",
+		"BossLoot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 0,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 2,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			}
+		]
+	},
+	{
+		"Id": 10,
+		"Name": "Arathai, the Eater of Souls",
+		"Health": 1500,
+		"Image": "/example.png",
+		"Description": "The large undead lord slowly gets up his throne. Only now you realise how large he really is – about ten meters tall. He is wearing a dark, heavy armor with a helmet resembling a skull, through which you can only see his emerald green eyes. He swings his just as tall scythe around and looks you in the eyes. He then slowly whispers: ‘I am your end'.",
+		"BossLoot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 0,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 2,
+				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
+			}
+		]
 	}
   ]

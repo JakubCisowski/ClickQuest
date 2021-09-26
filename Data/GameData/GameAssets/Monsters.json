@@ -1,40 +1,631 @@
 [
 	{
 	  "Id": 1,
-	  "Name": "Gray Wolf",
-	  "Description": "GrayWolfDesc",
+	  "Name": "Rakshasa Warrior",
+	  "Description": "Rakshasas are demons that take the form of a humanoid, two-legged lion. They might seem friendly at first, but they are extremely good swordfighters, and won't hesitate to kill you once they're done playing with you.",
 	  "Health": 60,
 	  "Image": "/example.png",
 	  "Loot": [
 		{
 		  "ItemType": "Material",
 		  "ItemId": 1,
-		  "Frequency": 0.5000
+		  "Frequency": 0.1000
 		},
 		{
-		  "ItemType": "Recipe",
-		  "ItemId": 1,
-		  "Frequency": 0.5000
+		  "ItemType": "Material",
+		  "ItemId": 2,
+		  "Frequency": 0.1000
+		},
+		{
+			"ItemType": "Recipe",
+			"ItemId": 1,
+			"Frequency": 0.0500
+		},
+		{
+			"ItemType": "Material",
+			"ItemId": 3,
+			"Frequency": 0.7500
 		}
 	  ]
 	},
 	{
 		"Id": 2,
-		"Name": "Cave Bat",
-		"Description": "CaveBatDesc",
+		"Name": "Sand Grub",
+		"Description": "This snake-like creature is well adapted to desert's heat and slowly crawls around in the sand. As it is often the target of larger, stronger monsters, its skin is tough and hard to pierce.",
 		"Health": 15,
 		"Image": "/example.png",
 		"Loot": [
 			{
 				"ItemType": "Material",
-				"ItemId": 0,
+				"ItemId": 4,
 				"Frequency": 0.1000
 			},
 			{
 				"ItemType": "Material",
-				"ItemId": 2,
-				"Frequency": 0.9000
+				"ItemId": 5,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 3,
+				"Frequency": 0.8000
 			}
 		]
-	  }
+	  },
+	{
+		"Id": 3,
+		"Name": "Sand Jackal",
+		"Description": "Jackals are the true icons of the desert. They often hunts in pairs, but can form bigger packs, so be careful out there!",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 6,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 7,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 3,
+				"Frequency": 0.8000
+			}
+		]
+	},
+	{
+		"Id": 4,
+		"Name": "The Jann Djinn",
+		"Description": "Taking the form of a whirlwind, the Jann Djinn is a powerful trickster that nobody has control over. This type of djinn will first fool you, then curse you, only to crush you to pieces moments later.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 8,
+				"Frequency": 0.0500
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 9,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.0100
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 3,
+				"Frequency": 0.8400
+			}
+		]
+	},
+	{
+		"Id": 5,
+		"Name": "Giant Scorpion",
+		"Description": "They say scorpions spend most of the day under small rocks, but this one certainly wouldn't fit under one…",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 10,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 11,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 3,
+				"Frequency": 0.8000
+			}
+		]
+	},
+	{
+		"Id": 6,
+		"Name": "Cholla Cactus",
+		"Description": "It's hard to tell if this is a plant, or an animal, but it clearly intends to hurt you - very badly.",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 12,
+				"Frequency": 0.1000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 3,
+				"Frequency": 0.0100
+			},
+			{
+				"ItemType": "Material",
+				"ItemId": 3,
+				"Frequency": 0.8900
+			}
+		]
+	},
+	{
+		"Id": 7,
+		"Name": "",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	},
+	{
+		"Id": 1,
+		"Name": "Gray Wolf",
+		"Description": "GrayWolfDesc",
+		"Health": 60,
+		"Image": "/example.png",
+		"Loot": [
+			{
+				"ItemType": "Material",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			},
+			{
+				"ItemType": "Recipe",
+				"ItemId": 1,
+				"Frequency": 0.5000
+			}
+		]
+	}
 ]

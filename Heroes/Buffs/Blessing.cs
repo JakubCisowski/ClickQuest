@@ -103,6 +103,19 @@ namespace ClickQuest.Heroes.Buffs
 				case BlessingType.CritDamage:
 					User.Instance.CurrentHero.CritDamage += 0.01d * Buff;
 					break;
+				
+				case BlessingType.CritChance:
+					break;
+				
+				case BlessingType.PoisonDamage:
+					break;
+				
+				case BlessingType.AuraDamage:
+					User.Instance.CurrentHero.AuraDamage += 0.01d * Buff;
+					break;
+				
+				case BlessingType.AuraSpeed:
+					break;
 			}
 
 			InitializeAndStartTimer();
@@ -124,6 +137,19 @@ namespace ClickQuest.Heroes.Buffs
 
 				case BlessingType.CritDamage:
 					User.Instance.CurrentHero.CritDamage -= 0.01d * Buff;
+					break;
+				
+				case BlessingType.CritChance:
+					break;
+				
+				case BlessingType.PoisonDamage:
+					break;
+				
+				case BlessingType.AuraDamage:
+					User.Instance.CurrentHero.AuraDamage -= 0.01d * Buff;
+					break;
+				
+				case BlessingType.AuraSpeed:
 					break;
 			}
 
