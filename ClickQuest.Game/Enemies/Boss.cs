@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ClickQuest.Game.Extensions.CombatManager;
 using ClickQuest.Game.Extensions.InterfaceManager;
@@ -79,14 +80,16 @@ namespace ClickQuest.Game.Enemies
 
 			// Grant boss loot.
 			// 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
-			int threshold = 5 - CurrentHealth / (Health / 5);
+			int threshold = 5 - (int)Math.Ceiling((double)CurrentHealth / (Health / 5));
 			// 2. Iterate through every possible loot.
 			string lootText = "Experience gained: " + experienceGained + " \n" + "Loot: \n";
 
 			foreach (var loot in BossLoot)
 			{
+				int itemIntegerCount = (int)loot.Frequencies[threshold];
+
 				double randomizedValue = RNG.Next(1, 10001) / 10000d;
-				if (randomizedValue < loot.Frequencies[threshold])
+				if (randomizedValue < loot.Frequencies[threshold] - itemIntegerCount)
 				{
 					// Grant loot after checking if it's not empty.
 					if (loot.LootType == LootType.Blessing)
@@ -99,20 +102,24 @@ namespace ClickQuest.Game.Enemies
 
 							if (doesUserWantToSwap == false)
 							{
-								return;
+								continue;
 							}
 						}
 						else
 						{
 							Blessing.AddOrReplaceBlessing(loot.LootId);
 						}
+						
+						continue;
 					}
 					else
 					{
-						loot.Item.AddItem();
-						lootText += "- " + loot.Item.Name + " (" + loot.LootType + ")\n";
+						itemIntegerCount++;
 					}
 				}
+
+				loot.Item.AddItem(itemIntegerCount);
+				lootText += "- " + $"{itemIntegerCount}x " + loot.Item.Name + " (" + loot.LootType + ")\n";
 			}
 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();

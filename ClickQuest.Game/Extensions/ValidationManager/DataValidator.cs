@@ -81,11 +81,11 @@ namespace ClickQuest.Game.Extensions.ValidationManager
 
 		private static void CheckIfFrequenciesAreValid(string objectName, IEnumerable<double> frequencies)
 		{
-			bool areFrequenciesInvalid = frequencies.Any(x => x < 0 || x > 1);
+			bool areFrequenciesInvalid = frequencies.Any(x => x < 0);
 
 			if (areFrequenciesInvalid)
 			{
-				string message = $"'{objectName}' frequency value is greater than 1";
+				string message = $"'{objectName}' frequency value is less than 0";
 				Logger.Log(message);
 			}
 		}

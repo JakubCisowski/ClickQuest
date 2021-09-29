@@ -8,12 +8,12 @@
 	"BossLoot": [
 	  {
 		"LootType": "Material",
-		"ItemId": 1,
+		"LootId": 1,
 		"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000, 1.0000]
 	  },
 	  {
 		"LootType": "Recipe",
-		"ItemId": 1,
+		"LootId": 1,
 		"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 	  }
 	]
@@ -27,12 +27,12 @@
 	  "BossLoot": [
 		  {
 			  "LootType": "Material",
-			  "ItemId": 0,
+			  "LootId": 0,
 			  "Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 		  },
 		  {
 			  "LootType": "Material",
-			  "ItemId": 2,
+			  "LootId": 2,
 			  "Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 		  }
 	  ]
@@ -46,12 +46,12 @@
 		"BossLoot": [
 			{
 				"LootType": "Material",
-				"ItemId": 0,
+				"LootId": 0,
 				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 2,
+				"LootId": 2,
 				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 			}
 		]
@@ -65,12 +65,12 @@
 		"BossLoot": [
 			{
 				"LootType": "Material",
-				"ItemId": 0,
+				"LootId": 0,
 				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 2,
+				"LootId": 2,
 				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 			}
 		]
@@ -84,32 +84,32 @@
 		"BossLoot": [
 			{
 				"LootType": "Material",
-				"ItemId": 45,
+				"LootId": 45,
 				"Frequencies": [0.0000,0.0400,0.0800,0.1200,0.1600,0.2000]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 20,
+				"LootId": 20,
 				"Frequencies": [0.0000,0.0200,0.0400,0.0600,0.0800,0.1000]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 16,
+				"LootId": 16,
 				"Frequencies": [0.0000,0.0400,0.0800,0.1200,0.1600,0.2000]
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 7,
+				"LootId": 7,
 				"Frequencies": [0.0000,0.0200,0.0400,0.0600,0.0800,0.1000]
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 6,
+				"LootId": 6,
 				"Frequencies": [0.0000,0.0100,0.0200,0.0300,0.0400,0.0500]
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 12,
+				"LootId": 12,
 				"Frequencies": [0.0000,0.0000,0.0000,0.0000,0.0000,0.0100]
 			}
 		]
@@ -123,12 +123,12 @@
 		"BossLoot": [
 			{
 				"LootType": "Material",
-				"ItemId": 0,
+				"LootId": 0,
 				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 2,
+				"LootId": 2,
 				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 			}
 		]
@@ -142,32 +142,32 @@
 		"BossLoot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 2,
+				"LootId": 2,
 				"Frequencies": [0.0000,0.1000,0.2000,0.3000,0.4000,0.5000]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 13,
+				"LootId": 13,
 				"Frequencies": [0.0000,0.1000,0.2000,0.3000,0.4000,0.5000]
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequencies": [0.0000,0.0000,0.0500,0.1000,0.1500,0.2000]
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 16,
+				"LootId": 16,
 				"Frequencies": [0.0000,0.0000,0.0000,0.0000,0.0000,0.0100]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 3,
+				"LootId": 3,
 				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 			}
 		]
@@ -181,37 +181,37 @@
 		"BossLoot": [
 			{
 				"LootType": "Material",
-				"ItemId": 8,
+				"LootId": 8,
 				"Frequencies": [0.0000,0.0500,0.1000,0.1500,0.2000,0.2500]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 14,
+				"LootId": 14,
 				"Frequencies": [0.0000,0.0200,0.0400,0.0600,0.0800,0.1000]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 18,
+				"LootId": 18,
 				"Frequencies": [0.2500,0.3000,0.3500,0.4000,0.4500,0.5000]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 9,
+				"LootId": 9,
 				"Frequencies": [0.0000,0.1000,0.2000,0.3000,0.4000,0.5000]
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 2,
+				"LootId": 2,
 				"Frequencies": [0.0000,0.0200,0.0400,0.0600,0.0800,0.1000]
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 17,
+				"LootId": 17,
 				"Frequencies": [0.0000,0.0000,0.0000,0.0000,0.0000,0.0100]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 3,
+				"LootId": 3,
 				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 			}
 		]
@@ -225,12 +225,12 @@
 		"BossLoot": [
 			{
 				"LootType": "Material",
-				"ItemId": 0,
+				"LootId": 0,
 				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 2,
+				"LootId": 2,
 				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 			}
 		]
@@ -244,12 +244,12 @@
 		"BossLoot": [
 			{
 				"LootType": "Material",
-				"ItemId": 0,
+				"LootId": 0,
 				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 2,
+				"LootId": 2,
 				"Frequencies": [0.5000,0.6000,0.7000,0.8000,0.9000,1.0000]
 			}
 		]

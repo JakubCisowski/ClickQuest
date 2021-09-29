@@ -8,22 +8,22 @@
 	  "Loot": [
 		{
 		  "LootType": "Material",
-		  "ItemId": 1,
+		  "LootId": 1,
 		  "Frequency": 0.1000
 		},
 		{
 		  "LootType": "Material",
-		  "ItemId": 2,
+		  "LootId": 2,
 		  "Frequency": 0.1000
 		},
 		{
 			"LootType": "Recipe",
-			"ItemId": 1,
+			"LootId": 1,
 			"Frequency": 0.0500
 		},
 		{
 			"LootType": "Material",
-			"ItemId": 3,
+			"LootId": 3,
 			"Frequency": 0.7500
 		}
 	  ]
@@ -37,17 +37,17 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 4,
+				"LootId": 4,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 5,
+				"LootId": 5,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 3,
+				"LootId": 3,
 				"Frequency": 0.8000
 			}
 		]
@@ -61,17 +61,17 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 6,
+				"LootId": 6,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 7,
+				"LootId": 7,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 3,
+				"LootId": 3,
 				"Frequency": 0.8000
 			}
 		]
@@ -85,22 +85,22 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 8,
+				"LootId": 8,
 				"Frequency": 0.0500
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 9,
+				"LootId": 9,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.0100
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 3,
+				"LootId": 3,
 				"Frequency": 0.8400
 			}
 		]
@@ -114,17 +114,17 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 10,
+				"LootId": 10,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 11,
+				"LootId": 11,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 3,
+				"LootId": 3,
 				"Frequency": 0.8000
 			}
 		]
@@ -138,17 +138,17 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 12,
+				"LootId": 12,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 3,
+				"LootId": 3,
 				"Frequency": 0.0100
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 3,
+				"LootId": 3,
 				"Frequency": 0.8900
 			}
 		]
@@ -162,12 +162,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 15,
+				"LootId": 15,
 				"Frequency": 0.0100
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 6,
+				"LootId": 6,
 				"Frequency": 0.0010
 			}
 		]
@@ -181,12 +181,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 15,
+				"LootId": 15,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 6,
+				"LootId": 6,
 				"Frequency": 0.0100
 			}
 		]
@@ -200,17 +200,17 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 16,
+				"LootId": 16,
 				"Frequency": 0.0200
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 17,
+				"LootId": 17,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 7,
+				"LootId": 7,
 				"Frequency": 0.1000
 			}
 		]
@@ -224,12 +224,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 18,
+				"LootId": 18,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 19,
+				"LootId": 19,
 				"Frequency": 0.0100
 			}
 		]
@@ -243,17 +243,17 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 20,
+				"LootId": 20,
 				"Frequency": 0.0500
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 16,
+				"LootId": 16,
 				"Frequency": 0.0200
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 7,
+				"LootId": 7,
 				"Frequency": 0.0010
 			}
 		]
@@ -267,22 +267,22 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 21,
+				"LootId": 21,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 22,
+				"LootId": 22,
 				"Frequency": 0.1500
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 23,
+				"LootId": 23,
 				"Frequency": 0.3000
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 9,
+				"LootId": 9,
 				"Frequency": 0.0500
 			}
 		]
@@ -296,32 +296,32 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 21,
+				"LootId": 21,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 24,
+				"LootId": 24,
 				"Frequency": 0.4000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 25,
+				"LootId": 25,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 26,
+				"LootId": 26,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 4,
+				"LootId": 4,
 				"Frequency": 0.0500
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 10,
+				"LootId": 10,
 				"Frequency": 0.0500
 			}
 		]
@@ -335,32 +335,32 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 8,
+				"LootId": 8,
 				"Frequency": 0.0500
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 27,
+				"LootId": 27,
 				"Frequency": 0.1400
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 23,
+				"LootId": 23,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 26,
+				"LootId": 26,
 				"Frequency": 0.2500
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 2,
+				"LootId": 2,
 				"Frequency": 0.0500
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 6,
+				"LootId": 6,
 				"Frequency": 0.0100
 			}
 		]
@@ -374,22 +374,22 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 28,
+				"LootId": 28,
 				"Frequency": 0.3500
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 8,
+				"LootId": 8,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 25,
+				"LootId": 25,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 8,
+				"LootId": 8,
 				"Frequency": 0.0500
 			}
 		]
@@ -403,42 +403,42 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 8,
+				"LootId": 8,
 				"Frequency": 0.1500
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 29,
+				"LootId": 29,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 30,
+				"LootId": 30,
 				"Frequency": 0.3000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 25,
+				"LootId": 25,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 26,
+				"LootId": 26,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 24,
+				"LootId": 24,
 				"Frequency": 0.0500
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 2,
+				"LootId": 2,
 				"Frequency": 0.0500
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 6,
+				"LootId": 6,
 				"Frequency": 0.0500
 			}
 		]
@@ -452,22 +452,22 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 29,
+				"LootId": 29,
 				"Frequency": 0.3500
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 30,
+				"LootId": 30,
 				"Frequency": 0.3000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 31,
+				"LootId": 31,
 				"Frequency": 0.3000
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.0500
 			}
 		]
@@ -481,17 +481,17 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 39,
+				"LootId": 39,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 40,
+				"LootId": 40,
 				"Frequency": 0.2500
 			},
 			{
 				"LootType": "Artifact",
-				"ItemId": 14,
+				"LootId": 14,
 				"Frequency": 0.0100
 			}
 		]
@@ -505,12 +505,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 41,
+				"LootId": 41,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 42,
+				"LootId": 42,
 				"Frequency": 0.1000
 			}
 		]
@@ -524,12 +524,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 39,
+				"LootId": 39,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 40,
+				"LootId": 40,
 				"Frequency": 0.1000
 			}
 		]
@@ -543,22 +543,22 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 24,
+				"LootId": 24,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 21,
+				"LootId": 21,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 25,
+				"LootId": 25,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 43,
+				"LootId": 43,
 				"Frequency": 0.1000
 			}
 		]
@@ -572,17 +572,17 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 24,
+				"LootId": 24,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 32,
+				"LootId": 32,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 7,
+				"LootId": 7,
 				"Frequency": 0.2000
 			}
 		]
@@ -596,12 +596,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 44,
+				"LootId": 44,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 33,
+				"LootId": 33,
 				"Frequency": 0.1000
 			}
 		]
@@ -615,27 +615,27 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 39,
+				"LootId": 39,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 40,
+				"LootId": 40,
 				"Frequency": 0.0500
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 41,
+				"LootId": 41,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 43,
+				"LootId": 43,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 4,
+				"LootId": 4,
 				"Frequency": 0.0500
 			}
 		]
@@ -649,17 +649,17 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 41,
+				"LootId": 41,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 42,
+				"LootId": 42,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 5,
+				"LootId": 5,
 				"Frequency": 0.2000
 			}
 		]
@@ -673,17 +673,17 @@
 		"Loot": [
 			{
 				"LootType": "Artifact",
-				"ItemId": 5,
+				"LootId": 5,
 				"Frequency": 0.0001
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 32,
+				"LootId": 32,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 33,
+				"LootId": 33,
 				"Frequency": 0.1000
 			}
 		]
@@ -697,12 +697,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 34,
+				"LootId": 34,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 33,
+				"LootId": 33,
 				"Frequency": 0.1000
 			}
 		]
@@ -716,17 +716,17 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 35,
+				"LootId": 35,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 33,
+				"LootId": 33,
 				"Frequency": 0.1000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 7,
+				"LootId": 7,
 				"Frequency": 0.0500
 			}
 		]
@@ -740,22 +740,22 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 35,
+				"LootId": 35,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 7,
+				"LootId": 7,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 33,
+				"LootId": 33,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 36,
+				"LootId": 36,
 				"Frequency": 0.2000
 			}
 		]
@@ -769,12 +769,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 33,
+				"LootId": 33,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 37,
+				"LootId": 37,
 				"Frequency": 0.2000
 			}
 		]
@@ -788,22 +788,22 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 38,
+				"LootId": 38,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 32,
+				"LootId": 32,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 18,
+				"LootId": 18,
 				"Frequency": 0.2000
 			},
 			{
 				"LootType": "Material",
-				"ItemId": 36,
+				"LootId": 36,
 				"Frequency": 0.2000
 			}
 		]
@@ -817,12 +817,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -836,12 +836,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -855,12 +855,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -874,12 +874,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -893,12 +893,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -912,12 +912,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -931,12 +931,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -950,12 +950,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -969,12 +969,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -988,12 +988,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1007,12 +1007,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1026,12 +1026,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1045,12 +1045,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1064,12 +1064,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1083,12 +1083,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1102,12 +1102,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1121,12 +1121,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1140,12 +1140,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1159,12 +1159,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1178,12 +1178,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1197,12 +1197,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1216,12 +1216,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1235,12 +1235,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
@@ -1254,12 +1254,12 @@
 		"Loot": [
 			{
 				"LootType": "Material",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			},
 			{
 				"LootType": "Recipe",
-				"ItemId": 1,
+				"LootId": 1,
 				"Frequency": 0.5000
 			}
 		]
