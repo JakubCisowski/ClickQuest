@@ -72,7 +72,7 @@ namespace ClickQuest.Game.Extensions.ValidationManager
 		private static void CheckFrequencySum(string objectName, IEnumerable<double> frequencies)
 		{
 			double frequenciesSum = frequencies.Sum();
-			if (frequenciesSum != 1)
+			if (frequenciesSum <= 0.9999 || frequenciesSum >= 1.0001) // <== cringe	
 			{
 				string message = $"'{objectName}' frequencies do not add up to 1";
 				Logger.Log(message);

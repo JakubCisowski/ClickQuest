@@ -528,7 +528,7 @@
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Recipe",
+				"ItemType": "Material",
 				"ItemId": 40,
 				"Frequency": 0.1000
 			}
@@ -799,7 +799,7 @@
 			{
 				"ItemType": "Material",
 				"ItemId": 18,
-				"Frequency": 0.5000
+				"Frequency": 0.2000
 			},
 			{
 				"ItemType": "Material",

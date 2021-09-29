@@ -33,11 +33,11 @@ namespace ClickQuest.Game.Data.GameData
 			GameData.DungeonGroups = DeserializeType<DungeonGroup>(Path.Combine(Environment.CurrentDirectory, @"Data\", @"GameData\", @"GameAssets\", "DungeonGroups.json"));
 			GameData.Dungeons = DeserializeType<Dungeon>(Path.Combine(Environment.CurrentDirectory, @"Data\", @"GameData\", @"GameAssets\", "Dungeons.json"));
 
+			PostLoad();
+
 #if DEBUG
 			DataValidator.ValidateData();
 #endif
-
-			PostLoad();
 
 			// Refresh Pages collection in order to  rearrange page bindings.
 			GameData.RefreshPages();
@@ -59,22 +59,10 @@ namespace ClickQuest.Game.Data.GameData
 				quest.UpdateAllRewardsDescription();
 			}
 
-			var artifactFunctionalities = new List<ArtifactFunctionality>();
+			LoadArtifactFunctionalities();
 
-			var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Artifacts", StringComparison.Ordinal));
-
-			foreach (var type in types)
-			{
-				if (Activator.CreateInstance(type) is ArtifactFunctionality artifactFunctionality)
-				{
-					artifactFunctionalities.Add(artifactFunctionality);
-				}
-			}
-
-			foreach (var artifact in GameData.Artifacts)
-			{
-				artifact.ArtifactFunctionality = artifactFunctionalities.FirstOrDefault(x => x.Name == artifact.Name);
-			}
+			// [PRERELEASE] In the future this will be done in content loader.
+			FillMonsterLootWithEmptyLoot();
 		}
 
 		public static List<T> DeserializeType<T>(string filePath)
@@ -93,6 +81,44 @@ namespace ClickQuest.Game.Data.GameData
 
 			result = JsonSerializer.Deserialize<List<T>>(json, options);
 			return result;
+		}
+
+		public static void LoadArtifactFunctionalities()
+		{
+			var artifactFunctionalities = new List<ArtifactFunctionality>();
+
+			var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Artifacts", StringComparison.Ordinal));
+
+			foreach (var type in types)
+			{
+				if (Activator.CreateInstance(type) is ArtifactFunctionality artifactFunctionality)
+				{
+					artifactFunctionalities.Add(artifactFunctionality);
+				}
+			}
+
+			foreach (var artifact in GameData.Artifacts)
+			{
+				artifact.ArtifactFunctionality = artifactFunctionalities.FirstOrDefault(x => x.Name == artifact.Name);
+			}
+		}
+		
+		public static void FillMonsterLootWithEmptyLoot()
+		{
+			foreach (var monster in GameData.Monsters)
+			{
+				var sumOfFrequencies = monster.Loot.Sum(x => x.Frequency);
+
+				if (sumOfFrequencies < 1.0)
+				{
+					monster.Loot.Add(new MonsterLootPattern() 
+					{ 
+						ItemId = 0, 
+						ItemType = ItemType.Material,
+						Frequency = 1.0 - sumOfFrequencies
+					});
+				}
+			}
 		}
 	}
 }
