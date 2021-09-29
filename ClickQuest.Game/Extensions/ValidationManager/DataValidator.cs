@@ -133,12 +133,25 @@ namespace ClickQuest.Game.Extensions.ValidationManager
 		{
 			foreach (var lootPattern in boss.BossLoot)
 			{
-				var item = lootPattern.Item;
-
-				if (item is null)
+				if (lootPattern.LootType == Items.LootType.Blessing)
 				{
-					string message = $"Following referenced item Id's in '{boss.Name}' is not available: " + lootPattern.ItemId;
-					Logger.Log(message);
+					var blessing = GameData.Blessings.FirstOrDefault(x=>x.Id==lootPattern.LootId);
+					
+					if (blessing is null)
+					{
+						string message = $"Following referenced blessing Id's in '{boss.Name}' is not available: " + lootPattern.LootId;
+						Logger.Log(message);
+					}
+				}
+				else
+				{
+					var item = lootPattern.Item;
+
+					if (item is null)
+					{
+						string message = $"Following referenced item Id's in '{boss.Name}' is not available: " + lootPattern.LootId;
+						Logger.Log(message);
+					}
 				}
 			}
 		}
@@ -151,7 +164,7 @@ namespace ClickQuest.Game.Extensions.ValidationManager
 
 				if (item is null)
 				{
-					string message = $"Following referenced item Id's in '{monster.Name}' is not available: " + lootPattern.ItemId;
+					string message = $"Following referenced item Id's in '{monster.Name}' is not available: " + lootPattern.LootId;
 					Logger.Log(message);
 				}
 			}

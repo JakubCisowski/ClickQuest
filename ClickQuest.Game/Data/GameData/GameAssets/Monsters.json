@@ -7,22 +7,22 @@
 	  "Image": "/example.png",
 	  "Loot": [
 		{
-		  "ItemType": "Material",
+		  "LootType": "Material",
 		  "ItemId": 1,
 		  "Frequency": 0.1000
 		},
 		{
-		  "ItemType": "Material",
+		  "LootType": "Material",
 		  "ItemId": 2,
 		  "Frequency": 0.1000
 		},
 		{
-			"ItemType": "Recipe",
+			"LootType": "Recipe",
 			"ItemId": 1,
 			"Frequency": 0.0500
 		},
 		{
-			"ItemType": "Material",
+			"LootType": "Material",
 			"ItemId": 3,
 			"Frequency": 0.7500
 		}
@@ -36,17 +36,17 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 4,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 5,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 3,
 				"Frequency": 0.8000
 			}
@@ -60,17 +60,17 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 6,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 7,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 3,
 				"Frequency": 0.8000
 			}
@@ -84,22 +84,22 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 8,
 				"Frequency": 0.0500
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 9,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.0100
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 3,
 				"Frequency": 0.8400
 			}
@@ -113,17 +113,17 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 10,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 11,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 3,
 				"Frequency": 0.8000
 			}
@@ -137,17 +137,17 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 12,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 3,
 				"Frequency": 0.0100
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 3,
 				"Frequency": 0.8900
 			}
@@ -161,12 +161,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 15,
 				"Frequency": 0.0100
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 6,
 				"Frequency": 0.0010
 			}
@@ -180,12 +180,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 15,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 6,
 				"Frequency": 0.0100
 			}
@@ -199,17 +199,17 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 16,
 				"Frequency": 0.0200
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 17,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 7,
 				"Frequency": 0.1000
 			}
@@ -223,12 +223,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 18,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 19,
 				"Frequency": 0.0100
 			}
@@ -242,17 +242,17 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 20,
 				"Frequency": 0.0500
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 16,
 				"Frequency": 0.0200
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 7,
 				"Frequency": 0.0010
 			}
@@ -266,22 +266,22 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 21,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 22,
 				"Frequency": 0.1500
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 23,
 				"Frequency": 0.3000
 			},
 			{
-				"ItemType": "Artifact",
+				"LootType": "Artifact",
 				"ItemId": 9,
 				"Frequency": 0.0500
 			}
@@ -295,32 +295,32 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 21,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 24,
 				"Frequency": 0.4000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 25,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 26,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Artifact",
+				"LootType": "Artifact",
 				"ItemId": 4,
 				"Frequency": 0.0500
 			},
 			{
-				"ItemType": "Artifact",
+				"LootType": "Artifact",
 				"ItemId": 10,
 				"Frequency": 0.0500
 			}
@@ -334,32 +334,32 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 8,
 				"Frequency": 0.0500
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 27,
 				"Frequency": 0.1400
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 23,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 26,
 				"Frequency": 0.2500
 			},
 			{
-				"ItemType": "Artifact",
+				"LootType": "Artifact",
 				"ItemId": 2,
 				"Frequency": 0.0500
 			},
 			{
-				"ItemType": "Artifact",
+				"LootType": "Artifact",
 				"ItemId": 6,
 				"Frequency": 0.0100
 			}
@@ -373,22 +373,22 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 28,
 				"Frequency": 0.3500
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 8,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 25,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Artifact",
+				"LootType": "Artifact",
 				"ItemId": 8,
 				"Frequency": 0.0500
 			}
@@ -402,42 +402,42 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 8,
 				"Frequency": 0.1500
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 29,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 30,
 				"Frequency": 0.3000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 25,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 26,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Artifact",
+				"LootType": "Artifact",
 				"ItemId": 24,
 				"Frequency": 0.0500
 			},
 			{
-				"ItemType": "Artifact",
+				"LootType": "Artifact",
 				"ItemId": 2,
 				"Frequency": 0.0500
 			},
 			{
-				"ItemType": "Artifact",
+				"LootType": "Artifact",
 				"ItemId": 6,
 				"Frequency": 0.0500
 			}
@@ -451,22 +451,22 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 29,
 				"Frequency": 0.3500
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 30,
 				"Frequency": 0.3000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 31,
 				"Frequency": 0.3000
 			},
 			{
-				"ItemType": "Artifact",
+				"LootType": "Artifact",
 				"ItemId": 1,
 				"Frequency": 0.0500
 			}
@@ -480,17 +480,17 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 39,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 40,
 				"Frequency": 0.2500
 			},
 			{
-				"ItemType": "Artifact",
+				"LootType": "Artifact",
 				"ItemId": 14,
 				"Frequency": 0.0100
 			}
@@ -504,12 +504,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 41,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 42,
 				"Frequency": 0.1000
 			}
@@ -523,12 +523,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 39,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 40,
 				"Frequency": 0.1000
 			}
@@ -542,22 +542,22 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 24,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 21,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 25,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 43,
 				"Frequency": 0.1000
 			}
@@ -571,17 +571,17 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 24,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 32,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 7,
 				"Frequency": 0.2000
 			}
@@ -595,12 +595,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 44,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 33,
 				"Frequency": 0.1000
 			}
@@ -614,27 +614,27 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 39,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 40,
 				"Frequency": 0.0500
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 41,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 43,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 4,
 				"Frequency": 0.0500
 			}
@@ -648,17 +648,17 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 41,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 42,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 5,
 				"Frequency": 0.2000
 			}
@@ -672,17 +672,17 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Artifact",
+				"LootType": "Artifact",
 				"ItemId": 5,
 				"Frequency": 0.0001
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 32,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 33,
 				"Frequency": 0.1000
 			}
@@ -696,12 +696,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 34,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 33,
 				"Frequency": 0.1000
 			}
@@ -715,17 +715,17 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 35,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 33,
 				"Frequency": 0.1000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 7,
 				"Frequency": 0.0500
 			}
@@ -739,22 +739,22 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 35,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 7,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 33,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 36,
 				"Frequency": 0.2000
 			}
@@ -768,12 +768,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 33,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 37,
 				"Frequency": 0.2000
 			}
@@ -787,22 +787,22 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 38,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 32,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 18,
 				"Frequency": 0.2000
 			},
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 36,
 				"Frequency": 0.2000
 			}
@@ -816,12 +816,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -835,12 +835,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -854,12 +854,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -873,12 +873,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -892,12 +892,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -911,12 +911,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -930,12 +930,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -949,12 +949,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -968,12 +968,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -987,12 +987,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1006,12 +1006,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1025,12 +1025,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1044,12 +1044,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1063,12 +1063,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1082,12 +1082,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1101,12 +1101,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1120,12 +1120,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1139,12 +1139,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1158,12 +1158,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1177,12 +1177,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1196,12 +1196,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1215,12 +1215,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1234,12 +1234,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}
@@ -1253,12 +1253,12 @@
 		"Image": "/example.png",
 		"Loot": [
 			{
-				"ItemType": "Material",
+				"LootType": "Material",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			},
 			{
-				"ItemType": "Recipe",
+				"LootType": "Recipe",
 				"ItemId": 1,
 				"Frequency": 0.5000
 			}

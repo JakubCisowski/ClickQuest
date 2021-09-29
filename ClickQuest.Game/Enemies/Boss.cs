@@ -89,10 +89,28 @@ namespace ClickQuest.Game.Enemies
 				if (randomizedValue < loot.Frequencies[threshold])
 				{
 					// Grant loot after checking if it's not empty.
-					if (loot.Item.Id != 0)
+					if (loot.LootType == LootType.Blessing)
+					{
+						bool hasBlessingActive = User.Instance.CurrentHero.Blessing != null;
+
+						if (hasBlessingActive)
+						{
+							bool doesUserWantToSwap = Blessing.AskUserAndSwapBlessing(loot.LootId);
+
+							if (doesUserWantToSwap == false)
+							{
+								return;
+							}
+						}
+						else
+						{
+							Blessing.AddOrReplaceBlessing(loot.LootId);
+						}
+					}
+					else
 					{
 						loot.Item.AddItem();
-						lootText += "- " + loot.Item.Name + " (" + loot.ItemType + ")\n";
+						lootText += "- " + loot.Item.Name + " (" + loot.LootType + ")\n";
 					}
 				}
 			}

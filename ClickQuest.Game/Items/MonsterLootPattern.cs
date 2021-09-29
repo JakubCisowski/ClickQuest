@@ -6,8 +6,8 @@ namespace ClickQuest.Game.Items
 {
 	public class MonsterLootPattern
 	{
-		public int ItemId { get; set; }
-		public ItemType ItemType { get; set; }
+		public int LootId { get; set; }
+		public LootType LootType { get; set; }
 		public double Frequency { get; set; }
 
 		[JsonIgnore]
@@ -17,18 +17,18 @@ namespace ClickQuest.Game.Items
 			{
 				Item item = null;
 
-				switch (ItemType)
+				switch (LootType)
 				{
-					case ItemType.Material:
-						item = GameData.Materials.FirstOrDefault(x => x.Id == ItemId);
+					case LootType.Material:
+						item = GameData.Materials.FirstOrDefault(x => x.Id == LootId);
 						break;
 
-					case ItemType.Recipe:
-						item = GameData.Recipes.FirstOrDefault(x => x.Id == ItemId);
+					case LootType.Recipe:
+						item = GameData.Recipes.FirstOrDefault(x => x.Id == LootId);
 						break;
 
-					case ItemType.Artifact:
-						item = GameData.Artifacts.FirstOrDefault(x => x.Id == ItemId);
+					case LootType.Artifact:
+						item = GameData.Artifacts.FirstOrDefault(x => x.Id == LootId);
 						break;
 				}
 

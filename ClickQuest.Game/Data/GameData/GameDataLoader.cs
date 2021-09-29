@@ -113,8 +113,8 @@ namespace ClickQuest.Game.Data.GameData
 				{
 					monster.Loot.Add(new MonsterLootPattern() 
 					{ 
-						ItemId = 0, 
-						ItemType = ItemType.Material,
+						LootId = 0, 
+						LootType = LootType.Material,
 						Frequency = 1.0 - sumOfFrequencies
 					});
 				}
