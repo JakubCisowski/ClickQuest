@@ -1,7 +1,7 @@
-﻿using ClickQuest.Items;
-using ClickQuest.Player;
+﻿using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Increases your Click Damage by 20, and your Aura Attack Speed by 10%.
 	public class SlySnakeOrb : ArtifactFunctionality

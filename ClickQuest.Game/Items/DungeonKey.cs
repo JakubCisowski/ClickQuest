@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using ClickQuest.Extensions.CollectionsManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Player;
+using ClickQuest.Game.Extensions.CollectionsManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Items
+namespace ClickQuest.Game.Items
 {
 	public class DungeonKey : Item
 	{

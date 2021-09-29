@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
-using ClickQuest.Adventures;
-using ClickQuest.Enemies;
-using ClickQuest.Heroes.Buffs;
-using ClickQuest.Items;
-using ClickQuest.Pages;
-using ClickQuest.Places;
+using ClickQuest.Game.Adventures;
+using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Heroes.Buffs;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Pages;
+using ClickQuest.Game.Places;
 
-namespace ClickQuest.Data.GameData
+namespace ClickQuest.Game.Data.GameData
 {
 	public static class GameData
 	{

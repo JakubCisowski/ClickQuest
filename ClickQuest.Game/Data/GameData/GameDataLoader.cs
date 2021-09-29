@@ -5,14 +5,14 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using ClickQuest.Adventures;
-using ClickQuest.Enemies;
-using ClickQuest.Extensions.ValidationManager;
-using ClickQuest.Heroes.Buffs;
-using ClickQuest.Items;
-using ClickQuest.Places;
+using ClickQuest.Game.Adventures;
+using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.ValidationManager;
+using ClickQuest.Game.Heroes.Buffs;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Places;
 
-namespace ClickQuest.Data.GameData
+namespace ClickQuest.Game.Data.GameData
 {
 	public static class GameDataLoader
 	{

@@ -1,9 +1,9 @@
-﻿using ClickQuest.Enemies;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Items;
+﻿using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Requires three artifact slots to equip. While on a Region, you don't deal any damage.
 	// Instead, each click you make on a Monster will instantly defeat them.

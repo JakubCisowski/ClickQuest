@@ -6,11 +6,11 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Items;
-using ClickQuest.Player;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Pages
+namespace ClickQuest.Game.Pages
 {
 	public partial class EquipmentPage : Page
 	{

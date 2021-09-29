@@ -1,10 +1,10 @@
-﻿using ClickQuest.Enemies;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Items;
-using ClickQuest.Player;
+﻿using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Your clicks leave a stack of 'Brittle' on the enemy, increasing your Critical Click Chance against them by 5%. Stacks up to 5 times.
 	// Additionally, clicks against Monsters (excluding Bosses) with 5 'Brittle' stacks and below 10% health instantly finish them.

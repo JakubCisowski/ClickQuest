@@ -5,9 +5,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using ClickQuest.Player;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Windows
+namespace ClickQuest.Game.Windows
 {
 	public partial class AchievementsWindow : Window
 	{

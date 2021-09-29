@@ -1,9 +1,9 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
-using ClickQuest.Interfaces;
-using ClickQuest.Player;
+using ClickQuest.Game.Interfaces;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Items
+namespace ClickQuest.Game.Items
 {
 	public abstract class Item : INotifyPropertyChanged, IIdentifiable
 	{

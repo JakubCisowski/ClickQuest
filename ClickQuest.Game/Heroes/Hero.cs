@@ -4,15 +4,15 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text.Json.Serialization;
-using ClickQuest.Adventures;
-using ClickQuest.Data.GameData;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Heroes.Buffs;
-using ClickQuest.Items;
-using ClickQuest.Player;
-using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
+using ClickQuest.Game.Adventures;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Heroes.Buffs;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
+using static ClickQuest.Game.Extensions.RandomnessManager.RandomnessController;
 
-namespace ClickQuest.Heroes
+namespace ClickQuest.Game.Heroes
 {
 	public class Hero : INotifyPropertyChanged
 	{

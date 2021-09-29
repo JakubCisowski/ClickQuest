@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Threading;
-using ClickQuest.Enemies;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Items;
+using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// For the first 5 seconds in combat with an Enemy, you cannot deal damage to them, and instead accumulate damage.
 	// After 5 seconds, explode dealing damage to the enemy. Damage dealt is equal to 200% of the accumulated damage.

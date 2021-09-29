@@ -2,13 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using ClickQuest.Adventures;
-using ClickQuest.Data.GameData;
-using ClickQuest.Enemies;
-using ClickQuest.Interfaces;
-using ClickQuest.Places;
+using ClickQuest.Game.Adventures;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Interfaces;
+using ClickQuest.Game.Places;
 
-namespace ClickQuest.Extensions.ValidationManager
+namespace ClickQuest.Game.Extensions.ValidationManager
 {
 	public static class DataValidator
 	{

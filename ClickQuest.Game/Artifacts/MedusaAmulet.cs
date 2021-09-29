@@ -1,10 +1,10 @@
-﻿using ClickQuest.Data.GameData;
-using ClickQuest.Items;
-using ClickQuest.Pages;
-using ClickQuest.Places;
-using ClickQuest.Player;
+﻿using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Pages;
+using ClickQuest.Game.Places;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// While on a Region, each monster you kill increases your Click Damage by 2, Critical Click Chance by 1% and Critical Click Damage by 1%.
 	// Stacks up to 20 times. Leaving the region removes all stacks.

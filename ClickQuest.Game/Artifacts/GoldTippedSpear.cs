@@ -1,7 +1,7 @@
-﻿using ClickQuest.Items;
-using ClickQuest.Player;
+﻿using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Convert your Poison Damage into Click Damage. For each 1 Poison Damage converted, gain 1 Click Damage.
 	// Additionally, for each 10 Poison Damage converted, gain 1% Critical Click Damage.

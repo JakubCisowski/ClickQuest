@@ -3,12 +3,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using ClickQuest.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.CombatManager;
 using MaterialDesignThemes.Wpf;
-using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
-using Colors = ClickQuest.Styles.Colors;
+using static ClickQuest.Game.Extensions.RandomnessManager.RandomnessController;
+using Colors = ClickQuest.Game.Styles.Colors;
 
-namespace ClickQuest.Extensions.InterfaceManager
+namespace ClickQuest.Game.Extensions.InterfaceManager
 {
 	public static class FloatingTextController
 	{

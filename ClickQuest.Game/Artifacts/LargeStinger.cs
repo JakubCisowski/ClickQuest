@@ -1,7 +1,7 @@
-﻿using ClickQuest.Items;
-using ClickQuest.Player;
+﻿using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Increases your Poison Damage by 5.
 	public class LargeStinger : ArtifactFunctionality

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ClickQuest.Extensions.CollectionsManager
+namespace ClickQuest.Game.Extensions.CollectionsManager
 {
 	public static class CollectionInitializer
 	{

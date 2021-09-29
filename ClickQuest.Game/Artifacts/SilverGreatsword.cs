@@ -1,8 +1,8 @@
-﻿using ClickQuest.Enemies;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Items;
+﻿using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// All non-artifact damage dealt by you is increased by 10% against Bosses.
 	public class SilverGreatsword : ArtifactFunctionality

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Threading;
-using ClickQuest.Items;
-using ClickQuest.Player;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// After killing a monster, your poison damage is increased by 10 for 5 seconds. This effect does not stack.
 	public class Necronomicon : ArtifactFunctionality

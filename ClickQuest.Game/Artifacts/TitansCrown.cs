@@ -1,7 +1,7 @@
-﻿using ClickQuest.Items;
-using ClickQuest.Player;
+﻿using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// All experience gained is increased by 30%.
 	public class TitansCrown : ArtifactFunctionality

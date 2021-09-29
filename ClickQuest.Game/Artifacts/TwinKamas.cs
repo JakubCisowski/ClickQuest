@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Threading;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Items;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Counts as two artifacts, therefore requires two free slots to use. After clicking on a monster, strike again after a 1s delay.
 	// The second attack can critically hit, as well as apply on-hit effects (such as poison).

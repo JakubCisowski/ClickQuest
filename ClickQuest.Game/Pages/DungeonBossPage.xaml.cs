@@ -7,12 +7,12 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using ClickQuest.Data.GameData;
-using ClickQuest.Enemies;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
 
-namespace ClickQuest.Pages
+namespace ClickQuest.Game.Pages
 {
 	public partial class DungeonBossPage : Page, INotifyPropertyChanged
 	{

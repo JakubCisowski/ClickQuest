@@ -1,12 +1,12 @@
 ﻿using System.Windows;
-using ClickQuest.Controls;
-using ClickQuest.Enemies;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Items;
-using ClickQuest.Player;
+using ClickQuest.Game.Controls;
+using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Has to be equipped with at least one other artifact. Causes all clicks to leave a spine in the target’s body.
 	// Click damage dealt is increased by 2 (?) for each spine in the target.

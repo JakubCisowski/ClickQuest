@@ -1,9 +1,9 @@
 using System.Windows;
 using System.Windows.Media;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Items;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Styles
+namespace ClickQuest.Game.Styles
 {
 	public static class Colors
 	{

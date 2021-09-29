@@ -1,6 +1,6 @@
 using System;
 
-namespace ClickQuest.Heroes
+namespace ClickQuest.Game.Heroes
 {
 	public static class Experience
 	{

@@ -6,15 +6,15 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
-using ClickQuest.Adventures;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Heroes;
-using ClickQuest.Heroes.Buffs;
-using ClickQuest.Items;
-using ClickQuest.Player;
+using ClickQuest.Game.Adventures;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Heroes;
+using ClickQuest.Game.Heroes.Buffs;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 using MaterialDesignThemes.Wpf;
 
-namespace ClickQuest.Pages
+namespace ClickQuest.Game.Pages
 {
 	public partial class HeroStatsPage : Page
 	{

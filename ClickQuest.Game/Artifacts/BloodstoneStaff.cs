@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Items;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Killing a Monster grants a 10% increase to all non-artifact damage dealt for 5 seconds. Stacks additively up to 5 times. Each stack has its own duration.
 	public class BloodstoneStaff : ArtifactFunctionality

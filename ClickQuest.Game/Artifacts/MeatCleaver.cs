@@ -1,7 +1,7 @@
-﻿using ClickQuest.Items;
-using ClickQuest.Player;
+﻿using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Gain 20% Critical Click Damage.
 	public class MeatCleaver : ArtifactFunctionality

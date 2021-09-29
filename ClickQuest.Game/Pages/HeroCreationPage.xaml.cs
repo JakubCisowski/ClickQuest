@@ -2,14 +2,14 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.Controls;
-using ClickQuest.Data.GameData;
-using ClickQuest.Extensions.CollectionsManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Heroes;
-using ClickQuest.Player;
+using ClickQuest.Game.Controls;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Extensions.CollectionsManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Heroes;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Pages
+namespace ClickQuest.Game.Pages
 {
 	public partial class HeroCreationPage : Page
 	{

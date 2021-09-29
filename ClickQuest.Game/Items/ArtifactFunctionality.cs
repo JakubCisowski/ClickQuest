@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using System.Windows;
-using ClickQuest.Adventures;
-using ClickQuest.Controls;
-using ClickQuest.Data.GameData;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Heroes.Buffs;
-using ClickQuest.Pages;
-using ClickQuest.Player;
+using ClickQuest.Game.Adventures;
+using ClickQuest.Game.Controls;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Heroes.Buffs;
+using ClickQuest.Game.Pages;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Items
+namespace ClickQuest.Game.Items
 {
 	public class ArtifactFunctionality
 	{

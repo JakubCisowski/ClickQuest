@@ -5,18 +5,18 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Threading;
-using ClickQuest.Controls;
-using ClickQuest.Data.GameData;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Extensions.QuestManager;
-using ClickQuest.Heroes;
-using ClickQuest.Heroes.Buffs;
-using ClickQuest.Interfaces;
-using ClickQuest.Items;
-using ClickQuest.Player;
+using ClickQuest.Game.Controls;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Extensions.QuestManager;
+using ClickQuest.Game.Heroes;
+using ClickQuest.Game.Heroes.Buffs;
+using ClickQuest.Game.Interfaces;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Adventures
+namespace ClickQuest.Game.Adventures
 {
 	public class Quest : INotifyPropertyChanged, IIdentifiable
 	{

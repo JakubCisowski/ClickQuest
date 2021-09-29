@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
-using ClickQuest.Data.GameData;
-using ClickQuest.Extensions.CollectionsManager;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Heroes;
-using ClickQuest.Items;
-using ClickQuest.Pages;
-using ClickQuest.Player;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Extensions.CollectionsManager;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Heroes;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Pages;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Enemies
+namespace ClickQuest.Game.Enemies
 {
 	public class Monster : Enemy
 	{

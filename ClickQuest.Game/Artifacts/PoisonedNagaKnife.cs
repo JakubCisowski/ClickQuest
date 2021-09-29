@@ -1,9 +1,9 @@
-﻿using ClickQuest.Enemies;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Items;
+﻿using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Clicks against Monsters deal additional damage equal to 5% of their maximum health. Does not work against Bosses.
 	public class PoisonedNagaKnife : ArtifactFunctionality

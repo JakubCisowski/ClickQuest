@@ -1,4 +1,4 @@
-namespace ClickQuest.Items
+namespace ClickQuest.Game.Items
 {
 	public enum Rarity
 	{

@@ -1,6 +1,6 @@
 using System;
 
-namespace ClickQuest.Extensions.RandomnessManager
+namespace ClickQuest.Game.Extensions.RandomnessManager
 {
 	public static class RandomnessController
 	{

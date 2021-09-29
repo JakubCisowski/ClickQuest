@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using ClickQuest.Player;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Data.UserData
+namespace ClickQuest.Game.Data.UserData
 {
 	public static class UserDataLoader
 	{

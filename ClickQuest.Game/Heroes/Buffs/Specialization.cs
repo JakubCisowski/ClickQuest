@@ -1,10 +1,10 @@
 using System;
 using System.ComponentModel;
-using ClickQuest.Extensions.CollectionsManager;
-using ClickQuest.Items;
-using ClickQuest.Player;
+using ClickQuest.Game.Extensions.CollectionsManager;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Heroes.Buffs
+namespace ClickQuest.Game.Heroes.Buffs
 {
 	public enum SpecializationType { Blessing, Clicking, Crafting, Buying, Melting, Questing, Dungeon }
 

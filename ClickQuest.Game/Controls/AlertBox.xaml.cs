@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace ClickQuest.Controls
+namespace ClickQuest.Game.Controls
 {
 	public partial class AlertBox : Window
 	{

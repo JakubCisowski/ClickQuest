@@ -2,10 +2,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.Adventures;
-using ClickQuest.Player;
+using ClickQuest.Game.Adventures;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Controls
+namespace ClickQuest.Game.Controls
 {
 	public partial class QuestButton : UserControl, INotifyPropertyChanged
 	{

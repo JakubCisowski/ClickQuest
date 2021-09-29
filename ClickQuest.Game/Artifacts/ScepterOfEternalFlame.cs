@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Threading;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Items;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// On click, applies burning for 2 seconds that deals a total of 80 (?) damage.
 	public class ScepterOfEternalFlame : ArtifactFunctionality

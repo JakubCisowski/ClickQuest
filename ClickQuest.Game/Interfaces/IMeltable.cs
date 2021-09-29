@@ -1,4 +1,4 @@
-namespace ClickQuest.Interfaces
+namespace ClickQuest.Game.Interfaces
 {
 	public interface IMeltable
 	{

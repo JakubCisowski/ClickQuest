@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using ClickQuest.Data.GameData;
-using ClickQuest.Interfaces;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Interfaces;
 
-namespace ClickQuest.Places
+namespace ClickQuest.Game.Places
 {
 	public class Dungeon : INotifyPropertyChanged, IIdentifiable
 	{

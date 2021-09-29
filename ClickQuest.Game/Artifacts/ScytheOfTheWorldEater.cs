@@ -1,7 +1,7 @@
-﻿using ClickQuest.Items;
-using ClickQuest.Player;
+﻿using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Gain 50% Critical Click Chance. Excess critical chance is converted to Critical Click Damage (unlimited).
 	public class ScytheOfTheWorldEater : ArtifactFunctionality

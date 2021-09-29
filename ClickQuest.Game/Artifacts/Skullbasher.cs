@@ -1,7 +1,7 @@
-﻿using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Items;
+﻿using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Every other click you make deals an additional 10 (?) damage.
 	public class Skullbasher : ArtifactFunctionality

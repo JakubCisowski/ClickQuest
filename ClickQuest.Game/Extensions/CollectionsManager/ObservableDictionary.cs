@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
-using ClickQuest.Extensions.EventsManager;
+using ClickQuest.Game.Extensions.EventsManager;
 
-namespace ClickQuest.Extensions.CollectionsManager
+namespace ClickQuest.Game.Extensions.CollectionsManager
 {
 	[DebuggerDisplay("Count={Count}")]
 	public class ObservableDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TValue>>, IDictionary<TKey, TValue>, INotifyCollectionChanged, INotifyPropertyChanged

@@ -1,13 +1,13 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.Controls;
-using ClickQuest.Data.GameData;
-using ClickQuest.Enemies;
-using ClickQuest.Pages;
+using ClickQuest.Game.Controls;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Pages;
 using Microsoft.CSharp.RuntimeBinder;
 
-namespace ClickQuest.Extensions.InterfaceManager
+namespace ClickQuest.Game.Extensions.InterfaceManager
 {
 	public static class InterfaceController
 	{

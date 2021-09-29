@@ -1,11 +1,11 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using ClickQuest.Heroes.Buffs;
-using ClickQuest.Items;
-using ClickQuest.Styles;
+using ClickQuest.Game.Heroes.Buffs;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Styles;
 
-namespace ClickQuest.Extensions.InterfaceManager
+namespace ClickQuest.Game.Extensions.InterfaceManager
 {
 	public static class TooltipController
 	{

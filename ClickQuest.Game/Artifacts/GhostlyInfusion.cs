@@ -1,10 +1,10 @@
 ﻿using System.Windows;
-using ClickQuest.Controls;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Items;
-using ClickQuest.Player;
+using ClickQuest.Game.Controls;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Has to be equipped with at least one other artifact. 
 	// After killing a monster, your next click is guaranteed to critically hit, and will deal 10% more damage.

@@ -1,9 +1,9 @@
-﻿using ClickQuest.Enemies;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Items;
+﻿using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Every third Click you make against the same enemy deals bonus damage based on their maximum health.
 	// Against Monsters, deals 6% of their health. Against Bosses, deals 1% of their health.

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Items;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Clicking on an enemy 3 times within 0.5 (?) seconds deals a bonus 20 (?) damage.
 	public class LightningBolt : ArtifactFunctionality

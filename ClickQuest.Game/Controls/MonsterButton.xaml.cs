@@ -6,15 +6,15 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using ClickQuest.Enemies;
-using ClickQuest.Extensions.CollectionsManager;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Pages;
-using ClickQuest.Places;
-using ClickQuest.Player;
+using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.CollectionsManager;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Pages;
+using ClickQuest.Game.Places;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Controls
+namespace ClickQuest.Game.Controls
 {
 	public partial class MonsterButton : UserControl, INotifyPropertyChanged
 	{

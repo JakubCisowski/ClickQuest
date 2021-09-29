@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Threading;
-using ClickQuest.Enemies;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Items;
+using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// All damage dealt is increased by 50% for the first few seconds in combat.
 	// Against Monsters, the duration is 2 seconds; against Bosses - 5 seconds. The duration is refreshed each time you kill a Monster.

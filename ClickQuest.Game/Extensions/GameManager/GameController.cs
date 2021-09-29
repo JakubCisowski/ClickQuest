@@ -1,6 +1,6 @@
-using ClickQuest.Player;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Extensions.GameManager
+namespace ClickQuest.Game.Extensions.GameManager
 {
 	public static class GameController
 	{

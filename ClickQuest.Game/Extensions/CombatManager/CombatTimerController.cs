@@ -2,12 +2,12 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Heroes.Buffs;
-using ClickQuest.Pages;
-using ClickQuest.Player;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Heroes.Buffs;
+using ClickQuest.Game.Pages;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Extensions.CombatManager
+namespace ClickQuest.Game.Extensions.CombatManager
 {
 	public static class CombatTimerController
 	{

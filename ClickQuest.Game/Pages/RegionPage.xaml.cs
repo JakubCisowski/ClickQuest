@@ -1,13 +1,13 @@
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.Controls;
-using ClickQuest.Data.GameData;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Places;
-using ClickQuest.Player;
+using ClickQuest.Game.Controls;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Places;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Pages
+namespace ClickQuest.Game.Pages
 {
 	public partial class RegionPage : Page
 	{

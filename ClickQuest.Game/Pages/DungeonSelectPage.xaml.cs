@@ -2,16 +2,16 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using ClickQuest.Controls;
-using ClickQuest.Data.GameData;
-using ClickQuest.Enemies;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Items;
-using ClickQuest.Places;
-using ClickQuest.Player;
-using Colors = ClickQuest.Styles.Colors;
+using ClickQuest.Game.Controls;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Places;
+using ClickQuest.Game.Player;
+using Colors = ClickQuest.Game.Styles.Colors;
 
-namespace ClickQuest.Pages
+namespace ClickQuest.Game.Pages
 {
 	public partial class DungeonSelectPage : Page
 	{

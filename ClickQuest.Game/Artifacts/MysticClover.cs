@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ClickQuest.Data.GameData;
-using ClickQuest.Items;
-using ClickQuest.Pages;
-using ClickQuest.Places;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Pages;
+using ClickQuest.Game.Places;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// While on a region, you have an increased chance to find rare Monsters. 
 	// The chance to find Monsters that have a spawn chance of 2% or less is doubled, while the chance to find the most common Monsters is reduced appropriately.

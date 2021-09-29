@@ -1,13 +1,13 @@
 using System.ComponentModel;
 using System.Linq;
-using ClickQuest.Data.GameData;
-using ClickQuest.Extensions.CollectionsManager;
-using ClickQuest.Interfaces;
-using ClickQuest.Items;
-using ClickQuest.Pages;
-using ClickQuest.Player;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Extensions.CollectionsManager;
+using ClickQuest.Game.Interfaces;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Pages;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Enemies
+namespace ClickQuest.Game.Enemies
 {
 	public abstract class Enemy : INotifyPropertyChanged, IIdentifiable
 	{

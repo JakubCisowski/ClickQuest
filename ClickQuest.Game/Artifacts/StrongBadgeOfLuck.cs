@@ -1,7 +1,7 @@
-﻿using ClickQuest.Items;
-using ClickQuest.Player;
+﻿using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Increases your Click Damage by 20, and your Critical Click Chance by 10%.
 	public class StrongBadgeOfLuck : ArtifactFunctionality

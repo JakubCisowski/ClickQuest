@@ -1,12 +1,12 @@
 using System.Linq;
 using System.Windows;
-using ClickQuest.Controls;
-using ClickQuest.Enemies;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Heroes.Buffs;
-using ClickQuest.Player;
+using ClickQuest.Game.Controls;
+using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Heroes.Buffs;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Extensions.CombatManager
+namespace ClickQuest.Game.Extensions.CombatManager
 {
 	public static class CombatController
 	{

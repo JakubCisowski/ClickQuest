@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows.Threading;
-using ClickQuest.Enemies;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Items;
-using ClickQuest.Player;
+using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Your first attack against a monster places 'Decay' on them, dealing damage every 0.5 seconds for 2.5 seconds. 
 	// Damage dealt is equal to your poison damage. Deals double damage against bosses.

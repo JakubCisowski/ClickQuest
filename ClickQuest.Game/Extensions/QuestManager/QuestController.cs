@@ -1,7 +1,7 @@
-using ClickQuest.Data.GameData;
-using ClickQuest.Pages;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Pages;
 
-namespace ClickQuest.Extensions.QuestManager
+namespace ClickQuest.Game.Extensions.QuestManager
 {
 	public static class QuestController
 	{

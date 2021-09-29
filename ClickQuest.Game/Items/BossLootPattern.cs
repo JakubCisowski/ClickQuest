@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
-using ClickQuest.Data.GameData;
+using ClickQuest.Game.Data.GameData;
 
-namespace ClickQuest.Items
+namespace ClickQuest.Game.Items
 {
 	public class BossLootPattern
 	{

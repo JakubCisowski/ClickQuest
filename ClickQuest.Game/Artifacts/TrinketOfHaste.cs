@@ -1,7 +1,7 @@
-﻿using ClickQuest.Adventures;
-using ClickQuest.Items;
+﻿using ClickQuest.Game.Adventures;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Quests take 25% less time to complete.
 	public class TrinketOfHaste : ArtifactFunctionality

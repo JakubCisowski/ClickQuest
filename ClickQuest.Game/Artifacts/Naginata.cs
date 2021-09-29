@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows.Threading;
-using ClickQuest.Enemies;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Items;
-using ClickQuest.Player;
+using ClickQuest.Game.Enemies;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// If you would deal 90% or more of an Enemy's health with a single click, gain double experience, 1 Gold and a 20 increase to Click Damage for 10 seconds.
 	// The damage increase bonus does not stack.

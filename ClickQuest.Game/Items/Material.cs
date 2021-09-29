@@ -1,10 +1,10 @@
 using System.Text.Json.Serialization;
-using ClickQuest.Extensions.CollectionsManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Interfaces;
-using ClickQuest.Player;
+using ClickQuest.Game.Extensions.CollectionsManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Interfaces;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Items
+namespace ClickQuest.Game.Items
 {
 	public class Material : Item, IMeltable
 	{

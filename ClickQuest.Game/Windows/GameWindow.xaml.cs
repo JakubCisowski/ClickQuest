@@ -2,16 +2,16 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using ClickQuest.Controls;
-using ClickQuest.Data.GameData;
-using ClickQuest.Data.UserData;
-using ClickQuest.Extensions.GameManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Pages;
-using ClickQuest.Player;
-using ClickQuest.Windows;
+using ClickQuest.Game.Controls;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Data.UserData;
+using ClickQuest.Game.Extensions.GameManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Pages;
+using ClickQuest.Game.Player;
+using ClickQuest.Game.Windows;
 
-namespace ClickQuest
+namespace ClickQuest.Game
 {
 	public partial class GameWindow : Window, INotifyPropertyChanged
 	{

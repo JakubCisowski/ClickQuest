@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
-using ClickQuest.Interfaces;
+using ClickQuest.Game.Interfaces;
 
-namespace ClickQuest.Places
+namespace ClickQuest.Game.Places
 {
 	public class Region : INotifyPropertyChanged, IIdentifiable
 	{

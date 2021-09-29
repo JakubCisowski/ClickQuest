@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Threading;
-using ClickQuest.Controls;
-using ClickQuest.Data.GameData;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Interfaces;
-using ClickQuest.Items;
-using ClickQuest.Player;
+using ClickQuest.Game.Controls;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Interfaces;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest.Heroes.Buffs
+namespace ClickQuest.Game.Heroes.Buffs
 {
 	public enum BlessingType { ClickDamage = 0, CritChance, CritDamage, PoisonDamage, AuraDamage, AuraSpeed }
 

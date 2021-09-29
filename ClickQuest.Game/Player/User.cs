@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
-using ClickQuest.Heroes;
-using ClickQuest.Items;
+using ClickQuest.Game.Heroes;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Player
+namespace ClickQuest.Game.Player
 {
 	public class User : INotifyPropertyChanged
 	{

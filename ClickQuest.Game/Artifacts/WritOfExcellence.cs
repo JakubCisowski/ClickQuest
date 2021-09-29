@@ -1,7 +1,7 @@
-﻿using ClickQuest.Heroes.Buffs;
-using ClickQuest.Items;
+﻿using ClickQuest.Game.Heroes.Buffs;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	public class WritOfExcellence : ArtifactFunctionality
 	{

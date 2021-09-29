@@ -1,8 +1,8 @@
-﻿using ClickQuest.Items;
-using ClickQuest.Player;
-using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
+﻿using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
+using static ClickQuest.Game.Extensions.RandomnessManager.RandomnessController;
 
-namespace ClickQuest.Artifacts
+namespace ClickQuest.Game.Artifacts
 {
 	// Your poison damage can now critically strike. The probability is calculated using your Critical Click Chance, and the damage using your Critical Click Damage.
 	public class WillOfTheAncients : ArtifactFunctionality

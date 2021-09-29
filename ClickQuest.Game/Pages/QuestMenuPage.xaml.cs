@@ -1,14 +1,14 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.Controls;
-using ClickQuest.Data.GameData;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Heroes;
-using ClickQuest.Player;
-using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
+using ClickQuest.Game.Controls;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Heroes;
+using ClickQuest.Game.Player;
+using static ClickQuest.Game.Extensions.RandomnessManager.RandomnessController;
 
-namespace ClickQuest.Pages
+namespace ClickQuest.Game.Pages
 {
 	public partial class QuestMenuPage : Page
 	{

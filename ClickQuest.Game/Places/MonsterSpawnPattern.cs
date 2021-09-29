@@ -1,8 +1,8 @@
 using System.Linq;
-using ClickQuest.Data.GameData;
-using ClickQuest.Enemies;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Enemies;
 
-namespace ClickQuest.Places
+namespace ClickQuest.Game.Places
 {
 	public class MonsterSpawnPattern
 	{

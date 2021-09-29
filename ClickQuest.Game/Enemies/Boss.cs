@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using ClickQuest.Extensions.CombatManager;
-using ClickQuest.Extensions.InterfaceManager;
-using ClickQuest.Heroes.Buffs;
-using ClickQuest.Items;
-using ClickQuest.Player;
-using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
+using ClickQuest.Game.Extensions.CombatManager;
+using ClickQuest.Game.Extensions.InterfaceManager;
+using ClickQuest.Game.Heroes.Buffs;
+using ClickQuest.Game.Items;
+using ClickQuest.Game.Player;
+using static ClickQuest.Game.Extensions.RandomnessManager.RandomnessController;
 
-namespace ClickQuest.Enemies
+namespace ClickQuest.Game.Enemies
 {
 	public class Boss : Enemy
 	{

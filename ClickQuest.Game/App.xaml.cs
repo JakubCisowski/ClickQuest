@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows;
-using ClickQuest.Data.GameData;
-using ClickQuest.Data.UserData;
-using ClickQuest.Pages;
-using ClickQuest.Player;
+using ClickQuest.Game.Data.GameData;
+using ClickQuest.Game.Data.UserData;
+using ClickQuest.Game.Pages;
+using ClickQuest.Game.Player;
 
-namespace ClickQuest
+namespace ClickQuest.Game
 {
 	public partial class App : Application
 	{

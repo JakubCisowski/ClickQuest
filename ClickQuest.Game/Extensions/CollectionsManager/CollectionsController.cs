@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using ClickQuest.Items;
-using static ClickQuest.Extensions.RandomnessManager.RandomnessController;
+using ClickQuest.Game.Items;
+using static ClickQuest.Game.Extensions.RandomnessManager.RandomnessController;
 
-namespace ClickQuest.Extensions.CollectionsManager
+namespace ClickQuest.Game.Extensions.CollectionsManager
 {
 	public static class CollectionsController
 	{

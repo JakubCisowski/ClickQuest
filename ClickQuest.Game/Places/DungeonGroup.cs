@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using ClickQuest.Items;
+using ClickQuest.Game.Items;
 
-namespace ClickQuest.Places
+namespace ClickQuest.Game.Places
 {
 	public class DungeonGroup
 	{
