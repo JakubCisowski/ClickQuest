@@ -25,7 +25,7 @@
 		"Type": "CritDamage",
 		"Rarity": 1,
 		"Duration": 300,
-		"Description": "Blessed by the priest, your strikes are now able to bring a more painful death on your enemies. Gives 10% Crit Damage.",
+		"Description": "Blessed by the priest, your strikes are now able to bring a more painful death on your enemies. Gives 10% Critical Click Damage.",
 		"Buff": 10,
 		"Value": 1
 	},
@@ -35,7 +35,7 @@
 		"Type": "AuraDamage",
 		"Rarity": 3,
 		"Duration": 300,
-		"Description": "Your recent encounter in the Pyramid of Truth has left you feeling stronger, able to obliterate foes with much less effort.",
+		"Description": "Your recent encounter in the Pyramid of Truth has left you feeling stronger, able to obliterate foes with much less effort. Gives 25% Aura Damage.",
 		"Buff": 25,
 		"Value": 1
 	},
@@ -45,7 +45,7 @@
 		"Type": "CritDamage",
 		"Rarity": 5,
 		"Duration": 300,
-		"Description": "You have been infused by death itself, granting you the power you cause fatal damage to all foes around.",
+		"Description": "You have been infused by death itself, granting you the power you cause fatal damage to all foes around. Gives 50% Critical Click Damage.",
 		"Buff": 50,
 		"Value": 1
 	}

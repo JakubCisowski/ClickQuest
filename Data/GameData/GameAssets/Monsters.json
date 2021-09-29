@@ -1039,7 +1039,7 @@
 	{
 		"Id": 44,
 		"Name": "Naga Queen",
-		"Description": "GrayWolfDesc",
+		"Description": "This is the mother of all other Naga. Six-armed and larger than the others, this avid fighter's orders have to be obeyed at the price of death.",
 		"Health": 60,
 		"Image": "/example.png",
 		"Loot": [
@@ -1058,7 +1058,7 @@
 	{
 		"Id": 45,
 		"Name": "Snake Minion",
-		"Description": "GrayWolfDesc",
+		"Description": "This venomous snake has lost its free will, and is instead obeying the orders of the Medusa. If you pose a threat to the Naga, you will quickly be swarmed and killed by these inconspicuous reptiles.",
 		"Health": 60,
 		"Image": "/example.png",
 		"Loot": [
@@ -1077,7 +1077,7 @@
 	{
 		"Id": 46,
 		"Name": "Naga Guard",
-		"Description": "GrayWolfDesc",
+		"Description": "Guards, although not the strongest of the Naga, are very well equipped. They will try and decimate you before you can make a move - and it that fails, they will often run away and call for reinforcements.",
 		"Health": 60,
 		"Image": "/example.png",
 		"Loot": [
@@ -1096,7 +1096,7 @@
 	{
 		"Id": 47,
 		"Name": "Naga Scout",
-		"Description": "GrayWolfDesc",
+		"Description": "Scouts are fast moving, rather small Naga, equipped with just a tiny knife and a spyglass. They don't often engage in combat; however, the knife has been poisoned, and can easily bring agony upon you if you're not careful.",
 		"Health": 60,
 		"Image": "/example.png",
 		"Loot": [
@@ -1115,7 +1115,7 @@
 	{
 		"Id": 48,
 		"Name": "Lamia",
-		"Description": "GrayWolfDesc",
+		"Description": "The Lamias, taking the form of beautiful women, are quite similar to the Naga, but the difference lies in how they fight. Unlike the Naga, they don't specialize in direct combat, but use deception to lure their victims and eat them alive.",
 		"Health": 60,
 		"Image": "/example.png",
 		"Loot": [
@@ -1134,7 +1134,7 @@
 	{
 		"Id": 49,
 		"Name": "Naga Swordsmaster",
-		"Description": "GrayWolfDesc",
+		"Description": "The Swordsmasters consist of the best fighters among the Naga. Wielding a sharp, poisoned sword in each one of their four arms, they can turn you into pieces in a split second.",
 		"Health": 60,
 		"Image": "/example.png",
 		"Loot": [

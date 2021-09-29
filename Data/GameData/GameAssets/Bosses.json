@@ -4,7 +4,7 @@
 	"Name": "Shaiiya, the Spider Queen",
 	"Health": 2000,
 	"Image": "/example.png",
-	"Description": "TestBoss0Desc",
+	"Description": "You end up in a rather narrow passage, but the ceiling is so far up you can't even see it. The room is full of spider webs. On the floor you see half-eaten remains of some bats and wolves. As you look up, a giant, black spider descends slowly towards you. You can barely see anything but its violet eyes staring at you through the darkness.",
 	"BossLoot": [
 	  {
 		"ItemType": "Material",
@@ -23,7 +23,7 @@
 	  "Name": "Gurug, the Exiled Ogre",
 	  "Health": 1500,
 	  "Image": "/example.png",
-	  "Description": "TestBoss1Desc",
+	  "Description": "One of the passages leads to a smaller cave, in the middle of which is sitting an ogre. It is slightly higher than a human, and its brown-colored body is well built. The ogre is located next to a little bonfire, and a pile of bones.",
 	  "BossLoot": [
 		  {
 			  "ItemType": "Material",

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text.Json.Serialization;
 using ClickQuest.Adventures;
@@ -83,7 +84,7 @@ namespace ClickQuest.Heroes
 		{
 			get
 			{
-				string critChanceText = (Math.Clamp(CritChance, 0, 1) * 100).ToString("0.##");
+				string critChanceText = (Math.Clamp(CritChance, 0, 1) * 100).ToString("0.##", CultureInfo.InvariantCulture);
 				critChanceText += "%";
 				return critChanceText;
 			}
@@ -94,7 +95,8 @@ namespace ClickQuest.Heroes
 		{
 			get
 			{
-				string critDamageText = Math.Floor(CritDamage * 100) + "%";
+				string critDamageText = Math.Floor(CritDamage * 100).ToString(CultureInfo.InvariantCulture);
+				critDamageText += "%";
 				return critDamageText;
 			}
 		}
@@ -158,7 +160,7 @@ namespace ClickQuest.Heroes
 		{
 			get
 			{
-				string auraDamageText = (AuraDamage * 100).ToString("0.##");
+				string auraDamageText = (AuraDamage * 100).ToString("0.##", CultureInfo.InvariantCulture);
 				auraDamageText += "%";
 				return auraDamageText;
 			}
@@ -169,7 +171,7 @@ namespace ClickQuest.Heroes
 		{
 			get
 			{
-				string auraDps = (Math.Round(AuraDamage * AuraAttackSpeed, 4) * 100).ToString("0.##");
+				string auraDps = (Math.Round(AuraDamage * AuraAttackSpeed, 4) * 100).ToString("0.##", CultureInfo.InvariantCulture);
 				auraDps += "%";
 				return auraDps;
 			}

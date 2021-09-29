@@ -153,5 +153,148 @@
 		"Name": "Recipe: Bloodstone Staff",
 		"Rarity": 3,
 		"Value": 1
+	},
+	{
+		"Id": 8,
+		"ArtifactId": 12,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Skullbasher",
+		"Rarity": 3,
+		"Value": 1
+	},
+	{
+		"Id": 9,
+		"ArtifactId": 12,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Meat Cleaver",
+		"Rarity": 3,
+		"Value": 1
+	},
+	{
+		"Id": 10,
+		"ArtifactId": 12,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Ghostly Infusion",
+		"Rarity": 3,
+		"Value": 1
+	},
+	{
+		"Id": 11,
+		"ArtifactId": 12,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Silver Greatsword",
+		"Rarity": 3,
+		"Value": 1
+	},
+	{
+		"Id": 12,
+		"ArtifactId": 12,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Large Scythe",
+		"Rarity": 3,
+		"Value": 1
+	},
+	{
+		"Id": 13,
+		"ArtifactId": 12,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Death-Infused Bone Talisman",
+		"Rarity": 3,
+		"Value": 1
+	},
+	{
+		"Id": 14,
+		"ArtifactId": 12,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Dull Sword",
+		"Rarity": 3,
+		"Value": 1
+	},
+	{
+		"Id": 15,
+		"ArtifactId": 12,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Dull Knife",
+		"Rarity": 3,
+		"Value": 1
+	},
+	{
+		"Id": 16,
+		"ArtifactId": 12,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Poisoned Sword",
+		"Rarity": 3,
+		"Value": 1
+	},
+	{
+		"Id": 17,
+		"ArtifactId": 12,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Necronomicon",
+		"Rarity": 3,
+		"Value": 1
+	},
+	{
+		"Id": 18,
+		"ArtifactId": 12,
+		"Ingredients": [
+			{
+				"Id":18,
+				"Quantity":10
+			}
+		],
+		"Name": "Recipe: Toxic Amulet",
+		"Rarity": 3,
+		"Value": 1
 	}
 ]
