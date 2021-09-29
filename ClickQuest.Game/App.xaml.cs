@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows;
-using ClickQuest.Game.Data.GameData;
-using ClickQuest.Game.Data.UserData;
-using ClickQuest.Game.Pages;
-using ClickQuest.Game.Player;
+using ClickQuest.Game.Core.GameData;
+using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Data;
+using ClickQuest.Game.UserInterface.Pages;
+using ClickQuest.Game.UserInterface.Windows;
 
 namespace ClickQuest.Game
 {
@@ -12,7 +13,7 @@ namespace ClickQuest.Game
 		protected void Application_Startup(object sender, StartupEventArgs e)
 		{
 			// Load JSONs.
-			GameDataLoader.Load();
+			GameAssetsLoader.Load();
 
 			var gameWindow = new GameWindow();
 			Current.MainWindow = gameWindow;
@@ -20,7 +21,7 @@ namespace ClickQuest.Game
 
 			UserDataLoader.Load();
 
-			(GameData.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
+			(GameAssets.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
 
 			// Save current time as the application's start time (for achievement tracking).
 			User.SessionStartDate = DateTime.Now;
