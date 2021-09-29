@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.30413.136
+VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickQuest", "ClickQuest.csproj", "{3F4F2DD8-D070-4533-BC76-956442F5BC9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickQuest.Game", "ClickQuest.Game\ClickQuest.Game.csproj", "{3D44B8C1-C9D9-4344-BD58-82EB1E79886A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3F4F2DD8-D070-4533-BC76-956442F5BC9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F4F2DD8-D070-4533-BC76-956442F5BC9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F4F2DD8-D070-4533-BC76-956442F5BC9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F4F2DD8-D070-4533-BC76-956442F5BC9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D44B8C1-C9D9-4344-BD58-82EB1E79886A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D44B8C1-C9D9-4344-BD58-82EB1E79886A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D44B8C1-C9D9-4344-BD58-82EB1E79886A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D44B8C1-C9D9-4344-BD58-82EB1E79886A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A6C83E45-4D7A-4ED8-BC9C-596B6CE234FF}
+		SolutionGuid = {4A0C0D6C-647E-41E6-A28C-96B113B708B7}
 	EndGlobalSection
 EndGlobal
