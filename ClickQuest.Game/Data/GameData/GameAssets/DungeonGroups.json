@@ -2,7 +2,7 @@
 	{
 		"Id": 1,
 		"Name": "General dungeons",
-		"Color": "Grey",
+		"Color": "Gray",
 		"Description": "GeneralDGDesc",
 		"KeyRequirementRarities": [0]
 	},

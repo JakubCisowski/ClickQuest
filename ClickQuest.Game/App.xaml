@@ -24,7 +24,7 @@
 			<SolidColorBrush x:Key="GameBackgroundSecondary" Color="#CFEFF8" />
 			<SolidColorBrush x:Key="GameBackgroundAdditional" Color="#ADD5E0" />
 
-			<SolidColorBrush x:Key="ButtonGreyBackground" Color="#CCDCE1" />
+			<SolidColorBrush x:Key="ButtonGrayBackground" Color="#CCDCE1" />
 
 			<SolidColorBrush x:Key="ButtonDangerBrush" Color="#FFD3D3" />
 			<SolidColorBrush x:Key="ButtonDangerBrushHover" Color="#FF0000" />
