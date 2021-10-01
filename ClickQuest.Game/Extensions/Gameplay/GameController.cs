@@ -1,4 +1,5 @@
 using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Extensions.Collections;
 
 namespace ClickQuest.Game.Extensions.Gameplay
 {
@@ -9,6 +10,23 @@ namespace ClickQuest.Game.Extensions.Gameplay
 			User.Instance.CurrentHero?.UpdateTimePlayed();
 			User.Instance.CurrentHero?.PauseBlessing();
 			User.Instance.CurrentHero?.UnequipArtfacts();
+		}
+
+		public static void ResetAllProgress()
+		{
+			User.Instance.LastHeroId = 0;
+			User.Instance.Heroes.Clear();
+			User.Instance.Gold = 0;
+
+			User.Instance.DungeonKeys.Clear();
+			Data.UserDataLoader.SeedDungeonKeys();
+
+			User.Instance.Ingots.Clear();
+			Data.UserDataLoader.SeedIngots();
+
+			User.Instance.Achievements.TotalTimePlayed = default;
+			User.Instance.Achievements.NumericAchievementCollection = new ObservableDictionary<NumericAchievementType, long>();
+			CollectionInitializer.InitializeDictionary(User.Instance.Achievements.NumericAchievementCollection);
 		}
 	}
 }

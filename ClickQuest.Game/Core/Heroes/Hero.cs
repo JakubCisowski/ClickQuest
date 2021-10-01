@@ -206,7 +206,7 @@ namespace ClickQuest.Game.Core.Heroes
 			CritDamage = 2.0;
 			AuraAttackSpeed = AURA_SPEED_BASE;
 
-			Id = User.Instance.Heroes.Select(x => x.Id).OrderByDescending(y => y).FirstOrDefault() + 1;
+			Id = ++User.Instance.LastHeroId;
 
 			SetClassSpecificValues();
 			RefreshHeroExperience();

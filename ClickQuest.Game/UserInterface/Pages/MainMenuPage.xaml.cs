@@ -7,6 +7,7 @@ using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
 using MaterialDesignThemes.Wpf;
@@ -216,6 +217,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (result == MessageBoxResult.OK)
 			{
+				GameController.ResetAllProgress();
 				UpdateSelectOrDeleteHeroButtons();
 				UpdateCreateHeroButton();
 			}

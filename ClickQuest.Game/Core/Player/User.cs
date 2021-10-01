@@ -33,6 +33,8 @@ namespace ClickQuest.Game.Core.Player
 		[JsonIgnore]
 		public Hero CurrentHero { get; set; }
 
+		public int LastHeroId { get; set;}
+
 		private int _gold;
 		public const int HERO_LIMIT = 6;
 		public List<Hero> Heroes { get; set; }
