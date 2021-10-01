@@ -6,7 +6,7 @@ using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Interface;
+using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 

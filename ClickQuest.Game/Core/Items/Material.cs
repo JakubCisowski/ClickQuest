@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
-using ClickQuest.Game.Extensions.Interface;
+using ClickQuest.Game.Extensions.UserInterface;
 
 namespace ClickQuest.Game.Core.Items
 {

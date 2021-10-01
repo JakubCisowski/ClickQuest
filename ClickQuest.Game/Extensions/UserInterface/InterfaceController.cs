@@ -8,7 +8,7 @@ using ClickQuest.Game.UserInterface.Pages;
 using ClickQuest.Game.UserInterface.Windows;
 using Microsoft.CSharp.RuntimeBinder;
 
-namespace ClickQuest.Game.Extensions.Interface
+namespace ClickQuest.Game.Extensions.UserInterface
 {
 	public static class InterfaceController
 	{

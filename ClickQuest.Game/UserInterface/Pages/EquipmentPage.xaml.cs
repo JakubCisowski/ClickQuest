@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Interface;
+using ClickQuest.Game.Extensions.UserInterface;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {

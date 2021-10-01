@@ -2,7 +2,7 @@
 using System.Windows.Threading;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Extensions.Interface;
+using ClickQuest.Game.Extensions.UserInterface;
 
 namespace ClickQuest.Game.Core.Artifacts
 {

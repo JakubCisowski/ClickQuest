@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Extensions.Combat;
-using ClickQuest.Game.Extensions.Interface;
+using ClickQuest.Game.Extensions.UserInterface;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {

@@ -5,8 +5,8 @@ using System.Windows.Input;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Data;
-using ClickQuest.Game.Extensions.Game;
-using ClickQuest.Game.Extensions.Interface;
+using ClickQuest.Game.Extensions.Gameplay;
+using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Pages;
 

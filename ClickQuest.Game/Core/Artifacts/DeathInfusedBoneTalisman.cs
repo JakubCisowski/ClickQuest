@@ -4,7 +4,7 @@ using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
-using ClickQuest.Game.Extensions.Interface;
+using ClickQuest.Game.Extensions.UserInterface;
 
 namespace ClickQuest.Game.Core.Artifacts
 {

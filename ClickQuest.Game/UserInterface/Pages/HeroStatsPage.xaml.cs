@@ -11,7 +11,7 @@ using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Interface;
+using ClickQuest.Game.Extensions.UserInterface;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.Game.UserInterface.Pages

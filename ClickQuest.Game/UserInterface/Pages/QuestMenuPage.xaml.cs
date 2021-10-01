@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Interface;
+using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using MaterialDesignThemes.Wpf;
 
-namespace ClickQuest.ContentManager.UI
+namespace ClickQuest.ContentManager.UserInterface
 {
 	// zrobić jakiś osobny control typu StackPanel i tam, w zależności od datacontext (typu obiektu i jego pól) generować textboxy itp
 	public partial class InputPanel : UserControl

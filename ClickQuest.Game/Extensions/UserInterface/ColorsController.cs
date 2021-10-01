@@ -3,7 +3,7 @@ using System.Windows.Media;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Extensions.Combat;
 
-namespace ClickQuest.Game.Extensions.Interface
+namespace ClickQuest.Game.Extensions.UserInterface
 {
 	public static class ColorsController
 	{

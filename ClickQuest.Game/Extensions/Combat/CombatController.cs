@@ -3,7 +3,7 @@ using System.Windows;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Interface;
+using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
 
 namespace ClickQuest.Game.Extensions.Combat

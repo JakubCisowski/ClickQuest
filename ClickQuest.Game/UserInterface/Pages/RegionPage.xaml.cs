@@ -4,7 +4,7 @@ using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Places;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
-using ClickQuest.Game.Extensions.Interface;
+using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
 
 namespace ClickQuest.Game.UserInterface.Pages

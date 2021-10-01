@@ -6,9 +6,9 @@ using System.Windows.Media.Animation;
 using ClickQuest.Game.Extensions.Combat;
 using MaterialDesignThemes.Wpf;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
-using Colors = ClickQuest.Game.Extensions.Interface.ColorsController;
+using Colors = ClickQuest.Game.Extensions.UserInterface.ColorsController;
 
-namespace ClickQuest.Game.Extensions.Interface
+namespace ClickQuest.Game.Extensions.UserInterface
 {
 	public static class FloatingTextController
 	{

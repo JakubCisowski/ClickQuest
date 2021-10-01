@@ -3,9 +3,9 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
-using Colors = ClickQuest.Game.Extensions.Interface.ColorsController;
+using Colors = ClickQuest.Game.Extensions.UserInterface.ColorsController;
 
-namespace ClickQuest.Game.Extensions.Interface
+namespace ClickQuest.Game.Extensions.UserInterface
 {
 	public static class TooltipController
 	{

@@ -7,10 +7,10 @@ using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Places;
 using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Interface;
+using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Windows;
-using Colors = ClickQuest.Game.Extensions.Interface.ColorsController;
+using Colors = ClickQuest.Game.Extensions.UserInterface.ColorsController;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
