@@ -49,6 +49,10 @@ namespace ClickQuest.Game.Extensions.Interface
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run($"{artifact.Description}"));
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new Run($"{artifact.Lore}"));
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new Run($"{artifact.ExtraInfo}"));
 				}
 					break;
 

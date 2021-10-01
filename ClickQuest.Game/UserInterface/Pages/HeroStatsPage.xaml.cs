@@ -215,6 +215,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 				blessingToolTipBlock.Inlines.Add(new LineBreak());
 				blessingToolTipBlock.Inlines.Add(new LineBreak());
 				blessingToolTipBlock.Inlines.Add(new Run($"{currentBlessing.Description}"));
+				blessingToolTipBlock.Inlines.Add(new LineBreak());
+				blessingToolTipBlock.Inlines.Add(new LineBreak());
+				blessingToolTipBlock.Inlines.Add(new Run($"{currentBlessing.Lore}"));
 			}
 			else
 			{

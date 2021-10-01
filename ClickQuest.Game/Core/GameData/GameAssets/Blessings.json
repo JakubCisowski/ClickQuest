@@ -5,7 +5,8 @@
 		"Type": "ClickDamage",
 		"Rarity": 0,
 		"Duration": 600,
-		"Description": "Your weapon has been blessed, increasing the damage it deals. Gives 10 Click Damage.",
+		"Description": "Gives 10 Click Damage.",
+		"Lore": "Your weapon has been blessed, increasing the damage it deals.",
 		"Buff": 10,
 		"Value": 1
 	},
@@ -15,7 +16,8 @@
 		"Type": "PoisonDamage",
 		"Rarity": 0,
 		"Duration": 600,
-		"Description": "Your weapon has been blessed, inflicting poison on your enemies. Gives 5 Poison Damage.",
+		"Description": "Gives 5 Poison Damage.",
+		"Lore": "Your weapon has been blessed, inflicting poison on your enemies.",
 		"Buff": 5,
 		"Value": 1
 	},
@@ -25,7 +27,8 @@
 		"Type": "CritDamage",
 		"Rarity": 1,
 		"Duration": 300,
-		"Description": "Blessed by the priest, your strikes are now able to bring a more painful death on your enemies. Gives 10% Critical Click Damage.",
+		"Description": "Gives 10% Critical Click Damage.",
+		"Lore": "Blessed by the priest, your strikes are now able to bring a more painful death on your enemies.",
 		"Buff": 10,
 		"Value": 1
 	},
@@ -35,7 +38,8 @@
 		"Type": "AuraDamage",
 		"Rarity": 3,
 		"Duration": 300,
-		"Description": "Your recent encounter in the Pyramid of Truth has left you feeling stronger, able to obliterate foes with much less effort. Gives 25% Aura Damage.",
+		"Description": "Gives 25% Aura Damage.",
+		"Lore": "Your recent encounter in the Pyramid of Truth has left you feeling stronger, able to obliterate foes with much less effort.",
 		"Buff": 25,
 		"Value": 1
 	},
@@ -45,7 +49,8 @@
 		"Type": "CritDamage",
 		"Rarity": 5,
 		"Duration": 300,
-		"Description": "You have been infused by death itself, granting you the power you cause fatal damage to all foes around. Gives 50% Critical Click Damage.",
+		"Description": "Gives 50% Critical Click Damage.",
+		"Lore": "You have been infused by death itself, granting you the power you cause fatal damage to all foes around.",
 		"Buff": 50,
 		"Value": 1
 	}

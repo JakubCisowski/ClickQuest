@@ -10,6 +10,8 @@ namespace ClickQuest.Game.Core.Items
 	{
 		[JsonIgnore]
 		public ArtifactFunctionality ArtifactFunctionality { get; set; }
+		public string Lore { get; set; }
+		public string ExtraInfo { get; set; }
 
 		public int BaseIngotBonus
 		{
@@ -27,9 +29,11 @@ namespace ClickQuest.Game.Core.Items
 			copy.Name = Name;
 			copy.Rarity = Rarity;
 			copy.Value = Value;
-			copy.Description = Description;
 			copy.Quantity = quantity;
 			copy.ArtifactFunctionality = ArtifactFunctionality;
+			copy.Description = Description;
+			copy.Lore = Lore;
+			copy.ExtraInfo = ExtraInfo;
 
 			return copy;
 		}

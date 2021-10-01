@@ -4,6 +4,8 @@
 		"Name": "Death-Infused Bone Talisman",
 		"Rarity": 3,
 		"Description": "Your first attack against a monster places 'Decay' on them, dealing damage every 0.5 seconds for 2.5 seconds. Damage dealt is equal to your poison damage. Deals double damage against bosses.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -11,6 +13,8 @@
 		"Name": "Ghostly Infusion",
 		"Rarity": 2,
 		"Description": "Has to be equipped with at least one other artifact. After killing a monster, your next click is guaranteed to critically hit, and will deal 10% more damage.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -18,6 +22,8 @@
 		"Name": "Large Scythe",
 		"Rarity": 2,
 		"Description": "All non-artifact damage dealt by you is increased by 15% against Monsters (excluding Bosses).",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -25,6 +31,8 @@
 		"Name": "Meat Cleaver",
 		"Rarity": 2,
 		"Description": "Gain 20% Critical Click Damage.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -32,6 +40,8 @@
 		"Name": "Mystic Clover",
 		"Rarity": 4,
 		"Description": "While on a region, you have an increased chance to find rare Monsters. The chance to find Monsters that have a spawn chance of 2% or less is doubled, while the chance to find the most common Monsters is reduced appropriately.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -39,6 +49,8 @@
 		"Name": "Necronomicon",
 		"Rarity": 2,
 		"Description": "After killing a monster, your poison damage is increased by 10 for 3 seconds. This effect does not stack.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -46,6 +58,8 @@
 		"Name": "Poisoned Sword",
 		"Rarity": 2,
 		"Description": "Increases your Click Damage by 10, and your Poison Damage by 5.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -53,6 +67,8 @@
 		"Name": "Silver Greatsword",
 		"Rarity": 2,
 		"Description": "All non-artifact damage dealt by you is increased by 10% against Bosses.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -60,6 +76,8 @@
 		"Name": "Skullbasher",
 		"Rarity": 2,
 		"Description": "Every other click you make deals an additional 10 (?) damage.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -67,6 +85,8 @@
 		"Name": "Toxic Amulet",
 		"Rarity": 3,
 		"Description": "Your poison damage is increased by 20%.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -74,6 +94,8 @@
 		"Name": "Bat Wing Backpack",
 		"Rarity": 0,
 		"Description": "Increases your Aura Damage by 25%, but reduces your Click Damage by 25%.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -81,6 +103,8 @@
 		"Name": "Bloodstone Staff",
 		"Rarity": 4,
 		"Description": "Killing a Monster grants a 10% increase to all non-artifact damage dealt for 5 seconds. Stacks additively up to 5 times. Each stack has its own duration.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -88,6 +112,8 @@
 		"Name": "Cholla Spine Infusion",
 		"Rarity": 4,
 		"Description": "Has to be equipped with at least one other artifact. Causes all clicks to leave a spine in the target's body. Click damage dealt is increased by 2 (?) for each spine in the target.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -95,6 +121,8 @@
 		"Name": "Ice Golem's Heart",
 		"Rarity": 3,
 		"Description": "Your clicks leave a stack of 'Brittle' on the enemy, increasing your Critical Click Chance against them by 5%. Stacks up to 5 times. Additionally, clicks against Monsters (excluding Bosses) with 5 'Brittle' stacks and below 10% health instantly finish them.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -102,6 +130,8 @@
 		"Name": "Pristine Wolf Fangs",
 		"Rarity": 1,
 		"Description": "Increases your Critical Click Chance by 10%, and your Critical Click Damage by 15%.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -109,6 +139,8 @@
 		"Name": "Rakshasa's Necklace",
 		"Rarity": 3,
 		"Description": "Increases passive Aura Attack Speed by 50%.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -116,6 +148,8 @@
 		"Name": "Scepter of Eternal Flame",
 		"Rarity": 4,
 		"Description": "On click, applies burning for 2 seconds that deals a total of 80 (?) damage.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -123,6 +157,8 @@
 		"Name": "Scythe of the World Eater",
 		"Rarity": 5,
 		"Description": "Gain 50% Critical Click Chance. Excess critical chance is converted to Critical Click Damage (unlimited).",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -130,6 +166,8 @@
 		"Name": "Twin Kamas",
 		"Rarity": 4,
 		"Description": "Counts as two artifacts, therefore requires two free slots to use. After clicking on a monster, strike again after a 1s delay. The second attack can critically hit, as well as apply on-hit effects (such as poison).",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -137,6 +175,8 @@
 		"Name": "Will of the Ancients",
 		"Rarity": 5,
 		"Description": "Your poison damage can now critically strike. The probability is calculated using your Critical Click Chance, and the damage using your Critical Click Damage.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -144,6 +184,8 @@
 		"Name": "Transcendence",
 		"Rarity": 5,
 		"Description": "Requires three artifact slots to equip. While on a Region, you don't deal any damage. Instead, each click you make on a Monster will instantly defeat them.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -151,6 +193,8 @@
 		"Name": "Dull Knife",
 		"Rarity": 0,
 		"Description": "Increases your Critical Click Chance by 5%.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -158,6 +202,8 @@
 		"Name": "Dull Sword",
 		"Rarity": 0,
 		"Description": "Increases your Click Damage by 3.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -165,6 +211,8 @@
 		"Name": "Large Stinger",
 		"Rarity": 1,
 		"Description": "Increases your Poison Damage by 5.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -172,6 +220,8 @@
 		"Name": "Lightning Bolt",
 		"Rarity": 3,
 		"Description": "Clicking on an enemy 3 times within 0.5 (?) seconds deals a bonus 20 (?) damage.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -179,6 +229,8 @@
 		"Name": "Obsidian Sword",
 		"Rarity": 2,
 		"Description": "Increases your Click Damage by 20, and your Critical Click Damage by 20%.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -186,6 +238,8 @@
 		"Name": "Sly Snake Orb",
 		"Rarity": 2,
 		"Description": "Increases your Click Damage by 20, and your Aura Attack Speed by 10%.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -193,6 +247,8 @@
 		"Name": "Strong Badge of Luck",
 		"Rarity": 2,
 		"Description": "Increases your Click Damage by 20, and your Critical Click Chance by 10%.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -200,6 +256,8 @@
 		"Name": "Tiny Venom Sac",
 		"Rarity": 0,
 		"Description": "Increases your Poison Damage by 1.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -207,6 +265,8 @@
 		"Name": "Titan's Crown",
 		"Rarity": 3,
 		"Description": "All experience gained is increased by 30%.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -214,6 +274,8 @@
 		"Name": "Trinket of Haste",
 		"Rarity": 3,
 		"Description": "Quests take 25% less time to complete.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -221,6 +283,8 @@
 		"Name": "Writ of Excellence",
 		"Rarity": 3,
 		"Description": "Blessings on you have a doubled effectiveness.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -228,6 +292,8 @@
 		"Name": "Poisoned Naga Knife",
 		"Rarity": 3,
 		"Description": "Clicks against Monsters deal additional damage equal to 5% of their maximum health. Does not work against Bosses.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -235,6 +301,8 @@
 		"Name": "Naginata",
 		"Rarity": 4,
 		"Description": "If you would deal 90% or more of an Enemy's health with a single click, gain double experience, 1 Gold and a 20 increase to Click Damage for 10 seconds. The damage increase bonus does not stack.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -242,6 +310,8 @@
 		"Name": "Gladiator's Trident",
 		"Rarity": 4,
 		"Description": "All damage dealt is increased by 50% for the first few seconds in combat. Against Monsters, the duration is 2 seconds; against Bosses - 5 seconds. The duration is refreshed each time you kill a Monster.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -249,6 +319,8 @@
 		"Name": "Bladed Fans",
 		"Rarity": 3,
 		"Description": "For the first 5 seconds in combat with an Enemy, you cannot deal damage to them, and instead accumulate damage. After 5 seconds, explode dealing damage to the enemy. Damage dealt is equal to 200% of the accumulated damage.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -256,6 +328,8 @@
 		"Name": "Medusa Amulet",
 		"Rarity": 4,
 		"Description": "While on a Region, each monster you kill increases your Click Damage by 2, Critical Click Chance by 1% and Critical Click Damage by 1%. Stacks up to 20 times. Leaving the region removes all stacks.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -263,6 +337,8 @@
 		"Name": "Gold-Tipped Spear",
 		"Rarity": 3,
 		"Description": "Convert your Poison Damage into Click Damage. For each 1 Poison Damage converted, gain 1 Click Damage. Additionally, for each 10 Poison Damage converted, gain 1% Critical Click Damage.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	},
 	{
@@ -270,6 +346,8 @@
 		"Name": "Vial of Plague",
 		"Rarity": 3,
 		"Description": "Every third Click you make against the same enemy deals bonus damage based on their maximum health. Against Monsters, deals 6% of their health. Against Bosses, deals 1% of their health.",
+		"Lore": "",
+		"ExtraInfo": "",
 		"Value": 1
 	}
 ]

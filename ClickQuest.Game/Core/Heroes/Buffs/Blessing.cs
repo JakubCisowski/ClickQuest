@@ -25,6 +25,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
+		public string Lore{ get; set; }
 		public Rarity Rarity { get; set; }
 		public int Value { get; set; }
 		public BlessingType Type { get; set; }
@@ -69,6 +70,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 			copy.Rarity = Rarity;
 			copy.Duration = Duration;
 			copy.Description = Description;
+			copy.Lore = Lore;
 			copy.Buff = Buff;
 			copy.Value = Value;
 			copy.AchievementBonusGranted = false;
