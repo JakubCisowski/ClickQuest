@@ -116,7 +116,7 @@ namespace ClickQuest.Game.Core.Enemies
 				}
 
 				(loot.Item as Artifact)?.CreateMythicTag(Name);
-				
+
 				loot.Item.AddItem(itemIntegerCount);
 				lootText += "- " + $"{itemIntegerCount}x " + loot.Item.Name + " (" + loot.LootType + ")\n";
 			}

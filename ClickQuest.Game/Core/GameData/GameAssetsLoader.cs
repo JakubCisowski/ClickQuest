@@ -87,7 +87,7 @@ namespace ClickQuest.Game.Core.GameData
 		{
 			var artifactFunctionalities = new List<ArtifactFunctionality>();
 
-			var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Artifacts", StringComparison.Ordinal));
+			var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Core.Artifacts", StringComparison.Ordinal));
 
 			foreach (var type in types)
 			{
