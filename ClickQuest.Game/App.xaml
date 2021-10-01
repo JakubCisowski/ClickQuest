@@ -33,8 +33,8 @@
 			<SolidColorBrush x:Key="ColorRarity1" Color="#D79E4B" /> <!-- Fine - Light brown -->
 			<SolidColorBrush x:Key="ColorRarity2" Color="#61B05A" /> <!-- Superior - Green -->
 			<SolidColorBrush x:Key="ColorRarity3" Color="#508CDA" /> <!-- Exceptional - Blue -->
-			<SolidColorBrush x:Key="ColorRarity4" Color="#A950DA" /> <!-- Mythic - Purple -->
-			<SolidColorBrush x:Key="ColorRarity5" Color="#E9DB50" /> <!-- Masterwork - Gold -->
+			<SolidColorBrush x:Key="ColorRarity4" Color="#A950DA" /> <!-- Masterwork - Purple -->
+			<SolidColorBrush x:Key="ColorRarity5" Color="#E9DB50" /> <!-- Mythic - Gold -->
 
 			<SolidColorBrush x:Key="ColorQuestRare" Color="#FFA237" /> <!-- Rare quest - Orange? -->
 

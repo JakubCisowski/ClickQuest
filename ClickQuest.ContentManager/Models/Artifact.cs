@@ -9,6 +9,7 @@
 		public string DescriptionLore { get; set; }
 		public string ExtraInfo { get; set; }
 		public int Value { get; set; }
+		public ArtifactType ArtifactType { get; set;}
 
 		public Artifact()
 		{

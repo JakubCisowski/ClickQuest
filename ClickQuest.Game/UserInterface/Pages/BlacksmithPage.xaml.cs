@@ -116,6 +116,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 				CheckAndRemoveIngots(recipe);
 			}
 
+			recipe.Artifact.CreateMythicTag();
+
 			recipe.Artifact.AddItem();
 			recipe.RemoveItem();
 

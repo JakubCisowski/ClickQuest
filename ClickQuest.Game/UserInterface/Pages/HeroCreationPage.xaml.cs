@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -67,11 +68,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 			SeedArtifacts();
 		}
 
-		// Debug only
+		// [PRERELEASE]
 		private void SeedArtifacts()
 		{
 			foreach (var artifact in GameAssets.Artifacts)
 			{
+				artifact.CreateMythicTag("FunctionSeedingArtifacts");
+
 				CollectionsController.AddItemToCollection(artifact, User.Instance.CurrentHero.Artifacts);
 			}
 		}

@@ -29,11 +29,11 @@ namespace ClickQuest.Game.Extensions.UserInterface
 					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity3");
 					break;
 
-				case Rarity.Mythic:
+				case Rarity.Masterwork:
 					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity4");
 					break;
 
-				case Rarity.Masterwork:
+				case Rarity.Mythic:
 					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity5");
 					break;
 			}

@@ -88,6 +88,7 @@ namespace ClickQuest.Game.Core.Enemies
 
 			if (selectedLoot.Id != 0)
 			{
+				(selectedLoot as Artifact)?.CreateMythicTag(Name);
 				selectedLoot.AddItem();
 			}
 

@@ -1,3 +1,5 @@
+using System;
+using System.Globalization;
 using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Player;
@@ -12,6 +14,8 @@ namespace ClickQuest.Game.Core.Items
 		public ArtifactFunctionality ArtifactFunctionality { get; set; }
 		public string Lore { get; set; }
 		public string ExtraInfo { get; set; }
+		public ArtifactType ArtifactType { get; set; }
+		public string MythicTag { get; set; }
 
 		public int BaseIngotBonus
 		{
@@ -30,10 +34,12 @@ namespace ClickQuest.Game.Core.Items
 			copy.Rarity = Rarity;
 			copy.Value = Value;
 			copy.Quantity = quantity;
+			copy.ArtifactType = ArtifactType;
 			copy.ArtifactFunctionality = ArtifactFunctionality;
 			copy.Description = Description;
 			copy.Lore = Lore;
 			copy.ExtraInfo = ExtraInfo;
+			copy.MythicTag = MythicTag;
 
 			return copy;
 		}
@@ -78,6 +84,21 @@ namespace ClickQuest.Game.Core.Items
 		public override void RemoveItem(int amount = 1)
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Materials);
+		}
+
+		public void CreateMythicTag(string enemyName = "")
+		{
+			if (Rarity == Rarity.Mythic)
+			{
+				if (enemyName == "")
+				{
+					MythicTag = "Crafted by " + User.Instance.CurrentHero.Name + " on " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+				}
+				else
+				{
+					MythicTag = "Dropped from " + enemyName + " by " + User.Instance.CurrentHero.Name + " on " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+				}
+			}
 		}
 	}
 }
