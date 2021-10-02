@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.ContentManager.UserInterface;
 
 namespace ClickQuest.ContentManager
 {
@@ -12,26 +13,17 @@ namespace ClickQuest.ContentManager
 			InitializeComponent();
 		}
 
-		private void TabControl_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+		private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			if (e.Source is TabControl tabControl)
 			{
-				var currentTabName = (tabControl.SelectedItem as TabItem).Header;
+				var currentTabName = (tabControl.SelectedItem as TabItem).Header.ToString();
+				var currentTabNameAsContentType = (ContentType) Enum.Parse(typeof(ContentType), currentTabName);
 
-				switch (currentTabName)
-				{
-					case "Artifacts":
-						
-
-						break;
-				}
+				var inputPanel = new InputPanel(currentTabNameAsContentType);
+				(tabControl.SelectedContent as Grid)?.Children.Clear();
+				(tabControl.SelectedContent as Grid)?.Children.Add(inputPanel);
 			}
-		}
-
-		private void ArtifactContentBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			var selectedName = (sender as ComboBox).SelectedValue.ToString();
-			// var selectedArtifact = GameAssets.Artifacts.FirstOrDefault(x => x.Name == selectedName);
 		}
 	}
 }

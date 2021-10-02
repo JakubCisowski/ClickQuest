@@ -12,43 +12,43 @@
 	<Grid>
 		<TabControl Style="{StaticResource MaterialDesignTabControl}" SelectionChanged="TabControl_SelectionChanged">
 			<TabItem Header="Artifacts">
-				<ui:InputPanel/>
+				<Grid/>
 			</TabItem>
 
 			<TabItem Header="Materials">
-				
+				<Grid/>
 			</TabItem>
 
 			<TabItem Header="Recipes">
-
+				<Grid/>
 			</TabItem>
 
 			<TabItem Header="Blessings">
-
+				<Grid/>
 			</TabItem>
 
 			<TabItem Header="Monsters">
-
+				<Grid/>
 			</TabItem>
 
 			<TabItem Header="Bosses">
-
+				<Grid/>
 			</TabItem>
 
 			<TabItem Header="Regions">
-
+				<Grid/>
 			</TabItem>
 
 			<TabItem Header="Quests">
-
+				<Grid/>
 			</TabItem>
 
 			<TabItem Header="Shop">
-
+				<Grid/>
 			</TabItem>
 			
 			<TabItem Header="Priest">
-
+				<Grid/>
 			</TabItem>
 		</TabControl>
 	</Grid>

@@ -6,12 +6,18 @@
              xmlns:local="clr-namespace:ClickQuest.ContentManager.UserInterface"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
-             mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-	<StackPanel>
-		<TextBox md:HintAssist.Hint="Id" Margin="0,100" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-			
-		
-		<Button Content="Update/add"/>
-	</StackPanel>
+             mc:Ignorable="d" Background="White"
+             d:DesignHeight="400" d:DesignWidth="900">
+	<Grid x:Name="MainGrid">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="2*"/>
+		</Grid.ColumnDefinitions>
+
+		<StackPanel Grid.Column="0">
+			<TextBlock Text="Choose object by name" Margin="20,100,20,5" HorizontalAlignment="Center" FontSize="16"/>
+			<ComboBox x:Name="ContentSelectionBox" Margin="20,20,20,5" SelectionChanged="ContentSelectionBox_SelectionChanged"/>
+			<Button x:Name="AddNewButton" Content="Add new" Margin="20,50,20,5" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Click="AddNewButton_Click"/>
+		</StackPanel>
+	</Grid>
 </UserControl>
