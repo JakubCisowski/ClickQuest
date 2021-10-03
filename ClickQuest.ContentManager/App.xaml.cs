@@ -6,7 +6,7 @@ namespace ClickQuest.ContentManager
 	{
 		protected void Application_Startup(object sender, StartupEventArgs e)
 		{
-			ContentLoader.CalculateGameAssetsFilePaths();
+			JsonFilePaths.CalculateGameAssetsFilePaths();
 			
 			ContentLoader.LoadAllContent();
 		}

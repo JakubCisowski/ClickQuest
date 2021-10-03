@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,6 +25,11 @@ namespace ClickQuest.ContentManager
 				(tabControl.SelectedContent as Grid)?.Children.Clear();
 				(tabControl.SelectedContent as Grid)?.Children.Add(inputPanel);
 			}
+		}
+
+		private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+		{
+			ContentSaver.SaveAllContent();
 		}
 	}
 }
