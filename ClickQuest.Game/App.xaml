@@ -20,7 +20,9 @@
 			</Style>
 
 			<!-- Colors -->
-			<SolidColorBrush x:Key="GameBackgroundRegular" Color="#EDF9FD" />
+			<Color x:Key="ColorGameBackgroundRegular" >#EDF9FD</Color>
+
+			<SolidColorBrush x:Key="GameBackgroundRegular" Color="{StaticResource ColorGameBackgroundRegular}" />
 			<SolidColorBrush x:Key="GameBackgroundSecondary" Color="#CFEFF8" />
 			<SolidColorBrush x:Key="GameBackgroundAdditional" Color="#ADD5E0" />
 

@@ -5,14 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="GameWindow" Height="768" Width="1366"
+        Title="GameWindow" Height="768" Width="1366" Background="Transparent"
         ResizeMode="NoResize" WindowStyle="None">
 
 	<StackPanel>
+		<StackPanel.Background>
+			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+				<GradientStop Color="{StaticResource ColorGameBackgroundRegular}" Offset="0.25" />
+				<GradientStop Color="White" Offset="0.75" />
+			</LinearGradientBrush>
+		</StackPanel.Background>
+
 		<!-- Dragable top window bar-->
-		<Grid Height="40">
+		<Grid Height="40" Background="Transparent">
 			<!-- Rectangle-->
-			<Rectangle x:Name="DragableTop" Height="40" Fill="White" MouseDown="DragableTop_MouseDown" />
+			<Rectangle x:Name="DragableTop" Height="40" Fill="Transparent" MouseDown="DragableTop_MouseDown" />
 
 			<!-- Location info block-->
 			<Border x:Name="LocationInfoBorder" BorderThickness="2" Visibility="Hidden" BorderBrush="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
@@ -47,6 +54,6 @@
 		</Grid>
 
 		<!-- Game frame-->
-		<Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden" />
+		<Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden" Background="Transparent"/>
 	</StackPanel>
 </Window>
