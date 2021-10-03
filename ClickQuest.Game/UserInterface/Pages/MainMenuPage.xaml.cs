@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
@@ -138,6 +139,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var heroLevelAndClassText = new Run($"\n{hero.Level} lvl | {hero.HeroClass} | ");
 			var heroTotalTimePlayedText = new Italic(new Run($"{Math.Floor(hero.TimePlayed.TotalHours)}h {hero.TimePlayed.Minutes}m"));
 
+			heroNameText.FontSize = 20;
+			
 			selectHeroButtonBlock.Inlines.Add(heroNameText);
 			selectHeroButtonBlock.Inlines.Add(heroLevelAndClassText);
 			selectHeroButtonBlock.Inlines.Add(heroTotalTimePlayedText);
@@ -221,6 +224,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 				UpdateSelectOrDeleteHeroButtons();
 				UpdateCreateHeroButton();
 			}
+		}
+
+		private void CreditsBlock_OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
+		{
+			AlertBox.Show("Nic", MessageBoxButton.OK);
 		}
 	}
 }

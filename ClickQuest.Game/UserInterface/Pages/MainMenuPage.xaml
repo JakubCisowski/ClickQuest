@@ -10,9 +10,12 @@
 			<RowDefinition Height="5*" />
 			<RowDefinition Height="7*" />
 		</Grid.RowDefinitions>
+		
+		<!-- Game version -->
+		<TextBlock Grid.Row="0" Text="BETA" FontSize="12" Foreground="DarkGray" HorizontalAlignment="Left" Margin="10,10,0,0"/>
 
 		<!-- Game logo -->
-		<Image Grid.Row="0" Height="350" Width="560" Source="/Resources/Images/logo.png" />
+		<Image Grid.Row="0" Height="350" Width="560" HorizontalAlignment="Center" Source="/Resources/Images/logo.png" />
 
 		<!-- Buttons grid -->
 		<Grid x:Name="SelectOrDeleteHeroButtonsGrid" Grid.Row="1">
@@ -31,7 +34,7 @@
 			</Grid.ColumnDefinitions>
 
 			<!-- Create hero button -->
-			<Button x:Name="CreateHeroButton" Grid.Row="0" Grid.ColumnSpan="2" Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" VerticalAlignment="Center" />
+			<Button x:Name="CreateHeroButton" Grid.Row="0" Grid.ColumnSpan="2" Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" VerticalAlignment="Center" Background="{StaticResource ButtonAccentedBackground}"/>
 
 			<!-- Hero list -->
 
@@ -48,6 +51,8 @@
 					</ToolTip>
 				</Button.ToolTip>
 			</Button>
+			
+			<TextBlock x:Name="CreditsBlock" Grid.ColumnSpan="2" Grid.Row="4" Text="Credits" FontSize="14" Foreground="DarkGray" PreviewMouseUp="CreditsBlock_OnPreviewMouseUp" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="15"/>
 		</Grid>
 	</Grid>
 </Page>
