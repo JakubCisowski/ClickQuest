@@ -21,6 +21,8 @@
 
 			<!-- Colors -->
 			<Color x:Key="ColorGameBackgroundRegular" >#EDF9FD</Color>
+			<Color x:Key="ColorButtonDangerHover" >#FF0000</Color>
+			<Color x:Key="ColorButtonDanger" >#FFD3D3</Color>
 
 			<SolidColorBrush x:Key="GameBackgroundRegular" Color="{StaticResource ColorGameBackgroundRegular}" />
 			<SolidColorBrush x:Key="GameBackgroundSecondary" Color="#CFEFF8" />
@@ -29,8 +31,8 @@
 			<SolidColorBrush x:Key="ButtonGrayBackground" Color="#CCDCE1" />
 			<SolidColorBrush x:Key="ButtonAccentedBackground" Color="#ACE9FA" />
 
-			<SolidColorBrush x:Key="ButtonDangerBrush" Color="#FFD3D3" />
-			<SolidColorBrush x:Key="ButtonDangerBrushHover" Color="#FF0000" />
+			<SolidColorBrush x:Key="ButtonDangerBrush" Color="{StaticResource ColorButtonDanger}" />
+			<SolidColorBrush x:Key="ButtonDangerBrushHover" Color="{StaticResource ColorButtonDangerHover}" />
 
 			<SolidColorBrush x:Key="ColorRarity0" Color="#8C8C8C" /> <!-- General - Gray -->
 			<SolidColorBrush x:Key="ColorRarity1" Color="#D79E4B" /> <!-- Fine - Light brown -->
@@ -40,16 +42,20 @@
 			<SolidColorBrush x:Key="ColorRarity5" Color="#E9DB50" /> <!-- Mythic - Gold -->
 
 			<SolidColorBrush x:Key="ColorQuestRare" Color="#FFA237" /> <!-- Rare quest - Orange? -->
-
-			<SolidColorBrush x:Key="ToolTipBackground" Color="Black" Opacity="0.7" />
-
-			<!-- Floating combat text colors -->
+			
+			<!-- Class and damage type colors -->
+			
+			<SolidColorBrush x:Key="ColorSlayerRelated" Color="#FF4242"/>
+			<SolidColorBrush x:Key="ColorVenomRelated" Color="#008500"/>
+			
 			<SolidColorBrush x:Key="ColorDamageTypeNormal" Color="#000000" />
 			<SolidColorBrush x:Key="ColorDamageTypeCritical" Color="#FF0000" />
 			<SolidColorBrush x:Key="ColorDamageTypePoison" Color="#006400" />
 			<SolidColorBrush x:Key="ColorDamageTypeAura" Color="#B8860B" />
 			<SolidColorBrush x:Key="ColorDamageTypeOnHit" Color="#F54DC4" />
 			<SolidColorBrush x:Key="ColorDamageTypeArtifact" Color="#0053FF" />
+
+			<SolidColorBrush x:Key="ToolTipBackground" Color="Black" Opacity="0.7" />
 
 			<!-- Custom global styles -->
 			<Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}" />

@@ -136,13 +136,26 @@ namespace ClickQuest.Game.UserInterface.Pages
 			};
 
 			var heroNameText = new Bold(new Run(hero.Name));
-			var heroLevelAndClassText = new Run($"\n{hero.Level} lvl | {hero.HeroClass} | ");
+			var heroLevelText = new Run($"\n{hero.Level} lvl | ");
+			var heroClassText = new Run($"{hero.HeroClass}");
+			var separator = new Run(" | ");
 			var heroTotalTimePlayedText = new Italic(new Run($"{Math.Floor(hero.TimePlayed.TotalHours)}h {hero.TimePlayed.Minutes}m"));
 
 			heroNameText.FontSize = 20;
+			switch (hero.HeroClass)
+			{
+				case HeroClass.Slayer:
+					heroClassText.Foreground = (SolidColorBrush) this.FindResource("ColorSlayerRelated");
+					break;
+				case HeroClass.Venom:
+					heroClassText.Foreground = (SolidColorBrush) this.FindResource("ColorVenomRelated");
+					break;
+			}
 			
 			selectHeroButtonBlock.Inlines.Add(heroNameText);
-			selectHeroButtonBlock.Inlines.Add(heroLevelAndClassText);
+			selectHeroButtonBlock.Inlines.Add(heroLevelText);
+			selectHeroButtonBlock.Inlines.Add(heroClassText);
+			selectHeroButtonBlock.Inlines.Add(separator);
 			selectHeroButtonBlock.Inlines.Add(heroTotalTimePlayedText);
 
 			selectHeroButton.Content = selectHeroButtonBlock;

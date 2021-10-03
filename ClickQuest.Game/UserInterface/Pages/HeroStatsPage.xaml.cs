@@ -27,6 +27,19 @@ namespace ClickQuest.Game.UserInterface.Pages
 			_hero = User.Instance.CurrentHero;
 			DataContext = _hero;
 
+			if (_hero != null)
+			{
+				switch (_hero.HeroClass)
+				{
+					case HeroClass.Slayer:
+						RunHeroClass.Foreground = (SolidColorBrush) this.FindResource("ColorSlayerRelated");
+						break;
+					case HeroClass.Venom:
+						RunHeroClass.Foreground = (SolidColorBrush) this.FindResource("ColorVenomRelated");
+						break;
+				}
+			}
+
 			UpdateGoldInterface();
 			UpdateIngotOrDungeonKeyInterface(User.Instance.Ingots);
 			UpdateIngotOrDungeonKeyInterface(User.Instance.DungeonKeys);

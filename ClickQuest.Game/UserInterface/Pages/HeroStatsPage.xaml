@@ -30,7 +30,7 @@
 				<!-- Hero race text-->
 				<Run Text="{Binding Mode=OneWay, Path=ThisHeroRace}" FontWeight="Normal" FontStyle="Italic" />
 				<!-- Hero class text-->
-				<Run Text="{Binding Mode=OneWay, Path=ThisHeroClass}" FontWeight="Normal" FontStyle="Italic" />
+				<Run x:Name="RunHeroClass" Text="{Binding Mode=OneWay, Path=ThisHeroClass}" FontWeight="Normal" FontStyle="Italic" />
 			</TextBlock>
 
 			<!-- Experience grid -->
@@ -117,7 +117,7 @@
 					</StackPanel.ToolTip>
 
 					<!-- Crit icon-->
-					<materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefaultClick" Foreground="Black" VerticalAlignment="Center" />
+					<materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefaultClick" Foreground="{StaticResource ColorDamageTypeCritical}" VerticalAlignment="Center" />
 					<!-- Crit text-->
 					<TextBlock Text="Crit chance:" FontSize="18" Margin="3" VerticalAlignment="Center" />
 				</StackPanel>
@@ -142,7 +142,7 @@
 					</StackPanel.ToolTip>
 
 					<!-- Poison damage icon-->
-					<materialDesign:PackIcon Width="22" Height="22" Kind="Water" Foreground="Green" VerticalAlignment="Center" />
+					<materialDesign:PackIcon Width="22" Height="22" Kind="Water" Foreground="{StaticResource ColorDamageTypePoison}" VerticalAlignment="Center" />
 					<!-- Poison damage text-->
 					<TextBlock Text="Poison damage:" FontSize="18" Margin="3" VerticalAlignment="Center" />
 				</StackPanel>
