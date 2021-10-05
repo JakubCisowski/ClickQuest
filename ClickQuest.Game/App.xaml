@@ -20,13 +20,18 @@
 			</Style>
 
 			<!-- Colors -->
-			<Color x:Key="ColorGameBackgroundRegular" >#EDF9FD</Color>
+			<Color x:Key="ColorGameBackground1" >#EDF9FD</Color>
+			<Color x:Key="ColorGameBackground2" >#CFEFF8</Color>
+			<Color x:Key="ColorGameBackground3" >#ADD5E0</Color>
+			<Color x:Key="ColorGameBackground4" >#c4effa</Color>
+			<Color x:Key="ColorGameBackground5" >#acd4e0</Color>
+
 			<Color x:Key="ColorButtonDangerHover" >#FF0000</Color>
 			<Color x:Key="ColorButtonDanger" >#FFD3D3</Color>
 
-			<SolidColorBrush x:Key="GameBackgroundRegular" Color="{StaticResource ColorGameBackgroundRegular}" />
-			<SolidColorBrush x:Key="GameBackgroundSecondary" Color="#CFEFF8" />
-			<SolidColorBrush x:Key="GameBackgroundAdditional" Color="#ADD5E0" />
+			<SolidColorBrush x:Key="GameBackground1" Color="{StaticResource ColorGameBackground1}" />
+			<SolidColorBrush x:Key="GameBackground2" Color="{StaticResource ColorGameBackground2}" />
+			<SolidColorBrush x:Key="GameBackground3" Color="{StaticResource ColorGameBackground3}" />
 
 			<SolidColorBrush x:Key="ButtonGrayBackground" Color="#CCDCE1" />
 			<SolidColorBrush x:Key="ButtonAccentedBackground" Color="#ACE9FA" />
@@ -64,15 +69,15 @@
 			<Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}" />
 
 			<Style TargetType="Window" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}" />
+				<Setter Property="Background" Value="{StaticResource GameBackground1}" />
 			</Style>
 
 			<Style TargetType="Frame" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}" />
+				<Setter Property="Background" Value="{StaticResource GameBackground1}" />
 			</Style>
 
 			<Style TargetType="Page" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource GameBackgroundRegular}" />
+				<Setter Property="Background" Value="{StaticResource GameBackground1}" />
 			</Style>
 
 			<Style TargetType="ToolTip" BasedOn="{StaticResource GameFontRegular}">

@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Places;
@@ -35,22 +36,47 @@ namespace ClickQuest.Game.UserInterface.Pages
 				var regionButton = new Button
 				{
 					Name = "Region" + region.Id,
-					Width = 150,
-					Height = 50,
+					Width = 200,
+					Height = 70,
 					Tag = region
 				};
 
 				var regionBlock = new TextBlock
 				{
-					Text = region.Name,
-					FontSize = 20
+					FontSize = 20,
+					TextAlignment = TextAlignment.Center
 				};
+
+				var regionNameRun = new Run(region.Name) {FontSize=20};
+
+				if (regionNameRun.Text.Length > 20)
+				{
+					regionNameRun.FontSize = 28 - regionNameRun.Text.Length/2;
+				}
+
+				regionBlock.Inlines.Add(regionNameRun);
+
+				regionBlock.Inlines.Add(new Italic(new Run($"\nLevel: {region.LevelRequirement}")));
 
 				regionButton.Content = regionBlock;
 
 				regionButton.Click += RegionButton_Click;
 
-				RegionsPanel.Children.Insert(i + 1, regionButton);
+				if (User.Instance.CurrentHero?.Level < region.LevelRequirement)
+				{
+					regionButton.Style = FindResource("ButtonStyleDisabled") as Style;
+					regionButton.IsEnabled = false;
+				}
+
+				if(i <= GameAssets.Regions.Count / 2)
+				{
+					RegionsPanelLeft.Children.Insert(i, regionButton);
+				}
+				else
+				{ 
+					RegionsPanelRight.Children.Insert(i - GameAssets.Regions.Count / 2 - 1, regionButton);
+				}
+
 			}
 		}
 

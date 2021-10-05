@@ -23,16 +23,26 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
 			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
 				<RowDefinition Height="*" />
 				<RowDefinition Height="8*" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
 			<!-- Page description -->
-			<Border Grid.Row="0" Grid.ColumnSpan="2" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Background="{StaticResource GameBackgroundAdditional}">
+			<Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Width="600">
+
+				<Border.Background>
+					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+						<GradientStop Color="{StaticResource ColorGameBackground4}" Offset="0.25" />
+						<GradientStop Color="{StaticResource ColorGameBackground5}" Offset="0.75" />
+					</LinearGradientBrush>
+				</Border.Background>
+
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center">
 					<Run Text="Town Districts are where you can buy and craft upgrades or go on an adventure" />
 					<LineBreak />
@@ -40,47 +50,54 @@
 				</TextBlock>
 			</Border>
 
+			<!-- Districts text -->
+			<TextBlock Grid.Row="1" Grid.Column="0" FontSize="22" FontWeight="DemiBold" Text="Districts" HorizontalAlignment="Center" Margin="0,10,0,20" />
+
 			<!-- Districts panel -->
-			<StackPanel x:Name="TownPanel" Orientation="Vertical" Grid.Column="0" Grid.Row="1">
-				<!-- Districts text -->
-				<TextBlock FontSize="22" FontWeight="DemiBold" Text="Districts" HorizontalAlignment="Center" Margin="0,10,0,20" />
+			<StackPanel x:Name="TownPanel" Orientation="Vertical" Grid.Column="0" Grid.Row="2">
 
 				<!-- Shop button -->
-				<Button x:Name="ShopButton" Click="ShopButton_Click" Width="150" Height="50">
+				<Button x:Name="ShopButton" Click="ShopButton_Click" Width="150" Height="70">
 					<TextBlock Text="Shop" FontSize="20" />
 				</Button>
 
 				<!-- Blacksmith button -->
-				<Button x:Name="BlacksmithButton" Click="BlacksmithButton_Click" Width="150" Height="50">
+				<Button x:Name="BlacksmithButton" Click="BlacksmithButton_Click" Width="150" Height="70">
 					<TextBlock Text="Blacksmith" FontSize="20" />
 				</Button>
 
 				<!-- Priest button -->
-				<Button x:Name="PriestButton" Click="PriestButton_Click" Width="150" Height="50">
+				<Button x:Name="PriestButton" Click="PriestButton_Click" Width="150" Height="70">
 					<TextBlock Text="Priest" FontSize="20" />
 				</Button>
 
 				<!-- Quest menu button -->
-				<Button x:Name="QuestMenuButton" Click="QuestMenuButton_Click" Width="150" Height="50">
+				<Button x:Name="QuestMenuButton" Click="QuestMenuButton_Click" Width="150" Height="70">
 					<TextBlock Text="Quests" FontSize="20" />
 				</Button>
 
 				<!-- Dungeon select button -->
-				<Button x:Name="DungeonSelectButton" Click="DungeonSelectButton_Click" Width="150" Height="50">
+				<Button x:Name="DungeonSelectButton" Click="DungeonSelectButton_Click" Width="150" Height="70">
 					<TextBlock Text="Dungeons" FontSize="20" />
 				</Button>
 			</StackPanel>
 
-			<!-- Districts panel -->
-			<StackPanel x:Name="RegionsPanel" Orientation="Vertical" Grid.Column="1" Grid.Row="1">
-				<!-- Districts text -->
-				<TextBlock FontSize="22" FontWeight="DemiBold" Text="Regions" HorizontalAlignment="Center" Margin="0,10,0,20" />
+			<!-- Regions text -->
+			<TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontSize="22" FontWeight="DemiBold" Text="Regions" HorizontalAlignment="Center" Margin="0,10,0,20" />
+
+			<!-- Regions panel left -->
+			<StackPanel x:Name="RegionsPanelLeft" Orientation="Vertical" Grid.Column="1" Grid.Row="2">
+				<!-- [Here region buttons are dynamically generated] -->
+			</StackPanel>
+
+			<!-- Regions panel right -->
+			<StackPanel x:Name="RegionsPanelRight" Orientation="Vertical" Grid.Column="2" Grid.Row="2">
 
 				<!-- [Here region buttons are dynamically generated] -->
 			</StackPanel>
 
 			<!-- Back to menu button -->
-			<Button x:Name="MainMenuButton" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="MainMenuButton_Click" Width="450" Height="50">
+			<Button x:Name="MainMenuButton" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" Click="MainMenuButton_Click" Width="450" Height="50">
 				<TextBlock Text="Back to menu" FontSize="22" />
 			</Button>
 		</Grid>

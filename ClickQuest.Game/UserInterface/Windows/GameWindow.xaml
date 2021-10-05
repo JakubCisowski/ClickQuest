@@ -11,7 +11,7 @@
 	<StackPanel>
 		<StackPanel.Background>
 			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-				<GradientStop Color="{StaticResource ColorGameBackgroundRegular}" Offset="0.25" />
+				<GradientStop Color="{StaticResource ColorGameBackground1}" Offset="0.25" />
 				<GradientStop Color="White" Offset="0.75" />
 			</LinearGradientBrush>
 		</StackPanel.Background>
