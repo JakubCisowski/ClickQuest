@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ClickQuest.ContentManager.Models;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface
 {
@@ -73,8 +74,9 @@ namespace ClickQuest.ContentManager.UserInterface
 		{
 			// https://stackoverflow.com/questions/63834841/how-to-add-a-materialdesignhint-to-a-textbox-in-code
 			// ?
-			// var idBox = new TextBox();
-			// HintAssist.SetHint(idBox, "ID");
+			// var xdBox = new TextBox();
+			// HintAssist.SetHint(xdBox, "ID");
+			// panel.Children.Add(xdBox);
 			
 			// clear grid's first column to avoid duplicating the controls added below
 			// how?
@@ -85,11 +87,11 @@ namespace ClickQuest.ContentManager.UserInterface
 			{
 				var selectedArtifact = _dataContext as Artifact;
 
-				var idBox = new TextBox() {Name = "IdBox", Text = selectedArtifact.Id.ToString()};
-				var nameBox = new TextBox() {Name="NameBox", Text = selectedArtifact.Name};
-				var valueBox = new TextBox() {Name="ValueBox", Text = selectedArtifact.Value.ToString()};
-				var rarityBox = new ComboBox() {Name="RarityBox", ItemsSource = Enum.GetValues(typeof(Rarity)), SelectedIndex = (int)selectedArtifact.Rarity};
-				var artifactTypeBox = new ComboBox() {Name="ArtifactTypeBox", ItemsSource = Enum.GetValues(typeof(ArtifactType)), SelectedIndex = (int)selectedArtifact.ArtifactType};
+				var idBox = new TextBox() {Name = "IdBox", Text = selectedArtifact.Id.ToString(), Margin = new Thickness(10)};
+				var nameBox = new TextBox() {Name="NameBox", Text = selectedArtifact.Name, Margin = new Thickness(10)};
+				var valueBox = new TextBox() {Name="ValueBox", Text = selectedArtifact.Value.ToString(), Margin = new Thickness(10)};
+				var rarityBox = new ComboBox() {Name="RarityBox", ItemsSource = Enum.GetValues(typeof(Rarity)), SelectedIndex = (int)selectedArtifact.Rarity, Margin = new Thickness(10)};
+				var artifactTypeBox = new ComboBox() {Name="ArtifactTypeBox", ItemsSource = Enum.GetValues(typeof(ArtifactType)), SelectedIndex = (int)selectedArtifact.ArtifactType, Margin = new Thickness(10)};
 				var descriptionBox = new TextBox()
 				{
 					Name="DescriptionBox",
@@ -99,7 +101,8 @@ namespace ClickQuest.ContentManager.UserInterface
 					AcceptsReturn = true,
 					VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
 					Height = 80,
-					Text = selectedArtifact.Description
+					Text = selectedArtifact.Description,
+					Margin = new Thickness(10)
 				};
 
 				var loreBox = new TextBox()
@@ -111,7 +114,8 @@ namespace ClickQuest.ContentManager.UserInterface
 					AcceptsReturn = true,
 					VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
 					Height = 80,
-					Text=selectedArtifact.Lore
+					Text=selectedArtifact.Lore,
+					Margin = new Thickness(10)
 				};
 
 				var extraInfoBox = new TextBox()
@@ -123,15 +127,27 @@ namespace ClickQuest.ContentManager.UserInterface
 					AcceptsReturn = true,
 					VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
 					Height = 80,
-					Text = selectedArtifact.ExtraInfo
+					Text = selectedArtifact.ExtraInfo,
+					Margin = new Thickness(10)
 				};
 
 				var makeChangesButton = new Button()
 				{
 					Name="MakeChangesButton",
-					Content = "Make changes"
+					Content = "Make changes",
+					Margin = new Thickness(10)
 				};
 				makeChangesButton.Click += MakeChangesButton_Click;
+				
+				// Set TextBox and ComboBox hints.
+				HintAssist.SetHint(idBox, "ID");
+				HintAssist.SetHint(nameBox, "Name");
+				HintAssist.SetHint(valueBox, "Value");
+				HintAssist.SetHint(rarityBox, "Rarity");
+				HintAssist.SetHint(artifactTypeBox, "Type");
+				HintAssist.SetHint(descriptionBox, "Description");
+				HintAssist.SetHint(loreBox, "Lore");
+				HintAssist.SetHint(extraInfoBox, "Extra info");
 
 				// Add controls to Dictionary for easier navigation.
 				_controls.Clear();
@@ -145,9 +161,19 @@ namespace ClickQuest.ContentManager.UserInterface
 				_controls.Add(loreBox.Name, loreBox);
 				_controls.Add(extraInfoBox.Name, extraInfoBox);
 				_controls.Add(makeChangesButton.Name, makeChangesButton);
-
+				
 				foreach (var elem in _controls)
 				{
+					// Set style of each control to MaterialDesignFloatingHint.
+					if (elem.Value is TextBox textBox)
+					{
+						textBox.Style = (Style) this.FindResource("MaterialDesignFloatingHintTextBox");
+					}
+					else if (elem.Value is ComboBox comboBox)
+					{
+						comboBox.Style = (Style) this.FindResource("MaterialDesignFloatingHintComboBox");
+					}
+
 					panel.Children.Add(elem.Value);
 				}
 			}

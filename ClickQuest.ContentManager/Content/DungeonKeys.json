@@ -1,0 +1,44 @@
+[
+	{
+		"Id": 0,
+		"Name": "General dungeon key",
+		"Rarity": 0,
+		"Description": "[...]",
+		"Value": 1
+	},
+	{
+		"Id": 1,
+		"Name": "Fine dungeon key",
+		"Rarity": 1,
+		"Description": "[...]",
+		"Value": 1
+	},
+	{
+		"Id": 2,
+		"Name": "Superior dungeon key",
+		"Rarity": 2,
+		"Description": "[...]",
+		"Value": 1
+	},
+	{
+		"Id": 3,
+		"Name": "Exceptional dungeon key",
+		"Rarity": 3,
+		"Description": "[...]",
+		"Value": 1
+	},
+	{
+		"Id": 4,
+		"Name": "Mythic dungeon key",
+		"Rarity": 4,
+		"Description": "[...]",
+		"Value": 1
+	},
+	{
+		"Id": 5,
+		"Name": "Masterwork dungeon key",
+		"Rarity": 5,
+		"Description": "[...]",
+		"Value": 1
+	}
+]
