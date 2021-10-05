@@ -1,0 +1,57 @@
+[
+  {
+    "Id": 1,
+    "Name": "Minor Enhancement",
+    "Type": 0,
+    "Rarity": 0,
+    "Duration": 600,
+    "DescriptionFunctionality": null,
+    "DescriptionLore": null,
+    "Buff": 10,
+    "Value": 1
+  },
+  {
+    "Id": 2,
+    "Name": "Minor Enrichment",
+    "Type": 3,
+    "Rarity": 0,
+    "Duration": 600,
+    "DescriptionFunctionality": null,
+    "DescriptionLore": null,
+    "Buff": 5,
+    "Value": 1
+  },
+  {
+    "Id": 3,
+    "Name": "Minor Blessing of Deathblow",
+    "Type": 2,
+    "Rarity": 1,
+    "Duration": 300,
+    "DescriptionFunctionality": null,
+    "DescriptionLore": null,
+    "Buff": 10,
+    "Value": 1
+  },
+  {
+    "Id": 4,
+    "Name": "Blessing of the Desolation",
+    "Type": 4,
+    "Rarity": 3,
+    "Duration": 300,
+    "DescriptionFunctionality": null,
+    "DescriptionLore": null,
+    "Buff": 25,
+    "Value": 1
+  },
+  {
+    "Id": 5,
+    "Name": "Blessing of the Damned",
+    "Type": 2,
+    "Rarity": 5,
+    "Duration": 300,
+    "DescriptionFunctionality": null,
+    "DescriptionLore": null,
+    "Buff": 50,
+    "Value": 1
+  }
+]

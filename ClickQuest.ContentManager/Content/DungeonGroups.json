@@ -17,7 +17,7 @@
 		"Id": 3,
 		"Name": "Superior dungeons",
 		"Color": "Green",
-		"Description": "SuperiorDGDesc",
+		"Description": "SuperiorlDGDesc",
 		"KeyRequirementRarities": [ 2 ]
 	},
 	{
@@ -29,16 +29,16 @@
 	},
 	{
 		"Id": 5,
-		"Name": "Masterwork dungeons",
+		"Name": "Mythic dungeons",
 		"Color": "Purple",
-		"Description": "MasterworkDGDesc",
+		"Description": "MythicDGDesc",
 		"KeyRequirementRarities": [ 4 ]
 	},
 	{
 		"Id": 6,
-		"Name": "Mythic dungeons",
+		"Name": "Masterwork dungeons",
 		"Color": "Gold",
-		"Description": "MythicDGDesc",
+		"Description": "MasterworkDGDesc",
 		"KeyRequirementRarities": [ 5 ]
 	}
 ]
