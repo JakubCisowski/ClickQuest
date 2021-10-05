@@ -19,5 +19,9 @@
 			<ComboBox x:Name="ContentSelectionBox" Margin="20,20,20,5" SelectionChanged="ContentSelectionBox_SelectionChanged"/>
 			<Button x:Name="AddNewButton" Content="Add new" Margin="20,50,20,5" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Click="AddNewButton_Click"/>
 		</StackPanel>
+		
+		<StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
+			<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Foreground="Black" Width="2"/>
+		</StackPanel>
 	</Grid>
 </UserControl>

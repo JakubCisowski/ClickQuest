@@ -14,6 +14,7 @@ namespace ClickQuest.ContentManager.UserInterface
 		private ContentType _currentContentType;
 		private object _dataContext;
 		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
+		private Grid _currentGrid;
 
 		public InputPanel(ContentType contentType)
 		{
@@ -73,15 +74,28 @@ namespace ClickQuest.ContentManager.UserInterface
 		public void RefreshControls<T>()
 		{
 			// https://stackoverflow.com/questions/63834841/how-to-add-a-materialdesignhint-to-a-textbox-in-code
-			// ?
-			// var xdBox = new TextBox();
-			// HintAssist.SetHint(xdBox, "ID");
-			// panel.Children.Add(xdBox);
-			
+
 			// clear grid's first column to avoid duplicating the controls added below
 			// how?
+			// use the Dictionary
 
-			var panel = new StackPanel(){Name="ControlsPanel"};
+			if (_currentGrid != null)
+			{
+				_currentGrid.Children.Clear();
+				MainGrid.Children.Remove(_currentGrid);
+			}
+
+			double gridHeight = this.ActualHeight;
+			var grid = new Grid() {Name = "ControlsGrid"};
+			
+			grid.ColumnDefinitions.Add(new ColumnDefinition());
+			grid.ColumnDefinitions.Add(new ColumnDefinition());
+			grid.ColumnDefinitions.Add(new ColumnDefinition());
+			grid.RowDefinitions.Add(new RowDefinition(){Height = new GridLength(gridHeight / 8)});
+			grid.RowDefinitions.Add(new RowDefinition(){Height = new GridLength(gridHeight / 8)});
+			grid.RowDefinitions.Add(new RowDefinition(){Height = new GridLength(gridHeight / 4)});
+			grid.RowDefinitions.Add(new RowDefinition(){Height = new GridLength(gridHeight / 4)});
+			grid.RowDefinitions.Add(new RowDefinition(){Height = new GridLength(gridHeight / 4)});
 
 			if (typeof(T) == typeof(Artifact))
 			{
@@ -139,6 +153,29 @@ namespace ClickQuest.ContentManager.UserInterface
 				};
 				makeChangesButton.Click += MakeChangesButton_Click;
 				
+				// Set Grid positions.
+				Grid.SetColumn(idBox, 0);
+				Grid.SetRow(idBox, 0);
+				Grid.SetColumn(nameBox, 1);
+				Grid.SetRow(nameBox, 0);
+				Grid.SetColumn(valueBox, 2);
+				Grid.SetRow(valueBox, 0);
+				
+				Grid.SetColumn(rarityBox, 0);
+				Grid.SetRow(rarityBox, 1);
+				Grid.SetColumn(artifactTypeBox, 2);
+				Grid.SetRow(artifactTypeBox, 1);
+				
+				Grid.SetColumnSpan(descriptionBox, 3);
+				Grid.SetRow(descriptionBox, 2);
+				Grid.SetColumnSpan(loreBox, 3);
+				Grid.SetRow(loreBox, 3);
+				Grid.SetColumnSpan(extraInfoBox, 3);
+				Grid.SetRow(extraInfoBox, 4);
+				
+				Grid.SetColumn(makeChangesButton, 1);
+				Grid.SetRow(makeChangesButton, 1);
+				
 				// Set TextBox and ComboBox hints.
 				HintAssist.SetHint(idBox, "ID");
 				HintAssist.SetHint(nameBox, "Name");
@@ -148,7 +185,7 @@ namespace ClickQuest.ContentManager.UserInterface
 				HintAssist.SetHint(descriptionBox, "Description");
 				HintAssist.SetHint(loreBox, "Lore");
 				HintAssist.SetHint(extraInfoBox, "Extra info");
-
+				
 				// Add controls to Dictionary for easier navigation.
 				_controls.Clear();
 				
@@ -164,23 +201,27 @@ namespace ClickQuest.ContentManager.UserInterface
 				
 				foreach (var elem in _controls)
 				{
-					// Set style of each control to MaterialDesignFloatingHint.
+					// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 					if (elem.Value is TextBox textBox)
 					{
 						textBox.Style = (Style) this.FindResource("MaterialDesignFloatingHintTextBox");
+						HintAssist.SetFloatingScale(elem.Value, 1.0);
 					}
 					else if (elem.Value is ComboBox comboBox)
 					{
 						comboBox.Style = (Style) this.FindResource("MaterialDesignFloatingHintComboBox");
+						HintAssist.SetFloatingScale(elem.Value, 1.0);
 					}
-
-					panel.Children.Add(elem.Value);
+					
+					grid.Children.Add(elem.Value);
 				}
 			}
 			
-			Grid.SetColumn(panel, 1);
+			Grid.SetColumn(grid, 1);
 
-			MainGrid.Children.Add(panel);
+			_currentGrid = grid;
+
+			MainGrid.Children.Add(grid);
 		}
 		
 		private void MakeChangesButton_Click(object sender, RoutedEventArgs e)
