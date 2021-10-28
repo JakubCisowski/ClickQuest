@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Alert Box" Height="160" Width="420" WindowStartupLocation="CenterOwner"
-        WindowStyle="None" ResizeMode="NoResize" Background="{StaticResource GameBackgroundRegular}" MouseDown="AlertBox_MouseDown">
+        WindowStyle="None" ResizeMode="NoResize" Background="{StaticResource GameBackground1}" MouseDown="AlertBox_MouseDown">
 	<Grid>
 		<Border BorderThickness="3" BorderBrush="DarkGray" CornerRadius="3">
 			<StackPanel>

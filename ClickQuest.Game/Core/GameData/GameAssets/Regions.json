@@ -88,7 +88,7 @@
 	},
 	{
 		"Id": 4,
-		"LevelRequirement": 0,
+		"LevelRequirement": 50,
 		"Name": "Frozen Highlands",
 		"Description": "ForestDescription",
 		"Background": "/example.png",

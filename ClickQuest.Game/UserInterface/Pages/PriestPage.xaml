@@ -40,7 +40,14 @@
 			</Grid.RowDefinitions>
 
 			<!-- Page description -->
-			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Background="{StaticResource GameBackgroundAdditional}">
+			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Width="600">
+				<Border.Background>
+					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+						<GradientStop Color="{StaticResource ColorGameBackground4}" Offset="0.25" />
+						<GradientStop Color="{StaticResource ColorGameBackground5}" Offset="0.75" />
+					</LinearGradientBrush>
+				</Border.Background>
+
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center">
 					<Run Text="Here you can buy temporary blessings which empower your hero" />
 					<LineBreak />
@@ -58,9 +65,9 @@
 			</Button>
 
 			<!-- Priest panel-->
-			<TabControl Grid.Row="1" Background="{StaticResource GameBackgroundRegular}" Width="550" Height="550">
+			<TabControl Grid.Row="1" Background="{StaticResource GameBackground1}" Width="550" Height="550">
 				<!-- Buy tab -->
-				<TabItem Background="{StaticResource GameBackgroundSecondary}">
+				<TabItem Background="{StaticResource GameBackground2}">
 					<!-- Header buy -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="133" HorizontalAlignment="Center">
