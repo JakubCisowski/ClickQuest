@@ -1,9 +1,8 @@
-﻿using System;
+﻿using ClickQuest.ContentManager.UserInterface;
+using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.UserInterface;
 
 namespace ClickQuest.ContentManager
 {
@@ -19,11 +18,22 @@ namespace ClickQuest.ContentManager
 			if (e.Source is TabControl tabControl)
 			{
 				var currentTabName = (tabControl.SelectedItem as TabItem).Header.ToString();
-				var currentTabNameAsContentType = (ContentType) Enum.Parse(typeof(ContentType), currentTabName);
+				var currentTabNameAsContentType = (ContentType)Enum.Parse(typeof(ContentType), currentTabName);
 
-				var inputPanel = new InputPanel(currentTabNameAsContentType);
-				(tabControl.SelectedContent as Grid)?.Children.Clear();
-				(tabControl.SelectedContent as Grid)?.Children.Add(inputPanel);
+				switch (currentTabNameAsContentType)
+				{
+					case ContentType.Artifacts:
+						var artifactsPanel = new ArtifactsPanel();
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(artifactsPanel);
+						break;
+
+					case ContentType.Regions:
+						var regionsPanel = new RegionsPanel();
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(regionsPanel);
+						break;
+				}
 			}
 		}
 

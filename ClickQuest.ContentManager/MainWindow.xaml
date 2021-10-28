@@ -7,11 +7,11 @@
         xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
         xmlns:ui="clr-namespace:ClickQuest.ContentManager.UserInterface"
         mc:Ignorable="d" Closing="MainWindow_OnClosing"
-        Title="Content Loader" Height="576" Width="1024"
+        Title="Content Loader" Height="1040" Width="1920" WindowStartupLocation="Manual" Top="0" Left="0"
 		ResizeMode="NoResize" >
 	<Grid>
-		<TabControl Style="{StaticResource MaterialDesignTabControl}" SelectionChanged="TabControl_SelectionChanged">
-			<TabItem Header="Artifacts">
+		<TabControl Style="{StaticResource MaterialDesignTabControl}" SelectionChanged="TabControl_SelectionChanged" HorizontalAlignment="Center">
+			<TabItem Header="Artifacts" FontSize="22" Width="200">
 				<Grid/>
 			</TabItem>
 
