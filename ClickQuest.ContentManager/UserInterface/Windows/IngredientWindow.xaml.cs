@@ -92,7 +92,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			var oldIngredientIndex = _recipe.Ingredients.IndexOf(_recipe.Ingredients.FirstOrDefault(x => x.Id == _ingredient.Id));
 
 			_ingredient.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
-			_ingredient.Quantity = Int32.Parse((_controls["QuantityBox"] as TextBox).Text, CultureInfo.InvariantCulture);
+			_ingredient.Quantity = int.Parse((_controls["QuantityBox"] as TextBox).Text, CultureInfo.InvariantCulture);
 
 			if (oldIngredientIndex == -1)
 			{

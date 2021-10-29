@@ -13,14 +13,14 @@ using System.Windows.Media;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
 {
-	public partial class RegionsPanel : UserControl
+	public partial class BossesPanel : UserControl
 	{
-		private Region _dataContext;
+		private Boss _dataContext;
 		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 		private StackPanel _currentPanel;
-		private List<MonsterSpawnPattern> _monsterSpawnPatterns;
+		private List<BossLootPattern> _bossLootPatterns;
 
-		public RegionsPanel()
+		public BossesPanel()
 		{
 			InitializeComponent();
 
@@ -29,7 +29,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void PopulateContentSelectionBox()
 		{
-			ContentSelectionBox.ItemsSource = GameContent.Regions.Select(x => x.Name);
+			ContentSelectionBox.ItemsSource = GameContent.Bosses.Select(x => x.Name);
 		}
 
 		public void RefreshStaticValuesPanel()
@@ -50,12 +50,12 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			double gridWidth = this.ActualWidth;
 			var panel = new StackPanel() { Name = "StaticInfoPanel" };
 
-			var selectedRegion = _dataContext;
+			var selectedBoss = _dataContext;
 
-			var idBox = new TextBox() { Name = "IdBox", Text = selectedRegion.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			var nameBox = new TextBox() { Name = "NameBox", Text = selectedRegion.Name, Margin = new Thickness(10) };
-			var levelRequirementBox = new TextBox() { Name = "LevelRequirementBox", Text = selectedRegion.LevelRequirement.ToString(), Margin = new Thickness(10) };
-			var backgroundBox = new TextBox() { Name = "BackgroundBox", Text = selectedRegion.Background, Margin = new Thickness(10) };
+			var idBox = new TextBox() { Name = "IdBox", Text = selectedBoss.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var nameBox = new TextBox() { Name = "NameBox", Text = selectedBoss.Name, Margin = new Thickness(10) };
+			var healthBox = new TextBox() { Name = "HealthBox", Text = selectedBoss.Health.ToString(), Margin = new Thickness(10) };
+			var imageBox = new TextBox() { Name = "ImageBox", Text = selectedBoss.Image, Margin = new Thickness(10) };
 			var descriptionBox = new TextBox()
 			{
 				Name = "DescriptionBox",
@@ -65,15 +65,15 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				AcceptsReturn = true,
 				VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
 				Height = 160,
-				Text = selectedRegion.Description,
+				Text = selectedBoss.Description,
 				Margin = new Thickness(10)
 			};
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
 			HintAssist.SetHint(nameBox, "Name");
-			HintAssist.SetHint(levelRequirementBox, "LevelRequirement");
-			HintAssist.SetHint(backgroundBox, "Background");
+			HintAssist.SetHint(healthBox, "Health");
+			HintAssist.SetHint(imageBox, "Image");
 			HintAssist.SetHint(descriptionBox, "Description");
 
 			// Add controls to Dictionary for easier navigation.
@@ -81,8 +81,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			_controls.Add(idBox.Name, idBox);
 			_controls.Add(nameBox.Name, nameBox);
-			_controls.Add(levelRequirementBox.Name, levelRequirementBox);
-			_controls.Add(backgroundBox.Name, backgroundBox);
+			_controls.Add(healthBox.Name, healthBox);
+			_controls.Add(imageBox.Name, imageBox);
 			_controls.Add(descriptionBox.Name, descriptionBox);
 
 			foreach (var elem in _controls)
@@ -111,31 +111,31 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void SaveButton_Click(object sender, RoutedEventArgs e)
 		{
-			var region = _dataContext;
+			var boss = _dataContext;
 
-			region.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
-			region.Name = (_controls["NameBox"] as TextBox).Text;
-			region.LevelRequirement = int.Parse((_controls["LevelRequirementBox"] as TextBox).Text);
-			region.Background = (_controls["BackgroundBox"] as TextBox).Text;
-			region.Description = (_controls["DescriptionBox"] as TextBox).Text;
+			boss.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
+			boss.Name = (_controls["NameBox"] as TextBox).Text;
+			boss.Health = int.Parse((_controls["HealthBox"] as TextBox).Text);
+			boss.Image = (_controls["ImageBox"] as TextBox).Text;
+			boss.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
 			// Check if this Id is already in the collection (modified).
-			if (GameContent.Regions.Select(x => x.Id).Contains(region.Id))
+			if (GameContent.Bosses.Select(x => x.Id).Contains(boss.Id))
 			{
-				int indexOfOldRegion = GameContent.Regions.FindIndex(x => x.Id == region.Id);
-				GameContent.Regions[indexOfOldRegion] = region;
+				int indexOfOldBoss = GameContent.Bosses.FindIndex(x => x.Id == boss.Id);
+				GameContent.Bosses[indexOfOldBoss] = boss;
 			}
 			else
 			{
 				// If not, add it.
-				GameContent.Regions.Add(region);
+				GameContent.Bosses.Add(boss);
 			}
 		}
 
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
-			int nextId = GameContent.Regions.Max(x => x.Id) + 1;
-			_dataContext = new Region() { Id = nextId };
+			int nextId = GameContent.Bosses.Max(x => x.Id) + 1;
+			_dataContext = new Boss() { Id = nextId };
 			RefreshStaticValuesPanel();
 		}
 
@@ -143,8 +143,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			var selectedName = (e.Source as ComboBox)?.SelectedValue.ToString();
 
-			_dataContext = GameContent.Regions.FirstOrDefault(x => x.Name == selectedName);
-			_monsterSpawnPatterns = _dataContext.MonsterSpawnPatterns;
+			_dataContext = GameContent.Bosses.FirstOrDefault(x => x.Name == selectedName);
+			_bossLootPatterns = _dataContext.BossLootPatterns;
 			RefreshStaticValuesPanel();
 			RefreshDynamicValuesPanel();
 		}
@@ -153,7 +153,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			DynamicValuesPanel.Children.Clear();
 
-			foreach (var pattern in _monsterSpawnPatterns)
+			foreach (var pattern in _bossLootPatterns)
 			{
 				var border = new Border
 				{
@@ -174,7 +174,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 		}
 
-		private Grid CreateDynamicValueGrid(MonsterSpawnPattern pattern)
+		private Grid CreateDynamicValueGrid(BossLootPattern pattern)
 		{
 			var grid = new Grid();
 
@@ -185,7 +185,16 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Margin = new Thickness(10, 0, 0, 0),
 				FontStyle = FontStyles.Italic,
-				Text = $"[{pattern.MonsterId}]"
+				Text = $"[{pattern.LootId}]"
+			};
+
+			var itemTypeBlock = new TextBlock
+			{
+				FontSize = 18,
+				VerticalAlignment = VerticalAlignment.Center,
+				HorizontalAlignment = HorizontalAlignment.Left,
+				Margin = new Thickness(80, 0, 0, 0),
+				Text = pattern.LootType.ToString()
 			};
 
 			var nameBlock = new TextBlock
@@ -193,24 +202,39 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Left,
-				Margin = new Thickness(80, 0, 0, 0),
-				Text = GameContent.Monsters.FirstOrDefault(x => x.Id == pattern.MonsterId).Name
+				Margin = new Thickness(180, 0, 0, 0),
 			};
 
-			var frequencyBlock = new TextBlock
+			switch (pattern.LootType)
+			{
+				case LootType.Material:
+					nameBlock.Text = GameContent.Materials.FirstOrDefault(x => x.Id == pattern.LootId).Name;
+					break;
+				case LootType.Recipe:
+					nameBlock.Text = GameContent.Recipes.FirstOrDefault(x => x.Id == pattern.LootId).Name;
+					break;
+				case LootType.Artifact:
+					nameBlock.Text = GameContent.Artifacts.FirstOrDefault(x => x.Id == pattern.LootId).Name;
+					break;
+				case LootType.Blessing:
+					nameBlock.Text = GameContent.Blessings.FirstOrDefault(x => x.Id == pattern.LootId).Name;
+					break;
+			}
+
+			var frequenciesBlock = new TextBlock
 			{
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Left,
-				Margin = new Thickness(480, 0, 0, 0),
-				Text = pattern.Frequency.ToString(CultureInfo.InvariantCulture)
+				Margin = new Thickness(460, 0, 0, 0),
+				Text = string.Join(' ', pattern.Frequencies.Select(x => x.ToString(CultureInfo.InvariantCulture)))
 			};
 
 			var deleteButton = new Button
 			{
 				Width = 30,
 				Height = 30,
-				Margin = new Thickness(5, 0, 50, 0),
+				Margin = new Thickness(5, 0, 20, 0),
 				Tag = pattern,
 				Padding = new Thickness(0),
 				HorizontalAlignment = HorizontalAlignment.Right
@@ -229,8 +253,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			deleteButton.Click += DeleteDynamicValue_Click;
 
 			grid.Children.Add(idBlock);
+			grid.Children.Add(itemTypeBlock);
 			grid.Children.Add(nameBlock);
-			grid.Children.Add(frequencyBlock);
+			grid.Children.Add(frequenciesBlock);
 			grid.Children.Add(deleteButton);
 
 			return grid;
@@ -238,28 +263,32 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void EditDynamicValue_Click(object sender, MouseButtonEventArgs e)
 		{
-			var monsterSpawnPattern = (sender as Border).Tag as MonsterSpawnPattern;
+			var bossLootPattern = (sender as Border).Tag as BossLootPattern;
 
-			var monsterSpawnPatternWindow = new MonsterSpawnPatternWindow(_dataContext, monsterSpawnPattern) { Owner = Application.Current.MainWindow };
-			monsterSpawnPatternWindow.ShowDialog();
+			var bossLootPatternWindow = new BossLootPatternWindow(_dataContext, bossLootPattern) { Owner = Application.Current.MainWindow };
+			bossLootPatternWindow.ShowDialog();
 
 			RefreshDynamicValuesPanel();
 		}
 
 		private void DeleteDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var pattern = (sender as Button).Tag as MonsterSpawnPattern;
-			_dataContext.MonsterSpawnPatterns.Remove(_dataContext.MonsterSpawnPatterns.FirstOrDefault(x => x.MonsterId == pattern.MonsterId));
+			var pattern = (sender as Button).Tag as BossLootPattern;
+			_dataContext.BossLootPatterns.Remove(_dataContext.BossLootPatterns.FirstOrDefault(x => x.LootId == pattern.LootId));
 
 			RefreshDynamicValuesPanel();
 		}
 
 		private void CreateDynamicValueButton_Click(object sender, RoutedEventArgs e)
 		{
-			var newMonsterSpawnPattern = new MonsterSpawnPattern();
-			_monsterSpawnPatterns.Add(newMonsterSpawnPattern);
+			var newBossLootPattern = new BossLootPattern();
+			newBossLootPattern.Frequencies = new List<double>()
+			{
+				0,0,0,0,0,0
+			};
+			_bossLootPatterns.Add(newBossLootPattern);
 
-			var tempBorder = new Border() { Tag = newMonsterSpawnPattern };
+			var tempBorder = new Border() { Tag = newBossLootPattern };
 			EditDynamicValue_Click(tempBorder, null);
 		}
 

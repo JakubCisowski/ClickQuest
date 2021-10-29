@@ -88,18 +88,18 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 		private void UpdateMonsterPattern()
 		{
-			var oldPatternIndex = _recipe.Monsters.IndexOf(_recipe.Monsters.FirstOrDefault(x => x.MonsterId == _pattern.MonsterId));
+			var oldPatternIndex = _recipe.MonsterSpawnPatterns.IndexOf(_recipe.MonsterSpawnPatterns.FirstOrDefault(x => x.MonsterId == _pattern.MonsterId));
 
 			_pattern.MonsterId = int.Parse((_controls["IdBox"] as TextBox).Text);
 			_pattern.Frequency = double.Parse((_controls["FrequencyBox"] as TextBox).Text, CultureInfo.InvariantCulture);
 
 			if (oldPatternIndex == -1)
 			{
-				_recipe.Monsters.Add(_pattern);
+				_recipe.MonsterSpawnPatterns.Add(_pattern);
 			}
 			else
 			{
-				_recipe.Monsters[oldPatternIndex] = _pattern;
+				_recipe.MonsterSpawnPatterns[oldPatternIndex] = _pattern;
 			}
 		}
 

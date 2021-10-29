@@ -1,5 +1,4 @@
 ﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.UserInterface;
 using ClickQuest.ContentManager.UserInterface.Panels;
 using System;
 using System.ComponentModel;
@@ -20,7 +19,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			if (e.Source is TabControl tabControl)
 			{
 				var currentTabName = (tabControl.SelectedItem as TabItem).Header.ToString();
-				var currentTabNameAsContentType = (ContentType)Enum.Parse(typeof(ContentType), currentTabName);
+				var currentTabNameAsContentType = (ContentType)Enum.Parse(typeof(ContentType), currentTabName.Replace(" ", ""));
 
 				switch (currentTabNameAsContentType)
 				{
@@ -52,6 +51,12 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						var blessingsPanel = new BlessingsPanel();
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
 						(tabControl.SelectedContent as Grid)?.Children.Add(blessingsPanel);
+						break;
+
+					case ContentType.Bosses:
+						var bossesPanel = new BossesPanel();
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(bossesPanel);
 						break;
 				}
 			}

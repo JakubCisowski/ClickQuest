@@ -37,7 +37,7 @@
       }
     ],
     "Name": "Recipe: Rakshasa\u0027s Necklace",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -70,7 +70,7 @@
       }
     ],
     "Name": "Recipe: Scepter of Eternal Flame",
-    "Rarity": 4,
+    "Rarity": "Mythic",
     "Value": 1
   },
   {
@@ -99,7 +99,7 @@
       }
     ],
     "Name": "Recipe: Cholla Spine Infusion",
-    "Rarity": 4,
+    "Rarity": "Mythic",
     "Value": 1
   },
   {
@@ -112,7 +112,7 @@
       }
     ],
     "Name": "Recipe: Vial of Plague",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -125,7 +125,7 @@
       }
     ],
     "Name": "Recipe: Gold-Tipped Spear",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -142,7 +142,7 @@
       }
     ],
     "Name": "Recipe: Twin Kamas",
-    "Rarity": 5,
+    "Rarity": "Masterwork",
     "Value": 100
   },
   {
@@ -155,7 +155,7 @@
       }
     ],
     "Name": "Recipe: Bloodstone Staff",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -168,7 +168,7 @@
       }
     ],
     "Name": "Recipe: Skullbasher",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -181,7 +181,7 @@
       }
     ],
     "Name": "Recipe: Meat Cleaver",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -194,7 +194,7 @@
       }
     ],
     "Name": "Recipe: Ghostly Infusion",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -207,7 +207,7 @@
       }
     ],
     "Name": "Recipe: Silver Greatsword",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -220,7 +220,7 @@
       }
     ],
     "Name": "Recipe: Large Scythe",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -233,7 +233,7 @@
       }
     ],
     "Name": "Recipe: Death-Infused Bone Talisman",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -246,7 +246,7 @@
       }
     ],
     "Name": "Recipe: Dull Sword",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -259,7 +259,7 @@
       }
     ],
     "Name": "Recipe: Dull Knife",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -272,7 +272,7 @@
       }
     ],
     "Name": "Recipe: Poisoned Sword",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -285,7 +285,7 @@
       }
     ],
     "Name": "Recipe: Necronomicon",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   },
   {
@@ -298,7 +298,7 @@
       }
     ],
     "Name": "Recipe: Toxic Amulet",
-    "Rarity": 3,
+    "Rarity": "Exceptional",
     "Value": 1
   }
 ]

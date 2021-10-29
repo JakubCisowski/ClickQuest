@@ -15,7 +15,7 @@ namespace ClickQuest.ContentManager.Models
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public string Background { get; set; }
-		public List<MonsterSpawnPattern> Monsters { get; set; }
+		public List<MonsterSpawnPattern> MonsterSpawnPatterns { get; set; }
 
 		public Region()
 		{

@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using ClickQuest.ContentManager.Models;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using ClickQuest.ContentManager.Models;
+using System.Text.Json.Serialization;
 using static ClickQuest.ContentManager.GameData.JsonFilePaths;
 
 namespace ClickQuest.ContentManager.GameData
@@ -25,8 +26,15 @@ namespace ClickQuest.ContentManager.GameData
 
 		public static void SaveContent<T>(List<T> collection, string jsonFilePath)
 		{
-			var json = JsonSerializer.Serialize(collection, new JsonSerializerOptions() {WriteIndented = true});
-			
+			var json = JsonSerializer.Serialize(collection, new JsonSerializerOptions()
+			{
+				WriteIndented = true,
+				Converters =
+				{
+					new JsonStringEnumConverter(null)
+				}
+			});
+
 			File.WriteAllText(jsonFilePath, json);
 		}
 	}

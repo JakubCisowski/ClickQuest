@@ -2,13 +2,13 @@
 
 namespace ClickQuest.ContentManager.Models
 {
-	public class BossLoot
+	public class BossLootPattern
 	{
 		public LootType LootType { get; set; }
 		public int LootId { get; set; }
 		public List<double> Frequencies { get; set; }
 
-		public BossLoot()
+		public BossLootPattern()
 		{
 			
 		}
@@ -21,7 +21,7 @@ namespace ClickQuest.ContentManager.Models
 		public int Health { get; set; }
 		public string Image { get; set; }
 		public string Description { get; set; }
-		public List<BossLoot> BossLoot { get; set; }
+		public List<BossLootPattern> BossLootPatterns { get; set; }
 
 		public Boss()
 		{

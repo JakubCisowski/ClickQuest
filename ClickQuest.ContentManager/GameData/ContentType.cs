@@ -2,6 +2,6 @@
 {
 	public enum ContentType
 	{
-		Artifacts, Materials, Recipes, Blessings, Monsters, Bosses, Regions, Quests, Shop, Priest
+		Artifacts, Blessings, Bosses, Dungeons, DngGroups, DngKeys, Ingots, Materials, Monsters, Priest, Quests, Recipes, Regions, Shop
 	}
 }

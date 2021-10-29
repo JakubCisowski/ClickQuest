@@ -70,7 +70,13 @@
       <Compile Update="UserInterface\Panels\BlessingsPanel.xaml.cs">
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="UserInterface\Panels\BossesPanel.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
       <Compile Update="UserInterface\Windows\IngredientWindow.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="UserInterface\Windows\BossLootPatternWindow.xaml.cs">
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>
@@ -88,7 +94,15 @@
         <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+      <Page Update="UserInterface\Panels\BossesPanel.xaml">
+        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
       <Page Update="UserInterface\Windows\IngredientWindow.xaml">
+        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="UserInterface\Windows\BossLootPatternWindow.xaml">
         <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>

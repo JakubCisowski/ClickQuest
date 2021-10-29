@@ -11,15 +11,7 @@
 		ResizeMode="NoResize" >
 	<Grid>
 		<TabControl Style="{StaticResource MaterialDesignTabControl}" SelectionChanged="TabControl_SelectionChanged" HorizontalAlignment="Center" FontSize="14">
-			<TabItem Header="Artifacts" Width="200">
-				<Grid/>
-			</TabItem>
-
-			<TabItem Header="Materials">
-				<Grid/>
-			</TabItem>
-
-			<TabItem Header="Recipes">
+			<TabItem Header="Artifacts" Width="200" HorizontalAlignment="Center">
 				<Grid/>
 			</TabItem>
 
@@ -27,15 +19,35 @@
 				<Grid/>
 			</TabItem>
 
-			<TabItem Header="Monsters">
-				<Grid/>
-			</TabItem>
-
 			<TabItem Header="Bosses">
 				<Grid/>
 			</TabItem>
 
-			<TabItem Header="Regions">
+			<TabItem Header="Dungeons">
+				<Grid/>
+			</TabItem>
+
+			<TabItem Header="Dng Groups">
+				<Grid/>
+			</TabItem>
+
+			<TabItem Header="Dng Keys">
+				<Grid/>
+			</TabItem>
+
+			<TabItem Header="Ingots">
+				<Grid/>
+			</TabItem>
+
+			<TabItem Header="Materials">
+				<Grid/>
+			</TabItem>
+
+			<TabItem Header="Monsters">
+				<Grid/>
+			</TabItem>
+			
+			<TabItem Header="Priest">
 				<Grid/>
 			</TabItem>
 
@@ -43,11 +55,15 @@
 				<Grid/>
 			</TabItem>
 
-			<TabItem Header="Shop">
+			<TabItem Header="Recipes">
 				<Grid/>
 			</TabItem>
-			
-			<TabItem Header="Priest">
+
+			<TabItem Header="Regions">
+				<Grid/>
+			</TabItem>
+
+			<TabItem Header="Shop">
 				<Grid/>
 			</TabItem>
 		</TabControl>

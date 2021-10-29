@@ -75,7 +75,7 @@ namespace ClickQuest.Game.Core.GameData
 			{
 				Converters =
 				{
-					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+					new JsonStringEnumConverter(null)
 				}
 			};
 
