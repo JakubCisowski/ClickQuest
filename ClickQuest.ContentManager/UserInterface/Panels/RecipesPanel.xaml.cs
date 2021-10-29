@@ -202,7 +202,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				VerticalAlignment = VerticalAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Margin = new Thickness(480, 0, 0, 0),
-				Text = ingredient.Quantity.ToString(CultureInfo.InvariantCulture)
+				Text = ingredient.Quantity.ToString()
 			};
 
 			var deleteButton = new Button

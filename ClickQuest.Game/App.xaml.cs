@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Player;
@@ -12,6 +13,11 @@ namespace ClickQuest.Game
 	{
 		protected void Application_Startup(object sender, StartupEventArgs e)
 		{
+			// Set default culture for all threads for this application (affects date and string formats, e.g. periods instead of commas)
+			CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+			CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+			CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+			
 			// Load JSONs.
 			GameAssetsLoader.Load();
 

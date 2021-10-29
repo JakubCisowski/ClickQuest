@@ -51,7 +51,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			nameBox.SelectedValue = GameContent.Materials.FirstOrDefault(x => x.Id == _ingredient.Id)?.Name;
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 
-			var quantityBox = new TextBox() { Name = "QuantityBox", Text = _ingredient.Quantity.ToString(CultureInfo.InvariantCulture), Margin = new Thickness(10) };
+			var quantityBox = new TextBox() { Name = "QuantityBox", Text = _ingredient.Quantity.ToString(), Margin = new Thickness(10) };
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
@@ -92,7 +92,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			var oldIngredientIndex = _recipe.Ingredients.IndexOf(_recipe.Ingredients.FirstOrDefault(x => x.Id == _ingredient.Id));
 
 			_ingredient.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
-			_ingredient.Quantity = int.Parse((_controls["QuantityBox"] as TextBox).Text, CultureInfo.InvariantCulture);
+			_ingredient.Quantity = int.Parse((_controls["QuantityBox"] as TextBox).Text);
 
 			if (oldIngredientIndex == -1)
 			{

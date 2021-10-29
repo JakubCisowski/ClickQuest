@@ -56,12 +56,12 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			lootTypeBox.SelectionChanged += LootTypeBox_SelectionChanged;
 			lootTypeBox.SelectedValue = _pattern.LootType;
 
-			var frequencyBox1 = new TextBox() { Name = "FrequencyBox1", Text = _pattern.Frequencies[0].ToString(CultureInfo.InvariantCulture), Margin = new Thickness(10) };
-			var frequencyBox2 = new TextBox() { Name = "FrequencyBox2", Text = _pattern.Frequencies[1].ToString(CultureInfo.InvariantCulture), Margin = new Thickness(10) };
-			var frequencyBox3 = new TextBox() { Name = "FrequencyBox3", Text = _pattern.Frequencies[2].ToString(CultureInfo.InvariantCulture), Margin = new Thickness(10) };
-			var frequencyBox4 = new TextBox() { Name = "FrequencyBox4", Text = _pattern.Frequencies[3].ToString(CultureInfo.InvariantCulture), Margin = new Thickness(10) };
-			var frequencyBox5 = new TextBox() { Name = "FrequencyBox5", Text = _pattern.Frequencies[4].ToString(CultureInfo.InvariantCulture), Margin = new Thickness(10) };
-			var frequencyBox6 = new TextBox() { Name = "FrequencyBox6", Text = _pattern.Frequencies[5].ToString(CultureInfo.InvariantCulture), Margin = new Thickness(10) };
+			var frequencyBox1 = new TextBox() { Name = "FrequencyBox1", Text = _pattern.Frequencies[0].ToString(), Margin = new Thickness(10) };
+			var frequencyBox2 = new TextBox() { Name = "FrequencyBox2", Text = _pattern.Frequencies[1].ToString(), Margin = new Thickness(10) };
+			var frequencyBox3 = new TextBox() { Name = "FrequencyBox3", Text = _pattern.Frequencies[2].ToString(), Margin = new Thickness(10) };
+			var frequencyBox4 = new TextBox() { Name = "FrequencyBox4", Text = _pattern.Frequencies[3].ToString(), Margin = new Thickness(10) };
+			var frequencyBox5 = new TextBox() { Name = "FrequencyBox5", Text = _pattern.Frequencies[4].ToString(), Margin = new Thickness(10) };
+			var frequencyBox6 = new TextBox() { Name = "FrequencyBox6", Text = _pattern.Frequencies[5].ToString(), Margin = new Thickness(10) };
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
@@ -171,12 +171,12 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			_pattern.LootType = (LootType)Enum.Parse(typeof(LootType), (_controls["LootTypeBox"] as ComboBox).SelectedValue.ToString());
 			_pattern.Frequencies = new List<double>()
 			{
-				double.Parse((_controls["FrequencyBox1"] as TextBox).Text, CultureInfo.InvariantCulture),
-				double.Parse((_controls["FrequencyBox2"] as TextBox).Text, CultureInfo.InvariantCulture),
-				double.Parse((_controls["FrequencyBox3"] as TextBox).Text, CultureInfo.InvariantCulture),
-				double.Parse((_controls["FrequencyBox4"] as TextBox).Text, CultureInfo.InvariantCulture),
-				double.Parse((_controls["FrequencyBox5"] as TextBox).Text, CultureInfo.InvariantCulture),
-				double.Parse((_controls["FrequencyBox6"] as TextBox).Text, CultureInfo.InvariantCulture),
+				double.Parse((_controls["FrequencyBox1"] as TextBox).Text),
+				double.Parse((_controls["FrequencyBox2"] as TextBox).Text),
+				double.Parse((_controls["FrequencyBox3"] as TextBox).Text),
+				double.Parse((_controls["FrequencyBox4"] as TextBox).Text),
+				double.Parse((_controls["FrequencyBox5"] as TextBox).Text),
+				double.Parse((_controls["FrequencyBox6"] as TextBox).Text),
 			};
 
 			if (oldPatternIndex == -1)

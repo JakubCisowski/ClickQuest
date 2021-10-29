@@ -84,7 +84,7 @@ namespace ClickQuest.Game.Core.Heroes
 		{
 			get
 			{
-				string critChanceText = (Math.Clamp(CritChance, 0, 1) * 100).ToString("0.##", CultureInfo.InvariantCulture);
+				string critChanceText = (Math.Clamp(CritChance, 0, 1) * 100).ToString("0.##");
 				critChanceText += "%";
 				return critChanceText;
 			}
@@ -95,7 +95,7 @@ namespace ClickQuest.Game.Core.Heroes
 		{
 			get
 			{
-				string critDamageText = Math.Floor(CritDamage * 100).ToString(CultureInfo.InvariantCulture);
+				string critDamageText = Math.Floor(CritDamage * 100).ToString();
 				critDamageText += "%";
 				return critDamageText;
 			}
@@ -160,7 +160,7 @@ namespace ClickQuest.Game.Core.Heroes
 		{
 			get
 			{
-				string auraDamageText = (AuraDamage * 100).ToString("0.##", CultureInfo.InvariantCulture);
+				string auraDamageText = (AuraDamage * 100).ToString("0.##");
 				auraDamageText += "%";
 				return auraDamageText;
 			}
@@ -171,7 +171,7 @@ namespace ClickQuest.Game.Core.Heroes
 		{
 			get
 			{
-				string auraDps = (Math.Round(AuraDamage * AuraAttackSpeed, 4) * 100).ToString("0.##", CultureInfo.InvariantCulture);
+				string auraDps = (Math.Round(AuraDamage * AuraAttackSpeed, 4) * 100).ToString("0.##");
 				auraDps += "%";
 				return auraDps;
 			}

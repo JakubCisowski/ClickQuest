@@ -227,7 +227,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				VerticalAlignment = VerticalAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Margin = new Thickness(460, 0, 0, 0),
-				Text = string.Join(' ', pattern.Frequencies.Select(x => x.ToString(CultureInfo.InvariantCulture)))
+				Text = string.Join(' ', pattern.Frequencies.Select(x => x.ToString()))
 			};
 
 			var deleteButton = new Button

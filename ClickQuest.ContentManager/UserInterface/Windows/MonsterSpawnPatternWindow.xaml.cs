@@ -50,7 +50,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			nameBox.SelectedValue = GameContent.Monsters.FirstOrDefault(x => x.Id == _pattern.MonsterId)?.Name;
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 
-			var frequencyBox = new TextBox() { Name = "FrequencyBox", Text = _pattern.Frequency.ToString(CultureInfo.InvariantCulture), Margin = new Thickness(10) };
+			var frequencyBox = new TextBox() { Name = "FrequencyBox", Text = _pattern.Frequency.ToString(), Margin = new Thickness(10) };
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
@@ -91,7 +91,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			var oldPatternIndex = _recipe.MonsterSpawnPatterns.IndexOf(_recipe.MonsterSpawnPatterns.FirstOrDefault(x => x.MonsterId == _pattern.MonsterId));
 
 			_pattern.MonsterId = int.Parse((_controls["IdBox"] as TextBox).Text);
-			_pattern.Frequency = double.Parse((_controls["FrequencyBox"] as TextBox).Text, CultureInfo.InvariantCulture);
+			_pattern.Frequency = double.Parse((_controls["FrequencyBox"] as TextBox).Text);
 
 			if (oldPatternIndex == -1)
 			{

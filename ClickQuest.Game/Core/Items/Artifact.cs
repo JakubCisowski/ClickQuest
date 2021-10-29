@@ -92,11 +92,11 @@ namespace ClickQuest.Game.Core.Items
 			{
 				if (enemyName == "")
 				{
-					MythicTag = "Crafted by " + User.Instance.CurrentHero.Name + " on " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+					MythicTag = "Crafted by " + User.Instance.CurrentHero.Name + " on " + DateTime.Now.ToString("dd/MM/yyyy");
 				}
 				else
 				{
-					MythicTag = "Dropped from " + enemyName + " by " + User.Instance.CurrentHero.Name + " on " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+					MythicTag = "Dropped from " + enemyName + " by " + User.Instance.CurrentHero.Name + " on " + DateTime.Now.ToString("dd/MM/yyyy");
 				}
 			}
 		}
