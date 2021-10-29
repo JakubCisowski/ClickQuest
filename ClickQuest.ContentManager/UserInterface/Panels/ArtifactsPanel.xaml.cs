@@ -1,4 +1,5 @@
-﻿using ClickQuest.ContentManager.Models;
+﻿using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.Models;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ClickQuest.ContentManager.UserInterface
+namespace ClickQuest.ContentManager.UserInterface.Panels
 {
-	// zrobić jakiś osobny control typu StackPanel i tam, w zależności od datacontext (typu obiektu i jego pól) generować textboxy itp
 	public partial class ArtifactsPanel : UserControl
 	{
 		private Artifact _dataContext;
@@ -47,7 +47,7 @@ namespace ClickQuest.ContentManager.UserInterface
 
 			var selectedArtifact = _dataContext as Artifact;
 
-			var idBox = new TextBox() { Name = "IdBox", Text = selectedArtifact.Id.ToString(), Margin = new Thickness(10), IsEnabled=false };
+			var idBox = new TextBox() { Name = "IdBox", Text = selectedArtifact.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
 			var nameBox = new TextBox() { Name = "NameBox", Text = selectedArtifact.Name, Margin = new Thickness(10) };
 			var valueBox = new TextBox() { Name = "ValueBox", Text = selectedArtifact.Value.ToString(), Margin = new Thickness(10) };
 			var rarityBox = new ComboBox() { Name = "RarityBox", ItemsSource = Enum.GetValues(typeof(Rarity)), SelectedIndex = (int)selectedArtifact.Rarity, Margin = new Thickness(10) };
@@ -60,7 +60,7 @@ namespace ClickQuest.ContentManager.UserInterface
 				MinWidth = 280,
 				AcceptsReturn = true,
 				VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-				Height = 80,
+				Height = 160,
 				Text = selectedArtifact.Description,
 				Margin = new Thickness(10)
 			};
@@ -73,7 +73,7 @@ namespace ClickQuest.ContentManager.UserInterface
 				MinWidth = 280,
 				AcceptsReturn = true,
 				VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-				Height = 80,
+				Height = 160,
 				Text = selectedArtifact.Lore,
 				Margin = new Thickness(10)
 			};
@@ -86,11 +86,11 @@ namespace ClickQuest.ContentManager.UserInterface
 				MinWidth = 280,
 				AcceptsReturn = true,
 				VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-				Height = 80,
+				Height = 160,
 				Text = selectedArtifact.ExtraInfo,
 				Margin = new Thickness(10)
 			};
-		
+
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
 			HintAssist.SetHint(nameBox, "Name");
@@ -118,12 +118,12 @@ namespace ClickQuest.ContentManager.UserInterface
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)this.FindResource("MaterialDesignFloatingHintTextBox");
+					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)this.FindResource("MaterialDesignFloatingHintComboBox");
+					comboBox.Style = (Style)this.FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -137,12 +137,12 @@ namespace ClickQuest.ContentManager.UserInterface
 			MainGrid.Children.Add(panel);
 		}
 
-		public void RefreshAdditionalInfoPanel()
+		public void RefreshDynamicValuesPanel()
 		{
-			
+
 		}
 
-		private void MakeChangesButton_Click(object sender, RoutedEventArgs e)
+		private void SaveButton_Click(object sender, RoutedEventArgs e)
 		{
 			var artifact = _dataContext as Artifact;
 
@@ -168,7 +168,7 @@ namespace ClickQuest.ContentManager.UserInterface
 			}
 		}
 
-		private void AddNewButton_Click(object sender, RoutedEventArgs e)
+		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			int nextId = GameContent.Artifacts.Max(x => x.Id) + 1;
 			_dataContext = new Artifact() { Id = nextId };

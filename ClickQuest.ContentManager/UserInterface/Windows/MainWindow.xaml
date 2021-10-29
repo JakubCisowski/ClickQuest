@@ -1,4 +1,4 @@
-﻿<Window x:Class="ClickQuest.ContentManager.MainWindow"
+﻿<Window x:Class="ClickQuest.ContentManager.UserInterface.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,8 +10,8 @@
         Title="Content Loader" Height="1040" Width="1920" WindowStartupLocation="Manual" Top="0" Left="0"
 		ResizeMode="NoResize" >
 	<Grid>
-		<TabControl Style="{StaticResource MaterialDesignTabControl}" SelectionChanged="TabControl_SelectionChanged" HorizontalAlignment="Center">
-			<TabItem Header="Artifacts" FontSize="22" Width="200">
+		<TabControl Style="{StaticResource MaterialDesignTabControl}" SelectionChanged="TabControl_SelectionChanged" HorizontalAlignment="Center" FontSize="14">
+			<TabItem Header="Artifacts" Width="200">
 				<Grid/>
 			</TabItem>
 

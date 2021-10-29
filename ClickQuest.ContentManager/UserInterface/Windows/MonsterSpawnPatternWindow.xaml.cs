@@ -1,4 +1,5 @@
-﻿using ClickQuest.ContentManager.Models;
+﻿using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.Models;
 using MaterialDesignThemes.Wpf;
 using System.Collections.Generic;
 using System.Globalization;
@@ -21,10 +22,10 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			_region = region;
 			_pattern = pattern;
 
-			Refresh();
+			RefreshWindowControls();
 		}
 
-		public void Refresh()
+		public void RefreshWindowControls()
 		{
 			// https://stackoverflow.com/questions/63834841/how-to-add-a-materialdesignhint-to-a-textbox-in-code
 
@@ -46,10 +47,10 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.MonsterId.ToString(), Margin = new Thickness(10), IsEnabled = false };
 
 			var nameBox = new ComboBox() { Name = "NameBox", ItemsSource = GameContent.Monsters.Select(x => x.Name), Margin = new Thickness(10) };
-			nameBox.SelectedValue = GameContent.Monsters.FirstOrDefault(x => x.Id == _pattern.MonsterId).Name;
+			nameBox.SelectedValue = GameContent.Monsters.FirstOrDefault(x => x.Id == _pattern.MonsterId)?.Name;
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 
-			var frequencyBox = new TextBox() { Name = "FrequencyBox", Text = _pattern.Frequency.ToString(), Margin = new Thickness(10) };
+			var frequencyBox = new TextBox() { Name = "FrequencyBox", Text = _pattern.Frequency.ToString(CultureInfo.InvariantCulture), Margin = new Thickness(10) };
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
@@ -65,17 +66,13 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)this.FindResource("MaterialDesignFloatingHintTextBox");
+					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)this.FindResource("MaterialDesignFloatingHintComboBox");
+					comboBox.Style = (Style)this.FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
-				}
-				else
-				{
-					// Styl buttona
 				}
 
 				panel.Children.Add(elem.Value);
@@ -108,8 +105,6 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 		private void SaveButton_Click(object sender, RoutedEventArgs e)
 		{
-			UpdateMonsterPattern();
-
 			this.Close();
 		}
 

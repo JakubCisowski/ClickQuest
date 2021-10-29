@@ -2,9 +2,9 @@
 using System.IO;
 using System.Text.Json;
 using ClickQuest.ContentManager.Models;
-using static ClickQuest.ContentManager.JsonFilePaths;
+using static ClickQuest.ContentManager.GameData.JsonFilePaths;
 
-namespace ClickQuest.ContentManager
+namespace ClickQuest.ContentManager.GameData
 {
 	public static class ContentSaver
 	{

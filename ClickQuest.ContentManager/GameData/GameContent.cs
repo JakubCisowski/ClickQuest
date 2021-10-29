@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ClickQuest.ContentManager.Models;
 
-namespace ClickQuest.ContentManager
+namespace ClickQuest.ContentManager.GameData
 {
 	public static class GameContent
 	{

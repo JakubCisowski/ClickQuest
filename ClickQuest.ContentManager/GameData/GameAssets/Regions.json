@@ -29,6 +29,18 @@
       {
         "MonsterId": 31,
         "Frequency": 0.05
+      },
+      {
+        "MonsterId": 50,
+        "Frequency": 0
+      },
+      {
+        "MonsterId": 6,
+        "Frequency": 0.1
+      },
+      {
+        "MonsterId": 7,
+        "Frequency": 0.2
       }
     ]
   },

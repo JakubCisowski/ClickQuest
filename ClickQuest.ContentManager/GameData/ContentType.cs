@@ -1,4 +1,4 @@
-﻿namespace ClickQuest.ContentManager
+﻿namespace ClickQuest.ContentManager.GameData
 {
 	public enum ContentType
 	{

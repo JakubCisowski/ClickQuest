@@ -1,4 +1,5 @@
-﻿using ClickQuest.ContentManager.Models;
+﻿using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.Models;
 using ClickQuest.ContentManager.UserInterface.Windows;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -11,7 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace ClickQuest.ContentManager.UserInterface
+namespace ClickQuest.ContentManager.UserInterface.Panels
 {
 	public partial class RegionsPanel : UserControl
 	{
@@ -32,7 +33,7 @@ namespace ClickQuest.ContentManager.UserInterface
 			ContentSelectionBox.ItemsSource = GameContent.Regions.Select(x => x.Name);
 		}
 
-		public void RefreshMainInfoPanel()
+		public void RefreshStaticValuesPanel()
 		{
 			// https://stackoverflow.com/questions/63834841/how-to-add-a-materialdesignhint-to-a-textbox-in-code
 
@@ -90,12 +91,12 @@ namespace ClickQuest.ContentManager.UserInterface
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)this.FindResource("MaterialDesignFloatingHintTextBox");
+					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)this.FindResource("MaterialDesignFloatingHintComboBox");
+					comboBox.Style = (Style)this.FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -109,7 +110,7 @@ namespace ClickQuest.ContentManager.UserInterface
 			MainGrid.Children.Add(panel);
 		}
 
-		private void MakeChangesButton_Click(object sender, RoutedEventArgs e)
+		private void SaveButton_Click(object sender, RoutedEventArgs e)
 		{
 			var region = _dataContext as Region;
 
@@ -132,11 +133,11 @@ namespace ClickQuest.ContentManager.UserInterface
 			}
 		}
 
-		private void AddNewButton_Click(object sender, RoutedEventArgs e)
+		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			int nextId = GameContent.Regions.Max(x => x.Id) + 1;
 			_dataContext = new Region() { Id = nextId };
-			RefreshMainInfoPanel();
+			RefreshStaticValuesPanel();
 		}
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -145,13 +146,13 @@ namespace ClickQuest.ContentManager.UserInterface
 
 			_dataContext = GameContent.Regions.FirstOrDefault(x => x.Name == selectedName);
 			_monsterSpawnPatterns = _dataContext.Monsters;
-			RefreshMainInfoPanel();
-			RefreshAdditionalInfoPanel();
+			RefreshStaticValuesPanel();
+			RefreshDynamicValuesPanel();
 		}
 
-		public void RefreshAdditionalInfoPanel()
+		public void RefreshDynamicValuesPanel()
 		{
-			AdditionalInfoPanel.Children.Clear();
+			DynamicValuesPanel.Children.Clear();
 
 			foreach (var pattern in _monsterSpawnPatterns)
 			{
@@ -164,17 +165,17 @@ namespace ClickQuest.ContentManager.UserInterface
 					Tag = pattern
 				};
 
-				border.PreviewMouseUp += Edit;
+				border.PreviewMouseUp += EditDynamicValue_Click;
 
-				var grid = CreateSingleItemGrid(pattern);
+				var grid = CreateDynamicValueGrid(pattern);
 
 				border.Child = grid;
 
-				AdditionalInfoPanel.Children.Add(border);
+				DynamicValuesPanel.Children.Add(border);
 			}
 		}
 
-		private Grid CreateSingleItemGrid(MonsterSpawnPattern pattern)
+		private Grid CreateDynamicValueGrid(MonsterSpawnPattern pattern)
 		{
 			var grid = new Grid();
 
@@ -226,7 +227,7 @@ namespace ClickQuest.ContentManager.UserInterface
 
 			deleteButton.Content = deleteIcon;
 
-			deleteButton.Click += DeleteButton_Click;
+			deleteButton.Click += DeleteDynamicValue_Click;
 
 			grid.Children.Add(idBlock);
 			grid.Children.Add(nameBlock);
@@ -236,29 +237,31 @@ namespace ClickQuest.ContentManager.UserInterface
 			return grid;
 		}
 
-		private void Edit(object sender, MouseButtonEventArgs e)
+		private void EditDynamicValue_Click(object sender, MouseButtonEventArgs e)
 		{
 			var monsterSpawnPattern = (sender as Border).Tag as MonsterSpawnPattern;
 
 			var monsterSpawnPatternWindow = new MonsterSpawnPatternWindow(_dataContext, monsterSpawnPattern) { Owner = Application.Current.MainWindow };
-			monsterSpawnPatternWindow.Show();
+			monsterSpawnPatternWindow.ShowDialog();
+
+			RefreshDynamicValuesPanel();
 		}
 
-		private void DeleteButton_Click(object sender, RoutedEventArgs e)
+		private void DeleteDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
 			var pattern = (sender as Button).Tag as MonsterSpawnPattern;
 			_dataContext.Monsters.Remove(_dataContext.Monsters.FirstOrDefault(x => x.MonsterId == pattern.MonsterId));
 
-			RefreshAdditionalInfoPanel();
+			RefreshDynamicValuesPanel();
 		}
 
-		private void CreateButton_Click(object sender, RoutedEventArgs e)
+		private void CreateDynamicValueButton_Click(object sender, RoutedEventArgs e)
 		{
 			var newMonsterSpawnPattern = new MonsterSpawnPattern();
 			_monsterSpawnPatterns.Add(newMonsterSpawnPattern);
 
 			var tempBorder = new Border() { Tag = newMonsterSpawnPattern };
-			Edit(tempBorder, null);
+			EditDynamicValue_Click(tempBorder, null);
 		}
 
 	}

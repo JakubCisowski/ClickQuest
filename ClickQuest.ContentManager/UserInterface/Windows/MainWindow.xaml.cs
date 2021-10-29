@@ -1,10 +1,12 @@
-﻿using ClickQuest.ContentManager.UserInterface;
+﻿using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.UserInterface;
+using ClickQuest.ContentManager.UserInterface.Panels;
 using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ClickQuest.ContentManager
+namespace ClickQuest.ContentManager.UserInterface.Windows
 {
 	public partial class MainWindow : Window
 	{

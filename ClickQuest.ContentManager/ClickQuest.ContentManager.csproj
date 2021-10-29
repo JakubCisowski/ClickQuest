@@ -12,46 +12,46 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Content\Artifacts.json">
+      <None Update="GameData\GameAssets\Artifacts.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Content\Blessings.json">
+      <None Update="GameData\GameAssets\Blessings.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Content\Bosses.json">
+      <None Update="GameData\GameAssets\Bosses.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Content\DungeonKeys.json">
+      <None Update="GameData\GameAssets\DungeonKeys.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Content\DungeonGroups.json">
+      <None Update="GameData\GameAssets\DungeonGroups.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Content\Dungeons.json">
+      <None Update="GameData\GameAssets\Dungeons.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Content\Ingots.json">
+      <None Update="GameData\GameAssets\Ingots.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Content\Materials.json">
+      <None Update="GameData\GameAssets\Materials.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Content\Monsters.json">
+      <None Update="GameData\GameAssets\Monsters.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Content\PriestOffer.json">
+      <None Update="GameData\GameAssets\PriestOffer.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Content\Quests.json">
+      <None Update="GameData\GameAssets\Quests.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Content\Recipes.json">
+      <None Update="GameData\GameAssets\Recipes.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Content\Regions.json">
+      <None Update="GameData\GameAssets\Regions.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Content\ShopOffer.json">
+      <None Update="GameData\GameAssets\ShopOffer.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>

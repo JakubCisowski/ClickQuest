@@ -343,7 +343,7 @@
     "Id": 35,
     "Name": "Gladiator\u0027s Trident",
     "Rarity": 4,
-    "Description": "All damage dealt is increased by 50% for the first few seconds in combat. Against Monsters, the duration is 2 seconds; against Bosses - 5 seconds. The duration is refreshed each time you kill a Monster.",
+    "Description": "All damage dealt is increased by 50% for the first few seconds in combat. Against Monsters, the duration is 2 seconds; against Bosses - 5 seconds. The duration is Refreshed each time you kill a Monster.",
     "Lore": "",
     "ExtraInfo": "",
     "Value": 1,

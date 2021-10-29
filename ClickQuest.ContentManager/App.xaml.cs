@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using ClickQuest.ContentManager.GameData;
 
 namespace ClickQuest.ContentManager
 {
