@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ClickQuest.ContentManager.UserInterface.Panels.ArtifactsPanel"
+﻿<UserControl x:Class="ClickQuest.ContentManager.UserInterface.Panels.RecipesPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -15,19 +15,22 @@
 			<ColumnDefinition Width="2*"/>
 		</Grid.ColumnDefinitions>
 		
-		<StackPanel Grid.Column="0">
+		<StackPanel x:Name="SelectionPanel" Grid.Column="0">
 			<TextBlock Text="Choose object by name" Margin="20,100,20,5" HorizontalAlignment="Center" FontSize="16"/>
 			<ComboBox x:Name="ContentSelectionBox" Margin="20,20,20,5" SelectionChanged="ContentSelectionBox_SelectionChanged"/>
 			<Button x:Name="AddNewObjectButton" Content="Add new" Margin="20,50,20,5" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Click="AddNewObjectButton_Click"/>
-			<Button x:Name="SaveButton" Content="Make Changes" Margin="20,50,20,5" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Click="SaveButton_Click" 		Background="Green"/>
+			<Button x:Name="SaveButton" Content="Make Changes" Margin="20,50,20,5" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Click="SaveButton_Click" Background="Green"/>
 		</StackPanel>
 		
-		<StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
+		<StackPanel x:Name="Separator" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
 			<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Foreground="Black" Width="2"/>
 		</StackPanel>
 
 		<ScrollViewer x:Name="DynamicValuesViewer" Grid.Column="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-			<StackPanel x:Name="DynamicValuesPanel" />
+			<StackPanel>
+				<Button x:Name="CreateDynamicValueButton" Content="Add" Click="CreateDynamicValueButton_Click" Margin="5"/>
+				<StackPanel x:Name="DynamicValuesPanel" />
+			</StackPanel>
 		</ScrollViewer>
 	</Grid>
 </UserControl>

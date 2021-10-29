@@ -1,9 +1,8 @@
-﻿using System;
+﻿using ClickQuest.ContentManager.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using ClickQuest.ContentManager.Models;
 using static ClickQuest.ContentManager.GameData.JsonFilePaths;
 
 namespace ClickQuest.ContentManager.GameData
@@ -35,7 +34,7 @@ namespace ClickQuest.ContentManager.GameData
 					new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
 				}
 			};
-			
+
 			var objects = JsonSerializer.Deserialize<List<T>>(json, options);
 
 			return objects;

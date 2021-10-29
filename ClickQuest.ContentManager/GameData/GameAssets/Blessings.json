@@ -5,8 +5,8 @@
     "Type": 0,
     "Rarity": 0,
     "Duration": 600,
-    "DescriptionFunctionality": null,
-    "DescriptionLore": null,
+    "Description": "Gives 10 Click Damage.",
+    "Lore": "Your weapon has been blessed, increasing the damage it deals.",
     "Buff": 10,
     "Value": 1
   },
@@ -16,8 +16,8 @@
     "Type": 3,
     "Rarity": 0,
     "Duration": 600,
-    "DescriptionFunctionality": null,
-    "DescriptionLore": null,
+    "Description": "Gives 5 Poison Damage.",
+    "Lore": "Your weapon has been blessed, inflicting poison on your enemies.",
     "Buff": 5,
     "Value": 1
   },
@@ -27,8 +27,8 @@
     "Type": 2,
     "Rarity": 1,
     "Duration": 300,
-    "DescriptionFunctionality": null,
-    "DescriptionLore": null,
+    "Description": "Gives 10% Critical Click Damage.",
+    "Lore": "Blessed by the priest, your strikes are now able to bring a more painful death on your enemies.",
     "Buff": 10,
     "Value": 1
   },
@@ -36,12 +36,12 @@
     "Id": 4,
     "Name": "Blessing of the Desolation",
     "Type": 4,
-    "Rarity": 3,
-    "Duration": 300,
-    "DescriptionFunctionality": null,
-    "DescriptionLore": null,
-    "Buff": 25,
-    "Value": 1
+    "Rarity": 4,
+    "Duration": 3000,
+    "Description": "Gives 25% Aura Damage.",
+    "Lore": "jd Your recent encounter in the Pyramid of Truth has left you feeling stronger, able to obliterate foes with much less effort.",
+    "Buff": 250,
+    "Value": 123
   },
   {
     "Id": 5,
@@ -49,8 +49,8 @@
     "Type": 2,
     "Rarity": 5,
     "Duration": 300,
-    "DescriptionFunctionality": null,
-    "DescriptionLore": null,
+    "Description": "Gives 50% Critical Click Damage.",
+    "Lore": "You have been infused by death itself, granting you the power you cause fatal damage to all foes around.",
     "Buff": 50,
     "Value": 1
   }

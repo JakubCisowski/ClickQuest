@@ -27,7 +27,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			ContentSelectionBox.ItemsSource = GameContent.Artifacts.Select(x => x.Name);
 		}
 
-		public void RefreshMainInfoPanel()
+		public void RefreshStaticInfoPanel()
 		{
 			// https://stackoverflow.com/questions/63834841/how-to-add-a-materialdesignhint-to-a-textbox-in-code
 
@@ -43,9 +43,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			double gridHeight = this.ActualHeight;
 			double gridWidth = this.ActualWidth;
-			var panel = new StackPanel() { Name = "MainInfoPanel" };
+			var panel = new StackPanel() { Name = "StaticInfoPanel" };
 
-			var selectedArtifact = _dataContext as Artifact;
+			var selectedArtifact = _dataContext;
 
 			var idBox = new TextBox() { Name = "IdBox", Text = selectedArtifact.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
 			var nameBox = new TextBox() { Name = "NameBox", Text = selectedArtifact.Name, Margin = new Thickness(10) };
@@ -137,14 +137,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			MainGrid.Children.Add(panel);
 		}
 
-		public void RefreshDynamicValuesPanel()
-		{
-
-		}
-
 		private void SaveButton_Click(object sender, RoutedEventArgs e)
 		{
-			var artifact = _dataContext as Artifact;
+			var artifact = _dataContext;
 
 			artifact.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
 			artifact.Name = (_controls["NameBox"] as TextBox).Text;
@@ -172,7 +167,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			int nextId = GameContent.Artifacts.Max(x => x.Id) + 1;
 			_dataContext = new Artifact() { Id = nextId };
-			RefreshMainInfoPanel();
+			RefreshStaticInfoPanel();
 		}
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -182,7 +177,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			// nie wiem czy nie trzeba jednak oddzielnych paneli od poszczególnych kontrolek bo sie robi zadyma tutaj
 
 			_dataContext = GameContent.Artifacts.FirstOrDefault(x => x.Name == selectedName);
-			RefreshMainInfoPanel();
+			RefreshStaticInfoPanel();
 		}
 	}
 }

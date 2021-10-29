@@ -4,23 +4,24 @@ using MaterialDesignThemes.Wpf;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace ClickQuest.ContentManager.UserInterface.Windows
 {
-	public partial class MonsterSpawnPatternWindow : Window
+	public partial class IngredientWindow : Window
 	{
-		private Region _recipe;
-		private MonsterSpawnPattern _pattern;
+		private Recipe _recipe;
+		private Ingredient _ingredient;
 		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 
-		public MonsterSpawnPatternWindow(Region region, MonsterSpawnPattern pattern)
+		public IngredientWindow(Recipe recipe, Ingredient ingredient)
 		{
 			InitializeComponent();
 
-			_recipe = region;
-			_pattern = pattern;
+			_recipe = recipe;
+			_ingredient = ingredient;
 
 			RefreshWindowControls();
 		}
@@ -44,22 +45,22 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			saveButton.Click += SaveButton_Click;
 			_controls.Add(saveButton.Name, saveButton);
 
-			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.MonsterId.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var idBox = new TextBox() { Name = "IdBox", Text = _ingredient.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
 
-			var nameBox = new ComboBox() { Name = "NameBox", ItemsSource = GameContent.Monsters.Select(x => x.Name), Margin = new Thickness(10) };
-			nameBox.SelectedValue = GameContent.Monsters.FirstOrDefault(x => x.Id == _pattern.MonsterId)?.Name;
+			var nameBox = new ComboBox() { Name = "NameBox", ItemsSource = GameContent.Materials.Select(x => x.Name), Margin = new Thickness(10) };
+			nameBox.SelectedValue = GameContent.Materials.FirstOrDefault(x => x.Id == _ingredient.Id)?.Name;
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 
-			var frequencyBox = new TextBox() { Name = "FrequencyBox", Text = _pattern.Frequency.ToString(CultureInfo.InvariantCulture), Margin = new Thickness(10) };
+			var quantityBox = new TextBox() { Name = "QuantityBox", Text = _ingredient.Quantity.ToString(CultureInfo.InvariantCulture), Margin = new Thickness(10) };
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
 			HintAssist.SetHint(nameBox, "Name");
-			HintAssist.SetHint(frequencyBox, "Frequency");
+			HintAssist.SetHint(quantityBox, "Quantity");
 
 			_controls.Add(idBox.Name, idBox);
 			_controls.Add(nameBox.Name, nameBox);
-			_controls.Add(frequencyBox.Name, frequencyBox);
+			_controls.Add(quantityBox.Name, quantityBox);
 
 			foreach (var elem in _controls)
 			{
@@ -83,23 +84,23 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 		private void NameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			(_controls["IdBox"] as TextBox).Text = GameContent.Monsters.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Id.ToString();
+			(_controls["IdBox"] as TextBox).Text = GameContent.Materials.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Id.ToString();
 		}
 
-		private void UpdateMonsterPattern()
+		private void UpdateIngredient()
 		{
-			var oldPatternIndex = _recipe.Monsters.IndexOf(_recipe.Monsters.FirstOrDefault(x => x.MonsterId == _pattern.MonsterId));
+			var oldIngredientIndex = _recipe.Ingredients.IndexOf(_recipe.Ingredients.FirstOrDefault(x => x.Id == _ingredient.Id));
 
-			_pattern.MonsterId = int.Parse((_controls["IdBox"] as TextBox).Text);
-			_pattern.Frequency = double.Parse((_controls["FrequencyBox"] as TextBox).Text, CultureInfo.InvariantCulture);
+			_ingredient.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
+			_ingredient.Quantity = Int32.Parse((_controls["QuantityBox"] as TextBox).Text, CultureInfo.InvariantCulture);
 
-			if (oldPatternIndex == -1)
+			if (oldIngredientIndex == -1)
 			{
-				_recipe.Monsters.Add(_pattern);
+				_recipe.Ingredients.Add(_ingredient);
 			}
 			else
 			{
-				_recipe.Monsters[oldPatternIndex] = _pattern;
+				_recipe.Ingredients[oldIngredientIndex] = _ingredient;
 			}
 		}
 
@@ -110,7 +111,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			UpdateMonsterPattern();
+			UpdateIngredient();
 		}
 	}
 }

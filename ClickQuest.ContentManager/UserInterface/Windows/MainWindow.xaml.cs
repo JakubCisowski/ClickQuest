@@ -35,6 +35,24 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
 						(tabControl.SelectedContent as Grid)?.Children.Add(regionsPanel);
 						break;
+
+					case ContentType.Materials:
+						var materialsPanel = new MaterialsPanel();
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(materialsPanel);
+						break;
+
+					case ContentType.Recipes:
+						var recipesPanel = new RecipesPanel();
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(recipesPanel);
+						break;
+
+					case ContentType.Blessings:
+						var blessingsPanel = new BlessingsPanel();
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(blessingsPanel);
+						break;
 				}
 			}
 		}

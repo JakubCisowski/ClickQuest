@@ -39,7 +39,7 @@
     "Name": "Soft Skin",
     "Rarity": 1,
     "Description": "Very soft skin belonging to an amphibian or a large insect. Feels a bit gross to touch.",
-    "Value": 2
+    "Value": 200
   },
   {
     "Id": 6,
@@ -320,5 +320,12 @@
     "Rarity": 1,
     "Description": "Bottle of sacred water, commonly used by the Assassins to perform rituals and sacrifices.",
     "Value": 2
+  },
+  {
+    "Id": 46,
+    "Name": "xd",
+    "Rarity": 0,
+    "Description": "jd",
+    "Value": 0
   }
 ]

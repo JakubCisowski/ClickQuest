@@ -60,4 +60,38 @@
       <Resource Include="Resources\GothamBook.ttf" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="UserInterface\Panels\MaterialsPanel.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="UserInterface\Panels\RecipesPanel.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="UserInterface\Panels\BlessingsPanel.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="UserInterface\Windows\IngredientWindow.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="UserInterface\Panels\MaterialsPanel.xaml">
+        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="UserInterface\Panels\RecipesPanel.xaml">
+        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="UserInterface\Panels\BlessingsPanel.xaml">
+        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="UserInterface\Windows\IngredientWindow.xaml">
+        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
 </Project>

@@ -5,10 +5,10 @@
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public BlessingType Type { get; set; }
-		public int Rarity { get; set; }
+		public Rarity Rarity { get; set; }
 		public int Duration { get; set; }
-		public string DescriptionFunctionality { get; set; }
-		public string DescriptionLore { get; set; }
+		public string Description { get; set; }
+		public string Lore { get; set; }
 		public int Buff { get; set; }
 		public int Value { get; set; }
 
