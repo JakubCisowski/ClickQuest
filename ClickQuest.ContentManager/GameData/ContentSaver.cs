@@ -16,6 +16,7 @@ namespace ClickQuest.ContentManager.GameData
 			SaveContent<Boss>(GameContent.Bosses, BossesFilePath);
 			SaveContent<Dungeon>(GameContent.Dungeons, DungeonsFilePath);
 			SaveContent<DungeonGroup>(GameContent.DungeonGroups, DungeonGroupsFilePath);
+			SaveContent<DungeonKey>(GameContent.DungeonKeys, DungeonKeysFilePath);
 			SaveContent<Material>(GameContent.Materials, MaterialsFilePath);
 			SaveContent<Monster>(GameContent.Monsters, MonstersFilePath);
 			SaveContent<Quest>(GameContent.Quests, QuestsFilePath);

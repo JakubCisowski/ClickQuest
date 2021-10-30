@@ -92,6 +92,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				{
 					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
+					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
@@ -107,6 +108,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			_currentPanel = panel;
 
 			MainGrid.Children.Add(panel);
+		}
+
+		private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+		{
+			(sender as TextBox).CaretIndex = int.MaxValue;
 		}
 
 		private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -129,8 +135,10 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			{
 				// If not, add it.
 				GameContent.Bosses.Add(boss);
-				PopulateContentSelectionBox();
 			}
+
+			PopulateContentSelectionBox();
+			ContentSelectionBox.SelectedValue = _dataContext.Name;
 		}
 
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
@@ -142,7 +150,12 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var selectedName = (e.Source as ComboBox)?.SelectedValue.ToString();
+			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+
+			if (selectedName is null)
+			{
+				return;
+			}
 
 			_dataContext = GameContent.Bosses.FirstOrDefault(x => x.Name == selectedName);
 			_bossLootPatterns = _dataContext.BossLootPatterns;
@@ -153,6 +166,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		public void RefreshDynamicValuesPanel()
 		{
 			DynamicValuesPanel.Children.Clear();
+
+			CreateDynamicValueButton.Visibility = Visibility.Visible;
 
 			foreach (var pattern in _bossLootPatterns)
 			{

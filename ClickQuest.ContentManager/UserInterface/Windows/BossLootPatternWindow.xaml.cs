@@ -89,6 +89,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				{
 					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
+					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
@@ -100,6 +101,11 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			}
 
 			MainGrid.Children.Add(panel);
+		}
+
+		private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+		{
+			(sender as TextBox).CaretIndex = int.MaxValue;
 		}
 
 		private void NameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

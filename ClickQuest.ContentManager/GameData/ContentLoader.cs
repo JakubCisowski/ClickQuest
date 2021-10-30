@@ -16,6 +16,7 @@ namespace ClickQuest.ContentManager.GameData
 			GameContent.Bosses = LoadContent<Boss>(BossesFilePath);
 			GameContent.Dungeons = LoadContent<Dungeon>(DungeonsFilePath);
 			GameContent.DungeonGroups = LoadContent<DungeonGroup>(DungeonGroupsFilePath);
+			GameContent.DungeonKeys = LoadContent<DungeonKey>(DungeonKeysFilePath);
 			GameContent.Materials = LoadContent<Material>(MaterialsFilePath);
 			GameContent.Monsters = LoadContent<Monster>(MonstersFilePath);
 			GameContent.Quests = LoadContent<Quest>(QuestsFilePath);

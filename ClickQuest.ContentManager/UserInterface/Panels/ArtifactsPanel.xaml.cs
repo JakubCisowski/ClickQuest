@@ -120,6 +120,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				{
 					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
+					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
@@ -135,6 +136,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			_currentPanel = panel;
 
 			MainGrid.Children.Add(panel);
+		}
+
+		private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+		{
+			(sender as TextBox).CaretIndex = int.MaxValue;
 		}
 
 		private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -160,25 +166,53 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			{
 				// If not, add it.
 				GameContent.Artifacts.Add(artifact);
-				PopulateContentSelectionBox();
 			}
+
+			PopulateContentSelectionBox();
+			ContentSelectionBox.SelectedValue = _dataContext.Name;
 		}
 
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			int nextId = GameContent.Artifacts.Max(x => x.Id) + 1;
 			_dataContext = new Artifact() { Id = nextId };
+			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticInfoPanel();
+		}
+
+		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
+		{
+			var objectToDelete = GameContent.Artifacts.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
+
+			if (objectToDelete is null)
+			{
+				return;
+			}
+
+			GameContent.Artifacts.Remove(objectToDelete);
+
+			PopulateContentSelectionBox();
+			ContentSelectionBox.SelectedIndex = -1;
+			_currentPanel.Children.Clear();
+			DeleteObjectButton.Visibility=Visibility.Hidden;
+			SaveButton.Visibility=Visibility.Hidden;
 		}
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var selectedName = (e.Source as ComboBox)?.SelectedValue.ToString();
+			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+
+			if (selectedName is null)
+			{
+				return;
+			}
 
 			// nie wiem czy nie trzeba jednak oddzielnych paneli od poszczególnych kontrolek bo sie robi zadyma tutaj
 
 			_dataContext = GameContent.Artifacts.FirstOrDefault(x => x.Name == selectedName);
 			RefreshStaticInfoPanel();
+			DeleteObjectButton.Visibility=Visibility.Visible;
+			SaveButton.Visibility = Visibility.Visible;
 		}
 	}
 }

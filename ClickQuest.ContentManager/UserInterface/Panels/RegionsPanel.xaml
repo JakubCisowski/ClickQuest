@@ -28,7 +28,7 @@
 
 		<ScrollViewer x:Name="DynamicValuesViewer" Grid.Column="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
 			<StackPanel>
-				<Button x:Name="CreateDynamicValueButton" Content="Add" Click="CreateDynamicValueButton_Click" Margin="5"/>
+				<Button x:Name="CreateDynamicValueButton" Content="Add" Click="CreateDynamicValueButton_Click" Margin="5" Visibility="Hidden"/>
 				<StackPanel x:Name="DynamicValuesPanel" />
 			</StackPanel>
 		</ScrollViewer>

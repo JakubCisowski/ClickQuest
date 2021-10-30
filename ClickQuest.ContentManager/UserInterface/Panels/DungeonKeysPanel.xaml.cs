@@ -8,19 +8,18 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
 {
-	public partial class MaterialsPanel : UserControl
+	public partial class DungeonKeysPanel : UserControl
 	{
-		private Material _dataContext;
+		private DungeonKey _dataContext;
 		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 		private StackPanel _currentPanel;
 
-		public MaterialsPanel()
+		public DungeonKeysPanel()
 		{
 			InitializeComponent();
 
@@ -29,7 +28,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void PopulateContentSelectionBox()
 		{
-			ContentSelectionBox.ItemsSource = GameContent.Materials.Select(x => x.Name);
+			ContentSelectionBox.ItemsSource = GameContent.DungeonKeys.Select(x => x.Name);
 		}
 
 		public void RefreshStaticValuesPanel()
@@ -48,14 +47,14 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			double gridHeight = this.ActualHeight;
 			double gridWidth = this.ActualWidth;
-			var panel = new StackPanel() { Name = "MainInfoPanel" };
+			var panel = new StackPanel() { Name = "StaticInfoPanel" };
 
-			var selectedMaterial = _dataContext;
+			var selectedDungeonKey = _dataContext;
 
-			var idBox = new TextBox() { Name = "IdBox", Text = selectedMaterial.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			var nameBox = new TextBox() { Name = "NameBox", Text = selectedMaterial.Name, Margin = new Thickness(10) };
-			var valueBox = new TextBox() { Name = "ValueBox", Text = selectedMaterial.Value.ToString(), Margin = new Thickness(10) };
-			var rarityBox = new ComboBox() { Name = "RarityBox", ItemsSource = Enum.GetValues(typeof(Rarity)), SelectedIndex = (int)selectedMaterial.Rarity, Margin = new Thickness(10) };
+			var idBox = new TextBox() { Name = "IdBox", Text = selectedDungeonKey.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var nameBox = new TextBox() { Name = "NameBox", Text = selectedDungeonKey.Name, Margin = new Thickness(10) };
+			var valueBox = new TextBox() { Name = "ValueBox", Text = selectedDungeonKey.Value.ToString(), Margin = new Thickness(10) };
+			var rarityBox = new ComboBox() { Name = "RarityBox", ItemsSource = Enum.GetValues(typeof(Rarity)), SelectedIndex = (int)selectedDungeonKey.Rarity, Margin = new Thickness(10) };
 			var descriptionBox = new TextBox()
 			{
 				Name = "DescriptionBox",
@@ -65,7 +64,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				AcceptsReturn = true,
 				VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
 				Height = 160,
-				Text = selectedMaterial.Description,
+				Text = selectedDungeonKey.Description,
 				Margin = new Thickness(10)
 			};
 
@@ -117,24 +116,24 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void SaveButton_Click(object sender, RoutedEventArgs e)
 		{
-			var material = _dataContext as Material;
+			var dungeonKey = _dataContext;
 
-			material.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
-			material.Name = (_controls["NameBox"] as TextBox).Text;
-			material.Value = int.Parse((_controls["ValueBox"] as TextBox).Text);
-			material.Rarity = (Rarity)Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
-			material.Description = (_controls["DescriptionBox"] as TextBox).Text;
+			dungeonKey.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
+			dungeonKey.Name = (_controls["NameBox"] as TextBox).Text;
+			dungeonKey.Value = int.Parse((_controls["ValueBox"] as TextBox).Text);
+			dungeonKey.Rarity = (Rarity)Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
+			dungeonKey.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
 			// Check if this Id is already in the collection (modified).
-			if (GameContent.Materials.Select(x => x.Id).Contains(material.Id))
+			if (GameContent.DungeonKeys.Select(x => x.Id).Contains(dungeonKey.Id))
 			{
-				int indexOfOldMaterial = GameContent.Materials.FindIndex(x => x.Id == material.Id);
-				GameContent.Materials[indexOfOldMaterial] = material;
+				int indexOfDungeonKey = GameContent.DungeonKeys.FindIndex(x => x.Id == dungeonKey.Id);
+				GameContent.DungeonKeys[indexOfDungeonKey] = dungeonKey;
 			}
 			else
 			{
 				// If not, add it.
-				GameContent.Materials.Add(material);
+				GameContent.DungeonKeys.Add(dungeonKey);
 			}
 
 			PopulateContentSelectionBox();
@@ -143,8 +142,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
-			int nextId = GameContent.Materials.Max(x => x.Id) + 1;
-			_dataContext = new Material() { Id = nextId };
+			int nextId = GameContent.DungeonKeys.Max(x => x.Id) + 1;
+			_dataContext = new DungeonKey() { Id = nextId };
+			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
 		}
 
@@ -157,8 +157,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				return;
 			}
 
-			_dataContext = GameContent.Materials.FirstOrDefault(x => x.Name == selectedName);
+			_dataContext =  GameContent.DungeonKeys.FirstOrDefault(x => x.Name == selectedName);
 			RefreshStaticValuesPanel();
 		}
+
 	}
 }
