@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ClickQuest.ContentManager.Models;
+using ClickQuest.ContentManager.GameData.Models;
 
 namespace ClickQuest.ContentManager.GameData
 {

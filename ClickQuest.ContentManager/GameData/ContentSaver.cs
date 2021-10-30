@@ -1,4 +1,4 @@
-﻿using ClickQuest.ContentManager.Models;
+﻿using ClickQuest.ContentManager.GameData.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -15,6 +15,7 @@ namespace ClickQuest.ContentManager.GameData
 			SaveContent<Blessing>(GameContent.Blessings, BlessingsFilePath);
 			SaveContent<Boss>(GameContent.Bosses, BossesFilePath);
 			SaveContent<Dungeon>(GameContent.Dungeons, DungeonsFilePath);
+			SaveContent<DungeonGroup>(GameContent.DungeonGroups, DungeonGroupsFilePath);
 			SaveContent<Material>(GameContent.Materials, MaterialsFilePath);
 			SaveContent<Monster>(GameContent.Monsters, MonstersFilePath);
 			SaveContent<Quest>(GameContent.Quests, QuestsFilePath);

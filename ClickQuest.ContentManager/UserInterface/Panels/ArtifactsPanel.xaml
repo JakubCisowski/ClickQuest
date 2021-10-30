@@ -19,7 +19,7 @@
 			<TextBlock Text="Choose object by name" Margin="20,100,20,5" HorizontalAlignment="Center" FontSize="16"/>
 			<ComboBox x:Name="ContentSelectionBox" Margin="20,20,20,5" SelectionChanged="ContentSelectionBox_SelectionChanged"/>
 			<Button x:Name="AddNewObjectButton" Content="Add new" Margin="20,50,20,5" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Click="AddNewObjectButton_Click"/>
-			<Button x:Name="SaveButton" Content="Make Changes" Margin="20,50,20,5" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Click="SaveButton_Click" 		Background="Green"/>
+			<Button x:Name="SaveButton" Content="Save" Margin="20,50,20,5" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Click="SaveButton_Click" 		Background="Green"/>
 		</StackPanel>
 		
 		<StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">

@@ -58,6 +58,12 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
 						(tabControl.SelectedContent as Grid)?.Children.Add(bossesPanel);
 						break;
+
+					case ContentType.DngGroups:
+						var dngGroupsPanel = new DungeonGroupsPanel();
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(dngGroupsPanel);
+						break;
 				}
 			}
 		}

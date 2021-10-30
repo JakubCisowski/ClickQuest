@@ -1,4 +1,4 @@
-﻿namespace ClickQuest.ContentManager.Models
+﻿namespace ClickQuest.ContentManager.GameData.Models
 {
 	public enum Rarity
 	{

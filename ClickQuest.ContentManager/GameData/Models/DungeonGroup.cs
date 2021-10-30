@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ClickQuest.ContentManager.Models
+namespace ClickQuest.ContentManager.GameData.Models
 {
 	public class DungeonGroup
 	{
@@ -9,7 +9,6 @@ namespace ClickQuest.ContentManager.Models
 		public string Color { get; set; }
 		public string Description { get; set; }
 		public List<Rarity> KeyRequirementRarities { get; set; }
-		public string Colour { get; set; }
 
 		public DungeonGroup()
 		{

@@ -1,5 +1,5 @@
 ﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.Models;
+using ClickQuest.ContentManager.GameData.Models;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -160,6 +160,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			{
 				// If not, add it.
 				GameContent.Artifacts.Add(artifact);
+				PopulateContentSelectionBox();
 			}
 		}
 

@@ -1,5 +1,5 @@
 ﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.Models;
+using ClickQuest.ContentManager.GameData.Models;
 using ClickQuest.ContentManager.UserInterface.Windows;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -157,6 +157,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			{
 				// If not, add it.
 				GameContent.Blessings.Add(blessing);
+				PopulateContentSelectionBox();
 			}
 		}
 

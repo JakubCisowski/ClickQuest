@@ -9,7 +9,7 @@
 	{
 		"Id": 2,
 		"Name": "Fine dungeons",
-		"Colour": "White",
+		"Color": "White",
 		"Description": "FineDGDesc",
 		"KeyRequirementRarities": [ 1 ]
 	},

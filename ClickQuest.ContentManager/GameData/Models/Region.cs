@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ClickQuest.ContentManager.Models
+namespace ClickQuest.ContentManager.GameData.Models
 {
 	public class MonsterSpawnPattern
 	{

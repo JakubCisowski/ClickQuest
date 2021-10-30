@@ -1,4 +1,4 @@
-﻿using ClickQuest.ContentManager.Models;
+﻿using ClickQuest.ContentManager.GameData.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -15,6 +15,7 @@ namespace ClickQuest.ContentManager.GameData
 			GameContent.Blessings = LoadContent<Blessing>(BlessingsFilePath);
 			GameContent.Bosses = LoadContent<Boss>(BossesFilePath);
 			GameContent.Dungeons = LoadContent<Dungeon>(DungeonsFilePath);
+			GameContent.DungeonGroups = LoadContent<DungeonGroup>(DungeonGroupsFilePath);
 			GameContent.Materials = LoadContent<Material>(MaterialsFilePath);
 			GameContent.Monsters = LoadContent<Monster>(MonstersFilePath);
 			GameContent.Quests = LoadContent<Quest>(QuestsFilePath);
