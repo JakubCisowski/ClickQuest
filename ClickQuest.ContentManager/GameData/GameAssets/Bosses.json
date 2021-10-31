@@ -196,7 +196,7 @@
     "Name": "Rakshasa Raja",
     "Health": 1500,
     "Image": "/example.png",
-    "Description": "\u0027Raja\u0027 stands for \u0027king\u0027, and it\u0027s exactly what it sounds like \u2013 Rakshasa Raja is a much bigger and more respected type among its kin. It has four arms, wields a sword in each one of them, and can turn you into pieces in the blink of an eye.",
+    "Description": "\u0027Raja\u0027 stands for \u0027king\u0027, and it\u0027s exactly what it sounds like \u2013 Rakshasa Raja is a much bigger and more respected type among its kin. It has four arms, wields a sword in each one of them, and can turn you into pieces in the blink of an eye. jd",
     "BossLootPatterns": [
       {
         "LootType": "Material",
@@ -226,7 +226,7 @@
         "LootType": "Material",
         "LootId": 13,
         "Frequencies": [
-          0,
+          1,
           0.1,
           0.2,
           0.3,

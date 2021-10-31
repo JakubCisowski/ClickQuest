@@ -197,6 +197,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				return;
 			}
 
+			if (_dataContext is not null)
+			{
+				SaveButton_Click(null, null);
+			}
+
 			_dataContext = GameContent.Bosses.FirstOrDefault(x => x.Name == selectedName);
 			_bossLootPatterns = _dataContext.BossLootPatterns;
 			RefreshStaticValuesPanel();

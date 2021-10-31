@@ -194,6 +194,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				return;
 			}
 
+			if (_dataContext is not null)
+			{
+				SaveButton_Click(null, null);
+			}
+
 			_dataContext = GameContent.Recipes.FirstOrDefault(x => x.Name == selectedName);
 			_ingredients = _dataContext.Ingredients;
 			RefreshStaticValuesPanel();
@@ -342,8 +347,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			var newIngredient = new Ingredient();
 			_ingredients.Add(newIngredient);
 
-			var tempBorder = new Border() { Tag = newIngredient };
-			EditDynamicValue_Click(tempBorder, null);
+			var tempButton = new Button() { Tag = newIngredient };
+			EditDynamicValue_Click(tempButton, null);
 		}
 
 	}

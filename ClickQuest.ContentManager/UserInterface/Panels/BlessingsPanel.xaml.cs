@@ -217,6 +217,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				return;
 			}
 
+			if (_dataContext is not null)
+			{
+				SaveButton_Click(null, null);
+			}
+
 			_dataContext = GameContent.Blessings.FirstOrDefault(x => x.Name == selectedName);
 			RefreshStaticValuesPanel();
 			DeleteObjectButton.Visibility=Visibility.Visible;

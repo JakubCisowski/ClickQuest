@@ -309,5 +309,18 @@
     "Name": "",
     "Rarity": "General",
     "Value": 0
+  },
+  {
+    "Id": 20,
+    "ArtifactId": 7,
+    "Ingredients": [
+      {
+        "Id": 1,
+        "Quantity": 120
+      }
+    ],
+    "Name": "asdf",
+    "Rarity": "General",
+    "Value": 0
   }
 ]

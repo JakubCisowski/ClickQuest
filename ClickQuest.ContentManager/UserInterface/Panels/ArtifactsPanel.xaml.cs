@@ -220,7 +220,10 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				return;
 			}
 
-			// nie wiem czy nie trzeba jednak oddzielnych paneli od poszczególnych kontrolek bo sie robi zadyma tutaj
+			if (_dataContext is not null)
+			{
+				SaveButton_Click(null, null);
+			}
 
 			_dataContext = GameContent.Artifacts.FirstOrDefault(x => x.Name == selectedName);
 			RefreshStaticInfoPanel();
