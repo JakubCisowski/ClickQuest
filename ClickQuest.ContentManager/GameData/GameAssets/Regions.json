@@ -106,10 +106,6 @@
     "Background": "/example.png",
     "MonsterSpawnPatterns": [
       {
-        "MonsterId": 18,
-        "Frequency": 0.04
-      },
-      {
         "MonsterId": 19,
         "Frequency": 0.15
       },
@@ -293,6 +289,19 @@
       {
         "MonsterId": 17,
         "Frequency": 0.03
+      }
+    ]
+  },
+  {
+    "Id": 10,
+    "LevelRequirement": 0,
+    "Name": "",
+    "Description": "",
+    "Background": "",
+    "MonsterSpawnPatterns": [
+      {
+        "MonsterId": 3,
+        "Frequency": 0.5
       }
     ]
   }

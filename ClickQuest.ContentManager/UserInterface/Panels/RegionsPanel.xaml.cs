@@ -144,9 +144,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			int nextId = GameContent.Regions.Max(x => x.Id) + 1;
-			_dataContext = new Region() { Id = nextId };
+
+			_dataContext = new Region() { Id = nextId, MonsterSpawnPatterns = new List<MonsterSpawnPattern>() };
+			_monsterSpawnPatterns = _dataContext.MonsterSpawnPatterns;
+
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
+			DynamicValuesPanel.Children.Clear();
 
 			DeleteObjectButton.Visibility=Visibility.Visible;
 			SaveButton.Visibility=Visibility.Visible;
@@ -175,7 +179,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			PopulateContentSelectionBox();
 			ContentSelectionBox.SelectedIndex = -1;
+			
 			_currentPanel.Children.Clear();
+			DynamicValuesPanel.Children.Clear();
+
+			CreateDynamicValueButton.Visibility = Visibility.Hidden;
 			DeleteObjectButton.Visibility=Visibility.Hidden;
 			SaveButton.Visibility=Visibility.Hidden;
 		}
@@ -210,11 +218,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 					BorderThickness = new Thickness(0.5),
 					BorderBrush = new SolidColorBrush(Colors.Gray),
 					Padding = new Thickness(6),
-					Margin = new Thickness(4),
-					Tag = pattern
+					Margin = new Thickness(4)
 				};
-
-				border.PreviewMouseUp += EditDynamicValue_Click;
 
 				var grid = CreateDynamicValueGrid(pattern);
 
@@ -256,6 +261,28 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = pattern.Frequency.ToString()
 			};
 
+			var editButton = new Button
+			{	
+				Width = 30,
+				Height = 30,
+				Margin = new Thickness(5, 0, 90, 0),
+				Padding = new Thickness(0),
+				HorizontalAlignment = HorizontalAlignment.Right,
+				Tag = pattern
+			};
+
+			var editIcon = new PackIcon
+			{
+				Width = 20,
+				Height = 20,
+				Kind = PackIconKind.Edit,
+				Foreground = new SolidColorBrush(Colors.Gray)
+			};
+
+			editButton.Content = editIcon;
+
+			editButton.Click += EditDynamicValue_Click;
+
 			var deleteButton = new Button
 			{
 				Width = 30,
@@ -281,14 +308,15 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			grid.Children.Add(idBlock);
 			grid.Children.Add(nameBlock);
 			grid.Children.Add(frequencyBlock);
+			grid.Children.Add(editButton);
 			grid.Children.Add(deleteButton);
 
 			return grid;
 		}
 
-		private void EditDynamicValue_Click(object sender, MouseButtonEventArgs e)
+		private void EditDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var monsterSpawnPattern = (sender as Border).Tag as MonsterSpawnPattern;
+			var monsterSpawnPattern = (sender as Button).Tag as MonsterSpawnPattern;
 
 			var monsterSpawnPatternWindow = new MonsterSpawnPatternWindow(_dataContext, monsterSpawnPattern) { Owner = Application.Current.MainWindow };
 			monsterSpawnPatternWindow.ShowDialog();
@@ -299,6 +327,14 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		private void DeleteDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
 			var pattern = (sender as Button).Tag as MonsterSpawnPattern;
+
+			var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {pattern.MonsterId}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+			if (result == MessageBoxResult.No)
+			{
+				return;
+			}
+
 			_dataContext.MonsterSpawnPatterns.Remove(_dataContext.MonsterSpawnPatterns.FirstOrDefault(x => x.MonsterId == pattern.MonsterId));
 
 			RefreshDynamicValuesPanel();
@@ -309,8 +345,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			var newMonsterSpawnPattern = new MonsterSpawnPattern();
 			_monsterSpawnPatterns.Add(newMonsterSpawnPattern);
 
-			var tempBorder = new Border() { Tag = newMonsterSpawnPattern };
-			EditDynamicValue_Click(tempBorder, null);
+			var tempButton = new Button() { Tag = newMonsterSpawnPattern };
+			EditDynamicValue_Click(tempButton, null);
 		}
 
 	}

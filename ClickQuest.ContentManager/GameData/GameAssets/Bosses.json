@@ -29,6 +29,18 @@
           0.9,
           1
         ]
+      },
+      {
+        "LootType": "Material",
+        "LootId": 5,
+        "Frequencies": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
       }
     ]
   },
@@ -38,39 +50,6 @@
     "Health": 1500,
     "Image": "/example.png",
     "Description": "One of the passages leads to a smaller cave, in the middle of which is sitting an ogre. It is slightly higher than a human, and its brown-colored body is well built. The ogre is located next to a little bonfire, and a pile of bones.",
-    "BossLootPatterns": [
-      {
-        "LootType": "Material",
-        "LootId": 0,
-        "Frequencies": [
-          0.5,
-          0.6,
-          0.7,
-          0.8,
-          0.9,
-          1
-        ]
-      },
-      {
-        "LootType": "Material",
-        "LootId": 2,
-        "Frequencies": [
-          0.5,
-          0.6,
-          0.7,
-          0.8,
-          0.9,
-          1
-        ]
-      }
-    ]
-  },
-  {
-    "Id": 3,
-    "Name": "Ancient Ice Mage",
-    "Health": 1500,
-    "Image": "/example.png",
-    "Description": "TestBoss1Desc",
     "BossLootPatterns": [
       {
         "LootType": "Material",
@@ -208,39 +187,6 @@
           0,
           0,
           0.01
-        ]
-      }
-    ]
-  },
-  {
-    "Id": 6,
-    "Name": "Medusa",
-    "Health": 1500,
-    "Image": "/example.png",
-    "Description": "TestBoss1Desc",
-    "BossLootPatterns": [
-      {
-        "LootType": "Material",
-        "LootId": 0,
-        "Frequencies": [
-          0.5,
-          0.6,
-          0.7,
-          0.8,
-          0.9,
-          1
-        ]
-      },
-      {
-        "LootType": "Material",
-        "LootId": 2,
-        "Frequencies": [
-          0.5,
-          0.6,
-          0.7,
-          0.8,
-          0.9,
-          1
         ]
       }
     ]
@@ -528,6 +474,48 @@
           0.7,
           0.8,
           0.9,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 11,
+    "Name": "xd",
+    "Health": 0,
+    "Image": "",
+    "Description": "",
+    "BossLootPatterns": [
+      {
+        "LootType": "Material",
+        "LootId": 5,
+        "Frequencies": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 12,
+    "Name": "",
+    "Health": 0,
+    "Image": "",
+    "Description": "",
+    "BossLootPatterns": [
+      {
+        "LootType": "Material",
+        "LootId": 5,
+        "Frequencies": [
+          0,
+          0,
+          0,
+          0,
+          0,
           1
         ]
       }

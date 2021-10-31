@@ -78,10 +78,6 @@
     "ArtifactId": 13,
     "Ingredients": [
       {
-        "Id": 18,
-        "Quantity": 10
-      },
-      {
         "Id": 10,
         "Quantity": 10
       },
@@ -300,5 +296,18 @@
     "Name": "Recipe: Toxic Amulet",
     "Rarity": "Exceptional",
     "Value": 1
+  },
+  {
+    "Id": 19,
+    "ArtifactId": 0,
+    "Ingredients": [
+      {
+        "Id": 3,
+        "Quantity": 123
+      }
+    ],
+    "Name": "",
+    "Rarity": "General",
+    "Value": 0
   }
 ]

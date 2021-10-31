@@ -144,9 +144,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			int nextId = GameContent.Bosses.Max(x => x.Id) + 1;
-			_dataContext = new Boss() { Id = nextId };
+
+			_dataContext = new Boss() { Id = nextId, BossLootPatterns = new List<BossLootPattern>() };
+			_bossLootPatterns = _dataContext.BossLootPatterns;
+
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
+			DynamicValuesPanel.Children.Clear();
 
 			DeleteObjectButton.Visibility=Visibility.Visible;
 			SaveButton.Visibility=Visibility.Visible;
@@ -175,7 +179,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			PopulateContentSelectionBox();
 			ContentSelectionBox.SelectedIndex = -1;
+
 			_currentPanel.Children.Clear();
+			DynamicValuesPanel.Children.Clear();
+
+			CreateDynamicValueButton.Visibility = Visibility.Hidden;
 			DeleteObjectButton.Visibility=Visibility.Hidden;
 			SaveButton.Visibility=Visibility.Hidden;
 		}
@@ -210,11 +218,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 					BorderThickness = new Thickness(0.5),
 					BorderBrush = new SolidColorBrush(Colors.Gray),
 					Padding = new Thickness(6),
-					Margin = new Thickness(4),
-					Tag = pattern
+					Margin = new Thickness(4)
 				};
-
-				border.PreviewMouseUp += EditDynamicValue_Click;
 
 				var grid = CreateDynamicValueGrid(pattern);
 
@@ -280,6 +285,28 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = string.Join(' ', pattern.Frequencies.Select(x => x.ToString()))
 			};
 
+			var editButton = new Button
+			{	
+				Width = 30,
+				Height = 30,
+				Margin = new Thickness(5, 0, 60, 0),
+				Padding = new Thickness(0),
+				HorizontalAlignment = HorizontalAlignment.Right,
+				Tag = pattern
+			};
+
+			var editIcon = new PackIcon
+			{
+				Width = 20,
+				Height = 20,
+				Kind = PackIconKind.Edit,
+				Foreground = new SolidColorBrush(Colors.Gray)
+			};
+
+			editButton.Content = editIcon;
+
+			editButton.Click += EditDynamicValue_Click;
+
 			var deleteButton = new Button
 			{
 				Width = 30,
@@ -306,14 +333,15 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			grid.Children.Add(itemTypeBlock);
 			grid.Children.Add(nameBlock);
 			grid.Children.Add(frequenciesBlock);
+			grid.Children.Add(editButton);
 			grid.Children.Add(deleteButton);
 
 			return grid;
 		}
 
-		private void EditDynamicValue_Click(object sender, MouseButtonEventArgs e)
+		private void EditDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var bossLootPattern = (sender as Border).Tag as BossLootPattern;
+			var bossLootPattern = (sender as Button).Tag as BossLootPattern;
 
 			var bossLootPatternWindow = new BossLootPatternWindow(_dataContext, bossLootPattern) { Owner = Application.Current.MainWindow };
 			bossLootPatternWindow.ShowDialog();
@@ -324,6 +352,14 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		private void DeleteDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
 			var pattern = (sender as Button).Tag as BossLootPattern;
+
+			var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {pattern.LootId}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+			if (result == MessageBoxResult.No)
+			{
+				return;
+			}
+
 			_dataContext.BossLootPatterns.Remove(_dataContext.BossLootPatterns.FirstOrDefault(x => x.LootId == pattern.LootId));
 
 			RefreshDynamicValuesPanel();
@@ -338,8 +374,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			};
 			_bossLootPatterns.Add(newBossLootPattern);
 
-			var tempBorder = new Border() { Tag = newBossLootPattern };
-			EditDynamicValue_Click(tempBorder, null);
+			var tempButton = new Button() { Tag = newBossLootPattern };
+			EditDynamicValue_Click(tempButton, null);
 		}
 
 	}
