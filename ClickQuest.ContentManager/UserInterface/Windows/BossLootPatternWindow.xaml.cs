@@ -41,10 +41,6 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			double gridWidth = this.ActualWidth;
 			var panel = new StackPanel() { Name = "MainInfoPanel" };
 
-			var saveButton = new Button() { Name = "SaveButton", Content = "Save", Margin = new Thickness(10) };
-			saveButton.Click += SaveButton_Click;
-			_controls.Add(saveButton.Name, saveButton);
-
 			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.LootId.ToString(), Margin = new Thickness(10), IsEnabled = false };
 			_controls.Add(idBox.Name, idBox);
 
@@ -193,11 +189,6 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			{
 				_boss.BossLootPatterns[oldPatternIndex] = _pattern;
 			}
-		}
-
-		private void SaveButton_Click(object sender, RoutedEventArgs e)
-		{
-			this.Close();
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

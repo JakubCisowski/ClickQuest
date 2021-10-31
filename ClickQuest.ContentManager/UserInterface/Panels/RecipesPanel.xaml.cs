@@ -4,11 +4,9 @@ using ClickQuest.ContentManager.UserInterface.Windows;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
@@ -151,19 +149,19 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			RefreshStaticValuesPanel();
 			DynamicValuesPanel.Children.Clear();
 
-			DeleteObjectButton.Visibility=Visibility.Visible;
-			SaveButton.Visibility=Visibility.Visible;
+			DeleteObjectButton.Visibility = Visibility.Visible;
+			SaveButton.Visibility = Visibility.Visible;
 		}
 
 		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
 		{
-			var objectToDelete = GameContent.Recipes.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
+			var objectToDelete = GameContent.Recipes.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 			if (objectToDelete is null)
 			{
 				_currentPanel?.Children.Clear();
-				DeleteObjectButton.Visibility=Visibility.Hidden;
-				SaveButton.Visibility=Visibility.Hidden;
+				DeleteObjectButton.Visibility = Visibility.Hidden;
+				SaveButton.Visibility = Visibility.Hidden;
 				return;
 			}
 
@@ -183,8 +181,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			DynamicValuesPanel.Children.Clear();
 
 			CreateDynamicValueButton.Visibility = Visibility.Hidden;
-			DeleteObjectButton.Visibility=Visibility.Hidden;
-			SaveButton.Visibility=Visibility.Hidden;
+			DeleteObjectButton.Visibility = Visibility.Hidden;
+			SaveButton.Visibility = Visibility.Hidden;
 		}
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -200,7 +198,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			_ingredients = _dataContext.Ingredients;
 			RefreshStaticValuesPanel();
 			RefreshDynamicValuesPanel();
-			DeleteObjectButton.Visibility=Visibility.Visible;
+			DeleteObjectButton.Visibility = Visibility.Visible;
 			SaveButton.Visibility = Visibility.Visible;
 		}
 
@@ -261,7 +259,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			};
 
 			var editButton = new Button
-			{	
+			{
 				Width = 30,
 				Height = 30,
 				Margin = new Thickness(5, 0, 90, 0),
@@ -344,8 +342,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			var newIngredient = new Ingredient();
 			_ingredients.Add(newIngredient);
 
-			var tempButton = new Button() { Tag = newIngredient };
-			EditDynamicValue_Click(tempButton, null);
+			var tempBorder = new Border() { Tag = newIngredient };
+			EditDynamicValue_Click(tempBorder, null);
 		}
 
 	}
