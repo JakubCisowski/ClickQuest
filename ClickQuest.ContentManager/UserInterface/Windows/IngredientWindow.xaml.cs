@@ -28,12 +28,6 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 		public void RefreshWindowControls()
 		{
-			// https://stackoverflow.com/questions/63834841/how-to-add-a-materialdesignhint-to-a-textbox-in-code
-
-			// clear grid's first column to avoid duplicating the controls added below
-			// how?
-			// use the Dictionary
-
 			// Add controls to Dictionary for easier navigation.
 			_controls.Clear();
 

@@ -29,12 +29,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		public void RefreshStaticInfoPanel()
 		{
-			// https://stackoverflow.com/questions/63834841/how-to-add-a-materialdesignhint-to-a-textbox-in-code
-
-			// clear grid's first column to avoid duplicating the controls added below
-			// how?
-			// use the Dictionary
-
 			if (_currentPanel != null)
 			{
 				_currentPanel.Children.Clear();

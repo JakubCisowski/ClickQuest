@@ -90,6 +90,14 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
 						(tabControl.SelectedContent as Grid)?.Children.Add(dngKeysPanel);
 						break;
+
+					case ContentType.Dungeons:
+						var dungeonsPanel = new DungeonsPanel();
+						_currentPanel = dungeonsPanel;
+
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(dungeonsPanel);
+						break;
 				}
 			}
 		}

@@ -73,6 +73,12 @@
       <Compile Update="UserInterface\Panels\BossesPanel.xaml.cs">
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="UserInterface\Panels\DungeonsPanel.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="UserInterface\Windows\BossIdWindow.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
       <Compile Update="UserInterface\Windows\IngredientWindow.xaml.cs">
         <SubType>Code</SubType>
       </Compile>
@@ -95,6 +101,14 @@
         <SubType>Designer</SubType>
       </Page>
       <Page Update="UserInterface\Panels\BossesPanel.xaml">
+        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="UserInterface\Panels\DungeonsPanel.xaml">
+        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="UserInterface\Windows\BossIdWindow.xaml">
         <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>

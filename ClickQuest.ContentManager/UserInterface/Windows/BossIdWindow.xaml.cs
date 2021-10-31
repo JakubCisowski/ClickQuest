@@ -2,25 +2,24 @@
 using ClickQuest.ContentManager.GameData.Models;
 using MaterialDesignThemes.Wpf;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace ClickQuest.ContentManager.UserInterface.Windows
 {
-	public partial class MonsterSpawnPatternWindow : Window
+	public partial class BossIdWindow : Window
 	{
-		private Region _recipe;
-		private MonsterSpawnPattern _pattern;
+		private Dungeon _dungeon;
+		private int _bossId;
 		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 
-		public MonsterSpawnPatternWindow(Region region, MonsterSpawnPattern pattern)
+		public BossIdWindow(Dungeon dungeon, int bossId)
 		{
 			InitializeComponent();
 
-			_recipe = region;
-			_pattern = pattern;
+			_dungeon = dungeon;
+			_bossId = bossId;
 
 			RefreshWindowControls();
 		}
@@ -34,22 +33,18 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			double gridWidth = this.ActualWidth;
 			var panel = new StackPanel() { Name = "MainInfoPanel" };
 
-			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.MonsterId.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var idBox = new TextBox() { Name = "IdBox", Text = _bossId.ToString(), Margin = new Thickness(10), IsEnabled = false };
 
-			var nameBox = new ComboBox() { Name = "NameBox", ItemsSource = GameContent.Monsters.Select(x => x.Name), Margin = new Thickness(10) };
-			nameBox.SelectedValue = GameContent.Monsters.FirstOrDefault(x => x.Id == _pattern.MonsterId)?.Name;
+			var nameBox = new ComboBox() { Name = "NameBox", ItemsSource = GameContent.Bosses.Select(x => x.Name), Margin = new Thickness(10) };
+			nameBox.SelectedValue = GameContent.Bosses.FirstOrDefault(x => x.Id == _bossId)?.Name;
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
-
-			var frequencyBox = new TextBox() { Name = "FrequencyBox", Text = _pattern.Frequency.ToString(), Margin = new Thickness(10) };
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
 			HintAssist.SetHint(nameBox, "Name");
-			HintAssist.SetHint(frequencyBox, "Frequency");
 
 			_controls.Add(idBox.Name, idBox);
 			_controls.Add(nameBox.Name, nameBox);
-			_controls.Add(frequencyBox.Name, frequencyBox);
 
 			foreach (var elem in _controls)
 			{
@@ -79,29 +74,28 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 		private void NameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			(_controls["IdBox"] as TextBox).Text = GameContent.Monsters.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Id.ToString();
+			(_controls["IdBox"] as TextBox).Text = GameContent.Bosses.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Id.ToString();
 		}
 
-		private void UpdateMonsterPattern()
+		private void UpdateBossId()
 		{
-			var oldPatternIndex = _recipe.MonsterSpawnPatterns.IndexOf(_recipe.MonsterSpawnPatterns.FirstOrDefault(x => x.MonsterId == _pattern.MonsterId));
+			var oldBossIdIndex = _dungeon.BossIds.IndexOf(_bossId);
 
-			_pattern.MonsterId = int.Parse((_controls["IdBox"] as TextBox).Text);
-			_pattern.Frequency = double.Parse((_controls["FrequencyBox"] as TextBox).Text);
+			_bossId = int.Parse((_controls["IdBox"] as TextBox).Text);
 
-			if (oldPatternIndex == -1)
+			if (oldBossIdIndex == -1)
 			{
-				_recipe.MonsterSpawnPatterns.Add(_pattern);
+				_dungeon.BossIds.Add(_bossId);
 			}
 			else
 			{
-				_recipe.MonsterSpawnPatterns[oldPatternIndex] = _pattern;
+				_dungeon.BossIds[oldBossIdIndex] = _bossId;
 			}
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			UpdateMonsterPattern();
+			UpdateBossId();
 		}
 	}
 }

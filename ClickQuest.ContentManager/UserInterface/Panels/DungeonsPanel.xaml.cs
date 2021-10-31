@@ -4,21 +4,23 @@ using ClickQuest.ContentManager.UserInterface.Windows;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
 {
-	public partial class RecipesPanel : UserControl
+	public partial class DungeonsPanel : UserControl
 	{
-		private Recipe _dataContext;
+		private Dungeon _dataContext;
 		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 		private StackPanel _currentPanel;
-		private List<Ingredient> _ingredients;
+		private List<int> _bossIds;
 
-		public RecipesPanel()
+		public DungeonsPanel()
 		{
 			InitializeComponent();
 
@@ -27,7 +29,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void PopulateContentSelectionBox()
 		{
-			ContentSelectionBox.ItemsSource = GameContent.Recipes.Select(x => x.Name);
+			ContentSelectionBox.ItemsSource = GameContent.Dungeons.Select(x => x.Name);
 		}
 
 		public void RefreshStaticValuesPanel()
@@ -42,34 +44,40 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			double gridWidth = this.ActualWidth;
 			var panel = new StackPanel() { Name = "StaticInfoPanel" };
 
-			var selectedRecipe = _dataContext;
+			var selectedDungeon = _dataContext;
 
-			var idBox = new TextBox() { Name = "IdBox", Text = selectedRecipe.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			var nameBox = new TextBox() { Name = "NameBox", Text = selectedRecipe.Name, Margin = new Thickness(10) };
-			var valueBox = new TextBox() { Name = "ValueBox", Text = selectedRecipe.Value.ToString(), Margin = new Thickness(10) };
-			var rarityBox = new ComboBox() { Name = "RarityBox", ItemsSource = Enum.GetValues(typeof(Rarity)), SelectedIndex = (int)selectedRecipe.Rarity, Margin = new Thickness(10) };
-			var artifactIdBox = new TextBox() { Name = "ArtifactIDBox", Text = selectedRecipe.ArtifactId.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			var artifactNameBox = new ComboBox() { Name = "ArtifactNameBox", ItemsSource = GameContent.Artifacts.Select(x => x.Name), Margin = new Thickness(10) };
-			artifactNameBox.SelectedValue = GameContent.Artifacts.FirstOrDefault(x => x.Id == selectedRecipe.ArtifactId)?.Name;
-			artifactNameBox.SelectionChanged += ArtifactNameBox_SelectionChanged;
+			var idBox = new TextBox() { Name = "IdBox", Text = selectedDungeon.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var dungeonGroupBox = new ComboBox() { Name = "DungeonGroupBox", ItemsSource = GameContent.DungeonGroups.Select(x=>x.Name), SelectedValue = GameContent.DungeonGroups.FirstOrDefault(x=>x.Id == selectedDungeon.DungeonGroupId)?.Name, Margin = new Thickness(10) };
+			var nameBox = new TextBox() { Name = "NameBox", Text = selectedDungeon.Name, Margin = new Thickness(10) };
+			var backgroundBox = new TextBox() { Name = "BackgroundBox", Text = selectedDungeon.Background, Margin = new Thickness(10) };
+			var descriptionBox = new TextBox()
+			{
+				Name = "DescriptionBox",
+				TextWrapping = TextWrapping.Wrap,
+				VerticalAlignment = VerticalAlignment.Stretch,
+				MinWidth = 280,
+				AcceptsReturn = true,
+				VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+				Height = 160,
+				Text = selectedDungeon.Description,
+				Margin = new Thickness(10)
+			};
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
+			HintAssist.SetHint(dungeonGroupBox, "DungeonGroup");
 			HintAssist.SetHint(nameBox, "Name");
-			HintAssist.SetHint(valueBox, "Value");
-			HintAssist.SetHint(rarityBox, "Rarity");
-			HintAssist.SetHint(artifactIdBox, "ArtifactID");
-			HintAssist.SetHint(artifactNameBox, "ArtifactName");
+			HintAssist.SetHint(backgroundBox, "Background");
+			HintAssist.SetHint(descriptionBox, "Description");
 
 			// Add controls to Dictionary for easier navigation.
 			_controls.Clear();
 
 			_controls.Add(idBox.Name, idBox);
+			_controls.Add(dungeonGroupBox.Name, dungeonGroupBox);
 			_controls.Add(nameBox.Name, nameBox);
-			_controls.Add(valueBox.Name, valueBox);
-			_controls.Add(rarityBox.Name, rarityBox);
-			_controls.Add(artifactIdBox.Name, artifactIdBox);
-			_controls.Add(artifactNameBox.Name, artifactNameBox);
+			_controls.Add(backgroundBox.Name, backgroundBox);
+			_controls.Add(descriptionBox.Name, descriptionBox);
 
 			foreach (var elem in _controls)
 			{
@@ -96,11 +104,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			MainGrid.Children.Add(panel);
 		}
 
-		private void ArtifactNameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			(_controls["ArtifactIDBox"] as TextBox).Text = GameContent.Artifacts.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Id.ToString();
-		}
-
 		private void TextBox_GotFocus(object sender, RoutedEventArgs e)
 		{
 			(sender as TextBox).CaretIndex = int.MaxValue;
@@ -108,29 +111,29 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		public void Save()
 		{
-			var recipe = _dataContext;
+			var dungeon = _dataContext;
 
-			if (recipe is null)
+			if (dungeon is null)
 			{
 				return;
 			}
 
-			recipe.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
-			recipe.Name = (_controls["NameBox"] as TextBox).Text;
-			recipe.Value = int.Parse((_controls["ValueBox"] as TextBox).Text);
-			recipe.Rarity = (Rarity)Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
-			recipe.ArtifactId = int.Parse((_controls["ArtifactIDBox"] as TextBox).Text);
+			dungeon.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
+			dungeon.DungeonGroupId = GameContent.DungeonGroups.FirstOrDefault(x=>x.Name == (_controls["DungeonGroupBox"] as ComboBox).SelectedValue.ToString()).Id;
+			dungeon.Name = (_controls["NameBox"] as TextBox).Text;
+			dungeon.Background = (_controls["BackgroundBox"] as TextBox).Text;
+			dungeon.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
 			// Check if this Id is already in the collection (modified).
-			if (GameContent.Recipes.Select(x => x.Id).Contains(recipe.Id))
+			if (GameContent.Dungeons.Select(x => x.Id).Contains(dungeon.Id))
 			{
-				int indexOfOldRecipe = GameContent.Recipes.FindIndex(x => x.Id == recipe.Id);
-				GameContent.Recipes[indexOfOldRecipe] = recipe;
+				int indexOfOldDungeon = GameContent.Dungeons.FindIndex(x => x.Id == dungeon.Id);
+				GameContent.Dungeons[indexOfOldDungeon] = dungeon;
 			}
 			else
 			{
 				// If not, add it.
-				GameContent.Recipes.Add(recipe);
+				GameContent.Dungeons.Add(dungeon);
 			}
 
 			PopulateContentSelectionBox();
@@ -141,26 +144,26 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			Save();
 			
-			int nextId = GameContent.Recipes.Max(x => x.Id) + 1;
+			int nextId = GameContent.Dungeons.Max(x => x.Id) + 1;
 
-			_dataContext = new Recipe() { Id = nextId, Ingredients = new List<Ingredient>() };
-			_ingredients = _dataContext.Ingredients;
+			_dataContext = new Dungeon() { Id = nextId, BossIds = new List<int>() };
+			_bossIds = _dataContext.BossIds;
 
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
 			DynamicValuesPanel.Children.Clear();
 
-			DeleteObjectButton.Visibility = Visibility.Visible;
+			DeleteObjectButton.Visibility=Visibility.Visible;
 		}
 
 		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
 		{
-			var objectToDelete = GameContent.Recipes.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+			var objectToDelete = GameContent.Dungeons.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
 
 			if (objectToDelete is null)
 			{
 				_currentPanel?.Children.Clear();
-				DeleteObjectButton.Visibility = Visibility.Hidden;
+				DeleteObjectButton.Visibility=Visibility.Hidden;
 				return;
 			}
 
@@ -171,16 +174,16 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				return;
 			}
 
-			GameContent.Recipes.Remove(objectToDelete);
+			GameContent.Dungeons.Remove(objectToDelete);
 
 			PopulateContentSelectionBox();
 			ContentSelectionBox.SelectedIndex = -1;
-
+			
 			_currentPanel.Children.Clear();
 			DynamicValuesPanel.Children.Clear();
 
 			CreateDynamicValueButton.Visibility = Visibility.Hidden;
-			DeleteObjectButton.Visibility = Visibility.Hidden;
+			DeleteObjectButton.Visibility=Visibility.Hidden;
 		}
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -197,11 +200,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Save();
 			}
 
-			_dataContext = GameContent.Recipes.FirstOrDefault(x => x.Name == selectedName);
-			_ingredients = _dataContext.Ingredients;
+			_dataContext = GameContent.Dungeons.FirstOrDefault(x => x.Name == selectedName);
+			_bossIds = _dataContext.BossIds;
 			RefreshStaticValuesPanel();
 			RefreshDynamicValuesPanel();
-			DeleteObjectButton.Visibility = Visibility.Visible;
+			DeleteObjectButton.Visibility=Visibility.Visible;
 		}
 
 		public void RefreshDynamicValuesPanel()
@@ -210,7 +213,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			CreateDynamicValueButton.Visibility = Visibility.Visible;
 
-			foreach (var ingredient in _ingredients)
+			foreach (var id in _bossIds)
 			{
 				var border = new Border
 				{
@@ -220,7 +223,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 					Margin = new Thickness(4)
 				};
 
-				var grid = CreateDynamicValueGrid(ingredient);
+				var grid = CreateDynamicValueGrid(id);
 
 				border.Child = grid;
 
@@ -228,7 +231,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 		}
 
-		private Grid CreateDynamicValueGrid(Ingredient ingredient)
+		private Grid CreateDynamicValueGrid(int id)
 		{
 			var grid = new Grid();
 
@@ -239,7 +242,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Margin = new Thickness(10, 0, 0, 0),
 				FontStyle = FontStyles.Italic,
-				Text = $"[{ingredient.Id}]"
+				Text = $"[{id}]"
 			};
 
 			var nameBlock = new TextBlock
@@ -248,26 +251,17 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				VerticalAlignment = VerticalAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Margin = new Thickness(80, 0, 0, 0),
-				Text = GameContent.Materials.FirstOrDefault(x => x.Id == ingredient.Id).Name
-			};
-
-			var quantityBlock = new TextBlock
-			{
-				FontSize = 18,
-				VerticalAlignment = VerticalAlignment.Center,
-				HorizontalAlignment = HorizontalAlignment.Left,
-				Margin = new Thickness(480, 0, 0, 0),
-				Text = ingredient.Quantity.ToString()
+				Text = GameContent.Bosses.FirstOrDefault(x => x.Id == id).Name
 			};
 
 			var editButton = new Button
-			{
+			{	
 				Width = 30,
 				Height = 30,
 				Margin = new Thickness(5, 0, 90, 0),
 				Padding = new Thickness(0),
 				HorizontalAlignment = HorizontalAlignment.Right,
-				Tag = ingredient
+				Tag = id
 			};
 
 			var editIcon = new PackIcon
@@ -287,7 +281,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Width = 30,
 				Height = 30,
 				Margin = new Thickness(5, 0, 50, 0),
-				Tag = ingredient,
+				Tag = id,
 				Padding = new Thickness(0),
 				HorizontalAlignment = HorizontalAlignment.Right
 			};
@@ -306,7 +300,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			grid.Children.Add(idBlock);
 			grid.Children.Add(nameBlock);
-			grid.Children.Add(quantityBlock);
 			grid.Children.Add(editButton);
 			grid.Children.Add(deleteButton);
 
@@ -315,36 +308,36 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void EditDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var ingredient = (sender as Button).Tag as Ingredient;
+			var bossId = int.Parse((sender as Button).Tag.ToString());
 
-			var ingredientWindow = new IngredientWindow(_dataContext, ingredient) { Owner = Application.Current.MainWindow };
-			ingredientWindow.ShowDialog();
+			var bossIdWindow = new BossIdWindow(_dataContext, bossId) { Owner = Application.Current.MainWindow };
+			bossIdWindow.ShowDialog();
 
 			RefreshDynamicValuesPanel();
 		}
 
 		private void DeleteDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var ingredient = (sender as Button).Tag as Ingredient;
+			var bossId = int.Parse((sender as Button).Tag.ToString());
 
-			var result = MessageBox.Show($"Are you sure you want to delete ingredient of Id: {ingredient.Id}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {bossId}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
 				return;
 			}
 
-			_dataContext.Ingredients.Remove(_dataContext.Ingredients.FirstOrDefault(x => x.Id == ingredient.Id));
+			_dataContext.BossIds.Remove(bossId);
 
 			RefreshDynamicValuesPanel();
 		}
 
 		private void CreateDynamicValueButton_Click(object sender, RoutedEventArgs e)
 		{
-			var newIngredient = new Ingredient();
-			_ingredients.Add(newIngredient);
+			var bossId = 0;
+			_bossIds.Add(bossId);
 
-			var tempButton = new Button() { Tag = newIngredient };
+			var tempButton = new Button() { Tag = bossId };
 			EditDynamicValue_Click(tempButton, null);
 		}
 
