@@ -178,6 +178,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			_dataContext = new Artifact() { Id = nextId };
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticInfoPanel();
+
+			DeleteObjectButton.Visibility=Visibility.Visible;
+			SaveButton.Visibility=Visibility.Visible;
 		}
 
 		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
@@ -185,6 +188,16 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			var objectToDelete = GameContent.Artifacts.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
 
 			if (objectToDelete is null)
+			{
+				_currentPanel?.Children.Clear();
+				DeleteObjectButton.Visibility=Visibility.Hidden;
+				SaveButton.Visibility=Visibility.Hidden;
+				return;
+			}
+
+			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+			if (result == MessageBoxResult.No)
 			{
 				return;
 			}

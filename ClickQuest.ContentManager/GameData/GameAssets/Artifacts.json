@@ -1,35 +1,5 @@
 [
   {
-    "Id": 2,
-    "Name": "Ghostly Infusion",
-    "Rarity": "Superior",
-    "Description": "Has to be equipped with at least one other artifact. After killing a monster, your next click is guaranteed to critically hit, and will deal 10% more damage.",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 1,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 3,
-    "Name": "Large Scythe",
-    "Rarity": "Superior",
-    "Description": "All non-artifact damage dealt by you is increased by 15% against Monsters (excluding Bosses).",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 1,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 4,
-    "Name": "Meat Cleaver",
-    "Rarity": "Superior",
-    "Description": "Gain 20% Critical Click Damage.",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 1,
-    "ArtifactType": "XD"
-  },
-  {
     "Id": 5,
     "Name": "Mystic Clover",
     "Rarity": "Mythic",
