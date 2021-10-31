@@ -35,6 +35,11 @@ namespace ClickQuest.Game.Core.Artifacts
 			}
 		}
 
+		public override void OnRegionLeave()
+		{
+			_clickCount = 0;
+		}
+
 		public VialOfPlague()
 		{
 			Name = "Vial of Plague";

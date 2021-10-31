@@ -24,6 +24,15 @@ namespace ClickQuest.Game.Core.Artifacts
 			_timer.Start();
 		}
 
+		public override void OnRegionLeave()
+		{
+			if (_timer.IsEnabled)
+			{
+				User.Instance.CurrentHero.PoisonDamage -= PoisonDamageIncrease;
+			}
+			_timer.Stop();
+		}
+
 		public Necronomicon()
 		{
 			Name = "Necronomicon";

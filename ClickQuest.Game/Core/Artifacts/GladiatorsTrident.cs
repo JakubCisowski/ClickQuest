@@ -37,6 +37,11 @@ namespace ClickQuest.Game.Core.Artifacts
 			}
 		}
 
+		public override void OnRegionLeave()
+		{
+			_timer.Stop();
+		}
+
 		public GladiatorsTrident()
 		{
 			Name = "Gladiator's Trident";

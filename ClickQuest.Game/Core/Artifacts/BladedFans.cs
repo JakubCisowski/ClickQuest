@@ -33,6 +33,11 @@ namespace ClickQuest.Game.Core.Artifacts
 			}
 		}
 
+		public override void OnRegionLeave()
+		{
+			_timer.Stop();
+		}
+
 		public BladedFans()
 		{
 			Name = "Bladed Fans";

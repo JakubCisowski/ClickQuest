@@ -26,6 +26,11 @@ namespace ClickQuest.Game.Core.Artifacts
 			_timer.Stop();
 		}
 
+		public override void OnRegionLeave()
+		{
+			_timer.Stop();
+		}
+
 		public ScepterOfEternalFlame()
 		{
 			Name = "Scepter of Eternal Flame";

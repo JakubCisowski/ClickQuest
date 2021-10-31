@@ -49,6 +49,11 @@ namespace ClickQuest.Game.Core.Artifacts
 			_spineCount++;
 		}
 
+		public override void OnRegionLeave()
+		{
+			_spineCount = 0;
+		}
+
 		public ChollaSpineInfusion()
 		{
 			Name = "Cholla Spine Infusion";

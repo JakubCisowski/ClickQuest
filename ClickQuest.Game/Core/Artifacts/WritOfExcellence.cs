@@ -3,6 +3,7 @@ using ClickQuest.Game.Core.Items;
 
 namespace ClickQuest.Game.Core.Artifacts
 {
+	// Blessings on you have a doubled effectiveness.
 	public class WritOfExcellence : ArtifactFunctionality
 	{
 		private const double EffectivenessIncrease = 2.0;

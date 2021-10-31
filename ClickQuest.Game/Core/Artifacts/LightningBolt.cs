@@ -33,6 +33,11 @@ namespace ClickQuest.Game.Core.Artifacts
 			}
 		}
 
+		public override void OnRegionLeave()
+		{
+			_clickTimes.Clear();
+		}
+
 		public LightningBolt()
 		{
 			Name = "Lightning Bolt";

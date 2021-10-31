@@ -23,6 +23,11 @@ namespace ClickQuest.Game.Core.Artifacts
 			CombatController.DealDamageToEnemy(DamageDealt, DamageType.Artifact);
 		}
 
+		public override void OnRegionLeave()
+		{
+			_isNextClickEmpowered = false;
+		}
+
 		public Skullbasher()
 		{
 			Name = "Skullbasher";

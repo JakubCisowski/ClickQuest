@@ -43,6 +43,11 @@ namespace ClickQuest.Game.Core.Artifacts
 			}
 		}
 
+		public override void OnRegionLeave()
+		{
+			_stackCount = 0;
+		}
+
 		public IceGolemsHeart()
 		{
 			Name = "Ice Golem's Heart";
