@@ -23,7 +23,7 @@
     "Id": 8,
     "Name": "Silver Greatsword",
     "Rarity": "Superior",
-    "Description": "All non-artifact damage dealt by you is increased by 10% against Bosses.",
+    "Description": "All non-artifact damage dealt by you is increased by 10% against Bosses. jd",
     "Lore": "",
     "ExtraInfo": "",
     "Value": 1,
@@ -33,10 +33,10 @@
     "Id": 9,
     "Name": "Skullbasher",
     "Rarity": "Superior",
-    "Description": "Every other click you make deals an additional 10 (?) damage.",
+    "Description": "Every other click you make deals an additional 10 (?) damage. xdjd",
     "Lore": "xdjd",
     "ExtraInfo": "",
-    "Value": 1,
+    "Value": 1000,
     "ArtifactType": "XD"
   },
   {
@@ -332,6 +332,116 @@
   {
     "Id": 42,
     "Name": "rtgfyhgf",
+    "Rarity": "General",
+    "Description": "",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 0,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 43,
+    "Name": "",
+    "Rarity": "General",
+    "Description": "",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 0,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 44,
+    "Name": "xdjd",
+    "Rarity": "General",
+    "Description": "jdjd",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 0,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 45,
+    "Name": "xdjd",
+    "Rarity": "General",
+    "Description": "jd",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 0,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 46,
+    "Name": "",
+    "Rarity": "General",
+    "Description": "",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 0,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 47,
+    "Name": "",
+    "Rarity": "General",
+    "Description": "",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 0,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 48,
+    "Name": "",
+    "Rarity": "General",
+    "Description": "",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 0,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 49,
+    "Name": "",
+    "Rarity": "General",
+    "Description": "",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 0,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 50,
+    "Name": "",
+    "Rarity": "General",
+    "Description": "",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 0,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 51,
+    "Name": "",
+    "Rarity": "General",
+    "Description": "",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 0,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 52,
+    "Name": "",
+    "Rarity": "General",
+    "Description": "",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 0,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 53,
+    "Name": "",
     "Rarity": "General",
     "Description": "",
     "Lore": "",

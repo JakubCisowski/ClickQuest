@@ -20,7 +20,6 @@
 			<ComboBox x:Name="ContentSelectionBox" Margin="20,20,20,5" SelectionChanged="ContentSelectionBox_SelectionChanged"/>
 			<Button x:Name="AddNewObjectButton" Content="Add new" Margin="20,50,20,5" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Click="AddNewObjectButton_Click"/>
 			<Button x:Name="DeleteObjectButton" Content="Delete" Margin="20,50,20,5" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Background="Red" Visibility="Hidden" Click="DeleteObjectButton_Click"/>
-			<Button x:Name="SaveButton" Content="Save" Margin="20,50,20,5" Style="{StaticResource MaterialDesignFlatDarkBgButton}" Click="SaveButton_Click" Background="Green" Visibility="Hidden"/>
 		</StackPanel>
 		
 		<StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">

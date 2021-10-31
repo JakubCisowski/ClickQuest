@@ -520,5 +520,13 @@
         ]
       }
     ]
+  },
+  {
+    "Id": 13,
+    "Name": "",
+    "Health": 0,
+    "Image": "",
+    "Description": "",
+    "BossLootPatterns": []
   }
 ]

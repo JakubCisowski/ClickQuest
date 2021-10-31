@@ -112,9 +112,14 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			(sender as TextBox).CaretIndex = int.MaxValue;
 		}
 
-		private void SaveButton_Click(object sender, RoutedEventArgs e)
+		public void Save()
 		{
 			var recipe = _dataContext;
+
+			if (recipe is null)
+			{
+				return;
+			}
 
 			recipe.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
 			recipe.Name = (_controls["NameBox"] as TextBox).Text;
@@ -140,6 +145,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
+			Save();
+			
 			int nextId = GameContent.Recipes.Max(x => x.Id) + 1;
 
 			_dataContext = new Recipe() { Id = nextId, Ingredients = new List<Ingredient>() };
@@ -150,7 +157,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			DynamicValuesPanel.Children.Clear();
 
 			DeleteObjectButton.Visibility = Visibility.Visible;
-			SaveButton.Visibility = Visibility.Visible;
 		}
 
 		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
@@ -161,7 +167,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			{
 				_currentPanel?.Children.Clear();
 				DeleteObjectButton.Visibility = Visibility.Hidden;
-				SaveButton.Visibility = Visibility.Hidden;
 				return;
 			}
 
@@ -182,7 +187,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			CreateDynamicValueButton.Visibility = Visibility.Hidden;
 			DeleteObjectButton.Visibility = Visibility.Hidden;
-			SaveButton.Visibility = Visibility.Hidden;
 		}
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -196,7 +200,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			if (_dataContext is not null)
 			{
-				SaveButton_Click(null, null);
+				Save();
 			}
 
 			_dataContext = GameContent.Recipes.FirstOrDefault(x => x.Name == selectedName);
@@ -204,7 +208,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			RefreshStaticValuesPanel();
 			RefreshDynamicValuesPanel();
 			DeleteObjectButton.Visibility = Visibility.Visible;
-			SaveButton.Visibility = Visibility.Visible;
 		}
 
 		public void RefreshDynamicValuesPanel()

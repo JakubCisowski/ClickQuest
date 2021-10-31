@@ -139,9 +139,14 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			(sender as TextBox).CaretIndex = int.MaxValue;
 		}
 
-		private void SaveButton_Click(object sender, RoutedEventArgs e)
+		public void Save()
 		{
 			var blessing = _dataContext;
+
+			if (blessing is null)
+			{
+				return;
+			}
 
 			blessing.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
 			blessing.Name = (_controls["NameBox"] as TextBox).Text;
@@ -171,13 +176,14 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
+			Save();
+
 			int nextId = GameContent.Blessings.Max(x => x.Id) + 1;
 			_dataContext = new Blessing() { Id = nextId };
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
 
 			DeleteObjectButton.Visibility=Visibility.Visible;
-			SaveButton.Visibility=Visibility.Visible;
 		}
 
 		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
@@ -188,7 +194,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			{
 				_currentPanel?.Children.Clear();
 				DeleteObjectButton.Visibility=Visibility.Hidden;
-				SaveButton.Visibility=Visibility.Hidden;
 				return;
 			}
 
@@ -205,7 +210,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			ContentSelectionBox.SelectedIndex = -1;
 			_currentPanel.Children.Clear();
 			DeleteObjectButton.Visibility=Visibility.Hidden;
-			SaveButton.Visibility=Visibility.Hidden;
 		}
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -219,13 +223,12 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			if (_dataContext is not null)
 			{
-				SaveButton_Click(null, null);
+				Save();
 			}
 
 			_dataContext = GameContent.Blessings.FirstOrDefault(x => x.Name == selectedName);
 			RefreshStaticValuesPanel();
 			DeleteObjectButton.Visibility=Visibility.Visible;
-			SaveButton.Visibility = Visibility.Visible;
 		}
 	}
 }
