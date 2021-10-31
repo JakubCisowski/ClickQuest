@@ -10,16 +10,6 @@
     "ArtifactType": "XD"
   },
   {
-    "Id": 6,
-    "Name": "Necronomicon",
-    "Rarity": "Superior",
-    "Description": "After killing a monster, your poison damage is increased by 10 for 3 seconds. This effect does not stack.",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 1,
-    "ArtifactType": "XD"
-  },
-  {
     "Id": 7,
     "Name": "Poisoned Sword",
     "Rarity": "Superior",

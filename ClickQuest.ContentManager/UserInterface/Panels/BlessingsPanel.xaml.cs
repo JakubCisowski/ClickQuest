@@ -173,7 +173,39 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			int nextId = GameContent.Blessings.Max(x => x.Id) + 1;
 			_dataContext = new Blessing() { Id = nextId };
+			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
+
+			DeleteObjectButton.Visibility=Visibility.Visible;
+			SaveButton.Visibility=Visibility.Visible;
+		}
+
+		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
+		{
+			var objectToDelete = GameContent.Blessings.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
+
+			if (objectToDelete is null)
+			{
+				_currentPanel?.Children.Clear();
+				DeleteObjectButton.Visibility=Visibility.Hidden;
+				SaveButton.Visibility=Visibility.Hidden;
+				return;
+			}
+
+			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+			if (result == MessageBoxResult.No)
+			{
+				return;
+			}
+
+			GameContent.Blessings.Remove(objectToDelete);
+
+			PopulateContentSelectionBox();
+			ContentSelectionBox.SelectedIndex = -1;
+			_currentPanel.Children.Clear();
+			DeleteObjectButton.Visibility=Visibility.Hidden;
+			SaveButton.Visibility=Visibility.Hidden;
 		}
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -187,6 +219,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			_dataContext = GameContent.Blessings.FirstOrDefault(x => x.Name == selectedName);
 			RefreshStaticValuesPanel();
+			DeleteObjectButton.Visibility=Visibility.Visible;
+			SaveButton.Visibility = Visibility.Visible;
 		}
 	}
 }
