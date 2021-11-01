@@ -5,11 +5,23 @@
     "HeroClass": "All",
     "Name": "TestQuest1",
     "Duration": 5,
-    "Description": "TestQuest1Description",
+    "Description": "TestQuest1Description jd",
     "QuestRewardPatterns": [
       {
         "Id": 1,
         "RewardType": "Ingot"
+      },
+      {
+        "Id": 3,
+        "RewardType": "Material"
+      },
+      {
+        "Id": 2,
+        "RewardType": "Ingot"
+      },
+      {
+        "Id": 7,
+        "RewardType": "Material"
       }
     ]
   },
@@ -38,6 +50,34 @@
       {
         "Id": 1,
         "RewardType": "Ingot"
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "Rare": false,
+    "HeroClass": "All",
+    "Name": "jd quest",
+    "Duration": 1,
+    "Description": "ubij orka",
+    "QuestRewardPatterns": [
+      {
+        "Id": 7,
+        "RewardType": "Material"
+      }
+    ]
+  },
+  {
+    "Id": 4,
+    "Rare": false,
+    "HeroClass": "All",
+    "Name": "",
+    "Duration": 0,
+    "Description": "",
+    "QuestRewardPatterns": [
+      {
+        "Id": 1,
+        "RewardType": "Artifact"
       }
     ]
   }

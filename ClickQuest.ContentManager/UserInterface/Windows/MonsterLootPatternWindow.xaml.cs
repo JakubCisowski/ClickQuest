@@ -132,31 +132,28 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			{
 				case RewardType.Material:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Materials.Select(x=>x.Name);
-					(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
 					break;
 
 				case RewardType.Recipe:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Recipes.Select(x=>x.Name);
-					(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
 					break;
 
 				case RewardType.Artifact:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Artifacts.Select(x=>x.Name);
-					(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
 					break;
 
 				case RewardType.Blessing:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Blessings.Select(x=>x.Name);
-					(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
 					break;
 
 				case RewardType.Ingot:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Ingots.Select(x=>x.Name);
-					(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
 					break;
 			}
 
 			_pattern.RewardType = (RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString());
+			
+			(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
 		}
 
 		private void UpdateMonsterLootPattern()

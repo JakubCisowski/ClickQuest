@@ -151,6 +151,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			int nextId = GameContent.Quests.Max(x => x.Id) + 1;
 
 			_dataContext = new Quest() { Id = nextId, QuestRewardPatterns = new List<QuestRewardPattern>()};
+			_questRewardPatterns = _dataContext.QuestRewardPatterns;
 
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();

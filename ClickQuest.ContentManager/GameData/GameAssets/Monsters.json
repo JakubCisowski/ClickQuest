@@ -25,6 +25,11 @@
         "RewardType": "Material",
         "LootId": 3,
         "Frequency": 0.75
+      },
+      {
+        "RewardType": "Material",
+        "LootId": 17,
+        "Frequency": 0
       }
     ]
   },
