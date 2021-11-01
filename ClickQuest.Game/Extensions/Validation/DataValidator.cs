@@ -108,10 +108,11 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckQuestReferences(Quest quest)
 		{
-			CheckReferencedIds($"{quest.Name}.RewardMaterialIds", GameAssets.Materials.Select(x => x.Id), quest.RewardMaterialIds);
-			CheckReferencedIds($"{quest.Name}.RewardRecipeIds", GameAssets.Recipes.Select(x => x.Id), quest.RewardRecipeIds);
-			CheckReferencedIds($"{quest.Name}.RewardBlesingIds", GameAssets.Blessings.Select(x => x.Id), quest.RewardBlessingIds);
-			CheckReferencedIds($"{quest.Name}.RewardIngotIds", GameAssets.Ingots.Select(x => x.Id), quest.RewardIngotIds);
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Material)", GameAssets.Materials.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.RewardType == RewardType.Material).Select(y=>y.Id));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Artifact)", GameAssets.Artifacts.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.RewardType == RewardType.Artifact).Select(y=>y.Id));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Recipe)", GameAssets.Recipes.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.RewardType == RewardType.Recipe).Select(y=>y.Id));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Blessing)", GameAssets.Blessings.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.RewardType == RewardType.Blessing).Select(y=>y.Id));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Ingot)", GameAssets.Ingots.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.RewardType == RewardType.Ingot).Select(y=>y.Id));
 		}
 
 		private static void CheckReferencedIds(string objectName, IEnumerable<int> availableIds, IEnumerable<int> requiredIds)
@@ -134,7 +135,7 @@ namespace ClickQuest.Game.Extensions.Validation
 		{
 			foreach (var lootPattern in boss.BossLootPatterns)
 			{
-				if (lootPattern.LootType == LootType.Blessing)
+				if (lootPattern.RewardType == RewardType.Blessing)
 				{
 					var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == lootPattern.LootId);
 

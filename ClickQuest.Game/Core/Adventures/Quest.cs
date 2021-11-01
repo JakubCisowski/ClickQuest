@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Windows;
-using System.Windows.Threading;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Heroes.Buffs;
@@ -12,9 +5,16 @@ using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
-using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.Extensions.Quests;
+using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text.Json.Serialization;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace ClickQuest.Game.Core.Adventures
 {
@@ -36,13 +36,7 @@ namespace ClickQuest.Game.Core.Adventures
 
 		public string Description { get; set; }
 
-		public List<int> RewardRecipeIds { get; set; }
-
-		public List<int> RewardMaterialIds { get; set; }
-
-		public List<int> RewardBlessingIds { get; set; }
-
-		public List<int> RewardIngotIds { get; set; }
+		public List<QuestRewardPattern> QuestRewardPatterns { get; set; }
 
 		public int TicksCountNumber { get; set; }
 
@@ -64,10 +58,7 @@ namespace ClickQuest.Game.Core.Adventures
 
 		public Quest()
 		{
-			RewardRecipeIds = new List<int>();
-			RewardMaterialIds = new List<int>();
-			RewardBlessingIds = new List<int>();
-			RewardIngotIds = new List<int>();
+			QuestRewardPatterns = new List<QuestRewardPattern>();
 
 			_timer = new DispatcherTimer
 			{
@@ -89,10 +80,7 @@ namespace ClickQuest.Game.Core.Adventures
 			copy.Description = Description;
 			copy.RewardsDescription = RewardsDescription;
 
-			copy.RewardRecipeIds = RewardRecipeIds;
-			copy.RewardMaterialIds = RewardMaterialIds;
-			copy.RewardBlessingIds = RewardBlessingIds;
-			copy.RewardIngotIds = RewardIngotIds;
+			copy.QuestRewardPatterns = QuestRewardPatterns;
 
 			return copy;
 		}
@@ -123,7 +111,7 @@ namespace ClickQuest.Game.Core.Adventures
 
 			// Initially set TicksCountText (for hero stats page info).
 			// Reset to 'Duration', it will count from Duration to 0.
-			questCopy.TicksCountNumber = (int) (questCopy.EndDate - DateTime.Now).TotalSeconds;
+			questCopy.TicksCountNumber = (int)(questCopy.EndDate - DateTime.Now).TotalSeconds;
 
 			if (questCopy.IsFinished)
 			{
@@ -151,23 +139,34 @@ namespace ClickQuest.Game.Core.Adventures
 
 		public void UpdateAllRewardsDescription()
 		{
-			UpdateSpecificRewardsDescription(RewardBlessingIds, GameAssets.Blessings);
-			UpdateSpecificRewardsDescription(RewardRecipeIds, GameAssets.Recipes);
-			UpdateSpecificRewardsDescription(RewardMaterialIds, GameAssets.Materials);
-			UpdateSpecificRewardsDescription(RewardIngotIds, GameAssets.Ingots);
-		}
-
-		private void UpdateSpecificRewardsDescription<T>(List<int> questRewardIdsCollection, List<T> rewardsGameAssetsCollection) where T : IIdentifiable
-		{
-			var rewardIdAndCountPairs = questRewardIdsCollection.GroupBy(id => id).Select(g => new
+			foreach (var reward in QuestRewardPatterns)
 			{
-				Value = g.Key,
-				Count = g.Count()
-			});
+				string itemName = "";
 
-			foreach (var rewardGroup in rewardIdAndCountPairs)
-			{
-				RewardsDescription += $"\n - {rewardGroup.Count}x {rewardsGameAssetsCollection.FirstOrDefault(x => x.Id == rewardGroup.Value).Name}";
+				switch (reward.RewardType)
+				{
+					case RewardType.Material:
+						itemName = GameAssets.Materials.FirstOrDefault(x => x.Id == reward.Id).Name;
+						break;
+
+					case RewardType.Recipe:
+						itemName = GameAssets.Recipes.FirstOrDefault(x => x.Id == reward.Id).Name;
+						break;
+
+					case RewardType.Artifact:
+						itemName = GameAssets.Artifacts.FirstOrDefault(x => x.Id == reward.Id).Name;
+						break;
+
+					case RewardType.Blessing:
+						itemName = GameAssets.Blessings.FirstOrDefault(x => x.Id == reward.Id).Name;
+						break;
+
+					case RewardType.Ingot:
+						itemName = GameAssets.Ingots.FirstOrDefault(x => x.Id == reward.Id).Name;
+						break;
+				}
+
+				RewardsDescription += $"\n - {reward.Quantity}x {itemName} ({reward.RewardType.ToString()})";
 			}
 		}
 
@@ -176,26 +175,40 @@ namespace ClickQuest.Game.Core.Adventures
 			AlertBox.Show($"Quest {Name} finished.\nRewards granted.", MessageBoxButton.OK);
 			User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.QuestsCompleted]++;
 
-			GrantSpecificReward(RewardMaterialIds, GameAssets.Materials);
-			GrantSpecificReward(RewardRecipeIds, GameAssets.Recipes);
-			GrantSpecificReward(RewardIngotIds, GameAssets.Ingots);
-
-			foreach (int blessingId in RewardBlessingIds)
+			foreach (var materialRewardPattern in QuestRewardPatterns.Where(x => x.RewardType == RewardType.Material))
 			{
-				Blessing.AskUserAndSwapBlessing(blessingId);
+				var material = GameAssets.Materials.FirstOrDefault(x => x.Id == materialRewardPattern.Id);
+				material.AddItem(materialRewardPattern.Quantity);
+				material.AddAchievementProgress();
+			}
+
+			foreach (var artifactRewardPattern in QuestRewardPatterns.Where(x => x.RewardType == RewardType.Artifact))
+			{
+				var artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == artifactRewardPattern.Id);
+				artifact.AddItem(artifactRewardPattern.Quantity);
+				artifact.AddAchievementProgress();
+			}
+
+			foreach (var recipeRewardPattern in QuestRewardPatterns.Where(x => x.RewardType == RewardType.Recipe))
+			{
+				var recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == recipeRewardPattern.Id);
+				recipe.AddItem(recipeRewardPattern.Quantity);
+				recipe.AddAchievementProgress();
+			}
+
+			foreach (var ingotRewardPattern in QuestRewardPatterns.Where(x => x.RewardType == RewardType.Ingot))
+			{
+				var ingot = GameAssets.Ingots.FirstOrDefault(x => x.Id == ingotRewardPattern.Id);
+				ingot.AddItem(ingotRewardPattern.Quantity);
+				ingot.AddAchievementProgress();
+			}
+
+			foreach (var blessingRewardPattern in QuestRewardPatterns.Where(x => x.RewardType == RewardType.Blessing))
+			{
+				Blessing.AskUserAndSwapBlessing(blessingRewardPattern.Id);
 			}
 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
-		}
-
-		private void GrantSpecificReward<T>(List<int> questRewardIdsCollection, List<T> rewardsGameAssetsCollection) where T : Item
-		{
-			foreach (int id in questRewardIdsCollection)
-			{
-				var item = rewardsGameAssetsCollection.FirstOrDefault(x => x.Id == id);
-				item.AddItem();
-				item.AddAchievementProgress();
-			}
 		}
 
 		public void PauseTimer()

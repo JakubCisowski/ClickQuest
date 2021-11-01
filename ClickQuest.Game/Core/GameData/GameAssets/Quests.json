@@ -1,38 +1,92 @@
 [
 	{
-		"Id": 0,
-		"Rare": false,
-		"HeroClass": "All",
-		"Name": "TestQuest1",
-		"Duration": 5,
-		"Description": "TestQuest1Description",
-		"RewardRecipeIds": [ 1 ],
-		"RewardBlessingIds": [],
-		"RewardMaterialIds": [ 1 ],
-		"RewardIngotIds": []
+	  "Id": 0,
+	  "Rare": false,
+	  "HeroClass": "All",
+	  "Name": "TestQuest1",
+	  "Duration": 5,
+	  "Description": "TestQuest1Description jd",
+	  "QuestRewardPatterns": [
+		{
+		  "Id": 1,
+		  "Quantity": 1,
+		  "RewardType": "Ingot"
+		},
+		{
+		  "Id": 3,
+		  "Quantity": 1,
+		  "RewardType": "Material"
+		},
+		{
+		  "Id": 2,
+		  "Quantity": 1,
+		  "RewardType": "Ingot"
+		},
+		{
+		  "Id": 7,
+		  "Quantity": 1,
+		  "RewardType": "Material"
+		}
+	  ]
 	},
 	{
-		"Id": 1,
-		"Rare": false,
-		"HeroClass": "All",
-		"Name": "TestQuest2",
-		"Duration": 5,
-		"Description": "TestQuest2Description. This ultra-long description was created to test the limits and boundaries of Microsoft and WPF. I wonder if this text will be wrapped and displayed properly.",
-		"RewardRecipeIds": [],
-		"RewardBlessingIds": [ 1 ],
-		"RewardMaterialIds": [],
-		"RewardIngotIds": []
+	  "Id": 1,
+	  "Rare": false,
+	  "HeroClass": "All",
+	  "Name": "TestQuest2",
+	  "Duration": 5,
+	  "Description": "TestQuest2Description. This ultra-long description was created to test the limits and boundaries of Microsoft and WPF. I wonder if this text will be wrapped and displayed properly.",
+	  "QuestRewardPatterns": [
+		{
+		  "Id": 1,
+		  "Quantity": 1,
+		  "RewardType": "Ingot"
+		},
+		{
+		  "Id": 3,
+		  "Quantity": 1,
+		  "RewardType": "Material"
+		},
+		{
+		  "Id": 2,
+		  "Quantity": 1,
+		  "RewardType": "Ingot"
+		},
+		{
+		  "Id": 7,
+		  "Quantity": 1,
+		  "RewardType": "Material"
+		}
+	  ]
 	},
 	{
-		"Id": 2,
-		"Rare": true,
-		"HeroClass": "All",
-		"Name": "TestQuest3",
-		"Duration": 5,
-		"Description": "TestQuest3Description",
-		"RewardRecipeIds": [],
-		"RewardBlessingIds": [],
-		"RewardMaterialIds": [],
-		"RewardIngotIds": [ 2, 2 ]
+	  "Id": 2,
+	  "Rare": true,
+	  "HeroClass": "All",
+	  "Name": "TestQuest3",
+	  "Duration": 5,
+	  "Description": "TestQuest3Description",
+	  "QuestRewardPatterns": [
+		{
+		  "Id": 1,
+		  "Quantity": 1,
+		  "RewardType": "Ingot"
+		},
+		{
+		  "Id": 3,
+		  "Quantity": 1,
+		  "RewardType": "Material"
+		},
+		{
+		  "Id": 2,
+		  "Quantity": 1,
+		  "RewardType": "Ingot"
+		},
+		{
+		  "Id": 7,
+		  "Quantity": 1,
+		  "RewardType": "Material"
+		}
+	  ]
 	}
-]
+  ]

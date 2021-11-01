@@ -92,7 +92,7 @@ namespace ClickQuest.Game.Core.Enemies
 				if (randomizedValue < loot.Frequencies[threshold] - itemIntegerCount)
 				{
 					// Grant loot after checking if it's not empty.
-					if (loot.LootType == LootType.Blessing)
+					if (loot.RewardType == RewardType.Blessing)
 					{
 						bool hasBlessingActive = User.Instance.CurrentHero.Blessing != null;
 
@@ -118,7 +118,7 @@ namespace ClickQuest.Game.Core.Enemies
 				(loot.Item as Artifact)?.CreateMythicTag(Name);
 
 				loot.Item.AddItem(itemIntegerCount);
-				lootText += "- " + $"{itemIntegerCount}x " + loot.Item.Name + " (" + loot.LootType + ")\n";
+				lootText += "- " + $"{itemIntegerCount}x " + loot.Item.Name + " (" + loot.RewardType + ")\n";
 			}
 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
