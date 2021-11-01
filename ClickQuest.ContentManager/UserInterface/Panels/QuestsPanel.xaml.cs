@@ -369,7 +369,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void CreateDynamicValueButton_Click(object sender, RoutedEventArgs e)
 		{
-			var newQuestRewardPattern = new QuestRewardPattern();
+			var newQuestRewardPattern = new QuestRewardPattern() { Quantity = 1 };
 			_questRewardPatterns.Add(newQuestRewardPattern);
 
 			var tempButton = new Button() { Tag = newQuestRewardPattern };

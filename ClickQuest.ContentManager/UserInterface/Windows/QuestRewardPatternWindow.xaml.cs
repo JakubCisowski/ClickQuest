@@ -42,16 +42,20 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 			_controls.Add(nameBox.Name, nameBox);
 
-			var RewardTypeBox = new ComboBox() { Name = "RewardTypeBox", ItemsSource = Enum.GetValues(typeof(RewardType)), Margin = new Thickness(10) };
-			RewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
-			RewardTypeBox.SelectedValue = _pattern.RewardType;
+			var rewardTypeBox = new ComboBox() { Name = "RewardTypeBox", ItemsSource = Enum.GetValues(typeof(RewardType)), Margin = new Thickness(10) };
+			rewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
+			rewardTypeBox.SelectedValue = _pattern.RewardType;
+
+			var quantityBox = new TextBox() { Name = "QuantityBox", Text = _pattern.Quantity.ToString(), Margin = new Thickness(10) };
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
 			HintAssist.SetHint(nameBox, "Name");
-			HintAssist.SetHint(RewardTypeBox, "RewardType");
+			HintAssist.SetHint(rewardTypeBox, "RewardType");
+			HintAssist.SetHint(quantityBox, "Quantity");
 
-			_controls.Add(RewardTypeBox.Name, RewardTypeBox);
+			_controls.Add(rewardTypeBox.Name, rewardTypeBox);
+			_controls.Add(quantityBox.Name, quantityBox);
 
 			foreach (var elem in _controls)
 			{
@@ -158,6 +162,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 			_pattern.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
 			_pattern.RewardType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
+			_pattern.Quantity = int.Parse((_controls["QuantityBox"] as TextBox).Text);
 
 			if (oldPatternIndex == -1)
 			{

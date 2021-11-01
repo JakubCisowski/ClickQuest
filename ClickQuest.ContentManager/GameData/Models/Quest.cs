@@ -11,6 +11,7 @@ namespace ClickQuest.ContentManager.GameData.Models
 	{
 		public int Id { get; set;}
 		public RewardType RewardType { get; set; }
+		public int Quantity{ get; set; }
 	}
 
 	public class Quest

@@ -9,19 +9,28 @@
     "QuestRewardPatterns": [
       {
         "Id": 1,
-        "RewardType": "Ingot"
+        "RewardType": "Ingot",
+        "Quantity": 1
       },
       {
         "Id": 3,
-        "RewardType": "Material"
+        "RewardType": "Material",
+        "Quantity": 1
       },
       {
         "Id": 2,
-        "RewardType": "Ingot"
+        "RewardType": "Ingot",
+        "Quantity": 1
       },
       {
         "Id": 7,
-        "RewardType": "Material"
+        "RewardType": "Material",
+        "Quantity": 1
+      },
+      {
+        "Id": 11,
+        "RewardType": "Material",
+        "Quantity": 10
       }
     ]
   },
@@ -35,7 +44,23 @@
     "QuestRewardPatterns": [
       {
         "Id": 1,
-        "RewardType": "Ingot"
+        "RewardType": "Ingot",
+        "Quantity": 1
+      },
+      {
+        "Id": 3,
+        "RewardType": "Material",
+        "Quantity": 1
+      },
+      {
+        "Id": 2,
+        "RewardType": "Ingot",
+        "Quantity": 1
+      },
+      {
+        "Id": 7,
+        "RewardType": "Material",
+        "Quantity": 1
       }
     ]
   },
@@ -49,7 +74,23 @@
     "QuestRewardPatterns": [
       {
         "Id": 1,
-        "RewardType": "Ingot"
+        "RewardType": "Ingot",
+        "Quantity": 1
+      },
+      {
+        "Id": 3,
+        "RewardType": "Material",
+        "Quantity": 1
+      },
+      {
+        "Id": 2,
+        "RewardType": "Ingot",
+        "Quantity": 1
+      },
+      {
+        "Id": 7,
+        "RewardType": "Material",
+        "Quantity": 1
       }
     ]
   },
@@ -58,26 +99,23 @@
     "Rare": false,
     "HeroClass": "All",
     "Name": "jd quest",
-    "Duration": 1,
-    "Description": "ubij orka",
+    "Duration": 100,
+    "Description": "hwdp jd",
     "QuestRewardPatterns": [
       {
         "Id": 7,
-        "RewardType": "Material"
-      }
-    ]
-  },
-  {
-    "Id": 4,
-    "Rare": false,
-    "HeroClass": "All",
-    "Name": "",
-    "Duration": 0,
-    "Description": "",
-    "QuestRewardPatterns": [
+        "RewardType": "Material",
+        "Quantity": 123
+      },
       {
-        "Id": 1,
-        "RewardType": "Artifact"
+        "Id": 5,
+        "RewardType": "Ingot",
+        "Quantity": 1
+      },
+      {
+        "Id": 9,
+        "RewardType": "Artifact",
+        "Quantity": 1
       }
     ]
   }
