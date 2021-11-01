@@ -13,14 +13,14 @@ using System.Windows.Media;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
 {
-	public partial class MonstersPanel : UserControl
+	public partial class QuestsPanel : UserControl
 	{
-		private Monster _dataContext;
+		private Quest _dataContext;
 		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 		private StackPanel _currentPanel;
-		private List<MonsterLootPattern> _monsterLootPatterns;
+		private List<QuestRewardPattern> _questRewardPatterns;
 
-		public MonstersPanel()
+		public QuestsPanel()
 		{
 			InitializeComponent();
 
@@ -29,7 +29,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void PopulateContentSelectionBox()
 		{
-			ContentSelectionBox.ItemsSource = GameContent.Monsters.Select(x => x.Name);
+			ContentSelectionBox.ItemsSource = GameContent.Quests.Select(x => x.Name);
 		}
 
 		public void RefreshStaticValuesPanel()
@@ -44,12 +44,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			double gridWidth = this.ActualWidth;
 			var panel = new StackPanel() { Name = "StaticInfoPanel" };
 
-			var selectedMonster = _dataContext;
+			var selectedQuest = _dataContext;
 
-			var idBox = new TextBox() { Name = "IdBox", Text = selectedMonster.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			var nameBox = new TextBox() { Name = "NameBox", Text = selectedMonster.Name, Margin = new Thickness(10) };
-			var healthBox = new TextBox() { Name = "HealthBox", Text = selectedMonster.Health.ToString(), Margin = new Thickness(10) };
-			var imageBox = new TextBox() { Name = "ImageBox", Text = selectedMonster.Image, Margin = new Thickness(10) };
+			var idBox = new TextBox() { Name = "IdBox", Text = selectedQuest.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var nameBox = new TextBox() { Name = "NameBox", Text = selectedQuest.Name, Margin = new Thickness(10) };
+			var rareBox = new CheckBox{ Name = "RareBox", Content = "Rare?", IsChecked = selectedQuest.Rare, Margin = new Thickness(10) };
+			var heroClassBox = new ComboBox() { Name = "HeroClassBox", ItemsSource = Enum.GetValues(typeof(HeroClass)), SelectedIndex = (int)selectedQuest.HeroClass, Margin = new Thickness(10) };
+			var durationBox = new TextBox() { Name = "DurationBox", Text = selectedQuest.Duration.ToString(), Margin = new Thickness(10) };
 			var descriptionBox = new TextBox()
 			{
 				Name = "DescriptionBox",
@@ -59,15 +60,16 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				AcceptsReturn = true,
 				VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
 				Height = 160,
-				Text = selectedMonster.Description,
+				Text = selectedQuest.Description,
 				Margin = new Thickness(10)
 			};
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
 			HintAssist.SetHint(nameBox, "Name");
-			HintAssist.SetHint(healthBox, "Health");
-			HintAssist.SetHint(imageBox, "Image");
+			HintAssist.SetHint(rareBox, "Rare");
+			HintAssist.SetHint(heroClassBox, "HeroClass");
+			HintAssist.SetHint(durationBox, "Duration");
 			HintAssist.SetHint(descriptionBox, "Description");
 
 			// Add controls to Dictionary for easier navigation.
@@ -75,8 +77,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			_controls.Add(idBox.Name, idBox);
 			_controls.Add(nameBox.Name, nameBox);
-			_controls.Add(healthBox.Name, healthBox);
-			_controls.Add(imageBox.Name, imageBox);
+			_controls.Add(rareBox.Name, rareBox);
+			_controls.Add(heroClassBox.Name, heroClassBox);
+			_controls.Add(durationBox.Name, durationBox);
 			_controls.Add(descriptionBox.Name, descriptionBox);
 
 			foreach (var elem in _controls)
@@ -111,29 +114,30 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		public void Save()
 		{
-			var monster = _dataContext;
+			var quest = _dataContext;
 
-			if (monster is null)
+			if (quest is null)
 			{
 				return;
 			}
 
-			monster.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
-			monster.Name = (_controls["NameBox"] as TextBox).Text;
-			monster.Health = int.Parse((_controls["HealthBox"] as TextBox).Text);
-			monster.Image = (_controls["ImageBox"] as TextBox).Text;
-			monster.Description = (_controls["DescriptionBox"] as TextBox).Text;
+			quest.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
+			quest.Name = (_controls["NameBox"] as TextBox).Text;
+			quest.Rare = (_controls["RareBox"] as CheckBox).IsChecked.Value;
+			quest.HeroClass = (HeroClass)Enum.Parse(typeof(HeroClass), (_controls["HeroClassBox"] as ComboBox).SelectedValue.ToString());
+			quest.Duration = int.Parse((_controls["DurationBox"] as TextBox).Text);
+			quest.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
 			// Check if this Id is already in the collection (modified).
-			if (GameContent.Monsters.Select(x => x.Id).Contains(monster.Id))
+			if (GameContent.Quests.Select(x => x.Id).Contains(quest.Id))
 			{
-				int indexOfOldMonster = GameContent.Monsters.FindIndex(x => x.Id == monster.Id);
-				GameContent.Monsters[indexOfOldMonster] = monster;
+				int indexOfOldQuest = GameContent.Quests.FindIndex(x => x.Id == quest.Id);
+				GameContent.Quests[indexOfOldQuest] = quest;
 			}
 			else
 			{
 				// If not, add it.
-				GameContent.Monsters.Add(monster);
+				GameContent.Quests.Add(quest);
 			}
 
 			PopulateContentSelectionBox();
@@ -143,11 +147,10 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			Save();
+			
+			int nextId = GameContent.Quests.Max(x => x.Id) + 1;
 
-			int nextId = GameContent.Monsters.Max(x => x.Id) + 1;
-
-			_dataContext = new Monster() { Id = nextId, MonsterLootPatterns = new List<MonsterLootPattern>() };
-			_monsterLootPatterns = _dataContext.MonsterLootPatterns;
+			_dataContext = new Quest() { Id = nextId, QuestRewardPatterns = new List<QuestRewardPattern>()};
 
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
@@ -158,7 +161,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
 		{
-			var objectToDelete = GameContent.Monsters.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
+			var objectToDelete = GameContent.Quests.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
 
 			if (objectToDelete is null)
 			{
@@ -174,11 +177,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				return;
 			}
 
-			GameContent.Monsters.Remove(objectToDelete);
+			GameContent.Quests.Remove(objectToDelete);
 
 			PopulateContentSelectionBox();
 			ContentSelectionBox.SelectedIndex = -1;
-
+			
 			_currentPanel.Children.Clear();
 			DynamicValuesPanel.Children.Clear();
 
@@ -200,8 +203,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Save();
 			}
 
-			_dataContext = GameContent.Monsters.FirstOrDefault(x => x.Name == selectedName);
-			_monsterLootPatterns = _dataContext.MonsterLootPatterns;
+			_dataContext = GameContent.Quests.FirstOrDefault(x => x.Name == selectedName);
+			_questRewardPatterns = _dataContext.QuestRewardPatterns;
 			RefreshStaticValuesPanel();
 			RefreshDynamicValuesPanel();
 			DeleteObjectButton.Visibility=Visibility.Visible;
@@ -213,7 +216,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			CreateDynamicValueButton.Visibility = Visibility.Visible;
 
-			foreach (var pattern in _monsterLootPatterns)
+			foreach (var pattern in _questRewardPatterns)
 			{
 				var border = new Border
 				{
@@ -231,7 +234,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 		}
 
-		private Grid CreateDynamicValueGrid(MonsterLootPattern pattern)
+		private Grid CreateDynamicValueGrid(QuestRewardPattern pattern)
 		{
 			var grid = new Grid();
 
@@ -242,7 +245,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Margin = new Thickness(10, 0, 0, 0),
 				FontStyle = FontStyles.Italic,
-				Text = $"[{pattern.LootId}]"
+				Text = $"[{pattern.Id}]"
 			};
 
 			var itemTypeBlock = new TextBlock
@@ -259,46 +262,37 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Left,
-				Margin = new Thickness(180, 0, 0, 0),
+				Margin = new Thickness(80, 0, 0, 0)
 			};
 
 			switch (pattern.RewardType)
 			{
 				case RewardType.Material:
-					nameBlock.Text = GameContent.Materials.FirstOrDefault(x => x.Id == pattern.LootId).Name;
+					nameBlock.Text = GameContent.Materials.FirstOrDefault(x => x.Id == pattern.Id).Name;
 					break;
 
 				case RewardType.Recipe:
-					nameBlock.Text = GameContent.Recipes.FirstOrDefault(x => x.Id == pattern.LootId).Name;
+					nameBlock.Text = GameContent.Recipes.FirstOrDefault(x => x.Id == pattern.Id).Name;
 					break;
 
 				case RewardType.Artifact:
-					nameBlock.Text = GameContent.Artifacts.FirstOrDefault(x => x.Id == pattern.LootId).Name;
+					nameBlock.Text = GameContent.Artifacts.FirstOrDefault(x => x.Id == pattern.Id).Name;
 					break;
 
 				case RewardType.Blessing:
-					nameBlock.Text = GameContent.Blessings.FirstOrDefault(x => x.Id == pattern.LootId).Name;
+					nameBlock.Text = GameContent.Blessings.FirstOrDefault(x => x.Id == pattern.Id).Name;
 					break;
-					
+
 				case RewardType.Ingot:
-					nameBlock.Text = GameContent.Ingots.FirstOrDefault(x=>x.Id == pattern.LootId).Name;
+					nameBlock.Text = GameContent.Ingots.FirstOrDefault(x=>x.Id == pattern.Id).Name;
 					break;
 			}
-
-			var frequencyBlock = new TextBlock
-			{
-				FontSize = 18,
-				VerticalAlignment = VerticalAlignment.Center,
-				HorizontalAlignment = HorizontalAlignment.Left,
-				Margin = new Thickness(460, 0, 0, 0),
-				Text = pattern.Frequency.ToString()
-			};
 
 			var editButton = new Button
 			{	
 				Width = 30,
 				Height = 30,
-				Margin = new Thickness(5, 0, 60, 0),
+				Margin = new Thickness(5, 0, 90, 0),
 				Padding = new Thickness(0),
 				HorizontalAlignment = HorizontalAlignment.Right,
 				Tag = pattern
@@ -320,7 +314,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			{
 				Width = 30,
 				Height = 30,
-				Margin = new Thickness(5, 0, 20, 0),
+				Margin = new Thickness(5, 0, 50, 0),
 				Tag = pattern,
 				Padding = new Thickness(0),
 				HorizontalAlignment = HorizontalAlignment.Right
@@ -339,9 +333,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			deleteButton.Click += DeleteDynamicValue_Click;
 
 			grid.Children.Add(idBlock);
-			grid.Children.Add(itemTypeBlock);
 			grid.Children.Add(nameBlock);
-			grid.Children.Add(frequencyBlock);
 			grid.Children.Add(editButton);
 			grid.Children.Add(deleteButton);
 
@@ -350,36 +342,36 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void EditDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var monsterLootPattern = (sender as Button).Tag as MonsterLootPattern;
+			var pattern = (sender as Button).Tag as QuestRewardPattern;
 
-			var monsterLootPatternWindow = new MonsterLootPatternWindow(_dataContext, monsterLootPattern) { Owner = Application.Current.MainWindow };
-			monsterLootPatternWindow.ShowDialog();
+			var questRewardPatternWindow = new QuestRewardPatternWindow(_dataContext, pattern) { Owner = Application.Current.MainWindow };
+			questRewardPatternWindow.ShowDialog();
 
 			RefreshDynamicValuesPanel();
 		}
 
 		private void DeleteDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var pattern = (sender as Button).Tag as MonsterLootPattern;
+			var pattern = (sender as Button).Tag as QuestRewardPattern;
 
-			var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {pattern.LootId}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {pattern.Id}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
 				return;
 			}
 
-			_dataContext.MonsterLootPatterns.Remove(_dataContext.MonsterLootPatterns.FirstOrDefault(x => x.LootId == pattern.LootId));
+			_dataContext.QuestRewardPatterns.Remove(pattern);
 
 			RefreshDynamicValuesPanel();
 		}
 
 		private void CreateDynamicValueButton_Click(object sender, RoutedEventArgs e)
 		{
-			var newMonsterLootPattern = new MonsterLootPattern();
-			_monsterLootPatterns.Add(newMonsterLootPattern);
+			var newQuestRewardPattern = new QuestRewardPattern();
+			_questRewardPatterns.Add(newQuestRewardPattern);
 
-			var tempButton = new Button() { Tag = newMonsterLootPattern };
+			var tempButton = new Button() { Tag = newQuestRewardPattern };
 			EditDynamicValue_Click(tempButton, null);
 		}
 

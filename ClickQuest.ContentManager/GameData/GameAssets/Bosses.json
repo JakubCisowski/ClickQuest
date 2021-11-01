@@ -7,7 +7,7 @@
     "Description": "You end up in a rather narrow passage, but the ceiling is so far up you can\u0027t even see it. The room is full of spider webs. On the floor you see half-eaten remains of some bats and wolves. As you look up, a giant, black spider descends slowly towards you. You can barely see anything but its violet eyes staring at you through the darkness.",
     "BossLootPatterns": [
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 1,
         "Frequencies": [
           0.5,
@@ -19,7 +19,7 @@
         ]
       },
       {
-        "LootType": "Recipe",
+        "RewardType": "Recipe",
         "LootId": 1,
         "Frequencies": [
           0.5,
@@ -40,7 +40,7 @@
     "Description": "One of the passages leads to a smaller cave, in the middle of which is sitting an ogre. It is slightly higher than a human, and its brown-colored body is well built. The ogre is located next to a little bonfire, and a pile of bones.",
     "BossLootPatterns": [
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 0,
         "Frequencies": [
           0.5,
@@ -52,7 +52,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 2,
         "Frequencies": [
           0.5,
@@ -73,7 +73,7 @@
     "Description": "TestBoss1Desc",
     "BossLootPatterns": [
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 0,
         "Frequencies": [
           0.5,
@@ -85,7 +85,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 2,
         "Frequencies": [
           0.5,
@@ -106,7 +106,7 @@
     "Description": "TestBoss1Desc",
     "BossLootPatterns": [
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 0,
         "Frequencies": [
           0.5,
@@ -118,7 +118,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 2,
         "Frequencies": [
           0.5,
@@ -139,7 +139,7 @@
     "Description": "This must be the individual who\u0027s the leader of all these assassins. He\u0027s sacrificing innocent people to grant himself power, which in turn has made him significantly harder to defeat.",
     "BossLootPatterns": [
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 45,
         "Frequencies": [
           0,
@@ -151,7 +151,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 20,
         "Frequencies": [
           0,
@@ -163,7 +163,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 16,
         "Frequencies": [
           0,
@@ -175,7 +175,7 @@
         ]
       },
       {
-        "LootType": "Recipe",
+        "RewardType": "Recipe",
         "LootId": 7,
         "Frequencies": [
           0,
@@ -187,7 +187,7 @@
         ]
       },
       {
-        "LootType": "Recipe",
+        "RewardType": "Recipe",
         "LootId": 6,
         "Frequencies": [
           0,
@@ -199,7 +199,7 @@
         ]
       },
       {
-        "LootType": "Artifact",
+        "RewardType": "Artifact",
         "LootId": 12,
         "Frequencies": [
           0,
@@ -220,7 +220,7 @@
     "Description": "TestBoss1Desc",
     "BossLootPatterns": [
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 0,
         "Frequencies": [
           0.5,
@@ -232,7 +232,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 2,
         "Frequencies": [
           0.5,
@@ -253,7 +253,7 @@
     "Description": "\u0027Raja\u0027 stands for \u0027king\u0027, and it\u0027s exactly what it sounds like \u2013 Rakshasa Raja is a much bigger and more respected type among its kin. It has four arms, wields a sword in each one of them, and can turn you into pieces in the blink of an eye.",
     "BossLootPatterns": [
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 1,
         "Frequencies": [
           0.5,
@@ -265,7 +265,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 2,
         "Frequencies": [
           0,
@@ -277,7 +277,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 13,
         "Frequencies": [
           0,
@@ -289,7 +289,7 @@
         ]
       },
       {
-        "LootType": "Recipe",
+        "RewardType": "Recipe",
         "LootId": 1,
         "Frequencies": [
           0,
@@ -301,7 +301,7 @@
         ]
       },
       {
-        "LootType": "Artifact",
+        "RewardType": "Artifact",
         "LootId": 16,
         "Frequencies": [
           0,
@@ -313,7 +313,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 3,
         "Frequencies": [
           0.5,
@@ -334,7 +334,7 @@
     "Description": "Quite like the djinn, the Ifrit are demons representing the dead. Unlike them, however, these fiery spirits have only malicious intents, and their single goal is to burn you alive. Painfully.",
     "BossLootPatterns": [
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 8,
         "Frequencies": [
           0,
@@ -346,7 +346,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 14,
         "Frequencies": [
           0,
@@ -358,7 +358,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 18,
         "Frequencies": [
           0.25,
@@ -370,7 +370,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 9,
         "Frequencies": [
           0,
@@ -382,7 +382,7 @@
         ]
       },
       {
-        "LootType": "Recipe",
+        "RewardType": "Recipe",
         "LootId": 2,
         "Frequencies": [
           0,
@@ -394,7 +394,7 @@
         ]
       },
       {
-        "LootType": "Artifact",
+        "RewardType": "Artifact",
         "LootId": 17,
         "Frequencies": [
           0,
@@ -406,7 +406,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 3,
         "Frequencies": [
           0.5,
@@ -427,7 +427,7 @@
     "Description": "TestBoss1Desc",
     "BossLootPatterns": [
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 0,
         "Frequencies": [
           0.5,
@@ -439,7 +439,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 2,
         "Frequencies": [
           0.5,
@@ -460,7 +460,7 @@
     "Description": "The large undead lord slowly gets up his throne. Only now you realise how large he really is \u2013 about ten meters tall. He is wearing a dark, heavy armor with a helmet resembling a skull, through which you can only see his emerald green eyes. He swings his just as tall scythe around and looks you in the eyes. He then slowly whispers: \u2018I am your end\u0027.",
     "BossLootPatterns": [
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 0,
         "Frequencies": [
           0.5,
@@ -472,7 +472,7 @@
         ]
       },
       {
-        "LootType": "Material",
+        "RewardType": "Material",
         "LootId": 2,
         "Frequencies": [
           0.5,

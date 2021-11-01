@@ -251,7 +251,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				VerticalAlignment = VerticalAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Margin = new Thickness(80, 0, 0, 0),
-				Text = pattern.LootType.ToString()
+				Text = pattern.RewardType.ToString()
 			};
 
 			var nameBlock = new TextBlock
@@ -262,19 +262,26 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Margin = new Thickness(180, 0, 0, 0),
 			};
 
-			switch (pattern.LootType)
+			switch (pattern.RewardType)
 			{
-				case LootType.Material:
+				case RewardType.Material:
 					nameBlock.Text = GameContent.Materials.FirstOrDefault(x => x.Id == pattern.LootId).Name;
 					break;
-				case LootType.Recipe:
+
+				case RewardType.Recipe:
 					nameBlock.Text = GameContent.Recipes.FirstOrDefault(x => x.Id == pattern.LootId).Name;
 					break;
-				case LootType.Artifact:
+
+				case RewardType.Artifact:
 					nameBlock.Text = GameContent.Artifacts.FirstOrDefault(x => x.Id == pattern.LootId).Name;
 					break;
-				case LootType.Blessing:
+
+				case RewardType.Blessing:
 					nameBlock.Text = GameContent.Blessings.FirstOrDefault(x => x.Id == pattern.LootId).Name;
+					break;
+
+				case RewardType.Ingot:
+					nameBlock.Text = GameContent.Ingots.FirstOrDefault(x=>x.Id == pattern.LootId).Name;
 					break;
 			}
 

@@ -4,7 +4,7 @@ namespace ClickQuest.ContentManager.GameData.Models
 {
 	public class BossLootPattern
 	{
-		public LootType LootType { get; set; }
+		public RewardType RewardType { get; set; }
 		public int LootId { get; set; }
 		public List<double> Frequencies { get; set; }
 

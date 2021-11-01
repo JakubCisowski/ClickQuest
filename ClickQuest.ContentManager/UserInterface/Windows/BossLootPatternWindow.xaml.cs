@@ -42,9 +42,9 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 			_controls.Add(nameBox.Name, nameBox);
 
-			var lootTypeBox = new ComboBox() { Name = "LootTypeBox", ItemsSource = Enum.GetValues(typeof(LootType)), Margin = new Thickness(10) };
-			lootTypeBox.SelectionChanged += LootTypeBox_SelectionChanged;
-			lootTypeBox.SelectedValue = _pattern.LootType;
+			var RewardTypeBox = new ComboBox() { Name = "RewardTypeBox", ItemsSource = Enum.GetValues(typeof(RewardType)), Margin = new Thickness(10) };
+			RewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
+			RewardTypeBox.SelectedValue = _pattern.RewardType;
 
 			var frequencyBox1 = new TextBox() { Name = "FrequencyBox1", Text = _pattern.Frequencies[0].ToString(), Margin = new Thickness(10) };
 			var frequencyBox2 = new TextBox() { Name = "FrequencyBox2", Text = _pattern.Frequencies[1].ToString(), Margin = new Thickness(10) };
@@ -56,7 +56,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
 			HintAssist.SetHint(nameBox, "Name");
-			HintAssist.SetHint(lootTypeBox, "LootType");
+			HintAssist.SetHint(RewardTypeBox, "RewardType");
 			HintAssist.SetHint(frequencyBox1, "Frequency1");
 			HintAssist.SetHint(frequencyBox2, "Frequency2");
 			HintAssist.SetHint(frequencyBox3, "Frequency3");
@@ -64,7 +64,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			HintAssist.SetHint(frequencyBox5, "Frequency5");
 			HintAssist.SetHint(frequencyBox6, "Frequency6");
 
-			_controls.Add(lootTypeBox.Name, lootTypeBox);
+			_controls.Add(RewardTypeBox.Name, RewardTypeBox);
 			_controls.Add(frequencyBox1.Name, frequencyBox1);
 			_controls.Add(frequencyBox2.Name, frequencyBox2);
 			_controls.Add(frequencyBox3.Name, frequencyBox3);
@@ -112,51 +112,66 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				return;
 			}
 
-			switch (_pattern.LootType)
+			switch (_pattern.RewardType)
 			{
-				case LootType.Material:
+				case RewardType.Material:
 					(_controls["IdBox"] as TextBox).Text = GameContent.Materials.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 					break;
-				case LootType.Recipe:
+
+				case RewardType.Recipe:
 					(_controls["IdBox"] as TextBox).Text = GameContent.Recipes.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 					break;
-				case LootType.Artifact:
+
+				case RewardType.Artifact:
 					(_controls["IdBox"] as TextBox).Text = GameContent.Artifacts.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 					break;
-				case LootType.Blessing:
+
+				case RewardType.Blessing:
 					(_controls["IdBox"] as TextBox).Text = GameContent.Blessings.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+					break;
+
+				case RewardType.Ingot:
+					(_controls["IdBox"] as TextBox).Text = GameContent.Ingots.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 					break;
 			}
 		}
 
-		private void LootTypeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void RewardTypeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			if (!_controls.ContainsKey("NameBox"))
 			{
 				return;
 			}
 
-			switch ((LootType)Enum.Parse(typeof(LootType), (sender as ComboBox).SelectedValue.ToString()))
+			switch ((RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString()))
 			{
-				case LootType.Material:
+				case RewardType.Material:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Materials.Select(x=>x.Name);
 					(_controls["NameBox"] as ComboBox).SelectedValue = GameContent.Materials.FirstOrDefault(x=>x.Id == _pattern.LootId)?.Name;
 					break;
-				case LootType.Recipe:
+
+				case RewardType.Recipe:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Recipes.Select(x=>x.Name);
 					(_controls["NameBox"] as ComboBox).SelectedValue = GameContent.Recipes.FirstOrDefault(x=>x.Id == _pattern.LootId)?.Name;
 					break;
-				case LootType.Artifact:
+
+				case RewardType.Artifact:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Artifacts.Select(x=>x.Name);
 					(_controls["NameBox"] as ComboBox).SelectedValue = GameContent.Artifacts.FirstOrDefault(x=>x.Id == _pattern.LootId)?.Name;
 					break;
-				case LootType.Blessing:
+
+				case RewardType.Blessing:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Blessings.Select(x=>x.Name);
 					(_controls["NameBox"] as ComboBox).SelectedValue = GameContent.Blessings.FirstOrDefault(x=>x.Id == _pattern.LootId)?.Name;
 					break;
+
+				case RewardType.Ingot:
+					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Ingots.Select(x=>x.Name);
+					(_controls["NameBox"] as ComboBox).SelectedValue = GameContent.Ingots.FirstOrDefault(x=>x.Id == _pattern.LootId)?.Name;
+					break;
 			}
 
-			_pattern.LootType = (LootType)Enum.Parse(typeof(LootType), (sender as ComboBox).SelectedValue.ToString());
+			_pattern.RewardType = (RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString());
 		}
 
 		private void UpdateBossLootPattern()
@@ -164,7 +179,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			var oldPatternIndex = _boss.BossLootPatterns.IndexOf(_boss.BossLootPatterns.FirstOrDefault(x => x.LootId == _pattern.LootId));
 
 			_pattern.LootId = int.Parse((_controls["IdBox"] as TextBox).Text);
-			_pattern.LootType = (LootType)Enum.Parse(typeof(LootType), (_controls["LootTypeBox"] as ComboBox).SelectedValue.ToString());
+			_pattern.RewardType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
 			_pattern.Frequencies = new List<double>()
 			{
 				double.Parse((_controls["FrequencyBox1"] as TextBox).Text),

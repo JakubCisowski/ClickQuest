@@ -10,17 +10,17 @@ using System.Windows.Controls;
 
 namespace ClickQuest.ContentManager.UserInterface.Windows
 {
-	public partial class MonsterLootPatternWindow : Window
+	public partial class QuestRewardPatternWindow : Window
 	{
-		private Monster _monster;
-		private MonsterLootPattern _pattern;
+		private Quest _quest;
+		private QuestRewardPattern _pattern;
 		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 
-		public MonsterLootPatternWindow(Monster monster, MonsterLootPattern pattern)
+		public QuestRewardPatternWindow(Quest quest, QuestRewardPattern pattern)
 		{
 			InitializeComponent();
 
-			_monster = monster;
+			_quest = quest;
 			_pattern = pattern;
 
 			RefreshWindowControls();
@@ -35,7 +35,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			double gridWidth = this.ActualWidth;
 			var panel = new StackPanel() { Name = "MainInfoPanel" };
 
-			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.LootId.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
 			_controls.Add(idBox.Name, idBox);
 
 			var nameBox = new ComboBox() { Name = "NameBox", Margin = new Thickness(10) };
@@ -46,16 +46,12 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			RewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
 			RewardTypeBox.SelectedValue = _pattern.RewardType;
 
-			var frequencyBox = new TextBox() { Name = "FrequencyBox", Text = _pattern.Frequency.ToString(), Margin = new Thickness(10) };
-
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
 			HintAssist.SetHint(nameBox, "Name");
 			HintAssist.SetHint(RewardTypeBox, "RewardType");
-			HintAssist.SetHint(frequencyBox, "Frequency");
 
 			_controls.Add(RewardTypeBox.Name, RewardTypeBox);
-			_controls.Add(frequencyBox.Name, frequencyBox);
 
 			foreach (var elem in _controls)
 			{
@@ -132,54 +128,53 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			{
 				case RewardType.Material:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Materials.Select(x=>x.Name);
-					(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
+					(_controls["NameBox"] as ComboBox).SelectedValue = GameContent.Materials.FirstOrDefault(x=>x.Id == _pattern.Id)?.Name;
 					break;
 
 				case RewardType.Recipe:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Recipes.Select(x=>x.Name);
-					(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
+					(_controls["NameBox"] as ComboBox).SelectedValue = GameContent.Recipes.FirstOrDefault(x=>x.Id == _pattern.Id)?.Name;
 					break;
 
 				case RewardType.Artifact:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Artifacts.Select(x=>x.Name);
-					(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
+					(_controls["NameBox"] as ComboBox).SelectedValue = GameContent.Artifacts.FirstOrDefault(x=>x.Id == _pattern.Id)?.Name;
 					break;
 
 				case RewardType.Blessing:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Blessings.Select(x=>x.Name);
-					(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
+					(_controls["NameBox"] as ComboBox).SelectedValue = GameContent.Blessings.FirstOrDefault(x=>x.Id == _pattern.Id)?.Name;
 					break;
 
 				case RewardType.Ingot:
 					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Ingots.Select(x=>x.Name);
-					(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
+					(_controls["NameBox"] as ComboBox).SelectedValue = GameContent.Ingots.FirstOrDefault(x=>x.Id == _pattern.Id)?.Name;
 					break;
 			}
 
 			_pattern.RewardType = (RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString());
 		}
 
-		private void UpdateMonsterLootPattern()
+		private void UpdateQuestRewardPattern()
 		{
-			var oldPatternIndex = _monster.MonsterLootPatterns.IndexOf(_monster.MonsterLootPatterns.FirstOrDefault(x => x.LootId == _pattern.LootId));
+			var oldPatternIndex = _quest.QuestRewardPatterns.IndexOf(_quest.QuestRewardPatterns.FirstOrDefault(x => x.Id == _pattern.Id));
 
-			_pattern.LootId = int.Parse((_controls["IdBox"] as TextBox).Text);
+			_pattern.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
 			_pattern.RewardType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
-			_pattern.Frequency = double.Parse((_controls["FrequencyBox"] as TextBox).Text);
 
 			if (oldPatternIndex == -1)
 			{
-				_monster.MonsterLootPatterns.Add(_pattern);
+				_quest.QuestRewardPatterns.Add(_pattern);
 			}
 			else
 			{
-				_monster.MonsterLootPatterns[oldPatternIndex] = _pattern;
+				_quest.QuestRewardPatterns[oldPatternIndex] = _pattern;
 			}
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			UpdateMonsterLootPattern();
+			UpdateQuestRewardPattern();
 		}
 	}
 }

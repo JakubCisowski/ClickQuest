@@ -114,6 +114,14 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
 						(tabControl.SelectedContent as Grid)?.Children.Add(monstersPanel);
 						break;
+
+					case ContentType.Quests:
+						var questsPanel = new QuestsPanel();
+						_currentPanel = questsPanel;
+
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(questsPanel);
+						break;
 				}
 			}
 		}
@@ -165,6 +173,10 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				
 				case MonstersPanel monstersPanel:
 					monstersPanel.Save();
+					break;
+
+				case QuestsPanel questsPanel:
+					questsPanel.Save();
 					break;
 			}
 		}
