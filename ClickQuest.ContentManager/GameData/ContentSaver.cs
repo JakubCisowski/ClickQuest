@@ -23,8 +23,8 @@ namespace ClickQuest.ContentManager.GameData
 			SaveContent<Quest>(GameContent.Quests, QuestsFilePath);
 			SaveContent<Recipe>(GameContent.Recipes, RecipesFilePath);
 			SaveContent<Region>(GameContent.Regions, RegionsFilePath);
-			SaveContent<int>(GameContent.PriestOffer, PriestOfferFilePath);
-			SaveContent<int>(GameContent.ShopOffer, ShopOfferFilePath);
+			SaveContent<VendorPattern>(GameContent.PriestOffer, PriestOfferFilePath);
+			SaveContent<VendorPattern>(GameContent.ShopOffer, ShopOfferFilePath);
 		}
 
 		public static void SaveContent<T>(List<T> collection, string jsonFilePath)

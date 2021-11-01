@@ -23,8 +23,8 @@ namespace ClickQuest.ContentManager.GameData
 			GameContent.Quests = LoadContent<Quest>(QuestsFilePath);
 			GameContent.Recipes = LoadContent<Recipe>(RecipesFilePath);
 			GameContent.Regions = LoadContent<Region>(RegionsFilePath);
-			GameContent.PriestOffer = LoadContent<int>(PriestOfferFilePath);
-			GameContent.ShopOffer = LoadContent<int>(ShopOfferFilePath);
+			GameContent.PriestOffer = LoadContent<VendorPattern>(PriestOfferFilePath);
+			GameContent.ShopOffer = LoadContent<VendorPattern>(ShopOfferFilePath);
 		}
 
 		public static List<T> LoadContent<T>(string jsonFilePath)

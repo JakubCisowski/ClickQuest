@@ -97,6 +97,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Page Update="UserInterface\Panels\IngotsPanel - Copy.xaml">
+        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      </Page>
       <Page Update="UserInterface\Panels\MaterialsPanel.xaml">
         <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
         <SubType>Designer</SubType>
