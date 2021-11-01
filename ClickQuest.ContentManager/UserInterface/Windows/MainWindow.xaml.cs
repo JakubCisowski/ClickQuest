@@ -98,6 +98,14 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
 						(tabControl.SelectedContent as Grid)?.Children.Add(dungeonsPanel);
 						break;
+					
+					case ContentType.Ingots:
+						var ingotsPanel = new IngotsPanel();
+						_currentPanel = ingotsPanel;
+
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(ingotsPanel);
+						break;
 				}
 			}
 		}
@@ -141,6 +149,10 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 				case DungeonKeysPanel dungeonKeysPanel:
 					dungeonKeysPanel.Save();
+					break;
+				
+				case IngotsPanel ingotsPanel:
+					ingotsPanel.Save();
 					break;
 			}
 		}

@@ -10,6 +10,7 @@ namespace ClickQuest.ContentManager.GameData
 		public static List<Boss> Bosses { get; set; }
 		public static List<DungeonGroup> DungeonGroups { get; set; }
 		public static List<DungeonKey> DungeonKeys { get; set; }
+		public static List<Ingot> Ingots { get; set; }
 		public static List<Dungeon> Dungeons { get; set; }
 		public static List<Material> Materials { get; set; }
 		public static List<Monster> Monsters { get; set; }

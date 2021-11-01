@@ -18,6 +18,7 @@ namespace ClickQuest.ContentManager.GameData
 		public static string ShopOfferFilePath { get; set; }
 		public static string DungeonGroupsFilePath { get; set; }
 		public static string DungeonKeysFilePath { get; set; }
+		public static string IngotsFilePath { get; set; }
 
 		public static void CalculateGameAssetsFilePaths()
 		{
@@ -34,6 +35,7 @@ namespace ClickQuest.ContentManager.GameData
 			RegionsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"GameData\", @"GameAssets\", "Regions.json");
 			PriestOfferFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"GameData\", @"GameAssets\", "PriestOffer.json");
 			ShopOfferFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"GameData\", @"GameAssets\", "ShopOffer.json");
+			IngotsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"GameData\", @"GameAssets\", "Ingots.json");
 		}
 	}
 }
