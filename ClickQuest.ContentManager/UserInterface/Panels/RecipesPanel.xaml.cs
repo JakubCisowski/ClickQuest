@@ -239,7 +239,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Margin = new Thickness(10, 0, 0, 0),
 				FontStyle = FontStyles.Italic,
-				Text = $"[{ingredient.Id}]"
+				Text = $"[{ingredient.MaterialId}]"
 			};
 
 			var nameBlock = new TextBlock
@@ -248,7 +248,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				VerticalAlignment = VerticalAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Margin = new Thickness(80, 0, 0, 0),
-				Text = GameContent.Materials.FirstOrDefault(x => x.Id == ingredient.Id).Name
+				Text = GameContent.Materials.FirstOrDefault(x => x.Id == ingredient.MaterialId).Name
 			};
 
 			var quantityBlock = new TextBlock
@@ -327,14 +327,14 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			var ingredient = (sender as Button).Tag as Ingredient;
 
-			var result = MessageBox.Show($"Are you sure you want to delete ingredient of Id: {ingredient.Id}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			var result = MessageBox.Show($"Are you sure you want to delete ingredient of Id: {ingredient.MaterialId}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
 				return;
 			}
 
-			_dataContext.Ingredients.Remove(_dataContext.Ingredients.FirstOrDefault(x => x.Id == ingredient.Id));
+			_dataContext.Ingredients.Remove(_dataContext.Ingredients.FirstOrDefault(x => x.MaterialId == ingredient.MaterialId));
 
 			RefreshDynamicValuesPanel();
 		}

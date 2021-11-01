@@ -8,24 +8,14 @@
 	  "Description": "TestQuest1Description jd",
 	  "QuestRewardPatterns": [
 		{
-		  "Id": 1,
+		  "QuestRewardId": 1,
 		  "Quantity": 1,
-		  "RewardType": "Ingot"
+		  "QuestRewardType": "Ingot"
 		},
 		{
-		  "Id": 3,
+		  "QuestRewardId": 7,
 		  "Quantity": 1,
-		  "RewardType": "Material"
-		},
-		{
-		  "Id": 2,
-		  "Quantity": 1,
-		  "RewardType": "Ingot"
-		},
-		{
-		  "Id": 7,
-		  "Quantity": 1,
-		  "RewardType": "Material"
+		  "QuestRewardType": "Material"
 		}
 	  ]
 	},
@@ -38,24 +28,14 @@
 	  "Description": "TestQuest2Description. This ultra-long description was created to test the limits and boundaries of Microsoft and WPF. I wonder if this text will be wrapped and displayed properly.",
 	  "QuestRewardPatterns": [
 		{
-		  "Id": 1,
+		  "QuestRewardId": 1,
 		  "Quantity": 1,
-		  "RewardType": "Ingot"
+		  "QuestRewardType": "Ingot"
 		},
 		{
-		  "Id": 3,
+		  "QuestRewardId": 7,
 		  "Quantity": 1,
-		  "RewardType": "Material"
-		},
-		{
-		  "Id": 2,
-		  "Quantity": 1,
-		  "RewardType": "Ingot"
-		},
-		{
-		  "Id": 7,
-		  "Quantity": 1,
-		  "RewardType": "Material"
+		  "QuestRewardType": "Material"
 		}
 	  ]
 	},
@@ -68,24 +48,14 @@
 	  "Description": "TestQuest3Description",
 	  "QuestRewardPatterns": [
 		{
-		  "Id": 1,
+		  "QuestRewardId": 1,
 		  "Quantity": 1,
-		  "RewardType": "Ingot"
+		  "QuestRewardType": "Ingot"
 		},
 		{
-		  "Id": 3,
+		  "QuestRewardId": 7,
 		  "Quantity": 1,
-		  "RewardType": "Material"
-		},
-		{
-		  "Id": 2,
-		  "Quantity": 1,
-		  "RewardType": "Ingot"
-		},
-		{
-		  "Id": 7,
-		  "Quantity": 1,
-		  "RewardType": "Material"
+		  "QuestRewardType": "Material"
 		}
 	  ]
 	}

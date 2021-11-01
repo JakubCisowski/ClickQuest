@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.Interfaces;
+using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.UserInterface;

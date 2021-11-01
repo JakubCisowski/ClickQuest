@@ -1,13 +1,14 @@
-using System.Collections.Generic;
-using System.Linq;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Pages;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClickQuest.Game.Core.Enemies
 {

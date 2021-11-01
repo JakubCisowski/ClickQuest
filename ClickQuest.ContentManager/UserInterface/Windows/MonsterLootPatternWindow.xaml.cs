@@ -35,7 +35,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			double gridWidth = this.ActualWidth;
 			var panel = new StackPanel() { Name = "MainInfoPanel" };
 
-			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.LootId.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.MonsterLootId.ToString(), Margin = new Thickness(10), IsEnabled = false };
 			_controls.Add(idBox.Name, idBox);
 
 			var nameBox = new ComboBox() { Name = "NameBox", Margin = new Thickness(10) };
@@ -44,7 +44,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 			var RewardTypeBox = new ComboBox() { Name = "RewardTypeBox", ItemsSource = Enum.GetValues(typeof(RewardType)), Margin = new Thickness(10) };
 			RewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
-			RewardTypeBox.SelectedValue = _pattern.RewardType;
+			RewardTypeBox.SelectedValue = _pattern.MonsterLootType;
 
 			var frequencyBox = new TextBox() { Name = "FrequencyBox", Text = _pattern.Frequency.ToString(), Margin = new Thickness(10) };
 
@@ -97,7 +97,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				return;
 			}
 
-			switch (_pattern.RewardType)
+			switch (_pattern.MonsterLootType)
 			{
 				case RewardType.Material:
 					(_controls["IdBox"] as TextBox).Text = GameContent.Materials.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
@@ -151,17 +151,17 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 					break;
 			}
 
-			_pattern.RewardType = (RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString());
+			_pattern.MonsterLootType = (RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString());
 			
 			(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
 		}
 
 		private void UpdateMonsterLootPattern()
 		{
-			var oldPatternIndex = _monster.MonsterLootPatterns.IndexOf(_monster.MonsterLootPatterns.FirstOrDefault(x => x.LootId == _pattern.LootId));
+			var oldPatternIndex = _monster.MonsterLootPatterns.IndexOf(_monster.MonsterLootPatterns.FirstOrDefault(x => x.MonsterLootId == _pattern.MonsterLootId));
 
-			_pattern.LootId = int.Parse((_controls["IdBox"] as TextBox).Text);
-			_pattern.RewardType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
+			_pattern.MonsterLootId = int.Parse((_controls["IdBox"] as TextBox).Text);
+			_pattern.MonsterLootType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
 			_pattern.Frequency = double.Parse((_controls["FrequencyBox"] as TextBox).Text);
 
 			if (oldPatternIndex == -1)

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.GameData;
+using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.UserInterface;
@@ -10,7 +11,7 @@ namespace ClickQuest.Game.Core.Items
 {
 	public class Recipe : Item
 	{
-		public List<Ingredient> Ingredients { get; set; }
+		public List<IngredientPattern> Ingredients { get; set; }
 
 		public string RequirementsDescription { get; private set; }
 

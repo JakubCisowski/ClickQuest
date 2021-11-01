@@ -9,6 +9,8 @@ using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Core.Items.Patterns;
+using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Places;
 using ClickQuest.Game.Extensions.Validation;
 
@@ -113,8 +115,8 @@ namespace ClickQuest.Game.Core.GameData
 				{
 					monster.MonsterLootPatterns.Add(new MonsterLootPattern
 					{
-						LootId = 0,
-						RewardType = RewardType.Material,
+						MonsterLootId = 0,
+						MonsterLootType = RewardType.Material,
 						Frequency = 1.0 - sumOfFrequencies
 					});
 				}

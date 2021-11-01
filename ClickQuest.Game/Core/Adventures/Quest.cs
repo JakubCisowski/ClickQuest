@@ -3,6 +3,8 @@ using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Core.Items.Patterns;
+using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.Quests;
@@ -143,30 +145,30 @@ namespace ClickQuest.Game.Core.Adventures
 			{
 				string itemName = "";
 
-				switch (reward.RewardType)
+				switch (reward.QuestRewardType)
 				{
 					case RewardType.Material:
-						itemName = GameAssets.Materials.FirstOrDefault(x => x.Id == reward.Id).Name;
+						itemName = GameAssets.Materials.FirstOrDefault(x => x.Id == reward.QuestRewardId).Name;
 						break;
 
 					case RewardType.Recipe:
-						itemName = GameAssets.Recipes.FirstOrDefault(x => x.Id == reward.Id).Name;
+						itemName = GameAssets.Recipes.FirstOrDefault(x => x.Id == reward.QuestRewardId).Name;
 						break;
 
 					case RewardType.Artifact:
-						itemName = GameAssets.Artifacts.FirstOrDefault(x => x.Id == reward.Id).Name;
+						itemName = GameAssets.Artifacts.FirstOrDefault(x => x.Id == reward.QuestRewardId).Name;
 						break;
 
 					case RewardType.Blessing:
-						itemName = GameAssets.Blessings.FirstOrDefault(x => x.Id == reward.Id).Name;
+						itemName = GameAssets.Blessings.FirstOrDefault(x => x.Id == reward.QuestRewardId).Name;
 						break;
 
 					case RewardType.Ingot:
-						itemName = GameAssets.Ingots.FirstOrDefault(x => x.Id == reward.Id).Name;
+						itemName = GameAssets.Ingots.FirstOrDefault(x => x.Id == reward.QuestRewardId).Name;
 						break;
 				}
 
-				RewardsDescription += $"\n - {reward.Quantity}x {itemName} ({reward.RewardType.ToString()})";
+				RewardsDescription += $"\n - {reward.Quantity}x {itemName} ({reward.QuestRewardType.ToString()})";
 			}
 		}
 
@@ -175,37 +177,37 @@ namespace ClickQuest.Game.Core.Adventures
 			AlertBox.Show($"Quest {Name} finished.\nRewards granted.", MessageBoxButton.OK);
 			User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.QuestsCompleted]++;
 
-			foreach (var materialRewardPattern in QuestRewardPatterns.Where(x => x.RewardType == RewardType.Material))
+			foreach (var materialRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Material))
 			{
-				var material = GameAssets.Materials.FirstOrDefault(x => x.Id == materialRewardPattern.Id);
+				var material = GameAssets.Materials.FirstOrDefault(x => x.Id == materialRewardPattern.QuestRewardId);
 				material.AddItem(materialRewardPattern.Quantity);
 				material.AddAchievementProgress();
 			}
 
-			foreach (var artifactRewardPattern in QuestRewardPatterns.Where(x => x.RewardType == RewardType.Artifact))
+			foreach (var artifactRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Artifact))
 			{
-				var artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == artifactRewardPattern.Id);
+				var artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == artifactRewardPattern.QuestRewardId);
 				artifact.AddItem(artifactRewardPattern.Quantity);
 				artifact.AddAchievementProgress();
 			}
 
-			foreach (var recipeRewardPattern in QuestRewardPatterns.Where(x => x.RewardType == RewardType.Recipe))
+			foreach (var recipeRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Recipe))
 			{
-				var recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == recipeRewardPattern.Id);
+				var recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == recipeRewardPattern.QuestRewardId);
 				recipe.AddItem(recipeRewardPattern.Quantity);
 				recipe.AddAchievementProgress();
 			}
 
-			foreach (var ingotRewardPattern in QuestRewardPatterns.Where(x => x.RewardType == RewardType.Ingot))
+			foreach (var ingotRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Ingot))
 			{
-				var ingot = GameAssets.Ingots.FirstOrDefault(x => x.Id == ingotRewardPattern.Id);
+				var ingot = GameAssets.Ingots.FirstOrDefault(x => x.Id == ingotRewardPattern.QuestRewardId);
 				ingot.AddItem(ingotRewardPattern.Quantity);
 				ingot.AddAchievementProgress();
 			}
 
-			foreach (var blessingRewardPattern in QuestRewardPatterns.Where(x => x.RewardType == RewardType.Blessing))
+			foreach (var blessingRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Blessing))
 			{
-				Blessing.AskUserAndSwapBlessing(blessingRewardPattern.Id);
+				Blessing.AskUserAndSwapBlessing(blessingRewardPattern.QuestRewardId);
 			}
 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();

@@ -1,57 +1,57 @@
 [
-  {
-    "Id": 1,
-    "Name": "Minor Enhancement",
-    "Type": "ClickDamage",
-    "Rarity": "General",
-    "Duration": 600,
-    "Description": "Gives 10 Click Damage.",
-    "Lore": "Your weapon has been blessed, increasing the damage it deals.",
-    "Buff": 10,
-    "Value": 1
-  },
-  {
-    "Id": 2,
-    "Name": "Minor Enrichment",
-    "Type": "PoisonDamage",
-    "Rarity": "General",
-    "Duration": 600,
-    "Description": "Gives 5 Poison Damage.",
-    "Lore": "Your weapon has been blessed, inflicting poison on your enemies.",
-    "Buff": 5,
-    "Value": 1
-  },
-  {
-    "Id": 3,
-    "Name": "Minor Blessing of Deathblow",
-    "Type": "CritDamage",
-    "Rarity": "Fine",
-    "Duration": 300,
-    "Description": "Gives 10% Critical Click Damage.",
-    "Lore": "Blessed by the priest, your strikes are now able to bring a more painful death on your enemies.",
-    "Buff": 10,
-    "Value": 1
-  },
-  {
-    "Id": 4,
-    "Name": "Blessing of the Desolation",
-    "Type": "AuraDamage",
-    "Rarity": "Exceptional",
-    "Duration": 300,
-    "Description": "Gives 25% Aura Damage.",
-    "Lore": "Your recent encounter in the Pyramid of Truth has left you feeling stronger, able to obliterate foes with much less effort.",
-    "Buff": 25,
-    "Value": 1
-  },
-  {
-    "Id": 5,
-    "Name": "Blessing of the Damned",
-    "Type": "CritDamage",
-    "Rarity": "Masterwork",
-    "Duration": 300,
-    "Description": "Gives 50% Critical Click Damage.",
-    "Lore": "You have been infused by death itself, granting you the power you cause fatal damage to all foes around.",
-    "Buff": 50,
-    "Value": 1
-  }
+	{
+		"Id": 1,
+		"Name": "Minor Enhancement",
+		"Type": "ClickDamage",
+		"Rarity": 0,
+		"Duration": 600,
+		"Description": "Gives 10 Click Damage.",
+		"Lore": "Your weapon has been blessed, increasing the damage it deals.",
+		"Buff": 10,
+		"Value": 1
+	},
+	{
+		"Id": 2,
+		"Name": "Minor Enrichment",
+		"Type": "PoisonDamage",
+		"Rarity": 0,
+		"Duration": 600,
+		"Description": "Gives 5 Poison Damage.",
+		"Lore": "Your weapon has been blessed, inflicting poison on your enemies.",
+		"Buff": 5,
+		"Value": 1
+	},
+	{
+		"Id": 3,
+		"Name": "Minor Blessing of Deathblow",
+		"Type": "CritDamage",
+		"Rarity": 1,
+		"Duration": 300,
+		"Description": "Gives 10% Critical Click Damage.",
+		"Lore": "Blessed by the priest, your strikes are now able to bring a more painful death on your enemies.",
+		"Buff": 10,
+		"Value": 1
+	},
+	{
+		"Id": 4,
+		"Name": "Blessing of the Desolation",
+		"Type": "AuraDamage",
+		"Rarity": 3,
+		"Duration": 300,
+		"Description": "Gives 25% Aura Damage.",
+		"Lore": "Your recent encounter in the Pyramid of Truth has left you feeling stronger, able to obliterate foes with much less effort.",
+		"Buff": 25,
+		"Value": 1
+	},
+	{
+		"Id": 5,
+		"Name": "Blessing of the Damned",
+		"Type": "CritDamage",
+		"Rarity": 5,
+		"Duration": 300,
+		"Description": "Gives 50% Critical Click Damage.",
+		"Lore": "You have been infused by death itself, granting you the power you cause fatal damage to all foes around.",
+		"Buff": 50,
+		"Value": 1
+	}
 ]

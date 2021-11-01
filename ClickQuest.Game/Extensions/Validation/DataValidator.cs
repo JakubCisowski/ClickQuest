@@ -7,6 +7,7 @@ using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Places;
 
 namespace ClickQuest.Game.Extensions.Validation
@@ -93,7 +94,7 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckReferencesCorrectness()
 		{
-			GameAssets.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameAssets.Materials.Select(y => y.Id), x.Ingredients.Select(z => z.Id)));
+			GameAssets.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameAssets.Materials.Select(y => y.Id), x.Ingredients.Select(z => z.MaterialId)));
 			GameAssets.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameAssets.Artifacts.Select(y => y.Id), new[] {x.ArtifactId}));
 			GameAssets.Dungeons.ForEach(x => CheckReferencedIds(x.Name, GameAssets.Bosses.Select(y => y.Id), x.BossIds));
 
@@ -108,11 +109,11 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckQuestReferences(Quest quest)
 		{
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Material)", GameAssets.Materials.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.RewardType == RewardType.Material).Select(y=>y.Id));
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Artifact)", GameAssets.Artifacts.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.RewardType == RewardType.Artifact).Select(y=>y.Id));
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Recipe)", GameAssets.Recipes.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.RewardType == RewardType.Recipe).Select(y=>y.Id));
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Blessing)", GameAssets.Blessings.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.RewardType == RewardType.Blessing).Select(y=>y.Id));
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Ingot)", GameAssets.Ingots.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.RewardType == RewardType.Ingot).Select(y=>y.Id));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Material)", GameAssets.Materials.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Material).Select(y=>y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Artifact)", GameAssets.Artifacts.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Artifact).Select(y=>y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Recipe)", GameAssets.Recipes.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Recipe).Select(y=>y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Blessing)", GameAssets.Blessings.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Blessing).Select(y=>y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Ingot)", GameAssets.Ingots.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Ingot).Select(y=>y.QuestRewardId));
 		}
 
 		private static void CheckReferencedIds(string objectName, IEnumerable<int> availableIds, IEnumerable<int> requiredIds)
@@ -135,13 +136,13 @@ namespace ClickQuest.Game.Extensions.Validation
 		{
 			foreach (var lootPattern in boss.BossLootPatterns)
 			{
-				if (lootPattern.RewardType == RewardType.Blessing)
+				if (lootPattern.BossLootType == RewardType.Blessing)
 				{
-					var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == lootPattern.LootId);
+					var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == lootPattern.BossLootId);
 
 					if (blessing is null)
 					{
-						string message = $"Following referenced blessing Id's in '{boss.Name}' is not available: " + lootPattern.LootId;
+						string message = $"Following referenced blessing Id's in '{boss.Name}' is not available: " + lootPattern.BossLootId;
 						Logger.Log(message);
 					}
 				}
@@ -151,7 +152,7 @@ namespace ClickQuest.Game.Extensions.Validation
 
 					if (item is null)
 					{
-						string message = $"Following referenced item Id's in '{boss.Name}' is not available: " + lootPattern.LootId;
+						string message = $"Following referenced item Id's in '{boss.Name}' is not available: " + lootPattern.BossLootId;
 						Logger.Log(message);
 					}
 				}
@@ -166,7 +167,7 @@ namespace ClickQuest.Game.Extensions.Validation
 
 				if (item is null)
 				{
-					string message = $"Following referenced item Id's in '{monster.Name}' is not available: " + lootPattern.LootId;
+					string message = $"Following referenced item Id's in '{monster.Name}' is not available: " + lootPattern.MonsterLootId;
 					Logger.Log(message);
 				}
 			}

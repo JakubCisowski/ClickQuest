@@ -246,7 +246,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Margin = new Thickness(10, 0, 0, 0),
 				FontStyle = FontStyles.Italic,
-				Text = $"[{pattern.Id}]"
+				Text = $"[{pattern.QuestRewardId}]"
 			};
 
 			var itemTypeBlock = new TextBlock
@@ -255,7 +255,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				VerticalAlignment = VerticalAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Margin = new Thickness(80, 0, 0, 0),
-				Text = pattern.RewardType.ToString()
+				Text = pattern.QuestRewardType.ToString()
 			};
 
 			var nameBlock = new TextBlock
@@ -266,26 +266,26 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Margin = new Thickness(80, 0, 0, 0)
 			};
 
-			switch (pattern.RewardType)
+			switch (pattern.QuestRewardType)
 			{
 				case RewardType.Material:
-					nameBlock.Text = GameContent.Materials.FirstOrDefault(x => x.Id == pattern.Id).Name;
+					nameBlock.Text = GameContent.Materials.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
 					break;
 
 				case RewardType.Recipe:
-					nameBlock.Text = GameContent.Recipes.FirstOrDefault(x => x.Id == pattern.Id).Name;
+					nameBlock.Text = GameContent.Recipes.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
 					break;
 
 				case RewardType.Artifact:
-					nameBlock.Text = GameContent.Artifacts.FirstOrDefault(x => x.Id == pattern.Id).Name;
+					nameBlock.Text = GameContent.Artifacts.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
 					break;
 
 				case RewardType.Blessing:
-					nameBlock.Text = GameContent.Blessings.FirstOrDefault(x => x.Id == pattern.Id).Name;
+					nameBlock.Text = GameContent.Blessings.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
 					break;
 
 				case RewardType.Ingot:
-					nameBlock.Text = GameContent.Ingots.FirstOrDefault(x=>x.Id == pattern.Id).Name;
+					nameBlock.Text = GameContent.Ingots.FirstOrDefault(x=>x.Id == pattern.QuestRewardId).Name;
 					break;
 			}
 
@@ -355,7 +355,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			var pattern = (sender as Button).Tag as QuestRewardPattern;
 
-			var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {pattern.Id}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {pattern.QuestRewardId}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{

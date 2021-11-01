@@ -4,7 +4,7 @@ namespace ClickQuest.ContentManager.GameData.Models
 {
 	public class Ingredient
 	{
-		public int Id { get; set; }
+		public int MaterialId { get; set; }
 		public int Quantity { get; set; }
 	}
 	

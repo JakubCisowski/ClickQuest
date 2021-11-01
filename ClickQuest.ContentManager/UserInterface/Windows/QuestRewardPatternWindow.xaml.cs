@@ -35,7 +35,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			double gridWidth = this.ActualWidth;
 			var panel = new StackPanel() { Name = "MainInfoPanel" };
 
-			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.QuestRewardId.ToString(), Margin = new Thickness(10), IsEnabled = false };
 			_controls.Add(idBox.Name, idBox);
 
 			var nameBox = new ComboBox() { Name = "NameBox", Margin = new Thickness(10) };
@@ -44,7 +44,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 			var rewardTypeBox = new ComboBox() { Name = "RewardTypeBox", ItemsSource = Enum.GetValues(typeof(RewardType)), Margin = new Thickness(10) };
 			rewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
-			rewardTypeBox.SelectedValue = _pattern.RewardType;
+			rewardTypeBox.SelectedValue = _pattern.QuestRewardType;
 
 			var quantityBox = new TextBox() { Name = "QuantityBox", Text = _pattern.Quantity.ToString(), Margin = new Thickness(10) };
 
@@ -97,7 +97,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				return;
 			}
 
-			switch (_pattern.RewardType)
+			switch (_pattern.QuestRewardType)
 			{
 				case RewardType.Material:
 					(_controls["IdBox"] as TextBox).Text = GameContent.Materials.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
@@ -151,17 +151,17 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 					break;
 			}
 
-			_pattern.RewardType = (RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString());
+			_pattern.QuestRewardType = (RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString());
 
 			(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
 		}
 
 		private void UpdateQuestRewardPattern()
 		{
-			var oldPatternIndex = _quest.QuestRewardPatterns.IndexOf(_quest.QuestRewardPatterns.FirstOrDefault(x => x.Id == _pattern.Id));
+			var oldPatternIndex = _quest.QuestRewardPatterns.IndexOf(_quest.QuestRewardPatterns.FirstOrDefault(x => x.QuestRewardId == _pattern.QuestRewardId));
 
-			_pattern.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
-			_pattern.RewardType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
+			_pattern.QuestRewardId = int.Parse((_controls["IdBox"] as TextBox).Text);
+			_pattern.QuestRewardType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
 			_pattern.Quantity = int.Parse((_controls["QuantityBox"] as TextBox).Text);
 
 			if (oldPatternIndex == -1)

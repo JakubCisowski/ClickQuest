@@ -61,6 +61,15 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="UserInterface\Panels\IngotsPanel - Copy %282%29.xaml.cs">
+        <DependentUpon>IngotsPanel.xaml.cs</DependentUpon>
+      </Compile>
+      <Compile Update="UserInterface\Panels\IngotsPanel - Copy - Copy.xaml.cs">
+        <DependentUpon>IngotsPanel - Copy.xaml.cs</DependentUpon>
+      </Compile>
+      <Compile Update="UserInterface\Panels\IngotsPanel - Copy.xaml.cs">
+        <DependentUpon>IngotsPanel.xaml.cs</DependentUpon>
+      </Compile>
       <Compile Update="UserInterface\Panels\MaterialsPanel.xaml.cs">
         <SubType>Code</SubType>
       </Compile>

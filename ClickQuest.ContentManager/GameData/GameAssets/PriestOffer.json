@@ -1,5 +1,12 @@
 [
-  1,
-  2,
-  3
+	{
+		"Id":1,
+		"RewardType": "Blessing",
+		"Value": 0
+	},
+	{
+		"Id":2,
+		"RewardType": "Blessing",
+		"Value": 0
+	}
 ]

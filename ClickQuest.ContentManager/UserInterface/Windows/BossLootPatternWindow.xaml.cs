@@ -35,7 +35,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			double gridWidth = this.ActualWidth;
 			var panel = new StackPanel() { Name = "MainInfoPanel" };
 
-			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.LootId.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.BossLootId.ToString(), Margin = new Thickness(10), IsEnabled = false };
 			_controls.Add(idBox.Name, idBox);
 
 			var nameBox = new ComboBox() { Name = "NameBox", Margin = new Thickness(10) };
@@ -44,7 +44,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 			var RewardTypeBox = new ComboBox() { Name = "RewardTypeBox", ItemsSource = Enum.GetValues(typeof(RewardType)), Margin = new Thickness(10) };
 			RewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
-			RewardTypeBox.SelectedValue = _pattern.RewardType;
+			RewardTypeBox.SelectedValue = _pattern.BossLootType;
 
 			var frequencyBox1 = new TextBox() { Name = "FrequencyBox1", Text = _pattern.Frequencies[0].ToString(), Margin = new Thickness(10) };
 			var frequencyBox2 = new TextBox() { Name = "FrequencyBox2", Text = _pattern.Frequencies[1].ToString(), Margin = new Thickness(10) };
@@ -112,7 +112,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				return;
 			}
 
-			switch (_pattern.RewardType)
+			switch (_pattern.BossLootType)
 			{
 				case RewardType.Material:
 					(_controls["IdBox"] as TextBox).Text = GameContent.Materials.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
@@ -166,17 +166,17 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 					break;
 			}
 
-			_pattern.RewardType = (RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString());
+			_pattern.BossLootType = (RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString());
 
 			(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
 		}
 
 		private void UpdateBossLootPattern()
 		{
-			var oldPatternIndex = _boss.BossLootPatterns.IndexOf(_boss.BossLootPatterns.FirstOrDefault(x => x.LootId == _pattern.LootId));
+			var oldPatternIndex = _boss.BossLootPatterns.IndexOf(_boss.BossLootPatterns.FirstOrDefault(x => x.BossLootId == _pattern.BossLootId));
 
-			_pattern.LootId = int.Parse((_controls["IdBox"] as TextBox).Text);
-			_pattern.RewardType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
+			_pattern.BossLootId = int.Parse((_controls["IdBox"] as TextBox).Text);
+			_pattern.BossLootType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
 			_pattern.Frequencies = new List<double>()
 			{
 				double.Parse((_controls["FrequencyBox1"] as TextBox).Text),

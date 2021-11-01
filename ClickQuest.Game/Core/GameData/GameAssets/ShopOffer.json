@@ -1,13 +1,12 @@
 [
-	14,
-	15,
-	8,
-	9,
-	11,
-	12,
-	10,
-	16,
-	18,
-	17,
-	13
+	{
+		"Id":14,
+		"RewardType": "Material",
+		"Value": 2
+	},
+	{
+		"Id":2,
+		"RewardType": "Ingot",
+		"Value": 1
+	}
 ]

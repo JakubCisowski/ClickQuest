@@ -1,56 +1,44 @@
 [
-  {
-    "Id": 1,
-    "Name": "General dungeons",
-    "Color": "Gray",
-    "Description": "GeneralDGDesc",
-    "KeyRequirementRarities": [
-      "General"
-    ]
-  },
-  {
-    "Id": 2,
-    "Name": "Fine dungeons",
-    "Color": "White",
-    "Description": "FineDGDesc",
-    "KeyRequirementRarities": [
-      "Fine"
-    ]
-  },
-  {
-    "Id": 3,
-    "Name": "Superior dungeons",
-    "Color": "Green",
-    "Description": "SuperiorDGDesc",
-    "KeyRequirementRarities": [
-      "Superior"
-    ]
-  },
-  {
-    "Id": 4,
-    "Name": "Exceptional dungeons",
-    "Color": "Blue",
-    "Description": "ExceptionalDGDesc",
-    "KeyRequirementRarities": [
-      "Exceptional"
-    ]
-  },
-  {
-    "Id": 5,
-    "Name": "Masterwork dungeons",
-    "Color": "Purple",
-    "Description": "MasterworkDGDesc",
-    "KeyRequirementRarities": [
-      "Mythic"
-    ]
-  },
-  {
-    "Id": 6,
-    "Name": "Mythic dungeons",
-    "Color": "Gold",
-    "Description": "MythicDGDesc",
-    "KeyRequirementRarities": [
-      "Masterwork"
-    ]
-  }
+	{
+		"Id": 1,
+		"Name": "General dungeons",
+		"Color": "Gray",
+		"Description": "GeneralDGDesc",
+		"KeyRequirementRarities": [ 0 ]
+	},
+	{
+		"Id": 2,
+		"Name": "Fine dungeons",
+		"Color": "White",
+		"Description": "FineDGDesc",
+		"KeyRequirementRarities": [ 1 ]
+	},
+	{
+		"Id": 3,
+		"Name": "Superior dungeons",
+		"Color": "Green",
+		"Description": "SuperiorDGDesc",
+		"KeyRequirementRarities": [ 2 ]
+	},
+	{
+		"Id": 4,
+		"Name": "Exceptional dungeons",
+		"Color": "Blue",
+		"Description": "ExceptionalDGDesc",
+		"KeyRequirementRarities": [ 3 ]
+	},
+	{
+		"Id": 5,
+		"Name": "Masterwork dungeons",
+		"Color": "Purple",
+		"Description": "MasterworkDGDesc",
+		"KeyRequirementRarities": [ 4 ]
+	},
+	{
+		"Id": 6,
+		"Name": "Mythic dungeons",
+		"Color": "Gold",
+		"Description": "MythicDGDesc",
+		"KeyRequirementRarities": [ 5 ]
+	}
 ]

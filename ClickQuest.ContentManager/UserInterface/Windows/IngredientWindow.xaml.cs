@@ -35,10 +35,10 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			double gridWidth = this.ActualWidth;
 			var panel = new StackPanel() { Name = "MainInfoPanel" };
 
-			var idBox = new TextBox() { Name = "IdBox", Text = _ingredient.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var idBox = new TextBox() { Name = "IdBox", Text = _ingredient.MaterialId.ToString(), Margin = new Thickness(10), IsEnabled = false };
 
 			var nameBox = new ComboBox() { Name = "NameBox", ItemsSource = GameContent.Materials.Select(x => x.Name), Margin = new Thickness(10) };
-			nameBox.SelectedValue = GameContent.Materials.FirstOrDefault(x => x.Id == _ingredient.Id)?.Name;
+			nameBox.SelectedValue = GameContent.Materials.FirstOrDefault(x => x.Id == _ingredient.MaterialId)?.Name;
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 
 			var quantityBox = new TextBox() { Name = "QuantityBox", Text = _ingredient.Quantity.ToString(), Margin = new Thickness(10) };
@@ -85,9 +85,9 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 		private void UpdateIngredient()
 		{
-			var oldIngredientIndex = _recipe.Ingredients.IndexOf(_recipe.Ingredients.FirstOrDefault(x => x.Id == _ingredient.Id));
+			var oldIngredientIndex = _recipe.Ingredients.IndexOf(_recipe.Ingredients.FirstOrDefault(x => x.MaterialId == _ingredient.MaterialId));
 
-			_ingredient.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
+			_ingredient.MaterialId = int.Parse((_controls["IdBox"] as TextBox).Text);
 			_ingredient.Quantity = int.Parse((_controls["QuantityBox"] as TextBox).Text);
 
 			if (oldIngredientIndex == -1)
