@@ -8,9 +8,9 @@
   },
   {
     "Id": 1,
-    "Name": "dsfd",
+    "Name": "Fine ingot",
     "Rarity": "Fine",
-    "Description": "[...]sdsdfsdf",
+    "Description": "[...]",
     "Value": 1
   },
   {
@@ -40,12 +40,5 @@
     "Rarity": "Masterwork",
     "Description": "[...]",
     "Value": 1
-  },
-  {
-    "Id": 6,
-    "Name": "xcfxdfg",
-    "Rarity": "General",
-    "Description": "",
-    "Value": 0
   }
 ]

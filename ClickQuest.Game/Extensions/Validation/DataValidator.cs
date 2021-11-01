@@ -65,9 +65,9 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckAllFrequenciesCorrectness()
 		{
-			GameAssets.Monsters.ForEach(x => CheckFrequencySum(x.Name, x.Loot.Select(y => y.Frequency)));
+			GameAssets.Monsters.ForEach(x => CheckFrequencySum(x.Name, x.MonsterLootPatterns.Select(y => y.Frequency)));
 			GameAssets.Regions.ForEach(x => CheckFrequencySum(x.Name, x.Monsters.Select(y => y.Frequency)));
-			GameAssets.Bosses.ForEach(x => x.BossLoot.ForEach(y => CheckIfFrequenciesAreValid(x.Name, y.Frequencies)));
+			GameAssets.Bosses.ForEach(x => x.BossLootPatterns.ForEach(y => CheckIfFrequenciesAreValid(x.Name, y.Frequencies)));
 		}
 
 		private static void CheckFrequencySum(string objectName, IEnumerable<double> frequencies)
@@ -132,7 +132,7 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckBossReferences(Boss boss)
 		{
-			foreach (var lootPattern in boss.BossLoot)
+			foreach (var lootPattern in boss.BossLootPatterns)
 			{
 				if (lootPattern.LootType == LootType.Blessing)
 				{
@@ -159,7 +159,7 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckMonsterReferences(Monster monster)
 		{
-			foreach (var lootPattern in monster.Loot)
+			foreach (var lootPattern in monster.MonsterLootPatterns)
 			{
 				var item = lootPattern.Item;
 

@@ -36,12 +36,12 @@
     "Id": 4,
     "Name": "Blessing of the Desolation",
     "Type": "AuraDamage",
-    "Rarity": "Mythic",
-    "Duration": 3000,
+    "Rarity": "Exceptional",
+    "Duration": 300,
     "Description": "Gives 25% Aura Damage.",
-    "Lore": "jd Your recent encounter in the Pyramid of Truth has left you feeling stronger, able to obliterate foes with much less effort.",
-    "Buff": 250,
-    "Value": 123
+    "Lore": "Your recent encounter in the Pyramid of Truth has left you feeling stronger, able to obliterate foes with much less effort.",
+    "Buff": 25,
+    "Value": 1
   },
   {
     "Id": 5,

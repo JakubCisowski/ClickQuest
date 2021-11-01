@@ -59,9 +59,8 @@
     "Background": "/example2.png",
     "Description": "This is the big, circular chapel in the middle of the Cemetery. On the far side of the room you see a throne with a large, undead creature sitting on it. The creature is playing with a gigantic scythe. In front of it, there is another enemy \u2013 a lich \u2013 kneeling and whispering unintelligible chants.",
     "BossIds": [
-      1,
-      10,
-      9
+      9,
+      10
     ]
   }
 ]

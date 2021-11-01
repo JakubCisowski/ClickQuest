@@ -78,6 +78,10 @@
     "ArtifactId": 13,
     "Ingredients": [
       {
+        "Id": 18,
+        "Quantity": 10
+      },
+      {
         "Id": 10,
         "Quantity": 10
       },
@@ -126,20 +130,16 @@
   },
   {
     "Id": 6,
-    "ArtifactId": 16,
+    "ArtifactId": 19,
     "Ingredients": [
       {
         "Id": 18,
-        "Quantity": 11
-      },
-      {
-        "Id": 3,
-        "Quantity": 100
+        "Quantity": 10
       }
     ],
     "Name": "Recipe: Twin Kamas",
-    "Rarity": "Masterwork",
-    "Value": 100
+    "Rarity": "Exceptional",
+    "Value": 1
   },
   {
     "Id": 7,
@@ -296,31 +296,5 @@
     "Name": "Recipe: Toxic Amulet",
     "Rarity": "Exceptional",
     "Value": 1
-  },
-  {
-    "Id": 19,
-    "ArtifactId": 0,
-    "Ingredients": [
-      {
-        "Id": 3,
-        "Quantity": 123
-      }
-    ],
-    "Name": "",
-    "Rarity": "General",
-    "Value": 0
-  },
-  {
-    "Id": 20,
-    "ArtifactId": 7,
-    "Ingredients": [
-      {
-        "Id": 1,
-        "Quantity": 120
-      }
-    ],
-    "Name": "asdf",
-    "Rarity": "General",
-    "Value": 0
   }
 ]

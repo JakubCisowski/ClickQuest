@@ -107,11 +107,11 @@ namespace ClickQuest.Game.Core.GameData
 		{
 			foreach (var monster in GameAssets.Monsters)
 			{
-				double sumOfFrequencies = monster.Loot.Sum(x => x.Frequency);
+				double sumOfFrequencies = monster.MonsterLootPatterns.Sum(x => x.Frequency);
 
 				if (sumOfFrequencies < 1.0)
 				{
-					monster.Loot.Add(new MonsterLootPattern
+					monster.MonsterLootPatterns.Add(new MonsterLootPattern
 					{
 						LootId = 0,
 						LootType = LootType.Material,

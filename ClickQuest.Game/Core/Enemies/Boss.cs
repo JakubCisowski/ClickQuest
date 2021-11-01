@@ -11,7 +11,7 @@ namespace ClickQuest.Game.Core.Enemies
 {
 	public class Boss : Enemy
 	{
-		public List<BossLootPattern> BossLoot { get; set; }
+		public List<BossLootPattern> BossLootPatterns { get; set; }
 
 		public override int CurrentHealth
 		{
@@ -52,7 +52,7 @@ namespace ClickQuest.Game.Core.Enemies
 			copy.CurrentHealth = Health;
 			copy.Description = Description;
 			copy.CurrentHealthProgress = CurrentHealthProgress;
-			copy.BossLoot = BossLoot;
+			copy.BossLootPatterns = BossLootPatterns;
 
 			return copy;
 		}
@@ -84,7 +84,7 @@ namespace ClickQuest.Game.Core.Enemies
 			// 2. Iterate through every possible loot.
 			string lootText = "Experience gained: " + experienceGained + " \n" + "Loot: \n";
 
-			foreach (var loot in BossLoot)
+			foreach (var loot in BossLootPatterns)
 			{
 				int itemIntegerCount = (int) loot.Frequencies[threshold];
 

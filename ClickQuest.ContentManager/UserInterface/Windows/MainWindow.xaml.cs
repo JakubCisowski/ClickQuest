@@ -106,6 +106,14 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
 						(tabControl.SelectedContent as Grid)?.Children.Add(ingotsPanel);
 						break;
+
+					case ContentType.Monsters:
+						var monstersPanel = new MonstersPanel();
+						_currentPanel = monstersPanel;
+
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(monstersPanel);
+						break;
 				}
 			}
 		}
@@ -153,6 +161,10 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				
 				case IngotsPanel ingotsPanel:
 					ingotsPanel.Save();
+					break;
+				
+				case MonstersPanel monstersPanel:
+					monstersPanel.Save();
 					break;
 			}
 		}

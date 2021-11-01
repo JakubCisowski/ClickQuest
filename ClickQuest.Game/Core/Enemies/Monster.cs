@@ -13,7 +13,7 @@ namespace ClickQuest.Game.Core.Enemies
 {
 	public class Monster : Enemy
 	{
-		public List<MonsterLootPattern> Loot { get; set; }
+		public List<MonsterLootPattern> MonsterLootPatterns { get; set; }
 
 		public override int CurrentHealth
 		{
@@ -54,7 +54,7 @@ namespace ClickQuest.Game.Core.Enemies
 			copy.CurrentHealth = Health;
 			copy.Description = Description;
 			copy.CurrentHealthProgress = CurrentHealthProgress;
-			copy.Loot = Loot;
+			copy.MonsterLootPatterns = MonsterLootPatterns;
 
 			return copy;
 		}
@@ -82,9 +82,9 @@ namespace ClickQuest.Game.Core.Enemies
 			int experienceGained = Experience.CalculateMonsterXpReward(Health);
 			User.Instance.CurrentHero.GainExperience(experienceGained);
 
-			var frequencyList = Loot.Select(x => x.Frequency).ToList();
+			var frequencyList = MonsterLootPatterns.Select(x => x.Frequency).ToList();
 			int position = CollectionsController.RandomizeFreqenciesListPosition(frequencyList);
-			var selectedLoot = Loot[position].Item;
+			var selectedLoot = MonsterLootPatterns[position].Item;
 
 			if (selectedLoot.Id != 0)
 			{

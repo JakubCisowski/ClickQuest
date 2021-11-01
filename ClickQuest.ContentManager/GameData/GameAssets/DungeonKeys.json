@@ -1,51 +1,44 @@
 [
   {
     "Id": 0,
-    "Name": "sdfhgsdfhgsdf",
+    "Name": "General dungeon key",
     "Rarity": "General",
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 1,
-    "Name": "Fine ingot",
+    "Name": "Fine dungeon key",
     "Rarity": "Fine",
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 2,
-    "Name": "Superior ingot",
+    "Name": "Superior dungeon key",
     "Rarity": "Superior",
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 3,
-    "Name": "Exceptional ingot",
+    "Name": "Exceptional dungeon key",
     "Rarity": "Exceptional",
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 4,
-    "Name": "Mythic ingot",
+    "Name": "Mythic dungeon key",
     "Rarity": "Mythic",
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 5,
-    "Name": "Masterwork ingot",
+    "Name": "Masterwork dungeon key",
     "Rarity": "Masterwork",
     "Description": "[...]",
     "Value": 1
-  },
-  {
-    "Id": 6,
-    "Name": "sdfgsdfgsdfg",
-    "Rarity": "General",
-    "Description": "",
-    "Value": 0
   }
 ]

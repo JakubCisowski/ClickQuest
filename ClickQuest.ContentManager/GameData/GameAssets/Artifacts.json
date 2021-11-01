@@ -1,9 +1,59 @@
 [
   {
+    "Id": 1,
+    "Name": "Death-Infused Bone Talisman",
+    "Rarity": "Exceptional",
+    "Description": "Your first attack against a monster places \u0027Decay\u0027 on them, dealing damage every 0.5 seconds for 2.5 seconds. Damage dealt is equal to your poison damage. Deals double damage against bosses.",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 1,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 2,
+    "Name": "Ghostly Infusion",
+    "Rarity": "Superior",
+    "Description": "Has to be equipped with at least one other artifact. After killing a monster, your next click is guaranteed to critically hit, and will deal 10% more damage.",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 1,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 3,
+    "Name": "Large Scythe",
+    "Rarity": "Superior",
+    "Description": "All non-artifact damage dealt by you is increased by 15% against Monsters (excluding Bosses).",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 1,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 4,
+    "Name": "Meat Cleaver",
+    "Rarity": "Superior",
+    "Description": "Gain 20% Critical Click Damage.",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 1,
+    "ArtifactType": "XD"
+  },
+  {
     "Id": 5,
     "Name": "Mystic Clover",
     "Rarity": "Mythic",
     "Description": "While on a region, you have an increased chance to find rare Monsters. The chance to find Monsters that have a spawn chance of 2% or less is doubled, while the chance to find the most common Monsters is reduced appropriately.",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 1,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 6,
+    "Name": "Necronomicon",
+    "Rarity": "Superior",
+    "Description": "After killing a monster, your poison damage is increased by 10 for 3 seconds. This effect does not stack.",
     "Lore": "",
     "ExtraInfo": "",
     "Value": 1,
@@ -23,7 +73,7 @@
     "Id": 8,
     "Name": "Silver Greatsword",
     "Rarity": "Superior",
-    "Description": "All non-artifact damage dealt by you is increased by 10% against Bosses. jd",
+    "Description": "All non-artifact damage dealt by you is increased by 10% against Bosses.",
     "Lore": "",
     "ExtraInfo": "",
     "Value": 1,
@@ -33,10 +83,10 @@
     "Id": 9,
     "Name": "Skullbasher",
     "Rarity": "Superior",
-    "Description": "Every other click you make deals an additional 10 (?) damage. xdjd",
-    "Lore": "xdjd",
+    "Description": "Every other click you make deals an additional 10 (?) damage.",
+    "Lore": "",
     "ExtraInfo": "",
-    "Value": 1000,
+    "Value": 1,
     "ArtifactType": "XD"
   },
   {
@@ -134,6 +184,16 @@
     "Name": "Twin Kamas",
     "Rarity": "Mythic",
     "Description": "Counts as two artifacts, therefore requires two free slots to use. After clicking on a monster, strike again after a 1s delay. The second attack can critically hit, as well as apply on-hit effects (such as poison).",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 1,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 20,
+    "Name": "Will of the Ancients",
+    "Rarity": "Masterwork",
+    "Description": "Your poison damage can now critically strike. The probability is calculated using your Critical Click Chance, and the damage using your Critical Click Damage.",
     "Lore": "",
     "ExtraInfo": "",
     "Value": 1,
@@ -273,7 +333,7 @@
     "Id": 34,
     "Name": "Naginata",
     "Rarity": "Mythic",
-    "Description": "If you would deal 90% or more of an Enemy\u0027s health with a single click, gain double experience, 1 Gold and a 20 increase to Click Damage for 10 seconds. The damage increase bonus does not stack. XDJD",
+    "Description": "If you would deal 90% or more of an Enemy\u0027s health with a single click, gain double experience, 1 Gold and a 20 increase to Click Damage for 10 seconds. The damage increase bonus does not stack.",
     "Lore": "",
     "ExtraInfo": "",
     "Value": 1,
@@ -283,7 +343,27 @@
     "Id": 35,
     "Name": "Gladiator\u0027s Trident",
     "Rarity": "Mythic",
-    "Description": "All damage dealt is increased by 50% for the first few seconds in combat. Against Monsters, the duration is 2 seconds; against Bosses - 5 seconds. The duration is Refreshed each time you kill a Monster.",
+    "Description": "All damage dealt is increased by 50% for the first few seconds in combat. Against Monsters, the duration is 2 seconds; against Bosses - 5 seconds. The duration is refreshed each time you kill a Monster.",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 1,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 36,
+    "Name": "Bladed Fans",
+    "Rarity": "Exceptional",
+    "Description": "For the first 5 seconds in combat with an Enemy, you cannot deal damage to them, and instead accumulate damage. After 5 seconds, explode dealing damage to the enemy. Damage dealt is equal to 200% of the accumulated damage.",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 1,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 37,
+    "Name": "Medusa Amulet",
+    "Rarity": "Mythic",
+    "Description": "While on a Region, each monster you kill increases your Click Damage by 2, Critical Click Chance by 1% and Critical Click Damage by 1%. Stacks up to 20 times. Leaving the region removes all stacks.",
     "Lore": "",
     "ExtraInfo": "",
     "Value": 1,
@@ -307,146 +387,6 @@
     "Lore": "",
     "ExtraInfo": "",
     "Value": 1,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 40,
-    "Name": "XDJD",
-    "Rarity": "General",
-    "Description": "hwdp jd",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 3,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 41,
-    "Name": "xd",
-    "Rarity": "General",
-    "Description": "",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 0,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 42,
-    "Name": "rtgfyhgf",
-    "Rarity": "General",
-    "Description": "",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 0,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 43,
-    "Name": "",
-    "Rarity": "General",
-    "Description": "",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 0,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 44,
-    "Name": "xdjd",
-    "Rarity": "General",
-    "Description": "jdjd",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 0,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 45,
-    "Name": "xdjd",
-    "Rarity": "General",
-    "Description": "jd",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 0,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 46,
-    "Name": "",
-    "Rarity": "General",
-    "Description": "",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 0,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 47,
-    "Name": "",
-    "Rarity": "General",
-    "Description": "",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 0,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 48,
-    "Name": "",
-    "Rarity": "General",
-    "Description": "",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 0,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 49,
-    "Name": "",
-    "Rarity": "General",
-    "Description": "",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 0,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 50,
-    "Name": "",
-    "Rarity": "General",
-    "Description": "",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 0,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 51,
-    "Name": "",
-    "Rarity": "General",
-    "Description": "",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 0,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 52,
-    "Name": "",
-    "Rarity": "General",
-    "Description": "",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 0,
-    "ArtifactType": "XD"
-  },
-  {
-    "Id": 53,
-    "Name": "",
-    "Rarity": "General",
-    "Description": "",
-    "Lore": "",
-    "ExtraInfo": "",
-    "Value": 0,
     "ArtifactType": "XD"
   }
 ]
