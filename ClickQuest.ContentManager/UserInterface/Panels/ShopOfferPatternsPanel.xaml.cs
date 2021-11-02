@@ -13,13 +13,13 @@ using System.Windows.Media;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
 {
-	public partial class PriestOfferPatternsPanel : UserControl
+	public partial class ShopOfferPatternsPanel : UserControl
 	{
 		private VendorPattern _dataContext;
 		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 		private StackPanel _currentPanel;
 
-		public PriestOfferPatternsPanel()
+		public ShopOfferPatternsPanel()
 		{
 			InitializeComponent();
 
@@ -28,7 +28,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void PopulateContentSelectionBox()
 		{
-			ContentSelectionBox.ItemsSource = GameContent.PriestOffer.Select(x => x.Id.ToString());
+			ContentSelectionBox.ItemsSource = GameContent.ShopOffer.Select(x => x.Id.ToString());
 		}
 
 		public void RefreshStaticValuesPanel()
@@ -191,15 +191,15 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			vendorPattern.VendorItemType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["VendorTypeBox"] as ComboBox).SelectedValue.ToString());
 
 			// Check if this Id is already in the collection (modified).
-			if (GameContent.PriestOffer.Select(x => x.Id).Contains(vendorPattern.Id))
+			if (GameContent.ShopOffer.Select(x => x.Id).Contains(vendorPattern.Id))
 			{
-				int indexOfVendorPattern = GameContent.PriestOffer.FindIndex(x => x.Id == vendorPattern.Id);
-				GameContent.PriestOffer[indexOfVendorPattern] = vendorPattern;
+				int indexOfVendorPattern = GameContent.ShopOffer.FindIndex(x => x.Id == vendorPattern.Id);
+				GameContent.ShopOffer[indexOfVendorPattern] = vendorPattern;
 			}
 			else
 			{
 				// If not, add it.
-				GameContent.PriestOffer.Add(vendorPattern);
+				GameContent.ShopOffer.Add(vendorPattern);
 			}
 
 			PopulateContentSelectionBox();
@@ -209,8 +209,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			Save();
 			
-			int nextId = GameContent.PriestOffer.Max(x => x.Id) + 1;
-			_dataContext = new VendorPattern() { Id = nextId, VendorItemType = RewardType.Blessing};
+			int nextId = GameContent.ShopOffer.Max(x => x.Id) + 1;
+			_dataContext = new VendorPattern() { Id = nextId};
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
 
@@ -221,7 +221,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			Save();
 
-			var objectToDelete = GameContent.PriestOffer.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
+			var objectToDelete = GameContent.ShopOffer.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
 
 			var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {objectToDelete.Id}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -230,7 +230,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				return;
 			}
 
-			GameContent.PriestOffer.Remove(objectToDelete);
+			GameContent.ShopOffer.Remove(objectToDelete);
 
 			PopulateContentSelectionBox();
 			ContentSelectionBox.SelectedIndex = -1;
@@ -255,7 +255,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Save();
 			}
 
-			_dataContext =  GameContent.PriestOffer.FirstOrDefault(x => x.Id == selectedId);
+			_dataContext =  GameContent.ShopOffer.FirstOrDefault(x => x.Id == selectedId);
 			ContentSelectionBox.SelectedValue = _dataContext.Id.ToString();
 			RefreshStaticValuesPanel();
 			DeleteObjectButton.Visibility=Visibility.Visible;

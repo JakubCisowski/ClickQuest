@@ -130,6 +130,14 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
 						(tabControl.SelectedContent as Grid)?.Children.Add(priestPanel);
 						break;
+
+					case ContentType.Shop:
+						var shopPanel = new ShopOfferPatternsPanel();
+						_currentPanel = shopPanel;
+
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(shopPanel);
+						break;
 				}
 			}
 		}
@@ -189,6 +197,10 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 				case PriestOfferPatternsPanel priestPanel:
 					priestPanel.Save();
+					break;
+
+				case ShopOfferPatternsPanel shopPanel:
+					shopPanel.Save();
 					break;
 			}
 		}

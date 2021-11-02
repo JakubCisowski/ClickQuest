@@ -139,7 +139,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			Save();
-			
+
 			int nextId = GameContent.Recipes.Max(x => x.Id) + 1;
 
 			_dataContext = new Recipe() { Id = nextId, IngredientPatterns = new List<IngredientPattern>() };
