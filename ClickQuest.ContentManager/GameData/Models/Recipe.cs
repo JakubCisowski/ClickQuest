@@ -2,7 +2,7 @@
 
 namespace ClickQuest.ContentManager.GameData.Models
 {
-	public class Ingredient
+	public class IngredientPattern
 	{
 		public int MaterialId { get; set; }
 		public int Quantity { get; set; }
@@ -12,7 +12,7 @@ namespace ClickQuest.ContentManager.GameData.Models
 	{
 		public int Id { get; set; }
 		public int ArtifactId { get; set; }
-		public List<Ingredient> Ingredients { get; set; }
+		public List<IngredientPattern> IngredientPatterns { get; set; }
 		public string Name { get; set; }
 		public Rarity Rarity { get; set; }
 		public int Value { get; set; }

@@ -13,10 +13,10 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 	public partial class IngredientWindow : Window
 	{
 		private Recipe _recipe;
-		private Ingredient _ingredient;
+		private IngredientPattern _ingredient;
 		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 
-		public IngredientWindow(Recipe recipe, Ingredient ingredient)
+		public IngredientWindow(Recipe recipe, IngredientPattern ingredient)
 		{
 			InitializeComponent();
 
@@ -85,18 +85,18 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 		private void UpdateIngredient()
 		{
-			var oldIngredientIndex = _recipe.Ingredients.IndexOf(_recipe.Ingredients.FirstOrDefault(x => x.MaterialId == _ingredient.MaterialId));
+			var oldIngredientIndex = _recipe.IngredientPatterns.IndexOf(_recipe.IngredientPatterns.FirstOrDefault(x => x.MaterialId == _ingredient.MaterialId));
 
 			_ingredient.MaterialId = int.Parse((_controls["IdBox"] as TextBox).Text);
 			_ingredient.Quantity = int.Parse((_controls["QuantityBox"] as TextBox).Text);
 
 			if (oldIngredientIndex == -1)
 			{
-				_recipe.Ingredients.Add(_ingredient);
+				_recipe.IngredientPatterns.Add(_ingredient);
 			}
 			else
 			{
-				_recipe.Ingredients[oldIngredientIndex] = _ingredient;
+				_recipe.IngredientPatterns[oldIngredientIndex] = _ingredient;
 			}
 		}
 

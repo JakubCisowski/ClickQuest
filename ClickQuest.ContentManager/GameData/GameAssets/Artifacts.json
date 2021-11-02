@@ -391,6 +391,16 @@
   },
   {
     "Id": 40,
+    "Name": "testswitch",
+    "Rarity": "General",
+    "Description": "",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 0,
+    "ArtifactType": "XD"
+  },
+  {
+    "Id": 41,
     "Name": "",
     "Rarity": "General",
     "Description": "",

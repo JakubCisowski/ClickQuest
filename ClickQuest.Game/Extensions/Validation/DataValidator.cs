@@ -94,7 +94,7 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckReferencesCorrectness()
 		{
-			GameAssets.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameAssets.Materials.Select(y => y.Id), x.Ingredients.Select(z => z.MaterialId)));
+			GameAssets.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameAssets.Materials.Select(y => y.Id), x.IngredientPatterns.Select(z => z.MaterialId)));
 			GameAssets.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameAssets.Artifacts.Select(y => y.Id), new[] {x.ArtifactId}));
 			GameAssets.Dungeons.ForEach(x => CheckReferencedIds(x.Name, GameAssets.Bosses.Select(y => y.Id), x.BossIds));
 

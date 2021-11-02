@@ -11,7 +11,7 @@ namespace ClickQuest.Game.Core.Items
 {
 	public class Recipe : Item
 	{
-		public List<IngredientPattern> Ingredients { get; set; }
+		public List<IngredientPattern> IngredientPatterns { get; set; }
 
 		public string RequirementsDescription { get; private set; }
 
@@ -37,11 +37,11 @@ namespace ClickQuest.Game.Core.Items
 
 		public void UpdateRequirementsDescription()
 		{
-			Ingredients = GameAssets.Recipes.FirstOrDefault(x => x.Id == Id)?.Ingredients;
+			IngredientPatterns = GameAssets.Recipes.FirstOrDefault(x => x.Id == Id)?.IngredientPatterns;
 
 			RequirementsDescription = "Materials required: ";
 
-			foreach (var ingredient in Ingredients)
+			foreach (var ingredient in IngredientPatterns)
 			{
 				var relatedMaterial = ingredient.RelatedMaterial;
 				RequirementsDescription += relatedMaterial.Name + ": " + relatedMaterial.Value + "; ";
@@ -64,7 +64,7 @@ namespace ClickQuest.Game.Core.Items
 			copy.Description = Description;
 			copy.Quantity = quantity;
 			copy.ArtifactId = ArtifactId;
-			copy.Ingredients = Ingredients;
+			copy.IngredientPatterns = IngredientPatterns;
 			copy.RequirementsDescription = RequirementsDescription;
 
 			return copy;

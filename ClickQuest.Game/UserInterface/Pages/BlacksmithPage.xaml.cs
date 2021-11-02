@@ -177,7 +177,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void RemoveMaterials(Recipe recipe)
 		{
-			foreach (var ingredient in recipe.Ingredients)
+			foreach (var ingredient in recipe.IngredientPatterns)
 			{
 				var material = User.Instance.CurrentHero.Materials.FirstOrDefault(x => x.Id == ingredient.MaterialId);
 				if (material != null && material.Quantity >= ingredient.Quantity)
@@ -189,7 +189,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private bool CheckIfHeroHasEnoughMaterials(Recipe recipe)
 		{
-			foreach (var ingredient in recipe.Ingredients)
+			foreach (var ingredient in recipe.IngredientPatterns)
 			{
 				var material = User.Instance.CurrentHero.Materials.FirstOrDefault(x => x.Id == ingredient.MaterialId);
 				if (!(material != null && material.Quantity >= ingredient.Quantity))

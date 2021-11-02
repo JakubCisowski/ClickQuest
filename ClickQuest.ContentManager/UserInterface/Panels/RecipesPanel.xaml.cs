@@ -16,7 +16,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		private Recipe _dataContext;
 		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 		private StackPanel _currentPanel;
-		private List<Ingredient> _ingredients;
+		private List<IngredientPattern> _ingredients;
 
 		public RecipesPanel()
 		{
@@ -134,7 +134,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			PopulateContentSelectionBox();
-			ContentSelectionBox.SelectedValue = _dataContext.Name;
 		}
 
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
@@ -143,8 +142,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			
 			int nextId = GameContent.Recipes.Max(x => x.Id) + 1;
 
-			_dataContext = new Recipe() { Id = nextId, Ingredients = new List<Ingredient>() };
-			_ingredients = _dataContext.Ingredients;
+			_dataContext = new Recipe() { Id = nextId, IngredientPatterns = new List<IngredientPattern>() };
+			_ingredients = _dataContext.IngredientPatterns;
 
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
@@ -155,14 +154,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
 		{
-			var objectToDelete = GameContent.Recipes.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+			Save();
 
-			if (objectToDelete is null)
-			{
-				_currentPanel?.Children.Clear();
-				DeleteObjectButton.Visibility = Visibility.Hidden;
-				return;
-			}
+			var objectToDelete = GameContent.Recipes.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -181,6 +175,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			CreateDynamicValueButton.Visibility = Visibility.Hidden;
 			DeleteObjectButton.Visibility = Visibility.Hidden;
+			_dataContext = null;
 		}
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -198,7 +193,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			_dataContext = GameContent.Recipes.FirstOrDefault(x => x.Name == selectedName);
-			_ingredients = _dataContext.Ingredients;
+			ContentSelectionBox.SelectedValue = _dataContext.Name.ToString();
+			_ingredients = _dataContext.IngredientPatterns;
 			RefreshStaticValuesPanel();
 			RefreshDynamicValuesPanel();
 			DeleteObjectButton.Visibility = Visibility.Visible;
@@ -228,7 +224,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 		}
 
-		private Grid CreateDynamicValueGrid(Ingredient ingredient)
+		private Grid CreateDynamicValueGrid(IngredientPattern ingredient)
 		{
 			var grid = new Grid();
 
@@ -315,7 +311,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void EditDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var ingredient = (sender as Button).Tag as Ingredient;
+			var ingredient = (sender as Button).Tag as IngredientPattern;
 
 			var ingredientWindow = new IngredientWindow(_dataContext, ingredient) { Owner = Application.Current.MainWindow };
 			ingredientWindow.ShowDialog();
@@ -325,7 +321,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void DeleteDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var ingredient = (sender as Button).Tag as Ingredient;
+			var ingredient = (sender as Button).Tag as IngredientPattern;
 
 			var result = MessageBox.Show($"Are you sure you want to delete ingredient of Id: {ingredient.MaterialId}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -334,14 +330,14 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				return;
 			}
 
-			_dataContext.Ingredients.Remove(_dataContext.Ingredients.FirstOrDefault(x => x.MaterialId == ingredient.MaterialId));
+			_dataContext.IngredientPatterns.Remove(_dataContext.IngredientPatterns.FirstOrDefault(x => x.MaterialId == ingredient.MaterialId));
 
 			RefreshDynamicValuesPanel();
 		}
 
 		private void CreateDynamicValueButton_Click(object sender, RoutedEventArgs e)
 		{
-			var newIngredient = new Ingredient();
+			var newIngredient = new IngredientPattern();
 			_ingredients.Add(newIngredient);
 
 			var tempButton = new Button() { Tag = newIngredient };

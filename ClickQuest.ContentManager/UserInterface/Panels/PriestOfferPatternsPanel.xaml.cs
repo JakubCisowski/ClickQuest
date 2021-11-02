@@ -203,7 +203,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			PopulateContentSelectionBox();
-			ContentSelectionBox.SelectedValue = _dataContext.Id; // NARAZIE ID DLA TESTU
 		}
 
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
@@ -220,14 +219,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
 		{
-			var objectToDelete = GameContent.PriestOffer.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
+			Save();
 
-			if (objectToDelete is null)
-			{
-				_currentPanel?.Children.Clear();
-				DeleteObjectButton.Visibility=Visibility.Hidden;
-				return;
-			}
+			var objectToDelete = GameContent.PriestOffer.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
 
 			var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {objectToDelete.Id}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -262,6 +256,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			_dataContext =  GameContent.PriestOffer.FirstOrDefault(x => x.Id == selectedId);
+			ContentSelectionBox.SelectedValue = _dataContext.Id.ToString();
 			RefreshStaticValuesPanel();
 			DeleteObjectButton.Visibility=Visibility.Visible;
 		}
