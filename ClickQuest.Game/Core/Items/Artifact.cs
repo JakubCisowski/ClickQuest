@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Items.Types;
@@ -13,6 +12,7 @@ namespace ClickQuest.Game.Core.Items
 	{
 		[JsonIgnore]
 		public ArtifactFunctionality ArtifactFunctionality { get; set; }
+
 		public string Lore { get; set; }
 		public string ExtraInfo { get; set; }
 		public ArtifactType ArtifactType { get; set; }

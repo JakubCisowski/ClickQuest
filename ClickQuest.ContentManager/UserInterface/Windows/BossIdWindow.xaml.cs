@@ -1,18 +1,19 @@
-﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
-using MaterialDesignThemes.Wpf;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.GameData.Models;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Windows
 {
 	public partial class BossIdWindow : Window
 	{
-		private Dungeon _dungeon;
+		private readonly Dungeon _dungeon;
 		private int _bossId;
-		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
+		private readonly Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 
 		public BossIdWindow(Dungeon dungeon, int bossId)
 		{
@@ -29,13 +30,27 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			// Add controls to Dictionary for easier navigation.
 			_controls.Clear();
 
-			double gridHeight = this.ActualHeight;
-			double gridWidth = this.ActualWidth;
-			var panel = new StackPanel() { Name = "MainInfoPanel" };
+			double gridHeight = ActualHeight;
+			double gridWidth = ActualWidth;
+			var panel = new StackPanel
+			{
+				Name = "MainInfoPanel"
+			};
 
-			var idBox = new TextBox() { Name = "IdBox", Text = _bossId.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var idBox = new TextBox
+			{
+				Name = "IdBox",
+				Text = _bossId.ToString(),
+				Margin = new Thickness(10),
+				IsEnabled = false
+			};
 
-			var nameBox = new ComboBox() { Name = "NameBox", ItemsSource = GameContent.Bosses.Select(x => x.Name), Margin = new Thickness(10) };
+			var nameBox = new ComboBox
+			{
+				Name = "NameBox",
+				ItemsSource = GameContent.Bosses.Select(x => x.Name),
+				Margin = new Thickness(10)
+			};
 			nameBox.SelectedValue = GameContent.Bosses.FirstOrDefault(x => x.Id == _bossId)?.Name;
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 
@@ -51,13 +66,13 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
+					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)this.FindResource("MaterialDesignOutlinedComboBox");
+					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -79,7 +94,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 		private void UpdateBossId()
 		{
-			var oldBossIdIndex = _dungeon.BossIds.IndexOf(_bossId);
+			int oldBossIdIndex = _dungeon.BossIds.IndexOf(_bossId);
 
 			_bossId = int.Parse((_controls["IdBox"] as TextBox).Text);
 
@@ -93,7 +108,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			}
 		}
 
-		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		private void Window_Closing(object sender, CancelEventArgs e)
 		{
 			UpdateBossId();
 		}

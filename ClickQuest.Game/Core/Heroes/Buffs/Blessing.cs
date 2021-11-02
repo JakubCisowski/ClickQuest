@@ -25,7 +25,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public string Lore{ get; set; }
+		public string Lore { get; set; }
 		public Rarity Rarity { get; set; }
 		public int Value { get; set; }
 		public BlessingType Type { get; set; }

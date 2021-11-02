@@ -18,7 +18,7 @@ namespace ClickQuest.ContentManager.GameData.Models
 			}
 		}
 	}
-	
+
 	public class Region : IIdentifiable
 	{
 		public int Id { get; set; }
@@ -27,10 +27,5 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public string Description { get; set; }
 		public string Background { get; set; }
 		public List<MonsterSpawnPattern> MonsterSpawnPatterns { get; set; }
-
-		public Region()
-		{
-			
-		}
 	}
 }

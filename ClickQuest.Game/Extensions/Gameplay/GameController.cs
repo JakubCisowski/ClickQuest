@@ -1,4 +1,5 @@
 using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Data;
 using ClickQuest.Game.Extensions.Collections;
 
 namespace ClickQuest.Game.Extensions.Gameplay
@@ -19,10 +20,10 @@ namespace ClickQuest.Game.Extensions.Gameplay
 			User.Instance.Gold = 0;
 
 			User.Instance.DungeonKeys.Clear();
-			Data.UserDataLoader.SeedDungeonKeys();
+			UserDataLoader.SeedDungeonKeys();
 
 			User.Instance.Ingots.Clear();
-			Data.UserDataLoader.SeedIngots();
+			UserDataLoader.SeedIngots();
 
 			User.Instance.Achievements.TotalTimePlayed = default;
 			User.Instance.Achievements.NumericAchievementCollection = new ObservableDictionary<NumericAchievementType, long>();

@@ -32,30 +32,30 @@
 					</Border>
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsMouseOver" Value="True">
-							
+
 							<Trigger.EnterActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">
 									<Storyboard>
-										<ColorAnimation To="Black" Duration="0:0:0.2" Storyboard.TargetName="border" 
-										                Storyboard.TargetProperty="BorderBrush.Color"/>
+										<ColorAnimation To="Black" Duration="0:0:0.2" Storyboard.TargetName="border"
+										                Storyboard.TargetProperty="BorderBrush.Color" />
 									</Storyboard>
 								</BeginStoryboard>
 							</Trigger.EnterActions>
-							
+
 							<Trigger.ExitActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">
 									<Storyboard>
 										<ColorAnimation To="DarkGray" Duration="0:0:0.2" Storyboard.TargetName="border"
-										                Storyboard.TargetProperty="BorderBrush.Color"/>
+										                Storyboard.TargetProperty="BorderBrush.Color" />
 									</Storyboard>
 								</BeginStoryboard>
 							</Trigger.ExitActions>
-							
+
 						</Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>
 			</Setter.Value>
-		</Setter>	
+		</Setter>
 	</Style>
 
 	<Style x:Key="ButtonStyleDisabled" TargetType="Button">
@@ -75,25 +75,25 @@
 					</Border>
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsMouseOver" Value="True">
-							
+
 							<Trigger.EnterActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">
 									<Storyboard>
-										<ColorAnimation To="Black" Duration="0:0:0.2" Storyboard.TargetName="border" 
-										                Storyboard.TargetProperty="BorderBrush.Color"/>
+										<ColorAnimation To="Black" Duration="0:0:0.2" Storyboard.TargetName="border"
+										                Storyboard.TargetProperty="BorderBrush.Color" />
 									</Storyboard>
 								</BeginStoryboard>
 							</Trigger.EnterActions>
-							
+
 							<Trigger.ExitActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">
 									<Storyboard>
 										<ColorAnimation To="DarkGray" Duration="0:0:0.2" Storyboard.TargetName="border"
-										                Storyboard.TargetProperty="BorderBrush.Color"/>
+										                Storyboard.TargetProperty="BorderBrush.Color" />
 									</Storyboard>
 								</BeginStoryboard>
 							</Trigger.ExitActions>
-							
+
 						</Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>
@@ -119,25 +119,25 @@
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsMouseOver" Value="True">
 							<!-- <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ButtonDangerBrushHover}" /> -->
-							
+
 							<Trigger.EnterActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">
 									<Storyboard>
-										<ColorAnimation To="#FF0000" Duration="0:0:0.2" Storyboard.TargetName="border" 
-										                Storyboard.TargetProperty="BorderBrush.Color"/>
+										<ColorAnimation To="#FF0000" Duration="0:0:0.2" Storyboard.TargetName="border"
+										                Storyboard.TargetProperty="BorderBrush.Color" />
 									</Storyboard>
 								</BeginStoryboard>
 							</Trigger.EnterActions>
-							
+
 							<Trigger.ExitActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">
 									<Storyboard>
 										<ColorAnimation To="#FFD3D3" Duration="0:0:0.2" Storyboard.TargetName="border"
-										                Storyboard.TargetProperty="BorderBrush.Color"/>
+										                Storyboard.TargetProperty="BorderBrush.Color" />
 									</Storyboard>
 								</BeginStoryboard>
 							</Trigger.ExitActions>
-							
+
 						</Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>

@@ -1,22 +1,17 @@
-﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
-using ClickQuest.ContentManager.UserInterface.Windows;
-using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
+using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.GameData.Models;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
 {
 	public partial class DungeonGroupsPanel : UserControl
 	{
 		private DungeonGroup _dataContext;
-		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
+		private readonly Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 		private StackPanel _currentPanel;
 
 		public DungeonGroupsPanel()
@@ -39,24 +34,73 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			double gridHeight = this.ActualHeight;
-			double gridWidth = this.ActualWidth;
-			var panel = new StackPanel() { Name = "StaticInfoPanel" };
+			double gridHeight = ActualHeight;
+			double gridWidth = ActualWidth;
+			var panel = new StackPanel
+			{
+				Name = "StaticInfoPanel"
+			};
 
 			var selectedDungeonGroup = _dataContext;
 
-			var idBox = new TextBox() { Name = "IdBox", Text = selectedDungeonGroup.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			var nameBox = new TextBox() { Name = "NameBox", Text = selectedDungeonGroup.Name, Margin = new Thickness(10) };
-			var colorBox = new TextBox() { Name = "ColorBox", Text = selectedDungeonGroup.Color, Margin = new Thickness(10) };
+			var idBox = new TextBox
+			{
+				Name = "IdBox",
+				Text = selectedDungeonGroup.Id.ToString(),
+				Margin = new Thickness(10),
+				IsEnabled = false
+			};
+			var nameBox = new TextBox
+			{
+				Name = "NameBox",
+				Text = selectedDungeonGroup.Name,
+				Margin = new Thickness(10)
+			};
+			var colorBox = new TextBox
+			{
+				Name = "ColorBox",
+				Text = selectedDungeonGroup.Color,
+				Margin = new Thickness(10)
+			};
 
-			var rarityBoxGeneral = new TextBox(){ Name = "RarityBoxGeneral", Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.General).ToString(), Margin = new Thickness(10) };
-			var rarityBoxFine = new TextBox(){ Name = "RarityBoxFine", Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Fine).ToString(), Margin = new Thickness(10) };
-			var rarityBoxSuperior = new TextBox(){ Name = "RarityBoxSuperior", Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Superior).ToString(), Margin = new Thickness(10) };
-			var rarityBoxExceptional = new TextBox(){ Name = "RarityBoxExceptional", Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Exceptional).ToString(), Margin = new Thickness(10) };
-			var rarityBoxMasterwork = new TextBox(){ Name = "RarityBoxMasterwork", Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Masterwork).ToString(), Margin = new Thickness(10) };
-			var rarityBoxMythic = new TextBox(){ Name = "RarityBoxMythic", Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Mythic).ToString(), Margin = new Thickness(10) };
+			var rarityBoxGeneral = new TextBox
+			{
+				Name = "RarityBoxGeneral",
+				Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.General).ToString(),
+				Margin = new Thickness(10)
+			};
+			var rarityBoxFine = new TextBox
+			{
+				Name = "RarityBoxFine",
+				Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Fine).ToString(),
+				Margin = new Thickness(10)
+			};
+			var rarityBoxSuperior = new TextBox
+			{
+				Name = "RarityBoxSuperior",
+				Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Superior).ToString(),
+				Margin = new Thickness(10)
+			};
+			var rarityBoxExceptional = new TextBox
+			{
+				Name = "RarityBoxExceptional",
+				Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Exceptional).ToString(),
+				Margin = new Thickness(10)
+			};
+			var rarityBoxMasterwork = new TextBox
+			{
+				Name = "RarityBoxMasterwork",
+				Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Masterwork).ToString(),
+				Margin = new Thickness(10)
+			};
+			var rarityBoxMythic = new TextBox
+			{
+				Name = "RarityBoxMythic",
+				Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Mythic).ToString(),
+				Margin = new Thickness(10)
+			};
 
-			var descriptionBox = new TextBox()
+			var descriptionBox = new TextBox
 			{
 				Name = "DescriptionBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -100,13 +144,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
+					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)this.FindResource("MaterialDesignOutlinedComboBox");
+					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -166,7 +210,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			var newList = new List<Rarity>();
 
-			for (int i=0;i<int.Parse(textBox.Text);i++)
+			for (int i = 0; i < int.Parse(textBox.Text); i++)
 			{
 				newList.Add(rarity);
 			}
@@ -177,20 +221,24 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			Save();
-			
+
 			int nextId = GameContent.DungeonGroups.Max(x => x.Id) + 1;
-			_dataContext = new DungeonGroup() { Id = nextId, KeyRequirementRarities = new List<Rarity>() };
+			_dataContext = new DungeonGroup
+			{
+				Id = nextId,
+				KeyRequirementRarities = new List<Rarity>()
+			};
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
 
-			DeleteObjectButton.Visibility=Visibility.Visible;
+			DeleteObjectButton.Visibility = Visibility.Visible;
 		}
 
 		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			Save();
 
-			var objectToDelete = GameContent.DungeonGroups.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
+			var objectToDelete = GameContent.DungeonGroups.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -204,7 +252,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			PopulateContentSelectionBox();
 			ContentSelectionBox.SelectedIndex = -1;
 			_currentPanel.Children.Clear();
-			DeleteObjectButton.Visibility=Visibility.Hidden;
+			DeleteObjectButton.Visibility = Visibility.Hidden;
 			_dataContext = null;
 
 			Application.Current.MainWindow.Close();
@@ -212,7 +260,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{
@@ -225,10 +273,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			_dataContext = GameContent.DungeonGroups.FirstOrDefault(x => x.Name == selectedName);
-			ContentSelectionBox.SelectedValue = _dataContext.Name.ToString();
+			ContentSelectionBox.SelectedValue = _dataContext.Name;
 			RefreshStaticValuesPanel();
-			DeleteObjectButton.Visibility=Visibility.Visible;
+			DeleteObjectButton.Visibility = Visibility.Visible;
 		}
-
 	}
 }

@@ -54,6 +54,6 @@
 		</Grid>
 
 		<!-- Game frame-->
-		<Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden" Background="Transparent"/>
+		<Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden" Background="Transparent" />
 	</StackPanel>
 </Window>

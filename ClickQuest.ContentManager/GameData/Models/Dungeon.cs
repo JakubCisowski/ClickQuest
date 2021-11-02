@@ -10,10 +10,5 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public string Background { get; set; }
 		public string Description { get; set; }
 		public List<int> BossIds { get; set; }
-
-		public Dungeon()
-		{
-			
-		}
 	}
 }

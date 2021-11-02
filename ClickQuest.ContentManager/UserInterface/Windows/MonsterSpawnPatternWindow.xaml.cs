@@ -1,19 +1,19 @@
-﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
-using MaterialDesignThemes.Wpf;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.GameData.Models;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Windows
 {
 	public partial class MonsterSpawnPatternWindow : Window
 	{
-		private Region _recipe;
-		private MonsterSpawnPattern _pattern;
-		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
+		private readonly Region _recipe;
+		private readonly MonsterSpawnPattern _pattern;
+		private readonly Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 
 		public MonsterSpawnPatternWindow(Region region, MonsterSpawnPattern pattern)
 		{
@@ -30,17 +30,36 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			// Add controls to Dictionary for easier navigation.
 			_controls.Clear();
 
-			double gridHeight = this.ActualHeight;
-			double gridWidth = this.ActualWidth;
-			var panel = new StackPanel() { Name = "MainInfoPanel" };
+			double gridHeight = ActualHeight;
+			double gridWidth = ActualWidth;
+			var panel = new StackPanel
+			{
+				Name = "MainInfoPanel"
+			};
 
-			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.MonsterId.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var idBox = new TextBox
+			{
+				Name = "IdBox",
+				Text = _pattern.MonsterId.ToString(),
+				Margin = new Thickness(10),
+				IsEnabled = false
+			};
 
-			var nameBox = new ComboBox() { Name = "NameBox", ItemsSource = GameContent.Monsters.Select(x => x.Name), Margin = new Thickness(10) };
+			var nameBox = new ComboBox
+			{
+				Name = "NameBox",
+				ItemsSource = GameContent.Monsters.Select(x => x.Name),
+				Margin = new Thickness(10)
+			};
 			nameBox.SelectedValue = GameContent.Monsters.FirstOrDefault(x => x.Id == _pattern.MonsterId)?.Name;
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 
-			var frequencyBox = new TextBox() { Name = "FrequencyBox", Text = _pattern.Frequency.ToString(), Margin = new Thickness(10) };
+			var frequencyBox = new TextBox
+			{
+				Name = "FrequencyBox",
+				Text = _pattern.Frequency.ToString(),
+				Margin = new Thickness(10)
+			};
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
@@ -56,13 +75,13 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
+					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)this.FindResource("MaterialDesignOutlinedComboBox");
+					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -84,7 +103,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 		private void UpdateMonsterPattern()
 		{
-			var oldPatternIndex = _recipe.MonsterSpawnPatterns.IndexOf(_recipe.MonsterSpawnPatterns.FirstOrDefault(x => x.MonsterId == _pattern.MonsterId));
+			int oldPatternIndex = _recipe.MonsterSpawnPatterns.IndexOf(_recipe.MonsterSpawnPatterns.FirstOrDefault(x => x.MonsterId == _pattern.MonsterId));
 
 			_pattern.MonsterId = int.Parse((_controls["IdBox"] as TextBox).Text);
 			_pattern.Frequency = double.Parse((_controls["FrequencyBox"] as TextBox).Text);
@@ -99,7 +118,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			}
 		}
 
-		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		private void Window_Closing(object sender, CancelEventArgs e)
 		{
 			UpdateMonsterPattern();
 		}

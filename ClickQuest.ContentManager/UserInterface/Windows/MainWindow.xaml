@@ -3,68 +3,65 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
-        xmlns:ui="clr-namespace:ClickQuest.ContentManager.UserInterface"
         mc:Ignorable="d" Closing="MainWindow_OnClosing"
         Title="Content Loader" Height="1040" Width="1920" WindowStartupLocation="Manual" Top="0" Left="0"
-		ResizeMode="NoResize" >
+        ResizeMode="NoResize">
 	<Grid>
 		<TabControl Style="{StaticResource MaterialDesignTabControl}" SelectionChanged="TabControl_SelectionChanged" HorizontalAlignment="Center" FontSize="14">
 			<TabItem Header="Artifacts" Width="200" HorizontalAlignment="Center">
-				<Grid/>
+				<Grid />
 			</TabItem>
 
 			<TabItem Header="Blessings">
-				<Grid/>
+				<Grid />
 			</TabItem>
 
 			<TabItem Header="Bosses">
-				<Grid/>
+				<Grid />
 			</TabItem>
 
 			<TabItem Header="Dungeons">
-				<Grid/>
+				<Grid />
 			</TabItem>
 
 			<TabItem Header="Dng Groups">
-				<Grid/>
+				<Grid />
 			</TabItem>
 
 			<TabItem Header="Dng Keys">
-				<Grid/>
+				<Grid />
 			</TabItem>
 
 			<TabItem Header="Ingots">
-				<Grid/>
+				<Grid />
 			</TabItem>
 
 			<TabItem Header="Materials">
-				<Grid/>
+				<Grid />
 			</TabItem>
 
 			<TabItem Header="Monsters">
-				<Grid/>
+				<Grid />
 			</TabItem>
-			
+
 			<TabItem Header="Priest">
-				<Grid/>
+				<Grid />
 			</TabItem>
 
 			<TabItem Header="Quests">
-				<Grid/>
+				<Grid />
 			</TabItem>
 
 			<TabItem Header="Recipes">
-				<Grid/>
+				<Grid />
 			</TabItem>
 
 			<TabItem Header="Regions">
-				<Grid/>
+				<Grid />
 			</TabItem>
 
 			<TabItem Header="Shop">
-				<Grid/>
+				<Grid />
 			</TabItem>
 		</TabControl>
 	</Grid>

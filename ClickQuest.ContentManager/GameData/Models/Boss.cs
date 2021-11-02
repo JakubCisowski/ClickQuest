@@ -35,13 +35,8 @@ namespace ClickQuest.ContentManager.GameData.Models
 				return item;
 			}
 		}
-
-		public BossLootPattern()
-		{
-			
-		}
 	}
-	
+
 	public class Boss : IIdentifiable
 	{
 		public int Id { get; set; }
@@ -50,10 +45,5 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public string Image { get; set; }
 		public string Description { get; set; }
 		public List<BossLootPattern> BossLootPatterns { get; set; }
-
-		public Boss()
-		{
-			
-		}
 	}
 }

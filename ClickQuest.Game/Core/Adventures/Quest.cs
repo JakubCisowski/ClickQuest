@@ -1,15 +1,3 @@
-using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Heroes;
-using ClickQuest.Game.Core.Heroes.Buffs;
-using ClickQuest.Game.Core.Interfaces;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Items.Patterns;
-using ClickQuest.Game.Core.Items.Types;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Combat;
-using ClickQuest.Game.Extensions.Quests;
-using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.UserInterface.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +5,17 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Threading;
+using ClickQuest.Game.Core.GameData;
+using ClickQuest.Game.Core.Heroes;
+using ClickQuest.Game.Core.Heroes.Buffs;
+using ClickQuest.Game.Core.Interfaces;
+using ClickQuest.Game.Core.Items.Patterns;
+using ClickQuest.Game.Core.Items.Types;
+using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Extensions.Combat;
+using ClickQuest.Game.Extensions.Quests;
+using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.UserInterface.Controls;
 
 namespace ClickQuest.Game.Core.Adventures
 {
@@ -113,7 +112,7 @@ namespace ClickQuest.Game.Core.Adventures
 
 			// Initially set TicksCountText (for hero stats page info).
 			// Reset to 'Duration', it will count from Duration to 0.
-			questCopy.TicksCountNumber = (int)(questCopy.EndDate - DateTime.Now).TotalSeconds;
+			questCopy.TicksCountNumber = (int) (questCopy.EndDate - DateTime.Now).TotalSeconds;
 
 			if (questCopy.IsFinished)
 			{

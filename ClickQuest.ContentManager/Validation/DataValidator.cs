@@ -99,17 +99,17 @@ namespace ClickQuest.ContentManager.Validation
 			GameContent.Regions.ForEach(x => CheckRegionReferences(x));
 			GameContent.Quests.ForEach(x => CheckQuestReferences(x));
 
-			CheckReferencedIds("ShopOffer", GameContent.Recipes.Select(x => x.Id), GameContent.ShopOffer.Select(x=>x.VendorItemId));
-			CheckReferencedIds("PriestOffer", GameContent.Blessings.Select(x => x.Id), GameContent.PriestOffer.Select(x=>x.VendorItemId));
+			CheckReferencedIds("ShopOffer", GameContent.Recipes.Select(x => x.Id), GameContent.ShopOffer.Select(x => x.VendorItemId));
+			CheckReferencedIds("PriestOffer", GameContent.Blessings.Select(x => x.Id), GameContent.PriestOffer.Select(x => x.VendorItemId));
 		}
 
 		private static void CheckQuestReferences(Quest quest)
 		{
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Material)", GameContent.Materials.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Material).Select(y=>y.QuestRewardId));
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Artifact)", GameContent.Artifacts.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Artifact).Select(y=>y.QuestRewardId));
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Recipe)", GameContent.Recipes.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Recipe).Select(y=>y.QuestRewardId));
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Blessing)", GameContent.Blessings.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Blessing).Select(y=>y.QuestRewardId));
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Ingot)", GameContent.Ingots.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Ingot).Select(y=>y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Material)", GameContent.Materials.Select(x => x.Id), quest.QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Material).Select(y => y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Artifact)", GameContent.Artifacts.Select(x => x.Id), quest.QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Artifact).Select(y => y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Recipe)", GameContent.Recipes.Select(x => x.Id), quest.QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Recipe).Select(y => y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Blessing)", GameContent.Blessings.Select(x => x.Id), quest.QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Blessing).Select(y => y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Ingot)", GameContent.Ingots.Select(x => x.Id), quest.QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Ingot).Select(y => y.QuestRewardId));
 		}
 
 		private static void CheckReferencedIds(string objectName, IEnumerable<int> availableIds, IEnumerable<int> requiredIds)

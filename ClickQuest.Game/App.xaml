@@ -20,14 +20,14 @@
 			</Style>
 
 			<!-- Colors -->
-			<Color x:Key="ColorGameBackground1" >#EDF9FD</Color>
-			<Color x:Key="ColorGameBackground2" >#CFEFF8</Color>
-			<Color x:Key="ColorGameBackground3" >#ADD5E0</Color>
-			<Color x:Key="ColorGameBackground4" >#c4effa</Color>
-			<Color x:Key="ColorGameBackground5" >#acd4e0</Color>
+			<Color x:Key="ColorGameBackground1">#EDF9FD</Color>
+			<Color x:Key="ColorGameBackground2">#CFEFF8</Color>
+			<Color x:Key="ColorGameBackground3">#ADD5E0</Color>
+			<Color x:Key="ColorGameBackground4">#c4effa</Color>
+			<Color x:Key="ColorGameBackground5">#acd4e0</Color>
 
-			<Color x:Key="ColorButtonDangerHover" >#FF0000</Color>
-			<Color x:Key="ColorButtonDanger" >#FFD3D3</Color>
+			<Color x:Key="ColorButtonDangerHover">#FF0000</Color>
+			<Color x:Key="ColorButtonDanger">#FFD3D3</Color>
 
 			<SolidColorBrush x:Key="GameBackground1" Color="{StaticResource ColorGameBackground1}" />
 			<SolidColorBrush x:Key="GameBackground2" Color="{StaticResource ColorGameBackground2}" />
@@ -47,12 +47,12 @@
 			<SolidColorBrush x:Key="ColorRarity5" Color="#E9DB50" /> <!-- Mythic - Gold -->
 
 			<SolidColorBrush x:Key="ColorQuestRare" Color="#FFA237" /> <!-- Rare quest - Orange? -->
-			
+
 			<!-- Class and damage type colors -->
-			
-			<SolidColorBrush x:Key="ColorSlayerRelated" Color="#FF4242"/>
-			<SolidColorBrush x:Key="ColorVenomRelated" Color="#008500"/>
-			
+
+			<SolidColorBrush x:Key="ColorSlayerRelated" Color="#FF4242" />
+			<SolidColorBrush x:Key="ColorVenomRelated" Color="#008500" />
+
 			<SolidColorBrush x:Key="ColorDamageTypeNormal" Color="#000000" />
 			<SolidColorBrush x:Key="ColorDamageTypeCritical" Color="#FF0000" />
 			<SolidColorBrush x:Key="ColorDamageTypePoison" Color="#006400" />

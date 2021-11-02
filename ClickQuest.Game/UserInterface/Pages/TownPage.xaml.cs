@@ -47,11 +47,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 					TextAlignment = TextAlignment.Center
 				};
 
-				var regionNameRun = new Run(region.Name) {FontSize=20};
+				var regionNameRun = new Run(region.Name)
+				{
+					FontSize = 20
+				};
 
 				if (regionNameRun.Text.Length > 20)
 				{
-					regionNameRun.FontSize = 28 - regionNameRun.Text.Length/2;
+					regionNameRun.FontSize = 28 - regionNameRun.Text.Length / 2;
 				}
 
 				regionBlock.Inlines.Add(regionNameRun);
@@ -68,15 +71,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 					regionButton.IsEnabled = false;
 				}
 
-				if(i <= GameAssets.Regions.Count / 2)
+				if (i <= GameAssets.Regions.Count / 2)
 				{
 					RegionsPanelLeft.Children.Insert(i, regionButton);
 				}
 				else
-				{ 
+				{
 					RegionsPanelRight.Children.Insert(i - GameAssets.Regions.Count / 2 - 1, regionButton);
 				}
-
 			}
 		}
 

@@ -1,22 +1,19 @@
-﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
-using ClickQuest.ContentManager.UserInterface.Windows;
-using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
+using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.UserInterface.Windows;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
 {
 	public partial class MonstersPanel : UserControl
 	{
 		private Monster _dataContext;
-		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
+		private readonly Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 		private StackPanel _currentPanel;
 		private List<MonsterLootPattern> _monsterLootPatterns;
 
@@ -40,17 +37,41 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			double gridHeight = this.ActualHeight;
-			double gridWidth = this.ActualWidth;
-			var panel = new StackPanel() { Name = "StaticInfoPanel" };
+			double gridHeight = ActualHeight;
+			double gridWidth = ActualWidth;
+			var panel = new StackPanel
+			{
+				Name = "StaticInfoPanel"
+			};
 
 			var selectedMonster = _dataContext;
 
-			var idBox = new TextBox() { Name = "IdBox", Text = selectedMonster.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			var nameBox = new TextBox() { Name = "NameBox", Text = selectedMonster.Name, Margin = new Thickness(10) };
-			var healthBox = new TextBox() { Name = "HealthBox", Text = selectedMonster.Health.ToString(), Margin = new Thickness(10) };
-			var imageBox = new TextBox() { Name = "ImageBox", Text = selectedMonster.Image, Margin = new Thickness(10) };
-			var descriptionBox = new TextBox()
+			var idBox = new TextBox
+			{
+				Name = "IdBox",
+				Text = selectedMonster.Id.ToString(),
+				Margin = new Thickness(10),
+				IsEnabled = false
+			};
+			var nameBox = new TextBox
+			{
+				Name = "NameBox",
+				Text = selectedMonster.Name,
+				Margin = new Thickness(10)
+			};
+			var healthBox = new TextBox
+			{
+				Name = "HealthBox",
+				Text = selectedMonster.Health.ToString(),
+				Margin = new Thickness(10)
+			};
+			var imageBox = new TextBox
+			{
+				Name = "ImageBox",
+				Text = selectedMonster.Image,
+				Margin = new Thickness(10)
+			};
+			var descriptionBox = new TextBox
 			{
 				Name = "DescriptionBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -84,13 +105,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
+					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)this.FindResource("MaterialDesignOutlinedComboBox");
+					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -145,21 +166,25 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			int nextId = GameContent.Monsters.Max(x => x.Id) + 1;
 
-			_dataContext = new Monster() { Id = nextId, MonsterLootPatterns = new List<MonsterLootPattern>() };
+			_dataContext = new Monster
+			{
+				Id = nextId,
+				MonsterLootPatterns = new List<MonsterLootPattern>()
+			};
 			_monsterLootPatterns = _dataContext.MonsterLootPatterns;
 
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
 			DynamicValuesPanel.Children.Clear();
 
-			DeleteObjectButton.Visibility=Visibility.Visible;
+			DeleteObjectButton.Visibility = Visibility.Visible;
 		}
 
 		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			Save();
 
-			var objectToDelete = GameContent.Monsters.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
+			var objectToDelete = GameContent.Monsters.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -177,7 +202,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			DynamicValuesPanel.Children.Clear();
 
 			CreateDynamicValueButton.Visibility = Visibility.Hidden;
-			DeleteObjectButton.Visibility=Visibility.Hidden;
+			DeleteObjectButton.Visibility = Visibility.Hidden;
 			_dataContext = null;
 
 			Application.Current.MainWindow.Close();
@@ -185,7 +210,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{
@@ -198,11 +223,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			_dataContext = GameContent.Monsters.FirstOrDefault(x => x.Name == selectedName);
-			ContentSelectionBox.SelectedValue = _dataContext.Name.ToString();
+			ContentSelectionBox.SelectedValue = _dataContext.Name;
 			_monsterLootPatterns = _dataContext.MonsterLootPatterns;
 			RefreshStaticValuesPanel();
 			RefreshDynamicValuesPanel();
-			DeleteObjectButton.Visibility=Visibility.Visible;
+			DeleteObjectButton.Visibility = Visibility.Visible;
 		}
 
 		public void RefreshDynamicValuesPanel()
@@ -257,7 +282,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Left,
-				Margin = new Thickness(180, 0, 0, 0),
+				Margin = new Thickness(180, 0, 0, 0)
 			};
 
 			switch (pattern.MonsterLootType)
@@ -277,9 +302,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				case RewardType.Blessing:
 					nameBlock.Text = GameContent.Blessings.FirstOrDefault(x => x.Id == pattern.MonsterLootId).Name;
 					break;
-					
+
 				case RewardType.Ingot:
-					nameBlock.Text = GameContent.Ingots.FirstOrDefault(x=>x.Id == pattern.MonsterLootId).Name;
+					nameBlock.Text = GameContent.Ingots.FirstOrDefault(x => x.Id == pattern.MonsterLootId).Name;
 					break;
 			}
 
@@ -293,7 +318,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			};
 
 			var editButton = new Button
-			{	
+			{
 				Width = 30,
 				Height = 30,
 				Margin = new Thickness(5, 0, 60, 0),
@@ -350,7 +375,10 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			var monsterLootPattern = (sender as Button).Tag as MonsterLootPattern;
 
-			var monsterLootPatternWindow = new MonsterLootPatternWindow(_dataContext, monsterLootPattern) { Owner = Application.Current.MainWindow };
+			var monsterLootPatternWindow = new MonsterLootPatternWindow(_dataContext, monsterLootPattern)
+			{
+				Owner = Application.Current.MainWindow
+			};
 			monsterLootPatternWindow.ShowDialog();
 
 			RefreshDynamicValuesPanel();
@@ -377,9 +405,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			var newMonsterLootPattern = new MonsterLootPattern();
 			_monsterLootPatterns.Add(newMonsterLootPattern);
 
-			var tempButton = new Button() { Tag = newMonsterLootPattern };
+			var tempButton = new Button
+			{
+				Tag = newMonsterLootPattern
+			};
 			EditDynamicValue_Click(tempButton, null);
 		}
-
 	}
 }

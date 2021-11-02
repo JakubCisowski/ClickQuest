@@ -34,7 +34,7 @@
 						<GradientStop Color="{StaticResource ColorGameBackground5}" Offset="0.75" />
 					</LinearGradientBrush>
 				</Border.Background>
-				
+
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" Text="{Binding Description}" />
 			</Border>
 

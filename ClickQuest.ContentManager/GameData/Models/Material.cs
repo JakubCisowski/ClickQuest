@@ -2,9 +2,5 @@
 {
 	public class Material : Item
 	{
-		public Material()
-		{
-			
-		}
 	}
 }

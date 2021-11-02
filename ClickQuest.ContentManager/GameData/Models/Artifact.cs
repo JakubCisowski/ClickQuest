@@ -4,11 +4,6 @@
 	{
 		public string Lore { get; set; }
 		public string ExtraInfo { get; set; }
-		public ArtifactType ArtifactType { get; set;}
-
-		public Artifact()
-		{
-			
-		}
+		public ArtifactType ArtifactType { get; set; }
 	}
 }

@@ -30,6 +30,7 @@ namespace ClickQuest.Game.Core.Artifacts
 			{
 				User.Instance.CurrentHero.PoisonDamage -= PoisonDamageIncrease;
 			}
+
 			_timer.Stop();
 		}
 

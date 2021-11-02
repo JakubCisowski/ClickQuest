@@ -35,13 +35,8 @@ namespace ClickQuest.ContentManager.GameData.Models
 				return item;
 			}
 		}
-
-		public MonsterLootPattern()
-		{
-			
-		}
 	}
-	
+
 	public class Monster : IIdentifiable
 	{
 		public int Id { get; set; }
@@ -50,10 +45,5 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public int Health { get; set; }
 		public string Image { get; set; }
 		public List<MonsterLootPattern> MonsterLootPatterns { get; set; }
-
-		public Monster()
-		{
-			
-		}
 	}
 }

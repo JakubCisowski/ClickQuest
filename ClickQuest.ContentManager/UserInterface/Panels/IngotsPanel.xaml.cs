@@ -1,22 +1,18 @@
-﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
-using ClickQuest.ContentManager.UserInterface.Windows;
-using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
+using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.GameData.Models;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
 {
 	public partial class IngotsPanel : UserControl
 	{
 		private Ingot _dataContext;
-		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
+		private readonly Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 		private StackPanel _currentPanel;
 
 		public IngotsPanel()
@@ -39,17 +35,42 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			double gridHeight = this.ActualHeight;
-			double gridWidth = this.ActualWidth;
-			var panel = new StackPanel() { Name = "StaticInfoPanel" };
+			double gridHeight = ActualHeight;
+			double gridWidth = ActualWidth;
+			var panel = new StackPanel
+			{
+				Name = "StaticInfoPanel"
+			};
 
 			var selectedIngot = _dataContext;
 
-			var idBox = new TextBox() { Name = "IdBox", Text = selectedIngot.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			var nameBox = new TextBox() { Name = "NameBox", Text = selectedIngot.Name, Margin = new Thickness(10) };
-			var valueBox = new TextBox() { Name = "ValueBox", Text = selectedIngot.Value.ToString(), Margin = new Thickness(10) };
-			var rarityBox = new ComboBox() { Name = "RarityBox", ItemsSource = Enum.GetValues(typeof(Rarity)), SelectedIndex = (int)selectedIngot.Rarity, Margin = new Thickness(10) };
-			var descriptionBox = new TextBox()
+			var idBox = new TextBox
+			{
+				Name = "IdBox",
+				Text = selectedIngot.Id.ToString(),
+				Margin = new Thickness(10),
+				IsEnabled = false
+			};
+			var nameBox = new TextBox
+			{
+				Name = "NameBox",
+				Text = selectedIngot.Name,
+				Margin = new Thickness(10)
+			};
+			var valueBox = new TextBox
+			{
+				Name = "ValueBox",
+				Text = selectedIngot.Value.ToString(),
+				Margin = new Thickness(10)
+			};
+			var rarityBox = new ComboBox
+			{
+				Name = "RarityBox",
+				ItemsSource = Enum.GetValues(typeof(Rarity)),
+				SelectedIndex = (int) selectedIngot.Rarity,
+				Margin = new Thickness(10)
+			};
+			var descriptionBox = new TextBox
 			{
 				Name = "DescriptionBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -83,13 +104,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
+					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)this.FindResource("MaterialDesignOutlinedComboBox");
+					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -120,7 +141,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			ingot.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
 			ingot.Name = (_controls["NameBox"] as TextBox).Text;
 			ingot.Value = int.Parse((_controls["ValueBox"] as TextBox).Text);
-			ingot.Rarity = (Rarity)Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
+			ingot.Rarity = (Rarity) Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
 			ingot.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
 			// Check if this Id is already in the collection (modified).
@@ -141,20 +162,23 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			Save();
-			
+
 			int nextId = GameContent.Ingots.Max(x => x.Id) + 1;
-			_dataContext = new Ingot() { Id = nextId };
+			_dataContext = new Ingot
+			{
+				Id = nextId
+			};
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
 
-			DeleteObjectButton.Visibility=Visibility.Visible;
+			DeleteObjectButton.Visibility = Visibility.Visible;
 		}
 
 		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			Save();
 
-			var objectToDelete = GameContent.Ingots.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
+			var objectToDelete = GameContent.Ingots.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -168,7 +192,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			PopulateContentSelectionBox();
 			ContentSelectionBox.SelectedIndex = -1;
 			_currentPanel.Children.Clear();
-			DeleteObjectButton.Visibility=Visibility.Hidden;
+			DeleteObjectButton.Visibility = Visibility.Hidden;
 			_dataContext = null;
 
 			Application.Current.MainWindow.Close();
@@ -176,7 +200,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{
@@ -188,11 +212,10 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Save();
 			}
 
-			_dataContext =  GameContent.Ingots.FirstOrDefault(x => x.Name == selectedName);
-			ContentSelectionBox.SelectedValue = _dataContext.Name.ToString();
+			_dataContext = GameContent.Ingots.FirstOrDefault(x => x.Name == selectedName);
+			ContentSelectionBox.SelectedValue = _dataContext.Name;
 			RefreshStaticValuesPanel();
-			DeleteObjectButton.Visibility=Visibility.Visible;
+			DeleteObjectButton.Visibility = Visibility.Visible;
 		}
-
 	}
 }

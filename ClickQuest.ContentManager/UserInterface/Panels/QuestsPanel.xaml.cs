@@ -1,22 +1,20 @@
-﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
-using ClickQuest.ContentManager.UserInterface.Windows;
-using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
+using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.UserInterface.Windows;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
 {
 	public partial class QuestsPanel : UserControl
 	{
 		private Quest _dataContext;
-		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
+		private readonly Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 		private StackPanel _currentPanel;
 		private List<QuestRewardPattern> _questRewardPatterns;
 
@@ -40,18 +38,49 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			double gridHeight = this.ActualHeight;
-			double gridWidth = this.ActualWidth;
-			var panel = new StackPanel() { Name = "StaticInfoPanel" };
+			double gridHeight = ActualHeight;
+			double gridWidth = ActualWidth;
+			var panel = new StackPanel
+			{
+				Name = "StaticInfoPanel"
+			};
 
 			var selectedQuest = _dataContext;
 
-			var idBox = new TextBox() { Name = "IdBox", Text = selectedQuest.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			var nameBox = new TextBox() { Name = "NameBox", Text = selectedQuest.Name, Margin = new Thickness(10) };
-			var rareBox = new CheckBox{ Name = "RareBox", Content = "Rare?", IsChecked = selectedQuest.Rare, Margin = new Thickness(10) };
-			var heroClassBox = new ComboBox() { Name = "HeroClassBox", ItemsSource = Enum.GetValues(typeof(HeroClass)), SelectedIndex = (int)selectedQuest.HeroClass, Margin = new Thickness(10) };
-			var durationBox = new TextBox() { Name = "DurationBox", Text = selectedQuest.Duration.ToString(), Margin = new Thickness(10) };
-			var descriptionBox = new TextBox()
+			var idBox = new TextBox
+			{
+				Name = "IdBox",
+				Text = selectedQuest.Id.ToString(),
+				Margin = new Thickness(10),
+				IsEnabled = false
+			};
+			var nameBox = new TextBox
+			{
+				Name = "NameBox",
+				Text = selectedQuest.Name,
+				Margin = new Thickness(10)
+			};
+			var rareBox = new CheckBox
+			{
+				Name = "RareBox",
+				Content = "Rare?",
+				IsChecked = selectedQuest.Rare,
+				Margin = new Thickness(10)
+			};
+			var heroClassBox = new ComboBox
+			{
+				Name = "HeroClassBox",
+				ItemsSource = Enum.GetValues(typeof(HeroClass)),
+				SelectedIndex = (int) selectedQuest.HeroClass,
+				Margin = new Thickness(10)
+			};
+			var durationBox = new TextBox
+			{
+				Name = "DurationBox",
+				Text = selectedQuest.Duration.ToString(),
+				Margin = new Thickness(10)
+			};
+			var descriptionBox = new TextBox
 			{
 				Name = "DescriptionBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -87,13 +116,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
+					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)this.FindResource("MaterialDesignOutlinedComboBox");
+					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -124,7 +153,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			quest.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
 			quest.Name = (_controls["NameBox"] as TextBox).Text;
 			quest.Rare = (_controls["RareBox"] as CheckBox).IsChecked.Value;
-			quest.HeroClass = (HeroClass)Enum.Parse(typeof(HeroClass), (_controls["HeroClassBox"] as ComboBox).SelectedValue.ToString());
+			quest.HeroClass = (HeroClass) Enum.Parse(typeof(HeroClass), (_controls["HeroClassBox"] as ComboBox).SelectedValue.ToString());
 			quest.Duration = int.Parse((_controls["DurationBox"] as TextBox).Text);
 			quest.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
@@ -146,24 +175,28 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			Save();
-			
+
 			int nextId = GameContent.Quests.Max(x => x.Id) + 1;
 
-			_dataContext = new Quest() { Id = nextId, QuestRewardPatterns = new List<QuestRewardPattern>()};
+			_dataContext = new Quest
+			{
+				Id = nextId,
+				QuestRewardPatterns = new List<QuestRewardPattern>()
+			};
 			_questRewardPatterns = _dataContext.QuestRewardPatterns;
 
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
 			DynamicValuesPanel.Children.Clear();
 
-			DeleteObjectButton.Visibility=Visibility.Visible;
+			DeleteObjectButton.Visibility = Visibility.Visible;
 		}
 
 		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
 		{
 			Save();
 
-			var objectToDelete = GameContent.Quests.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
+			var objectToDelete = GameContent.Quests.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -176,12 +209,12 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			PopulateContentSelectionBox();
 			ContentSelectionBox.SelectedIndex = -1;
-			
+
 			_currentPanel.Children.Clear();
 			DynamicValuesPanel.Children.Clear();
 
 			CreateDynamicValueButton.Visibility = Visibility.Hidden;
-			DeleteObjectButton.Visibility=Visibility.Hidden;
+			DeleteObjectButton.Visibility = Visibility.Hidden;
 			_dataContext = null;
 
 			Application.Current.MainWindow.Close();
@@ -189,7 +222,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{
@@ -202,11 +235,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			_dataContext = GameContent.Quests.FirstOrDefault(x => x.Name == selectedName);
-			ContentSelectionBox.SelectedValue = _dataContext.Name.ToString();
+			ContentSelectionBox.SelectedValue = _dataContext.Name;
 			_questRewardPatterns = _dataContext.QuestRewardPatterns;
 			RefreshStaticValuesPanel();
 			RefreshDynamicValuesPanel();
-			DeleteObjectButton.Visibility=Visibility.Visible;
+			DeleteObjectButton.Visibility = Visibility.Visible;
 		}
 
 		public void RefreshDynamicValuesPanel()
@@ -283,12 +316,12 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 					break;
 
 				case RewardType.Ingot:
-					nameBlock.Text = GameContent.Ingots.FirstOrDefault(x=>x.Id == pattern.QuestRewardId).Name;
+					nameBlock.Text = GameContent.Ingots.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
 					break;
 			}
 
 			var editButton = new Button
-			{	
+			{
 				Width = 30,
 				Height = 30,
 				Margin = new Thickness(5, 0, 90, 0),
@@ -343,7 +376,10 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			var pattern = (sender as Button).Tag as QuestRewardPattern;
 
-			var questRewardPatternWindow = new QuestRewardPatternWindow(_dataContext, pattern) { Owner = Application.Current.MainWindow };
+			var questRewardPatternWindow = new QuestRewardPatternWindow(_dataContext, pattern)
+			{
+				Owner = Application.Current.MainWindow
+			};
 			questRewardPatternWindow.ShowDialog();
 
 			RefreshDynamicValuesPanel();
@@ -367,12 +403,17 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void CreateDynamicValueButton_Click(object sender, RoutedEventArgs e)
 		{
-			var newQuestRewardPattern = new QuestRewardPattern() { Quantity = 1 };
+			var newQuestRewardPattern = new QuestRewardPattern
+			{
+				Quantity = 1
+			};
 			_questRewardPatterns.Add(newQuestRewardPattern);
 
-			var tempButton = new Button() { Tag = newQuestRewardPattern };
+			var tempButton = new Button
+			{
+				Tag = newQuestRewardPattern
+			};
 			EditDynamicValue_Click(tempButton, null);
 		}
-
 	}
 }

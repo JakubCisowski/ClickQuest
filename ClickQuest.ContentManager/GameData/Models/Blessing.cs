@@ -11,10 +11,5 @@
 		public string Lore { get; set; }
 		public int Buff { get; set; }
 		public int Value { get; set; }
-
-		public Blessing()
-		{
-			
-		}
 	}
 }

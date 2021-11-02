@@ -53,7 +53,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 					toolTipBlock.Inlines.Add(new Run($"{artifact.Lore}"));
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run($"{artifact.ExtraInfo}"));
-					
+
 					if (artifact.Rarity == Rarity.Mythic)
 					{
 						toolTipBlock.Inlines.Add(new LineBreak());

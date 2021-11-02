@@ -1,10 +1,10 @@
-﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.UserInterface.Panels;
-using ClickQuest.ContentManager.Validation;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.UserInterface.Panels;
+using ClickQuest.ContentManager.Validation;
 
 namespace ClickQuest.ContentManager.UserInterface.Windows
 {
@@ -23,8 +23,8 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			{
 				SaveObjectChanges();
 
-				var currentTabName = (tabControl.SelectedItem as TabItem).Header.ToString();
-				var currentTabNameAsContentType = (ContentType)Enum.Parse(typeof(ContentType), currentTabName.Replace(" ", ""));
+				string? currentTabName = (tabControl.SelectedItem as TabItem).Header.ToString();
+				var currentTabNameAsContentType = (ContentType) Enum.Parse(typeof(ContentType), currentTabName.Replace(" ", ""));
 
 				switch (currentTabNameAsContentType)
 				{
@@ -99,7 +99,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
 						(tabControl.SelectedContent as Grid)?.Children.Add(dungeonsPanel);
 						break;
-					
+
 					case ContentType.Ingots:
 						var ingotsPanel = new IngotsPanel();
 						_currentPanel = ingotsPanel;
@@ -183,11 +183,11 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				case DungeonKeysPanel dungeonKeysPanel:
 					dungeonKeysPanel.Save();
 					break;
-				
+
 				case IngotsPanel ingotsPanel:
 					ingotsPanel.Save();
 					break;
-				
+
 				case MonstersPanel monstersPanel:
 					monstersPanel.Save();
 					break;

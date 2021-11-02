@@ -1,20 +1,20 @@
-﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
-using ClickQuest.ContentManager.UserInterface.Windows;
-using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.UserInterface.Windows;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
 {
 	public partial class RecipesPanel : UserControl
 	{
 		private Recipe _dataContext;
-		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
+		private readonly Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 		private StackPanel _currentPanel;
 		private List<IngredientPattern> _ingredients;
 
@@ -38,18 +38,54 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			double gridHeight = this.ActualHeight;
-			double gridWidth = this.ActualWidth;
-			var panel = new StackPanel() { Name = "StaticInfoPanel" };
+			double gridHeight = ActualHeight;
+			double gridWidth = ActualWidth;
+			var panel = new StackPanel
+			{
+				Name = "StaticInfoPanel"
+			};
 
 			var selectedRecipe = _dataContext;
 
-			var idBox = new TextBox() { Name = "IdBox", Text = selectedRecipe.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			var nameBox = new TextBox() { Name = "NameBox", Text = selectedRecipe.Name, Margin = new Thickness(10) };
-			var valueBox = new TextBox() { Name = "ValueBox", Text = selectedRecipe.Value.ToString(), Margin = new Thickness(10) };
-			var rarityBox = new ComboBox() { Name = "RarityBox", ItemsSource = Enum.GetValues(typeof(Rarity)), SelectedIndex = (int)selectedRecipe.Rarity, Margin = new Thickness(10) };
-			var artifactIdBox = new TextBox() { Name = "ArtifactIDBox", Text = selectedRecipe.ArtifactId.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			var artifactNameBox = new ComboBox() { Name = "ArtifactNameBox", ItemsSource = GameContent.Artifacts.Select(x => x.Name), Margin = new Thickness(10) };
+			var idBox = new TextBox
+			{
+				Name = "IdBox",
+				Text = selectedRecipe.Id.ToString(),
+				Margin = new Thickness(10),
+				IsEnabled = false
+			};
+			var nameBox = new TextBox
+			{
+				Name = "NameBox",
+				Text = selectedRecipe.Name,
+				Margin = new Thickness(10)
+			};
+			var valueBox = new TextBox
+			{
+				Name = "ValueBox",
+				Text = selectedRecipe.Value.ToString(),
+				Margin = new Thickness(10)
+			};
+			var rarityBox = new ComboBox
+			{
+				Name = "RarityBox",
+				ItemsSource = Enum.GetValues(typeof(Rarity)),
+				SelectedIndex = (int) selectedRecipe.Rarity,
+				Margin = new Thickness(10)
+			};
+			var artifactIdBox = new TextBox
+			{
+				Name = "ArtifactIDBox",
+				Text = selectedRecipe.ArtifactId.ToString(),
+				Margin = new Thickness(10),
+				IsEnabled = false
+			};
+			var artifactNameBox = new ComboBox
+			{
+				Name = "ArtifactNameBox",
+				ItemsSource = GameContent.Artifacts.Select(x => x.Name),
+				Margin = new Thickness(10)
+			};
 			artifactNameBox.SelectedValue = GameContent.Artifacts.FirstOrDefault(x => x.Id == selectedRecipe.ArtifactId)?.Name;
 			artifactNameBox.SelectionChanged += ArtifactNameBox_SelectionChanged;
 
@@ -76,13 +112,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
+					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)this.FindResource("MaterialDesignOutlinedComboBox");
+					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -118,7 +154,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			recipe.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
 			recipe.Name = (_controls["NameBox"] as TextBox).Text;
 			recipe.Value = int.Parse((_controls["ValueBox"] as TextBox).Text);
-			recipe.Rarity = (Rarity)Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
+			recipe.Rarity = (Rarity) Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
 			recipe.ArtifactId = int.Parse((_controls["ArtifactIDBox"] as TextBox).Text);
 
 			// Check if this Id is already in the collection (modified).
@@ -142,7 +178,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			int nextId = GameContent.Recipes.Max(x => x.Id) + 1;
 
-			_dataContext = new Recipe() { Id = nextId, IngredientPatterns = new List<IngredientPattern>() };
+			_dataContext = new Recipe
+			{
+				Id = nextId,
+				IngredientPatterns = new List<IngredientPattern>()
+			};
 			_ingredients = _dataContext.IngredientPatterns;
 
 			ContentSelectionBox.SelectedIndex = -1;
@@ -182,7 +222,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{
@@ -195,7 +235,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			_dataContext = GameContent.Recipes.FirstOrDefault(x => x.Name == selectedName);
-			ContentSelectionBox.SelectedValue = _dataContext.Name.ToString();
+			ContentSelectionBox.SelectedValue = _dataContext.Name;
 			_ingredients = _dataContext.IngredientPatterns;
 			RefreshStaticValuesPanel();
 			RefreshDynamicValuesPanel();
@@ -315,7 +355,10 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			var ingredient = (sender as Button).Tag as IngredientPattern;
 
-			var ingredientWindow = new IngredientWindow(_dataContext, ingredient) { Owner = Application.Current.MainWindow };
+			var ingredientWindow = new IngredientWindow(_dataContext, ingredient)
+			{
+				Owner = Application.Current.MainWindow
+			};
 			ingredientWindow.ShowDialog();
 
 			RefreshDynamicValuesPanel();
@@ -342,9 +385,11 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			var newIngredient = new IngredientPattern();
 			_ingredients.Add(newIngredient);
 
-			var tempButton = new Button() { Tag = newIngredient };
+			var tempButton = new Button
+			{
+				Tag = newIngredient
+			};
 			EditDynamicValue_Click(tempButton, null);
 		}
-
 	}
 }

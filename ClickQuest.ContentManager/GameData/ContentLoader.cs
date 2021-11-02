@@ -1,8 +1,8 @@
-﻿using ClickQuest.ContentManager.GameData.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using ClickQuest.ContentManager.GameData.Models;
 using static ClickQuest.ContentManager.GameData.JsonFilePaths;
 
 namespace ClickQuest.ContentManager.GameData
@@ -29,7 +29,7 @@ namespace ClickQuest.ContentManager.GameData
 
 		public static List<T> LoadContent<T>(string jsonFilePath)
 		{
-			var json = File.ReadAllText(jsonFilePath);
+			string json = File.ReadAllText(jsonFilePath);
 			var options = new JsonSerializerOptions
 			{
 				Converters =

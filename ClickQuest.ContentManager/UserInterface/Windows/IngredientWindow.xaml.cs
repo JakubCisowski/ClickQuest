@@ -1,20 +1,19 @@
-﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
-using MaterialDesignThemes.Wpf;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.GameData.Models;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Windows
 {
 	public partial class IngredientWindow : Window
 	{
-		private Recipe _recipe;
-		private IngredientPattern _ingredient;
-		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
+		private readonly Recipe _recipe;
+		private readonly IngredientPattern _ingredient;
+		private readonly Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 
 		public IngredientWindow(Recipe recipe, IngredientPattern ingredient)
 		{
@@ -31,17 +30,36 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			// Add controls to Dictionary for easier navigation.
 			_controls.Clear();
 
-			double gridHeight = this.ActualHeight;
-			double gridWidth = this.ActualWidth;
-			var panel = new StackPanel() { Name = "MainInfoPanel" };
+			double gridHeight = ActualHeight;
+			double gridWidth = ActualWidth;
+			var panel = new StackPanel
+			{
+				Name = "MainInfoPanel"
+			};
 
-			var idBox = new TextBox() { Name = "IdBox", Text = _ingredient.MaterialId.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var idBox = new TextBox
+			{
+				Name = "IdBox",
+				Text = _ingredient.MaterialId.ToString(),
+				Margin = new Thickness(10),
+				IsEnabled = false
+			};
 
-			var nameBox = new ComboBox() { Name = "NameBox", ItemsSource = GameContent.Materials.Select(x => x.Name), Margin = new Thickness(10) };
+			var nameBox = new ComboBox
+			{
+				Name = "NameBox",
+				ItemsSource = GameContent.Materials.Select(x => x.Name),
+				Margin = new Thickness(10)
+			};
 			nameBox.SelectedValue = GameContent.Materials.FirstOrDefault(x => x.Id == _ingredient.MaterialId)?.Name;
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 
-			var quantityBox = new TextBox() { Name = "QuantityBox", Text = _ingredient.Quantity.ToString(), Margin = new Thickness(10) };
+			var quantityBox = new TextBox
+			{
+				Name = "QuantityBox",
+				Text = _ingredient.Quantity.ToString(),
+				Margin = new Thickness(10)
+			};
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
@@ -57,13 +75,13 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
+					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)this.FindResource("MaterialDesignOutlinedComboBox");
+					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -85,7 +103,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 		private void UpdateIngredient()
 		{
-			var oldIngredientIndex = _recipe.IngredientPatterns.IndexOf(_recipe.IngredientPatterns.FirstOrDefault(x => x.MaterialId == _ingredient.MaterialId));
+			int oldIngredientIndex = _recipe.IngredientPatterns.IndexOf(_recipe.IngredientPatterns.FirstOrDefault(x => x.MaterialId == _ingredient.MaterialId));
 
 			_ingredient.MaterialId = int.Parse((_controls["IdBox"] as TextBox).Text);
 			_ingredient.Quantity = int.Parse((_controls["QuantityBox"] as TextBox).Text);
@@ -100,7 +118,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			}
 		}
 
-		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		private void Window_Closing(object sender, CancelEventArgs e)
 		{
 			UpdateIngredient();
 		}

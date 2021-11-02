@@ -2,16 +2,13 @@
 
 namespace ClickQuest.ContentManager.GameData.Models
 {
-	public enum HeroClass
-	{
-		All, Slayer, Venom
-	}
+	public enum HeroClass { All, Slayer, Venom }
 
 	public class QuestRewardPattern
 	{
-		public int QuestRewardId { get; set;}
+		public int QuestRewardId { get; set; }
 		public RewardType QuestRewardType { get; set; }
-		public int Quantity{ get; set; }
+		public int Quantity { get; set; }
 	}
 
 	public class Quest : IIdentifiable
@@ -22,11 +19,6 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public string Name { get; set; }
 		public int Duration { get; set; }
 		public string Description { get; set; }
-		public List<QuestRewardPattern> QuestRewardPatterns{ get; set; }
-
-		public Quest()
-		{
-			
-		}
+		public List<QuestRewardPattern> QuestRewardPatterns { get; set; }
 	}
 }

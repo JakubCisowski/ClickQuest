@@ -1,18 +1,18 @@
-﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
-using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.GameData.Models;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
 {
 	public partial class ArtifactsPanel : UserControl
 	{
 		private Artifact _dataContext;
-		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
+		private readonly Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 		private StackPanel _currentPanel;
 
 		public ArtifactsPanel()
@@ -35,18 +35,49 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			double gridHeight = this.ActualHeight;
-			double gridWidth = this.ActualWidth;
-			var panel = new StackPanel() { Name = "StaticInfoPanel" };
+			double gridHeight = ActualHeight;
+			double gridWidth = ActualWidth;
+			var panel = new StackPanel
+			{
+				Name = "StaticInfoPanel"
+			};
 
 			var selectedArtifact = _dataContext;
 
-			var idBox = new TextBox() { Name = "IdBox", Text = selectedArtifact.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			var nameBox = new TextBox() { Name = "NameBox", Text = selectedArtifact.Name, Margin = new Thickness(10) };
-			var valueBox = new TextBox() { Name = "ValueBox", Text = selectedArtifact.Value.ToString(), Margin = new Thickness(10) };
-			var rarityBox = new ComboBox() { Name = "RarityBox", ItemsSource = Enum.GetValues(typeof(Rarity)), SelectedIndex = (int)selectedArtifact.Rarity, Margin = new Thickness(10) };
-			var artifactTypeBox = new ComboBox() { Name = "ArtifactTypeBox", ItemsSource = Enum.GetValues(typeof(ArtifactType)), SelectedIndex = (int)selectedArtifact.ArtifactType, Margin = new Thickness(10) };
-			var descriptionBox = new TextBox()
+			var idBox = new TextBox
+			{
+				Name = "IdBox",
+				Text = selectedArtifact.Id.ToString(),
+				Margin = new Thickness(10),
+				IsEnabled = false
+			};
+			var nameBox = new TextBox
+			{
+				Name = "NameBox",
+				Text = selectedArtifact.Name,
+				Margin = new Thickness(10)
+			};
+			var valueBox = new TextBox
+			{
+				Name = "ValueBox",
+				Text = selectedArtifact.Value.ToString(),
+				Margin = new Thickness(10)
+			};
+			var rarityBox = new ComboBox
+			{
+				Name = "RarityBox",
+				ItemsSource = Enum.GetValues(typeof(Rarity)),
+				SelectedIndex = (int) selectedArtifact.Rarity,
+				Margin = new Thickness(10)
+			};
+			var artifactTypeBox = new ComboBox
+			{
+				Name = "ArtifactTypeBox",
+				ItemsSource = Enum.GetValues(typeof(ArtifactType)),
+				SelectedIndex = (int) selectedArtifact.ArtifactType,
+				Margin = new Thickness(10)
+			};
+			var descriptionBox = new TextBox
 			{
 				Name = "DescriptionBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -59,7 +90,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Margin = new Thickness(10)
 			};
 
-			var loreBox = new TextBox()
+			var loreBox = new TextBox
 			{
 				Name = "LoreBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -72,7 +103,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Margin = new Thickness(10)
 			};
 
-			var extraInfoBox = new TextBox()
+			var extraInfoBox = new TextBox
 			{
 				Name = "ExtraInfoBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -112,13 +143,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
+					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)this.FindResource("MaterialDesignOutlinedComboBox");
+					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -149,8 +180,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			artifact.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
 			artifact.Name = (_controls["NameBox"] as TextBox).Text;
 			artifact.Value = int.Parse((_controls["ValueBox"] as TextBox).Text);
-			artifact.Rarity = (Rarity)Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
-			artifact.ArtifactType = (ArtifactType)Enum.Parse(typeof(ArtifactType), (_controls["ArtifactTypeBox"] as ComboBox).SelectedValue.ToString());
+			artifact.Rarity = (Rarity) Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
+			artifact.ArtifactType = (ArtifactType) Enum.Parse(typeof(ArtifactType), (_controls["ArtifactTypeBox"] as ComboBox).SelectedValue.ToString());
 			artifact.Description = (_controls["DescriptionBox"] as TextBox).Text;
 			artifact.Lore = (_controls["LoreBox"] as TextBox).Text;
 			artifact.ExtraInfo = (_controls["ExtraInfoBox"] as TextBox).Text;
@@ -175,7 +206,10 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			Save();
 
 			int nextId = GameContent.Artifacts.Max(x => x.Id) + 1;
-			_dataContext = new Artifact() { Id = nextId };
+			_dataContext = new Artifact
+			{
+				Id = nextId
+			};
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticInfoPanel();
 
@@ -208,7 +242,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{
@@ -221,7 +255,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			_dataContext = GameContent.Artifacts.FirstOrDefault(x => x.Name == selectedName);
-			ContentSelectionBox.SelectedValue = _dataContext.Name.ToString();
+			ContentSelectionBox.SelectedValue = _dataContext.Name;
 			RefreshStaticInfoPanel();
 			DeleteObjectButton.Visibility = Visibility.Visible;
 		}

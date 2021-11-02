@@ -17,7 +17,7 @@ namespace ClickQuest.Game
 			CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 			CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
 			CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
-			
+
 			// Load JSONs.
 			GameAssetsLoader.Load();
 

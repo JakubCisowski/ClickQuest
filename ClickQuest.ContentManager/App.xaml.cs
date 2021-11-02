@@ -14,7 +14,7 @@ namespace ClickQuest.ContentManager
 			CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
 			JsonFilePaths.CalculateGameAssetsFilePaths();
-			
+
 			ContentLoader.LoadAllContent();
 		}
 	}

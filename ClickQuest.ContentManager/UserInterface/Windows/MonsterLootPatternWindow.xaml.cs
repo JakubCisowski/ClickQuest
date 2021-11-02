@@ -1,20 +1,20 @@
-﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
-using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.GameData.Models;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Windows
 {
 	public partial class MonsterLootPatternWindow : Window
 	{
-		private Monster _monster;
-		private MonsterLootPattern _pattern;
-		private Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
+		private readonly Monster _monster;
+		private readonly MonsterLootPattern _pattern;
+		private readonly Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
 
 		public MonsterLootPatternWindow(Monster monster, MonsterLootPattern pattern)
 		{
@@ -31,22 +31,45 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			// Add controls to Dictionary for easier navigation.
 			_controls.Clear();
 
-			double gridHeight = this.ActualHeight;
-			double gridWidth = this.ActualWidth;
-			var panel = new StackPanel() { Name = "MainInfoPanel" };
+			double gridHeight = ActualHeight;
+			double gridWidth = ActualWidth;
+			var panel = new StackPanel
+			{
+				Name = "MainInfoPanel"
+			};
 
-			var idBox = new TextBox() { Name = "IdBox", Text = _pattern.MonsterLootId.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			var idBox = new TextBox
+			{
+				Name = "IdBox",
+				Text = _pattern.MonsterLootId.ToString(),
+				Margin = new Thickness(10),
+				IsEnabled = false
+			};
 			_controls.Add(idBox.Name, idBox);
 
-			var nameBox = new ComboBox() { Name = "NameBox", Margin = new Thickness(10) };
+			var nameBox = new ComboBox
+			{
+				Name = "NameBox",
+				Margin = new Thickness(10)
+			};
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 			_controls.Add(nameBox.Name, nameBox);
 
-			var RewardTypeBox = new ComboBox() { Name = "RewardTypeBox", ItemsSource = Enum.GetValues(typeof(RewardType)), Margin = new Thickness(10) };
+			var RewardTypeBox = new ComboBox
+			{
+				Name = "RewardTypeBox",
+				ItemsSource = Enum.GetValues(typeof(RewardType)),
+				Margin = new Thickness(10)
+			};
 			RewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
 			RewardTypeBox.SelectedValue = _pattern.MonsterLootType;
 
-			var frequencyBox = new TextBox() { Name = "FrequencyBox", Text = _pattern.Frequency.ToString(), Margin = new Thickness(10) };
+			var frequencyBox = new TextBox
+			{
+				Name = "FrequencyBox",
+				Text = _pattern.Frequency.ToString(),
+				Margin = new Thickness(10)
+			};
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
@@ -62,13 +85,13 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)this.FindResource("MaterialDesignOutlinedTextBox");
+					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)this.FindResource("MaterialDesignOutlinedComboBox");
+					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -128,40 +151,40 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				return;
 			}
 
-			switch ((RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString()))
+			switch ((RewardType) Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString()))
 			{
 				case RewardType.Material:
-					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Materials.Select(x=>x.Name);
+					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Materials.Select(x => x.Name);
 					break;
 
 				case RewardType.Recipe:
-					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Recipes.Select(x=>x.Name);
+					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Recipes.Select(x => x.Name);
 					break;
 
 				case RewardType.Artifact:
-					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Artifacts.Select(x=>x.Name);
+					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Artifacts.Select(x => x.Name);
 					break;
 
 				case RewardType.Blessing:
-					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Blessings.Select(x=>x.Name);
+					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Blessings.Select(x => x.Name);
 					break;
 
 				case RewardType.Ingot:
-					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Ingots.Select(x=>x.Name);
+					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Ingots.Select(x => x.Name);
 					break;
 			}
 
-			_pattern.MonsterLootType = (RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString());
-			
+			_pattern.MonsterLootType = (RewardType) Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString());
+
 			(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
 		}
 
 		private void UpdateMonsterLootPattern()
 		{
-			var oldPatternIndex = _monster.MonsterLootPatterns.IndexOf(_monster.MonsterLootPatterns.FirstOrDefault(x => x.MonsterLootId == _pattern.MonsterLootId));
+			int oldPatternIndex = _monster.MonsterLootPatterns.IndexOf(_monster.MonsterLootPatterns.FirstOrDefault(x => x.MonsterLootId == _pattern.MonsterLootId));
 
 			_pattern.MonsterLootId = int.Parse((_controls["IdBox"] as TextBox).Text);
-			_pattern.MonsterLootType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
+			_pattern.MonsterLootType = (RewardType) Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
 			_pattern.Frequency = double.Parse((_controls["FrequencyBox"] as TextBox).Text);
 
 			if (oldPatternIndex == -1)
@@ -174,7 +197,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			}
 		}
 
-		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		private void Window_Closing(object sender, CancelEventArgs e)
 		{
 			UpdateMonsterLootPattern();
 		}

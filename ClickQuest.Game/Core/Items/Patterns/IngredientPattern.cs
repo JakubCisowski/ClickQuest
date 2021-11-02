@@ -1,6 +1,6 @@
-using ClickQuest.Game.Core.GameData;
 using System.Linq;
 using System.Text.Json.Serialization;
+using ClickQuest.Game.Core.GameData;
 
 namespace ClickQuest.Game.Core.Items.Patterns
 {

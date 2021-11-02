@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Patterns;
@@ -5,8 +7,6 @@ using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
-using System;
-using System.Collections.Generic;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 
 namespace ClickQuest.Game.Core.Enemies
@@ -82,13 +82,13 @@ namespace ClickQuest.Game.Core.Enemies
 
 			// Grant boss loot.
 			// 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
-			int threshold = 5 - (int)Math.Ceiling((double)CurrentHealth / (Health / 5));
+			int threshold = 5 - (int) Math.Ceiling((double) CurrentHealth / (Health / 5));
 			// 2. Iterate through every possible loot.
 			string lootText = "Experience gained: " + experienceGained + " \n" + "Loot: \n";
 
 			foreach (var loot in BossLootPatterns)
 			{
-				int itemIntegerCount = (int)loot.Frequencies[threshold];
+				int itemIntegerCount = (int) loot.Frequencies[threshold];
 
 				double randomizedValue = RNG.Next(1, 10001) / 10000d;
 				if (randomizedValue < loot.Frequencies[threshold] - itemIntegerCount)
