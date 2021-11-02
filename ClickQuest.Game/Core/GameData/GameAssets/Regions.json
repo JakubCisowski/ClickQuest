@@ -5,7 +5,7 @@
 		"Name": "Woodland Cascades",
 		"Description": "ForestDescription",
 		"Background": "/example.png",
-		"Monsters": [
+		"MonsterSpawnPatterns": [
 			{
 				"MonsterId": 26,
 				"Frequency": 0.4000
@@ -38,7 +38,7 @@
 		"Name": "Ominous Cave",
 		"Description": "CaveDescription",
 		"Background": "/example2.png",
-		"Monsters": [
+		"MonsterSpawnPatterns": [
 			{
 				"MonsterId": 1,
 				"Frequency": 0.0000
@@ -55,7 +55,7 @@
 		"Name": "Whistle Lake",
 		"Description": "ForestDescription",
 		"Background": "/example.png",
-		"Monsters": [
+		"MonsterSpawnPatterns": [
 			{
 				"MonsterId": 37,
 				"Frequency": 0.1500
@@ -92,7 +92,7 @@
 		"Name": "Frozen Highlands",
 		"Description": "ForestDescription",
 		"Background": "/example.png",
-		"Monsters": [
+		"MonsterSpawnPatterns": [
 			{
 				"MonsterId": 18,
 				"Frequency": 0.0400
@@ -133,7 +133,7 @@
 		"Name": "Titan's Hills",
 		"Description": "ForestDescription",
 		"Background": "/example.png",
-		"Monsters": [
+		"MonsterSpawnPatterns": [
 			{
 				"MonsterId": 32,
 				"Frequency": 0.1500
@@ -162,7 +162,7 @@
 		"Name": "Assassins' Woods",
 		"Description": "The woods seem unusually quiet at first… But are you sure they are completely empty?",
 		"Background": "/example.png",
-		"Monsters": [
+		"MonsterSpawnPatterns": [
 			{
 				"MonsterId": 7,
 				"Frequency": 0.4000
@@ -191,7 +191,7 @@
 		"Name": "Naga Acropolis",
 		"Description": "ForestDescription",
 		"Background": "/example.png",
-		"Monsters": [
+		"MonsterSpawnPatterns": [
 			{
 				"MonsterId": 44,
 				"Frequency": 0.0100
@@ -224,7 +224,7 @@
 		"Name": "Desert of Desolation",
 		"Description": "Countless adventurers have ended their journey in this very desert. Will you manage the danger that awaits you on its scorching sands?",
 		"Background": "/example.png",
-		"Monsters": [
+		"MonsterSpawnPatterns": [
 			{
 				"MonsterId": 1,
 				"Frequency": 0.0100
@@ -257,7 +257,7 @@
 		"Name": "Cemetery of the Damned",
 		"Description": "This place seemed empty and quiet from afar. As you get closer, however, you start seeing some movement on top of the tombstones. The big, circular chapel in the middle of this place suddenly gets filled with all types of undead, glancing over you with hatred.",
 		"Background": "/example.png",
-		"Monsters": [
+		"MonsterSpawnPatterns": [
 			{
 				"MonsterId": 12,
 				"Frequency": 0.3000

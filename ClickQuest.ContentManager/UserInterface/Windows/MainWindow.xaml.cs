@@ -122,6 +122,14 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
 						(tabControl.SelectedContent as Grid)?.Children.Add(questsPanel);
 						break;
+
+					case ContentType.Priest:
+						var priestPanel = new PriestOfferPatternsPanel();
+						_currentPanel = priestPanel;
+
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(priestPanel);
+						break;
 				}
 			}
 		}
@@ -177,6 +185,10 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 				case QuestsPanel questsPanel:
 					questsPanel.Save();
+					break;
+
+				case PriestOfferPatternsPanel priestPanel:
+					priestPanel.Save();
 					break;
 			}
 		}

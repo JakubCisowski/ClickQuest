@@ -33,6 +33,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		public void RefreshStaticValuesPanel()
 		{
+			// Add controls to Dictionary for easier navigation.
+			_controls.Clear();
+
 			if (_currentPanel != null)
 			{
 				_currentPanel.Children.Clear();
@@ -46,37 +49,30 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			var selectedVendorPattern = _dataContext;
 
 			var idBox = new TextBox() { Name = "IdBox", Text = selectedVendorPattern.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			var nameBox = new TextBox() { Name = "NameBox", Text = selectedVendorPattern.Name, Margin = new Thickness(10) };
+			
+			var referencedIdBox = new TextBox() { Name = "ReferencedIdBox", Text = selectedVendorPattern.VendorItemId.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			_controls.Add(referencedIdBox.Name, referencedIdBox);
+
+			var nameBox = new ComboBox() { Name = "NameBox", Margin = new Thickness(10) };
+			nameBox.SelectionChanged += NameBox_SelectionChanged;
+			_controls.Add(nameBox.Name, nameBox);
+
+			var rewardTypeBox = new ComboBox() { Name = "RewardTypeBox", ItemsSource = Enum.GetValues(typeof(RewardType)), Margin = new Thickness(10) };
+			rewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
+			rewardTypeBox.SelectedValue = selectedVendorPattern.VendorItemType;
+
 			var valueBox = new TextBox() { Name = "ValueBox", Text = selectedVendorPattern.Value.ToString(), Margin = new Thickness(10) };
-			var rarityBox = new ComboBox() { Name = "RarityBox", ItemsSource = Enum.GetValues(typeof(Rarity)), SelectedIndex = (int)selectedVendorPattern.Rarity, Margin = new Thickness(10) };
-			var descriptionBox = new TextBox()
-			{
-				Name = "DescriptionBox",
-				TextWrapping = TextWrapping.Wrap,
-				VerticalAlignment = VerticalAlignment.Stretch,
-				MinWidth = 280,
-				AcceptsReturn = true,
-				VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-				Height = 160,
-				Text = selectedVendorPattern.Description,
-				Margin = new Thickness(10)
-			};
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
 			HintAssist.SetHint(nameBox, "Name");
+			HintAssist.SetHint(referencedIdBox, "ReferencedId");
+			HintAssist.SetHint(rewardTypeBox, "RewardType");
 			HintAssist.SetHint(valueBox, "Value");
-			HintAssist.SetHint(rarityBox, "Rarity");
-			HintAssist.SetHint(descriptionBox, "Description");
-
-			// Add controls to Dictionary for easier navigation.
-			_controls.Clear();
 
 			_controls.Add(idBox.Name, idBox);
-			_controls.Add(nameBox.Name, nameBox);
 			_controls.Add(valueBox.Name, valueBox);
-			_controls.Add(rarityBox.Name, rarityBox);
-			_controls.Add(descriptionBox.Name, descriptionBox);
+			_controls.Add(rewardTypeBox.Name, rewardTypeBox);
 
 			foreach (var elem in _controls)
 			{
@@ -103,6 +99,79 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			MainGrid.Children.Add(panel);
 		}
 
+		private void RewardTypeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (!_controls.ContainsKey("NameBox"))
+			{
+				return;
+			}
+
+			switch ((RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString()))
+			{
+				case RewardType.Material:
+					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Materials.Select(x=>x.Name);
+					break;
+
+				case RewardType.Recipe:
+					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Recipes.Select(x=>x.Name);
+					break;
+
+				case RewardType.Artifact:
+					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Artifacts.Select(x=>x.Name);
+					break;
+
+				case RewardType.Blessing:
+					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Blessings.Select(x=>x.Name);
+					break;
+
+				case RewardType.Ingot:
+					(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Ingots.Select(x=>x.Name);
+					break;
+			}
+
+			_dataContext.VendorItemType = (RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString());
+			
+			(_controls["NameBox"] as ComboBox).SelectedIndex = 0;
+		}
+
+		private void NameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (!_controls.ContainsKey("IdBox"))
+			{
+				return;
+			}
+
+			var comboBox = sender as ComboBox;
+
+			if (comboBox.SelectedValue is null)
+			{
+				return;
+			}
+
+			switch (_dataContext.VendorItemType)
+			{
+				case RewardType.Material:
+					(_controls["IdBox"] as TextBox).Text = GameContent.Materials.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+					break;
+
+				case RewardType.Recipe:
+					(_controls["IdBox"] as TextBox).Text = GameContent.Recipes.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+					break;
+
+				case RewardType.Artifact:
+					(_controls["IdBox"] as TextBox).Text = GameContent.Artifacts.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+					break;
+
+				case RewardType.Blessing:
+					(_controls["IdBox"] as TextBox).Text = GameContent.Blessings.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+					break;
+
+				case RewardType.Ingot:
+					(_controls["IdBox"] as TextBox).Text = GameContent.Ingots.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+					break;
+			}
+		}
+
 		private void TextBox_GotFocus(object sender, RoutedEventArgs e)
 		{
 			(sender as TextBox).CaretIndex = int.MaxValue;
@@ -118,9 +187,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			vendorPattern.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
-			vendorPattern.VendorItemId = int.Parse((_controls["VendorItemIdBox"] as TextBox).Text);
+			vendorPattern.VendorItemId = int.Parse((_controls["ReferencedIdBox"] as TextBox).Text);
 			vendorPattern.Value = int.Parse((_controls["ValueBox"] as TextBox).Text);
-			vendorPattern.VendorItemType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["VendorItemTypeBox"] as ComboBox).SelectedValue.ToString());
+			vendorPattern.VendorItemType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
 
 			// Check if this Id is already in the collection (modified).
 			if (GameContent.PriestOffer.Select(x => x.Id).Contains(vendorPattern.Id))
@@ -135,7 +204,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			PopulateContentSelectionBox();
-			ContentSelectionBox.SelectedValue = _dataContext.Name;
+			ContentSelectionBox.SelectedValue = _dataContext.Id; // NARAZIE ID DLA TESTU
 		}
 
 		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)

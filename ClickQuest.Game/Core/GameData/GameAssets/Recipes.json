@@ -2,7 +2,7 @@
 	{
 		"Id": 1,
 		"ArtifactId": 16,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 1,
 				"Quantity": 10
@@ -43,7 +43,7 @@
 	{
 		"Id": 2,
 		"ArtifactId": 17,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -76,7 +76,7 @@
 	{
 		"Id": 3,
 		"ArtifactId": 13,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -105,7 +105,7 @@
 	{
 		"Id": 4,
 		"ArtifactId": 39,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -118,7 +118,7 @@
 	{
 		"Id": 5,
 		"ArtifactId": 38,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -131,7 +131,7 @@
 	{
 		"Id": 6,
 		"ArtifactId": 19,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -144,7 +144,7 @@
 	{
 		"Id": 7,
 		"ArtifactId": 12,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -157,7 +157,7 @@
 	{
 		"Id": 8,
 		"ArtifactId": 12,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -170,7 +170,7 @@
 	{
 		"Id": 9,
 		"ArtifactId": 12,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -183,7 +183,7 @@
 	{
 		"Id": 10,
 		"ArtifactId": 12,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -196,7 +196,7 @@
 	{
 		"Id": 11,
 		"ArtifactId": 12,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -209,7 +209,7 @@
 	{
 		"Id": 12,
 		"ArtifactId": 12,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -222,7 +222,7 @@
 	{
 		"Id": 13,
 		"ArtifactId": 12,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -235,7 +235,7 @@
 	{
 		"Id": 14,
 		"ArtifactId": 12,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -248,7 +248,7 @@
 	{
 		"Id": 15,
 		"ArtifactId": 12,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -261,7 +261,7 @@
 	{
 		"Id": 16,
 		"ArtifactId": 12,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -274,7 +274,7 @@
 	{
 		"Id": 17,
 		"ArtifactId": 12,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10
@@ -287,7 +287,7 @@
 	{
 		"Id": 18,
 		"ArtifactId": 12,
-		"Ingredients": [
+		"IngredientPatterns": [
 			{
 				"MaterialId": 18,
 				"Quantity": 10

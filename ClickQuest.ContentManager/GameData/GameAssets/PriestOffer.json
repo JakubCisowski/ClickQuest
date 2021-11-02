@@ -1,12 +1,14 @@
 [
-	{
-		"Id":1,
-		"RewardType": "Blessing",
-		"Value": 0
-	},
-	{
-		"Id":2,
-		"RewardType": "Blessing",
-		"Value": 0
-	}
+  {
+    "Id": 1,
+    "VendorItemId": 0,
+    "VendorItemType": "Material",
+    "Value": 0
+  },
+  {
+    "Id": 2,
+    "VendorItemId": 0,
+    "VendorItemType": "Material",
+    "Value": 0
+  }
 ]

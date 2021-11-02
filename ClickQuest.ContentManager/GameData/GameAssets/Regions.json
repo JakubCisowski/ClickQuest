@@ -1,287 +1,287 @@
 [
-	{
-		"Id": 1,
-		"LevelRequirement": 0,
-		"Name": "Woodland Cascades",
-		"Description": "ForestDescription",
-		"Background": "/example.png",
-		"Monsters": [
-			{
-				"MonsterId": 26,
-				"Frequency": 0.4000
-			},
-			{
-				"MonsterId": 27,
-				"Frequency": 0.1000
-			},
-			{
-				"MonsterId": 28,
-				"Frequency": 0.1500
-			},
-			{
-				"MonsterId": 29,
-				"Frequency": 0.2000
-			},
-			{
-				"MonsterId": 30,
-				"Frequency": 0.1000
-			},
-			{
-				"MonsterId": 31,
-				"Frequency": 0.0500
-			}
-		]
-	},
-	{
-		"Id": 2,
-		"LevelRequirement": 0,
-		"Name": "Ominous Cave",
-		"Description": "CaveDescription",
-		"Background": "/example2.png",
-		"Monsters": [
-			{
-				"MonsterId": 1,
-				"Frequency": 0.0000
-			},
-			{
-				"MonsterId": 2,
-				"Frequency": 1.0000
-			}
-		]
-	},
-	{
-		"Id": 3,
-		"LevelRequirement": 0,
-		"Name": "Whistle Lake",
-		"Description": "ForestDescription",
-		"Background": "/example.png",
-		"Monsters": [
-			{
-				"MonsterId": 37,
-				"Frequency": 0.1500
-			},
-			{
-				"MonsterId": 38,
-				"Frequency": 0.2000
-			},
-			{
-				"MonsterId": 39,
-				"Frequency": 0.0500
-			},
-			{
-				"MonsterId": 40,
-				"Frequency": 0.2500
-			},
-			{
-				"MonsterId": 41,
-				"Frequency": 0.1000
-			},
-			{
-				"MonsterId": 42,
-				"Frequency": 0.1000
-			},
-			{
-				"MonsterId": 43,
-				"Frequency": 0.1500
-			}
-		]
-	},
-	{
-		"Id": 4,
-		"LevelRequirement": 50,
-		"Name": "Frozen Highlands",
-		"Description": "ForestDescription",
-		"Background": "/example.png",
-		"Monsters": [
-			{
-				"MonsterId": 18,
-				"Frequency": 0.0400
-			},
-			{
-				"MonsterId": 19,
-				"Frequency": 0.1500
-			},
-			{
-				"MonsterId": 20,
-				"Frequency": 0.2000
-			},
-			{
-				"MonsterId": 21,
-				"Frequency": 0.1500
-			},
-			{
-				"MonsterId": 22,
-				"Frequency": 0.1500
-			},
-			{
-				"MonsterId": 23,
-				"Frequency": 0.2500
-			},
-			{
-				"MonsterId": 24,
-				"Frequency": 0.0500
-			},
-			{
-				"MonsterId": 25,
-				"Frequency": 0.0100
-			}
-		]
-	},
-	{
-		"Id": 5,
-		"LevelRequirement": 0,
-		"Name": "Titan's Hills",
-		"Description": "ForestDescription",
-		"Background": "/example.png",
-		"Monsters": [
-			{
-				"MonsterId": 32,
-				"Frequency": 0.1500
-			},
-			{
-				"MonsterId": 33,
-				"Frequency": 0.2000
-			},
-			{
-				"MonsterId": 34,
-				"Frequency": 0.0500
-			},
-			{
-				"MonsterId": 35,
-				"Frequency": 0.3000
-			},
-			{
-				"MonsterId": 36,
-				"Frequency": 0.3000
-			}
-		]
-	},
-	{
-		"Id": 6,
-		"LevelRequirement": 0,
-		"Name": "Assassins' Woods",
-		"Description": "The woods seem unusually quiet at first… But are you sure they are completely empty?",
-		"Background": "/example.png",
-		"Monsters": [
-			{
-				"MonsterId": 7,
-				"Frequency": 0.4000
-			},
-			{
-				"MonsterId": 8,
-				"Frequency": 0.2000
-			},
-			{
-				"MonsterId": 9,
-				"Frequency": 0.2000
-			},
-			{
-				"MonsterId": 10,
-				"Frequency": 0.1000
-			},
-			{
-				"MonsterId": 11,
-				"Frequency": 0.1000
-			}
-		]
-	},
-	{
-		"Id": 7,
-		"LevelRequirement": 0,
-		"Name": "Naga Acropolis",
-		"Description": "ForestDescription",
-		"Background": "/example.png",
-		"Monsters": [
-			{
-				"MonsterId": 44,
-				"Frequency": 0.0100
-			},
-			{
-				"MonsterId": 45,
-				"Frequency": 0.2500
-			},
-			{
-				"MonsterId": 46,
-				"Frequency": 0.2500
-			},
-			{
-				"MonsterId": 47,
-				"Frequency": 0.3500
-			},
-			{
-				"MonsterId": 48,
-				"Frequency": 0.0400
-			},
-			{
-				"MonsterId": 49,
-				"Frequency": 0.1000
-			}
-		]
-	},
-	{
-		"Id": 8,
-		"LevelRequirement": 0,
-		"Name": "Desert of Desolation",
-		"Description": "Countless adventurers have ended their journey in this very desert. Will you manage the danger that awaits you on its scorching sands?",
-		"Background": "/example.png",
-		"Monsters": [
-			{
-				"MonsterId": 1,
-				"Frequency": 0.0100
-			},
-			{
-				"MonsterId": 2,
-				"Frequency": 0.2500
-			},
-			{
-				"MonsterId": 3,
-				"Frequency": 0.4000
-			},
-			{
-				"MonsterId": 4,
-				"Frequency": 0.0300
-			},
-			{
-				"MonsterId": 5,
-				"Frequency": 0.2500
-			},
-			{
-				"MonsterId": 6,
-				"Frequency": 0.0600
-			}
-		]
-	},
-	{
-		"Id": 9,
-		"LevelRequirement": 0,
-		"Name": "Cemetery of the Damned",
-		"Description": "This place seemed empty and quiet from afar. As you get closer, however, you start seeing some movement on top of the tombstones. The big, circular chapel in the middle of this place suddenly gets filled with all types of undead, glancing over you with hatred.",
-		"Background": "/example.png",
-		"Monsters": [
-			{
-				"MonsterId": 12,
-				"Frequency": 0.3000
-			},
-			{
-				"MonsterId": 13,
-				"Frequency": 0.3000
-			},
-			{
-				"MonsterId": 14,
-				"Frequency": 0.1800
-			},
-			{
-				"MonsterId": 15,
-				"Frequency": 0.1200
-			},
-			{
-				"MonsterId": 16,
-				"Frequency": 0.0700
-			},
-			{
-				"MonsterId": 17,
-				"Frequency": 0.0300
-			}
-		]
-	}
+  {
+    "Id": 1,
+    "LevelRequirement": 0,
+    "Name": "Woodland Cascades",
+    "Description": "ForestDescription",
+    "Background": "/example.png",
+    "MonsterSpawnPatterns": [
+      {
+        "MonsterId": 26,
+        "Frequency": 0.4
+      },
+      {
+        "MonsterId": 27,
+        "Frequency": 0.1
+      },
+      {
+        "MonsterId": 28,
+        "Frequency": 0.15
+      },
+      {
+        "MonsterId": 29,
+        "Frequency": 0.2
+      },
+      {
+        "MonsterId": 30,
+        "Frequency": 0.1
+      },
+      {
+        "MonsterId": 31,
+        "Frequency": 0.05
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "LevelRequirement": 0,
+    "Name": "Ominous Cave",
+    "Description": "CaveDescription",
+    "Background": "/example2.png",
+    "MonsterSpawnPatterns": [
+      {
+        "MonsterId": 1,
+        "Frequency": 0
+      },
+      {
+        "MonsterId": 2,
+        "Frequency": 1
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "LevelRequirement": 0,
+    "Name": "Whistle Lake",
+    "Description": "ForestDescription",
+    "Background": "/example.png",
+    "MonsterSpawnPatterns": [
+      {
+        "MonsterId": 37,
+        "Frequency": 0.15
+      },
+      {
+        "MonsterId": 38,
+        "Frequency": 0.2
+      },
+      {
+        "MonsterId": 39,
+        "Frequency": 0.05
+      },
+      {
+        "MonsterId": 40,
+        "Frequency": 0.25
+      },
+      {
+        "MonsterId": 41,
+        "Frequency": 0.1
+      },
+      {
+        "MonsterId": 42,
+        "Frequency": 0.1
+      },
+      {
+        "MonsterId": 43,
+        "Frequency": 0.15
+      }
+    ]
+  },
+  {
+    "Id": 4,
+    "LevelRequirement": 50,
+    "Name": "Frozen Highlands",
+    "Description": "ForestDescription",
+    "Background": "/example.png",
+    "MonsterSpawnPatterns": [
+      {
+        "MonsterId": 18,
+        "Frequency": 0.04
+      },
+      {
+        "MonsterId": 19,
+        "Frequency": 0.15
+      },
+      {
+        "MonsterId": 20,
+        "Frequency": 0.2
+      },
+      {
+        "MonsterId": 21,
+        "Frequency": 0.15
+      },
+      {
+        "MonsterId": 22,
+        "Frequency": 0.15
+      },
+      {
+        "MonsterId": 23,
+        "Frequency": 0.25
+      },
+      {
+        "MonsterId": 24,
+        "Frequency": 0.05
+      },
+      {
+        "MonsterId": 25,
+        "Frequency": 0.01
+      }
+    ]
+  },
+  {
+    "Id": 5,
+    "LevelRequirement": 0,
+    "Name": "Titan\u0027s Hills",
+    "Description": "ForestDescription",
+    "Background": "/example.png",
+    "MonsterSpawnPatterns": [
+      {
+        "MonsterId": 32,
+        "Frequency": 0.15
+      },
+      {
+        "MonsterId": 33,
+        "Frequency": 0.2
+      },
+      {
+        "MonsterId": 34,
+        "Frequency": 0.05
+      },
+      {
+        "MonsterId": 35,
+        "Frequency": 0.3
+      },
+      {
+        "MonsterId": 36,
+        "Frequency": 0.3
+      }
+    ]
+  },
+  {
+    "Id": 6,
+    "LevelRequirement": 0,
+    "Name": "Assassins\u0027 Woods",
+    "Description": "The woods seem unusually quiet at first\u2026 But are you sure they are completely empty?",
+    "Background": "/example.png",
+    "MonsterSpawnPatterns": [
+      {
+        "MonsterId": 7,
+        "Frequency": 0.4
+      },
+      {
+        "MonsterId": 8,
+        "Frequency": 0.2
+      },
+      {
+        "MonsterId": 9,
+        "Frequency": 0.2
+      },
+      {
+        "MonsterId": 10,
+        "Frequency": 0.1
+      },
+      {
+        "MonsterId": 11,
+        "Frequency": 0.1
+      }
+    ]
+  },
+  {
+    "Id": 7,
+    "LevelRequirement": 0,
+    "Name": "Naga Acropolis",
+    "Description": "ForestDescription",
+    "Background": "/example.png",
+    "MonsterSpawnPatterns": [
+      {
+        "MonsterId": 44,
+        "Frequency": 0.01
+      },
+      {
+        "MonsterId": 45,
+        "Frequency": 0.25
+      },
+      {
+        "MonsterId": 46,
+        "Frequency": 0.25
+      },
+      {
+        "MonsterId": 47,
+        "Frequency": 0.35
+      },
+      {
+        "MonsterId": 48,
+        "Frequency": 0.04
+      },
+      {
+        "MonsterId": 49,
+        "Frequency": 0.1
+      }
+    ]
+  },
+  {
+    "Id": 8,
+    "LevelRequirement": 0,
+    "Name": "Desert of Desolation",
+    "Description": "Countless adventurers have ended their journey in this very desert. Will you manage the danger that awaits you on its scorching sands?",
+    "Background": "/example.png",
+    "MonsterSpawnPatterns": [
+      {
+        "MonsterId": 1,
+        "Frequency": 0.01
+      },
+      {
+        "MonsterId": 2,
+        "Frequency": 0.25
+      },
+      {
+        "MonsterId": 3,
+        "Frequency": 0.4
+      },
+      {
+        "MonsterId": 4,
+        "Frequency": 0.03
+      },
+      {
+        "MonsterId": 5,
+        "Frequency": 0.25
+      },
+      {
+        "MonsterId": 6,
+        "Frequency": 0.06
+      }
+    ]
+  },
+  {
+    "Id": 9,
+    "LevelRequirement": 0,
+    "Name": "Cemetery of the Damned",
+    "Description": "This place seemed empty and quiet from afar. As you get closer, however, you start seeing some movement on top of the tombstones. The big, circular chapel in the middle of this place suddenly gets filled with all types of undead, glancing over you with hatred.",
+    "Background": "/example.png",
+    "MonsterSpawnPatterns": [
+      {
+        "MonsterId": 12,
+        "Frequency": 0.3
+      },
+      {
+        "MonsterId": 13,
+        "Frequency": 0.3
+      },
+      {
+        "MonsterId": 14,
+        "Frequency": 0.18
+      },
+      {
+        "MonsterId": 15,
+        "Frequency": 0.12
+      },
+      {
+        "MonsterId": 16,
+        "Frequency": 0.07
+      },
+      {
+        "MonsterId": 17,
+        "Frequency": 0.03
+      }
+    ]
+  }
 ]
