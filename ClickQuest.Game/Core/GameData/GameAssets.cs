@@ -4,6 +4,7 @@ using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Places;
 using ClickQuest.Game.UserInterface.Pages;
 
@@ -19,8 +20,8 @@ namespace ClickQuest.Game.Core.GameData
 		public static List<Monster> Monsters { get; set; }
 		public static List<Region> Regions { get; set; }
 		public static List<Blessing> Blessings { get; set; }
-		public static List<int> ShopOffer { get; set; }
-		public static List<int> PriestOffer { get; set; }
+		public static List<VendorPattern> ShopOffer { get; set; }
+		public static List<VendorPattern> PriestOffer { get; set; }
 		public static List<Quest> Quests { get; set; }
 		public static Dictionary<string, Page> Pages { get; set; }
 		public static List<Boss> Bosses { get; set; }
@@ -38,8 +39,8 @@ namespace ClickQuest.Game.Core.GameData
 			Monsters = new List<Monster>();
 			Regions = new List<Region>();
 			Blessings = new List<Blessing>();
-			ShopOffer = new List<int>();
-			PriestOffer = new List<int>();
+			ShopOffer = new List<VendorPattern>();
+			PriestOffer = new List<VendorPattern>();
 			Quests = new List<Quest>();
 			Pages = new Dictionary<string, Page>();
 			Bosses = new List<Boss>();

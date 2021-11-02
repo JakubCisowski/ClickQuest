@@ -1,392 +1,392 @@
 [
-	{
-		"Id": 1,
-		"Name": "Death-Infused Bone Talisman",
-		"ArtifactType": "XD",
-		"Rarity": 3,
-		"Description": "Your first attack against a monster places 'Decay' on them, dealing damage every 0.5 seconds for 2.5 seconds. Damage dealt is equal to your poison damage. Deals double damage against bosses.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 2,
-		"Name": "Ghostly Infusion",
-		"ArtifactType": "XD",
-		"Rarity": 2,
-		"Description": "Has to be equipped with at least one other artifact. After killing a monster, your next click is guaranteed to critically hit, and will deal 10% more damage.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 3,
-		"Name": "Large Scythe",
-		"ArtifactType": "XD",
-		"Rarity": 2,
-		"Description": "All non-artifact damage dealt by you is increased by 15% against Monsters (excluding Bosses).",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 4,
-		"Name": "Meat Cleaver",
-		"ArtifactType": "XD",
-		"Rarity": 2,
-		"Description": "Gain 20% Critical Click Damage.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 5,
-		"Name": "Mystic Clover",
-		"ArtifactType": "XD",
-		"Rarity": 4,
-		"Description": "While on a region, you have an increased chance to find rare Monsters. The chance to find Monsters that have a spawn chance of 2% or less is doubled, while the chance to find the most common Monsters is reduced appropriately.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 6,
-		"Name": "Necronomicon",
-		"ArtifactType": "XD",
-		"Rarity": 2,
-		"Description": "After killing a monster, your poison damage is increased by 10 for 3 seconds. This effect does not stack.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 7,
-		"Name": "Poisoned Sword",
-		"ArtifactType": "XD",
-		"Rarity": 2,
-		"Description": "Increases your Click Damage by 10, and your Poison Damage by 5.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 8,
-		"Name": "Silver Greatsword",
-		"ArtifactType": "XD",
-		"Rarity": 2,
-		"Description": "All non-artifact damage dealt by you is increased by 10% against Bosses.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 9,
-		"Name": "Skullbasher",
-		"ArtifactType": "XD",
-		"Rarity": 2,
-		"Description": "Every other click you make deals an additional 10 (?) damage.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 10,
-		"Name": "Toxic Amulet",
-		"ArtifactType": "XD",
-		"Rarity": 3,
-		"Description": "Your poison damage is increased by 20%.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 11,
-		"Name": "Bat Wing Backpack",
-		"ArtifactType": "XD",
-		"Rarity": 0,
-		"Description": "Increases your Aura Damage by 25%, but reduces your Click Damage by 25%.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 12,
-		"Name": "Bloodstone Staff",
-		"ArtifactType": "XD",
-		"Rarity": 4,
-		"Description": "Killing a Monster grants a 10% increase to all non-artifact damage dealt for 5 seconds. Stacks additively up to 5 times. Each stack has its own duration.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 13,
-		"Name": "Cholla Spine Infusion",
-		"ArtifactType": "XD",
-		"Rarity": 4,
-		"Description": "Has to be equipped with at least one other artifact. Causes all clicks to leave a spine in the target's body. Click damage dealt is increased by 2 (?) for each spine in the target.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 14,
-		"Name": "Ice Golem's Heart",
-		"ArtifactType": "XD",
-		"Rarity": 3,
-		"Description": "Your clicks leave a stack of 'Brittle' on the enemy, increasing your Critical Click Chance against them by 5%. Stacks up to 5 times. Additionally, clicks against Monsters (excluding Bosses) with 5 'Brittle' stacks and below 10% health instantly finish them.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 15,
-		"Name": "Pristine Wolf Fangs",
-		"ArtifactType": "XD",
-		"Rarity": 1,
-		"Description": "Increases your Critical Click Chance by 10%, and your Critical Click Damage by 15%.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 16,
-		"Name": "Rakshasa's Necklace",
-		"ArtifactType": "XD",
-		"Rarity": 3,
-		"Description": "Increases passive Aura Attack Speed by 50%.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 17,
-		"Name": "Scepter of Eternal Flame",
-		"ArtifactType": "XD",
-		"Rarity": 4,
-		"Description": "On click, applies burning for 2 seconds that deals a total of 80 (?) damage.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 18,
-		"Name": "Scythe of the World Eater",
-		"ArtifactType": "XD",
-		"Rarity": 5,
-		"Description": "Gain 50% Critical Click Chance. Excess critical chance is converted to Critical Click Damage (unlimited).",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 19,
-		"Name": "Twin Kamas",
-		"ArtifactType": "XD",
-		"Rarity": 4,
-		"Description": "Counts as two artifacts, therefore requires two free slots to use. After clicking on a monster, strike again after a 1s delay. The second attack can critically hit, as well as apply on-hit effects (such as poison).",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 20,
-		"Name": "Will of the Ancients",
-		"ArtifactType": "XD",
-		"Rarity": 5,
-		"Description": "Your poison damage can now critically strike. The probability is calculated using your Critical Click Chance, and the damage using your Critical Click Damage.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 21,
-		"Name": "Transcendence",
-		"ArtifactType": "XD",
-		"Rarity": 5,
-		"Description": "Requires three artifact slots to equip. While on a Region, you don't deal any damage. Instead, each click you make on a Monster will instantly defeat them.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 22,
-		"Name": "Dull Knife",
-		"ArtifactType": "XD",
-		"Rarity": 0,
-		"Description": "Increases your Critical Click Chance by 5%.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 23,
-		"Name": "Dull Sword",
-		"ArtifactType": "XD",
-		"Rarity": 0,
-		"Description": "Increases your Click Damage by 3.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 24,
-		"Name": "Large Stinger",
-		"ArtifactType": "XD",
-		"Rarity": 1,
-		"Description": "Increases your Poison Damage by 5.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 25,
-		"Name": "Lightning Bolt",
-		"ArtifactType": "XD",
-		"Rarity": 3,
-		"Description": "Clicking on an enemy 3 times within 0.5 (?) seconds deals a bonus 20 (?) damage.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 26,
-		"Name": "Obsidian Sword",
-		"ArtifactType": "XD",
-		"Rarity": 2,
-		"Description": "Increases your Click Damage by 20, and your Critical Click Damage by 20%.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 27,
-		"Name": "Sly Snake Orb",
-		"ArtifactType": "XD",
-		"Rarity": 2,
-		"Description": "Increases your Click Damage by 20, and your Aura Attack Speed by 10%.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 28,
-		"Name": "Strong Badge of Luck",
-		"ArtifactType": "XD",
-		"Rarity": 2,
-		"Description": "Increases your Click Damage by 20, and your Critical Click Chance by 10%.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 29,
-		"Name": "Tiny Venom Sac",
-		"ArtifactType": "XD",
-		"Rarity": 0,
-		"Description": "Increases your Poison Damage by 1.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 30,
-		"Name": "Titan's Crown",
-		"ArtifactType": "XD",
-		"Rarity": 3,
-		"Description": "All experience gained is increased by 30%.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 31,
-		"Name": "Trinket of Haste",
-		"ArtifactType": "XD",
-		"Rarity": 3,
-		"Description": "Quests take 25% less time to complete.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 32,
-		"Name": "Writ of Excellence",
-		"ArtifactType": "XD",
-		"Rarity": 3,
-		"Description": "Blessings on you have a doubled effectiveness.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 33,
-		"Name": "Poisoned Naga Knife",
-		"ArtifactType": "XD",
-		"Rarity": 3,
-		"Description": "Clicks against Monsters deal additional damage equal to 5% of their maximum health. Does not work against Bosses.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 34,
-		"Name": "Naginata",
-		"ArtifactType": "XD",
-		"Rarity": 4,
-		"Description": "If you would deal 90% or more of an Enemy's health with a single click, gain double experience, 1 Gold and a 20 increase to Click Damage for 10 seconds. The damage increase bonus does not stack.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 35,
-		"Name": "Gladiator's Trident",
-		"ArtifactType": "XD",
-		"Rarity": 4,
-		"Description": "All damage dealt is increased by 50% for the first few seconds in combat. Against Monsters, the duration is 2 seconds; against Bosses - 5 seconds. The duration is refreshed each time you kill a Monster.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 36,
-		"Name": "Bladed Fans",
-		"ArtifactType": "XD",
-		"Rarity": 3,
-		"Description": "For the first 5 seconds in combat with an Enemy, you cannot deal damage to them, and instead accumulate damage. After 5 seconds, explode dealing damage to the enemy. Damage dealt is equal to 200% of the accumulated damage.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 37,
-		"Name": "Medusa Amulet",
-		"ArtifactType": "XD",
-		"Rarity": 4,
-		"Description": "While on a Region, each monster you kill increases your Click Damage by 2, Critical Click Chance by 1% and Critical Click Damage by 1%. Stacks up to 20 times. Leaving the region removes all stacks.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 38,
-		"Name": "Gold-Tipped Spear",
-		"ArtifactType": "XD",
-		"Rarity": 3,
-		"Description": "Convert your Poison Damage into Click Damage. For each 1 Poison Damage converted, gain 1 Click Damage. Additionally, for each 10 Poison Damage converted, gain 1% Critical Click Damage.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	},
-	{
-		"Id": 39,
-		"Name": "Vial of Plague",
-		"ArtifactType": "XD",
-		"Rarity": 3,
-		"Description": "Every third Click you make against the same enemy deals bonus damage based on their maximum health. Against Monsters, deals 6% of their health. Against Bosses, deals 1% of their health.",
-		"Lore": "",
-		"ExtraInfo": "",
-		"Value": 1
-	}
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 1,
+    "Name": "Death-Infused Bone Talisman",
+    "Value": 1,
+    "Rarity": "Exceptional",
+    "Description": "Your first attack against a monster places \u0027Decay\u0027 on them, dealing damage every 0.5 seconds for 2.5 seconds. Damage dealt is equal to your poison damage. Deals double damage against bosses."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 2,
+    "Name": "Ghostly Infusion",
+    "Value": 1,
+    "Rarity": "Superior",
+    "Description": "Has to be equipped with at least one other artifact. After killing a monster, your next click is guaranteed to critically hit, and will deal 10% more damage."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 3,
+    "Name": "Large Scythe",
+    "Value": 1,
+    "Rarity": "Superior",
+    "Description": "All non-artifact damage dealt by you is increased by 15% against Monsters (excluding Bosses)."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 4,
+    "Name": "Meat Cleaver",
+    "Value": 1,
+    "Rarity": "Superior",
+    "Description": "Gain 20% Critical Click Damage."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 5,
+    "Name": "Mystic Clover",
+    "Value": 1,
+    "Rarity": "Mythic",
+    "Description": "While on a region, you have an increased chance to find rare Monsters. The chance to find Monsters that have a spawn chance of 2% or less is doubled, while the chance to find the most common Monsters is reduced appropriately."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 6,
+    "Name": "Necronomicon",
+    "Value": 1,
+    "Rarity": "Superior",
+    "Description": "After killing a monster, your poison damage is increased by 10 for 3 seconds. This effect does not stack."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 7,
+    "Name": "Poisoned Sword",
+    "Value": 1,
+    "Rarity": "Superior",
+    "Description": "Increases your Click Damage by 10, and your Poison Damage by 5."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 8,
+    "Name": "Silver Greatsword",
+    "Value": 1,
+    "Rarity": "Superior",
+    "Description": "All non-artifact damage dealt by you is increased by 10% against Bosses."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 9,
+    "Name": "Skullbasher",
+    "Value": 1,
+    "Rarity": "Superior",
+    "Description": "Every other click you make deals an additional 10 (?) damage."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 10,
+    "Name": "Toxic Amulet",
+    "Value": 1,
+    "Rarity": "Exceptional",
+    "Description": "Your poison damage is increased by 20%."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 11,
+    "Name": "Bat Wing Backpack",
+    "Value": 1,
+    "Rarity": "General",
+    "Description": "Increases your Aura Damage by 25%, but reduces your Click Damage by 25%."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 12,
+    "Name": "Bloodstone Staff",
+    "Value": 1,
+    "Rarity": "Mythic",
+    "Description": "Killing a Monster grants a 10% increase to all non-artifact damage dealt for 5 seconds. Stacks additively up to 5 times. Each stack has its own duration."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 13,
+    "Name": "Cholla Spine Infusion",
+    "Value": 1,
+    "Rarity": "Mythic",
+    "Description": "Has to be equipped with at least one other artifact. Causes all clicks to leave a spine in the target\u0027s body. Click damage dealt is increased by 2 (?) for each spine in the target."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 14,
+    "Name": "Ice Golem\u0027s Heart",
+    "Value": 1,
+    "Rarity": "Exceptional",
+    "Description": "Your clicks leave a stack of \u0027Brittle\u0027 on the enemy, increasing your Critical Click Chance against them by 5%. Stacks up to 5 times. Additionally, clicks against Monsters (excluding Bosses) with 5 \u0027Brittle\u0027 stacks and below 10% health instantly finish them."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 15,
+    "Name": "Pristine Wolf Fangs",
+    "Value": 1,
+    "Rarity": "Fine",
+    "Description": "Increases your Critical Click Chance by 10%, and your Critical Click Damage by 15%."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 16,
+    "Name": "Rakshasa\u0027s Necklace",
+    "Value": 1,
+    "Rarity": "Exceptional",
+    "Description": "Increases passive Aura Attack Speed by 50%."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 17,
+    "Name": "Scepter of Eternal Flame",
+    "Value": 1,
+    "Rarity": "Mythic",
+    "Description": "On click, applies burning for 2 seconds that deals a total of 80 (?) damage."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 18,
+    "Name": "Scythe of the World Eater",
+    "Value": 1,
+    "Rarity": "Masterwork",
+    "Description": "Gain 50% Critical Click Chance. Excess critical chance is converted to Critical Click Damage (unlimited)."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 19,
+    "Name": "Twin Kamas",
+    "Value": 1,
+    "Rarity": "Mythic",
+    "Description": "Counts as two artifacts, therefore requires two free slots to use. After clicking on a monster, strike again after a 1s delay. The second attack can critically hit, as well as apply on-hit effects (such as poison)."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 20,
+    "Name": "Will of the Ancients",
+    "Value": 1,
+    "Rarity": "Masterwork",
+    "Description": "Your poison damage can now critically strike. The probability is calculated using your Critical Click Chance, and the damage using your Critical Click Damage."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 21,
+    "Name": "Transcendence",
+    "Value": 1,
+    "Rarity": "Masterwork",
+    "Description": "Requires three artifact slots to equip. While on a Region, you don\u0027t deal any damage. Instead, each click you make on a Monster will instantly defeat them."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 22,
+    "Name": "Dull Knife",
+    "Value": 1,
+    "Rarity": "General",
+    "Description": "Increases your Critical Click Chance by 5%."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 23,
+    "Name": "Dull Sword",
+    "Value": 1,
+    "Rarity": "General",
+    "Description": "Increases your Click Damage by 3."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 24,
+    "Name": "Large Stinger",
+    "Value": 1,
+    "Rarity": "Fine",
+    "Description": "Increases your Poison Damage by 5."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 25,
+    "Name": "Lightning Bolt",
+    "Value": 1,
+    "Rarity": "Exceptional",
+    "Description": "Clicking on an enemy 3 times within 0.5 (?) seconds deals a bonus 20 (?) damage."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 26,
+    "Name": "Obsidian Sword",
+    "Value": 1,
+    "Rarity": "Superior",
+    "Description": "Increases your Click Damage by 20, and your Critical Click Damage by 20%."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 27,
+    "Name": "Sly Snake Orb",
+    "Value": 1,
+    "Rarity": "Superior",
+    "Description": "Increases your Click Damage by 20, and your Aura Attack Speed by 10%."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 28,
+    "Name": "Strong Badge of Luck",
+    "Value": 1,
+    "Rarity": "Superior",
+    "Description": "Increases your Click Damage by 20, and your Critical Click Chance by 10%."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 29,
+    "Name": "Tiny Venom Sac",
+    "Value": 1,
+    "Rarity": "General",
+    "Description": "Increases your Poison Damage by 1."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 30,
+    "Name": "Titan\u0027s Crown",
+    "Value": 1,
+    "Rarity": "Exceptional",
+    "Description": "All experience gained is increased by 30%."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 31,
+    "Name": "Trinket of Haste",
+    "Value": 1,
+    "Rarity": "Exceptional",
+    "Description": "Quests take 25% less time to complete."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 32,
+    "Name": "Writ of Excellence",
+    "Value": 1,
+    "Rarity": "Exceptional",
+    "Description": "Blessings on you have a doubled effectiveness."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 33,
+    "Name": "Poisoned Naga Knife",
+    "Value": 1,
+    "Rarity": "Exceptional",
+    "Description": "Clicks against Monsters deal additional damage equal to 5% of their maximum health. Does not work against Bosses."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 34,
+    "Name": "Naginata",
+    "Value": 1,
+    "Rarity": "Mythic",
+    "Description": "If you would deal 90% or more of an Enemy\u0027s health with a single click, gain double experience, 1 Gold and a 20 increase to Click Damage for 10 seconds. The damage increase bonus does not stack."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 35,
+    "Name": "Gladiator\u0027s Trident",
+    "Value": 1,
+    "Rarity": "Mythic",
+    "Description": "All damage dealt is increased by 50% for the first few seconds in combat. Against Monsters, the duration is 2 seconds; against Bosses - 5 seconds. The duration is refreshed each time you kill a Monster."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 36,
+    "Name": "Bladed Fans",
+    "Value": 1,
+    "Rarity": "Exceptional",
+    "Description": "For the first 5 seconds in combat with an Enemy, you cannot deal damage to them, and instead accumulate damage. After 5 seconds, explode dealing damage to the enemy. Damage dealt is equal to 200% of the accumulated damage."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 37,
+    "Name": "Medusa Amulet",
+    "Value": 1,
+    "Rarity": "Mythic",
+    "Description": "While on a Region, each monster you kill increases your Click Damage by 2, Critical Click Chance by 1% and Critical Click Damage by 1%. Stacks up to 20 times. Leaving the region removes all stacks."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 38,
+    "Name": "Gold-Tipped Spear",
+    "Value": 1,
+    "Rarity": "Exceptional",
+    "Description": "Convert your Poison Damage into Click Damage. For each 1 Poison Damage converted, gain 1 Click Damage. Additionally, for each 10 Poison Damage converted, gain 1% Critical Click Damage."
+  },
+  {
+    "Lore": "",
+    "ExtraInfo": "",
+    "ArtifactType": "XD",
+    "Id": 39,
+    "Name": "Vial of Plague",
+    "Value": 1,
+    "Rarity": "Exceptional",
+    "Description": "Every third Click you make against the same enemy deals bonus damage based on their maximum health. Against Monsters, deals 6% of their health. Against Bosses, deals 1% of their health."
+  }
 ]

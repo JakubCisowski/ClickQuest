@@ -28,11 +28,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 		public List<Blessing> GetPriestOfferAsBlessings()
 		{
 			var result = new List<Blessing>();
-			var listOfIds = GameAssets.PriestOffer;
+			var listOfPatterns = GameAssets.PriestOffer;
 
-			foreach (int id in listOfIds)
+			foreach (var pattern in listOfPatterns)
 			{
-				result.Add(GameAssets.Blessings.FirstOrDefault(x => x.Id == id));
+				result.Add(GameAssets.Blessings.FirstOrDefault(x => x.Id == pattern.Id));
 			}
 
 			return result;

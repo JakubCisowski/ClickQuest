@@ -37,11 +37,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 		public List<Recipe> GetShopOfferAsRecipes()
 		{
 			var result = new List<Recipe>();
-			var listOfIds = GameAssets.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Buying]);
+			var listOfPatterns = GameAssets.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Buying]);
 
-			foreach (int id in listOfIds)
+			foreach (var pattern in listOfPatterns)
 			{
-				result.Add(GameAssets.Recipes.FirstOrDefault(x => x.Id == id));
+				result.Add(GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.Id));
 			}
 
 			return result;

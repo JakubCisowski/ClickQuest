@@ -27,8 +27,8 @@ namespace ClickQuest.Game.Core.GameData
 			GameAssets.Monsters = DeserializeType<Monster>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Monsters.json"));
 			GameAssets.Regions = DeserializeType<Region>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Regions.json"));
 			GameAssets.Blessings = DeserializeType<Blessing>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Blessings.json"));
-			GameAssets.ShopOffer = DeserializeType<int>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "ShopOffer.json"));
-			GameAssets.PriestOffer = DeserializeType<int>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "PriestOffer.json"));
+			GameAssets.ShopOffer = DeserializeType<VendorPattern>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "ShopOffer.json"));
+			GameAssets.PriestOffer = DeserializeType<VendorPattern>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "PriestOffer.json"));
 			GameAssets.Quests = DeserializeType<Quest>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Quests.json"));
 			GameAssets.Bosses = DeserializeType<Boss>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Bosses.json"));
 			GameAssets.DungeonGroups = DeserializeType<DungeonGroup>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "DungeonGroups.json"));
