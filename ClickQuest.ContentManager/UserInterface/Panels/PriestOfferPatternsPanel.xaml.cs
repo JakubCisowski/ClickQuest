@@ -49,30 +49,29 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			var selectedVendorPattern = _dataContext;
 
 			var idBox = new TextBox() { Name = "IdBox", Text = selectedVendorPattern.Id.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			
-			var referencedIdBox = new TextBox() { Name = "ReferencedIdBox", Text = selectedVendorPattern.VendorItemId.ToString(), Margin = new Thickness(10), IsEnabled = false };
-			_controls.Add(referencedIdBox.Name, referencedIdBox);
+			_controls.Add(idBox.Name, idBox);
 
+			var vendorIdBox = new TextBox() { Name = "VendorIdBox", Text = selectedVendorPattern.VendorItemId.ToString(), Margin = new Thickness(10), IsEnabled = false };
+			_controls.Add(vendorIdBox.Name, vendorIdBox);
+			
 			var nameBox = new ComboBox() { Name = "NameBox", Margin = new Thickness(10) };
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 			_controls.Add(nameBox.Name, nameBox);
-
-			var rewardTypeBox = new ComboBox() { Name = "RewardTypeBox", ItemsSource = Enum.GetValues(typeof(RewardType)), Margin = new Thickness(10) };
-			rewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
-			rewardTypeBox.SelectedValue = selectedVendorPattern.VendorItemType;
+			
+			var vendorTypeBox = new ComboBox() { Name = "VendorTypeBox", ItemsSource = Enum.GetValues(typeof(RewardType)), Margin = new Thickness(10) };
+			vendorTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
+			vendorTypeBox.SelectedValue = selectedVendorPattern.VendorItemType;
+			_controls.Add(vendorTypeBox.Name, vendorTypeBox);
 
 			var valueBox = new TextBox() { Name = "ValueBox", Text = selectedVendorPattern.Value.ToString(), Margin = new Thickness(10) };
+			_controls.Add(valueBox.Name, valueBox);
 
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
+			HintAssist.SetHint(vendorIdBox, "VendorItemId");
 			HintAssist.SetHint(nameBox, "Name");
-			HintAssist.SetHint(referencedIdBox, "ReferencedId");
-			HintAssist.SetHint(rewardTypeBox, "RewardType");
+			HintAssist.SetHint(vendorTypeBox, "VendorTypeBox");
 			HintAssist.SetHint(valueBox, "Value");
-
-			_controls.Add(idBox.Name, idBox);
-			_controls.Add(valueBox.Name, valueBox);
-			_controls.Add(rewardTypeBox.Name, rewardTypeBox);
 
 			foreach (var elem in _controls)
 			{
@@ -151,23 +150,23 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			switch (_dataContext.VendorItemType)
 			{
 				case RewardType.Material:
-					(_controls["IdBox"] as TextBox).Text = GameContent.Materials.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+					(_controls["VendorIdBox"] as TextBox).Text = GameContent.Materials.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 					break;
 
 				case RewardType.Recipe:
-					(_controls["IdBox"] as TextBox).Text = GameContent.Recipes.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+					(_controls["VendorIdBox"] as TextBox).Text = GameContent.Recipes.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 					break;
 
 				case RewardType.Artifact:
-					(_controls["IdBox"] as TextBox).Text = GameContent.Artifacts.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+					(_controls["VendorIdBox"] as TextBox).Text = GameContent.Artifacts.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 					break;
 
 				case RewardType.Blessing:
-					(_controls["IdBox"] as TextBox).Text = GameContent.Blessings.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+					(_controls["VendorIdBox"] as TextBox).Text = GameContent.Blessings.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 					break;
 
 				case RewardType.Ingot:
-					(_controls["IdBox"] as TextBox).Text = GameContent.Ingots.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+					(_controls["VendorIdBox"] as TextBox).Text = GameContent.Ingots.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 					break;
 			}
 		}
@@ -187,9 +186,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			vendorPattern.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
-			vendorPattern.VendorItemId = int.Parse((_controls["ReferencedIdBox"] as TextBox).Text);
+			vendorPattern.VendorItemId = int.Parse((_controls["VendorIdBox"] as TextBox).Text);
 			vendorPattern.Value = int.Parse((_controls["ValueBox"] as TextBox).Text);
-			vendorPattern.VendorItemType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
+			vendorPattern.VendorItemType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["VendorTypeBox"] as ComboBox).SelectedValue.ToString());
 
 			// Check if this Id is already in the collection (modified).
 			if (GameContent.PriestOffer.Select(x => x.Id).Contains(vendorPattern.Id))
@@ -212,7 +211,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			Save();
 			
 			int nextId = GameContent.PriestOffer.Max(x => x.Id) + 1;
-			_dataContext = new VendorPattern() { Id = nextId };
+			_dataContext = new VendorPattern() { Id = nextId, VendorItemType = RewardType.Blessing};
 			ContentSelectionBox.SelectedIndex = -1;
 			RefreshStaticValuesPanel();
 
@@ -243,16 +242,19 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			ContentSelectionBox.SelectedIndex = -1;
 			_currentPanel.Children.Clear();
 			DeleteObjectButton.Visibility=Visibility.Hidden;
+			_dataContext = null;
 		}
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var selectedId = int.Parse((e.Source as ComboBox)?.SelectedValue?.ToString());
+			var selectedValue = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
-			if (selectedId == 0)
+			if (selectedValue is null)
 			{
 				return;
 			}
+			
+			var selectedId = int.Parse(selectedValue);
 
 			if (_dataContext is not null)
 			{

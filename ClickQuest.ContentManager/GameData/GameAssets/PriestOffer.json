@@ -1,14 +1,32 @@
 [
   {
     "Id": 1,
-    "VendorItemId": 0,
-    "VendorItemType": "Material",
+    "VendorItemId": 1,
+    "VendorItemType": "Blessing",
+    "Value": 10
+  },
+  {
+    "Id": 6,
+    "VendorItemId": 1,
+    "VendorItemType": "Blessing",
+    "Value": 2
+  },
+  {
+    "Id": 7,
+    "VendorItemId": 1,
+    "VendorItemType": "Blessing",
     "Value": 0
   },
   {
-    "Id": 2,
-    "VendorItemId": 0,
-    "VendorItemType": "Material",
-    "Value": 0
+    "Id": 5,
+    "VendorItemId": 1,
+    "VendorItemType": "Blessing",
+    "Value": 101
+  },
+  {
+    "Id": 8,
+    "VendorItemId": 1,
+    "VendorItemType": "Blessing",
+    "Value": 1
   }
 ]

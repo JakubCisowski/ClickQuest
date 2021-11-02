@@ -388,5 +388,15 @@
     "ExtraInfo": "",
     "Value": 1,
     "ArtifactType": "XD"
+  },
+  {
+    "Id": 40,
+    "Name": "",
+    "Rarity": "General",
+    "Description": "",
+    "Lore": "",
+    "ExtraInfo": "",
+    "Value": 0,
+    "ArtifactType": "XD"
   }
 ]
