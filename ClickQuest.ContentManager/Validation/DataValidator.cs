@@ -2,15 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using ClickQuest.Game.Core.Adventures;
-using ClickQuest.Game.Core.Enemies;
-using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Interfaces;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Items.Types;
-using ClickQuest.Game.Core.Places;
+using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.GameManager.Validation;
 
-namespace ClickQuest.Game.Extensions.Validation
+namespace ClickQuest.ContentManager.Validation
 {
 	public static class DataValidator
 	{
@@ -26,7 +22,7 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckIdUniqueness()
 		{
-			var dataProperties = typeof(GameAssets).GetProperties();
+			var dataProperties = typeof(GameContent).GetProperties();
 
 			foreach (var propertyInfo in dataProperties)
 			{
@@ -66,9 +62,9 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckAllFrequenciesCorrectness()
 		{
-			GameAssets.Monsters.ForEach(x => CheckFrequencySum(x.Name, x.MonsterLootPatterns.Select(y => y.Frequency)));
-			GameAssets.Regions.ForEach(x => CheckFrequencySum(x.Name, x.Monsters.Select(y => y.Frequency)));
-			GameAssets.Bosses.ForEach(x => x.BossLootPatterns.ForEach(y => CheckIfFrequenciesAreValid(x.Name, y.Frequencies)));
+			GameContent.Monsters.ForEach(x => CheckFrequencySum(x.Name, x.MonsterLootPatterns.Select(y => y.Frequency)));
+			GameContent.Regions.ForEach(x => CheckFrequencySum(x.Name, x.MonsterSpawnPatterns.Select(y => y.Frequency)));
+			GameContent.Bosses.ForEach(x => x.BossLootPatterns.ForEach(y => CheckIfFrequenciesAreValid(x.Name, y.Frequencies)));
 		}
 
 		private static void CheckFrequencySum(string objectName, IEnumerable<double> frequencies)
@@ -94,26 +90,26 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckReferencesCorrectness()
 		{
-			GameAssets.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameAssets.Materials.Select(y => y.Id), x.IngredientPatterns.Select(z => z.MaterialId)));
-			GameAssets.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameAssets.Artifacts.Select(y => y.Id), new[] {x.ArtifactId}));
-			GameAssets.Dungeons.ForEach(x => CheckReferencedIds(x.Name, GameAssets.Bosses.Select(y => y.Id), x.BossIds));
+			GameContent.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameContent.Materials.Select(y => y.Id), x.IngredientPatterns.Select(z => z.MaterialId)));
+			GameContent.Recipes.ForEach(x => CheckReferencedIds(x.Name, GameContent.Artifacts.Select(y => y.Id), new[] {x.ArtifactId}));
+			GameContent.Dungeons.ForEach(x => CheckReferencedIds(x.Name, GameContent.Bosses.Select(y => y.Id), x.BossIds));
 
-			GameAssets.Bosses.ForEach(x => CheckBossReferences(x));
-			GameAssets.Monsters.ForEach(x => CheckMonsterReferences(x));
-			GameAssets.Regions.ForEach(x => CheckRegionReferences(x));
-			GameAssets.Quests.ForEach(x => CheckQuestReferences(x));
+			GameContent.Bosses.ForEach(x => CheckBossReferences(x));
+			GameContent.Monsters.ForEach(x => CheckMonsterReferences(x));
+			GameContent.Regions.ForEach(x => CheckRegionReferences(x));
+			GameContent.Quests.ForEach(x => CheckQuestReferences(x));
 
-			CheckReferencedIds("ShopOffer", GameAssets.Recipes.Select(x => x.Id), GameAssets.ShopOffer);
-			CheckReferencedIds("PriestOffer", GameAssets.Blessings.Select(x => x.Id), GameAssets.PriestOffer);
+			CheckReferencedIds("ShopOffer", GameContent.Recipes.Select(x => x.Id), GameContent.ShopOffer.Select(x=>x.VendorItemId));
+			CheckReferencedIds("PriestOffer", GameContent.Blessings.Select(x => x.Id), GameContent.PriestOffer.Select(x=>x.VendorItemId));
 		}
 
 		private static void CheckQuestReferences(Quest quest)
 		{
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Material)", GameAssets.Materials.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Material).Select(y=>y.QuestRewardId));
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Artifact)", GameAssets.Artifacts.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Artifact).Select(y=>y.QuestRewardId));
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Recipe)", GameAssets.Recipes.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Recipe).Select(y=>y.QuestRewardId));
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Blessing)", GameAssets.Blessings.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Blessing).Select(y=>y.QuestRewardId));
-			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Ingot)", GameAssets.Ingots.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Ingot).Select(y=>y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Material)", GameContent.Materials.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Material).Select(y=>y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Artifact)", GameContent.Artifacts.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Artifact).Select(y=>y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Recipe)", GameContent.Recipes.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Recipe).Select(y=>y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Blessing)", GameContent.Blessings.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Blessing).Select(y=>y.QuestRewardId));
+			CheckReferencedIds($"{quest.Name}.QuestRewardPatterns(Ingot)", GameContent.Ingots.Select(x => x.Id), quest.QuestRewardPatterns.Where(x=>x.QuestRewardType == RewardType.Ingot).Select(y=>y.QuestRewardId));
 		}
 
 		private static void CheckReferencedIds(string objectName, IEnumerable<int> availableIds, IEnumerable<int> requiredIds)
@@ -138,7 +134,7 @@ namespace ClickQuest.Game.Extensions.Validation
 			{
 				if (lootPattern.BossLootType == RewardType.Blessing)
 				{
-					var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == lootPattern.BossLootId);
+					var blessing = GameContent.Blessings.FirstOrDefault(x => x.Id == lootPattern.BossLootId);
 
 					if (blessing is null)
 					{
@@ -175,7 +171,7 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckRegionReferences(Region region)
 		{
-			foreach (var spawnPattern in region.Monsters)
+			foreach (var spawnPattern in region.MonsterSpawnPatterns)
 			{
 				var monster = spawnPattern.Monster;
 
@@ -189,18 +185,18 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckEnumBounds()
 		{
-			CheckEnumCollectionBounds("Artifacts_Rarity", GameAssets.Artifacts.Select(x => x.Rarity));
-			CheckEnumCollectionBounds("Blessings_Rarity", GameAssets.Blessings.Select(x => x.Rarity));
-			CheckEnumCollectionBounds("DungeonKey_Rarity", GameAssets.DungeonKeys.Select(x => x.Rarity));
-			CheckEnumCollectionBounds("Ingots_Rarity", GameAssets.Ingots.Select(x => x.Rarity));
-			CheckEnumCollectionBounds("Materials_Rarity", GameAssets.Materials.Select(x => x.Rarity));
-			CheckEnumCollectionBounds("Recipes_Rarity", GameAssets.Recipes.Select(x => x.Rarity));
+			CheckEnumCollectionBounds("Artifacts_Rarity", GameContent.Artifacts.Select(x => x.Rarity));
+			CheckEnumCollectionBounds("Blessings_Rarity", GameContent.Blessings.Select(x => x.Rarity));
+			CheckEnumCollectionBounds("DungeonKey_Rarity", GameContent.DungeonKeys.Select(x => x.Rarity));
+			CheckEnumCollectionBounds("Ingots_Rarity", GameContent.Ingots.Select(x => x.Rarity));
+			CheckEnumCollectionBounds("Materials_Rarity", GameContent.Materials.Select(x => x.Rarity));
+			CheckEnumCollectionBounds("Recipes_Rarity", GameContent.Recipes.Select(x => x.Rarity));
 
-			CheckEnumCollectionBounds("Quests_HeroClass", GameAssets.Quests.Select(x => x.HeroClass));
+			CheckEnumCollectionBounds("Quests_HeroClass", GameContent.Quests.Select(x => x.HeroClass));
 
-			CheckEnumCollectionBounds("Blessings_BlessingType", GameAssets.Blessings.Select(x => x.Type));
+			CheckEnumCollectionBounds("Blessings_BlessingType", GameContent.Blessings.Select(x => x.Type));
 
-			GameAssets.DungeonGroups.ForEach(x => CheckEnumCollectionBounds("DungeonGroup", x.KeyRequirementRarities));
+			GameContent.DungeonGroups.ForEach(x => CheckEnumCollectionBounds("DungeonGroup", x.KeyRequirementRarities));
 		}
 
 		private static void CheckEnumCollectionBounds<T>(string collectionName, IEnumerable<T> enumCollection) where T : Enum
@@ -217,20 +213,20 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckPositiveValues()
 		{
-			CheckCollectionPositiveValues("Artifacts_Value", GameAssets.Artifacts.Select(x => x.Value));
-			CheckCollectionPositiveValues("Blessings_Value", GameAssets.Blessings.Select(x => x.Value));
-			CheckCollectionPositiveValues("DungeonKey_Value", GameAssets.DungeonKeys.Select(x => x.Value));
-			CheckCollectionPositiveValues("Ingots_Value", GameAssets.Ingots.Select(x => x.Value));
-			CheckCollectionPositiveValues("Materials_Value", GameAssets.Materials.Select(x => x.Value));
-			CheckCollectionPositiveValues("Recipes_Value", GameAssets.Recipes.Select(x => x.Value));
+			CheckCollectionPositiveValues("Artifacts_Value", GameContent.Artifacts.Select(x => x.Value));
+			CheckCollectionPositiveValues("Blessings_Value", GameContent.Blessings.Select(x => x.Value));
+			CheckCollectionPositiveValues("DungeonKey_Value", GameContent.DungeonKeys.Select(x => x.Value));
+			CheckCollectionPositiveValues("Ingots_Value", GameContent.Ingots.Select(x => x.Value));
+			CheckCollectionPositiveValues("Materials_Value", GameContent.Materials.Select(x => x.Value));
+			CheckCollectionPositiveValues("Recipes_Value", GameContent.Recipes.Select(x => x.Value));
 
-			CheckCollectionPositiveValues("Blessings_Duration", GameAssets.Blessings.Select(x => x.Duration));
-			CheckCollectionPositiveValues("Quests_Duration", GameAssets.Quests.Select(x => x.Duration));
+			CheckCollectionPositiveValues("Blessings_Duration", GameContent.Blessings.Select(x => x.Duration));
+			CheckCollectionPositiveValues("Quests_Duration", GameContent.Quests.Select(x => x.Duration));
 
-			CheckCollectionPositiveValues("Bosses_Health", GameAssets.Bosses.Select(x => x.Health));
-			CheckCollectionPositiveValues("Monsters_Health", GameAssets.Monsters.Select(x => x.Health));
+			CheckCollectionPositiveValues("Bosses_Health", GameContent.Bosses.Select(x => x.Health));
+			CheckCollectionPositiveValues("Monsters_Health", GameContent.Monsters.Select(x => x.Health));
 
-			CheckCollectionPositiveValues("Blessings_Buff", GameAssets.Blessings.Select(x => x.Buff));
+			CheckCollectionPositiveValues("Blessings_Buff", GameContent.Blessings.Select(x => x.Buff));
 		}
 
 		private static void CheckCollectionPositiveValues(string collectionValuesInfo, IEnumerable<int> valuesCollection)
@@ -246,7 +242,7 @@ namespace ClickQuest.Game.Extensions.Validation
 
 		private static void CheckLevelRequirements()
 		{
-			var levelRequirements = GameAssets.Regions.Select(x => x.LevelRequirement);
+			var levelRequirements = GameContent.Regions.Select(x => x.LevelRequirement);
 
 			bool isEveryLevelRequirementValid = levelRequirements.All(x => x >= 0 && x <= 100);
 

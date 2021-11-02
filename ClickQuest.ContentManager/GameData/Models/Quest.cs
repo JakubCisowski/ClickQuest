@@ -14,7 +14,7 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public int Quantity{ get; set; }
 	}
 
-	public class Quest
+	public class Quest : IIdentifiable
 	{
 		public int Id { get; set; }
 		public bool Rare { get; set; }

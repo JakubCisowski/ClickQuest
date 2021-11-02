@@ -12,7 +12,6 @@ using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Places;
-using ClickQuest.Game.Extensions.Validation;
 
 namespace ClickQuest.Game.Core.GameData
 {
@@ -36,10 +35,6 @@ namespace ClickQuest.Game.Core.GameData
 			GameAssets.Dungeons = DeserializeType<Dungeon>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Dungeons.json"));
 
 			PostLoad();
-
-#if DEBUG
-			DataValidator.ValidateData();
-#endif
 
 			// Refresh Pages collection in order to  rearrange page bindings.
 			GameAssets.RefreshPages();

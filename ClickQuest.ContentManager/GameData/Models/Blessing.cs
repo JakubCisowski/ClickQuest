@@ -1,6 +1,6 @@
 ﻿namespace ClickQuest.ContentManager.GameData.Models
 {
-	public class Blessing
+	public class Blessing : IIdentifiable
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }

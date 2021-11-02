@@ -1,14 +1,14 @@
 [
   {
+    "Id": 14,
+    "VendorItemId": 0,
+    "VendorItemType": "Material",
+    "Value": 2
+  },
+  {
     "Id": 2,
     "VendorItemId": 0,
     "VendorItemType": "Material",
     "Value": 1
-  },
-  {
-    "Id": 15,
-    "VendorItemId": 1,
-    "VendorItemType": "Artifact",
-    "Value": 100
   }
 ]

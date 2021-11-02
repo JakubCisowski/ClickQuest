@@ -1,5 +1,6 @@
 ﻿using ClickQuest.ContentManager.GameData;
 using ClickQuest.ContentManager.UserInterface.Panels;
+using ClickQuest.ContentManager.Validation;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -210,6 +211,8 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			SaveObjectChanges();
 
 			ContentSaver.SaveAllContent();
+
+			DataValidator.ValidateData();
 		}
 	}
 }

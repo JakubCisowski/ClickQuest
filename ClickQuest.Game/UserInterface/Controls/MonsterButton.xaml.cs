@@ -45,9 +45,9 @@ namespace ClickQuest.Game.UserInterface.Controls
 
 		public void SpawnMonster()
 		{
-			var frequencyList = Region.Monsters.Select(x => x.Frequency).ToList();
+			var frequencyList = Region.MonsterSpawnPatterns.Select(x => x.Frequency).ToList();
 			int position = CollectionsController.RandomizeFreqenciesListPosition(frequencyList);
-			Monster = Region.Monsters[position].Monster.CopyEnemy();
+			Monster = Region.MonsterSpawnPatterns[position].Monster.CopyEnemy();
 
 			DataContext = Monster;
 

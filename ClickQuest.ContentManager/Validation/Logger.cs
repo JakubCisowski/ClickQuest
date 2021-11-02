@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace ClickQuest.Game.Extensions.Validation
+namespace ClickQuest.GameManager.Validation
 {
 	public static class Logger
 	{

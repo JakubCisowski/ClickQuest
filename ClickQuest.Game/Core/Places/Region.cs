@@ -12,7 +12,7 @@ namespace ClickQuest.Game.Core.Places
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public string Background { get; set; }
-		public List<MonsterSpawnPattern> Monsters { get; set; }
+		public List<MonsterSpawnPattern> MonsterSpawnPatterns { get; set; }
 		public int LevelRequirement { get; set; }
 	}
 }

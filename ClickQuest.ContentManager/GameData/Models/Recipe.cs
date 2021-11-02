@@ -8,14 +8,10 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public int Quantity { get; set; }
 	}
 	
-	public class Recipe
+	public class Recipe : Item
 	{
-		public int Id { get; set; }
 		public int ArtifactId { get; set; }
 		public List<IngredientPattern> IngredientPatterns { get; set; }
-		public string Name { get; set; }
-		public Rarity Rarity { get; set; }
-		public int Value { get; set; }
 
 		public Recipe()
 		{

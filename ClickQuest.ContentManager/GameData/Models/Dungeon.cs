@@ -2,7 +2,7 @@
 
 namespace ClickQuest.ContentManager.GameData.Models
 {
-	public class Dungeon
+	public class Dungeon : IIdentifiable
 	{
 		public int Id { get; set; }
 		public int DungeonGroupId { get; set; }

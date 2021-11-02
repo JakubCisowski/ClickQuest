@@ -161,7 +161,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			var objectToDelete = GameContent.Monsters.FirstOrDefault(x=>x.Id==int.Parse((_controls["IdBox"] as TextBox).Text));
 
-			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -179,6 +179,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			CreateDynamicValueButton.Visibility = Visibility.Hidden;
 			DeleteObjectButton.Visibility=Visibility.Hidden;
 			_dataContext = null;
+
+			Application.Current.MainWindow.Close();
 		}
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

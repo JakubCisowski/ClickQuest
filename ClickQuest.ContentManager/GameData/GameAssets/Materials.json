@@ -2,323 +2,323 @@
   {
     "Id": 0,
     "Name": "Empty loot",
+    "Value": 1,
     "Rarity": "General",
-    "Description": "This text shouldn\u0027t be visible.",
-    "Value": 1
+    "Description": "This text shouldn\u0027t be visible."
   },
   {
     "Id": 1,
     "Name": "Strand of Rakshasa\u0027s Hair",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "Piece of what feels like lion\u0027s mane. It is quite rough to the touch (in touch?).",
-    "Value": 2
+    "Description": "Piece of what feels like lion\u0027s mane. It is quite rough to the touch (in touch?)."
   },
   {
     "Id": 2,
     "Name": "Rakshasa\u0027s Teeth",
+    "Value": 1,
     "Rarity": "General",
-    "Description": "A pair of long fangs, just like you would expect from a lion.",
-    "Value": 1
+    "Description": "A pair of long fangs, just like you would expect from a lion."
   },
   {
     "Id": 3,
     "Name": "Grain of Sand",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "A grain of sand in the desert\u2026 But surely it\u0027s not a junk item and can be used for something, right?",
-    "Value": 2
+    "Description": "A grain of sand in the desert\u2026 But surely it\u0027s not a junk item and can be used for something, right?"
   },
   {
     "Id": 4,
     "Name": "Sand Grub\u0027s Fang",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "One thick fang that the Sand Grub uses to paralyze its victims.",
-    "Value": 2
+    "Description": "One thick fang that the Sand Grub uses to paralyze its victims."
   },
   {
     "Id": 5,
     "Name": "Soft Skin",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "Very soft skin belonging to an amphibian or a large insect. Feels a bit gross to touch.",
-    "Value": 2
+    "Description": "Very soft skin belonging to an amphibian or a large insect. Feels a bit gross to touch."
   },
   {
     "Id": 6,
     "Name": "Jackal\u0027s Hide",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "Short, coarse fur that is mostly golden with some darker spots on it.",
-    "Value": 2
+    "Description": "Short, coarse fur that is mostly golden with some darker spots on it."
   },
   {
     "Id": 7,
     "Name": "Canine Fangs",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "The fangs of a canine - it\u0027s hard to tell exactly what they belonged to.",
-    "Value": 2
+    "Description": "The fangs of a canine - it\u0027s hard to tell exactly what they belonged to."
   },
   {
     "Id": 8,
     "Name": "Piece of Ethereal Shroud",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "A small piece of silk cloth that was once worn by a powerful creature. You can still feel the magic flowing through it.",
-    "Value": 2
+    "Description": "A small piece of silk cloth that was once worn by a powerful creature. You can still feel the magic flowing through it."
   },
   {
     "Id": 9,
     "Name": "Golden Ring",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "Valuable ring made of pure gold.",
-    "Value": 2
+    "Description": "Valuable ring made of pure gold."
   },
   {
     "Id": 10,
     "Name": "Scorpion\u0027s Stinger",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "Used by all types of scorpions to paralyze and kill their victims.",
-    "Value": 2
+    "Description": "Used by all types of scorpions to paralyze and kill their victims."
   },
   {
     "Id": 11,
     "Name": "Venom Sac",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "A rather small membrane with deadly venom inside.",
-    "Value": 2
+    "Description": "A rather small membrane with deadly venom inside."
   },
   {
     "Id": 12,
     "Name": "Cholla Spine",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "A very long spine with hundreds of minuscule barbs. Be careful with it, as removing one of those from your body can be extremely painful.",
-    "Value": 2
+    "Description": "A very long spine with hundreds of minuscule barbs. Be careful with it, as removing one of those from your body can be extremely painful."
   },
   {
     "Id": 13,
     "Name": "Raja\u0027s Earring",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "A large golden ring with small jewels inserted on the other side. It is worn like an earring by the most powerful and respected Rakshasas.",
-    "Value": 2
+    "Description": "A large golden ring with small jewels inserted on the other side. It is worn like an earring by the most powerful and respected Rakshasas."
   },
   {
     "Id": 14,
     "Name": "Blood Ruby",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "A dark-red colored piece of ruby. The way it reflects light makes you think the inside of it is constantly moving.",
-    "Value": 2
+    "Description": "A dark-red colored piece of ruby. The way it reflects light makes you think the inside of it is constantly moving."
   },
   {
     "Id": 15,
     "Name": "Kama of the Assassin",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "Kama is a short, one-handed weapon, resembling a sickle. It is commonly used by the Brotherhood of the Assassins, as it is great for quietly stabbing a victim, as well as direct combat.",
-    "Value": 2
+    "Description": "Kama is a short, one-handed weapon, resembling a sickle. It is commonly used by the Brotherhood of the Assassins, as it is great for quietly stabbing a victim, as well as direct combat."
   },
   {
     "Id": 16,
     "Name": "Piece of Bloodstone",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "Piece of a very dark, nearly black mineral, with small, crimson red spots all over it. Looks almost like it had blood spilt all over it.",
-    "Value": 2
+    "Description": "Piece of a very dark, nearly black mineral, with small, crimson red spots all over it. Looks almost like it had blood spilt all over it."
   },
   {
     "Id": 17,
     "Name": "Warg\u0027s Hide",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "Short, dark fur, almost entirely black. It feels luxurious, as the only way to obtain it is to defeat a very tough canine.",
-    "Value": 2
+    "Description": "Short, dark fur, almost entirely black. It feels luxurious, as the only way to obtain it is to defeat a very tough canine."
   },
   {
     "Id": 18,
     "Name": "Piece of Wood",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "Small chunk of wood, used in many disciplines.",
-    "Value": 2
+    "Description": "Small chunk of wood, used in many disciplines."
   },
   {
     "Id": 19,
     "Name": "Moonstone",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "This gemstone looks like the moon on a clear night sky - pale white, with blue-ish edge. It\u0027s quite valuable, and some use it to enhance a weapon\u0027s properties.",
-    "Value": 2
+    "Description": "This gemstone looks like the moon on a clear night sky - pale white, with blue-ish edge. It\u0027s quite valuable, and some use it to enhance a weapon\u0027s properties."
   },
   {
     "Id": 20,
     "Name": "Writ of Salvation",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "A page out of some holy book of the Assassins. The writing on it is illegible, but you can easily tell it\u0027s something important, because of its very decorative style.",
-    "Value": 2
+    "Description": "A page out of some holy book of the Assassins. The writing on it is illegible, but you can easily tell it\u0027s something important, because of its very decorative style."
   },
   {
     "Id": 21,
     "Name": "Intact Bone",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "This bone is about half a meter long and doesn\u0027t show any signs of damage or decay.",
-    "Value": 2
+    "Description": "This bone is about half a meter long and doesn\u0027t show any signs of damage or decay."
   },
   {
     "Id": 22,
     "Name": "Small Skull",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "A rather small skull, likely belonging to a young human or other humanoid creature.",
-    "Value": 2
+    "Description": "A rather small skull, likely belonging to a young human or other humanoid creature."
   },
   {
     "Id": 23,
     "Name": "Shimmering Dust",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "The way this pile of dust reflect light makes it seem alive.",
-    "Value": 2
+    "Description": "The way this pile of dust reflect light makes it seem alive."
   },
   {
     "Id": 24,
     "Name": "Remnant of a Dead Body",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "Piece of half-decayed meat with some skin and bruises on it. You would rather not touch it.",
-    "Value": 2
+    "Description": "Piece of half-decayed meat with some skin and bruises on it. You would rather not touch it."
   },
   {
     "Id": 25,
     "Name": "Leather Scrap",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "Piece of the skin of an unidentified animal, often used as clothing or decoration.",
-    "Value": 2
+    "Description": "Piece of the skin of an unidentified animal, often used as clothing or decoration."
   },
   {
     "Id": 26,
     "Name": "Metal Chain",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "A short chain made of several links connected together. It\u0027s impossible to tell what it was used for before being destroyed.",
-    "Value": 2
+    "Description": "A short chain made of several links connected together. It\u0027s impossible to tell what it was used for before being destroyed."
   },
   {
     "Id": 27,
     "Name": "Ghostly Essence",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "Volatile, constantly moving liquid. Is it a ghost in a vial?",
-    "Value": 2
+    "Description": "Volatile, constantly moving liquid. Is it a ghost in a vial?"
   },
   {
     "Id": 28,
     "Name": "Pair of Vampire Teeth",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "A pair of oddly long canines, with some blood stains on them, however clearly belonging to a human and not an animal.",
-    "Value": 2
+    "Description": "A pair of oddly long canines, with some blood stains on them, however clearly belonging to a human and not an animal."
   },
   {
     "Id": 29,
     "Name": "Higher Ghostly Essence",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "A relentless ghost caught in a flask. Be careful not to let it escape, as it will likely get its revenge on you - in a painful way.",
-    "Value": 2
+    "Description": "A relentless ghost caught in a flask. Be careful not to let it escape, as it will likely get its revenge on you - in a painful way."
   },
   {
     "Id": 30,
     "Name": "Incandescent Dust",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "This pile of dust seems to be ablaze, as the way it reflect light resembles flame dancing on a piece of material.",
-    "Value": 2
+    "Description": "This pile of dust seems to be ablaze, as the way it reflect light resembles flame dancing on a piece of material."
   },
   {
     "Id": 31,
     "Name": "Large Skull",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "This gigantic skull likely belonged to a dragon or a creature similar in size.",
-    "Value": 2
+    "Description": "This gigantic skull likely belonged to a dragon or a creature similar in size."
   },
   {
     "Id": 32,
     "Name": "Patch of Fur",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "",
-    "Value": 2
+    "Description": ""
   },
   {
     "Id": 33,
     "Name": "Small Talon",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "",
-    "Value": 2
+    "Description": ""
   },
   {
     "Id": 34,
     "Name": "Brown Fox Fur",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "",
-    "Value": 2
+    "Description": ""
   },
   {
     "Id": 35,
     "Name": "Wolf Skin",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "",
-    "Value": 2
+    "Description": ""
   },
   {
     "Id": 36,
     "Name": "Bone Shard",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "",
-    "Value": 2
+    "Description": ""
   },
   {
     "Id": 37,
     "Name": "Hawk Feather",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "",
-    "Value": 2
+    "Description": ""
   },
   {
     "Id": 38,
     "Name": "Boar Tusk",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "",
-    "Value": 2
+    "Description": ""
   },
   {
     "Id": 39,
     "Name": "Ice Marble",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "",
-    "Value": 2
+    "Description": ""
   },
   {
     "Id": 40,
     "Name": "Never Melting Ice",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "",
-    "Value": 2
+    "Description": ""
   },
   {
     "Id": 41,
     "Name": "Patch of Yeti Fur",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "",
-    "Value": 2
+    "Description": ""
   },
   {
     "Id": 42,
     "Name": "Vicious Claw",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "",
-    "Value": 2
+    "Description": ""
   },
   {
     "Id": 43,
     "Name": "Vial of Unknown Medicine",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "",
-    "Value": 2
+    "Description": ""
   },
   {
     "Id": 44,
     "Name": "Snow Lynx Fur",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "",
-    "Value": 2
+    "Description": ""
   },
   {
     "Id": 45,
     "Name": "Bottle of Holy Water",
+    "Value": 2,
     "Rarity": "Fine",
-    "Description": "Bottle of sacred water, commonly used by the Assassins to perform rituals and sacrifices.",
-    "Value": 2
+    "Description": "Bottle of sacred water, commonly used by the Assassins to perform rituals and sacrifices."
   }
 ]
