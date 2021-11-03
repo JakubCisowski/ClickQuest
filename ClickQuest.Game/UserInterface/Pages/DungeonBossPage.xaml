@@ -38,7 +38,7 @@
 			</Grid.RowDefinitions>
 
 			<!-- Dungeon description -->
-			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Width="600">
+			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushGray}" HorizontalAlignment="Center" Margin="5" Width="600">
 				<Border.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
 						<GradientStop Color="{StaticResource ColorGame4}" Offset="0.25" />
@@ -69,7 +69,7 @@
 							<!-- Health progress bar -->
 							<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=CurrentHealthProgress, UpdateSourceTrigger=PropertyChanged}" Height="25" Width="300" materialDesign:TransitionAssist.DisableTransitions="True" />
 							<!-- Text on progress bar -->
-							<TextBlock x:Name="BossHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource BrushGameWhite}" FontWeight="Bold" FontSize="18">
+							<TextBlock x:Name="BossHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource BrushWhite}" FontWeight="Bold" FontSize="18">
 								<TextBlock.Text>
 									<MultiBinding StringFormat=" {0} / {1} ">
 										<Binding Path="CurrentHealth" />
@@ -80,7 +80,7 @@
 						</Grid>
 
 						<!-- Boss description -->
-						<Border Grid.Row="2" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5">
+						<Border Grid.Row="2" BorderThickness="0.5" BorderBrush="{StaticResource BrushGray}" HorizontalAlignment="Center" Margin="5">
 							<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" Text="{Binding Description}" />
 						</Border>
 

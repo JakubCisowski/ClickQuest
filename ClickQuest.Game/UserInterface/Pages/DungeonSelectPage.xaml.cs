@@ -155,7 +155,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				var border = new Border
 				{
 					BorderThickness = new Thickness(0.5),
-					BorderBrush = new SolidColorBrush(System.Windows.Media.Colors.LightGray),
+					BorderBrush = (SolidColorBrush) FindResource("BrushGray"),
 					Margin = new Thickness(0, 5, 0, 0)
 				};
 
@@ -213,7 +213,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				var border = new Border
 				{
 					BorderThickness = new Thickness(0.5),
-					BorderBrush = new SolidColorBrush(System.Windows.Media.Colors.LightGray),
+					BorderBrush = (SolidColorBrush) FindResource("BrushGray"),
 					Margin = new Thickness(0, 5, 0, 0)
 				};
 

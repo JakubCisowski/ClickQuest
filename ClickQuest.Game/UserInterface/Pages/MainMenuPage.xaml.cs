@@ -81,7 +81,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Width = 30,
 				Height = 30,
 				Kind = PackIconKind.DeleteForever,
-				Foreground = new SolidColorBrush(Colors.Gray)
+				Foreground = (SolidColorBrush) FindResource("BrushGray")
 			};
 
 			deleteHeroButton.Content = deleteHeroIcon;

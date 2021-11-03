@@ -12,7 +12,7 @@
 		<StackPanel.Background>
 			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
 				<GradientStop Color="{StaticResource ColorGame1}" Offset="0.25" />
-				<GradientStop Color="White" Offset="0.75" />
+				<GradientStop Color="{StaticResource ColorWhite}" Offset="0.75" />
 			</LinearGradientBrush>
 		</StackPanel.Background>
 
@@ -22,7 +22,7 @@
 			<Rectangle x:Name="DragableTop" Height="40" Fill="Transparent" MouseDown="DragableTop_MouseDown" />
 
 			<!-- Location info block-->
-			<Border x:Name="LocationInfoBorder" BorderThickness="2" Visibility="Hidden" BorderBrush="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+			<Border x:Name="LocationInfoBorder" BorderThickness="2" Visibility="Hidden" BorderBrush="{StaticResource BrushGray}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
 				<TextBlock x:Name="LocationInfoBlock" Text="{Binding LocationInfo}" FontWeight="DemiBold" FontSize="18" VerticalAlignment="Center" Margin="3" />
 			</Border>
 
@@ -31,7 +31,7 @@
 			        Padding="0" Margin="5,5,40,5">
 				<!-- Exit button icon -->
 				<Button.Content>
-					<materialDesign:PackIcon Kind="Trophy" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Gray" Margin="0" />
+					<materialDesign:PackIcon Kind="Trophy" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushGray}" Margin="0" />
 				</Button.Content>
 			</Button>
 
@@ -40,7 +40,7 @@
 			        Padding="0">
 				<!-- Exit button icon -->
 				<Button.Content>
-					<materialDesign:PackIcon Kind="CloseBox" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Gray" Margin="0" />
+					<materialDesign:PackIcon Kind="CloseBox" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushGray}" Margin="0" />
 				</Button.Content>
 			</Button>
 

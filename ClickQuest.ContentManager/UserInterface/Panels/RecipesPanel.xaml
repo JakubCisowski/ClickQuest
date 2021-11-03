@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" Background="White"
+             mc:Ignorable="d" Background="{StaticResource BrushWhite}"
              d:DesignHeight="940" d:DesignWidth="1920">
 	<Grid x:Name="MainGrid">
 		<Grid.ColumnDefinitions>
@@ -20,7 +20,7 @@
 		</StackPanel>
 
 		<StackPanel x:Name="Separator" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
-			<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Foreground="Black" Width="2" />
+			<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Foreground="{StaticResource BrushBlack}" Width="2" />
 		</StackPanel>
 
 		<ScrollViewer x:Name="DynamicValuesViewer" Grid.Column="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">

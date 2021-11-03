@@ -18,7 +18,7 @@
     </Page.Resources>
 
     <!-- Stats panel -->
-    <Border BorderThickness="3" BorderBrush="Gray" Margin="1" Padding="6">
+    <Border BorderThickness="3" BorderBrush="{StaticResource BrushGray}" Margin="1" Padding="6">
         <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical" HorizontalAlignment="Left" Width="323">
             <!-- Hero info block -->
             <TextBlock x:Name="HeroNameBlock" FontSize="22" TextAlignment="Center">
@@ -51,7 +51,7 @@
                 <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16" materialDesign:TransitionAssist.DisableTransitions="True" />
 
                 <!-- Progress text on experience progress bar -->
-                <TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource BrushGameWhite}" FontWeight="Bold" />
+                <TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource BrushWhite}" FontWeight="Bold" />
             </Grid>
 
             <Separator Height="2" Width="200" Margin="10" />
@@ -89,7 +89,7 @@
                     </StackPanel.ToolTip>
 
                     <!-- Click damage icon-->
-                    <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="Gray" VerticalAlignment="Center" />
+                    <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="{StaticResource BrushGray}" VerticalAlignment="Center" />
                     <!-- Click damage text-->
                     <TextBlock FontSize="18" Margin="3" Text="Damage:" VerticalAlignment="Center" />
                 </StackPanel>
@@ -168,7 +168,7 @@
                     </StackPanel.ToolTip>
 
                     <!-- Aura icon-->
-                    <materialDesign:PackIcon Width="22" Height="22" Kind="Brightness5" Foreground="Yellow" VerticalAlignment="Center" />
+                    <materialDesign:PackIcon Width="22" Height="22" Kind="Brightness5" Foreground="{StaticResource BrushDamageTypeAura}" VerticalAlignment="Center" />
                     <!-- Aura text-->
                     <TextBlock Text="Aura DPS:" FontSize="18" Margin="3" VerticalAlignment="Center" />
                 </StackPanel>
@@ -245,7 +245,7 @@
                 <!-- Blessing timer-->
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center">
                     <!-- Icon -->
-                    <materialDesign:PackIcon Width="30" Height="30" Kind="BookCross" Foreground="Black" HorizontalAlignment="Center" />
+                    <materialDesign:PackIcon Width="30" Height="30" Kind="BookCross" Foreground="{StaticResource BrushBlack}" HorizontalAlignment="Center" />
                     <!-- Name and timer -->
                     <TextBlock x:Name="BlessingDurationBlock" Text="" TextAlignment="Center" FontSize="18" Margin="0,5,0,0" />
                 </StackPanel>
@@ -259,7 +259,7 @@
                 <!-- Quest timer-->
                 <StackPanel Grid.Column="2" HorizontalAlignment="Center">
                     <!-- Icon -->
-                    <materialDesign:PackIcon Width="30" Height="30" Kind="ProgressQuestion" Foreground="Black" HorizontalAlignment="Center" />
+                    <materialDesign:PackIcon Width="30" Height="30" Kind="ProgressQuestion" Foreground="{StaticResource BrushBlack}" HorizontalAlignment="Center" />
                     <!-- Name and timer -->
                     <TextBlock x:Name="QuestDurationBlock" Text="" TextAlignment="Center" FontSize="18" Margin="0,5,0,0" />
                 </StackPanel>

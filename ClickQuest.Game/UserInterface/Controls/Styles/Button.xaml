@@ -4,9 +4,9 @@
 
 	<!-- Colors -->
 	<SolidColorBrush x:Key="BrushGame2" Color="#CFEFF8" />
-	<SolidColorBrush x:Key="BrushGameGray" Color="#CCDCE1" />
-	<SolidColorBrush x:Key="BrushButtonDangerPink" Color="#FFD3D3" />
-	<SolidColorBrush x:Key="BrushButtonDangerRed" Color="#FF0000" />
+	<SolidColorBrush x:Key="BrushGray" Color="#CCDCE1" />
+	<SolidColorBrush x:Key="BrushPink" Color="#FFD3D3" />
+	<SolidColorBrush x:Key="BrushRed" Color="#FF0000" />
 
 	<!-- Custom button styles -->
 	<Style x:Key="ButtonStyleGeneral" TargetType="Button">
@@ -21,7 +21,7 @@
 					<Border Name="border"
 					        BorderThickness="1"
 					        Padding="4,2"
-					        BorderBrush="DarkGray"
+					        BorderBrush="{StaticResource BrushGray}"
 					        CornerRadius="3"
 					        Background="{TemplateBinding Background}">
 						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -57,14 +57,14 @@
 	<Style x:Key="ButtonStyleDisabled" TargetType="Button">
 		<Setter Property="OverridesDefaultStyle" Value="True" />
 		<Setter Property="Margin" Value="5" />
-		<Setter Property="Background" Value="{StaticResource BrushGameGray}" />
+		<Setter Property="Background" Value="{StaticResource BrushGray}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Border Name="border"
 					        BorderThickness="1"
 					        Padding="4,2"
-					        BorderBrush="DarkGray"
+					        BorderBrush="{StaticResource BrushGray}"
 					        CornerRadius="3"
 					        Background="{TemplateBinding Background}">
 						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -100,21 +100,21 @@
 	<Style x:Key="ButtonStyleDanger" TargetType="Button">
 		<Setter Property="OverridesDefaultStyle" Value="True" />
 		<Setter Property="Margin" Value="5" />
-		<Setter Property="Background" Value="{StaticResource BrushGameGray}" />
+		<Setter Property="Background" Value="{StaticResource BrushGray}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Border Name="border"
 					        BorderThickness="2"
 					        Padding="4,2"
-					        BorderBrush="{StaticResource BrushButtonDangerPink}"
+					        BorderBrush="{StaticResource BrushPink}"
 					        CornerRadius="3"
 					        Background="{TemplateBinding Background}">
 						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
 					</Border>
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsMouseOver" Value="True">
-							<Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BrushButtonDangerRed}" />
+							<Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BrushRed}" />
 
 							<Trigger.EnterActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">
