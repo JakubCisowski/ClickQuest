@@ -45,6 +45,7 @@ namespace ClickQuest.Game.Core.Artifacts
 
 		public override void OnRegionLeave()
 		{
+			User.Instance.CurrentHero.CritChance -= _stackCount * CritChanceIncreasePerStack;
 			_stackCount = 0;
 		}
 
