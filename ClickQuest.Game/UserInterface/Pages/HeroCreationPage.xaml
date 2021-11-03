@@ -59,7 +59,7 @@
 				</TextBlock>
 
 				<!-- Hero class selection -->
-				<Border Margin="0,10" BorderThickness="2" BorderBrush="{StaticResource BrushGray}" Width="150">
+				<Border Margin="0,10" BorderThickness="2" BorderBrush="{StaticResource BrushLightGray}" Width="150">
 					<ListView x:Name="HeroClassBox" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
 						<ListView.ItemTemplate>
 							<DataTemplate>
@@ -139,7 +139,7 @@
 				</TextBlock>
 
 				<!-- Hero race selection -->
-				<Border Margin="0,10" BorderThickness="2" BorderBrush="{StaticResource BrushGray}" Width="150">
+				<Border Margin="0,10" BorderThickness="2" BorderBrush="{StaticResource BrushLightGray}" Width="150">
 					<ListView x:Name="HeroRaceBox" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
 						<ListView.ItemTemplate>
 							<DataTemplate>

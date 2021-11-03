@@ -67,7 +67,7 @@ namespace ClickQuest.Game.UserInterface.Windows
 			{
 				Name = nameWithoutSpaces + "Border",
 				BorderThickness = new Thickness(0.5),
-				BorderBrush = (SolidColorBrush) FindResource("BrushGray"),
+				BorderBrush = (SolidColorBrush) FindResource("BrushLightGray"),
 				Padding = new Thickness(6),
 				Margin = new Thickness(1),
 				Background = FindResource("BrushGame5") as SolidColorBrush

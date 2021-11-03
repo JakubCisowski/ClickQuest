@@ -18,7 +18,7 @@
     </Page.Resources>
 
     <!-- Stats panel -->
-    <Border BorderThickness="3" BorderBrush="{StaticResource BrushGray}" Margin="1" Padding="6">
+    <Border BorderThickness="3" BorderBrush="{StaticResource BrushLightGray}" Margin="1" Padding="6">
         <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical" HorizontalAlignment="Left" Width="323">
             <!-- Hero info block -->
             <TextBlock x:Name="HeroNameBlock" FontSize="22" TextAlignment="Center">
@@ -89,7 +89,7 @@
                     </StackPanel.ToolTip>
 
                     <!-- Click damage icon-->
-                    <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="{StaticResource BrushGray}" VerticalAlignment="Center" />
+                    <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="{StaticResource BrushLightGray}" VerticalAlignment="Center" />
                     <!-- Click damage text-->
                     <TextBlock FontSize="18" Margin="3" Text="Damage:" VerticalAlignment="Center" />
                 </StackPanel>

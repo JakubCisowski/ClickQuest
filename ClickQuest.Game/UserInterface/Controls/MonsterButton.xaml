@@ -45,7 +45,7 @@
 			</Grid>
 
 			<!-- Monster description -->
-			<Border Grid.Row="2" BorderThickness="0.5" BorderBrush="{StaticResource BrushGray}" HorizontalAlignment="Center" Margin="5">
+			<Border Grid.Row="2" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5">
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" Text="{Binding Description}" />
 			</Border>
 

@@ -12,7 +12,7 @@
 		</Grid.RowDefinitions>
 
 		<!-- Game version -->
-		<TextBlock Grid.Row="0" Text="BETA" FontSize="12" Foreground="{StaticResource BrushGray}" HorizontalAlignment="Left" Margin="10,10,0,0" />
+		<TextBlock Grid.Row="0" Text="BETA" FontSize="12" Foreground="{StaticResource BrushDarkGray}" HorizontalAlignment="Left" Margin="10,10,0,0" />
 
 		<!-- Game logo -->
 		<Image Grid.Row="0" Height="350" Width="560" HorizontalAlignment="Center" Source="/Resources/Images/logo.png" />
@@ -52,7 +52,7 @@
 				</Button.ToolTip>
 			</Button>
 
-			<TextBlock x:Name="CreditsBlock" Grid.ColumnSpan="2" Grid.Row="4" Text="Credits" FontSize="14" Foreground="{StaticResource BrushGray}" PreviewMouseUp="CreditsBlock_OnPreviewMouseUp" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="15" />
+			<TextBlock x:Name="CreditsBlock" Grid.ColumnSpan="2" Grid.Row="4" Text="Credits" FontSize="14" Foreground="{StaticResource BrushDarkGray}" PreviewMouseUp="CreditsBlock_OnPreviewMouseUp" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="15" />
 		</Grid>
 	</Grid>
 </Page>

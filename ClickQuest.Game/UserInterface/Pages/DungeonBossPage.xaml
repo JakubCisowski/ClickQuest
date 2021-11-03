@@ -38,7 +38,7 @@
 			</Grid.RowDefinitions>
 
 			<!-- Dungeon description -->
-			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushGray}" HorizontalAlignment="Center" Margin="5" Width="600">
+			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600">
 				<Border.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
 						<GradientStop Color="{StaticResource ColorGame3}" Offset="0.25" />
@@ -80,7 +80,7 @@
 						</Grid>
 
 						<!-- Boss description -->
-						<Border Grid.Row="2" BorderThickness="0.5" BorderBrush="{StaticResource BrushGray}" HorizontalAlignment="Center" Margin="5">
+						<Border Grid.Row="2" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5">
 							<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" Text="{Binding Description}" />
 						</Border>
 

@@ -8,7 +8,8 @@
 	<Color x:Key="ColorGame4">#ACE9FA </Color>
 	<Color x:Key="ColorGame5">#ADD5E0 </Color>
 
-	<Color x:Key="ColorGray">#CCDCE1 </Color>
+	<Color x:Key="ColorLightGray">#CCDCE1 </Color>
+	<Color x:Key="ColorDarkGray">#666666 </Color>
 	<Color x:Key="ColorBlack">#000000 </Color>
 	<Color x:Key="ColorWhite">#FFFFFF </Color>
 	<Color x:Key="ColorRed">#FF0000  </Color>
@@ -49,7 +50,8 @@
 	<SolidColorBrush x:Key="BrushGame4" Color="{StaticResource ColorGame4}" />
 	<SolidColorBrush x:Key="BrushGame5" Color="{StaticResource ColorGame5}" />
 
-	<SolidColorBrush x:Key="BrushGray" Color="{StaticResource ColorGray}" />
+	<SolidColorBrush x:Key="BrushLightGray" Color="{StaticResource ColorLightGray}" />
+	<SolidColorBrush x:Key="BrushDarkGray" Color="{StaticResource ColorDarkGray}" />
 	<SolidColorBrush x:Key="BrushBlack" Color="{StaticResource ColorBlack}" />
 	<SolidColorBrush x:Key="BrushWhite" Color="{StaticResource ColorWhite}" />
 	<SolidColorBrush x:Key="BrushPink" Color="{StaticResource ColorPink}" />

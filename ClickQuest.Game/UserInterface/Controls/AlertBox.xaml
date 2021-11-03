@@ -7,7 +7,7 @@
         Title="Alert Box" Height="160" Width="420" WindowStartupLocation="CenterOwner"
         WindowStyle="None" ResizeMode="NoResize" Background="{StaticResource BrushGame1}" MouseDown="AlertBox_MouseDown">
 	<Grid>
-		<Border BorderThickness="3" BorderBrush="{StaticResource BrushGray}" CornerRadius="3">
+		<Border BorderThickness="3" BorderBrush="{StaticResource BrushLightGray}" CornerRadius="3">
 			<StackPanel>
 				<!-- Alert text -->
 				<Grid Height="95">
