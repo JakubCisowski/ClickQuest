@@ -14,27 +14,27 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			switch (rarity)
 			{
 				case Rarity.General:
-					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity0");
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity0");
 					break;
 
 				case Rarity.Fine:
-					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity1");
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity1");
 					break;
 
 				case Rarity.Superior:
-					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity2");
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity2");
 					break;
 
 				case Rarity.Exceptional:
-					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity3");
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity3");
 					break;
 
 				case Rarity.Masterwork:
-					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity4");
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity4");
 					break;
 
 				case Rarity.Mythic:
-					brush = (SolidColorBrush) Application.Current.FindResource("ColorRarity5");
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity5");
 					break;
 			}
 
@@ -48,27 +48,27 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			switch (damageType)
 			{
 				case DamageType.Normal:
-					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeNormal");
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushDamageTypeNormal");
 					break;
 
 				case DamageType.Critical:
-					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeCritical");
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushDamageTypeCritical");
 					break;
 
 				case DamageType.Poison:
-					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypePoison");
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushDamageTypePoison");
 					break;
 
 				case DamageType.Aura:
-					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeAura");
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushDamageTypeAura");
 					break;
 
 				case DamageType.OnHit:
-					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeOnHit");
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushDamageTypeOnHit");
 					break;
 
 				case DamageType.Artifact:
-					brush = (SolidColorBrush) Application.Current.FindResource("ColorDamageTypeArtifact");
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushDamageTypeArtifact");
 					break;
 			}
 

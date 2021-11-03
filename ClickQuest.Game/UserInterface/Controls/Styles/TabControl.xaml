@@ -3,17 +3,10 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!-- Colors -->
-	<SolidColorBrush x:Key="GameBackground1" Color="#EDF9FD" />
-	<SolidColorBrush x:Key="GameBackground2" Color="#CFEFF8" />
-	<SolidColorBrush x:Key="GameBackground3" Color="#ADD5E0" />
-
-	<SolidColorBrush x:Key="ButtonGrayBackground" Color="#CCDCE1" />
-
-	<SolidColorBrush x:Key="ButtonDangerBrush" Color="#FFD3D3" />
-	<SolidColorBrush x:Key="ButtonDangerBrushHover" Color="#FF0000" />
+	<SolidColorBrush x:Key="BrushGame1" Color="#EDF9FD" />
 
 	<!-- Custom TabControl style -->
 	<Style x:Key="TabControlStyleGeneral" TargetType="TabControl">
-		<Setter Property="Background" Value="{StaticResource GameBackground1}" />
+		<Setter Property="Background" Value="{StaticResource BrushGame1}" />
 	</Style>
 </ResourceDictionary>

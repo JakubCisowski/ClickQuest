@@ -145,10 +145,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 			switch (hero.HeroClass)
 			{
 				case HeroClass.Slayer:
-					heroClassText.Foreground = (SolidColorBrush) FindResource("ColorSlayerRelated");
+					heroClassText.Foreground = (SolidColorBrush) FindResource("BrushSlayerRelated");
 					break;
 				case HeroClass.Venom:
-					heroClassText.Foreground = (SolidColorBrush) FindResource("ColorVenomRelated");
+					heroClassText.Foreground = (SolidColorBrush) FindResource("BrushVenomRelated");
 					break;
 			}
 

@@ -16,51 +16,91 @@
 			<!-- Fonts -->
 			<Style x:Key="GameFontRegular" TargetType="FrameworkElement">
 				<Setter Property="TextElement.FontFamily" Value="/Resources/Fonts/#GothamBook" />
-				<Setter Property="TextElement.FontSize" Value="16" />
 			</Style>
 
-			<!-- Colors -->
-			<Color x:Key="ColorGameBackground1">#EDF9FD</Color>
-			<Color x:Key="ColorGameBackground2">#CFEFF8</Color>
-			<Color x:Key="ColorGameBackground3">#ADD5E0</Color>
-			<Color x:Key="ColorGameBackground4">#c4effa</Color>
-			<Color x:Key="ColorGameBackground5">#acd4e0</Color>
+			<!-- COLORS -->
+			<Color x:Key="ColorGame1">#EDF9FD </Color>
+			<Color x:Key="ColorGame2">#CFEFF8 </Color>
+			<Color x:Key="ColorGame3">#ADD5E0 </Color>
+			<Color x:Key="ColorGame4">#c4effa </Color>
+			<Color x:Key="ColorGame5">#ACE9FA </Color>
 
-			<Color x:Key="ColorButtonDangerHover">#FF0000</Color>
-			<Color x:Key="ColorButtonDanger">#FFD3D3</Color>
+			<Color x:Key="ColorGameGray">#CCDCE1 </Color>
+			<Color x:Key="ColorGameBlack">#000000 </Color>
+			<Color x:Key="ColorGameWhite">#FFFFFF </Color>
 
-			<SolidColorBrush x:Key="GameBackground1" Color="{StaticResource ColorGameBackground1}" />
-			<SolidColorBrush x:Key="GameBackground2" Color="{StaticResource ColorGameBackground2}" />
-			<SolidColorBrush x:Key="GameBackground3" Color="{StaticResource ColorGameBackground3}" />
+			<Color x:Key="ColorGold">#FFD700 </Color>
 
-			<SolidColorBrush x:Key="ButtonGrayBackground" Color="#CCDCE1" />
-			<SolidColorBrush x:Key="ButtonAccentedBackground" Color="#ACE9FA" />
+			<Color x:Key="ColorRarity0">#8C8C8C </Color>
+			<Color x:Key="ColorRarity1">#D79E4B </Color>
+			<Color x:Key="ColorRarity2">#61B05A </Color>
+			<Color x:Key="ColorRarity3">#508CDA </Color>
+			<Color x:Key="ColorRarity4">#A950DA </Color>
+			<Color x:Key="ColorRarity5">#E9DB50 </Color>
 
-			<SolidColorBrush x:Key="ButtonDangerBrush" Color="{StaticResource ColorButtonDanger}" />
-			<SolidColorBrush x:Key="ButtonDangerBrushHover" Color="{StaticResource ColorButtonDangerHover}" />
+			<Color x:Key="ColorQuestRare">#FFA237 </Color>
 
-			<SolidColorBrush x:Key="ColorRarity0" Color="#8C8C8C" /> <!-- General - Gray -->
-			<SolidColorBrush x:Key="ColorRarity1" Color="#D79E4B" /> <!-- Fine - Light brown -->
-			<SolidColorBrush x:Key="ColorRarity2" Color="#61B05A" /> <!-- Superior - Green -->
-			<SolidColorBrush x:Key="ColorRarity3" Color="#508CDA" /> <!-- Exceptional - Blue -->
-			<SolidColorBrush x:Key="ColorRarity4" Color="#A950DA" /> <!-- Masterwork - Purple -->
-			<SolidColorBrush x:Key="ColorRarity5" Color="#E9DB50" /> <!-- Mythic - Gold -->
+			<Color x:Key="ColorButtonDangerRed">#FF0000  </Color>
+			<Color x:Key="ColorButtonDangerPink">#FFD3D3  </Color>
 
-			<SolidColorBrush x:Key="ColorQuestRare" Color="#FFA237" /> <!-- Rare quest - Orange? -->
+			<Color x:Key="ColorSlayerRelated">#FF4242  </Color>
+			<Color x:Key="ColorVenomRelated">#008500  </Color>
+
+
+			<!-- Class and damage type colors -->
+			<Color x:Key="ColorDamageTypeNormal"> #000000 </Color>
+			<Color x:Key="ColorDamageTypeCritical"> #FF0000  </Color>
+			<Color x:Key="ColorDamageTypePoison"> #006400  </Color>
+			<Color x:Key="ColorDamageTypeAura"> #B8860B  </Color>
+			<Color x:Key="ColorDamageTypeOnHit"> #F54DC4  </Color>
+			<Color x:Key="ColorDamageTypeArtifact"> #0053FF  </Color>
+
+
+			<Color x:Key="ColorToolTipBackground"> #000000 </Color>
+
+
+
+			<!-- BRUSHES -->
+			<SolidColorBrush x:Key="BrushGame1" Color="{StaticResource ColorGame1}" />
+			<SolidColorBrush x:Key="BrushGame2" Color="{StaticResource ColorGame2}" />
+			<SolidColorBrush x:Key="BrushGame3" Color="{StaticResource ColorGame3}" />
+			<SolidColorBrush x:Key="BrushGame4" Color="{StaticResource ColorGame4}" />
+			<SolidColorBrush x:Key="BrushGame5" Color="{StaticResource ColorGame5}" />
+
+			<SolidColorBrush x:Key="BrushGameGray" Color="{StaticResource ColorGameGray}" />
+			<SolidColorBrush x:Key="BrushGameBlack" Color="{StaticResource ColorGameBlack}" />
+			<SolidColorBrush x:Key="BrushGameWhite" Color="{StaticResource ColorGameWhite}" />
+
+			<SolidColorBrush x:Key="BrushGold" Color="{StaticResource ColorGold}" />
+
+			<SolidColorBrush x:Key="BrushButtonDangerPink" Color="{StaticResource ColorButtonDangerPink}" />
+			<SolidColorBrush x:Key="BrushButtonDangerRed" Color="{StaticResource ColorButtonDangerRed}" />
+
+			<SolidColorBrush x:Key="BrushRarity0" Color="{StaticResource ColorRarity0}" /> <!-- General - Gray -->
+			<SolidColorBrush x:Key="BrushRarity1" Color="{StaticResource ColorRarity1}" /> <!-- Fine - Light brown -->
+			<SolidColorBrush x:Key="BrushRarity2" Color="{StaticResource ColorRarity2}" /> <!-- Superior - Green -->
+			<SolidColorBrush x:Key="BrushRarity3" Color="{StaticResource ColorRarity3}" /> <!-- Exceptional - Blue -->
+			<SolidColorBrush x:Key="BrushRarity4" Color="{StaticResource ColorRarity4}" /> <!-- Masterwork - Purple -->
+			<SolidColorBrush x:Key="BrushRarity5" Color="{StaticResource ColorRarity5}" /> <!-- Mythic - Gold -->
+
+			<SolidColorBrush x:Key="BrushQuestRare" Color="{StaticResource ColorQuestRare}" /> <!-- Rare quest - Orange? -->
 
 			<!-- Class and damage type colors -->
 
-			<SolidColorBrush x:Key="ColorSlayerRelated" Color="#FF4242" />
-			<SolidColorBrush x:Key="ColorVenomRelated" Color="#008500" />
+			<SolidColorBrush x:Key="BrushSlayerRelated" Color="{StaticResource ColorSlayerRelated}" />
+			<SolidColorBrush x:Key="BrushVenomRelated" Color="{StaticResource ColorVenomRelated}" />
 
-			<SolidColorBrush x:Key="ColorDamageTypeNormal" Color="#000000" />
-			<SolidColorBrush x:Key="ColorDamageTypeCritical" Color="#FF0000" />
-			<SolidColorBrush x:Key="ColorDamageTypePoison" Color="#006400" />
-			<SolidColorBrush x:Key="ColorDamageTypeAura" Color="#B8860B" />
-			<SolidColorBrush x:Key="ColorDamageTypeOnHit" Color="#F54DC4" />
-			<SolidColorBrush x:Key="ColorDamageTypeArtifact" Color="#0053FF" />
+			<SolidColorBrush x:Key="BrushDamageTypeNormal" Color="{StaticResource ColorDamageTypeNormal}" />
+			<SolidColorBrush x:Key="BrushDamageTypeCritical" Color="{StaticResource ColorDamageTypeCritical}" />
+			<SolidColorBrush x:Key="BrushDamageTypePoison" Color="{StaticResource ColorDamageTypePoison}" />
+			<SolidColorBrush x:Key="BrushDamageTypeAura" Color="{StaticResource ColorDamageTypeAura}" />
+			<SolidColorBrush x:Key="BrushDamageTypeOnHit" Color="{StaticResource ColorDamageTypeOnHit}" />
+			<SolidColorBrush x:Key="BrushDamageTypeArtifact" Color="{StaticResource ColorDamageTypeArtifact}" />
 
-			<SolidColorBrush x:Key="ToolTipBackground" Color="Black" Opacity="0.7" />
+			<SolidColorBrush x:Key="BrushToolTipBackground" Color="{StaticResource ColorToolTipBackground}" Opacity="0.7" />
+
+
+
 
 			<!-- Custom global styles -->
 			<Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}" />
@@ -69,19 +109,19 @@
 			<Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}" />
 
 			<Style TargetType="Window" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource GameBackground1}" />
+				<Setter Property="Background" Value="{StaticResource BrushGame1}" />
 			</Style>
 
 			<Style TargetType="Frame" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource GameBackground1}" />
+				<Setter Property="Background" Value="{StaticResource BrushGame1}" />
 			</Style>
 
 			<Style TargetType="Page" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource GameBackground1}" />
+				<Setter Property="Background" Value="{StaticResource BrushGame1}" />
 			</Style>
 
 			<Style TargetType="ToolTip" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource ToolTipBackground}" />
+				<Setter Property="Background" Value="{StaticResource BrushToolTipBackground}" />
 				<!-- <Setter Property="Opacity" Value="0.6"/> -->
 				<Setter Property="Padding" Value="5" />
 				<Setter Property="BorderBrush" Value="Black" />

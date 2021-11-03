@@ -2,16 +2,6 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<!-- Colors -->
-	<SolidColorBrush x:Key="GameBackground1" Color="#EDF9FD" />
-	<SolidColorBrush x:Key="GameBackground2" Color="#CFEFF8" />
-	<SolidColorBrush x:Key="GameBackground3" Color="#ADD5E0" />
-
-	<SolidColorBrush x:Key="ButtonGrayBackground" Color="#CCDCE1" />
-
-	<SolidColorBrush x:Key="ButtonDangerBrush" Color="#FFD3D3" />
-	<SolidColorBrush x:Key="ButtonDangerBrushHover" Color="#FF0000" />
-
 	<!-- Tooltip text styles -->
 	<Style x:Key="ToolTipTextBlockBase" TargetType="TextBlock">
 		<Setter Property="Foreground" Value="White" />

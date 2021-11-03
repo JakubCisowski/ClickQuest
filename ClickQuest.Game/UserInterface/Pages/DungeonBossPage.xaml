@@ -41,8 +41,8 @@
 			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="LightGray" HorizontalAlignment="Center" Margin="5" Width="600">
 				<Border.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-						<GradientStop Color="{StaticResource ColorGameBackground4}" Offset="0.25" />
-						<GradientStop Color="{StaticResource ColorGameBackground5}" Offset="0.75" />
+						<GradientStop Color="{StaticResource ColorGame4}" Offset="0.25" />
+						<GradientStop Color="{StaticResource ColorGame5}" Offset="0.75" />
 					</LinearGradientBrush>
 				</Border.Background>
 
@@ -69,7 +69,7 @@
 							<!-- Health progress bar -->
 							<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=CurrentHealthProgress, UpdateSourceTrigger=PropertyChanged}" Height="25" Width="300" materialDesign:TransitionAssist.DisableTransitions="True" />
 							<!-- Text on progress bar -->
-							<TextBlock x:Name="BossHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#ededed" FontWeight="Bold" FontSize="18">
+							<TextBlock x:Name="BossHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource BrushGameWhite}" FontWeight="Bold" FontSize="18">
 								<TextBlock.Text>
 									<MultiBinding StringFormat=" {0} / {1} ">
 										<Binding Path="CurrentHealth" />

@@ -11,9 +11,9 @@
 	<Border BorderThickness="3" BorderBrush="Gray" Margin="1" Padding="6">
 
 		<!-- TabControl with 3 tabs - Materials, Recipes and Artifacts -->
-		<TabControl x:Name="EquipmentTabControl" Width="319" Background="{StaticResource GameBackground1}" SelectionChanged="TabControl_SelectionChanged">
+		<TabControl x:Name="EquipmentTabControl" Width="319" Background="{StaticResource BrushGame1}" SelectionChanged="TabControl_SelectionChanged">
 			<!-- Materials -->
-			<TabItem Background="{StaticResource GameBackground2}">
+			<TabItem Background="{StaticResource BrushGame2}">
 				<TabItem.Header>
 					<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
 						<materialDesign:PackIcon Kind="Cog" Width="20" Height="20" />
@@ -28,7 +28,7 @@
 			</TabItem>
 
 			<!-- Recipes -->
-			<TabItem Background="{StaticResource GameBackground2}">
+			<TabItem Background="{StaticResource BrushGame2}">
 				<TabItem.Header>
 					<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
 						<materialDesign:PackIcon Kind="ScriptText" Width="20" Height="20" Margin="4,0,0,0" />
@@ -43,7 +43,7 @@
 			</TabItem>
 
 			<!-- Artifacts -->
-			<TabItem Background="{StaticResource GameBackground2}">
+			<TabItem Background="{StaticResource BrushGame2}">
 				<TabItem.Header>
 					<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
 						<materialDesign:PackIcon Kind="DiamondStone" Width="20" Height="20" Margin="3,0,0,0" />

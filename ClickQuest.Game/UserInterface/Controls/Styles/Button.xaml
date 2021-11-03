@@ -3,14 +3,10 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!-- Colors -->
-	<SolidColorBrush x:Key="GameBackground1" Color="#EDF9FD" />
-	<SolidColorBrush x:Key="GameBackground2" Color="#CFEFF8" />
-	<SolidColorBrush x:Key="GameBackground3" Color="#ADD5E0" />
-
-	<SolidColorBrush x:Key="ButtonGrayBackground" Color="#CCDCE1" />
-
-	<SolidColorBrush x:Key="ButtonDangerBrush" Color="#FFD3D3" />
-	<SolidColorBrush x:Key="ButtonDangerBrushHover" Color="#FF0000" />
+	<SolidColorBrush x:Key="BrushGame2" Color="#CFEFF8" />
+	<SolidColorBrush x:Key="BrushGameGray" Color="#CCDCE1" />
+	<SolidColorBrush x:Key="BrushButtonDangerPink" Color="#FFD3D3" />
+	<SolidColorBrush x:Key="BrushButtonDangerRed" Color="#FF0000" />
 
 	<!-- Custom button styles -->
 	<Style x:Key="ButtonStyleGeneral" TargetType="Button">
@@ -18,7 +14,7 @@
 		<Setter Property="Margin" Value="5" />
 		<Setter Property="FontSize" Value="16" />
 		<Setter Property="FontFamily" Value="/Resources/Fonts/#GothamBook" />
-		<Setter Property="Background" Value="{StaticResource GameBackground2}" />
+		<Setter Property="Background" Value="{StaticResource BrushGame2}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -61,7 +57,7 @@
 	<Style x:Key="ButtonStyleDisabled" TargetType="Button">
 		<Setter Property="OverridesDefaultStyle" Value="True" />
 		<Setter Property="Margin" Value="5" />
-		<Setter Property="Background" Value="{StaticResource ButtonGrayBackground}" />
+		<Setter Property="Background" Value="{StaticResource BrushGameGray}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -104,21 +100,21 @@
 	<Style x:Key="ButtonStyleDanger" TargetType="Button">
 		<Setter Property="OverridesDefaultStyle" Value="True" />
 		<Setter Property="Margin" Value="5" />
-		<Setter Property="Background" Value="{StaticResource ButtonGrayBackground}" />
+		<Setter Property="Background" Value="{StaticResource BrushGameGray}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Border Name="border"
 					        BorderThickness="2"
 					        Padding="4,2"
-					        BorderBrush="{StaticResource ButtonDangerBrush}"
+					        BorderBrush="{StaticResource BrushButtonDangerPink}"
 					        CornerRadius="3"
 					        Background="{TemplateBinding Background}">
 						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
 					</Border>
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsMouseOver" Value="True">
-							<!-- <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ButtonDangerBrushHover}" /> -->
+							<Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BrushButtonDangerRed}" />
 
 							<Trigger.EnterActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">

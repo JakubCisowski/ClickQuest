@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" WindowStartupLocation="CenterOwner" WindowStyle="None" ResizeMode="NoResize" Background="{StaticResource GameBackground1}"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner" WindowStyle="None" ResizeMode="NoResize" Background="{StaticResource BrushGame1}"
         Title="AchievementsWindow" Height="500" Width="600" MouseDown="AchievementsWindow_MouseDown" Closing="AchievementsWindow_Closing">
 	<Grid>
 		<Border BorderThickness="3" BorderBrush="DarkGray" CornerRadius="3">
