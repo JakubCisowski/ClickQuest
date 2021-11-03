@@ -96,7 +96,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 						BorderBrush = (SolidColorBrush) FindResource("BrushGray"),
 						Padding = new Thickness(6),
 						Margin = new Thickness(4),
-						Background = FindResource("BrushGame3") as SolidColorBrush,
+						Background = FindResource("BrushGame5") as SolidColorBrush,
 						Tag = item
 					};
 
@@ -155,7 +155,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					{
 						User.Instance.CurrentHero.EquippedArtifacts.Remove(artifact);
 						artifact.ArtifactFunctionality.OnUnequip();
-						(sender as Border).Background = FindResource("BrushGame3") as SolidColorBrush;
+						(sender as Border).Background = FindResource("BrushGame5") as SolidColorBrush;
 
 						equippedArtifactsChanged = true;
 					}

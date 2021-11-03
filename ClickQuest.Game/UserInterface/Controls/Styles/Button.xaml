@@ -2,11 +2,9 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<!-- Colors -->
-	<SolidColorBrush x:Key="BrushGame2" Color="#CFEFF8" />
-	<SolidColorBrush x:Key="BrushGray" Color="#CCDCE1" />
-	<SolidColorBrush x:Key="BrushPink" Color="#FFD3D3" />
-	<SolidColorBrush x:Key="BrushRed" Color="#FF0000" />
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/UserInterface/Controls/Styles/Colors.xaml" />
+	</ResourceDictionary.MergedDictionaries>
 
 	<!-- Custom button styles -->
 	<Style x:Key="ButtonStyleGeneral" TargetType="Button">

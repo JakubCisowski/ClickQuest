@@ -1,11 +1,11 @@
-﻿using System;
+﻿using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.GameData.Models;
+using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
-using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
 {
@@ -67,14 +67,14 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			{
 				Name = "RarityBox",
 				ItemsSource = Enum.GetValues(typeof(Rarity)),
-				SelectedIndex = (int) selectedArtifact.Rarity,
+				SelectedIndex = (int)selectedArtifact.Rarity,
 				Margin = new Thickness(10)
 			};
 			var artifactTypeBox = new ComboBox
 			{
 				Name = "ArtifactTypeBox",
 				ItemsSource = Enum.GetValues(typeof(ArtifactType)),
-				SelectedIndex = (int) selectedArtifact.ArtifactType,
+				SelectedIndex = (int)selectedArtifact.ArtifactType,
 				Margin = new Thickness(10)
 			};
 			var descriptionBox = new TextBox
@@ -143,13 +143,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
+					textBox.Style = (Style)FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
+					comboBox.Style = (Style)FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -180,8 +180,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			artifact.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
 			artifact.Name = (_controls["NameBox"] as TextBox).Text;
 			artifact.Value = int.Parse((_controls["ValueBox"] as TextBox).Text);
-			artifact.Rarity = (Rarity) Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
-			artifact.ArtifactType = (ArtifactType) Enum.Parse(typeof(ArtifactType), (_controls["ArtifactTypeBox"] as ComboBox).SelectedValue.ToString());
+			artifact.Rarity = (Rarity)Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
+			artifact.ArtifactType = (ArtifactType)Enum.Parse(typeof(ArtifactType), (_controls["ArtifactTypeBox"] as ComboBox).SelectedValue.ToString());
 			artifact.Description = (_controls["DescriptionBox"] as TextBox).Text;
 			artifact.Lore = (_controls["LoreBox"] as TextBox).Text;
 			artifact.ExtraInfo = (_controls["ExtraInfoBox"] as TextBox).Text;
@@ -242,7 +242,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{

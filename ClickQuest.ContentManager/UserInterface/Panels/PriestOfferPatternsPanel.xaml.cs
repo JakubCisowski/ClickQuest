@@ -272,7 +272,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			string? selectedValue = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			var selectedValue = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedValue is null)
 			{

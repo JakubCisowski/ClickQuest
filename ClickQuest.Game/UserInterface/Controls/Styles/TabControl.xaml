@@ -2,8 +2,9 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<!-- Colors -->
-	<SolidColorBrush x:Key="BrushGame1" Color="#EDF9FD" />
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/UserInterface/Controls/Styles/Colors.xaml" />
+	</ResourceDictionary.MergedDictionaries>
 
 	<!-- Custom TabControl style -->
 	<Style x:Key="TabControlStyleGeneral" TargetType="TabControl">
