@@ -220,15 +220,15 @@
     "Description": "TestBoss1Desc",
     "BossLootPatterns": [
       {
-        "BossLootType": "Material",
-        "BossLootId": 0,
+        "BossLootType": "Blessing",
+        "BossLootId": 1,
         "Frequencies": [
-          0.5,
-          0.6,
-          0.7,
-          0.8,
-          0.9,
-          1
+          1,
+          2,
+          2,
+          2,
+          2,
+          2
         ]
       },
       {
@@ -240,6 +240,30 @@
           0.7,
           0.8,
           0.9,
+          1
+        ]
+      },
+      {
+        "BossLootType": "Blessing",
+        "BossLootId": 1,
+        "Frequencies": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "BossLootType": "Blessing",
+        "BossLootId": 4,
+        "Frequencies": [
+          1,
+          1,
+          1,
+          1,
+          1,
           1
         ]
       }

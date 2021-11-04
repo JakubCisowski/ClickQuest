@@ -10,7 +10,7 @@
       {
         "QuestRewardId": 1,
         "QuestRewardType": "Ingot",
-        "Quantity": 1
+        "Quantity": 0
       },
       {
         "QuestRewardId": 7,
@@ -36,6 +36,16 @@
         "QuestRewardId": 7,
         "QuestRewardType": "Material",
         "Quantity": 1
+      },
+      {
+        "QuestRewardId": 1,
+        "QuestRewardType": "Blessing",
+        "Quantity": 1
+      },
+      {
+        "QuestRewardId": 2,
+        "QuestRewardType": "Blessing",
+        "Quantity": 1
       }
     ]
   },
@@ -56,6 +66,11 @@
         "QuestRewardId": 7,
         "QuestRewardType": "Material",
         "Quantity": 1
+      },
+      {
+        "QuestRewardId": 5,
+        "QuestRewardType": "Blessing",
+        "Quantity": 10
       }
     ]
   }

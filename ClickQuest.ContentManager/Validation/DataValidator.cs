@@ -18,6 +18,8 @@ namespace ClickQuest.ContentManager.Validation
 			CheckEnumBounds();
 			CheckPositiveValues();
 			CheckLevelRequirements();
+			CheckRewardBlessingsQuantity();
+			CheckRecipeArtifactLinks();
 		}
 
 		private static void CheckIdUniqueness()
@@ -227,6 +229,9 @@ namespace ClickQuest.ContentManager.Validation
 			CheckCollectionPositiveValues("Monsters_Health", GameContent.Monsters.Select(x => x.Health));
 
 			CheckCollectionPositiveValues("Blessings_Buff", GameContent.Blessings.Select(x => x.Buff));
+
+			CheckCollectionPositiveValues("QuestRewardPatterns_Quantity", GameContent.Quests.SelectMany(x => x.QuestRewardPatterns).Select(y=>y.Quantity));
+			CheckCollectionPositiveValues("IngredientPatterns_Quantity", GameContent.Recipes.SelectMany(x => x.IngredientPatterns).Select(y=>y.Quantity));
 		}
 
 		private static void CheckCollectionPositiveValues(string collectionValuesInfo, IEnumerable<int> valuesCollection)
@@ -250,6 +255,57 @@ namespace ClickQuest.ContentManager.Validation
 			{
 				string message = "Level requirement of region is invalid";
 				Logger.Log(message);
+			}
+		}	
+
+		private static void CheckRewardBlessingsQuantity()
+		{
+			foreach (var boss in GameContent.Bosses)
+			{
+				var blessingPatterns = boss.BossLootPatterns.Where(pattern=>pattern.BossLootType == RewardType.Blessing);
+				
+				if (blessingPatterns.Any(pattern=>pattern.Frequencies.Any(frequency=>frequency > 1)))
+				{
+					string message = $"More than one of the same Blessing can be dropped from Boss of Id {boss.Id}.";
+					Logger.Log(message);
+				}
+
+				if(blessingPatterns.Count() > 1)
+				{
+					string message = $"More than one Blessing can be dropped from Boss of Id {boss.Id}.";
+					Logger.Log(message);
+				}
+			}
+
+			foreach (var quest in GameContent.Quests)
+			{
+				var blessingPatterns = quest.QuestRewardPatterns.Where(pattern=>pattern.QuestRewardType == RewardType.Blessing);
+
+				if (blessingPatterns.Any(pattern=>pattern.Quantity > 1))
+				{
+					string message = $"More than one of the same Blessing is awarded from Quest of Id {quest.Id}.";
+					Logger.Log(message);
+				}
+
+				if(blessingPatterns.Count() > 1)
+				{
+					string message = $"More than one Blessing is awarded from Quest of Id {quest.Id}.";
+					Logger.Log(message);
+				}
+			}
+		}
+
+		private static void CheckRecipeArtifactLinks()
+		{
+			foreach (var recipe in GameContent.Recipes)
+			{
+				var artifact = GameContent.Artifacts.FirstOrDefault(artifact => artifact.Id == recipe.ArtifactId);
+
+				if (!recipe.Name.Contains(artifact.Name))
+				{
+					string message = $"{recipe.Name} of Id: {recipe.Id} is not linked to the correct artifact ({artifact.Name} instead).";
+					Logger.Log(message);
+				}
 			}
 		}
 	}
