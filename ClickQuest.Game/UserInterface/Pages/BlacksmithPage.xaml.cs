@@ -38,11 +38,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (b.CommandParameter is Material material)
 			{
-				var result = AlertBox.Show($"Are you sure you want to melt {material.Name}?\nThis action will destroy this item and create at least {Material.BaseMeltingIngotBonus} {material.Rarity} ingots.\nYou can get bonus ingots if you master Melter specialization (by melting more materials).");
-
-				if (result == MessageBoxResult.Cancel)
+				if (material.Rarity == Rarity.Mythic)
 				{
-					return;
+					var result = AlertBox.Show($"Are you sure you want to melt {material.Name}?\nThis action will destroy this item and create at least {Material.BaseMeltingIngotBonus} {material.Rarity} ingots.\nYou can get bonus ingots if you master Melter specialization (by melting more materials).");
+
+					if (result == MessageBoxResult.Cancel)
+					{
+						return;
+					}
 				}
 				
 				MeltMaterial(material);
