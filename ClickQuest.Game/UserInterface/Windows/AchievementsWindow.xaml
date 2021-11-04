@@ -25,7 +25,7 @@
 				</Border>
 
 				<!-- Close button -->
-				<Button x:Name="CloseButton" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="50" Click="CloseButton_Click">
+				<Button x:Name="CloseButton" Background="{StaticResource BrushGameB}" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="50" Click="CloseButton_Click">
 					<Button.Content>
 						<TextBlock FontSize="18" Text="Close" />
 					</Button.Content>

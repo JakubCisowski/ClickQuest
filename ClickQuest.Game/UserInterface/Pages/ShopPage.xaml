@@ -40,13 +40,7 @@
 			</Grid.RowDefinitions>
 
 			<!-- Page description -->
-			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600">
-				<Border.Background>
-					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-						<GradientStop Color="{StaticResource ColorGameC}" Offset="0.25" />
-						<GradientStop Color="{StaticResource ColorGameD}" Offset="0.75" />
-					</LinearGradientBrush>
-				</Border.Background>
+			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGameJ}">
 
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center">
 					<Run Text="Here you can sell your materials and recipes" />
@@ -56,18 +50,18 @@
 			</Border>
 
 			<!-- Town button -->
-			<Button x:Name="TownButton" Grid.Row="2" Width="450" Height="50" Click="TownButton_Click">
+			<Button x:Name="TownButton" Grid.Row="2" Width="450" Height="50" Click="TownButton_Click" Background="{StaticResource BrushGameB}">
 				<Button.Content>
 					<TextBlock FontSize="22" Text="Come back to town!" />
 				</Button.Content>
 			</Button>
 
 			<!-- Shop panel -->
-			<TabControl Grid.Row="1" Background="{StaticResource BrushGameA}" Width="550" Height="550">
+			<TabControl Grid.Row="1" Background="{StaticResource BrushGameT}" Width="550" Height="550">
 				<!-- Sell materials tab-->
-				<TabItem Background="{StaticResource BrushGameB}">
+				<TabItem Background="{StaticResource BrushGameK}">
 					<!-- Header sell -->
-					<TabItem.Header>
+					<TabItem.Header> 
 						<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
 							<materialDesign:PackIcon Kind="Cog" Width="20" Height="20" Margin="20,0,0,0" />
 							<TextBlock Text="Sell" FontSize="17" Margin="2,0,0,0" />
@@ -75,7 +69,7 @@
 					</TabItem.Header>
 
 					<!-- List view sell -->
-					<ListView x:Name="ItemsListViewSellMaterials" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible">
+					<ListView x:Name="ItemsListViewSellMaterials" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible"  Background="{StaticResource BrushGameM}">
 						<!-- Styles -->
 						<ListView.ItemContainerStyle>
 							<Style TargetType="ListViewItem">
@@ -154,7 +148,7 @@
 									<!-- Sell button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Sell" Click="SellButton_Click" CommandParameter="{Binding}" />
+											<Button Content="Sell" Click="SellButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGameC}"/>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -164,7 +158,7 @@
 				</TabItem>
 
 				<!-- Sell recipes tab-->
-				<TabItem Background="{StaticResource BrushGameB}">
+				<TabItem Background="{StaticResource BrushGameK}">
 					<!-- Header sell -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
@@ -251,7 +245,7 @@
 									<!-- Sell button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Sell" Click="SellButton_Click" CommandParameter="{Binding}" />
+											<Button Content="Sell" Click="SellButton_Click" CommandParameter="{Binding}"  Background="{StaticResource BrushGameC}"/>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -261,7 +255,7 @@
 				</TabItem>
 
 				<!-- Buy tab-->
-				<TabItem Background="{StaticResource BrushGameB}">
+				<TabItem Background="{StaticResource BrushGameK}">
 					<!-- Header -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
@@ -336,7 +330,7 @@
 									<!-- Buy button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Buy" Click="BuyButton_Click" CommandParameter="{Binding}" />
+											<Button Content="Buy" Click="BuyButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGameC}" />
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>

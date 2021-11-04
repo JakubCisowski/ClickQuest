@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              Height="450" Width="220">
 
-	<Button Click="QuestButton_Click">
+	<Button Click="QuestButton_Click" Background="{StaticResource BrushGameN}">
 		<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="0.5*" />

@@ -34,14 +34,7 @@
 			</Grid.RowDefinitions>
 
 			<!-- Page description -->
-			<Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600">
-
-				<Border.Background>
-					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-						<GradientStop Color="{StaticResource ColorGameC}" Offset="0.25" />
-						<GradientStop Color="{StaticResource ColorGameD}" Offset="0.75" />
-					</LinearGradientBrush>
-				</Border.Background>
+			<Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGameJ}">
 
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center">
 					<Run Text="Town Districts are where you can buy and craft upgrades or go on an adventure" />
@@ -57,27 +50,27 @@
 			<StackPanel x:Name="TownPanel" Orientation="Vertical" Grid.Column="0" Grid.Row="2">
 
 				<!-- Shop button -->
-				<Button x:Name="ShopButton" Click="ShopButton_Click" Width="150" Height="70">
+				<Button x:Name="ShopButton" Click="ShopButton_Click" Width="150" Height="70" Background="{StaticResource BrushGameC}">
 					<TextBlock Text="Shop" FontSize="20" />
 				</Button>
 
 				<!-- Blacksmith button -->
-				<Button x:Name="BlacksmithButton" Click="BlacksmithButton_Click" Width="150" Height="70">
+				<Button x:Name="BlacksmithButton" Click="BlacksmithButton_Click" Width="150" Height="70" Background="{StaticResource BrushGameC}">
 					<TextBlock Text="Blacksmith" FontSize="20" />
 				</Button>
 
 				<!-- Priest button -->
-				<Button x:Name="PriestButton" Click="PriestButton_Click" Width="150" Height="70">
+				<Button x:Name="PriestButton" Click="PriestButton_Click" Width="150" Height="70" Background="{StaticResource BrushGameC}">
 					<TextBlock Text="Priest" FontSize="20" />
 				</Button>
 
 				<!-- Quest menu button -->
-				<Button x:Name="QuestMenuButton" Click="QuestMenuButton_Click" Width="150" Height="70">
+				<Button x:Name="QuestMenuButton" Click="QuestMenuButton_Click" Width="150" Height="70" Background="{StaticResource BrushGameC}">
 					<TextBlock Text="Quests" FontSize="20" />
 				</Button>
 
 				<!-- Dungeon select button -->
-				<Button x:Name="DungeonSelectButton" Click="DungeonSelectButton_Click" Width="150" Height="70">
+				<Button x:Name="DungeonSelectButton" Click="DungeonSelectButton_Click" Width="150" Height="70" Background="{StaticResource BrushGameC}">
 					<TextBlock Text="Dungeons" FontSize="20" />
 				</Button>
 			</StackPanel>
@@ -97,7 +90,7 @@
 			</StackPanel>
 
 			<!-- Back to menu button -->
-			<Button x:Name="MainMenuButton" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" Click="MainMenuButton_Click" Width="450" Height="50">
+			<Button x:Name="MainMenuButton" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" Click="MainMenuButton_Click" Width="450" Height="50" Background="{StaticResource BrushGameB}">
 				<TextBlock Text="Back to menu" FontSize="22" />
 			</Button>
 		</Grid>

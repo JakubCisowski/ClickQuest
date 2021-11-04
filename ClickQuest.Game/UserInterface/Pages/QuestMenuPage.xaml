@@ -29,13 +29,7 @@
 			</Grid.RowDefinitions>
 
 			<!-- Page description -->
-			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600">
-				<Border.Background>
-					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-						<GradientStop Color="{StaticResource ColorGameC}" Offset="0.25" />
-						<GradientStop Color="{StaticResource ColorGameD}" Offset="0.75" />
-					</LinearGradientBrush>
-				</Border.Background>
+			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}"  Background="{StaticResource BrushGameJ}" HorizontalAlignment="Center" Margin="5" Width="600">
 
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center">
 					<Run Text="Here you can complete quests that give you different rewards" />
@@ -47,7 +41,7 @@
 			</Border>
 
 			<!-- Quest reroll button -->
-			<Button x:Name="RerollButton" Grid.Row="1" HorizontalAlignment="Center" Width="450" Height="50" Click="RerollButton_Click">
+			<Button x:Name="RerollButton" Grid.Row="1" HorizontalAlignment="Center" Width="450" Height="50" Background="{StaticResource BrushGameC}" Click="RerollButton_Click">
 				<TextBlock Text="Reroll" FontSize="22" />
 			</Button>
 
@@ -55,7 +49,7 @@
 			<StackPanel x:Name="QuestPanel" Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" />
 
 			<!-- Back to town button -->
-			<Button x:Name="MainMenuButton" Grid.Row="3" HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
+			<Button x:Name="MainMenuButton" Grid.Row="3" Background="{StaticResource BrushGameB}" HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
 				<TextBlock Text="Come back to town!" FontSize="22" />
 			</Button>
 		</Grid>

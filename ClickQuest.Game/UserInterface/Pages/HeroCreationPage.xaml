@@ -61,6 +61,7 @@
 				<!-- Hero class selection -->
 				<Border Margin="0,10" BorderThickness="2" BorderBrush="{StaticResource BrushLightGray}" Width="150">
 					<ListView x:Name="HeroClassBox" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
+
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								<StackPanel>
@@ -77,6 +78,7 @@
 								<Setter Property="ToolTipService.ShowDuration" Value="20000" />
 								<Setter Property="ToolTipService.InitialShowDelay" Value="100" />
 								<Style.Triggers>
+
 									<!-- Slayer class -->
 									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroClass.Slayer}">
 										<!-- Tooltip -->
@@ -113,7 +115,7 @@
 												</ToolTip>
 											</Setter.Value>
 										</Setter>
-									</DataTrigger>
+									</DataTrigger> 
 								</Style.Triggers>
 							</Style>
 						</ListView.ItemContainerStyle>
@@ -230,14 +232,14 @@
 		<Separator Height="2" Width="500" Margin="20" />
 
 		<!-- Creates hero -->
-		<Button x:Name="CreateHeroButton" HorizontalAlignment="Center" Click="CreateHeroButton_Click" Margin="30" Width="180" Height="60">
+		<Button x:Name="CreateHeroButton" HorizontalAlignment="Center" Click="CreateHeroButton_Click" Margin="30" Width="180" Height="60" Background="{StaticResource BrushGameC}">
 			<Button.Content>
 				<TextBlock FontSize="22" Text="Create!" />
 			</Button.Content>
 		</Button>
 
 		<!-- Back to menu button -->
-		<Button x:Name="CancelButton" Margin="0,100,0,0" HorizontalAlignment="Center" Click="CancelButton_Click" Width="180" Height="60">
+		<Button x:Name="CancelButton" Margin="0,100,0,0" HorizontalAlignment="Center" Click="CancelButton_Click" Width="180" Height="60" Background="{StaticResource BrushGameB}">
 			<Button.Content>
 				<TextBlock FontSize="22" Text="Back to menu" />
 			</Button.Content>

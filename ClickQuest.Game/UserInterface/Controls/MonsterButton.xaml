@@ -18,7 +18,7 @@
 	</UserControl.Resources>
 
 	<!-- Monster button -->
-	<Button Click="MonsterButton_Click">
+	<Button Click="MonsterButton_Click" Background="{StaticResource BrushGameC}">
 		<Grid x:Name="MainGrid">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*" />

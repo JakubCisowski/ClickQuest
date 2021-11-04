@@ -17,9 +17,9 @@
 
 				<!-- Buttons -->
 				<StackPanel Height="60" Orientation="Horizontal" HorizontalAlignment="Center">
-					<Button x:Name="OkButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="OK" Click="OkButton_Click" Margin="0,0,10,5" />
-					<Button x:Name="OkButton2" Visibility="Hidden" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="OK" Click="OkButton_Click" Margin="0,0,10,5" />
-					<Button x:Name="CancelButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Cancel" Click="CancelButton_Click" Margin="10,0,0,5" />
+					<Button x:Name="OkButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Yes" Click="OkButton_Click" Margin="0,0,10,5" Background="{StaticResource BrushGameB}"/>
+					<Button x:Name="OkButton2" Visibility="Hidden" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Ok" Click="OkButton_Click" Margin="0,0,10,5" Background="{StaticResource BrushGameB}"/>
+					<Button x:Name="CancelButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="No" Click="CancelButton_Click" Margin="10,0,0,5" Background="{StaticResource BrushGameB}"/>
 				</StackPanel>
 			</StackPanel>
 		</Border>

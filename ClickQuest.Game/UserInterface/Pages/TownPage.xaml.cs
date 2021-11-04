@@ -2,6 +2,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Places;
@@ -38,7 +39,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Name = "Region" + region.Id,
 					Width = 200,
 					Height = 70,
-					Tag = region
+					Tag = region,
+					Background = (SolidColorBrush)this.FindResource("BrushGameC")
 				};
 
 				var regionBlock = new TextBlock
@@ -68,6 +70,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				if (User.Instance.CurrentHero?.Level < region.LevelRequirement)
 				{
 					regionButton.Style = FindResource("ButtonStyleDisabled") as Style;
+					regionButton.Background = (SolidColorBrush)this.FindResource("BrushGameD");
 					regionButton.IsEnabled = false;
 				}
 

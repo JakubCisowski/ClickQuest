@@ -34,12 +34,12 @@
 			</Grid.ColumnDefinitions>
 
 			<!-- Create hero button -->
-			<Button x:Name="CreateHeroButton" Grid.Row="0" Grid.ColumnSpan="2" Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" VerticalAlignment="Center" Background="{StaticResource BrushGameD}" />
+			<Button x:Name="CreateHeroButton" Grid.Row="0" Grid.ColumnSpan="2" Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" VerticalAlignment="Center" Background="{StaticResource BrushGameB}" />
 
 			<!-- Hero list -->
 
 			<!-- Reset progress button -->
-			<Button x:Name="ResetProgressButton" Style="{StaticResource ButtonStyleDanger}" Grid.Row="4" Grid.ColumnSpan="2" Width="250" Height="50" Content="Reset all your progress" Click="ResetProgressButton_Click" Margin="0,0,0,20" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
+			<Button x:Name="ResetProgressButton" Style="{StaticResource ButtonStyleDanger}" Grid.Row="4" Grid.ColumnSpan="2" Width="250" Height="50" Content="Reset all your progress" Click="ResetProgressButton_Click" Margin="0,0,0,20" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="{StaticResource BrushGameD}">
 				<!-- Tooltip -->
 				<Button.ToolTip>
 					<ToolTip>

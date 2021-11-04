@@ -40,13 +40,7 @@
 			</Grid.RowDefinitions>
 
 			<!-- Page description -->
-			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600">
-				<Border.Background>
-					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-						<GradientStop Color="{StaticResource ColorGameC}" Offset="0.25" />
-						<GradientStop Color="{StaticResource ColorGameD}" Offset="0.75" />
-					</LinearGradientBrush>
-				</Border.Background>
+			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGameJ}">
 
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center">
 					<Run Text="Here you can melt your materials or use them to craft artifacts" />
@@ -56,16 +50,16 @@
 			</Border>
 
 			<!-- Town button -->
-			<Button x:Name="TownButton" Grid.Row="2" Width="450" Height="50" Click="TownButton_Click">
+			<Button x:Name="TownButton" Grid.Row="2" Width="450" Height="50" Click="TownButton_Click" Background="{StaticResource BrushGameB}">
 				<Button.Content>
 					<TextBlock FontSize="22" Text="Come back to town!" />
 				</Button.Content>
 			</Button>
 
 			<!-- Blacksmith panel-->
-			<TabControl Grid.Row="1" Background="{StaticResource BrushGameA}" Width="550" Height="550">
+			<TabControl Grid.Row="1" Background="{StaticResource BrushGameT}" Width="550" Height="550">
 				<!-- Melt tab -->
-				<TabItem Background="{StaticResource BrushGameB}">
+				<TabItem Background="{StaticResource BrushGameK}">
 					<!-- Header melt -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="133" HorizontalAlignment="Center">
@@ -75,7 +69,7 @@
 					</TabItem.Header>
 
 					<!-- List view melt -->
-					<ListView x:Name="ItemsListViewMeltMaterials" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible">
+					<ListView x:Name="ItemsListViewMeltMaterials" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="{StaticResource BrushGameM}">
 						<!-- Styles -->
 						<ListView.ItemContainerStyle>
 							<Style TargetType="ListViewItem">
@@ -154,7 +148,7 @@
 									<!-- Melt button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Melt" Click="MeltButton_Click" CommandParameter="{Binding}" />
+											<Button Content="Melt" Click="MeltButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGameC}"/>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -164,7 +158,7 @@
 				</TabItem>
 
 				<!-- Melt artifacts tab -->
-				<TabItem Background="{StaticResource BrushGameB}">
+				<TabItem Background="{StaticResource BrushGameK}">
 					<!-- Header melt artifacts -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="133" HorizontalAlignment="Center">
@@ -174,7 +168,7 @@
 					</TabItem.Header>
 
 					<!-- List view melt artifacts -->
-					<ListView x:Name="ItemsListViewMeltArtifacts" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible">
+					<ListView x:Name="ItemsListViewMeltArtifacts" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="{StaticResource BrushGameM}">
 						<!-- Styles -->
 						<ListView.ItemContainerStyle>
 							<Style TargetType="ListViewItem">
@@ -251,7 +245,7 @@
 									<!-- Melt button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Melt" Click="MeltButton_Click" CommandParameter="{Binding}" />
+											<Button Content="Melt" Click="MeltButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGameC}"/>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -261,7 +255,7 @@
 				</TabItem>
 
 				<!-- Craft tab -->
-				<TabItem Background="{StaticResource BrushGameB}">
+				<TabItem Background="{StaticResource BrushGameK}">
 					<!-- Header craft -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="133" HorizontalAlignment="Center">
@@ -271,7 +265,7 @@
 					</TabItem.Header>
 
 					<!-- List view craft -->
-					<ListView x:Name="ItemsListViewCraft" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible">
+					<ListView x:Name="ItemsListViewCraft" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="{StaticResource BrushGameM}">
 						<!-- Styles -->
 						<ListView.ItemContainerStyle>
 							<Style TargetType="ListViewItem">
@@ -325,7 +319,7 @@
 									<!-- Craft with materials button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Click="CraftMaterialButton_Click" CommandParameter="{Binding}">
+											<Button Click="CraftMaterialButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGameC}">
 												<Button.Content>
 													<StackPanel Orientation="Horizontal">
 														<TextBlock Text="Craft" FontSize="17" Margin="2,0,0,0" />

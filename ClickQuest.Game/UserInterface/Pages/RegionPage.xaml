@@ -27,13 +27,7 @@
 			</Grid.RowDefinitions>
 
 			<!-- Page description -->
-			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600">
-				<Border.Background>
-					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-						<GradientStop Color="{StaticResource ColorGameC}" Offset="0.25" />
-						<GradientStop Color="{StaticResource ColorGameD}" Offset="0.75" />
-					</LinearGradientBrush>
-				</Border.Background>
+			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushDarkGray}" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGameJ}">
 
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" Text="{Binding Description}" />
 			</Border>
@@ -47,7 +41,7 @@
 			</StackPanel>
 
 			<!-- Back to town button -->
-			<Button x:Name="TownButton" Grid.Row="2" HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
+			<Button x:Name="TownButton" Grid.Row="2" HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50" Background="{StaticResource BrushGameB}">
 				<TextBlock Text="Come back to town!" FontSize="22" />
 			</Button>
 		</Grid>

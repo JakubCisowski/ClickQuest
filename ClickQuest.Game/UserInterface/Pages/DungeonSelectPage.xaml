@@ -29,13 +29,7 @@
 			</Grid.RowDefinitions>
 
 			<!-- Page description -->
-			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600">
-				<Border.Background>
-					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-						<GradientStop Color="{StaticResource ColorGameC}" Offset="0.25" />
-						<GradientStop Color="{StaticResource ColorGameD}" Offset="0.75" />
-					</LinearGradientBrush>
-				</Border.Background>
+			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" Background="{StaticResource BrushGameJ}" HorizontalAlignment="Center" Margin="5" Width="600">
 
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center">
 					<Run Text="Here you can use dropped Dungeon Keys to fight Bosses" />
@@ -47,7 +41,7 @@
 			</Border>
 
 			<!-- Undo selection (of DungeonGroup/Dungeon) button -->
-			<Button x:Name="UndoButton" Grid.Row="1" Width="450" Height="50" Visibility="Hidden">
+			<Button x:Name="UndoButton" Background="{StaticResource BrushGameC}"  Grid.Row="1" Width="450" Height="50" Visibility="Hidden">
 				<TextBlock Text="Undo" FontSize="22" />
 			</Button>
 
@@ -57,7 +51,7 @@
 			</Grid>
 
 			<!-- Back to town button -->
-			<Button x:Name="TownButton" Grid.Row="3" Width="450" Height="50" Click="TownButton_Click">
+			<Button x:Name="TownButton" Background="{StaticResource BrushGameB}"  Grid.Row="3" Width="450" Height="50" Click="TownButton_Click">
 				<TextBlock Text="Come back to town!" FontSize="22" />
 			</Button>
 
