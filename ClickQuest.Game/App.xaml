@@ -17,6 +17,7 @@
 			<!-- Fonts -->
 			<Style x:Key="GameFontRegular" TargetType="FrameworkElement">
 				<Setter Property="TextElement.FontFamily" Value="/Resources/Fonts/#GothamBook" />
+				<Setter Property="TextElement.FontSize" Value="16" />
 			</Style>
 
 			<!-- Custom global styles -->

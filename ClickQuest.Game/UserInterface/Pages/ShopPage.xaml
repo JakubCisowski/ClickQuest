@@ -57,7 +57,7 @@
 			</Button>
 
 			<!-- Shop panel -->
-			<TabControl Grid.Row="1" Background="{StaticResource BrushGameT}" Width="550" Height="550">
+			<TabControl Grid.Row="1" Background="{StaticResource BrushGameT}" Width="650" Height="550">
 				<!-- Sell materials tab-->
 				<TabItem Background="{StaticResource BrushGameK}">
 					<!-- Header sell -->
@@ -103,7 +103,7 @@
 						<ListView.View>
 							<GridView>
 								<!-- Name column-->
-								<GridViewColumn Header="Name" Width="190" DisplayMemberBinding="{Binding Name}">
+								<GridViewColumn Header="Name" Width="290" DisplayMemberBinding="{Binding Name}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -114,7 +114,7 @@
 								</GridViewColumn>
 
 								<!-- Rarity column-->
-								<GridViewColumn Header="Rarity" Width="80" DisplayMemberBinding="{Binding Rarity}">
+								<GridViewColumn Header="Rarity" Width="110" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -147,7 +147,7 @@
 								</GridViewColumn>
 
 								<!-- Sell column-->
-								<GridViewColumn Width="60">
+								<GridViewColumn Width="90">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -211,7 +211,7 @@
 						<ListView.View>
 							<GridView>
 								<!-- Name column-->
-								<GridViewColumn Header="Name" Width="190" DisplayMemberBinding="{Binding Name}">
+								<GridViewColumn Header="Name" Width="290" DisplayMemberBinding="{Binding Name}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -222,7 +222,7 @@
 								</GridViewColumn>
 
 								<!-- Rarity column-->
-								<GridViewColumn Header="Rarity" Width="80" DisplayMemberBinding="{Binding Rarity}">
+								<GridViewColumn Header="Rarity" Width="110" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -255,7 +255,7 @@
 								</GridViewColumn>
 
 								<!-- Sell column-->
-								<GridViewColumn Width="60">
+								<GridViewColumn Width="90">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -318,7 +318,7 @@
 						<ListView.View>
 							<GridView>
 								<!-- Name column -->
-								<GridViewColumn Header="Name" Width="250" DisplayMemberBinding="{Binding Name}">
+								<GridViewColumn Header="Name" Width="360" DisplayMemberBinding="{Binding Name}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -329,7 +329,7 @@
 								</GridViewColumn>
 
 								<!-- Rarity column-->
-								<GridViewColumn Header="Rarity" Width="80" DisplayMemberBinding="{Binding Rarity}">
+								<GridViewColumn Header="Rarity" Width="110" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -351,7 +351,7 @@
 								</GridViewColumn>
 
 								<!-- Buy column -->
-								<GridViewColumn Width="60">
+								<GridViewColumn Width="90">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
