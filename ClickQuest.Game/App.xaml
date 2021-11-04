@@ -26,15 +26,15 @@
 			<Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}" />
 
 			<Style TargetType="Window" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource BrushGame1}" />
+				<Setter Property="Background" Value="{StaticResource BrushGameA}" />
 			</Style>
 
 			<Style TargetType="Frame" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource BrushGame1}" />
+				<Setter Property="Background" Value="{StaticResource BrushGameA}" />
 			</Style>
 
 			<Style TargetType="Page" BasedOn="{StaticResource GameFontRegular}">
-				<Setter Property="Background" Value="{StaticResource BrushGame1}" />
+				<Setter Property="Background" Value="{StaticResource BrushGameA}" />
 			</Style>
 
 			<Style TargetType="ToolTip" BasedOn="{StaticResource GameFontRegular}">

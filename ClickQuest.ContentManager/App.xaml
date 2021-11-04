@@ -38,11 +38,11 @@
 			</ResourceDictionary.MergedDictionaries>
 
 			<!-- COLORS -->
-			<Color x:Key="ColorGame1">#EDF9FD </Color>
-			<Color x:Key="ColorGame2">#CFEFF8 </Color>
-			<Color x:Key="ColorGame5">#ADD5E0 </Color>
-			<Color x:Key="ColorGame3">#c4effa </Color>
-			<Color x:Key="ColorGame4">#ACE9FA </Color>
+			<Color x:Key="ColorGameA">#EDF9FD </Color>
+			<Color x:Key="ColorGameB">#CFEFF8 </Color>
+			<Color x:Key="ColorGameE">#ADD5E0 </Color>
+			<Color x:Key="ColorGameC">#c4effa </Color>
+			<Color x:Key="ColorGameD">#ACE9FA </Color>
 
 			<Color x:Key="ColorLightGray">#CCDCE1 </Color>
 			<Color x:Key="ColorBlack">#000000 </Color>
@@ -79,11 +79,11 @@
 
 
 			<!-- BRUSHES -->
-			<SolidColorBrush x:Key="BrushGame1" Color="{StaticResource ColorGame1}" />
-			<SolidColorBrush x:Key="BrushGame2" Color="{StaticResource ColorGame2}" />
-			<SolidColorBrush x:Key="BrushGame5" Color="{StaticResource ColorGame5}" />
-			<SolidColorBrush x:Key="BrushGame3" Color="{StaticResource ColorGame3}" />
-			<SolidColorBrush x:Key="BrushGame4" Color="{StaticResource ColorGame4}" />
+			<SolidColorBrush x:Key="BrushGameA" Color="{StaticResource ColorGameA}" />
+			<SolidColorBrush x:Key="BrushGameB" Color="{StaticResource ColorGameB}" />
+			<SolidColorBrush x:Key="BrushGameE" Color="{StaticResource ColorGameE}" />
+			<SolidColorBrush x:Key="BrushGameC" Color="{StaticResource ColorGameC}" />
+			<SolidColorBrush x:Key="BrushGameD" Color="{StaticResource ColorGameD}" />
 
 			<SolidColorBrush x:Key="BrushLightGray" Color="{StaticResource ColorLightGray}" />
 			<SolidColorBrush x:Key="BrushBlack" Color="{StaticResource ColorBlack}" />

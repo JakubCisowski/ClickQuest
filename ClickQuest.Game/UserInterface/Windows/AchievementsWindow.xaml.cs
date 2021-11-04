@@ -70,7 +70,7 @@ namespace ClickQuest.Game.UserInterface.Windows
 				BorderBrush = (SolidColorBrush) FindResource("BrushLightGray"),
 				Padding = new Thickness(6),
 				Margin = new Thickness(1),
-				Background = FindResource("BrushGame5") as SolidColorBrush
+				Background = FindResource("BrushGameE") as SolidColorBrush
 			};
 
 			var grid = new Grid();

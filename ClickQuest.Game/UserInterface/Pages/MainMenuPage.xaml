@@ -34,7 +34,7 @@
 			</Grid.ColumnDefinitions>
 
 			<!-- Create hero button -->
-			<Button x:Name="CreateHeroButton" Grid.Row="0" Grid.ColumnSpan="2" Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" VerticalAlignment="Center" Background="{StaticResource BrushGame4}" />
+			<Button x:Name="CreateHeroButton" Grid.Row="0" Grid.ColumnSpan="2" Width="250" Height="50" Content="Create a new hero!" Click="CreateHeroButton_Click" VerticalAlignment="Center" Background="{StaticResource BrushGameD}" />
 
 			<!-- Hero list -->
 

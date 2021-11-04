@@ -12,7 +12,7 @@
 		<Setter Property="Margin" Value="5" />
 		<Setter Property="FontSize" Value="16" />
 		<Setter Property="FontFamily" Value="/Resources/Fonts/#GothamBook" />
-		<Setter Property="Background" Value="{StaticResource BrushGame2}" />
+		<Setter Property="Background" Value="{StaticResource BrushGameB}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">

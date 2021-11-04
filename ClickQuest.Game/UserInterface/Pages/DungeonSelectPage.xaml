@@ -32,8 +32,8 @@
 			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600">
 				<Border.Background>
 					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-						<GradientStop Color="{StaticResource ColorGame3}" Offset="0.25" />
-						<GradientStop Color="{StaticResource ColorGame4}" Offset="0.75" />
+						<GradientStop Color="{StaticResource ColorGameC}" Offset="0.25" />
+						<GradientStop Color="{StaticResource ColorGameD}" Offset="0.75" />
 					</LinearGradientBrush>
 				</Border.Background>
 

@@ -96,7 +96,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 						BorderBrush = (SolidColorBrush) FindResource("BrushLightGray"),
 						Padding = new Thickness(6),
 						Margin = new Thickness(4),
-						Background = FindResource("BrushGame5") as SolidColorBrush,
+						Background = FindResource("BrushGameE") as SolidColorBrush,
 						Tag = item
 					};
 
@@ -142,7 +142,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					{
 						User.Instance.CurrentHero.EquippedArtifacts.Add(artifact);
 						artifact.ArtifactFunctionality.OnEquip();
-						(sender as Border).Background = FindResource("BrushGame2") as SolidColorBrush;
+						(sender as Border).Background = FindResource("BrushGameB") as SolidColorBrush;
 
 						equippedArtifactsChanged = true;
 					}
@@ -155,7 +155,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					{
 						User.Instance.CurrentHero.EquippedArtifacts.Remove(artifact);
 						artifact.ArtifactFunctionality.OnUnequip();
-						(sender as Border).Background = FindResource("BrushGame5") as SolidColorBrush;
+						(sender as Border).Background = FindResource("BrushGameE") as SolidColorBrush;
 
 						equippedArtifactsChanged = true;
 					}
@@ -179,7 +179,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				var artifact = artifactBorder.Tag as Artifact;
 				if (User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact))
 				{
-					artifactBorder.Background = FindResource("BrushGame2") as SolidColorBrush;
+					artifactBorder.Background = FindResource("BrushGameB") as SolidColorBrush;
 				}
 			}
 		}

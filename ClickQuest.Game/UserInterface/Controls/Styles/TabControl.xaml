@@ -8,6 +8,6 @@
 
 	<!-- Custom TabControl style -->
 	<Style x:Key="TabControlStyleGeneral" TargetType="TabControl">
-		<Setter Property="Background" Value="{StaticResource BrushGame1}" />
+		<Setter Property="Background" Value="{StaticResource BrushGameA}" />
 	</Style>
 </ResourceDictionary>

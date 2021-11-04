@@ -2,11 +2,20 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 					
     <!-- COLORS -->
-	<Color x:Key="ColorGame1">#EDF9FD </Color>
-	<Color x:Key="ColorGame2">#CFEFF8 </Color>
-	<Color x:Key="ColorGame3">#c4effa </Color>
-	<Color x:Key="ColorGame4">#ACE9FA </Color>
-	<Color x:Key="ColorGame5">#ADD5E0 </Color>
+	<Color x:Key="ColorGameA">#EDF9FD </Color> <!-- 1  / Main game background (fades to white) -->
+	<Color x:Key="ColorGameB">#CFEFF8 </Color> <!-- 2  / Accented button background [create hero/back to menu or town/monster/boss] -->
+	<Color x:Key="ColorGameC">#c4effa </Color> <!-- 3  / Normal button background -->
+	<Color x:Key="ColorGameD">#ACE9FA </Color> <!-- 4  / Special button background [deleting/exiting/unavailable] -->
+	<Color x:Key="ColorGameE">#ADD5E0 </Color> <!-- 5  / Special button foreground (icon color) -->
+	<Color x:Key="ColorGameF">#ADD5E0 </Color> <!-- 6  / Selected bar background (class/race selection) (shop/priest/blacksmith) -->
+	<Color x:Key="ColorGameG">#ADD5E0 </Color> <!-- 7  / Selected bar higher priority background (class/race selection) (shop/priest/blacksmith) -->
+	<Color x:Key="ColorGameH">#ADD5E0 </Color> <!-- 8  / Hero stats/equipment background -->
+	<Color x:Key="ColorGameI">#ADD5E0 </Color> <!-- 9  / Item background (equipment) -->
+	<Color x:Key="ColorGameJ">#ADD5E0 </Color> <!-- 10 / Region description background -->
+	<Color x:Key="ColorGameK">#ADD5E0 </Color> <!-- 11 / Not selected tab header (equipment/shop/priest/blacksmith) -->
+	<Color x:Key="ColorGameL">#ADD5E0 </Color> <!-- 12 / Selected tab header (equipment/shop/priest/blacksmith) -->
+	<Color x:Key="ColorGameM">#ADD5E0 </Color> <!-- 13 / Shop/Priest/Blacksmith background -->
+	<Color x:Key="ColorGameN">#ADD5E0 </Color> <!-- 14 / Quest button background -->
 
 	<Color x:Key="ColorLightGray">#CCDCE1 </Color>
 	<Color x:Key="ColorDarkGray">#666666 </Color>
@@ -44,11 +53,20 @@
 
 
 	<!-- BRUSHES -->
-	<SolidColorBrush x:Key="BrushGame1" Color="{StaticResource ColorGame1}" />
-	<SolidColorBrush x:Key="BrushGame2" Color="{StaticResource ColorGame2}" />
-	<SolidColorBrush x:Key="BrushGame3" Color="{StaticResource ColorGame3}" />
-	<SolidColorBrush x:Key="BrushGame4" Color="{StaticResource ColorGame4}" />
-	<SolidColorBrush x:Key="BrushGame5" Color="{StaticResource ColorGame5}" />
+	<SolidColorBrush x:Key="BrushGameA" Color="{StaticResource ColorGameA}" />
+	<SolidColorBrush x:Key="BrushGameB" Color="{StaticResource ColorGameB}" />
+	<SolidColorBrush x:Key="BrushGameC" Color="{StaticResource ColorGameC}" />
+	<SolidColorBrush x:Key="BrushGameD" Color="{StaticResource ColorGameD}" />
+	<SolidColorBrush x:Key="BrushGameE" Color="{StaticResource ColorGameE}" />
+	<SolidColorBrush x:Key="BrushGameF" Color="{StaticResource ColorGameF}" />
+	<SolidColorBrush x:Key="BrushGameG" Color="{StaticResource ColorGameG}" />
+	<SolidColorBrush x:Key="BrushGameH" Color="{StaticResource ColorGameH}" />
+	<SolidColorBrush x:Key="BrushGameI" Color="{StaticResource ColorGameI}" />
+	<SolidColorBrush x:Key="BrushGameJ" Color="{StaticResource ColorGameJ}" />
+	<SolidColorBrush x:Key="BrushGameK" Color="{StaticResource ColorGameK}" />
+	<SolidColorBrush x:Key="BrushGameL" Color="{StaticResource ColorGameL}" />
+	<SolidColorBrush x:Key="BrushGameM" Color="{StaticResource ColorGameM}" />
+	<SolidColorBrush x:Key="BrushGameN" Color="{StaticResource ColorGameN}" />
 
 	<SolidColorBrush x:Key="BrushLightGray" Color="{StaticResource ColorLightGray}" />
 	<SolidColorBrush x:Key="BrushDarkGray" Color="{StaticResource ColorDarkGray}" />
