@@ -8,7 +8,7 @@ using ClickQuest.Game.Extensions.UserInterface;
 
 namespace ClickQuest.Game.Core.Items
 {
-	public class Artifact : Item, IMeltable
+	public class Artifact : Item
 	{
 		[JsonIgnore]
 		public ArtifactFunctionality ArtifactFunctionality { get; set; }
@@ -17,7 +17,10 @@ namespace ClickQuest.Game.Core.Items
 		public string ExtraInfo { get; set; }
 		public ArtifactType ArtifactType { get; set; }
 		public string MythicTag { get; set; }
+		public const double MeltingIngredientsRatio = 0.6;
+		public const double CraftingRatio = 20;
 
+		[JsonIgnore]
 		public int BaseIngotBonus
 		{
 			get

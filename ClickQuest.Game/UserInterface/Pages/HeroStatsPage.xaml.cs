@@ -315,7 +315,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
                     case SpecializationType.Melting:
                         nameText = "Melter";
-                        buffText = " → Extra ingot +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%";
+                        buffText = " → Extra ingots +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%";
                         break;
 
                     case SpecializationType.Questing:

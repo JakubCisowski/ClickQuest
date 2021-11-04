@@ -103,7 +103,18 @@
 						<ListView.View>
 							<GridView>
 								<!-- Name column-->
-								<GridViewColumn Header="Name" Width="250" DisplayMemberBinding="{Binding Name}">
+								<GridViewColumn Header="Name" Width="190" DisplayMemberBinding="{Binding Name}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False" />
+											<Setter Property="HorizontalContentAlignment" Value="Center" />
+											<Setter Property="Padding" Value="1,5,1,5" />
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
+
+								<!-- Rarity column-->
+								<GridViewColumn Header="Rarity" Width="80" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -114,7 +125,7 @@
 								</GridViewColumn>
 
 								<!-- Quantity column-->
-								<GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Quantity}">
+								<GridViewColumn Header="Quantity" Width="70" DisplayMemberBinding="{Binding Quantity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -125,7 +136,7 @@
 								</GridViewColumn>
 
 								<!-- Value column-->
-								<GridViewColumn Header="Value" Width="100" DisplayMemberBinding="{Binding Value}">
+								<GridViewColumn Header="Value" Width="70" DisplayMemberBinding="{Binding Value}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -200,7 +211,18 @@
 						<ListView.View>
 							<GridView>
 								<!-- Name column-->
-								<GridViewColumn Header="Name" Width="250" DisplayMemberBinding="{Binding Name}">
+								<GridViewColumn Header="Name" Width="190" DisplayMemberBinding="{Binding Name}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False" />
+											<Setter Property="HorizontalContentAlignment" Value="Center" />
+											<Setter Property="Padding" Value="1,5,1,5" />
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
+
+								<!-- Rarity column-->
+								<GridViewColumn Header="Rarity" Width="80" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -211,7 +233,7 @@
 								</GridViewColumn>
 
 								<!-- Quantity column-->
-								<GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Quantity}">
+								<GridViewColumn Header="Quantity" Width="70" DisplayMemberBinding="{Binding Quantity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -222,7 +244,7 @@
 								</GridViewColumn>
 
 								<!-- Value column-->
-								<GridViewColumn Header="Value" Width="100" DisplayMemberBinding="{Binding Value}">
+								<GridViewColumn Header="Value" Width="70" DisplayMemberBinding="{Binding Value}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -296,7 +318,18 @@
 						<ListView.View>
 							<GridView>
 								<!-- Name column -->
-								<GridViewColumn Header="Name" Width="350" DisplayMemberBinding="{Binding Name}">
+								<GridViewColumn Header="Name" Width="250" DisplayMemberBinding="{Binding Name}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False" />
+											<Setter Property="HorizontalContentAlignment" Value="Center" />
+											<Setter Property="Padding" Value="1,5,1,5" />
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
+
+								<!-- Rarity column-->
+								<GridViewColumn Header="Rarity" Width="80" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -307,7 +340,7 @@
 								</GridViewColumn>
 
 								<!-- Value column -->
-								<GridViewColumn Header="Value" Width="100" DisplayMemberBinding="{Binding Value}">
+								<GridViewColumn Header="Value" Width="70" DisplayMemberBinding="{Binding Value}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />

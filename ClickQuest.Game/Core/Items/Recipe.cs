@@ -15,15 +15,6 @@ namespace ClickQuest.Game.Core.Items
 
 		public string RequirementsDescription { get; private set; }
 
-		[JsonIgnore]
-		public int IngotsRequired
-		{
-			get
-			{
-				return (int) (Rarity + 1) * 1000;
-			}
-		}
-
 		public int ArtifactId { get; set; }
 
 		[JsonIgnore]
@@ -39,12 +30,12 @@ namespace ClickQuest.Game.Core.Items
 		{
 			IngredientPatterns = GameAssets.Recipes.FirstOrDefault(x => x.Id == Id)?.IngredientPatterns;
 
-			RequirementsDescription = "Materials required: ";
+			RequirementsDescription = "Materials required:\n";
 
 			foreach (var ingredient in IngredientPatterns)
 			{
 				var relatedMaterial = ingredient.RelatedMaterial;
-				RequirementsDescription += relatedMaterial.Name + ": " + relatedMaterial.Value + "; ";
+				RequirementsDescription += $"- {ingredient.Quantity}x {relatedMaterial.Name}\n";
 			}
 		}
 

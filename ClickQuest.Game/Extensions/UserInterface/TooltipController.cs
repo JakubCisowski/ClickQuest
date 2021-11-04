@@ -75,6 +75,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run($"{recipe.Description}"));
 					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run($"{recipe.RequirementsDescription}"));
 				}
 					break;
@@ -169,11 +170,11 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 				case SpecializationType.Melting:
 				{
-					toolTipBlock.Inlines.Add(new Run("Increases % chance to get bonus ingots when melting (base chance is 0%)"));
+					toolTipBlock.Inlines.Add(new Run($"Increases % chance to get a bonus {Material.BaseMeltingIngotBonus} ingots when melting materials (base chance is 0%)"));
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run("You can master Melter by melting materials in Blacksmith"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run("Each 100% guarantees additional ingot"));
+					toolTipBlock.Inlines.Add(new Run($"Each 100% guarantees additional {Material.BaseMeltingIngotBonus} ingots"));
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run("Next upgrade (+5% chance) in"));
 					toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));

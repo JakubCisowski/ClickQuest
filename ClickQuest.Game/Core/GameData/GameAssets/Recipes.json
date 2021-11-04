@@ -1,5 +1,6 @@
 [
   {
+    "Description": null,
     "ArtifactId": 16,
     "IngredientPatterns": [
       {
@@ -38,10 +39,10 @@
     "Id": 1,
     "Name": "Recipe: Rakshasa\u0027s Necklace",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 17,
     "IngredientPatterns": [
       {
@@ -72,10 +73,10 @@
     "Id": 2,
     "Name": "Recipe: Scepter of Eternal Flame",
     "Value": 1,
-    "Rarity": "Mythic",
-    "Description": null
+    "Rarity": "Mythic"
   },
   {
+    "Description": null,
     "ArtifactId": 13,
     "IngredientPatterns": [
       {
@@ -102,10 +103,10 @@
     "Id": 3,
     "Name": "Recipe: Cholla Spine Infusion",
     "Value": 1,
-    "Rarity": "Mythic",
-    "Description": null
+    "Rarity": "Mythic"
   },
   {
+    "Description": null,
     "ArtifactId": 39,
     "IngredientPatterns": [
       {
@@ -116,10 +117,10 @@
     "Id": 4,
     "Name": "Recipe: Vial of Plague",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 38,
     "IngredientPatterns": [
       {
@@ -130,10 +131,10 @@
     "Id": 5,
     "Name": "Recipe: Gold-Tipped Spear",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 19,
     "IngredientPatterns": [
       {
@@ -144,10 +145,10 @@
     "Id": 6,
     "Name": "Recipe: Twin Kamas",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 12,
     "IngredientPatterns": [
       {
@@ -158,10 +159,10 @@
     "Id": 7,
     "Name": "Recipe: Bloodstone Staff",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 12,
     "IngredientPatterns": [
       {
@@ -172,10 +173,10 @@
     "Id": 8,
     "Name": "Recipe: Skullbasher",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 12,
     "IngredientPatterns": [
       {
@@ -186,10 +187,10 @@
     "Id": 9,
     "Name": "Recipe: Meat Cleaver",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 12,
     "IngredientPatterns": [
       {
@@ -200,10 +201,10 @@
     "Id": 10,
     "Name": "Recipe: Ghostly Infusion",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 12,
     "IngredientPatterns": [
       {
@@ -214,10 +215,10 @@
     "Id": 11,
     "Name": "Recipe: Silver Greatsword",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 12,
     "IngredientPatterns": [
       {
@@ -228,10 +229,10 @@
     "Id": 12,
     "Name": "Recipe: Large Scythe",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 12,
     "IngredientPatterns": [
       {
@@ -242,10 +243,10 @@
     "Id": 13,
     "Name": "Recipe: Death-Infused Bone Talisman",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 12,
     "IngredientPatterns": [
       {
@@ -256,10 +257,10 @@
     "Id": 14,
     "Name": "Recipe: Dull Sword",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "General"
   },
   {
+    "Description": null,
     "ArtifactId": 12,
     "IngredientPatterns": [
       {
@@ -270,10 +271,10 @@
     "Id": 15,
     "Name": "Recipe: Dull Knife",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 12,
     "IngredientPatterns": [
       {
@@ -284,10 +285,10 @@
     "Id": 16,
     "Name": "Recipe: Poisoned Sword",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 12,
     "IngredientPatterns": [
       {
@@ -298,10 +299,10 @@
     "Id": 17,
     "Name": "Recipe: Necronomicon",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
+    "Description": null,
     "ArtifactId": 12,
     "IngredientPatterns": [
       {
@@ -312,7 +313,15 @@
     "Id": 18,
     "Name": "Recipe: Toxic Amulet",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
+  },
+  {
+    "Description": null,
+    "ArtifactId": 2,
+    "IngredientPatterns": [],
+    "Id": 19,
+    "Name": "Recipe: XD",
+    "Value": 0,
+    "Rarity": "General"
   }
 ]

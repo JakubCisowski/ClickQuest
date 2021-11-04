@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,41 +36,75 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			var b = sender as Button;
 
-			var result = AlertBox.Show($"Are you sure you want to melt {(b.CommandParameter as Item).Name}?\nThis action will destroy this item and create at least X {(b.CommandParameter as Item).Rarity} ingots.\nYou can get bonus ingots if you master Melter specialization (by melting more items).");
-
-			if (result == MessageBoxResult.Cancel)
-			{
-				return;
-			}
-
 			if (b.CommandParameter is Material material)
 			{
-				MeltItem(material);
+				var result = AlertBox.Show($"Are you sure you want to melt {material.Name}?\nThis action will destroy this item and create at least {Material.BaseMeltingIngotBonus} {material.Rarity} ingots.\nYou can get bonus ingots if you master Melter specialization (by melting more materials).");
+
+				if (result == MessageBoxResult.Cancel)
+				{
+					return;
+				}
+				
+				MeltMaterial(material);
+
+				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Melting]++;
 			}
 			else if (b.CommandParameter is Artifact artifact)
 			{
-				MeltItem(artifact);
+				string ingotAmountsDescription = "";
+				var ingotAmounts = CalculateIngotAmountsWhenMeltingArtifact(artifact);
+
+				for (int i=0;i<6;i++)
+				{
+					if (ingotAmounts[i] == 0)
+					{
+						continue;
+					}
+					
+					ingotAmountsDescription += $"- {ingotAmounts[i]}x {(Rarity)i} Ingots \n";
+				}
+
+				var result = AlertBox.Show($"Are you sure you want to melt {artifact.Name}?\nThis action will destroy this item and create: \n {ingotAmountsDescription}\n");
+
+				if (result == MessageBoxResult.Cancel)
+				{
+					return;
+				}
+
+				MeltArtifact(artifact);
 			}
 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 			UpdateBlacksmithItems();
-
-			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Melting]++;
 		}
 
-		public void MeltItem<T>(T meltedItem) where T : Item, IMeltable
+		public void MeltMaterial(Material meltedMaterial)
 		{
-			meltedItem.RemoveItem();
+			meltedMaterial.RemoveItem();
 
-			int ingotAmount = CalculateIngotAmount(meltedItem.BaseIngotBonus);
+			int ingotAmount = CalculateIngotAmounstWhenMeltingMaterial(Material.BaseMeltingIngotBonus);
 
-			var ingot = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == meltedItem.Rarity);
+			var ingot = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == meltedMaterial.Rarity);
 			ingot.Quantity += ingotAmount;
 
 			ingot.AddAchievementProgress(ingotAmount);
 		}
 
-		private int CalculateIngotAmount(int baseIngotBonus)
+		public void MeltArtifact(Artifact meltedArtifact)
+		{
+			meltedArtifact.RemoveItem();
+
+			var ingotAmounts = CalculateIngotAmountsWhenMeltingArtifact(meltedArtifact);
+
+			for (int i=0;i<6;i++)
+			{
+				var ingot = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == (Rarity)i);
+				ingot.Quantity += ingotAmounts[i];
+				ingot.AddAchievementProgress(ingotAmounts[i]);
+			}
+		}
+
+		private int CalculateIngotAmounstWhenMeltingMaterial(int baseIngotBonus)
 		{
 			int ingotAmount = baseIngotBonus;
 			int meltingBuffPercent = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting];
@@ -91,6 +126,22 @@ namespace ClickQuest.Game.UserInterface.Pages
 			return ingotAmount;
 		}
 
+		private List<int> CalculateIngotAmountsWhenMeltingArtifact(Artifact meltedArtifact)
+		{
+			var ingotAmounts = new List<int>();
+
+			var artifactRecipe = GameAssets.Recipes.FirstOrDefault(x=>x.ArtifactId==meltedArtifact.Id);
+
+			for (int i = 0; i < 6; i++)
+			{
+				var materialsOfRarity = artifactRecipe.IngredientPatterns.Where(x=>x.RelatedMaterial.Rarity == (Rarity)i);
+				var totalMaterialQuantity = materialsOfRarity.Sum(x => x.Quantity);
+				ingotAmounts.Add((int)(totalMaterialQuantity * Material.BaseMeltingIngotBonus * Artifact.MeltingIngredientsRatio));
+			}
+
+			return ingotAmounts;
+		}
+
 		private void CraftMaterialButton_Click(object sender, RoutedEventArgs e)
 		{
 			var b = sender as Button;
@@ -107,72 +158,125 @@ namespace ClickQuest.Game.UserInterface.Pages
 				return;
 			}
 
+			bool enoughIngredients = false;
+
 			if (typeof(T) == typeof(Material))
 			{
-				CheckAndRemoveMaterials(recipe);
+				enoughIngredients = CheckAndRemoveMaterials(recipe);
 			}
 			else
 			{
-				CheckAndRemoveIngots(recipe);
+				enoughIngredients = CheckAndRemoveIngots(recipe);
 			}
 
-			recipe.Artifact.CreateMythicTag();
+			if (enoughIngredients)
+			{
+				recipe.Artifact.CreateMythicTag();
 
-			recipe.Artifact.AddItem();
-			recipe.RemoveItem();
+				recipe.Artifact.AddItem();
+				recipe.RemoveItem();
 
-			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting]++;
+				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting]++;
 
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
-			;
-			UpdateBlacksmithItems();
+				InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
+				
+				UpdateBlacksmithItems();
+			}
 		}
 
-		private void CheckAndRemoveIngots(Recipe recipe)
+		private bool CheckAndRemoveIngots(Recipe recipe)
 		{
-			if (!CheckIfUserHasEnoughIngots(recipe))
+			string ingotAmountsDescription = "";
+			var ingotAmounts = CalculateIngotAmountsWhenCraftingArtifact(recipe.Artifact);
+
+			for (int i=0;i<6;i++)
 			{
-				AlertBox.Show($"You dont have {recipe.IngotsRequired} {recipe.RarityString} ingots to craft {recipe.Name}.\nGet more ingots by melting materials/artifacts or try to craft this artifact using materials.", MessageBoxButton.OK);
-				return;
+				if (ingotAmounts[i] == 0)
+				{
+					continue;
+				}
+				
+				ingotAmountsDescription += $"- {ingotAmounts[i]}x {(Rarity)i} Ingots \n";
 			}
 
-			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using ingots?\nIngots needed: {recipe.IngotsRequired} {recipe.RarityString} ingots.\nThis action will destroy all ingots and this recipe.");
+
+			if (!CheckIfUserHasEnoughIngots(recipe))
+			{
+				AlertBox.Show($"You dont have enough ingots to craft {recipe.Name}.\nIngots required:\n{ingotAmountsDescription}\n\nGet more ingots by melting materials/artifacts or try to craft this artifact using materials.", MessageBoxButton.OK);
+				return false;
+			}
+
+			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using ingots?\nIngots needed:\n{ingotAmountsDescription}\n\nThis action will destroy all ingots and this recipe.");
 
 			if (result == MessageBoxResult.Cancel)
 			{
-				return;
+				return false;
 			}
 
-			RemoveIngots(recipe);
+			RemoveIngotsWhenCrafting(recipe);
+			return true;
 		}
 
-		private void RemoveIngots(Recipe recipe)
+		private void RemoveIngotsWhenCrafting(Recipe recipe)
 		{
-			User.Instance.Ingots.FirstOrDefault(x => x.Rarity == recipe.Rarity).Quantity -= recipe.IngotsRequired;
+			var ingotsAmount = CalculateIngotAmountsWhenCraftingArtifact(recipe.Artifact);
+
+			for (int i=0;i<6;i++)
+			{
+				User.Instance.Ingots.FirstOrDefault(x => x.Rarity == (Rarity)i).Quantity -= ingotsAmount[i];
+			}
 		}
 
 		private bool CheckIfUserHasEnoughIngots(Recipe recipe)
 		{
-			var ingotRarityNeeded = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == recipe.Rarity);
-			return recipe.IngotsRequired <= ingotRarityNeeded.Quantity;
+			var ingotsAmount = CalculateIngotAmountsWhenCraftingArtifact(recipe.Artifact);
+
+			for (int i=0;i<6;i++)
+			{
+				bool userHasEnoughIngots = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == (Rarity)i).Quantity >= ingotsAmount[i];
+
+				if(!userHasEnoughIngots)
+				{
+					return false;
+				}
+			}
+
+			return true;
 		}
 
-		private void CheckAndRemoveMaterials(Recipe recipe)
+		private List<int> CalculateIngotAmountsWhenCraftingArtifact(Artifact craftedArtifact)
+		{
+			var ingotAmounts = new List<int>();
+
+			var artifactRecipe = GameAssets.Recipes.FirstOrDefault(x=>x.ArtifactId==craftedArtifact.Id);
+
+			for (int i = 0; i < 6; i++)
+			{
+				var materialsOfRarity = artifactRecipe.IngredientPatterns.Where(x=>x.RelatedMaterial.Rarity == (Rarity)i);
+				var totalMaterialQuantity = materialsOfRarity.Sum(x => x.Quantity);
+				ingotAmounts.Add((int)(totalMaterialQuantity * Material.BaseMeltingIngotBonus * Artifact.CraftingRatio));
+			}
+
+			return ingotAmounts;
+		}
+
+		private bool CheckAndRemoveMaterials(Recipe recipe)
 		{
 			if (!CheckIfHeroHasEnoughMaterials(recipe))
 			{
 				AlertBox.Show($"You don't have enough materials to craft {recipe.Name}.\n{recipe.RequirementsDescription}\nGet more materials by completing quests and killing monsters and boses or try to craft this artifact using ingots.", MessageBoxButton.OK);
-				return;
+				return false;
 			}
 
 			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using materials?\n{recipe.RequirementsDescription}\nThis action will destroy all materials and this recipe.");
 
 			if (result == MessageBoxResult.Cancel)
 			{
-				return;
+				return false;
 			}
 
 			RemoveMaterials(recipe);
+			return true;
 		}
 
 		private void RemoveMaterials(Recipe recipe)

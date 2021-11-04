@@ -62,7 +62,7 @@
 				<TabItem Background="{StaticResource BrushGameK}">
 					<!-- Header melt -->
 					<TabItem.Header>
-						<StackPanel Orientation="Horizontal" Width="133" HorizontalAlignment="Center">
+						<StackPanel Orientation="Horizontal" Width="135" HorizontalAlignment="Center">
 							<materialDesign:PackIcon Kind="Cog" Width="20" Height="20" Margin="5,0,0,0" />
 							<TextBlock Text="Melt Materials" FontSize="17" Margin="2,0,0,0" />
 						</StackPanel>
@@ -113,8 +113,19 @@
 									</GridViewColumn.HeaderContainerStyle>
 								</GridViewColumn>
 
+								<!-- Rarity column-->
+								<GridViewColumn Header="Rarity" Width="80" DisplayMemberBinding="{Binding Rarity}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False" />
+											<Setter Property="HorizontalContentAlignment" Value="Center" />
+											<Setter Property="Padding" Value="1,5,1,5" />
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
+
 								<!-- Quantity column-->
-								<GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Quantity}">
+								<GridViewColumn Header="Quantity" Width="70" DisplayMemberBinding="{Binding Quantity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -125,7 +136,7 @@
 								</GridViewColumn>
 
 								<!-- Value column-->
-								<GridViewColumn Header="Value" Width="100" DisplayMemberBinding="{Binding Value}">
+								<GridViewColumn Header="Value" Width="70" DisplayMemberBinding="{Binding Value}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -161,7 +172,7 @@
 				<TabItem Background="{StaticResource BrushGameK}">
 					<!-- Header melt artifacts -->
 					<TabItem.Header>
-						<StackPanel Orientation="Horizontal" Width="133" HorizontalAlignment="Center">
+						<StackPanel Orientation="Horizontal" Width="135" HorizontalAlignment="Center">
 							<materialDesign:PackIcon Kind="DiamondStone" Width="20" Height="20" Margin="5,0,0,0" />
 							<TextBlock Text="Melt Artifacts" FontSize="17" Margin="2,0,0,0" />
 						</StackPanel>
@@ -210,8 +221,19 @@
 									</GridViewColumn.HeaderContainerStyle>
 								</GridViewColumn>
 
+								<!-- Rarity column-->
+								<GridViewColumn Header="Rarity" Width="80" DisplayMemberBinding="{Binding Rarity}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False" />
+											<Setter Property="HorizontalContentAlignment" Value="Center" />
+											<Setter Property="Padding" Value="1,5,1,5" />
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
+
 								<!-- Quantity column-->
-								<GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Quantity}">
+								<GridViewColumn Header="Quantity" Width="70" DisplayMemberBinding="{Binding Quantity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -222,7 +244,7 @@
 								</GridViewColumn>
 
 								<!-- Value column-->
-								<GridViewColumn Header="Value" Width="100" DisplayMemberBinding="{Binding Value}">
+								<GridViewColumn Header="Value" Width="70" DisplayMemberBinding="{Binding Value}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />
@@ -258,7 +280,7 @@
 				<TabItem Background="{StaticResource BrushGameK}">
 					<!-- Header craft -->
 					<TabItem.Header>
-						<StackPanel Orientation="Horizontal" Width="133" HorizontalAlignment="Center">
+						<StackPanel Orientation="Horizontal" Width="135" HorizontalAlignment="Center">
 							<materialDesign:PackIcon Kind="Anvil" Width="20" Height="20" Margin="5,0,0,0" />
 							<TextBlock Text="Craft Artifacts" FontSize="17" Margin="2,0,0,0" />
 						</StackPanel>
@@ -298,6 +320,17 @@
 							<GridView>
 								<!-- Name column-->
 								<GridViewColumn Header="Name" Width="270" DisplayMemberBinding="{Binding Name}">
+									<GridViewColumn.HeaderContainerStyle>
+										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+											<Setter Property="IsHitTestVisible" Value="False" />
+											<Setter Property="HorizontalContentAlignment" Value="Center" />
+											<Setter Property="Padding" Value="1,5,1,5" />
+										</Style>
+									</GridViewColumn.HeaderContainerStyle>
+								</GridViewColumn>
+
+								<!-- Rarity column-->
+								<GridViewColumn Header="Rarity" Width="140" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
 											<Setter Property="IsHitTestVisible" Value="False" />

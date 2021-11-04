@@ -6,16 +6,9 @@ using ClickQuest.Game.Extensions.UserInterface;
 
 namespace ClickQuest.Game.Core.Items
 {
-	public class Material : Item, IMeltable
+	public class Material : Item
 	{
-		[JsonIgnore]
-		public int BaseIngotBonus
-		{
-			get
-			{
-				return 1;
-			}
-		}
+		public const int BaseMeltingIngotBonus = 10;
 
 		public override Material CopyItem(int quantity)
 		{
