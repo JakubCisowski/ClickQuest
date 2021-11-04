@@ -9,6 +9,7 @@ using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Pages;
+using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 
 namespace ClickQuest.Game.Core.Enemies
 {
@@ -83,23 +84,41 @@ namespace ClickQuest.Game.Core.Enemies
 			int experienceGained = Experience.CalculateMonsterXpReward(Health);
 			User.Instance.CurrentHero.GainExperience(experienceGained);
 
-			var frequencyList = MonsterLootPatterns.Select(x => x.Frequency).ToList();
-			int position = CollectionsController.RandomizeFreqenciesListPosition(frequencyList);
-			var selectedLoot = MonsterLootPatterns[position].Item;
+			var selectedLoot = RandomizeMonsterLoot();
 
-			if (selectedLoot.Id != 0)
+			if (selectedLoot != null)
 			{
 				(selectedLoot as Artifact)?.CreateMythicTag(Name);
 				selectedLoot.AddItem();
 			}
 
 			// [PRERELEASE] Display exp and loot for testing purposes.
-			(GameAssets.CurrentPage as RegionPage).TestRewardsBlock.Text = "Loot: " + selectedLoot.Name + ", Base Exp: " + experienceGained;
+			(GameAssets.CurrentPage as RegionPage).TestRewardsBlock.Text = "Loot: " + selectedLoot?.Name + ", Base Exp: " + experienceGained;
 
 			CheckForDungeonKeyDrop();
 
 			(GameAssets.CurrentPage as RegionPage).StatsFrame.Refresh();
 			CombatTimerController.UpdateAuraAttackSpeed();
+		}
+
+		public Item RandomizeMonsterLoot()
+		{
+			var frequencyList = MonsterLootPatterns.Select(x => x.Frequency).ToList();
+			double randomizedValue = RNG.Next(1, 10001) / 10000d;
+
+			int i = 0;
+
+			while (i < frequencyList.Count)
+			{
+				if (randomizedValue < frequencyList[i])
+				{
+					return MonsterLootPatterns[i].Item;
+				}
+				randomizedValue -= frequencyList[i];
+				i++;
+			}
+
+			return null;
 		}
 	}
 }

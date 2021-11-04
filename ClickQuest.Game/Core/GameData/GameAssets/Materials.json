@@ -1,12 +1,5 @@
 [
   {
-    "Id": 0,
-    "Name": "Empty loot",
-    "Value": 1,
-    "Rarity": "General",
-    "Description": "This text shouldn\u0027t be visible."
-  },
-  {
     "Id": 1,
     "Name": "Strand of Rakshasa\u0027s Hair",
     "Value": 2,

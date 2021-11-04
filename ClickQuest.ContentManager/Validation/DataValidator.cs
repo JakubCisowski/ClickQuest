@@ -64,17 +64,28 @@ namespace ClickQuest.ContentManager.Validation
 
 		private static void CheckAllFrequenciesCorrectness()
 		{
-			GameContent.Monsters.ForEach(x => CheckFrequencySum(x.Name, x.MonsterLootPatterns.Select(y => y.Frequency)));
-			GameContent.Regions.ForEach(x => CheckFrequencySum(x.Name, x.MonsterSpawnPatterns.Select(y => y.Frequency)));
+			GameContent.Monsters.ForEach(x => CheckFrequencySumLesserThanOne(x.Name, x.MonsterLootPatterns.Select(y => y.Frequency)));
+			GameContent.Regions.ForEach(x => CheckFrequencySumEqualToOne(x.Name, x.MonsterSpawnPatterns.Select(y => y.Frequency)));
 			GameContent.Bosses.ForEach(x => x.BossLootPatterns.ForEach(y => CheckIfFrequenciesAreValid(x.Name, y.Frequencies)));
 		}
 
-		private static void CheckFrequencySum(string objectName, IEnumerable<double> frequencies)
+		private static void CheckFrequencySumEqualToOne(string objectName, IEnumerable<double> frequencies)
 		{
 			double frequenciesSum = frequencies.Sum();
 			if (frequenciesSum <= 0.9999 || frequenciesSum >= 1.0001) // <== cringe	
 			{
 				string message = $"'{objectName}' frequencies do not add up to 1";
+				Logger.Log(message);
+			}
+		}
+
+		private static void CheckFrequencySumLesserThanOne(string objectName, IEnumerable<double> frequencies)
+		{
+			double frequenciesSum = frequencies.Sum();
+
+			if (frequenciesSum >= 1.0001)
+			{
+				string message = $"'{objectName}' frequencies is greater than 1";
 				Logger.Log(message);
 			}
 		}

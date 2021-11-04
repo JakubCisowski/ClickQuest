@@ -150,6 +150,11 @@
         "MonsterLootType": "Material",
         "MonsterLootId": 3,
         "Frequency": 0.89
+      },
+      {
+        "MonsterLootType": "Material",
+        "MonsterLootId": 5,
+        "Frequency": 0.5
       }
     ]
   },
