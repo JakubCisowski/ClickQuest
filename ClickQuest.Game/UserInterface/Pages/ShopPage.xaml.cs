@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -13,6 +14,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 {
 	public partial class ShopPage : Page
 	{
+		public const double SellingRatio = 0.65;
+
 		public ShopPage()
 		{
 			InitializeComponent();
@@ -57,10 +60,34 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var b = sender as Button;
 			var item = b.CommandParameter as Item;
 
+			int itemSellValue = 0;
+
+			if (item.Rarity == Rarity.Mythic)
+			{
+				var result = AlertBox.Show($"Are you sure you want to sell {item.Name}?");
+
+				if (result == MessageBoxResult.Cancel)
+				{
+					return;
+				}
+			}
+
+			if (item is Material)
+			{
+				// The selling ratio is only applied for materials.
+				itemSellValue = (int)Math.Ceiling(item.Value * (SellingRatio + Specialization.SpecBuyingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Buying]));
+				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Buying]++;
+			}
+			else
+			{
+				itemSellValue = item.Value;
+			}
+
 			item.RemoveItem();
-			User.Instance.Gold += item.Value;
+			User.Instance.Gold += itemSellValue;
 
 			(GameAssets.Pages["Shop"] as ShopPage).EquipmentFrame.Refresh();
+			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 			UpdateShop();
 		}
 

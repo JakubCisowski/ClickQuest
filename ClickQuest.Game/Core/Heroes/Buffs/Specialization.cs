@@ -12,9 +12,12 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
+		// Base SellRatio value per point of SpecBuying Buff.
+		public const double SpecBuyingRatioIncreasePerBuffValue = 0.01;
+
 		// Base values for each buff.
 		private const int SpecCraftingBuffBase = 1;
-		private const int SpecBuyingBuffBase = 50;
+		private const int SpecBuyingBuffBase = 5;
 		private const int SpecDungeonBuffBase = 30;
 
 		// Value limits for each buff.
@@ -67,7 +70,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 			SpecializationThresholds[SpecializationType.Blessing] = 10; // Amount increases every time a Blessing is bought.
 			SpecializationThresholds[SpecializationType.Clicking] = 1000; // Amount increases every time user clicks on monster or boss.
 			SpecializationThresholds[SpecializationType.Crafting] = 10; // Amount increases every time an artifact is crafted using recipe.
-			SpecializationThresholds[SpecializationType.Buying] = 10; // Amount increases every time a Recipe is bought.
+			SpecializationThresholds[SpecializationType.Buying] = 10; // Amount increases every time a Recipe is bought or Material is sold.
 			SpecializationThresholds[SpecializationType.Melting] = 10; // Amount increases every time a material is melted.
 			SpecializationThresholds[SpecializationType.Questing] = 10; // Amount increases every time a quest is completed.
 			SpecializationThresholds[SpecializationType.Dungeon] = 10; // Amount increases every time a dungeon is finished.
