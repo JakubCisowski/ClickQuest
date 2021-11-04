@@ -58,7 +58,8 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			{
 				Name = "NameBox",
 				Text = selectedRecipe.Name,
-				Margin = new Thickness(10)
+				Margin = new Thickness(10),
+				IsEnabled = false
 			};
 			var valueBox = new TextBox
 			{
@@ -87,6 +88,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Margin = new Thickness(10)
 			};
 			artifactNameBox.SelectedValue = GameContent.Artifacts.FirstOrDefault(x => x.Id == selectedRecipe.ArtifactId)?.Name;
+			nameBox.Text = "Recipe: " + GameContent.Artifacts.FirstOrDefault(x => x.Id == selectedRecipe.ArtifactId)?.Name;
 			artifactNameBox.SelectionChanged += ArtifactNameBox_SelectionChanged;
 
 			// Set TextBox and ComboBox hints.
@@ -135,6 +137,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		private void ArtifactNameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			(_controls["ArtifactIDBox"] as TextBox).Text = GameContent.Artifacts.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Id.ToString();
+			(_controls["NameBox"] as TextBox).Text = "Recipe: " + GameContent.Artifacts.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Name;
 		}
 
 		private void TextBox_GotFocus(object sender, RoutedEventArgs e)
