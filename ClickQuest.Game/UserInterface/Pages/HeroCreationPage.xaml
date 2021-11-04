@@ -166,7 +166,7 @@
 											<Setter.Value>
 												<ToolTip>
 													<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-														<Run Text="Human race specializes in buying and crafting" />
+														<Run Text="Human race specializes in trading and crafting" />
 														<LineBreak />
 														<LineBreak />
 														<Run Text="Tradesman specialization threshold: 5 (instead of 10)" />

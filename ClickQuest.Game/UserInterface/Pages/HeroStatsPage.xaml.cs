@@ -308,9 +308,9 @@ namespace ClickQuest.Game.UserInterface.Pages
                         buffText = " → Can craft " + User.Instance.CurrentHero.Specialization.SpecCraftingText + " recipes";
                         break;
 
-                    case SpecializationType.Buying:
+                    case SpecializationType.Trading:
                         nameText = "Tradesman";
-                        buffText = " → Shop offer size +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Buying];
+                        buffText = " → Shop offer size +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading];
                         break;
 
                     case SpecializationType.Melting:
@@ -396,7 +396,7 @@ namespace ClickQuest.Game.UserInterface.Pages
             switch (User.Instance.CurrentHero?.HeroRace)
             {
                 case HeroRace.Human:
-                    block.Inlines.Add(new Run("Human race specializes in buying and crafting"));
+                    block.Inlines.Add(new Run("Human race specializes in trading and crafting"));
                     block.Inlines.Add(new LineBreak());
                     block.Inlines.Add(new Run("Tradesman specialization threshold: 5 (instead of 10)"));
                     block.Inlines.Add(new LineBreak());

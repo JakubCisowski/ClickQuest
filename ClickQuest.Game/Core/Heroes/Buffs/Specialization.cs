@@ -6,32 +6,32 @@ using ClickQuest.Game.Extensions.Collections;
 
 namespace ClickQuest.Game.Core.Heroes.Buffs
 {
-	public enum SpecializationType { Blessing, Clicking, Crafting, Buying, Melting, Questing, Dungeon }
+	public enum SpecializationType { Blessing, Clicking, Crafting, Trading, Melting, Questing, Dungeon }
 
 	public class Specialization : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		// Base SellRatio value per point of SpecBuying Buff.
-		public const double SpecBuyingRatioIncreasePerBuffValue = 0.01;
+		// Base SellRatio value per point of SpecTrading Buff.
+		public const double SpecTradingRatioIncreasePerBuffValue = 0.01;
 
 		// Base values for each buff.
-		private const int SpecCraftingBuffBase = 1;
-		private const int SpecBuyingBuffBase = 5;
-		private const int SpecDungeonBuffBase = 30;
+		public const int SpecCraftingBuffBase = 1;
+		public const int SpecTradingBuffBase = 5;
+		public const int SpecDungeonBuffBase = 30;
 
 		// Value limits for each buff.
-		private const int SpecCraftingBuffLimit = 5;
-		private const int SpecQuestingBuffLimit = 50;
+		public const int SpecCraftingBuffLimit = 5;
+		public const int SpecQuestingBuffLimit = 50;
 
 		// Const buff value for reaching every threshold.
-		private const int SpecBlessingBuffBonus = 15; // Increases blessings duration in seconds. <Base - 0>
-		private const int SpecClickingBuffBonus = 1; // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
-		private const int SpecCraftingBuffBonus = 1; // Increases crafting rarity limit. <Base - 1> <Limit - 5>
-		private const int SpecBuyingBuffBonus = 1; // Increases shop offer size. <Base - 5>
-		private const int SpecMeltingBuffBonus = 5; // Increases % chance to get additional ingots when melting. <Base - 0%>
-		private const int SpecQuestingBuffBonus = 5; // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
-		private const int SpecDungeonBuffBonus = 1; // Increases amount of time to defeat dungeon boss in seconds <Base - 30s>
+		public const int SpecBlessingBuffBonus = 15; // Increases blessings duration in seconds. <Base - 0>
+		public const int SpecClickingBuffBonus = 1; // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
+		public const int SpecCraftingBuffBonus = 1; // Increases crafting rarity limit. <Base - 1> <Limit - 5>
+		public const int SpecTradingBuffBonus = 1; // Increases shop offer size and material selling ratio by 1% <Base - 5>
+		public const int SpecMeltingBuffBonus = 5; // Increases % chance to get additional ingots when melting. <Base - 0%>
+		public const int SpecQuestingBuffBonus = 5; // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
+		public const int SpecDungeonBuffBonus = 1; // Increases amount of time to defeat dungeon boss in seconds <Base - 30s>
 
 		public ObservableDictionary<SpecializationType, int> SpecializationBuffs { get; set; }
 
@@ -70,7 +70,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 			SpecializationThresholds[SpecializationType.Blessing] = 10; // Amount increases every time a Blessing is bought.
 			SpecializationThresholds[SpecializationType.Clicking] = 1000; // Amount increases every time user clicks on monster or boss.
 			SpecializationThresholds[SpecializationType.Crafting] = 10; // Amount increases every time an artifact is crafted using recipe.
-			SpecializationThresholds[SpecializationType.Buying] = 10; // Amount increases every time a Recipe is bought or Material is sold.
+			SpecializationThresholds[SpecializationType.Trading] = 10; // Amount increases every time a Recipe is bought or Material is sold.
 			SpecializationThresholds[SpecializationType.Melting] = 10; // Amount increases every time a material is melted.
 			SpecializationThresholds[SpecializationType.Questing] = 10; // Amount increases every time a quest is completed.
 			SpecializationThresholds[SpecializationType.Dungeon] = 10; // Amount increases every time a dungeon is finished.
@@ -81,7 +81,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 			{
 				case HeroRace.Human:
 					SpecializationThresholds[SpecializationType.Crafting] = 5;
-					SpecializationThresholds[SpecializationType.Buying] = 5;
+					SpecializationThresholds[SpecializationType.Trading] = 5;
 
 					break;
 
@@ -109,7 +109,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 
 			SpecializationBuffs[SpecializationType.Crafting] = Math.Min(SpecCraftingBuffBase + SpecializationAmounts[SpecializationType.Crafting] / SpecializationThresholds[SpecializationType.Crafting] * SpecCraftingBuffBonus, SpecCraftingBuffLimit);
 
-			SpecializationBuffs[SpecializationType.Buying] = SpecBuyingBuffBase + SpecializationAmounts[SpecializationType.Buying] / SpecializationThresholds[SpecializationType.Buying] * SpecBuyingBuffBonus;
+			SpecializationBuffs[SpecializationType.Trading] = SpecTradingBuffBase + SpecializationAmounts[SpecializationType.Trading] / SpecializationThresholds[SpecializationType.Trading] * SpecTradingBuffBonus;
 
 			SpecializationBuffs[SpecializationType.Melting] = SpecializationAmounts[SpecializationType.Melting] / SpecializationThresholds[SpecializationType.Melting] * SpecMeltingBuffBonus;
 

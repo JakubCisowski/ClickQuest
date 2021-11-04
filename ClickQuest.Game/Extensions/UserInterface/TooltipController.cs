@@ -108,7 +108,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 		public static ToolTip GenerateSpecizaltionTooltip(SpecializationType typeOfGeneratedSpecialization, int nextUpgrade)
 		{
-			// Generate SpecBuying tooltips.
+			// Generate SpecTrading tooltips.
 			var specToolTip = new ToolTip();
 
 			var toolTipBlock = new TextBlock
@@ -124,7 +124,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run("You can master Prayer by buying blessings in Priest"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run("Next upgrade (+15s duration) in"));
+					toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecBlessingBuffBonus}s duration) in"));
 					toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
 					toolTipBlock.Inlines.Add(new Run("bought blessings"));
 				}
@@ -138,7 +138,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run("Click damage from this specialization is applied after other effects eg. crit"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run("Next upgrade (+1 click damage) in"));
+					toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecClickingBuffBonus} click damage) in"));
 					toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
 					toolTipBlock.Inlines.Add(new Run("clicks"));
 				}
@@ -146,7 +146,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 				case SpecializationType.Crafting:
 				{
-					toolTipBlock.Inlines.Add(new Run("Increases crafting rarity limit (base limit is Fine rarity)"));
+					toolTipBlock.Inlines.Add(new Run($"Increases crafting rarity limit (base limit is {(Rarity)Specialization.SpecCraftingBuffBase} rarity)"));
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run("You can master Craftsman by crafting artifacts in Blacksmith"));
 					toolTipBlock.Inlines.Add(new LineBreak());
@@ -156,15 +156,15 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				}
 					break;
 
-				case SpecializationType.Buying:
+				case SpecializationType.Trading:
 				{
-					toolTipBlock.Inlines.Add(new Run("Increases shop offer size (base size is 5)"));
+					toolTipBlock.Inlines.Add(new Run($"Increases shop offer size (base size is {Specialization.SpecTradingBuffBase}) and materials selling ratio (base bonus is {Specialization.SpecTradingBuffBase}%)"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run("You can master Tradesman by buying recipes in shop"));
+					toolTipBlock.Inlines.Add(new Run("You can master Tradesman by buying recipes or selling materials in shop"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run("Next upgrade (+1 shop offer size) in"));
+					toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecTradingBuffBonus} shop offer size and +{Specialization.SpecTradingBuffBonus}% materials selling ratio) in"));
 					toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
-					toolTipBlock.Inlines.Add(new Run("bought recipes"));
+					toolTipBlock.Inlines.Add(new Run("bought recipes or sold materials"));
 				}
 					break;
 
@@ -176,7 +176,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run($"Each 100% guarantees additional {Material.BaseMeltingIngotBonus} ingots"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run("Next upgrade (+5% chance) in"));
+					toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecMeltingBuffBonus}% chance) in"));
 					toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
 					toolTipBlock.Inlines.Add(new Run("melted materials"));
 				}
@@ -184,11 +184,11 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 				case SpecializationType.Questing:
 				{
-					toolTipBlock.Inlines.Add(new Run("Reduces % time to complete quests (limit is 50%)"));
+					toolTipBlock.Inlines.Add(new Run($"Reduces % time to complete quests (limit is {Specialization.SpecQuestingBuffLimit}%)"));
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run("You can master Adventurer by completing quests"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run("Next upgrade (+5% reduced time) in"));
+					toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecQuestingBuffBonus}% reduced time) in"));
 					toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
 					toolTipBlock.Inlines.Add(new Run("completed quests"));
 				}
@@ -196,11 +196,11 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 				case SpecializationType.Dungeon:
 				{
-					toolTipBlock.Inlines.Add(new Run("Increases amount of time to defeat boss in seconds (base time is 30s)"));
+					toolTipBlock.Inlines.Add(new Run($"Increases amount of time to defeat boss in seconds (base time is {Specialization.SpecDungeonBuffBase}s)"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run("You can master Daredevil by buying recipes in shop"));
+					toolTipBlock.Inlines.Add(new Run("You can master Daredevil by trading recipes in shop"));
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run("Next upgrade (+1 second) in"));
+					toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecDungeonBuffBonus} second) in"));
 					toolTipBlock.Inlines.Add(new Bold(new Run($" {nextUpgrade} ")));
 					toolTipBlock.Inlines.Add(new Run("finished dungeons"));
 				}

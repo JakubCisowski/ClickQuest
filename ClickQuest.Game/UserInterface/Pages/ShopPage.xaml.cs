@@ -40,7 +40,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		public List<Recipe> GetShopOfferAsRecipes()
 		{
 			var result = new List<Recipe>();
-			var listOfPatterns = GameAssets.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Buying]);
+			var listOfPatterns = GameAssets.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]);
 
 			foreach (var pattern in listOfPatterns)
 			{
@@ -75,8 +75,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 			if (item is Material)
 			{
 				// The selling ratio is only applied for materials.
-				itemSellValue = (int)Math.Ceiling(item.Value * (SellingRatio + Specialization.SpecBuyingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Buying]));
-				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Buying]++;
+				itemSellValue = (int)Math.Ceiling(item.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Trading]++;
 			}
 			else
 			{
@@ -107,7 +107,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				recipe.AddItem();
 				User.Instance.Gold -= recipe.Value;
 
-				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Buying]++;
+				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Trading]++;
 
 				InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 				UpdateShop();
