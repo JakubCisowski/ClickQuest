@@ -74,9 +74,9 @@ namespace ClickQuest.Game.UserInterface.Windows
 
 		private void ExitButton_Click(object sender, RoutedEventArgs e)
 		{
-			var result = AlertBox.Show("Are you sure you want to quit?\nAll progress will be saved.");
+			var result = AlertBox.Show("Are you sure you want to quit?\nAll progress will be saved.", MessageBoxButton.YesNo);
 
-			if (result == MessageBoxResult.OK)
+			if (result == MessageBoxResult.Yes)
 			{
 				Application.Current.Shutdown();
 			}

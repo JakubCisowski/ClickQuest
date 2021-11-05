@@ -219,8 +219,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			var hero = (sender as Button).Tag as Hero;
 
-			var result = AlertBox.Show($"Press OK to delete {hero.Name}.");
-			if (result == MessageBoxResult.OK)
+			var result = AlertBox.Show($"Press Yes to delete {hero.Name}.", MessageBoxButton.YesNo);
+			if (result == MessageBoxResult.Yes)
 			{
 				User.Instance.Heroes.Remove(hero);
 
@@ -231,9 +231,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void ResetProgressButton_Click(object sender, RoutedEventArgs e)
 		{
-			var result = AlertBox.Show("This action will delete all heroes, along with their equipment, as well as all currencies and achievements. Are you sure?");
+			var result = AlertBox.Show("This action will delete all heroes, along with their equipment, as well as all currencies and achievements. Are you sure?", MessageBoxButton.YesNo);
 
-			if (result == MessageBoxResult.OK)
+			if (result == MessageBoxResult.Yes)
 			{
 				GameController.ResetAllProgress();
 				UpdateSelectOrDeleteHeroButtons();

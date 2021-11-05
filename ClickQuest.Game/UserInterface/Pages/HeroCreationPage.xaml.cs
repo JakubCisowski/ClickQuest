@@ -78,7 +78,7 @@ namespace ClickQuest.Game.UserInterface.Pages
             }
         }
 
-        public void CancelButton_Click(object sender, RoutedEventArgs e)
+        public void NoButton_Click(object sender, RoutedEventArgs e)
         {
             InterfaceController.ChangePage(GameAssets.Pages["MainMenu"], "");
         }

@@ -200,10 +200,10 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 
 			if (User.Instance.CurrentHero.Blessing != null)
 			{
-				result = AlertBox.Show($"Do you want to swap current blessing to {blessingBlueprint.Name}?\n{blessingBlueprint.Description}");
+				result = AlertBox.Show($"Do you want to swap current blessing to {blessingBlueprint.Name}?\n{blessingBlueprint.Description}", MessageBoxButton.YesNo);
 			}
 
-			if (result == MessageBoxResult.OK)
+			if (result == MessageBoxResult.Yes)
 			{
 				AddOrReplaceBlessing(newBlessingId);
 				return true;

@@ -45,9 +45,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (User.Instance.Gold >= blessingBlueprint.Value)
 			{
-				var result = AlertBox.Show($"Are you sure you want to buy {blessingBlueprint.Name} for {blessingBlueprint.Value} gold?");
+				var result = AlertBox.Show($"Are you sure you want to buy {blessingBlueprint.Name} for {blessingBlueprint.Value} gold?", MessageBoxButton.YesNo);
 
-				if (result == MessageBoxResult.Cancel)
+				if (result == MessageBoxResult.No)
 				{
 					return;
 				}

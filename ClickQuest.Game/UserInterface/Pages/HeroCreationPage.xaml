@@ -239,7 +239,7 @@
 		</Button>
 
 		<!-- Back to menu button -->
-		<Button x:Name="CancelButton" Margin="0,100,0,0" HorizontalAlignment="Center" Click="CancelButton_Click" Width="180" Height="60" Background="{StaticResource BrushGameB}">
+		<Button x:Name="NoButton" Margin="0,100,0,0" HorizontalAlignment="Center" Click="NoButton_Click" Width="180" Height="60" Background="{StaticResource BrushGameB}">
 			<Button.Content>
 				<TextBlock FontSize="22" Text="Back to menu" />
 			</Button.Content>

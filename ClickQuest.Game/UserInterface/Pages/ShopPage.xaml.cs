@@ -64,9 +64,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (item.Rarity == Rarity.Mythic)
 			{
-				var result = AlertBox.Show($"Are you sure you want to sell {item.Name}?");
+				var result = AlertBox.Show($"Are you sure you want to sell {item.Name}?", MessageBoxButton.YesNo);
 
-				if (result == MessageBoxResult.Cancel)
+				if (result == MessageBoxResult.No)
 				{
 					return;
 				}
@@ -98,8 +98,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (User.Instance.Gold >= recipe.Value)
 			{
-				var result = AlertBox.Show($"Are you sure you want to buy {recipe.Name} for {recipe.Value} gold?");
-				if (result == MessageBoxResult.Cancel)
+				var result = AlertBox.Show($"Are you sure you want to buy {recipe.Name} for {recipe.Value} gold?", MessageBoxButton.YesNo);
+				if (result == MessageBoxResult.No)
 				{
 					return;
 				}

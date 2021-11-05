@@ -40,9 +40,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				if (material.Rarity == Rarity.Mythic)
 				{
-					var result = AlertBox.Show($"Are you sure you want to melt {material.Name}?\nThis action will destroy this item and create at least {Material.BaseMeltingIngotBonus} {material.Rarity} ingots.\nYou can get bonus ingots if you master Melter specialization (by melting more materials).");
+					var result = AlertBox.Show($"Are you sure you want to melt {material.Name}?\nThis action will destroy this item and create at least {Material.BaseMeltingIngotBonus} {material.Rarity} ingots.\nYou can get bonus ingots if you master Melter specialization (by melting more materials).", MessageBoxButton.YesNo);
 
-					if (result == MessageBoxResult.Cancel)
+					if (result == MessageBoxResult.No)
 					{
 						return;
 					}
@@ -67,9 +67,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 					ingotAmountsDescription += $"- {ingotAmounts[i]}x {(Rarity)i} Ingots \n";
 				}
 
-				var result = AlertBox.Show($"Are you sure you want to melt {artifact.Name}?\nThis action will destroy this item and create: \n {ingotAmountsDescription}\n");
+				var result = AlertBox.Show($"Are you sure you want to melt {artifact.Name}?\nThis action will destroy this item and create: \n {ingotAmountsDescription}\n", MessageBoxButton.YesNo);
 
-				if (result == MessageBoxResult.Cancel)
+				if (result == MessageBoxResult.No)
 				{
 					return;
 				}
@@ -209,9 +209,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 				return false;
 			}
 
-			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using ingots?\nIngots needed:\n{ingotAmountsDescription}\n\nThis action will destroy all ingots and this recipe.");
+			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using ingots?\nIngots needed:\n{ingotAmountsDescription}\n\nThis action will destroy all ingots and this recipe.", MessageBoxButton.YesNo);
 
-			if (result == MessageBoxResult.Cancel)
+			if (result == MessageBoxResult.No)
 			{
 				return false;
 			}
@@ -271,9 +271,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 				return false;
 			}
 
-			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using materials?\n{recipe.RequirementsDescription}\nThis action will destroy all materials and this recipe.");
+			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using materials?\n{recipe.RequirementsDescription}\nThis action will destroy all materials and this recipe.", MessageBoxButton.YesNo);
 
-			if (result == MessageBoxResult.Cancel)
+			if (result == MessageBoxResult.No)
 			{
 				return false;
 			}

@@ -28,17 +28,17 @@ namespace ClickQuest.Game.UserInterface.Controls
 			{
 				case MessageBoxButton.YesNo:
 				{
-					MessageBox.OkButton2.Visibility = Visibility.Hidden;
-					MessageBox.OkButton.Visibility = Visibility.Visible;
-					MessageBox.CancelButton.Visibility = Visibility.Visible;
+					MessageBox.OkButton.Visibility = Visibility.Collapsed;
+					MessageBox.YesButton.Visibility = Visibility.Visible;
+					MessageBox.NoButton.Visibility = Visibility.Visible;
 				}
 					break;
 
 				case MessageBoxButton.OK:
 				{
-					MessageBox.OkButton2.Visibility = Visibility.Visible;
-					MessageBox.OkButton.Visibility = Visibility.Hidden;
-					MessageBox.CancelButton.Visibility = Visibility.Hidden;
+					MessageBox.OkButton.Visibility = Visibility.Visible;
+					MessageBox.YesButton.Visibility = Visibility.Collapsed;
+					MessageBox.NoButton.Visibility = Visibility.Collapsed;
 				}
 					break;
 			}
@@ -63,9 +63,16 @@ namespace ClickQuest.Game.UserInterface.Controls
 			MessageBox = null;
 		}
 
-		private void CancelButton_Click(object sender, RoutedEventArgs e)
+		private void YesButton_Click(object sender, RoutedEventArgs e)
 		{
-			Result = MessageBoxResult.Cancel;
+			Result = MessageBoxResult.Yes;
+			MessageBox.Close();
+			MessageBox = null;
+		}
+
+		private void NoButton_Click(object sender, RoutedEventArgs e)
+		{
+			Result = MessageBoxResult.No;
 			MessageBox.Close();
 			MessageBox = null;
 		}
