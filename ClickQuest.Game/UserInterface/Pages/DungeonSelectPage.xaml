@@ -31,7 +31,7 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" Background="{StaticResource BrushGameJ}" HorizontalAlignment="Center" Margin="5" Width="600">
 
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center">
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontRegular}">
 					<Run Text="Here you can use dropped Dungeon Keys to fight Bosses" />
 					<LineBreak />
 					<Run Text="You have 30 seconds to deal as much damage as you can, the more damage the better rewards" />

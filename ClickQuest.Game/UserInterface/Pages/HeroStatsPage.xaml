@@ -23,7 +23,7 @@
             <!-- Hero info block -->
             <TextBlock x:Name="HeroNameBlock" FontSize="22" TextAlignment="Center">
 				<!-- Hero name text-->
-				<Run Text="{Binding Path=Name}" FontWeight="DemiBold" />
+				<Run Text="{Binding Path=Name}" FontWeight="DemiBold" FontFamily="{StaticResource FontFancy}" />
 				<LineBreak />
 				<!-- Hero level text-->
 				<Run Text="{Binding Level, StringFormat='\{0\} lvl -'}" FontWeight="Normal" />

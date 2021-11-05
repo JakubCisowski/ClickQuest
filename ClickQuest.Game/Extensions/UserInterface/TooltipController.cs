@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
 using Colors = ClickQuest.Game.Extensions.UserInterface.ColorsController;
@@ -57,7 +58,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 					if (artifact.Rarity == Rarity.Mythic)
 					{
 						toolTipBlock.Inlines.Add(new LineBreak());
-						toolTipBlock.Inlines.Add(new Run($"{artifact.MythicTag}"));
+						toolTipBlock.Inlines.Add(new Run($"{artifact.MythicTag}"){FontFamily = (FontFamily)Application.Current.FindResource("FontFancy")});
 					}
 				}
 					break;

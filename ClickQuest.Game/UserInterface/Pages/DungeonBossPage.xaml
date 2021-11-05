@@ -40,7 +40,7 @@
 			<!-- Dungeon description -->
 			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGameJ}">
 
-				<TextBlock x:Name="DungeonDescriptionBlock" FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" />
+				<TextBlock x:Name="DungeonDescriptionBlock" FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontRegular}"/>
 			</Border>
 
 			<!-- Main panel -->

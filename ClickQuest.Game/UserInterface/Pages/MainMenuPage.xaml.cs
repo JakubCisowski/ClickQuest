@@ -1,10 +1,3 @@
-using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Player;
@@ -12,6 +5,13 @@ using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
 using MaterialDesignThemes.Wpf;
+using System;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
@@ -73,7 +73,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Width = 50,
 				Height = 50,
 				Margin = new Thickness(5),
-				Background = (SolidColorBrush) FindResource("BrushGameD"),
+				Background = (SolidColorBrush)FindResource("BrushGameD"),
 				Tag = hero
 			};
 
@@ -82,7 +82,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Width = 30,
 				Height = 30,
 				Kind = PackIconKind.DeleteForever,
-				Foreground = (SolidColorBrush) FindResource("BrushGameE")
+				Foreground = (SolidColorBrush)FindResource("BrushGameE")
 			};
 
 			deleteHeroButton.Content = deleteHeroIcon;
@@ -137,7 +137,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				TextAlignment = TextAlignment.Center
 			};
 
-			var heroNameText = new Bold(new Run(hero.Name));
+			var heroNameText = new Run(hero.Name) {FontFamily = (FontFamily)this.FindResource("FontFancy")};
 			var heroLevelText = new Run($"\n{hero.Level} lvl | ");
 			var heroClassText = new Run($"{hero.HeroClass}");
 			var separator = new Run(" | ");
@@ -147,10 +147,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 			switch (hero.HeroClass)
 			{
 				case HeroClass.Slayer:
-					heroClassText.Foreground = (SolidColorBrush) FindResource("BrushSlayerRelated");
+					heroClassText.Foreground = (SolidColorBrush)FindResource("BrushSlayerRelated");
 					break;
 				case HeroClass.Venom:
-					heroClassText.Foreground = (SolidColorBrush) FindResource("BrushVenomRelated");
+					heroClassText.Foreground = (SolidColorBrush)FindResource("BrushVenomRelated");
 					break;
 			}
 

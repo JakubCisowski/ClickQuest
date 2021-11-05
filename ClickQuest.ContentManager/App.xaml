@@ -117,14 +117,14 @@
 			<SolidColorBrush x:Key="BrushToolTipBackground" Color="{StaticResource ColorToolTipBackground}" Opacity="0.7" />
 
 			<!-- Fonts -->
-			<Style x:Key="GameFontRegular" TargetType="FrameworkElement">
-				<Setter Property="TextElement.FontFamily" Value="/Resources/#GothamBook" />
+			<Style x:Key="StyleFontRegular" TargetType="FrameworkElement">
+				<Setter Property="TextElement.FontFamily" Value="Segoe UI" />
 				<Setter Property="TextElement.FontSize" Value="16" />
 			</Style>
 
 			<!-- Global styles -->
-			<Style TargetType="Window" BasedOn="{StaticResource GameFontRegular}" />
-			<Style TargetType="UserControl" BasedOn="{StaticResource GameFontRegular}" />
+			<Style TargetType="Window" BasedOn="{StaticResource StyleFontRegular}" />
+			<Style TargetType="UserControl" BasedOn="{StaticResource StyleFontRegular}" />
 
 		</ResourceDictionary>
 	</Application.Resources>

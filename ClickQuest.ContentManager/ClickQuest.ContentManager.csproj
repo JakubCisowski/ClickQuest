@@ -12,10 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Resource Include="Resources\GothamBook.ttf" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Compile Update="UserInterface\Panels\IngotsPanel - Copy %282%29.xaml.cs">
         <DependentUpon>IngotsPanel.xaml.cs</DependentUpon>
       </Compile>
@@ -94,6 +90,7 @@
 
     <ItemGroup>
       <Folder Include="Logs\" />
+      <Folder Include="Resources\" />
     </ItemGroup>
 
     <ItemGroup>

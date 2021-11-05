@@ -12,33 +12,40 @@
 				<ResourceDictionary Source="/UserInterface/Controls/Styles/ToolTip.xaml" />
 				<ResourceDictionary Source="/UserInterface/Controls/Styles/TabControl.xaml" />
 				<ResourceDictionary Source="/UserInterface/Controls/Styles/Colors.xaml" />
+				<ResourceDictionary Source="/UserInterface/Controls/Styles/Fonts.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
 			<!-- Fonts -->
-			<Style x:Key="GameFontRegular" TargetType="FrameworkElement">
-				<Setter Property="TextElement.FontFamily" Value="/Resources/Fonts/#GothamBook" />
+			<Style x:Key="StyleFontRegular">
+				<Setter Property="TextElement.FontFamily" Value="{StaticResource FontRegular}" />
+				<Setter Property="TextElement.FontSize" Value="16" />
+			</Style>
+
+			<!-- Hero names, descriptions, mythic tags -->
+			<Style x:Key="StyleFontFancy">
+				<Setter Property="TextElement.FontFamily" Value="{StaticResource FontFancy}" />
 				<Setter Property="TextElement.FontSize" Value="16" />
 			</Style>
 
 			<!-- Custom global styles -->
-			<Style TargetType="TextBlock" BasedOn="{StaticResource GameFontRegular}" />
-			<Style TargetType="ListView" BasedOn="{StaticResource GameFontRegular}" />
+			<Style TargetType="TextBlock" BasedOn="{StaticResource StyleFontRegular}" />
+			<Style TargetType="ListView" BasedOn="{StaticResource StyleFontRegular}" />
 
 			<Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}" />
 
-			<Style TargetType="Window" BasedOn="{StaticResource GameFontRegular}">
+			<Style TargetType="Window" BasedOn="{StaticResource StyleFontRegular}">
 				<Setter Property="Background" Value="{StaticResource BrushGameA}" />
 			</Style>
 
-			<Style TargetType="Frame" BasedOn="{StaticResource GameFontRegular}">
+			<Style TargetType="Frame" BasedOn="{StaticResource StyleFontRegular}">
 				<Setter Property="Background" Value="{StaticResource BrushGameA}" />
 			</Style>
 
-			<Style TargetType="Page" BasedOn="{StaticResource GameFontRegular}">
+			<Style TargetType="Page" BasedOn="{StaticResource StyleFontRegular}">
 				<Setter Property="Background" Value="{StaticResource BrushGameA}" />
 			</Style>
 
-			<Style TargetType="ToolTip" BasedOn="{StaticResource GameFontRegular}">
+			<Style TargetType="ToolTip" BasedOn="{StaticResource StyleFontRegular}">
 				<Setter Property="Background" Value="{StaticResource BrushToolTipBackground}" />
 				<!-- <Setter Property="Opacity" Value="0.6"/> -->
 				<Setter Property="Padding" Value="5" />
