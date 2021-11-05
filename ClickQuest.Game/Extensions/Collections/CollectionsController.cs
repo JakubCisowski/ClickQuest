@@ -18,7 +18,7 @@ namespace ClickQuest.Game.Extensions.Collections
 			}
 
 			// If user doesn't have this item, clone and add it.
-			var copy = itemToAdd.CopyItem(1);
+			var copy = itemToAdd.CopyItem(amount);
 
 			itemCollection.Add((T) copy);
 		}

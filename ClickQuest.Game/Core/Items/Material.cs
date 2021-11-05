@@ -31,7 +31,7 @@ namespace ClickQuest.Game.Core.Items
 
 		public override void AddItem(int amount = 1)
 		{
-			CollectionsController.AddItemToCollection(this, User.Instance.CurrentHero.Materials);
+			CollectionsController.AddItemToCollection(this, User.Instance.CurrentHero.Materials, amount);
 
 			AddAchievementProgress();
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
@@ -39,7 +39,7 @@ namespace ClickQuest.Game.Core.Items
 
 		public override void RemoveItem(int amount = 1)
 		{
-			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Materials);
+			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Materials, amount);
 		}
 	}
 }

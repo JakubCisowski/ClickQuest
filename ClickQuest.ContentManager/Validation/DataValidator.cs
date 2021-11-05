@@ -20,6 +20,7 @@ namespace ClickQuest.ContentManager.Validation
 			CheckLevelRequirements();
 			CheckRewardBlessingsQuantity();
 			CheckRecipeArtifactLinks();
+			CheckMonsterRewardTypes();
 		}
 
 		private static void CheckIdUniqueness()
@@ -315,6 +316,20 @@ namespace ClickQuest.ContentManager.Validation
 				if (!recipe.Name.Contains(artifact.Name))
 				{
 					string message = $"{recipe.Name} of Id: {recipe.Id} is not linked to the correct artifact ({artifact.Name} instead).";
+					Logger.Log(message);
+				}
+			}
+		}
+
+		private static void CheckMonsterRewardTypes()
+		{
+			foreach (var monster in GameContent.Monsters)
+			{
+				var monsterBlessingPatterns = monster.MonsterLootPatterns.Where(pattern=>pattern.MonsterLootType == RewardType.Blessing);
+
+				if(monsterBlessingPatterns.Count() != 0)
+				{
+					string message = $"Blessing can be dropped from Monster of Id {monster.Id} (blessing drops from monsters are not handled).";
 					Logger.Log(message);
 				}
 			}

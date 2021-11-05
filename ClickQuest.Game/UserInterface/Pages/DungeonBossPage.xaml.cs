@@ -67,7 +67,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 		private void BossButton_Click(object sender, RoutedEventArgs e)
 		{
 			CombatController.HandleUserClickOnEnemy();
-			Boss.HandleEnemyDeathIfDefeated();
 			StatsFrame.Refresh();
 		}
 

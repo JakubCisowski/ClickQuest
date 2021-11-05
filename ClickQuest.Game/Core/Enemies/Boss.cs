@@ -93,34 +93,24 @@ namespace ClickQuest.Game.Core.Enemies
 				double randomizedValue = RNG.Next(1, 10001) / 10000d;
 				if (randomizedValue < loot.Frequencies[threshold] - itemIntegerCount)
 				{
-					// Grant loot after checking if it's not empty.
-					if (loot.BossLootType == RewardType.Blessing)
-					{
-						bool hasBlessingActive = User.Instance.CurrentHero.Blessing != null;
-
-						if (hasBlessingActive)
-						{
-							bool doesUserWantToSwap = Blessing.AskUserAndSwapBlessing(loot.BossLootId);
-
-							if (doesUserWantToSwap == false)
-							{
-							}
-						}
-						else
-						{
-							Blessing.AddOrReplaceBlessing(loot.BossLootId);
-						}
-
-						continue;
-					}
-
 					itemIntegerCount++;
+				}
+
+				// Grant loot after checking if it's not empty.
+				if (loot.BossLootType == RewardType.Blessing)
+				{
+					Blessing.AskUserAndSwapBlessing(loot.BossLootId);
+
+					continue;
 				}
 
 				(loot.Item as Artifact)?.CreateMythicTag(Name);
 
-				loot.Item.AddItem(itemIntegerCount);
-				lootText += "- " + $"{itemIntegerCount}x " + loot.Item.Name + " (" + loot.BossLootType + ")\n";
+				if (itemIntegerCount > 0)
+				{
+					loot.Item.AddItem(itemIntegerCount);
+					lootText += "- " + $"{itemIntegerCount}x " + loot.Item.Name + " (" + loot.BossLootType + ")\n";
+				}
 			}
 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();

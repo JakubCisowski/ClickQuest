@@ -20,17 +20,17 @@ namespace ClickQuest.Game.Extensions.Combat
 
 				var damageBaseAndCritInfo = User.Instance.CurrentHero.CalculateBaseAndCritClickDamage();
 				int damageOnHit = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
+				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
 
 				DealDamageToEnemy(damageBaseAndCritInfo.Damage, damageBaseAndCritInfo.DamageType);
 				DealDamageToEnemy(damageOnHit, DamageType.OnHit);
 
-				// Invoke Artifacts with the "on-enemy-click" effect.
+				// Invoke Artifacts with the "on-enemy-click" effect (if enemy isn't dead already).
 				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
 				{
 					equippedArtifact.ArtifactFunctionality.OnEnemyClick();
 				}
 
-				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
 			}
 			else
 			{
@@ -40,6 +40,12 @@ namespace ClickQuest.Game.Extensions.Combat
 
 		public static void DealDamageToEnemy(int damage, DamageType damageType = DamageType.Normal)
 		{
+			// Make sure enemy is still alive before dealing damage.
+			if (InterfaceController.CurrentEnemy?.CurrentHealth <= 0)
+			{
+				return;
+			}
+
 			// Trigger on dealing (any) damage artifact event.
 			if (damageType != DamageType.Artifact)
 			{

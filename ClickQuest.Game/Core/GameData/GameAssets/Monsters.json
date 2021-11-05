@@ -49,6 +49,11 @@
         "MonsterLootType": "Material",
         "MonsterLootId": 3,
         "Frequency": 0.8
+      },
+      {
+        "MonsterLootType": "Blessing",
+        "MonsterLootId": 1,
+        "Frequency": 0.5
       }
     ]
   },

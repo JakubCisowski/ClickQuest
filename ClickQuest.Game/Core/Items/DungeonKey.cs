@@ -52,7 +52,7 @@ namespace ClickQuest.Game.Core.Items
 
 		public override void AddItem(int amount = 1)
 		{
-			CollectionsController.AddItemToCollection(this, User.Instance.DungeonKeys);
+			CollectionsController.AddItemToCollection(this, User.Instance.DungeonKeys, amount);
 
 			AddAchievementProgress();
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
@@ -60,7 +60,7 @@ namespace ClickQuest.Game.Core.Items
 
 		public override void RemoveItem(int amount = 1)
 		{
-			CollectionsController.RemoveItemFromCollection(this, User.Instance.DungeonKeys);
+			CollectionsController.RemoveItemFromCollection(this, User.Instance.DungeonKeys, amount);
 		}
 
 		public static List<double> CreateRarityChancesList(int monsterHealth)
