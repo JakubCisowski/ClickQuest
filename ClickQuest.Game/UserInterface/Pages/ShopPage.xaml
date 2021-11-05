@@ -42,7 +42,7 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGameJ}">
 
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontRegular}">
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontFancy}">
 					<Run Text="Here you can sell your materials and recipes" />
 					<LineBreak />
 					<Run Text="You can also buy recipes with gold" />

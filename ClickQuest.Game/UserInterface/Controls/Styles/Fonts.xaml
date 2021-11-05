@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<FontFamily x:Key="FontRegular">Segoe UI</FontFamily>
+	<FontFamily x:Key="FontRegular">/Resources/Fonts/#Lato Regular</FontFamily>
 	<FontFamily x:Key="FontFancy">/Resources/Fonts/#Courgette Regular</FontFamily>
-    
-    
-</ResourceDictionary>   
+
+
+</ResourceDictionary>

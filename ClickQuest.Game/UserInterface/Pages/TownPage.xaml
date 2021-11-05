@@ -36,7 +36,7 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGameJ}">
 
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontRegular}">
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontFancy}">
 					<Run Text="Town Districts are where you can buy and craft upgrades or go on an adventure" />
 					<LineBreak />
 					<Run Text="Regions are where your hero can fight monsters for experience and loot" />

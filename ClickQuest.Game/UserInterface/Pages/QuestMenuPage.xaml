@@ -31,7 +31,7 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushLightGray}"  Background="{StaticResource BrushGameJ}" HorizontalAlignment="Center" Margin="5" Width="600">
 
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontRegular}">
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontFancy}">
 					<Run Text="Here you can complete quests that give you different rewards" />
 					<LineBreak />
 					<Run Text="You can't fight during quests, and they are running even if you exit the game" />
