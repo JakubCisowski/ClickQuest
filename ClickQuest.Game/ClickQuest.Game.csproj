@@ -13,6 +13,12 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\Courgette-Regular.ttf" />
+	  <None Remove="Resources\Fonts\Lato-Black.ttf" />
+	  <None Remove="Resources\Fonts\Lato-BlackItalic.ttf" />
+	  <None Remove="Resources\Fonts\Lato-Bold.ttf" />
+	  <None Remove="Resources\Fonts\Lato-BoldItalic.ttf" />
+	  <None Remove="Resources\Fonts\Lato-Italic.ttf" />
+	  <None Remove="Resources\Fonts\Lato-LightItalic.ttf" />
 	  <None Remove="Resources\Fonts\Lato-Regular.ttf" />
 	</ItemGroup>
 
@@ -74,6 +80,10 @@
 
 	<ItemGroup>
 		<Resource Include="Resources\Fonts\Courgette-Regular.ttf" />
+		<Resource Include="Resources\Fonts\Lato-Black.ttf" />
+		<Resource Include="Resources\Fonts\Lato-BlackItalic.ttf" />
+		<Resource Include="Resources\Fonts\Lato-Bold.ttf" />
+		<Resource Include="Resources\Fonts\Lato-LightItalic.ttf" />
 		<Resource Include="Resources\Fonts\Lato-Regular.ttf" />
 		<Resource Include="Resources\Images\logo.png" />
 		<Resource Include="Resources\Images\GameIcon.png" />

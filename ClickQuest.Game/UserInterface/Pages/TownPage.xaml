@@ -44,7 +44,7 @@
 			</Border>
 
 			<!-- Districts text -->
-			<TextBlock Grid.Row="1" Grid.Column="0" FontSize="22" FontWeight="DemiBold" Text="Districts" HorizontalAlignment="Center" Margin="0,10,0,20" />
+			<TextBlock Grid.Row="1" Grid.Column="0" FontSize="22" FontFamily="{StaticResource FontRegularDemiBold}" Text="Districts" HorizontalAlignment="Center" Margin="0,10,0,20" />
 
 			<!-- Districts panel -->
 			<StackPanel x:Name="TownPanel" Orientation="Vertical" Grid.Column="0" Grid.Row="2">
@@ -76,7 +76,7 @@
 			</StackPanel>
 
 			<!-- Regions text -->
-			<TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontSize="22" FontWeight="DemiBold" Text="Regions" HorizontalAlignment="Center" Margin="0,10,0,20" />
+			<TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontSize="22" FontFamily="{StaticResource FontRegularDemiBold}" Text="Regions" HorizontalAlignment="Center" Margin="0,10,0,20" />
 
 			<!-- Regions panel left -->
 			<StackPanel x:Name="RegionsPanelLeft" Orientation="Vertical" Grid.Column="1" Grid.Row="2">

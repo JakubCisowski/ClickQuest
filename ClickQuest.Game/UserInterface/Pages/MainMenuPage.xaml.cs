@@ -141,7 +141,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var heroLevelText = new Run($"\n{hero.Level} lvl | ");
 			var heroClassText = new Run($"{hero.HeroClass}");
 			var separator = new Run(" | ");
-			var heroTotalTimePlayedText = new Italic(new Run($"{Math.Floor(hero.TimePlayed.TotalHours)}h {hero.TimePlayed.Minutes}m"));
+			var heroTotalTimePlayedText = new Run($"{Math.Floor(hero.TimePlayed.TotalHours)}h {hero.TimePlayed.Minutes}m"){ FontFamily = (FontFamily)this.FindResource("FontRegularItalic") };
 
 			heroNameText.FontSize = 20;
 			switch (hero.HeroClass)
@@ -176,7 +176,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					TextAlignment = TextAlignment.Center
 				};
 
-				var disabledText = new Italic(new Run("Can't create new hero\nMax heroes reached!"));
+				var disabledText = new Run("Can't create new hero\nMax heroes reached!"){ FontFamily = (FontFamily)this.FindResource("FontRegularItalic") };
 				disabledInfoBlock.Inlines.Add(disabledText);
 
 				CreateHeroButton.Content = disabledInfoBlock;

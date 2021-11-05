@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<FontFamily x:Key="FontRegular">/Resources/Fonts/#Lato Regular</FontFamily>
+	<FontFamily x:Key="FontRegularDemiBold">/Resources/Fonts/#Lato Bold</FontFamily>
+	<FontFamily x:Key="FontRegularBold">/Resources/Fonts/#Lato Black</FontFamily>
+	<FontFamily x:Key="FontRegularItalic">/Resources/Fonts/#Lato Light Italic</FontFamily>
+	<FontFamily x:Key="FontRegularBoldItalic">/Resources/Fonts/#Lato Black Italic</FontFamily>
 	<FontFamily x:Key="FontFancy">/Resources/Fonts/#Courgette Regular</FontFamily>
 
 

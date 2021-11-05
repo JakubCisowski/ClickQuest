@@ -1,3 +1,6 @@
+using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Extensions.UserInterface;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -5,9 +8,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.UserInterface;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
@@ -93,7 +93,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					var border = new Border
 					{
 						BorderThickness = new Thickness(0.5),
-						BorderBrush = (SolidColorBrush) FindResource("BrushLightGray"),
+						BorderBrush = (SolidColorBrush)FindResource("BrushLightGray"),
 						Padding = new Thickness(6),
 						Margin = new Thickness(4),
 						Background = FindResource("BrushGameI") as SolidColorBrush,
@@ -167,6 +167,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					ArtifactsPanel.Children.Clear();
 					UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
 					RefreshEquippedArtifacts();
+					InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 					ArtifactsScrollViewer.ScrollToTop();
 				}
 			}

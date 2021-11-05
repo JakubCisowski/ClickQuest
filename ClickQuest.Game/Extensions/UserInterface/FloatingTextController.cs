@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ClickQuest.Game.Extensions.Combat;
+using MaterialDesignThemes.Wpf;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using ClickQuest.Game.Extensions.Combat;
-using MaterialDesignThemes.Wpf;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 using Colors = ClickQuest.Game.Extensions.UserInterface.ColorsController;
 
@@ -70,7 +70,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 			if (damageType == DamageType.Critical)
 			{
-				text.FontWeight = FontWeights.DemiBold;
+				text.FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold");
 			}
 
 			stackPanel.Children.Add(text);

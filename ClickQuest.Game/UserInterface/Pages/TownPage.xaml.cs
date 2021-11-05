@@ -61,7 +61,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				regionBlock.Inlines.Add(regionNameRun);
 
-				regionBlock.Inlines.Add(new Italic(new Run($"\nLevel: {region.LevelRequirement}")));
+				regionBlock.Inlines.Add(new Run($"\nLevel: {region.LevelRequirement}"){ FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
 
 				regionButton.Content = regionBlock;
 

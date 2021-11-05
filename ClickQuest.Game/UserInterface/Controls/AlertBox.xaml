@@ -11,8 +11,7 @@
 			<StackPanel>
 				<!-- Alert text -->
 				<Grid Height="95">
-					<TextBlock x:Name="ContentBox" VerticalAlignment="Center" HorizontalAlignment="Center" Width="410" TextAlignment="Center" TextWrapping="Wrap"
-					           FontWeight="DemiBold" />
+					<TextBlock x:Name="ContentBox" VerticalAlignment="Center" HorizontalAlignment="Center" Width="410" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{StaticResource FontRegularDemiBold}" />
 				</Grid>
 
 				<!-- Buttons -->

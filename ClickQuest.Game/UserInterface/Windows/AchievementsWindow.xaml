@@ -15,7 +15,7 @@
 				</Grid.RowDefinitions>
 
 				<!-- Window title-->
-				<TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="410" TextAlignment="Center" TextWrapping="Wrap" FontWeight="DemiBold" Text="Achievements" FontSize="24" />
+				<TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="410" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{StaticResource FontRegularDemiBold}" Text="Achievements" FontSize="24" />
 
 				<!-- Achievemets list text -->
 				<Border Grid.Row="1" BorderThickness="3" BorderBrush="{StaticResource BrushLightGray}" CornerRadius="3" Width="500">

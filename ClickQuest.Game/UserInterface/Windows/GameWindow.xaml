@@ -23,7 +23,7 @@
 
 			<!-- Location info block-->
 			<Border x:Name="LocationInfoBorder" BorderThickness="2" Visibility="Hidden" BorderBrush="{StaticResource BrushLightGray}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
-				<TextBlock x:Name="LocationInfoBlock" Text="{Binding LocationInfo}" FontWeight="DemiBold" FontSize="18" VerticalAlignment="Center" Margin="3" />
+				<TextBlock x:Name="LocationInfoBlock" Text="{Binding LocationInfo}" FontFamily="{StaticResource FontRegularDemiBold}" FontSize="18" VerticalAlignment="Center" Margin="3" />
 			</Border>
 
 			<!-- Achievements button-->

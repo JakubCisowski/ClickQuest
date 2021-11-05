@@ -185,6 +185,15 @@ namespace ClickQuest.Game.Core.Heroes
 			}
 		}
 
+		[JsonIgnore]
+		public double LevelAuraBonusTotal
+		{
+			get
+			{
+				return AURA_SPEED_BASE + AURA_SPEED_PER_LEVEL * Level;
+			}
+		}
+
 		public Hero(HeroClass heroClass, HeroRace heroRace, string heroName)
 		{
 			Materials = new List<Material>();
