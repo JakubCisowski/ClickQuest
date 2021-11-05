@@ -173,7 +173,6 @@ namespace ClickQuest.Game.Core.Adventures
 
 		private void AssignRewards()
 		{
-			AlertBox.Show($"Quest {Name} finished.\nRewards granted.", MessageBoxButton.OK);
 			User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.QuestsCompleted]++;
 
 			foreach (var materialRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Material))
