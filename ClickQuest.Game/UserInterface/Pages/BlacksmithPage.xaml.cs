@@ -135,11 +135,28 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			var artifactRecipe = GameAssets.Recipes.FirstOrDefault(x=>x.ArtifactId==meltedArtifact.Id);
 
-			for (int i = 0; i < 6; i++)
+			if (artifactRecipe is not null)
 			{
-				var materialsOfRarity = artifactRecipe.IngredientPatterns.Where(x=>x.RelatedMaterial.Rarity == (Rarity)i);
-				var totalMaterialQuantity = materialsOfRarity.Sum(x => x.Quantity);
-				ingotAmounts.Add((int)(totalMaterialQuantity * Material.BaseMeltingIngotBonus * Artifact.MeltingIngredientsRatio));
+				for (int i = 0; i < 6; i++)
+				{
+					var materialsOfRarity = artifactRecipe.IngredientPatterns.Where(x=>x.RelatedMaterial.Rarity == (Rarity)i);
+					var totalMaterialQuantity = materialsOfRarity.Sum(x => x.Quantity);
+					ingotAmounts.Add((int)(totalMaterialQuantity * Material.BaseMeltingIngotBonus * Artifact.MeltingIngredientsRatio));
+				}
+			}
+			else
+			{
+				for (int i = 0; i < 6; i++)
+				{
+					if ((Rarity)i == meltedArtifact.Rarity)
+					{
+						ingotAmounts.Add(Artifact.MeltingWithoutIngredientsValue);
+					}
+					else
+					{
+						ingotAmounts.Add(0);
+					}
+				}
 			}
 
 			return ingotAmounts;

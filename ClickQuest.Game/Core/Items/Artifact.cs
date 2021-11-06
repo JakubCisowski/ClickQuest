@@ -18,6 +18,7 @@ namespace ClickQuest.Game.Core.Items
 		public ArtifactType ArtifactType { get; set; }
 		public string MythicTag { get; set; }
 		public const double MeltingIngredientsRatio = 0.6;
+		public const int MeltingWithoutIngredientsValue = 100;
 		public const double CraftingRatio = 20;
 
 		[JsonIgnore]
@@ -87,7 +88,7 @@ namespace ClickQuest.Game.Core.Items
 
 		public override void RemoveItem(int amount = 1)
 		{
-			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Materials, amount);
+			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Artifacts, amount);
 		}
 
 		public void CreateMythicTag(string enemyName = "")
