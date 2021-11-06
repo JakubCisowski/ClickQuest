@@ -7,7 +7,7 @@
     "Name": "Death-Infused Bone Talisman",
     "Value": 1,
     "Rarity": "Exceptional",
-    "Description": "Your first attack against a monster places \u0027Decay\u0027 on them, dealing damage every 0.5 seconds for 2.5 seconds. Damage dealt is equal to your poison damage. Deals double damage against bosses."
+    "Description": "Your first attack against a monster places \u0027Decay\u0027 on them, dealing damage every 0.5 seconds for 2.5 seconds. Damage dealt is equal to your poison damage. Deals <poison>double</poison> damage against bosses."
   },
   {
     "Lore": "",
@@ -227,7 +227,7 @@
     "Name": "Dull Sword",
     "Value": 1,
     "Rarity": "General",
-    "Description": "Increases your Click Damage by 3."
+    "Description": "Increases your <CRITICAL>Click Damage</CRITICAL> by 3."
   },
   {
     "Lore": "",
