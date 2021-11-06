@@ -244,6 +244,12 @@ namespace ClickQuest.Game.Extensions.UserInterface
 		{
 			var artifactDescriptionRuns = new List<Run>();
 
+			// If it's called before loading descriptions.
+			if (description is null)
+			{
+				return artifactDescriptionRuns;
+			}
+
 			while (true)
 			{
 				int indexOfTagOpeningStart = description.IndexOf(TagOpeningStart);

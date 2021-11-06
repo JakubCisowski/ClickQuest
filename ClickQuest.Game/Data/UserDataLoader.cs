@@ -28,7 +28,13 @@ namespace ClickQuest.Game.Data
 			}
 
 			string json = File.ReadAllText(UserDataPath);
-			var user = JsonSerializer.Deserialize<User>(json);
+			var user = JsonSerializer.Deserialize<User>(json, new JsonSerializerOptions()
+			{
+				Converters =
+				{
+					new JsonStringEnumConverter(null)
+				}
+			});
 
 			User.Instance = user;
 
@@ -49,6 +55,7 @@ namespace ClickQuest.Game.Data
 			foreach (var hero in User.Instance.Heroes)
 			{
 				hero.Artifacts.ForEach(x => x.ArtifactFunctionality = GameAssets.Artifacts.FirstOrDefault(y => y.Name == x.Name)?.ArtifactFunctionality);
+				hero.Recipes.ForEach(x => { x.UpdateDescription(); x.UpdateRequirementsDescription(); });
 			}
 
 			// Re-arrange references between hero's Artifacts and EquippedArtifacts.

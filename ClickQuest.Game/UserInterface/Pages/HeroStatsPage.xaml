@@ -48,7 +48,7 @@
                 </Grid.ToolTip>
 
                 <!-- Experience progress bar -->
-                <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16" materialDesign:TransitionAssist.DisableTransitions="True" />
+                <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16" materialDesign:TransitionAssist.DisableTransitions="True" Foreground="{StaticResource BrushGameR}" Background="{StaticResource BrushGameP}"/>
 
                 <!-- Progress text on experience progress bar -->
                 <TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource BrushWhite}" FontWeight="Bold" />
