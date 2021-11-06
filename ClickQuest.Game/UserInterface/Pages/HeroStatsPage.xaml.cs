@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
+using ClickQuest.Game.Extensions.Combat;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
@@ -372,23 +373,25 @@ namespace ClickQuest.Game.UserInterface.Pages
 			switch (User.Instance.CurrentHero?.HeroClass)
 			{
 				case HeroClass.Slayer:
-					block.Inlines.Add(new Run("This class specializes in powerful critical clicks that deal double damage"));
+					block.Inlines.Add(new Run("This class specializes in powerful critical clicks that deal double damage"){Foreground=ColorsController.GetHeroClassColor(HeroClass.Slayer)});
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new Run("Click damage: 2 (+1/lvl)"));
 					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Crit chance: 25% (+0.4%/lvl)"));
+					block.Inlines.Add(new Run("Crit chance: "){Foreground=ColorsController.GetHeroClassColor(HeroClass.Slayer)});
+					block.Inlines.Add(new Run("25% (+0.4%/lvl)"));
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new LineBreak());
 					break;
 
 				case HeroClass.Venom:
-					block.Inlines.Add(new Run("This class specializes in poisonous clicks that deal additional damage over time"));
+					block.Inlines.Add(new Run("This class specializes in poisonous clicks that deal additional damage over time"){Foreground=ColorsController.GetHeroClassColor(HeroClass.Venom)});
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new Run("Click damage: 2 (+1/lvl)"));
 					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Poison damage: 1 (+2/lvl) per tick (5 ticks over 2.5s)"));
+					block.Inlines.Add(new Run("Poison damage: "){Foreground=ColorsController.GetHeroClassColor(HeroClass.Venom)});
+					block.Inlines.Add(new Run("1 (+2/lvl) per tick (5 ticks over 2.5s)"));
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new LineBreak());
 					break;
@@ -433,7 +436,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void GenerateStatValueDamageTooltip()
 		{
-			var tooltipDamage = new ToolTip();
+			var tooltipDamage = new ToolTip()
+			{
+				BorderBrush = ColorsController.GetDamageTypeColor(DamageType.Normal),
+				BorderThickness = new Thickness(1)
+			};
 
 			TooltipController.SetTooltipDelayAndDuration(ClickDamageBlock);
 
@@ -546,7 +553,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void GenerateStatValueCritTooltip()
 		{
-			var toolTipCrit = new ToolTip();
+			var toolTipCrit = new ToolTip()
+			{
+				BorderBrush = ColorsController.GetDamageTypeColor(DamageType.Critical),
+				BorderThickness = new Thickness(1)
+			};
 
 			TooltipController.SetTooltipDelayAndDuration(CritChanceBlock);
 
@@ -710,7 +721,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void GenerateStatValuePoisonTooltip()
 		{
-			var toolTipPoison = new ToolTip();
+			var toolTipPoison = new ToolTip()
+			{
+				BorderBrush = ColorsController.GetDamageTypeColor(DamageType.Poison),
+				BorderThickness = new Thickness(1)
+			};
 
 			TooltipController.SetTooltipDelayAndDuration(PoisonDamageBlock);
 
@@ -813,7 +828,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void GenerateStatValueAuraTooltip()
 		{
-			var tooltipAura = new ToolTip();
+			var tooltipAura = new ToolTip()
+			{
+				BorderBrush = ColorsController.GetDamageTypeColor(DamageType.Aura),
+				BorderThickness = new Thickness(1)
+			};
 
 			TooltipController.SetTooltipDelayAndDuration(AuraDamageBlock);
 

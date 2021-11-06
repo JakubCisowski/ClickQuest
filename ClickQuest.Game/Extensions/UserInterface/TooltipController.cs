@@ -147,7 +147,9 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 				case SpecializationType.Crafting:
 					{
-						toolTipBlock.Inlines.Add(new Run($"Increases crafting rarity limit (base limit is {(Rarity)Specialization.SpecCraftingBuffBase} rarity)"));
+						toolTipBlock.Inlines.Add(new Run("Increases crafting rarity limit (base limit is "));
+						toolTipBlock.Inlines.Add(new Run($"{(Rarity)Specialization.SpecCraftingBuffBase}"){Foreground = ColorsController.GetRarityColor((Rarity)Specialization.SpecCraftingBuffBase)});
+						toolTipBlock.Inlines.Add(new Run(" rarity)"));
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(new Run("You can master Craftsman by crafting artifacts in Blacksmith"));
 						toolTipBlock.Inlines.Add(new LineBreak());

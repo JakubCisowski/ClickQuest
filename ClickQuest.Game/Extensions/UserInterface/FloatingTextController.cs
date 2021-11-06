@@ -52,7 +52,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				Orientation = Orientation.Horizontal
 			};
 
-			var textBrush = Colors.GetFloatingCombatTextColor(damageType);
+			var textBrush = Colors.GetDamageTypeColor(damageType);
 
 			var icon = GetFloatingCombatIcon(damageType);
 			icon.Foreground = textBrush;

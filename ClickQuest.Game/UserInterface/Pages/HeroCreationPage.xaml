@@ -81,6 +81,9 @@
 
 									<!-- Slayer class -->
 									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroClass.Slayer}">
+										
+										<Setter Property="Foreground" Value="{StaticResource BrushSlayerRelated}"/>
+										
 										<!-- Tooltip -->
 										<Setter Property="ToolTip">
 											<Setter.Value>
@@ -100,6 +103,9 @@
 
 									<!-- Venom class -->
 									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroClass.Venom}">
+										
+										<Setter Property="Foreground" Value="{StaticResource BrushVenomRelated}"/>
+										
 										<!-- Tooltip -->
 										<Setter Property="ToolTip">
 											<Setter.Value>
