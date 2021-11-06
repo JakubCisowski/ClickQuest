@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Player;
 
@@ -72,7 +73,15 @@ namespace ClickQuest.Game.Data
 			// Convert TimePlayed on all heroes to string.
 			User.Instance.Heroes.ForEach(x => x.TimePlayedString = x.TimePlayed.ToString());
 
-			string json = JsonSerializer.Serialize(User.Instance);
+			string json = JsonSerializer.Serialize(User.Instance, new JsonSerializerOptions()
+			{
+				WriteIndented = true,
+				Converters =
+				{
+					new JsonStringEnumConverter(null)
+				}
+			});
+
 			File.WriteAllText(UserDataPath, json);
 		}
 

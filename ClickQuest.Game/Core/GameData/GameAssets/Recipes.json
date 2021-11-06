@@ -38,8 +38,7 @@
     "Id": 1,
     "Name": "Recipe: Rakshasa\u0027s Necklace",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 17,
@@ -72,8 +71,7 @@
     "Id": 2,
     "Name": "Recipe: Scepter of Eternal Flame",
     "Value": 1,
-    "Rarity": "Mythic",
-    "Description": null
+    "Rarity": "Mythic"
   },
   {
     "ArtifactId": 19,
@@ -102,8 +100,7 @@
     "Id": 3,
     "Name": "Twin Kamas",
     "Value": 1,
-    "Rarity": "Mythic",
-    "Description": null
+    "Rarity": "Mythic"
   },
   {
     "ArtifactId": 39,
@@ -116,8 +113,7 @@
     "Id": 4,
     "Name": "Recipe: Vial of Plague",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 38,
@@ -130,8 +126,7 @@
     "Id": 5,
     "Name": "Recipe: Gold-Tipped Spear",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 19,
@@ -144,8 +139,7 @@
     "Id": 6,
     "Name": "Recipe: Twin Kamas",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 12,
@@ -158,8 +152,7 @@
     "Id": 7,
     "Name": "Recipe: Bloodstone Staff",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 12,
@@ -172,8 +165,7 @@
     "Id": 8,
     "Name": "Recipe: Skullbasher",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 12,
@@ -186,8 +178,7 @@
     "Id": 9,
     "Name": "Recipe: Meat Cleaver",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 12,
@@ -200,8 +191,7 @@
     "Id": 10,
     "Name": "Recipe: Ghostly Infusion",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 12,
@@ -214,8 +204,7 @@
     "Id": 11,
     "Name": "Recipe: Silver Greatsword",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 12,
@@ -228,8 +217,7 @@
     "Id": 12,
     "Name": "Recipe: Large Scythe",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 12,
@@ -242,8 +230,7 @@
     "Id": 13,
     "Name": "Recipe: Death-Infused Bone Talisman",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 23,
@@ -256,8 +243,7 @@
     "Id": 14,
     "Name": "Recipe: Dull Sword",
     "Value": 1,
-    "Rarity": "General",
-    "Description": null
+    "Rarity": "General"
   },
   {
     "ArtifactId": 12,
@@ -270,8 +256,7 @@
     "Id": 15,
     "Name": "Recipe: Dull Knife",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 12,
@@ -284,8 +269,7 @@
     "Id": 16,
     "Name": "Recipe: Poisoned Sword",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 12,
@@ -298,8 +282,7 @@
     "Id": 17,
     "Name": "Recipe: Necronomicon",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 12,
@@ -312,8 +295,7 @@
     "Id": 18,
     "Name": "Recipe: Toxic Amulet",
     "Value": 1,
-    "Rarity": "Exceptional",
-    "Description": null
+    "Rarity": "Exceptional"
   },
   {
     "ArtifactId": 2,
@@ -321,8 +303,7 @@
     "Id": 19,
     "Name": "Recipe: XD",
     "Value": 0,
-    "Rarity": "General",
-    "Description": null
+    "Rarity": "General"
   },
   {
     "ArtifactId": 34,
@@ -330,7 +311,6 @@
     "Id": 20,
     "Name": "Naginata",
     "Value": 0,
-    "Rarity": "General",
-    "Description": null
+    "Rarity": "General"
   }
 ]

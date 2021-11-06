@@ -11,6 +11,8 @@ namespace ClickQuest.ContentManager.GameData.Models
 
 	public class Recipe : Item
 	{
+		[JsonIgnore]
+		public override string Description { get; set; }
 		public int ArtifactId { get; set; }
 		public List<IngredientPattern> IngredientPatterns { get; set; }
 	}
