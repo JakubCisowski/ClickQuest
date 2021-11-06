@@ -11,10 +11,17 @@
 	<Page.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="LightBlue" SecondaryColor="Lime" />
 				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListView.xaml" />
 				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Indigo.xaml" />
 			</ResourceDictionary.MergedDictionaries>
+
+			<SolidColorBrush x:Key="PrimaryHueLightBrush" Color="{StaticResource ColorGameO}"/>
+			<SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="{StaticResource ColorGameO}"/>
+			<SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource ColorGameO}"/>
+			<SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="{StaticResource ColorGameO}"/>
+			<SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource ColorGameO}"/>
+			<SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource ColorGameO}"/>
 		</ResourceDictionary>
 	</Page.Resources>
 
@@ -25,7 +32,7 @@
 		<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Name" />
 
 		<!-- Hero name input -->
-		<TextBox x:Name="HeroNameBox" HorizontalAlignment="Center" Width="200" Margin="30" HorizontalContentAlignment="Center" FontSize="24" Style="{StaticResource MaterialDesignTextBox}" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
+		<TextBox x:Name="HeroNameBox" HorizontalAlignment="Center" Width="200" Margin="30" HorizontalContentAlignment="Center" FontSize="24" Style="{StaticResource MaterialDesignTextBox}" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" FontFamily="{StaticResource FontFancy}">
 			<!-- Tooltip -->
 			<TextBox.ToolTip>
 				<ToolTip>
