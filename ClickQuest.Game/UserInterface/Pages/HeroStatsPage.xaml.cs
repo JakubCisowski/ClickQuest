@@ -291,43 +291,51 @@ namespace ClickQuest.Game.UserInterface.Pages
 			for (int i = 0; i < specializationTypes.Length; i++)
 			{
 				string nameText = "";
-				string buffText = "";
+
+				var block = new TextBlock
+				{
+					Name = "Spec" + specializationTypes.GetValue(i) + "Buff",
+					FontSize = 18,
+					Margin = new Thickness(0, 1, 0, 1)
+				};
 
 				switch (specializationTypes.GetValue(i))
 				{
 					case SpecializationType.Blessing:
 						nameText = "Prayer";
-						buffText = " → Blessing duration +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing] + "s";
+						block.Inlines.Add(new Run(" → Blessing duration +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing] + "s"));
 						break;
 
 					case SpecializationType.Clicking:
 						nameText = "Clicker";
-						buffText = " → Click damage +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
+						block.Inlines.Add(new Run(" → Click damage +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking]));
 						break;
 
 					case SpecializationType.Crafting:
 						nameText = "Craftsman";
-						buffText = " → Can craft " + User.Instance.CurrentHero.Specialization.SpecCraftingText + " recipes";
+						block.Inlines.Add(" → Can craft ");
+						block.Inlines.Add(new Run(User.Instance.CurrentHero.Specialization.SpecCraftingText){ Foreground = ColorsController.GetRarityColor((Rarity)User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting]) }) ;
+						block.Inlines.Add(" recipes");
 						break;
 
 					case SpecializationType.Trading:
 						nameText = "Tradesman";
-						buffText = " → Shop offer size +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading];
+						block.Inlines.Add(new Run(" → Shop offer size +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
 						break;
 
 					case SpecializationType.Melting:
 						nameText = "Melter";
-						buffText = " → Extra ingots +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%";
+						block.Inlines.Add(new Run(" → Extra ingots +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%"));
 						break;
 
 					case SpecializationType.Questing:
 						nameText = "Adventurer";
-						buffText = " → Quest time -" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Questing] + "%";
+						block.Inlines.Add(new Run(" → Quest time -" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Questing] + "%"));
 						break;
 
 					case SpecializationType.Dungeon:
 						nameText = "Daredevil";
-						buffText = " → Bossfight timer +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon] + "s";
+						block.Inlines.Add(new Run(" → Bossfight timer +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon] + "s"));
 						break;
 				}
 
@@ -335,14 +343,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 				{
 					Name = "Spec" + specializationTypes.GetValue(i) + "Name",
 					Text = nameText,
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
-
-				var block = new TextBlock
-				{
-					Name = "Spec" + specializationTypes.GetValue(i) + "Buff",
-					Text = buffText,
 					FontSize = 18,
 					Margin = new Thickness(0, 1, 0, 1)
 				};
