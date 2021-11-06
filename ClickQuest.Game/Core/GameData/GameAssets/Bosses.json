@@ -4,7 +4,7 @@
     "Name": "Shaiiya, the Spider Queen",
     "Health": 2000,
     "Image": "/example.png",
-    "Description": "You end up in a rather narrow passage, but the ceiling is so far up you can\u0027t even see it. The room is full of spider webs. On the floor you see half-eaten remains of some bats and wolves. As you look up, a giant, black spider descends slowly towards you. You can barely see anything but its violet eyes staring at you through the darkness.",
+    "Description": "You end up in a rather narrow passage, but the ceiling is so far up you can't even see it. The room is full of spider webs. On the floor you see half-eaten remains of some bats and wolves. As you look up, a giant, black spider descends slowly towards you. You can barely see anything but its violet eyes staring at you through the darkness.",
     "BossLootPatterns": [
       {
         "BossLootType": "Material",
@@ -136,7 +136,7 @@
     "Name": "Ardor, the Prior of the Assassins",
     "Health": 1500,
     "Image": "/example.png",
-    "Description": "This must be the individual who\u0027s the leader of all these assassins. He\u0027s sacrificing innocent people to grant himself power, which in turn has made him significantly harder to defeat.",
+    "Description": "This must be the individual who's the leader of all these assassins. He's sacrificing innocent people to grant himself power, which in turn has made him significantly harder to defeat.",
     "BossLootPatterns": [
       {
         "BossLootType": "Material",
@@ -274,7 +274,7 @@
     "Name": "Rakshasa Raja",
     "Health": 1500,
     "Image": "/example.png",
-    "Description": "\u0027Raja\u0027 stands for \u0027king\u0027, and it\u0027s exactly what it sounds like \u2013 Rakshasa Raja is a much bigger and more respected type among its kin. It has four arms, wields a sword in each one of them, and can turn you into pieces in the blink of an eye.",
+    "Description": "'Raja' stands for 'king', and it's exactly what it sounds like – Rakshasa Raja is a much bigger and more respected type among its kin. It has four arms, wields a sword in each one of them, and can turn you into pieces in the blink of an eye.",
     "BossLootPatterns": [
       {
         "BossLootType": "Material",
@@ -445,7 +445,7 @@
   },
   {
     "Id": 9,
-    "Name": "Itu\u0027Zeld, the High Lich",
+    "Name": "Itu'Zeld, the High Lich",
     "Health": 1500,
     "Image": "/example.png",
     "Description": "TestBoss1Desc",
@@ -481,7 +481,7 @@
     "Name": "Arathai, the Eater of Souls",
     "Health": 1500,
     "Image": "/example.png",
-    "Description": "The large undead lord slowly gets up his throne. Only now you realise how large he really is \u2013 about ten meters tall. He is wearing a dark, heavy armor with a helmet resembling a skull, through which you can only see his emerald green eyes. He swings his just as tall scythe around and looks you in the eyes. He then slowly whispers: \u2018I am your end\u0027.",
+    "Description": "The large undead lord slowly gets up his throne. Only now you realise how large he really is – about ten meters tall. He is wearing a dark, heavy armor with a helmet resembling a skull, through which you can only see his emerald green eyes. He swings his just as tall scythe around and looks you in the eyes. He then slowly whispers: ‘I am your end'.",
     "BossLootPatterns": [
       {
         "BossLootType": "Material",

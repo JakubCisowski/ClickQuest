@@ -130,7 +130,7 @@
   {
     "Id": 5,
     "LevelRequirement": 0,
-    "Name": "Titan\u0027s Hills",
+    "Name": "Titan's Hills",
     "Description": "ForestDescription",
     "Background": "/example.png",
     "MonsterSpawnPatterns": [
@@ -159,8 +159,8 @@
   {
     "Id": 6,
     "LevelRequirement": 0,
-    "Name": "Assassins\u0027 Woods",
-    "Description": "The woods seem unusually quiet at first\u2026 But are you sure they are completely empty?",
+    "Name": "Assassins' Woods",
+    "Description": "The woods seem unusually quiet at first… But are you sure they are completely empty?",
     "Background": "/example.png",
     "MonsterSpawnPatterns": [
       {

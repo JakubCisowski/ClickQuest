@@ -1,14 +1,14 @@
 [
   {
     "Id": 1,
-    "Name": "Strand of Rakshasa\u0027s Hair",
+    "Name": "Strand of Rakshasa's Hair",
     "Value": 2,
     "Rarity": "Fine",
-    "Description": "Piece of what feels like lion\u0027s mane. It is quite rough to the touch (in touch?)."
+    "Description": "Piece of what feels like lion's mane. It is quite rough to the touch (in touch?)."
   },
   {
     "Id": 2,
-    "Name": "Rakshasa\u0027s Teeth",
+    "Name": "Rakshasa's Teeth",
     "Value": 1,
     "Rarity": "General",
     "Description": "A pair of long fangs, just like you would expect from a lion."
@@ -18,11 +18,11 @@
     "Name": "Grain of Sand",
     "Value": 2,
     "Rarity": "Fine",
-    "Description": "A grain of sand in the desert\u2026 But surely it\u0027s not a junk item and can be used for something, right?"
+    "Description": "A grain of sand in the desert… But surely it's not a junk item and can be used for something, right?"
   },
   {
     "Id": 4,
-    "Name": "Sand Grub\u0027s Fang",
+    "Name": "Sand Grub's Fang",
     "Value": 2,
     "Rarity": "Fine",
     "Description": "One thick fang that the Sand Grub uses to paralyze its victims."
@@ -36,7 +36,7 @@
   },
   {
     "Id": 6,
-    "Name": "Jackal\u0027s Hide",
+    "Name": "Jackal's Hide",
     "Value": 2,
     "Rarity": "Fine",
     "Description": "Short, coarse fur that is mostly golden with some darker spots on it."
@@ -46,7 +46,7 @@
     "Name": "Canine Fangs",
     "Value": 2,
     "Rarity": "Fine",
-    "Description": "The fangs of a canine - it\u0027s hard to tell exactly what they belonged to."
+    "Description": "The fangs of a canine - it's hard to tell exactly what they belonged to."
   },
   {
     "Id": 8,
@@ -64,7 +64,7 @@
   },
   {
     "Id": 10,
-    "Name": "Scorpion\u0027s Stinger",
+    "Name": "Scorpion's Stinger",
     "Value": 2,
     "Rarity": "Fine",
     "Description": "Used by all types of scorpions to paralyze and kill their victims."
@@ -85,7 +85,7 @@
   },
   {
     "Id": 13,
-    "Name": "Raja\u0027s Earring",
+    "Name": "Raja's Earring",
     "Value": 2,
     "Rarity": "Fine",
     "Description": "A large golden ring with small jewels inserted on the other side. It is worn like an earring by the most powerful and respected Rakshasas."
@@ -113,7 +113,7 @@
   },
   {
     "Id": 17,
-    "Name": "Warg\u0027s Hide",
+    "Name": "Warg's Hide",
     "Value": 2,
     "Rarity": "Fine",
     "Description": "Short, dark fur, almost entirely black. It feels luxurious, as the only way to obtain it is to defeat a very tough canine."
@@ -130,21 +130,21 @@
     "Name": "Moonstone",
     "Value": 2,
     "Rarity": "Fine",
-    "Description": "This gemstone looks like the moon on a clear night sky - pale white, with blue-ish edge. It\u0027s quite valuable, and some use it to enhance a weapon\u0027s properties."
+    "Description": "This gemstone looks like the moon on a clear night sky - pale white, with blue-ish edge. It's quite valuable, and some use it to enhance a weapon's properties."
   },
   {
     "Id": 20,
     "Name": "Writ of Salvation",
     "Value": 2,
     "Rarity": "Fine",
-    "Description": "A page out of some holy book of the Assassins. The writing on it is illegible, but you can easily tell it\u0027s something important, because of its very decorative style."
+    "Description": "A page out of some holy book of the Assassins. The writing on it is illegible, but you can easily tell it's something important, because of its very decorative style."
   },
   {
     "Id": 21,
     "Name": "Intact Bone",
     "Value": 2,
     "Rarity": "Fine",
-    "Description": "This bone is about half a meter long and doesn\u0027t show any signs of damage or decay."
+    "Description": "This bone is about half a meter long and doesn't show any signs of damage or decay."
   },
   {
     "Id": 22,
@@ -179,7 +179,7 @@
     "Name": "Metal Chain",
     "Value": 2,
     "Rarity": "Fine",
-    "Description": "A short chain made of several links connected together. It\u0027s impossible to tell what it was used for before being destroyed."
+    "Description": "A short chain made of several links connected together. It's impossible to tell what it was used for before being destroyed."
   },
   {
     "Id": 27,

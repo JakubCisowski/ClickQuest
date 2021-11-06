@@ -34,9 +34,9 @@
   {
     "Id": 4,
     "DungeonGroupId": 4,
-    "Name": "Medusa\u0027s Chamber",
+    "Name": "Medusa's Chamber",
     "Background": "/example2.png",
-    "Description": "The Chamber is a small, rectangular room with snakes crawling all around it. The room is crowded with statues resembling humans. The more you think about it, however, the more you feel like they are not just statues, but the Medusa\u0027s victims...",
+    "Description": "The Chamber is a small, rectangular room with snakes crawling all around it. The room is crowded with statues resembling humans. The more you think about it, however, the more you feel like they are not just statues, but the Medusa's victims...",
     "BossIds": [
       6
     ]
@@ -57,7 +57,7 @@
     "DungeonGroupId": 6,
     "Name": "Hall of Judgement",
     "Background": "/example2.png",
-    "Description": "This is the big, circular chapel in the middle of the Cemetery. On the far side of the room you see a throne with a large, undead creature sitting on it. The creature is playing with a gigantic scythe. In front of it, there is another enemy \u2013 a lich \u2013 kneeling and whispering unintelligible chants.",
+    "Description": "This is the big, circular chapel in the middle of the Cemetery. On the far side of the room you see a throne with a large, undead creature sitting on it. The creature is playing with a gigantic scythe. In front of it, there is another enemy – a lich – kneeling and whispering unintelligible chants.",
     "BossIds": [
       9,
       10

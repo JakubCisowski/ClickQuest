@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.GameData;
@@ -86,7 +87,8 @@ namespace ClickQuest.Game.Data
 				Converters =
 				{
 					new JsonStringEnumConverter(null)
-				}
+				},
+				Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
 			});
 
 			File.WriteAllText(UserDataPath, json);

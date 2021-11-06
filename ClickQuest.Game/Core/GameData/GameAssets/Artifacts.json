@@ -7,7 +7,7 @@
     "Name": "Death-Infused Bone Talisman",
     "Value": 1,
     "Rarity": "Exceptional",
-    "Description": "Your first attack against a monster places \u0027Decay\u0027 on them, dealing damage every 0.5 seconds for 2.5 seconds. Damage dealt is equal to your poison damage. Deals \u003Cpoison\u003Edouble\u003C/poison\u003E damage against bosses."
+    "Description": "Your first attack against a monster places 'Decay' on them, dealing damage every 0.5 seconds for 2.5 seconds. Damage dealt is equal to your poison damage. Deals <poison>double</poison> damage against bosses."
   },
   {
     "Lore": "",
@@ -127,17 +127,17 @@
     "Name": "Cholla Spine Infusion",
     "Value": 1,
     "Rarity": "Mythic",
-    "Description": "Has to be equipped with at least one other artifact. Causes all clicks to leave a spine in the target\u0027s body. Click damage dealt is increased by 2 (?) for each spine in the target."
+    "Description": "Has to be equipped with at least one other artifact. Causes all clicks to leave a spine in the target's body. Click damage dealt is increased by 2 (?) for each spine in the target."
   },
   {
     "Lore": "",
     "ExtraInfo": "",
     "ArtifactType": "XD",
     "Id": 14,
-    "Name": "Ice Golem\u0027s Heart",
+    "Name": "Ice Golem's Heart",
     "Value": 1,
     "Rarity": "Exceptional",
-    "Description": "Your clicks leave a stack of \u0027Brittle\u0027 on the enemy, increasing your Critical Click Chance against them by 5%. Stacks up to 5 times. Additionally, clicks against Monsters (excluding Bosses) with 5 \u0027Brittle\u0027 stacks and below 10% health instantly finish them."
+    "Description": "Your clicks leave a stack of 'Brittle' on the enemy, increasing your Critical Click Chance against them by 5%. Stacks up to 5 times. Additionally, clicks against Monsters (excluding Bosses) with 5 'Brittle' stacks and below 10% health instantly finish them."
   },
   {
     "Lore": "",
@@ -154,7 +154,7 @@
     "ExtraInfo": "",
     "ArtifactType": "XD",
     "Id": 16,
-    "Name": "Rakshasa\u0027s Necklace",
+    "Name": "Rakshasa's Necklace",
     "Value": 1,
     "Rarity": "Exceptional",
     "Description": "Increases passive Aura Attack Speed by 50%."
@@ -207,7 +207,7 @@
     "Name": "Transcendence",
     "Value": 1,
     "Rarity": "Masterwork",
-    "Description": "Requires three artifact slots to equip. While on a Region, you don\u0027t deal any damage. Instead, each click you make on a Monster will instantly defeat them."
+    "Description": "Requires three artifact slots to equip. While on a Region, you don't deal any damage. Instead, each click you make on a Monster will instantly defeat them."
   },
   {
     "Lore": "",
@@ -227,7 +227,7 @@
     "Name": "Dull Sword",
     "Value": 1,
     "Rarity": "General",
-    "Description": "Increases your \u003CCRITICAL\u003EClick Damage\u003C/CRITICAL\u003E by 3."
+    "Description": "Increases your <CRITICAL>Click Damage</CRITICAL> by 3."
   },
   {
     "Lore": "",
@@ -294,7 +294,7 @@
     "ExtraInfo": "",
     "ArtifactType": "XD",
     "Id": 30,
-    "Name": "Titan\u0027s Crown",
+    "Name": "Titan's Crown",
     "Value": 1,
     "Rarity": "Exceptional",
     "Description": "All experience gained is increased by 30%."
@@ -337,14 +337,14 @@
     "Name": "Naginata",
     "Value": 1,
     "Rarity": "Mythic",
-    "Description": "If you would deal 90% or more of an Enemy\u0027s health with a single click, gain double experience, 1 Gold and a 20 increase to Click Damage for 10 seconds. The damage increase bonus does not stack."
+    "Description": "If you would deal 90% or more of an Enemy's health with a single click, gain double experience, 1 Gold and a 20 increase to Click Damage for 10 seconds. The damage increase bonus does not stack."
   },
   {
     "Lore": "",
     "ExtraInfo": "",
     "ArtifactType": "XD",
     "Id": 35,
-    "Name": "Gladiator\u0027s Trident",
+    "Name": "Gladiator's Trident",
     "Value": 1,
     "Rarity": "Mythic",
     "Description": "All damage dealt is increased by 50% for the first few seconds in combat. Against Monsters, the duration is 2 seconds; against Bosses - 5 seconds. The duration is refreshed each time you kill a Monster."
