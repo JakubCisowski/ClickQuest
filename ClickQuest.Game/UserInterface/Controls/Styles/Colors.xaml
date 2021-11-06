@@ -22,6 +22,8 @@
 	<Color x:Key="ColorGameS">#FF0000 </Color> <!-- 18 / Equipped artifact -->
 	<Color x:Key="ColorGameT">#006400 </Color> <!-- 19 / Shop/Priest/Blacksmith border -->
 	<Color x:Key="ColorGameU">#61B05A </Color> <!-- 20 / Hovered tab header (equipment/shop/priest/blacksmith)  -->
+	<Color x:Key="ColorGameV">#EDF9FD </Color> <!-- 21 / Shop/Priest/Blacksmith header background  -->
+	<Color x:Key="ColorGameW">#666666 </Color> <!-- 22 / Shop/Priest/Blacksmith header font color  -->
 
 	<Color x:Key="ColorLightGray">#c9c9c9 </Color>
 	<Color x:Key="ColorDarkGray">#666666 </Color>
@@ -79,6 +81,8 @@
 	<SolidColorBrush x:Key="BrushGameS" Color="{StaticResource ColorGameS}" />
 	<SolidColorBrush x:Key="BrushGameT" Color="{StaticResource ColorGameT}" />
 	<SolidColorBrush x:Key="BrushGameU" Color="{StaticResource ColorGameU}" />
+	<SolidColorBrush x:Key="BrushGameV" Color="{StaticResource ColorGameV}" />
+	<SolidColorBrush x:Key="BrushGameW" Color="{StaticResource ColorGameW}" />
 
 	<SolidColorBrush x:Key="BrushLightGray" Color="{StaticResource ColorLightGray}" />
 	<SolidColorBrush x:Key="BrushDarkGray" Color="{StaticResource ColorDarkGray}" />

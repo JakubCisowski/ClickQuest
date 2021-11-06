@@ -105,7 +105,10 @@
 								<!-- Name column-->
 								<GridViewColumn Header="Name" Width="240" DisplayMemberBinding="{Binding Name}">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -116,7 +119,10 @@
 								<!-- Rarity column-->
 								<GridViewColumn Header="Rarity" Width="110" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -127,7 +133,10 @@
 								<!-- Quantity column-->
 								<GridViewColumn Header="Quantity" Width="70" DisplayMemberBinding="{Binding Quantity}">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -138,7 +147,10 @@
 								<!-- Value column-->
 								<GridViewColumn Header="Value" Width="70" DisplayMemberBinding="{Binding Value}">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -149,7 +161,10 @@
 								<!-- Melt column-->
 								<GridViewColumn Width="140">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -213,7 +228,10 @@
 								<!-- Name column-->
 								<GridViewColumn Header="Name" Width="240" DisplayMemberBinding="{Binding Name}">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -224,7 +242,10 @@
 								<!-- Rarity column-->
 								<GridViewColumn Header="Rarity" Width="110" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -235,7 +256,10 @@
 								<!-- Quantity column-->
 								<GridViewColumn Header="Quantity" Width="70" DisplayMemberBinding="{Binding Quantity}">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -246,7 +270,10 @@
 								<!-- Value column-->
 								<GridViewColumn Header="Value" Width="70" DisplayMemberBinding="{Binding Value}">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -257,7 +284,10 @@
 								<!-- Melt artifact column-->
 								<GridViewColumn Width="140">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -321,7 +351,10 @@
 								<!-- Name column-->
 								<GridViewColumn Header="Name" Width="360" DisplayMemberBinding="{Binding Name}">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -332,7 +365,10 @@
 								<!-- Rarity column-->
 								<GridViewColumn Header="Rarity" Width="140" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -343,7 +379,10 @@
 								<!-- Craft with materials column-->
 								<GridViewColumn Width="120">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -367,7 +406,10 @@
 								<!-- Craft with ingots column-->
 								<GridViewColumn Width="150">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />

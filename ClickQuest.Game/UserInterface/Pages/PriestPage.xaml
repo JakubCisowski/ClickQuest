@@ -106,7 +106,10 @@
 								<!-- Name column-->
 								<GridViewColumn Header="Name" Width="410" DisplayMemberBinding="{Binding Name}">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -117,7 +120,10 @@
 								<!-- Value column-->
 								<GridViewColumn Header="Value" Width="100" DisplayMemberBinding="{Binding Value}">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -128,7 +134,10 @@
 								<!-- Buy column-->
 								<GridViewColumn Width="120">
 									<GridViewColumn.HeaderContainerStyle>
-										<Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+										<Style TargetType="{x:Type GridViewColumnHeader}">
+											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
