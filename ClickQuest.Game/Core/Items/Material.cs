@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using System.Windows.Controls;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
@@ -9,7 +10,7 @@ namespace ClickQuest.Game.Core.Items
 	public class Material : Item
 	{
 		public const int BaseMeltingIngotBonus = 10;
-
+		
 		public override Material CopyItem(int quantity)
 		{
 			var copy = new Material();

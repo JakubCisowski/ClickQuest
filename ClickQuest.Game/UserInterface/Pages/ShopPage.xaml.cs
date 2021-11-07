@@ -28,7 +28,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			ItemsListViewSellMaterials.ItemsSource = User.Instance.CurrentHero?.Materials;
 			ItemsListViewSellRecipes.ItemsSource = User.Instance.CurrentHero?.Recipes;
-
+			
 			if (User.Instance.CurrentHero != null)
 			{
 				ItemsListViewBuy.ItemsSource = GetShopOfferAsRecipes();

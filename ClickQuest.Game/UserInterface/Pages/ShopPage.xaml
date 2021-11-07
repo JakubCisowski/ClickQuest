@@ -76,26 +76,7 @@
 								<Setter Property="HorizontalContentAlignment" Value="Center" />
 								<Setter Property="ToolTipService.ShowDuration" Value="20000" />
 								<Setter Property="ToolTipService.InitialShowDelay" Value="100" />
-								<Setter Property="ToolTip">
-									<Setter.Value>
-										<ToolTip>
-											<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-												<Run Text="{Binding Name}" />
-												<LineBreak />
-												<Run Text="*" />
-												<Run Text="{Binding RarityString, Mode=OneWay}" />
-												<Run Text="*" />
-												<LineBreak />
-												<LineBreak />
-												<Run Text="{Binding Description}" />
-												<LineBreak />
-												<Run Text="Value:" />
-												<Run Text="{Binding Value}" />
-												<Run Text="gold" />
-											</TextBlock>
-										</ToolTip>
-									</Setter.Value>
-								</Setter>
+								<Setter Property="ToolTip" Value="{Binding ToolTip}"/>
 							</Style>
 						</ListView.ItemContainerStyle>
 
@@ -201,24 +182,7 @@
 								<Setter Property="HorizontalContentAlignment" Value="Center" />
 								<Setter Property="ToolTipService.ShowDuration" Value="20000" />
 								<Setter Property="ToolTipService.InitialShowDelay" Value="100" />
-								<Setter Property="ToolTip">
-									<Setter.Value>
-										<ToolTip>
-											<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-												<Run Text="{Binding Name}" />
-												<LineBreak />
-												<Run Text="*" />
-												<Run Text="{Binding RarityString, Mode=OneWay}" />
-												<Run Text="*" />
-												<LineBreak />
-												<LineBreak />
-												<Run Text="{Binding Description}" />
-												<LineBreak />
-												<Run Text="{Binding RequirementsDescription, Mode=OneWay}" />
-											</TextBlock>
-										</ToolTip>
-									</Setter.Value>
-								</Setter>
+								<Setter Property="ToolTip" Value="{Binding ToolTip}"/>
 							</Style>
 						</ListView.ItemContainerStyle>
 
@@ -324,24 +288,7 @@
 								<Setter Property="HorizontalContentAlignment" Value="Center" />
 								<Setter Property="ToolTipService.ShowDuration" Value="20000" />
 								<Setter Property="ToolTipService.InitialShowDelay" Value="100" />
-								<Setter Property="ToolTip">
-									<Setter.Value>
-										<ToolTip>
-											<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-												<Run Text="{Binding Name}" />
-												<LineBreak />
-												<Run Text="*" />
-												<Run Text="{Binding RarityString, Mode=OneWay}" />
-												<Run Text="*" />
-												<LineBreak />
-												<LineBreak />
-												<Run Text="{Binding Description}" />
-												<LineBreak />
-												<Run Text="{Binding RequirementsDescription, Mode=OneWay}" />
-											</TextBlock>
-										</ToolTip>
-									</Setter.Value>
-								</Setter>
+								<Setter Property="ToolTip" Value="{Binding ToolTip}"/>
 							</Style>
 						</ListView.ItemContainerStyle>
 

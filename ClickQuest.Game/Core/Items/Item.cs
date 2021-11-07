@@ -1,7 +1,9 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
+using System.Windows.Controls;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Extensions.UserInterface;
 
 namespace ClickQuest.Game.Core.Items
 {
@@ -15,6 +17,9 @@ namespace ClickQuest.Game.Core.Items
 		public int Value { get; set; }
 		public Rarity Rarity { get; set; }
 		public virtual string Description { get; set; }
+		
+		[JsonIgnore]
+		public ToolTip ToolTip => TooltipController.GenerateEquipmentItemTooltip(this);
 
 		public int Quantity
 		{

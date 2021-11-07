@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Interfaces;
@@ -59,6 +60,9 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 				return Duration <= 0;
 			}
 		}
+
+		[JsonIgnore]
+		public ToolTip ToolTip => TooltipController.GenerateBlessingTooltip(this);
 
 		public Blessing CopyBlessing()
 		{

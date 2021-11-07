@@ -234,6 +234,51 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			return specToolTip;
 		}
 
+		public static ToolTip GenerateBlessingTooltip(Blessing blessing)
+		{
+			/*
+			 * <ToolTip>
+											<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+												<Run Text="{Binding Name}" />
+												<LineBreak />
+												<Run Text="*" />
+												<Run Text="{Binding RarityString, Mode=OneWay}" />
+												<Run Text="*" />
+												<LineBreak />
+												<LineBreak />
+												<Run Text="{Binding Description}" />
+												<LineBreak />
+												<Run Text="Duration:" />
+												<Run Text="{Binding Duration}" /><Run Text="s" />
+											</TextBlock>
+										</ToolTip>
+			 */
+
+			var blessingTooltip = new ToolTip();
+
+			var blessingTooltipTextBlock = new TextBlock
+			{
+				Style = (Style)Application.Current.FindResource("ToolTipTextBlockBase")
+			};
+			
+			blessingTooltipTextBlock.Inlines.Add(new Run($"{blessing.Name}"));
+			blessingTooltipTextBlock.Inlines.Add(new LineBreak());
+			blessingTooltipTextBlock.Inlines.Add(new Run($"*{blessing.RarityString}*")
+			{
+				Foreground = Colors.GetRarityColor((Rarity)blessing.Rarity),
+				FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold")
+			});
+			blessingTooltipTextBlock.Inlines.Add(new LineBreak());
+			blessingTooltipTextBlock.Inlines.Add(new LineBreak());
+			blessingTooltipTextBlock.Inlines.Add(new Run($"{blessing.Description}"));
+			blessingTooltipTextBlock.Inlines.Add(new LineBreak());
+			blessingTooltipTextBlock.Inlines.Add(new Run($"Duration: {blessing.Duration}s"));
+
+			blessingTooltip.Content = blessingTooltipTextBlock;
+
+			return blessingTooltip;
+		}
+
 		public static void SetTooltipDelayAndDuration(DependencyObject control)
 		{
 			ToolTipService.SetInitialShowDelay(control, 100);
