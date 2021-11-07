@@ -62,7 +62,6 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			{
 				CornerRadius = new CornerRadius(20),
 				BorderThickness = new Thickness(5),
-				// Background = (SolidColorBrush)Application.Current.FindResource("BrushGameC"),
 				Padding = new Thickness(2)
 			};
 
