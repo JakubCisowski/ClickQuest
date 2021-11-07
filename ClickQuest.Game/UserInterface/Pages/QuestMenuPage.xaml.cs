@@ -78,7 +78,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			// Check if any quest is currently assigned - if so, user can't reroll quests.
 			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
 			{
-				// Later: add price.
+				// Later: add price and -gold floating text.
 				RerollQuests();
 
 				// Increase achievement amount.

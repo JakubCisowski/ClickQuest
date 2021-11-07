@@ -1,4 +1,5 @@
-﻿using ClickQuest.Game.Extensions.Combat;
+﻿using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Extensions.Combat;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Windows;
@@ -12,6 +13,24 @@ namespace ClickQuest.Game.Extensions.UserInterface
 {
 	public static class FloatingTextController
 	{
+		public const int IngotDungeonKeyOffset = 22;
+		public static Point GoldPositionPoint = new Point() { X = 200, Y = 225 };
+		public static Point ExperiencePositionPoint = new Point() { X = 200, Y = 50 };
+		public static Point IngotGeneralPositionPoint = new Point() { X = 110, Y = 250 };
+		public static Point DungeonKeyGeneralPositionPoint = new Point() { X = 285, Y = 250 };
+
+
+		public static Point IngotFinePositionPoint = new Point() { X = IngotGeneralPositionPoint.X, Y = IngotGeneralPositionPoint.Y + IngotDungeonKeyOffset };
+		public static Point IngotSuperiorPositionPoint = new Point() { X = IngotGeneralPositionPoint.X, Y = IngotFinePositionPoint.Y + IngotDungeonKeyOffset };
+		public static Point IngotExceptionalPositionPoint = new Point() { X = IngotGeneralPositionPoint.X, Y = IngotSuperiorPositionPoint.Y + IngotDungeonKeyOffset };
+		public static Point IngotMasterworkPositionPoint = new Point() { X = IngotGeneralPositionPoint.X, Y = IngotExceptionalPositionPoint.Y + IngotDungeonKeyOffset };
+		public static Point IngotMythicPositionPoint = new Point() { X = IngotGeneralPositionPoint.X, Y = IngotMasterworkPositionPoint.Y + IngotDungeonKeyOffset };
+		public static Point DungeonKeyFinePositionPoint = new Point() { X = DungeonKeyGeneralPositionPoint.X, Y = DungeonKeyGeneralPositionPoint.Y + IngotDungeonKeyOffset };
+		public static Point DungeonKeySuperiorPositionPoint = new Point() { X = DungeonKeyGeneralPositionPoint.X, Y = DungeonKeyFinePositionPoint.Y + IngotDungeonKeyOffset };
+		public static Point DungeonKeyExceptionalPositionPoint = new Point() { X = DungeonKeyGeneralPositionPoint.X, Y = DungeonKeySuperiorPositionPoint.Y + IngotDungeonKeyOffset };
+		public static Point DungeonKeyMasterworkPositionPoint = new Point() { X = DungeonKeyGeneralPositionPoint.X, Y = DungeonKeyExceptionalPositionPoint.Y + IngotDungeonKeyOffset };
+		public static Point DungeonKeyMythicPositionPoint = new Point() { X = DungeonKeyGeneralPositionPoint.X, Y = DungeonKeyMasterworkPositionPoint.Y + IngotDungeonKeyOffset };
+
 		public static DoubleAnimation CreateTextOpacityAnimation(int durationInSeconds)
 		{
 			var textVisibilityAnimation = new DoubleAnimation
@@ -37,13 +56,13 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			return (randomizedPositionX, randomizedPositionY);
 		}
 
-		public static Border CreateFloatingTextPanel(int damageValue, DamageType damageType)
+		public static Border CreateFloatingTextCombatBorder(int damageValue, DamageType damageType)
 		{
 			var border = new Border
 			{
 				CornerRadius = new CornerRadius(20),
 				BorderThickness = new Thickness(5),
-				Background = (SolidColorBrush)Application.Current.FindResource("BrushGameC"),
+				// Background = (SolidColorBrush)Application.Current.FindResource("BrushGameC"),
 				Padding = new Thickness(2)
 			};
 
@@ -72,6 +91,35 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			{
 				text.FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold");
 			}
+
+			stackPanel.Children.Add(text);
+
+			border.Child = stackPanel;
+
+			return border;
+		}
+
+		public static Border CreateFloatingTextUtilityBorder(string value, SolidColorBrush textBrush)
+		{
+			var border = new Border
+			{
+				CornerRadius = new CornerRadius(20),
+				BorderThickness = new Thickness(5),
+				Padding = new Thickness(2)
+			};
+
+			var stackPanel = new StackPanel
+			{
+				Orientation = Orientation.Horizontal
+			};
+
+			var text = new TextBlock
+			{
+				Text = value,
+				Foreground = textBrush,
+				FontSize = 28,
+				VerticalAlignment = VerticalAlignment.Center
+			};
 
 			stackPanel.Children.Add(text);
 
@@ -117,6 +165,74 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			}
 
 			return icon;
+		}
+
+		public static Point GetIngotRarityPosition(Rarity rarity)
+		{
+			Point point;
+
+			switch (rarity)
+			{
+				case Rarity.General:
+					point = IngotGeneralPositionPoint;
+					break;
+
+				case Rarity.Fine:
+					point = IngotFinePositionPoint;
+					break;
+
+				case Rarity.Superior:
+					point = IngotSuperiorPositionPoint;
+					break;
+
+				case Rarity.Exceptional:
+					point = IngotExceptionalPositionPoint;
+					break;
+
+				case Rarity.Masterwork:
+					point = IngotMasterworkPositionPoint;
+					break;
+
+				case Rarity.Mythic:
+					point = IngotMythicPositionPoint;
+					break;
+			}
+
+			return point;
+		}
+
+		public static Point GetDungeonKeyRarityPosition(Rarity rarity)
+		{
+			Point point;
+
+			switch (rarity)
+			{
+				case Rarity.General:
+					point = DungeonKeyGeneralPositionPoint;
+					break;
+
+				case Rarity.Fine:
+					point = DungeonKeyFinePositionPoint;
+					break;
+
+				case Rarity.Superior:
+					point = DungeonKeySuperiorPositionPoint;
+					break;
+
+				case Rarity.Exceptional:
+					point = DungeonKeyExceptionalPositionPoint;
+					break;
+
+				case Rarity.Masterwork:
+					point = DungeonKeyMasterworkPositionPoint;
+					break;
+
+				case Rarity.Mythic:
+					point = DungeonKeyMythicPositionPoint;
+					break;
+			}
+
+			return point;
 		}
 	}
 }

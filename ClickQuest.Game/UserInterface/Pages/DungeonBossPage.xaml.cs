@@ -81,7 +81,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			int maximumPositionOffset = 50;
 			var mousePosition = Mouse.GetPosition(DamageTextCanvas);
 
-			var panel = FloatingTextController.CreateFloatingTextPanel(damage, damageType);
+			var panel = FloatingTextController.CreateFloatingTextCombatBorder(damage, damageType);
 
 			var randomizedPositions = FloatingTextController.RandomizeFloatingTextPathPosition(mousePosition, DamageTextCanvas.ActualWidth, DamageTextCanvas.ActualHeight, maximumPositionOffset);
 

@@ -1,6 +1,8 @@
+using System.Windows;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.UserInterface.Windows;
 
 namespace ClickQuest.Game.Core.Items
 {
@@ -54,6 +56,11 @@ namespace ClickQuest.Game.Core.Items
 		{
 			CollectionsController.AddItemToCollection(this, User.Instance.Ingots, amount);
 
+			if (amount!=0)
+			{
+				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{amount}", ColorsController.GetRarityColor(Rarity), FloatingTextController.GetIngotRarityPosition(Rarity));
+			}
+
 			AddAchievementProgress();
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 		}
@@ -61,6 +68,12 @@ namespace ClickQuest.Game.Core.Items
 		public override void RemoveItem(int amount = 1)
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.Ingots, amount);
+
+			if (amount!=0)
+			{
+				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{amount}", ColorsController.GetRarityColor(Rarity), FloatingTextController.GetIngotRarityPosition(Rarity));
+
+			}
 		}
 	}
 }

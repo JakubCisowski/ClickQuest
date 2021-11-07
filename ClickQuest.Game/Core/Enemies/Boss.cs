@@ -115,11 +115,6 @@ namespace ClickQuest.Game.Core.Enemies
 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 
-			// Grant gold reward.
-			int goldReward = 2137; // (change value later)
-			User.Instance.Gold += goldReward;
-			lootText += "- " + goldReward + " (gold)\n";
-
 			// [PRERELEASE] Display exp and loot for testing purposes.
 			InterfaceController.CurrentBossPage.TestRewardsBlock.Text = lootText;
 

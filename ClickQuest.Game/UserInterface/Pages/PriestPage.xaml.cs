@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Windows;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
@@ -67,6 +69,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 				{
 					Blessing.AddOrReplaceBlessing(blessingBlueprint.Id);
 				}
+
+				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{blessingBlueprint.Value}", (SolidColorBrush)this.FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
 
 				User.Instance.Gold -= blessingBlueprint.Value;
 

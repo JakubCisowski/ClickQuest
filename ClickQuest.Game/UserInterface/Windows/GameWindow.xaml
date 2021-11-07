@@ -51,7 +51,11 @@
 			</Image>
 		</Grid>
 
-		<!-- Game frame-->
-		<Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden" Background="Transparent" />
+		<Grid x:Name="MainGrid">
+			<!-- Game frame-->
+			<Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden" Background="Transparent" />
+
+			<Canvas x:Name="FloatingTextAnimationCanvas" Width="{Binding ActualWidth, ElementName=MainGrid}" Height="{Binding ActualHeight, ElementName=MainGrid}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+		</Grid>
 	</StackPanel>
 </Window>

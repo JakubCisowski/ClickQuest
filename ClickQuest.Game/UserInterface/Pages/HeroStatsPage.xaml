@@ -57,7 +57,7 @@
             <Separator Height="2" Width="200" Margin="10" />
 
             <!-- Hero stats grid -->
-            <Grid>
+            <Grid x:Name="MainGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -65,12 +65,12 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
 
-                <!-- Click damage panel-->
+				<!-- Click damage panel-->
                 <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
                     <!-- Click damage info tooltip -->
                     <StackPanel.ToolTip>
@@ -180,12 +180,14 @@
             <Separator Height="2" Width="200" Margin="10" />
 
             <!-- Gold panel -->
-            <StackPanel x:Name="GoldPanel" Orientation="Horizontal" HorizontalAlignment="Center" Background="Transparent">
-                <!-- Gold icon-->
-                <materialDesign:PackIcon Width="22" Height="22" Kind="CheckboxMultipleBlankCircle" Foreground="{StaticResource BrushGold}" VerticalAlignment="Center" />
-                <!-- Gold text-->
-                <TextBlock x:Name="GoldBlock" FontSize="18" Margin="3" VerticalAlignment="Center" />
-            </StackPanel>
+			<Grid x:Name="GoldGrid">
+				<StackPanel x:Name="GoldPanel" Orientation="Horizontal" HorizontalAlignment="Center" Background="Transparent">
+					<!-- Gold icon-->
+					<materialDesign:PackIcon Width="22" Height="22" Kind="CheckboxMultipleBlankCircle" Foreground="{StaticResource BrushGold}" VerticalAlignment="Center" />
+					<!-- Gold text-->
+					<TextBlock x:Name="GoldBlock" FontSize="18" Margin="3" VerticalAlignment="Center" />
+            	</StackPanel>
+			</Grid>
 
             <!-- Ingots & Dungeon keys panel-->
             <StackPanel>

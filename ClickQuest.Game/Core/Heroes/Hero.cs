@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.Json.Serialization;
+using System.Windows;
+using System.Windows.Media;
 using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
+using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.UserInterface.Windows;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 
 namespace ClickQuest.Game.Core.Heroes
@@ -368,6 +372,8 @@ namespace ClickQuest.Game.Core.Heroes
 			{
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.ExperienceGained, experienceGained);
 			}
+
+			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{value}", (SolidColorBrush)Application.Current.FindResource("BrushExperienceRelated"), FloatingTextController.ExperiencePositionPoint);
 
 			Experience += value;
 			Heroes.Experience.CheckIfLeveledUpAndGrantBonuses(this);

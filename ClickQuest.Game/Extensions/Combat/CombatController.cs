@@ -5,6 +5,7 @@ using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Windows;
 
 namespace ClickQuest.Game.Extensions.Combat
 {
@@ -76,16 +77,8 @@ namespace ClickQuest.Game.Extensions.Combat
 
 			InterfaceController.CurrentEnemy.CurrentHealth -= damage;
 
-			// todo: zrobic to lepiej potem
 			// Invoke floating text method.
-			if (InterfaceController.CurrentEnemy is Monster)
-			{
-				InterfaceController.CurrentMonsterButton.CreateFloatingTextPathAndStartAnimations(damage, damageType);
-			}
-			else if (InterfaceController.CurrentEnemy is Boss)
-			{
-				InterfaceController.CurrentBossPage.CreateFloatingTextPathAndStartAnimations(damage, damageType);
-			}
+			(Application.Current.MainWindow as GameWindow).CreateFloatingTextCombat(damage, damageType);
 
 			InterfaceController.CurrentEnemy.HandleEnemyDeathIfDefeated();
 		}

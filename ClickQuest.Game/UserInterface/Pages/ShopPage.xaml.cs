@@ -1,14 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Windows;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
@@ -83,6 +85,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 				itemSellValue = item.Value;
 			}
 
+			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{itemSellValue}", (SolidColorBrush)this.FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+
 			item.RemoveItem();
 			User.Instance.Gold += itemSellValue;
 
@@ -103,6 +107,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 				{
 					return;
 				}
+
+				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{recipe.Value}", (SolidColorBrush)this.FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
 
 				recipe.AddItem();
 				User.Instance.Gold -= recipe.Value;

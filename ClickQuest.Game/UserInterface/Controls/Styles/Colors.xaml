@@ -43,6 +43,8 @@
 
 	<Color x:Key="ColorQuestRare">#FFA237 </Color>
 
+	<Color x:Key="ColorExperienceRelated">#FFFFFF </Color>
+
 	<Color x:Key="ColorSlayerRelated">#FF4242  </Color>
 	<Color x:Key="ColorVenomRelated">#008500  </Color>
 
@@ -103,6 +105,7 @@
 	<SolidColorBrush x:Key="BrushQuestRare" Color="{StaticResource ColorQuestRare}" /> <!-- Rare quest - Orange? -->
 
 	<!-- Class and damage type colors -->
+	<SolidColorBrush x:Key="BrushExperienceRelated" Color="{StaticResource ColorExperienceRelated}" />
 
 	<SolidColorBrush x:Key="BrushSlayerRelated" Color="{StaticResource ColorSlayerRelated}" />
 	<SolidColorBrush x:Key="BrushVenomRelated" Color="{StaticResource ColorVenomRelated}" />

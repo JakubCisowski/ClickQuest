@@ -3,6 +3,7 @@ using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -13,7 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
-using ClickQuest.Game.Extensions.Combat;
+using System.Windows.Media.Animation;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
@@ -314,7 +315,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					case SpecializationType.Crafting:
 						nameText = "Craftsman";
 						block.Inlines.Add(" → Can craft ");
-						block.Inlines.Add(new Run(User.Instance.CurrentHero.Specialization.SpecCraftingText){ Foreground = ColorsController.GetRarityColor((Rarity)User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting]) }) ;
+						block.Inlines.Add(new Run(User.Instance.CurrentHero.Specialization.SpecCraftingText) { Foreground = ColorsController.GetRarityColor((Rarity)User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting]) });
 						block.Inlines.Add(" recipes");
 						break;
 
@@ -373,24 +374,24 @@ namespace ClickQuest.Game.UserInterface.Pages
 			switch (User.Instance.CurrentHero?.HeroClass)
 			{
 				case HeroClass.Slayer:
-					block.Inlines.Add(new Run("This class specializes in powerful critical clicks that deal double damage"){Foreground=ColorsController.GetHeroClassColor(HeroClass.Slayer)});
+					block.Inlines.Add(new Run("This class specializes in powerful critical clicks that deal double damage") { Foreground = ColorsController.GetHeroClassColor(HeroClass.Slayer) });
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new Run("Click damage: 2 (+1/lvl)"));
 					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Crit chance: "){Foreground=ColorsController.GetHeroClassColor(HeroClass.Slayer)});
+					block.Inlines.Add(new Run("Crit chance: ") { Foreground = ColorsController.GetHeroClassColor(HeroClass.Slayer) });
 					block.Inlines.Add(new Run("25% (+0.4%/lvl)"));
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new LineBreak());
 					break;
 
 				case HeroClass.Venom:
-					block.Inlines.Add(new Run("This class specializes in poisonous clicks that deal additional damage over time"){Foreground=ColorsController.GetHeroClassColor(HeroClass.Venom)});
+					block.Inlines.Add(new Run("This class specializes in poisonous clicks that deal additional damage over time") { Foreground = ColorsController.GetHeroClassColor(HeroClass.Venom) });
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new Run("Click damage: 2 (+1/lvl)"));
 					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Poison damage: "){Foreground=ColorsController.GetHeroClassColor(HeroClass.Venom)});
+					block.Inlines.Add(new Run("Poison damage: ") { Foreground = ColorsController.GetHeroClassColor(HeroClass.Venom) });
 					block.Inlines.Add(new Run("1 (+2/lvl) per tick (5 ticks over 2.5s)"));
 					block.Inlines.Add(new LineBreak());
 					block.Inlines.Add(new LineBreak());
