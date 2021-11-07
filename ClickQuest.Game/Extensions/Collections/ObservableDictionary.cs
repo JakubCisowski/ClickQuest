@@ -31,7 +31,7 @@ namespace ClickQuest.Game.Extensions.Collections
 
 		// Custom events.
 
-		// Handle updating specialization text and tooltips - only for Specialization.SpecializationAmounts.
+		// Handle updating specialization text and ToolTips - only for Specialization.SpecializationAmounts.
 		// Handle specialization buffs, amounts and threshold updates - for collections in Specialization.
 		public event SpecializationCollectionUpdatedEventHandler SpecializationCollectionUpdated;
 

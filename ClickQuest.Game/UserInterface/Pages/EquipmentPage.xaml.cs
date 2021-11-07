@@ -103,7 +103,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 					border.PreviewMouseUp += ItemBorder_TryToEquip;
 
-					GeneralToolTipController.SetTooltipDelayAndDuration(border);
+					GeneralToolTipController.SetToolTipDelayAndDuration(border);
 
 					var toolTip = ItemToolTipController.GenerateItemToolTip(item);
 					border.ToolTip = toolTip;

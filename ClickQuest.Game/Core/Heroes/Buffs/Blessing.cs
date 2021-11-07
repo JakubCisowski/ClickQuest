@@ -45,7 +45,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		public bool IsFinished => Duration <= 0;
 
 		[JsonIgnore]
-		public ToolTip ToolTip => ItemToolTipController.GenerateBlessingTooltip(this);
+		public ToolTip ToolTip => ItemToolTipController.GenerateBlessingToolTip(this);
 
 		public Blessing CopyBlessing()
 		{

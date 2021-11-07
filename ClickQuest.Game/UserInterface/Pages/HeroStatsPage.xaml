@@ -35,7 +35,7 @@
 
             <!-- Experience grid -->
             <Grid ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
-                <!-- Experience progress bar tooltip -->
+                <!-- Experience progress bar ToolTip -->
                 <Grid.ToolTip>
                     <ToolTip>
                         <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
@@ -72,7 +72,7 @@
 
 				<!-- Click damage panel-->
                 <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
-                    <!-- Click damage info tooltip -->
+                    <!-- Click damage info ToolTip -->
                     <StackPanel.ToolTip>
                         <ToolTip BorderBrush="{StaticResource BrushDamageTypeNormal}" BorderThickness="1">
                             <TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
@@ -99,7 +99,7 @@
 
                 <!-- Crit panel -->
                 <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
-                    <!-- Crit info tooltip -->
+                    <!-- Crit info ToolTip -->
                     <StackPanel.ToolTip>
                         <ToolTip BorderBrush="{StaticResource BrushDamageTypeCritical}" BorderThickness="1">
                             <TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
@@ -126,7 +126,7 @@
 
                 <!-- Poison damage panel -->
                 <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
-                    <!-- Poison damage tooltip -->
+                    <!-- Poison damage ToolTip -->
                     <StackPanel.ToolTip>
                         <ToolTip BorderBrush="{StaticResource BrushDamageTypePoison}" BorderThickness="1">
                             <TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
@@ -151,7 +151,7 @@
 
                 <!-- Aura panel -->
                 <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
-                    <!-- Aura tooltip -->
+                    <!-- Aura ToolTip -->
                     <StackPanel.ToolTip>
                         <ToolTip BorderBrush="{StaticResource BrushDamageTypeAura}" BorderThickness="1">
                             <TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">

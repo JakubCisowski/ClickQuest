@@ -33,7 +33,7 @@
 
 		<!-- Hero name input -->
 		<TextBox x:Name="HeroNameBox" HorizontalAlignment="Center" Width="200" Margin="30" HorizontalContentAlignment="Center" FontSize="24" Style="{StaticResource MaterialDesignTextBox}" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" FontFamily="{StaticResource FontFancy}">
-			<!-- Tooltip -->
+			<!-- ToolTip -->
 			<TextBox.ToolTip>
 				<ToolTip>
 					<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
@@ -53,7 +53,7 @@
 			<StackPanel>
 				<!-- Class text-->
 				<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Class" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
-					<!-- Tooltip -->
+					<!-- ToolTip -->
 					<TextBlock.ToolTip>
 						<ToolTip>
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
@@ -91,7 +91,7 @@
 										
 										<Setter Property="Foreground" Value="{StaticResource BrushSlayerRelated}"/>
 										
-										<!-- Tooltip -->
+										<!-- ToolTip -->
 										<Setter Property="ToolTip">
 											<Setter.Value>
 												<ToolTip>
@@ -113,7 +113,7 @@
 										
 										<Setter Property="Foreground" Value="{StaticResource BrushVenomRelated}"/>
 										
-										<!-- Tooltip -->
+										<!-- ToolTip -->
 										<Setter Property="ToolTip">
 											<Setter.Value>
 												<ToolTip>
@@ -139,7 +139,7 @@
 			<!-- Race panel-->
 			<StackPanel Margin="80,0,0,0">
 				<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Race" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100">
-					<!-- Tooltip -->
+					<!-- ToolTip -->
 					<TextBlock.ToolTip>
 						<ToolTip>
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
@@ -174,7 +174,7 @@
 								<Style.Triggers>
 									<!-- Human race -->
 									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroRace.Human}">
-										<!-- Tooltip -->
+										<!-- ToolTip -->
 										<Setter Property="ToolTip">
 											<Setter.Value>
 												<ToolTip>
@@ -195,7 +195,7 @@
 
 									<!-- Elf race -->
 									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroRace.Elf}">
-										<!-- Tooltip -->
+										<!-- ToolTip -->
 										<Setter Property="ToolTip">
 											<Setter.Value>
 												<ToolTip>
@@ -216,7 +216,7 @@
 
 									<!-- Dwarf race -->
 									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroRace.Dwarf}">
-										<!-- Tooltip -->
+										<!-- ToolTip -->
 										<Setter Property="ToolTip">
 											<Setter.Value>
 												<ToolTip>

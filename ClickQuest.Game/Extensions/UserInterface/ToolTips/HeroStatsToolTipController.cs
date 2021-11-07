@@ -16,9 +16,9 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 {
 	public static class HeroStatsToolTipController
 	{
-		public static ToolTip GenerateSpecizaltionTooltip(SpecializationType typeOfGeneratedSpecialization, int nextUpgrade)
+		public static ToolTip GenerateSpecizaltionToolTip(SpecializationType typeOfGeneratedSpecialization, int nextUpgrade)
 		{
-			// Generate SpecTrading tooltips.
+			// Generate SpecTrading ToolTips.
 			var specToolTip = new ToolTip();
 
 			var toolTipBlock = new TextBlock

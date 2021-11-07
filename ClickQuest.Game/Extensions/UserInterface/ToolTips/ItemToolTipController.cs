@@ -21,7 +21,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 		const string TagClosingStart = "</";
 		const string TagEnd = ">";
 		
-		public static ToolTip GenerateItemToolTip<T>(T itemToGenerateTooltipFor) where T : Item
+		public static ToolTip GenerateItemToolTip<T>(T itemToGenerateToolTipFor) where T : Item
 		{
 			var toolTip = new ToolTip();
 
@@ -30,7 +30,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 				Style = (Style)Application.Current.FindResource("ToolTipTextBlockBase")
 			};
 
-			switch (itemToGenerateTooltipFor)
+			switch (itemToGenerateToolTipFor)
 			{
 				case Material material:
 					{
@@ -110,51 +110,51 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 			return toolTip;
 		}
 
-		public static ToolTip GenerateCurrencyTooltip<T>(int rarityValue) where T : Item
+		public static ToolTip GenerateCurrencyToolTip<T>(int rarityValue) where T : Item
 		{
-			var currencyTooltip = new ToolTip();
+			var currencyToolTip = new ToolTip();
 
-			var currencyTooltipTextBlock = new TextBlock
+			var currencyToolTipTextBlock = new TextBlock
 			{
 				Style = (Style)Application.Current.FindResource("ToolTipTextBlockBase"),
 				FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold")
 			};
 
 			var currencyColor = Colors.GetRarityColor((Rarity)rarityValue);
-			currencyTooltipTextBlock.Foreground = currencyColor;
+			currencyToolTipTextBlock.Foreground = currencyColor;
 
-			currencyTooltipTextBlock.Text = (Rarity)rarityValue + " " + (typeof(T) == typeof(Ingot) ? "Ingots" : "Dungeon Keys");
+			currencyToolTipTextBlock.Text = (Rarity)rarityValue + " " + (typeof(T) == typeof(Ingot) ? "Ingots" : "Dungeon Keys");
 
-			currencyTooltip.Content = currencyTooltipTextBlock;
+			currencyToolTip.Content = currencyToolTipTextBlock;
 
-			return currencyTooltip;
+			return currencyToolTip;
 		}
 
-		public static ToolTip GenerateBlessingTooltip(Blessing blessing)
+		public static ToolTip GenerateBlessingToolTip(Blessing blessing)
 		{
-			var blessingTooltip = new ToolTip();
+			var blessingToolTip = new ToolTip();
 
-			var blessingTooltipTextBlock = new TextBlock
+			var blessingToolTipTextBlock = new TextBlock
 			{
 				Style = (Style)Application.Current.FindResource("ToolTipTextBlockBase")
 			};
 			
-			blessingTooltipTextBlock.Inlines.Add(new Run($"{blessing.Name}"));
-			blessingTooltipTextBlock.Inlines.Add(new LineBreak());
-			blessingTooltipTextBlock.Inlines.Add(new Run($"*{blessing.RarityString}*")
+			blessingToolTipTextBlock.Inlines.Add(new Run($"{blessing.Name}"));
+			blessingToolTipTextBlock.Inlines.Add(new LineBreak());
+			blessingToolTipTextBlock.Inlines.Add(new Run($"*{blessing.RarityString}*")
 			{
 				Foreground = Colors.GetRarityColor((Rarity)blessing.Rarity),
 				FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold")
 			});
-			blessingTooltipTextBlock.Inlines.Add(new LineBreak());
-			blessingTooltipTextBlock.Inlines.Add(new LineBreak());
-			blessingTooltipTextBlock.Inlines.Add(new Run($"{blessing.Description}"));
-			blessingTooltipTextBlock.Inlines.Add(new LineBreak());
-			blessingTooltipTextBlock.Inlines.Add(new Run($"Duration: {blessing.Duration}s"));
+			blessingToolTipTextBlock.Inlines.Add(new LineBreak());
+			blessingToolTipTextBlock.Inlines.Add(new LineBreak());
+			blessingToolTipTextBlock.Inlines.Add(new Run($"{blessing.Description}"));
+			blessingToolTipTextBlock.Inlines.Add(new LineBreak());
+			blessingToolTipTextBlock.Inlines.Add(new Run($"Duration: {blessing.Duration}s"));
 
-			blessingTooltip.Content = blessingTooltipTextBlock;
+			blessingToolTip.Content = blessingToolTipTextBlock;
 
-			return blessingTooltip;
+			return blessingToolTip;
 		}
 
 		public static List<Run> GenerateArtifactDescriptionRuns(string description)

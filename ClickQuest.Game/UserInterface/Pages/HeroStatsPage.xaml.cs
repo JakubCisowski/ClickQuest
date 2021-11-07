@@ -24,7 +24,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 		private readonly Hero _hero;
 
 		public HeroStatsPage()
-
 		{
 			InitializeComponent();
 
@@ -51,11 +50,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 			UpdateQuestTimer();
 			UpdateBlessingTimer();
 			UpdateSpecializationsInterface();
-			GenerateHeroInfoTooltip();
-			GenerateStatValueAuraTooltip();
-			GenerateStatValueDamageTooltip();
-			GenerateStatValuePoisonTooltip();
-			GenerateStatValueCritTooltip();
+			GenerateHeroInfoToolTip();
+			GenerateStatValueAuraToolTip();
+			GenerateStatValueDamageToolTip();
+			GenerateStatValuePoisonToolTip();
+			GenerateStatValueCritToolTip();
 		}
 
 		private void UpdateGoldInterface()
@@ -68,24 +67,24 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			GoldBlock.SetBinding(TextBlock.TextProperty, goldAmountBinding);
 
-			GoldPanel.ToolTip = GenerateGoldTooltip();
+			GoldPanel.ToolTip = GenerateGoldToolTip();
 		}
 
-		private ToolTip GenerateGoldTooltip()
+		private ToolTip GenerateGoldToolTip()
 		{
-			var goldInfoTooltip = new ToolTip();
+			var goldInfoToolTip = new ToolTip();
 
-			GeneralToolTipController.SetTooltipDelayAndDuration(GoldPanel);
+			GeneralToolTipController.SetToolTipDelayAndDuration(GoldPanel);
 
-			var tooltipTextBlock = new TextBlock
+			var toolTipTextBlock = new TextBlock
 			{
 				Style = (Style)FindResource("ToolTipTextBlockBase"),
 				Text = "Gold"
 			};
 
-			goldInfoTooltip.Content = tooltipTextBlock;
+			goldInfoToolTip.Content = toolTipTextBlock;
 
-			return goldInfoTooltip;
+			return goldInfoToolTip;
 		}
 
 		private void UpdateIngotOrDungeonKeyInterface<T>(List<T> currencyList) where T : Item
@@ -99,7 +98,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Background = new SolidColorBrush(Colors.Transparent)
 				};
 
-				GeneralToolTipController.SetTooltipDelayAndDuration(currencyPanel);
+				GeneralToolTipController.SetToolTipDelayAndDuration(currencyPanel);
 
 				currencyPanel.Children.Add(GenerateCurrencyIcon<T>(currencyRarityValue));
 
@@ -124,7 +123,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Grid.SetColumn(currencyPanel, column);
 				Grid.SetRow(currencyPanel, currencyRarityValue);
 
-				currencyPanel.ToolTip = ItemToolTipController.GenerateCurrencyTooltip<T>(currencyRarityValue);
+				currencyPanel.ToolTip = ItemToolTipController.GenerateCurrencyToolTip<T>(currencyRarityValue);
 			}
 		}
 
@@ -154,13 +153,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 			};
 			QuestDurationBlock.SetBinding(TextBlock.TextProperty, questDurationBinding);
 
-			QuestDurationBlock.ToolTip = GenerateQuestTooltip(currentQuest);
+			QuestDurationBlock.ToolTip = GenerateQuestToolTip(currentQuest);
 		}
 
-		private ToolTip GenerateQuestTooltip(Quest currentQuest)
+		private ToolTip GenerateQuestToolTip(Quest currentQuest)
 		{
-			var questTooltip = new ToolTip();
-			GeneralToolTipController.SetTooltipDelayAndDuration(QuestDurationBlock);
+			var questToolTip = new ToolTip();
+			GeneralToolTipController.SetToolTipDelayAndDuration(QuestDurationBlock);
 
 			var questToolTipTextBlock = new TextBlock
 			{
@@ -194,9 +193,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 				questToolTipTextBlock.Text = "No quest is currently active";
 			}
 
-			questTooltip.Content = questToolTipTextBlock;
+			questToolTip.Content = questToolTipTextBlock;
 
-			return questTooltip;
+			return questToolTip;
 		}
 
 		private void UpdateBlessingTimer()
@@ -209,13 +208,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 			};
 			BlessingDurationBlock.SetBinding(TextBlock.TextProperty, binding);
 
-			BlessingDurationBlock.ToolTip = GenerateBlessingTooltip(currentBlessing);
+			BlessingDurationBlock.ToolTip = GenerateBlessingToolTip(currentBlessing);
 		}
 
-		private ToolTip GenerateBlessingTooltip(Blessing currentBlessing)
+		private ToolTip GenerateBlessingToolTip(Blessing currentBlessing)
 		{
 			var blessingToolTip = new ToolTip();
-			GeneralToolTipController.SetTooltipDelayAndDuration(BlessingDurationBlock);
+			GeneralToolTipController.SetToolTipDelayAndDuration(BlessingDurationBlock);
 
 			var blessingToolTipBlock = new TextBlock
 			{
@@ -248,7 +247,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			return blessingToolTip;
 		}
 
-		private void GenerateSpecializationsTooltips()
+		private void GenerateSpecializationsToolTips()
 		{
 			if (User.Instance.CurrentHero is null)
 			{
@@ -258,7 +257,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			var specializationTypes = Enum.GetValues(typeof(SpecializationType));
 
-			GeneralToolTipController.SetTooltipDelayAndDuration(SpecializationsGrid);
+			GeneralToolTipController.SetToolTipDelayAndDuration(SpecializationsGrid);
 
 			for (int i = 0; i < specializationTypes.Length; i++)
 			{
@@ -270,7 +269,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(i)] - nextUpgrade;
 
-				var toolTip = HeroStatsToolTipController.GenerateSpecizaltionTooltip((SpecializationType)specializationTypes.GetValue(i), nextUpgrade);
+				var toolTip = HeroStatsToolTipController.GenerateSpecizaltionToolTip((SpecializationType)specializationTypes.GetValue(i), nextUpgrade);
 
 				var nameBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationTypes.GetValue(i) + "Name");
 				var buffBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationTypes.GetValue(i) + "Buff");
@@ -358,14 +357,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 				SpecializationsGrid.Children.Add(block);
 			}
 
-			GenerateSpecializationsTooltips();
+			GenerateSpecializationsToolTips();
 		}
 
-		private void GenerateHeroInfoTooltip()
+		private void GenerateHeroInfoToolTip()
 		{
-			var tooltip = new ToolTip();
+			var toolTip = new ToolTip();
 
-			GeneralToolTipController.SetTooltipDelayAndDuration(HeroNameBlock);
+			GeneralToolTipController.SetToolTipDelayAndDuration(HeroNameBlock);
 
 			var block = new TextBlock
 			{
@@ -432,19 +431,19 @@ namespace ClickQuest.Game.UserInterface.Pages
 					break;
 			}
 
-			tooltip.Content = block;
-			HeroNameBlock.ToolTip = tooltip;
+			toolTip.Content = block;
+			HeroNameBlock.ToolTip = toolTip;
 		}
 
-		private void GenerateStatValueDamageTooltip()
+		private void GenerateStatValueDamageToolTip()
 		{
-			var tooltipDamage = new ToolTip()
+			var toolTipDamage = new ToolTip()
 			{
 				BorderBrush = ColorsController.GetDamageTypeColor(DamageType.Normal),
 				BorderThickness = new Thickness(1)
 			};
 
-			GeneralToolTipController.SetTooltipDelayAndDuration(ClickDamageBlock);
+			GeneralToolTipController.SetToolTipDelayAndDuration(ClickDamageBlock);
 
 			var blockDamage = new TextBlock
 			{
@@ -549,11 +548,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 				blockDamage.Inlines.Add(new Run(" on-hit damage from Clicker Specialization, but it doesn't get multiplied upon critting") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
 			}
 
-			tooltipDamage.Content = blockDamage;
-			ClickDamageBlock.ToolTip = tooltipDamage;
+			toolTipDamage.Content = blockDamage;
+			ClickDamageBlock.ToolTip = toolTipDamage;
 		}
 
-		private void GenerateStatValueCritTooltip()
+		private void GenerateStatValueCritToolTip()
 		{
 			var toolTipCrit = new ToolTip()
 			{
@@ -561,7 +560,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				BorderThickness = new Thickness(1)
 			};
 
-			GeneralToolTipController.SetTooltipDelayAndDuration(CritChanceBlock);
+			GeneralToolTipController.SetToolTipDelayAndDuration(CritChanceBlock);
 
 			var blockCrit = new TextBlock
 			{
@@ -721,7 +720,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			CritChanceBlock.ToolTip = toolTipCrit;
 		}
 
-		private void GenerateStatValuePoisonTooltip()
+		private void GenerateStatValuePoisonToolTip()
 		{
 			var toolTipPoison = new ToolTip()
 			{
@@ -729,7 +728,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				BorderThickness = new Thickness(1)
 			};
 
-			GeneralToolTipController.SetTooltipDelayAndDuration(PoisonDamageBlock);
+			GeneralToolTipController.SetToolTipDelayAndDuration(PoisonDamageBlock);
 
 			var blockPoison = new TextBlock
 			{
@@ -828,15 +827,15 @@ namespace ClickQuest.Game.UserInterface.Pages
 			PoisonDamageBlock.ToolTip = toolTipPoison;
 		}
 
-		private void GenerateStatValueAuraTooltip()
+		private void GenerateStatValueAuraToolTip()
 		{
-			var tooltipAura = new ToolTip()
+			var toolTipAura = new ToolTip()
 			{
 				BorderBrush = ColorsController.GetDamageTypeColor(DamageType.Aura),
 				BorderThickness = new Thickness(1)
 			};
 
-			GeneralToolTipController.SetTooltipDelayAndDuration(AuraDamageBlock);
+			GeneralToolTipController.SetToolTipDelayAndDuration(AuraDamageBlock);
 
 			var blockAura = new TextBlock
 			{
@@ -1004,8 +1003,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 				}
 			}
 
-			tooltipAura.Content = blockAura;
-			AuraDamageBlock.ToolTip = tooltipAura;
+			toolTipAura.Content = blockAura;
+			AuraDamageBlock.ToolTip = toolTipAura;
 		}
 	}
 }

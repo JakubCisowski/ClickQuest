@@ -6,7 +6,7 @@
 		<ResourceDictionary Source="/UserInterface/Controls/Styles/Colors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
-	<!-- Tooltip text styles -->
+	<!-- ToolTip text styles -->
 	<Style x:Key="ToolTipTextBlockBase" TargetType="TextBlock">
 		<Setter Property="Foreground" Value="{StaticResource BrushWhite}" />
 		<Setter Property="TextAlignment" Value="Center" />
