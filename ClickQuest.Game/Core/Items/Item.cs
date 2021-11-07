@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.Extensions.UserInterface.ToolTips;
 
 namespace ClickQuest.Game.Core.Items
 {
@@ -19,7 +20,7 @@ namespace ClickQuest.Game.Core.Items
 		public virtual string Description { get; set; }
 		
 		[JsonIgnore]
-		public ToolTip ToolTip => TooltipController.GenerateEquipmentItemTooltip(this);
+		public ToolTip ToolTip => ItemToolTipController.GenerateItemToolTip(this);
 
 		public int Quantity
 		{

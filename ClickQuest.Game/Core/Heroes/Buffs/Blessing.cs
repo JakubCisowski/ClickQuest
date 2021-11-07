@@ -10,6 +10,7 @@ using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.Extensions.UserInterface.ToolTips;
 using ClickQuest.Game.UserInterface.Controls;
 
 namespace ClickQuest.Game.Core.Heroes.Buffs
@@ -62,7 +63,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		}
 
 		[JsonIgnore]
-		public ToolTip ToolTip => TooltipController.GenerateBlessingTooltip(this);
+		public ToolTip ToolTip => ItemToolTipController.GenerateBlessingTooltip(this);
 
 		public Blessing CopyBlessing()
 		{

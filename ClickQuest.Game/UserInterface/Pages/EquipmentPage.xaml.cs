@@ -1,6 +1,7 @@
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.Extensions.UserInterface.ToolTips;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -102,9 +103,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 					border.PreviewMouseUp += ItemBorder_TryToEquip;
 
-					TooltipController.SetTooltipDelayAndDuration(border);
+					GeneralToolTipController.SetTooltipDelayAndDuration(border);
 
-					var toolTip = TooltipController.GenerateEquipmentItemTooltip(item);
+					var toolTip = ItemToolTipController.GenerateItemToolTip(item);
 					border.ToolTip = toolTip;
 
 					var grid = CreateSingleItemGrid(item);
