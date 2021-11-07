@@ -11,12 +11,6 @@ namespace ClickQuest.Game.Core.Places
 		public double Frequency { get; set; }
 
 		[JsonIgnore]
-		public Monster Monster
-		{
-			get
-			{
-				return GameAssets.Monsters.FirstOrDefault(x => x.Id == MonsterId);
-			}
-		}
+		public Monster Monster => GameAssets.Monsters.FirstOrDefault(x => x.Id == MonsterId);
 	}
 }

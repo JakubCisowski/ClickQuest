@@ -36,31 +36,13 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		public bool AchievementBonusGranted { get; set; }
 
 		[JsonIgnore]
-		public string TypeString
-		{
-			get
-			{
-				return Type.ToString();
-			}
-		}
+		public string TypeString => Type.ToString();
 
 		[JsonIgnore]
-		public string RarityString
-		{
-			get
-			{
-				return Rarity.ToString();
-			}
-		}
+		public string RarityString => Rarity.ToString();
 
 		[JsonIgnore]
-		public bool IsFinished
-		{
-			get
-			{
-				return Duration <= 0;
-			}
-		}
+		public bool IsFinished => Duration <= 0;
 
 		[JsonIgnore]
 		public ToolTip ToolTip => ItemToolTipController.GenerateBlessingTooltip(this);

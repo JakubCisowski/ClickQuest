@@ -65,22 +65,10 @@ namespace ClickQuest.Game.Core.Heroes
 		public double AuraAttackSpeed { get; set; }
 
 		[JsonIgnore]
-		public string ThisHeroClass
-		{
-			get
-			{
-				return HeroClass.ToString();
-			}
-		}
+		public string ThisHeroClass => HeroClass.ToString();
 
 		[JsonIgnore]
-		public string ThisHeroRace
-		{
-			get
-			{
-				return HeroRace.ToString();
-			}
-		}
+		public string ThisHeroRace => HeroRace.ToString();
 
 		[JsonIgnore]
 		public string CritChanceText
@@ -105,58 +93,22 @@ namespace ClickQuest.Game.Core.Heroes
 		}
 
 		[JsonIgnore]
-		public int LevelDamageBonus
-		{
-			get
-			{
-				return ClickDamagePerLevel * Level;
-			}
-		}
+		public int LevelDamageBonus => ClickDamagePerLevel * Level;
 
 		[JsonIgnore]
-		public int LevelDamageBonusTotal
-		{
-			get
-			{
-				return ClickDamagePerLevel * Level + 2;
-			}
-		}
+		public int LevelDamageBonusTotal => ClickDamagePerLevel * Level + 2;
 
 		[JsonIgnore]
-		public double LevelCritBonus
-		{
-			get
-			{
-				return Math.Round(CritChancePerLevel * Level * 100, 2);
-			}
-		}
+		public double LevelCritBonus => Math.Round(CritChancePerLevel * Level * 100, 2);
 
 		[JsonIgnore]
-		public double LevelCritBonusTotal
-		{
-			get
-			{
-				return Math.Round(CritChancePerLevel * Level * 100 + 25, 2);
-			}
-		}
+		public double LevelCritBonusTotal => Math.Round(CritChancePerLevel * Level * 100 + 25, 2);
 
 		[JsonIgnore]
-		public int LevelPoisonBonus
-		{
-			get
-			{
-				return PoisonDamagePerLevel * Level;
-			}
-		}
+		public int LevelPoisonBonus => PoisonDamagePerLevel * Level;
 
 		[JsonIgnore]
-		public int LevelPoisonBonusTotal
-		{
-			get
-			{
-				return PoisonDamagePerLevel * Level + 1;
-			}
-		}
+		public int LevelPoisonBonusTotal => PoisonDamagePerLevel * Level + 1;
 
 		[JsonIgnore]
 		public string AuraDamageText
@@ -181,22 +133,10 @@ namespace ClickQuest.Game.Core.Heroes
 		}
 
 		[JsonIgnore]
-		public double LevelAuraBonus
-		{
-			get
-			{
-				return AURA_SPEED_PER_LEVEL * Level;
-			}
-		}
+		public double LevelAuraBonus => AURA_SPEED_PER_LEVEL * Level;
 
 		[JsonIgnore]
-		public double LevelAuraBonusTotal
-		{
-			get
-			{
-				return AURA_SPEED_BASE + AURA_SPEED_PER_LEVEL * Level;
-			}
-		}
+		public double LevelAuraBonusTotal => AURA_SPEED_BASE + AURA_SPEED_PER_LEVEL * Level;
 
 		public Hero(HeroClass heroClass, HeroRace heroRace, string heroName)
 		{

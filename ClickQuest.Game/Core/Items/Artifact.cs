@@ -22,13 +22,7 @@ namespace ClickQuest.Game.Core.Items
 		public const double CraftingRatio = 20;
 
 		[JsonIgnore]
-		public int BaseIngotBonus
-		{
-			get
-			{
-				return 100;
-			}
-		}
+		public int BaseIngotBonus => 100;
 
 		public override Artifact CopyItem(int quantity)
 		{

@@ -10,13 +10,7 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public double Frequency { get; set; }
 
 		[JsonIgnore]
-		public Monster Monster
-		{
-			get
-			{
-				return GameContent.Monsters.FirstOrDefault(x => x.Id == MonsterId);
-			}
-		}
+		public Monster Monster => GameContent.Monsters.FirstOrDefault(x => x.Id == MonsterId);
 	}
 
 	public class Region : IIdentifiable
