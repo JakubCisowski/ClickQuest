@@ -22,8 +22,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 			InitializeComponent();
 			UpdateCreateHeroButton();
 			UpdateSelectOrDeleteHeroButtons();
-
-			throw new Exception("jd");
 		}
 
 		public void UpdateSelectOrDeleteHeroButtons()
@@ -139,11 +137,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 				TextAlignment = TextAlignment.Center
 			};
 
-			var heroNameText = new Run(hero.Name) {FontFamily = (FontFamily)this.FindResource("FontFancy")};
+			var heroNameText = new Run(hero.Name) { FontFamily = (FontFamily)this.FindResource("FontFancy") };
 			var heroLevelText = new Run($"\n{hero.Level} lvl | ");
 			var heroClassText = new Run($"{hero.HeroClass}");
 			var separator = new Run(" | ");
-			var heroTotalTimePlayedText = new Run($"{Math.Floor(hero.TimePlayed.TotalHours)}h {hero.TimePlayed.Minutes}m"){ FontFamily = (FontFamily)this.FindResource("FontRegularItalic") };
+			var heroTotalTimePlayedText = new Run($"{Math.Floor(hero.TimePlayed.TotalHours)}h {hero.TimePlayed.Minutes}m") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") };
 
 			heroNameText.FontSize = 20;
 			switch (hero.HeroClass)
@@ -151,6 +149,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				case HeroClass.Slayer:
 					heroClassText.Foreground = (SolidColorBrush)FindResource("BrushSlayerRelated");
 					break;
+
 				case HeroClass.Venom:
 					heroClassText.Foreground = (SolidColorBrush)FindResource("BrushVenomRelated");
 					break;
@@ -178,7 +177,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					TextAlignment = TextAlignment.Center
 				};
 
-				var disabledText = new Run("Can't create new hero\nMax heroes reached!"){ FontFamily = (FontFamily)this.FindResource("FontRegularItalic") };
+				var disabledText = new Run("Can't create new hero\nMax heroes reached!") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") };
 				disabledInfoBlock.Inlines.Add(disabledText);
 
 				CreateHeroButton.Content = disabledInfoBlock;

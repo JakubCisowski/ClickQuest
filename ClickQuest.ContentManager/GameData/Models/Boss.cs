@@ -10,7 +10,6 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public int BossLootId { get; set; }
 		public List<double> Frequencies { get; set; }
 
-		[JsonIgnore]
 		public Item Item
 		{
 			get

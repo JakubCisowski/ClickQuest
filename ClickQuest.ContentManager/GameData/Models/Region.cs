@@ -9,7 +9,6 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public int MonsterId { get; set; }
 		public double Frequency { get; set; }
 
-		[JsonIgnore]
 		public Monster Monster => GameContent.Monsters.FirstOrDefault(x => x.Id == MonsterId);
 	}
 

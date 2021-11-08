@@ -64,13 +64,10 @@ namespace ClickQuest.Game.Core.Heroes
 		public double AuraDamage { get; set; }
 		public double AuraAttackSpeed { get; set; }
 
-		[JsonIgnore]
 		public string ThisHeroClass => HeroClass.ToString();
 
-		[JsonIgnore]
 		public string ThisHeroRace => HeroRace.ToString();
 
-		[JsonIgnore]
 		public string CritChanceText
 		{
 			get
@@ -81,7 +78,6 @@ namespace ClickQuest.Game.Core.Heroes
 			}
 		}
 
-		[JsonIgnore]
 		public string CritDamageText
 		{
 			get
@@ -92,25 +88,18 @@ namespace ClickQuest.Game.Core.Heroes
 			}
 		}
 
-		[JsonIgnore]
 		public int LevelDamageBonus => ClickDamagePerLevel * Level;
 
-		[JsonIgnore]
 		public int LevelDamageBonusTotal => ClickDamagePerLevel * Level + 2;
 
-		[JsonIgnore]
 		public double LevelCritBonus => Math.Round(CritChancePerLevel * Level * 100, 2);
 
-		[JsonIgnore]
 		public double LevelCritBonusTotal => Math.Round(CritChancePerLevel * Level * 100 + 25, 2);
 
-		[JsonIgnore]
 		public int LevelPoisonBonus => PoisonDamagePerLevel * Level;
 
-		[JsonIgnore]
 		public int LevelPoisonBonusTotal => PoisonDamagePerLevel * Level + 1;
 
-		[JsonIgnore]
 		public string AuraDamageText
 		{
 			get
@@ -121,7 +110,6 @@ namespace ClickQuest.Game.Core.Heroes
 			}
 		}
 
-		[JsonIgnore]
 		public string AuraDpsText
 		{
 			get
@@ -132,10 +120,8 @@ namespace ClickQuest.Game.Core.Heroes
 			}
 		}
 
-		[JsonIgnore]
 		public double LevelAuraBonus => AURA_SPEED_PER_LEVEL * Level;
 
-		[JsonIgnore]
 		public double LevelAuraBonusTotal => AURA_SPEED_BASE + AURA_SPEED_PER_LEVEL * Level;
 
 		public Hero(HeroClass heroClass, HeroRace heroRace, string heroName)
@@ -295,7 +281,7 @@ namespace ClickQuest.Game.Core.Heroes
 			double randomizedValue = RNG.Next(1, 101) / 100d;
 			if (randomizedValue <= CritChance)
 			{
-				damage = (int) (damage * CritDamage);
+				damage = (int)(damage * CritDamage);
 				damageType = DamageType.Critical;
 
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.CritsAmount, 1);

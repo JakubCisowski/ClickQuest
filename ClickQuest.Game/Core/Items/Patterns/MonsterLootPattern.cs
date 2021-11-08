@@ -11,7 +11,6 @@ namespace ClickQuest.Game.Core.Items.Patterns
 		public RewardType MonsterLootType { get; set; }
 		public double Frequency { get; set; }
 
-		[JsonIgnore]
 		public Item Item
 		{
 			get

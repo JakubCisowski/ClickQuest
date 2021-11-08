@@ -12,7 +12,6 @@ namespace ClickQuest.Game.Core.Items.Patterns
 		public RewardType BossLootType { get; set; }
 		public List<double> Frequencies { get; set; }
 
-		[JsonIgnore]
 		public Item Item
 		{
 			get

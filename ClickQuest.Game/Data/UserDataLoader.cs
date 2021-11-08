@@ -79,11 +79,8 @@ namespace ClickQuest.Game.Data
 
 			string json = JsonSerializer.Serialize(User.Instance, new JsonSerializerOptions()
 			{
+				IgnoreReadOnlyProperties = true,
 				WriteIndented = true,
-				Converters =
-				{
-					new JsonStringEnumConverter(null)
-				},
 				Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
 			});
 
