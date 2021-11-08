@@ -69,7 +69,7 @@ namespace ClickQuest.Game.Data
 			User.Instance.Heroes.ForEach(x => x.TimePlayed = TimeSpan.Parse(x.TimePlayedString));
 		}
 
-		public static void Save()
+		public static string Save()
 		{
 			// Convert Achievements to a serializable string.
 			User.Instance.Achievements.SerializeAchievements();
@@ -88,6 +88,8 @@ namespace ClickQuest.Game.Data
 			});
 
 			File.WriteAllText(UserDataPath, json);
+
+			return json;
 		}
 
 		public static void SeedIngots()

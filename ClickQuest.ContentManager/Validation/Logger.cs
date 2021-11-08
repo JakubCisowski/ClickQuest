@@ -9,7 +9,7 @@ namespace ClickQuest.GameManager.Validation
 
 		public static void Log(string log)
 		{
-			string folderPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.ToString(), "Logs");
+			string folderPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.ToString(), "Logs", "AssetsLogs");
 
 			if (!Directory.Exists(folderPath))
 			{

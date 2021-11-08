@@ -22,6 +22,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 			InitializeComponent();
 			UpdateCreateHeroButton();
 			UpdateSelectOrDeleteHeroButtons();
+
+			throw new Exception("jd");
 		}
 
 		public void UpdateSelectOrDeleteHeroButtons()
