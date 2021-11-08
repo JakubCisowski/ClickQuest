@@ -31,7 +31,6 @@ namespace ClickQuest.Game.Extensions.Combat
 				{
 					equippedArtifact.ArtifactFunctionality.OnEnemyClick();
 				}
-
 			}
 			else
 			{
@@ -72,6 +71,20 @@ namespace ClickQuest.Game.Extensions.Combat
 					case DamageType.Aura:
 						equippedArtifact.ArtifactFunctionality.OnDealingAuraDamage(ref damage);
 						break;
+				}
+			}
+
+			// Trigger boss affix-related events.
+			if (InterfaceController.CurrentEnemy is Boss boss)
+			{
+				foreach (var affix in boss.AffixFunctionalities)
+				{
+					switch (damageType)
+					{
+						case DamageType.Poison:
+							affix.OnDealingPoisonDamage(ref damage);
+							break;
+					}
 				}
 			}
 

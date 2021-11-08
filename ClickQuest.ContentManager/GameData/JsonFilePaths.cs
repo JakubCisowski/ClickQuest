@@ -5,7 +5,7 @@ namespace ClickQuest.ContentManager.GameData
 {
 	public static class JsonFilePaths
 	{
-		public static string ArtifactsFilePath { get; set; }
+        public static string ArtifactsFilePath { get; set; }
 		public static string BlessingsFilePath { get; set; }
 		public static string BossesFilePath { get; set; }
 		public static string DungeonsFilePath { get; set; }

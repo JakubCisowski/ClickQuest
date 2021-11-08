@@ -7,22 +7,22 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 2,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.05
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 3,
         "Frequency": 0.75
       }
@@ -36,22 +36,22 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 4,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 5,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 3,
         "Frequency": 0.8
       },
       {
-        "MonsterLootType": "Blessing",
+        "MonsterLootType": 3,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -65,17 +65,17 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 6,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 7,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 3,
         "Frequency": 0.8
       }
@@ -89,22 +89,22 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 8,
         "Frequency": 0.05
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 9,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.01
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 3,
         "Frequency": 0.84
       }
@@ -118,17 +118,17 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 10,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 11,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 3,
         "Frequency": 0.8
       }
@@ -142,22 +142,22 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 12,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 3,
         "Frequency": 0.01
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 3,
         "Frequency": 0.89
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 5,
         "Frequency": 0.5
       }
@@ -171,12 +171,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 15,
         "Frequency": 0.01
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 6,
         "Frequency": 0.001
       }
@@ -190,12 +190,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 15,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 6,
         "Frequency": 0.01
       }
@@ -209,17 +209,17 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 16,
         "Frequency": 0.02
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 17,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 7,
         "Frequency": 0.1
       }
@@ -233,12 +233,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 18,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 19,
         "Frequency": 0.01
       }
@@ -252,17 +252,17 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 20,
         "Frequency": 0.05
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 16,
         "Frequency": 0.02
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 7,
         "Frequency": 0.001
       }
@@ -276,22 +276,22 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 21,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 22,
         "Frequency": 0.15
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 23,
         "Frequency": 0.3
       },
       {
-        "MonsterLootType": "Artifact",
+        "MonsterLootType": 2,
         "MonsterLootId": 9,
         "Frequency": 0.05
       }
@@ -305,32 +305,32 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 21,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 24,
         "Frequency": 0.4
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 25,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 26,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Artifact",
+        "MonsterLootType": 2,
         "MonsterLootId": 4,
         "Frequency": 0.05
       },
       {
-        "MonsterLootType": "Artifact",
+        "MonsterLootType": 2,
         "MonsterLootId": 10,
         "Frequency": 0.05
       }
@@ -344,32 +344,32 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 8,
         "Frequency": 0.05
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 27,
         "Frequency": 0.14
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 23,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 26,
         "Frequency": 0.25
       },
       {
-        "MonsterLootType": "Artifact",
+        "MonsterLootType": 2,
         "MonsterLootId": 2,
         "Frequency": 0.05
       },
       {
-        "MonsterLootType": "Artifact",
+        "MonsterLootType": 2,
         "MonsterLootId": 6,
         "Frequency": 0.01
       }
@@ -383,22 +383,22 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 28,
         "Frequency": 0.35
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 8,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 25,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Artifact",
+        "MonsterLootType": 2,
         "MonsterLootId": 8,
         "Frequency": 0.05
       }
@@ -412,42 +412,42 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 8,
         "Frequency": 0.15
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 29,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 30,
         "Frequency": 0.3
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 25,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 26,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Artifact",
+        "MonsterLootType": 2,
         "MonsterLootId": 24,
         "Frequency": 0.05
       },
       {
-        "MonsterLootType": "Artifact",
+        "MonsterLootType": 2,
         "MonsterLootId": 2,
         "Frequency": 0.05
       },
       {
-        "MonsterLootType": "Artifact",
+        "MonsterLootType": 2,
         "MonsterLootId": 6,
         "Frequency": 0.05
       }
@@ -461,22 +461,22 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 29,
         "Frequency": 0.35
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 30,
         "Frequency": 0.3
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 31,
         "Frequency": 0.3
       },
       {
-        "MonsterLootType": "Artifact",
+        "MonsterLootType": 2,
         "MonsterLootId": 1,
         "Frequency": 0.05
       }
@@ -490,17 +490,17 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 39,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 40,
         "Frequency": 0.25
       },
       {
-        "MonsterLootType": "Artifact",
+        "MonsterLootType": 2,
         "MonsterLootId": 14,
         "Frequency": 0.01
       }
@@ -514,12 +514,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 41,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 42,
         "Frequency": 0.1
       }
@@ -533,12 +533,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 39,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 40,
         "Frequency": 0.1
       }
@@ -552,22 +552,22 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 24,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 21,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 25,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 43,
         "Frequency": 0.1
       }
@@ -581,17 +581,17 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 24,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 32,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 7,
         "Frequency": 0.2
       }
@@ -605,12 +605,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 44,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 33,
         "Frequency": 0.1
       }
@@ -624,27 +624,27 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 39,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 40,
         "Frequency": 0.05
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 41,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 43,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 4,
         "Frequency": 0.05
       }
@@ -658,17 +658,17 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 41,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 42,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 5,
         "Frequency": 0.2
       }
@@ -682,17 +682,17 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Artifact",
+        "MonsterLootType": 2,
         "MonsterLootId": 5,
         "Frequency": 0.0001
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 32,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 33,
         "Frequency": 0.1
       }
@@ -706,12 +706,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 34,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 33,
         "Frequency": 0.1
       }
@@ -725,17 +725,17 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 35,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 33,
         "Frequency": 0.1
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 7,
         "Frequency": 0.05
       }
@@ -749,22 +749,22 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 35,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 7,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 33,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 36,
         "Frequency": 0.2
       }
@@ -778,12 +778,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 33,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 37,
         "Frequency": 0.2
       }
@@ -797,22 +797,22 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 38,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 32,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 18,
         "Frequency": 0.2
       },
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 36,
         "Frequency": 0.2
       }
@@ -826,12 +826,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -845,12 +845,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -864,12 +864,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -883,12 +883,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -902,12 +902,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -921,12 +921,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -940,12 +940,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -959,12 +959,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -978,12 +978,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -997,12 +997,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1016,12 +1016,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1035,12 +1035,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1054,12 +1054,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1073,12 +1073,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1092,12 +1092,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1111,12 +1111,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1130,12 +1130,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1149,12 +1149,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1168,12 +1168,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1187,12 +1187,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1206,12 +1206,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1225,12 +1225,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1244,12 +1244,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }
@@ -1263,12 +1263,12 @@
     "Image": "/example.png",
     "MonsterLootPatterns": [
       {
-        "MonsterLootType": "Material",
+        "MonsterLootType": 0,
         "MonsterLootId": 1,
         "Frequency": 0.5
       },
       {
-        "MonsterLootType": "Recipe",
+        "MonsterLootType": 1,
         "MonsterLootId": 1,
         "Frequency": 0.5
       }

@@ -2,42 +2,42 @@
   {
     "Id": 0,
     "Name": "General ingot",
-    "Rarity": "General",
+    "Rarity": 0,
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 1,
     "Name": "Fine ingot",
-    "Rarity": "Fine",
+    "Rarity": 1,
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 2,
     "Name": "Superior ingot",
-    "Rarity": "Superior",
+    "Rarity": 2,
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 3,
     "Name": "Exceptional ingot",
-    "Rarity": "Exceptional",
+    "Rarity": 3,
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 4,
     "Name": "Mythic ingot",
-    "Rarity": "Mythic",
+    "Rarity": 4,
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 5,
     "Name": "Masterwork ingot",
-    "Rarity": "Masterwork",
+    "Rarity": 5,
     "Description": "[...]",
     "Value": 1
   }

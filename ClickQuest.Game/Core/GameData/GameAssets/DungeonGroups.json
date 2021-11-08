@@ -5,7 +5,7 @@
     "Color": "Gray",
     "Description": "GeneralDGDesc",
     "KeyRequirementRarities": [
-      "General"
+      0
     ]
   },
   {
@@ -14,7 +14,7 @@
     "Color": "White",
     "Description": "FineDGDesc",
     "KeyRequirementRarities": [
-      "Fine"
+      1
     ]
   },
   {
@@ -23,7 +23,7 @@
     "Color": "Green",
     "Description": "SuperiorDGDesc",
     "KeyRequirementRarities": [
-      "Superior"
+      2
     ]
   },
   {
@@ -32,7 +32,7 @@
     "Color": "Blue",
     "Description": "ExceptionalDGDesc",
     "KeyRequirementRarities": [
-      "Exceptional"
+      3
     ]
   },
   {
@@ -41,7 +41,7 @@
     "Color": "Purple",
     "Description": "MasterworkDGDesc",
     "KeyRequirementRarities": [
-      "Mythic"
+      4
     ]
   },
   {
@@ -50,7 +50,7 @@
     "Color": "Gold",
     "Description": "MythicDGDesc",
     "KeyRequirementRarities": [
-      "Masterwork"
+      5
     ]
   }
 ]

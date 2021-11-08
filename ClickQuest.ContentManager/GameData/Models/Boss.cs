@@ -45,5 +45,6 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public string Image { get; set; }
 		public string Description { get; set; }
 		public List<BossLootPattern> BossLootPatterns { get; set; }
+		public List<Affix> Affixes { get; set; }
 	}
 }

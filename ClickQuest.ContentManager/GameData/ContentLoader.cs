@@ -32,10 +32,6 @@ namespace ClickQuest.ContentManager.GameData
 			string json = File.ReadAllText(jsonFilePath);
 			var options = new JsonSerializerOptions
 			{
-				Converters =
-				{
-					new JsonStringEnumConverter(null)
-				}
 			};
 
 			var objects = JsonSerializer.Deserialize<List<T>>(json, options);

@@ -2,13 +2,13 @@
   {
     "Id": 1,
     "VendorItemId": 0,
-    "VendorItemType": "Material",
+    "VendorItemType": 0,
     "Value": 0
   },
   {
     "Id": 2,
     "VendorItemId": 0,
-    "VendorItemType": "Material",
+    "VendorItemType": 0,
     "Value": 0
   }
 ]

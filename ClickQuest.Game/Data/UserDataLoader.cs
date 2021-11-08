@@ -31,10 +31,6 @@ namespace ClickQuest.Game.Data
 			string json = File.ReadAllText(UserDataPath);
 			var user = JsonSerializer.Deserialize<User>(json, new JsonSerializerOptions()
 			{
-				Converters =
-				{
-					new JsonStringEnumConverter(null)
-				}
 			});
 
 			User.Instance = user;

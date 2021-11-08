@@ -33,10 +33,6 @@ namespace ClickQuest.ContentManager.GameData
 			string json = JsonSerializer.Serialize(collection, new JsonSerializerOptions
 			{
 				WriteIndented = true,
-				Converters =
-				{
-					new JsonStringEnumConverter(null)
-				},
 				Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
 			});
 

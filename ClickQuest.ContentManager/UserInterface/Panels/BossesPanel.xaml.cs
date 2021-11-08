@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -59,6 +60,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = selectedBoss.Name,
 				Margin = new Thickness(10)
 			};
+			var affixBox = new ListBox
+			{
+				Name = "AffixBox",
+				ItemsSource = Enum.GetValues(typeof(Affix)),
+				Margin = new Thickness(10),
+				SelectionMode = SelectionMode.Multiple
+			};
 			var healthBox = new TextBox
 			{
 				Name = "HealthBox",
@@ -87,6 +95,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
 			HintAssist.SetHint(nameBox, "Name");
+			HintAssist.SetHint(affixBox, "Affixes");
 			HintAssist.SetHint(healthBox, "Health");
 			HintAssist.SetHint(imageBox, "Image");
 			HintAssist.SetHint(descriptionBox, "Description");
@@ -96,6 +105,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			_controls.Add(idBox.Name, idBox);
 			_controls.Add(nameBox.Name, nameBox);
+			_controls.Add(affixBox.Name, affixBox);
 			_controls.Add(healthBox.Name, healthBox);
 			_controls.Add(imageBox.Name, imageBox);
 			_controls.Add(descriptionBox.Name, descriptionBox);
@@ -105,13 +115,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
+					textBox.Style = (Style)FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
+					comboBox.Style = (Style)FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -144,6 +154,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			boss.Health = int.Parse((_controls["HealthBox"] as TextBox).Text);
 			boss.Image = (_controls["ImageBox"] as TextBox).Text;
 			boss.Description = (_controls["DescriptionBox"] as TextBox).Text;
+			boss.Affixes = (_controls["AffixBox"] as ListBox).SelectedItems.Cast<Affix>().ToList();
 
 			// Check if this Id is already in the collection (modified).
 			if (GameContent.Bosses.Select(x => x.Id).Contains(boss.Id))
@@ -241,7 +252,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				var border = new Border
 				{
 					BorderThickness = new Thickness(0.5),
-					BorderBrush = (SolidColorBrush) FindResource("BrushLightGray"),
+					BorderBrush = (SolidColorBrush)FindResource("BrushLightGray"),
 					Padding = new Thickness(6),
 					Margin = new Thickness(4)
 				};
@@ -332,7 +343,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Width = 20,
 				Height = 20,
 				Kind = PackIconKind.Edit,
-				Foreground = (SolidColorBrush) FindResource("BrushLightGray")
+				Foreground = (SolidColorBrush)FindResource("BrushLightGray")
 			};
 
 			editButton.Content = editIcon;
@@ -354,7 +365,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Width = 20,
 				Height = 20,
 				Kind = PackIconKind.DeleteForever,
-				Foreground = (SolidColorBrush) FindResource("BrushLightGray")
+				Foreground = (SolidColorBrush)FindResource("BrushLightGray")
 			};
 
 			deleteButton.Content = deleteIcon;

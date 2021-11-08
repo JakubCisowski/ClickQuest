@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Patterns;
@@ -14,6 +15,11 @@ namespace ClickQuest.Game.Core.Enemies
 	public class Boss : Enemy
 	{
 		public List<BossLootPattern> BossLootPatterns { get; set; }
+
+		[JsonIgnore]
+		public List<AffixFunctionality> AffixFunctionalities { get; set; }
+
+		public List<Affix> Affixes { get; set; }
 
 		public override int CurrentHealth
 		{
@@ -55,6 +61,8 @@ namespace ClickQuest.Game.Core.Enemies
 			copy.Description = Description;
 			copy.CurrentHealthProgress = CurrentHealthProgress;
 			copy.BossLootPatterns = BossLootPatterns;
+			copy.AffixFunctionalities = AffixFunctionalities;
+			copy.Affixes = Affixes;
 
 			return copy;
 		}
@@ -82,13 +90,13 @@ namespace ClickQuest.Game.Core.Enemies
 
 			// Grant boss loot.
 			// 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
-			int threshold = 5 - (int) Math.Ceiling((double) CurrentHealth / (Health / 5));
+			int threshold = 5 - (int)Math.Ceiling((double)CurrentHealth / (Health / 5));
 			// 2. Iterate through every possible loot.
 			string lootText = "Experience gained: " + experienceGained + " \n" + "Loot: \n";
 
 			foreach (var loot in BossLootPatterns)
 			{
-				int itemIntegerCount = (int) loot.Frequencies[threshold];
+				int itemIntegerCount = (int)loot.Frequencies[threshold];
 
 				double randomizedValue = RNG.Next(1, 10001) / 10000d;
 				if (randomizedValue < loot.Frequencies[threshold] - itemIntegerCount)
