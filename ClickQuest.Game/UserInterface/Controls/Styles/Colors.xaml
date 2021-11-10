@@ -1,135 +1,139 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-					
+
     <!-- COLORS -->
-	<Color x:Key="ColorGameA">#EDF9FD </Color> <!-- 1  / Main game background (fades to white) & Alert box background without gradient -->
-	<Color x:Key="ColorGameB">#47a0ff </Color> <!-- 2  / Accented button background [create hero/back to menu or town/monster/boss] -->
-	<Color x:Key="ColorGameC">#c4effa </Color> <!-- 3  / Normal button background -->
-	<Color x:Key="ColorGameD">#c9c9c9 </Color> <!-- 4  / Special button background [deleting/exiting/unavailable] -->
-	<Color x:Key="ColorGameE">#666666 </Color> <!-- 5  / Special button foreground (icon color) -->
-	<Color x:Key="ColorGameF">#D79E4B </Color> <!-- 6  / Hovered vendor item / race/class background (shop/priest/blacksmith) -->
-	<Color x:Key="ColorGameG">#A950DA </Color> <!-- 7  / Selected race/class background (class/race selection) -->
-	<Color x:Key="ColorGameH">#61B05A </Color> <!-- 8  / Hero stats/equipment background -->
-	<Color x:Key="ColorGameI">#508CDA </Color> <!-- 9  / Item background (equipment) & Achievement background -->
-	<Color x:Key="ColorGameJ">#F54DC4 </Color> <!-- 10 / Region description background -->
-	<Color x:Key="ColorGameK">#FFD700 </Color> <!-- 11 / Not selected tab header (equipment/shop/priest/blacksmith) -->
-	<Color x:Key="ColorGameL">#FFD3D3 </Color> <!-- 12 / Selected tab header (equipment/shop/priest/blacksmith) -->
-	<Color x:Key="ColorGameM">#FFFFFF </Color> <!-- 13 / Shop/Priest/Blacksmith background -->
-	<Color x:Key="ColorGameN">#B8860B </Color> <!-- 14 / Quest button background -->
-	<Color x:Key="ColorGameO">#000000 </Color> <!-- 15 / User input text box (hero name) -->
-	<Color x:Key="ColorGameP">#0053FF </Color> <!-- 16 / Experience bar background -->
-	<Color x:Key="ColorGameR">#FFA237 </Color> <!-- 17 / Experience bar foreground -->
-	<Color x:Key="ColorGameS">#FF0000 </Color> <!-- 18 / Equipped artifact -->
-	<Color x:Key="ColorGameT">#006400 </Color> <!-- 19 / Shop/Priest/Blacksmith border -->
-	<Color x:Key="ColorGameU">#61B05A </Color> <!-- 20 / Hovered tab header (equipment/shop/priest/blacksmith)  -->
-	<Color x:Key="ColorGameV">#EDF9FD </Color> <!-- 21 / Shop/Priest/Blacksmith header background  -->
-	<Color x:Key="ColorGameW">#666666 </Color> <!-- 22 / Shop/Priest/Blacksmith header font color  -->
-	<Color x:Key="ColorGameX">#000000 </Color> <!-- 23 / Tooltip background  -->
-	<Color x:Key="ColorGameY">#FFFFFF </Color> <!-- 24 / Tooltip foreground (name, type, artifact functionality description / DESCRIPTION) -->
-	<Color x:Key="ColorGameZ">#ababab </Color> <!-- 25 / Tooltip border colour default -->
-	<Color x:Key="ColorGame0">#ababab </Color> <!-- 26 / Tooltip foreground (lore / TECHNICAL INFO) -->
-	<Color x:Key="ColorGame1">#666666 </Color> <!-- 27 / Tooltip foreground (extra info / material description / EXTRA INFO) -->
-	<Color x:Key="ColorGame2">#61B05A </Color> <!-- 28 / Tooltip foreground (mythic tag) -->
-	<Color x:Key="ColorGame3">#FFFFFF </Color> <!-- 29 / Tooltip separator -->
+    <Color x:Key="ColorGameA">#919191</Color><!-- 1  / Main game background (fades to white) & Alert box background without gradient -->
+    <Color x:Key="ColorGameB">#FFA237</Color><!-- 2  / Accented button background [create hero/back to menu or town/monster/boss] 919191 -->
+    <Color x:Key="ColorGameC">#e0e0e0</Color><!-- 3  / Normal button background e0e0e0 -->
+    <Color x:Key="ColorGameD">#666666</Color><!-- 4  / Special button background [deleting/exiting/unavailable] ffdab0 -->
+    <Color x:Key="ColorGameE">#000000</Color><!-- 5  / Special button foreground (icon color) -->
+    <Color x:Key="ColorGameF">#ffdab0</Color><!-- 6  / Hovered vendor item / race/class background (shop/priest/blacksmith) -->
+    <Color x:Key="ColorGameG">#FFA237</Color><!-- 7  / Selected race/class background (class/race selection) -->
+    <Color x:Key="ColorGameH">#e0e0e0</Color><!-- 8  / Hero stats/equipment background -->
+    <Color x:Key="ColorGameI">#ababab</Color><!-- 9  / Item background (equipment) & Achievement background -->
+    <Color x:Key="ColorGameJ">#e0e0e0</Color><!-- 10 / Region description background -->
+    <Color x:Key="ColorGameK">#e0e0e0</Color><!-- 11 / Not selected tab header (equipment/shop/priest/blacksmith) -->
+    <Color x:Key="ColorGameL">#FFA237</Color><!-- 12 / Selected tab header (equipment/shop/priest/blacksmith) FFA237 -->
+    <Color x:Key="ColorGameM">#FFFFFF</Color><!-- 13 / Shop/Priest/Blacksmith background -->
+    <Color x:Key="ColorGameN">#ababab</Color><!-- 14 / Quest button background -->
+    <Color x:Key="ColorGameO">#000000</Color><!-- 15 / User input text box (hero name) -->
+    <Color x:Key="ColorGameP">#666666</Color><!-- 16 / Experience bar background -->
+    <Color x:Key="ColorGameR">#FFA237</Color><!-- 17 / Experience bar foreground -->
+    <Color x:Key="ColorGameS">#ffdab0</Color><!-- 18 / Equipped artifact -->
+    <Color x:Key="ColorGameT">#FFA237</Color><!-- 19 / Shop/Priest/Blacksmith border -->
+    <Color x:Key="ColorGameU">#ffdab0</Color><!-- 20 / Hovered tab header (equipment/shop/priest/blacksmith)  -->
+    <Color x:Key="ColorGameV">#ffdab0</Color><!-- 21 / Shop/Priest/Blacksmith header background  -->
+    <Color x:Key="ColorGameW">#666666</Color><!-- 22 / Shop/Priest/Blacksmith header font color  -->
+    <Color x:Key="ColorGameX">#000000</Color><!-- 23 / Tooltip background  -->
+    <Color x:Key="ColorGameY">#FFFFFF</Color><!-- 24 / Tooltip foreground (name, type, artifact functionality description / DESCRIPTION) -->
+    <Color x:Key="ColorGameZ">#ababab</Color><!-- 25 / Tooltip border colour default -->
+    <Color x:Key="ColorGame0">#ababab</Color><!-- 26 / Tooltip foreground (lore / TECHNICAL INFO) -->
+    <Color x:Key="ColorGame1">#666666</Color><!-- 27 / Tooltip foreground (extra info / material description / EXTRA INFO) -->
+    <Color x:Key="ColorGame2">#61B05A</Color><!-- 28 / Tooltip foreground (mythic tag) -->
+    <Color x:Key="ColorGame3">#FFFFFF</Color><!-- 29 / Tooltip separator -->
 
-	<Color x:Key="ColorLightGray">#c9c9c9 </Color>
-	<Color x:Key="ColorDarkGray">#666666 </Color>
-	<Color x:Key="ColorBlack">#000000 </Color>
-	<Color x:Key="ColorWhite">#FFFFFF </Color>
-	<Color x:Key="ColorRed">#FF0000  </Color>
-	<Color x:Key="ColorPink">#FFD3D3  </Color>
+    <Color x:Key="ColorLightGray">#c9c9c9</Color>
+    <Color x:Key="ColorDarkGray">#666666</Color>
+    <Color x:Key="ColorBlack">#000000</Color>
+    <Color x:Key="ColorWhite">#FFFFFF</Color>
+    <Color x:Key="ColorRed">#FF0000</Color>
+    <Color x:Key="ColorPink">#FFD3D3</Color>
 
-	<Color x:Key="ColorGold">#FFD700 </Color>
+    <Color x:Key="ColorGold">#FFD700</Color>
 
-	<Color x:Key="ColorRarity0">#8C8C8C </Color>
-	<Color x:Key="ColorRarity1">#D79E4B </Color>
-	<Color x:Key="ColorRarity2">#61B05A </Color>
-	<Color x:Key="ColorRarity3">#508CDA </Color>
-	<Color x:Key="ColorRarity4">#A950DA </Color>
-	<Color x:Key="ColorRarity5">#E9DB50 </Color>
+    <Color x:Key="ColorRarity0">#8C8C8C</Color>
+    <Color x:Key="ColorRarity1">#e69f39</Color>
+    <Color x:Key="ColorRarity2">#61B05A</Color>
+    <Color x:Key="ColorRarity3">#508CDA</Color>
+    <Color x:Key="ColorRarity4">#A950DA</Color>
+    <Color x:Key="ColorRarity5">#FFD700</Color>
 
-	<Color x:Key="ColorQuestRare">#FFA237 </Color>
+    <Color x:Key="ColorQuestRare">#FFA237</Color>
 
-	<Color x:Key="ColorExperienceRelated">#FFFFFF </Color>
+    <Color x:Key="ColorExperienceRelated">#FFFFFF</Color>
 
-	<Color x:Key="ColorSlayerRelated">#FF4242  </Color>
-	<Color x:Key="ColorVenomRelated">#008500  </Color>
+    <Color x:Key="ColorSlayerRelated">#FF0000</Color>
+    <Color x:Key="ColorVenomRelated">#006400</Color>
 
+    <!-- Class and damage type colors -->
+    <Color x:Key="ColorDamageTypeNormal">#666666</Color>
+    <!-- Everywhere but floating text -->
+    <Color x:Key="ColorDamageTypeCritical">#FF4242</Color>
+    <Color x:Key="ColorDamageTypePoison">#008500</Color>
+    <Color x:Key="ColorDamageTypeAura">#B8860B</Color>
+    <Color x:Key="ColorDamageTypeOnHit">#F54DC4</Color>
+    <Color x:Key="ColorDamageTypeArtifact">#0053FF</Color>
 
-	<!-- Class and damage type colors -->
-	<Color x:Key="ColorDamageTypeNormal"> #c9c9c9 </Color> <!-- Everywhere but floating text -->
-	<Color x:Key="ColorDamageTypeCritical"> #FF0000  </Color>
-	<Color x:Key="ColorDamageTypePoison"> #006400  </Color>
-	<Color x:Key="ColorDamageTypeAura"> #B8860B  </Color>
-	<Color x:Key="ColorDamageTypeOnHit"> #F54DC4  </Color>
-	<Color x:Key="ColorDamageTypeArtifact"> #0053FF  </Color>
+    <Color x:Key="ColorFloatingTextNormal">#000000</Color>
 
-	
-	<Color x:Key="ColorFloatingTextNormal"> #000000 </Color>
+    <!-- BRUSHES -->
+    <SolidColorBrush x:Key="BrushGameA" Color="{StaticResource ColorGameA}" />
+    <SolidColorBrush x:Key="BrushGameB" Color="{StaticResource ColorGameB}" />
+    <SolidColorBrush x:Key="BrushGameC" Color="{StaticResource ColorGameC}" />
+    <SolidColorBrush x:Key="BrushGameD" Color="{StaticResource ColorGameD}" />
+    <SolidColorBrush x:Key="BrushGameE" Color="{StaticResource ColorGameE}" />
+    <SolidColorBrush x:Key="BrushGameF" Color="{StaticResource ColorGameF}" />
+    <SolidColorBrush x:Key="BrushGameG" Color="{StaticResource ColorGameG}" />
+    <SolidColorBrush x:Key="BrushGameH" Color="{StaticResource ColorGameH}" />
+    <SolidColorBrush x:Key="BrushGameI" Color="{StaticResource ColorGameI}" />
+    <SolidColorBrush x:Key="BrushGameJ" Color="{StaticResource ColorGameJ}" />
+    <SolidColorBrush x:Key="BrushGameK" Color="{StaticResource ColorGameK}" />
+    <SolidColorBrush x:Key="BrushGameL" Color="{StaticResource ColorGameL}" />
+    <SolidColorBrush x:Key="BrushGameM" Color="{StaticResource ColorGameM}" />
+    <SolidColorBrush x:Key="BrushGameN" Color="{StaticResource ColorGameN}" />
+    <SolidColorBrush x:Key="BrushGameO" Color="{StaticResource ColorGameO}" />
+    <SolidColorBrush x:Key="BrushGameP" Color="{StaticResource ColorGameP}" />
+    <SolidColorBrush x:Key="BrushGameR" Color="{StaticResource ColorGameR}" />
+    <SolidColorBrush x:Key="BrushGameS" Color="{StaticResource ColorGameS}" />
+    <SolidColorBrush x:Key="BrushGameT" Color="{StaticResource ColorGameT}" />
+    <SolidColorBrush x:Key="BrushGameU" Color="{StaticResource ColorGameU}" />
+    <SolidColorBrush x:Key="BrushGameV" Color="{StaticResource ColorGameV}" />
+    <SolidColorBrush x:Key="BrushGameW" Color="{StaticResource ColorGameW}" />
+    <SolidColorBrush x:Key="BrushGameX" Color="{StaticResource ColorGameX}" Opacity="0.8" />
+    <SolidColorBrush x:Key="BrushGameY" Color="{StaticResource ColorGameY}" />
+    <SolidColorBrush x:Key="BrushGameZ" Color="{StaticResource ColorGameZ}" />
+    <SolidColorBrush x:Key="BrushGame0" Color="{StaticResource ColorGame0}" />
+    <SolidColorBrush x:Key="BrushGame1" Color="{StaticResource ColorGame1}" />
+    <SolidColorBrush x:Key="BrushGame2" Color="{StaticResource ColorGame2}" />
+    <SolidColorBrush x:Key="BrushGame3" Color="{StaticResource ColorGame3}" />
 
+    <SolidColorBrush x:Key="BrushLightGray" Color="{StaticResource ColorLightGray}" />
+    <SolidColorBrush x:Key="BrushDarkGray" Color="{StaticResource ColorDarkGray}" />
+    <SolidColorBrush x:Key="BrushBlack" Color="{StaticResource ColorBlack}" />
+    <SolidColorBrush x:Key="BrushWhite" Color="{StaticResource ColorWhite}" />
+    <SolidColorBrush x:Key="BrushPink" Color="{StaticResource ColorPink}" />
+    <SolidColorBrush x:Key="BrushRed" Color="{StaticResource ColorRed}" />
 
+    <SolidColorBrush x:Key="BrushGold" Color="{StaticResource ColorGold}" />
 
-	<!-- BRUSHES -->
-	<SolidColorBrush x:Key="BrushGameA" Color="{StaticResource ColorGameA}" />
-	<SolidColorBrush x:Key="BrushGameB" Color="{StaticResource ColorGameB}" />
-	<SolidColorBrush x:Key="BrushGameC" Color="{StaticResource ColorGameC}" />
-	<SolidColorBrush x:Key="BrushGameD" Color="{StaticResource ColorGameD}" />
-	<SolidColorBrush x:Key="BrushGameE" Color="{StaticResource ColorGameE}" />
-	<SolidColorBrush x:Key="BrushGameF" Color="{StaticResource ColorGameF}" />
-	<SolidColorBrush x:Key="BrushGameG" Color="{StaticResource ColorGameG}" />
-	<SolidColorBrush x:Key="BrushGameH" Color="{StaticResource ColorGameH}" />
-	<SolidColorBrush x:Key="BrushGameI" Color="{StaticResource ColorGameI}" />
-	<SolidColorBrush x:Key="BrushGameJ" Color="{StaticResource ColorGameJ}" />
-	<SolidColorBrush x:Key="BrushGameK" Color="{StaticResource ColorGameK}" />
-	<SolidColorBrush x:Key="BrushGameL" Color="{StaticResource ColorGameL}" />
-	<SolidColorBrush x:Key="BrushGameM" Color="{StaticResource ColorGameM}" />
-	<SolidColorBrush x:Key="BrushGameN" Color="{StaticResource ColorGameN}" />
-	<SolidColorBrush x:Key="BrushGameO" Color="{StaticResource ColorGameO}" />
-	<SolidColorBrush x:Key="BrushGameP" Color="{StaticResource ColorGameP}" />
-	<SolidColorBrush x:Key="BrushGameR" Color="{StaticResource ColorGameR}" />
-	<SolidColorBrush x:Key="BrushGameS" Color="{StaticResource ColorGameS}" />
-	<SolidColorBrush x:Key="BrushGameT" Color="{StaticResource ColorGameT}" />
-	<SolidColorBrush x:Key="BrushGameU" Color="{StaticResource ColorGameU}" />
-	<SolidColorBrush x:Key="BrushGameV" Color="{StaticResource ColorGameV}" />
-	<SolidColorBrush x:Key="BrushGameW" Color="{StaticResource ColorGameW}" />
-	<SolidColorBrush x:Key="BrushGameX" Color="{StaticResource ColorGameX}" Opacity="0.8" />
-	<SolidColorBrush x:Key="BrushGameY" Color="{StaticResource ColorGameY}" />
-	<SolidColorBrush x:Key="BrushGameZ" Color="{StaticResource ColorGameZ}" />
-	<SolidColorBrush x:Key="BrushGame0" Color="{StaticResource ColorGame0}" />
-	<SolidColorBrush x:Key="BrushGame1" Color="{StaticResource ColorGame1}" />
-	<SolidColorBrush x:Key="BrushGame2" Color="{StaticResource ColorGame2}" />
-	<SolidColorBrush x:Key="BrushGame3" Color="{StaticResource ColorGame3}" />
+    <SolidColorBrush x:Key="BrushRarity0" Color="{StaticResource ColorRarity0}" />
+    <!-- General - Gray -->
+    <SolidColorBrush x:Key="BrushRarity1" Color="{StaticResource ColorRarity1}" />
+    <!-- Fine - Light brown -->
+    <SolidColorBrush x:Key="BrushRarity2" Color="{StaticResource ColorRarity2}" />
+    <!-- Superior - Green -->
+    <SolidColorBrush x:Key="BrushRarity3" Color="{StaticResource ColorRarity3}" />
+    <!-- Exceptional - Blue -->
+    <SolidColorBrush x:Key="BrushRarity4" Color="{StaticResource ColorRarity4}" />
+    <!-- Masterwork - Purple -->
+    <SolidColorBrush x:Key="BrushRarity5" Color="{StaticResource ColorRarity5}" />
+    <!-- Mythic - Gold -->
 
-	<SolidColorBrush x:Key="BrushLightGray" Color="{StaticResource ColorLightGray}" />
-	<SolidColorBrush x:Key="BrushDarkGray" Color="{StaticResource ColorDarkGray}" />
-	<SolidColorBrush x:Key="BrushBlack" Color="{StaticResource ColorBlack}" />
-	<SolidColorBrush x:Key="BrushWhite" Color="{StaticResource ColorWhite}" />
-	<SolidColorBrush x:Key="BrushPink" Color="{StaticResource ColorPink}" />
-	<SolidColorBrush x:Key="BrushRed" Color="{StaticResource ColorRed}" />
+    <SolidColorBrush x:Key="BrushQuestRare" Color="{StaticResource ColorQuestRare}" />
+    <!-- Rare quest - Orange? -->
 
-	<SolidColorBrush x:Key="BrushGold" Color="{StaticResource ColorGold}" />
+    <!-- Class and damage type colors -->
+    <SolidColorBrush x:Key="BrushExperienceRelated" Color="{StaticResource ColorExperienceRelated}" />
 
-	<SolidColorBrush x:Key="BrushRarity0" Color="{StaticResource ColorRarity0}" /> <!-- General - Gray -->
-	<SolidColorBrush x:Key="BrushRarity1" Color="{StaticResource ColorRarity1}" /> <!-- Fine - Light brown -->
-	<SolidColorBrush x:Key="BrushRarity2" Color="{StaticResource ColorRarity2}" /> <!-- Superior - Green -->
-	<SolidColorBrush x:Key="BrushRarity3" Color="{StaticResource ColorRarity3}" /> <!-- Exceptional - Blue -->
-	<SolidColorBrush x:Key="BrushRarity4" Color="{StaticResource ColorRarity4}" /> <!-- Masterwork - Purple -->
-	<SolidColorBrush x:Key="BrushRarity5" Color="{StaticResource ColorRarity5}" /> <!-- Mythic - Gold -->
+    <SolidColorBrush x:Key="BrushSlayerRelated" Color="{StaticResource ColorSlayerRelated}" />
+    <SolidColorBrush x:Key="BrushVenomRelated" Color="{StaticResource ColorVenomRelated}" />
 
-	<SolidColorBrush x:Key="BrushQuestRare" Color="{StaticResource ColorQuestRare}" /> <!-- Rare quest - Orange? -->
+    <SolidColorBrush x:Key="BrushDamageTypeNormal" Color="{StaticResource ColorDamageTypeNormal}" />
+    <SolidColorBrush x:Key="BrushDamageTypeCritical" Color="{StaticResource ColorDamageTypeCritical}" />
+    <SolidColorBrush x:Key="BrushDamageTypePoison" Color="{StaticResource ColorDamageTypePoison}" />
+    <SolidColorBrush x:Key="BrushDamageTypeAura" Color="{StaticResource ColorDamageTypeAura}" />
+    <SolidColorBrush x:Key="BrushDamageTypeOnHit" Color="{StaticResource ColorDamageTypeOnHit}" />
+    <SolidColorBrush x:Key="BrushDamageTypeArtifact" Color="{StaticResource ColorDamageTypeArtifact}" />
 
-	<!-- Class and damage type colors -->
-	<SolidColorBrush x:Key="BrushExperienceRelated" Color="{StaticResource ColorExperienceRelated}" />
-
-	<SolidColorBrush x:Key="BrushSlayerRelated" Color="{StaticResource ColorSlayerRelated}" />
-	<SolidColorBrush x:Key="BrushVenomRelated" Color="{StaticResource ColorVenomRelated}" />
-
-	<SolidColorBrush x:Key="BrushDamageTypeNormal" Color="{StaticResource ColorDamageTypeNormal}" />
-	<SolidColorBrush x:Key="BrushDamageTypeCritical" Color="{StaticResource ColorDamageTypeCritical}" />
-	<SolidColorBrush x:Key="BrushDamageTypePoison" Color="{StaticResource ColorDamageTypePoison}" />
-	<SolidColorBrush x:Key="BrushDamageTypeAura" Color="{StaticResource ColorDamageTypeAura}" />
-	<SolidColorBrush x:Key="BrushDamageTypeOnHit" Color="{StaticResource ColorDamageTypeOnHit}" />
-	<SolidColorBrush x:Key="BrushDamageTypeArtifact" Color="{StaticResource ColorDamageTypeArtifact}" />
-
-	<SolidColorBrush x:Key="BrushFloatingTextNormal" Color="{StaticResource ColorFloatingTextNormal}" />
+    <SolidColorBrush x:Key="BrushFloatingTextNormal" Color="{StaticResource ColorFloatingTextNormal}" />
 </ResourceDictionary>

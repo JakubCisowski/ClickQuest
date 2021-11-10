@@ -7,55 +7,55 @@
       mc:Ignorable="d"
       Title="EquipmentPage" Height="728" Width="341">
 
-	<!-- Main Border -->
-	<Border BorderThickness="3" BorderBrush="{StaticResource BrushLightGray}" Margin="1" Padding="6">
+    <!-- Main Border -->
+    <Border BorderThickness="1" CornerRadius="8" BorderBrush="{StaticResource BrushBlack}" Margin="1" Padding="6" Background="{StaticResource BrushGameH}">
 
 		<!-- TabControl with 3 tabs - Materials, Recipes and Artifacts -->
 		<TabControl x:Name="EquipmentTabControl" Width="319" Background="{StaticResource BrushGameH}" SelectionChanged="TabControl_SelectionChanged">
-			<!-- Materials -->
-			<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
-				<TabItem.Header>
-					<StackPanel Orientation="Horizontal" Width="99" HorizontalAlignment="Center">
-						<materialDesign:PackIcon Kind="Cog" Width="20" Height="20" />
-						<TextBlock Text="Materials" FontSize="17" Margin="2,0,0,0" />
-					</StackPanel>
-				</TabItem.Header>
+        <!-- Materials -->
+        <TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal" Width="99" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Cog" Width="20" Height="20" />
+                    <TextBlock Text="Materials" FontSize="17" Margin="2,0,0,0" />
+                </StackPanel>
+            </TabItem.Header>
 
-				<!-- ScrollViewer displaying Materials (generated dynamically) -->
-				<ScrollViewer x:Name="MaterialsScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-					<StackPanel x:Name="MaterialsPanel" />
-				</ScrollViewer>
-			</TabItem>
+            <!-- ScrollViewer displaying Materials (generated dynamically) -->
+            <ScrollViewer x:Name="MaterialsScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+                <StackPanel x:Name="MaterialsPanel" />
+            </ScrollViewer>
+        </TabItem>
 
-			<!-- Recipes -->
-			<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
-				<TabItem.Header>
-					<StackPanel Orientation="Horizontal" Width="99" HorizontalAlignment="Center">
-						<materialDesign:PackIcon Kind="ScriptText" Width="20" Height="20" Margin="4,0,0,0" />
-						<TextBlock Text="Recipes" FontSize="17" Margin="2,0,0,0" />
-					</StackPanel>
-				</TabItem.Header>
+        <!-- Recipes -->
+        <TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal" Width="99" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Kind="ScriptText" Width="20" Height="20" Margin="4,0,0,0" />
+                    <TextBlock Text="Recipes" FontSize="17" Margin="2,0,0,0" />
+                </StackPanel>
+            </TabItem.Header>
 
-				<!-- ScrollViewer displaying Recipes (generated dynamically) -->
-				<ScrollViewer x:Name="RecipesScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-					<StackPanel x:Name="RecipesPanel" />
-				</ScrollViewer>
-			</TabItem>
+            <!-- ScrollViewer displaying Recipes (generated dynamically) -->
+            <ScrollViewer x:Name="RecipesScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+                <StackPanel x:Name="RecipesPanel" />
+            </ScrollViewer>
+        </TabItem>
 
-			<!-- Artifacts -->
-			<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
-				<TabItem.Header>
-					<StackPanel Orientation="Horizontal" Width="99" HorizontalAlignment="Center">
-						<materialDesign:PackIcon Kind="DiamondStone" Width="20" Height="20" Margin="3,0,0,0" />
-						<TextBlock Text="Artifacts" FontSize="17" Margin="2,0,0,0" />
-					</StackPanel>
-				</TabItem.Header>
+        <!-- Artifacts -->
+        <TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal" Width="99" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Kind="DiamondStone" Width="20" Height="20" Margin="3,0,0,0" />
+                    <TextBlock Text="Artifacts" FontSize="17" Margin="2,0,0,0" />
+                </StackPanel>
+            </TabItem.Header>
 
-				<!-- ScrollViewer displaying Artifacts (generated dynamically) -->
-				<ScrollViewer x:Name="ArtifactsScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-					<StackPanel x:Name="ArtifactsPanel" />
-				</ScrollViewer>
-			</TabItem>
-		</TabControl>
-	</Border>
+            <!-- ScrollViewer displaying Artifacts (generated dynamically) -->
+            <ScrollViewer x:Name="ArtifactsScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+                <StackPanel x:Name="ArtifactsPanel" />
+            </ScrollViewer>
+        </TabItem>
+        </TabControl>
+    </Border>
 </Page>

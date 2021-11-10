@@ -62,7 +62,7 @@
 				<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 					<!-- Header melt -->
 					<TabItem.Header>
-						<StackPanel Orientation="Horizontal" Width="135" HorizontalAlignment="Center">
+						<StackPanel Orientation="Horizontal" Width="150" HorizontalAlignment="Center">
 							<materialDesign:PackIcon Kind="Cog" Width="20" Height="20" Margin="5,0,0,0" />
 							<TextBlock Text="Melt Materials" FontSize="17" Margin="2,0,0,0" />
 						</StackPanel>
@@ -168,7 +168,7 @@
 				<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 					<!-- Header melt artifacts -->
 					<TabItem.Header>
-						<StackPanel Orientation="Horizontal" Width="135" HorizontalAlignment="Center">
+						<StackPanel Orientation="Horizontal" Width="150" HorizontalAlignment="Center">
 							<materialDesign:PackIcon Kind="DiamondStone" Width="20" Height="20" Margin="5,0,0,0" />
 							<TextBlock Text="Melt Artifacts" FontSize="17" Margin="2,0,0,0" />
 						</StackPanel>
@@ -274,7 +274,7 @@
 				<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 					<!-- Header craft -->
 					<TabItem.Header>
-						<StackPanel Orientation="Horizontal" Width="135" HorizontalAlignment="Center">
+						<StackPanel Orientation="Horizontal" Width="150" HorizontalAlignment="Center">
 							<materialDesign:PackIcon Kind="Anvil" Width="20" Height="20" Margin="5,0,0,0" />
 							<TextBlock Text="Craft Artifacts" FontSize="17" Margin="2,0,0,0" />
 						</StackPanel>
