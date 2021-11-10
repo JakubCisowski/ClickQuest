@@ -21,7 +21,6 @@ namespace ClickQuest.Game.Core.Items
 		public const int MeltingWithoutIngredientsValue = 100;
 		public const double CraftingRatio = 20;
 
-		[JsonIgnore]
 		public int BaseIngotBonus => 100;
 
 		public override Artifact CopyItem(int quantity)

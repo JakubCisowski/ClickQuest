@@ -35,16 +35,11 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		public int Buff { get; set; }
 		public bool AchievementBonusGranted { get; set; }
 
-		[JsonIgnore]
 		public string TypeString => Type.ToString();
 
-		[JsonIgnore]
 		public string RarityString => Rarity.ToString();
 
-		[JsonIgnore]
 		public bool IsFinished => Duration <= 0;
-
-		[JsonIgnore]
 		public ToolTip ToolTip => ItemToolTipController.GenerateBlessingToolTip(this);
 
 		public Blessing CopyBlessing()

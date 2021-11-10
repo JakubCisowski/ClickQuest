@@ -19,7 +19,6 @@ namespace ClickQuest.Game.Core.Items
 
 		public int ArtifactId { get; set; }
 
-		[JsonIgnore]
 		public Artifact Artifact
 		{
 			get

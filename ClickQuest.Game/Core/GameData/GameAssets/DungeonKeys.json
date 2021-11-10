@@ -2,42 +2,42 @@
   {
     "Id": 0,
     "Name": "General dungeon key",
-    "Rarity": "General",
+    "Rarity": 0,
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 1,
     "Name": "Fine dungeon key",
-    "Rarity": "Fine",
+    "Rarity": 1,
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 2,
     "Name": "Superior dungeon key",
-    "Rarity": "Superior",
+    "Rarity": 2,
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 3,
     "Name": "Exceptional dungeon key",
-    "Rarity": "Exceptional",
+    "Rarity": 3,
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 4,
     "Name": "Mythic dungeon key",
-    "Rarity": "Mythic",
+    "Rarity": 4,
     "Description": "[...]",
     "Value": 1
   },
   {
     "Id": 5,
     "Name": "Masterwork dungeon key",
-    "Rarity": "Masterwork",
+    "Rarity": 5,
     "Description": "[...]",
     "Value": 1
   }

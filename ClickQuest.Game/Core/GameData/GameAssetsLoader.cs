@@ -57,6 +57,7 @@ namespace ClickQuest.Game.Core.GameData
 			}
 
 			LoadArtifactFunctionalities();
+			LoadBossAffixFunctionalities();
 
 			// [PRERELEASE] In the future this will be done in content loader.
 			FillMonsterLootWithEmptyLoot();
@@ -70,10 +71,6 @@ namespace ClickQuest.Game.Core.GameData
 			// Enums as strings.
 			var options = new JsonSerializerOptions
 			{
-				Converters =
-				{
-					new JsonStringEnumConverter(null)
-				}
 			};
 
 			result = JsonSerializer.Deserialize<List<T>>(json, options);
@@ -97,6 +94,31 @@ namespace ClickQuest.Game.Core.GameData
 			foreach (var artifact in GameAssets.Artifacts)
 			{
 				artifact.ArtifactFunctionality = artifactFunctionalities.FirstOrDefault(x => x.Name == artifact.Name);
+			}
+		}
+
+		public static void LoadBossAffixFunctionalities()
+		{
+			var affixFunctionalities = new List<AffixFunctionality>();
+
+			var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Core.Enemies.Affixes", StringComparison.Ordinal));
+
+			foreach (var type in types)
+			{
+				if (Activator.CreateInstance(type) is AffixFunctionality affixFunctionality)
+				{
+					affixFunctionalities.Add(affixFunctionality);
+				}
+			}
+
+			foreach (var boss in GameAssets.Bosses)
+			{
+				boss.AffixFunctionalities = new List<AffixFunctionality>();
+
+				foreach (var affix in boss.Affixes)
+				{
+					boss.AffixFunctionalities.Add(affixFunctionalities.FirstOrDefault(x => x.Affix == affix));
+				}
 			}
 		}
 

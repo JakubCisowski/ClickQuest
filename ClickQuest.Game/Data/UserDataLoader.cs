@@ -31,10 +31,6 @@ namespace ClickQuest.Game.Data
 			string json = File.ReadAllText(UserDataPath);
 			var user = JsonSerializer.Deserialize<User>(json, new JsonSerializerOptions()
 			{
-				Converters =
-				{
-					new JsonStringEnumConverter(null)
-				}
 			});
 
 			User.Instance = user;
@@ -73,7 +69,7 @@ namespace ClickQuest.Game.Data
 			User.Instance.Heroes.ForEach(x => x.TimePlayed = TimeSpan.Parse(x.TimePlayedString));
 		}
 
-		public static void Save()
+		public static string Save()
 		{
 			// Convert Achievements to a serializable string.
 			User.Instance.Achievements.SerializeAchievements();
@@ -83,15 +79,14 @@ namespace ClickQuest.Game.Data
 
 			string json = JsonSerializer.Serialize(User.Instance, new JsonSerializerOptions()
 			{
+				IgnoreReadOnlyProperties = true,
 				WriteIndented = true,
-				Converters =
-				{
-					new JsonStringEnumConverter(null)
-				},
 				Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
 			});
 
 			File.WriteAllText(UserDataPath, json);
+
+			return json;
 		}
 
 		public static void SeedIngots()

@@ -48,7 +48,6 @@ namespace ClickQuest.Game.Core.Adventures
 		public DateTime EndDate { get; set; }
 		public int Id { get; set; }
 
-		[JsonIgnore]
 		public bool IsFinished
 		{
 			get
@@ -112,7 +111,7 @@ namespace ClickQuest.Game.Core.Adventures
 
 			// Initially set TicksCountText (for hero stats page info).
 			// Reset to 'Duration', it will count from Duration to 0.
-			questCopy.TicksCountNumber = (int) (questCopy.EndDate - DateTime.Now).TotalSeconds;
+			questCopy.TicksCountNumber = (int)(questCopy.EndDate - DateTime.Now).TotalSeconds;
 
 			if (questCopy.IsFinished)
 			{

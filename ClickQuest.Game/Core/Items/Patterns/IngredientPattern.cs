@@ -9,7 +9,6 @@ namespace ClickQuest.Game.Core.Items.Patterns
 		public int MaterialId { get; set; }
 		public int Quantity { get; set; }
 
-		[JsonIgnore]
 		public Material RelatedMaterial
 		{
 			get

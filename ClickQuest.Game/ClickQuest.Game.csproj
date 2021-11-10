@@ -12,6 +12,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Logs\AssetsLogs\**" />
+	  <Compile Remove="Logs\CrashLogs\**" />
+	  <EmbeddedResource Remove="Logs\AssetsLogs\**" />
+	  <EmbeddedResource Remove="Logs\CrashLogs\**" />
+	  <None Remove="Logs\AssetsLogs\**" />
+	  <None Remove="Logs\CrashLogs\**" />
+	  <Page Remove="Logs\AssetsLogs\**" />
+	  <Page Remove="Logs\CrashLogs\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Fonts\Courgette-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Lato-Black.ttf" />
 	  <None Remove="Resources\Fonts\Lato-BlackItalic.ttf" />
@@ -75,10 +86,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Logs" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Resource Include="Resources\Fonts\Courgette-Regular.ttf" />
 		<Resource Include="Resources\Fonts\Lato-Black.ttf" />
 		<Resource Include="Resources\Fonts\Lato-BlackItalic.ttf" />
@@ -88,5 +95,9 @@
 		<Resource Include="Resources\Images\logo.png" />
 		<Resource Include="Resources\Images\GameIcon.png" />
 		<Resource Include="Resources\Images\GameIcon.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Logs\" />
 	</ItemGroup>
 </Project>

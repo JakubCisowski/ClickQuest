@@ -2,19 +2,19 @@
   {
     "Id": 0,
     "Rare": false,
-    "HeroClass": "All",
+    "HeroClass": 0,
     "Name": "TestQuest1",
     "Duration": 5,
     "Description": "TestQuest1Description jd",
     "QuestRewardPatterns": [
       {
         "QuestRewardId": 1,
-        "QuestRewardType": "Ingot",
+        "QuestRewardType": 4,
         "Quantity": 0
       },
       {
         "QuestRewardId": 7,
-        "QuestRewardType": "Material",
+        "QuestRewardType": 0,
         "Quantity": 1
       }
     ]
@@ -22,29 +22,29 @@
   {
     "Id": 1,
     "Rare": false,
-    "HeroClass": "All",
+    "HeroClass": 0,
     "Name": "TestQuest2",
     "Duration": 5,
     "Description": "TestQuest2Description. This ultra-long description was created to test the limits and boundaries of Microsoft and WPF. I wonder if this text will be wrapped and displayed properly.",
     "QuestRewardPatterns": [
       {
         "QuestRewardId": 1,
-        "QuestRewardType": "Ingot",
+        "QuestRewardType": 4,
         "Quantity": 1
       },
       {
         "QuestRewardId": 7,
-        "QuestRewardType": "Material",
+        "QuestRewardType": 0,
         "Quantity": 1
       },
       {
         "QuestRewardId": 1,
-        "QuestRewardType": "Blessing",
+        "QuestRewardType": 3,
         "Quantity": 1
       },
       {
         "QuestRewardId": 2,
-        "QuestRewardType": "Blessing",
+        "QuestRewardType": 3,
         "Quantity": 1
       }
     ]
@@ -52,24 +52,24 @@
   {
     "Id": 2,
     "Rare": true,
-    "HeroClass": "All",
+    "HeroClass": 0,
     "Name": "TestQuest3",
     "Duration": 5,
     "Description": "TestQuest3Description",
     "QuestRewardPatterns": [
       {
         "QuestRewardId": 1,
-        "QuestRewardType": "Ingot",
+        "QuestRewardType": 4,
         "Quantity": 1
       },
       {
         "QuestRewardId": 7,
-        "QuestRewardType": "Material",
+        "QuestRewardType": 0,
         "Quantity": 1
       },
       {
         "QuestRewardId": 5,
-        "QuestRewardType": "Blessing",
+        "QuestRewardType": 3,
         "Quantity": 10
       }
     ]

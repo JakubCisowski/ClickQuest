@@ -19,7 +19,6 @@ namespace ClickQuest.Game.Core.Items
 		public Rarity Rarity { get; set; }
 		public virtual string Description { get; set; }
 		
-		[JsonIgnore]
 		public ToolTip ToolTip => ItemToolTipController.GenerateItemToolTip(this);
 
 		public int Quantity
@@ -42,7 +41,6 @@ namespace ClickQuest.Game.Core.Items
 			}
 		}
 
-		[JsonIgnore]
 		public string RarityString
 		{
 			get
