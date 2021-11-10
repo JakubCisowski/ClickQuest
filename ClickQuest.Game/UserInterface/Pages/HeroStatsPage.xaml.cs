@@ -309,7 +309,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 					case SpecializationType.Clicking:
 						nameText = "Clicker";
-						block.Inlines.Add(new Run(" → Click damage +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking]));
+						block.Inlines.Add(new Run(" → On-hit damage +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking]));
 						break;
 
 					case SpecializationType.Crafting:
@@ -321,7 +321,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 					case SpecializationType.Trading:
 						nameText = "Tradesman";
-						block.Inlines.Add(new Run(" → Shop offer size +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+						block.Inlines.Add(new Run(" → Shop size & ratio +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
 						break;
 
 					case SpecializationType.Melting:
@@ -469,7 +469,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				Source = User.Instance.CurrentHero
 			};
-			var runDamagePerLevel = new Run() { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") };
+			var runDamagePerLevel = new Run() { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") };
 			runDamagePerLevel.SetBinding(Run.TextProperty, bindingDamagePerLevel);
 			var bindingLevelDamageBonus = new Binding("LevelDamageBonus")
 			{
@@ -487,12 +487,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 			runLevelDamageBonusTotal.SetBinding(Run.TextProperty, bindingLevelDamageBonusTotal);
 			blockDamage.Inlines.Add("Click damage: ");
 			blockDamage.Inlines.Add(new Run("2") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
-			blockDamage.Inlines.Add(new Run(" (base)") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
+			blockDamage.Inlines.Add(new Run(" (base)") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
 			blockDamage.Inlines.Add(" + ");
 			blockDamage.Inlines.Add(runLevelDamageBonus);
-			blockDamage.Inlines.Add(new Run(" (") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
+			blockDamage.Inlines.Add(new Run(" (") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
 			blockDamage.Inlines.Add(runDamagePerLevel);
-			blockDamage.Inlines.Add(new Run("/lvl)") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
+			blockDamage.Inlines.Add(new Run("/lvl)") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
 			blockDamage.Inlines.Add(" = ");
 			blockDamage.Inlines.Add(runLevelDamageBonusTotal);
 
@@ -543,9 +543,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 			if (User.Instance.CurrentHero?.Specialization.SpecializationBuffs[SpecializationType.Clicking] > 0)
 			{
 				blockDamage.Inlines.Add(new LineBreak());
-				blockDamage.Inlines.Add(new Run("You also deal ") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
+				blockDamage.Inlines.Add(new Run("You also deal ") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
 				blockDamage.Inlines.Add(new Run(User.Instance.CurrentHero?.Specialization.SpecializationBuffs[SpecializationType.Clicking].ToString()) { FontFamily = (FontFamily)this.FindResource("FontRegularBoldItalic") });
-				blockDamage.Inlines.Add(new Run(" on-hit damage from Clicker Specialization, but it doesn't get multiplied upon critting") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
+				blockDamage.Inlines.Add(new Run(" on-hit damage from Clicker Specialization, but it doesn't get multiplied upon critting") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
 			}
 
 			toolTipDamage.Content = blockDamage;
@@ -618,11 +618,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 					blockCrit.Inlines.Add(new LineBreak());
 					blockCrit.Inlines.Add("Crit chance: ");
 					blockCrit.Inlines.Add(new Run("25% ") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
-					blockCrit.Inlines.Add(new Run("(base)") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
+					blockCrit.Inlines.Add(new Run("(base)") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
 					blockCrit.Inlines.Add(new Run(" + "));
 					blockCrit.Inlines.Add(runLevelCritBonus);
 					blockCrit.Inlines.Add(new Run("%") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
-					blockCrit.Inlines.Add(new Run(" (0.4%/lvl)") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
+					blockCrit.Inlines.Add(new Run(" (0.4%/lvl)") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
 					blockCrit.Inlines.Add(" = ");
 					blockCrit.Inlines.Add(runLevelCritBonusTotal);
 					blockCrit.Inlines.Add(new Run("%") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
@@ -771,10 +771,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 					blockPoison.Inlines.Add(new LineBreak());
 					blockPoison.Inlines.Add("Poison damage: ");
 					blockPoison.Inlines.Add((new Run("1 ") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") }));
-					blockPoison.Inlines.Add(new Run("(base)") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
+					blockPoison.Inlines.Add(new Run("(base)") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
 					blockPoison.Inlines.Add(new Run(" + "));
 					blockPoison.Inlines.Add(runLevelPoisonBonus);
-					blockPoison.Inlines.Add(new Run(" (2/lvl)") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
+					blockPoison.Inlines.Add(new Run(" (2/lvl)") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
 					blockPoison.Inlines.Add(" = ");
 					blockPoison.Inlines.Add(runLevelPoisonBonusTotal);
 					blockPoison.Inlines.Add(new LineBreak());
@@ -882,7 +882,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			// ["Aura tick damage: X% (base)"]
 			blockAura.Inlines.Add("Aura tick damage: ");
 			blockAura.Inlines.Add(new Run("10%") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
-			blockAura.Inlines.Add(new Run(" (base)") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
+			blockAura.Inlines.Add(new Run(" (base)") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
 
 			blockAura.Inlines.Add(new LineBreak());
 
@@ -903,11 +903,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 			runAuraSpeedLevelBonusTotal.SetBinding(Run.TextProperty, bindingAuraSpeedLevelBonusTotal);
 			blockAura.Inlines.Add("Aura tick speed: ");
 			blockAura.Inlines.Add((new Run($"{Hero.AURA_SPEED_BASE}/s") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") }));
-			blockAura.Inlines.Add(new Run(" (base)") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
+			blockAura.Inlines.Add(new Run(" (base)") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
 			blockAura.Inlines.Add(" + ");
 			blockAura.Inlines.Add(runAuraSpeedLevelBonus);
 			blockAura.Inlines.Add(new Run("/s") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
-			blockAura.Inlines.Add(new Run($" ({Hero.AURA_SPEED_PER_LEVEL}/s/lvl)") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
+			blockAura.Inlines.Add(new Run($" ({Hero.AURA_SPEED_PER_LEVEL}/s/lvl)") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
 			blockAura.Inlines.Add(" = ");
 			blockAura.Inlines.Add(runAuraSpeedLevelBonusTotal);
 			blockAura.Inlines.Add(new Run("/s") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });

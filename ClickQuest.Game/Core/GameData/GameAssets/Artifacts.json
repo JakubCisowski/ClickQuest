@@ -1,13 +1,13 @@
 [
   {
-    "Lore": "",
-    "ExtraInfo": "",
+    "Lore": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tristique congue accumsan. Nunc feugiat nec tellus nec mattis. Praesent quis libero semper, iaculis lorem non, condimentum est. Nulla pulvinar nibh orci, ut molestie neque convallis eget. Vestibulum vel sagittis eros, et posuere ipsum. Donec ac mollis odio. Fusce sit amet eros massa. Vestibulum porta, ante et sollicitudin ultrices, magna lorem ullamcorper quam, a rutrum orci massa id est. Proin ultrices mollis urna, ut faucibus leo ullamcorper a.",
+    "ExtraInfo": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tristique congue accumsan.",
     "ArtifactType": 0,
     "Id": 1,
     "Name": "Death-Infused Bone Talisman",
     "Value": 1,
-    "Rarity": 3,
-    "Description": "Your first attack against a monster places 'Decay' on them, dealing damage every 0.5 seconds for 2.5 seconds. Damage dealt is equal to your poison damage. Deals <poison>double</poison> damage against bosses."
+    "Rarity": 5,
+    "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tristique congue accumsan. Nunc feugiat nec tellus nec mattis. Praesent quis libero semper, iaculis lorem non, condimentum est. Nulla pulvinar nibh orci"
   },
   {
     "Lore": "",
@@ -220,7 +220,7 @@
     "Description": "Increases your Critical Click Chance by 5%."
   },
   {
-    "Lore": "",
+    "Lore": "A very blunt sword. It can barely inflict any damage.",
     "ExtraInfo": "",
     "ArtifactType": 0,
     "Id": 23,

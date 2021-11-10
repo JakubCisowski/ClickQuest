@@ -24,6 +24,12 @@
 	<Color x:Key="ColorGameU">#61B05A </Color> <!-- 20 / Hovered tab header (equipment/shop/priest/blacksmith)  -->
 	<Color x:Key="ColorGameV">#EDF9FD </Color> <!-- 21 / Shop/Priest/Blacksmith header background  -->
 	<Color x:Key="ColorGameW">#666666 </Color> <!-- 22 / Shop/Priest/Blacksmith header font color  -->
+	<Color x:Key="ColorGameX">#000000 </Color> <!-- 23 / Tooltip background  -->
+	<Color x:Key="ColorGameY">#FFFFFF </Color> <!-- 24 / Tooltip foreground  (name, type, artifact functionality description) -->
+	<Color x:Key="ColorGameZ">#ababab </Color> <!-- 25 / Tooltip border colour default -->
+	<Color x:Key="ColorGame0">#ababab </Color> <!-- 26 / Tooltip foreground (lore / specialization technical info) -->
+	<Color x:Key="ColorGame1">#666666 </Color> <!-- 27 / Tooltip foreground (extra info / material description) -->
+	<Color x:Key="ColorGame2">#61B05A </Color> <!-- 28 / Tooltip foreground (mythic tag) -->
 
 	<Color x:Key="ColorLightGray">#c9c9c9 </Color>
 	<Color x:Key="ColorDarkGray">#666666 </Color>
@@ -58,9 +64,6 @@
 	<Color x:Key="ColorDamageTypeArtifact"> #0053FF  </Color>
 
 
-	<Color x:Key="ColorToolTipBackground"> #000000 </Color>
-
-
 
 	<!-- BRUSHES -->
 	<SolidColorBrush x:Key="BrushGameA" Color="{StaticResource ColorGameA}" />
@@ -85,6 +88,12 @@
 	<SolidColorBrush x:Key="BrushGameU" Color="{StaticResource ColorGameU}" />
 	<SolidColorBrush x:Key="BrushGameV" Color="{StaticResource ColorGameV}" />
 	<SolidColorBrush x:Key="BrushGameW" Color="{StaticResource ColorGameW}" />
+	<SolidColorBrush x:Key="BrushGameX" Color="{StaticResource ColorGameX}" Opacity="0.8" />
+	<SolidColorBrush x:Key="BrushGameY" Color="{StaticResource ColorGameY}" />
+	<SolidColorBrush x:Key="BrushGameZ" Color="{StaticResource ColorGameZ}" />
+	<SolidColorBrush x:Key="BrushGame0" Color="{StaticResource ColorGame0}" />
+	<SolidColorBrush x:Key="BrushGame1" Color="{StaticResource ColorGame1}" />
+	<SolidColorBrush x:Key="BrushGame2" Color="{StaticResource ColorGame2}" />
 
 	<SolidColorBrush x:Key="BrushLightGray" Color="{StaticResource ColorLightGray}" />
 	<SolidColorBrush x:Key="BrushDarkGray" Color="{StaticResource ColorDarkGray}" />
@@ -116,6 +125,4 @@
 	<SolidColorBrush x:Key="BrushDamageTypeAura" Color="{StaticResource ColorDamageTypeAura}" />
 	<SolidColorBrush x:Key="BrushDamageTypeOnHit" Color="{StaticResource ColorDamageTypeOnHit}" />
 	<SolidColorBrush x:Key="BrushDamageTypeArtifact" Color="{StaticResource ColorDamageTypeArtifact}" />
-
-	<SolidColorBrush x:Key="BrushToolTipBackground" Color="{StaticResource ColorToolTipBackground}" Opacity="0.7" />
 </ResourceDictionary>

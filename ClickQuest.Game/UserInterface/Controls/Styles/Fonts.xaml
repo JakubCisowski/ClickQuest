@@ -1,12 +1,28 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:System="clr-namespace:System;assembly=mscorlib">
 
+	<!-- REGULAR-->
 	<FontFamily x:Key="FontRegular">/Resources/Fonts/#Lato Regular</FontFamily>
+
+	<!-- bold -->
 	<FontFamily x:Key="FontRegularDemiBold">/Resources/Fonts/#Lato Bold</FontFamily>
 	<FontFamily x:Key="FontRegularBold">/Resources/Fonts/#Lato Black</FontFamily>
-	<FontFamily x:Key="FontRegularItalic">/Resources/Fonts/#Lato Light Italic</FontFamily>
-	<FontFamily x:Key="FontRegularBoldItalic">/Resources/Fonts/#Lato Black Italic</FontFamily>
+	
+	<!-- italic -->
+	<FontFamily x:Key="FontRegularLightItalic">/Resources/Fonts/#Lato Light Italic</FontFamily>
+	<FontFamily x:Key="FontRegularItalic">/Resources/Fonts/#Lato Italic</FontFamily>
+
+	<!-- bold italic -->
+	<FontFamily x:Key="FontRegularBoldItalic">/Resources/Fonts/#Lato Bold Italic</FontFamily>
+	<FontFamily x:Key="FontRegularBlackItalic">/Resources/Fonts/#Lato Black Italic</FontFamily>
+
+	<!-- FANCY-->
 	<FontFamily x:Key="FontFancy">/Resources/Fonts/#Courgette Regular</FontFamily>
+
+	<!-- SIZES -->
+	<System:Double x:Key="FontSizeToolTipName">20</System:Double>
+	<System:Double x:Key="FontSizeToolTipIngredientText">18</System:Double>
 
 
 </ResourceDictionary>

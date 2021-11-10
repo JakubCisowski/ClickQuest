@@ -7,10 +7,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using System.Windows.Shapes;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Extensions.Combat;
+using static ClickQuest.Game.Extensions.UserInterface.ToolTips.GeneralToolTipController;
 using Colors = ClickQuest.Game.Extensions.UserInterface.ColorsController;
 
 namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
@@ -20,10 +22,13 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 		const string TagOpeningStart = "<";
 		const string TagClosingStart = "</";
 		const string TagEnd = ">";
-		
+
 		public static ToolTip GenerateItemToolTip<T>(T itemToGenerateToolTipFor) where T : Item
 		{
-			var toolTip = new ToolTip();
+			var toolTip = new ToolTip()
+			{
+				BorderBrush = Colors.GetRarityColor(itemToGenerateToolTipFor.Rarity)
+			};
 
 			var toolTipBlock = new TextBlock
 			{
@@ -34,24 +39,32 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 			{
 				case Material material:
 					{
-						toolTipBlock.Inlines.Add(new Run($"{material.Name}"));
+						toolTipBlock.Inlines.Add(new Run($"{material.Name}"){FontSize=(double)Application.Current.FindResource("FontSizeToolTipName")});
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(new Run($"*{material.RarityString}*")
 						{
 							Foreground = Colors.GetRarityColor(material.Rarity),
 							FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold")
 						});
+						
 						toolTipBlock.Inlines.Add(new LineBreak());
+						toolTipBlock.Inlines.Add(GenerateTextSeparator());
 						toolTipBlock.Inlines.Add(new LineBreak());
-						toolTipBlock.Inlines.Add(new Run($"{material.Description}"));
+
+						toolTipBlock.Inlines.Add(new Run($"{material.Description}") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+
 						toolTipBlock.Inlines.Add(new LineBreak());
-						toolTipBlock.Inlines.Add(new Run($"Value: {material.Value} gold"));
+						toolTipBlock.Inlines.Add(GenerateTextSeparator());
+						toolTipBlock.Inlines.Add(new LineBreak());
+						
+						toolTipBlock.Inlines.Add(new Run("Value: "));
+						toolTipBlock.Inlines.Add(new Run($"{material.Value} gold") {Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGold")});
 					}
 					break;
 
 				case Artifact artifact:
 					{
-						toolTipBlock.Inlines.Add(new Run($"{artifact.Name}"));
+						toolTipBlock.Inlines.Add(new Run($"{artifact.Name}"){FontSize=(double)Application.Current.FindResource("FontSizeToolTipName")});
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(new Run($"*{artifact.RarityString}*")
 						{
@@ -59,48 +72,76 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 							FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold")
 						});
 						toolTipBlock.Inlines.Add(new LineBreak());
+						toolTipBlock.Inlines.Add(new Run($"{artifact.ArtifactType.ToString()}"));
+
+						toolTipBlock.Inlines.Add(new LineBreak());
+						toolTipBlock.Inlines.Add(GenerateTextSeparator());
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						var listOfRuns = GenerateArtifactDescriptionRuns(artifact.Description);
-						foreach (var run in listOfRuns)
+						var listOfDescriptionRuns = GenerateArtifactDescriptionRuns(artifact.Description);
+						foreach (var run in listOfDescriptionRuns)
 						{
 							toolTipBlock.Inlines.Add(run);
 						}
+						
+						if (!string.IsNullOrWhiteSpace(artifact.ExtraInfo))
+						{
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run($"{artifact.ExtraInfo}") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame1")});
+						}
 
 						toolTipBlock.Inlines.Add(new LineBreak());
-						toolTipBlock.Inlines.Add(new Run($"{artifact.Lore}"));
+						toolTipBlock.Inlines.Add(GenerateTextSeparator());
 						toolTipBlock.Inlines.Add(new LineBreak());
-						toolTipBlock.Inlines.Add(new Run($"{artifact.ExtraInfo}"));
+
+						toolTipBlock.Inlines.Add(new Run($"{artifact.Lore}") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
 
 						if (artifact.Rarity == Rarity.Mythic)
 						{
 							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run($"{artifact.MythicTag}") { FontFamily = (FontFamily)Application.Current.FindResource("FontFancy") });
+							toolTipBlock.Inlines.Add(new LineBreak());
+							toolTipBlock.Inlines.Add(new Run($"{artifact.MythicTag}") { FontFamily = (FontFamily)Application.Current.FindResource("FontFancy"), Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGame2")});
 						}
 					}
 					break;
 
 				case Recipe recipe:
 					{
-						toolTipBlock.Inlines.Add(new Run($"{recipe.Name}"));
+						toolTipBlock.Inlines.Add(new Run($"{recipe.Name}") {FontSize=(double)Application.Current.FindResource("FontSizeToolTipName")});
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(new Run($"*{recipe.RarityString}*")
 						{
 							Foreground = Colors.GetRarityColor(recipe.Rarity),
 							FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold")
 						});
+
 						toolTipBlock.Inlines.Add(new LineBreak());
+						toolTipBlock.Inlines.Add(GenerateTextSeparator());
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						var listOfRuns = GenerateArtifactDescriptionRuns(recipe.Description);
-						foreach (var run in listOfRuns)
+						var listOfDescriptionRuns = GenerateArtifactDescriptionRuns(recipe.Description);
+						foreach (var run in listOfDescriptionRuns)
 						{
 							toolTipBlock.Inlines.Add(run);
 						}
 
 						toolTipBlock.Inlines.Add(new LineBreak());
+						toolTipBlock.Inlines.Add(GenerateTextSeparator());
 						toolTipBlock.Inlines.Add(new LineBreak());
-						toolTipBlock.Inlines.Add(new Run($"{recipe.RequirementsDescription}"));
+
+						var listOfIngredientRuns = GenerateRecipeIngredientsRuns(recipe);
+						foreach (var run in listOfIngredientRuns)
+						{
+							toolTipBlock.Inlines.Add(run);
+						}
+						
+						toolTipBlock.Inlines.Add(new LineBreak());
+						toolTipBlock.Inlines.Add(GenerateTextSeparator());
+						toolTipBlock.Inlines.Add(new LineBreak());
+						
+						toolTipBlock.Inlines.Add(new Run("Value: "));
+						toolTipBlock.Inlines.Add(new Run($"{recipe.Value} gold") {Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGold")});
 					}
 					break;
 			}
@@ -259,6 +300,25 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 			}
 
 			return artifactDescriptionRuns;
+		}
+	
+		public static List<Run> GenerateRecipeIngredientsRuns(Recipe recipe)
+		{
+			var ingredientRuns = new List<Run>();
+
+			ingredientRuns.Add(new Run("Ingredients:\n") { FontSize = (double)Application.Current.FindResource("FontSizeToolTipIngredientText")});
+
+			foreach (var ingredient in recipe.IngredientPatterns)
+			{
+				var relatedMaterial = ingredient.RelatedMaterial;
+				ingredientRuns.Add(new Run($"{ingredient.Quantity}x "));
+				ingredientRuns.Add(new Run($"{relatedMaterial.Name}"){Foreground=Colors.GetRarityColor(relatedMaterial.Rarity)});
+				ingredientRuns.Add(new Run("\n"));
+			}
+
+			ingredientRuns.RemoveAt(ingredientRuns.Count - 1);
+
+			return ingredientRuns;
 		}
 	}
 }

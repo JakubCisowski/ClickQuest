@@ -1,4 +1,4 @@
 namespace ClickQuest.Game.Core.Items.Types
 {
-	public enum ArtifactType { XD = 0 }
+	public enum ArtifactType { Talisman = 0 }
 }

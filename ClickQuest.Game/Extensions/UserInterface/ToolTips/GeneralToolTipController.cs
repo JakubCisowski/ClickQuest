@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 {
@@ -9,6 +11,11 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 		{
 			ToolTipService.SetInitialShowDelay(control, 100);
 			ToolTipService.SetShowDuration(control, 20000);
+		}
+
+		public static Line GenerateTextSeparator()
+		{
+			return new Line() { X1 = 0, Y1 = 0, X2 = 500, Stroke = (SolidColorBrush)Application.Current.FindResource("BrushWhite"), StrokeThickness = 1, Margin = new Thickness(0, 6, 0, 6) };
 		}
 	}
 }
