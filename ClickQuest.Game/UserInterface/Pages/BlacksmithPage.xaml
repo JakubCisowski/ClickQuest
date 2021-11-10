@@ -59,7 +59,7 @@
 			<!-- Blacksmith panel-->
 			<TabControl Grid.Row="1" Background="{StaticResource BrushGameT}" Width="650" Height="550">
 				<!-- Melt tab -->
-				<TabItem Background="{StaticResource BrushGameK}">
+				<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 					<!-- Header melt -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="135" HorizontalAlignment="Center">
@@ -165,7 +165,7 @@
 				</TabItem>
 
 				<!-- Melt artifacts tab -->
-				<TabItem Background="{StaticResource BrushGameK}">
+				<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 					<!-- Header melt artifacts -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="135" HorizontalAlignment="Center">
@@ -271,7 +271,7 @@
 				</TabItem>
 
 				<!-- Craft tab -->
-				<TabItem Background="{StaticResource BrushGameK}">
+				<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 					<!-- Header craft -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="135" HorizontalAlignment="Center">

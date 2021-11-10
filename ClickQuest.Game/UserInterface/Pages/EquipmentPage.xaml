@@ -13,7 +13,7 @@
 		<!-- TabControl with 3 tabs - Materials, Recipes and Artifacts -->
 		<TabControl x:Name="EquipmentTabControl" Width="319" Background="{StaticResource BrushGameH}" SelectionChanged="TabControl_SelectionChanged">
 			<!-- Materials -->
-			<TabItem Background="{StaticResource BrushGameK}">
+			<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 				<TabItem.Header>
 					<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
 						<materialDesign:PackIcon Kind="Cog" Width="20" Height="20" />
@@ -43,7 +43,7 @@
 			</TabItem>
 
 			<!-- Artifacts -->
-			<TabItem Background="{StaticResource BrushGameK}">
+			<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 				<TabItem.Header>
 					<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
 						<materialDesign:PackIcon Kind="DiamondStone" Width="20" Height="20" Margin="3,0,0,0" />

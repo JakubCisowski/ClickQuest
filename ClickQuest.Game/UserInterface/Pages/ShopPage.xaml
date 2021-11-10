@@ -59,7 +59,7 @@
 			<!-- Shop panel -->
 			<TabControl Grid.Row="1" Background="{StaticResource BrushGameT}" Width="650" Height="550">
 				<!-- Sell materials tab-->
-				<TabItem Background="{StaticResource BrushGameK}">
+				<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 					<!-- Header sell -->
 					<TabItem.Header> 
 						<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
@@ -165,7 +165,7 @@
 				</TabItem>
 
 				<!-- Sell recipes tab-->
-				<TabItem Background="{StaticResource BrushGameK}">
+				<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 					<!-- Header sell -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
@@ -271,7 +271,7 @@
 				</TabItem>
 
 				<!-- Buy tab-->
-				<TabItem Background="{StaticResource BrushGameK}">
+				<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 					<!-- Header -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">

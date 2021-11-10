@@ -61,7 +61,7 @@
 			<!-- Priest panel-->
 			<TabControl Grid.Row="1" Background="{StaticResource BrushGameT}" Width="650" Height="550">
 				<!-- Buy tab -->
-				<TabItem Background="{StaticResource BrushGameK}">
+				<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 					<!-- Header buy -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="133" HorizontalAlignment="Center">
