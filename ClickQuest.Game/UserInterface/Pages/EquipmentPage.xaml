@@ -15,7 +15,7 @@
 			<!-- Materials -->
 			<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 				<TabItem.Header>
-					<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
+					<StackPanel Orientation="Horizontal" Width="99" HorizontalAlignment="Center">
 						<materialDesign:PackIcon Kind="Cog" Width="20" Height="20" />
 						<TextBlock Text="Materials" FontSize="17" Margin="2,0,0,0" />
 					</StackPanel>
@@ -28,9 +28,9 @@
 			</TabItem>
 
 			<!-- Recipes -->
-			<TabItem Background="{StaticResource BrushGameK}">
+			<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 				<TabItem.Header>
-					<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
+					<StackPanel Orientation="Horizontal" Width="99" HorizontalAlignment="Center">
 						<materialDesign:PackIcon Kind="ScriptText" Width="20" Height="20" Margin="4,0,0,0" />
 						<TextBlock Text="Recipes" FontSize="17" Margin="2,0,0,0" />
 					</StackPanel>
@@ -45,7 +45,7 @@
 			<!-- Artifacts -->
 			<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
 				<TabItem.Header>
-					<StackPanel Orientation="Horizontal" Width="93" HorizontalAlignment="Center">
+					<StackPanel Orientation="Horizontal" Width="99" HorizontalAlignment="Center">
 						<materialDesign:PackIcon Kind="DiamondStone" Width="20" Height="20" Margin="3,0,0,0" />
 						<TextBlock Text="Artifacts" FontSize="17" Margin="2,0,0,0" />
 					</StackPanel>
