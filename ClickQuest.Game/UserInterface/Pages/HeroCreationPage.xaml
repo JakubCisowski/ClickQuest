@@ -78,13 +78,40 @@
 						</ListView.ItemTemplate>
 
 						<ListView.ItemContainerStyle>
-							<Style TargetType="ListViewItem">
+							<Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
 								<Setter Property="HorizontalContentAlignment" Value="Center" />
 								<Setter Property="Width" Value="146" />
 								<Setter Property="ToolTip" Value="default" />
 								<Setter Property="ToolTipService.ShowDuration" Value="20000" />
 								<Setter Property="ToolTipService.InitialShowDelay" Value="100" />
 								<Style.Triggers>
+									
+									<MultiTrigger>
+										<MultiTrigger.Conditions>
+											<Condition Property="IsSelected" Value="True" />
+											<Condition Property="Selector.IsSelectionActive" Value="True" />
+										</MultiTrigger.Conditions>
+
+										<Setter Property="Background" Value="{StaticResource BrushGameG}" />
+									</MultiTrigger>
+
+									<MultiTrigger>
+										<MultiTrigger.Conditions>
+											<Condition Property="IsSelected" Value="True" />
+											<Condition Property="Selector.IsSelectionActive" Value="False" />
+										</MultiTrigger.Conditions>
+									
+										<Setter Property="Background" Value="{StaticResource BrushGameG}" />
+									</MultiTrigger>
+									
+									<MultiTrigger>
+										<MultiTrigger.Conditions>
+											<Condition Property="IsMouseOver" Value="True" />
+											<Condition Property="IsSelected" Value="False"/>
+										</MultiTrigger.Conditions>
+
+										<Setter Property="Background" Value="{StaticResource BrushGameF}" />
+									</MultiTrigger>
 
 									<!-- Slayer class -->
 									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroClass.Slayer}">
@@ -165,13 +192,41 @@
 						</ListView.ItemTemplate>
 
 						<ListView.ItemContainerStyle>
-							<Style TargetType="ListViewItem">
+							<Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
 								<Setter Property="HorizontalContentAlignment" Value="Center" />
 								<Setter Property="Width" Value="146" />
 								<Setter Property="ToolTip" Value="default" />
 								<Setter Property="ToolTipService.ShowDuration" Value="20000" />
 								<Setter Property="ToolTipService.InitialShowDelay" Value="100" />
 								<Style.Triggers>
+									
+									<MultiTrigger>
+										<MultiTrigger.Conditions>
+											<Condition Property="IsSelected" Value="True" />
+											<Condition Property="Selector.IsSelectionActive" Value="True" />
+										</MultiTrigger.Conditions>
+
+										<Setter Property="Background" Value="{StaticResource BrushGameG}" />
+									</MultiTrigger>
+
+									<MultiTrigger>
+										<MultiTrigger.Conditions>
+											<Condition Property="IsSelected" Value="True" />
+											<Condition Property="Selector.IsSelectionActive" Value="False" />
+										</MultiTrigger.Conditions>
+									
+										<Setter Property="Background" Value="{StaticResource BrushGameG}" />
+									</MultiTrigger>
+									
+									<MultiTrigger>
+										<MultiTrigger.Conditions>
+											<Condition Property="IsMouseOver" Value="True" />
+											<Condition Property="IsSelected" Value="False"/>
+										</MultiTrigger.Conditions>
+
+										<Setter Property="Background" Value="{StaticResource BrushGameF}" />
+									</MultiTrigger>
+									
 									<!-- Human race -->
 									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroRace.Human}">
 										<!-- ToolTip -->
