@@ -37,7 +37,7 @@
             <Grid ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
                 <!-- Experience progress bar ToolTip -->
                 <Grid.ToolTip>
-                    <ToolTip>
+                    <ToolTip Style="{StaticResource ToolTipSimple}">
                         <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
 							<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}" />
 							<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" />
@@ -89,7 +89,7 @@
                     </StackPanel.ToolTip>
 
                     <!-- Click damage icon-->
-                    <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="{StaticResource BrushLightGray}" VerticalAlignment="Center" />
+                    <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="{StaticResource BrushDamageTypeNormal}" VerticalAlignment="Center" />
                     <!-- Click damage text-->
                     <TextBlock FontSize="18" Margin="3" Text="Damage:" VerticalAlignment="Center" />
                 </StackPanel>

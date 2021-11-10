@@ -51,26 +51,87 @@
 
 				<!-- Shop button -->
 				<Button x:Name="ShopButton" Click="ShopButton_Click" Width="150" Height="70" Background="{StaticResource BrushGameC}">
+
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="Here you can sell your materials and recipes" />
+								<LineBreak />
+								<Run Text="You can also buy recipes with gold" />
+							</TextBlock>
+						</ToolTip>
+					</Button.ToolTip>
+
 					<TextBlock Text="Shop" FontSize="20" />
 				</Button>
 
 				<!-- Blacksmith button -->
 				<Button x:Name="BlacksmithButton" Click="BlacksmithButton_Click" Width="150" Height="70" Background="{StaticResource BrushGameC}">
+
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="Here you can melt your materials or use them to craft artifacts" />
+								<LineBreak />
+								<Run Text="Melting gives you ingots that can be used instead of materials to craft artifacts" />
+							</TextBlock>
+						</ToolTip>
+					</Button.ToolTip>
+
 					<TextBlock Text="Blacksmith" FontSize="20" />
 				</Button>
 
 				<!-- Priest button -->
 				<Button x:Name="PriestButton" Click="PriestButton_Click" Width="150" Height="70" Background="{StaticResource BrushGameC}">
+
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="Here you can buy temporary blessings which empower your hero" />
+								<LineBreak />
+								<Run Text="If you exit this hero or game all blessings are paused" />
+								<LineBreak />
+								<Run Text="Blessing timer is started right when you buy it, you can only have one blessing at a time" />
+							</TextBlock>
+						</ToolTip>
+					</Button.ToolTip>
+
 					<TextBlock Text="Priest" FontSize="20" />
 				</Button>
 
 				<!-- Quest menu button -->
 				<Button x:Name="QuestMenuButton" Click="QuestMenuButton_Click" Width="150" Height="70" Background="{StaticResource BrushGameC}">
+
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="Here you can complete quests that give you different rewards" />
+								<LineBreak />
+								<Run Text="You can't fight during quests, and they are running even if you exit the game" />
+								<LineBreak />
+								<Run Text="Rerolling gives you a new set of three quests" />
+							</TextBlock>
+						</ToolTip>
+					</Button.ToolTip>
+					
 					<TextBlock Text="Quests" FontSize="20" />
 				</Button>
 
 				<!-- Dungeon select button -->
 				<Button x:Name="DungeonSelectButton" Click="DungeonSelectButton_Click" Width="150" Height="70" Background="{StaticResource BrushGameC}">
+
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="Here you can use dropped Dungeon Keys to fight Bosses" />
+								<LineBreak />
+								<Run Text="You have 30 seconds to deal as much damage as you can, the more damage the better rewards" />
+								<LineBreak />
+								<Run Text="Rare keys open tougher dungeons, but provide better loot" />
+							</TextBlock>
+						</ToolTip>
+					</Button.ToolTip>
+				
 					<TextBlock Text="Dungeons" FontSize="20" />
 				</Button>
 			</StackPanel>

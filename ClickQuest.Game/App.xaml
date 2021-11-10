@@ -44,6 +44,7 @@
 				<Setter Property="Background" Value="{StaticResource BrushGameA}" />
 			</Style>
 
+			<!-- Extended ToolTip style (eg. items, specializations) - set globally -->
 			<Style TargetType="ToolTip" BasedOn="{StaticResource StyleFontRegular}">
 				<Setter Property="Background" Value="{StaticResource BrushGameX}" />
 				<Setter Property="Padding" Value="5" />
@@ -51,6 +52,14 @@
 				<Setter Property="controlzEx:ToolTipAssist.AutoMove" Value="True" />
 				<Setter Property="MinWidth" Value="300"/>
 				<Setter Property="MaxWidth" Value="500"/>
+			</Style>
+
+			<!-- Simple ToolTip style (eg. ingots, gold) -->
+			<Style x:Key="ToolTipSimple" TargetType="ToolTip" BasedOn="{StaticResource StyleFontRegular}">
+				<Setter Property="Background" Value="{StaticResource BrushGameX}" />
+				<Setter Property="Padding" Value="5" />
+				<Setter Property="BorderBrush" Value="{StaticResource BrushGameZ}" />
+				<Setter Property="controlzEx:ToolTipAssist.AutoMove" Value="True" />
 			</Style>
 
 			<!-- ToolTip text styles -->

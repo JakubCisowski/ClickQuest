@@ -72,7 +72,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private ToolTip GenerateGoldToolTip()
 		{
-			var goldInfoToolTip = new ToolTip();
+			var goldInfoToolTip = new ToolTip()
+			{
+				Style = (Style)FindResource("ToolTipSimple")
+			};
 
 			GeneralToolTipController.SetToolTipDelayAndDuration(GoldPanel);
 
@@ -191,6 +194,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			else
 			{
 				questToolTipTextBlock.Text = "No quest is currently active";
+				questToolTip.Style = (Style)this.FindResource("ToolTipSimple");
 			}
 
 			questToolTip.Content = questToolTipTextBlock;
@@ -240,6 +244,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			else
 			{
 				blessingToolTipBlock.Text = "No blessing is currently active";
+				blessingToolTip.Style = (Style)this.FindResource("ToolTipSimple");
 			}
 
 			blessingToolTip.Content = blessingToolTipBlock;

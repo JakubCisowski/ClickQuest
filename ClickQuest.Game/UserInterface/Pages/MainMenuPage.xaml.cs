@@ -3,6 +3,7 @@ using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.Extensions.UserInterface.ToolTips;
 using ClickQuest.Game.UserInterface.Controls;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -67,6 +68,20 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private Button GenerateDeleteHeroButton(Hero hero)
 		{
+			var toolTip = new ToolTip()
+			{
+				Style= (Style)FindResource("ToolTipSimple")
+			};
+
+
+			var toolTipBlock = new TextBlock
+			{
+				Style = (Style)FindResource("ToolTipTextBlockBase"),
+				Text = "This will permanently delete the hero and all of their items\nCurrencies (gold, ingots, dungeon keys) will not be reset"
+			};
+
+			toolTip.Content = toolTipBlock;
+
 			var deleteHeroButton = new Button
 			{
 				Name = "DeleteHero" + hero.Id,
@@ -76,6 +91,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Background = (SolidColorBrush)FindResource("BrushGameD"),
 				Tag = hero
 			};
+
+			GeneralToolTipController.SetToolTipDelayAndDuration(deleteHeroButton);
+			deleteHeroButton.ToolTip = toolTip;
 
 			var deleteHeroIcon = new PackIcon
 			{

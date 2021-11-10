@@ -15,7 +15,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static Line GenerateTextSeparator()
 		{
-			return new Line() { X1 = 0, Y1 = 0, X2 = 500, Stroke = (SolidColorBrush)Application.Current.FindResource("BrushWhite"), StrokeThickness = 1, Margin = new Thickness(0, 6, 0, 6) };
+			return new Line() { X1 = 0, Y1 = 0, X2 = 500, Stroke = (SolidColorBrush)Application.Current.FindResource("BrushGame3"), StrokeThickness = 1, Margin = new Thickness(0, 6, 0, 6) };
 		}
 	}
 }

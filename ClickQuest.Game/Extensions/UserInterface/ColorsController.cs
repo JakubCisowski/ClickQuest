@@ -49,7 +49,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			switch (damageType)
 			{
 				case DamageType.Normal:
-					brush = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeNormal");
+					brush = (SolidColorBrush)Application.Current.FindResource("BrushFloatingTextNormal");
 					break;
 
 				case DamageType.Critical:

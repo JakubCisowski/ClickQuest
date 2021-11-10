@@ -153,7 +153,10 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static ToolTip GenerateCurrencyToolTip<T>(int rarityValue) where T : Item
 		{
-			var currencyToolTip = new ToolTip();
+			var currencyToolTip = new ToolTip()
+			{
+				Style = (Style)Application.Current.FindResource("ToolTipSimple")
+			};
 
 			var currencyToolTipTextBlock = new TextBlock
 			{

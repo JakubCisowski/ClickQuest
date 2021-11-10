@@ -42,9 +42,11 @@
 			<Button x:Name="ResetProgressButton" Style="{StaticResource ButtonStyleDanger}" Grid.Row="4" Grid.ColumnSpan="2" Width="250" Height="50" Content="Reset all your progress" Click="ResetProgressButton_Click" Margin="0,0,0,20" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="{StaticResource BrushGameD}">
 				<!-- ToolTip -->
 				<Button.ToolTip>
-					<ToolTip>
+					<ToolTip Style="{StaticResource ToolTipSimple}">
 						<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-							<Run Text="This will remove: heroes (with their equipments), gold, ingots, keys and achievements" />
+							<Run Text="This will remove all heroes (with their items) and currencies (gold, ingots, dungeon keys)" />
+							<LineBreak />
+							<Run Text="User achievements will also be reset" />
 							<LineBreak />
 							<Run Text="This action is irreversible!" />
 						</TextBlock>
