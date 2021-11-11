@@ -225,5 +225,143 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 			return specToolTip;
 		}
+
+		public static ToolTip GenerateHeroInfoToolTip(HeroRace heroRace, HeroClass heroClass)
+		{
+			var toolTip = new ToolTip();
+
+			var block = new TextBlock
+			{
+				Style = (Style)Application.Current.FindResource("ToolTipTextBlockBase")
+			};
+
+			// Race + Class (eg. Human Slayer)
+			block.Inlines.Add(new Run($"{User.Instance.CurrentHero.ThisHeroRace} ") { FontSize=(double)Application.Current.FindResource("FontSizeToolTipName") });
+			block.Inlines.Add(new Run($"{User.Instance.CurrentHero.ThisHeroClass}") { FontSize=(double)Application.Current.FindResource("FontSizeToolTipName"), Foreground = ColorsController.GetHeroClassColor(User.Instance.CurrentHero.HeroClass) });
+
+			block.Inlines.Add(new LineBreak());
+			block.Inlines.Add(GenerateTextSeparator());
+			block.Inlines.Add(new LineBreak());
+
+			switch (heroRace)
+			{
+				case HeroRace.Human:
+					block.Inlines.Add(new Run("Human race specializes in trading and crafting"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("This means that human progresses these specializations two times faster than other races") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame1")});
+					
+					break;
+
+				case HeroRace.Elf:
+					block.Inlines.Add(new Run("Elf race specializes in questing and blessings"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("This means that elf progresses these specializations two times faster than other races") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame1")});
+					
+					break;
+
+				case HeroRace.Dwarf:
+					block.Inlines.Add(new Run("Dwarf race specializes in melting and fighting bosses"));
+					block.Inlines.Add(new LineBreak());
+					block.Inlines.Add(new Run("This means that dwarf progresses these specializations two times faster than other races") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame1")});
+					
+					break;
+			}
+
+			block.Inlines.Add(new LineBreak());
+			block.Inlines.Add(new LineBreak());
+
+			switch (heroClass)
+			{
+				case HeroClass.Slayer:
+					block.Inlines.Add(new Run("Slayer class specializes in powerful critical clicks that deal increased damage"));
+					break;
+
+				case HeroClass.Venom:
+					block.Inlines.Add(new Run("Venom class specializes in poisonous clicks that deal additional damage over time"));
+					break;
+			}
+
+			block.Inlines.Add(new LineBreak());
+			block.Inlines.Add(GenerateTextSeparator());
+			block.Inlines.Add(new LineBreak());
+
+			switch (heroRace)
+			{
+				case HeroRace.Human:
+					block.Inlines.Add(new Run("Tradesman specialization threshold: ") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run("5") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
+					block.Inlines.Add(new Run(" (instead of 10)") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					
+					block.Inlines.Add(new LineBreak());
+
+					block.Inlines.Add(new Run("Craftsman specialization threshold: ")  {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run("5") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
+					block.Inlines.Add(new Run(" (instead of 10)")  {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					
+					break;
+
+				case HeroRace.Elf:
+					block.Inlines.Add(new Run("Adventurer specialization threshold: "){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run("5"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
+					block.Inlines.Add(new Run(" (instead of 10)"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+
+					block.Inlines.Add(new LineBreak());
+
+					block.Inlines.Add(new Run("Prayer specialization threshold: ") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run("5"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
+					block.Inlines.Add(new Run(" (instead of 10)"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					
+					break;
+
+				case HeroRace.Dwarf:
+					block.Inlines.Add(new Run("Melter specialization threshold: ") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run("5"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
+					block.Inlines.Add(new Run(" (instead of 10)"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+
+					block.Inlines.Add(new LineBreak());
+
+					block.Inlines.Add(new Run("Daredevil specialization threshold: ") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run("5"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
+					block.Inlines.Add(new Run(" (instead of 10)"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					
+					break;
+			}
+
+			block.Inlines.Add(new LineBreak());
+			block.Inlines.Add(new LineBreak());
+
+			block.Inlines.Add(new Run("Click damage"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold"), Foreground = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeNormal") });
+			block.Inlines.Add(new Run(": "));
+			block.Inlines.Add(new Run("2"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBold"), Foreground = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeNormal") });
+			block.Inlines.Add(new Run(" (+"));
+			block.Inlines.Add(new Run("1"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBold"), Foreground = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeNormal") });
+			block.Inlines.Add(new Run("/lvl)"));
+			block.Inlines.Add(new LineBreak());
+
+			switch (heroClass)
+			{
+				case HeroClass.Slayer:
+					block.Inlines.Add(new Run("Crit chance") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold"), Foreground = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeCritical") });
+					block.Inlines.Add(new Run(": "));
+					block.Inlines.Add(new Run("25%"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBold"), Foreground = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeCritical") });
+					block.Inlines.Add(new Run("(+"));
+					block.Inlines.Add(new Run("0.4%"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBold"), Foreground = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeCritical") });
+					block.Inlines.Add(new Run("/lvl)"));
+					break;
+
+				case HeroClass.Venom:
+					block.Inlines.Add(new Run("Poison damage") { Foreground = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypePoison"), FontFamily=(FontFamily)Application.Current.FindResource("FontRegularDemiBold") });
+					block.Inlines.Add(new Run(": "));
+					block.Inlines.Add(new Run("1") { Foreground = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypePoison"), FontFamily=(FontFamily)Application.Current.FindResource("FontRegularBold") });
+					block.Inlines.Add(new Run(" (+"));
+					block.Inlines.Add(new Run("2") { Foreground = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypePoison"), FontFamily=(FontFamily)Application.Current.FindResource("FontRegularBold") });
+					block.Inlines.Add(new Run("/lvl) per tick (5 ticks over 2.5s)"));
+					break;
+			}
+
+			toolTip.Content = block;
+
+			return toolTip;
+		}
 	}
 }

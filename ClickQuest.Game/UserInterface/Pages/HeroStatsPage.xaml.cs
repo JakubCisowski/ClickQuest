@@ -6,6 +6,7 @@ using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.Extensions.UserInterface.ToolTips;
+using static ClickQuest.Game.Extensions.UserInterface.ToolTips.GeneralToolTipController;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -367,76 +368,15 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void GenerateHeroInfoToolTip()
 		{
-			var toolTip = new ToolTip();
+			if (User.Instance.CurrentHero is null)
+			{
+				return;
+			}
+
+			var toolTip = HeroStatsToolTipController.GenerateHeroInfoToolTip(User.Instance.CurrentHero.HeroRace, User.Instance.CurrentHero.HeroClass);
 
 			GeneralToolTipController.SetToolTipDelayAndDuration(HeroNameBlock);
 
-			var block = new TextBlock
-			{
-				Style = (Style)FindResource("ToolTipTextBlockBase")
-			};
-
-			switch (User.Instance.CurrentHero?.HeroClass)
-			{
-				case HeroClass.Slayer:
-					block.Inlines.Add(new Run("This class specializes in powerful critical clicks that deal double damage") { Foreground = ColorsController.GetHeroClassColor(HeroClass.Slayer) });
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Click damage: 2 (+1/lvl)"));
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Crit chance: ") { Foreground = ColorsController.GetHeroClassColor(HeroClass.Slayer) });
-					block.Inlines.Add(new Run("25% (+0.4%/lvl)"));
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new LineBreak());
-					break;
-
-				case HeroClass.Venom:
-					block.Inlines.Add(new Run("This class specializes in poisonous clicks that deal additional damage over time") { Foreground = ColorsController.GetHeroClassColor(HeroClass.Venom) });
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Click damage: 2 (+1/lvl)"));
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Poison damage: ") { Foreground = ColorsController.GetHeroClassColor(HeroClass.Venom) });
-					block.Inlines.Add(new Run("1 (+2/lvl) per tick (5 ticks over 2.5s)"));
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new LineBreak());
-					break;
-			}
-
-			switch (User.Instance.CurrentHero?.HeroRace)
-			{
-				case HeroRace.Human:
-					block.Inlines.Add(new Run("Human race specializes in trading and crafting"));
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Tradesman specialization threshold: 5 (instead of 10)"));
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Craftsman specialization threshold: 5 (instead of 10)"));
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("This means that human progresses these specializations two times faster than other races"));
-					break;
-
-				case HeroRace.Elf:
-					block.Inlines.Add(new Run("Elf race specializes in questing and blessings"));
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Adventurer specialization threshold: 5 (instead of 10)"));
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Prayer specialization threshold: 5 (instead of 10)"));
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("This means that elf progresses these specializations two times faster than other races"));
-					break;
-
-				case HeroRace.Dwarf:
-					block.Inlines.Add(new Run("Dwarf race specializes in melting and fighting bosses"));
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Melter specialization threshold: 5 (instead of 10)"));
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("Daredevil specialization threshold: 5 (instead of 10)"));
-					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("This means that dwarf progresses these specializations two times faster than other races"));
-					break;
-			}
-
-			toolTip.Content = block;
 			HeroNameBlock.ToolTip = toolTip;
 		}
 
