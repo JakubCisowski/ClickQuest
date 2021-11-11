@@ -43,8 +43,14 @@ namespace ClickQuest.Game
 		{
 			var e = args.Exception;
 
-			string filePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.ToString(), "Logs", $"CrashLog {DateTime.Now.ToString("ddMMyyyy HHmmss")}.txt");
+			string directoryPath = Path.Combine(Environment.CurrentDirectory, "Logs");
+			string filePath = Path.Combine(directoryPath, $"CrashLog {DateTime.Now.ToString("ddMMyyyy HHmmss")}.txt");
 
+			if (!Directory.Exists(directoryPath))
+			{
+				Directory.CreateDirectory(directoryPath);
+			}
+			
 			using (var writer = new StreamWriter(filePath))
 			{
 				writer.WriteLine($"Exception message: {e.Message}");
