@@ -39,10 +39,13 @@
                 <Grid.ToolTip>
                     <ToolTip Style="{StaticResource ToolTipSimple}">
                         <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-							<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='Experience: \{0\} /'}" />
-							<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" />
+							<Run Text="Experience: " />
+							<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='\{0\}'}" FontFamily="{StaticResource FontRegularDemiBold}"/>
+							<Run Text=" / " />
+							<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" FontFamily="{StaticResource FontRegularDemiBold}"/>
 							<LineBreak />
-							<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='To next lvl: \{0\}'}" />
+							<Run Text="To next lvl: "/>
+							<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='\{0\}'}" FontFamily="{StaticResource FontRegularDemiBold}"/>
                         </TextBlock>
                     </ToolTip>
                 </Grid.ToolTip>
