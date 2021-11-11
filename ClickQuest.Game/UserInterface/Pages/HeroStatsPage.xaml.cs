@@ -157,50 +157,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 			};
 			QuestDurationBlock.SetBinding(TextBlock.TextProperty, questDurationBinding);
 
-			QuestDurationBlock.ToolTip = GenerateQuestToolTip(currentQuest);
-		}
-
-		private ToolTip GenerateQuestToolTip(Quest currentQuest)
-		{
-			var questToolTip = new ToolTip();
 			GeneralToolTipController.SetToolTipDelayAndDuration(QuestDurationBlock);
-
-			var questToolTipTextBlock = new TextBlock
-			{
-				Style = (Style)FindResource("ToolTipTextBlockBase")
-			};
-
-			if (currentQuest != null)
-			{
-				questToolTipTextBlock.Inlines.Add(new Run($"{currentQuest.Name}"));
-				if (currentQuest.Rare)
-				{
-					questToolTipTextBlock.Inlines.Add(new LineBreak());
-					questToolTipTextBlock.Inlines.Add(new Run("*Rare Quest*")
-					{
-						Foreground = (SolidColorBrush)FindResource("BrushQuestRare"),
-						FontFamily = (FontFamily)this.FindResource("FontRegularBold")
-					});
-				}
-
-				questToolTipTextBlock.Inlines.Add(new LineBreak());
-				questToolTipTextBlock.Inlines.Add(new Run($"Class: {currentQuest.HeroClass}") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
-				questToolTipTextBlock.Inlines.Add(new LineBreak());
-				questToolTipTextBlock.Inlines.Add(new LineBreak());
-				questToolTipTextBlock.Inlines.Add(new Run($"{currentQuest.Description}"));
-				questToolTipTextBlock.Inlines.Add(new LineBreak());
-				questToolTipTextBlock.Inlines.Add(new LineBreak());
-				questToolTipTextBlock.Inlines.Add(new Run($"{currentQuest.RewardsDescription}"));
-			}
-			else
-			{
-				questToolTipTextBlock.Text = "No quest is currently active";
-				questToolTip.Style = (Style)this.FindResource("ToolTipSimple");
-			}
-
-			questToolTip.Content = questToolTipTextBlock;
-
-			return questToolTip;
+			QuestDurationBlock.ToolTip = ItemToolTipController.GenerateQuestToolTip(currentQuest);
 		}
 
 		private void UpdateBlessingTimer()
@@ -213,44 +171,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 			};
 			BlessingDurationBlock.SetBinding(TextBlock.TextProperty, binding);
 
-			BlessingDurationBlock.ToolTip = GenerateBlessingToolTip(currentBlessing);
-		}
-
-		private ToolTip GenerateBlessingToolTip(Blessing currentBlessing)
-		{
-			var blessingToolTip = new ToolTip();
 			GeneralToolTipController.SetToolTipDelayAndDuration(BlessingDurationBlock);
-
-			var blessingToolTipBlock = new TextBlock
-			{
-				Style = (Style)FindResource("ToolTipTextBlockBase")
-			};
-
-			if (currentBlessing != null)
-			{
-				blessingToolTipBlock.Inlines.Add(new Run($"{currentBlessing.Name}"));
-				blessingToolTipBlock.Inlines.Add(new LineBreak());
-				blessingToolTipBlock.Inlines.Add(new Run($"*{currentBlessing.RarityString}*")
-				{
-					Foreground = ColorsController.GetRarityColor(currentBlessing.Rarity),
-					FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")
-				});
-				blessingToolTipBlock.Inlines.Add(new LineBreak());
-				blessingToolTipBlock.Inlines.Add(new LineBreak());
-				blessingToolTipBlock.Inlines.Add(new Run($"{currentBlessing.Description}"));
-				blessingToolTipBlock.Inlines.Add(new LineBreak());
-				blessingToolTipBlock.Inlines.Add(new LineBreak());
-				blessingToolTipBlock.Inlines.Add(new Run($"{currentBlessing.Lore}"));
-			}
-			else
-			{
-				blessingToolTipBlock.Text = "No blessing is currently active";
-				blessingToolTip.Style = (Style)this.FindResource("ToolTipSimple");
-			}
-
-			blessingToolTip.Content = blessingToolTipBlock;
-
-			return blessingToolTip;
+			BlessingDurationBlock.ToolTip = ItemToolTipController.GenerateBlessingToolTip(currentBlessing);
 		}
 
 		private void GenerateSpecializationsToolTips()
