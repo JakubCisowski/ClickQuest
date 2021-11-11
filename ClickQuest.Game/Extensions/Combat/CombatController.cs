@@ -17,19 +17,26 @@ namespace ClickQuest.Game.Extensions.Combat
 
 			if (isNoQuestActive)
 			{
+				var clickedEnemy = InterfaceController.CurrentEnemy;
+				
 				CombatTimerController.StartPoisonTimer();
 
 				var damageBaseAndCritInfo = User.Instance.CurrentHero.CalculateBaseAndCritClickDamage();
 				int damageOnHit = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
 				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
 
-				DealDamageToEnemy(damageBaseAndCritInfo.Damage, damageBaseAndCritInfo.DamageType);
-				DealDamageToEnemy(damageOnHit, DamageType.OnHit);
+				// Passing clickedEnemy ensures that even if we kill the enemy with dealt damage (eg. click damage),
+				// other effects (on-hit and artifacts) will be dealt to that dead enemy instead of being carried over.
+				// However, stacking artifacts and other similar bonuses will still work properly.
+				
+				DealDamageToEnemy(clickedEnemy, damageBaseAndCritInfo.Damage, damageBaseAndCritInfo.DamageType);
 
-				// Invoke Artifacts with the "on-enemy-click" effect (if enemy isn't dead already).
+				DealDamageToEnemy(clickedEnemy, damageOnHit, DamageType.OnHit);
+
+				// Invoke Artifacts with the "on-enemy-click" effect.
 				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
 				{
-					equippedArtifact.ArtifactFunctionality.OnEnemyClick();
+					equippedArtifact.ArtifactFunctionality.OnEnemyClick(clickedEnemy);
 				}
 			}
 			else
@@ -38,10 +45,12 @@ namespace ClickQuest.Game.Extensions.Combat
 			}
 		}
 
-		public static void DealDamageToEnemy(int damage, DamageType damageType = DamageType.Normal)
+		public static void DealDamageToCurrentEnemy(int damage, DamageType damageType = DamageType.Normal) => DealDamageToEnemy(InterfaceController.CurrentEnemy, damage, damageType);
+
+		public static void DealDamageToEnemy(Enemy enemy, int damage, DamageType damageType = DamageType.Normal)
 		{
 			// Make sure enemy is still alive before dealing damage.
-			if (InterfaceController.CurrentEnemy?.CurrentHealth <= 0)
+			if (enemy?.CurrentHealth <= 0)
 			{
 				return;
 			}
@@ -75,7 +84,7 @@ namespace ClickQuest.Game.Extensions.Combat
 			}
 
 			// Trigger boss affix-related events.
-			if (InterfaceController.CurrentEnemy is Boss boss)
+			if (enemy is Boss boss)
 			{
 				foreach (var affix in boss.AffixFunctionalities)
 				{
@@ -88,12 +97,12 @@ namespace ClickQuest.Game.Extensions.Combat
 				}
 			}
 
-			InterfaceController.CurrentEnemy.CurrentHealth -= damage;
+			enemy.CurrentHealth -= damage;
 
 			// Invoke floating text method.
 			(Application.Current.MainWindow as GameWindow).CreateFloatingTextCombat(damage, damageType);
 
-			InterfaceController.CurrentEnemy.HandleEnemyDeathIfDefeated();
+			enemy.HandleEnemyDeathIfDefeated();
 		}
 	}
 }

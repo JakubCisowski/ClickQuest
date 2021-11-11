@@ -37,15 +37,15 @@ namespace ClickQuest.Game.Core.Artifacts
 			return false;
 		}
 
-		public override void OnEnemyClick()
+		public override void OnEnemyClick(Enemy clickedEnemy)
 		{
-			if (_currentEnemy != InterfaceController.CurrentEnemy)
+			if (_currentEnemy != clickedEnemy)
 			{
 				_spineCount = 0;
-				_currentEnemy = InterfaceController.CurrentEnemy;
+				_currentEnemy = clickedEnemy;
 			}
 
-			CombatController.DealDamageToEnemy(DamagePerSpine * _spineCount, DamageType.Artifact);
+			CombatController.DealDamageToEnemy(clickedEnemy, DamagePerSpine * _spineCount, DamageType.Artifact);
 			_spineCount++;
 		}
 

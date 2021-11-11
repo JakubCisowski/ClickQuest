@@ -17,11 +17,11 @@ namespace ClickQuest.Game.Core.Artifacts
 		private Enemy _currentEnemy;
 		private int _stackCount;
 
-		public override void OnEnemyClick()
+		public override void OnEnemyClick(Enemy clickedEnemy)
 		{
-			if (_currentEnemy != InterfaceController.CurrentEnemy)
+			if (_currentEnemy != clickedEnemy)
 			{
-				_currentEnemy = InterfaceController.CurrentEnemy;
+				_currentEnemy = clickedEnemy;
 				User.Instance.CurrentHero.CritChance -= _stackCount * CritChanceIncreasePerStack;
 				_stackCount = 0;
 			}
@@ -38,7 +38,7 @@ namespace ClickQuest.Game.Core.Artifacts
 
 				if (isEnemyAMonster && isEnemyInThreshold && _stackCount == MaxStacks)
 				{
-					CombatController.DealDamageToEnemy(_currentEnemy.CurrentHealth, DamageType.Artifact);
+					CombatController.DealDamageToEnemy(_currentEnemy, _currentEnemy.CurrentHealth, DamageType.Artifact);
 				}
 			}
 		}
@@ -47,6 +47,7 @@ namespace ClickQuest.Game.Core.Artifacts
 		{
 			User.Instance.CurrentHero.CritChance -= _stackCount * CritChanceIncreasePerStack;
 			_stackCount = 0;
+			_currentEnemy = null;
 		}
 
 		public IceGolemsHeart()

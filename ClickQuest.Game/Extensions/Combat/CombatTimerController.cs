@@ -82,7 +82,7 @@ namespace ClickQuest.Game.Extensions.Combat
 			}
 			else
 			{
-				CombatController.DealDamageToEnemy(User.Instance.CurrentHero.PoisonDamage, DamageType.Poison);
+				CombatController.DealDamageToCurrentEnemy(User.Instance.CurrentHero.PoisonDamage, DamageType.Poison);
 
 				_poisonTicks++;
 
@@ -94,7 +94,7 @@ namespace ClickQuest.Game.Extensions.Combat
 		{
 			if (User.Instance.CurrentHero != null)
 			{
-				CombatController.DealDamageToEnemy(AuraTickDamage, DamageType.Aura);
+				CombatController.DealDamageToCurrentEnemy(AuraTickDamage, DamageType.Aura);
 			}
 		}
 

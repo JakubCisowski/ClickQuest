@@ -10,11 +10,11 @@ namespace ClickQuest.Game.Core.Artifacts
 	{
 		private const double DamageDealtPercentage = 0.05;
 
-		public override void OnEnemyClick()
+		public override void OnEnemyClick(Enemy clickedEnemy)
 		{
-			if (InterfaceController.CurrentEnemy is Monster monster)
+			if (clickedEnemy is Monster monster)
 			{
-				CombatController.DealDamageToEnemy((int) (monster.Health * DamageDealtPercentage), DamageType.Artifact);
+				CombatController.DealDamageToEnemy(clickedEnemy, (int) (monster.Health * DamageDealtPercentage), DamageType.Artifact);
 			}
 		}
 

@@ -16,11 +16,11 @@ namespace ClickQuest.Game.Core.Artifacts
 		private int _clickCount;
 		private Enemy _currentEnemy;
 
-		public override void OnEnemyClick()
+		public override void OnEnemyClick(Enemy clickedEnemy)
 		{
-			if (_currentEnemy != InterfaceController.CurrentEnemy)
+			if (_currentEnemy != clickedEnemy)
 			{
-				_currentEnemy = InterfaceController.CurrentEnemy;
+				_currentEnemy = clickedEnemy;
 				_clickCount = 0;
 			}
 
@@ -29,7 +29,7 @@ namespace ClickQuest.Game.Core.Artifacts
 			if (_clickCount == ClickThreshold)
 			{
 				int damageDealt = _currentEnemy is Monster ? (int) (_currentEnemy.Health * DamageAgainstMonsters) : (int) (_currentEnemy.Health * DamageAgainstBosses);
-				CombatController.DealDamageToEnemy(damageDealt, DamageType.Artifact);
+				CombatController.DealDamageToEnemy(_currentEnemy, damageDealt, DamageType.Artifact);
 
 				_clickCount = 0;
 			}

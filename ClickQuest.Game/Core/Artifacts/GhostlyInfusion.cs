@@ -44,13 +44,14 @@ namespace ClickQuest.Game.Core.Artifacts
 				{
 					int criticalDamageDealt = (int) (clickDamage * User.Instance.CurrentHero.CritDamage);
 
-					CombatController.DealDamageToEnemy(criticalDamageDealt, DamageType.Critical);
-					CombatController.DealDamageToEnemy((int) (criticalDamageDealt * DamageModifier), DamageType.Artifact);
+					CombatController.DealDamageToCurrentEnemy(criticalDamageDealt, DamageType.Critical);
+					CombatController.DealDamageToCurrentEnemy((int) (criticalDamageDealt * DamageModifier), DamageType.Artifact);
+					
 					clickDamage = 0;
 				}
 				else if (clickDamageType == DamageType.Critical)
 				{
-					CombatController.DealDamageToEnemy((int) (clickDamage * DamageModifier), DamageType.Artifact);
+					CombatController.DealDamageToCurrentEnemy((int) (clickDamage * DamageModifier), DamageType.Artifact);
 				}
 			}
 		}

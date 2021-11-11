@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
+using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Extensions.Combat;
 
@@ -13,7 +14,7 @@ namespace ClickQuest.Game.Core.Artifacts
 
 		private readonly DispatcherTimer _timer;
 
-		public override void OnEnemyClick()
+		public override void OnEnemyClick(Enemy clickedEnemy)
 		{
 			_timer.Start();
 		}

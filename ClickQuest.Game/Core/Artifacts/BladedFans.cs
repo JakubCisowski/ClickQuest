@@ -51,7 +51,7 @@ namespace ClickQuest.Game.Core.Artifacts
 		private void ExplosionTimer_Tick(object source, EventArgs e)
 		{
 			_timer.Stop();
-			CombatController.DealDamageToEnemy(_damageStored * DamageModifier, DamageType.Artifact);
+			CombatController.DealDamageToCurrentEnemy(_damageStored * DamageModifier, DamageType.Artifact);
 		}
 	}
 }

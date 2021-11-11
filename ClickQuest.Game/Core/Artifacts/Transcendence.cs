@@ -33,11 +33,11 @@ namespace ClickQuest.Game.Core.Artifacts
 			}
 		}
 
-		public override void OnEnemyClick()
+		public override void OnEnemyClick(Enemy clickedEnemy)
 		{
-			if (InterfaceController.CurrentEnemy is Monster monster)
+			if (clickedEnemy is Monster monster)
 			{
-				CombatController.DealDamageToEnemy(monster.CurrentHealth, DamageType.Artifact);
+				CombatController.DealDamageToEnemy(monster, monster.CurrentHealth, DamageType.Artifact);
 			}
 		}
 

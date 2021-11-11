@@ -1,4 +1,5 @@
-﻿using ClickQuest.Game.Core.Items;
+﻿using ClickQuest.Game.Core.Enemies;
+using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Extensions.Combat;
 
 namespace ClickQuest.Game.Core.Artifacts
@@ -10,7 +11,7 @@ namespace ClickQuest.Game.Core.Artifacts
 
 		private bool _isNextClickEmpowered;
 
-		public override void OnEnemyClick()
+		public override void OnEnemyClick(Enemy clickedEnemy)
 		{
 			if (!_isNextClickEmpowered)
 			{
@@ -20,7 +21,7 @@ namespace ClickQuest.Game.Core.Artifacts
 
 			_isNextClickEmpowered = false;
 
-			CombatController.DealDamageToEnemy(DamageDealt, DamageType.Artifact);
+			CombatController.DealDamageToEnemy(clickedEnemy, DamageDealt, DamageType.Artifact);
 		}
 
 		public override void OnRegionLeave()

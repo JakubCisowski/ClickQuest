@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows;
 using ClickQuest.Game.Core.Adventures;
+using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Player;
@@ -80,7 +81,7 @@ namespace ClickQuest.Game.Core.Items
 		}
 
 		// Use to deal bonus damage upon clicking.
-		public virtual void OnEnemyClick()
+		public virtual void OnEnemyClick(Enemy clickedEnemy)
 		{
 		}
 

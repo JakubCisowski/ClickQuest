@@ -20,10 +20,8 @@ namespace ClickQuest.Game.Core.Artifacts
 		private readonly DispatcherTimer _timer;
 		private int _ticksCount;
 
-		public override void OnEnemyClick()
+		public override void OnEnemyClick(Enemy clickedEnemy)
 		{
-			var clickedEnemy = InterfaceController.CurrentEnemy;
-
 			if (_affectedEnemy != clickedEnemy)
 			{
 				_affectedEnemy = clickedEnemy;
@@ -64,7 +62,7 @@ namespace ClickQuest.Game.Core.Artifacts
 				damage *= DamageModifier;
 			}
 
-			CombatController.DealDamageToEnemy(damage, DamageType.Artifact);
+			CombatController.DealDamageToCurrentEnemy(damage, DamageType.Artifact);
 
 			if (_ticksCount == TicksNumber)
 			{
