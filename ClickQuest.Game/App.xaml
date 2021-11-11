@@ -34,22 +34,22 @@
 			<Style TargetType="Button" BasedOn="{StaticResource ButtonStyleGeneral}" />
 
 			<Style TargetType="Window" BasedOn="{StaticResource StyleFontRegular}">
-				<Setter Property="Background" Value="{StaticResource BrushGameA}" />
+				<Setter Property="Background" Value="{StaticResource BrushGray4}" />
 			</Style>
 
 			<Style TargetType="Frame" BasedOn="{StaticResource StyleFontRegular}">
-				<Setter Property="Background" Value="{StaticResource BrushGameA}" />
+				<Setter Property="Background" Value="{StaticResource BrushGray4}" />
 			</Style>
 
 			<Style TargetType="Page" BasedOn="{StaticResource StyleFontRegular}">
-				<Setter Property="Background" Value="{StaticResource BrushGameA}" />
+				<Setter Property="Background" Value="{StaticResource BrushGray4}" />
 			</Style>
 
 			<!-- Extended ToolTip style (eg. items, specializations) - set globally -->
 			<Style TargetType="ToolTip" BasedOn="{StaticResource StyleFontRegular}">
-				<Setter Property="Background" Value="{StaticResource BrushGameX}" />
+				<Setter Property="Background" Value="{StaticResource BrushToolTip}" />
 				<Setter Property="Padding" Value="5" />
-				<Setter Property="BorderBrush" Value="{StaticResource BrushGameZ}" />
+				<Setter Property="BorderBrush" Value="{StaticResource BrushGray3}" />
 				<Setter Property="BorderThickness" Value="1" />
 				<Setter Property="controlzEx:ToolTipAssist.AutoMove" Value="True" />
 				<Setter Property="MinWidth" Value="300"/>
@@ -58,16 +58,16 @@
 
 			<!-- Simple ToolTip style (eg. ingots, gold) -->
 			<Style x:Key="ToolTipSimple" TargetType="ToolTip" BasedOn="{StaticResource StyleFontRegular}">
-				<Setter Property="Background" Value="{StaticResource BrushGameX}" />
+				<Setter Property="Background" Value="{StaticResource BrushToolTip}" />
 				<Setter Property="Padding" Value="5" />
-				<Setter Property="BorderBrush" Value="{StaticResource BrushGameZ}" />
+				<Setter Property="BorderBrush" Value="{StaticResource BrushGray3}" />
 				<Setter Property="BorderThickness" Value="1" />
 				<Setter Property="controlzEx:ToolTipAssist.AutoMove" Value="True" />
 			</Style>
 
 			<!-- ToolTip text styles -->
 			<Style x:Key="ToolTipTextBlockBase" TargetType="TextBlock">
-				<Setter Property="Foreground" Value="{StaticResource BrushGameY}" />
+				<Setter Property="Foreground" Value="{StaticResource BrushWhite}" />
 				<Setter Property="TextAlignment" Value="Center" />
 				<Setter Property="FontSize" Value="16" />
 				<Setter Property="TextOptions.TextFormattingMode" Value="Display" />

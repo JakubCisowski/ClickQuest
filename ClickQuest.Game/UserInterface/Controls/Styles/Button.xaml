@@ -13,14 +13,14 @@
 		<Setter Property="Margin" Value="5" />
 		<Setter Property="FontSize" Value="16" />
 		<Setter Property="FontFamily" Value="{StaticResource FontRegular}" />
-		<Setter Property="Background" Value="{StaticResource BrushGameB}" />
+		<Setter Property="Background" Value="{StaticResource BrushAccent3}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Border Name="border"
 					        BorderThickness="1"
 					        Padding="4,2"
-					        BorderBrush="{StaticResource BrushLightGray}"
+					        BorderBrush="{StaticResource BrushGray2}"
 					        CornerRadius="3"
 					        Background="{TemplateBinding Background}">
 						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -40,7 +40,7 @@
 							<Trigger.ExitActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">
 									<Storyboard>
-										<ColorAnimation To="{StaticResource ColorDarkGray}" Duration="0:0:0.2" Storyboard.TargetName="border"
+										<ColorAnimation To="{StaticResource ColorGray5}" Duration="0:0:0.2" Storyboard.TargetName="border"
 										                Storyboard.TargetProperty="BorderBrush.Color" />
 									</Storyboard>
 								</BeginStoryboard>
@@ -58,14 +58,14 @@
 		<Setter Property="Margin" Value="5" />
 		<Setter Property="FontSize" Value="16" />
 		<Setter Property="FontFamily" Value="{StaticResource FontRegular}" />
-		<Setter Property="Background" Value="{StaticResource BrushLightGray}" />
+		<Setter Property="Background" Value="{StaticResource BrushGray2}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Border Name="border"
 					        BorderThickness="1"
 					        Padding="4,2"
-					        BorderBrush="{StaticResource BrushLightGray}"
+					        BorderBrush="{StaticResource BrushGray2}"
 					        CornerRadius="3"
 					        Background="{TemplateBinding Background}">
 						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -85,7 +85,7 @@
 							<Trigger.ExitActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">
 									<Storyboard>
-										<ColorAnimation To="{StaticResource ColorDarkGray}" Duration="0:0:0.2" Storyboard.TargetName="border"
+										<ColorAnimation To="{StaticResource ColorGray5}" Duration="0:0:0.2" Storyboard.TargetName="border"
 										                Storyboard.TargetProperty="BorderBrush.Color" />
 									</Storyboard>
 								</BeginStoryboard>
@@ -103,14 +103,14 @@
 		<Setter Property="Margin" Value="5" />
 		<Setter Property="FontSize" Value="16" />
 		<Setter Property="FontFamily" Value="{StaticResource FontRegular}" />
-		<Setter Property="Background" Value="{StaticResource BrushLightGray}" />
+		<Setter Property="Background" Value="{StaticResource BrushGray2}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Border Name="border"
 					        BorderThickness="3"
 					        Padding="4,2"
-					        BorderBrush="{StaticResource BrushGameU}"
+					        BorderBrush="{StaticResource BrushAccent2}"
 					        CornerRadius="3"
 					        Background="{TemplateBinding Background}">
 						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -131,7 +131,7 @@
 							<Trigger.ExitActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">
 									<Storyboard>
-										<ColorAnimation To="{StaticResource ColorGameU}" Duration="0:0:0.2" Storyboard.TargetName="border"
+										<ColorAnimation To="{StaticResource ColorAccent2}" Duration="0:0:0.2" Storyboard.TargetName="border"
 										                Storyboard.TargetProperty="BorderBrush.Color" />
 									</Storyboard>
 								</BeginStoryboard>

@@ -40,7 +40,7 @@
 			</Grid.RowDefinitions>
 
 			<!-- Page description -->
-			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushBlack}" BorderThickness="1" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGameJ}">
+			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushBlack}" BorderThickness="1" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}">
 
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontFancy}">
 					<Run Text="Here you can melt your materials or use them to craft artifacts" />
@@ -50,16 +50,16 @@
 			</Border>
 
 			<!-- Town button -->
-			<Button x:Name="TownButton" Grid.Row="2" Width="450" Height="50" Click="TownButton_Click" Background="{StaticResource BrushGameB}">
+			<Button x:Name="TownButton" Grid.Row="2" Width="450" Height="50" Click="TownButton_Click" Background="{StaticResource BrushAccent3}">
 				<Button.Content>
 					<TextBlock FontSize="22" Text="Come back to town!" />
 				</Button.Content>
 			</Button>
 
 			<!-- Blacksmith panel-->
-			<TabControl Grid.Row="1" Background="{StaticResource BrushGameT}" Width="650" Height="550">
+			<TabControl Grid.Row="1" Background="{StaticResource BrushAccent3}" Width="650" Height="550">
 				<!-- Melt tab -->
-				<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
+				<TabItem Background="{StaticResource BrushGray1}" Style="{StaticResource TabItemStyleGeneral}">
 					<!-- Header melt -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="150" HorizontalAlignment="Center">
@@ -69,7 +69,7 @@
 					</TabItem.Header>
 
 					<!-- List view melt -->
-					<ListView x:Name="ItemsListViewMeltMaterials" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="{StaticResource BrushGameM}">
+					<ListView x:Name="ItemsListViewMeltMaterials" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="{StaticResource BrushWhite}">
 						<!-- Styles -->
 						<ListView.ItemContainerStyle>
 							<Style TargetType="ListViewItem">
@@ -88,8 +88,8 @@
 								<GridViewColumn Header="Name" Width="240" DisplayMemberBinding="{Binding Name}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -102,8 +102,8 @@
 								<GridViewColumn Header="Rarity" Width="110" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -116,8 +116,8 @@
 								<GridViewColumn Header="Quantity" Width="70" DisplayMemberBinding="{Binding Quantity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -130,8 +130,8 @@
 								<GridViewColumn Header="Value" Width="70" DisplayMemberBinding="{Binding Value}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -144,8 +144,8 @@
 								<GridViewColumn Width="140">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -156,7 +156,7 @@
 									<!-- Melt button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Melt" Click="MeltButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGameC}"/>
+											<Button Content="Melt" Click="MeltButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}"/>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -166,7 +166,7 @@
 				</TabItem>
 
 				<!-- Melt artifacts tab -->
-				<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
+				<TabItem Background="{StaticResource BrushGray1}" Style="{StaticResource TabItemStyleGeneral}">
 					<!-- Header melt artifacts -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="150" HorizontalAlignment="Center">
@@ -176,7 +176,7 @@
 					</TabItem.Header>
 
 					<!-- List view melt artifacts -->
-					<ListView x:Name="ItemsListViewMeltArtifacts" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="{StaticResource BrushGameM}">
+					<ListView x:Name="ItemsListViewMeltArtifacts" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="{StaticResource BrushWhite}">
 						<!-- Styles -->
 						<ListView.ItemContainerStyle>
 							<Style TargetType="ListViewItem">
@@ -195,8 +195,8 @@
 								<GridViewColumn Header="Name" Width="240" DisplayMemberBinding="{Binding Name}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -209,8 +209,8 @@
 								<GridViewColumn Header="Rarity" Width="110" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -223,8 +223,8 @@
 								<GridViewColumn Header="Quantity" Width="70" DisplayMemberBinding="{Binding Quantity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -237,8 +237,8 @@
 								<GridViewColumn Header="Value" Width="70" DisplayMemberBinding="{Binding Value}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -251,8 +251,8 @@
 								<GridViewColumn Width="140">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -263,7 +263,7 @@
 									<!-- Melt button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Melt" Click="MeltButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGameC}"/>
+											<Button Content="Melt" Click="MeltButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}"/>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -273,7 +273,7 @@
 				</TabItem>
 
 				<!-- Craft tab -->
-				<TabItem Background="{StaticResource BrushGameK}" Style="{StaticResource TabItemStyleGeneral}">
+				<TabItem Background="{StaticResource BrushGray1}" Style="{StaticResource TabItemStyleGeneral}">
 					<!-- Header craft -->
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Width="150" HorizontalAlignment="Center">
@@ -283,7 +283,7 @@
 					</TabItem.Header>
 
 					<!-- List view craft -->
-					<ListView x:Name="ItemsListViewCraft" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="{StaticResource BrushGameM}">
+					<ListView x:Name="ItemsListViewCraft" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="{StaticResource BrushWhite}">
 						<!-- Styles -->
 						<ListView.ItemContainerStyle>
 							<Style TargetType="ListViewItem">
@@ -302,8 +302,8 @@
 								<GridViewColumn Header="Name" Width="360" DisplayMemberBinding="{Binding Name}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -316,8 +316,8 @@
 								<GridViewColumn Header="Rarity" Width="140" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -330,8 +330,8 @@
 								<GridViewColumn Width="120">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -341,7 +341,7 @@
 									<!-- Craft with materials button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Click="CraftMaterialButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGameC}">
+											<Button Click="CraftMaterialButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}">
 												<Button.Content>
 													<StackPanel Orientation="Horizontal">
 														<TextBlock Text="Craft" FontSize="17" Margin="2,0,0,0" />
@@ -357,8 +357,8 @@
 								<GridViewColumn Width="150">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushGameV}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGameW}"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
 											<Setter Property="Height" Value="50"/>
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />

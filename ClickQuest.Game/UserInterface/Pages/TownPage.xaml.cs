@@ -40,7 +40,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Width = 200,
 					Height = 70,
 					Tag = region,
-					Background = (SolidColorBrush)this.FindResource("BrushGameC")
+					Background = (SolidColorBrush)this.FindResource("BrushGray1")
 				};
 
 				var regionBlock = new TextBlock
@@ -70,7 +70,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				if (User.Instance.CurrentHero?.Level < region.LevelRequirement)
 				{
 					regionButton.Style = FindResource("ButtonStyleDisabled") as Style;
-					regionButton.Background = (SolidColorBrush)this.FindResource("BrushGameD");
+					regionButton.Background = (SolidColorBrush)this.FindResource("BrushGray5");
 					regionButton.IsEnabled = false;
 				}
 

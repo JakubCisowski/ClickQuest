@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Alert Box" Height="160" Width="420" WindowStartupLocation="CenterOwner"
-        WindowStyle="None" ResizeMode="NoResize" Background="{StaticResource BrushGameA}" MouseDown="AlertBox_MouseDown">
+        WindowStyle="None" ResizeMode="NoResize" Background="{StaticResource BrushGray4}" MouseDown="AlertBox_MouseDown">
 	<Grid>
-		<Border BorderThickness="3" BorderBrush="{StaticResource BrushGameB}" CornerRadius="3">
+		<Border BorderThickness="3" BorderBrush="{StaticResource BrushAccent3}" CornerRadius="3">
 			<StackPanel>
 				<!-- Alert text -->
 				<Grid Height="95">
@@ -16,11 +16,11 @@
 
 				<!-- Buttons -->
 				<StackPanel Height="60" Orientation="Horizontal" HorizontalAlignment="Center">
-					<Button x:Name="OkButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Ok" Click="OkButton_Click" Margin="0,0,10,5" Background="{StaticResource BrushGameB}"/>
+					<Button x:Name="OkButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Ok" Click="OkButton_Click" Margin="0,0,10,5" Background="{StaticResource BrushAccent3}"/>
 
-					<Button x:Name="YesButton" Visibility="Hidden" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Yes" Click="YesButton_Click" Margin="0,0,10,5" Background="{StaticResource BrushGameB}"/>
+					<Button x:Name="YesButton" Visibility="Hidden" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Yes" Click="YesButton_Click" Margin="0,0,10,5" Background="{StaticResource BrushAccent3}"/>
 
-					<Button x:Name="NoButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="No" Click="NoButton_Click" Margin="10,0,0,5" Background="{StaticResource BrushGameB}"/>
+					<Button x:Name="NoButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="No" Click="NoButton_Click" Margin="10,0,0,5" Background="{StaticResource BrushAccent3}"/>
 				</StackPanel>
 			</StackPanel>
 		</Border>

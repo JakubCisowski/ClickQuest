@@ -15,7 +15,7 @@
 				<Style TargetType="Border">
 					<Style.Triggers>
 						<Trigger Property="IsMouseOver" Value="True">
-							<Setter Property="Background" Value="{StaticResource BrushGameF}"/>
+							<Setter Property="Background" Value="{StaticResource BrushAccent3}"/>
 						</Trigger>
 					</Style.Triggers>
 				</Style>

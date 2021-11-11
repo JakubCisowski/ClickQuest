@@ -46,13 +46,13 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						toolTipBlock.Inlines.Add(GenerateTextSeparator());
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						toolTipBlock.Inlines.Add(new Run("You can master Prayer by buying blessings in Priest")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") } );
+						toolTipBlock.Inlines.Add(new Run("You can master Prayer by buying blessings in Priest")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") } );
 						
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecBlessingBuffBonus}s duration) in") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecBlessingBuffBonus}s duration) in") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 						toolTipBlock.Inlines.Add(new Run($" {nextUpgrade} ") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
-						toolTipBlock.Inlines.Add(new Run("bought blessings") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("bought blessings") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 					}
 					break;
 
@@ -70,18 +70,18 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						toolTipBlock.Inlines.Add(new Run("On-hit damage from this specialization is applied after other effects eg. crit")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame1") });
+						toolTipBlock.Inlines.Add(new Run("On-hit damage from this specialization is applied after other effects eg. crit")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray5") });
 
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(GenerateTextSeparator());
 						toolTipBlock.Inlines.Add(new LineBreak());
 						
-						toolTipBlock.Inlines.Add(new Run("You can master Clicker by clicking on monsters and bosses")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("You can master Clicker by clicking on monsters and bosses")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecClickingBuffBonus} on-hit damage) in")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecClickingBuffBonus} on-hit damage) in")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 						toolTipBlock.Inlines.Add(new Run($" {nextUpgrade} ") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
-						toolTipBlock.Inlines.Add(new Run("clicks")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("clicks")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 					}
 					break;
 
@@ -102,13 +102,13 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						toolTipBlock.Inlines.Add(new LineBreak());
 
 						
-						toolTipBlock.Inlines.Add(new Run("You can master Craftsman by crafting artifacts in Blacksmith")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("You can master Craftsman by crafting artifacts in Blacksmith")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 						
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						toolTipBlock.Inlines.Add(new Run("Next rarity limit upgrade in") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("Next rarity limit upgrade in") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 						toolTipBlock.Inlines.Add(new Run($" {nextUpgrade} ") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic") });
-						toolTipBlock.Inlines.Add(new Run("crafted artifacts") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("crafted artifacts") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 					}
 					break;
 
@@ -132,12 +132,12 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						toolTipBlock.Inlines.Add(GenerateTextSeparator());
 						toolTipBlock.Inlines.Add(new LineBreak());
 						
-						toolTipBlock.Inlines.Add(new Run("You can master Tradesman by buying recipes or selling materials in shop") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("You can master Tradesman by buying recipes or selling materials in shop") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 						toolTipBlock.Inlines.Add(new LineBreak());
 						
-						toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecTradingBuffBonus} shop offer size and +{Specialization.SpecTradingBuffBonus}% materials selling ratio) in"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecTradingBuffBonus} shop offer size and +{Specialization.SpecTradingBuffBonus}% materials selling ratio) in"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 						toolTipBlock.Inlines.Add(new Run($" {nextUpgrade} ") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic") });
-						toolTipBlock.Inlines.Add(new Run("bought recipes or sold materials"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("bought recipes or sold materials"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 					}
 					break;
 
@@ -154,18 +154,18 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						toolTipBlock.Inlines.Add(new Run(" ingots when melting materials"));
 						toolTipBlock.Inlines.Add(new LineBreak());
 						
-						toolTipBlock.Inlines.Add(new Run($"Each 100% guarantees additional {Material.BaseMeltingIngotBonus} ingots") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame1") });
+						toolTipBlock.Inlines.Add(new Run($"Each 100% guarantees additional {Material.BaseMeltingIngotBonus} ingots") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray5") });
 
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(GenerateTextSeparator());
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						toolTipBlock.Inlines.Add(new Run("You can master Melter by melting materials in Blacksmith"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("You can master Melter by melting materials in Blacksmith"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecMeltingBuffBonus}% chance) in"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecMeltingBuffBonus}% chance) in"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 						toolTipBlock.Inlines.Add(new Run($" {nextUpgrade} ") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic") });
-						toolTipBlock.Inlines.Add(new Run("melted materials"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("melted materials"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 					}
 					break;
 
@@ -182,17 +182,17 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						toolTipBlock.Inlines.Add(new Run("%)"));
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						toolTipBlock.Inlines.Add(new Run($"Maximum reduction value is {Specialization.SpecQuestingBuffLimit}%")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame1") });
+						toolTipBlock.Inlines.Add(new Run($"Maximum reduction value is {Specialization.SpecQuestingBuffLimit}%")  { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray5") });
 						
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(GenerateTextSeparator());
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						toolTipBlock.Inlines.Add(new Run("You can master Adventurer by completing quests"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("You can master Adventurer by completing quests"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 						toolTipBlock.Inlines.Add(new LineBreak());
-						toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecQuestingBuffBonus}% reduced time) in"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecQuestingBuffBonus}% reduced time) in"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 						toolTipBlock.Inlines.Add(new Run($" {nextUpgrade} ") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic") });
-						toolTipBlock.Inlines.Add(new Run("completed quests"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("completed quests"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 					}
 					break;
 
@@ -212,11 +212,11 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						toolTipBlock.Inlines.Add(GenerateTextSeparator());
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						toolTipBlock.Inlines.Add(new Run("You can master Daredevil by trading recipes in shop"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("You can master Daredevil by trading recipes in shop"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 						toolTipBlock.Inlines.Add(new LineBreak());
-						toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecDungeonBuffBonus} second) in"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run($"Next upgrade (+{Specialization.SpecDungeonBuffBonus} second) in"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 						toolTipBlock.Inlines.Add(new Run($" {nextUpgrade} ") { FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic") });
-						toolTipBlock.Inlines.Add(new Run("finished dungeons"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0") });
+						toolTipBlock.Inlines.Add(new Run("finished dungeons"){ FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3") });
 					}
 					break;
 			}
@@ -248,21 +248,21 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 				case HeroRace.Human:
 					block.Inlines.Add(new Run("Human race specializes in trading and crafting"));
 					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("This means that human progresses these specializations two times faster than other races") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame1")});
+					block.Inlines.Add(new Run("This means that human progresses these specializations two times faster than other races") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray5")});
 					
 					break;
 
 				case HeroRace.Elf:
 					block.Inlines.Add(new Run("Elf race specializes in questing and blessings"));
 					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("This means that elf progresses these specializations two times faster than other races") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame1")});
+					block.Inlines.Add(new Run("This means that elf progresses these specializations two times faster than other races") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray5")});
 					
 					break;
 
 				case HeroRace.Dwarf:
 					block.Inlines.Add(new Run("Dwarf race specializes in melting and fighting bosses"));
 					block.Inlines.Add(new LineBreak());
-					block.Inlines.Add(new Run("This means that dwarf progresses these specializations two times faster than other races") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame1")});
+					block.Inlines.Add(new Run("This means that dwarf progresses these specializations two times faster than other races") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray5")});
 					
 					break;
 			}
@@ -288,41 +288,41 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 			switch (heroRace)
 			{
 				case HeroRace.Human:
-					block.Inlines.Add(new Run("Tradesman specialization threshold: ") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run("Tradesman specialization threshold: ") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 					block.Inlines.Add(new Run("5") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
-					block.Inlines.Add(new Run(" (instead of 10)") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run(" (instead of 10)") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 					
 					block.Inlines.Add(new LineBreak());
 
-					block.Inlines.Add(new Run("Craftsman specialization threshold: ")  {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run("Craftsman specialization threshold: ")  {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 					block.Inlines.Add(new Run("5") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
-					block.Inlines.Add(new Run(" (instead of 10)")  {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run(" (instead of 10)")  {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 					
 					break;
 
 				case HeroRace.Elf:
-					block.Inlines.Add(new Run("Adventurer specialization threshold: "){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run("Adventurer specialization threshold: "){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 					block.Inlines.Add(new Run("5"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
-					block.Inlines.Add(new Run(" (instead of 10)"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run(" (instead of 10)"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 
 					block.Inlines.Add(new LineBreak());
 
-					block.Inlines.Add(new Run("Prayer specialization threshold: ") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run("Prayer specialization threshold: ") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 					block.Inlines.Add(new Run("5"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
-					block.Inlines.Add(new Run(" (instead of 10)"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run(" (instead of 10)"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 					
 					break;
 
 				case HeroRace.Dwarf:
-					block.Inlines.Add(new Run("Melter specialization threshold: ") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run("Melter specialization threshold: ") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 					block.Inlines.Add(new Run("5"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
-					block.Inlines.Add(new Run(" (instead of 10)"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run(" (instead of 10)"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 
 					block.Inlines.Add(new LineBreak());
 
-					block.Inlines.Add(new Run("Daredevil specialization threshold: ") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run("Daredevil specialization threshold: ") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 					block.Inlines.Add(new Run("5"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
-					block.Inlines.Add(new Run(" (instead of 10)"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+					block.Inlines.Add(new Run(" (instead of 10)"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 					
 					break;
 			}

@@ -72,7 +72,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				var button = new Button
 				{
-					Background = (SolidColorBrush) FindResource("BrushGameC"),
+					Background = (SolidColorBrush) FindResource("BrushGray1"),
 					Name = "DungeonGroup" + GameAssets.DungeonGroups[i].Id,
 					Width = 250,
 					Height = 100
@@ -139,7 +139,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				var button = new Button
 				{
-					Background = (SolidColorBrush) FindResource("BrushGameC"),
+					Background = (SolidColorBrush) FindResource("BrushGray1"),
 					Name = "Dungeon" + dungeonsOfThisGroup[i].Id,
 					Width = 250,
 					Height = 80
@@ -157,7 +157,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				var border = new Border
 				{
 					BorderThickness = new Thickness(0.5),
-					BorderBrush = (SolidColorBrush) FindResource("BrushLightGray"),
+					BorderBrush = (SolidColorBrush) FindResource("BrushGray2"),
 					Margin = new Thickness(0, 5, 0, 0)
 				};
 
@@ -198,7 +198,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				var button = new Button
 				{
-					Background = (SolidColorBrush) FindResource("BrushGameC"),
+					Background = (SolidColorBrush) FindResource("BrushGray1"),
 					Name = "Boss" + boss.Id,
 					Width = 250,
 					Height = 80
@@ -216,7 +216,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				var border = new Border
 				{
 					BorderThickness = new Thickness(0.5),
-					BorderBrush = (SolidColorBrush) FindResource("BrushLightGray"),
+					BorderBrush = (SolidColorBrush) FindResource("BrushGray2"),
 					Margin = new Thickness(0, 5, 0, 0)
 				};
 

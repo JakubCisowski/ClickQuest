@@ -252,7 +252,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				var border = new Border
 				{
 					BorderThickness = new Thickness(0.5),
-					BorderBrush = (SolidColorBrush)FindResource("BrushLightGray"),
+					BorderBrush = (SolidColorBrush)FindResource("BrushGray2"),
 					Padding = new Thickness(6),
 					Margin = new Thickness(4)
 				};
@@ -343,7 +343,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Width = 20,
 				Height = 20,
 				Kind = PackIconKind.Edit,
-				Foreground = (SolidColorBrush)FindResource("BrushLightGray")
+				Foreground = (SolidColorBrush)FindResource("BrushGray2")
 			};
 
 			editButton.Content = editIcon;
@@ -365,7 +365,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Width = 20,
 				Height = 20,
 				Kind = PackIconKind.DeleteForever,
-				Foreground = (SolidColorBrush)FindResource("BrushLightGray")
+				Foreground = (SolidColorBrush)FindResource("BrushGray2")
 			};
 
 			deleteButton.Content = deleteIcon;

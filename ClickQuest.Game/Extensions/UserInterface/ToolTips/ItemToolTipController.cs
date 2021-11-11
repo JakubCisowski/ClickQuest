@@ -54,7 +54,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						toolTipBlock.Inlines.Add(GenerateTextSeparator());
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						toolTipBlock.Inlines.Add(new Run($"{material.Description}") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+						toolTipBlock.Inlines.Add(new Run($"{material.Description}") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(GenerateTextSeparator());
@@ -91,20 +91,20 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						{
 							toolTipBlock.Inlines.Add(new LineBreak());
 							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run($"{artifact.ExtraInfo}") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame1")});
+							toolTipBlock.Inlines.Add(new Run($"{artifact.ExtraInfo}") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray5")});
 						}
 
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(GenerateTextSeparator());
 						toolTipBlock.Inlines.Add(new LineBreak());
 
-						toolTipBlock.Inlines.Add(new Run($"{artifact.Lore}") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+						toolTipBlock.Inlines.Add(new Run($"{artifact.Lore}") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 
 						if (artifact.Rarity == Rarity.Mythic)
 						{
 							toolTipBlock.Inlines.Add(new LineBreak());
 							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run($"{artifact.MythicTag}") { FontFamily = (FontFamily)Application.Current.FindResource("FontFancy"), Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGame2")});
+							toolTipBlock.Inlines.Add(new Run($"{artifact.MythicTag}") { FontFamily = (FontFamily)Application.Current.FindResource("FontFancy"), Foreground = (SolidColorBrush)Application.Current.FindResource("BrushMythicTag")});
 						}
 					}
 					break;
@@ -209,7 +209,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 				blessingToolTipBlock.Inlines.Add(GenerateTextSeparator());
 				blessingToolTipBlock.Inlines.Add(new LineBreak());
 
-				blessingToolTipBlock.Inlines.Add(new Run($"{blessing.Lore}"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGame0")});
+				blessingToolTipBlock.Inlines.Add(new Run($"{blessing.Lore}"){FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray3")});
 			}
 			else
 			{

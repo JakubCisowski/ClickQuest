@@ -11,7 +11,7 @@
 	<StackPanel>
 		<StackPanel.Background>
 			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-				<GradientStop Color="{StaticResource ColorGameA}" Offset="0.25" />
+				<GradientStop Color="{StaticResource ColorGray4}" Offset="0.25" />
 				<GradientStop Color="{StaticResource ColorWhite}" Offset="0.75" />
 			</LinearGradientBrush>
 		</StackPanel.Background>
@@ -27,7 +27,7 @@
 			</Border>
 
 			<!-- Achievements button-->
-			<Button x:Name="AchievementsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="AchievementsButton_Click" Padding="0" Margin="5,5,40,5" Background="{StaticResource BrushGameC}">
+			<Button x:Name="AchievementsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="AchievementsButton_Click" Padding="0" Margin="5,5,40,5" Background="{StaticResource BrushGray1}">
 				<Button.ToolTip>
 					<ToolTip Style="{StaticResource ToolTipSimple}">
                         <TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Your Achievements"/>
@@ -36,12 +36,12 @@
 
 				<!-- Exit button icon -->
 				<Button.Content>
-					<materialDesign:PackIcon Kind="Trophy" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushGameE}" Margin="0" />
+					<materialDesign:PackIcon Kind="Trophy" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushBlack}" Margin="0" />
 				</Button.Content>
 			</Button>
 
 			<!-- Exit button-->
-			<Button x:Name="ExitButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleDanger}" Click="ExitButton_Click" Background="{StaticResource BrushGameD}" Padding="0">
+			<Button x:Name="ExitButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleDanger}" Click="ExitButton_Click" Background="{StaticResource BrushGray5}" Padding="0">
 				<Button.ToolTip>
 					<ToolTip Style="{StaticResource ToolTipSimple}">
                         <TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Exit the Game"/>
@@ -50,7 +50,7 @@
 
 				<!-- Exit button icon -->
 				<Button.Content>
-					<materialDesign:PackIcon Kind="CloseBox" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushGameE}" Margin="0" />
+					<materialDesign:PackIcon Kind="CloseBox" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushBlack}" Margin="0" />
 				</Button.Content>
 			</Button>
 

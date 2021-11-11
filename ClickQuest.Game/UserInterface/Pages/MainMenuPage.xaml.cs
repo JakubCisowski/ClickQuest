@@ -88,7 +88,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Width = 50,
 				Height = 50,
 				Margin = new Thickness(5),
-				Background = (SolidColorBrush)FindResource("BrushGameD"),
+				Background = (SolidColorBrush)FindResource("BrushGray5"),
 				Tag = hero
 			};
 
@@ -100,7 +100,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Width = 30,
 				Height = 30,
 				Kind = PackIconKind.DeleteForever,
-				Foreground = (SolidColorBrush)FindResource("BrushGameE")
+				Foreground = (SolidColorBrush)FindResource("BrushBlack")
 			};
 
 			deleteHeroButton.Content = deleteHeroIcon;
@@ -147,7 +147,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Height = 50,
 				Margin = new Thickness(5),
 				Tag = hero,
-				Background = (SolidColorBrush)this.FindResource("BrushGameC")
+				Background = (SolidColorBrush)this.FindResource("BrushGray1")
 			};
 
 			var selectHeroButtonBlock = new TextBlock

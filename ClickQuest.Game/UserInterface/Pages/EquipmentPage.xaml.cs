@@ -94,8 +94,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 					var border = new Border
 					{
 						BorderThickness = new Thickness(2),
-						BorderBrush = (SolidColorBrush)FindResource("BrushGame8"),
-						Background = (SolidColorBrush) FindResource("BrushGameI"),
+						BorderBrush = (SolidColorBrush)FindResource("BrushAccent3"),
+						Background = (SolidColorBrush) FindResource("BrushAccent1"),
 						Padding = new Thickness(6),
 						Margin = new Thickness(2),
 						Tag = item
@@ -143,8 +143,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 					{
 						User.Instance.CurrentHero.EquippedArtifacts.Add(artifact);
 						artifact.ArtifactFunctionality.OnEquip();
-						(sender as Border).Background = FindResource("BrushGameS") as SolidColorBrush;
-						(sender as Border).BorderBrush = FindResource("BrushGame7") as SolidColorBrush;
+						(sender as Border).Background = FindResource("BrushAccent3") as SolidColorBrush;
+						(sender as Border).BorderBrush = FindResource("BrushAccent3") as SolidColorBrush;
 
 						equippedArtifactsChanged = true;
 					}
@@ -157,8 +157,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 					{
 						User.Instance.CurrentHero.EquippedArtifacts.Remove(artifact);
 						artifact.ArtifactFunctionality.OnUnequip();
-						(sender as Border).Background = FindResource("BrushGameI") as SolidColorBrush;
-						(sender as Border).BorderBrush = FindResource("BrushGame8") as SolidColorBrush;
+						(sender as Border).Background = FindResource("BrushAccent1") as SolidColorBrush;
+						(sender as Border).BorderBrush = FindResource("BrushAccent3") as SolidColorBrush;
 
 
 						equippedArtifactsChanged = true;
@@ -184,8 +184,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 				var artifact = artifactBorder.Tag as Artifact;
 				if (User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact))
 				{
-					artifactBorder.Background = FindResource("BrushGameS") as SolidColorBrush;
-					artifactBorder.BorderBrush = FindResource("BrushGame7") as SolidColorBrush;
+					artifactBorder.Background = FindResource("BrushAccent3") as SolidColorBrush;
+					artifactBorder.BorderBrush = FindResource("BrushAccent3") as SolidColorBrush;
 				}
 			}
 		}

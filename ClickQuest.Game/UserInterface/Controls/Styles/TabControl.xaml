@@ -8,7 +8,7 @@
 
 	<!-- Custom TabControl style -->
 	<Style x:Key="TabControlStyleGeneral" TargetType="TabControl">
-		<Setter Property="Background" Value="{StaticResource BrushGameA}" />
+		<Setter Property="Background" Value="{StaticResource BrushGray4}" />
 	</Style>
 	
 	<!-- Custom TabItem style with Selected, NotSelcted and Hover background changes -->
@@ -29,11 +29,11 @@
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsSelected" Value="True">
 							<Setter Property="Panel.ZIndex" Value="100" />
-							<Setter TargetName="Border" Property="Background" Value="{StaticResource BrushGameL}" />
+							<Setter TargetName="Border" Property="Background" Value="{StaticResource BrushAccent3}" />
 							<Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
 						</Trigger>
 						<Trigger Property="IsSelected" Value="False">
-							<Setter TargetName="Border" Property="Background" Value="{StaticResource BrushGameK}"/>
+							<Setter TargetName="Border" Property="Background" Value="{StaticResource BrushGray1}"/>
 						</Trigger>
 						<MultiTrigger>
 							<MultiTrigger.Conditions>
@@ -41,7 +41,7 @@
 								<Condition Property="IsSelected" Value="False"/>
 							</MultiTrigger.Conditions>
 												
-							<Setter TargetName="Border" Property="Background" Value="{StaticResource BrushGameU}"/>
+							<Setter TargetName="Border" Property="Background" Value="{StaticResource BrushAccent2}"/>
 						</MultiTrigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>
