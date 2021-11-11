@@ -266,9 +266,12 @@ namespace ClickQuest.Game.Core.Heroes
 
 		public void UnequipArtfacts()
 		{
+			// Trigger OnUnequip, OnRegionLeave and similar artifact effects.
+			// This is done so that stacking effects are not retained permanently.
 			foreach (var equippedArtifact in EquippedArtifacts)
 			{
 				equippedArtifact.ArtifactFunctionality.OnUnequip();
+				equippedArtifact.ArtifactFunctionality.OnRegionLeave();
 			}
 		}
 

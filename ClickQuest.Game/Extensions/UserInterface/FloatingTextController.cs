@@ -62,7 +62,8 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			{
 				CornerRadius = new CornerRadius(20),
 				BorderThickness = new Thickness(5),
-				Padding = new Thickness(2)
+				Padding = new Thickness(2),
+				IsHitTestVisible = false
 			};
 
 			var stackPanel = new StackPanel
@@ -104,7 +105,8 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			{
 				CornerRadius = new CornerRadius(20),
 				BorderThickness = new Thickness(5),
-				Padding = new Thickness(2)
+				Padding = new Thickness(2),
+				IsHitTestVisible = false
 			};
 
 			var stackPanel = new StackPanel
