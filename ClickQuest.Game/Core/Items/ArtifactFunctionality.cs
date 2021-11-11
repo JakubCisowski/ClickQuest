@@ -4,6 +4,7 @@ using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
+using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.UserInterface.Controls;
@@ -64,6 +65,17 @@ namespace ClickQuest.Game.Core.Items
 			if (isQuesting)
 			{
 				AlertBox.Show("You cannot unequip artifacts while questing.", MessageBoxButton.OK);
+				return false;
+			}
+			
+			// This should be ignored in infusion-type artifacts to allow them to be unequipped freely.
+			
+			bool isInfusionEquipped = User.Instance.CurrentHero.EquippedArtifacts.Any(x => x.ArtifactType == ArtifactType.Infusion);
+			bool isOnlyOtherArtifact = User.Instance.CurrentHero.EquippedArtifacts.Count(x => x.ArtifactType != ArtifactType.Infusion) == 1;
+
+			if (isInfusionEquipped && isOnlyOtherArtifact)
+			{
+				AlertBox.Show("You cannot unequip this artifact right now - you have an artifact equipped that requires at least one other artifact.", MessageBoxButton.OK);
 				return false;
 			}
 

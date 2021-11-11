@@ -12,7 +12,7 @@
   {
     "Lore": "",
     "ExtraInfo": "",
-    "ArtifactType": 0,
+    "ArtifactType": 1,
     "Id": 2,
     "Name": "Ghostly Infusion",
     "Value": 1,
@@ -122,7 +122,7 @@
   {
     "Lore": "",
     "ExtraInfo": "",
-    "ArtifactType": 0,
+    "ArtifactType": 1,
     "Id": 13,
     "Name": "Cholla Spine Infusion",
     "Value": 1,

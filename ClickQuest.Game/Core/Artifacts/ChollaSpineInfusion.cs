@@ -1,10 +1,13 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using ClickQuest.Game.Core.Enemies;
+using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Pages;
 
 namespace ClickQuest.Game.Core.Artifacts
 {
@@ -35,6 +38,27 @@ namespace ClickQuest.Game.Core.Artifacts
 
 			AlertBox.Show("This artifact cannot be equipped right now - it requires at least 1 other artifact to be equipped.", MessageBoxButton.OK);
 			return false;
+		}
+
+		public override bool CanBeUnequipped()
+		{
+			bool isFighting = GameAssets.CurrentPage is RegionPage or DungeonBossPage;
+
+			if (isFighting)
+			{
+				AlertBox.Show("You cannot unequip artifacts while in combat.", MessageBoxButton.OK);
+				return false;
+			}
+
+			bool isQuesting = User.Instance.CurrentHero.Quests.Any(x => x.EndDate != default);
+
+			if (isQuesting)
+			{
+				AlertBox.Show("You cannot unequip artifacts while questing.", MessageBoxButton.OK);
+				return false;
+			}
+			
+			return true;
 		}
 
 		public override void OnEnemyClick(Enemy clickedEnemy)
