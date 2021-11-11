@@ -25,22 +25,27 @@ namespace ClickQuest.Game.Core.Artifacts
 				User.Instance.CurrentHero.CritChance -= _stackCount * CritChanceIncreasePerStack;
 				_stackCount = 0;
 			}
-			else
+			
+			if (_stackCount < MaxStacks)
 			{
-				if (_stackCount < MaxStacks)
-				{
-					User.Instance.CurrentHero.CritChance += CritChanceIncreasePerStack;
-					_stackCount++;
-				}
-
-				bool isEnemyAMonster = _currentEnemy is Monster;
-				bool isEnemyInThreshold = _currentEnemy.CurrentHealth <= ExecuteThreshold * _currentEnemy.Health;
-
-				if (isEnemyAMonster && isEnemyInThreshold && _stackCount == MaxStacks)
-				{
-					CombatController.DealDamageToEnemy(_currentEnemy, _currentEnemy.CurrentHealth, DamageType.Artifact);
-				}
+				_stackCount++;
+				User.Instance.CurrentHero.CritChance += CritChanceIncreasePerStack;
 			}
+
+			bool isEnemyAMonster = _currentEnemy is Monster;
+			bool isEnemyInThreshold = _currentEnemy.CurrentHealth <= ExecuteThreshold * _currentEnemy.Health;
+
+			if (isEnemyAMonster && isEnemyInThreshold && _stackCount == MaxStacks)
+			{
+				CombatController.DealDamageToEnemy(_currentEnemy, _currentEnemy.CurrentHealth, DamageType.Artifact);
+			}
+		}
+
+		public override void OnKill()
+		{
+			User.Instance.CurrentHero.CritChance -= _stackCount * CritChanceIncreasePerStack;
+			_stackCount = 0;
+			_currentEnemy = null;
 		}
 
 		public override void OnRegionLeave()

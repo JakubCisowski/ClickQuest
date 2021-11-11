@@ -77,6 +77,13 @@ namespace ClickQuest.Game.Core.Enemies
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.BossesDefeated, 1);
 
 				GrantVictoryBonuses();
+				
+				// Invoke Artifacts with the "on-death" effect.
+				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
+				{
+					equippedArtifact.ArtifactFunctionality.OnKill();
+				}
+				
 				InterfaceController.CurrentBossPage.HandleInterfaceAfterBossDeath();
 			}
 		}

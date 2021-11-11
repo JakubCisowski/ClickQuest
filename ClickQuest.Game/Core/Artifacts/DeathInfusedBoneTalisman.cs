@@ -33,6 +33,7 @@ namespace ClickQuest.Game.Core.Artifacts
 		public override void OnKill()
 		{
 			_timer.Stop();
+			_affectedEnemy = null;
 		}
 
 		public override void OnRegionLeave()

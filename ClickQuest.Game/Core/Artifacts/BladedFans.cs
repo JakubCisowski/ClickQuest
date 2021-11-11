@@ -36,6 +36,7 @@ namespace ClickQuest.Game.Core.Artifacts
 		public override void OnRegionLeave()
 		{
 			_timer.Stop();
+			_currentEnemy = null;
 		}
 
 		public BladedFans()
@@ -52,6 +53,7 @@ namespace ClickQuest.Game.Core.Artifacts
 		{
 			_timer.Stop();
 			CombatController.DealDamageToCurrentEnemy(_damageStored * DamageModifier, DamageType.Artifact);
+			_damageStored = 0;
 		}
 	}
 }
