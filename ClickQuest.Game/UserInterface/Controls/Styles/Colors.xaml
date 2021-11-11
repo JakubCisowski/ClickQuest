@@ -2,35 +2,38 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- COLORS -->
-    <Color x:Key="ColorGameA">#919191</Color><!-- 1  / Main game background (fades to white) & Alert box background without gradient -->
-    <Color x:Key="ColorGameB">#FFA237</Color><!-- 2  / Accented button background [create hero/back to menu or town/monster/boss] 919191 -->
+    <Color x:Key="ColorGameM">#FFFFFF</Color><!-- 13 / Shop/Priest/Blacksmith background -->
+    <Color x:Key="ColorGameY">#FFFFFF</Color><!-- 24 / Tooltip foreground (name, type, artifact functionality description / DESCRIPTION) -->
+    <Color x:Key="ColorGame3">#FFFFFF</Color><!-- 29 / Tooltip separator -->
     <Color x:Key="ColorGameC">#e0e0e0</Color><!-- 3  / Normal button background e0e0e0 -->
-    <Color x:Key="ColorGameD">#666666</Color><!-- 4  / Special button background [deleting/exiting/unavailable] ffdab0 -->
-    <Color x:Key="ColorGameE">#000000</Color><!-- 5  / Special button foreground (icon color) -->
-    <Color x:Key="ColorGameF">#ffdab0</Color><!-- 6  / Hovered vendor item / race/class background (shop/priest/blacksmith) -->
-    <Color x:Key="ColorGameG">#FFA237</Color><!-- 7  / Selected race/class background (class/race selection) -->
     <Color x:Key="ColorGameH">#e0e0e0</Color><!-- 8  / Hero stats/equipment background -->
-    <Color x:Key="ColorGameI">#ababab</Color><!-- 9  / Item background (equipment) & Achievement background -->
     <Color x:Key="ColorGameJ">#e0e0e0</Color><!-- 10 / Region description background -->
     <Color x:Key="ColorGameK">#e0e0e0</Color><!-- 11 / Not selected tab header (equipment/shop/priest/blacksmith) -->
-    <Color x:Key="ColorGameL">#FFA237</Color><!-- 12 / Selected tab header (equipment/shop/priest/blacksmith) FFA237 -->
-    <Color x:Key="ColorGameM">#FFFFFF</Color><!-- 13 / Shop/Priest/Blacksmith background -->
-    <Color x:Key="ColorGameN">#ababab</Color><!-- 14 / Quest button background -->
-    <Color x:Key="ColorGameO">#000000</Color><!-- 15 / User input text box (hero name) -->
-    <Color x:Key="ColorGameP">#666666</Color><!-- 16 / Experience bar background -->
-    <Color x:Key="ColorGameR">#FFA237</Color><!-- 17 / Experience bar foreground -->
-    <Color x:Key="ColorGameS">#ffdab0</Color><!-- 18 / Equipped artifact -->
-    <Color x:Key="ColorGameT">#FFA237</Color><!-- 19 / Shop/Priest/Blacksmith border -->
-    <Color x:Key="ColorGameU">#ffdab0</Color><!-- 20 / Hovered tab header (equipment/shop/priest/blacksmith)  -->
-    <Color x:Key="ColorGameV">#ffdab0</Color><!-- 21 / Shop/Priest/Blacksmith header background  -->
-    <Color x:Key="ColorGameW">#666666</Color><!-- 22 / Shop/Priest/Blacksmith header font color  -->
-    <Color x:Key="ColorGameX">#000000</Color><!-- 23 / Tooltip background  -->
-    <Color x:Key="ColorGameY">#FFFFFF</Color><!-- 24 / Tooltip foreground (name, type, artifact functionality description / DESCRIPTION) -->
     <Color x:Key="ColorGameZ">#ababab</Color><!-- 25 / Tooltip border colour default -->
     <Color x:Key="ColorGame0">#ababab</Color><!-- 26 / Tooltip foreground (lore / TECHNICAL INFO) -->
+    <Color x:Key="ColorGameN">#ababab</Color><!-- 14 / Quest button background -->
+    <Color x:Key="ColorGameA">#919191</Color><!-- 1  / Main game background (fades to white) & Alert box background without gradient -->
+    <Color x:Key="ColorGameD">#666666</Color><!-- 4  / Special button background [deleting/exiting/unavailable] ffdab0 -->
+    <Color x:Key="ColorGameW">#666666</Color><!-- 22 / Shop/Priest/Blacksmith header font color  -->
     <Color x:Key="ColorGame1">#666666</Color><!-- 27 / Tooltip foreground (extra info / material description / EXTRA INFO) -->
+    <Color x:Key="ColorGameP">#666666</Color><!-- 16 / Experience bar background -->
+    <Color x:Key="ColorGameO">#000000</Color><!-- 15 / User input text box (hero name) / Credits & BETA tag foreground -->
+    <Color x:Key="ColorGameE">#000000</Color><!-- 5  / Special button foreground (icon color) -->
+    <Color x:Key="ColorGameX">#000000</Color><!-- 23 / Tooltip background  -->
+    <Color x:Key="ColorGameI">#fff9f2 </Color><!-- 9  / Item background (equipment) & Achievement background -->
+    <Color x:Key="ColorGameU">#ffdab0</Color><!-- 20 / Hovered tab header (equipment/shop/priest/blacksmith) / ButtonStyleDanger non-hover border  -->
+    <Color x:Key="ColorGameV">#ffdab0</Color><!-- 21 / Shop/Priest/Blacksmith header background  -->
+    <Color x:Key="ColorGameF">#FFA237</Color><!-- 6  / Hovered vendor item / race/class background (shop/priest/blacksmith) -->
+    <Color x:Key="ColorGameB">#FFA237</Color><!-- 2  / Accented button background [create hero/back to menu or town/monster/boss] 919191 -->
+    <Color x:Key="ColorGameG">#FFA237</Color><!-- 7  / Selected race/class background (class/race selection) -->
+    <Color x:Key="ColorGameL">#FFA237</Color><!-- 12 / Selected tab header (equipment/shop/priest/blacksmith) FFA237 -->
+    <Color x:Key="ColorGameR">#FFA237</Color><!-- 17 / Experience bar foreground -->
+    <Color x:Key="ColorGameT">#FFA237</Color><!-- 19 / Shop/Priest/Blacksmith border -->
+    <Color x:Key="ColorGame8">#FFA237</Color><!-- 18 / not equipped border -->
+    <Color x:Key="ColorGameS">#FFA237</Color><!-- 18 / Equipped artifact -->
+    <Color x:Key="ColorGame7">#FFA237</Color><!-- 18 / equipped border -->
+
     <Color x:Key="ColorGame2">#61B05A</Color><!-- 28 / Tooltip foreground (mythic tag) -->
-    <Color x:Key="ColorGame3">#FFFFFF</Color><!-- 29 / Tooltip separator -->
 
     <Color x:Key="ColorLightGray">#c9c9c9</Color>
     <Color x:Key="ColorDarkGray">#666666</Color>
@@ -96,6 +99,8 @@
     <SolidColorBrush x:Key="BrushGame1" Color="{StaticResource ColorGame1}" />
     <SolidColorBrush x:Key="BrushGame2" Color="{StaticResource ColorGame2}" />
     <SolidColorBrush x:Key="BrushGame3" Color="{StaticResource ColorGame3}" />
+    <SolidColorBrush x:Key="BrushGame7" Color="{StaticResource ColorGame7}" />
+    <SolidColorBrush x:Key="BrushGame8" Color="{StaticResource ColorGame8}" />
 
     <SolidColorBrush x:Key="BrushLightGray" Color="{StaticResource ColorLightGray}" />
     <SolidColorBrush x:Key="BrushDarkGray" Color="{StaticResource ColorDarkGray}" />

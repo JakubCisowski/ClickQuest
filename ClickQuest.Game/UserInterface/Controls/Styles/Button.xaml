@@ -108,9 +108,9 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Border Name="border"
-					        BorderThickness="2"
+					        BorderThickness="3"
 					        Padding="4,2"
-					        BorderBrush="{StaticResource BrushPink}"
+					        BorderBrush="{StaticResource BrushGameU}"
 					        CornerRadius="3"
 					        Background="{TemplateBinding Background}">
 						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -131,7 +131,7 @@
 							<Trigger.ExitActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">
 									<Storyboard>
-										<ColorAnimation To="{StaticResource ColorPink}" Duration="0:0:0.2" Storyboard.TargetName="border"
+										<ColorAnimation To="{StaticResource ColorGameU}" Duration="0:0:0.2" Storyboard.TargetName="border"
 										                Storyboard.TargetProperty="BorderBrush.Color" />
 									</Storyboard>
 								</BeginStoryboard>

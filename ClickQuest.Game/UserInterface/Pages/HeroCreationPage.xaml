@@ -16,12 +16,12 @@
 				<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Indigo.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
-			<SolidColorBrush x:Key="PrimaryHueLightBrush" Color="{StaticResource ColorGameO}"/>
-			<SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="{StaticResource ColorGameO}"/>
-			<SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource ColorGameO}"/>
-			<SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="{StaticResource ColorGameO}"/>
-			<SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource ColorGameO}"/>
-			<SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource ColorGameO}"/>
+			<SolidColorBrush x:Key="PrimaryHueLightBrush" Color="{StaticResource ColorGameU}"/>
+			<SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="{StaticResource ColorGameU}"/>
+			<SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource ColorGameU}"/>
+			<SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="{StaticResource ColorGameU}"/>
+			<SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource ColorGameU}"/>
+			<SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource ColorGameU}"/>
 		</ResourceDictionary>
 	</Page.Resources>
 
@@ -66,7 +66,7 @@
 				</TextBlock>
 
 				<!-- Hero class selection -->
-				<Border Margin="0,10" BorderThickness="2" BorderBrush="{StaticResource BrushLightGray}" Width="150">
+				<Border  BorderThickness="2" BorderBrush="{StaticResource BrushGameB}" Width="150">
 					<ListView x:Name="HeroClassBox" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
 
 						<ListView.ItemTemplate>
@@ -216,7 +216,7 @@
 				</TextBlock>
 
 				<!-- Hero race selection -->
-				<Border Margin="0,10" BorderThickness="2" BorderBrush="{StaticResource BrushLightGray}" Width="150">
+				<Border BorderThickness="2" BorderBrush="{StaticResource BrushGameB}" Width="150">
 					<ListView x:Name="HeroRaceBox" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
 						<ListView.ItemTemplate>
 							<DataTemplate>
@@ -372,7 +372,7 @@
 		<Separator Height="2" Width="500" Margin="20" />
 
 		<!-- Creates hero -->
-		<Button x:Name="CreateHeroButton" HorizontalAlignment="Center" Click="CreateHeroButton_Click" Margin="30" Width="180" Height="60" Background="{StaticResource BrushGameC}">
+		<Button x:Name="CreateHeroButton" HorizontalAlignment="Center" Click="CreateHeroButton_Click" Margin="30" Width="180" Height="60" Background="{StaticResource BrushGameU}">
 			<Button.Content>
 				<TextBlock FontSize="22" Text="Create!" />
 			</Button.Content>
