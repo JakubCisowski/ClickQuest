@@ -476,7 +476,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				int clickDamageFromArtifacts = User.Instance.CurrentHero.ClickDamage - (2 + User.Instance.CurrentHero.ClickDamagePerLevel * User.Instance.CurrentHero.Level) - clickDamageFromBlessing;
 
-				if (clickDamageFromArtifacts > 0)
+				if (clickDamageFromArtifacts != 0)
 				{
 					blockDamage.Inlines.Add(new Run("Artifacts") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
 					blockDamage.Inlines.Add(new Run(", damage: "));
@@ -634,13 +634,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 			// ["Artifacts, damage: X"] - for crit chance
 			if (User.Instance.CurrentHero != null)
 			{
-				double critChanceFromArtifacts = User.Instance.CurrentHero.CritChance - (User.Instance.CurrentHero.HeroClass == HeroClass.Slayer ? 0.25 : 0 + User.Instance.CurrentHero.CritChancePerLevel * User.Instance.CurrentHero.Level) - critChanceFromBlessing;
+				double critChanceFromArtifacts = User.Instance.CurrentHero.CritChance - ((User.Instance.CurrentHero.HeroClass == HeroClass.Slayer ? 0.25 : 0) + User.Instance.CurrentHero.CritChancePerLevel * User.Instance.CurrentHero.Level) - critChanceFromBlessing;
 
-				if (critChanceFromArtifacts > 0)
+				if (critChanceFromArtifacts != 0)
 				{
 					blockCrit.Inlines.Add(new Run("Artifacts") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
 					blockCrit.Inlines.Add(new Run(", crit chance: "));
-					blockCrit.Inlines.Add(new Run(Math.Round(critChanceFromArtifacts * 100, 2).ToString()) { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
+					blockCrit.Inlines.Add(new Run(Math.Floor(critChanceFromArtifacts * 100).ToString()) { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
 					blockCrit.Inlines.Add(new Run("%") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
 					blockCrit.Inlines.Add(new LineBreak());
 				}
@@ -651,11 +651,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				double critDamageFromArtifacts = User.Instance.CurrentHero.CritDamage - 2 - critDamageFromBlessing;
 
-				if (critDamageFromArtifacts > 0)
+				if (critDamageFromArtifacts != 0)
 				{
 					blockCrit.Inlines.Add(new Run("Artifacts") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
 					blockCrit.Inlines.Add(new Run(", crit damage: "));
-					blockCrit.Inlines.Add(new Run(Math.Round(critDamageFromArtifacts * 100, 2).ToString()) { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
+					blockCrit.Inlines.Add(new Run(Math.Floor(critDamageFromArtifacts * 100).ToString()) { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
 					blockCrit.Inlines.Add(new Run("%") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
 					blockCrit.Inlines.Add(new LineBreak());
 				}
@@ -754,12 +754,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 				}
 			}
 
-			// ["Artifacts, damage: X"] - for crit chance
+			// ["Artifacts, damage: X"] - for poison damage
 			if (User.Instance.CurrentHero != null)
 			{
-				double poisonDamageFromArtifacts = User.Instance.CurrentHero.PoisonDamage - (User.Instance.CurrentHero.HeroClass == HeroClass.Venom ? 1 : 0 + User.Instance.CurrentHero.PoisonDamagePerLevel * User.Instance.CurrentHero.Level) - poisonDamageFromBlessing;
+				double poisonDamageFromArtifacts = User.Instance.CurrentHero.PoisonDamage - ((User.Instance.CurrentHero.HeroClass == HeroClass.Venom ? 1 : 0) + User.Instance.CurrentHero.PoisonDamagePerLevel * User.Instance.CurrentHero.Level) - poisonDamageFromBlessing;
 
-				if (poisonDamageFromArtifacts > 0)
+				if (poisonDamageFromArtifacts != 0)
 				{
 					blockPoison.Inlines.Add(new LineBreak());
 					blockPoison.Inlines.Add(new Run("Artifacts") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
@@ -921,12 +921,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				double auraDamageFromArtifacts = User.Instance.CurrentHero.AuraDamage - 0.1 - auraDamageFromBlessing;
 
-				if (auraDamageFromArtifacts > 0)
+				if (auraDamageFromArtifacts != 0)
 				{
 					blockAura.Inlines.Add(new LineBreak());
 					blockAura.Inlines.Add(new Run("Artifacts") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
 					blockAura.Inlines.Add(new Run(", aura damage: "));
-					blockAura.Inlines.Add(new Run(Math.Round(auraDamageFromArtifacts * 100, 2).ToString()) { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
+					blockAura.Inlines.Add(new Run(Math.Floor(auraDamageFromArtifacts * 100).ToString()) { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
 					blockAura.Inlines.Add(new Run("%"));
 					blockAura.Inlines.Add(new LineBreak());
 				}
@@ -937,12 +937,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				double auraSpeedFromArtifacts = User.Instance.CurrentHero.AuraAttackSpeed - (Hero.AURA_SPEED_BASE + User.Instance.CurrentHero.LevelAuraBonus) - auraSpeedFromBlessing;
 
-				if (auraSpeedFromArtifacts > 0)
+				if (auraSpeedFromArtifacts != 0)
 				{
 					blockAura.Inlines.Add(new LineBreak());
 					blockAura.Inlines.Add(new Run("Artifacts") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
 					blockAura.Inlines.Add(new Run(", aura speed: "));
-					blockAura.Inlines.Add(new Run(Math.Round(auraSpeedFromArtifacts, 2).ToString()) { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
+					blockAura.Inlines.Add(new Run(Math.Floor(auraSpeedFromArtifacts).ToString()) { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
 					blockAura.Inlines.Add(new Run("/s"));
 					blockAura.Inlines.Add(new LineBreak());
 				}

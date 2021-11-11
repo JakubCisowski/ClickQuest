@@ -74,16 +74,25 @@
                 <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
                     <!-- Click damage info ToolTip -->
                     <StackPanel.ToolTip>
-                        <ToolTip BorderBrush="{StaticResource BrushDamageTypeNormal}" BorderThickness="1">
-                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
-								<Run Text="Damage you deal with every click on a monster/boss (doubled when critting)" />
+                        <ToolTip BorderBrush="{StaticResource BrushDamageTypeNormal}">
+                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="Click Damage" FontSize="{StaticResource FontSizeToolTipName}"/>
+
+								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushGame3}" StrokeThickness="1" Margin="0,6,0,6" />
+								<LineBreak />
+
+								<Run Text="Damage you deal with every click on a monster/boss (increased when critting)" />
 								<LineBreak />
 								<LineBreak />
-								<Run Text="You can increase damage by: using blessings or damage artifacts" />
+
+								<Run Text="You can increase damage by: using blessings or damage artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGame0}"/>
 								<LineBreak />
-								<Run Text="Also, you get bonus click damage when you level up" />
+								<Run Text="Also, you get bonus click damage when you level up" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGame0}"/>
+
+								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushGame3}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
-								<Run Text="There is also on-hit click damage from Clicker Specialization, but it doesn't get multiplied upon critting" />
+
+								<Run Text="There is also on-hit damage from Clicker Specialization, but it doesn't get multiplied upon critting" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGame1}"/>
                             </TextBlock>
                         </ToolTip>
                     </StackPanel.ToolTip>
@@ -102,15 +111,22 @@
                     <!-- Crit info ToolTip -->
                     <StackPanel.ToolTip>
                         <ToolTip BorderBrush="{StaticResource BrushDamageTypeCritical}" BorderThickness="1">
-                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
+                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="Critical Clicks" FontSize="{StaticResource FontSizeToolTipName}"/>
+								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushGame3}" StrokeThickness="1" Margin="0,6,0,6" />
+								<LineBreak />
+
 								<Run Text="Chance to deal increased damage when clicking on an enemy" />
 								<LineBreak />
 								<LineBreak />
-								<Run Text="You can increase crit chance by: using blessings or crit artifacts" />
+
+								<Run Text="Default crit damage is 200%" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGame0}"/>
 								<LineBreak />
-								<Run Text="Default crit damage is 200%, and can be increased by using certain artifacts" />
+								<Run Text="You can increase crit chance and crit damage by: using blessings or crit artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGame0}"/>
+
+								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushGame3}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
-								<Run Text="This does not multiply damage from Clicker Specialization or artifacts" />
+								<Run Text="This does not multiply damage from Clicker Specialization or artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGame1}"/>
                             </TextBlock>
                         </ToolTip>
                     </StackPanel.ToolTip>
@@ -129,13 +145,21 @@
                     <!-- Poison damage ToolTip -->
                     <StackPanel.ToolTip>
                         <ToolTip BorderBrush="{StaticResource BrushDamageTypePoison}" BorderThickness="1">
-                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
+                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="Poison Damage" FontSize="{StaticResource FontSizeToolTipName}"/>
+								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushGame3}" StrokeThickness="1" Margin="0,6,0,6" />
+								<LineBreak />
+
 								<Run Text="Damage over time you deal after every click on a monster/boss" />
 								<LineBreak />
-								<Run Text="There are 5 ticks over 2.5s" />
 								<LineBreak />
+
+								<Run Text="There are 5 ticks over 2.5s" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGame0}"/>
+
+								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushGame3}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
-								<Run Text="You can increase poison damage by: using blessings or poison artifacts" />
+
+								<Run Text="You can increase poison damage by: using blessings or poison artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGame1}"/>
                             </TextBlock>
                         </ToolTip>
                     </StackPanel.ToolTip>
@@ -154,15 +178,21 @@
                     <!-- Aura ToolTip -->
                     <StackPanel.ToolTip>
                         <ToolTip BorderBrush="{StaticResource BrushDamageTypeAura}" BorderThickness="1">
-                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}" FontStyle="Italic">
+                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="Aura" FontSize="{StaticResource FontSizeToolTipName}"/>
+								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushGame3}" StrokeThickness="1" Margin="0,6,0,6" />
+								<LineBreak />
+
 								<Run Text="Idle damage you deal while fighting monsters (doesn't work in dungeons)" />
 								<LineBreak />
 								<Run Text="Damage scales with monster's max health" />
+								
+								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushGame3}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
+
+								<Run Text="You can increase Aura DPS by: using blessings or Aura artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGame1}"/>
 								<LineBreak />
-								<Run Text="You can increase Aura DPS by: using blessings or Aura artifacts" />
-								<LineBreak />
-								<Run Text="Also, you get bonus Aura DPS when you level up" />
+								<Run Text="Also, you get bonus Aura DPS when you level up" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGame1}"/>
                             </TextBlock>
                         </ToolTip>
                     </StackPanel.ToolTip>

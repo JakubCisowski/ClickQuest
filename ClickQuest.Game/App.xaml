@@ -50,6 +50,7 @@
 				<Setter Property="Background" Value="{StaticResource BrushGameX}" />
 				<Setter Property="Padding" Value="5" />
 				<Setter Property="BorderBrush" Value="{StaticResource BrushGameZ}" />
+				<Setter Property="BorderThickness" Value="1" />
 				<Setter Property="controlzEx:ToolTipAssist.AutoMove" Value="True" />
 				<Setter Property="MinWidth" Value="300"/>
 				<Setter Property="MaxWidth" Value="500"/>
@@ -60,6 +61,7 @@
 				<Setter Property="Background" Value="{StaticResource BrushGameX}" />
 				<Setter Property="Padding" Value="5" />
 				<Setter Property="BorderBrush" Value="{StaticResource BrushGameZ}" />
+				<Setter Property="BorderThickness" Value="1" />
 				<Setter Property="controlzEx:ToolTipAssist.AutoMove" Value="True" />
 			</Style>
 
