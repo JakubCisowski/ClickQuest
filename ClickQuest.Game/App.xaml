@@ -12,6 +12,7 @@
 				<ResourceDictionary Source="/UserInterface/Controls/Styles/TabControl.xaml" />
 				<ResourceDictionary Source="/UserInterface/Controls/Styles/Colors.xaml" />
 				<ResourceDictionary Source="/UserInterface/Controls/Styles/Fonts.xaml" />
+				<ResourceDictionary Source="/UserInterface/Controls/Styles/ListView.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
 			<!-- Fonts -->

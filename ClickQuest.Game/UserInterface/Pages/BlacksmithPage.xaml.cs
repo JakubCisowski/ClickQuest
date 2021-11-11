@@ -64,10 +64,15 @@ namespace ClickQuest.Game.UserInterface.Pages
 						continue;
 					}
 					
-					ingotAmountsDescription += $"- {ingotAmounts[i]}x {(Rarity)i} Ingots \n";
+					ingotAmountsDescription += $"- {ingotAmounts[i]}x {(Rarity)i} Ingots";
+
+					if (i<5)
+					{
+						ingotAmountsDescription += "\n";
+					}
 				}
 
-				var result = AlertBox.Show($"Are you sure you want to melt {artifact.Name}?\nThis action will destroy this item and create: \n {ingotAmountsDescription}\n", MessageBoxButton.YesNo);
+				var result = AlertBox.Show($"Are you sure you want to melt {artifact.Name}?\nThis action will destroy this item and create: \n {ingotAmountsDescription}", MessageBoxButton.YesNo);
 
 				if (result == MessageBoxResult.No)
 				{

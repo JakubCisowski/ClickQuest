@@ -77,6 +77,7 @@
 								<Setter Property="ToolTipService.ShowDuration" Value="20000" />
 								<Setter Property="ToolTipService.InitialShowDelay" Value="100" />
 								<Setter Property="ToolTip" Value="{Binding ToolTip}"/>
+								<Setter Property="Template" Value="{StaticResource ListViewItemVendorTemplate}"/>
 							</Style>
 						</ListView.ItemContainerStyle>
 
@@ -183,6 +184,7 @@
 								<Setter Property="ToolTipService.ShowDuration" Value="20000" />
 								<Setter Property="ToolTipService.InitialShowDelay" Value="100" />
 								<Setter Property="ToolTip" Value="{Binding ToolTip}"/>
+								<Setter Property="Template" Value="{StaticResource ListViewItemVendorTemplate}"/>
 							</Style>
 						</ListView.ItemContainerStyle>
 
@@ -289,6 +291,7 @@
 								<Setter Property="ToolTipService.ShowDuration" Value="20000" />
 								<Setter Property="ToolTipService.InitialShowDelay" Value="100" />
 								<Setter Property="ToolTip" Value="{Binding ToolTip}"/>
+								<Setter Property="Template" Value="{StaticResource ListViewItemVendorTemplate}"/>
 							</Style>
 						</ListView.ItemContainerStyle>
 

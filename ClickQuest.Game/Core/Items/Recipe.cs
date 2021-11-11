@@ -31,12 +31,12 @@ namespace ClickQuest.Game.Core.Items
 		{
 			IngredientPatterns = GameAssets.Recipes.FirstOrDefault(x => x.Id == Id)?.IngredientPatterns;
 
-			RequirementsDescription = "Materials required:\n";
+			RequirementsDescription = "Materials required:";
 
 			foreach (var ingredient in IngredientPatterns)
 			{
 				var relatedMaterial = ingredient.RelatedMaterial;
-				RequirementsDescription += $"- {ingredient.Quantity}x {relatedMaterial.Name}\n";
+				RequirementsDescription += $"\n- {ingredient.Quantity}x {relatedMaterial.Name}";
 			}
 		}
 
