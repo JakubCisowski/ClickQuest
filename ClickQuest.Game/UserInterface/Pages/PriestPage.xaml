@@ -26,10 +26,10 @@
 		</Grid.ColumnDefinitions>
 
 		<!-- Hero stats frame-->
-		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/UserInterface/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" />
+		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/UserInterface/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" Background="Transparent"/>
 
 		<!-- Equipment frame-->
-		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/UserInterface/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" />
+		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/UserInterface/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" Background="Transparent"/>
 
 		<!-- Main priest page grid -->
 		<Grid Grid.Column="1">
