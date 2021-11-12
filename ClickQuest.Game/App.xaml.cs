@@ -33,6 +33,7 @@ namespace ClickQuest.Game
 
 			UserDataLoader.Load();
 
+			(GameAssets.Pages["MainMenu"] as MainMenuPage).UpdateCreateHeroButton();
 			(GameAssets.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
 
 			// Save current time as the application's start time (for achievement tracking).
