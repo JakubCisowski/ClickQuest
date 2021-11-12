@@ -20,7 +20,7 @@
 					<Border Name="border"
 					        BorderThickness="1"
 					        Padding="4,2"
-					        BorderBrush="{StaticResource BrushGray2}"
+					        BorderBrush="{StaticResource BrushBlack}"
 					        CornerRadius="3"
 					        Background="{TemplateBinding Background}">
 						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -31,7 +31,7 @@
 							<Trigger.EnterActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">
 									<Storyboard>
-										<ColorAnimation To="{StaticResource ColorBlack}" Duration="0:0:0.2" Storyboard.TargetName="border"
+										<ColorAnimation To="{StaticResource ColorAccent3}" Duration="0:0:0.2" Storyboard.TargetName="border"
 										                Storyboard.TargetProperty="BorderBrush.Color" />
 									</Storyboard>
 								</BeginStoryboard>
@@ -40,7 +40,7 @@
 							<Trigger.ExitActions>
 								<BeginStoryboard HandoffBehavior="SnapshotAndReplace">
 									<Storyboard>
-										<ColorAnimation To="{StaticResource ColorGray5}" Duration="0:0:0.2" Storyboard.TargetName="border"
+										<ColorAnimation To="{StaticResource ColorBlack}" Duration="0:0:0.2" Storyboard.TargetName="border"
 										                Storyboard.TargetProperty="BorderBrush.Color" />
 									</Storyboard>
 								</BeginStoryboard>
@@ -65,7 +65,7 @@
 					<Border Name="border"
 					        BorderThickness="1"
 					        Padding="4,2"
-					        BorderBrush="{StaticResource BrushGray2}"
+					        BorderBrush="{StaticResource BrushGray5}"
 					        CornerRadius="3"
 					        Background="{TemplateBinding Background}">
 						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
