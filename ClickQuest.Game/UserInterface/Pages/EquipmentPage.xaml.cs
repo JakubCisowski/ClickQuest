@@ -1,3 +1,4 @@
+using System;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.UserInterface;
@@ -105,6 +106,26 @@ namespace ClickQuest.Game.UserInterface.Pages
 					UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
 					RefreshEquippedArtifacts();
 					break;
+			}
+		}
+
+		public void RefreshSpecificEquipmentTab(Type itemType)
+		{
+			if (itemType == typeof(Material) && _selectedTabIndex == 0)
+			{
+				MaterialsPanel.Children.Clear();
+				UpdateEquipmentTab(User.Instance.CurrentHero?.Materials, MaterialsPanel);
+			}
+			else if (itemType == typeof(Recipe) && _selectedTabIndex == 1)
+			{
+				RecipesPanel.Children.Clear();
+				UpdateEquipmentTab(User.Instance.CurrentHero?.Recipes, RecipesPanel);
+			}
+			else if (itemType == typeof(Artifact) && _selectedTabIndex == 2)
+			{
+				ArtifactsPanel.Children.Clear();
+				UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
+				RefreshEquippedArtifacts();
 			}
 		}
 
@@ -259,6 +280,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 				// Save tab selection (to set it after updating equipment page).
 				_selectedTabIndex = EquipmentTabControl.SelectedIndex;
 				_verticalOffset = 0;
+				
+				// Update the tab that is being selected.
+				RefreshCurrentEquipmentTab();
 			}
 		}
 	}

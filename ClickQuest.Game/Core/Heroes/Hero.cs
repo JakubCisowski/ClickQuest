@@ -234,6 +234,7 @@ namespace ClickQuest.Game.Core.Heroes
 		{
 			User.Instance.CurrentHero.Blessing?.DisableBuff();
 			User.Instance.CurrentHero.Blessing = null;
+			InterfaceController.RefreshBlessingInterfaceOnCurrentPage();
 		}
 
 		public void ResumeQuest()

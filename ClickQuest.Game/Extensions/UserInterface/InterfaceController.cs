@@ -77,7 +77,28 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				statsPage.RefreshAllDynamicStatsAndToolTips();
 
 				EquipmentPage equipmentPage = p.EquipmentFrame.Content;
-				p.EquipmentFrame.Refresh();
+				equipmentPage.RefreshCurrentEquipmentTab();
+			}
+			catch (RuntimeBinderException)
+			{
+				// No stats frame on this page!
+				// Best solution according to:
+				// https://stackoverflow.com/a/5768449/14770235
+			}
+			catch (NullReferenceException)
+			{
+				// This might be necessary instead of the above with the new approach.
+			}
+		}
+
+		public static void RefreshSpecificEquipmentPanelTabOnCurrentPage(Type itemType)
+		{
+			try
+			{
+				dynamic p = GameAssets.CurrentPage;
+
+				EquipmentPage equipmentPage = p.EquipmentFrame.Content;
+				equipmentPage.RefreshSpecificEquipmentTab(itemType);
 			}
 			catch (RuntimeBinderException)
 			{
@@ -120,6 +141,48 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 				HeroStatsPage statsPage = p.StatsFrame.Content;
 				statsPage.UpdateSingleSpecializationInterface(specializationType);
+			}
+			catch (RuntimeBinderException)
+			{
+				// No stats frame on this page!
+				// Best solution according to:
+				// https://stackoverflow.com/a/5768449/14770235
+			}
+			catch (NullReferenceException)
+			{
+				// This might be necessary instead of the above with the new approach.
+			}
+		}
+
+		public static void RefreshBlessingInterfaceOnCurrentPage()
+		{
+			try
+			{
+				dynamic p = GameAssets.CurrentPage;
+
+				HeroStatsPage statsPage = p.StatsFrame.Content;
+				statsPage.UpdateBlessingTimer();
+			}
+			catch (RuntimeBinderException)
+			{
+				// No stats frame on this page!
+				// Best solution according to:
+				// https://stackoverflow.com/a/5768449/14770235
+			}
+			catch (NullReferenceException)
+			{
+				// This might be necessary instead of the above with the new approach.
+			}
+		}
+
+		public static void RefreshQuestInterfaceOnCurrentPage()
+		{
+			try
+			{
+				dynamic p = GameAssets.CurrentPage;
+
+				HeroStatsPage statsPage = p.StatsFrame.Content;
+				statsPage.UpdateQuestTimer();
 			}
 			catch (RuntimeBinderException)
 			{

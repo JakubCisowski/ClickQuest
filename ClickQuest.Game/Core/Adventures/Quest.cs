@@ -125,7 +125,7 @@ namespace ClickQuest.Game.Core.Adventures
 
 			UpdateTicksCountText(questCopy);
 
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
+			InterfaceController.RefreshQuestInterfaceOnCurrentPage();
 		}
 
 		public void FinishQuest()
@@ -208,7 +208,8 @@ namespace ClickQuest.Game.Core.Adventures
 				Blessing.AskUserAndSwapBlessing(blessingRewardPattern.QuestRewardId);
 			}
 
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
+			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
+			InterfaceController.RefreshQuestInterfaceOnCurrentPage();
 		}
 
 		public void PauseTimer()

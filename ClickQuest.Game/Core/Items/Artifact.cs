@@ -76,14 +76,14 @@ namespace ClickQuest.Game.Core.Items
 			CollectionsController.AddItemToCollection(this, User.Instance.CurrentHero.Artifacts, amount);
 
 			AddAchievementProgress();
-			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
+			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Artifact));
 		}
 
 		public override void RemoveItem(int amount = 1)
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Artifacts, amount);
 			
-			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
+			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Artifact));
 		}
 
 		public void CreateMythicTag(string enemyName = "")

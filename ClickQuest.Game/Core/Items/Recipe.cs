@@ -66,14 +66,14 @@ namespace ClickQuest.Game.Core.Items
 			CollectionsController.AddItemToCollection(this, User.Instance.CurrentHero.Recipes, amount);
 
 			AddAchievementProgress();
-			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
+			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Recipe));
 		}
 
 		public override void RemoveItem(int amount = 1)
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Recipes, amount);
 			
-			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
+			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Recipe));
 		}
 	}
 }

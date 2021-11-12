@@ -83,7 +83,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 				MeltArtifact(artifact);
 			}
 
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 			UpdateBlacksmithItems();
 		}
 
@@ -203,8 +202,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 				recipe.RemoveItem();
 
 				GameController.UpdateSpecializationAmountAndUI(SpecializationType.Crafting);
-
-				InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 				
 				UpdateBlacksmithItems();
 			}

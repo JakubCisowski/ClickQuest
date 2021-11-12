@@ -62,7 +62,7 @@ namespace ClickQuest.Game.Core.Items
 			}
 
 			AddAchievementProgress();
-			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
+			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Ingot));
 		}
 
 		public override void RemoveItem(int amount = 1)
@@ -75,7 +75,7 @@ namespace ClickQuest.Game.Core.Items
 
 			}
 			
-			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
+			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Ingot));
 		}
 	}
 }

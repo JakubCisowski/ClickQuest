@@ -165,7 +165,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			return currencyIcon;
 		}
 
-		private void UpdateQuestTimer()
+		public void UpdateQuestTimer()
 		{
 			var currentQuest = User.Instance.CurrentHero?.Quests.FirstOrDefault(x => x.EndDate != default);
 
@@ -179,7 +179,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			QuestDurationBlock.ToolTip = ItemToolTipController.GenerateQuestToolTip(currentQuest);
 		}
 
-		private void UpdateBlessingTimer()
+		public void UpdateBlessingTimer()
 		{
 			var currentBlessing = User.Instance.CurrentHero?.Blessing;
 

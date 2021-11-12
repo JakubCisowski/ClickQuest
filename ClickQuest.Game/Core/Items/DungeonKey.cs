@@ -62,7 +62,7 @@ namespace ClickQuest.Game.Core.Items
 			}
 
 			AddAchievementProgress();
-			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
+			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(DungeonKey));
 		}
 
 		public override void RemoveItem(int amount = 1)
@@ -74,7 +74,7 @@ namespace ClickQuest.Game.Core.Items
 				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{amount}", ColorsController.GetRarityColor(Rarity), FloatingTextController.GetDungeonKeyRarityPosition(Rarity));
 			}
 			
-			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
+			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(DungeonKey));
 		}
 
 		public static List<double> CreateRarityChancesList(int monsterHealth)
