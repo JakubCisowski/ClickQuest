@@ -182,7 +182,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				// This function was called before selecting a hero - return.
 				return;
 			}
-
+			
 			var specializationTypes = Enum.GetValues(typeof(SpecializationType));
 
 			GeneralToolTipController.SetToolTipDelayAndDuration(SpecializationsGrid);
@@ -216,6 +216,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 
 			var specializationTypes = Enum.GetValues(typeof(SpecializationType));
+			
+			User.Instance.CurrentHero.Specialization.UpdateSpecialization();
 
 			for (int i = 0; i < specializationTypes.Length; i++)
 			{
