@@ -9,6 +9,7 @@ using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.Extensions.UserInterface.ToolTips;
 using ClickQuest.Game.UserInterface.Controls;
@@ -202,7 +203,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 
 			var newBlessing = blessingBlueprint.CopyBlessing();
 			newBlessing.Duration += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing];
-			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Blessing]++;
+			GameController.UpdateSpecializationAmountAndUI(SpecializationType.Blessing);
 
 			User.Instance.CurrentHero.Blessing = newBlessing;
 			newBlessing.EnableBuff();

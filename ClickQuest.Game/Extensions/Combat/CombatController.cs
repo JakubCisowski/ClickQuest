@@ -3,6 +3,7 @@ using System.Windows;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Windows;
@@ -23,7 +24,7 @@ namespace ClickQuest.Game.Extensions.Combat
 
 				var damageBaseAndCritInfo = User.Instance.CurrentHero.CalculateBaseAndCritClickDamage();
 				int damageOnHit = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking];
-				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Clicking]++;
+				GameController.UpdateSpecializationAmountAndUI(SpecializationType.Clicking);
 
 				// Passing clickedEnemy ensures that even if we kill the enemy with dealt damage (eg. click damage),
 				// other effects (on-hit and artifacts) will be dealt to that dead enemy instead of being carried over.

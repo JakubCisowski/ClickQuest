@@ -7,6 +7,7 @@ using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
@@ -50,7 +51,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				
 				MeltMaterial(material);
 
-				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Melting]++;
+				GameController.UpdateSpecializationAmountAndUI(SpecializationType.Melting);
 			}
 			else if (b.CommandParameter is Artifact artifact)
 			{
@@ -201,7 +202,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				recipe.Artifact.AddItem();
 				recipe.RemoveItem();
 
-				User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Crafting]++;
+				GameController.UpdateSpecializationAmountAndUI(SpecializationType.Crafting);
 
 				InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 				

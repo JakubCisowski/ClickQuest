@@ -23,7 +23,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 	public partial class HeroStatsPage : Page
 	{
 		private readonly Hero _hero;
-
+		
 		public HeroStatsPage()
 		{
 			InitializeComponent();
@@ -45,17 +45,35 @@ namespace ClickQuest.Game.UserInterface.Pages
 				}
 			}
 
+			// Since the values of Ingots and DungeonKeys are binded, and their ToolTips are static, we only call their update functions here
+			// (so only when refreshing HeroStatsPage - upon selecting a hero, creating one or loading the game).
+			// We do not need to update them in any other situation.
 			UpdateGoldInterface();
 			UpdateIngotOrDungeonKeyInterface(User.Instance.Ingots);
 			UpdateIngotOrDungeonKeyInterface(User.Instance.DungeonKeys);
+			
+			RefreshAllDynamicStatsAndToolTips();
+		}
+
+		public void RefreshAllDynamicStatsAndToolTips()
+		{
+			// Clear everything.
+			ClearAllDynamicControls();
+
 			UpdateQuestTimer();
 			UpdateBlessingTimer();
-			UpdateSpecializationsInterface();
+			UpdateAllSpecializationsInterface();
 			GenerateHeroInfoToolTip();
 			GenerateStatValueAuraToolTip();
 			GenerateStatValueDamageToolTip();
 			GenerateStatValuePoisonToolTip();
 			GenerateStatValueCritToolTip();
+		}
+
+		public void ClearAllDynamicControls()
+		{
+			// We do not need to clear Gold, Ingots or DungeonKeys panels, because their values are binded and their ToolTips are static.
+			SpecializationsGrid.Children.Clear();
 		}
 
 		private void UpdateGoldInterface()
@@ -175,7 +193,26 @@ namespace ClickQuest.Game.UserInterface.Pages
 			BlessingDurationBlock.ToolTip = ItemToolTipController.GenerateBlessingToolTip(currentBlessing);
 		}
 
-		private void GenerateSpecializationsToolTips()
+		private void GenerateSingleSpecializationToolTip(SpecializationType specializationType)
+		{
+			int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[specializationType];
+			while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[specializationType])
+			{
+				nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[specializationType];
+			}
+
+			nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[specializationType] - nextUpgrade;
+
+			var toolTip = HeroStatsToolTipController.GenerateSpecizaltionToolTip(specializationType, nextUpgrade);
+
+			var nameBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationType.ToString() + "Name");
+			var buffBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationType.ToString() + "Buff");
+
+			nameBlock.ToolTip = toolTip;
+			buffBlock.ToolTip = toolTip;
+		}
+
+		private void GenerateAllSpecializationsToolTips()
 		{
 			if (User.Instance.CurrentHero is null)
 			{
@@ -189,25 +226,70 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			for (int i = 0; i < specializationTypes.Length; i++)
 			{
-				int nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[(SpecializationType)specializationTypes.GetValue(i)];
-				while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(i)])
-				{
-					nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(i)];
-				}
-
-				nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[(SpecializationType)specializationTypes.GetValue(i)] - nextUpgrade;
-
-				var toolTip = HeroStatsToolTipController.GenerateSpecizaltionToolTip((SpecializationType)specializationTypes.GetValue(i), nextUpgrade);
-
-				var nameBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationTypes.GetValue(i) + "Name");
-				var buffBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationTypes.GetValue(i) + "Buff");
-
-				nameBlock.ToolTip = toolTip;
-				buffBlock.ToolTip = toolTip;
+				var specializationType = (SpecializationType)specializationTypes.GetValue(i);
+				
+				GenerateSingleSpecializationToolTip(specializationType);
 			}
 		}
 
-		public void UpdateSpecializationsInterface()
+		public void UpdateSingleSpecializationInterface(SpecializationType specializationType)
+		{
+			string buffBlockName = "Spec" + specializationType.ToString() + "Buff";
+
+			TextBlock buffBlock = null;
+
+			// Find the existing control in SpecializationsGrid.
+			foreach (TextBlock textBlock in SpecializationsGrid.Children)
+			{
+				if (textBlock.Name == buffBlockName)
+				{
+					buffBlock = textBlock;
+					break;
+				}
+			}
+
+			if (buffBlock != null)
+			{
+				buffBlock.Inlines.Clear();
+				
+				switch (specializationType)
+				{
+					case SpecializationType.Blessing:
+						buffBlock.Inlines.Add(new Run(" → Blessing duration +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing] + "s"));
+						break;
+					
+					case SpecializationType.Clicking:
+						buffBlock.Inlines.Add(new Run(" → On-hit damage +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking]));
+						break;
+					
+					case SpecializationType.Crafting:
+						buffBlock.Inlines.Add(" → Can craft ");
+						buffBlock.Inlines.Add(new Run(User.Instance.CurrentHero.Specialization.SpecCraftingText) { Foreground = ColorsController.GetRarityColor((Rarity)User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting]) });
+						buffBlock.Inlines.Add(" recipes");
+						break;
+					
+					case SpecializationType.Trading:
+						buffBlock.Inlines.Add(new Run(" → Shop size & ratio +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+						break;
+					
+					case SpecializationType.Melting:
+						buffBlock.Inlines.Add(new Run(" → Extra ingots +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%"));
+						break;
+					
+					case SpecializationType.Questing:
+						buffBlock.Inlines.Add(new Run(" → Quest time -" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Questing] + "%"));
+						break;
+					
+					case SpecializationType.Dungeon:
+						buffBlock.Inlines.Add(new Run(" → Bossfight timer +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon] + "s"));
+						break;
+				}
+				
+				GenerateSingleSpecializationToolTip(specializationType);
+			}
+		}
+
+		public void UpdateAllSpecializationsInterface()
 		{
 			if (User.Instance.CurrentHero is null)
 			{
@@ -221,62 +303,52 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			for (int i = 0; i < specializationTypes.Length; i++)
 			{
-				string nameText = "";
+				var specializationType = (SpecializationType)specializationTypes.GetValue(i);
+				
+				var nameBlock = new TextBlock
+				{
+					Name = "Spec" + specializationType + "Name",
+					FontSize = 18,
+					Margin = new Thickness(0, 1, 0, 1)
+				};
 
 				var block = new TextBlock
 				{
-					Name = "Spec" + specializationTypes.GetValue(i) + "Buff",
+					Name = "Spec" + specializationType + "Buff",
 					FontSize = 18,
 					Margin = new Thickness(0, 1, 0, 1)
 				};
 
-				switch (specializationTypes.GetValue(i))
+				switch (specializationType)
 				{
 					case SpecializationType.Blessing:
-						nameText = "Prayer";
-						block.Inlines.Add(new Run(" → Blessing duration +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing] + "s"));
+						nameBlock.Text = "Prayer";
 						break;
 
 					case SpecializationType.Clicking:
-						nameText = "Clicker";
-						block.Inlines.Add(new Run(" → On-hit damage +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking]));
+						nameBlock.Text = "Clicker";
 						break;
 
 					case SpecializationType.Crafting:
-						nameText = "Craftsman";
-						block.Inlines.Add(" → Can craft ");
-						block.Inlines.Add(new Run(User.Instance.CurrentHero.Specialization.SpecCraftingText) { Foreground = ColorsController.GetRarityColor((Rarity)User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting]) });
-						block.Inlines.Add(" recipes");
+						nameBlock.Text = "Craftsman";
 						break;
 
 					case SpecializationType.Trading:
-						nameText = "Tradesman";
-						block.Inlines.Add(new Run(" → Shop size & ratio +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+						nameBlock.Text = "Tradesman";
 						break;
 
 					case SpecializationType.Melting:
-						nameText = "Melter";
-						block.Inlines.Add(new Run(" → Extra ingots +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%"));
+						nameBlock.Text = "Melter";
 						break;
 
 					case SpecializationType.Questing:
-						nameText = "Adventurer";
-						block.Inlines.Add(new Run(" → Quest time -" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Questing] + "%"));
+						nameBlock.Text = "Adventurer";
 						break;
 
 					case SpecializationType.Dungeon:
-						nameText = "Daredevil";
-						block.Inlines.Add(new Run(" → Bossfight timer +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon] + "s"));
+						nameBlock.Text = "Daredevil";
 						break;
 				}
-
-				var nameBlock = new TextBlock
-				{
-					Name = "Spec" + specializationTypes.GetValue(i) + "Name",
-					Text = nameText,
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
 
 				Grid.SetRow(nameBlock, i);
 				Grid.SetRow(block, i);
@@ -285,9 +357,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				SpecializationsGrid.Children.Add(nameBlock);
 				SpecializationsGrid.Children.Add(block);
+				
+				UpdateSingleSpecializationInterface(specializationType);
 			}
 
-			GenerateSpecializationsToolTips();
+			GenerateAllSpecializationsToolTips();
 		}
 
 		private void GenerateHeroInfoToolTip()

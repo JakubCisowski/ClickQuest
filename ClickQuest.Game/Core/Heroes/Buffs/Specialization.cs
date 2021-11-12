@@ -38,9 +38,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		public ObservableDictionary<SpecializationType, int> SpecializationThresholds { get; set; }
 
 		public ObservableDictionary<SpecializationType, int> SpecializationAmounts { get; set; }
-
-		public string SpecializationAmountsString { get; set; }
-
+		
 		public string SpecCraftingText { get; set; }
 
 		public Specialization()
@@ -52,9 +50,6 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 			CollectionInitializer.InitializeDictionary(SpecializationBuffs);
 			CollectionInitializer.InitializeDictionary(SpecializationThresholds);
 			CollectionInitializer.InitializeDictionary(SpecializationAmounts);
-
-			// Assign event handlers.
-			SpecializationAmounts.SpecializationCollectionUpdated += SpecializationAmounts_Updated;
 
 			UpdateSpecialization();
 		}
@@ -125,16 +120,13 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		{
 			UpdateThresholds();
 			UpdateBuffs();
-		}
 
-		public void SerializeSpecializationAmounts()
-		{
-			SpecializationAmountsString = Serialization.SerializeData(SpecializationAmounts);
-		}
-
-		public void DeserializeSpecializationAmounts()
-		{
-			Serialization.DeserializeData(SpecializationAmountsString, SpecializationAmounts);
+			// Assign event handlers.
+			// First remove the handler (if it's already been added) - otherwise it doesn't do anything.
+			// This is to make sure the same handler isn't added twice.
+			// https://stackoverflow.com/a/3598010/17360812
+			SpecializationAmounts.SpecializationCollectionUpdated -= SpecializationAmounts_Updated;
+			SpecializationAmounts.SpecializationCollectionUpdated += SpecializationAmounts_Updated;
 		}
 	}
 }

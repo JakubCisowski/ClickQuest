@@ -224,6 +224,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			selectedHero.LoadQuests();
 			selectedHero.ResumeBlessing();
 			selectedHero.ReequipArtifacts();
+			selectedHero.Specialization.UpdateSpecialization();
 			selectedHero.SessionStartDate = DateTime.Now;
 
 			selectedHero.RefreshHeroExperience();

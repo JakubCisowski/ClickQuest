@@ -7,6 +7,7 @@ using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
+using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Extensions.UserInterface;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 
@@ -133,7 +134,7 @@ namespace ClickQuest.Game.Core.Enemies
 			// [PRERELEASE] Display exp and loot for testing purposes.
 			InterfaceController.CurrentBossPage.TestRewardsBlock.Text = lootText;
 
-			User.Instance.CurrentHero.Specialization.SpecializationAmounts[SpecializationType.Dungeon]++;
+			GameController.UpdateSpecializationAmountAndUI(SpecializationType.Dungeon);
 
 			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.DungeonsCompleted, 1);
 		}

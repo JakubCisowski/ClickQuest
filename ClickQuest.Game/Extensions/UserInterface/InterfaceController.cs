@@ -1,8 +1,10 @@
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
+using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Pages;
 using ClickQuest.Game.UserInterface.Windows;
@@ -70,7 +72,11 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			try
 			{
 				dynamic p = GameAssets.CurrentPage;
-				p.StatsFrame.Refresh();
+
+				HeroStatsPage statsPage = p.StatsFrame.Content;
+				statsPage.RefreshAllDynamicStatsAndToolTips();
+
+				EquipmentPage equipmentPage = p.EquipmentFrame.Content;
 				p.EquipmentFrame.Refresh();
 			}
 			catch (RuntimeBinderException)
@@ -78,6 +84,52 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				// No stats frame on this page!
 				// Best solution according to:
 				// https://stackoverflow.com/a/5768449/14770235
+			}
+			catch (NullReferenceException)
+			{
+				// This might be necessary instead of the above with the new approach.
+			}
+		}
+
+		public static void RefreshCurrentEquipmentPanelTabOnCurrentPage()
+		{
+			try
+			{
+				dynamic p = GameAssets.CurrentPage;
+
+				EquipmentPage equipmentPage = p.EquipmentFrame.Content;
+				equipmentPage.RefreshCurrentEquipmentTab();
+			}
+			catch (RuntimeBinderException)
+			{
+				// No stats frame on this page!
+				// Best solution according to:
+				// https://stackoverflow.com/a/5768449/14770235
+			}
+			catch (NullReferenceException)
+			{
+				// This might be necessary instead of the above with the new approach.
+			}
+		}
+		
+		public static void UpdateSingleSpecializationInterface(SpecializationType specializationType)
+		{
+			try
+			{
+				dynamic p = GameAssets.CurrentPage;
+
+				HeroStatsPage statsPage = p.StatsFrame.Content;
+				statsPage.UpdateSingleSpecializationInterface(specializationType);
+			}
+			catch (RuntimeBinderException)
+			{
+				// No stats frame on this page!
+				// Best solution according to:
+				// https://stackoverflow.com/a/5768449/14770235
+			}
+			catch (NullReferenceException)
+			{
+				// This might be necessary instead of the above with the new approach.
 			}
 		}
 

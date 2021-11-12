@@ -97,7 +97,7 @@ namespace ClickQuest.Game.Core.Enemies
 
 			CheckForDungeonKeyDrop();
 
-			(GameAssets.CurrentPage as RegionPage).StatsFrame.Refresh();
+			((GameAssets.CurrentPage as RegionPage).StatsFrame.Content as HeroStatsPage).RefreshAllDynamicStatsAndToolTips();
 			CombatTimerController.UpdateAuraAttackSpeed();
 		}
 

@@ -21,7 +21,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			InitializeComponent();
 			ReloadScrollbarOffset();
-			UpdateEquipment();
+			UpdateAllEquipmentTabs();
 		}
 
 		private void ReloadScrollbarOffset()
@@ -65,7 +65,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 		}
 
-		public void UpdateEquipment()
+		public void UpdateAllEquipmentTabs()
 		{
 			// Refresh equipment.
 
@@ -81,6 +81,31 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			// Change ActiveTab to what was selected before.
 			EquipmentTabControl.SelectedIndex = _selectedTabIndex;
+		}
+
+		public void RefreshCurrentEquipmentTab()
+		{
+			switch (_selectedTabIndex)
+			{
+				// Materials
+				case 0:
+					MaterialsPanel.Children.Clear();
+					UpdateEquipmentTab(User.Instance.CurrentHero?.Materials, MaterialsPanel);
+					break;
+				
+				// Recipes
+				case 1:
+					RecipesPanel.Children.Clear();
+					UpdateEquipmentTab(User.Instance.CurrentHero?.Recipes, RecipesPanel);
+					break;
+				
+				// Artifacts
+				case 2:
+					ArtifactsPanel.Children.Clear();
+					UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
+					RefreshEquippedArtifacts();
+					break;
+			}
 		}
 
 		private void UpdateEquipmentTab<T>(List<T> specificEquipmentCollection, StackPanel equipmentTabPanel) where T : Item

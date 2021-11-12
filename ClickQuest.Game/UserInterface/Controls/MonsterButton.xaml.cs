@@ -61,8 +61,6 @@ namespace ClickQuest.Game.UserInterface.Controls
 			if (isNoQuestActive)
 			{
 				CombatController.HandleUserClickOnEnemy();
-
-				_regionPage.StatsFrame.Refresh();
 			}
 			else
 			{

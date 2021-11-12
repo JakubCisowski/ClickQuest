@@ -19,13 +19,7 @@ namespace ClickQuest.Game.Core.Items
 
 		public int ArtifactId { get; set; }
 
-		public Artifact Artifact
-		{
-			get
-			{
-				return GameAssets.Artifacts.FirstOrDefault(x => x.Id == ArtifactId);
-			}
-		}
+		public Artifact Artifact => GameAssets.Artifacts.FirstOrDefault(x => x.Id == ArtifactId);
 
 		public void UpdateRequirementsDescription()
 		{
@@ -72,12 +66,14 @@ namespace ClickQuest.Game.Core.Items
 			CollectionsController.AddItemToCollection(this, User.Instance.CurrentHero.Recipes, amount);
 
 			AddAchievementProgress();
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
+			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
 		}
 
 		public override void RemoveItem(int amount = 1)
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Recipes, amount);
+			
+			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
 		}
 	}
 }
