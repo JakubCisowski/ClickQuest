@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Alert Box" Height="160" Width="420" WindowStartupLocation="CenterOwner"
-        WindowStyle="None" ResizeMode="NoResize" Background="{StaticResource BrushGray4}" MouseDown="AlertBox_MouseDown">
+        Title="Alert Box" Height="160" Width="420" WindowStartupLocation="CenterOwner" AllowsTransparency="True"
+        WindowStyle="None" ResizeMode="NoResize" Background="Transparent" MouseDown="AlertBox_MouseDown">
 	<Grid>
-		<Border BorderThickness="3" BorderBrush="{StaticResource BrushAccent3}" CornerRadius="3">
+		<Border BorderThickness="3" BorderBrush="{StaticResource BrushAccent3}" CornerRadius="3" Background="{StaticResource BrushGray4}">
 			<StackPanel>
 				<!-- Alert text -->
 				<Grid Height="95">
