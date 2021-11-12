@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using ClickQuest.Game.Extensions.Collections;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
@@ -133,7 +134,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			if (specificEquipmentCollection != null)
 			{
-				ReorderItemsInList(ref specificEquipmentCollection);
+				specificEquipmentCollection = specificEquipmentCollection.ReorderItemsInList();
 
 				foreach (var item in specificEquipmentCollection)
 				{
@@ -161,15 +162,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 					equipmentTabPanel.Children.Add(border);
 				}
 			}
-		}
-
-		private void ReorderItemsInList<T>(ref List<T> specificEquipmentCollection) where T : Item
-		{
-			// 1. Items should be ordered based on (name / rarity / type / something else) - currently Name.
-			// 2. Equipped Artifacts should be at the top.
-
-			var orderedItemsList = specificEquipmentCollection.OrderByDescending(x => User.Instance.CurrentHero.EquippedArtifacts.Contains(x as Artifact)).ThenBy(y => y.Name).ToList();
-			specificEquipmentCollection = orderedItemsList;
 		}
 
 		private void ItemBorder_TryToEquip(object sender, MouseButtonEventArgs e)

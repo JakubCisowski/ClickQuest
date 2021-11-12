@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Core.Player;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 
 namespace ClickQuest.Game.Extensions.Collections
@@ -54,6 +56,20 @@ namespace ClickQuest.Game.Extensions.Collections
 			}
 
 			return i;
+		}
+
+		public static List<T> ReorderItemsInList<T>(this List<T> specificEquipmentCollection) where T : Item
+		{
+			// 1. Items should be ordered based on (name / rarity / type / something else) - currently Name.
+			var orderedItemsList = specificEquipmentCollection.OrderBy(x => x.Name).ToList();
+
+			if (typeof(T) == typeof(Artifact) && User.Instance.CurrentHero != null)
+			{
+				// 2. Equipped Artifacts should be at the top.
+				orderedItemsList = orderedItemsList.OrderByDescending(x => User.Instance.CurrentHero.EquippedArtifacts.Contains(x as Artifact)).ToList();
+			}
+			
+			return orderedItemsList;
 		}
 	}
 }

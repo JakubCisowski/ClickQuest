@@ -7,6 +7,7 @@ using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
@@ -24,9 +25,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 		public void UpdateBlacksmithItems()
 		{
 			// Refresh list of items.
-			ItemsListViewMeltMaterials.ItemsSource = User.Instance.CurrentHero.Materials;
-			ItemsListViewMeltArtifacts.ItemsSource = User.Instance.CurrentHero.Artifacts;
-			ItemsListViewCraft.ItemsSource = User.Instance.CurrentHero.Recipes;
+			ItemsListViewMeltMaterials.ItemsSource = User.Instance.CurrentHero.Materials.ReorderItemsInList();
+			ItemsListViewMeltArtifacts.ItemsSource = User.Instance.CurrentHero.Artifacts.ReorderItemsInList();
+			ItemsListViewCraft.ItemsSource = User.Instance.CurrentHero.Recipes.ReorderItemsInList();
 
 			ItemsListViewMeltMaterials.Items.Refresh();
 			ItemsListViewMeltArtifacts.Items.Refresh();

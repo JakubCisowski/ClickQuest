@@ -11,6 +11,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.Gameplay;
 
 namespace ClickQuest.Game.UserInterface.Pages
@@ -27,8 +28,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		public void UpdateShop()
 		{
-			ItemsListViewSellMaterials.ItemsSource = User.Instance.CurrentHero?.Materials;
-			ItemsListViewSellRecipes.ItemsSource = User.Instance.CurrentHero?.Recipes;
+			ItemsListViewSellMaterials.ItemsSource = User.Instance.CurrentHero?.Materials.ReorderItemsInList();
+			ItemsListViewSellRecipes.ItemsSource = User.Instance.CurrentHero?.Recipes.ReorderItemsInList();
 			
 			if (User.Instance.CurrentHero != null)
 			{
