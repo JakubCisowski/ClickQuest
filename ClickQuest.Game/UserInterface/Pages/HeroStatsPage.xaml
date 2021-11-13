@@ -109,7 +109,7 @@
                 </StackPanel>
 
                 <!-- Click damage value (binding) -->
-                <TextBlock x:Name="ClickDamageBlock" Grid.Row="0" Grid.Column="2" FontSize="18" Margin="3" VerticalAlignment="Center" Text="{Binding Path=ClickDamage}" />
+				<TextBlock x:Name="ClickDamageBlock" Grid.Row="0" Grid.Column="2" FontSize="18" Margin="3" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding Path=ClickDamage, StringFormat='\{0\}'}" />
 
                 <!-- Crit panel -->
                 <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
@@ -143,7 +143,7 @@
                 </StackPanel>
 
                 <!-- Crit value (binding) -->
-                <TextBlock x:Name="CritChanceBlock" Grid.Row="1" Grid.Column="2" Text="{Binding Path=CritChanceText, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" />
+				<TextBlock x:Name="CritChanceBlock" Grid.Row="1" Grid.Column="2" Text="{Binding Path=CritChanceText, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" TextAlignment="Right" />
 
                 <!-- Poison damage panel -->
                 <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
@@ -176,9 +176,9 @@
                 </StackPanel>
 
                 <!-- Poison damage value (binding) -->
-                <TextBlock x:Name="PoisonDamageBlock" Grid.Row="2" Grid.Column="2" Text="{Binding Path=PoisonDamage}" FontSize="18" Margin="3" VerticalAlignment="Center" />
+				<TextBlock x:Name="PoisonDamageBlock" Grid.Row="2" Grid.Column="2" Text="{Binding Path=PoisonDamage, StringFormat='\{0\}'}" FontSize="18" Margin="3" VerticalAlignment="Center" TextAlignment="Right" />
 
-                <!-- Aura panel -->
+				<!-- Aura panel -->
                 <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
                     <!-- Aura ToolTip -->
                     <StackPanel.ToolTip>
@@ -209,7 +209,7 @@
                 </StackPanel>
 
                 <!-- Aura value (binding) -->
-                <TextBlock x:Name="AuraDamageBlock" Grid.Row="3" Grid.Column="2" Text="{Binding Path=AuraDpsText, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" />
+				<TextBlock x:Name="AuraDamageBlock" Grid.Row="3" Grid.Column="2" Text="{Binding Path=AuraDpsText, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" TextAlignment="Right" />
             </Grid>
 
             <Separator Height="2" Width="200" Margin="10" />
