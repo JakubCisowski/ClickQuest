@@ -232,9 +232,12 @@ namespace ClickQuest.Game.Core.Heroes
 
 		public void RemoveBlessing()
 		{
-			User.Instance.CurrentHero.Blessing?.DisableBuff();
-			User.Instance.CurrentHero.Blessing = null;
-			InterfaceController.RefreshBlessingInterfaceOnCurrentPage();
+			if (User.Instance.CurrentHero.Blessing is not null)
+			{
+				User.Instance.CurrentHero.Blessing.DisableBuff();
+				InterfaceController.RefreshBlessingInterfaceOnCurrentPage(User.Instance.CurrentHero.Blessing.Type);
+				User.Instance.CurrentHero.Blessing = null;
+			}
 		}
 
 		public void ResumeQuest()

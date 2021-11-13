@@ -154,7 +154,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			}
 		}
 
-		public static void RefreshBlessingInterfaceOnCurrentPage()
+		public static void RefreshBlessingInterfaceOnCurrentPage(BlessingType blessingType)
 		{
 			try
 			{
@@ -162,6 +162,25 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 				HeroStatsPage statsPage = p.StatsFrame.Content;
 				statsPage.UpdateBlessingTimer();
+				
+				switch (blessingType)
+				{
+					case BlessingType.ClickDamage:
+						statsPage.GenerateStatValueDamageToolTip();
+						break;
+					
+					case BlessingType.CritChance or BlessingType.CritDamage:
+						statsPage.GenerateStatValueCritToolTip();
+						break;
+					
+					case BlessingType.PoisonDamage:
+						statsPage.GenerateStatValuePoisonToolTip();
+						break;
+					
+					case BlessingType.AuraDamage or BlessingType.AuraSpeed:
+						statsPage.GenerateStatValueAuraToolTip();
+						break;
+				}
 			}
 			catch (RuntimeBinderException)
 			{

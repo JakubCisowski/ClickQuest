@@ -375,7 +375,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			HeroNameBlock.ToolTip = toolTip;
 		}
 
-		private void GenerateStatValueDamageToolTip()
+		public void GenerateStatValueDamageToolTip()
 		{
 			var toolTipDamage = new ToolTip()
 			{
@@ -491,7 +491,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			ClickDamageBlock.ToolTip = toolTipDamage;
 		}
 
-		private void GenerateStatValueCritToolTip()
+		public void GenerateStatValueCritToolTip()
 		{
 			var toolTipCrit = new ToolTip()
 			{
@@ -694,7 +694,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			CritChanceBlock.ToolTip = toolTipCrit;
 		}
 
-		private void GenerateStatValuePoisonToolTip()
+		public void GenerateStatValuePoisonToolTip()
 		{
 			var toolTipPoison = new ToolTip()
 			{
@@ -821,7 +821,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			PoisonDamageBlock.ToolTip = toolTipPoison;
 		}
 
-		private void GenerateStatValueAuraToolTip()
+		public void GenerateStatValueAuraToolTip()
 		{
 			var toolTipAura = new ToolTip()
 			{
