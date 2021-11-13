@@ -157,7 +157,7 @@
 									<!-- Melt button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Melt" Click="MeltButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}"/>
+											<Button Content="Melt" Click="MeltButton_Click" Initialized="MeltButton_OnInitialized" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}"/>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -265,7 +265,7 @@
 									<!-- Melt button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Melt" Click="MeltButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}"/>
+											<Button Content="Melt" Click="MeltButton_Click" Initialized="MeltButton_OnInitialized" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}"/>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -302,7 +302,7 @@
 						<ListView.View>
 							<GridView>
 								<!-- Name column-->
-								<GridViewColumn Header="Name" Width="360" DisplayMemberBinding="{Binding Name}">
+								<GridViewColumn Header="Name" Width="320" DisplayMemberBinding="{Binding Name}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
 											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
@@ -316,7 +316,7 @@
 								</GridViewColumn>
 
 								<!-- Rarity column-->
-								<GridViewColumn Header="Rarity" Width="140" DisplayMemberBinding="{Binding Rarity}">
+								<GridViewColumn Header="Rarity" Width="100" DisplayMemberBinding="{Binding Rarity}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
 											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
@@ -330,7 +330,7 @@
 								</GridViewColumn>
 
 								<!-- Craft with materials column-->
-								<GridViewColumn Width="120">
+								<GridViewColumn Width="100">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
 											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
@@ -344,7 +344,7 @@
 									<!-- Craft with materials button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Click="CraftMaterialButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}">
+											<Button Click="CraftMaterialButton_Click" Initialized="CraftMaterialButton_OnInitialized" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}">
 												<Button.Content>
 													<StackPanel Orientation="Horizontal">
 														<TextBlock Text="Craft" FontSize="17" Margin="2,0,0,0" />
@@ -357,7 +357,7 @@
 								</GridViewColumn>
 
 								<!-- Craft with ingots column-->
-								<GridViewColumn Width="150">
+								<GridViewColumn Width="100">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
 											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
@@ -372,7 +372,7 @@
 									<!-- Craft with ingots column-->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Click="CraftIngotButton_Click" CommandParameter="{Binding}">
+											<Button Click="CraftIngotButton_Click" Initialized="CraftIngotButton_OnInitialized" CommandParameter="{Binding}">
 												<Button.Content>
 													<StackPanel Orientation="Horizontal">
 														<TextBlock Text="Craft" FontSize="17" Margin="2,0,0,0" />

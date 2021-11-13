@@ -131,7 +131,7 @@
 									<!-- Buy button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Buy" Click="BuyButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}"/>
+											<Button Content="Buy" Click="BuyButton_Click" Initialized="BuyButton_OnInitialized" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}"/>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>

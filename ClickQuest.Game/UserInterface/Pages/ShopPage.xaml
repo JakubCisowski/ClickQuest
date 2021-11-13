@@ -157,7 +157,7 @@
 									<!-- Sell button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Sell" Click="SellButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}"/>
+											<Button Content="Sell" Click="SellButton_Click" Initialized="SellButton_OnInitialized" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}"/>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -265,7 +265,7 @@
 									<!-- Sell button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Sell" Click="SellButton_Click" CommandParameter="{Binding}"  Background="{StaticResource BrushGray1}"/>
+											<Button Content="Sell" Click="SellButton_Click" Initialized="SellButton_OnInitialized" CommandParameter="{Binding}"  Background="{StaticResource BrushGray1}"/>
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -358,7 +358,7 @@
 									<!-- Buy button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Buy" Click="BuyButton_Click" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}" />
+											<Button Content="Buy" Click="BuyButton_Click" Initialized="BuyButton_OnInitialized" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}" />
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>

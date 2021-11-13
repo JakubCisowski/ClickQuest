@@ -1,12 +1,16 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.Extensions.UserInterface.ToolTips;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Windows;
 
@@ -79,6 +83,33 @@ namespace ClickQuest.Game.UserInterface.Pages
 			else
 			{
 				AlertBox.Show($"You do not have enough gold to buy this blessing.\nIt costs {blessingBlueprint.Value} gold.\nYou can get more gold by completing quests and selling loot from monsters and bosses.", MessageBoxButton.OK);
+			}
+		}
+
+		private void BuyButton_OnInitialized(object sender, EventArgs e)
+		{
+			var button = sender as Button;
+
+			if (button?.ToolTip == null)
+			{
+				var toolTip = new ToolTip()
+				{
+					Style = (Style)this.FindResource("ToolTipSimple")
+				};
+
+				GeneralToolTipController.SetToolTipDelayAndDuration(button);
+
+				var toolTipBlock = new TextBlock()
+				{
+					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+				};
+
+				toolTipBlock.Inlines.Add(new Run("Buy for "));
+				toolTipBlock.Inlines.Add(new Run($"{(button.CommandParameter as Blessing).Value} gold"){FontFamily=(FontFamily)this.FindResource("FontRegularDemiBold"),Foreground=(SolidColorBrush)this.FindResource("BrushGold")});
+
+				toolTip.Content = toolTipBlock;
+
+				button.ToolTip = toolTip;
 			}
 		}
 

@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Interfaces;
@@ -10,6 +13,7 @@ using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.Extensions.UserInterface.ToolTips;
 using ClickQuest.Game.UserInterface.Controls;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 
@@ -66,15 +70,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 						continue;
 					}
 					
-					ingotAmountsDescription += $"- {ingotAmounts[i]}x {(Rarity)i} Ingots";
-
-					if (i<5)
-					{
-						ingotAmountsDescription += "\n";
-					}
+					ingotAmountsDescription += $"\n{ingotAmounts[i]}x {(Rarity)i} Ingots";
 				}
 
-				var result = AlertBox.Show($"Are you sure you want to melt {artifact.Name}?\nThis action will destroy this item and create: \n {ingotAmountsDescription}", MessageBoxButton.YesNo);
+				var result = AlertBox.Show($"Are you sure you want to melt {artifact.Name}?\nThis action will destroy this item and create: {ingotAmountsDescription}", MessageBoxButton.YesNo);
 
 				if (result == MessageBoxResult.No)
 				{
@@ -340,6 +339,134 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var recipe = b.CommandParameter as Recipe;
 
 			HandleCrafting<Ingot>(recipe);
+		}
+
+		private void MeltButton_OnInitialized(object sender, EventArgs e)
+		{
+			var button = sender as Button;
+
+			if (button?.ToolTip == null)
+			{
+				var toolTipBlock = new TextBlock()
+				{
+					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+				};
+
+				if (button.CommandParameter is Material material)
+				{
+					toolTipBlock.Inlines.Add(new Run("Melt for at least"));
+					toolTipBlock.Inlines.Add(new LineBreak());
+
+					toolTipBlock.Inlines.Add(new Run($"{Material.BaseMeltingIngotBonus}x {material.RarityString} Ingots") {FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold"), Foreground = ColorsController.GetRarityColor(material.Rarity)});
+					toolTipBlock.Inlines.Add(new LineBreak());
+
+					toolTipBlock.Inlines.Add(new Run("Chance for more through Melter specialization"));
+				}
+				else
+				{
+					var ingotAmounts = CalculateIngotAmountsWhenMeltingArtifact(button.CommandParameter as Artifact);
+
+					toolTipBlock.Inlines.Add(new Run("Melt for:"));
+
+					for (int i=0;i<6;i++)
+					{
+						if (ingotAmounts[i] == 0)
+						{
+							continue;
+						}
+						
+						toolTipBlock.Inlines.Add(new LineBreak());
+						toolTipBlock.Inlines.Add(new Run($"{ingotAmounts[i]}x {(Rarity)i} Ingots"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold"), Foreground = ColorsController.GetRarityColor((Rarity)i)});
+					}
+				}
+
+				var toolTip = new ToolTip()
+				{
+					Style = (Style)this.FindResource("ToolTipSimple")
+				};
+
+				GeneralToolTipController.SetToolTipDelayAndDuration(button);
+
+				toolTip.Content = toolTipBlock;
+
+				button.ToolTip = toolTip;
+			}
+		}
+
+		private void CraftMaterialButton_OnInitialized(object sender, EventArgs e)
+		{
+			var button = sender as Button;
+
+			if (button?.ToolTip == null)
+			{
+				var toolTipBlock = new TextBlock()
+				{
+					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+				};
+
+				toolTipBlock.Inlines.Add(new Run("Craft with:"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+
+				var listOfRuns = ItemToolTipController.GenerateRecipeIngredientsRuns(button.CommandParameter as Recipe);
+
+				foreach (var run in listOfRuns)
+				{
+					run.FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold");
+					toolTipBlock.Inlines.Add(run);
+				}
+
+				var toolTip = new ToolTip()
+				{
+					Style = (Style)this.FindResource("ToolTipSimple")
+				};
+
+				GeneralToolTipController.SetToolTipDelayAndDuration(button);
+
+				toolTip.Content = toolTipBlock;
+
+				button.ToolTip = toolTip;
+			}
+		}
+
+		private void CraftIngotButton_OnInitialized(object sender, EventArgs e)
+		{
+			var button = sender as Button;
+
+			if (button?.ToolTip == null)
+			{
+				var toolTipBlock = new TextBlock()
+				{
+					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+				};
+
+				toolTipBlock.Inlines.Add(new Run("Craft with:"));
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(new Run("Ingots:"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold"), FontSize=(double)this.FindResource("FontSizeToolTipIngredientText")});
+
+				var ingotAmounts = CalculateIngotAmountsWhenCraftingArtifact((button.CommandParameter as Recipe).Artifact);
+
+				for (int i=0;i<6;i++)
+				{
+					if (ingotAmounts[i] == 0)
+					{
+						continue;
+					}
+
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new Run($"{ingotAmounts[i]}x {(Rarity)i} Ingots"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold"), Foreground = ColorsController.GetRarityColor((Rarity)i)});
+				}
+
+				var toolTip = new ToolTip()
+				{
+					Style = (Style)this.FindResource("ToolTipSimple")
+				};
+
+				GeneralToolTipController.SetToolTipDelayAndDuration(button);
+
+				toolTip.Content = toolTipBlock;
+
+				button.ToolTip = toolTip;
+			}
 		}
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)

@@ -13,6 +13,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.Gameplay;
+using ClickQuest.Game.Extensions.UserInterface.ToolTips;
+using System.Windows.Documents;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
@@ -120,6 +122,71 @@ namespace ClickQuest.Game.UserInterface.Pages
 			else
 			{
 				AlertBox.Show($"You do not have enough gold to buy this item.\nIt costs {recipe.Value} gold.\nYou can get more gold by completing quests and selling loot from monsters and bosses.", MessageBoxButton.OK);
+			}
+		}
+
+		private void SellButton_OnInitialized(object sender, EventArgs e)
+		{
+			var button = sender as Button;
+
+			if (button?.ToolTip == null)
+			{
+				int itemSellValue = 0;
+
+				if (button.CommandParameter is Material material)
+				{
+					itemSellValue = (int)Math.Ceiling(material.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+				}
+				else
+				{
+					itemSellValue = (button.CommandParameter as Item).Value;
+				}
+
+				var toolTip = new ToolTip()
+				{
+					Style = (Style)this.FindResource("ToolTipSimple")
+				};
+
+				GeneralToolTipController.SetToolTipDelayAndDuration(button);
+
+				var toolTipBlock = new TextBlock()
+				{
+					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+				};
+
+				toolTipBlock.Inlines.Add(new Run("Sell for "));
+				toolTipBlock.Inlines.Add(new Run($"{itemSellValue} gold"){FontFamily=(FontFamily)this.FindResource("FontRegularDemiBold"),Foreground=(SolidColorBrush)this.FindResource("BrushGold")});
+
+				toolTip.Content = toolTipBlock;
+
+				button.ToolTip = toolTip;
+			}
+		}
+
+		private void BuyButton_OnInitialized(object sender, EventArgs e)
+		{
+			var button = sender as Button;
+
+			if (button?.ToolTip == null)
+			{
+				var toolTip = new ToolTip()
+				{
+					Style = (Style)this.FindResource("ToolTipSimple")
+				};
+
+				GeneralToolTipController.SetToolTipDelayAndDuration(button);
+
+				var toolTipBlock = new TextBlock()
+				{
+					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+				};
+
+				toolTipBlock.Inlines.Add(new Run("Buy for "));
+				toolTipBlock.Inlines.Add(new Run($"{(button.CommandParameter as Item).Value} gold"){FontFamily=(FontFamily)this.FindResource("FontRegularDemiBold"),Foreground=(SolidColorBrush)this.FindResource("BrushGold")});
+
+				toolTip.Content = toolTipBlock;
+
+				button.ToolTip = toolTip;
 			}
 		}
 	}
