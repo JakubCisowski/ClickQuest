@@ -16,7 +16,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type TabItem}">
-					<Grid>
+					<Grid Margin="0,0,0,2">
 						<Border Name="Border" Margin="0,0,0,0" Background="Transparent"
 						        BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="5">
 							<ContentPresenter x:Name="ContentSite" VerticalAlignment="Center"
@@ -30,7 +30,7 @@
 						<Trigger Property="IsSelected" Value="True">
 							<Setter Property="Panel.ZIndex" Value="100" />
 							<Setter TargetName="Border" Property="Background" Value="{StaticResource BrushAccent3}" />
-							<Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
+							<Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,1" />
 						</Trigger>
 						<Trigger Property="IsSelected" Value="False">
 							<Setter TargetName="Border" Property="Background" Value="{StaticResource BrushGray1}"/>

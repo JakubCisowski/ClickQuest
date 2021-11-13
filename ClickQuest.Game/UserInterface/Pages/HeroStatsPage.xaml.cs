@@ -49,8 +49,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 			// (so only when refreshing HeroStatsPage - upon selecting a hero, creating one or loading the game).
 			// We do not need to update them in any other situation.
 			UpdateGoldInterface();
-			UpdateIngotOrDungeonKeyInterface(User.Instance.Ingots);
-			UpdateIngotOrDungeonKeyInterface(User.Instance.DungeonKeys);
+			UpdateIngotInterface(User.Instance.Ingots);
+			UpdateDungeonKeyInterface(User.Instance.DungeonKeys);
 			
 			RefreshAllDynamicStatsAndToolTips();
 		}
@@ -109,24 +109,24 @@ namespace ClickQuest.Game.UserInterface.Pages
 			return goldInfoToolTip;
 		}
 
-		private void UpdateIngotOrDungeonKeyInterface<T>(List<T> currencyList) where T : Item
+		private void UpdateIngotInterface(List<Ingot> currencyList)
 		{
 			for (int currencyRarityValue = 0; currencyRarityValue < currencyList.Count; currencyRarityValue++)
 			{
 				var currencyPanel = new StackPanel
 				{
 					Orientation = Orientation.Horizontal,
-					Margin = new Thickness(50, 0, 0, 0),
+					Margin = new Thickness(60, 0, 0, 0),
 					Background = new SolidColorBrush(Colors.Transparent)
 				};
 
 				GeneralToolTipController.SetToolTipDelayAndDuration(currencyPanel);
 
-				currencyPanel.Children.Add(GenerateCurrencyIcon<T>(currencyRarityValue));
+				currencyPanel.Children.Add(GenerateCurrencyIcon<Ingot>(currencyRarityValue));
 
 				var currencyAmountTextBlock = new TextBlock
 				{
-					Name = (typeof(T) == typeof(Ingot) ? "Ingot" : "DungeonKey") + currencyRarityValue,
+					Name = "Ingot" + currencyRarityValue,
 					FontSize = 18,
 					VerticalAlignment = VerticalAlignment.Center
 				};
@@ -141,11 +141,50 @@ namespace ClickQuest.Game.UserInterface.Pages
 				currencyPanel.Children.Add(currencyAmountTextBlock);
 				IngotKeyGrid.Children.Add(currencyPanel);
 
-				int column = typeof(T) == typeof(Ingot) ? 0 : 1;
-				Grid.SetColumn(currencyPanel, column);
+				Grid.SetColumn(currencyPanel, 0);
 				Grid.SetRow(currencyPanel, currencyRarityValue);
 
-				currencyPanel.ToolTip = ItemToolTipController.GenerateCurrencyToolTip<T>(currencyRarityValue);
+				currencyPanel.ToolTip = ItemToolTipController.GenerateCurrencyToolTip<Ingot>(currencyRarityValue);
+			}
+		}
+
+		private void UpdateDungeonKeyInterface(List<DungeonKey> currencyList)
+		{
+			for (int currencyRarityValue = 0; currencyRarityValue < currencyList.Count; currencyRarityValue++)
+			{
+				var currencyPanel = new StackPanel
+				{
+					Orientation = Orientation.Horizontal,
+					Margin = new Thickness(0, 0, 60, 0),
+					HorizontalAlignment = HorizontalAlignment.Right,
+					Background = new SolidColorBrush(Colors.Transparent)
+				};
+
+				GeneralToolTipController.SetToolTipDelayAndDuration(currencyPanel);
+
+				var currencyAmountTextBlock = new TextBlock
+				{
+					Name =  "Ingot" + currencyRarityValue,
+					FontSize = 18,
+					VerticalAlignment = VerticalAlignment.Center
+				};
+
+				var currencyAmountBinding = new Binding("Quantity")
+				{
+					Source = currencyList[currencyRarityValue],
+					StringFormat = "{0}   "
+				};
+				currencyAmountTextBlock.SetBinding(TextBlock.TextProperty, currencyAmountBinding);
+
+				currencyPanel.Children.Add(currencyAmountTextBlock);
+				currencyPanel.Children.Add(GenerateCurrencyIcon<DungeonKey>(currencyRarityValue));
+
+				IngotKeyGrid.Children.Add(currencyPanel);
+
+				Grid.SetColumn(currencyPanel, 1);
+				Grid.SetRow(currencyPanel, currencyRarityValue);
+
+				currencyPanel.ToolTip = ItemToolTipController.GenerateCurrencyToolTip<DungeonKey>(currencyRarityValue);
 			}
 		}
 
@@ -205,10 +244,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			var toolTip = HeroStatsToolTipController.GenerateSpecizaltionToolTip(specializationType, nextUpgrade);
 
-			var nameBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationType.ToString() + "Name");
 			var buffBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationType.ToString() + "Buff");
 
-			nameBlock.ToolTip = toolTip;
 			buffBlock.ToolTip = toolTip;
 		}
 
@@ -255,33 +292,33 @@ namespace ClickQuest.Game.UserInterface.Pages
 				switch (specializationType)
 				{
 					case SpecializationType.Blessing:
-						buffBlock.Inlines.Add(new Run(" → Blessing duration +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing] + "s"));
+						buffBlock.Inlines.Add(new Run("Blessing duration +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing] + "s"));
 						break;
 					
 					case SpecializationType.Clicking:
-						buffBlock.Inlines.Add(new Run(" → On-hit damage +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking]));
+						buffBlock.Inlines.Add(new Run("On-hit damage +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking]));
 						break;
 					
 					case SpecializationType.Crafting:
-						buffBlock.Inlines.Add(" → Can craft ");
+						buffBlock.Inlines.Add("Can craft ");
 						buffBlock.Inlines.Add(new Run(User.Instance.CurrentHero.Specialization.SpecCraftingText) { Foreground = ColorsController.GetRarityColor((Rarity)User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting]) });
 						buffBlock.Inlines.Add(" recipes");
 						break;
 					
 					case SpecializationType.Trading:
-						buffBlock.Inlines.Add(new Run(" → Shop size & ratio +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+						buffBlock.Inlines.Add(new Run("Shop size & ratio +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
 						break;
 					
 					case SpecializationType.Melting:
-						buffBlock.Inlines.Add(new Run(" → Extra ingots +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%"));
+						buffBlock.Inlines.Add(new Run("Extra ingots +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%"));
 						break;
 					
 					case SpecializationType.Questing:
-						buffBlock.Inlines.Add(new Run(" → Quest time -" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Questing] + "%"));
+						buffBlock.Inlines.Add(new Run("Quest time -" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Questing] + "%"));
 						break;
 					
 					case SpecializationType.Dungeon:
-						buffBlock.Inlines.Add(new Run(" → Bossfight timer +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon] + "s"));
+						buffBlock.Inlines.Add(new Run("Bossfight timer +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon] + "s"));
 						break;
 				}
 				
@@ -304,58 +341,18 @@ namespace ClickQuest.Game.UserInterface.Pages
 			for (int i = 0; i < specializationTypes.Length; i++)
 			{
 				var specializationType = (SpecializationType)specializationTypes.GetValue(i);
-				
-				var nameBlock = new TextBlock
-				{
-					Name = "Spec" + specializationType + "Name",
-					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
-				};
 
 				var block = new TextBlock
 				{
 					Name = "Spec" + specializationType + "Buff",
 					FontSize = 18,
-					Margin = new Thickness(0, 1, 0, 1)
+					Margin = new Thickness(0, 1, 0, 1),
+					HorizontalAlignment = HorizontalAlignment.Center,
+					TextAlignment = TextAlignment.Center
 				};
 
-				switch (specializationType)
-				{
-					case SpecializationType.Blessing:
-						nameBlock.Text = "Prayer";
-						break;
-
-					case SpecializationType.Clicking:
-						nameBlock.Text = "Clicker";
-						break;
-
-					case SpecializationType.Crafting:
-						nameBlock.Text = "Craftsman";
-						break;
-
-					case SpecializationType.Trading:
-						nameBlock.Text = "Tradesman";
-						break;
-
-					case SpecializationType.Melting:
-						nameBlock.Text = "Melter";
-						break;
-
-					case SpecializationType.Questing:
-						nameBlock.Text = "Adventurer";
-						break;
-
-					case SpecializationType.Dungeon:
-						nameBlock.Text = "Daredevil";
-						break;
-				}
-
-				Grid.SetRow(nameBlock, i);
 				Grid.SetRow(block, i);
-				Grid.SetColumn(nameBlock, 0);
-				Grid.SetColumn(block, 1);
 
-				SpecializationsGrid.Children.Add(nameBlock);
 				SpecializationsGrid.Children.Add(block);
 				
 				UpdateSingleSpecializationInterface(specializationType);

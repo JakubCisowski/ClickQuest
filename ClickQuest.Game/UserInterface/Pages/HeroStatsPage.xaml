@@ -70,11 +70,13 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <!-- Click damage panel-->
-                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
                     <!-- Click damage info ToolTip -->
                     <StackPanel.ToolTip>
                         <ToolTip BorderBrush="{StaticResource BrushDamageTypeNormal}">
@@ -107,10 +109,10 @@
                 </StackPanel>
 
                 <!-- Click damage value (binding) -->
-                <TextBlock x:Name="ClickDamageBlock" Grid.Row="0" Grid.Column="1" FontSize="18" Margin="3" VerticalAlignment="Center" Text="{Binding Path=ClickDamage}" />
+                <TextBlock x:Name="ClickDamageBlock" Grid.Row="0" Grid.Column="2" FontSize="18" Margin="3" VerticalAlignment="Center" Text="{Binding Path=ClickDamage}" />
 
                 <!-- Crit panel -->
-                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
                     <!-- Crit info ToolTip -->
                     <StackPanel.ToolTip>
                         <ToolTip BorderBrush="{StaticResource BrushDamageTypeCritical}" BorderThickness="1">
@@ -141,10 +143,10 @@
                 </StackPanel>
 
                 <!-- Crit value (binding) -->
-                <TextBlock x:Name="CritChanceBlock" Grid.Row="1" Grid.Column="1" Text="{Binding Path=CritChanceText, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" />
+                <TextBlock x:Name="CritChanceBlock" Grid.Row="1" Grid.Column="2" Text="{Binding Path=CritChanceText, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" />
 
                 <!-- Poison damage panel -->
-                <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
                     <!-- Poison damage ToolTip -->
                     <StackPanel.ToolTip>
                         <ToolTip BorderBrush="{StaticResource BrushDamageTypePoison}" BorderThickness="1">
@@ -174,10 +176,10 @@
                 </StackPanel>
 
                 <!-- Poison damage value (binding) -->
-                <TextBlock x:Name="PoisonDamageBlock" Grid.Row="2" Grid.Column="1" Text="{Binding Path=PoisonDamage}" FontSize="18" Margin="3" VerticalAlignment="Center" />
+                <TextBlock x:Name="PoisonDamageBlock" Grid.Row="2" Grid.Column="2" Text="{Binding Path=PoisonDamage}" FontSize="18" Margin="3" VerticalAlignment="Center" />
 
                 <!-- Aura panel -->
-                <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
                     <!-- Aura ToolTip -->
                     <StackPanel.ToolTip>
                         <ToolTip BorderBrush="{StaticResource BrushDamageTypeAura}" BorderThickness="1">
@@ -207,7 +209,7 @@
                 </StackPanel>
 
                 <!-- Aura value (binding) -->
-                <TextBlock x:Name="AuraDamageBlock" Grid.Row="3" Grid.Column="1" Text="{Binding Path=AuraDpsText, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" />
+                <TextBlock x:Name="AuraDamageBlock" Grid.Row="3" Grid.Column="2" Text="{Binding Path=AuraDpsText, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" />
             </Grid>
 
             <Separator Height="2" Width="200" Margin="10" />
@@ -259,11 +261,6 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
                 <!-- [Here specializations info is dyanmically generated] -->
             </Grid>
 
