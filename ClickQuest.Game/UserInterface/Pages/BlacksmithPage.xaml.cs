@@ -94,8 +94,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			var ingot = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == meltedMaterial.Rarity);
 			ingot.AddItem(ingotAmount);
-
-			ingot.AddAchievementProgress(ingotAmount);
 		}
 
 		public void MeltArtifact(Artifact meltedArtifact)
@@ -108,7 +106,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				var ingot = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == (Rarity)i);
 				ingot.AddItem(ingotAmounts[i]);
-				ingot.AddAchievementProgress(ingotAmounts[i]);
 			}
 		}
 

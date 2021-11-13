@@ -41,6 +41,9 @@ namespace ClickQuest.Game.Core.Player
 		{
 			Serialization.DeserializeData(AchievementCollectionString, NumericAchievementCollection);
 			TotalTimePlayed = TimeSpan.Parse(TotalTimePlayedString);
+			
+			// After deserializing, refresh the UI.
+			AchievementsWindow.Instance.RefreshAchievementsPanel();
 		}
 
 		public void IncreaseAchievementValue(NumericAchievementType achievementType, long value)

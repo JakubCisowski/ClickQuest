@@ -179,28 +179,24 @@ namespace ClickQuest.Game.Core.Adventures
 			{
 				var material = GameAssets.Materials.FirstOrDefault(x => x.Id == materialRewardPattern.QuestRewardId);
 				material.AddItem(materialRewardPattern.Quantity);
-				material.AddAchievementProgress();
 			}
 
 			foreach (var artifactRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Artifact))
 			{
 				var artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == artifactRewardPattern.QuestRewardId);
 				artifact.AddItem(artifactRewardPattern.Quantity);
-				artifact.AddAchievementProgress();
 			}
 
 			foreach (var recipeRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Recipe))
 			{
 				var recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == recipeRewardPattern.QuestRewardId);
 				recipe.AddItem(recipeRewardPattern.Quantity);
-				recipe.AddAchievementProgress();
 			}
 
 			foreach (var ingotRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Ingot))
 			{
 				var ingot = GameAssets.Ingots.FirstOrDefault(x => x.Id == ingotRewardPattern.QuestRewardId);
 				ingot.AddItem(ingotRewardPattern.Quantity);
-				ingot.AddAchievementProgress();
 			}
 
 			foreach (var blessingRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Blessing))
