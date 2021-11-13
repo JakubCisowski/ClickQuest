@@ -11,6 +11,7 @@ using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -51,7 +52,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 			UpdateGoldInterface();
 			UpdateIngotInterface(User.Instance.Ingots);
 			UpdateDungeonKeyInterface(User.Instance.DungeonKeys);
-			
+			GenerateHeroInfoToolTip();
+
 			RefreshAllDynamicStatsAndToolTips();
 		}
 
@@ -63,7 +65,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 			UpdateQuestTimer();
 			UpdateBlessingTimer();
 			UpdateAllSpecializationsInterface();
-			GenerateHeroInfoToolTip();
 			GenerateStatValueAuraToolTip();
 			GenerateStatValueDamageToolTip();
 			GenerateStatValuePoisonToolTip();
@@ -85,7 +86,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			};
 
 			GoldBlock.SetBinding(TextBlock.TextProperty, goldAmountBinding);
-
+			
 			GoldPanel.ToolTip = GenerateGoldToolTip();
 		}
 
@@ -101,7 +102,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var toolTipTextBlock = new TextBlock
 			{
 				Style = (Style)FindResource("ToolTipTextBlockBase"),
-				Text = "Gold"
+				Text = "Gold",
+				FontFamily = (FontFamily)FindResource("FontRegularDemiBold"),
+				Foreground = (SolidColorBrush)FindResource("BrushGold")
 			};
 
 			goldInfoToolTip.Content = toolTipTextBlock;
@@ -269,6 +272,42 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 		}
 
+		public string CringeStringToFillWidth(string input)
+		{
+			const int MaxChars = 28;
+			StringBuilder output = new StringBuilder();
+			int difference = MaxChars - input.Length;
+
+			if (difference > 0)
+			{
+				int wordsCount = input.Count(c => c == ' ') + 1;
+
+				int spacesPerWord = difference / wordsCount;
+
+				for (int i = 0; i < input.Length; i++)
+				{
+					if (input[i] == ' ')
+					{
+						// Add the space and spacesPerWord more.
+						// If this is the last space in input, add the remaining spaces.
+						output.Append(' ', spacesPerWord + 1);
+						difference -= spacesPerWord;
+
+						if (input.IndexOf(' ', i + 1) == -1)
+						{
+							output.Append(' ', difference);
+						}
+					}
+					else
+					{
+						output.Append(input[i]);
+					}
+				}
+			}
+
+			return output.ToString();
+		}
+
 		public void UpdateSingleSpecializationInterface(SpecializationType specializationType)
 		{
 			string buffBlockName = "Spec" + specializationType.ToString() + "Buff";
@@ -292,11 +331,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 				switch (specializationType)
 				{
 					case SpecializationType.Blessing:
-						buffBlock.Inlines.Add(new Run("Blessing duration +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing] + "s"));
+						buffBlock.Inlines.Add(new Run(CringeStringToFillWidth("Blessing duration +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing] + "s")));
 						break;
 					
 					case SpecializationType.Clicking:
-						buffBlock.Inlines.Add(new Run("On-hit damage +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking]));
+						buffBlock.Inlines.Add(new Run(CringeStringToFillWidth("On-hit damage +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking])));
 						break;
 					
 					case SpecializationType.Crafting:
@@ -306,19 +345,19 @@ namespace ClickQuest.Game.UserInterface.Pages
 						break;
 					
 					case SpecializationType.Trading:
-						buffBlock.Inlines.Add(new Run("Shop size & ratio +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+						buffBlock.Inlines.Add(new Run(CringeStringToFillWidth("Shop size & ratio +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading])));
 						break;
 					
 					case SpecializationType.Melting:
-						buffBlock.Inlines.Add(new Run("Extra ingots +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%"));
+						buffBlock.Inlines.Add(new Run(CringeStringToFillWidth("Extra ingots +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%")));
 						break;
 					
 					case SpecializationType.Questing:
-						buffBlock.Inlines.Add(new Run("Quest time -" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Questing] + "%"));
+						buffBlock.Inlines.Add(new Run(CringeStringToFillWidth("Quest time -" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Questing] + "%")));
 						break;
 					
 					case SpecializationType.Dungeon:
-						buffBlock.Inlines.Add(new Run("Bossfight timer +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon] + "s"));
+						buffBlock.Inlines.Add(new Run(CringeStringToFillWidth("Bossfight timer +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon] + "s")));
 						break;
 				}
 				
