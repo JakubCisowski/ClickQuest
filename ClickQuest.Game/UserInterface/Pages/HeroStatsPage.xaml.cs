@@ -479,7 +479,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				int clickDamageFromArtifacts = User.Instance.CurrentHero.ClickDamage - (2 + User.Instance.CurrentHero.ClickDamagePerLevel * User.Instance.CurrentHero.Level) - clickDamageFromBlessing;
 
-				if (clickDamageFromArtifacts != 0)
+				if (clickDamageFromArtifacts > 0.009 || clickDamageFromArtifacts < -0.009)
 				{
 					blockDamage.Inlines.Add(new LineBreak());
 					blockDamage.Inlines.Add(new Run("Artifacts") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
@@ -661,7 +661,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				double critChanceFromArtifacts = User.Instance.CurrentHero.CritChance - ((User.Instance.CurrentHero.HeroClass == HeroClass.Slayer ? 0.25 : 0) + User.Instance.CurrentHero.CritChancePerLevel * User.Instance.CurrentHero.Level) - critChanceFromBlessing;
 
-				if (critChanceFromArtifacts != 0)
+				if (critChanceFromArtifacts > 0.009 || critChanceFromArtifacts < -0.009)
 				{
 					if (!separatorInserted)
 					{
@@ -683,7 +683,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				double critDamageFromArtifacts = User.Instance.CurrentHero.CritDamage - 2 - critDamageFromBlessing;
 
-				if (critDamageFromArtifacts != 0)
+				if (critDamageFromArtifacts > 0.009 || critDamageFromArtifacts < -0.009)
 				{
 					if (!separatorInserted)
 					{
@@ -811,7 +811,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				double poisonDamageFromArtifacts = User.Instance.CurrentHero.PoisonDamage - ((User.Instance.CurrentHero.HeroClass == HeroClass.Venom ? 1 : 0) + User.Instance.CurrentHero.PoisonDamagePerLevel * User.Instance.CurrentHero.Level) - poisonDamageFromBlessing;
 
-				if (poisonDamageFromArtifacts != 0)
+				if (poisonDamageFromArtifacts > 0.009 || poisonDamageFromArtifacts < -0.009)
 				{
 					if (!separatorInserted)
 					{
@@ -867,7 +867,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			};
 			var runAuraDamageTotal = new Run() { FontFamily = (FontFamily)this.FindResource("FontRegularBold") };
 			runAuraDamageTotal.SetBinding(Run.TextProperty, bindingAuraDamageTotal);
-			var bindingAuraAttackSpeedTotal = new Binding("AuraAttackSpeed")
+			var bindingAuraAttackSpeedTotal = new Binding("AuraSpeedText")
 			{
 				Source = User.Instance.CurrentHero,
 				Mode = BindingMode.OneWay
@@ -893,14 +893,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 			blockAura.Inlines.Add(new LineBreak());
 
 			// ["Aura tick speed: X/s (base) + X/s (X/s/lvl) = X/s"]
-			var bindingAuraSpeedLevelBonus = new Binding("LevelAuraBonus")
+			var bindingAuraSpeedLevelBonus = new Binding("LevelAuraBonusText")
 			{
 				Source = User.Instance.CurrentHero,
 				Mode = BindingMode.OneWay
 			};
 			var runAuraSpeedLevelBonus = new Run() { FontFamily = (FontFamily)this.FindResource("FontRegularBold") };
 			runAuraSpeedLevelBonus.SetBinding(Run.TextProperty, bindingAuraSpeedLevelBonus);
-			var bindingAuraSpeedLevelBonusTotal = new Binding("LevelAuraBonusTotal")
+			var bindingAuraSpeedLevelBonusTotal = new Binding("LevelAuraBonusTotalText")
 			{
 				Source = User.Instance.CurrentHero,
 				Mode = BindingMode.OneWay
@@ -981,7 +981,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				double auraDamageFromArtifacts = User.Instance.CurrentHero.AuraDamage - 0.1 - auraDamageFromBlessing;
 
-				if (auraDamageFromArtifacts != 0)
+				if (auraDamageFromArtifacts > 0.009 || auraDamageFromArtifacts < -0.009)
 				{
 					blockAura.Inlines.Add(new LineBreak());
 					blockAura.Inlines.Add(new Run("Artifacts") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });
@@ -996,7 +996,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				double auraSpeedFromArtifacts = User.Instance.CurrentHero.AuraAttackSpeed - (Hero.AURA_SPEED_BASE + User.Instance.CurrentHero.LevelAuraBonus) - auraSpeedFromBlessing;
 
-				if (auraSpeedFromArtifacts != 0)
+				if (auraSpeedFromArtifacts > 0.009 || auraSpeedFromArtifacts < -0.009)
 				{
 					blockAura.Inlines.Add(new LineBreak());
 					blockAura.Inlines.Add(new Run("Artifacts") { FontFamily = (FontFamily)this.FindResource("FontRegularBold") });

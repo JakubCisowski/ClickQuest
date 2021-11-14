@@ -86,15 +86,15 @@
 								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
 
-								<Run Text="Damage you deal with every click on a monster/boss (increased when critting)" />
+								<Run Text="Damage you deal with every click on a monster/boss" />
 								<LineBreak />
 								<LineBreak />
-
-								<Run Text="You can increase damage by: using blessings or damage artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}"/>
-								<LineBreak />
-								<Run Text="Also, you get bonus click damage when you level up" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}"/>
+								<Run Text="You get bonus click damage when you level up" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}"/>
 
 								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
+								<LineBreak />
+
+								<Run Text="You can increase damage by: using blessings or damage artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
 								<LineBreak />
 
 								<Run Text="There is also on-hit damage from Clicker Specialization, but it doesn't get multiplied upon critting" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
@@ -126,11 +126,13 @@
 								<LineBreak />
 
 								<Run Text="Default crit damage is 200%" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}"/>
-								<LineBreak />
-								<Run Text="You can increase crit chance and crit damage by: using blessings or crit artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}"/>
 
 								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
+
+                                <Run Text="You can increase crit chance and crit damage by: using blessings or crit artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
+                                <LineBreak />
+
 								<Run Text="This does not multiply damage from Clicker Specialization or artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
                             </TextBlock>
                         </ToolTip>
@@ -188,9 +190,12 @@
 								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
 
-								<Run Text="Idle damage you deal while fighting monsters (doesn't work in dungeons)" />
+								<Run Text="Idle damage you deal while fighting monsters" />
 								<LineBreak />
-								<Run Text="Damage scales with monster's max health" />
+								<LineBreak />
+								<Run Text="Doesn't work in dungeons" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}"/>
+								<LineBreak />
+								<Run Text="Damage scales with monster's max health" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}"/>
 								
 								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />

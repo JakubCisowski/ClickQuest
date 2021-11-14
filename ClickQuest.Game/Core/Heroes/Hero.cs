@@ -110,6 +110,14 @@ namespace ClickQuest.Game.Core.Heroes
 			}
 		}
 
+		public string AuraSpeedText
+		{
+			get
+			{
+				return AuraAttackSpeed.ToString("0.##");
+			}
+		}
+
 		public string AuraDpsText
 		{
 			get
@@ -122,7 +130,11 @@ namespace ClickQuest.Game.Core.Heroes
 
 		public double LevelAuraBonus => AURA_SPEED_PER_LEVEL * Level;
 
+		public string LevelAuraBonusText => LevelAuraBonus.ToString("0.##");
+
 		public double LevelAuraBonusTotal => AURA_SPEED_BASE + AURA_SPEED_PER_LEVEL * Level;
+
+		public string LevelAuraBonusTotalText => LevelAuraBonusTotal.ToString("0.##");
 
 		public Hero(HeroClass heroClass, HeroRace heroRace, string heroName)
 		{
