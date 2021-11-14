@@ -82,6 +82,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 			RefreshEquippedArtifacts();
 
 			// Change ActiveTab to what was selected before.
+			ChangeActiveTab();
+		}
+
+		public void ChangeActiveTab()
+		{
 			EquipmentTabControl.SelectedIndex = _selectedTabIndex;
 		}
 

@@ -16,7 +16,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 		public const int IngotDungeonKeyOffset = 22;
 		public static Point GoldPositionPoint = new Point() { X = 193, Y = 227 };
 		public static Point ExperiencePositionPoint = new Point() { X = 200, Y = 50 };
-		public static Point IngotGeneralPositionPoint = new Point() { X = 0, Y = 252 };
+		public static Point IngotGeneralPositionPoint = new Point() { X = 1, Y = 252 };
 		public static Point DungeonKeyGeneralPositionPoint = new Point() { X = 265, Y = 252 };
 
 

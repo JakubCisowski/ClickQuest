@@ -77,6 +77,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				statsPage.RefreshAllDynamicStatsAndToolTips();
 
 				EquipmentPage equipmentPage = p.EquipmentFrame.Content;
+				equipmentPage.ChangeActiveTab();
 				equipmentPage.RefreshCurrentEquipmentTab();
 			}
 			catch (RuntimeBinderException)
