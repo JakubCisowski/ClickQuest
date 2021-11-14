@@ -17,41 +17,40 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 
-	<!-- Monster button -->
-	<Button Click="MonsterButton_Click" Background="{StaticResource BrushGray1}">
-		<Grid x:Name="MainGrid">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
+	<!-- Monster button - cannot be named like that because that is the class name -->
+	<Button Click="MonsterButton_Click" Background="{StaticResource BrushGray1}" >
+			<Border x:Name="MainBorder" BorderThickness="2" Width="300" Height="300">
+				<Grid x:Name="MainGrid">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+						<RowDefinition Height="2*" />
+					</Grid.RowDefinitions>
 
-			<!-- Text with name -->
-			<TextBlock x:Name="MonsterName" Grid.Row="0" Text="{Binding Path=Name}" FontSize="28" HorizontalAlignment="Center" />
+					<!-- Text with name -->
+					<TextBlock x:Name="MonsterName" Grid.Row="0" Text="{Binding Path=Name}" FontSize="28" FontFamily="{StaticResource FontRegularBold}" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-			<!-- Health info-->
-			<Grid Grid.Row="1" Margin="6">
-				<!-- Health progress bar -->
-				<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=CurrentHealthProgress, UpdateSourceTrigger=PropertyChanged}" Height="25" Width="150" materialDesign:TransitionAssist.DisableTransitions="True" />
-				<!-- Text on progress bar -->
-				<TextBlock x:Name="MonsterHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource BrushWhite}" FontWeight="Bold" FontSize="18">
-					<TextBlock.Text>
-						<MultiBinding StringFormat=" {0} / {1} ">
-							<Binding Path="CurrentHealth" />
-							<Binding Path="Health" />
-						</MultiBinding>
-					</TextBlock.Text>
-				</TextBlock>
+					<!-- Health info-->
+					<Grid Grid.Row="1" Margin="6">
+						<!-- Health progress bar -->
+						<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=CurrentHealthProgress, UpdateSourceTrigger=PropertyChanged}" Height="25" Width="250" materialDesign:TransitionAssist.DisableTransitions="True" />
+						<!-- Text on progress bar -->
+						<TextBlock x:Name="MonsterHealth" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource BrushWhite}" FontWeight="Bold" FontSize="18">
+							<TextBlock.Text>
+								<MultiBinding StringFormat=" {0} / {1} ">
+									<Binding Path="CurrentHealth" />
+									<Binding Path="Health" />
+								</MultiBinding>
+							</TextBlock.Text>
+						</TextBlock>
+					</Grid>
+
+					<!-- Monster description -->
+				<Border Grid.Row="2" BorderThickness="0.5" BorderBrush="{StaticResource BrushGray2}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+					<TextBlock FontSize="16" FontFamily="{StaticResource FontRegularItalic}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Justify" TextWrapping="Wrap" Text="{Binding Description}" />
+				</Border>
+
 			</Grid>
-
-			<!-- Monster description -->
-			<Border Grid.Row="2" BorderThickness="0.5" BorderBrush="{StaticResource BrushGray2}" HorizontalAlignment="Center" Margin="5">
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" Text="{Binding Description}" />
 			</Border>
-
-			<!-- Canvas used for floating combat text -->
-			<Canvas Grid.Row="0" Grid.RowSpan="3" x:Name="DamageTextCanvas" Width="{Binding ActualWidth, ElementName=MainGrid}" Height="{Binding ActualHeight, ElementName=MainGrid}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-
-		</Grid>
 	</Button>
 </UserControl>

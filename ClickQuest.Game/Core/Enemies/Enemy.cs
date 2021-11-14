@@ -54,7 +54,7 @@ namespace ClickQuest.Game.Core.Enemies
 				dungeonKey.AddItem();
 
 				// [PRERELEASE] Display dungeon key drop.
-				(GameAssets.CurrentPage as RegionPage).TestRewardsBlock.Text += $". You've got a {(Rarity) (position - 1)} Dungeon Key!";
+				// (GameAssets.CurrentPage as RegionPage).TestRewardsBlock.Text += $". You've got a {(Rarity) (position - 1)} Dungeon Key!";
 			}
 		}
 	}

@@ -1,8 +1,11 @@
+using System.Linq;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Extensions.Combat;
 using System.Windows;
 using System.Windows.Media;
+using ClickQuest.Game.Core.Enemies;
+using ClickQuest.Game.Core.Places;
 
 namespace ClickQuest.Game.Extensions.UserInterface
 {
@@ -88,6 +91,42 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 				case HeroClass.Venom:
 					brush = (SolidColorBrush)Application.Current.FindResource("BrushVenomRelated");
+					break;
+			}
+
+			return brush;
+		}
+
+		public static SolidColorBrush GetMonsterSpawnRarityColor(Region region, Monster monster)
+		{
+			SolidColorBrush brush = null;
+
+			var monsterSpawnFrequency = region.MonsterSpawnPatterns.FirstOrDefault(x => x.MonsterId == monster.Id).Frequency;
+
+			switch (monsterSpawnFrequency)
+			{
+				case <= 0.01:
+					brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity5");
+					break;
+				
+				case <= 0.03:
+					brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity4");
+					break;
+				
+				case <= 0.05:
+					brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity3");
+					break;
+				
+				case <= 0.10:
+					brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity2");
+					break;
+				
+				case <=0.25:
+					brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity1");
+					break;
+				
+				case > 0.25:
+					brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity0");
 					break;
 			}
 

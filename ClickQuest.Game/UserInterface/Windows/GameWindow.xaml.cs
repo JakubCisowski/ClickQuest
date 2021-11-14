@@ -14,6 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using ClickQuest.Game.Core.Items;
 
 namespace ClickQuest.Game.UserInterface.Windows
 {
@@ -106,6 +107,31 @@ namespace ClickQuest.Game.UserInterface.Windows
 			transform.BeginAnimation(ScaleTransform.ScaleXProperty, animationX);
 			var animationY = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
 			transform.BeginAnimation(ScaleTransform.ScaleYProperty, animationY);
+		}
+
+		public void CreateFloatingTextLoot(Item item, int quantity = 1)
+		{
+			if (item is null || quantity==0)
+			{
+				return;
+			}
+			
+			int animationDuration = 5;
+
+			var border = FloatingTextController.CreateFloatingTextLootBorder(item, quantity);
+			
+			// Start position is center of the screen (so center of the enemy as well).
+			var startPosition = FloatingTextController.EnemyCenterPoint;
+			var endPosition = FloatingTextController.LootEndPositionPoint;
+
+			Canvas.SetLeft(border, startPosition.X);
+			Canvas.SetTop(border, startPosition.Y);
+
+			FloatingTextAnimationCanvas.Children.Add(border);
+
+			var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration);
+			textOpacityAnimation.Completed += FloatingTextAnimation_Completed;
+			border.BeginAnimation(OpacityProperty, textOpacityAnimation);
 		}
 
 		private void FloatingTextAnimation_Completed(object sender, EventArgs e)

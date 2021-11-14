@@ -24,13 +24,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 
 		public Monster Monster { get; set; }
 
-		public Region Region
-		{
-			get
-			{
-				return _regionPage.Region;
-			}
-		}
+		public Region Region => _regionPage.Region;
 
 		public MonsterButton(RegionPage regionPage)
 		{
@@ -50,6 +44,9 @@ namespace ClickQuest.Game.UserInterface.Controls
 			Monster = Region.MonsterSpawnPatterns[position].Monster.CopyEnemy();
 
 			DataContext = Monster;
+			
+			// Set Button's border based on it's spawn rate.
+			MainBorder.BorderBrush = ColorsController.GetMonsterSpawnRarityColor(Region, Monster);
 
 			CombatTimerController.StartAuraTimerOnCurrentRegion();
 		}

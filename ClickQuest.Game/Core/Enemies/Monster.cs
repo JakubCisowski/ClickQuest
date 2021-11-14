@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Items;
@@ -9,6 +10,7 @@ using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Pages;
+using ClickQuest.Game.UserInterface.Windows;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 
 namespace ClickQuest.Game.Core.Enemies
@@ -93,7 +95,8 @@ namespace ClickQuest.Game.Core.Enemies
 			}
 
 			// [PRERELEASE] Display exp and loot for testing purposes.
-			(GameAssets.CurrentPage as RegionPage).TestRewardsBlock.Text = "Loot: " + selectedLoot?.Name + ", Base Exp: " + experienceGained;
+			// (GameAssets.CurrentPage as RegionPage).TestRewardsBlock.Text = "Loot: " + selectedLoot?.Name + ", Base Exp: " + experienceGained;
+			(Application.Current.MainWindow as GameWindow).CreateFloatingTextLoot(selectedLoot);
 
 			CheckForDungeonKeyDrop();
 

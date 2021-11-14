@@ -61,7 +61,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			BossButton.IsEnabled = false;
 			TownButton.Visibility = Visibility.Visible;
-			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
+			
+			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
+			(StatsFrame.Content as HeroStatsPage).RefreshAllDynamicStatsAndToolTips();
 		}
 
 		private void BossButton_Click(object sender, RoutedEventArgs e)

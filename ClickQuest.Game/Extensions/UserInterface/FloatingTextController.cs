@@ -31,6 +31,10 @@ namespace ClickQuest.Game.Extensions.UserInterface
 		public static Point DungeonKeyMasterworkPositionPoint = new Point() { X = DungeonKeyGeneralPositionPoint.X, Y = DungeonKeyExceptionalPositionPoint.Y + IngotDungeonKeyOffset };
 		public static Point DungeonKeyMythicPositionPoint = new Point() { X = DungeonKeyGeneralPositionPoint.X, Y = DungeonKeyMasterworkPositionPoint.Y + IngotDungeonKeyOffset };
 
+
+		public static Point EnemyCenterPoint = new Point() { X = 683, Y = 384 };
+		public static Point LootEndPositionPoint = new Point() { X = EnemyCenterPoint.X + 200, Y = EnemyCenterPoint.Y - 200 };
+
 		public static DoubleAnimation CreateTextOpacityAnimation(int durationInSeconds)
 		{
 			var textVisibilityAnimation = new DoubleAnimation
@@ -123,6 +127,37 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			};
 
 			stackPanel.Children.Add(text);
+
+			border.Child = stackPanel;
+
+			return border;
+		}
+
+		public static Border CreateFloatingTextLootBorder(Item item, int quantity = 1)
+		{
+			var border = new Border
+			{
+				CornerRadius = new CornerRadius(20),
+				BorderThickness = new Thickness(5),
+				Padding = new Thickness(2),
+				IsHitTestVisible = false
+			};
+
+			var stackPanel = new StackPanel
+			{
+				Orientation = Orientation.Horizontal
+			};
+
+			var itemBlock = new TextBlock
+			{
+				Text = quantity + "x " + item.Name,
+				Foreground = ColorsController.GetRarityColor(item.Rarity),
+				FontSize = 28,
+				VerticalAlignment = VerticalAlignment.Center
+			};
+
+
+			stackPanel.Children.Add(itemBlock);
 
 			border.Child = stackPanel;
 
