@@ -272,42 +272,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 		}
 
-		public string CringeStringToFillWidth(string input)
-		{
-			const int MaxChars = 28;
-			StringBuilder output = new StringBuilder();
-			int difference = MaxChars - input.Length;
-
-			if (difference > 0)
-			{
-				int wordsCount = input.Count(c => c == ' ') + 1;
-
-				int spacesPerWord = difference / wordsCount;
-
-				for (int i = 0; i < input.Length; i++)
-				{
-					if (input[i] == ' ')
-					{
-						// Add the space and spacesPerWord more.
-						// If this is the last space in input, add the remaining spaces.
-						output.Append(' ', spacesPerWord + 1);
-						difference -= spacesPerWord;
-
-						if (input.IndexOf(' ', i + 1) == -1)
-						{
-							output.Append(' ', difference);
-						}
-					}
-					else
-					{
-						output.Append(input[i]);
-					}
-				}
-			}
-
-			return output.ToString();
-		}
-
 		public void UpdateSingleSpecializationInterface(SpecializationType specializationType)
 		{
 			string buffBlockName = "Spec" + specializationType.ToString() + "Buff";
@@ -331,33 +295,39 @@ namespace ClickQuest.Game.UserInterface.Pages
 				switch (specializationType)
 				{
 					case SpecializationType.Blessing:
-						buffBlock.Inlines.Add(new Run(CringeStringToFillWidth("Blessing duration +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing] + "s")));
+						buffBlock.Inlines.Add(new Run("Blessing duration +"));
+						buffBlock.Inlines.Add(new Run(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing] + "s"){FontFamily=(FontFamily)this.FindResource("FontRegularDemiBold")});
 						break;
 					
 					case SpecializationType.Clicking:
-						buffBlock.Inlines.Add(new Run(CringeStringToFillWidth("On-hit damage +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking])));
+						buffBlock.Inlines.Add(new Run("On-hit damage "));
+						buffBlock.Inlines.Add(new Run("+" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking]) {Foreground = (SolidColorBrush)this.FindResource("BrushDamageTypeOnHit"), FontFamily=(FontFamily)this.FindResource("FontRegularDemiBold")});
 						break;
 					
 					case SpecializationType.Crafting:
 						buffBlock.Inlines.Add("Can craft ");
-						buffBlock.Inlines.Add(new Run(User.Instance.CurrentHero.Specialization.SpecCraftingText) { Foreground = ColorsController.GetRarityColor((Rarity)User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting]) });
+						buffBlock.Inlines.Add(new Run(User.Instance.CurrentHero.Specialization.SpecCraftingText) { Foreground = ColorsController.GetRarityColor((Rarity)User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting]), FontFamily=(FontFamily)this.FindResource("FontRegularDemiBold") });
 						buffBlock.Inlines.Add(" recipes");
 						break;
 					
 					case SpecializationType.Trading:
-						buffBlock.Inlines.Add(new Run(CringeStringToFillWidth("Shop size & ratio +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading])));
+						buffBlock.Inlines.Add(new Run("Shop size & ratio "));
+						buffBlock.Inlines.Add(new Run("+" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]){FontFamily=(FontFamily)this.FindResource("FontRegularDemiBold")});
 						break;
 					
 					case SpecializationType.Melting:
-						buffBlock.Inlines.Add(new Run(CringeStringToFillWidth("Extra ingots +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%")));
+						buffBlock.Inlines.Add(new Run("Extra ingots "));
+						buffBlock.Inlines.Add(new Run("+" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%"){FontFamily=(FontFamily)this.FindResource("FontRegularDemiBold")});
 						break;
 					
 					case SpecializationType.Questing:
-						buffBlock.Inlines.Add(new Run(CringeStringToFillWidth("Quest time -" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Questing] + "%")));
+						buffBlock.Inlines.Add(new Run("Quest time "));
+						buffBlock.Inlines.Add(new Run("-" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Questing] + "%"){FontFamily=(FontFamily)this.FindResource("FontRegularDemiBold")});
 						break;
 					
 					case SpecializationType.Dungeon:
-						buffBlock.Inlines.Add(new Run(CringeStringToFillWidth("Bossfight timer +" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon] + "s")));
+						buffBlock.Inlines.Add(new Run("Bossfight timer "));
+						buffBlock.Inlines.Add(new Run("+" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon] + "s"){FontFamily=(FontFamily)this.FindResource("FontRegularDemiBold")});
 						break;
 				}
 				
@@ -521,7 +491,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 			if (User.Instance.CurrentHero?.Specialization.SpecializationBuffs[SpecializationType.Clicking] > 0)
 			{
 				blockDamage.Inlines.Add(new LineBreak());
-				blockDamage.Inlines.Add(new Run("You also deal ") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
+				blockDamage.Inlines.Add(new LineBreak());
+				blockDamage.Inlines.Add(new Run("You also deal ") { FontFamily = (FontFamily)this.FindResource("FontRegularItalic") });
 				blockDamage.Inlines.Add(new Run(User.Instance.CurrentHero?.Specialization.SpecializationBuffs[SpecializationType.Clicking].ToString()) { FontFamily = (FontFamily)this.FindResource("FontRegularBoldItalic") });
 				blockDamage.Inlines.Add(new Run(" on-hit damage from Clicker Specialization, but it doesn't get multiplied upon critting") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") });
 			}

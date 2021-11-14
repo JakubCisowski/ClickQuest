@@ -65,8 +65,8 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						toolTipBlock.Inlines.Add(new LineBreak());
 
 						toolTipBlock.Inlines.Add(new Run("Your clicks deal a bonus "));
-						toolTipBlock.Inlines.Add(new Run($"{User.Instance.CurrentHero?.Specialization.SpecializationBuffs[SpecializationType.Clicking]}") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
-						toolTipBlock.Inlines.Add(new Run(" on-hit damage"));
+						toolTipBlock.Inlines.Add(new Run($"{User.Instance.CurrentHero?.Specialization.SpecializationBuffs[SpecializationType.Clicking]}") {Foreground = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeOnHit"), FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBlackItalic")});
+						toolTipBlock.Inlines.Add(new Run(" on-hit damage"){Foreground = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeOnHit")});
 						
 						toolTipBlock.Inlines.Add(new LineBreak());
 

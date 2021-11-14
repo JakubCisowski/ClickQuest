@@ -46,7 +46,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 			DataContext = Monster;
 			
 			// Set Button's border based on it's spawn rate.
-			MainBorder.BorderBrush = ColorsController.GetMonsterSpawnRarityColor(Region, Monster);
+			this.Resources["MonsterRarityBrush"] = ColorsController.GetMonsterSpawnRarityColor(Region, Monster);
 
 			CombatTimerController.StartAuraTimerOnCurrentRegion();
 		}
