@@ -107,6 +107,16 @@ namespace ClickQuest.Game.UserInterface.Pages
 				{
 					equippedArtifact.ArtifactFunctionality.OnRegionEnter();
 				}
+
+				// [PRERELEASE]
+				foreach (var key in User.Instance.DungeonKeys)
+				{
+					key.AddItem(100);
+				}
+				foreach (var ingot in User.Instance.Ingots)
+				{
+					ingot.AddItem(100);
+				}
 			}
 			else
 			{
