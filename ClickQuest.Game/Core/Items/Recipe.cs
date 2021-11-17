@@ -13,6 +13,9 @@ namespace ClickQuest.Game.Core.Items
 	{
 		[JsonIgnore]
 		public override string Description { get; set; }
+
+		public string FullName => "Recipe: " + Name;
+
 		public List<IngredientPattern> IngredientPatterns { get; set; }
 
 		public string RequirementsDescription { get; private set; }

@@ -198,7 +198,7 @@
 						<ListView.View>
 							<GridView>
 								<!-- Name column-->
-								<GridViewColumn Header="Name" Width="290" DisplayMemberBinding="{Binding Name}">
+								<GridViewColumn Header="Name" Width="290" DisplayMemberBinding="{Binding FullName}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
 											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
@@ -307,7 +307,7 @@
 						<ListView.View>
 							<GridView>
 								<!-- Name column -->
-								<GridViewColumn Header="Name" Width="360" DisplayMemberBinding="{Binding Name}">
+								<GridViewColumn Header="Name" Width="360" DisplayMemberBinding="{Binding FullName}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
 											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>

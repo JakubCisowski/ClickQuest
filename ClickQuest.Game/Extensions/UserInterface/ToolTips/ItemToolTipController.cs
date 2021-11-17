@@ -111,7 +111,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 				case Recipe recipe:
 					{
-						toolTipBlock.Inlines.Add(new Run($"{recipe.Name}") {FontSize=(double)Application.Current.FindResource("FontSizeToolTipName")});
+						toolTipBlock.Inlines.Add(new Run($"{recipe.FullName}") {FontSize=(double)Application.Current.FindResource("FontSizeToolTipName")});
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(new Run($"*{recipe.RarityString}*")
 						{

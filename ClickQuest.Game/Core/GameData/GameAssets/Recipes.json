@@ -36,7 +36,7 @@
       }
     ],
     "Id": 1,
-    "Name": "Recipe: Rakshasa's Necklace",
+    "Name": "Rakshasa's Necklace",
     "Value": 1,
     "Rarity": 3
   },
@@ -69,7 +69,7 @@
       }
     ],
     "Id": 2,
-    "Name": "Recipe: Scepter of Eternal Flame",
+    "Name": "Scepter of Eternal Flame",
     "Value": 1,
     "Rarity": 4
   },
@@ -111,7 +111,7 @@
       }
     ],
     "Id": 4,
-    "Name": "Recipe: Vial of Plague",
+    "Name": "Vial of Plague",
     "Value": 1,
     "Rarity": 3
   },
@@ -124,7 +124,7 @@
       }
     ],
     "Id": 5,
-    "Name": "Recipe: Gold-Tipped Spear",
+    "Name": "Gold-Tipped Spear",
     "Value": 1,
     "Rarity": 3
   },
@@ -137,7 +137,7 @@
       }
     ],
     "Id": 6,
-    "Name": "Recipe: Twin Kamas",
+    "Name": "Twin Kamas",
     "Value": 1,
     "Rarity": 3
   },
@@ -150,7 +150,7 @@
       }
     ],
     "Id": 7,
-    "Name": "Recipe: Bloodstone Staff",
+    "Name": "Bloodstone Staff",
     "Value": 1,
     "Rarity": 3
   },
@@ -163,7 +163,7 @@
       }
     ],
     "Id": 8,
-    "Name": "Recipe: Skullbasher",
+    "Name": "Skullbasher",
     "Value": 1,
     "Rarity": 3
   },
@@ -176,7 +176,7 @@
       }
     ],
     "Id": 9,
-    "Name": "Recipe: Meat Cleaver",
+    "Name": "Meat Cleaver",
     "Value": 1,
     "Rarity": 3
   },
@@ -189,7 +189,7 @@
       }
     ],
     "Id": 10,
-    "Name": "Recipe: Ghostly Infusion",
+    "Name": "Ghostly Infusion",
     "Value": 1,
     "Rarity": 3
   },
@@ -202,7 +202,7 @@
       }
     ],
     "Id": 11,
-    "Name": "Recipe: Silver Greatsword",
+    "Name": "Silver Greatsword",
     "Value": 1,
     "Rarity": 3
   },
@@ -215,7 +215,7 @@
       }
     ],
     "Id": 12,
-    "Name": "Recipe: Large Scythe",
+    "Name": "Large Scythe",
     "Value": 1,
     "Rarity": 3
   },
@@ -228,7 +228,7 @@
       }
     ],
     "Id": 13,
-    "Name": "Recipe: Death-Infused Bone Talisman",
+    "Name": "Death-Infused Bone Talisman",
     "Value": 1,
     "Rarity": 3
   },
@@ -241,7 +241,7 @@
       }
     ],
     "Id": 14,
-    "Name": "Recipe: Dull Sword",
+    "Name": "Dull Sword",
     "Value": 1,
     "Rarity": 0
   },
@@ -254,7 +254,7 @@
       }
     ],
     "Id": 15,
-    "Name": "Recipe: Dull Knife",
+    "Name": "Dull Knife",
     "Value": 1,
     "Rarity": 3
   },
@@ -267,7 +267,7 @@
       }
     ],
     "Id": 16,
-    "Name": "Recipe: Poisoned Sword",
+    "Name": "Poisoned Sword",
     "Value": 1,
     "Rarity": 3
   },
@@ -280,7 +280,7 @@
       }
     ],
     "Id": 17,
-    "Name": "Recipe: Necronomicon",
+    "Name": "Necronomicon",
     "Value": 1,
     "Rarity": 3
   },
@@ -293,7 +293,7 @@
       }
     ],
     "Id": 18,
-    "Name": "Recipe: Toxic Amulet",
+    "Name": "Toxic Amulet",
     "Value": 1,
     "Rarity": 3
   },
@@ -301,7 +301,7 @@
     "ArtifactId": 2,
     "IngredientPatterns": [],
     "Id": 19,
-    "Name": "Recipe: XD",
+    "Name": "XD",
     "Value": 0,
     "Rarity": 0
   },
