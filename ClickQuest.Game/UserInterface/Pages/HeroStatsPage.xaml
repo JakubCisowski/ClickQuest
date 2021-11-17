@@ -280,25 +280,25 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Blessing timer-->
-                <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                <StackPanel Grid.Column="0" HorizontalAlignment="Center" Margin="5,0,0,0" >
                     <!-- Icon -->
                     <materialDesign:PackIcon Width="30" Height="30" Kind="BookCross" Foreground="{StaticResource BrushBlack}" HorizontalAlignment="Center" />
                     <!-- Name and timer -->
-                    <TextBlock x:Name="BlessingDurationBlock" Text="" TextAlignment="Center" FontSize="18" Margin="0,5,0,0" />
+                    <TextBlock x:Name="BlessingDurationBlock" Text="" TextAlignment="Center" FontSize="14" />
                 </StackPanel>
 
-                <Separator Grid.Column="1" Width="170" Height="2" Margin="5">
+                <Separator Grid.Column="1" Width="170" Height="2" >
                     <Separator.LayoutTransform>
                         <RotateTransform Angle="90" />
                     </Separator.LayoutTransform>
                 </Separator>
 
                 <!-- Quest timer-->
-                <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                <StackPanel Grid.Column="2" HorizontalAlignment="Center" Margin="5,0,0,0" >
                     <!-- Icon -->
                     <materialDesign:PackIcon Width="30" Height="30" Kind="ProgressQuestion" Foreground="{StaticResource BrushBlack}" HorizontalAlignment="Center" />
                     <!-- Name and timer -->
-                    <TextBlock x:Name="QuestDurationBlock" Text="" TextAlignment="Center" FontSize="18" Margin="0,5,0,0" />
+                    <TextBlock x:Name="QuestDurationBlock" Text="" TextAlignment="Center" FontSize="14" />
                 </StackPanel>
             </Grid>
         </StackPanel>
