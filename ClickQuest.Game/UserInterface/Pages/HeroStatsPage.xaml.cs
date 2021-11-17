@@ -264,9 +264,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			GeneralToolTipController.SetToolTipDelayAndDuration(SpecializationsGrid);
 
-			for (int i = 0; i < specializationTypes.Length; i++)
+			var usedSpecializationTypes = RemoveUnusedSpecializations(specializationTypes.OfType<SpecializationType>());
+
+			for (int i = 0; i < usedSpecializationTypes.Count; i++)
 			{
-				var specializationType = (SpecializationType)specializationTypes.GetValue(i);
+				var specializationType = usedSpecializationTypes[i];
 				
 				GenerateSingleSpecializationToolTip(specializationType);
 			}
@@ -344,12 +346,16 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 
 			var specializationTypes = Enum.GetValues(typeof(SpecializationType));
-			
+
 			User.Instance.CurrentHero.Specialization.UpdateSpecialization();
 
-			for (int i = 0; i < specializationTypes.Length; i++)
+			var usedSpecializationTypes = RemoveUnusedSpecializations(specializationTypes.OfType<SpecializationType>());
+
+			int i = 0;
+
+			for (i = 0; i < usedSpecializationTypes.Count; i++)
 			{
-				var specializationType = (SpecializationType)specializationTypes.GetValue(i);
+				var specializationType = usedSpecializationTypes[i];
 
 				var block = new TextBlock
 				{
@@ -367,7 +373,38 @@ namespace ClickQuest.Game.UserInterface.Pages
 				UpdateSingleSpecializationInterface(specializationType);
 			}
 
+			for (; i < specializationTypes.Length;i++)
+			{
+				var block = new TextBlock
+				{
+					Name = "Spec" + i + "Buff",
+					FontSize = 18,
+					Margin = new Thickness(0, 1, 0, 1),
+					HorizontalAlignment = HorizontalAlignment.Center,
+					TextAlignment = TextAlignment.Center
+				};
+
+				Grid.SetRow(block, i);
+
+				SpecializationsGrid.Children.Add(block);
+			}
+
 			GenerateAllSpecializationsToolTips();
+		}
+
+		public List<SpecializationType> RemoveUnusedSpecializations(IEnumerable<SpecializationType> specializationTypes)
+		{
+			var usedSpecializations = new List<SpecializationType>();
+
+			foreach (var specType in specializationTypes)
+			{
+				if (User.Instance.CurrentHero.Specialization.SpecializationBuffs[specType] != 0)
+				{
+					usedSpecializations.Add(specType);
+				}
+			}
+
+			return usedSpecializations;		
 		}
 
 		private void GenerateHeroInfoToolTip()
