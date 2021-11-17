@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" WindowStartupLocation="CenterOwner" WindowStyle="None" ResizeMode="NoResize" Background="{StaticResource BrushGray4}"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner" WindowStyle="None" ResizeMode="NoResize" Background="Transparent" AllowsTransparency="True"
         Title="AchievementsWindow" Height="500" Width="600" MouseDown="AchievementsWindow_MouseDown" Closing="AchievementsWindow_Closing">
 	<Grid>
-		<Border BorderThickness="3" BorderBrush="{StaticResource BrushGray2}" CornerRadius="3">
+		<Border BorderThickness="3" BorderBrush="{StaticResource BrushAccent3}" CornerRadius="3" Background="{StaticResource BrushGray4}">
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="*" />
@@ -18,7 +18,7 @@
 				<TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="410" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{StaticResource FontRegularDemiBold}" Text="Achievements" FontSize="24" />
 
 				<!-- Achievemets list text -->
-				<Border Grid.Row="1" BorderThickness="3" BorderBrush="{StaticResource BrushGray2}" CornerRadius="3" Width="500">
+				<Border Grid.Row="1" BorderThickness="3" BorderBrush="{StaticResource BrushAccent3}" CornerRadius="3" Width="500">
 					<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
 						<StackPanel x:Name="AchievementsList" />
 					</ScrollViewer>
