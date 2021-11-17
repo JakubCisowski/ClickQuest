@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using ClickQuest.Game.Extensions.Collections;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
@@ -237,10 +238,20 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			var grid = new Grid();
 
+			var circleIcon = new PackIcon
+			{
+				Kind = PackIconKind.Circle,
+				Width = 15,
+				Height = 15,
+				VerticalAlignment = VerticalAlignment.Center,
+				Foreground = ColorsController.GetRarityColor(item.Rarity)
+			};
+
 			var nameBlock = new TextBlock
 			{
 				FontSize = 18,
-				HorizontalAlignment = HorizontalAlignment.Left
+				HorizontalAlignment = HorizontalAlignment.Left,
+				Margin = new Thickness(20,0,0,0)
 			};
 
 			var quantityBlock = new TextBlock
@@ -264,6 +275,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			nameBlock.SetBinding(TextBlock.TextProperty, binding);
 			quantityBlock.SetBinding(TextBlock.TextProperty, binding2);
 
+			grid.Children.Add(circleIcon);
 			grid.Children.Add(nameBlock);
 			grid.Children.Add(quantityBlock);
 
