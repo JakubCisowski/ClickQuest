@@ -833,6 +833,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		public void GenerateStatValueAuraToolTip()
 		{
+			if (User.Instance.CurrentHero is null) 
+			{
+				return;
+			}
+
 			var toolTipAura = new ToolTip()
 			{
 				BorderBrush = ColorsController.GetDamageTypeColor(DamageType.Aura),
@@ -857,6 +862,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 			blockAura.Inlines.Add("You deal ");
 			blockAura.Inlines.Add(runAuraDpsTotal);
 			blockAura.Inlines.Add(" of monster's hp Aura damage per second");
+			blockAura.Inlines.Add(new LineBreak());
+
+			// ["You kill a monster every X seconds"]
+			int timeToKill = (int)Math.Ceiling(1 / (User.Instance.CurrentHero.AuraDamage * User.Instance.CurrentHero.AuraAttackSpeed));
+			blockAura.Inlines.Add("You kill a monster every ");
+			blockAura.Inlines.Add(new Run(timeToKill.ToString()) {FontFamily= (FontFamily)this.FindResource("FontRegularBold")});
+			blockAura.Inlines.Add(timeToKill == 1 ? " second" : " seconds");
 			blockAura.Inlines.Add(new LineBreak());
 
 			// ["Your Aura tick damage is X%; Your Aura tick speed is X/s"]
