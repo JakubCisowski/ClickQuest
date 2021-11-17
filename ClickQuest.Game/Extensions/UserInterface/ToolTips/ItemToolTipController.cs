@@ -28,6 +28,9 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static ToolTip GenerateItemToolTip<T>(T itemToGenerateToolTipFor) where T : Item
 		{
+			double fontSizeToolTipname = (double)Application.Current.FindResource("FontSizeToolTipName");
+			var fontFamilyRegularDemiBold = (FontFamily)Application.Current.FindResource("FontRegularDemiBold");
+
 			var toolTip = new ToolTip()
 			{
 				BorderBrush = Colors.GetRarityColor(itemToGenerateToolTipFor.Rarity)
@@ -42,12 +45,12 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 			{
 				case Material material:
 					{
-						toolTipBlock.Inlines.Add(new Run($"{material.Name}"){FontSize=(double)Application.Current.FindResource("FontSizeToolTipName")});
+						toolTipBlock.Inlines.Add(new Run($"{material.Name}"){FontSize=fontSizeToolTipname});
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(new Run($"*{material.RarityString}*")
 						{
 							Foreground = Colors.GetRarityColor(material.Rarity),
-							FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold")
+							FontFamily = fontFamilyRegularDemiBold
 						});
 						
 						toolTipBlock.Inlines.Add(new LineBreak());
@@ -67,12 +70,12 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 				case Artifact artifact:
 					{
-						toolTipBlock.Inlines.Add(new Run($"{artifact.Name}"){FontSize=(double)Application.Current.FindResource("FontSizeToolTipName")});
+						toolTipBlock.Inlines.Add(new Run($"{artifact.Name}"){FontSize=fontSizeToolTipname});
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(new Run($"*{artifact.RarityString}*")
 						{
 							Foreground = Colors.GetRarityColor(artifact.Rarity),
-							FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold")
+							FontFamily = fontFamilyRegularDemiBold
 						});
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(new Run($"{artifact.ArtifactType.ToString()}"));
@@ -111,12 +114,12 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 				case Recipe recipe:
 					{
-						toolTipBlock.Inlines.Add(new Run($"{recipe.FullName}") {FontSize=(double)Application.Current.FindResource("FontSizeToolTipName")});
+						toolTipBlock.Inlines.Add(new Run($"{recipe.FullName}") {FontSize=fontSizeToolTipname});
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(new Run($"*{recipe.RarityString}*")
 						{
 							Foreground = Colors.GetRarityColor(recipe.Rarity),
-							FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold")
+							FontFamily = fontFamilyRegularDemiBold
 						});
 
 						toolTipBlock.Inlines.Add(new LineBreak());
@@ -156,6 +159,8 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static ToolTip GenerateCurrencyToolTip<T>(int rarityValue) where T : Item
 		{
+			var fontFamilyRegularDemiBold = (FontFamily)Application.Current.FindResource("FontRegularDemiBold");
+
 			var currencyToolTip = new ToolTip()
 			{
 				Style = (Style)Application.Current.FindResource("ToolTipSimple")
@@ -164,7 +169,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 			var currencyToolTipTextBlock = new TextBlock
 			{
 				Style = (Style)Application.Current.FindResource("ToolTipTextBlockBase"),
-				FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold")
+				FontFamily = fontFamilyRegularDemiBold
 			};
 
 			var currencyColor = Colors.GetRarityColor((Rarity)rarityValue);
@@ -179,6 +184,9 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static ToolTip GenerateBlessingToolTip(Blessing blessing)
 		{
+			double fontSizeToolTipname = (double)Application.Current.FindResource("FontSizeToolTipName");
+			var fontFamilyRegularDemiBold = (FontFamily)Application.Current.FindResource("FontRegularDemiBold");
+
 			var blessingToolTip = new ToolTip();
 			
 			var blessingToolTipBlock = new TextBlock
@@ -188,12 +196,12 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 			if (blessing != null)
 			{
-				blessingToolTipBlock.Inlines.Add(new Run($"{blessing.Name}"){FontSize=(double)Application.Current.FindResource("FontSizeToolTipName")});
+				blessingToolTipBlock.Inlines.Add(new Run($"{blessing.Name}"){FontSize=fontSizeToolTipname});
 				blessingToolTipBlock.Inlines.Add(new LineBreak());
 				blessingToolTipBlock.Inlines.Add(new Run($"*{blessing.RarityString}*")
 				{
 					Foreground = ColorsController.GetRarityColor(blessing.Rarity),
-					FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold")
+					FontFamily = fontFamilyRegularDemiBold
 				});
 
 				blessingToolTipBlock.Inlines.Add(new LineBreak());
@@ -224,6 +232,8 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static ToolTip GenerateQuestToolTip(Quest currentQuest)
 		{
+			double fontSizeToolTipname = (double)Application.Current.FindResource("FontSizeToolTipName");
+
 			var questToolTip = new ToolTip();
 
 			var questToolTipTextBlock = new TextBlock
@@ -233,7 +243,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 			if (currentQuest != null)
 			{
-				questToolTipTextBlock.Inlines.Add(new Run($"{currentQuest.Name}"){FontSize=(double)Application.Current.FindResource("FontSizeToolTipName")});
+				questToolTipTextBlock.Inlines.Add(new Run($"{currentQuest.Name}"){FontSize=fontSizeToolTipname});
 				if (currentQuest.Rare)
 				{
 					questToolTipTextBlock.Inlines.Add(new LineBreak());
