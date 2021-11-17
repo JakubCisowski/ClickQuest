@@ -14,10 +14,10 @@ namespace ClickQuest.Game.Extensions.UserInterface
 	public static class FloatingTextController
 	{
 		public const int IngotDungeonKeyOffset = 22;
-		public static Point GoldPositionPoint = new Point() { X = 193, Y = 227 };
+		public static Point GoldPositionPoint = new Point() { X = 193, Y = 232 };
 		public static Point ExperiencePositionPoint = new Point() { X = 200, Y = 50 };
-		public static Point IngotGeneralPositionPoint = new Point() { X = 1, Y = 252 };
-		public static Point DungeonKeyGeneralPositionPoint = new Point() { X = 265, Y = 252 };
+		public static Point IngotGeneralPositionPoint = new Point() { X = 1, Y = 257 };
+		public static Point DungeonKeyGeneralPositionPoint = new Point() { X = 265, Y = 257 };
 
 
 		public static Point IngotFinePositionPoint = new Point() { X = IngotGeneralPositionPoint.X, Y = IngotGeneralPositionPoint.Y + IngotDungeonKeyOffset };

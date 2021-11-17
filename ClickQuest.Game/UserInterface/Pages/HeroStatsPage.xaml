@@ -5,7 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" Title="Stats"
-      Height="728" Width="341" Background="Transparent">
+      Height="715" Width="341" Background="Transparent">
 
     <!-- Material design resources for progres bar -->
     <Page.Resources>

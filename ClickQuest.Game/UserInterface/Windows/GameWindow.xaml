@@ -5,69 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="GameWindow" Height="768" Width="1366" Background="Transparent"
+        Title="GameWindow" Height="768" Width="1366" Background="Transparent" AllowsTransparency="True"
         ResizeMode="NoResize" WindowStyle="None">
 
-	<StackPanel>
-		<StackPanel.Background>
+	<Border BorderThickness="3" CornerRadius="7">
+		<Border.Background>
 			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-				<GradientStop Color="{StaticResource ColorGray4}" Offset="0.25" />
-				<GradientStop Color="{StaticResource ColorWhite}" Offset="0.75" />
-			</LinearGradientBrush>
-		</StackPanel.Background>
+					<GradientStop Color="{StaticResource ColorGray4}" Offset="0.25" />
+					<GradientStop Color="{StaticResource ColorWhite}" Offset="0.75" />
+				</LinearGradientBrush>
+		</Border.Background>
+		<StackPanel Background="Transparent">
 
-		<!-- Dragable top window bar-->
-		<Grid Height="40" Background="Transparent">
-			<!-- Rectangle-->
-			<Rectangle x:Name="DragableTop" Height="40" Fill="Transparent" MouseDown="DragableTop_MouseDown" />
+			<!-- Dragable top window bar-->
+			<Grid Height="40" Background="Transparent">
+				<!-- Rectangle-->
+				<Rectangle x:Name="DragableTop" Height="40" Fill="Transparent" MouseDown="DragableTop_MouseDown" />
 
-			<!-- Location info block-->
-			<Border x:Name="LocationInfoBorder" BorderThickness="1" Visibility="Hidden" BorderBrush="{StaticResource BrushBlack}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
-				<TextBlock x:Name="LocationInfoBlock" Text="{Binding LocationInfo}" FontFamily="{StaticResource FontRegularDemiBold}" FontSize="18" VerticalAlignment="Center" Margin="3" />
-			</Border>
+				<!-- Location info block-->
+				<Border x:Name="LocationInfoBorder" BorderThickness="1" Visibility="Hidden" BorderBrush="{StaticResource BrushBlack}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+					<TextBlock x:Name="LocationInfoBlock" Text="{Binding LocationInfo}" FontFamily="{StaticResource FontRegularDemiBold}" FontSize="18" VerticalAlignment="Center" Margin="3" />
+				</Border>
 
-			<!-- Achievements button-->
-			<Button x:Name="AchievementsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="AchievementsButton_Click" Padding="0" Margin="5,5,40,5" Background="{StaticResource BrushGray1}">
-				<Button.ToolTip>
-					<ToolTip Style="{StaticResource ToolTipSimple}">
-                        <TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Your Achievements"/>
-                    </ToolTip>
-				</Button.ToolTip>
+				<!-- Achievements button-->
+				<Button x:Name="AchievementsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="AchievementsButton_Click" Padding="0" Margin="5,5,40,5" Background="{StaticResource BrushGray1}">
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Your Achievements"/>
+						</ToolTip>
+					</Button.ToolTip>
 
-				<!-- Exit button icon -->
-				<Button.Content>
-					<materialDesign:PackIcon Kind="Trophy" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushBlack}" Margin="0" />
-				</Button.Content>
-			</Button>
+					<!-- Exit button icon -->
+					<Button.Content>
+						<materialDesign:PackIcon Kind="Trophy" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushBlack}" Margin="0" />
+					</Button.Content>
+				</Button>
 
-			<!-- Exit button-->
-			<Button x:Name="ExitButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleDanger}" Click="ExitButton_Click" Background="{StaticResource BrushGray5}" Padding="0">
-				<Button.ToolTip>
-					<ToolTip Style="{StaticResource ToolTipSimple}">
-                        <TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Exit the Game"/>
-                    </ToolTip>
-				</Button.ToolTip>
+				<!-- Exit button-->
+				<Button x:Name="ExitButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleDanger}" Click="ExitButton_Click" Background="{StaticResource BrushGray5}" Padding="0">
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Exit the Game"/>
+						</ToolTip>
+					</Button.ToolTip>
 
-				<!-- Exit button icon -->
-				<Button.Content>
-					<materialDesign:PackIcon Kind="CloseBox" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushBlack}" Margin="0" />
-				</Button.Content>
-			</Button>
+					<!-- Exit button icon -->
+					<Button.Content>
+						<materialDesign:PackIcon Kind="CloseBox" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushBlack}" Margin="0" />
+					</Button.Content>
+				</Button>
 
-			<!-- Game icon-->
-			<Image Source="/Resources/Images/GameIcon.png" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" RenderOptions.EdgeMode="Aliased"
-			       RenderOptions.BitmapScalingMode="Fant" Margin="5,0,0,0">
-				<Image.RenderTransform>
-					<ScaleTransform ScaleX="1.5" />
-				</Image.RenderTransform>
-			</Image>
-		</Grid>
+				<!-- Game icon-->
+				<Image Source="/Resources/Images/GameIcon.png" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" RenderOptions.EdgeMode="Aliased"
+					RenderOptions.BitmapScalingMode="Fant" Margin="5,0,0,0">
+					<Image.RenderTransform>
+						<ScaleTransform ScaleX="1.5" />
+					</Image.RenderTransform>
+				</Image>
+			</Grid>
 
-		<Grid x:Name="MainGrid">
-			<!-- Game frame-->
-			<Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden" Background="Transparent" />
+			<Grid x:Name="MainGrid">
+				<!-- Game frame-->
+				<Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden" Background="Transparent" />
 
-			<Canvas x:Name="FloatingTextAnimationCanvas" Width="{Binding ActualWidth, ElementName=MainGrid}" Height="{Binding ActualHeight, ElementName=MainGrid}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-		</Grid>
-	</StackPanel>
+				<Canvas x:Name="FloatingTextAnimationCanvas" Width="{Binding ActualWidth, ElementName=MainGrid}" Height="{Binding ActualHeight, ElementName=MainGrid}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+			</Grid>
+		</StackPanel>
+	</Border>
 </Window>
