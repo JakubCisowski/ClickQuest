@@ -40,7 +40,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Width = 200,
 					Height = 70,
 					Tag = region,
-					Background = (SolidColorBrush)this.FindResource("BrushAccent1")
+					Background = (SolidColorBrush)this.FindResource("BrushGray1")
 				};
 
 				var regionBlock = new TextBlock
