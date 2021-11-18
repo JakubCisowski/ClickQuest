@@ -18,7 +18,7 @@
     </Page.Resources>
 
     <!-- Stats panel -->
-    <Border BorderThickness="1" CornerRadius="8" BorderBrush="{StaticResource BrushBlack}" Margin="1" Padding="6" Background="{StaticResource BrushGray1}">
+    <Border BorderThickness="3" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" Margin="1" Padding="6" Background="{StaticResource BrushGray1}">
         <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical" HorizontalAlignment="Left" Width="323">
             <!-- Hero info block -->
             <TextBlock x:Name="HeroNameBlock" FontSize="22" TextAlignment="Center">

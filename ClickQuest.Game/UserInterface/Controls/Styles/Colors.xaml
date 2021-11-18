@@ -13,9 +13,9 @@
     <Color x:Key="ColorBlack">#000000</Color>
 
 	<!-- Theme accent palette -->
-    <Color x:Key="ColorAccent1">#fff9f2 </Color>
-    <Color x:Key="ColorAccent2">#ffdab0</Color>
-    <Color x:Key="ColorAccent3">#FFA237</Color>
+    <Color x:Key="ColorAccent1">#ffecd6</Color>
+    <Color x:Key="ColorAccent2">#ffd6a6</Color>
+    <Color x:Key="ColorAccent3">#ffbe73</Color>
 
 	<!-- Rarity -->
     <Color x:Key="ColorRarity0">#8C8C8C</Color>
