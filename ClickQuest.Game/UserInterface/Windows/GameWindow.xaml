@@ -11,7 +11,7 @@
 	<Border BorderThickness="3" CornerRadius="7">
 		<Border.Background>
 			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-					<GradientStop Color="{StaticResource ColorAccent1}" Offset="0.25" />
+					<GradientStop Color="{StaticResource ColorGray3}" Offset="0.25" />
 					<GradientStop Color="{StaticResource ColorWhite}" Offset="0.75" />
 				</LinearGradientBrush>
 		</Border.Background>
