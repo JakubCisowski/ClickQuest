@@ -46,7 +46,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				if (material.Rarity == Rarity.Mythic)
 				{
-					var result = AlertBox.Show($"Are you sure you want to melt {material.Name}?\nThis action will destroy this item and create at least {Material.BaseMeltingIngotBonus} {material.Rarity} ingots.\nYou can get bonus ingots if you master Melter specialization (by melting more materials).", MessageBoxButton.YesNo);
+					var listOfRuns = new List<Run>();
+					listOfRuns.Add(new Run("Are you sure you want to melt "));
+					listOfRuns.Add(new Run($"{material.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+					listOfRuns.Add(new Run("?\nThis action will destroy this item and create at least "));
+					listOfRuns.Add(new Run($"{Material.BaseMeltingIngotBonus} {material.Rarity} Ingots"){Foreground = ColorsController.GetRarityColor(material.Rarity)});
+					listOfRuns.Add(new Run(".\nYou can get bonus ingots if you master Melter specialization (by melting more materials)."));
+					
+					var result = AlertBox.Show(listOfRuns, MessageBoxButton.YesNo);
 
 					if (result == MessageBoxResult.No)
 					{
@@ -60,7 +67,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 			else if (b.CommandParameter is Artifact artifact)
 			{
-				string ingotAmountsDescription = "";
+				var listOfRuns = new List<Run>();
+				listOfRuns.Add(new Run("Are you sure you want to melt "));
+				listOfRuns.Add(new Run($"{artifact.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				listOfRuns.Add(new Run("?\nThis action will destroy this item and create:"));
+				
 				var ingotAmounts = CalculateIngotAmountsWhenMeltingArtifact(artifact);
 
 				for (int i=0;i<6;i++)
@@ -70,10 +81,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 						continue;
 					}
 					
-					ingotAmountsDescription += $"\n{ingotAmounts[i]}x {(Rarity)i} Ingots";
+					listOfRuns.Add(new Run($"\n{ingotAmounts[i]}x {(Rarity)i} Ingots"){Foreground = ColorsController.GetRarityColor((Rarity)i)});
 				}
 
-				var result = AlertBox.Show($"Are you sure you want to melt {artifact.Name}?\nThis action will destroy this item and create: {ingotAmountsDescription}", MessageBoxButton.YesNo);
+				var result = AlertBox.Show(listOfRuns, MessageBoxButton.YesNo);
 
 				if (result == MessageBoxResult.No)
 				{
@@ -176,7 +187,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			if (!MeetsCraftingRequirement(recipe))
 			{
-				AlertBox.Show($"You dont meet Craftsmen specialization requirements to craft {recipe.Rarity.ToString()} artifacts.\nCraft more common items in order to master it.", MessageBoxButton.OK);
+				var listOfRuns = new List<Run>();
+				listOfRuns.Add(new Run("You dont meet Craftsman specialization requirements to craft "));
+				listOfRuns.Add(new Run($"{recipe.Rarity.ToString()}"){Foreground = ColorsController.GetRarityColor(recipe.Rarity), FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				listOfRuns.Add(new Run(" artifacts.\nCraft more common items in order to master it."));
+				
+				AlertBox.Show(listOfRuns, MessageBoxButton.OK);
 				return;
 			}
 
@@ -206,7 +222,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private bool CheckAndRemoveIngots(Recipe recipe)
 		{
-			string ingotAmountsDescription = "";
+			var ingotRaritiesRuns = new List<Run>();
+			
 			var ingotAmounts = CalculateIngotAmountsWhenCraftingArtifact(recipe.Artifact);
 
 			for (int i=0;i<6;i++)
@@ -216,17 +233,31 @@ namespace ClickQuest.Game.UserInterface.Pages
 					continue;
 				}
 				
-				ingotAmountsDescription += $"- {ingotAmounts[i]}x {(Rarity)i} Ingots \n";
+				ingotRaritiesRuns.Add(new Run($"\n{ingotAmounts[i]}x {(Rarity)i} Ingots"){Foreground = ColorsController.GetRarityColor((Rarity)i)});
 			}
 
 
 			if (!CheckIfUserHasEnoughIngots(recipe))
 			{
-				AlertBox.Show($"You dont have enough ingots to craft {recipe.Name}.\nIngots required:\n{ingotAmountsDescription}\n\nGet more ingots by melting materials/artifacts or try to craft this artifact using materials.", MessageBoxButton.OK);
+				var notEnoughIngotsRuns = new List<Run>();
+				notEnoughIngotsRuns.Add(new Run("You dont have enough ingots to craft "));
+				notEnoughIngotsRuns.Add(new Run($"{recipe.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				notEnoughIngotsRuns.Add(new Run(".\nIngots required:"));
+				notEnoughIngotsRuns.AddRange(ingotRaritiesRuns);
+				notEnoughIngotsRuns.Add(new Run("\n\nGet more ingots by melting materials/artifacts or try to craft this artifact using materials."));
+				
+				AlertBox.Show(notEnoughIngotsRuns, MessageBoxButton.OK);
 				return false;
 			}
 
-			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using ingots?\nIngots needed:\n{ingotAmountsDescription}\n\nThis action will destroy all ingots and this recipe.", MessageBoxButton.YesNo);
+			var enoughIngotsRuns = new List<Run>();
+			enoughIngotsRuns.Add(new Run("Are you sure you want to craft "));
+			enoughIngotsRuns.Add(new Run($"{recipe.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+			enoughIngotsRuns.Add(new Run(" using ingots?\nIngots required:"));
+			enoughIngotsRuns.AddRange(ingotRaritiesRuns);
+			enoughIngotsRuns.Add(new Run("\n\nThis action will destroy all ingots and this recipe."));
+
+			var result = AlertBox.Show(enoughIngotsRuns, MessageBoxButton.YesNo);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -284,11 +315,25 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			if (!CheckIfHeroHasEnoughMaterials(recipe))
 			{
-				AlertBox.Show($"You don't have enough materials to craft {recipe.Name}.\n{recipe.RequirementsDescription}\nGet more materials by completing quests and killing monsters and boses or try to craft this artifact using ingots.", MessageBoxButton.OK);
+				var notEnoughMaterialsRuns = new List<Run>();
+				notEnoughMaterialsRuns.Add(new Run("You don't have enough materials to craft "));
+				notEnoughMaterialsRuns.Add(new Run($"{recipe.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				notEnoughMaterialsRuns.Add(new Run(".\n"));
+				notEnoughMaterialsRuns.AddRange(ItemToolTipController.GenerateRecipeIngredientsRuns(recipe));
+				notEnoughMaterialsRuns.Add(new Run("\n\nGet more materials by completing quests and killing monsters and boses or try to craft this artifact using ingots."));
+
+				AlertBox.Show(notEnoughMaterialsRuns, MessageBoxButton.OK);
 				return false;
 			}
 
-			var result = AlertBox.Show($"Are you sure you want to craft {recipe.Name} using materials?\n{recipe.RequirementsDescription}\nThis action will destroy all materials and this recipe.", MessageBoxButton.YesNo);
+			var enoughMaterialsRuns = new List<Run>();
+			enoughMaterialsRuns.Add(new Run("Are you sure you want to craft "));
+			enoughMaterialsRuns.Add(new Run($"{recipe.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+			enoughMaterialsRuns.Add(new Run(" using materials?\n"));
+			enoughMaterialsRuns.AddRange(ItemToolTipController.GenerateRecipeIngredientsRuns(recipe));
+			enoughMaterialsRuns.Add(new Run("\n\nThis action will destroy all materials and this recipe."));
+
+			var result = AlertBox.Show(enoughMaterialsRuns, MessageBoxButton.YesNo);
 
 			if (result == MessageBoxResult.No)
 			{

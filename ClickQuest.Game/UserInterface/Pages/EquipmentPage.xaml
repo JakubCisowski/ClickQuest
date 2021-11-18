@@ -11,11 +11,11 @@
     <Border BorderThickness="3" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" Margin="1" Padding="6" Background="{StaticResource BrushGray1}">
 
 		<!-- TabControl with 3 tabs - Materials, Recipes and Artifacts -->
-		<TabControl x:Name="EquipmentTabControl" Width="319" Background="{StaticResource BrushGray1}" SelectionChanged="TabControl_SelectionChanged">
+		<TabControl x:Name="EquipmentTabControl" Width="313" Background="{StaticResource BrushGray1}" SelectionChanged="TabControl_SelectionChanged">
         <!-- Materials -->
         <TabItem Background="{StaticResource BrushGray1}" Style="{StaticResource TabItemStyleGeneral}">
             <TabItem.Header>
-                <StackPanel Width="99" HorizontalAlignment="Center">
+                <StackPanel Width="97" HorizontalAlignment="Center">
                     <TextBlock Text="Materials" FontSize="20" HorizontalAlignment="Center" />
                     <materialDesign:PackIcon Kind="Cog" Width="20" Height="20" HorizontalAlignment="Center" />
                 </StackPanel>
@@ -30,7 +30,7 @@
         <!-- Recipes -->
         <TabItem Background="{StaticResource BrushGray1}" Style="{StaticResource TabItemStyleGeneral}">
             <TabItem.Header>
-                <StackPanel Width="99" HorizontalAlignment="Center">
+                <StackPanel Width="97" HorizontalAlignment="Center">
                     <TextBlock Text="Recipes" FontSize="20" HorizontalAlignment="Center" />
                     <materialDesign:PackIcon Kind="ScriptText" Width="20" Height="20" HorizontalAlignment="Center" />
                 </StackPanel>
@@ -45,7 +45,7 @@
         <!-- Artifacts -->
         <TabItem Background="{StaticResource BrushGray1}" Style="{StaticResource TabItemStyleGeneral}">
             <TabItem.Header>
-                <StackPanel Width="99" HorizontalAlignment="Center">
+                <StackPanel Width="97" HorizontalAlignment="Center">
                     <TextBlock Text="Artifacts" FontSize="20" HorizontalAlignment="Center" />
                     <materialDesign:PackIcon Kind="DiamondStone" Width="20" Height="20" HorizontalAlignment="Center" />
                 </StackPanel>

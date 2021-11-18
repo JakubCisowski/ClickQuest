@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace ClickQuest.Game.UserInterface.Controls
@@ -16,6 +18,8 @@ namespace ClickQuest.Game.UserInterface.Controls
 
 		public static MessageBoxResult Show(string content, MessageBoxButton buttons = MessageBoxButton.YesNo)
 		{
+			// Display a single string message on the screen.
+			
 			MessageBox = new AlertBox
 			{
 				ContentBox =
@@ -47,6 +51,39 @@ namespace ClickQuest.Game.UserInterface.Controls
 
 			return Result;
 		}
+
+		public static MessageBoxResult Show(List<Run> textRuns, MessageBoxButton buttons = MessageBoxButton.YesNo)
+		{
+			// Display a complex message that supports coloring and styling on the screen.
+			
+			MessageBox = new AlertBox();
+
+			MessageBox.ContentBox.Inlines.AddRange(textRuns);
+
+			switch (buttons)
+			{
+				case MessageBoxButton.YesNo:
+				{
+					MessageBox.OkButton.Visibility = Visibility.Collapsed;
+					MessageBox.YesButton.Visibility = Visibility.Visible;
+					MessageBox.NoButton.Visibility = Visibility.Visible;
+				}
+					break;
+
+				case MessageBoxButton.OK:
+				{
+					MessageBox.OkButton.Visibility = Visibility.Visible;
+					MessageBox.YesButton.Visibility = Visibility.Collapsed;
+					MessageBox.NoButton.Visibility = Visibility.Collapsed;
+				}
+					break;
+			}
+
+			MessageBox.ShowDialog();
+
+			return Result;
+		}
+
 
 		private void AlertBox_MouseDown(object sender, MouseButtonEventArgs e)
 		{

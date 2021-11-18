@@ -4,18 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Alert Box" Height="160" Width="420" WindowStartupLocation="CenterOwner" AllowsTransparency="True"
-        WindowStyle="None" ResizeMode="NoResize" Background="Transparent" MouseDown="AlertBox_MouseDown">
+        x:Name="AlertBoxWindow"
+        Title="Alert Box" Width="420" MinHeight="160" WindowStartupLocation="CenterOwner" AllowsTransparency="True"
+        WindowStyle="None" ResizeMode="NoResize" Background="Transparent" MouseDown="AlertBox_MouseDown" SizeToContent="Height">
 	<Grid>
-		<Border BorderThickness="3" BorderBrush="{StaticResource BrushAccent3}" CornerRadius="3" Background="{StaticResource BrushGray4}">
+		<Border BorderThickness="3" BorderBrush="{StaticResource BrushAccent3}" CornerRadius="3" Background="{StaticResource BrushGray4}" >
 			<StackPanel>
 				<!-- Alert text -->
-				<Grid Height="95">
-					<TextBlock x:Name="ContentBox" VerticalAlignment="Center" HorizontalAlignment="Center" Width="410" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{StaticResource FontRegularDemiBold}" />
+				<Grid Height="Auto" MinHeight="95">
+					<TextBlock x:Name="ContentBox" VerticalAlignment="Center" HorizontalAlignment="Center" Width="410" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{StaticResource FontRegular}" />
 				</Grid>
 
 				<!-- Buttons -->
-				<StackPanel Height="60" Orientation="Horizontal" HorizontalAlignment="Center">
+				<StackPanel Height="60" Orientation="Horizontal" HorizontalAlignment="Center" >
 					<Button x:Name="OkButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Ok" Click="OkButton_Click" Margin="0,0,10,5" Background="{StaticResource BrushAccent3}"/>
 
 					<Button x:Name="YesButton" Visibility="Hidden" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Yes" Click="YesButton_Click" Margin="0,0,10,5" Background="{StaticResource BrushAccent3}"/>

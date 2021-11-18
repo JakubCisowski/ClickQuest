@@ -51,7 +51,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (User.Instance.Gold >= blessingBlueprint.Value)
 			{
-				var result = AlertBox.Show($"Are you sure you want to buy {blessingBlueprint.Name} for {blessingBlueprint.Value} gold?", MessageBoxButton.YesNo);
+				var buyRuns = new List<Run>();
+				buyRuns.Add(new Run("Are you sure you want to buy "));
+				buyRuns.Add(new Run($"{blessingBlueprint.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				buyRuns.Add(new Run(" for "));
+				buyRuns.Add(new Run($"{blessingBlueprint.Value} gold"){Foreground = (SolidColorBrush)this.FindResource("BrushGold"), FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				buyRuns.Add(new Run("?"));
+				
+				var result = AlertBox.Show(buyRuns, MessageBoxButton.YesNo);
 
 				if (result == MessageBoxResult.No)
 				{
@@ -82,7 +89,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 			else
 			{
-				AlertBox.Show($"You do not have enough gold to buy this blessing.\nIt costs {blessingBlueprint.Value} gold.\nYou can get more gold by completing quests and selling loot from monsters and bosses.", MessageBoxButton.OK);
+				var notEnoughGoldRuns = new List<Run>();
+				notEnoughGoldRuns.Add(new Run("You do not have enough gold to buy this blessing.\nIt costs "));
+				notEnoughGoldRuns.Add(new Run($"{blessingBlueprint.Value} gold"){Foreground = (SolidColorBrush)this.FindResource("BrushGold"), FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				notEnoughGoldRuns.Add(new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses."));
+				
+				AlertBox.Show(notEnoughGoldRuns, MessageBoxButton.OK);
 			}
 		}
 

@@ -70,7 +70,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (item.Rarity == Rarity.Mythic)
 			{
-				var result = AlertBox.Show($"Are you sure you want to sell {item.Name}?", MessageBoxButton.YesNo);
+				var sellItemRuns = new List<Run>();
+				sellItemRuns.Add(new Run("Are you sure you want to sell "));
+				sellItemRuns.Add(new Run($"{item.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				sellItemRuns.Add(new Run("?"));
+				
+				var result = AlertBox.Show(sellItemRuns, MessageBoxButton.YesNo);
 
 				if (result == MessageBoxResult.No)
 				{
@@ -104,7 +109,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (User.Instance.Gold >= recipe.Value)
 			{
-				var result = AlertBox.Show($"Are you sure you want to buy {recipe.Name} for {recipe.Value} gold?", MessageBoxButton.YesNo);
+				var buyRecipeRuns = new List<Run>();
+				buyRecipeRuns.Add(new Run("Are you sure you want to buy "));
+				buyRecipeRuns.Add(new Run($"{recipe.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				buyRecipeRuns.Add(new Run(" for "));
+				buyRecipeRuns.Add(new Run($"{recipe.Value} gold"){Foreground = (SolidColorBrush)this.FindResource("BrushGold"), FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				buyRecipeRuns.Add(new Run("?"));
+				
+				var result = AlertBox.Show(buyRecipeRuns, MessageBoxButton.YesNo);
 				if (result == MessageBoxResult.No)
 				{
 					return;
@@ -121,7 +133,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 			else
 			{
-				AlertBox.Show($"You do not have enough gold to buy this item.\nIt costs {recipe.Value} gold.\nYou can get more gold by completing quests and selling loot from monsters and bosses.", MessageBoxButton.OK);
+				var notEnoughGoldRuns = new List<Run>();
+				notEnoughGoldRuns.Add(new Run("You do not have enough gold to buy this item.\nIt costs "));
+				notEnoughGoldRuns.Add(new Run($"{recipe.Value} gold"){Foreground = (SolidColorBrush)this.FindResource("BrushGold"), FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				notEnoughGoldRuns.Add(new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses."));
+				
+				AlertBox.Show(notEnoughGoldRuns, MessageBoxButton.OK);
 			}
 		}
 
