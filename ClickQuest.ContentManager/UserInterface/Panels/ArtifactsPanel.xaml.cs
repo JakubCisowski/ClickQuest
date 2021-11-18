@@ -57,12 +57,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = selectedArtifact.Name,
 				Margin = new Thickness(10)
 			};
-			var valueBox = new TextBox
-			{
-				Name = "ValueBox",
-				Text = selectedArtifact.Value.ToString(),
-				Margin = new Thickness(10)
-			};
 			var rarityBox = new ComboBox
 			{
 				Name = "RarityBox",
@@ -119,7 +113,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
 			HintAssist.SetHint(nameBox, "Name");
-			HintAssist.SetHint(valueBox, "Value");
 			HintAssist.SetHint(rarityBox, "Rarity");
 			HintAssist.SetHint(artifactTypeBox, "Type");
 			HintAssist.SetHint(descriptionBox, "Description");
@@ -131,7 +124,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			_controls.Add(idBox.Name, idBox);
 			_controls.Add(nameBox.Name, nameBox);
-			_controls.Add(valueBox.Name, valueBox);
 			_controls.Add(rarityBox.Name, rarityBox);
 			_controls.Add(artifactTypeBox.Name, artifactTypeBox);
 			_controls.Add(descriptionBox.Name, descriptionBox);
@@ -179,12 +171,12 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			artifact.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
 			artifact.Name = (_controls["NameBox"] as TextBox).Text;
-			artifact.Value = int.Parse((_controls["ValueBox"] as TextBox).Text);
 			artifact.Rarity = (Rarity)Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
 			artifact.ArtifactType = (ArtifactType)Enum.Parse(typeof(ArtifactType), (_controls["ArtifactTypeBox"] as ComboBox).SelectedValue.ToString());
 			artifact.Description = (_controls["DescriptionBox"] as TextBox).Text;
 			artifact.Lore = (_controls["LoreBox"] as TextBox).Text;
 			artifact.ExtraInfo = (_controls["ExtraInfoBox"] as TextBox).Text;
+			artifact.Value = 0;
 
 			// Check if this Id is already in the collection (modified).
 			if (GameContent.Artifacts.Select(x => x.Id).Contains(artifact.Id))
