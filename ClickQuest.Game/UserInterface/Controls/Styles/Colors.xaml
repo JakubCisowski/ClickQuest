@@ -13,6 +13,7 @@
     <Color x:Key="ColorBlack">#000000</Color>
 
 	<!-- Theme accent palette -->
+    <Color x:Key="ColorAccent0">#c5d0d9</Color> <!-- Usually a mix of gray with accent (EQ/Stats background) -->
     <Color x:Key="ColorAccent1">#d6edff</Color>
     <Color x:Key="ColorAccent2">#a6d8ff</Color>
     <Color x:Key="ColorAccent3">#73a6ff</Color>
@@ -54,6 +55,7 @@
     <SolidColorBrush x:Key="BrushGray4" Color="{StaticResource ColorGray4}" />
     <SolidColorBrush x:Key="BrushGray5" Color="{StaticResource ColorGray5}" />
     <SolidColorBrush x:Key="BrushBlack" Color="{StaticResource ColorBlack}" />
+    <SolidColorBrush x:Key="BrushAccent0" Color="{StaticResource ColorAccent0}" />
     <SolidColorBrush x:Key="BrushAccent1" Color="{StaticResource ColorAccent1}" />
     <SolidColorBrush x:Key="BrushAccent2" Color="{StaticResource ColorAccent2}" />
     <SolidColorBrush x:Key="BrushAccent3" Color="{StaticResource ColorAccent3}" />
