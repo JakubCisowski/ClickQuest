@@ -1,0 +1,31 @@
+<Window x:Class="ClickQuest.Game.UserInterface.Windows.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Name="AlertBoxWindow"
+        Title="Alert Box" Width="420" MinHeight="160" WindowStartupLocation="CenterOwner" AllowsTransparency="True"
+        WindowStyle="None" ResizeMode="NoResize" Background="Transparent" MouseDown="SettingsWindow_MouseDown" SizeToContent="Height" Closing="SettingsWindow_Closing">
+	<Grid>
+		<Border BorderThickness="3" BorderBrush="{StaticResource BrushAccent3}" CornerRadius="3" Background="{StaticResource BrushGray3}">
+			<StackPanel>
+				<!-- Theme selection -->
+				<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False">
+					<TextBlock Text="Color themes" VerticalAlignment="Center" HorizontalAlignment="Center" Width="410" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{StaticResource FontRegular}" />
+
+					<StackPanel Orientation="Horizontal" Margin="0,10,0,0" IsHitTestVisible="False">
+						<Border x:Name="BlueThemeBorder" Width="40" Height="40" BorderBrush="{StaticResource BrushGray3}" BorderThickness="2" Background="#73a6ff" PreviewMouseUp="ThemeBorder_OnPreviewMouseUp"/>
+
+						<Border x:Name="OrangeThemeBorder" Width="40" Height="40" BorderBrush="{StaticResource BrushGray3}" BorderThickness="2" Background="#ffbe73" PreviewMouseUp="ThemeBorder_OnPreviewMouseUp"/>
+
+						<Border x:Name="PinkThemeBorder" Width="40" Height="40" BorderBrush="{StaticResource BrushGray3}" BorderThickness="2" Background="#dda8a2" PreviewMouseUp="ThemeBorder_OnPreviewMouseUp"/>
+					</StackPanel>
+				</StackPanel>
+
+				<!-- Buttons -->
+				<Button x:Name="OkButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Ok" Click="OkButton_OnClick" Margin="0,0,10,5" Background="{StaticResource BrushAccent3}"/>
+			</StackPanel>
+		</Border>
+	</Grid>
+</Window>

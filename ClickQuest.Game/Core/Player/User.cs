@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.UserInterface.Controls.Styles.Themes;
 
 namespace ClickQuest.Game.Core.Player
 {
@@ -43,6 +44,8 @@ namespace ClickQuest.Game.Core.Player
 		public static DateTime SessionStartDate { get; set; }
 		public Achievements Achievements { get; set; }
 
+		public ColorTheme Theme{ get; set; }
+
 		public int Gold
 		{
 			get
@@ -72,6 +75,7 @@ namespace ClickQuest.Game.Core.Player
 			Ingots = new List<Ingot>();
 			DungeonKeys = new List<DungeonKey>();
 			Achievements = new Achievements();
+			Theme = ColorTheme.Blue;
 		}
 	}
 }

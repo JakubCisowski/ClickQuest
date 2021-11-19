@@ -178,5 +178,10 @@ namespace ClickQuest.Game.UserInterface.Windows
 				Application.Current.Shutdown();
 			}
 		}
+
+		private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
+		{
+			SettingsWindow.Instance.Show();
+		}
 	}
 }

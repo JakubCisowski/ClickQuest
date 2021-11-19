@@ -7,10 +7,11 @@
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/UserInterface/Controls/Styles/Themes/Blue.xaml" />
+				<ResourceDictionary Source="/UserInterface/Controls/Styles/Colors.xaml" />
 				<ResourceDictionary Source="/UserInterface/Controls/Styles/ScrollBar.xaml" />
 				<ResourceDictionary Source="/UserInterface/Controls/Styles/Button.xaml" />
 				<ResourceDictionary Source="/UserInterface/Controls/Styles/TabControl.xaml" />
-				<ResourceDictionary Source="/UserInterface/Controls/Styles/Colors.xaml" />
 				<ResourceDictionary Source="/UserInterface/Controls/Styles/Fonts.xaml" />
 				<ResourceDictionary Source="/UserInterface/Controls/Styles/ListView.xaml" />
 			</ResourceDictionary.MergedDictionaries>

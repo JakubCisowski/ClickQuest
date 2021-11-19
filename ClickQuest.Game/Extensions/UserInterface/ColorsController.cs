@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Items;
@@ -5,7 +6,9 @@ using ClickQuest.Game.Extensions.Combat;
 using System.Windows;
 using System.Windows.Media;
 using ClickQuest.Game.Core.Enemies;
+using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Places;
+using ClickQuest.Game.UserInterface.Controls.Styles.Themes;
 
 namespace ClickQuest.Game.Extensions.UserInterface
 {
@@ -131,6 +134,72 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			}
 
 			return brush;
+		}
+
+		public static void ChangeApplicationColorTheme(ColorTheme newTheme)
+		{
+			switch (newTheme)
+			{
+				case ColorTheme.Blue:
+				{
+					string blueThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Blue.xaml";
+					
+					var newDict = new ResourceDictionary() {Source = new Uri(blueThemeXamlPath, UriKind.Relative)};
+
+					foreach (var mergedDict in newDict.MergedDictionaries)
+					{
+						Application.Current.Resources.MergedDictionaries.Add(mergedDict);
+					}
+
+					foreach (var key in newDict.Keys)
+					{
+						Application.Current.Resources[key] = newDict[key];
+					}
+					
+					break;
+				}
+
+				case ColorTheme.Orange:
+				{
+					string orangeThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Orange.xaml";
+
+					var newDict = new ResourceDictionary() {Source = new Uri(orangeThemeXamlPath, UriKind.Relative)};
+
+					foreach (var mergedDict in newDict.MergedDictionaries)
+					{
+						Application.Current.Resources.MergedDictionaries.Add(mergedDict);
+					}
+
+					foreach (var key in newDict.Keys)
+					{
+						Application.Current.Resources[key] = newDict[key];
+					}
+					
+					break;
+
+				}
+
+				case ColorTheme.Pink:
+				{
+					string pinkThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Pink.xaml";
+					
+					var newDict = new ResourceDictionary() {Source = new Uri(pinkThemeXamlPath, UriKind.Relative)};
+
+					foreach (var mergedDict in newDict.MergedDictionaries)
+					{
+						Application.Current.Resources.MergedDictionaries.Add(mergedDict);
+					}
+
+					foreach (var key in newDict.Keys)
+					{
+						Application.Current.Resources[key] = newDict[key];
+					}
+
+					break;
+				}
+			}
+			
+			GameAssets.RefreshPages();
 		}
 	}
 }

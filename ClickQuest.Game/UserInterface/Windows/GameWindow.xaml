@@ -11,7 +11,7 @@
 	<Border BorderThickness="3" CornerRadius="7">
 		<Border.Background>
 			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-					<GradientStop Color="{StaticResource ColorAccent1}" Offset="0.25" />
+					<GradientStop Color="{DynamicResource ColorAccent1}" Offset="0.25" />
 					<GradientStop Color="{StaticResource ColorWhite}" Offset="0.75" />
 				</LinearGradientBrush>
 		</Border.Background>
@@ -23,21 +23,35 @@
 				<Rectangle x:Name="DragableTop" Height="40" Fill="Transparent" MouseDown="DragableTop_MouseDown" />
 
 				<!-- Location info block-->
-				<Border x:Name="LocationInfoBorder" BorderThickness="2" CornerRadius="3" Visibility="Hidden" BorderBrush="{StaticResource BrushAccent3}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+				<Border x:Name="LocationInfoBorder" BorderThickness="2" CornerRadius="3" Visibility="Hidden" BorderBrush="{DynamicResource BrushAccent3}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
 					<TextBlock x:Name="LocationInfoBlock" Text="{Binding LocationInfo}" FontFamily="{StaticResource FontRegularDemiBold}" FontSize="18" VerticalAlignment="Center" Margin="3" />
 				</Border>
 
 				<!-- Achievements button-->
-				<Button x:Name="AchievementsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="AchievementsButton_Click" Padding="0" Margin="5,5,40,5" Background="{StaticResource BrushGray1}">
+				<Button x:Name="AchievementsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="AchievementsButton_Click" Padding="0" Margin="5,5,80,5" Background="{StaticResource BrushGray1}">
 					<Button.ToolTip>
 						<ToolTip Style="{StaticResource ToolTipSimple}">
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Your Achievements"/>
 						</ToolTip>
 					</Button.ToolTip>
 
-					<!-- Exit button icon -->
+					<!-- Achievements button icon -->
 					<Button.Content>
 						<materialDesign:PackIcon Kind="Trophy" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushBlack}" Margin="0" />
+					</Button.Content>
+				</Button>
+
+				<!-- Achievements button-->
+				<Button x:Name="SettingsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="SettingsButton_OnClick" Padding="0" Margin="5,5,40,5" Background="{StaticResource BrushGray1}">
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Game Settings"/>
+						</ToolTip>
+					</Button.ToolTip>
+
+					<!-- Achievements button icon -->
+					<Button.Content>
+						<materialDesign:PackIcon Kind="Tools" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushBlack}" Margin="0" />
 					</Button.Content>
 				</Button>
 
