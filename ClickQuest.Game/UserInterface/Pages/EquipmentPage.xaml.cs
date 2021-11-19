@@ -151,7 +151,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 						Background = (SolidColorBrush) FindResource("BrushAccent1"),
 						Padding = new Thickness(6),
 						Margin = new Thickness(2),
-						Tag = material
+						Tag = material,
+						CornerRadius = new CornerRadius(3)
 					};
 
 					border.PreviewMouseUp += ItemBorder_TryToEquip;
@@ -185,7 +186,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 						Background = (SolidColorBrush) FindResource("BrushAccent1"),
 						Padding = new Thickness(6),
 						Margin = new Thickness(2),
-						Tag = recipe
+						Tag = recipe,
+						CornerRadius = new CornerRadius(3)
 					};
 
 					border.PreviewMouseUp += ItemBorder_TryToEquip;
@@ -227,7 +229,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 						Background = (SolidColorBrush) FindResource("BrushAccent1"),
 						Padding = new Thickness(6),
 						Margin = new Thickness(2),
-						Tag = artifact
+						Tag = artifact,
+						CornerRadius = new CornerRadius(3)
 					};
 
 					border.PreviewMouseUp += ItemBorder_TryToEquip;
