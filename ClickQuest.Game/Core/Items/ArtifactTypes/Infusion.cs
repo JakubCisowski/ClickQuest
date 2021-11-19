@@ -13,7 +13,7 @@ namespace ClickQuest.Game.Core.Items.ArtifactTypes
 			bool isAnArtifactEquipped = User.Instance.CurrentHero.EquippedArtifacts.Count > 0;
 			bool isNoInfusionEquipped = User.Instance.CurrentHero.EquippedArtifacts.All(x => x.ArtifactType != ArtifactType.Infusion);
 
-			if (isAnArtifactEquipped)
+			if (isAnArtifactEquipped && isNoInfusionEquipped)
 			{
 				return true;
 			}
@@ -25,6 +25,7 @@ namespace ClickQuest.Game.Core.Items.ArtifactTypes
 		public Infusion()
 		{
 			ArtifactType = ArtifactType.Infusion;
+			Description = "Has to be equipped with at least 1 other Artifact, and cannot be equipped with another Infusion.";
 		}
 	}
 }

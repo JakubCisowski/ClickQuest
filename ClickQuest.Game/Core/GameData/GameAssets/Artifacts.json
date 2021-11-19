@@ -15,7 +15,7 @@
     "ArtifactType": 1,
     "Id": 2,
     "Name": "Ghostly Infusion",
-    "Value": 1,
+    "Value": 0,
     "Rarity": 2,
     "Description": "Has to be equipped with at least one other artifact. After killing a monster, your next click is guaranteed to critically hit, and will deal 10% more damage."
   },
@@ -45,7 +45,7 @@
     "ArtifactType": 0,
     "Id": 5,
     "Name": "Mystic Clover",
-    "Value": 1,
+    "Value": 0,
     "Rarity": 4,
     "Description": "While on a region, you have an increased chance to find rare Monsters. The chance to find Monsters that have a spawn chance of 2% or less is doubled, while the chance to find the most common Monsters is reduced appropriately."
   },

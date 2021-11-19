@@ -7,6 +7,7 @@ namespace ClickQuest.Game.Core.Items.ArtifactTypes
 		public Talisman()
 		{
 			ArtifactType = ArtifactType.Talisman;
+			Description = "Useless type";
 		}
 	}
 }

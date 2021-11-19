@@ -90,12 +90,9 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 							toolTipBlock.Inlines.Add(run);
 						}
 						
-						if (!string.IsNullOrWhiteSpace(artifact.ExtraInfo))
-						{
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new LineBreak());
-							toolTipBlock.Inlines.Add(new Run($"{artifact.ExtraInfo}") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray5")});
-						}
+						toolTipBlock.Inlines.Add(new LineBreak());
+						toolTipBlock.Inlines.Add(new LineBreak());
+						toolTipBlock.Inlines.Add(new Run($"{artifact.ArtifactFunctionality.ArtifactTypeFunctionality.Description + artifact.ExtraInfo}") {FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"), Foreground=(SolidColorBrush)Application.Current.FindResource("BrushGray5")});
 
 						toolTipBlock.Inlines.Add(new LineBreak());
 						toolTipBlock.Inlines.Add(GenerateTextSeparator());
