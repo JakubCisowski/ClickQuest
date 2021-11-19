@@ -16,6 +16,7 @@ namespace ClickQuest.Game.Core.Items
 	{
 		public string Name { get; set; }
 		public int ArtifactSlotsRequired { get; set; } = 1;
+		public ArtifactTypeFunctionality ArtifactTypeFunctionality { get; set; }
 
 		// Use when trying to equip an artifact to determine if it can be equipped.
 		public virtual bool CanBeEquipped()
@@ -46,6 +47,11 @@ namespace ClickQuest.Game.Core.Items
 				return false;
 			}
 
+			if (!ArtifactTypeFunctionality.CanBeEquipped())
+			{
+				return false;
+			}
+
 			return true;
 		}
 
@@ -67,13 +73,11 @@ namespace ClickQuest.Game.Core.Items
 				AlertBox.Show("You cannot unequip artifacts while questing.", MessageBoxButton.OK);
 				return false;
 			}
-			
-			// This should be ignored in infusion-type artifacts to allow them to be unequipped freely.
-			
+						
 			bool isInfusionEquipped = User.Instance.CurrentHero.EquippedArtifacts.Any(x => x.ArtifactType == ArtifactType.Infusion);
 			bool isOnlyOtherArtifact = User.Instance.CurrentHero.EquippedArtifacts.Count(x => x.ArtifactType != ArtifactType.Infusion) == 1;
 
-			if (isInfusionEquipped && isOnlyOtherArtifact)
+			if (isInfusionEquipped && isOnlyOtherArtifact && ArtifactTypeFunctionality.ArtifactType != ArtifactType.Infusion)
 			{
 				AlertBox.Show("You cannot unequip this artifact right now - you have an artifact equipped that requires at least one other artifact.", MessageBoxButton.OK);
 				return false;

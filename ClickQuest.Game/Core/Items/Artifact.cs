@@ -12,10 +12,9 @@ namespace ClickQuest.Game.Core.Items
 	{
 		[JsonIgnore]
 		public ArtifactFunctionality ArtifactFunctionality { get; set; }
-
+		public ArtifactType ArtifactType { get; set; }
 		public string Lore { get; set; }
 		public string ExtraInfo { get; set; }
-		public ArtifactType ArtifactType { get; set; }
 		public string MythicTag { get; set; }
 		public const double MeltingIngredientsRatio = 0.6;
 		public const int MeltingWithoutIngredientsValue = 100;

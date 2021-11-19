@@ -57,10 +57,9 @@ namespace ClickQuest.Game.Core.GameData
 			}
 
 			LoadArtifactFunctionalities();
-			LoadBossAffixFunctionalities();
+			LoadArtifactTypeFunctionalities();
 
-			// [PRERELEASE] In the future this will be done in content loader.
-			FillMonsterLootWithEmptyLoot();
+			LoadBossAffixFunctionalities();
 		}
 
 		public static List<T> DeserializeType<T>(string filePath)
@@ -81,7 +80,7 @@ namespace ClickQuest.Game.Core.GameData
 		{
 			var artifactFunctionalities = new List<ArtifactFunctionality>();
 
-			var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Core.Artifacts", StringComparison.Ordinal));
+			var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Core.Items.Artifacts", StringComparison.Ordinal));
 
 			foreach (var type in types)
 			{
@@ -94,6 +93,26 @@ namespace ClickQuest.Game.Core.GameData
 			foreach (var artifact in GameAssets.Artifacts)
 			{
 				artifact.ArtifactFunctionality = artifactFunctionalities.FirstOrDefault(x => x.Name == artifact.Name);
+			}
+		}
+
+		public static void LoadArtifactTypeFunctionalities()
+		{
+			var artifactTypeFunctionalities = new List<ArtifactTypeFunctionality>();
+
+			var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Core.Items.ArtifactTypes", StringComparison.Ordinal));
+
+			foreach (var type in types)
+			{
+				if (Activator.CreateInstance(type) is ArtifactTypeFunctionality artifactTypeFunctionality)
+				{
+					artifactTypeFunctionalities.Add(artifactTypeFunctionality);
+				}
+			}
+
+			foreach (var artifact in GameAssets.Artifacts)
+			{
+				artifact.ArtifactFunctionality.ArtifactTypeFunctionality = artifactTypeFunctionalities.FirstOrDefault(x => x.ArtifactType == artifact.ArtifactType);
 			}
 		}
 
@@ -118,24 +137,6 @@ namespace ClickQuest.Game.Core.GameData
 				foreach (var affix in boss.Affixes)
 				{
 					boss.AffixFunctionalities.Add(affixFunctionalities.FirstOrDefault(x => x.Affix == affix));
-				}
-			}
-		}
-
-		public static void FillMonsterLootWithEmptyLoot()
-		{
-			foreach (var monster in GameAssets.Monsters)
-			{
-				double sumOfFrequencies = monster.MonsterLootPatterns.Sum(x => x.Frequency);
-
-				if (sumOfFrequencies < 1.0)
-				{
-					monster.MonsterLootPatterns.Add(new MonsterLootPattern
-					{
-						MonsterLootId = 0,
-						MonsterLootType = RewardType.Material,
-						Frequency = 1.0 - sumOfFrequencies
-					});
 				}
 			}
 		}
