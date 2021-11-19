@@ -18,7 +18,8 @@ namespace ClickQuest.Game.Core.Items
 		public int ArtifactSlotsRequired { get; set; } = 1;
 		public ArtifactTypeFunctionality ArtifactTypeFunctionality { get; set; }
 
-		// Use when trying to equip an artifact to determine if it can be equipped.
+		// Used when trying to equip an artifact to determine if it can be equipped.
+		// Triggered: before equipping an Artifact.
 		public virtual bool CanBeEquipped()
 		{
 			bool isFighting = GameAssets.CurrentPage is RegionPage or DungeonBossPage;
@@ -55,7 +56,8 @@ namespace ClickQuest.Game.Core.Items
 			return true;
 		}
 
-		// Use when trying to unequip an artifact to determine if it can be unequipped.
+		// Used when trying to unequip an artifact to determine if it can be unequipped.
+		// Triggered: before unequipping an Artifact.
 		public virtual bool CanBeUnequipped()
 		{
 			bool isFighting = GameAssets.CurrentPage is RegionPage or DungeonBossPage;
@@ -86,66 +88,89 @@ namespace ClickQuest.Game.Core.Items
 			return true;
 		}
 
-		// Use when increasing base stats.
+		// Used upon equipping or re-equipping an artifact to grant some permanent bonuses.
+		// Triggered: after equipping an Artifact, and after loading data from User.json.
 		public virtual void OnEquip()
 		{
 		}
 
-		// Use to decrease base stats that have previously been increased.
+		// Used upon unequipping an artifact to take back the bonuses granted in OnEquip.
+		// Triggered: after unequipping an Artifact, and before exiting the game and saving user data (to prevent bonuses from persisting forever).
 		public virtual void OnUnequip()
 		{
 		}
 
-		// Use to deal bonus damage upon clicking.
+		// Used to trigger on-click effects, such as a damage increase or a stacking bonus.
+		// Triggered: after dealing all types of damage from a click to an enemy (after applying click and on-hit damage).
+		// clickedEnemy - the enemy that was clicked.
 		public virtual void OnEnemyClick(Enemy clickedEnemy)
 		{
 		}
 
-		// Use to increase ALL damage dealt (eg. by a percentage).
+		// Used to modify or trigger an effect based on the amount of any damage dealt (click, on-hit, poison, aura) except artifact damage.
+		// Triggered: before dealing any damage to an enemy, and before triggering other OnDealingXDamage effects.
+		// damage - the amount of damage dealt.
 		public virtual void OnDealingDamage(ref int damage)
 		{
 		}
 
-		// Use to increase click damage dealt (eg. by a percentage).
+		// Used to modify or trigger an effect based on the amount of click damage dealt (regardless if critical or not).
+		// Triggered: before dealing click damage to an enemy, but after triggering the OnDealingDamage effect.
+		// clickDamage - the amount of damage dealt; clickDamageType - determines if the damage was critical or not.
 		public virtual void OnDealingClickDamage(ref int clickDamage, DamageType clickDamageType)
 		{
 		}
 
-		// Use to increase poison damage dealt (eg. by a percentage).
+		// Used to modify or trigger an effect based on the amount of poison dealt.
+		// Triggered: before dealing poison damage to an enemy, but after triggering the OnDealingDamage effect.
+		// poisonDamage - the amount of damage dealt.
 		public virtual void OnDealingPoisonDamage(ref int poisonDamage)
 		{
 		}
 
+		// Used to modify or trigger an effect based on the amount of aura damage dealt.
+		// Triggered: before dealing aura damage to an enemy, but after triggering the OnDealingDamage effect.
+		// auraDamage - the amount of damage dealt.
 		public virtual void OnDealingAuraDamage(ref int auraDamage)
 		{
 		}
 
-		// Use to trigger on-kill effects.
+		// Used to trigger an effect based on enemy deaths.
+		// Triggered: after killing an enemy and after granting victory bonuses, but before spawning another monster
+		// Also triggered when boss timer goes down to 0, regardless if the boss died or not.
 		public virtual void OnKill()
 		{
 		}
 
-		// Use to trigger region-based utility effects (eg. increased drop rate).
+		// Used to trigger an effect when entering a region.
+		// Triggered: when switching page to a region, after the ChangePage method is invoked.
 		public virtual void OnRegionEnter()
 		{
 		}
 
-		// Use to revert the above utility effects.
+		// Used to trigger an effect when leaving a region.
+		// Triggered: when switching page from a region, and before exiting the game and saving user data (to prevent bonuses from persisting forever).
 		public virtual void OnRegionLeave()
 		{
 		}
 
-		// Use for effects that trigger on experience gained (eg. bonus experience).
+		// Used to trigger an effect upon gaining experience.
+		// Triggered: when gaining experience, after adding to the hero Experience property.
+		// experienceGained - the amount of experience gained.
 		public virtual void OnExperienceGained(int experienceGained)
 		{
 		}
 
-		// Use for effects that increase blessing effectiveness.
+		// Used to trigger an effect upon gaining a blessing.
+		// Triggered: when gaining a blessing, before increasing a hero's stats and starting the blessing timer.
+		// blessing - blessing that is being gained.
 		public virtual void OnBlessingStarted(Blessing blessing)
 		{
 		}
 
-		// Use for effects that empower quests (eg. decrease duration).
+		// Used to trigger an effect upon starting a quest.
+		// Triggered: when starting a quest, before starting its timer.
+		// quest - quest that is being started.
 		public virtual void OnQuestStarted(Quest quest)
 		{
 		}
