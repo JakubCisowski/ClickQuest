@@ -76,9 +76,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 			RecipesPanel.Children.Clear();
 			ArtifactsPanel.Children.Clear();
 
-			UpdateEquipmentTab(User.Instance.CurrentHero?.Materials, MaterialsPanel);
-			UpdateEquipmentTab(User.Instance.CurrentHero?.Recipes, RecipesPanel);
-			UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
+			UpdateMaterialsEquipmentTab(User.Instance.CurrentHero?.Materials);
+			UpdateRecipesEquipmentTab(User.Instance.CurrentHero?.Recipes);
+			UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
 
 			RefreshEquippedArtifacts();
 
@@ -98,19 +98,19 @@ namespace ClickQuest.Game.UserInterface.Pages
 				// Materials
 				case 0:
 					MaterialsPanel.Children.Clear();
-					UpdateEquipmentTab(User.Instance.CurrentHero?.Materials, MaterialsPanel);
+					UpdateMaterialsEquipmentTab(User.Instance.CurrentHero?.Materials);
 					break;
 				
 				// Recipes
 				case 1:
 					RecipesPanel.Children.Clear();
-					UpdateEquipmentTab(User.Instance.CurrentHero?.Recipes, RecipesPanel);
+					UpdateRecipesEquipmentTab(User.Instance.CurrentHero?.Recipes);
 					break;
 				
 				// Artifacts
 				case 2:
 					ArtifactsPanel.Children.Clear();
-					UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
+					UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
 					RefreshEquippedArtifacts();
 					break;
 			}
@@ -121,28 +121,28 @@ namespace ClickQuest.Game.UserInterface.Pages
 			if (itemType == typeof(Material) && _selectedTabIndex == 0)
 			{
 				MaterialsPanel.Children.Clear();
-				UpdateEquipmentTab(User.Instance.CurrentHero?.Materials, MaterialsPanel);
+				UpdateMaterialsEquipmentTab(User.Instance.CurrentHero?.Materials);
 			}
 			else if (itemType == typeof(Recipe) && _selectedTabIndex == 1)
 			{
 				RecipesPanel.Children.Clear();
-				UpdateEquipmentTab(User.Instance.CurrentHero?.Recipes, RecipesPanel);
+				UpdateRecipesEquipmentTab(User.Instance.CurrentHero?.Recipes);
 			}
 			else if (itemType == typeof(Artifact) && _selectedTabIndex == 2)
 			{
 				ArtifactsPanel.Children.Clear();
-				UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
+				UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
 				RefreshEquippedArtifacts();
 			}
 		}
 
-		private void UpdateEquipmentTab<T>(List<T> specificEquipmentCollection, StackPanel equipmentTabPanel) where T : Item
+		private void UpdateMaterialsEquipmentTab(List<Material> materials)
 		{
-			if (specificEquipmentCollection != null)
+			if (materials is not null)
 			{
-				specificEquipmentCollection = specificEquipmentCollection.ReorderItemsInList();
+				materials = materials.ReorderItemsInList();
 
-				foreach (var item in specificEquipmentCollection)
+				foreach (var material in materials)
 				{
 					var border = new Border
 					{
@@ -151,21 +151,97 @@ namespace ClickQuest.Game.UserInterface.Pages
 						Background = (SolidColorBrush) FindResource("BrushAccent1"),
 						Padding = new Thickness(6),
 						Margin = new Thickness(2),
-						Tag = item
+						Tag = material
 					};
 
 					border.PreviewMouseUp += ItemBorder_TryToEquip;
 
 					GeneralToolTipController.SetToolTipDelayAndDuration(border);
 
-					var toolTip = ItemToolTipController.GenerateItemToolTip(item);
+					var toolTip = ItemToolTipController.GenerateItemToolTip(material);
 					border.ToolTip = toolTip;
 
-					var grid = CreateSingleItemGrid(item);
+					var grid = CreateSingleItemGrid(material);
 
 					border.Child = grid;
 
-					equipmentTabPanel.Children.Add(border);
+					MaterialsPanel.Children.Add(border);
+				}
+			}
+		}
+		
+		private void UpdateRecipesEquipmentTab(List<Recipe> recipes)
+		{
+			if (recipes is not null)
+			{
+				recipes = recipes.ReorderItemsInList();
+
+				foreach (var recipe in recipes)
+				{
+					var border = new Border
+					{
+						BorderThickness = new Thickness(2),
+						BorderBrush = (SolidColorBrush)FindResource("BrushBlack"),
+						Background = (SolidColorBrush) FindResource("BrushAccent1"),
+						Padding = new Thickness(6),
+						Margin = new Thickness(2),
+						Tag = recipe
+					};
+
+					border.PreviewMouseUp += ItemBorder_TryToEquip;
+
+					GeneralToolTipController.SetToolTipDelayAndDuration(border);
+
+					var toolTip = ItemToolTipController.GenerateItemToolTip(recipe);
+					border.ToolTip = toolTip;
+
+					var grid = CreateSingleItemGrid(recipe);
+
+					border.Child = grid;
+
+					RecipesPanel.Children.Add(border);
+				}
+			}
+		}
+		
+		private void UpdateArtifactsEquipmentTab(List<Artifact> artifacts)
+		{
+			if (artifacts is not null)
+			{
+				artifacts = artifacts.ReorderItemsInList();
+
+				foreach (var artifact in artifacts)
+				{
+					// If the current Artifact is equipped, and its count is equal to 1 (so the only available Artifact is equipped), skip it
+					// Otherwise, we'll create the block but with quantity of one less.
+					if (User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact) && artifact.Quantity==1)
+					{
+						continue;
+					}
+					
+					var border = new Border
+					{
+						Name="Artifact" + artifact.Id+"ItemBorder",
+						BorderThickness = new Thickness(2),
+						BorderBrush = (SolidColorBrush)FindResource("BrushBlack"),
+						Background = (SolidColorBrush) FindResource("BrushAccent1"),
+						Padding = new Thickness(6),
+						Margin = new Thickness(2),
+						Tag = artifact
+					};
+
+					border.PreviewMouseUp += ItemBorder_TryToEquip;
+
+					GeneralToolTipController.SetToolTipDelayAndDuration(border);
+
+					var toolTip = ItemToolTipController.GenerateItemToolTip(artifact);
+					border.ToolTip = toolTip;
+
+					var grid = CreateArtifactGrid(artifact, User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact));
+
+					border.Child = grid;
+
+					ArtifactsPanel.Children.Add(border);
 				}
 			}
 		}
@@ -193,19 +269,23 @@ namespace ClickQuest.Game.UserInterface.Pages
 						equippedArtifactsChanged = true;
 					}
 				}
-				else if (isEquipped)
+				else
 				{
-					bool canBeUnequipped = artifact.ArtifactFunctionality.CanBeUnequipped();
-
-					if (canBeUnequipped)
+					// If the player clicked on the Equipped item border (in case they have 2 of this item and only 1 is equipped).
+					if ((sender as Border).Name.StartsWith("Equipped"))
 					{
-						User.Instance.CurrentHero.EquippedArtifacts.Remove(artifact);
-						artifact.ArtifactFunctionality.OnUnequip();
-						(sender as Border).Background = FindResource("BrushAccent1") as SolidColorBrush;
-						(sender as Border).BorderBrush = FindResource("BrushBlack") as SolidColorBrush;
+						bool canBeUnequipped = artifact.ArtifactFunctionality.CanBeUnequipped();
+
+						if (canBeUnequipped)
+						{
+							User.Instance.CurrentHero.EquippedArtifacts.Remove(artifact);
+							artifact.ArtifactFunctionality.OnUnequip();
+							(sender as Border).Background = FindResource("BrushAccent1") as SolidColorBrush;
+							(sender as Border).BorderBrush = FindResource("BrushBlack") as SolidColorBrush;
 
 
-						equippedArtifactsChanged = true;
+							equippedArtifactsChanged = true;
+						}
 					}
 				}
 
@@ -213,8 +293,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 				if (equippedArtifactsChanged)
 				{
 					ArtifactsPanel.Children.Clear();
-					UpdateEquipmentTab(User.Instance.CurrentHero?.Artifacts, ArtifactsPanel);
+					UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
 					RefreshEquippedArtifacts();
+					
 					InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 					ArtifactsScrollViewer.ScrollToTop();
 				}
@@ -223,15 +304,67 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		public void RefreshEquippedArtifacts()
 		{
-			foreach (Border artifactBorder in ArtifactsPanel.Children)
+			if (User.Instance.CurrentHero is null)
 			{
-				var artifact = artifactBorder.Tag as Artifact;
-				if (User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact))
-				{
-					artifactBorder.Background = FindResource("BrushAccent3") as SolidColorBrush;
-					artifactBorder.BorderBrush = FindResource("BrushBlack") as SolidColorBrush;
-				}
+				return;
 			}
+
+			if (User.Instance.CurrentHero.EquippedArtifacts.Count == 0)
+			{
+				return;
+			}
+			
+			// Add "Equipped" block.
+			var equippedTextBlock = new TextBlock()
+			{
+				Text = "Equipped",
+				FontSize = 20,
+				TextAlignment = TextAlignment.Center,
+				FontFamily = (FontFamily) this.FindResource("FontRegularItalic"),
+				Margin = new Thickness(5)
+			};
+			ArtifactsPanel.Children.Insert(0, equippedTextBlock);
+
+			var orderedEquippedArtifacts = User.Instance.CurrentHero.EquippedArtifacts.OrderBy(x => x.Name);
+
+			// Add Equipped Artifacts borders (no quantity) with a different style.
+			for (int i = 0; i < User.Instance.CurrentHero.EquippedArtifacts.Count; i++)
+			{
+				var equippedArtifact = orderedEquippedArtifacts.ElementAt(i);
+				
+				var border = new Border
+				{
+					Name="EquippedArtifact" + equippedArtifact.Id +"ItemBorder",
+					BorderThickness = new Thickness(2),
+					BorderBrush = (SolidColorBrush)FindResource("BrushBlack"),
+					Background = (SolidColorBrush)FindResource("BrushAccent3"),
+					Padding = new Thickness(6),
+					Margin = new Thickness(2),
+					Tag = equippedArtifact
+				};
+
+				border.PreviewMouseUp += ItemBorder_TryToEquip;
+
+				GeneralToolTipController.SetToolTipDelayAndDuration(border);
+
+				var toolTip = ItemToolTipController.GenerateItemToolTip(equippedArtifact);
+				border.ToolTip = toolTip;
+
+				var grid = CreateEquippedArtifactGrid(equippedArtifact);
+
+				border.Child = grid;
+
+				ArtifactsPanel.Children.Insert(1+i, border);
+			}
+			
+			// Add separator between equipped and not-equipped Artifacts.
+			var separator = new Separator()
+			{
+				Height = 2,
+				Width = 200,
+				Margin = new Thickness(10)
+			};
+			ArtifactsPanel.Children.Insert(User.Instance.CurrentHero.EquippedArtifacts.Count + 1, separator);
 		}
 
 		private Grid CreateSingleItemGrid(Item item)
@@ -251,33 +384,100 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				FontSize = 18,
 				HorizontalAlignment = HorizontalAlignment.Left,
-				Margin = new Thickness(20,0,0,0)
+				Margin = new Thickness(20,0,0,0),
+				Text = item.Name
 			};
-
+			
 			var quantityBlock = new TextBlock
 			{
 				FontSize = 18,
-				HorizontalAlignment = HorizontalAlignment.Right
+				HorizontalAlignment = HorizontalAlignment.Right,
+				Text="x"+item.Quantity
 			};
-
-			var binding = new Binding("Name")
-			{
-				Source = item,
-				StringFormat = "{0}"
-			};
-
-			var binding2 = new Binding("Quantity")
-			{
-				Source = item,
-				StringFormat = "x{0}"
-			};
-
-			nameBlock.SetBinding(TextBlock.TextProperty, binding);
-			quantityBlock.SetBinding(TextBlock.TextProperty, binding2);
 
 			grid.Children.Add(circleIcon);
 			grid.Children.Add(nameBlock);
 			grid.Children.Add(quantityBlock);
+
+			return grid;
+		}
+		
+		private Grid CreateEquippedArtifactGrid(Artifact artifact)
+		{
+			var grid = new Grid();
+
+			var circleIcon = new PackIcon
+			{
+				Kind = PackIconKind.Circle,
+				Width = 15,
+				Height = 15,
+				VerticalAlignment = VerticalAlignment.Center,
+				Foreground = ColorsController.GetRarityColor(artifact.Rarity)
+			};
+
+			var nameBlock = new TextBlock
+			{
+				FontSize = 18,
+				HorizontalAlignment = HorizontalAlignment.Left,
+				Margin = new Thickness(20,0,0,0),
+				Text = artifact.Name
+			};
+
+			grid.Children.Add(circleIcon);
+			grid.Children.Add(nameBlock);
+
+			return grid;
+		}
+
+		private Grid CreateArtifactGrid(Artifact artifact, bool isAlreadyEquipped)
+		{
+			// If the Artifact is already equipped (but this exact one isn't), treat it as if it had 1 less quantity (but don't display quantity if it's 1).
+			// If not and quantity is equal to 1, do not display its quantity.
+			
+			var grid = new Grid();
+
+			var circleIcon = new PackIcon
+			{
+				Kind = PackIconKind.Circle,
+				Width = 15,
+				Height = 15,
+				VerticalAlignment = VerticalAlignment.Center,
+				Foreground = ColorsController.GetRarityColor(artifact.Rarity)
+			};
+
+			var nameBlock = new TextBlock
+			{
+				FontSize = 18,
+				HorizontalAlignment = HorizontalAlignment.Left,
+				Margin = new Thickness(20,0,0,0),
+				Text = artifact.Name
+			};
+			
+			grid.Children.Add(circleIcon);
+			grid.Children.Add(nameBlock);
+
+			if (isAlreadyEquipped && artifact.Quantity > 2)
+			{
+				var quantityBlock = new TextBlock
+				{
+					FontSize = 18,
+					HorizontalAlignment = HorizontalAlignment.Right,
+					Text="x"+(artifact.Quantity - 1)
+				};
+				
+				grid.Children.Add(quantityBlock);
+			}
+			else if (!isAlreadyEquipped && artifact.Quantity > 1)
+			{
+				var quantityBlock = new TextBlock
+				{
+					FontSize = 18,
+					HorizontalAlignment = HorizontalAlignment.Right,
+					Text="x"+artifact.Quantity
+				};
+				
+				grid.Children.Add(quantityBlock);
+			}
 
 			return grid;
 		}

@@ -62,13 +62,9 @@ namespace ClickQuest.Game.Extensions.Collections
 		{
 			// 1. Items should be ordered based on (name / rarity / type / something else) - currently Name.
 			var orderedItemsList = specificEquipmentCollection.OrderBy(x => x.Name).ToList();
-
-			if (typeof(T) == typeof(Artifact) && User.Instance.CurrentHero != null)
-			{
-				// 2. Equipped Artifacts should be at the top.
-				orderedItemsList = orderedItemsList.OrderByDescending(x => User.Instance.CurrentHero.EquippedArtifacts.Contains(x as Artifact)).ToList();
-			}
 			
+			// 2. ???
+
 			return orderedItemsList;
 		}
 	}
