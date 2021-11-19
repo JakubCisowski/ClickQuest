@@ -31,13 +31,7 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" Background="{StaticResource BrushGray1}" HorizontalAlignment="Center" Margin="5" Width="600">
 
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontFancy}">
-					<Run Text="Here you can use dropped Dungeon Keys to fight Bosses" />
-					<LineBreak />
-					<Run Text="You have 30 seconds to deal as much damage as you can, the more damage the better rewards" />
-					<LineBreak />
-					<Run Text="Rare keys open tougher dungeons, but provide better loot" />
-				</TextBlock>
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Here you can use dropped Dungeon Keys to fight Bosses. You have 30 seconds to deal as much damage as you can, the more damage the better rewards. Rare keys open tougher dungeons, but provide better loot"/>
 			</Border>
 
 			<!-- Undo selection (of DungeonGroup/Dungeon) button -->

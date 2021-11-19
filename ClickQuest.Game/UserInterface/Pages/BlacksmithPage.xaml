@@ -42,11 +42,7 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}">
 
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontFancy}">
-					<Run Text="Here you can melt your materials or use them to craft artifacts" />
-					<LineBreak />
-					<Run Text="Melting gives you ingots that can be used instead of materials to craft artifacts" />
-				</TextBlock>
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Here you can melt your materials or use them to craft artifacts. Melting gives you ingots that can be used instead of materials to craft artifacts"/>
 			</Border>
 
 			<!-- Town button -->

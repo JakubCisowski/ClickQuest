@@ -42,11 +42,7 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}">
 
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontFancy}">
-					<Run Text="Here you can sell your materials and recipes" />
-					<LineBreak />
-					<Run Text="You can also buy recipes with gold" />
-				</TextBlock>
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Here you can sell your materials and recipes. You can also buy recipes with gold"/>
 			</Border>
 
 			<!-- Town button -->

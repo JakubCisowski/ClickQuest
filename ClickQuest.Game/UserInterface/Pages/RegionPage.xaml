@@ -29,7 +29,7 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}">
 
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" Text="{Binding Description}" FontFamily="{StaticResource FontFancy}"/>
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center"  TextAlignment="Center" Text="{Binding Description}" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap"/>
 			</Border>
 
 			<!-- Region panel-->

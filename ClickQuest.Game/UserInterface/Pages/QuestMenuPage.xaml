@@ -31,13 +31,7 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2"  Background="{StaticResource BrushGray1}" HorizontalAlignment="Center" Margin="5" Width="600">
 
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontFancy}">
-					<Run Text="Here you can complete quests that give you different rewards" />
-					<LineBreak />
-					<Run Text="You can't fight during quests, and they are running even if you exit the game" />
-					<LineBreak />
-					<Run Text="Rerolling gives you a new set of three quests" />
-				</TextBlock>
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Here you can complete quests that give you different rewards. You can't fight during quests, and they are running even if you exit the game. Rerolling gives you a new set of three quests"/>
 			</Border>
 
 			<!-- Quest reroll button -->

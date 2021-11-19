@@ -42,13 +42,7 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}">
 
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" FontFamily="{StaticResource FontFancy}">
-					<Run Text="Here you can buy temporary blessings which empower your hero" />
-					<LineBreak />
-					<Run Text="If you exit this hero or game all blessings are paused" />
-					<LineBreak />
-					<Run Text="Blessing timer is started right when you buy it, you can only have one blessing at a time" />
-				</TextBlock>
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Here you can buy temporary blessings which empower your hero. If you exit this hero or game all blessings are paused. Blessing timer is started right when you buy it, you can only have one blessing at a time"/>
 			</Border>
 
 			<!-- Town button -->
