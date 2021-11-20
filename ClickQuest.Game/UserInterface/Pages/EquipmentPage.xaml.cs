@@ -175,7 +175,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				}
 				
 				// Toggle ScrollBar visibility based on how many elements there are.
-				if (MaterialsPanel.Children.Count > 15)
+				if (MaterialsPanel.Children.Count > InterfaceController.EquipmentItemsNeededToShowScrollBar)
 				{
 					MaterialsScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
 				}
@@ -220,7 +220,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				}
 				
 				// Toggle ScrollBar visibility based on how many elements there are.
-				if (RecipesPanel.Children.Count > 15)
+				if (RecipesPanel.Children.Count > InterfaceController.EquipmentItemsNeededToShowScrollBar)
 				{
 					RecipesScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
 				}
@@ -273,7 +273,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				}
 				
 				// Toggle ScrollBar visibility based on how many elements there are.
-				if (ArtifactsPanel.Children.Count > 15)
+				if (ArtifactsPanel.Children.Count > InterfaceController.EquipmentItemsNeededToShowScrollBar || (ArtifactsPanel.Children.Count > InterfaceController.EquipmentItemsNeededToShowScrollBarIfArtifactsAreEquipped && User.Instance.CurrentHero.EquippedArtifacts.Count > 0))
 				{
 					ArtifactsScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
 				}
@@ -545,17 +545,21 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Margin = new Thickness(20,0,0,0),
 				Text = item.Name
 			};
-			
-			var quantityBlock = new TextBlock
-			{
-				FontSize = 18,
-				HorizontalAlignment = HorizontalAlignment.Right,
-				Text="x"+item.Quantity
-			};
 
 			grid.Children.Add(circleIcon);
 			grid.Children.Add(nameBlock);
-			grid.Children.Add(quantityBlock);
+			
+			if (item.Quantity > 1)
+			{
+				var quantityBlock = new TextBlock
+				{
+					FontSize = 18,
+					HorizontalAlignment = HorizontalAlignment.Right,
+					Text="x"+item.Quantity
+				};
+				
+				grid.Children.Add(quantityBlock);
+			}
 
 			return grid;
 		}

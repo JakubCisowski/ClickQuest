@@ -43,7 +43,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		public void RefreshScrollBarVisibilities()
 		{
-			if (ItemsListViewMeltMaterials.Items.Count > 12)
+			if (ItemsListViewMeltMaterials.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
 			{
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltMaterials, ScrollBarVisibility.Visible);
 			}
@@ -52,7 +52,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltMaterials, ScrollBarVisibility.Disabled);
 			}
 			
-			if (ItemsListViewMeltArtifacts.Items.Count > 12)
+			if (ItemsListViewMeltArtifacts.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
 			{
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltArtifacts, ScrollBarVisibility.Visible);
 			}
@@ -61,7 +61,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltArtifacts, ScrollBarVisibility.Disabled);
 			}
 			
-			if (ItemsListViewCraft.Items.Count > 12)
+			if (ItemsListViewCraft.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
 			{
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewCraft, ScrollBarVisibility.Visible);
 			}

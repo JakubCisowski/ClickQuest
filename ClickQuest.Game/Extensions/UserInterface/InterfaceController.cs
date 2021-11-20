@@ -14,6 +14,10 @@ namespace ClickQuest.Game.Extensions.UserInterface
 {
 	public static class InterfaceController
 	{
+		public const int EquipmentItemsNeededToShowScrollBar = 15;
+		public const int EquipmentItemsNeededToShowScrollBarIfArtifactsAreEquipped = 10;
+		public const int VendorItemsNeededToShowScrollBar = 12;
+		
 		public static Enemy CurrentEnemy
 		{
 			get

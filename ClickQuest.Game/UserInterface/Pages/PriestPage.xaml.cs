@@ -30,7 +30,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			ItemsListViewBuy.ItemsSource = GetPriestOfferAsBlessings();
 			ItemsListViewBuy.Items.Refresh();
 			
-			if (ItemsListViewBuy.Items.Count > 12)
+			if (ItemsListViewBuy.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
 			{
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Visible);
 			}
