@@ -168,6 +168,16 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 					MaterialsPanel.Children.Add(border);
 				}
+				
+				// Toggle ScrollBar visibility based on how many elements there are.
+				if (MaterialsPanel.Children.Count > 15)
+				{
+					MaterialsScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+				}
+				else
+				{
+					MaterialsScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
+				}
 			}
 		}
 		
@@ -202,6 +212,16 @@ namespace ClickQuest.Game.UserInterface.Pages
 					border.Child = grid;
 
 					RecipesPanel.Children.Add(border);
+				}
+				
+				// Toggle ScrollBar visibility based on how many elements there are.
+				if (RecipesPanel.Children.Count > 15)
+				{
+					RecipesScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+				}
+				else
+				{
+					RecipesScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
 				}
 			}
 		}
@@ -245,6 +265,16 @@ namespace ClickQuest.Game.UserInterface.Pages
 					border.Child = grid;
 
 					ArtifactsPanel.Children.Add(border);
+				}
+				
+				// Toggle ScrollBar visibility based on how many elements there are.
+				if (ArtifactsPanel.Children.Count > 15)
+				{
+					ArtifactsScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+				}
+				else
+				{
+					ArtifactsScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
 				}
 			}
 		}

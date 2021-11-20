@@ -41,6 +41,38 @@ namespace ClickQuest.Game.UserInterface.Pages
 			ItemsListViewSellMaterials.Items.Refresh();
 			ItemsListViewSellRecipes.Items.Refresh();
 			ItemsListViewBuy.Items.Refresh();
+			
+			RefreshScrollBarVisibilities();
+		}
+		
+		public void RefreshScrollBarVisibilities()
+		{
+			if (ItemsListViewSellMaterials.Items.Count > 12)
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellMaterials, ScrollBarVisibility.Visible);
+			}
+			else
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellMaterials, ScrollBarVisibility.Disabled);
+			}
+			
+			if (ItemsListViewSellRecipes.Items.Count > 12)
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Visible);
+			}
+			else
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Disabled);
+			}
+			
+			if (ItemsListViewBuy.Items.Count > 12)
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Visible);
+			}
+			else
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Disabled);
+			}
 		}
 
 		public List<Recipe> GetShopOfferAsRecipes()

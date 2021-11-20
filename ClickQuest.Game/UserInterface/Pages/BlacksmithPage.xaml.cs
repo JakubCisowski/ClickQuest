@@ -36,6 +36,39 @@ namespace ClickQuest.Game.UserInterface.Pages
 			ItemsListViewMeltMaterials.Items.Refresh();
 			ItemsListViewMeltArtifacts.Items.Refresh();
 			ItemsListViewCraft.Items.Refresh();
+			
+			// Refresh Scroll Bar visibilities based on the amount of items.
+			RefreshScrollBarVisibilities();
+		}
+
+		public void RefreshScrollBarVisibilities()
+		{
+			if (ItemsListViewMeltMaterials.Items.Count > 12)
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltMaterials, ScrollBarVisibility.Visible);
+			}
+			else
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltMaterials, ScrollBarVisibility.Disabled);
+			}
+			
+			if (ItemsListViewMeltArtifacts.Items.Count > 12)
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltArtifacts, ScrollBarVisibility.Visible);
+			}
+			else
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltArtifacts, ScrollBarVisibility.Disabled);
+			}
+			
+			if (ItemsListViewCraft.Items.Count > 12)
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewCraft, ScrollBarVisibility.Visible);
+			}
+			else
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewCraft, ScrollBarVisibility.Disabled);
+			}
 		}
 
 		private void MeltButton_Click(object sender, RoutedEventArgs e)

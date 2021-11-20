@@ -29,6 +29,15 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			ItemsListViewBuy.ItemsSource = GetPriestOfferAsBlessings();
 			ItemsListViewBuy.Items.Refresh();
+			
+			if (ItemsListViewBuy.Items.Count > 12)
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Visible);
+			}
+			else
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Disabled);
+			}
 		}
 
 		public List<Blessing> GetPriestOfferAsBlessings()
