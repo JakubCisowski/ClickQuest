@@ -12,12 +12,14 @@ namespace ClickQuest.Game.Extensions.Items
 	{
 		public static void SwitchArtifactSet(int targetSetId)
 		{
-
 			while (User.Instance.CurrentHero.EquippedArtifacts.Count > 0)
 			{
 				var currentIndex = User.Instance.CurrentHero.EquippedArtifacts.Count - 1;
-				User.Instance.CurrentHero.EquippedArtifacts.RemoveAt(currentIndex);
-				User.Instance.CurrentHero.EquippedArtifacts[currentIndex].ArtifactFunctionality.OnUnequip();
+
+				var artifactRemoved = User.Instance.CurrentHero.EquippedArtifacts[currentIndex];
+
+				User.Instance.CurrentHero.EquippedArtifacts.Remove(artifactRemoved);
+				artifactRemoved.ArtifactFunctionality.OnUnequip();
 			}
 
 			var newSet = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x => x.Id == targetSetId);

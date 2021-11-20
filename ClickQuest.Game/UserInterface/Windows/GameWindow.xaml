@@ -28,7 +28,7 @@
 				</Border>
 
 				<!-- Achievements button-->
-				<Button x:Name="AchievementsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="AchievementsButton_Click" Padding="0" Margin="5,5,80,5" Background="{StaticResource BrushGray1}">
+				<Button x:Name="AchievementsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="AchievementsButton_Click" Padding="0" Margin="5,5,75,5" Background="{StaticResource BrushGray1}">
 					<Button.ToolTip>
 						<ToolTip Style="{StaticResource ToolTipSimple}">
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Your Achievements"/>

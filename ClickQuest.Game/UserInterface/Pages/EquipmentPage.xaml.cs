@@ -414,16 +414,15 @@ namespace ClickQuest.Game.UserInterface.Pages
 				return;
 			}
 
-			var oldGrid = ArtifactsPanel.FindName("ArtifactSetsGrid") as Grid;
-
-			if (oldGrid is not null)
+			if (LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") is Grid oldGrid)
 			{
 				oldGrid.Children.Clear();
 			}
 
 			var artifactSetsGrid = new Grid()
 			{
-				Name = "ArtifactSetsGrid"
+				Name = "ArtifactSetsGrid",
+				Margin = new Thickness(0,10,0,10)
 			};
 
 			var addButton = new Button()
@@ -445,7 +444,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var renameButton = new Button()
 			{
 				HorizontalAlignment = HorizontalAlignment.Right,
-				Margin = new Thickness(0, 0, 25, 0),
+				Margin = new Thickness(0, 0, 40, 0),
 				Content = new PackIcon(){Kind = PackIconKind.Pencil}
 			};
 			renameButton.Click += RenameArtifactSet_Click;
@@ -456,7 +455,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 				HorizontalAlignment = HorizontalAlignment.Center,
 				Style = (Style)this.FindResource("MaterialDesignComboBox"),
 				ItemsSource = User.Instance.CurrentHero.ArtifactSets.Select(x=>x.Name),
-				SelectedIndex = User.Instance.CurrentHero.CurrentArtifactSetId
+				SelectedIndex = User.Instance.CurrentHero.CurrentArtifactSetId,
+				Width = 100
 			};
 
 			artifactSetsComboBox.SelectionChanged += ArtifactSetsComboBox_SelectionChanged;
@@ -476,19 +476,19 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var newId = User.Instance.CurrentHero.ArtifactSets.Max(x=>x.Id)+1;
 			User.Instance.CurrentHero.ArtifactSets.Add(new ArtifactSet(){Id = newId, Name = "Set " + newId.ToString()});
 
-			RenameArtifactSet_Click(null, null);
-			
-			var oldGrid = ArtifactsPanel.FindName("ArtifactSetsGrid") as Grid;
-			var artifactSetsComboBox = oldGrid.FindName("ArtifactSetsComboBox") as ComboBox;
+			RefreshArtifactSets();
+
+			var oldGrid = LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") as Grid;
+			var artifactSetsComboBox = LogicalTreeHelper.FindLogicalNode(oldGrid, "ArtifactSetsComboBox") as ComboBox;
 			artifactSetsComboBox.SelectedItem = "Set " + newId.ToString();
 
-			RefreshArtifactSets();
+			RenameArtifactSet_Click(null, null);
 		}
 
 		private void RenameArtifactSet_Click(object sender, RoutedEventArgs e)
 		{
-			var oldGrid = ArtifactsPanel.FindName("ArtifactSetsGrid") as Grid;
-			var artifactSetsComboBox = oldGrid.FindName("ArtifactSetsComboBox") as ComboBox;
+			var oldGrid = LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") as Grid;
+			var artifactSetsComboBox = LogicalTreeHelper.FindLogicalNode(oldGrid, "ArtifactSetsComboBox") as ComboBox;
 			var selectedName = artifactSetsComboBox.SelectedItem.ToString();
 
 			var newName = RenameBox.Show(selectedName);
@@ -506,10 +506,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				var firstId = User.Instance.CurrentHero.ArtifactSets.Min(x=>x.Id);
 				var firstName = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x=>x.Id==firstId);
-
-				var artifactSetsComboBox = this.FindName("ArtifactSetsComboBox") as ComboBox;
+				
+				var oldGrid = LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") as Grid;
+				var artifactSetsComboBox = LogicalTreeHelper.FindLogicalNode(oldGrid, "ArtifactSetsComboBox") as ComboBox;
 				artifactSetsComboBox.SelectedItem = firstName;
-
+				
 				User.Instance.CurrentHero.ArtifactSets.RemoveAt(removedSetId);
 				
 				RefreshArtifactSets();

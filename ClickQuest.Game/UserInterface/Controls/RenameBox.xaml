@@ -7,19 +7,36 @@
         x:Name="RenameBoxWindow"
         Title="Rename Box" Width="420" MinHeight="160" WindowStartupLocation="CenterOwner" AllowsTransparency="True"
         WindowStyle="None" ResizeMode="NoResize" Background="Transparent" MouseDown="RenameBox_MouseDown" SizeToContent="Height">
+	
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Indigo.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+
+			<SolidColorBrush x:Key="PrimaryHueLightBrush" Color="{StaticResource ColorAccent2}"/>
+			<SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="{StaticResource ColorAccent2}"/>
+			<SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource ColorAccent2}"/>
+			<SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="{StaticResource ColorAccent2}"/>
+			<SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource ColorAccent2}"/>
+			<SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource ColorAccent2}"/>
+		</ResourceDictionary>
+	</Window.Resources>
+	
 	<Grid>
 		<Border BorderThickness="3" BorderBrush="{StaticResource BrushAccent3}" CornerRadius="3" Background="{StaticResource BrushGray3}" >
 			<StackPanel>
 				<!-- Alert text -->
 				<Grid Height="Auto" MinHeight="95">
-					<TextBox x:Name="RenameTextBox" VerticalAlignment="Center" HorizontalAlignment="Center" Width="410" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{StaticResource FontRegular}" />
+					<TextBox x:Name="RenameTextBox" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" FontSize="16" TextAlignment="Center" FontFamily="{StaticResource FontRegular}" Style = "{StaticResource MaterialDesignTextBox}"/>
 				</Grid>
 
 				<!-- Buttons -->
 				<StackPanel Height="60" Orientation="Horizontal" HorizontalAlignment="Center" >
 					<Button x:Name="OkButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Ok" Click="OkButton_Click" Margin="0,0,10,5" Background="{StaticResource BrushAccent3}"/>
 
-					<Button x:Name="CancelButton" Visibility="Hidden" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Cancel" Click="CancelButton_Click" Margin="0,0,10,5" Background="{StaticResource BrushAccent3}"/>
+					<Button x:Name="CancelButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Cancel" Click="CancelButton_Click" Margin="0,0,10,5" Background="{StaticResource BrushAccent3}"/>
 				</StackPanel>
 			</StackPanel>
 		</Border>

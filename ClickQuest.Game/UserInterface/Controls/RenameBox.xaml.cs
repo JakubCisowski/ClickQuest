@@ -41,7 +41,8 @@ namespace ClickQuest.Game.UserInterface.Controls
 
 		private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (User.Instance.CurrentHero.ArtifactSets.Any(x=>x.Name == RenameTextBox.Text))
+			var newName = RenameTextBox.Text;
+			if (User.Instance.CurrentHero.ArtifactSets.Any(x=>x.Name == newName) && newName != ArtifactSetName)
 		 	{
 				AlertBox.Show("An artifact set with this name already exists.", MessageBoxButton.OK);
 				return;

@@ -10,7 +10,7 @@
     <Page.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-                <materialDesign:BundledTheme PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+                <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
 				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ComboBox.xaml" />
 			</ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
