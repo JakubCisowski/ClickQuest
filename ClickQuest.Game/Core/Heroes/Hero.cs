@@ -55,6 +55,8 @@ namespace ClickQuest.Game.Core.Heroes
 		public List<Quest> Quests { get; set; }
 		public Blessing Blessing { get; set; }
 		public Specialization Specialization { get; set; }
+		public List<ArtifactSet> ArtifactSets { get; set; }
+		public int CurrentArtifactSetId { get; set; }
 
 		[JsonIgnore]
 		public TimeSpan TimePlayed { get; set; }
@@ -145,6 +147,9 @@ namespace ClickQuest.Game.Core.Heroes
 			Quests = new List<Quest>();
 
 			Specialization = new Specialization();
+
+			ArtifactSets = new List<ArtifactSet>();
+			ArtifactSets.Add(new ArtifactSet(){Id=0, Name="Default set"});
 
 			HeroClass = heroClass;
 			HeroRace = heroRace;

@@ -58,8 +58,11 @@ namespace ClickQuest.Game.Data
 			// Re-arrange references between hero's Artifacts and EquippedArtifacts.
 			foreach (var hero in User.Instance.Heroes)
 			{
-				var newEquippedArtifacts = hero.Artifacts.Where(x => hero.EquippedArtifacts.Select(y => y.Name).Contains(x.Name)).ToList();
-				hero.EquippedArtifacts = newEquippedArtifacts;
+				for (int i=0;i<hero.EquippedArtifacts.Count;i++)
+				{
+					var newEquippedArtifact = hero.Artifacts.FirstOrDefault(x => x.Id == hero.EquippedArtifacts[i].Id);
+					hero.EquippedArtifacts[i] = newEquippedArtifact;
+				}
 			}
 
 			// Reload Achievements.

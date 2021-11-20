@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using ClickQuest.Game.Extensions.Collections;
 using MaterialDesignThemes.Wpf;
+using ClickQuest.Game.Extensions.Items;
+using ClickQuest.Game.UserInterface.Controls;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
@@ -80,6 +82,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			UpdateRecipesEquipmentTab(User.Instance.CurrentHero?.Recipes);
 			UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
 
+			RefreshArtifactSets();
 			RefreshEquippedArtifacts();
 
 			// Change ActiveTab to what was selected before.
@@ -111,6 +114,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				case 2:
 					ArtifactsPanel.Children.Clear();
 					UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
+					RefreshArtifactSets();
 					RefreshEquippedArtifacts();
 					break;
 			}
@@ -132,6 +136,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				ArtifactsPanel.Children.Clear();
 				UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
+				RefreshArtifactSets();
 				RefreshEquippedArtifacts();
 			}
 		}
@@ -295,6 +300,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					if (canBeEquipped)
 					{
 						User.Instance.CurrentHero.EquippedArtifacts.Add(artifact);
+						User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x=>x.Id == User.Instance.CurrentHero.CurrentArtifactSetId).ArtifactIds.Add(artifact.Id);
 						artifact.ArtifactFunctionality.OnEquip();
 						(sender as Border).Background = FindResource("BrushAccent3") as SolidColorBrush;
 						(sender as Border).BorderBrush = FindResource("BrushBlack") as SolidColorBrush;
@@ -312,6 +318,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 						if (canBeUnequipped)
 						{
 							User.Instance.CurrentHero.EquippedArtifacts.Remove(artifact);
+							User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x=>x.Id == User.Instance.CurrentHero.CurrentArtifactSetId).ArtifactIds.Remove(artifact.Id);
 							artifact.ArtifactFunctionality.OnUnequip();
 							(sender as Border).Background = FindResource("BrushAccent1") as SolidColorBrush;
 							(sender as Border).BorderBrush = FindResource("BrushBlack") as SolidColorBrush;
@@ -358,12 +365,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 			};
 			ArtifactsPanel.Children.Insert(0, equippedTextBlock);
 
-			var orderedEquippedArtifacts = User.Instance.CurrentHero.EquippedArtifacts.OrderBy(x => x.Name);
+			var equippedArtifacts = User.Instance.CurrentHero.EquippedArtifacts;
 
 			// Add Equipped Artifacts borders (no quantity) with a different style.
 			for (int i = 0; i < User.Instance.CurrentHero.EquippedArtifacts.Count; i++)
 			{
-				var equippedArtifact = orderedEquippedArtifacts.ElementAt(i);
+				var equippedArtifact = equippedArtifacts[i];
 				
 				var border = new Border
 				{
@@ -387,7 +394,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				border.Child = grid;
 
-				ArtifactsPanel.Children.Insert(1+i, border);
+				ArtifactsPanel.Children.Insert(2 + i, border);
 			}
 			
 			// Add separator between equipped and not-equipped Artifacts.
@@ -397,7 +404,125 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Width = 200,
 				Margin = new Thickness(10)
 			};
-			ArtifactsPanel.Children.Insert(User.Instance.CurrentHero.EquippedArtifacts.Count + 1, separator);
+			ArtifactsPanel.Children.Insert(User.Instance.CurrentHero.EquippedArtifacts.Count + 2, separator);
+		}
+
+		public void RefreshArtifactSets()
+		{
+			if (User.Instance.CurrentHero is null)
+			{
+				return;
+			}
+
+			var oldGrid = ArtifactsPanel.FindName("ArtifactSetsGrid") as Grid;
+
+			if (oldGrid is not null)
+			{
+				oldGrid.Children.Clear();
+			}
+
+			var artifactSetsGrid = new Grid()
+			{
+				Name = "ArtifactSetsGrid"
+			};
+
+			var addButton = new Button()
+			{
+				HorizontalAlignment = HorizontalAlignment.Left,
+				Margin = new Thickness(5, 0, 0, 0),
+				Content = new PackIcon(){Kind = PackIconKind.PlusThick}
+			};
+			addButton.Click += AddArtifactSet_Click;
+
+			var removeButton = new Button()
+			{
+				HorizontalAlignment = HorizontalAlignment.Right,
+				Margin = new Thickness(0, 0, 5, 0),
+				Content = new PackIcon(){Kind = PackIconKind.DeleteForever}
+			};
+			removeButton.Click += RemoveArtifactSet_Click;
+
+			var renameButton = new Button()
+			{
+				HorizontalAlignment = HorizontalAlignment.Right,
+				Margin = new Thickness(0, 0, 25, 0),
+				Content = new PackIcon(){Kind = PackIconKind.Pencil}
+			};
+			renameButton.Click += RenameArtifactSet_Click;
+
+			var artifactSetsComboBox = new ComboBox()
+			{
+				Name = "ArtifactSetsComboBox",
+				HorizontalAlignment = HorizontalAlignment.Center,
+				Style = (Style)this.FindResource("MaterialDesignComboBox"),
+				ItemsSource = User.Instance.CurrentHero.ArtifactSets.Select(x=>x.Name),
+				SelectedIndex = User.Instance.CurrentHero.CurrentArtifactSetId
+			};
+
+			artifactSetsComboBox.SelectionChanged += ArtifactSetsComboBox_SelectionChanged;
+
+			ComboBoxAssist.SetShowSelectedItem(artifactSetsComboBox, true);
+
+			artifactSetsGrid.Children.Add(addButton);
+			artifactSetsGrid.Children.Add(removeButton);
+			artifactSetsGrid.Children.Add(renameButton);
+			artifactSetsGrid.Children.Add(artifactSetsComboBox);
+
+			ArtifactsPanel.Children.Insert(0, artifactSetsGrid);
+		}
+		
+		private void AddArtifactSet_Click(object sender, RoutedEventArgs e)
+		{
+			var newId = User.Instance.CurrentHero.ArtifactSets.Max(x=>x.Id)+1;
+			User.Instance.CurrentHero.ArtifactSets.Add(new ArtifactSet(){Id = newId, Name = "Set " + newId.ToString()});
+
+			RenameArtifactSet_Click(null, null);
+			
+			var oldGrid = ArtifactsPanel.FindName("ArtifactSetsGrid") as Grid;
+			var artifactSetsComboBox = oldGrid.FindName("ArtifactSetsComboBox") as ComboBox;
+			artifactSetsComboBox.SelectedItem = "Set " + newId.ToString();
+
+			RefreshArtifactSets();
+		}
+
+		private void RenameArtifactSet_Click(object sender, RoutedEventArgs e)
+		{
+			var oldGrid = ArtifactsPanel.FindName("ArtifactSetsGrid") as Grid;
+			var artifactSetsComboBox = oldGrid.FindName("ArtifactSetsComboBox") as ComboBox;
+			var selectedName = artifactSetsComboBox.SelectedItem.ToString();
+
+			var newName = RenameBox.Show(selectedName);
+			
+			User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x=>x.Name==selectedName).Name = newName;
+			
+			RefreshArtifactSets();
+		}
+
+		private void RemoveArtifactSet_Click(object sender, RoutedEventArgs e)
+		{
+			if(User.Instance.CurrentHero.ArtifactSets.Count > 1)
+			{
+				var removedSetId = User.Instance.CurrentHero.CurrentArtifactSetId;
+
+				var firstId = User.Instance.CurrentHero.ArtifactSets.Min(x=>x.Id);
+				var firstName = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x=>x.Id==firstId);
+
+				var artifactSetsComboBox = this.FindName("ArtifactSetsComboBox") as ComboBox;
+				artifactSetsComboBox.SelectedItem = firstName;
+
+				User.Instance.CurrentHero.ArtifactSets.RemoveAt(removedSetId);
+				
+				RefreshArtifactSets();
+			}
+		}
+
+		private void ArtifactSetsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			var artifactSetName = e.AddedItems[0].ToString();
+
+			var artifactSetId = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x=>x.Name == artifactSetName).Id;
+
+			ArtifactSetsController.SwitchArtifactSet(artifactSetId);
 		}
 
 		private Grid CreateSingleItemGrid(Item item)

@@ -7,6 +7,15 @@
       mc:Ignorable="d" Title="Equipment"
       Height="715" Width="335" Background="Transparent">
 
+    <Page.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ComboBox.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
     <!-- Main Border -->
     <Border Background="{StaticResource BrushAccent0}" BorderThickness="3" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" Margin="1" Padding="6">
 		<!-- TabControl with 3 tabs - Materials, Recipes and Artifacts -->
