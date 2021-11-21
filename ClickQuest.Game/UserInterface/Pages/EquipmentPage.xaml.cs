@@ -556,7 +556,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					AlertBox.Show("Artifact Sets cannot be changed while in combat or questing", MessageBoxButton.OK);
 
 					var comboBox = sender as ComboBox;
-										_artifactSetsComboBoxSelectionHandled = false;
+					_artifactSetsComboBoxSelectionHandled = false;
 					comboBox.SelectedItem = e.RemovedItems[0];
 
 					return;

@@ -1,10 +1,13 @@
 using System;
+using System.Linq;
 using System.Text.Json.Serialization;
+using System.Windows;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.UserInterface.Controls;
 
 namespace ClickQuest.Game.Core.Items
 {
@@ -83,6 +86,16 @@ namespace ClickQuest.Game.Core.Items
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Artifacts, amount);
 			
 			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Artifact));
+
+			if(User.Instance.CurrentHero.ArtifactSets.Any(x=>x.ArtifactIds.Any(y=>y == this.Id)) && !User.Instance.CurrentHero.Artifacts.Contains(this))
+			{
+				AlertBox.Show($"{this.Name} has been removed from all Artifact Sets", MessageBoxButton.OK);
+
+				foreach (var artifactSet in User.Instance.CurrentHero.ArtifactSets)
+				{
+					artifactSet.ArtifactIds.Remove(this.Id);
+				}
+			}
 		}
 
 		public void CreateMythicTag(string enemyName = "")
