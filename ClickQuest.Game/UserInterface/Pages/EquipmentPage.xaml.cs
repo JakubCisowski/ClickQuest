@@ -416,6 +416,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") is Grid oldGrid)
 			{
+				// Remove Grid from ArtifactsPanel, then clear its children,
+				ArtifactsPanel.Children.Remove(oldGrid);
 				oldGrid.Children.Clear();
 			}
 
@@ -505,7 +507,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				var removedSetId = User.Instance.CurrentHero.CurrentArtifactSetId;
 
 				var firstId = User.Instance.CurrentHero.ArtifactSets.Min(x=>x.Id);
-				var firstName = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x=>x.Id==firstId);
+				var firstName = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x=>x.Id==firstId).Name;
 				
 				var oldGrid = LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") as Grid;
 				var artifactSetsComboBox = LogicalTreeHelper.FindLogicalNode(oldGrid, "ArtifactSetsComboBox") as ComboBox;
@@ -524,6 +526,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var artifactSetId = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x=>x.Name == artifactSetName).Id;
 
 			ArtifactSetsController.SwitchArtifactSet(artifactSetId);
+			
+			// Refresh the entire panel.
+			ArtifactsPanel.Children.Clear();
+			UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
+			RefreshArtifactSets();
+			RefreshEquippedArtifacts();
+			ArtifactsScrollViewer.ScrollToTop();
 		}
 
 		private Grid CreateSingleItemGrid(Item item)
