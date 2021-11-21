@@ -22,6 +22,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 		private static int _selectedTabIndex;
 		private static double _verticalOffset;
 
+		private bool _artifactSetsComboBoxSelectionHandled = true;
+
 		public EquipmentPage()
 		{
 			InitializeComponent();
@@ -440,8 +442,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			var addButton = new Button()
 			{
-				HorizontalAlignment = HorizontalAlignment.Left,
-				Margin = new Thickness(5, 0, 0, 0),
+				HorizontalAlignment = HorizontalAlignment.Right,
+				Margin = new Thickness(0, 0, 75, 0),
 				Content = new PackIcon(){Kind = PackIconKind.PlusThick}
 			};
 			addButton.Click += AddArtifactSet_Click;
@@ -465,11 +467,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var artifactSetsComboBox = new ComboBox()
 			{
 				Name = "ArtifactSetsComboBox",
-				HorizontalAlignment = HorizontalAlignment.Center,
+				HorizontalAlignment = HorizontalAlignment.Left,
 				Style = (Style)this.FindResource("MaterialDesignComboBox"),
 				ItemsSource = User.Instance.CurrentHero.ArtifactSets.Select(x=>x.Name),
 				SelectedIndex = User.Instance.CurrentHero.CurrentArtifactSetId,
-				Width = 100
+				Margin = new Thickness(5,0,0,0),
+				Width = 150
 			};
 
 			artifactSetsComboBox.SelectionChanged += ArtifactSetsComboBox_SelectionChanged;
@@ -486,14 +489,20 @@ namespace ClickQuest.Game.UserInterface.Pages
 		
 		private void AddArtifactSet_Click(object sender, RoutedEventArgs e)
 		{
+			if (!ArtifactSetsController.CanArtifactSetsBeChanged())
+			{
+				AlertBox.Show("Artifact Sets cannot be changed while in combat or questing", MessageBoxButton.OK);
+				return;
+			}
+
 			var newId = User.Instance.CurrentHero.ArtifactSets.Max(x=>x.Id)+1;
-			User.Instance.CurrentHero.ArtifactSets.Add(new ArtifactSet(){Id = newId, Name = "Set " + newId.ToString()});
+			User.Instance.CurrentHero.ArtifactSets.Add(new ArtifactSet(){Id = newId, Name = "Artifact Set " + newId.ToString()});
 
 			RefreshWholeArtifactsPanel();
 
 			var oldGrid = LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") as Grid;
 			var artifactSetsComboBox = LogicalTreeHelper.FindLogicalNode(oldGrid, "ArtifactSetsComboBox") as ComboBox;
-			artifactSetsComboBox.SelectedItem = "Set " + newId.ToString();
+			artifactSetsComboBox.SelectedItem = "Artifact Set " + newId.ToString();
 		}
 
 		private void RenameArtifactSet_Click(object sender, RoutedEventArgs e)
@@ -513,6 +522,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			if(User.Instance.CurrentHero.ArtifactSets.Count > 1)
 			{
+				if (!ArtifactSetsController.CanArtifactSetsBeChanged())
+				{
+					AlertBox.Show("Artifact Sets cannot be changed while in combat or questing", MessageBoxButton.OK);
+					return;
+				}
+
 				var removedSetId = User.Instance.CurrentHero.CurrentArtifactSetId;
 
 				var firstId = User.Instance.CurrentHero.ArtifactSets.Min(x=>x.Id);
@@ -526,19 +541,39 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				RefreshWholeArtifactsPanel();
 			}
+			else
+			{
+				AlertBox.Show("You cannot delete the only Artifact Set - you must always have at least one.", MessageBoxButton.OK);
+			}
 		}
 
 		private void ArtifactSetsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var artifactSetName = e.AddedItems[0].ToString();
+			if (_artifactSetsComboBoxSelectionHandled)
+			{
+				if (!ArtifactSetsController.CanArtifactSetsBeChanged())
+				{
+					AlertBox.Show("Artifact Sets cannot be changed while in combat or questing", MessageBoxButton.OK);
 
-			var artifactSetId = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x=>x.Name == artifactSetName).Id;
+					var comboBox = sender as ComboBox;
+										_artifactSetsComboBoxSelectionHandled = false;
+					comboBox.SelectedItem = e.RemovedItems[0];
 
-			ArtifactSetsController.SwitchArtifactSet(artifactSetId);
+					return;
+				}
 
-			// Refresh the entire panel.
-			RefreshWholeArtifactsPanel();
-			ArtifactsScrollViewer.ScrollToTop();
+				var artifactSetName = e.AddedItems[0].ToString();
+
+				var artifactSetId = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x=>x.Name == artifactSetName).Id;
+
+				ArtifactSetsController.SwitchArtifactSet(artifactSetId);
+
+				// Refresh the entire panel.
+				RefreshWholeArtifactsPanel();
+				ArtifactsScrollViewer.ScrollToTop();
+			}
+
+			_artifactSetsComboBoxSelectionHandled = true;
 		}
 
 		private Grid CreateSingleItemGrid(Item item)

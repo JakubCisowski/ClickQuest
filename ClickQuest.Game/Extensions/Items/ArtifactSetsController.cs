@@ -5,6 +5,7 @@ using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Data;
 using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.UserInterface.Pages;
 
 namespace ClickQuest.Game.Extensions.Items
 {
@@ -32,6 +33,21 @@ namespace ClickQuest.Game.Extensions.Items
 			}
 
 			User.Instance.CurrentHero.CurrentArtifactSetId = targetSetId;
+		}
+
+		public static bool CanArtifactSetsBeChanged()
+		{
+			if (User.Instance.CurrentHero.Quests.Any(x=>x.EndDate != default))
+			{
+				return false;
+			}
+
+			if (GameAssets.CurrentPage is RegionPage || GameAssets.CurrentPage is DungeonBossPage)
+			{
+				return false;
+			}
+
+			return true;
 		}
 	}
 }
