@@ -26,6 +26,9 @@ namespace ClickQuest.Game.UserInterface.Controls
 
 			MessageBox = new RenameBox(previousName);
 
+			MessageBox.RenameTextBox.Focus();
+			MessageBox.RenameTextBox.CaretIndex = int.MaxValue;
+
 			MessageBox.ShowDialog();
 
 			return ArtifactSetName;

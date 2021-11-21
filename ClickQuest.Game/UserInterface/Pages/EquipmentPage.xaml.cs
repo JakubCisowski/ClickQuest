@@ -82,8 +82,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 			UpdateRecipesEquipmentTab(User.Instance.CurrentHero?.Recipes);
 			UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
 
-			RefreshArtifactSets();
 			RefreshEquippedArtifacts();
+			RefreshArtifactSets();
 
 			// Change ActiveTab to what was selected before.
 			ChangeActiveTab();
@@ -112,10 +112,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				
 				// Artifacts
 				case 2:
-					ArtifactsPanel.Children.Clear();
-					UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
-					RefreshArtifactSets();
-					RefreshEquippedArtifacts();
+					RefreshWholeArtifactsPanel();
 					break;
 			}
 		}
@@ -134,11 +131,16 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 			else if (itemType == typeof(Artifact) && _selectedTabIndex == 2)
 			{
-				ArtifactsPanel.Children.Clear();
-				UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
-				RefreshArtifactSets();
-				RefreshEquippedArtifacts();
+				RefreshWholeArtifactsPanel();
 			}
+		}
+
+		public void RefreshWholeArtifactsPanel()
+		{
+			ArtifactsPanel.Children.Clear();
+			UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
+			RefreshEquippedArtifacts();
+			RefreshArtifactSets();
 		}
 
 		private void UpdateMaterialsEquipmentTab(List<Material> materials)
@@ -332,10 +334,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 				// Refresh Artifacts tab.
 				if (equippedArtifactsChanged)
 				{
-					ArtifactsPanel.Children.Clear();
-					UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
-					RefreshEquippedArtifacts();
-					
+					RefreshWholeArtifactsPanel();
+
 					InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 					ArtifactsScrollViewer.ScrollToTop();
 				}
@@ -349,11 +349,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 				return;
 			}
 
-			if (User.Instance.CurrentHero.EquippedArtifacts.Count == 0)
-			{
-				return;
-			}
-			
 			// Add "Equipped" block.
 			var equippedTextBlock = new TextBlock()
 			{
@@ -364,6 +359,31 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Margin = new Thickness(5)
 			};
 			ArtifactsPanel.Children.Insert(0, equippedTextBlock);
+
+			// Add separator between equipped and not-equipped Artifacts.
+			var separator = new Separator()
+			{
+				Height = 2,
+				Width = 200,
+				Margin = new Thickness(10)
+			};
+			ArtifactsPanel.Children.Insert(1, separator);
+
+			if (User.Instance.CurrentHero.EquippedArtifacts.Count == 0)
+			{
+				var noArtifactsEquippedTextBlock = new TextBlock()
+				{
+					Text = "You have no Artifacts equipped in this set\nEquip Artifacts by clicking them in this tab",
+					FontSize = 16,
+					TextAlignment = TextAlignment.Center,
+					FontFamily = (FontFamily) this.FindResource("FontRegularItalic"),
+					Margin = new Thickness(5),
+					TextWrapping = TextWrapping.Wrap
+				};
+				ArtifactsPanel.Children.Insert(1, noArtifactsEquippedTextBlock);
+
+				return;
+			}
 
 			var equippedArtifacts = User.Instance.CurrentHero.EquippedArtifacts;
 
@@ -394,17 +414,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				border.Child = grid;
 
-				ArtifactsPanel.Children.Insert(2 + i, border);
+				ArtifactsPanel.Children.Insert(1 + i, border);
 			}
-			
-			// Add separator between equipped and not-equipped Artifacts.
-			var separator = new Separator()
-			{
-				Height = 2,
-				Width = 200,
-				Margin = new Thickness(10)
-			};
-			ArtifactsPanel.Children.Insert(User.Instance.CurrentHero.EquippedArtifacts.Count + 2, separator);
 		}
 
 		public void RefreshArtifactSets()
@@ -470,7 +481,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			artifactSetsGrid.Children.Add(renameButton);
 			artifactSetsGrid.Children.Add(artifactSetsComboBox);
 
-			ArtifactsPanel.Children.Insert(0, artifactSetsGrid);
+			ArtifactsPanel.Children.Insert(1, artifactSetsGrid);
 		}
 		
 		private void AddArtifactSet_Click(object sender, RoutedEventArgs e)
@@ -478,13 +489,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var newId = User.Instance.CurrentHero.ArtifactSets.Max(x=>x.Id)+1;
 			User.Instance.CurrentHero.ArtifactSets.Add(new ArtifactSet(){Id = newId, Name = "Set " + newId.ToString()});
 
-			RefreshArtifactSets();
+			RefreshWholeArtifactsPanel();
 
 			var oldGrid = LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") as Grid;
 			var artifactSetsComboBox = LogicalTreeHelper.FindLogicalNode(oldGrid, "ArtifactSetsComboBox") as ComboBox;
 			artifactSetsComboBox.SelectedItem = "Set " + newId.ToString();
-
-			RenameArtifactSet_Click(null, null);
 		}
 
 		private void RenameArtifactSet_Click(object sender, RoutedEventArgs e)
@@ -496,8 +505,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var newName = RenameBox.Show(selectedName);
 			
 			User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x=>x.Name==selectedName).Name = newName;
-			
-			RefreshArtifactSets();
+
+			RefreshWholeArtifactsPanel();
 		}
 
 		private void RemoveArtifactSet_Click(object sender, RoutedEventArgs e)
@@ -514,8 +523,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 				artifactSetsComboBox.SelectedItem = firstName;
 				
 				User.Instance.CurrentHero.ArtifactSets.RemoveAt(removedSetId);
-				
-				RefreshArtifactSets();
+
+				RefreshWholeArtifactsPanel();
 			}
 		}
 
@@ -526,12 +535,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var artifactSetId = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x=>x.Name == artifactSetName).Id;
 
 			ArtifactSetsController.SwitchArtifactSet(artifactSetId);
-			
+
 			// Refresh the entire panel.
-			ArtifactsPanel.Children.Clear();
-			UpdateArtifactsEquipmentTab(User.Instance.CurrentHero?.Artifacts);
-			RefreshArtifactSets();
-			RefreshEquippedArtifacts();
+			RefreshWholeArtifactsPanel();
 			ArtifactsScrollViewer.ScrollToTop();
 		}
 
