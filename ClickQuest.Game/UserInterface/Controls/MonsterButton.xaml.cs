@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using ClickQuest.Game.Core.Enemies;
+using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Places;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;

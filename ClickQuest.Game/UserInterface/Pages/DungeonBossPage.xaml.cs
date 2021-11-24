@@ -36,6 +36,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			BindFightInfoToInterface(boss);
 
+			// Mark the Boss as discovered.
+			GameAssets.Bosses.FirstOrDefault(x => x.Id == boss.Id).BestiaryDiscovered = true;
+
 			CombatTimerController.BossFightTimer.Start();
 		}
 

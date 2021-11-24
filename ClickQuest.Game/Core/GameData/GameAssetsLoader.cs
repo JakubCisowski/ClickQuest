@@ -77,8 +77,8 @@ namespace ClickQuest.Game.Core.GameData
 		public static void SaveEnemies()
 		{
 			// Save Monsters and Bosses to keep track of the BestiaryDiscovered properties.
-			SerializeType<Monster>(GameAssets.Monsters, Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Monsters.json"));
-			SerializeType<Boss>(GameAssets.Bosses, Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Bosses.json"));
+			SerializeType<Monster>(GameAssets.Monsters, Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Core\", @"GameData\", @"GameAssets\", "Monsters.json"));
+			SerializeType<Boss>(GameAssets.Bosses, Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Core\", @"GameData\", @"GameAssets\", "Bosses.json"));
 		}
 
 		public static void SerializeType<T>(List<T> objects, string filePath)

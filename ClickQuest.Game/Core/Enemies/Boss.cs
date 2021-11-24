@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json.Serialization;
+using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Patterns;
@@ -117,6 +119,8 @@ namespace ClickQuest.Game.Core.Enemies
 				{
 					Blessing.AskUserAndSwapBlessing(loot.BossLootId);
 
+					GameAssets.Bosses.FirstOrDefault(x => x.Id == this.Id).BossLootPatterns.FirstOrDefault(y => y.BossLootId == loot.BossLootId).BestiaryDiscovered = true;
+
 					continue;
 				}
 
@@ -126,6 +130,8 @@ namespace ClickQuest.Game.Core.Enemies
 				{
 					loot.Item.AddItem(itemIntegerCount);
 					lootText += "- " + $"{itemIntegerCount}x " + loot.Item.Name + " (" + loot.BossLootType + ")\n";
+
+					GameAssets.Bosses.FirstOrDefault(x => x.Id == this.Id).BossLootPatterns.FirstOrDefault(y => y.BossLootId == loot.BossLootId).BestiaryDiscovered = true;
 				}
 			}
 

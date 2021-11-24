@@ -69,6 +69,9 @@ namespace ClickQuest.Game.Core.Enemies
 			{
 				CombatTimerController.StopPoisonTimer();
 
+				// Mark the Monster as discovered.
+				GameAssets.Monsters.FirstOrDefault(x => x.Id == this.Id).BestiaryDiscovered = true;
+
 				GrantVictoryBonuses();
 
 				// Invoke Artifacts with the "on-death" effect.
@@ -92,6 +95,9 @@ namespace ClickQuest.Game.Core.Enemies
 			{
 				(selectedLoot as Artifact)?.CreateMythicTag(Name);
 				selectedLoot.AddItem();
+
+				// Mark the corresponding Pattern as discovered.
+				GameAssets.Monsters.FirstOrDefault(x=>x.Id==this.Id).MonsterLootPatterns.FirstOrDefault(y => y.MonsterLootId == selectedLoot.Id).BestiaryDiscovered = true;
 			}
 
 			// [PRERELEASE] Display exp and loot for testing purposes.

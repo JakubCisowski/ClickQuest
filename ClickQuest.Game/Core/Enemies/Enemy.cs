@@ -38,7 +38,6 @@ namespace ClickQuest.Game.Core.Enemies
 			return (int) ((double) CurrentHealth / Health * 100);
 		}
 
-		// Returns true if Enemy died.
 		public abstract void HandleEnemyDeathIfDefeated();
 
 		public abstract void GrantVictoryBonuses();
