@@ -186,6 +186,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			_pattern.MonsterLootId = int.Parse((_controls["IdBox"] as TextBox).Text);
 			_pattern.MonsterLootType = (RewardType) Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());
 			_pattern.Frequency = double.Parse((_controls["FrequencyBox"] as TextBox).Text);
+			_pattern.BestiaryDiscovered = false;
 
 			if (oldPatternIndex == -1)
 			{

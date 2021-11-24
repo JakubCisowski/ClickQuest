@@ -23,6 +23,8 @@ namespace ClickQuest.Game.Core.Enemies
 		public int CurrentHealthProgress { get; set; }
 		public string Image { get; set; }
 
+		public bool BestiaryDiscovered{ get; set; }
+
 		public Enemy()
 		{
 			CurrentHealthProgress = 100;

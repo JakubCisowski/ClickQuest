@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.Adventures;
@@ -69,13 +70,29 @@ namespace ClickQuest.Game.Core.GameData
 			var result = new List<T>();
 			string json = File.ReadAllText(filePath);
 
-			// Enums as strings.
+			result = JsonSerializer.Deserialize<List<T>>(json);
+			return result;
+		}
+
+		public static void SaveEnemies()
+		{
+			// Save Monsters and Bosses to keep track of the BestiaryDiscovered properties.
+			SerializeType<Monster>(GameAssets.Monsters, Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Monsters.json"));
+			SerializeType<Boss>(GameAssets.Bosses, Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Bosses.json"));
+		}
+
+		public static void SerializeType<T>(List<T> objects, string filePath)
+		{
 			var options = new JsonSerializerOptions
 			{
+				WriteIndented = true,
+				Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+				IgnoreReadOnlyProperties = true
 			};
 
-			result = JsonSerializer.Deserialize<List<T>>(json, options);
-			return result;
+			string json = JsonSerializer.Serialize<List<T>>(objects, options);
+
+			File.WriteAllText(filePath, json);
 		}
 
 		public static void LoadArtifactFunctionalities()

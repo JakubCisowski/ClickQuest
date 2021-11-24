@@ -9,6 +9,7 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public RewardType BossLootType { get; set; }
 		public int BossLootId { get; set; }
 		public List<double> Frequencies { get; set; }
+		public bool BestiaryDiscovered{ get; set; }
 
 		public Item Item
 		{
@@ -43,6 +44,7 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public int Health { get; set; }
 		public string Image { get; set; }
 		public string Description { get; set; }
+		public bool BestiaryDiscovered{ get; set; }
 		public List<BossLootPattern> BossLootPatterns { get; set; }
 		public List<Affix> Affixes { get; set; }
 	}

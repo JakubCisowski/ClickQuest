@@ -11,6 +11,7 @@ namespace ClickQuest.Game.Core.Items.Patterns
 		public int BossLootId { get; set; }
 		public RewardType BossLootType { get; set; }
 		public List<double> Frequencies { get; set; }
+		public bool BestiaryDiscovered{ get; set; }
 
 		public Item Item
 		{
