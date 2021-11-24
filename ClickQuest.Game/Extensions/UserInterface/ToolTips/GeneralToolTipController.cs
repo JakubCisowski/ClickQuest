@@ -28,7 +28,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 			var toolTipBlock = new TextBlock
 			{
 				Style = (Style)Application.Current.FindResource("ToolTipTextBlockBase"),
-				Text = "You have not discovered this Enemy yet\nIt will show up here once you first defeat it"
+				Text = "You have not discovered this Enemy yet\nIt will show up here once you first fight it"
 			};
 
 			toolTip.Content = toolTipBlock;

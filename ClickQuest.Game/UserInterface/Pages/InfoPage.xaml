@@ -59,7 +59,7 @@
 
 					<Separator Height="2" Width="100" Margin="10" />
 
-					<ListView x:Name="DungeonsListView" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
+					<ListView x:Name="DungeonsListView" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center" SelectionChanged="DungeonsListView_SelectionChanged">
 
 						<ListView.ItemTemplate>
 							<DataTemplate>

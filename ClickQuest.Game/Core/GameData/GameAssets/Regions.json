@@ -3,7 +3,7 @@
     "Id": 1,
     "LevelRequirement": 0,
     "Name": "Woodland Cascades",
-    "Description": "ForestDescription",
+    "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed lacus iaculis ex feugiat scelerisque in nec velit. Sed semper molestie diam vel tincidunt. Phasellus pellentesque, ligula consectetur ullamcorper rhoncus, enim elit lacinia neque, a scelerisque metus sapien quis diam. Vestibulum quis leo quam.",
     "Background": "/example.png",
     "MonsterSpawnPatterns": [
       {
