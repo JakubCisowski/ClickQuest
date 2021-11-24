@@ -26,6 +26,7 @@ namespace ClickQuest.ContentManager.GameData
 			SaveContent(GameContent.Regions, RegionsFilePath);
 			SaveContent(GameContent.PriestOffer, PriestOfferFilePath);
 			SaveContent(GameContent.ShopOffer, ShopOfferFilePath);
+			SaveContent(GameContent.GameMechanicsTabs, GameMechanicsPath);
 		}
 
 		public static void SaveContent<T>(List<T> collection, string jsonFilePath)

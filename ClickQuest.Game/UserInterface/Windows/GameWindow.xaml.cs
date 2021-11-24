@@ -164,6 +164,21 @@ namespace ClickQuest.Game.UserInterface.Windows
 			base.OnClosing(e);
 		}
 
+		private void InfoButton_Click(object sender, RoutedEventArgs e)
+		{
+			var currentPage = GameAssets.CurrentPage;
+
+			if (currentPage is RegionPage or DungeonBossPage)
+			{
+				AlertBox.Show("You cannot view this page while in combat!", MessageBoxButton.OK);
+				return;
+			}
+
+			var currentLocationInfo = LocationInfo;
+
+			InterfaceController.ChangePage(new InfoPage(currentPage, LocationInfo), "Bestiary & Game Mechanics");
+		}
+
 		private void AchievementsButton_Click(object sender, RoutedEventArgs e)
 		{
 			AchievementsWindow.Instance.Show();

@@ -139,6 +139,14 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
 						(tabControl.SelectedContent as Grid)?.Children.Add(shopPanel);
 						break;
+
+					case ContentType.GameMech:
+						var gameMechanicsPanel = new GameMechanicsTabsPanel();
+						_currentPanel = gameMechanicsPanel;
+
+						(tabControl.SelectedContent as Grid)?.Children.Clear();
+						(tabControl.SelectedContent as Grid)?.Children.Add(gameMechanicsPanel);
+						break;
 				}
 			}
 		}
@@ -202,6 +210,10 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 				case ShopOfferPatternsPanel shopPanel:
 					shopPanel.Save();
+					break;
+
+				case GameMechanicsTabsPanel gameMechanicsPanel:
+					gameMechanicsPanel.Save();
 					break;
 			}
 		}

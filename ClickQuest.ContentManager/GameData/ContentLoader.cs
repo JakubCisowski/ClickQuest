@@ -25,6 +25,7 @@ namespace ClickQuest.ContentManager.GameData
 			GameContent.Regions = LoadContent<Region>(RegionsFilePath);
 			GameContent.PriestOffer = LoadContent<VendorPattern>(PriestOfferFilePath);
 			GameContent.ShopOffer = LoadContent<VendorPattern>(ShopOfferFilePath);
+			GameContent.GameMechanicsTabs = LoadContent<GameMechanicsTab>(GameMechanicsPath);
 		}
 
 		public static List<T> LoadContent<T>(string jsonFilePath)

@@ -19,5 +19,6 @@ namespace ClickQuest.ContentManager.GameData
 		public static List<Region> Regions { get; set; }
 		public static List<VendorPattern> PriestOffer { get; set; }
 		public static List<VendorPattern> ShopOffer { get; set; }
+		public static List<GameMechanicsTab> GameMechanicsTabs{ get; set; }
 	}
 }

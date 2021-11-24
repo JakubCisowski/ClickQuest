@@ -27,6 +27,20 @@
 					<TextBlock x:Name="LocationInfoBlock" Text="{Binding LocationInfo}" FontFamily="{StaticResource FontRegularDemiBold}" FontSize="18" VerticalAlignment="Center" Margin="3" />
 				</Border>
 
+				<!-- Info button-->
+				<Button x:Name="InfoButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="InfoButton_Click" Padding="0" Margin="5,5,110,5" Background="{StaticResource BrushGray1}">
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Info"/>
+						</ToolTip>
+					</Button.ToolTip>
+
+					<!-- Info button icon -->
+					<Button.Content>
+						<materialDesign:PackIcon Kind="Paw" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushBlack}" Margin="0" />
+					</Button.Content>
+				</Button>
+
 				<!-- Achievements button-->
 				<Button x:Name="AchievementsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="AchievementsButton_Click" Padding="0" Margin="5,5,75,5" Background="{StaticResource BrushGray1}">
 					<Button.ToolTip>
@@ -41,7 +55,7 @@
 					</Button.Content>
 				</Button>
 
-				<!-- Achievements button-->
+				<!-- Settings button-->
 				<Button x:Name="SettingsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="SettingsButton_OnClick" Padding="0" Margin="5,5,40,5" Background="{StaticResource BrushGray1}">
 					<Button.ToolTip>
 						<ToolTip Style="{StaticResource ToolTipSimple}">
@@ -49,7 +63,7 @@
 						</ToolTip>
 					</Button.ToolTip>
 
-					<!-- Achievements button icon -->
+					<!-- Settings button icon -->
 					<Button.Content>
 						<materialDesign:PackIcon Kind="Tools" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource BrushBlack}" Margin="0" />
 					</Button.Content>

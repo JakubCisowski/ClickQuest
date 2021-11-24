@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.Heroes.Buffs;
+using ClickQuest.Game.Core.Info;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Places;
@@ -28,6 +29,7 @@ namespace ClickQuest.Game.Core.GameData
 		public static List<Dungeon> Dungeons { get; set; }
 		public static List<DungeonGroup> DungeonGroups { get; set; }
 		public static List<DungeonKey> DungeonKeys { get; set; }
+		public static List<GameMechanicsTab> GameMechanicsTabs { get; set; }
 
 		static GameAssets()
 		{
@@ -47,6 +49,7 @@ namespace ClickQuest.Game.Core.GameData
 			Dungeons = new List<Dungeon>();
 			DungeonGroups = new List<DungeonGroup>();
 			DungeonKeys = new List<DungeonKey>();
+			GameMechanicsTabs = new List<GameMechanicsTab>();
 		}
 
 		public static void RefreshPages()

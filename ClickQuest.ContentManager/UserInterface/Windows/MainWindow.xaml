@@ -63,6 +63,10 @@
 			<TabItem Header="Shop">
 				<Grid />
 			</TabItem>
+
+			<TabItem Header="Game Mech">
+				<Grid />
+			</TabItem>
 		</TabControl>
 	</Grid>
 </Window>

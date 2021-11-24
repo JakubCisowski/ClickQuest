@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.Heroes.Buffs;
+using ClickQuest.Game.Core.Info;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Items.Types;
@@ -33,6 +34,7 @@ namespace ClickQuest.Game.Core.GameData
 			GameAssets.Bosses = DeserializeType<Boss>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Bosses.json"));
 			GameAssets.DungeonGroups = DeserializeType<DungeonGroup>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "DungeonGroups.json"));
 			GameAssets.Dungeons = DeserializeType<Dungeon>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Dungeons.json"));
+			GameAssets.GameMechanicsTabs = DeserializeType<GameMechanicsTab>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "GameMechanics.json"));
 
 			PostLoad();
 
