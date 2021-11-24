@@ -100,11 +100,11 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			return brush;
 		}
 
-		public static SolidColorBrush GetMonsterSpawnRarityColor(Region region, Monster monster)
+		public static SolidColorBrush GetMonsterSpawnRarityColor(MonsterSpawnPattern spawnPattern)
 		{
 			SolidColorBrush brush = null;
 
-			var monsterSpawnFrequency = region.MonsterSpawnPatterns.FirstOrDefault(x => x.MonsterId == monster.Id).Frequency;
+			var monsterSpawnFrequency = spawnPattern.Frequency;
 
 			switch (monsterSpawnFrequency)
 			{

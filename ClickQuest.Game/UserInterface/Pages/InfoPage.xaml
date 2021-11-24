@@ -22,7 +22,7 @@
 		</Grid.ColumnDefinitions>
 
 		<!-- Bestiary tabs panel -->
-		<Border Grid.Column="0" HorizontalAlignment="Left" Width="341" Background="{StaticResource BrushAccent0}" BorderThickness="3" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" Margin="1" Padding="6">
+		<Border Grid.Column="0" HorizontalAlignment="Left" Width="341" Height="715" Background="{StaticResource BrushAccent0}" BorderThickness="3" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" Margin="1" Padding="6">
 
 			<ScrollViewer x:Name="BestiaryScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
 				<StackPanel>
@@ -35,7 +35,7 @@
 
 					<Separator Height="2" Width="100" Margin="10" />
 
-					<ListView x:Name="RegionsListView" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
+					<ListView x:Name="RegionsListView" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center" SelectionChanged="RegionsListView_SelectionChanged">
 
 						<ListView.ItemTemplate>
 							<DataTemplate>
@@ -84,7 +84,7 @@
 		</Border>
 
 		<!-- Game mechanics tabs panel -->
-		 <Border Grid.Column="2" Background="{StaticResource BrushAccent0}" BorderThickness="3" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" Margin="1" Padding="6" Width="335" HorizontalAlignment="Left" >
+		 <Border Grid.Column="2" Background="{StaticResource BrushAccent0}" BorderThickness="3" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" Margin="1" Padding="6" Width="333" Height="715" HorizontalAlignment="Left" >
 			 <StackPanel x:Name="GameMechanicsTabsPanel">
 				 <TextBlock Text="Game Mechanics" FontFamily="{StaticResource FontFancy}" FontSize="24" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Top" Margin="5"/>
 

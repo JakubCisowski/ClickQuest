@@ -24,6 +24,7 @@ namespace ClickQuest.Game.Core.Enemies
 
 		public List<Affix> Affixes { get; set; }
 
+		[JsonIgnore]
 		public override int CurrentHealth
 		{
 			get

@@ -344,5 +344,23 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 			return questRewardRuns;
 		}
+
+		public static ToolTip GenerateUndiscoveredItemToolTip()
+		{
+			var toolTip = new ToolTip()
+			{
+				Style = (Style)Application.Current.FindResource("ToolTipSimple")
+			};
+
+			var toolTipBlock = new TextBlock
+			{
+				Style = (Style)Application.Current.FindResource("ToolTipTextBlockBase"),
+				Text = "You have not discovered this item yet\nIt will show up here once you first loot it"
+			};
+
+			toolTip.Content = toolTipBlock;
+
+			return toolTip;
+		}
 	}
 }

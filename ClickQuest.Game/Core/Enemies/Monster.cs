@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Windows;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
@@ -19,6 +20,7 @@ namespace ClickQuest.Game.Core.Enemies
 	{
 		public List<MonsterLootPattern> MonsterLootPatterns { get; set; }
 
+		[JsonIgnore]
 		public override int CurrentHealth
 		{
 			get

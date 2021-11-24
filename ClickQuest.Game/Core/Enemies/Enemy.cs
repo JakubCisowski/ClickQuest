@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Linq;
+using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Items;
@@ -20,6 +21,8 @@ namespace ClickQuest.Game.Core.Enemies
 		public string Description { get; set; }
 		public int Health { get; set; }
 		public abstract int CurrentHealth { get; set; }
+		
+		[JsonIgnore]
 		public int CurrentHealthProgress { get; set; }
 		public string Image { get; set; }
 
