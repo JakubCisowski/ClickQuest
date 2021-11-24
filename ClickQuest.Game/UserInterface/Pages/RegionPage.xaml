@@ -21,13 +21,13 @@
 
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="*" />
-				<RowDefinition Height="8*" />
+				<RowDefinition Height="1.4*" />
+				<RowDefinition Height="7.6*" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
 			<!-- Page description -->
-			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}">
+			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}" Padding="2">
 
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center"  TextAlignment="Center" Text="{Binding Description}" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap"/>
 			</Border>

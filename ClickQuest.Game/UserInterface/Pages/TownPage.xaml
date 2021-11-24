@@ -34,7 +34,7 @@
             </Grid.RowDefinitions>
 
             <!-- Page description -->
-            <Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" Height="70" Grid.ColumnSpan="3"   HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}">
+            <Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" Height="70" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}">
 
                 <TextBlock FontSize="16" Height="45" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Town Districts are where you can buy and craft upgrades or go on an adventure. Regions are where your hero can fight monsters for experience and loot"/>
             </Border>

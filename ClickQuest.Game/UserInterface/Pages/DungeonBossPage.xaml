@@ -38,7 +38,7 @@
 			</Grid.RowDefinitions>
 
 			<!-- Dungeon description -->
-			<Border Grid.Row="0" BorderThickness="0.5" BorderBrush="{StaticResource BrushGray2}" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}">
+			<Border Grid.Row="0" BorderThickness="2" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}">
 
 				<TextBlock x:Name="DungeonDescriptionBlock" FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap"/>
 			</Border>
