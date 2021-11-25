@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -33,6 +34,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			BossButton.IsEnabled = true;
 			TownButton.Visibility = Visibility.Hidden;
+			BossHealthBorder.BorderBrush = (SolidColorBrush)this.FindResource("BrushGold");
 
 			BindFightInfoToInterface(boss);
 
@@ -49,22 +51,29 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			var binding = new Binding("Duration")
 			{
-				Source = this
+				Source = this,
+				StringFormat = "Time remaining: {0}s"
 			};
-			TimeRemainingBlock.SetBinding(TextBlock.TextProperty, binding);
+			DungeonTimerBlock.SetBinding(TextBlock.TextProperty, binding);
 
-			var binding2 = new Binding("Description")
+			var affixesStringList = new List<string>();
+
+			foreach (var affix in boss.Affixes)
 			{
-				Source = GameAssets.Dungeons.FirstOrDefault(x => x.BossIds.Contains(boss.Id))
-			};
-			DungeonDescriptionBlock.SetBinding(TextBlock.TextProperty, binding2);
+				var	affixString = string.Concat(affix.ToString().Select(x => Char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
+
+				affixesStringList.Add(affixString);
+			}
+
+			BossAffixesBlock.Text = string.Join(" / ", affixesStringList);
 		}
 
 		public void HandleInterfaceAfterBossDeath()
 		{
 			BossButton.IsEnabled = false;
 			TownButton.Visibility = Visibility.Visible;
-			
+			BossHealthBorder.BorderBrush = (SolidColorBrush)this.FindResource("BrushGray3");
+
 			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
 			(StatsFrame.Content as HeroStatsPage).RefreshAllDynamicStatsAndToolTips();
 		}
