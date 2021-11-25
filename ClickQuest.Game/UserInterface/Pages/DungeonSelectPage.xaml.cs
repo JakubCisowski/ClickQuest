@@ -1,6 +1,9 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
@@ -141,38 +144,21 @@ namespace ClickQuest.Game.UserInterface.Pages
 				{
 					Background = (SolidColorBrush) FindResource("BrushGray1"),
 					Name = "Dungeon" + dungeonsOfThisGroup[i].Id,
-					Width = 250,
-					Height = 80
+					Width = 330,
+					Height = 100
 				};
 
 				var panel = new StackPanel();
 
 				var block = new TextBlock
 				{
-					FontSize = 22,
+					FontSize = 25,
 					Text = dungeonsOfThisGroup[i].Name,
-					TextAlignment = TextAlignment.Center
+					TextAlignment = TextAlignment.Center,
+					FontFamily = (FontFamily)this.FindResource("FontFancy")
 				};
-
-				var border = new Border
-				{
-					BorderThickness = new Thickness(0.5),
-					BorderBrush = (SolidColorBrush) FindResource("BrushGray2"),
-					Margin = new Thickness(0, 5, 0, 0)
-				};
-
-				var block2 = new TextBlock
-				{
-					FontSize = 16,
-					FontStyle = FontStyles.Italic,
-					Text = dungeonsOfThisGroup[i].Description,
-					TextAlignment = TextAlignment.Center
-				};
-
-				border.Child = block2;
 
 				panel.Children.Add(block);
-				panel.Children.Add(border);
 
 				button.Content = panel;
 
@@ -200,40 +186,62 @@ namespace ClickQuest.Game.UserInterface.Pages
 				{
 					Background = (SolidColorBrush) FindResource("BrushGray1"),
 					Name = "Boss" + boss.Id,
-					Width = 250,
-					Height = 80
+					Width = 330,
+					Height = 120
 				};
 
-				var panel = new StackPanel();
+				var grid = new Grid()
+				{
+					Width = 320,
+					Height = 110
+				};
 
 				var block = new TextBlock
 				{
-					FontSize = 22,
+					FontSize = 25,
 					Text = boss.Name,
-					TextAlignment = TextAlignment.Center
-				};
-
-				var border = new Border
-				{
-					BorderThickness = new Thickness(0.5),
-					BorderBrush = (SolidColorBrush) FindResource("BrushGray2"),
-					Margin = new Thickness(0, 5, 0, 0)
+					TextAlignment = TextAlignment.Center,
+					FontFamily = (FontFamily)this.FindResource("FontFancy"),
+					VerticalAlignment=VerticalAlignment.Top,
+					Margin = new Thickness(0,10,0,0)
 				};
 
 				var block2 = new TextBlock
 				{
-					FontSize = 16,
-					FontStyle = FontStyles.Italic,
-					Text = boss.Description,
-					TextAlignment = TextAlignment.Center
+					FontSize = 18,
+					TextAlignment = TextAlignment.Center,
+					FontFamily = (FontFamily)this.FindResource("FontFancy"),
+					VerticalAlignment=VerticalAlignment.Center
 				};
 
-				border.Child = block2;
+				block2.Inlines.Add(new Run("Health: "));
+				block2.Inlines.Add(new Run(boss.Health.ToString()){Foreground=(SolidColorBrush)this.FindResource("BrushRed")});
 
-				panel.Children.Add(block);
-				panel.Children.Add(border);
+				var block3 = new TextBlock
+				{
+					FontSize = 16,
+					FontFamily = (FontFamily)this.FindResource("FontRegularItalic"),
+					TextAlignment = TextAlignment.Center,
+					VerticalAlignment=VerticalAlignment.Bottom,
+					Margin = new Thickness(0,0,0,10)
+				};
 
-				button.Content = panel;
+				var affixesStringList = new List<string>();
+
+				foreach (var affix in boss.Affixes)
+				{
+					var	affixString = string.Concat(affix.ToString().Select(x => Char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
+
+					affixesStringList.Add(affixString);
+				}
+
+				block3.Text = string.Join(" / ", affixesStringList);
+
+				grid.Children.Add(block);
+				grid.Children.Add(block2);
+				grid.Children.Add(block3);
+
+				button.Content = grid;
 
 				button.Tag = boss;
 
