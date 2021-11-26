@@ -3,6 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	  xmlns:local="clr-namespace:ClickQuest.Game.Core.Adventures"
       mc:Ignorable="d" Title="Quest Menu" Background="Transparent"
       Height="728" Width="1366">
 
@@ -24,7 +26,8 @@
 			<Grid.RowDefinitions>
 				<RowDefinition Height="1.1*" />
 				<RowDefinition Height="*" />
-				<RowDefinition Height="7*" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="6*" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
@@ -36,14 +39,36 @@
 
 			<!-- Quest reroll button -->
 			<Button x:Name="RerollButton" Grid.Row="1" HorizontalAlignment="Center" Width="450" Height="50" Background="{StaticResource BrushAccent2}" Click="RerollButton_Click">
-				<TextBlock Text="Reroll" FontSize="22" />
+				<Button.Content>
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+						<TextBlock Text="Reroll" FontSize="22" VerticalAlignment="Center" />
+						<TextBlock Text=" (" FontSize="22" VerticalAlignment="Center" />
+						<materialDesign:PackIcon Width="20" Height="20" Kind="CheckboxMultipleBlankCircle" VerticalAlignment="Center" Foreground="{StaticResource BrushGold}"/>
+						<TextBlock FontSize="22" Text="{Binding Source={x:Static local:Quest.RerollGoldCost}, StringFormat='\{0\})'}" VerticalAlignment="Center"/>
+					</StackPanel>
+				</Button.Content>
 			</Button>
 
-			<!-- Quest list -->
-			<StackPanel x:Name="QuestPanel" Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" />
+			<Grid Grid.Row="2">
+				<Button x:Name="LeftNavigationButton" HorizontalAlignment="Center" Width="50" Height="50" Margin="0,0,110,0" Click="LeftNavigationButton_OnClick" IsEnabled="False" Style="{StaticResource ButtonStyleDisabled}">
+					<Button.Content>
+						<materialDesign:PackIcon Kind="ArrowLeft" Width="45" Height="45" VerticalAlignment="Center" HorizontalAlignment="Center" />
+					</Button.Content>
+				</Button>
+
+				<TextBlock x:Name="NavigationTextBlock" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" Text="1 / 3"/>
+
+				<Button x:Name="RightNavigationButton" HorizontalAlignment="Center" Width="50" Height="50" Margin="110,0,0,0" Click="RightNavigationButton_OnClick">
+					<Button.Content>
+						<materialDesign:PackIcon Kind="ArrowRight" Width="45" Height="45" VerticalAlignment="Center" HorizontalAlignment="Center" />
+					</Button.Content>
+				</Button>
+			</Grid>
+
+			<StackPanel x:Name="QuestPanel" Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center" />
 
 			<!-- Back to town button -->
-			<Button x:Name="MainMenuButton" Grid.Row="3" Background="{StaticResource BrushAccent3}" HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
+			<Button x:Name="MainMenuButton" Grid.Row="4" Background="{StaticResource BrushAccent3}" HorizontalAlignment="Center" Click="TownButton_Click" Width="450" Height="50">
 				<TextBlock Text="Come back to town!" FontSize="22" />
 			</Button>
 		</Grid>

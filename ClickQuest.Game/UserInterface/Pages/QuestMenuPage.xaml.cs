@@ -1,20 +1,32 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Media;
+using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Windows;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
 	public partial class QuestMenuPage : Page
 	{
+		private List<QuestButton> _questButtons;
+
+		private int _currentQuestPosition;
+
 		public QuestMenuPage()
 		{
 			InitializeComponent();
+
+			_questButtons = new List<QuestButton>();
+			_currentQuestPosition = 0;
 		}
 
 		public void LoadPage()
@@ -36,6 +48,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		public void RerollQuests()
 		{
 			User.Instance.CurrentHero.Quests.Clear();
+			_questButtons.Clear();
 
 			var questsForCurrentHeroClass = GameAssets.Quests.Where(x => x.HeroClass == User.Instance.CurrentHero.HeroClass || x.HeroClass == HeroClass.All).ToList();
 
@@ -64,13 +77,16 @@ namespace ClickQuest.Game.UserInterface.Pages
 		public void RefreshQuestButtons()
 		{
 			QuestPanel.Children.Clear();
+			_questButtons.Clear();
 
-			for (int i = 0; i < User.Instance.CurrentHero.Quests.Count; i++)
+			for (int i = 0; i < 3; i++)
 			{
 				var button = new QuestButton(User.Instance.CurrentHero.Quests[i]);
 
-				QuestPanel.Children.Add(button);
+				_questButtons.Add(button);
 			}
+
+			QuestPanel.Children.Add(_questButtons[0]);
 		}
 
 		private void RerollButton_Click(object sender, RoutedEventArgs e)
@@ -78,11 +94,26 @@ namespace ClickQuest.Game.UserInterface.Pages
 			// Check if any quest is currently assigned - if so, user can't reroll quests.
 			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
 			{
-				// Later: add price and -gold floating text.
-				RerollQuests();
+				if (User.Instance.Gold >= Quest.RerollGoldCost)
+				{
+					var result = AlertBox.Show("Are you sure you want to reroll your current quests for 100 gold?", MessageBoxButton.YesNo);
 
-				// Increase achievement amount.
-				User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.QuestRerollsAmount]++;
+					if (result == MessageBoxResult.Yes)
+					{
+						(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{Quest.RerollGoldCost}", (SolidColorBrush)this.FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+
+						User.Instance.Gold -= Quest.RerollGoldCost;
+
+						RerollQuests();
+
+						// Increase achievement amount.
+						User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.QuestRerollsAmount]++;
+					}
+				}
+				else
+				{
+					AlertBox.Show("You don't have enough gold to reroll", MessageBoxButton.OK);
+				}
 			}
 		}
 
@@ -90,6 +121,40 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			// Go back to Town.
 			InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
+		}
+
+		private void LeftNavigationButton_OnClick(object sender, RoutedEventArgs e)
+		{
+			QuestPanel.Children.Clear();
+			QuestPanel.Children.Add(_questButtons[--_currentQuestPosition]);
+
+			RightNavigationButton.IsEnabled = true;
+			RightNavigationButton.Style = (Style)this.FindResource("ButtonStyleGeneral");
+
+			NavigationTextBlock.Text = $"{_currentQuestPosition + 1} / {_questButtons.Count}";
+
+			if (_currentQuestPosition == 0)
+			{
+				LeftNavigationButton.IsEnabled = false;
+				LeftNavigationButton.Style = (Style)this.FindResource("ButtonStyleDisabled");
+			}
+		}
+
+		private void RightNavigationButton_OnClick(object sender, RoutedEventArgs e)
+		{
+			QuestPanel.Children.Clear();
+			QuestPanel.Children.Add(_questButtons[++_currentQuestPosition]);
+
+			LeftNavigationButton.IsEnabled = true;
+			LeftNavigationButton.Style = (Style)this.FindResource("ButtonStyleGeneral");
+
+			NavigationTextBlock.Text = $"{_currentQuestPosition + 1} / {_questButtons.Count}";
+
+			if (_currentQuestPosition == 2)
+			{
+				RightNavigationButton.IsEnabled = false;
+				RightNavigationButton.Style = (Style)this.FindResource("ButtonStyleDisabled");
+			}
 		}
 	}
 }

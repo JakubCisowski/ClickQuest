@@ -851,7 +851,7 @@
         "MonsterLootId": 33,
         "MonsterLootType": 0,
         "Frequency": 0.1,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 7,
@@ -947,7 +947,7 @@
         "MonsterLootId": 36,
         "MonsterLootType": 0,
         "Frequency": 0.2,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       }
     ],
     "Id": 31,

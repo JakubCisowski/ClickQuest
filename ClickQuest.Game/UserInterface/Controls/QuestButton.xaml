@@ -4,36 +4,37 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             Height="450" Width="220">
+             Height="430" Width="660">
 
-	<Button Click="QuestButton_Click" Background="{StaticResource BrushGray3}">
-		<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+	<Button Click="QuestButton_Click" Background="{StaticResource BrushAccent1}">
+		<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="630" Height="420">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="0.5*" />
-				<RowDefinition Height="2*" />
-				<RowDefinition Height="0.5*" />
+				<RowDefinition Height="0.4*" />
+				<RowDefinition Height="1.5*" />
 				<RowDefinition Height="10" />
 				<RowDefinition Height="40" />
 				<RowDefinition Height="1.5*" />
 			</Grid.RowDefinitions>
 
 			<!-- Name text -->
-			<TextBlock x:Name="QuestName" Grid.Row="0" Text="{Binding Path=Name}" FontSize="28" TextAlignment="Center" VerticalAlignment="Top" Margin="5" />
+			<StackPanel x:Name="QuestNamePanel" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal">
+				<TextBlock x:Name="QuestName" Text="{Binding Path=Name}" FontSize="28" TextAlignment="Center" Margin="5" FontFamily="{StaticResource FontFancy}"/>
+			</StackPanel>
 
-			<!-- Description text -->
-			<Border Grid.Row="1" BorderThickness="1" BorderBrush="{StaticResource BrushGray2}" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="5" Margin="5">
-				<TextBlock x:Name="QuestDescription" Text="{Binding Path=Description}" FontSize="18" TextAlignment="Center" TextWrapping="Wrap" />
-			</Border>
+			<!-- dodać rare -->
 
 			<!-- Duration info text -->
-			<TextBlock x:Name="QuestDuration" Grid.Row="2" Text="{Binding Path=Duration, StringFormat=Duration: {0}}" FontSize="24" TextAlignment="Center" Margin="5" />
+			<TextBlock x:Name="QuestDuration" Grid.Row="1" Text="{Binding Path=Duration, StringFormat=Duration: {0}}" FontSize="24" TextAlignment="Center" Margin="5" VerticalAlignment="Center" />
+
+			<!-- Description text -->
+			<TextBlock x:Name="QuestDescription" Grid.Row="2" Text="{Binding Path=Description}" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="5" FontFamily="{StaticResource FontFancy}" />
 
 			<Separator Grid.Row="3" Height="2" Width="160" Margin="10,4,10,4" HorizontalAlignment="Center" />
 
-			<TextBlock Grid.Row="4" Text="Rewards:" TextAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="5" />
+			<TextBlock Grid.Row="4" Text="Rewards:" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Margin="5" FontFamily="{StaticResource FontRegularDemiBold}"/>
 
-			<!-- Panel for rewards-->
-			<TextBlock x:Name="QuestRewardsPanel" Grid.Row="5" Text="{Binding Path=RewardsDescription}" FontSize="16" Margin="5" VerticalAlignment="Center" />
+			<StackPanel x:Name="RewardsPanel" Grid.Row="5" VerticalAlignment="Top" HorizontalAlignment="Center"/>
 		</Grid>
 	</Button>
 </UserControl>

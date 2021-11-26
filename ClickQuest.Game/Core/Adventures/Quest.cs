@@ -25,8 +25,7 @@ namespace ClickQuest.Game.Core.Adventures
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		private readonly DispatcherTimer _timer;
-
-		public int DbKey { get; set; }
+		public static int RerollGoldCost = 100;
 
 		public bool Rare { get; set; }
 
