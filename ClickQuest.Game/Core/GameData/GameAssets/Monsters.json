@@ -39,19 +39,19 @@
         "MonsterLootId": 4,
         "MonsterLootType": 0,
         "Frequency": 0.1,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 5,
         "MonsterLootType": 0,
         "Frequency": 0.1,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 3,
         "MonsterLootType": 0,
         "Frequency": 0.8,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 1,
@@ -73,19 +73,19 @@
         "MonsterLootId": 6,
         "MonsterLootType": 0,
         "Frequency": 0.1,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 7,
         "MonsterLootType": 0,
         "Frequency": 0.1,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 3,
         "MonsterLootType": 0,
         "Frequency": 0.8,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       }
     ],
     "Id": 3,
@@ -141,13 +141,13 @@
         "MonsterLootId": 11,
         "MonsterLootType": 0,
         "Frequency": 0.1,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 3,
         "MonsterLootType": 0,
         "Frequency": 0.8,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       }
     ],
     "Id": 5,
@@ -163,13 +163,13 @@
         "MonsterLootId": 12,
         "MonsterLootType": 0,
         "Frequency": 0.1,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 3,
         "MonsterLootType": 1,
         "Frequency": 0.01,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 3,
@@ -801,7 +801,7 @@
         "MonsterLootId": 32,
         "MonsterLootType": 0,
         "Frequency": 0.1,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 33,
@@ -845,7 +845,7 @@
         "MonsterLootId": 35,
         "MonsterLootType": 0,
         "Frequency": 0.1,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 33,
@@ -873,25 +873,25 @@
         "MonsterLootId": 35,
         "MonsterLootType": 0,
         "Frequency": 0.2,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 7,
         "MonsterLootType": 0,
         "Frequency": 0.2,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 33,
         "MonsterLootType": 0,
         "Frequency": 0.2,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 36,
         "MonsterLootType": 0,
         "Frequency": 0.2,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       }
     ],
     "Id": 29,
@@ -907,13 +907,13 @@
         "MonsterLootId": 33,
         "MonsterLootType": 0,
         "Frequency": 0.2,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 37,
         "MonsterLootType": 0,
         "Frequency": 0.2,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       }
     ],
     "Id": 30,
@@ -921,7 +921,7 @@
     "Description": "While normally the hawks reside high up in the canopy, this one flew down to 'greet' the intruder to its home.",
     "Health": 60,
     "Image": "/example.png",
-    "BestiaryDiscovered": false
+    "BestiaryDiscovered": true
   },
   {
     "MonsterLootPatterns": [
@@ -935,13 +935,13 @@
         "MonsterLootId": 32,
         "MonsterLootType": 0,
         "Frequency": 0.2,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 18,
         "MonsterLootType": 0,
         "Frequency": 0.2,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 36,
@@ -955,7 +955,7 @@
     "Description": "This dark boar has seemingly been on a vegetarian diet for a long time. It might change soon, as it's about to charge and attack you.",
     "Health": 60,
     "Image": "/example.png",
-    "BestiaryDiscovered": false
+    "BestiaryDiscovered": true
   },
   {
     "MonsterLootPatterns": [

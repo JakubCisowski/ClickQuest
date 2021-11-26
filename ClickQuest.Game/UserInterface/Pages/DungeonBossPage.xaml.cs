@@ -86,9 +86,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 		private void TownButton_Click(object sender, RoutedEventArgs e)
 		{
 			InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
-
-			// [PRERELEASE]
-			TestRewardsBlock.Text = "";
 		}
 	}
 }

@@ -317,7 +317,7 @@
           0.9,
           1
         ],
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "BossLootId": 2,
@@ -330,7 +330,7 @@
           0.4,
           0.5
         ],
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "BossLootId": 13,
@@ -343,7 +343,7 @@
           0.4,
           0.5
         ],
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "BossLootId": 1,
@@ -382,7 +382,7 @@
           0.9,
           1
         ],
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       }
     ],
     "Affixes": [],
@@ -391,7 +391,7 @@
     "Description": "'Raja' stands for 'king', and it's exactly what it sounds like – Rakshasa Raja is a much bigger and more respected type among its kin. It has four arms, wields a sword in each one of them, and can turn you into pieces in the blink of an eye.",
     "Health": 1500,
     "Image": "/example.png",
-    "BestiaryDiscovered": false
+    "BestiaryDiscovered": true
   },
   {
     "BossLootPatterns": [

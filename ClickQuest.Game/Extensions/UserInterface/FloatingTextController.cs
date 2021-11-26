@@ -153,9 +153,9 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				Text = quantity + "x " + item.Name,
 				Foreground = ColorsController.GetRarityColor(item.Rarity),
 				FontSize = 28,
+				FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBold"),
 				VerticalAlignment = VerticalAlignment.Center
 			};
-
 
 			stackPanel.Children.Add(itemBlock);
 

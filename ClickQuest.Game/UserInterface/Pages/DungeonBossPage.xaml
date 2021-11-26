@@ -81,11 +81,6 @@
 						</Border>
 					</Grid>
 				</Button>
-
-				<!-- Debug boss info -->
-				<StackPanel x:Name="BossPanel" Orientation="Vertical" HorizontalAlignment="Center">
-					<TextBlock x:Name="TestRewardsBlock" />
-				</StackPanel>
 			</StackPanel>
 
 			<!-- Back to town button -->

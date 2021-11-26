@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
+using System.Windows;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
@@ -11,6 +12,7 @@ using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.UserInterface.Windows;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 
 namespace ClickQuest.Game.Core.Enemies
@@ -101,9 +103,11 @@ namespace ClickQuest.Game.Core.Enemies
 
 			// Grant boss loot.
 			// 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
-			int threshold = 5 - (int)Math.Ceiling((double)CurrentHealth / (Health / 5));
+			int threshold = 5 - (int)Math.Ceiling(CurrentHealth / (Health / 5.0));
 			// 2. Iterate through every possible loot.
-			string lootText = "Experience gained: " + experienceGained + " \n" + "Loot: \n";
+
+			// Loot animation delay, incremented after each animation.
+			int animationDelay = 1;
 
 			foreach (var loot in BossLootPatterns)
 			{
@@ -121,6 +125,9 @@ namespace ClickQuest.Game.Core.Enemies
 					Blessing.AskUserAndSwapBlessing(loot.BossLootId);
 
 					GameAssets.Bosses.FirstOrDefault(x => x.Id == this.Id).BossLootPatterns.FirstOrDefault(y => y.BossLootId == loot.BossLootId).BestiaryDiscovered = true;
+					
+					// Start blessing animation.
+					(Application.Current.MainWindow as GameWindow).CreateFloatingTextBlessing(GameAssets.Blessings.FirstOrDefault(x=>x.Id==loot.BossLootId));
 
 					continue;
 				}
@@ -130,16 +137,15 @@ namespace ClickQuest.Game.Core.Enemies
 				if (itemIntegerCount > 0)
 				{
 					loot.Item.AddItem(itemIntegerCount);
-					lootText += "- " + $"{itemIntegerCount}x " + loot.Item.Name + " (" + loot.BossLootType + ")\n";
 
 					GameAssets.Bosses.FirstOrDefault(x => x.Id == this.Id).BossLootPatterns.FirstOrDefault(y => y.BossLootId == loot.BossLootId).BestiaryDiscovered = true;
+
+					// Start loot animation.
+					(Application.Current.MainWindow as GameWindow).CreateFloatingTextLoot(loot.Item, itemIntegerCount, animationDelay++);
 				}
 			}
 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
-
-			// [PRERELEASE] Display exp and loot for testing purposes.
-			InterfaceController.CurrentBossPage.TestRewardsBlock.Text = lootText;
 
 			GameController.UpdateSpecializationAmountAndUI(SpecializationType.Dungeon);
 
