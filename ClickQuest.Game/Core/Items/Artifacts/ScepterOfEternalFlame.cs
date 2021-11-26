@@ -20,6 +20,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 		public override void OnEnemyClick(Enemy clickedEnemy)
 		{
 			_timer.Start();
+			_ticksCount = 0;
 		}
 
 		public override void OnKill()
