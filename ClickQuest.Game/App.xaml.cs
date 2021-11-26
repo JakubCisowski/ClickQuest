@@ -45,7 +45,7 @@ namespace ClickQuest.Game
 			var e = args.Exception;
 
 			string directoryPath = Path.Combine(Environment.CurrentDirectory, "Logs");
-			string filePath = Path.Combine(directoryPath, $"CrashLog {DateTime.Now.ToString("ddMMyyyy HHmmss")}.txt");
+			string filePath = Path.Combine(directoryPath, $"CrashLog {DateTime.Now.ToString("dd-MM-yyyy HH-mm-ss")}.txt");
 
 			if (!Directory.Exists(directoryPath))
 			{
@@ -59,7 +59,17 @@ namespace ClickQuest.Game
 				writer.WriteLine($"Stack trace: {e.StackTrace}");
 				writer.WriteLine();
 				writer.WriteLine("User.json file:");
-				writer.WriteLine(UserDataLoader.Save());
+
+				//  If exception was thrown before loading User.json (Ingots.Count can't be null after loading)
+				if (User.Instance.Ingots?.Count == 0)
+				{
+					var userJson = File.ReadAllText(UserDataLoader.UserDataPath);
+					writer.Write(userJson);
+				}
+				else
+				{
+					writer.Write(UserDataLoader.Save());
+				}
 			}
 		}
 	}
