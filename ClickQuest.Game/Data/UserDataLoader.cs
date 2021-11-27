@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Extensions.Encryption;
 
 namespace ClickQuest.Game.Data
 {
@@ -27,8 +28,12 @@ namespace ClickQuest.Game.Data
 				SeedDungeonKeys();
 				return;
 			}
+			
+			// Decrypt the file.
+			byte[] encryptedJson = File.ReadAllBytes(UserDataPath);
+			
+			string json = DataEncryptionController.DecryptJsonUsingAes(encryptedJson);
 
-			string json = File.ReadAllText(UserDataPath);
 			var user = JsonSerializer.Deserialize<User>(json, new JsonSerializerOptions()
 			{
 			});
@@ -86,8 +91,11 @@ namespace ClickQuest.Game.Data
 				WriteIndented = true,
 				Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
 			});
-
-			File.WriteAllText(UserDataPath, json);
+			
+			// Encrypt the file.
+			var encrypted = DataEncryptionController.EncryptJsonUsingAes(json);
+			
+			File.WriteAllBytes(UserDataPath, encrypted);
 
 			return json;
 		}

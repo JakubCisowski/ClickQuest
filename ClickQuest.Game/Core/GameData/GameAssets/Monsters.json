@@ -359,19 +359,19 @@
         "MonsterLootId": 24,
         "MonsterLootType": 0,
         "Frequency": 0.4,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 25,
         "MonsterLootType": 0,
         "Frequency": 0.2,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 26,
         "MonsterLootType": 0,
         "Frequency": 0.2,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 4,
@@ -391,7 +391,7 @@
     "Description": "Judging by the rusty cleaver in the green-skinned zombie’s right hand, it was a butcher before it died. Its body had been severely wounded, and you can still see multiple cuts everywhere, even on its head.",
     "Health": 60,
     "Image": "/example.png",
-    "BestiaryDiscovered": false
+    "BestiaryDiscovered": true
   },
   {
     "MonsterLootPatterns": [
@@ -399,7 +399,7 @@
         "MonsterLootId": 8,
         "MonsterLootType": 0,
         "Frequency": 0.05,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 27,
@@ -437,7 +437,7 @@
     "Description": "It was hard to realise you were being attacked by this transparent ghost. When it appeared in sight, however, you started hearing loud noises, and your surroundings suddenly started moving around. The creature’s red eyes stare deep into your soul, and you can see what feels like a smile on its indistinct face.",
     "Health": 60,
     "Image": "/example.png",
-    "BestiaryDiscovered": false
+    "BestiaryDiscovered": true
   },
   {
     "MonsterLootPatterns": [
@@ -491,7 +491,7 @@
         "MonsterLootId": 30,
         "MonsterLootType": 0,
         "Frequency": 0.3,
-        "BestiaryDiscovered": false
+        "BestiaryDiscovered": true
       },
       {
         "MonsterLootId": 25,
@@ -529,7 +529,7 @@
     "Description": "This large, ethereal woman can be heard from afar due to her screaming. She is wearing a long dress, with many chains attached to it, and underneath it is a pinkish ghost. She is wielding a huge scythe in both of her hands, and it looks like she doesn’t use it for harvesting crops, but something else.",
     "Health": 60,
     "Image": "/example.png",
-    "BestiaryDiscovered": false
+    "BestiaryDiscovered": true
   },
   {
     "MonsterLootPatterns": [
