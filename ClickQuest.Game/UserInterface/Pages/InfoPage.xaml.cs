@@ -222,7 +222,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					}
 					else
 					{
-						itemNameBlock.Text = item.Name;
+						itemNameBlock.Text = item is Recipe recipe ? recipe.FullName : item.Name;
 						itemNameBlock.FontFamily = (FontFamily)this.FindResource("FontRegularBold");
 						itemNameBlock.ToolTip = ItemToolTipController.GenerateItemToolTip(item);
 					}
@@ -410,7 +410,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					}
 					else
 					{
-						itemNameBlock.Text = item.Name;
+						itemNameBlock.Text = item is Recipe recipe ? recipe.FullName : item.Name;;
 						itemNameBlock.FontFamily = (FontFamily)this.FindResource("FontRegularBold");
 						
 						if (lootPattern.BossLootType == Core.Items.Types.RewardType.Blessing)
