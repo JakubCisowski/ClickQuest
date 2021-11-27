@@ -13,6 +13,7 @@ using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Pages;
 using ClickQuest.Game.UserInterface.Windows;
+using MaterialDesignThemes.Wpf;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 
 namespace ClickQuest.Game.Core.Enemies
@@ -107,11 +108,22 @@ namespace ClickQuest.Game.Core.Enemies
 				{
 					GameAssets.BestiaryEntries.Add(new BestiaryEntry() { Id = selectedLoot.Id, EntryType = BestiaryEntryType.MonsterLoot });
 				}
-			}
+				
+				switch (selectedLoot)
+				{
+					case Material material:
+						LootQueueController.AddToQueue(material.Name, material.Rarity, PackIconKind.Cog);
+						break;
 
-			// [PRERELEASE] Display exp and loot for testing purposes.
-			// (GameAssets.CurrentPage as RegionPage).TestRewardsBlock.Text = "Loot: " + selectedLoot?.Name + ", Base Exp: " + experienceGained;
-			(Application.Current.MainWindow as GameWindow).CreateFloatingTextLoot(selectedLoot);
+					case Recipe recipe:
+						LootQueueController.AddToQueue(recipe.FullName, recipe.Rarity, PackIconKind.ScriptText);
+						break;
+
+					case Artifact artifact:
+						LootQueueController.AddToQueue(artifact.Name, artifact.Rarity, PackIconKind.DiamondStone);
+						break;
+				}
+			}			
 
 			CheckForDungeonKeyDrop();
 

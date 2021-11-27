@@ -13,6 +13,7 @@ using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Windows;
+using MaterialDesignThemes.Wpf;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 
 namespace ClickQuest.Game.Core.Enemies
@@ -106,8 +107,7 @@ namespace ClickQuest.Game.Core.Enemies
 			int threshold = 5 - (int)Math.Ceiling(CurrentHealth / (Health / 5.0));
 			// 2. Iterate through every possible loot.
 
-			// Loot animation delay, incremented after each animation.
-			int animationDelay = 1;
+			var lootQueueEntries = new List<LootQueueEntry>();
 
 			foreach (var loot in BossLootPatterns)
 			{
@@ -122,15 +122,20 @@ namespace ClickQuest.Game.Core.Enemies
 				// Grant loot after checking if it's not empty.
 				if (loot.BossLootType == RewardType.Blessing)
 				{
-					Blessing.AskUserAndSwapBlessing(loot.BossLootId);
+					bool isBlessingAccepted = Blessing.AskUserAndSwapBlessing(loot.BossLootId);
 
 					if (!GameAssets.BestiaryEntries.Any(x=>x.EntryType == BestiaryEntryType.BossLoot && x.LootType == RewardType.Blessing && x.Id==loot.BossLootId))
 					{
 						GameAssets.BestiaryEntries.Add(new BestiaryEntry() { Id = loot.BossLootId, LootType = RewardType.Blessing, EntryType = BestiaryEntryType.BossLoot });
 					}
-					
-					// Start blessing animation.
-					(Application.Current.MainWindow as GameWindow).CreateFloatingTextBlessing(GameAssets.Blessings.FirstOrDefault(x=>x.Id==loot.BossLootId));
+
+					if (isBlessingAccepted)
+					{
+						// Start blessing animation.
+						var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == loot.BossLootId);
+
+						lootQueueEntries.Add(new LootQueueEntry(blessing.Name, blessing.Rarity, PackIconKind.BookCross, 1));
+					}
 
 					continue;
 				}
@@ -147,9 +152,24 @@ namespace ClickQuest.Game.Core.Enemies
 					}
 
 					// Start loot animation.
-					(Application.Current.MainWindow as GameWindow).CreateFloatingTextLoot(loot.Item, itemIntegerCount, animationDelay++);
+					switch (loot.Item)
+					{
+						case Material material:
+							lootQueueEntries.Add(new LootQueueEntry(material.Name, material.Rarity, PackIconKind.Cog, itemIntegerCount));
+							break;
+
+						case Recipe recipe:
+							lootQueueEntries.Add(new LootQueueEntry(recipe.FullName, recipe.Rarity, PackIconKind.ScriptText, itemIntegerCount));
+							break;
+
+						case Artifact artifact:
+							lootQueueEntries.Add(new LootQueueEntry(artifact.Name, artifact.Rarity, PackIconKind.DiamondStone, itemIntegerCount));
+							break;
+					}
 				}
 			}
+
+			LootQueueController.AddToQueue(lootQueueEntries);
 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 

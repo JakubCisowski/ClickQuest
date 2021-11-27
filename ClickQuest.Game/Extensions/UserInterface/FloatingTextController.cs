@@ -134,7 +134,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			return border;
 		}
 
-		public static Border CreateFloatingTextLootBorder(Item item, int quantity = 1)
+		public static Border CreateFloatingTextLootBorder(string lootName, Rarity lootRarity, PackIconKind lootIconKind, int quantity = 1)
 		{
 			var border = new Border
 			{
@@ -151,32 +151,19 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 			var lootIcon = new PackIcon()
 			{
-				Foreground = ColorsController.GetRarityColor(item.Rarity),
+				Foreground = ColorsController.GetRarityColor(lootRarity),
 				Width = 20,
 				Height = 20,
 				VerticalAlignment = VerticalAlignment.Center
 			};
-
-			switch (item)
-			{
-				case Material:
-					lootIcon.Kind = PackIconKind.Cog;
-					break;
-
-				case Recipe:
-					lootIcon.Kind = PackIconKind.ScriptText;
-					break;
-
-				case Artifact:
-					lootIcon.Kind = PackIconKind.DiamondStone;
-					break;
-			}
+			
+			lootIcon.Kind = lootIconKind;
 
 			stackPanel.Children.Add(lootIcon);
 
 			var itemBlock = new TextBlock
 			{
-				Foreground = ColorsController.GetRarityColor(item.Rarity),
+				Foreground = ColorsController.GetRarityColor(lootRarity),
 				FontSize = 28,
 				FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBold"),
 				VerticalAlignment = VerticalAlignment.Center,
@@ -185,55 +172,12 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 			if (quantity <= 1)
 			{
-				itemBlock.Text = item.Name;
+				itemBlock.Text = lootName;
 			}
 			else
 			{
-				itemBlock.Text = quantity + "x " + item.Name;
+				itemBlock.Text = quantity + "x " + lootName;
 			}
-
-			stackPanel.Children.Add(itemBlock);
-
-			border.Child = stackPanel;
-
-			return border;
-		}
-
-		public static Border CreateFloatingTextBlessingBorder(Blessing blessing)
-		{
-			var border = new Border
-			{
-				CornerRadius = new CornerRadius(20),
-				BorderThickness = new Thickness(5),
-				Padding = new Thickness(2),
-				IsHitTestVisible = false
-			};
-
-			var stackPanel = new StackPanel
-			{
-				Orientation = Orientation.Horizontal
-			};
-
-			var lootIcon = new PackIcon()
-			{
-				Foreground = ColorsController.GetRarityColor(blessing.Rarity),
-				Width = 20,
-				Height = 20,
-				VerticalAlignment = VerticalAlignment.Center,
-				Kind = PackIconKind.BookCross
-			};
-
-			stackPanel.Children.Add(lootIcon);
-
-			var itemBlock = new TextBlock
-			{
-				Text = blessing.Name,
-				Foreground = ColorsController.GetRarityColor(blessing.Rarity),
-				FontSize = 28,
-				FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBold"),
-				VerticalAlignment = VerticalAlignment.Center,
-				Margin = new Thickness(5,0,0,0)
-			};
 
 			stackPanel.Children.Add(itemBlock);
 

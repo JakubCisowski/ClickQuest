@@ -110,76 +110,28 @@ namespace ClickQuest.Game.UserInterface.Windows
 			transform.BeginAnimation(ScaleTransform.ScaleYProperty, animationY);
 		}
 
-		public void CreateFloatingTextLoot(Item item, int quantity = 1, int animationDelay = 0)
+		public void CreateFloatingTextLoot(Border lootBorder, int animationDelay = 0)
 		{
-			if (item is null || quantity==0)
-			{
-				return;
-			}
-			
 			int animationDuration = 5;
-
-			var border = FloatingTextController.CreateFloatingTextLootBorder(item, quantity);
 			
 			// Start position is center of the screen (so center of the enemy as well).
 			var startPosition = FloatingTextController.EnemyCenterPoint;
 			var endPosition = FloatingTextController.LootEndPositionPoint;
 
-			Canvas.SetLeft(border, startPosition.X);
-			Canvas.SetTop(border, startPosition.Y);
+			Canvas.SetLeft(lootBorder, startPosition.X);
+			Canvas.SetTop(lootBorder, startPosition.Y);
 
-			FloatingTextAnimationCanvas.Children.Add(border);
-
-			// Add animationDelay to the duration, because otherwise all of the animations spawn (and dissapear) at the same time.
-			var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration + animationDelay);
-			textOpacityAnimation.Completed += FloatingTextAnimation_Completed;
-			border.BeginAnimation(OpacityProperty, textOpacityAnimation);
-
-			var top = Canvas.GetTop(border);
-			var left = Canvas.GetLeft(border);
-			var transform = new TranslateTransform();
-			border.RenderTransform = transform;
-
-			var animX = new DoubleAnimation(startPosition.X - left, endPosition.X - left - 100, TimeSpan.FromSeconds(animationDuration));
-			var animY = new DoubleAnimation(startPosition.Y - top, endPosition.Y - top - 100, TimeSpan.FromSeconds(animationDuration));
-			
-			// Delay the animations.
-			animX.BeginTime = TimeSpan.FromSeconds(animationDelay);
-			animY.BeginTime = TimeSpan.FromSeconds(animationDelay);
-			
-			transform.BeginAnimation(TranslateTransform.XProperty, animX);
-			transform.BeginAnimation(TranslateTransform.YProperty, animY);
-		}
-		
-		public void CreateFloatingTextBlessing(Blessing blessing, int animationDelay = 0)
-		{
-			if (blessing is null)
-			{
-				return;
-			}
-			
-			int animationDuration = 5;
-
-			var border = FloatingTextController.CreateFloatingTextBlessingBorder(blessing);
-			
-			// Start position is center of the screen (so center of the enemy as well).
-			var startPosition = FloatingTextController.EnemyCenterPoint;
-			var endPosition = FloatingTextController.LootEndPositionPoint;
-
-			Canvas.SetLeft(border, startPosition.X);
-			Canvas.SetTop(border, startPosition.Y);
-
-			FloatingTextAnimationCanvas.Children.Add(border);
+			FloatingTextAnimationCanvas.Children.Add(lootBorder);
 
 			// Add animationDelay to the duration, because otherwise all of the animations spawn (and dissapear) at the same time.
 			var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration + animationDelay);
 			textOpacityAnimation.Completed += FloatingTextAnimation_Completed;
-			border.BeginAnimation(OpacityProperty, textOpacityAnimation);
+			lootBorder.BeginAnimation(OpacityProperty, textOpacityAnimation);
 
-			var top = Canvas.GetTop(border);
-			var left = Canvas.GetLeft(border);
+			var top = Canvas.GetTop(lootBorder);
+			var left = Canvas.GetLeft(lootBorder);
 			var transform = new TranslateTransform();
-			border.RenderTransform = transform;
+			lootBorder.RenderTransform = transform;
 
 			var animX = new DoubleAnimation(startPosition.X - left, endPosition.X - left - 100, TimeSpan.FromSeconds(animationDuration));
 			var animY = new DoubleAnimation(startPosition.Y - top, endPosition.Y - top - 100, TimeSpan.FromSeconds(animationDuration));
