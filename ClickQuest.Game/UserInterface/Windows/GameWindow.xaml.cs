@@ -221,8 +221,6 @@ namespace ClickQuest.Game.UserInterface.Windows
 
 			UserDataLoader.Save();
 
-			GameAssetsLoader.SaveEnemies();
-
 			base.OnClosing(e);
 		}
 

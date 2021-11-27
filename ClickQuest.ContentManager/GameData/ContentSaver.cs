@@ -38,7 +38,9 @@ namespace ClickQuest.ContentManager.GameData
 				IgnoreReadOnlyProperties = true
 			});
 
-			File.WriteAllText(jsonFilePath, json);
+			var encryptedJson = DataEncryptionController.EncryptJsonUsingAes(json);
+
+			File.WriteAllBytes(jsonFilePath, encryptedJson);
 		}
 	}
 }

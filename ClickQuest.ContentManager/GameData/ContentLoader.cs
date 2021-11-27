@@ -30,12 +30,11 @@ namespace ClickQuest.ContentManager.GameData
 
 		public static List<T> LoadContent<T>(string jsonFilePath)
 		{
-			string json = File.ReadAllText(jsonFilePath);
-			var options = new JsonSerializerOptions
-			{
-			};
+			var encryptedJson = File.ReadAllBytes(jsonFilePath);
 
-			var objects = JsonSerializer.Deserialize<List<T>>(json, options);
+			string json = DataEncryptionController.DecryptJsonUsingAes(encryptedJson);
+
+			var objects = JsonSerializer.Deserialize<List<T>>(json);
 
 			return objects;
 		}

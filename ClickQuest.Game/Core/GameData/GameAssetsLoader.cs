@@ -14,6 +14,7 @@ using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Places;
+using ClickQuest.Game.Extensions.Encryption;
 
 namespace ClickQuest.Game.Core.GameData
 {
@@ -68,31 +69,13 @@ namespace ClickQuest.Game.Core.GameData
 		public static List<T> DeserializeType<T>(string filePath)
 		{
 			var result = new List<T>();
-			string json = File.ReadAllText(filePath);
+
+			var encryptedJson = File.ReadAllBytes(filePath);
+
+			string json = DataEncryptionController.DecryptJsonUsingAes(encryptedJson);
 
 			result = JsonSerializer.Deserialize<List<T>>(json);
 			return result;
-		}
-
-		public static void SaveEnemies()
-		{
-			// Save Monsters and Bosses to keep track of the BestiaryDiscovered properties.
-			SerializeType<Monster>(GameAssets.Monsters, Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Core\", @"GameData\", @"GameAssets\", "Monsters.json"));
-			SerializeType<Boss>(GameAssets.Bosses, Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Core\", @"GameData\", @"GameAssets\", "Bosses.json"));
-		}
-
-		public static void SerializeType<T>(List<T> objects, string filePath)
-		{
-			var options = new JsonSerializerOptions
-			{
-				WriteIndented = true,
-				Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-				IgnoreReadOnlyProperties = true
-			};
-
-			string json = JsonSerializer.Serialize<List<T>>(objects, options);
-
-			File.WriteAllText(filePath, json);
 		}
 
 		public static void LoadArtifactFunctionalities()
