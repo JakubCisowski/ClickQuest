@@ -234,7 +234,6 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				double.Parse((_controls["FrequencyBox5"] as TextBox).Text),
 				double.Parse((_controls["FrequencyBox6"] as TextBox).Text)
 			};
-			_pattern.BestiaryDiscovered = false;
 
 			if (oldPatternIndex == -1)
 			{

@@ -1,9 +1,14 @@
 [
   {
+    "Id": 1,
+    "Name": "Shaiiya, the Spider Queen",
+    "Health": 2000,
+    "Image": "/example.png",
+    "Description": "You end up in a rather narrow passage, but the ceiling is so far up you can't even see it. The room is full of spider webs. On the floor you see half-eaten remains of some bats and wolves. As you look up, a giant, black spider descends slowly towards you. You can barely see anything but its violet eyes staring at you through the darkness.",
     "BossLootPatterns": [
       {
-        "BossLootId": 1,
         "BossLootType": 0,
+        "BossLootId": 1,
         "Frequencies": [
           0.5,
           0.6,
@@ -14,8 +19,8 @@
         ]
       },
       {
-        "BossLootId": 1,
         "BossLootType": 1,
+        "BossLootId": 1,
         "Frequencies": [
           0.5,
           0.6,
@@ -29,52 +34,18 @@
     "Affixes": [
       1,
       0
-    ],
-    "Id": 1,
-    "Name": "Shaiiya, the Spider Queen",
-    "Description": "You end up in a rather narrow passage, but the ceiling is so far up you can't even see it. The room is full of spider webs. On the floor you see half-eaten remains of some bats and wolves. As you look up, a giant, black spider descends slowly towards you. You can barely see anything but its violet eyes staring at you through the darkness.",
-    "Health": 2000,
-    "Image": "/example.png"
+    ]
   },
   {
-    "BossLootPatterns": [
-      {
-        "BossLootId": 0,
-        "BossLootType": 0,
-        "Frequencies": [
-          0.5,
-          0.6,
-          0.7,
-          0.8,
-          0.9,
-          1
-        ]
-      },
-      {
-        "BossLootId": 2,
-        "BossLootType": 0,
-        "Frequencies": [
-          0.5,
-          0.6,
-          0.7,
-          0.8,
-          0.9,
-          1
-        ]
-      }
-    ],
-    "Affixes": [],
     "Id": 2,
     "Name": "Gurug, the Exiled Ogre",
-    "Description": "One of the passages leads to a smaller cave, in the middle of which is sitting an ogre. It is slightly higher than a human, and its brown-colored body is well built. The ogre is located next to a little bonfire, and a pile of bones.",
     "Health": 1500,
-    "Image": "/example.png"
-  },
-  {
+    "Image": "/example.png",
+    "Description": "One of the passages leads to a smaller cave, in the middle of which is sitting an ogre. It is slightly higher than a human, and its brown-colored body is well built. The ogre is located next to a little bonfire, and a pile of bones.",
     "BossLootPatterns": [
       {
-        "BossLootId": 0,
         "BossLootType": 0,
+        "BossLootId": 0,
         "Frequencies": [
           0.5,
           0.6,
@@ -85,8 +56,8 @@
         ]
       },
       {
-        "BossLootId": 2,
         "BossLootType": 0,
+        "BossLootId": 2,
         "Frequencies": [
           0.5,
           0.6,
@@ -97,18 +68,18 @@
         ]
       }
     ],
-    "Affixes": [],
+    "Affixes": []
+  },
+  {
     "Id": 3,
     "Name": "Ancient Ice Mage",
-    "Description": "TestBoss1Desc",
     "Health": 1500,
-    "Image": "/example.png"
-  },
-  {
+    "Image": "/example.png",
+    "Description": "TestBoss1Desc",
     "BossLootPatterns": [
       {
-        "BossLootId": 0,
         "BossLootType": 0,
+        "BossLootId": 0,
         "Frequencies": [
           0.5,
           0.6,
@@ -119,8 +90,8 @@
         ]
       },
       {
-        "BossLootId": 2,
         "BossLootType": 0,
+        "BossLootId": 2,
         "Frequencies": [
           0.5,
           0.6,
@@ -131,18 +102,52 @@
         ]
       }
     ],
-    "Affixes": [],
-    "Id": 4,
-    "Name": "Ancient Invoked Ice Hydra",
-    "Description": "TestBoss1Desc",
-    "Health": 1500,
-    "Image": "/example.png"
+    "Affixes": []
   },
   {
+    "Id": 4,
+    "Name": "Ancient Invoked Ice Hydra",
+    "Health": 1500,
+    "Image": "/example.png",
+    "Description": "TestBoss1Desc",
     "BossLootPatterns": [
       {
+        "BossLootType": 0,
+        "BossLootId": 0,
+        "Frequencies": [
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9,
+          1
+        ]
+      },
+      {
+        "BossLootType": 0,
+        "BossLootId": 2,
+        "Frequencies": [
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9,
+          1
+        ]
+      }
+    ],
+    "Affixes": []
+  },
+  {
+    "Id": 5,
+    "Name": "Ardor, the Prior of the Assassins",
+    "Health": 1500,
+    "Image": "/example.png",
+    "Description": "This must be the individual who's the leader of all these assassins. He's sacrificing innocent people to grant himself power, which in turn has made him significantly harder to defeat.",
+    "BossLootPatterns": [
+      {
+        "BossLootType": 0,
         "BossLootId": 45,
-        "BossLootType": 0,
         "Frequencies": [
           0,
           0.04,
@@ -153,8 +158,8 @@
         ]
       },
       {
+        "BossLootType": 0,
         "BossLootId": 20,
-        "BossLootType": 0,
         "Frequencies": [
           0,
           0.02,
@@ -165,8 +170,8 @@
         ]
       },
       {
-        "BossLootId": 16,
         "BossLootType": 0,
+        "BossLootId": 16,
         "Frequencies": [
           0,
           0.04,
@@ -177,8 +182,8 @@
         ]
       },
       {
-        "BossLootId": 7,
         "BossLootType": 1,
+        "BossLootId": 7,
         "Frequencies": [
           0,
           0.02,
@@ -189,8 +194,8 @@
         ]
       },
       {
-        "BossLootId": 6,
         "BossLootType": 1,
+        "BossLootId": 6,
         "Frequencies": [
           0,
           0.01,
@@ -201,8 +206,8 @@
         ]
       },
       {
-        "BossLootId": 12,
         "BossLootType": 2,
+        "BossLootId": 12,
         "Frequencies": [
           0,
           0,
@@ -213,18 +218,18 @@
         ]
       }
     ],
-    "Affixes": [],
-    "Id": 5,
-    "Name": "Ardor, the Prior of the Assassins",
-    "Description": "This must be the individual who's the leader of all these assassins. He's sacrificing innocent people to grant himself power, which in turn has made him significantly harder to defeat.",
-    "Health": 1500,
-    "Image": "/example.png"
+    "Affixes": []
   },
   {
+    "Id": 6,
+    "Name": "Medusa",
+    "Health": 1500,
+    "Image": "/example.png",
+    "Description": "TestBoss1Desc",
     "BossLootPatterns": [
       {
-        "BossLootId": 1,
         "BossLootType": 3,
+        "BossLootId": 1,
         "Frequencies": [
           1,
           2,
@@ -235,8 +240,8 @@
         ]
       },
       {
-        "BossLootId": 2,
         "BossLootType": 0,
+        "BossLootId": 2,
         "Frequencies": [
           0.5,
           0.6,
@@ -247,8 +252,8 @@
         ]
       },
       {
-        "BossLootId": 1,
         "BossLootType": 3,
+        "BossLootId": 1,
         "Frequencies": [
           1,
           2,
@@ -259,8 +264,8 @@
         ]
       },
       {
-        "BossLootId": 4,
         "BossLootType": 3,
+        "BossLootId": 4,
         "Frequencies": [
           1,
           1,
@@ -273,18 +278,18 @@
     ],
     "Affixes": [
       0
-    ],
-    "Id": 6,
-    "Name": "Medusa",
-    "Description": "TestBoss1Desc",
-    "Health": 1500,
-    "Image": "/example.png"
+    ]
   },
   {
+    "Id": 7,
+    "Name": "Rakshasa Raja",
+    "Health": 1500,
+    "Image": "/example.png",
+    "Description": "'Raja' stands for 'king', and it's exactly what it sounds like – Rakshasa Raja is a much bigger and more respected type among its kin. It has four arms, wields a sword in each one of them, and can turn you into pieces in the blink of an eye.",
     "BossLootPatterns": [
       {
-        "BossLootId": 1,
         "BossLootType": 0,
+        "BossLootId": 1,
         "Frequencies": [
           0.5,
           0.6,
@@ -295,8 +300,8 @@
         ]
       },
       {
+        "BossLootType": 0,
         "BossLootId": 2,
-        "BossLootType": 0,
         "Frequencies": [
           0,
           0.1,
@@ -307,8 +312,8 @@
         ]
       },
       {
+        "BossLootType": 0,
         "BossLootId": 13,
-        "BossLootType": 0,
         "Frequencies": [
           0,
           0.1,
@@ -319,8 +324,8 @@
         ]
       },
       {
-        "BossLootId": 1,
         "BossLootType": 1,
+        "BossLootId": 1,
         "Frequencies": [
           0,
           0,
@@ -331,8 +336,8 @@
         ]
       },
       {
-        "BossLootId": 16,
         "BossLootType": 2,
+        "BossLootId": 16,
         "Frequencies": [
           0,
           0,
@@ -343,8 +348,8 @@
         ]
       },
       {
-        "BossLootId": 3,
         "BossLootType": 0,
+        "BossLootId": 3,
         "Frequencies": [
           0.5,
           0.6,
@@ -355,18 +360,18 @@
         ]
       }
     ],
-    "Affixes": [],
-    "Id": 7,
-    "Name": "Rakshasa Raja",
-    "Description": "'Raja' stands for 'king', and it's exactly what it sounds like – Rakshasa Raja is a much bigger and more respected type among its kin. It has four arms, wields a sword in each one of them, and can turn you into pieces in the blink of an eye.",
-    "Health": 1500,
-    "Image": "/example.png"
+    "Affixes": []
   },
   {
+    "Id": 8,
+    "Name": "Raadhu, the Ifrit Sultan",
+    "Health": 1500,
+    "Image": "/example.png",
+    "Description": "Quite like the djinn, the Ifrit are demons representing the dead. Unlike them, however, these fiery spirits have only malicious intents, and their single goal is to burn you alive. Painfully.",
     "BossLootPatterns": [
       {
-        "BossLootId": 8,
         "BossLootType": 0,
+        "BossLootId": 8,
         "Frequencies": [
           0,
           0.05,
@@ -377,8 +382,8 @@
         ]
       },
       {
-        "BossLootId": 14,
         "BossLootType": 0,
+        "BossLootId": 14,
         "Frequencies": [
           0,
           0.02,
@@ -389,8 +394,8 @@
         ]
       },
       {
-        "BossLootId": 18,
         "BossLootType": 0,
+        "BossLootId": 18,
         "Frequencies": [
           0.25,
           0.3,
@@ -401,8 +406,8 @@
         ]
       },
       {
-        "BossLootId": 9,
         "BossLootType": 0,
+        "BossLootId": 9,
         "Frequencies": [
           0,
           0.1,
@@ -413,8 +418,8 @@
         ]
       },
       {
-        "BossLootId": 2,
         "BossLootType": 1,
+        "BossLootId": 2,
         "Frequencies": [
           0,
           0.02,
@@ -425,8 +430,8 @@
         ]
       },
       {
-        "BossLootId": 17,
         "BossLootType": 2,
+        "BossLootId": 17,
         "Frequencies": [
           0,
           0,
@@ -437,8 +442,8 @@
         ]
       },
       {
-        "BossLootId": 1,
         "BossLootType": 3,
+        "BossLootId": 1,
         "Frequencies": [
           1,
           1,
@@ -449,52 +454,18 @@
         ]
       }
     ],
-    "Affixes": [],
-    "Id": 8,
-    "Name": "Raadhu, the Ifrit Sultan",
-    "Description": "Quite like the djinn, the Ifrit are demons representing the dead. Unlike them, however, these fiery spirits have only malicious intents, and their single goal is to burn you alive. Painfully.",
-    "Health": 1500,
-    "Image": "/example.png"
+    "Affixes": []
   },
   {
-    "BossLootPatterns": [
-      {
-        "BossLootId": 0,
-        "BossLootType": 0,
-        "Frequencies": [
-          0.5,
-          0.6,
-          0.7,
-          0.8,
-          0.9,
-          1
-        ]
-      },
-      {
-        "BossLootId": 2,
-        "BossLootType": 0,
-        "Frequencies": [
-          0.5,
-          0.6,
-          0.7,
-          0.8,
-          0.9,
-          1
-        ]
-      }
-    ],
-    "Affixes": [],
     "Id": 9,
     "Name": "Itu'Zeld, the High Lich",
-    "Description": "TestBoss1Desc",
     "Health": 1500,
-    "Image": "/example.png"
-  },
-  {
+    "Image": "/example.png",
+    "Description": "TestBoss1Desc",
     "BossLootPatterns": [
       {
-        "BossLootId": 0,
         "BossLootType": 0,
+        "BossLootId": 0,
         "Frequencies": [
           0.5,
           0.6,
@@ -505,8 +476,8 @@
         ]
       },
       {
-        "BossLootId": 2,
         "BossLootType": 0,
+        "BossLootId": 2,
         "Frequencies": [
           0.5,
           0.6,
@@ -517,11 +488,40 @@
         ]
       }
     ],
-    "Affixes": [],
+    "Affixes": []
+  },
+  {
     "Id": 10,
     "Name": "Arathai, the Eater of Souls",
-    "Description": "The large undead lord slowly gets up his throne. Only now you realise how large he really is – about ten meters tall. He is wearing a dark, heavy armor with a helmet resembling a skull, through which you can only see his emerald green eyes. He swings his just as tall scythe around and looks you in the eyes. He then slowly whispers: ‘I am your end'.",
     "Health": 1500,
-    "Image": "/example.png"
+    "Image": "/example.png",
+    "Description": "The large undead lord slowly gets up his throne. Only now you realise how large he really is – about ten meters tall. He is wearing a dark, heavy armor with a helmet resembling a skull, through which you can only see his emerald green eyes. He swings his just as tall scythe around and looks you in the eyes. He then slowly whispers: ‘I am your end'.",
+    "BossLootPatterns": [
+      {
+        "BossLootType": 0,
+        "BossLootId": 0,
+        "Frequencies": [
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9,
+          1
+        ]
+      },
+      {
+        "BossLootType": 0,
+        "BossLootId": 2,
+        "Frequencies": [
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9,
+          1
+        ]
+      }
+    ],
+    "Affixes": []
   }
 ]

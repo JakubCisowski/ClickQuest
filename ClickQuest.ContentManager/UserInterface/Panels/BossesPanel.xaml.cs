@@ -180,8 +180,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			_dataContext = new Boss
 			{
 				Id = nextId,
-				BossLootPatterns = new List<BossLootPattern>(),
-				BestiaryDiscovered = false
+				BossLootPatterns = new List<BossLootPattern>()
 			};
 			_bossLootPatterns = _dataContext.BossLootPatterns;
 

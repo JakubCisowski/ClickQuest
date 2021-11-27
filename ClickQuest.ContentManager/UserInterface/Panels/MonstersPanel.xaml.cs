@@ -169,8 +169,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			_dataContext = new Monster
 			{
 				Id = nextId,
-				MonsterLootPatterns = new List<MonsterLootPattern>(),
-				BestiaryDiscovered = false
+				MonsterLootPatterns = new List<MonsterLootPattern>()
 			};
 			_monsterLootPatterns = _dataContext.MonsterLootPatterns;
 
