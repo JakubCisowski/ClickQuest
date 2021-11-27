@@ -124,7 +124,10 @@ namespace ClickQuest.Game.Core.Enemies
 				{
 					Blessing.AskUserAndSwapBlessing(loot.BossLootId);
 
-					GameAssets.Bosses.FirstOrDefault(x => x.Id == this.Id).BossLootPatterns.FirstOrDefault(y => y.BossLootId == loot.BossLootId).BestiaryDiscovered = true;
+					if (!GameAssets.BestiaryEntries.Any(x=>x.EntryType == BestiaryEntryType.BossLoot && x.LootType == RewardType.Blessing && x.Id==loot.BossLootId))
+					{
+						GameAssets.BestiaryEntries.Add(new BestiaryEntry() { Id = loot.BossLootId, LootType = RewardType.Blessing, EntryType = BestiaryEntryType.BossLoot });
+					}
 					
 					// Start blessing animation.
 					(Application.Current.MainWindow as GameWindow).CreateFloatingTextBlessing(GameAssets.Blessings.FirstOrDefault(x=>x.Id==loot.BossLootId));
@@ -138,7 +141,10 @@ namespace ClickQuest.Game.Core.Enemies
 				{
 					loot.Item.AddItem(itemIntegerCount);
 
-					GameAssets.Bosses.FirstOrDefault(x => x.Id == this.Id).BossLootPatterns.FirstOrDefault(y => y.BossLootId == loot.BossLootId).BestiaryDiscovered = true;
+					if (!GameAssets.BestiaryEntries.Any(x=>x.EntryType == BestiaryEntryType.BossLoot && x.LootType == loot.BossLootType && x.Id==loot.BossLootId))
+					{
+						GameAssets.BestiaryEntries.Add(new BestiaryEntry() { Id = loot.BossLootId, LootType = loot.BossLootType, EntryType = BestiaryEntryType.BossLoot });
+					}
 
 					// Start loot animation.
 					(Application.Current.MainWindow as GameWindow).CreateFloatingTextLoot(loot.Item, itemIntegerCount, animationDelay++);

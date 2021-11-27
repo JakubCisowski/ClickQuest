@@ -1,0 +1,67 @@
+[
+  {
+    "Id": 30,
+    "EntryType": 0,
+    "LootType": 0
+  },
+  {
+    "Id": 26,
+    "EntryType": 0,
+    "LootType": 0
+  },
+  {
+    "Id": 33,
+    "EntryType": 1,
+    "LootType": 0
+  },
+  {
+    "Id": 5,
+    "EntryType": 0,
+    "LootType": 0
+  },
+  {
+    "Id": 3,
+    "EntryType": 1,
+    "LootType": 0
+  },
+  {
+    "Id": 38,
+    "EntryType": 0,
+    "LootType": 0
+  },
+  {
+    "Id": 1,
+    "EntryType": 1,
+    "LootType": 0
+  },
+  {
+    "Id": 39,
+    "EntryType": 0,
+    "LootType": 0
+  },
+  {
+    "Id": 1,
+    "EntryType": 2,
+    "LootType": 0
+  },
+  {
+    "Id": 1,
+    "EntryType": 3,
+    "LootType": 0
+  },
+  {
+    "Id": 7,
+    "EntryType": 2,
+    "LootType": 0
+  },
+  {
+    "Id": 2,
+    "EntryType": 3,
+    "LootType": 0
+  },
+  {
+    "Id": 3,
+    "EntryType": 3,
+    "LootType": 0
+  }
+]

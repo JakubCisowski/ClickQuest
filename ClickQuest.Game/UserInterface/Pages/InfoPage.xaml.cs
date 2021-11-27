@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Places;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
@@ -117,12 +118,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 			InfoPanel.Children.Add(descriptionBlock);
 			InfoPanel.Children.Add(separator);
 
-			var sortedMonsterPatterns = region.MonsterSpawnPatterns.OrderByDescending(x => x.Monster.BestiaryDiscovered).ThenByDescending(y => y.Frequency);
+			var sortedMonsterPatterns = region.MonsterSpawnPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y=>y.Id == x.MonsterId && y.EntryType == BestiaryEntryType.Monster)).ThenByDescending(z => z.Frequency);
 
 			foreach (var monsterPattern in sortedMonsterPatterns)
 			{
 				var monster = monsterPattern.Monster;
-				
+				var monsterDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == monster.Id && x.EntryType == BestiaryEntryType.Monster);
+
 				var monsterNameBlock = new TextBlock()
 				{
 					FontSize = 22,
@@ -132,7 +134,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Margin = new Thickness(5)
 				};
 
-				if (!monster.BestiaryDiscovered)
+				if (!monsterDiscovered)
 				{
 					monsterNameBlock.Text = "Unknown Monster";
 
@@ -146,7 +148,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				InfoPanel.Children.Add(monsterNameBlock);
 
-				if (!monster.BestiaryDiscovered)
+				if (!monsterDiscovered)
 				{
 					var monsterSeparator = new Separator()
 					{
@@ -194,11 +196,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				InfoPanel.Children.Add(lootLabelBlock);
 
-				var sortedLootPatterns = monster.MonsterLootPatterns.OrderByDescending(x => x.BestiaryDiscovered).ThenBy(y => y.Item.Rarity);
+				var sortedLootPatterns = monster.MonsterLootPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y=>y.Id == x.MonsterLootId && y.EntryType == BestiaryEntryType.MonsterLoot)).ThenBy(y => y.Item.Rarity);
 
 				foreach (var lootPattern in sortedLootPatterns)
 				{
 					var item = lootPattern.Item;
+					var monsterLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == item.Id && x.EntryType == BestiaryEntryType.MonsterLoot);
 
 					var itemNameBlock = new TextBlock()
 					{
@@ -211,7 +214,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 					GeneralToolTipController.SetToolTipDelayAndDuration(itemNameBlock);
 
-					if (!lootPattern.BestiaryDiscovered)
+					if (!monsterLootDiscovered)
 					{
 						itemNameBlock.Text = "Unknown " + item.RarityString + " " + lootPattern.MonsterLootType;
 						itemNameBlock.FontFamily = (FontFamily)this.FindResource("FontRegularItalic");
@@ -285,10 +288,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 			InfoPanel.Children.Add(descriptionBlock);
 			InfoPanel.Children.Add(separator);
 
-			var sortedBosses = GameAssets.Bosses.Where(x => dungeon.BossIds.Contains(x.Id)).OrderByDescending(y => y.BestiaryDiscovered);
+			var sortedBosses = GameAssets.Bosses.Where(x => dungeon.BossIds.Contains(x.Id)).OrderByDescending(y => GameAssets.BestiaryEntries.Any(z=>z.Id == y.Id && z.EntryType == BestiaryEntryType.Boss));
 
 			foreach (var boss in sortedBosses)
-			{				
+			{
+				bool bossDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == boss.Id && x.EntryType == BestiaryEntryType.Boss);
+
 				var bossNameBlock = new TextBlock()
 				{
 					FontSize = 22,
@@ -298,7 +303,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Margin = new Thickness(5)
 				};
 
-				if (!boss.BestiaryDiscovered)
+				if (!bossDiscovered)
 				{
 					bossNameBlock.Text = "Unknown Boss";
 
@@ -312,7 +317,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				InfoPanel.Children.Add(bossNameBlock);
 
-				if (!boss.BestiaryDiscovered)
+				if (!bossDiscovered)
 				{
 					var bossSeparator = new Separator()
 					{
@@ -379,11 +384,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				InfoPanel.Children.Add(lootLabelBlock);
 
-				var sortedLootPatterns = boss.BossLootPatterns.OrderByDescending(x => x.BestiaryDiscovered).ThenBy(y => y.Item.Rarity);
+				var sortedLootPatterns = boss.BossLootPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y=>y.Id == x.BossLootId && y.EntryType == BestiaryEntryType.BossLoot)).ThenBy(z => z.Item.Rarity);
 
 				foreach (var lootPattern in sortedLootPatterns)
 				{
 					var item = lootPattern.Item;
+					bool bossLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == item.Id && x.EntryType == BestiaryEntryType.BossLoot);
 
 					var itemNameBlock = new TextBlock()
 					{
@@ -396,7 +402,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 					GeneralToolTipController.SetToolTipDelayAndDuration(itemNameBlock);
 
-					if (!lootPattern.BestiaryDiscovered)
+					if (!bossLootDiscovered)
 					{
 						itemNameBlock.Text = "Unknown " + item.RarityString + " " + lootPattern.BossLootType;
 						itemNameBlock.FontFamily = (FontFamily)this.FindResource("FontRegularItalic");

@@ -6,6 +6,7 @@ using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Patterns;
+using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.Combat;
@@ -72,7 +73,10 @@ namespace ClickQuest.Game.Core.Enemies
 				CombatTimerController.StopPoisonTimer();
 
 				// Mark the Monster as discovered.
-				GameAssets.Monsters.FirstOrDefault(x => x.Id == this.Id).BestiaryDiscovered = true;
+				if (!GameAssets.BestiaryEntries.Any(x=>x.EntryType == BestiaryEntryType.Monster && x.Id==this.Id))
+				{
+					GameAssets.BestiaryEntries.Add(new BestiaryEntry() { Id = this.Id, EntryType = BestiaryEntryType.Monster });
+				}
 
 				GrantVictoryBonuses();
 
@@ -99,7 +103,10 @@ namespace ClickQuest.Game.Core.Enemies
 				selectedLoot.AddItem();
 
 				// Mark the corresponding Pattern as discovered.
-				GameAssets.Monsters.FirstOrDefault(x=>x.Id==this.Id).MonsterLootPatterns.FirstOrDefault(y => y.MonsterLootId == selectedLoot.Id).BestiaryDiscovered = true;
+				if (!GameAssets.BestiaryEntries.Any(x=>x.EntryType == BestiaryEntryType.MonsterLoot && x.Id==selectedLoot.Id))
+				{
+					GameAssets.BestiaryEntries.Add(new BestiaryEntry() { Id = selectedLoot.Id, EntryType = BestiaryEntryType.MonsterLoot });
+				}
 			}
 
 			// [PRERELEASE] Display exp and loot for testing purposes.

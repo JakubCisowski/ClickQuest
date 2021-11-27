@@ -88,6 +88,9 @@
 		<None Update="Core\GameData\GameAssets\GameMechanics.json">
 	    	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  	</None>
+		<None Update="Data\Bestiary.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>

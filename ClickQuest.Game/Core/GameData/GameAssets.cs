@@ -30,6 +30,7 @@ namespace ClickQuest.Game.Core.GameData
 		public static List<DungeonGroup> DungeonGroups { get; set; }
 		public static List<DungeonKey> DungeonKeys { get; set; }
 		public static List<GameMechanicsTab> GameMechanicsTabs { get; set; }
+		public static List<BestiaryEntry> BestiaryEntries { get; set; }
 
 		static GameAssets()
 		{
@@ -50,6 +51,7 @@ namespace ClickQuest.Game.Core.GameData
 			DungeonGroups = new List<DungeonGroup>();
 			DungeonKeys = new List<DungeonKey>();
 			GameMechanicsTabs = new List<GameMechanicsTab>();
+			BestiaryEntries = new List<BestiaryEntry>();
 		}
 
 		public static void RefreshPages()

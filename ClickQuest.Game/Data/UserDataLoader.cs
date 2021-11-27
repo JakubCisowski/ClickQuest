@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Encryption;
@@ -13,11 +15,13 @@ namespace ClickQuest.Game.Data
 	public static class UserDataLoader
 	{
 		public static string UserDataPath;
+		public static string BestiaryDataPath;
 
 		static UserDataLoader()
 		{
 			// [PRERELEASE]
 			UserDataPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Data\", "User.json");
+			BestiaryDataPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Data\", "Bestiary.json");
 		}
 
 		public static void Load()
@@ -48,6 +52,8 @@ namespace ClickQuest.Game.Data
 				Save();
 			}
 
+			LoadBestiary();
+
 			PostLoad();
 		}
 
@@ -77,6 +83,13 @@ namespace ClickQuest.Game.Data
 			User.Instance.Heroes.ForEach(x => x.TimePlayed = TimeSpan.Parse(x.TimePlayedString));
 		}
 
+		public static void LoadBestiary()
+		{
+			string bestiaryJson = File.ReadAllText(BestiaryDataPath);
+
+			GameAssets.BestiaryEntries = JsonSerializer.Deserialize<List<BestiaryEntry>>(bestiaryJson);
+		}
+
 		public static string Save()
 		{
 			// Convert Achievements to a serializable string.
@@ -97,7 +110,21 @@ namespace ClickQuest.Game.Data
 			
 			File.WriteAllBytes(UserDataPath, encrypted);
 
+			SaveBestiary();
+
 			return json;
+		}
+
+		public static void SaveBestiary()
+		{
+			string bestiaryJson = JsonSerializer.Serialize(GameAssets.BestiaryEntries, new JsonSerializerOptions()
+			{
+				IgnoreReadOnlyProperties = true,
+				WriteIndented = true,
+				Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+			});
+
+			File.WriteAllText(BestiaryDataPath, bestiaryJson);
 		}
 
 		public static void SeedIngots()

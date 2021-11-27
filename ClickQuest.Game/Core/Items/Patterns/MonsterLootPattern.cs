@@ -10,7 +10,6 @@ namespace ClickQuest.Game.Core.Items.Patterns
 		public int MonsterLootId { get; set; }
 		public RewardType MonsterLootType { get; set; }
 		public double Frequency { get; set; }
-		public bool BestiaryDiscovered{ get; set; }
 
 		public Item Item
 		{

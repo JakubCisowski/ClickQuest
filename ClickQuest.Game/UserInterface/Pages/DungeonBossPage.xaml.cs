@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
+using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
 
@@ -39,7 +40,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 			BindFightInfoToInterface(boss);
 
 			// Mark the Boss as discovered.
-			GameAssets.Bosses.FirstOrDefault(x => x.Id == boss.Id).BestiaryDiscovered = true;
+			if (!GameAssets.BestiaryEntries.Any(x=>x.EntryType == BestiaryEntryType.Boss && x.Id==boss.Id))
+			{
+				GameAssets.BestiaryEntries.Add(new BestiaryEntry() { Id = boss.Id, EntryType = BestiaryEntryType.Boss });
+			}
 
 			CombatTimerController.BossFightTimer.Start();
 		}
