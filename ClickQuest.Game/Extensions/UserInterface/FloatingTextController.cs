@@ -1,4 +1,5 @@
-﻿using ClickQuest.Game.Core.Items;
+﻿using ClickQuest.Game.Core.Heroes.Buffs;
+using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Extensions.Combat;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -42,7 +43,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				Name = "ClickTextVisibilityAnimation",
 				Duration = new Duration(TimeSpan.FromSeconds(durationInSeconds)),
 				From = 1.0,
-				To = 0.0
+				To = 0.5
 			};
 
 			return textVisibilityAnimation;
@@ -148,13 +149,90 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				Orientation = Orientation.Horizontal
 			};
 
+			var lootIcon = new PackIcon()
+			{
+				Foreground = ColorsController.GetRarityColor(item.Rarity),
+				Width = 20,
+				Height = 20,
+				VerticalAlignment = VerticalAlignment.Center
+			};
+
+			switch (item)
+			{
+				case Material:
+					lootIcon.Kind = PackIconKind.Cog;
+					break;
+
+				case Recipe:
+					lootIcon.Kind = PackIconKind.ScriptText;
+					break;
+
+				case Artifact:
+					lootIcon.Kind = PackIconKind.DiamondStone;
+					break;
+			}
+
+			stackPanel.Children.Add(lootIcon);
+
 			var itemBlock = new TextBlock
 			{
-				Text = quantity + "x " + item.Name,
 				Foreground = ColorsController.GetRarityColor(item.Rarity),
 				FontSize = 28,
 				FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBold"),
-				VerticalAlignment = VerticalAlignment.Center
+				VerticalAlignment = VerticalAlignment.Center,
+				Margin = new Thickness(5,0,0,0)
+			};
+
+			if (quantity <= 1)
+			{
+				itemBlock.Text = item.Name;
+			}
+			else
+			{
+				itemBlock.Text = quantity + "x " + item.Name;
+			}
+
+			stackPanel.Children.Add(itemBlock);
+
+			border.Child = stackPanel;
+
+			return border;
+		}
+
+		public static Border CreateFloatingTextBlessingBorder(Blessing blessing)
+		{
+			var border = new Border
+			{
+				CornerRadius = new CornerRadius(20),
+				BorderThickness = new Thickness(5),
+				Padding = new Thickness(2),
+				IsHitTestVisible = false
+			};
+
+			var stackPanel = new StackPanel
+			{
+				Orientation = Orientation.Horizontal
+			};
+
+			var lootIcon = new PackIcon()
+			{
+				Foreground = ColorsController.GetRarityColor(blessing.Rarity),
+				Width = 20,
+				Height = 20,
+				VerticalAlignment = VerticalAlignment.Center,
+				Kind = PackIconKind.BookCross
+			};
+
+			stackPanel.Children.Add(lootIcon);
+
+			var itemBlock = new TextBlock
+			{
+				Text = blessing.Name,
+				Foreground = ColorsController.GetRarityColor(blessing.Rarity),
+				FontSize = 28,
+				FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBold"),
+				VerticalAlignment = VerticalAlignment.Center,
+				Margin = new Thickness(5,0,0,0)
 			};
 
 			stackPanel.Children.Add(itemBlock);
