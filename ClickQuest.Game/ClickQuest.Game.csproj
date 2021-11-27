@@ -43,52 +43,52 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="Core\GameData\GameAssets\Artifacts.json">
+		<None Update="Core\GameData\GameAssets\Artifacts.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\Materials.json">
+		<None Update="Core\GameData\GameAssets\Materials.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\Monsters.json">
+		<None Update="Core\GameData\GameAssets\Monsters.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\PriestOffer.json">
+		<None Update="Core\GameData\GameAssets\PriestOffer.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\Recipes.json">
+		<None Update="Core\GameData\GameAssets\Recipes.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\Regions.json">
+		<None Update="Core\GameData\GameAssets\Regions.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\ShopOffer.json">
+		<None Update="Core\GameData\GameAssets\ShopOffer.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\Blessings.json">
+		<None Update="Core\GameData\GameAssets\Blessings.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\Quests.json">
+		<None Update="Core\GameData\GameAssets\Quests.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\Bosses.json">
+		<None Update="Core\GameData\GameAssets\Bosses.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\Dungeons.json">
+		<None Update="Core\GameData\GameAssets\Dungeons.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\DungeonGroups.json">
+		<None Update="Core\GameData\GameAssets\DungeonGroups.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\DungeonKeys.json">
+		<None Update="Core\GameData\GameAssets\DungeonKeys.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\Ingots.json">
+		<None Update="Core\GameData\GameAssets\Ingots.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Core\GameData\GameAssets\GameMechanics.json">
+		<None Update="Core\GameData\GameAssets\GameMechanics.aes">
 	    	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  	</None>
-		<None Update="Data\Bestiary.json">
+		<None Update="Data\Bestiary.aes">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

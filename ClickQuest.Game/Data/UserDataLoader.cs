@@ -20,8 +20,8 @@ namespace ClickQuest.Game.Data
 		static UserDataLoader()
 		{
 			// [PRERELEASE]
-			UserDataPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Data\", "User.json");
-			BestiaryDataPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Data\", "Bestiary.json");
+			UserDataPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Data\", "User.aes");
+			BestiaryDataPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Data\", "Bestiary.aes");
 		}
 
 		public static void Load()
