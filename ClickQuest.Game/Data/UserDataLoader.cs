@@ -85,7 +85,8 @@ namespace ClickQuest.Game.Data
 
 		public static void LoadBestiary()
 		{
-			string bestiaryJson = File.ReadAllText(BestiaryDataPath);
+			byte[] encryptedJson = File.ReadAllBytes(BestiaryDataPath);
+			string bestiaryJson = DataEncryptionController.DecryptJsonUsingAes(encryptedJson);
 
 			GameAssets.BestiaryEntries = JsonSerializer.Deserialize<List<BestiaryEntry>>(bestiaryJson);
 		}
@@ -124,7 +125,8 @@ namespace ClickQuest.Game.Data
 				Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
 			});
 
-			File.WriteAllText(BestiaryDataPath, bestiaryJson);
+			var encrypted = DataEncryptionController.EncryptJsonUsingAes(bestiaryJson);
+			File.WriteAllBytes(BestiaryDataPath, encrypted);
 		}
 
 		public static void SeedIngots()
