@@ -28,7 +28,7 @@
 				</Border>
 
 				<!-- Info button-->
-				<Button x:Name="InfoButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="InfoButton_Click" Padding="0" Margin="5,5,110,5" Background="{StaticResource BrushGray1}">
+				<Button x:Name="InfoButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="InfoButton_Click" Padding="0" Margin="5,5,75,5" Background="{StaticResource BrushGray1}">
 					<Button.ToolTip>
 						<ToolTip Style="{StaticResource ToolTipSimple}">
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Info"/>
@@ -42,7 +42,7 @@
 				</Button>
 
 				<!-- Achievements button-->
-				<Button x:Name="AchievementsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="AchievementsButton_Click" Padding="0" Margin="5,5,75,5" Background="{StaticResource BrushGray1}">
+				<Button x:Name="AchievementsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="AchievementsButton_Click" Padding="0" Margin="5,5,40,5" Background="{StaticResource BrushGray1}">
 					<Button.ToolTip>
 						<ToolTip Style="{StaticResource ToolTipSimple}">
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Your Achievements"/>
@@ -56,7 +56,7 @@
 				</Button>
 
 				<!-- Settings button-->
-				<Button x:Name="SettingsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="SettingsButton_OnClick" Padding="0" Margin="5,5,40,5" Background="{StaticResource BrushGray1}">
+				<Button x:Name="SettingsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="SettingsButton_OnClick" Padding="0" Margin="5,5,40,5" Background="{StaticResource BrushGray1}" Visibility="Hidden">
 					<Button.ToolTip>
 						<ToolTip Style="{StaticResource ToolTipSimple}">
 							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Game Settings"/>

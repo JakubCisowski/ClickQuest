@@ -474,6 +474,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Margin = new Thickness(5,0,0,0),
 				Width = 150
 			};
+			
+			TextFieldAssist.SetUnderlineBrush(artifactSetsComboBox, (SolidColorBrush)this.FindResource("BrushGray3"));
+			
+			artifactSetsComboBox.Resources.Add("MaterialDesignPaper", (SolidColorBrush)this.FindResource("BrushAccent2"));
 
 			artifactSetsComboBox.SelectionChanged += ArtifactSetsComboBox_SelectionChanged;
 

@@ -32,7 +32,7 @@
 		<TextBlock HorizontalAlignment="Center" FontSize="28" Text="Name" />
 
 		<!-- Hero name input -->
-		<TextBox x:Name="HeroNameBox" HorizontalAlignment="Center" Width="200" Margin="30" HorizontalContentAlignment="Center" FontSize="24" Style="{StaticResource MaterialDesignTextBox}" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" FontFamily="{StaticResource FontFancy}">
+		<TextBox x:Name="HeroNameBox" HorizontalAlignment="Center" Width="200" Margin="30" HorizontalContentAlignment="Center" FontSize="24" Style="{StaticResource MaterialDesignTextBox}" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" FontFamily="{StaticResource FontFancy}" materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource BrushGray3}" CaretBrush="{StaticResource BrushGray3}">
 			<!-- ToolTip -->
 			<TextBox.ToolTip>
 				<ToolTip Style="{StaticResource ToolTipSimple}">
