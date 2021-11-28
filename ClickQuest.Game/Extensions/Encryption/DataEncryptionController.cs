@@ -49,6 +49,11 @@ namespace ClickQuest.Game.Extensions.Encryption
 
 		public static string DecryptJsonUsingAes(byte[] encryptedJson)
 		{
+			if (encryptedJson is null || encryptedJson.Length == 0)
+			{
+				return "";
+			}
+
 			string json;
 			
 			using (var aes = Aes.Create())

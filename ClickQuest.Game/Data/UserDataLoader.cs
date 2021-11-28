@@ -38,23 +38,26 @@ namespace ClickQuest.Game.Data
 			
 			string json = DataEncryptionController.DecryptJsonUsingAes(encryptedJson);
 
-			var user = JsonSerializer.Deserialize<User>(json, new JsonSerializerOptions()
+			if (!string.IsNullOrEmpty(json))
 			{
-			});
+				var user = JsonSerializer.Deserialize<User>(json, new JsonSerializerOptions()
+				{
+				});
 
-			User.Instance = user;
+				User.Instance = user;
 
-			if (User.Instance.Ingots.Count == 0 || User.Instance.DungeonKeys.Count == 0)
-			{
-				SeedIngots();
-				SeedDungeonKeys();
+				if (User.Instance.Ingots.Count == 0 || User.Instance.DungeonKeys.Count == 0)
+				{
+					SeedIngots();
+					SeedDungeonKeys();
 
-				Save();
+					Save();
+				}
+
+				LoadBestiary();
+
+				PostLoad();
 			}
-
-			LoadBestiary();
-
-			PostLoad();
 		}
 
 		public static void PostLoad()
@@ -85,10 +88,19 @@ namespace ClickQuest.Game.Data
 
 		public static void LoadBestiary()
 		{
+			if (!File.Exists(BestiaryDataPath))
+			{
+				var stream = File.Create(BestiaryDataPath);
+				stream.Close();
+			}
+
 			byte[] encryptedJson = File.ReadAllBytes(BestiaryDataPath);
 			string bestiaryJson = DataEncryptionController.DecryptJsonUsingAes(encryptedJson);
 
-			GameAssets.BestiaryEntries = JsonSerializer.Deserialize<List<BestiaryEntry>>(bestiaryJson);
+			if (!string.IsNullOrEmpty(bestiaryJson))
+			{
+				GameAssets.BestiaryEntries = JsonSerializer.Deserialize<List<BestiaryEntry>>(bestiaryJson);
+			}
 		}
 
 		public static string Save()

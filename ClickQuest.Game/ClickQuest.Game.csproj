@@ -88,9 +88,6 @@
 		<None Update="Core\GameData\GameAssets\GameMechanics.aes">
 	    	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  	</None>
-		<None Update="Data\Bestiary.aes">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 	</ItemGroup>
 
 	<ItemGroup>
