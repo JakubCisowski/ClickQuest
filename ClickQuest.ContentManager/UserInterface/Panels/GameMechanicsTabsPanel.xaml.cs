@@ -189,7 +189,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			_dataContext = GameContent.GameMechanicsTabs.FirstOrDefault(x => x.Name == selectedName);
-			ContentSelectionBox.SelectedValue = _dataContext.Name;
 			RefreshStaticInfoPanel();
 			DeleteObjectButton.Visibility = Visibility.Visible;
 		}

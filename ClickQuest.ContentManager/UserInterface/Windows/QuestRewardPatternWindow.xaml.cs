@@ -181,7 +181,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 
 		private void UpdateQuestRewardPattern()
 		{
-			int oldPatternIndex = _quest.QuestRewardPatterns.IndexOf(_quest.QuestRewardPatterns.FirstOrDefault(x => x.QuestRewardId == _pattern.QuestRewardId));
+			int oldPatternIndex = _quest.QuestRewardPatterns.IndexOf(_quest.QuestRewardPatterns.FirstOrDefault(x => x.QuestRewardId == _pattern.QuestRewardId && x.QuestRewardType == _pattern.QuestRewardType));
 
 			_pattern.QuestRewardId = int.Parse((_controls["IdBox"] as TextBox).Text);
 			_pattern.QuestRewardType = (RewardType) Enum.Parse(typeof(RewardType), (_controls["RewardTypeBox"] as ComboBox).SelectedValue.ToString());

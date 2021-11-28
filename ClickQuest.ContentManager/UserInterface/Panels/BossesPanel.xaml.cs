@@ -234,7 +234,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			_dataContext = GameContent.Bosses.FirstOrDefault(x => x.Name == selectedName);
-			ContentSelectionBox.SelectedValue = _dataContext.Name;
 			_bossLootPatterns = _dataContext.BossLootPatterns;
 			RefreshStaticValuesPanel();
 			RefreshDynamicValuesPanel();

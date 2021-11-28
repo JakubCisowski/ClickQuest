@@ -56,7 +56,7 @@ namespace ClickQuest.ContentManager.Validation
 				var duplicatedValues = duplicates.Distinct();
 				foreach (int value in duplicatedValues)
 				{
-					message += value + ", ";
+					message += value + " ";
 				}
 
 				Logger.Log(message);
@@ -75,7 +75,7 @@ namespace ClickQuest.ContentManager.Validation
 			double frequenciesSum = frequencies.Sum();
 			if (frequenciesSum <= 0.9999 || frequenciesSum >= 1.0001) // <== cringe	
 			{
-				string message = $"'{objectName}' frequencies do not add up to 1";
+				string message = $"{objectName} loot/spawn frequencies do not add up to 1";
 				Logger.Log(message);
 			}
 		}
@@ -86,7 +86,7 @@ namespace ClickQuest.ContentManager.Validation
 
 			if (frequenciesSum >= 1.0001)
 			{
-				string message = $"'{objectName}' frequencies is greater than 1";
+				string message = $"{objectName} loot/spawn frequencies is greater than 1";
 				Logger.Log(message);
 			}
 		}
@@ -97,7 +97,7 @@ namespace ClickQuest.ContentManager.Validation
 
 			if (areFrequenciesInvalid)
 			{
-				string message = $"'{objectName}' frequency value is less than 0";
+				string message = $"{objectName} loot/spawn frequency value is less than 0";
 				Logger.Log(message);
 			}
 		}
@@ -131,11 +131,11 @@ namespace ClickQuest.ContentManager.Validation
 			var notAvailable = requiredIds.Except(availableIds);
 			if (notAvailable.Count() > 0)
 			{
-				string message = $"Following referenced Id's in '{objectName}' are not available: ";
+				string message = $"Following referenced Id's in '{objectName}' do not exist: ";
 
 				foreach (int value in notAvailable)
 				{
-					message += value + ", ";
+					message += value + " ";
 				}
 
 				Logger.Log(message);
@@ -152,7 +152,7 @@ namespace ClickQuest.ContentManager.Validation
 
 					if (blessing is null)
 					{
-						string message = $"Following referenced blessing Id's in '{boss.Name}' is not available: " + lootPattern.BossLootId;
+						string message = $"Following referenced blessing Id's in '{boss.Name}' do not exist: " + lootPattern.BossLootId;
 						Logger.Log(message);
 					}
 				}
@@ -162,7 +162,7 @@ namespace ClickQuest.ContentManager.Validation
 
 					if (item is null)
 					{
-						string message = $"Following referenced item Id's in '{boss.Name}' is not available: " + lootPattern.BossLootId;
+						string message = $"Following referenced item Id's in '{boss.Name}' do not exist: " + lootPattern.BossLootId;
 						Logger.Log(message);
 					}
 				}
@@ -177,7 +177,7 @@ namespace ClickQuest.ContentManager.Validation
 
 				if (item is null)
 				{
-					string message = $"Following referenced item Id's in '{monster.Name}' is not available: " + lootPattern.MonsterLootId;
+					string message = $"Following referenced item Id's in '{monster.Name}' do not exist: " + lootPattern.MonsterLootId;
 					Logger.Log(message);
 				}
 			}
@@ -191,7 +191,7 @@ namespace ClickQuest.ContentManager.Validation
 
 				if (monster is null)
 				{
-					string message = $"Following referenced item Id's in '{region.Name}' is not available: " + spawnPattern.MonsterId;
+					string message = $"Following referenced item Id's in '{region.Name}' do not exist: " + spawnPattern.MonsterId;
 					Logger.Log(message);
 				}
 			}
@@ -227,7 +227,6 @@ namespace ClickQuest.ContentManager.Validation
 
 		private static void CheckPositiveValues()
 		{
-			CheckCollectionPositiveValues("Artifacts_Value", GameContent.Artifacts.Select(x => x.Value));
 			CheckCollectionPositiveValues("Blessings_Value", GameContent.Blessings.Select(x => x.Value));
 			CheckCollectionPositiveValues("DungeonKey_Value", GameContent.DungeonKeys.Select(x => x.Value));
 			CheckCollectionPositiveValues("Ingots_Value", GameContent.Ingots.Select(x => x.Value));
@@ -252,7 +251,7 @@ namespace ClickQuest.ContentManager.Validation
 
 			if (!isEveryValueValid)
 			{
-				string message = $"'{collectionValuesInfo}' is nonpositive";
+				string message = $"At least one {collectionValuesInfo} is nonpositive";
 				Logger.Log(message);
 			}
 		}
@@ -278,13 +277,13 @@ namespace ClickQuest.ContentManager.Validation
 				
 				if (blessingPatterns.Any(pattern=>pattern.Frequencies.Any(frequency=>frequency > 1)))
 				{
-					string message = $"More than one of the same Blessing can be dropped from Boss of Id {boss.Id}.";
+					string message = $"More than one of the same Blessing can be dropped from Boss of Id {boss.Id}";
 					Logger.Log(message);
 				}
 
 				if(blessingPatterns.Count() > 1)
 				{
-					string message = $"More than one Blessing can be dropped from Boss of Id {boss.Id}.";
+					string message = $"More than one Blessing can be dropped from Boss of Id {boss.Id}";
 					Logger.Log(message);
 				}
 			}
@@ -295,13 +294,13 @@ namespace ClickQuest.ContentManager.Validation
 
 				if (blessingPatterns.Any(pattern=>pattern.Quantity > 1))
 				{
-					string message = $"More than one of the same Blessing is awarded from Quest of Id {quest.Id}.";
+					string message = $"More than one of the same Blessing is awarded from Quest of Id {quest.Id}";
 					Logger.Log(message);
 				}
 
 				if(blessingPatterns.Count() > 1)
 				{
-					string message = $"More than one Blessing is awarded from Quest of Id {quest.Id}.";
+					string message = $"More than one Blessing is awarded from Quest of Id {quest.Id}";
 					Logger.Log(message);
 				}
 			}
@@ -315,7 +314,7 @@ namespace ClickQuest.ContentManager.Validation
 
 				if (!recipe.Name.Contains(artifact.Name))
 				{
-					string message = $"{recipe.Name} of Id: {recipe.Id} is not linked to the correct artifact ({artifact.Name} instead).";
+					string message = $"{recipe.FullName} of Id: {recipe.Id} is not linked to the correct artifact ({artifact.Name} instead)";
 					Logger.Log(message);
 				}
 			}
@@ -329,7 +328,7 @@ namespace ClickQuest.ContentManager.Validation
 
 				if(monsterBlessingPatterns.Count() != 0)
 				{
-					string message = $"Blessing can be dropped from Monster of Id {monster.Id} (blessing drops from monsters are not handled).";
+					string message = $"Blessing can be dropped from Monster of Id {monster.Id} (blessing drops from monsters are not handled)";
 					Logger.Log(message);
 				}
 			}

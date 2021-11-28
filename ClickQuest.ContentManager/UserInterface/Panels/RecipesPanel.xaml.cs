@@ -238,7 +238,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			_dataContext = GameContent.Recipes.FirstOrDefault(x => x.Name == selectedName);
-			ContentSelectionBox.SelectedValue = _dataContext.Name;
 			_ingredients = _dataContext.IngredientPatterns;
 			RefreshStaticValuesPanel();
 			RefreshDynamicValuesPanel();

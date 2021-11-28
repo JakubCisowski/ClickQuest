@@ -223,7 +223,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			_dataContext = GameContent.Regions.FirstOrDefault(x => x.Name == selectedName);
-			ContentSelectionBox.SelectedValue = _dataContext.Name;
 			_monsterSpawnPatterns = _dataContext.MonsterSpawnPatterns;
 			RefreshStaticValuesPanel();
 			RefreshDynamicValuesPanel();

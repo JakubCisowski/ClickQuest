@@ -235,7 +235,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			}
 
 			_dataContext = GameContent.Quests.FirstOrDefault(x => x.Name == selectedName);
-			ContentSelectionBox.SelectedValue = _dataContext.Name;
 			_questRewardPatterns = _dataContext.QuestRewardPatterns;
 			RefreshStaticValuesPanel();
 			RefreshDynamicValuesPanel();
