@@ -22,8 +22,9 @@ namespace ClickQuest.Game.Core.Heroes
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		private const int MAX_LEVEL = 100;
-		public const double AURA_SPEED_PER_LEVEL = 0.01;
+		public const double AURA_SPEED_PER_LEVEL = 0.004;
 		public const double AURA_SPEED_BASE = 1;
+		public const double AURA_DAMAGE_BASE = 0.084;
 
 		public int Id { get; set; }
 
@@ -116,7 +117,7 @@ namespace ClickQuest.Game.Core.Heroes
 		{
 			get
 			{
-				return AuraAttackSpeed.ToString("0.##");
+				return AuraAttackSpeed.ToString("0.###");
 			}
 		}
 
@@ -124,7 +125,7 @@ namespace ClickQuest.Game.Core.Heroes
 		{
 			get
 			{
-				string auraDps = (Math.Round(AuraDamage * AuraAttackSpeed, 4) * 100).ToString("0.##");
+				string auraDps = (Math.Ceiling(AuraDamage * AuraAttackSpeed * 10000) / 100).ToString("0.##");
 				auraDps += "%";
 				return auraDps;
 			}
@@ -132,11 +133,11 @@ namespace ClickQuest.Game.Core.Heroes
 
 		public double LevelAuraBonus => AURA_SPEED_PER_LEVEL * Level;
 
-		public string LevelAuraBonusText => LevelAuraBonus.ToString("0.##");
+		public string LevelAuraBonusText => LevelAuraBonus.ToString("0.###");
 
 		public double LevelAuraBonusTotal => AURA_SPEED_BASE + AURA_SPEED_PER_LEVEL * Level;
 
-		public string LevelAuraBonusTotalText => LevelAuraBonusTotal.ToString("0.##");
+		public string LevelAuraBonusTotalText => LevelAuraBonusTotal.ToString("0.###");
 
 		public Hero(HeroClass heroClass, HeroRace heroRace, string heroName)
 		{
@@ -157,7 +158,7 @@ namespace ClickQuest.Game.Core.Heroes
 			Level = 0;
 			Name = heroName;
 			ClickDamagePerLevel = 1;
-			AuraDamage = 0.1;
+			AuraDamage = 0.084;
 			CritDamage = 2.0;
 			AuraAttackSpeed = AURA_SPEED_BASE;
 

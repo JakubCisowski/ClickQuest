@@ -935,7 +935,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			// ["Aura tick damage: X% (base)"]
 			blockAura.Inlines.Add("Aura tick damage: ");
-			blockAura.Inlines.Add(new Run("10%") { FontFamily = fontFamilyRegularBold });
+			blockAura.Inlines.Add(new Run($"{(Hero.AURA_DAMAGE_BASE * 100).ToString("#.#")}%") { FontFamily = fontFamilyRegularBold });
 			blockAura.Inlines.Add(new Run(" (base)") { FontFamily = fontFamilyRegularLightItalic });
 
 			blockAura.Inlines.Add(new LineBreak());
@@ -1019,7 +1019,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 
 			// ["Artifacts, tick damage: X%"]
-			double auraDamageFromArtifacts = User.Instance.CurrentHero.AuraDamage - 0.1 - auraDamageFromBlessing;
+			double auraDamageFromArtifacts = User.Instance.CurrentHero.AuraDamage - Hero.AURA_DAMAGE_BASE - auraDamageFromBlessing;
 
 			if (auraDamageFromArtifacts > 0.009 || auraDamageFromArtifacts < -0.009)
 			{
