@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Media;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Extensions.Combat;
@@ -101,6 +103,11 @@ namespace ClickQuest.Game.Extensions.UserInterface
 							break;
 						case "MYTHIC":
 							coloredRun.Foreground = ColorsController.GetRarityColor(Rarity.Mythic);
+							break;
+						
+						// Font style
+						case "BOLD":
+							coloredRun.FontFamily = (FontFamily) Application.Current.FindResource("FontRegularDemiBold");
 							break;
 					}
 

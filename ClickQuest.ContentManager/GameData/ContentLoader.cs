@@ -38,5 +38,17 @@ namespace ClickQuest.ContentManager.GameData
 
 			return objects;
 		}
+
+		// Use when clearing a JSON file's contents to generate padding and the default values needed.
+		public static void SeedContent<T>(string jsonFilePath)
+		{
+			var emptyList = new List<T>();
+
+			string json = JsonSerializer.Serialize<List<T>>(emptyList);
+
+			var encryptedJson = DataEncryptionController.EncryptJsonUsingAes(json);
+			
+			File.WriteAllBytes(jsonFilePath, encryptedJson);
+		}
 	}
 }
