@@ -163,7 +163,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			Save();
 
-			int nextId = GameContent.Ingots.Max(x => x.Id) + 1;
+			int nextId = (GameContent.Ingots.Max(x => x.Id as int?) ?? 0) + 1;
 			_dataContext = new Ingot
 			{
 				Id = nextId
