@@ -40,6 +40,7 @@
 		<PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
 		<PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
+		<PackageReference Include="Troschuetz.Random" Version="5.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
