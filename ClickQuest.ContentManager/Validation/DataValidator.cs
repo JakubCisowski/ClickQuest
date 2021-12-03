@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using ClickQuest.ContentManager.GameData;
 using ClickQuest.ContentManager.GameData.Models;
-using ClickQuest.GameManager.Validation;
 
 namespace ClickQuest.ContentManager.Validation
 {
@@ -311,7 +310,7 @@ namespace ClickQuest.ContentManager.Validation
 		{
 			foreach (Recipe recipe in GameContent.Recipes)
 			{
-				var artifact = GameContent.Artifacts.FirstOrDefault(artifact => artifact.Id == recipe.ArtifactId);
+				var artifact = GameContent.Artifacts.FirstOrDefault(x => x.Id == recipe.ArtifactId);
 
 				if (!recipe.Name.Contains(artifact.Name))
 				{

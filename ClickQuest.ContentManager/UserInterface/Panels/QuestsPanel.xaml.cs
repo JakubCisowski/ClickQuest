@@ -277,14 +277,14 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = $"[{pattern.QuestRewardId}]"
 			};
 
-			new TextBlock
-			{
-				FontSize = 18,
-				VerticalAlignment = VerticalAlignment.Center,
-				HorizontalAlignment = HorizontalAlignment.Left,
-				Margin = new Thickness(80, 0, 0, 0),
-				Text = pattern.QuestRewardType.ToString()
-			};
+			// new TextBlock
+			// {
+			// 	FontSize = 18,
+			// 	VerticalAlignment = VerticalAlignment.Center,
+			// 	HorizontalAlignment = HorizontalAlignment.Left,
+			// 	Margin = new Thickness(80, 0, 0, 0),
+			// 	Text = pattern.QuestRewardType.ToString()
+			// };
 
 			TextBlock nameBlock = new TextBlock
 			{

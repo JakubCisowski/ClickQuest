@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -26,7 +27,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 			while (true)
 			{
-				int indexOfTagOpeningStart = description.IndexOf(TagOpeningStart);
+				int indexOfTagOpeningStart = description.IndexOf(TagOpeningStart, StringComparison.Ordinal);
 
 				if (indexOfTagOpeningStart == -1)
 				{
@@ -45,8 +46,8 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				}
 
 				// Find closing tag.
-				int indexOfTagOpeningEnd = description.IndexOf(TagEnd);
-				int indexOfTagClosingStart = description.IndexOf(TagClosingStart);
+				int indexOfTagOpeningEnd = description.IndexOf(TagEnd, StringComparison.Ordinal);
+				int indexOfTagClosingStart = description.IndexOf(TagClosingStart, StringComparison.Ordinal);
 
 				string tagType = description.Substring(1, indexOfTagOpeningEnd - indexOfTagOpeningStart - 1).ToUpper();
 
@@ -114,7 +115,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 				// Remove opening tag, tagged part and closing tag from description.
 				description = description.Remove(0, indexOfTagClosingStart);
-				int indexOfTagClosingEnd = description.IndexOf(TagEnd);
+				int indexOfTagClosingEnd = description.IndexOf(TagEnd, StringComparison.Ordinal);
 				description = description.Remove(0, indexOfTagClosingEnd + 1);
 			}
 

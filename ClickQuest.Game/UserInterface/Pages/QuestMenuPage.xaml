@@ -44,7 +44,7 @@
 						<TextBlock Text="Reroll" FontSize="22" VerticalAlignment="Center" />
 						<TextBlock Text=" (" FontSize="22" VerticalAlignment="Center" />
 						<materialDesign:PackIcon Width="20" Height="20" Kind="CheckboxMultipleBlankCircle" VerticalAlignment="Center" Foreground="{StaticResource BrushGold}" />
-						<TextBlock FontSize="22" Text="{Binding Source={x:Static local:Quest.RerollGoldCost}, StringFormat='\{0\})'}" VerticalAlignment="Center" />
+						<TextBlock FontSize="22" Text="{Binding Source={x:Static local:Quest.RerollCost}, StringFormat='\{0\})'}" VerticalAlignment="Center" />
 					</StackPanel>
 				</Button.Content>
 			</Button>
