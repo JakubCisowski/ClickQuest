@@ -1,218 +1,218 @@
-﻿using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
-using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.GameData.Models;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels
 {
-    public partial class IngotsPanel : UserControl
-    {
-        private Ingot _dataContext;
-        private readonly Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
-        private StackPanel _currentPanel;
+	public partial class IngotsPanel : UserControl
+	{
+		private Ingot _dataContext;
+		private readonly Dictionary<string, FrameworkElement> _controls = new Dictionary<string, FrameworkElement>();
+		private StackPanel _currentPanel;
 
-        public IngotsPanel()
-        {
-            InitializeComponent();
+		public IngotsPanel()
+		{
+			InitializeComponent();
 
-            PopulateContentSelectionBox();
-        }
+			PopulateContentSelectionBox();
+		}
 
-        private void PopulateContentSelectionBox()
-        {
-            ContentSelectionBox.ItemsSource = GameContent.Ingots.Select(x => x.Name);
-        }
+		private void PopulateContentSelectionBox()
+		{
+			ContentSelectionBox.ItemsSource = GameContent.Ingots.Select(x => x.Name);
+		}
 
-        public void RefreshStaticValuesPanel()
-        {
-            if (_currentPanel != null)
-            {
-                _currentPanel.Children.Clear();
-                MainGrid.Children.Remove(_currentPanel);
-            }
+		public void RefreshStaticValuesPanel()
+		{
+			if (_currentPanel != null)
+			{
+				_currentPanel.Children.Clear();
+				MainGrid.Children.Remove(_currentPanel);
+			}
 
-            StackPanel panel = new StackPanel
-            {
-                Name = "StaticInfoPanel"
-            };
+			StackPanel panel = new StackPanel
+			{
+				Name = "StaticInfoPanel"
+			};
 
-            Ingot selectedIngot = _dataContext;
+			Ingot selectedIngot = _dataContext;
 
-            TextBox idBox = new TextBox
-            {
-                Name = "IdBox",
-                Text = selectedIngot.Id.ToString(),
-                Margin = new Thickness(10),
-                IsEnabled = false
-            };
-            TextBox nameBox = new TextBox
-            {
-                Name = "NameBox",
-                Text = selectedIngot.Name,
-                Margin = new Thickness(10)
-            };
-            TextBox valueBox = new TextBox
-            {
-                Name = "ValueBox",
-                Text = selectedIngot.Value.ToString(),
-                Margin = new Thickness(10)
-            };
-            ComboBox rarityBox = new ComboBox
-            {
-                Name = "RarityBox",
-                ItemsSource = Enum.GetValues(typeof(Rarity)),
-                SelectedIndex = (int)selectedIngot.Rarity,
-                Margin = new Thickness(10)
-            };
-            TextBox descriptionBox = new TextBox
-            {
-                Name = "DescriptionBox",
-                TextWrapping = TextWrapping.Wrap,
-                VerticalAlignment = VerticalAlignment.Stretch,
-                MinWidth = 280,
-                AcceptsReturn = true,
-                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-                Height = 160,
-                Text = selectedIngot.Description,
-                Margin = new Thickness(10)
-            };
+			TextBox idBox = new TextBox
+			{
+				Name = "IdBox",
+				Text = selectedIngot.Id.ToString(),
+				Margin = new Thickness(10),
+				IsEnabled = false
+			};
+			TextBox nameBox = new TextBox
+			{
+				Name = "NameBox",
+				Text = selectedIngot.Name,
+				Margin = new Thickness(10)
+			};
+			TextBox valueBox = new TextBox
+			{
+				Name = "ValueBox",
+				Text = selectedIngot.Value.ToString(),
+				Margin = new Thickness(10)
+			};
+			ComboBox rarityBox = new ComboBox
+			{
+				Name = "RarityBox",
+				ItemsSource = Enum.GetValues(typeof(Rarity)),
+				SelectedIndex = (int) selectedIngot.Rarity,
+				Margin = new Thickness(10)
+			};
+			TextBox descriptionBox = new TextBox
+			{
+				Name = "DescriptionBox",
+				TextWrapping = TextWrapping.Wrap,
+				VerticalAlignment = VerticalAlignment.Stretch,
+				MinWidth = 280,
+				AcceptsReturn = true,
+				VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+				Height = 160,
+				Text = selectedIngot.Description,
+				Margin = new Thickness(10)
+			};
 
-            // Set TextBox and ComboBox hints.
-            HintAssist.SetHint(idBox, "ID");
-            HintAssist.SetHint(nameBox, "Name");
-            HintAssist.SetHint(valueBox, "Value");
-            HintAssist.SetHint(rarityBox, "Rarity");
-            HintAssist.SetHint(descriptionBox, "Description");
+			// Set TextBox and ComboBox hints.
+			HintAssist.SetHint(idBox, "ID");
+			HintAssist.SetHint(nameBox, "Name");
+			HintAssist.SetHint(valueBox, "Value");
+			HintAssist.SetHint(rarityBox, "Rarity");
+			HintAssist.SetHint(descriptionBox, "Description");
 
-            // Add controls to Dictionary for easier navigation.
-            _controls.Clear();
+			// Add controls to Dictionary for easier navigation.
+			_controls.Clear();
 
-            _controls.Add(idBox.Name, idBox);
-            _controls.Add(nameBox.Name, nameBox);
-            _controls.Add(valueBox.Name, valueBox);
-            _controls.Add(rarityBox.Name, rarityBox);
-            _controls.Add(descriptionBox.Name, descriptionBox);
+			_controls.Add(idBox.Name, idBox);
+			_controls.Add(nameBox.Name, nameBox);
+			_controls.Add(valueBox.Name, valueBox);
+			_controls.Add(rarityBox.Name, rarityBox);
+			_controls.Add(descriptionBox.Name, descriptionBox);
 
-            foreach (var elem in _controls)
-            {
-                // Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
-                if (elem.Value is TextBox textBox)
-                {
-                    textBox.Style = (Style)FindResource("MaterialDesignOutlinedTextBox");
-                    HintAssist.SetFloatingScale(elem.Value, 1.0);
-                    textBox.GotFocus += TextBox_GotFocus;
-                }
-                else if (elem.Value is ComboBox comboBox)
-                {
-                    comboBox.Style = (Style)FindResource("MaterialDesignOutlinedComboBox");
-                    HintAssist.SetFloatingScale(elem.Value, 1.0);
-                }
+			foreach (var elem in _controls)
+			{
+				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
+				if (elem.Value is TextBox textBox)
+				{
+					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
+					HintAssist.SetFloatingScale(elem.Value, 1.0);
+					textBox.GotFocus += TextBox_GotFocus;
+				}
+				else if (elem.Value is ComboBox comboBox)
+				{
+					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
+					HintAssist.SetFloatingScale(elem.Value, 1.0);
+				}
 
-                panel.Children.Add(elem.Value);
-            }
+				panel.Children.Add(elem.Value);
+			}
 
-            Grid.SetColumn(panel, 1);
+			Grid.SetColumn(panel, 1);
 
-            _currentPanel = panel;
+			_currentPanel = panel;
 
-            MainGrid.Children.Add(panel);
-        }
+			MainGrid.Children.Add(panel);
+		}
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            (sender as TextBox).CaretIndex = int.MaxValue;
-        }
+		private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+		{
+			(sender as TextBox).CaretIndex = int.MaxValue;
+		}
 
-        public void Save()
-        {
-            Ingot ingot = _dataContext;
+		public void Save()
+		{
+			Ingot ingot = _dataContext;
 
-            if (ingot is null)
-            {
-                return;
-            }
+			if (ingot is null)
+			{
+				return;
+			}
 
-            ingot.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
-            ingot.Name = (_controls["NameBox"] as TextBox).Text;
-            ingot.Value = int.Parse((_controls["ValueBox"] as TextBox).Text);
-            ingot.Rarity = (Rarity)Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
-            ingot.Description = (_controls["DescriptionBox"] as TextBox).Text;
+			ingot.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
+			ingot.Name = (_controls["NameBox"] as TextBox).Text;
+			ingot.Value = int.Parse((_controls["ValueBox"] as TextBox).Text);
+			ingot.Rarity = (Rarity) Enum.Parse(typeof(Rarity), (_controls["RarityBox"] as ComboBox).SelectedValue.ToString());
+			ingot.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
-            // Check if this Id is already in the collection (modified).
-            if (GameContent.Ingots.Select(x => x.Id).Contains(ingot.Id))
-            {
-                int indexOfIngot = GameContent.Ingots.FindIndex(x => x.Id == ingot.Id);
-                GameContent.Ingots[indexOfIngot] = ingot;
-            }
-            else
-            {
-                // If not, add it.
-                GameContent.Ingots.Add(ingot);
-            }
+			// Check if this Id is already in the collection (modified).
+			if (GameContent.Ingots.Select(x => x.Id).Contains(ingot.Id))
+			{
+				int indexOfIngot = GameContent.Ingots.FindIndex(x => x.Id == ingot.Id);
+				GameContent.Ingots[indexOfIngot] = ingot;
+			}
+			else
+			{
+				// If not, add it.
+				GameContent.Ingots.Add(ingot);
+			}
 
-            PopulateContentSelectionBox();
-        }
+			PopulateContentSelectionBox();
+		}
 
-        private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
-        {
-            Save();
+		private void AddNewObjectButton_Click(object sender, RoutedEventArgs e)
+		{
+			Save();
 
-            int nextId = (GameContent.Ingots.Max(x => x.Id as int?) ?? 0) + 1;
-            _dataContext = new Ingot
-            {
-                Id = nextId
-            };
-            ContentSelectionBox.SelectedIndex = -1;
-            RefreshStaticValuesPanel();
+			int nextId = (GameContent.Ingots.Max(x => x.Id as int?) ?? 0) + 1;
+			_dataContext = new Ingot
+			{
+				Id = nextId
+			};
+			ContentSelectionBox.SelectedIndex = -1;
+			RefreshStaticValuesPanel();
 
-            DeleteObjectButton.Visibility = Visibility.Visible;
-        }
+			DeleteObjectButton.Visibility = Visibility.Visible;
+		}
 
-        private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
-        {
-            Save();
+		private void DeleteObjectButton_Click(object sender, RoutedEventArgs e)
+		{
+			Save();
 
-            Ingot? objectToDelete = GameContent.Ingots.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+			var objectToDelete = GameContent.Ingots.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
-            MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            if (result == MessageBoxResult.No)
-            {
-                return;
-            }
+			if (result == MessageBoxResult.No)
+			{
+				return;
+			}
 
-            GameContent.Ingots.Remove(objectToDelete);
+			GameContent.Ingots.Remove(objectToDelete);
 
-            PopulateContentSelectionBox();
-            ContentSelectionBox.SelectedIndex = -1;
-            _currentPanel.Children.Clear();
-            DeleteObjectButton.Visibility = Visibility.Hidden;
-            _dataContext = null;
+			PopulateContentSelectionBox();
+			ContentSelectionBox.SelectedIndex = -1;
+			_currentPanel.Children.Clear();
+			DeleteObjectButton.Visibility = Visibility.Hidden;
+			_dataContext = null;
 
-            Application.Current.MainWindow.Close();
-        }
+			Application.Current.MainWindow.Close();
+		}
 
-        private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
-            if (selectedName is null)
-            {
-                return;
-            }
+			if (selectedName is null)
+			{
+				return;
+			}
 
-            if (_dataContext is not null)
-            {
-                Save();
-            }
+			if (_dataContext is not null)
+			{
+				Save();
+			}
 
-            _dataContext = GameContent.Ingots.FirstOrDefault(x => x.Name == selectedName);
-            RefreshStaticValuesPanel();
-            DeleteObjectButton.Visibility = Visibility.Visible;
-        }
-    }
+			_dataContext = GameContent.Ingots.FirstOrDefault(x => x.Name == selectedName);
+			RefreshStaticValuesPanel();
+			DeleteObjectButton.Visibility = Visibility.Visible;
+		}
+	}
 }

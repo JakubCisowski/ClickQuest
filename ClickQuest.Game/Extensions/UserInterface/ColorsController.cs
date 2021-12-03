@@ -1,211 +1,211 @@
+using System;
+using System.Windows;
+using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Places;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.UserInterface.Controls.Styles.Themes;
-using System;
-using System.Windows;
-using System.Windows.Media;
 
 namespace ClickQuest.Game.Extensions.UserInterface
 {
-    public static class ColorsController
-    {
-        public static SolidColorBrush GetRarityColor(Rarity rarity)
-        {
-            SolidColorBrush brush = null;
+	public static class ColorsController
+	{
+		public static SolidColorBrush GetRarityColor(Rarity rarity)
+		{
+			SolidColorBrush brush = null;
 
-            switch (rarity)
-            {
-                case Rarity.General:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity0");
-                    break;
+			switch (rarity)
+			{
+				case Rarity.General:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity0");
+					break;
 
-                case Rarity.Fine:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity1");
-                    break;
+				case Rarity.Fine:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity1");
+					break;
 
-                case Rarity.Superior:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity2");
-                    break;
+				case Rarity.Superior:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity2");
+					break;
 
-                case Rarity.Exceptional:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity3");
-                    break;
+				case Rarity.Exceptional:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity3");
+					break;
 
-                case Rarity.Masterwork:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity4");
-                    break;
+				case Rarity.Masterwork:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity4");
+					break;
 
-                case Rarity.Mythic:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity5");
-                    break;
-            }
+				case Rarity.Mythic:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity5");
+					break;
+			}
 
-            return brush;
-        }
+			return brush;
+		}
 
-        public static SolidColorBrush GetDamageTypeColor(DamageType damageType)
-        {
-            SolidColorBrush brush = null;
+		public static SolidColorBrush GetDamageTypeColor(DamageType damageType)
+		{
+			SolidColorBrush brush = null;
 
-            switch (damageType)
-            {
-                case DamageType.Normal:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushFloatingTextNormal");
-                    break;
+			switch (damageType)
+			{
+				case DamageType.Normal:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushFloatingTextNormal");
+					break;
 
-                case DamageType.Critical:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeCritical");
-                    break;
+				case DamageType.Critical:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushDamageTypeCritical");
+					break;
 
-                case DamageType.Poison:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypePoison");
-                    break;
+				case DamageType.Poison:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushDamageTypePoison");
+					break;
 
-                case DamageType.Aura:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeAura");
-                    break;
+				case DamageType.Aura:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushDamageTypeAura");
+					break;
 
-                case DamageType.OnHit:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeOnHit");
-                    break;
+				case DamageType.OnHit:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushDamageTypeOnHit");
+					break;
 
-                case DamageType.Artifact:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeArtifact");
-                    break;
-            }
+				case DamageType.Artifact:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushDamageTypeArtifact");
+					break;
+			}
 
-            return brush;
-        }
+			return brush;
+		}
 
-        public static SolidColorBrush GetHeroClassColor(HeroClass heroClass)
-        {
-            SolidColorBrush brush = null;
+		public static SolidColorBrush GetHeroClassColor(HeroClass heroClass)
+		{
+			SolidColorBrush brush = null;
 
-            switch (heroClass)
-            {
-                case HeroClass.Slayer:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushSlayerRelated");
-                    break;
+			switch (heroClass)
+			{
+				case HeroClass.Slayer:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushSlayerRelated");
+					break;
 
-                case HeroClass.Venom:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushVenomRelated");
-                    break;
-            }
+				case HeroClass.Venom:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushVenomRelated");
+					break;
+			}
 
-            return brush;
-        }
+			return brush;
+		}
 
-        public static SolidColorBrush GetMonsterSpawnRarityColor(MonsterSpawnPattern spawnPattern)
-        {
-            SolidColorBrush brush = null;
+		public static SolidColorBrush GetMonsterSpawnRarityColor(MonsterSpawnPattern spawnPattern)
+		{
+			SolidColorBrush brush = null;
 
-            double monsterSpawnFrequency = spawnPattern.Frequency;
+			double monsterSpawnFrequency = spawnPattern.Frequency;
 
-            switch (monsterSpawnFrequency)
-            {
-                case <= 0.01:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity5");
-                    break;
+			switch (monsterSpawnFrequency)
+			{
+				case <= 0.01:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity5");
+					break;
 
-                case <= 0.03:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity4");
-                    break;
+				case <= 0.03:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity4");
+					break;
 
-                case <= 0.05:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity3");
-                    break;
+				case <= 0.05:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity3");
+					break;
 
-                case <= 0.10:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity2");
-                    break;
+				case <= 0.10:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity2");
+					break;
 
-                case <= 0.25:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity1");
-                    break;
+				case <= 0.25:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity1");
+					break;
 
-                case > 0.25:
-                    brush = (SolidColorBrush)Application.Current.FindResource("BrushRarity0");
-                    break;
-            }
+				case > 0.25:
+					brush = (SolidColorBrush) Application.Current.FindResource("BrushRarity0");
+					break;
+			}
 
-            return brush;
-        }
+			return brush;
+		}
 
-        public static void ChangeApplicationColorTheme(ColorTheme newTheme)
-        {
-            switch (newTheme)
-            {
-                case ColorTheme.Blue:
-                    {
-                        const string blueThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Blue.xaml";
+		public static void ChangeApplicationColorTheme(ColorTheme newTheme)
+		{
+			switch (newTheme)
+			{
+				case ColorTheme.Blue:
+				{
+					const string blueThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Blue.xaml";
 
-                        ResourceDictionary newDict = new ResourceDictionary
-                        {
-                            Source = new Uri(blueThemeXamlPath, UriKind.Relative)
-                        };
+					ResourceDictionary newDict = new ResourceDictionary
+					{
+						Source = new Uri(blueThemeXamlPath, UriKind.Relative)
+					};
 
-                        foreach (ResourceDictionary mergedDict in newDict.MergedDictionaries)
-                        {
-                            Application.Current.Resources.MergedDictionaries.Add(mergedDict);
-                        }
+					foreach (ResourceDictionary mergedDict in newDict.MergedDictionaries)
+					{
+						Application.Current.Resources.MergedDictionaries.Add(mergedDict);
+					}
 
-                        foreach (object key in newDict.Keys)
-                        {
-                            Application.Current.Resources[key] = newDict[key];
-                        }
+					foreach (object key in newDict.Keys)
+					{
+						Application.Current.Resources[key] = newDict[key];
+					}
 
-                        break;
-                    }
+					break;
+				}
 
-                case ColorTheme.Orange:
-                    {
-                        const string orangeThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Orange.xaml";
+				case ColorTheme.Orange:
+				{
+					const string orangeThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Orange.xaml";
 
-                        ResourceDictionary newDict = new ResourceDictionary
-                        {
-                            Source = new Uri(orangeThemeXamlPath, UriKind.Relative)
-                        };
+					ResourceDictionary newDict = new ResourceDictionary
+					{
+						Source = new Uri(orangeThemeXamlPath, UriKind.Relative)
+					};
 
-                        foreach (ResourceDictionary mergedDict in newDict.MergedDictionaries)
-                        {
-                            Application.Current.Resources.MergedDictionaries.Add(mergedDict);
-                        }
+					foreach (ResourceDictionary mergedDict in newDict.MergedDictionaries)
+					{
+						Application.Current.Resources.MergedDictionaries.Add(mergedDict);
+					}
 
-                        foreach (object key in newDict.Keys)
-                        {
-                            Application.Current.Resources[key] = newDict[key];
-                        }
+					foreach (object key in newDict.Keys)
+					{
+						Application.Current.Resources[key] = newDict[key];
+					}
 
-                        break;
-                    }
+					break;
+				}
 
-                case ColorTheme.Pink:
-                    {
-                        const string pinkThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Pink.xaml";
+				case ColorTheme.Pink:
+				{
+					const string pinkThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Pink.xaml";
 
-                        ResourceDictionary newDict = new ResourceDictionary
-                        {
-                            Source = new Uri(pinkThemeXamlPath, UriKind.Relative)
-                        };
+					ResourceDictionary newDict = new ResourceDictionary
+					{
+						Source = new Uri(pinkThemeXamlPath, UriKind.Relative)
+					};
 
-                        foreach (ResourceDictionary mergedDict in newDict.MergedDictionaries)
-                        {
-                            Application.Current.Resources.MergedDictionaries.Add(mergedDict);
-                        }
+					foreach (ResourceDictionary mergedDict in newDict.MergedDictionaries)
+					{
+						Application.Current.Resources.MergedDictionaries.Add(mergedDict);
+					}
 
-                        foreach (object key in newDict.Keys)
-                        {
-                            Application.Current.Resources[key] = newDict[key];
-                        }
+					foreach (object key in newDict.Keys)
+					{
+						Application.Current.Resources[key] = newDict[key];
+					}
 
-                        break;
-                    }
-            }
+					break;
+				}
+			}
 
-            GameAssets.RefreshPages();
-        }
-    }
+			GameAssets.RefreshPages();
+		}
+	}
 }

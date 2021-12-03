@@ -1,3 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
@@ -8,257 +15,250 @@ using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.Extensions.UserInterface.ToolTips;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Windows;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Media;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
-    public partial class ShopPage : Page
-    {
-        public const double SellingRatio = 0.65;
+	public partial class ShopPage : Page
+	{
+		public const double SellingRatio = 0.65;
 
-        public ShopPage()
-        {
-            InitializeComponent();
-            UpdateShop();
-        }
+		public ShopPage()
+		{
+			InitializeComponent();
+			UpdateShop();
+		}
 
-        public void UpdateShop()
-        {
-            ItemsListViewSellMaterials.ItemsSource = User.Instance.CurrentHero?.Materials.ReorderItemsInList();
-            ItemsListViewSellRecipes.ItemsSource = User.Instance.CurrentHero?.Recipes.ReorderItemsInList();
+		public void UpdateShop()
+		{
+			ItemsListViewSellMaterials.ItemsSource = User.Instance.CurrentHero?.Materials.ReorderItemsInList();
+			ItemsListViewSellRecipes.ItemsSource = User.Instance.CurrentHero?.Recipes.ReorderItemsInList();
 
-            if (User.Instance.CurrentHero != null)
-            {
-                ItemsListViewBuy.ItemsSource = GetShopOfferAsRecipes();
-            }
+			if (User.Instance.CurrentHero != null)
+			{
+				ItemsListViewBuy.ItemsSource = GetShopOfferAsRecipes();
+			}
 
-            ItemsListViewSellMaterials.Items.Refresh();
-            ItemsListViewSellRecipes.Items.Refresh();
-            ItemsListViewBuy.Items.Refresh();
+			ItemsListViewSellMaterials.Items.Refresh();
+			ItemsListViewSellRecipes.Items.Refresh();
+			ItemsListViewBuy.Items.Refresh();
 
-            RefreshScrollBarVisibilities();
-        }
+			RefreshScrollBarVisibilities();
+		}
 
-        public void RefreshScrollBarVisibilities()
-        {
-            if (ItemsListViewSellMaterials.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
-            {
-                ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellMaterials, ScrollBarVisibility.Visible);
-            }
-            else
-            {
-                ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellMaterials, ScrollBarVisibility.Disabled);
-            }
+		public void RefreshScrollBarVisibilities()
+		{
+			if (ItemsListViewSellMaterials.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellMaterials, ScrollBarVisibility.Visible);
+			}
+			else
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellMaterials, ScrollBarVisibility.Disabled);
+			}
 
-            if (ItemsListViewSellRecipes.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
-            {
-                ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Visible);
-            }
-            else
-            {
-                ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Disabled);
-            }
+			if (ItemsListViewSellRecipes.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Visible);
+			}
+			else
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Disabled);
+			}
 
-            if (ItemsListViewBuy.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
-            {
-                ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Visible);
-            }
-            else
-            {
-                ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Disabled);
-            }
-        }
+			if (ItemsListViewBuy.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Visible);
+			}
+			else
+			{
+				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Disabled);
+			}
+		}
 
-        public static List<Recipe> GetShopOfferAsRecipes()
-        {
-            var listOfPatterns = GameAssets.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]);
+		public static List<Recipe> GetShopOfferAsRecipes()
+		{
+			var listOfPatterns = GameAssets.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]);
 
-            return listOfPatterns.Select(pattern => GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.Id)).ToList();
-        }
+			return listOfPatterns.Select(pattern => GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.Id)).ToList();
+		}
 
-        private void TownButton_Click(object sender, RoutedEventArgs e)
-        {
-            InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
-        }
+		private void TownButton_Click(object sender, RoutedEventArgs e)
+		{
+			InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
+		}
 
-        private void SellButton_Click(object sender, RoutedEventArgs e)
-        {
-            Button b = sender as Button;
-            Item item = b.CommandParameter as Item;
+		private void SellButton_Click(object sender, RoutedEventArgs e)
+		{
+			Button b = sender as Button;
+			Item item = b.CommandParameter as Item;
 
-            var itemSellValue = 0;
+			var itemSellValue = 0;
 
-            if (item.Rarity == Rarity.Mythic)
-            {
-                var sellItemRuns = new List<Run>
-                {
-                    new Run("Are you sure you want to sell "),
-                    new Run($"{item.Name}")
-                    {
-                        FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-                    },
-                    new Run("?")
-                };
+			if (item.Rarity == Rarity.Mythic)
+			{
+				var sellItemRuns = new List<Run>
+				{
+					new Run("Are you sure you want to sell "),
+					new Run($"{item.Name}")
+					{
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+					},
+					new Run("?")
+				};
 
-                MessageBoxResult result = AlertBox.Show(sellItemRuns);
+				var result = AlertBox.Show(sellItemRuns);
 
-                if (result == MessageBoxResult.No)
-                {
-                    return;
-                }
-            }
+				if (result == MessageBoxResult.No)
+				{
+					return;
+				}
+			}
 
-            if (item is Material)
-            {
-                // The selling ratio is only applied for materials.
-                itemSellValue = (int)Math.Ceiling(item.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
-                GameController.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
-            }
-            else
-            {
-                itemSellValue = item.Value;
-            }
+			if (item is Material)
+			{
+				// The selling ratio is only applied for materials.
+				itemSellValue = (int) Math.Ceiling(item.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+				GameController.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
+			}
+			else
+			{
+				itemSellValue = item.Value;
+			}
 
-            (Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{itemSellValue}", (SolidColorBrush)FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{itemSellValue}", (SolidColorBrush) FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
 
-            item.RemoveItem();
-            User.Instance.Gold += itemSellValue;
+			item.RemoveItem();
+			User.Instance.Gold += itemSellValue;
 
-            UpdateShop();
-        }
+			UpdateShop();
+		}
 
-        private void BuyButton_Click(object sender, RoutedEventArgs e)
-        {
-            Button b = sender as Button;
-            Recipe recipe = b.CommandParameter as Recipe;
+		private void BuyButton_Click(object sender, RoutedEventArgs e)
+		{
+			Button b = sender as Button;
+			Recipe recipe = b.CommandParameter as Recipe;
 
-            if (User.Instance.Gold >= recipe.Value)
-            {
-                var buyRecipeRuns = new List<Run>
-                {
-                    new Run("Are you sure you want to buy "),
-                    new Run($"{recipe.Name}")
-                    {
-                        FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-                    },
-                    new Run(" for "),
-                    new Run($"{recipe.Value} gold")
-                    {
-                        Foreground = (SolidColorBrush) FindResource("BrushGold"),
-                        FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-                    },
-                    new Run("?")
-                };
+			if (User.Instance.Gold >= recipe.Value)
+			{
+				var buyRecipeRuns = new List<Run>
+				{
+					new Run("Are you sure you want to buy "),
+					new Run($"{recipe.Name}")
+					{
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+					},
+					new Run(" for "),
+					new Run($"{recipe.Value} gold")
+					{
+						Foreground = (SolidColorBrush) FindResource("BrushGold"),
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+					},
+					new Run("?")
+				};
 
-                MessageBoxResult result = AlertBox.Show(buyRecipeRuns);
-                if (result == MessageBoxResult.No)
-                {
-                    return;
-                }
+				var result = AlertBox.Show(buyRecipeRuns);
+				if (result == MessageBoxResult.No)
+				{
+					return;
+				}
 
-                (Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{recipe.Value}", (SolidColorBrush)FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{recipe.Value}", (SolidColorBrush) FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
 
-                recipe.AddItem();
-                User.Instance.Gold -= recipe.Value;
+				recipe.AddItem();
+				User.Instance.Gold -= recipe.Value;
 
-                GameController.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
+				GameController.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
 
-                UpdateShop();
-            }
-            else
-            {
-                var notEnoughGoldRuns = new List<Run>
-                {
-                    new Run("You do not have enough gold to buy this item.\nIt costs "),
-                    new Run($"{recipe.Value} gold")
-                    {
-                        Foreground = (SolidColorBrush) FindResource("BrushGold"),
-                        FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-                    },
-                    new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses.")
-                };
+				UpdateShop();
+			}
+			else
+			{
+				var notEnoughGoldRuns = new List<Run>
+				{
+					new Run("You do not have enough gold to buy this item.\nIt costs "),
+					new Run($"{recipe.Value} gold")
+					{
+						Foreground = (SolidColorBrush) FindResource("BrushGold"),
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+					},
+					new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses.")
+				};
 
-                AlertBox.Show(notEnoughGoldRuns, MessageBoxButton.OK);
-            }
-        }
+				AlertBox.Show(notEnoughGoldRuns, MessageBoxButton.OK);
+			}
+		}
 
-        private void SellButton_OnInitialized(object sender, EventArgs e)
-        {
-            Button button = sender as Button;
+		private void SellButton_OnInitialized(object sender, EventArgs e)
+		{
+			Button button = sender as Button;
 
-            if (button?.ToolTip == null)
-            {
-                var itemSellValue = 0;
+			if (button?.ToolTip == null)
+			{
+				var itemSellValue = 0;
 
-                if (button.CommandParameter is Material material)
-                {
-                    itemSellValue = (int)Math.Ceiling(material.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
-                }
-                else
-                {
-                    itemSellValue = (button.CommandParameter as Item).Value;
-                }
+				if (button.CommandParameter is Material material)
+				{
+					itemSellValue = (int) Math.Ceiling(material.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+				}
+				else
+				{
+					itemSellValue = (button.CommandParameter as Item).Value;
+				}
 
-                ToolTip toolTip = new ToolTip
-                {
-                    Style = (Style)FindResource("ToolTipSimple")
-                };
+				ToolTip toolTip = new ToolTip
+				{
+					Style = (Style) FindResource("ToolTipSimple")
+				};
 
-                GeneralToolTipController.SetToolTipDelayAndDuration(button);
+				GeneralToolTipController.SetToolTipDelayAndDuration(button);
 
-                TextBlock toolTipBlock = new TextBlock
-                {
-                    Style = (Style)FindResource("ToolTipTextBlockBase")
-                };
+				TextBlock toolTipBlock = new TextBlock
+				{
+					Style = (Style) FindResource("ToolTipTextBlockBase")
+				};
 
-                toolTipBlock.Inlines.Add(new Run("Sell for "));
-                toolTipBlock.Inlines.Add(new Run($"{itemSellValue} gold")
-                {
-                    FontFamily = (FontFamily)FindResource("FontRegularDemiBold"),
-                    Foreground = (SolidColorBrush)FindResource("BrushGold")
-                });
+				toolTipBlock.Inlines.Add(new Run("Sell for "));
+				toolTipBlock.Inlines.Add(new Run($"{itemSellValue} gold")
+				{
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold"),
+					Foreground = (SolidColorBrush) FindResource("BrushGold")
+				});
 
-                toolTip.Content = toolTipBlock;
+				toolTip.Content = toolTipBlock;
 
-                button.ToolTip = toolTip;
-            }
-        }
+				button.ToolTip = toolTip;
+			}
+		}
 
-        private void BuyButton_OnInitialized(object sender, EventArgs e)
-        {
-            Button button = sender as Button;
+		private void BuyButton_OnInitialized(object sender, EventArgs e)
+		{
+			Button button = sender as Button;
 
-            if (button?.ToolTip == null)
-            {
-                ToolTip toolTip = new ToolTip
-                {
-                    Style = (Style)FindResource("ToolTipSimple")
-                };
+			if (button?.ToolTip == null)
+			{
+				ToolTip toolTip = new ToolTip
+				{
+					Style = (Style) FindResource("ToolTipSimple")
+				};
 
-                GeneralToolTipController.SetToolTipDelayAndDuration(button);
+				GeneralToolTipController.SetToolTipDelayAndDuration(button);
 
-                TextBlock toolTipBlock = new TextBlock
-                {
-                    Style = (Style)FindResource("ToolTipTextBlockBase")
-                };
+				TextBlock toolTipBlock = new TextBlock
+				{
+					Style = (Style) FindResource("ToolTipTextBlockBase")
+				};
 
-                toolTipBlock.Inlines.Add(new Run("Buy for "));
-                toolTipBlock.Inlines.Add(new Run($"{(button.CommandParameter as Item).Value} gold")
-                {
-                    FontFamily = (FontFamily)FindResource("FontRegularDemiBold"),
-                    Foreground = (SolidColorBrush)FindResource("BrushGold")
-                });
+				toolTipBlock.Inlines.Add(new Run("Buy for "));
+				toolTipBlock.Inlines.Add(new Run($"{(button.CommandParameter as Item).Value} gold")
+				{
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold"),
+					Foreground = (SolidColorBrush) FindResource("BrushGold")
+				});
 
-                toolTip.Content = toolTipBlock;
+				toolTip.Content = toolTipBlock;
 
-                button.ToolTip = toolTip;
-            }
-        }
-    }
+				button.ToolTip = toolTip;
+			}
+		}
+	}
 }

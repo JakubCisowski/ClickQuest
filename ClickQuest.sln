@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31402.337
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickQuest.Game", "ClickQuest.Game\ClickQuest.Game.csproj", "{3D44B8C1-C9D9-4344-BD58-82EB1E79886A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickQuest.ContentManager", "ClickQuest.ContentManager\ClickQuest.ContentManager.csproj", "{5FD2D030-070B-4BF9-A84C-271241B3CB9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickQuest.ContentManager", "ClickQuest.ContentManager\ClickQuest.ContentManager.csproj", "{5FD2D030-070B-4BF9-A84C-271241B3CB9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

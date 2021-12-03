@@ -1,22 +1,22 @@
 ﻿namespace ClickQuest.Game.Core.Items.Artifacts
 {
-    // Increases passive Aura Attack Speed by 50%.
-    public class RakshasasNecklace : ArtifactFunctionality
-    {
-        private const double AuraAttackSpeedModifier = 1.5;
+	// Increases passive Aura Attack Speed by 50%.
+	public class RakshasasNecklace : ArtifactFunctionality
+	{
+		private const double AuraAttackSpeedModifier = 1.5;
 
-        public override void OnEquip()
-        {
-        }
+		public override void OnEquip()
+		{
+		}
 
-        public override void OnUnequip()
-        {
-            base.OnUnequip();
-        }
+		public override void OnUnequip()
+		{
+			base.OnUnequip();
+		}
 
-        public RakshasasNecklace()
-        {
-            Name = "Rakshasa's Necklace";
-        }
-    }
+		public RakshasasNecklace()
+		{
+			Name = "Rakshasa's Necklace";
+		}
+	}
 }

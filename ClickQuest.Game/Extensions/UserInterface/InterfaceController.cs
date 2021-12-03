@@ -1,3 +1,7 @@
+using System;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
@@ -5,238 +9,234 @@ using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Pages;
 using ClickQuest.Game.UserInterface.Windows;
 using Microsoft.CSharp.RuntimeBinder;
-using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace ClickQuest.Game.Extensions.UserInterface
 {
-    public static class InterfaceController
-    {
-        public const int EquipmentItemsNeededToShowScrollBar = 15;
-        public const int EquipmentItemsNeededToShowScrollBarIfArtifactsAreEquipped = 10;
-        public const int VendorItemsNeededToShowScrollBar = 12;
+	public static class InterfaceController
+	{
+		public const int EquipmentItemsNeededToShowScrollBar = 15;
+		public const int EquipmentItemsNeededToShowScrollBarIfArtifactsAreEquipped = 10;
+		public const int VendorItemsNeededToShowScrollBar = 12;
 
-        public static Enemy CurrentEnemy
-        {
-            get
-            {
-                object currentFrameContent = (Application.Current.MainWindow as GameWindow)?.CurrentFrame.Content;
-                bool isCurrentFrameContentARegion = currentFrameContent is RegionPage;
+		public static Enemy CurrentEnemy
+		{
+			get
+			{
+				object currentFrameContent = (Application.Current.MainWindow as GameWindow)?.CurrentFrame.Content;
+				bool isCurrentFrameContentARegion = currentFrameContent is RegionPage;
 
-                if (isCurrentFrameContentARegion)
-                {
-                    return (currentFrameContent as RegionPage).RegionPanel.Children.OfType<MonsterButton>().FirstOrDefault()?.Monster;
-                }
+				if (isCurrentFrameContentARegion)
+				{
+					return (currentFrameContent as RegionPage).RegionPanel.Children.OfType<MonsterButton>().FirstOrDefault()?.Monster;
+				}
 
-                bool isCurrentFrameContentADungeon = currentFrameContent is DungeonBossPage;
+				bool isCurrentFrameContentADungeon = currentFrameContent is DungeonBossPage;
 
-                if (isCurrentFrameContentADungeon)
-                {
-                    return (currentFrameContent as DungeonBossPage).Boss;
-                }
+				if (isCurrentFrameContentADungeon)
+				{
+					return (currentFrameContent as DungeonBossPage).Boss;
+				}
 
-                return null;
-            }
-        }
+				return null;
+			}
+		}
 
-        public static MonsterButton CurrentMonsterButton
-        {
-            get
-            {
-                bool isCurrentFrameContentARegion = GameAssets.CurrentPage is RegionPage;
+		public static MonsterButton CurrentMonsterButton
+		{
+			get
+			{
+				bool isCurrentFrameContentARegion = GameAssets.CurrentPage is RegionPage;
 
-                if (isCurrentFrameContentARegion)
-                {
-                    return (GameAssets.CurrentPage as RegionPage).RegionPanel.Children.OfType<MonsterButton>().FirstOrDefault();
-                }
+				if (isCurrentFrameContentARegion)
+				{
+					return (GameAssets.CurrentPage as RegionPage).RegionPanel.Children.OfType<MonsterButton>().FirstOrDefault();
+				}
 
-                return null;
-            }
-        }
+				return null;
+			}
+		}
 
-        public static DungeonBossPage CurrentBossPage
-        {
-            get
-            {
-                bool isCurrentFrameContentARegion = GameAssets.CurrentPage is DungeonBossPage;
+		public static DungeonBossPage CurrentBossPage
+		{
+			get
+			{
+				bool isCurrentFrameContentARegion = GameAssets.CurrentPage is DungeonBossPage;
 
-                if (isCurrentFrameContentARegion)
-                {
-                    return GameAssets.CurrentPage as DungeonBossPage;
-                }
+				if (isCurrentFrameContentARegion)
+				{
+					return GameAssets.CurrentPage as DungeonBossPage;
+				}
 
-                return null;
-            }
-        }
+				return null;
+			}
+		}
 
-        public static void RefreshStatsAndEquipmentPanelsOnCurrentPage()
-        {
-            try
-            {
-                dynamic p = GameAssets.CurrentPage;
+		public static void RefreshStatsAndEquipmentPanelsOnCurrentPage()
+		{
+			try
+			{
+				dynamic p = GameAssets.CurrentPage;
 
-                HeroStatsPage statsPage = p.StatsFrame.Content;
-                statsPage.RefreshAllDynamicStatsAndToolTips();
+				HeroStatsPage statsPage = p.StatsFrame.Content;
+				statsPage.RefreshAllDynamicStatsAndToolTips();
 
-                EquipmentPage equipmentPage = p.EquipmentFrame.Content;
-                equipmentPage.ChangeActiveTab();
-                equipmentPage.RefreshCurrentEquipmentTab();
-            }
-            catch (RuntimeBinderException)
-            {
-                // No stats frame on this page!
-                // Best solution according to:
-                // https://stackoverflow.com/a/5768449/14770235
-            }
-            catch (NullReferenceException)
-            {
-                // This might be necessary instead of the above with the new approach.
-            }
-        }
+				EquipmentPage equipmentPage = p.EquipmentFrame.Content;
+				equipmentPage.ChangeActiveTab();
+				equipmentPage.RefreshCurrentEquipmentTab();
+			}
+			catch (RuntimeBinderException)
+			{
+				// No stats frame on this page!
+				// Best solution according to:
+				// https://stackoverflow.com/a/5768449/14770235
+			}
+			catch (NullReferenceException)
+			{
+				// This might be necessary instead of the above with the new approach.
+			}
+		}
 
-        public static void RefreshSpecificEquipmentPanelTabOnCurrentPage(Type itemType)
-        {
-            try
-            {
-                dynamic p = GameAssets.CurrentPage;
+		public static void RefreshSpecificEquipmentPanelTabOnCurrentPage(Type itemType)
+		{
+			try
+			{
+				dynamic p = GameAssets.CurrentPage;
 
-                EquipmentPage equipmentPage = p.EquipmentFrame.Content;
-                equipmentPage.RefreshSpecificEquipmentTab(itemType);
-            }
-            catch (RuntimeBinderException)
-            {
-                // No stats frame on this page!
-                // Best solution according to:
-                // https://stackoverflow.com/a/5768449/14770235
-            }
-            catch (NullReferenceException)
-            {
-                // This might be necessary instead of the above with the new approach.
-            }
-        }
+				EquipmentPage equipmentPage = p.EquipmentFrame.Content;
+				equipmentPage.RefreshSpecificEquipmentTab(itemType);
+			}
+			catch (RuntimeBinderException)
+			{
+				// No stats frame on this page!
+				// Best solution according to:
+				// https://stackoverflow.com/a/5768449/14770235
+			}
+			catch (NullReferenceException)
+			{
+				// This might be necessary instead of the above with the new approach.
+			}
+		}
 
-        public static void RefreshCurrentEquipmentPanelTabOnCurrentPage()
-        {
-            try
-            {
-                dynamic p = GameAssets.CurrentPage;
+		public static void RefreshCurrentEquipmentPanelTabOnCurrentPage()
+		{
+			try
+			{
+				dynamic p = GameAssets.CurrentPage;
 
-                EquipmentPage equipmentPage = p.EquipmentFrame.Content;
-                equipmentPage.RefreshCurrentEquipmentTab();
-            }
-            catch (RuntimeBinderException)
-            {
-                // No stats frame on this page!
-                // Best solution according to:
-                // https://stackoverflow.com/a/5768449/14770235
-            }
-            catch (NullReferenceException)
-            {
-                // This might be necessary instead of the above with the new approach.
-            }
-        }
+				EquipmentPage equipmentPage = p.EquipmentFrame.Content;
+				equipmentPage.RefreshCurrentEquipmentTab();
+			}
+			catch (RuntimeBinderException)
+			{
+				// No stats frame on this page!
+				// Best solution according to:
+				// https://stackoverflow.com/a/5768449/14770235
+			}
+			catch (NullReferenceException)
+			{
+				// This might be necessary instead of the above with the new approach.
+			}
+		}
 
-        public static void UpdateSingleSpecializationInterface(SpecializationType specializationType)
-        {
-            try
-            {
-                dynamic p = GameAssets.CurrentPage;
+		public static void UpdateSingleSpecializationInterface(SpecializationType specializationType)
+		{
+			try
+			{
+				dynamic p = GameAssets.CurrentPage;
 
-                HeroStatsPage statsPage = p.StatsFrame.Content;
-                statsPage.UpdateSingleSpecializationInterface(specializationType);
-            }
-            catch (RuntimeBinderException)
-            {
-                // No stats frame on this page!
-                // Best solution according to:
-                // https://stackoverflow.com/a/5768449/14770235
-            }
-            catch (NullReferenceException)
-            {
-                // This might be necessary instead of the above with the new approach.
-            }
-        }
+				HeroStatsPage statsPage = p.StatsFrame.Content;
+				statsPage.UpdateSingleSpecializationInterface(specializationType);
+			}
+			catch (RuntimeBinderException)
+			{
+				// No stats frame on this page!
+				// Best solution according to:
+				// https://stackoverflow.com/a/5768449/14770235
+			}
+			catch (NullReferenceException)
+			{
+				// This might be necessary instead of the above with the new approach.
+			}
+		}
 
-        public static void RefreshBlessingInterfaceOnCurrentPage(BlessingType blessingType)
-        {
-            try
-            {
-                dynamic p = GameAssets.CurrentPage;
+		public static void RefreshBlessingInterfaceOnCurrentPage(BlessingType blessingType)
+		{
+			try
+			{
+				dynamic p = GameAssets.CurrentPage;
 
-                HeroStatsPage statsPage = p.StatsFrame.Content;
-                statsPage.UpdateBlessingTimer();
+				HeroStatsPage statsPage = p.StatsFrame.Content;
+				statsPage.UpdateBlessingTimer();
 
-                switch (blessingType)
-                {
-                    case BlessingType.ClickDamage:
-                        statsPage.GenerateStatValueDamageToolTip();
-                        break;
+				switch (blessingType)
+				{
+					case BlessingType.ClickDamage:
+						statsPage.GenerateStatValueDamageToolTip();
+						break;
 
-                    case BlessingType.CritChance or BlessingType.CritDamage:
-                        statsPage.GenerateStatValueCritToolTip();
-                        break;
+					case BlessingType.CritChance or BlessingType.CritDamage:
+						statsPage.GenerateStatValueCritToolTip();
+						break;
 
-                    case BlessingType.PoisonDamage:
-                        statsPage.GenerateStatValuePoisonToolTip();
-                        break;
+					case BlessingType.PoisonDamage:
+						statsPage.GenerateStatValuePoisonToolTip();
+						break;
 
-                    case BlessingType.AuraDamage or BlessingType.AuraSpeed:
-                        statsPage.GenerateStatValueAuraToolTip();
-                        break;
-                }
-            }
-            catch (RuntimeBinderException)
-            {
-                // No stats frame on this page!
-                // Best solution according to:
-                // https://stackoverflow.com/a/5768449/14770235
-            }
-            catch (NullReferenceException)
-            {
-                // This might be necessary instead of the above with the new approach.
-            }
-        }
+					case BlessingType.AuraDamage or BlessingType.AuraSpeed:
+						statsPage.GenerateStatValueAuraToolTip();
+						break;
+				}
+			}
+			catch (RuntimeBinderException)
+			{
+				// No stats frame on this page!
+				// Best solution according to:
+				// https://stackoverflow.com/a/5768449/14770235
+			}
+			catch (NullReferenceException)
+			{
+				// This might be necessary instead of the above with the new approach.
+			}
+		}
 
-        public static void RefreshQuestInterfaceOnCurrentPage()
-        {
-            try
-            {
-                dynamic p = GameAssets.CurrentPage;
+		public static void RefreshQuestInterfaceOnCurrentPage()
+		{
+			try
+			{
+				dynamic p = GameAssets.CurrentPage;
 
-                HeroStatsPage statsPage = p.StatsFrame.Content;
-                statsPage.UpdateQuestTimer();
-            }
-            catch (RuntimeBinderException)
-            {
-                // No stats frame on this page!
-                // Best solution according to:
-                // https://stackoverflow.com/a/5768449/14770235
-            }
-            catch (NullReferenceException)
-            {
-                // This might be necessary instead of the above with the new approach.
-            }
-        }
+				HeroStatsPage statsPage = p.StatsFrame.Content;
+				statsPage.UpdateQuestTimer();
+			}
+			catch (RuntimeBinderException)
+			{
+				// No stats frame on this page!
+				// Best solution according to:
+				// https://stackoverflow.com/a/5768449/14770235
+			}
+			catch (NullReferenceException)
+			{
+				// This might be necessary instead of the above with the new approach.
+			}
+		}
 
-        public static void ChangePage(Page destinationPage, string locationInfoText)
-        {
-            try
-            {
-                dynamic p = GameAssets.CurrentPage;
-                (p.EquipmentFrame.Content as EquipmentPage).SaveScrollbarOffset();
-            }
-            catch (RuntimeBinderException)
-            {
-            }
+		public static void ChangePage(Page destinationPage, string locationInfoText)
+		{
+			try
+			{
+				dynamic p = GameAssets.CurrentPage;
+				(p.EquipmentFrame.Content as EquipmentPage).SaveScrollbarOffset();
+			}
+			catch (RuntimeBinderException)
+			{
+			}
 
-            GameWindow window = Application.Current.MainWindow as GameWindow;
-            window.CurrentFrame.Navigate(destinationPage);
-            window.LocationInfo = locationInfoText;
+			GameWindow window = Application.Current.MainWindow as GameWindow;
+			window.CurrentFrame.Navigate(destinationPage);
+			window.LocationInfo = locationInfoText;
 
-            GameAssets.CurrentPage = destinationPage;
-            RefreshStatsAndEquipmentPanelsOnCurrentPage();
-        }
-    }
+			GameAssets.CurrentPage = destinationPage;
+			RefreshStatsAndEquipmentPanelsOnCurrentPage();
+		}
+	}
 }
