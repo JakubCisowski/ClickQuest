@@ -12,6 +12,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
+		// How much the race-specific Thresholds are reduced.
 		public const double RaceThresholdReduction = 0.5;
 
 		// Base SellRatio value per point of SpecTrading Buff.
