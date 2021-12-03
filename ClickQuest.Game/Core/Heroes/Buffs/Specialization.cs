@@ -12,6 +12,8 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
+		public const double RaceThresholdReduction = 0.5;
+
 		// Base SellRatio value per point of SpecTrading Buff.
 		public const double SpecTradingRatioIncreasePerBuffValue = 0.01;
 
@@ -25,7 +27,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		public const int SpecQuestingBuffLimit = 50;
 
 		// Const buff value for reaching every threshold.
-		public const int SpecBlessingBuffBonus = 15; // Increases blessings duration in seconds. <Base - 0>
+		public const int SpecBlessingBuffBonus = 5; // Increases blessings duration in seconds. <Base - 0>
 		public const int SpecClickingBuffBonus = 1; // Increases click damage (after effects like crit, poison are applied - const value) <Base - 0>
 		public const int SpecCraftingBuffBonus = 1; // Increases crafting rarity limit. <Base - 1> <Limit - 5>
 		public const int SpecTradingBuffBonus = 1; // Increases shop offer size and material selling ratio by 1% <Base - 5>
@@ -62,12 +64,12 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		public void UpdateThresholds()
 		{
 			// Buff gains thresholds.
-			SpecializationThresholds[SpecializationType.Blessing] = 10; // Amount increases every time a Blessing is bought.
+			SpecializationThresholds[SpecializationType.Blessing] = 16; // Amount increases every time a Blessing is bought.
 			SpecializationThresholds[SpecializationType.Clicking] = 1000; // Amount increases every time user clicks on monster or boss.
 			SpecializationThresholds[SpecializationType.Crafting] = 10; // Amount increases every time an artifact is crafted using recipe.
-			SpecializationThresholds[SpecializationType.Trading] = 10; // Amount increases every time a Recipe is bought or Material is sold.
-			SpecializationThresholds[SpecializationType.Melting] = 10; // Amount increases every time a material is melted.
-			SpecializationThresholds[SpecializationType.Questing] = 10; // Amount increases every time a quest is completed.
+			SpecializationThresholds[SpecializationType.Trading] = 100; // Amount increases every time a Recipe is bought or Material is sold.
+			SpecializationThresholds[SpecializationType.Melting] = 100; // Amount increases every time a material is melted.
+			SpecializationThresholds[SpecializationType.Questing] = 16; // Amount increases every time a quest is completed.
 			SpecializationThresholds[SpecializationType.Dungeon] = 10; // Amount increases every time a dungeon is finished.
 
 			// Changes that depend on hero class.
@@ -75,20 +77,20 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 			switch (User.Instance.CurrentHero?.HeroRace)
 			{
 				case HeroRace.Human:
-					SpecializationThresholds[SpecializationType.Crafting] = 5;
-					SpecializationThresholds[SpecializationType.Trading] = 5;
+					SpecializationThresholds[SpecializationType.Crafting] = (int) (Math.Ceiling(SpecializationThresholds[SpecializationType.Crafting] * RaceThresholdReduction));
+					SpecializationThresholds[SpecializationType.Trading] = (int) (Math.Ceiling(SpecializationThresholds[SpecializationType.Trading] * RaceThresholdReduction));
 
 					break;
 
 				case HeroRace.Elf:
-					SpecializationThresholds[SpecializationType.Questing] = 5;
-					SpecializationThresholds[SpecializationType.Blessing] = 5;
+					SpecializationThresholds[SpecializationType.Questing] = (int) (Math.Ceiling(SpecializationThresholds[SpecializationType.Questing] * RaceThresholdReduction));
+					SpecializationThresholds[SpecializationType.Blessing] = (int) (Math.Ceiling(SpecializationThresholds[SpecializationType.Blessing] * RaceThresholdReduction));
 
 					break;
 
 				case HeroRace.Dwarf:
-					SpecializationThresholds[SpecializationType.Melting] = 5;
-					SpecializationThresholds[SpecializationType.Dungeon] = 5;
+					SpecializationThresholds[SpecializationType.Melting] = (int) (Math.Ceiling(SpecializationThresholds[SpecializationType.Melting] * RaceThresholdReduction));
+					SpecializationThresholds[SpecializationType.Dungeon] = (int) (Math.Ceiling(SpecializationThresholds[SpecializationType.Dungeon] * RaceThresholdReduction));
 
 					break;
 			}
