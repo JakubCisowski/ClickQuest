@@ -219,7 +219,7 @@ namespace ClickQuest.Game.Core.Heroes
 			switch (HeroClass)
 			{
 				case HeroClass.Slayer:
-					ClickDamage = 2;
+					ClickDamage = 10;
 					CritChance = 0.25;
 					CritChancePerLevel = 0.004;
 					PoisonDamage = 0;
@@ -227,7 +227,7 @@ namespace ClickQuest.Game.Core.Heroes
 					break;
 
 				case HeroClass.Venom:
-					ClickDamage = 2;
+					ClickDamage = 10;
 					CritChance = 0;
 					CritChancePerLevel = 0;
 					PoisonDamage = 1;
