@@ -81,27 +81,13 @@ namespace ClickQuest.Game.Core.Items
 		public static List<double> CreateRarityChancesList(int monsterHealth)
 		{
 			var dungeonKeyRarityChances = new List<double>();
-			double emptyLootChance = 1;
-			double dungeonKeyRarity0Chance = 0;
-			double dungeonKeyRarity1Chance = 0;
-			double dungeonKeyRarity2Chance = 0;
-			double dungeonKeyRarity3Chance = 0;
-			double dungeonKeyRarity4Chance = 0;
-			double dungeonKeyRarity5Chance = 0;
-
-			// Set dungeon key drop rates.
-			if (monsterHealth < 100)
-			{
-				emptyLootChance = 0.05000;
-				dungeonKeyRarity0Chance = 0.8000;
-				dungeonKeyRarity1Chance = 0.1500;
-			}
-			else if (monsterHealth < 200)
-			{
-				emptyLootChance = 0.05000;
-				dungeonKeyRarity0Chance = 0.4500;
-				dungeonKeyRarity1Chance = 0.5000;
-			}
+			const double dungeonKeyRarity0Chance = 0.0048;
+			const double dungeonKeyRarity1Chance = 0.0039;
+			const double dungeonKeyRarity2Chance = 0.0024;
+			const double dungeonKeyRarity3Chance = 0.0010;
+			const double dungeonKeyRarity4Chance = 0.0003;
+			const double dungeonKeyRarity5Chance = 0.0001;
+			const double emptyLootChance = 1 - dungeonKeyRarity0Chance - dungeonKeyRarity1Chance - dungeonKeyRarity2Chance - dungeonKeyRarity3Chance - dungeonKeyRarity4Chance - dungeonKeyRarity5Chance;
 
 			// Set drop rates in list for randomizing algorithm.
 			// Note that index 0 is for empty loot, rarities start with index 1 up to 6.
