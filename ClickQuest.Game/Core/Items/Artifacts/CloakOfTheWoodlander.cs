@@ -1,6 +1,6 @@
 ﻿namespace ClickQuest.Game.Core.Items.Artifacts
 {
-	public class CloakOfTheWoodlander
-	{
-	}
+    public class CloakOfTheWoodlander
+    {
+    }
 }

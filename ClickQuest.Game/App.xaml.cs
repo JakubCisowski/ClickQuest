@@ -1,44 +1,44 @@
-﻿using System;
-using System.Globalization;
-using System.Windows;
-using ClickQuest.Game.Core.GameData;
+﻿using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Data;
 using ClickQuest.Game.UserInterface.Pages;
 using ClickQuest.Game.UserInterface.Windows;
+using System;
+using System.Globalization;
+using System.Windows;
 
 namespace ClickQuest.Game
 {
-	public partial class App : Application
-	{
-		protected void Application_Startup(object sender, StartupEventArgs e)
-		{
-			// Set crash logs output to Logs - any unhandled exceptions will be saved to a text file locally.
-			// Release only, because we want to see Exceptions in IDE during development.
+    public partial class App : Application
+    {
+        protected void Application_Startup(object sender, StartupEventArgs e)
+        {
+            // Set crash logs output to Logs - any unhandled exceptions will be saved to a text file locally.
+            // Release only, because we want to see Exceptions in IDE during development.
 #if RELEASE
 			Application.Current.DispatcherUnhandledException += OnUnhandledException;
 #endif
 
-			// Set default culture for all threads for this application (affects date and string formats, e.g. periods instead of commas)
-			CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
-			CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-			CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+            // Set default culture for all threads for this application (affects date and string formats, e.g. periods instead of commas)
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
-			// Load JSONs.
-			GameAssetsLoader.Load();
+            // Load JSONs.
+            GameAssetsLoader.Load();
 
-			GameWindow gameWindow = new GameWindow();
-			Current.MainWindow = gameWindow;
-			gameWindow.Show();
+            GameWindow gameWindow = new GameWindow();
+            Current.MainWindow = gameWindow;
+            gameWindow.Show();
 
-			UserDataLoader.Load();
+            UserDataLoader.Load();
 
-			(GameAssets.Pages["MainMenu"] as MainMenuPage).UpdateCreateHeroButton();
-			(GameAssets.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
+            (GameAssets.Pages["MainMenu"] as MainMenuPage).UpdateCreateHeroButton();
+            (GameAssets.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
 
-			// Save current time as the application's start time (for achievement tracking).
-			User.SessionStartDate = DateTime.Now;
-		}
+            // Save current time as the application's start time (for achievement tracking).
+            User.SessionStartDate = DateTime.Now;
+        }
 
 #if RELEASE
 		private static void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs args)
@@ -77,5 +77,5 @@ namespace ClickQuest.Game
 			AlertBox.Show("There was an error with the game. A log file has been generated in the Logs folder. To help us fix the issue, you can contribute the log file at X. We apologize for the inconvenience.\nYour data has been saved.", MessageBoxButton.OK);
 		}
 #endif
-	}
+    }
 }
