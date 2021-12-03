@@ -241,8 +241,8 @@ namespace ClickQuest.ContentManager.Validation
 
 			CheckCollectionPositiveValues("Blessings_Buff", GameContent.Blessings.Select(x => x.Buff));
 
-			CheckCollectionPositiveValues("QuestRewardPatterns_Quantity", GameContent.Quests.SelectMany(x => x.QuestRewardPatterns).Select(y=>y.Quantity));
-			CheckCollectionPositiveValues("IngredientPatterns_Quantity", GameContent.Recipes.SelectMany(x => x.IngredientPatterns).Select(y=>y.Quantity));
+			CheckCollectionPositiveValues("QuestRewardPatterns_Quantity", GameContent.Quests.SelectMany(x => x.QuestRewardPatterns).Select(y => y.Quantity));
+			CheckCollectionPositiveValues("IngredientPatterns_Quantity", GameContent.Recipes.SelectMany(x => x.IngredientPatterns).Select(y => y.Quantity));
 		}
 
 		private static void CheckCollectionPositiveValues(string collectionValuesInfo, IEnumerable<int> valuesCollection)
@@ -267,21 +267,21 @@ namespace ClickQuest.ContentManager.Validation
 				string message = "Level requirement of region is invalid";
 				Logger.Log(message);
 			}
-		}	
+		}
 
 		private static void CheckRewardBlessingsQuantity()
 		{
 			foreach (var boss in GameContent.Bosses)
 			{
-				var blessingPatterns = boss.BossLootPatterns.Where(pattern=>pattern.BossLootType == RewardType.Blessing);
-				
-				if (blessingPatterns.Any(pattern=>pattern.Frequencies.Any(frequency=>frequency > 1)))
+				var blessingPatterns = boss.BossLootPatterns.Where(pattern => pattern.BossLootType == RewardType.Blessing);
+
+				if (blessingPatterns.Any(pattern => pattern.Frequencies.Any(frequency => frequency > 1)))
 				{
 					string message = $"More than one of the same Blessing can be dropped from Boss of Id {boss.Id}";
 					Logger.Log(message);
 				}
 
-				if(blessingPatterns.Count() > 1)
+				if (blessingPatterns.Count() > 1)
 				{
 					string message = $"More than one Blessing can be dropped from Boss of Id {boss.Id}";
 					Logger.Log(message);
@@ -290,15 +290,15 @@ namespace ClickQuest.ContentManager.Validation
 
 			foreach (var quest in GameContent.Quests)
 			{
-				var blessingPatterns = quest.QuestRewardPatterns.Where(pattern=>pattern.QuestRewardType == RewardType.Blessing);
+				var blessingPatterns = quest.QuestRewardPatterns.Where(pattern => pattern.QuestRewardType == RewardType.Blessing);
 
-				if (blessingPatterns.Any(pattern=>pattern.Quantity > 1))
+				if (blessingPatterns.Any(pattern => pattern.Quantity > 1))
 				{
 					string message = $"More than one of the same Blessing is awarded from Quest of Id {quest.Id}";
 					Logger.Log(message);
 				}
 
-				if(blessingPatterns.Count() > 1)
+				if (blessingPatterns.Count() > 1)
 				{
 					string message = $"More than one Blessing is awarded from Quest of Id {quest.Id}";
 					Logger.Log(message);
@@ -324,9 +324,9 @@ namespace ClickQuest.ContentManager.Validation
 		{
 			foreach (var monster in GameContent.Monsters)
 			{
-				var monsterBlessingPatterns = monster.MonsterLootPatterns.Where(pattern=>pattern.MonsterLootType == RewardType.Blessing);
+				var monsterBlessingPatterns = monster.MonsterLootPatterns.Where(pattern => pattern.MonsterLootType == RewardType.Blessing);
 
-				if(monsterBlessingPatterns.Count() != 0)
+				if (monsterBlessingPatterns.Count() != 0)
 				{
 					string message = $"Blessing can be dropped from Monster of Id {monster.Id} (blessing drops from monsters are not handled)";
 					Logger.Log(message);

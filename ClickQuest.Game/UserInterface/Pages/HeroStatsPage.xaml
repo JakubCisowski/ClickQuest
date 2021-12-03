@@ -7,22 +7,22 @@
       mc:Ignorable="d" Title="Stats"
       Height="715" Width="341" Background="Transparent">
 
-    <!-- Material design resources for progres bar -->
-    <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="LightBlue" SecondaryColor="Lime" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ProgressBar.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Page.Resources>
+	<!-- Material design resources for progres bar -->
+	<Page.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="LightBlue" SecondaryColor="Lime" />
+				<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ProgressBar.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Page.Resources>
 
-    <!-- Stats panel -->
-    <Border Background="{StaticResource BrushAccent0}" BorderThickness="3" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" Margin="1" Padding="6">
-	    
-	    <StackPanel x:Name="HeroStatsPanel" Orientation="Vertical" HorizontalAlignment="Left" Width="323">
-            <!-- Hero info block -->
-            <TextBlock x:Name="HeroNameBlock" FontSize="22" TextAlignment="Center">
+	<!-- Stats panel -->
+	<Border Background="{StaticResource BrushAccent0}" BorderThickness="3" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" Margin="1" Padding="6">
+
+		<StackPanel x:Name="HeroStatsPanel" Orientation="Vertical" HorizontalAlignment="Left" Width="323">
+			<!-- Hero info block -->
+			<TextBlock x:Name="HeroNameBlock" FontSize="22" TextAlignment="Center">
 				<!-- Hero name text-->
 				<Run Text="{Binding Path=Name}" FontFamily="{StaticResource FontFancy}" />
 				<LineBreak />
@@ -32,57 +32,57 @@
 				<Run Text="{Binding Mode=OneWay, Path=ThisHeroRace}" FontWeight="Normal" FontStyle="Italic" />
 				<!-- Hero class text-->
 				<Run x:Name="RunHeroClass" Text="{Binding Mode=OneWay, Path=ThisHeroClass}" FontWeight="Normal" FontStyle="Italic" />
-            </TextBlock>
+			</TextBlock>
 
-            <!-- Experience grid -->
-            <Grid ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
-                <!-- Experience progress bar ToolTip -->
-                <Grid.ToolTip>
-                    <ToolTip Style="{StaticResource ToolTipSimple}">
-                        <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+			<!-- Experience grid -->
+			<Grid ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
+				<!-- Experience progress bar ToolTip -->
+				<Grid.ToolTip>
+					<ToolTip Style="{StaticResource ToolTipSimple}">
+						<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
 							<Run Text="Experience: " />
-							<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='\{0\}'}" FontFamily="{StaticResource FontRegularDemiBold}"/>
+							<Run Text="{Binding Mode=OneWay, Path=Experience, StringFormat='\{0\}'}" FontFamily="{StaticResource FontRegularDemiBold}" />
 							<Run Text=" / " />
-							<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" FontFamily="{StaticResource FontRegularDemiBold}"/>
+							<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvlTotal, StringFormat='\{0\}'}" FontFamily="{StaticResource FontRegularDemiBold}" />
 							<LineBreak />
-							<Run Text="To next lvl: "/>
-							<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='\{0\}'}" FontFamily="{StaticResource FontRegularDemiBold}"/>
-                        </TextBlock>
-                    </ToolTip>
-                </Grid.ToolTip>
+							<Run Text="To next lvl: " />
+							<Run Text="{Binding Mode=OneWay, Path=ExperienceToNextLvl, StringFormat='\{0\}'}" FontFamily="{StaticResource FontRegularDemiBold}" />
+						</TextBlock>
+					</ToolTip>
+				</Grid.ToolTip>
 
-                <!-- Experience progress bar -->
-                <ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16" materialDesign:TransitionAssist.DisableTransitions="True" Foreground="{StaticResource BrushAccent3}" Background="{StaticResource BrushGray5}" BorderBrush="{StaticResource BrushBlack}" BorderThickness="0" />
+				<!-- Experience progress bar -->
+				<ProgressBar Style="{StaticResource MaterialDesignLinearProgressBar}" Value="{Binding Mode=OneWay, Path=ExperienceProgress, UpdateSourceTrigger=PropertyChanged}" Height="16" materialDesign:TransitionAssist.DisableTransitions="True" Foreground="{StaticResource BrushAccent3}" Background="{StaticResource BrushGray5}" BorderBrush="{StaticResource BrushBlack}" BorderThickness="0" />
 
-                <!-- Progress text on experience progress bar -->
-                <TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource BrushWhite}" FontWeight="Bold" />
-            </Grid>
+				<!-- Progress text on experience progress bar -->
+				<TextBlock Text="{Binding ExperienceProgress, StringFormat='\{0\}%'}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource BrushWhite}" FontWeight="Bold" />
+			</Grid>
 
-            <Separator Height="2" Width="200" Margin="10" />
+			<Separator Height="2" Width="200" Margin="10" />
 
-            <!-- Hero stats grid -->
-            <Grid x:Name="MainGrid">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+			<!-- Hero stats grid -->
+			<Grid x:Name="MainGrid">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="4*" />
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="4*" />
+					<ColumnDefinition Width="2*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
 
-                <!-- Click damage panel-->
-                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
-                    <!-- Click damage info ToolTip -->
-                    <StackPanel.ToolTip>
-                        <ToolTip BorderBrush="{StaticResource BrushDamageTypeNormal}">
-                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-								<Run Text="Click Damage" FontSize="{StaticResource FontSizeToolTipName}"/>
+				<!-- Click damage panel-->
+				<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
+					<!-- Click damage info ToolTip -->
+					<StackPanel.ToolTip>
+						<ToolTip BorderBrush="{StaticResource BrushDamageTypeNormal}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="Click Damage" FontSize="{StaticResource FontSizeToolTipName}" />
 
 								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
@@ -90,35 +90,35 @@
 								<Run Text="Damage you deal with every click on a monster/boss" />
 								<LineBreak />
 								<LineBreak />
-								<Run Text="You get bonus click damage when you level up" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}"/>
+								<Run Text="You get bonus click damage when you level up" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}" />
 
 								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
 
-								<Run Text="You can increase damage by: using blessings or damage artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
+								<Run Text="You can increase damage by: using blessings or damage artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}" />
 								<LineBreak />
 
-								<Run Text="There is also on-hit damage from Clicker Specialization, but it doesn't get multiplied upon critting" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
-                            </TextBlock>
-                        </ToolTip>
-                    </StackPanel.ToolTip>
+								<Run Text="There is also on-hit damage from Clicker Specialization, but it doesn't get multiplied upon critting" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}" />
+							</TextBlock>
+						</ToolTip>
+					</StackPanel.ToolTip>
 
-                    <!-- Click damage icon-->
-                    <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="{StaticResource BrushDamageTypeNormal}" VerticalAlignment="Center" />
-                    <!-- Click damage text-->
-                    <TextBlock FontSize="18" Margin="3" Text="Damage:" VerticalAlignment="Center" />
-                </StackPanel>
+					<!-- Click damage icon-->
+					<materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="{StaticResource BrushDamageTypeNormal}" VerticalAlignment="Center" />
+					<!-- Click damage text-->
+					<TextBlock FontSize="18" Margin="3" Text="Damage:" VerticalAlignment="Center" />
+				</StackPanel>
 
-                <!-- Click damage value (binding) -->
+				<!-- Click damage value (binding) -->
 				<TextBlock x:Name="ClickDamageBlock" Grid.Row="0" Grid.Column="2" FontSize="18" Margin="3" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding Path=ClickDamage, StringFormat='\{0\}'}" />
 
-                <!-- Crit panel -->
-                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
-                    <!-- Crit info ToolTip -->
-                    <StackPanel.ToolTip>
-                        <ToolTip BorderBrush="{StaticResource BrushDamageTypeCritical}" BorderThickness="1">
-                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-								<Run Text="Critical Clicks" FontSize="{StaticResource FontSizeToolTipName}"/>
+				<!-- Crit panel -->
+				<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
+					<!-- Crit info ToolTip -->
+					<StackPanel.ToolTip>
+						<ToolTip BorderBrush="{StaticResource BrushDamageTypeCritical}" BorderThickness="1">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="Critical Clicks" FontSize="{StaticResource FontSizeToolTipName}" />
 								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
 
@@ -126,35 +126,35 @@
 								<LineBreak />
 								<LineBreak />
 
-								<Run Text="Default crit damage is 200%" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}"/>
+								<Run Text="Default crit damage is 200%" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}" />
 
 								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
 
-                                <Run Text="You can increase crit chance and crit damage by: using blessings or crit artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
-                                <LineBreak />
+								<Run Text="You can increase crit chance and crit damage by: using blessings or crit artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}" />
+								<LineBreak />
 
-								<Run Text="This does not multiply damage from Clicker Specialization or artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
-                            </TextBlock>
-                        </ToolTip>
-                    </StackPanel.ToolTip>
+								<Run Text="This does not multiply damage from Clicker Specialization or artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}" />
+							</TextBlock>
+						</ToolTip>
+					</StackPanel.ToolTip>
 
-                    <!-- Crit icon-->
-                    <materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefaultClick" Foreground="{StaticResource BrushDamageTypeCritical}" VerticalAlignment="Center" />
-                    <!-- Crit text-->
-                    <TextBlock Text="Crit chance:" FontSize="18" Margin="3" VerticalAlignment="Center" />
-                </StackPanel>
+					<!-- Crit icon-->
+					<materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefaultClick" Foreground="{StaticResource BrushDamageTypeCritical}" VerticalAlignment="Center" />
+					<!-- Crit text-->
+					<TextBlock Text="Crit chance:" FontSize="18" Margin="3" VerticalAlignment="Center" />
+				</StackPanel>
 
-                <!-- Crit value (binding) -->
+				<!-- Crit value (binding) -->
 				<TextBlock x:Name="CritChanceBlock" Grid.Row="1" Grid.Column="2" Text="{Binding Path=CritChanceText, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" TextAlignment="Right" />
 
-                <!-- Poison damage panel -->
-                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
-                    <!-- Poison damage ToolTip -->
-                    <StackPanel.ToolTip>
-                        <ToolTip BorderBrush="{StaticResource BrushDamageTypePoison}" BorderThickness="1">
-                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-								<Run Text="Poison Damage" FontSize="{StaticResource FontSizeToolTipName}"/>
+				<!-- Poison damage panel -->
+				<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
+					<!-- Poison damage ToolTip -->
+					<StackPanel.ToolTip>
+						<ToolTip BorderBrush="{StaticResource BrushDamageTypePoison}" BorderThickness="1">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="Poison Damage" FontSize="{StaticResource FontSizeToolTipName}" />
 								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
 
@@ -162,146 +162,146 @@
 								<LineBreak />
 								<LineBreak />
 
-								<Run Text="There are 5 ticks over 2.5s" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}"/>
+								<Run Text="There are 5 ticks over 2.5s" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}" />
 
 								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
 
-								<Run Text="You can increase poison damage by: using blessings or poison artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
-                            </TextBlock>
-                        </ToolTip>
-                    </StackPanel.ToolTip>
+								<Run Text="You can increase poison damage by: using blessings or poison artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}" />
+							</TextBlock>
+						</ToolTip>
+					</StackPanel.ToolTip>
 
-                    <!-- Poison damage icon-->
-                    <materialDesign:PackIcon Width="22" Height="22" Kind="Water" Foreground="{StaticResource BrushDamageTypePoison}" VerticalAlignment="Center" />
-                    <!-- Poison damage text-->
-                    <TextBlock Text="Poison damage:" FontSize="18" Margin="3" VerticalAlignment="Center" />
-                </StackPanel>
+					<!-- Poison damage icon-->
+					<materialDesign:PackIcon Width="22" Height="22" Kind="Water" Foreground="{StaticResource BrushDamageTypePoison}" VerticalAlignment="Center" />
+					<!-- Poison damage text-->
+					<TextBlock Text="Poison damage:" FontSize="18" Margin="3" VerticalAlignment="Center" />
+				</StackPanel>
 
-                <!-- Poison damage value (binding) -->
+				<!-- Poison damage value (binding) -->
 				<TextBlock x:Name="PoisonDamageBlock" Grid.Row="2" Grid.Column="2" Text="{Binding Path=PoisonDamage, StringFormat='\{0\}'}" FontSize="18" Margin="3" VerticalAlignment="Center" TextAlignment="Right" />
 
 				<!-- Aura panel -->
-                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
-                    <!-- Aura ToolTip -->
-                    <StackPanel.ToolTip>
-                        <ToolTip BorderBrush="{StaticResource BrushDamageTypeAura}" BorderThickness="1">
-                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-								<Run Text="Aura" FontSize="{StaticResource FontSizeToolTipName}"/>
+				<StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" ToolTipService.ShowDuration="20000" ToolTipService.InitialShowDelay="100" Background="Transparent">
+					<!-- Aura ToolTip -->
+					<StackPanel.ToolTip>
+						<ToolTip BorderBrush="{StaticResource BrushDamageTypeAura}" BorderThickness="1">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+								<Run Text="Aura" FontSize="{StaticResource FontSizeToolTipName}" />
 								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
 
 								<Run Text="Idle damage you deal while fighting monsters" />
 								<LineBreak />
 								<LineBreak />
-								<Run Text="Doesn't work in dungeons" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}"/>
+								<Run Text="Doesn't work in dungeons" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}" />
 								<LineBreak />
-								<Run Text="Damage scales with monster's max health" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}"/>
-								
+								<Run Text="Damage scales with monster's max health" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray3}" />
+
 								<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 								<LineBreak />
 
-								<Run Text="You can increase Aura DPS by: using blessings or Aura artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
+								<Run Text="You can increase Aura DPS by: using blessings or Aura artifacts" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}" />
 								<LineBreak />
-								<Run Text="Also, you get bonus Aura DPS when you level up" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
-                            </TextBlock>
-                        </ToolTip>
-                    </StackPanel.ToolTip>
+								<Run Text="Also, you get bonus Aura DPS when you level up" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}" />
+							</TextBlock>
+						</ToolTip>
+					</StackPanel.ToolTip>
 
-                    <!-- Aura icon-->
-                    <materialDesign:PackIcon Width="22" Height="22" Kind="Brightness5" Foreground="{StaticResource BrushDamageTypeAura}" VerticalAlignment="Center" />
-                    <!-- Aura text-->
-                    <TextBlock Text="Aura DPS:" FontSize="18" Margin="3" VerticalAlignment="Center" />
-                </StackPanel>
+					<!-- Aura icon-->
+					<materialDesign:PackIcon Width="22" Height="22" Kind="Brightness5" Foreground="{StaticResource BrushDamageTypeAura}" VerticalAlignment="Center" />
+					<!-- Aura text-->
+					<TextBlock Text="Aura DPS:" FontSize="18" Margin="3" VerticalAlignment="Center" />
+				</StackPanel>
 
-                <!-- Aura value (binding) -->
+				<!-- Aura value (binding) -->
 				<TextBlock x:Name="AuraDamageBlock" Grid.Row="3" Grid.Column="2" Text="{Binding Path=AuraDpsText, Mode=OneWay}" FontSize="18" Margin="3" VerticalAlignment="Center" TextAlignment="Right" />
-            </Grid>
+			</Grid>
 
-            <Separator Height="2" Width="200" Margin="10" />
+			<Separator Height="2" Width="200" Margin="10" />
 
-            <!-- Gold panel -->
-            <Grid x:Name="GoldGrid">
-                <StackPanel x:Name="GoldPanel" Orientation="Horizontal" HorizontalAlignment="Center" Background="Transparent">
-                    <!-- Gold icon-->
-                    <materialDesign:PackIcon Width="22" Height="22" Kind="CheckboxMultipleBlankCircle" Foreground="{StaticResource BrushGold}" VerticalAlignment="Center" />
-                    <!-- Gold text-->
-                    <TextBlock x:Name="GoldBlock" FontSize="18" Margin="3" VerticalAlignment="Center" />
-                </StackPanel>
-            </Grid>
+			<!-- Gold panel -->
+			<Grid x:Name="GoldGrid">
+				<StackPanel x:Name="GoldPanel" Orientation="Horizontal" HorizontalAlignment="Center" Background="Transparent">
+					<!-- Gold icon-->
+					<materialDesign:PackIcon Width="22" Height="22" Kind="CheckboxMultipleBlankCircle" Foreground="{StaticResource BrushGold}" VerticalAlignment="Center" />
+					<!-- Gold text-->
+					<TextBlock x:Name="GoldBlock" FontSize="18" Margin="3" VerticalAlignment="Center" />
+				</StackPanel>
+			</Grid>
 
-            <!-- Ingots & Dungeon keys panel-->
-            <StackPanel>
-                <Grid x:Name="IngotKeyGrid">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+			<!-- Ingots & Dungeon keys panel-->
+			<StackPanel>
+				<Grid x:Name="IngotKeyGrid">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                </Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+				</Grid>
 
-                <!-- [Here ingots and dungeon keys are dyanmically generated] -->
-            </StackPanel>
+				<!-- [Here ingots and dungeon keys are dyanmically generated] -->
+			</StackPanel>
 
-            <Separator Height="2" Width="200" Margin="10" />
+			<Separator Height="2" Width="200" Margin="10" />
 
-            <!-- Specializations text -->
-            <TextBlock Text="Specializations" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" Margin="0,3,0,10" />
+			<!-- Specializations text -->
+			<TextBlock Text="Specializations" FontSize="20" FontWeight="Medium" HorizontalAlignment="Center" Margin="0,3,0,10" />
 
-            <!-- Specializations grid-->
-            <Grid x:Name="SpecializationsGrid">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <!-- [Here specializations info is dyanmically generated] -->
-            </Grid>
+			<!-- Specializations grid-->
+			<Grid x:Name="SpecializationsGrid">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<!-- [Here specializations info is dyanmically generated] -->
+			</Grid>
 
-            <Separator Height="2" Width="200" Margin="5" />
+			<Separator Height="2" Width="200" Margin="5" />
 
-            <!-- Quests and blessing timers -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+			<!-- Quests and blessing timers -->
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
 
-                <!-- Blessing timer-->
-                <StackPanel Grid.Column="0" HorizontalAlignment="Center" Margin="5,0,5,0" >
-                    <!-- Icon -->
-                    <materialDesign:PackIcon Width="30" Height="30" Kind="BookCross" Foreground="{StaticResource BrushBlack}" HorizontalAlignment="Center" />
-                    <!-- Name and timer -->
-                    <TextBlock x:Name="BlessingDurationBlock" Text="" TextAlignment="Center" FontSize="14" />
-                </StackPanel>
+				<!-- Blessing timer-->
+				<StackPanel Grid.Column="0" HorizontalAlignment="Center" Margin="5,0,5,0">
+					<!-- Icon -->
+					<materialDesign:PackIcon Width="30" Height="30" Kind="BookCross" Foreground="{StaticResource BrushBlack}" HorizontalAlignment="Center" />
+					<!-- Name and timer -->
+					<TextBlock x:Name="BlessingDurationBlock" Text="" TextAlignment="Center" FontSize="14" />
+				</StackPanel>
 
-                <Separator Grid.Column="1" Width="170" Height="2" >
-                    <Separator.LayoutTransform>
-                        <RotateTransform Angle="90" />
-                    </Separator.LayoutTransform>
-                </Separator>
+				<Separator Grid.Column="1" Width="170" Height="2">
+					<Separator.LayoutTransform>
+						<RotateTransform Angle="90" />
+					</Separator.LayoutTransform>
+				</Separator>
 
-                <!-- Quest timer-->
-                <StackPanel Grid.Column="2" HorizontalAlignment="Center" Margin="5,0,5,0" >
-                    <!-- Icon -->
-                    <materialDesign:PackIcon Width="30" Height="30" Kind="ProgressQuestion" Foreground="{StaticResource BrushBlack}" HorizontalAlignment="Center" />
-                    <!-- Name and timer -->
+				<!-- Quest timer-->
+				<StackPanel Grid.Column="2" HorizontalAlignment="Center" Margin="5,0,5,0">
+					<!-- Icon -->
+					<materialDesign:PackIcon Width="30" Height="30" Kind="ProgressQuestion" Foreground="{StaticResource BrushBlack}" HorizontalAlignment="Center" />
+					<!-- Name and timer -->
 					<TextBlock x:Name="QuestDurationBlock" Text="" TextAlignment="Center" FontSize="14" />
 				</StackPanel>
-            </Grid>
-        </StackPanel>
-    </Border>
+			</Grid>
+		</StackPanel>
+	</Border>
 </Page>

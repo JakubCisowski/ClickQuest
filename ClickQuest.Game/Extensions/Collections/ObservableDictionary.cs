@@ -103,7 +103,13 @@ namespace ClickQuest.Game.Extensions.Collections
 			return _dictionary.ContainsKey(key);
 		}
 
-		public ICollection<TKey> Keys => _dictionary.Keys;
+		public ICollection<TKey> Keys
+		{
+			get
+			{
+				return _dictionary.Keys;
+			}
+		}
 
 		public bool Remove(TKey key)
 		{

@@ -31,8 +31,6 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			// Add controls to Dictionary for easier navigation.
 			_controls.Clear();
 
-			double gridHeight = ActualHeight;
-			double gridWidth = ActualWidth;
 			var panel = new StackPanel
 			{
 				Name = "MainInfoPanel"

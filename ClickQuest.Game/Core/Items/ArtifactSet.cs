@@ -6,7 +6,7 @@ namespace ClickQuest.Game.Core.Items
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public List<int> ArtifactIds{ get; set; }
+		public List<int> ArtifactIds { get; set; }
 
 		public ArtifactSet()
 		{

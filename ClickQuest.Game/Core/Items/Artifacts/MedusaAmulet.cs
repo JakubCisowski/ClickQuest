@@ -1,5 +1,4 @@
 ﻿using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Places;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.UserInterface.Pages;

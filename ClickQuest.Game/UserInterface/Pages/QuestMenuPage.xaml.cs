@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.GameData;
@@ -17,7 +16,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 {
 	public partial class QuestMenuPage : Page
 	{
-		private List<QuestButton> _questButtons;
+		private readonly List<QuestButton> _questButtons;
 
 		private int _currentQuestPosition;
 
@@ -96,11 +95,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				if (User.Instance.Gold >= Quest.RerollGoldCost)
 				{
-					var result = AlertBox.Show("Are you sure you want to reroll your current quests for 100 gold?", MessageBoxButton.YesNo);
+					var result = AlertBox.Show("Are you sure you want to reroll your current quests for 100 gold?");
 
 					if (result == MessageBoxResult.Yes)
 					{
-						(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{Quest.RerollGoldCost}", (SolidColorBrush)this.FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+						(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{Quest.RerollGoldCost}", (SolidColorBrush) FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
 
 						User.Instance.Gold -= Quest.RerollGoldCost;
 
@@ -129,14 +128,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 			QuestPanel.Children.Add(_questButtons[--_currentQuestPosition]);
 
 			RightNavigationButton.IsEnabled = true;
-			RightNavigationButton.Style = (Style)this.FindResource("ButtonStyleGeneral");
+			RightNavigationButton.Style = (Style) FindResource("ButtonStyleGeneral");
 
 			NavigationTextBlock.Text = $"{_currentQuestPosition + 1} / {_questButtons.Count}";
 
 			if (_currentQuestPosition == 0)
 			{
 				LeftNavigationButton.IsEnabled = false;
-				LeftNavigationButton.Style = (Style)this.FindResource("ButtonStyleDisabled");
+				LeftNavigationButton.Style = (Style) FindResource("ButtonStyleDisabled");
 			}
 		}
 
@@ -146,14 +145,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 			QuestPanel.Children.Add(_questButtons[++_currentQuestPosition]);
 
 			LeftNavigationButton.IsEnabled = true;
-			LeftNavigationButton.Style = (Style)this.FindResource("ButtonStyleGeneral");
+			LeftNavigationButton.Style = (Style) FindResource("ButtonStyleGeneral");
 
 			NavigationTextBlock.Text = $"{_currentQuestPosition + 1} / {_questButtons.Count}";
 
 			if (_currentQuestPosition == 2)
 			{
 				RightNavigationButton.IsEnabled = false;
-				RightNavigationButton.Style = (Style)this.FindResource("ButtonStyleDisabled");
+				RightNavigationButton.Style = (Style) FindResource("ButtonStyleDisabled");
 			}
 		}
 	}

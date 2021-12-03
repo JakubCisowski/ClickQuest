@@ -38,8 +38,6 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			double gridHeight = ActualHeight;
-			double gridWidth = ActualWidth;
 			var panel = new StackPanel
 			{
 				Name = "StaticInfoPanel"
@@ -115,13 +113,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				// Set style of each control to MaterialDesignFloatingHint, and set floating hint scale.
 				if (elem.Value is TextBox textBox)
 				{
-					textBox.Style = (Style)FindResource("MaterialDesignOutlinedTextBox");
+					textBox.Style = (Style) FindResource("MaterialDesignOutlinedTextBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 					textBox.GotFocus += TextBox_GotFocus;
 				}
 				else if (elem.Value is ComboBox comboBox)
 				{
-					comboBox.Style = (Style)FindResource("MaterialDesignOutlinedComboBox");
+					comboBox.Style = (Style) FindResource("MaterialDesignOutlinedComboBox");
 					HintAssist.SetFloatingScale(elem.Value, 1.0);
 				}
 
@@ -221,7 +219,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{
@@ -251,7 +249,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				var border = new Border
 				{
 					BorderThickness = new Thickness(0.5),
-					BorderBrush = (SolidColorBrush)FindResource("BrushGray2"),
+					BorderBrush = (SolidColorBrush) FindResource("BrushGray2"),
 					Padding = new Thickness(6),
 					Margin = new Thickness(4)
 				};
@@ -342,7 +340,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Width = 20,
 				Height = 20,
 				Kind = PackIconKind.Edit,
-				Foreground = (SolidColorBrush)FindResource("BrushGray2")
+				Foreground = (SolidColorBrush) FindResource("BrushGray2")
 			};
 
 			editButton.Content = editIcon;
@@ -364,7 +362,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Width = 20,
 				Height = 20,
 				Kind = PackIconKind.DeleteForever,
-				Foreground = (SolidColorBrush)FindResource("BrushGray2")
+				Foreground = (SolidColorBrush) FindResource("BrushGray2")
 			};
 
 			deleteButton.Content = deleteIcon;

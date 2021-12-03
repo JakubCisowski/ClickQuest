@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
 using ClickQuest.Game.Core.Player;
 
@@ -44,9 +42,9 @@ namespace ClickQuest.Game.UserInterface.Controls
 
 		private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-			var newName = RenameTextBox.Text;
-			if (User.Instance.CurrentHero.ArtifactSets.Any(x=>x.Name == newName) && newName != ArtifactSetName)
-		 	{
+			string newName = RenameTextBox.Text;
+			if (User.Instance.CurrentHero.ArtifactSets.Any(x => x.Name == newName) && newName != ArtifactSetName)
+			{
 				AlertBox.Show("An artifact set with this name already exists.", MessageBoxButton.OK);
 				return;
 			}

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
-using System.Windows;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
@@ -12,7 +11,6 @@ using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.UserInterface.Windows;
 using MaterialDesignThemes.Wpf;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 
@@ -84,34 +82,33 @@ namespace ClickQuest.Game.Core.Enemies
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.BossesDefeated, 1);
 
 				GrantVictoryBonuses();
-				
+
 				// Invoke Artifacts with the "on-death" effect.
 				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
 				{
 					equippedArtifact.ArtifactFunctionality.OnKill();
 				}
-				
+
 				InterfaceController.CurrentBossPage.HandleInterfaceAfterBossDeath();
 			}
 		}
 
 		public override void GrantVictoryBonuses()
 		{
-			int damageDealtToBoss = Health - CurrentHealth;
 			// [PRERELEASE]
 			int experienceGained = 10;
 			User.Instance.CurrentHero.GainExperience(experienceGained);
 
 			// Grant boss loot.
 			// 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
-			int threshold = 5 - (int)Math.Ceiling(CurrentHealth / (Health / 5.0));
+			int threshold = 5 - (int) Math.Ceiling(CurrentHealth / (Health / 5.0));
 			// 2. Iterate through every possible loot.
 
 			var lootQueueEntries = new List<LootQueueEntry>();
 
 			foreach (var loot in BossLootPatterns)
 			{
-				int itemIntegerCount = (int)loot.Frequencies[threshold];
+				int itemIntegerCount = (int) loot.Frequencies[threshold];
 
 				double randomizedValue = RNG.Next(1, 10001) / 10000d;
 				if (randomizedValue < loot.Frequencies[threshold] - itemIntegerCount)
@@ -124,9 +121,14 @@ namespace ClickQuest.Game.Core.Enemies
 				{
 					bool isBlessingAccepted = Blessing.AskUserAndSwapBlessing(loot.BossLootId);
 
-					if (!GameAssets.BestiaryEntries.Any(x=>x.EntryType == BestiaryEntryType.BossLoot && x.LootType == RewardType.Blessing && x.Id==loot.BossLootId))
+					if (!GameAssets.BestiaryEntries.Any(x => x.EntryType == BestiaryEntryType.BossLoot && x.LootType == RewardType.Blessing && x.Id == loot.BossLootId))
 					{
-						GameAssets.BestiaryEntries.Add(new BestiaryEntry() { Id = loot.BossLootId, LootType = RewardType.Blessing, EntryType = BestiaryEntryType.BossLoot });
+						GameAssets.BestiaryEntries.Add(new BestiaryEntry
+						{
+							Id = loot.BossLootId,
+							LootType = RewardType.Blessing,
+							EntryType = BestiaryEntryType.BossLoot
+						});
 					}
 
 					if (isBlessingAccepted)
@@ -146,9 +148,14 @@ namespace ClickQuest.Game.Core.Enemies
 				{
 					loot.Item.AddItem(itemIntegerCount);
 
-					if (!GameAssets.BestiaryEntries.Any(x=>x.EntryType == BestiaryEntryType.BossLoot && x.LootType == loot.BossLootType && x.Id==loot.BossLootId))
+					if (!GameAssets.BestiaryEntries.Any(x => x.EntryType == BestiaryEntryType.BossLoot && x.LootType == loot.BossLootType && x.Id == loot.BossLootId))
 					{
-						GameAssets.BestiaryEntries.Add(new BestiaryEntry() { Id = loot.BossLootId, LootType = loot.BossLootType, EntryType = BestiaryEntryType.BossLoot });
+						GameAssets.BestiaryEntries.Add(new BestiaryEntry
+						{
+							Id = loot.BossLootId,
+							LootType = loot.BossLootType,
+							EntryType = BestiaryEntryType.BossLoot
+						});
 					}
 
 					// Start loot animation.

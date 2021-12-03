@@ -6,16 +6,16 @@
 	</ResourceDictionary.MergedDictionaries>
 
 	<ControlTemplate x:Key="ListViewItemVendorTemplate" TargetType="ListBoxItem">
-	
+
 		<Border x:Name="Border" SnapsToDevicePixels="true">
 
-			<GridViewRowPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-			
+			<GridViewRowPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+
 			<Border.Style>
 				<Style TargetType="Border">
 					<Style.Triggers>
 						<Trigger Property="IsMouseOver" Value="True">
-							<Setter Property="Background" Value="{StaticResource BrushAccent3}"/>
+							<Setter Property="Background" Value="{StaticResource BrushAccent3}" />
 						</Trigger>
 					</Style.Triggers>
 				</Style>

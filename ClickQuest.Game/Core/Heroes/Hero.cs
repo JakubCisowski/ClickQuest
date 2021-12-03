@@ -67,9 +67,21 @@ namespace ClickQuest.Game.Core.Heroes
 		public double AuraDamage { get; set; }
 		public double AuraAttackSpeed { get; set; }
 
-		public string ThisHeroClass => HeroClass.ToString();
+		public string ThisHeroClass
+		{
+			get
+			{
+				return HeroClass.ToString();
+			}
+		}
 
-		public string ThisHeroRace => HeroRace.ToString();
+		public string ThisHeroRace
+		{
+			get
+			{
+				return HeroRace.ToString();
+			}
+		}
 
 		public string CritChanceText
 		{
@@ -91,17 +103,53 @@ namespace ClickQuest.Game.Core.Heroes
 			}
 		}
 
-		public int LevelDamageBonus => ClickDamagePerLevel * Level;
+		public int LevelDamageBonus
+		{
+			get
+			{
+				return ClickDamagePerLevel * Level;
+			}
+		}
 
-		public int LevelDamageBonusTotal => ClickDamagePerLevel * Level + 2;
+		public int LevelDamageBonusTotal
+		{
+			get
+			{
+				return ClickDamagePerLevel * Level + 2;
+			}
+		}
 
-		public double LevelCritBonus => Math.Round(CritChancePerLevel * Level * 100, 2);
+		public double LevelCritBonus
+		{
+			get
+			{
+				return Math.Round(CritChancePerLevel * Level * 100, 2);
+			}
+		}
 
-		public double LevelCritBonusTotal => Math.Round(CritChancePerLevel * Level * 100 + 25, 2);
+		public double LevelCritBonusTotal
+		{
+			get
+			{
+				return Math.Round(CritChancePerLevel * Level * 100 + 25, 2);
+			}
+		}
 
-		public int LevelPoisonBonus => PoisonDamagePerLevel * Level;
+		public int LevelPoisonBonus
+		{
+			get
+			{
+				return PoisonDamagePerLevel * Level;
+			}
+		}
 
-		public int LevelPoisonBonusTotal => PoisonDamagePerLevel * Level + 1;
+		public int LevelPoisonBonusTotal
+		{
+			get
+			{
+				return PoisonDamagePerLevel * Level + 1;
+			}
+		}
 
 		public string AuraDamageText
 		{
@@ -131,13 +179,37 @@ namespace ClickQuest.Game.Core.Heroes
 			}
 		}
 
-		public double LevelAuraBonus => AURA_SPEED_PER_LEVEL * Level;
+		public double LevelAuraBonus
+		{
+			get
+			{
+				return AURA_SPEED_PER_LEVEL * Level;
+			}
+		}
 
-		public string LevelAuraBonusText => LevelAuraBonus.ToString("0.###");
+		public string LevelAuraBonusText
+		{
+			get
+			{
+				return LevelAuraBonus.ToString("0.###");
+			}
+		}
 
-		public double LevelAuraBonusTotal => AURA_SPEED_BASE + AURA_SPEED_PER_LEVEL * Level;
+		public double LevelAuraBonusTotal
+		{
+			get
+			{
+				return AURA_SPEED_BASE + AURA_SPEED_PER_LEVEL * Level;
+			}
+		}
 
-		public string LevelAuraBonusTotalText => LevelAuraBonusTotal.ToString("0.###");
+		public string LevelAuraBonusTotalText
+		{
+			get
+			{
+				return LevelAuraBonusTotal.ToString("0.###");
+			}
+		}
 
 		public Hero(HeroClass heroClass, HeroRace heroRace, string heroName)
 		{
@@ -150,7 +222,11 @@ namespace ClickQuest.Game.Core.Heroes
 			Specialization = new Specialization();
 
 			ArtifactSets = new List<ArtifactSet>();
-			ArtifactSets.Add(new ArtifactSet(){Id=0, Name="Default set"});
+			ArtifactSets.Add(new ArtifactSet
+			{
+				Id = 0,
+				Name = "Default set"
+			});
 
 			HeroClass = heroClass;
 			HeroRace = heroRace;
@@ -306,7 +382,7 @@ namespace ClickQuest.Game.Core.Heroes
 			double randomizedValue = RNG.Next(1, 101) / 100d;
 			if (randomizedValue <= CritChance)
 			{
-				damage = (int)(damage * CritDamage);
+				damage = (int) (damage * CritDamage);
 				damageType = DamageType.Critical;
 
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.CritsAmount, 1);
@@ -324,7 +400,7 @@ namespace ClickQuest.Game.Core.Heroes
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.ExperienceGained, experienceGained);
 			}
 
-			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{value}", (SolidColorBrush)Application.Current.FindResource("BrushExperienceRelated"), FloatingTextController.ExperiencePositionPoint);
+			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{value}", (SolidColorBrush) Application.Current.FindResource("BrushExperienceRelated"), FloatingTextController.ExperiencePositionPoint);
 
 			Experience += value;
 			Heroes.Experience.CheckIfLeveledUpAndGrantBonuses(this);

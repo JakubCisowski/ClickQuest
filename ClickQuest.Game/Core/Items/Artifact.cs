@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Windows;
-using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
@@ -15,6 +14,7 @@ namespace ClickQuest.Game.Core.Items
 	{
 		[JsonIgnore]
 		public ArtifactFunctionality ArtifactFunctionality { get; set; }
+
 		public ArtifactType ArtifactType { get; set; }
 		public string Lore { get; set; }
 		public string ExtraInfo { get; set; }
@@ -23,7 +23,13 @@ namespace ClickQuest.Game.Core.Items
 		public const int MeltingWithoutIngredientsValue = 100;
 		public const double CraftingRatio = 20;
 
-		public int BaseIngotBonus => 100;
+		public int BaseIngotBonus
+		{
+			get
+			{
+				return 100;
+			}
+		}
 
 		public override Artifact CopyItem(int quantity)
 		{
@@ -84,16 +90,16 @@ namespace ClickQuest.Game.Core.Items
 		public override void RemoveItem(int amount = 1)
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Artifacts, amount);
-			
+
 			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Artifact));
 
-			if(User.Instance.CurrentHero.ArtifactSets.Any(x=>x.ArtifactIds.Any(y=>y == this.Id)) && !User.Instance.CurrentHero.Artifacts.Contains(this))
+			if (User.Instance.CurrentHero.ArtifactSets.Any(x => x.ArtifactIds.Any(y => y == Id)) && !User.Instance.CurrentHero.Artifacts.Contains(this))
 			{
-				AlertBox.Show($"{this.Name} has been removed from all Artifact Sets", MessageBoxButton.OK);
+				AlertBox.Show($"{Name} has been removed from all Artifact Sets", MessageBoxButton.OK);
 
 				foreach (var artifactSet in User.Instance.CurrentHero.ArtifactSets)
 				{
-					artifactSet.ArtifactIds.Remove(this.Id);
+					artifactSet.ArtifactIds.Remove(Id);
 				}
 			}
 		}

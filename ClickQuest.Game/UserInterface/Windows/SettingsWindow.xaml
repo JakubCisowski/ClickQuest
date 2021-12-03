@@ -15,16 +15,16 @@
 					<TextBlock Text="Color themes" VerticalAlignment="Center" HorizontalAlignment="Center" Width="410" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{StaticResource FontRegular}" />
 
 					<StackPanel Orientation="Horizontal" Margin="0,10,0,0" IsHitTestVisible="False">
-						<Border x:Name="BlueThemeBorder" Width="40" Height="40" BorderBrush="{StaticResource BrushGray3}" BorderThickness="2" Background="#73a6ff" PreviewMouseUp="ThemeBorder_OnPreviewMouseUp"/>
+						<Border x:Name="BlueThemeBorder" Width="40" Height="40" BorderBrush="{StaticResource BrushGray3}" BorderThickness="2" Background="#73a6ff" PreviewMouseUp="ThemeBorder_OnPreviewMouseUp" />
 
-						<Border x:Name="OrangeThemeBorder" Width="40" Height="40" BorderBrush="{StaticResource BrushGray3}" BorderThickness="2" Background="#ffbe73" PreviewMouseUp="ThemeBorder_OnPreviewMouseUp"/>
+						<Border x:Name="OrangeThemeBorder" Width="40" Height="40" BorderBrush="{StaticResource BrushGray3}" BorderThickness="2" Background="#ffbe73" PreviewMouseUp="ThemeBorder_OnPreviewMouseUp" />
 
-						<Border x:Name="PinkThemeBorder" Width="40" Height="40" BorderBrush="{StaticResource BrushGray3}" BorderThickness="2" Background="#dda8a2" PreviewMouseUp="ThemeBorder_OnPreviewMouseUp"/>
+						<Border x:Name="PinkThemeBorder" Width="40" Height="40" BorderBrush="{StaticResource BrushGray3}" BorderThickness="2" Background="#dda8a2" PreviewMouseUp="ThemeBorder_OnPreviewMouseUp" />
 					</StackPanel>
 				</StackPanel>
 
 				<!-- Buttons -->
-				<Button x:Name="OkButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Ok" Click="OkButton_OnClick" Margin="0,0,10,5" Background="{StaticResource BrushAccent3}"/>
+				<Button x:Name="OkButton" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Height="40" Content="Ok" Click="OkButton_OnClick" Margin="0,0,10,5" Background="{StaticResource BrushAccent3}" />
 			</StackPanel>
 		</Border>
 	</Grid>

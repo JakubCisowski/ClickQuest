@@ -1,13 +1,5 @@
-﻿using System.Linq;
-using System.Windows;
-using ClickQuest.Game.Core.Enemies;
-using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Player;
+﻿using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Extensions.Combat;
-using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.UserInterface.Controls;
-using ClickQuest.Game.UserInterface.Pages;
 
 namespace ClickQuest.Game.Core.Items.Artifacts
 {
@@ -19,7 +11,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 
 		private Enemy _currentEnemy;
 		private int _spineCount;
-		
+
 		public override void OnEnemyClick(Enemy clickedEnemy)
 		{
 			if (_currentEnemy != clickedEnemy)

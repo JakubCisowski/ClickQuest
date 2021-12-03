@@ -14,7 +14,13 @@ namespace ClickQuest.Game.Core.Items
 		[JsonIgnore]
 		public override string Description { get; set; }
 
-		public string FullName => "Recipe: " + Name;
+		public string FullName
+		{
+			get
+			{
+				return "Recipe: " + Name;
+			}
+		}
 
 		public List<IngredientPattern> IngredientPatterns { get; set; }
 
@@ -22,7 +28,13 @@ namespace ClickQuest.Game.Core.Items
 
 		public int ArtifactId { get; set; }
 
-		public Artifact Artifact => GameAssets.Artifacts.FirstOrDefault(x => x.Id == ArtifactId);
+		public Artifact Artifact
+		{
+			get
+			{
+				return GameAssets.Artifacts.FirstOrDefault(x => x.Id == ArtifactId);
+			}
+		}
 
 		public void UpdateRequirementsDescription()
 		{
@@ -75,7 +87,7 @@ namespace ClickQuest.Game.Core.Items
 		public override void RemoveItem(int amount = 1)
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Recipes, amount);
-			
+
 			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Recipe));
 		}
 	}

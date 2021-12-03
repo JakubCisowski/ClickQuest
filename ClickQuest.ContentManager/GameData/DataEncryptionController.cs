@@ -6,8 +6,8 @@ namespace ClickQuest.ContentManager.GameData
 	// Source: https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.aes?view=net-6.0
 	public static class DataEncryptionController
 	{
-		private static byte[] AesKey;
-		private static byte[] AesIV;
+		private static readonly byte[] AesKey;
+		private static readonly byte[] AesIV;
 
 		static DataEncryptionController()
 		{
@@ -17,11 +17,11 @@ namespace ClickQuest.ContentManager.GameData
 
 			AesIV = new byte[] {18, 37, 145, 119, 109, 3, 139, 169, 191, 72, 159, 19, 248, 63, 190, 3};
 		}
-		
+
 		public static byte[] EncryptJsonUsingAes(string json)
 		{
 			byte[] encryptedJson;
-			
+
 			using (var aes = Aes.Create())
 			{
 				aes.Key = AesKey;
@@ -38,6 +38,7 @@ namespace ClickQuest.ContentManager.GameData
 						{
 							streamWriter.Write(json);
 						}
+
 						encryptedJson = memoryStream.ToArray();
 					}
 				}
@@ -49,7 +50,7 @@ namespace ClickQuest.ContentManager.GameData
 		public static string DecryptJsonUsingAes(byte[] encryptedJson)
 		{
 			string json;
-			
+
 			using (var aes = Aes.Create())
 			{
 				aes.Key = AesKey;

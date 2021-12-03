@@ -75,7 +75,7 @@ namespace ClickQuest.Game.Core.Items
 				AlertBox.Show("You cannot unequip artifacts while questing.", MessageBoxButton.OK);
 				return false;
 			}
-						
+
 			bool isInfusionEquipped = User.Instance.CurrentHero.EquippedArtifacts.Any(x => x.ArtifactType == ArtifactType.Infusion);
 			bool isOnlyOtherArtifact = User.Instance.CurrentHero.EquippedArtifacts.Count(x => x.ArtifactType != ArtifactType.Infusion) == 1;
 

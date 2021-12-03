@@ -56,7 +56,7 @@ namespace ClickQuest.Game.Core.Items
 		{
 			CollectionsController.AddItemToCollection(this, User.Instance.DungeonKeys, amount);
 
-			if (amount!=0)
+			if (amount != 0)
 			{
 				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{amount}", ColorsController.GetRarityColor(Rarity), FloatingTextController.GetDungeonKeyRarityPosition(Rarity));
 			}
@@ -69,11 +69,11 @@ namespace ClickQuest.Game.Core.Items
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.DungeonKeys, amount);
 
-			if (amount!=0)
+			if (amount != 0)
 			{
 				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{amount}", ColorsController.GetRarityColor(Rarity), FloatingTextController.GetDungeonKeyRarityPosition(Rarity));
 			}
-			
+
 			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(DungeonKey));
 		}
 

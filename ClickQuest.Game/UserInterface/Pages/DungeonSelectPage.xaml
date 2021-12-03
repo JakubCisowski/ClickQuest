@@ -14,10 +14,10 @@
 		</Grid.ColumnDefinitions>
 
 		<!-- Hero stats frame-->
-		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/UserInterface/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" Background="Transparent"/>
+		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/UserInterface/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" Background="Transparent" />
 
 		<!-- Equipment frame-->
-		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/UserInterface/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="335" Background="Transparent"/>
+		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/UserInterface/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="335" Background="Transparent" />
 
 		<!-- Main Grid -->
 		<Grid Grid.Column="1">
@@ -31,11 +31,11 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" Background="{StaticResource BrushGray1}" HorizontalAlignment="Center" Margin="5" Width="600">
 
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Here you can use dropped Dungeon Keys to fight Bosses. You have 30 seconds to deal as much damage as you can, the more damage the better rewards. Rare keys open tougher dungeons, but provide better loot"/>
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Here you can use dropped Dungeon Keys to fight Bosses. You have 30 seconds to deal as much damage as you can, the more damage the better rewards. Rare keys open tougher dungeons, but provide better loot" />
 			</Border>
 
 			<!-- Undo selection (of DungeonGroup/Dungeon) button -->
-			<Button x:Name="UndoButton" Background="{StaticResource BrushAccent2}"  Grid.Row="1" Width="450" Height="50" Visibility="Hidden">
+			<Button x:Name="UndoButton" Background="{StaticResource BrushAccent2}" Grid.Row="1" Width="450" Height="50" Visibility="Hidden">
 				<TextBlock Text="Undo" FontSize="22" />
 			</Button>
 
@@ -45,7 +45,7 @@
 			</Grid>
 
 			<!-- Back to town button -->
-			<Button x:Name="TownButton" Background="{StaticResource BrushAccent3}"  Grid.Row="3" Width="450" Height="50" Click="TownButton_Click">
+			<Button x:Name="TownButton" Background="{StaticResource BrushAccent3}" Grid.Row="3" Width="450" Height="50" Click="TownButton_Click">
 				<TextBlock Text="Come back to town!" FontSize="22" />
 			</Button>
 

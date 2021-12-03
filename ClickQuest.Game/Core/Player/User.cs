@@ -44,7 +44,7 @@ namespace ClickQuest.Game.Core.Player
 		public static DateTime SessionStartDate { get; set; }
 		public Achievements Achievements { get; set; }
 
-		public ColorTheme Theme{ get; set; }
+		public ColorTheme Theme { get; set; }
 
 		public int Gold
 		{

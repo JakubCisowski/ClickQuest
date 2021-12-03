@@ -53,8 +53,8 @@
 				<Setter Property="BorderBrush" Value="{StaticResource BrushGray3}" />
 				<Setter Property="BorderThickness" Value="1" />
 				<Setter Property="controlzEx:ToolTipAssist.AutoMove" Value="True" />
-				<Setter Property="MinWidth" Value="300"/>
-				<Setter Property="MaxWidth" Value="500"/>
+				<Setter Property="MinWidth" Value="300" />
+				<Setter Property="MaxWidth" Value="500" />
 			</Style>
 
 			<!-- Simple ToolTip style (eg. ingots, gold) -->
@@ -73,7 +73,7 @@
 				<Setter Property="FontSize" Value="16" />
 				<Setter Property="TextOptions.TextFormattingMode" Value="Display" />
 				<Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
-				<Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+				<Setter Property="TextWrapping" Value="WrapWithOverflow" />
 			</Style>
 
 		</ResourceDictionary>

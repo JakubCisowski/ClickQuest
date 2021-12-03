@@ -1,12 +1,4 @@
-﻿using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Data;
-using ClickQuest.Game.Extensions.Combat;
-using ClickQuest.Game.Extensions.Gameplay;
-using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.UserInterface.Controls;
-using ClickQuest.Game.UserInterface.Pages;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -14,8 +6,14 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using ClickQuest.Game.Core.Heroes.Buffs;
-using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Core.GameData;
+using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Data;
+using ClickQuest.Game.Extensions.Combat;
+using ClickQuest.Game.Extensions.Gameplay;
+using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Pages;
 
 namespace ClickQuest.Game.UserInterface.Windows
 {
@@ -113,7 +111,7 @@ namespace ClickQuest.Game.UserInterface.Windows
 		public void CreateFloatingTextLoot(Border lootBorder, int animationDelay = 0)
 		{
 			int animationDuration = 5;
-			
+
 			// Start position is center of the screen (so center of the enemy as well).
 			var startPosition = FloatingTextController.EnemyCenterPoint;
 			var endPosition = FloatingTextController.LootEndPositionPoint;
@@ -128,18 +126,18 @@ namespace ClickQuest.Game.UserInterface.Windows
 			textOpacityAnimation.Completed += FloatingTextAnimation_Completed;
 			lootBorder.BeginAnimation(OpacityProperty, textOpacityAnimation);
 
-			var top = Canvas.GetTop(lootBorder);
-			var left = Canvas.GetLeft(lootBorder);
+			double top = Canvas.GetTop(lootBorder);
+			double left = Canvas.GetLeft(lootBorder);
 			var transform = new TranslateTransform();
 			lootBorder.RenderTransform = transform;
 
 			var animX = new DoubleAnimation(startPosition.X - left, endPosition.X - left - 100, TimeSpan.FromSeconds(animationDuration));
 			var animY = new DoubleAnimation(startPosition.Y - top, endPosition.Y - top - 100, TimeSpan.FromSeconds(animationDuration));
-			
+
 			// Delay the animations.
 			animX.BeginTime = TimeSpan.FromSeconds(animationDelay);
 			animY.BeginTime = TimeSpan.FromSeconds(animationDelay);
-			
+
 			transform.BeginAnimation(TranslateTransform.XProperty, animX);
 			transform.BeginAnimation(TranslateTransform.YProperty, animY);
 		}
@@ -184,8 +182,6 @@ namespace ClickQuest.Game.UserInterface.Windows
 				return;
 			}
 
-			var currentLocationInfo = LocationInfo;
-
 			InterfaceController.ChangePage(new InfoPage(currentPage, LocationInfo), "Bestiary & Game Mechanics");
 		}
 
@@ -196,7 +192,7 @@ namespace ClickQuest.Game.UserInterface.Windows
 
 		private void ExitButton_Click(object sender, RoutedEventArgs e)
 		{
-			var result = AlertBox.Show("Are you sure you want to quit?\nAll progress will be saved.", MessageBoxButton.YesNo);
+			var result = AlertBox.Show("Are you sure you want to quit?\nAll progress will be saved.");
 
 			if (result == MessageBoxResult.Yes)
 			{

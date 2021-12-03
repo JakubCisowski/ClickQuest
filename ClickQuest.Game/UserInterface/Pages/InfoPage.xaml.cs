@@ -1,25 +1,22 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Places;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.Extensions.UserInterface.ToolTips;
-using ClickQuest.Game.UserInterface.Controls;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
-	public partial class InfoPage : Page
+	public partial class InfoPage
 	{
-		private Page _previousPage;
-		private string _previousLocationInfo;
+		private readonly Page _previousPage;
+		private readonly string _previousLocationInfo;
 
 		public InfoPage(Page previousPage, string previousLocationInfo)
 		{
@@ -76,37 +73,37 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			InfoPanel.Children.Clear();
 
-			var regionNameBlock = new TextBlock()
+			var regionNameBlock = new TextBlock
 			{
-				Text=region.Name,
+				Text = region.Name,
 				FontSize = 26,
-				FontFamily = (FontFamily)this.FindResource("FontFancy"),
-				TextAlignment=TextAlignment.Center,
+				FontFamily = (FontFamily) FindResource("FontFancy"),
+				TextAlignment = TextAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Center,
 				Margin = new Thickness(5)
 			};
 
-			var levelRequirementBlock = new TextBlock()
+			var levelRequirementBlock = new TextBlock
 			{
-				Text="Level Requirement: " + region.LevelRequirement,
+				Text = "Level Requirement: " + region.LevelRequirement,
 				FontSize = 20,
-				TextAlignment=TextAlignment.Center,
+				TextAlignment = TextAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Center,
 				Margin = new Thickness(5)
 			};
 
-			var descriptionBlock = new TextBlock()
+			var descriptionBlock = new TextBlock
 			{
 				Text = region.Description,
 				FontSize = 18,
-				TextAlignment=TextAlignment.Justify,
+				TextAlignment = TextAlignment.Justify,
 				HorizontalAlignment = HorizontalAlignment.Center,
 				Margin = new Thickness(5),
 				TextWrapping = TextWrapping.Wrap,
-				FontFamily = (FontFamily)this.FindResource("FontFancy")
+				FontFamily = (FontFamily) FindResource("FontFancy")
 			};
 
-			var separator = new Separator()
+			var separator = new Separator
 			{
 				Height = 2,
 				Width = 400,
@@ -118,18 +115,18 @@ namespace ClickQuest.Game.UserInterface.Pages
 			InfoPanel.Children.Add(descriptionBlock);
 			InfoPanel.Children.Add(separator);
 
-			var sortedMonsterPatterns = region.MonsterSpawnPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y=>y.Id == x.MonsterId && y.EntryType == BestiaryEntryType.Monster)).ThenByDescending(z => z.Frequency);
+			var sortedMonsterPatterns = region.MonsterSpawnPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y => y.Id == x.MonsterId && y.EntryType == BestiaryEntryType.Monster)).ThenByDescending(z => z.Frequency);
 
 			foreach (var monsterPattern in sortedMonsterPatterns)
 			{
 				var monster = monsterPattern.Monster;
-				var monsterDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == monster.Id && x.EntryType == BestiaryEntryType.Monster);
+				bool monsterDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == monster.Id && x.EntryType == BestiaryEntryType.Monster);
 
-				var monsterNameBlock = new TextBlock()
+				var monsterNameBlock = new TextBlock
 				{
 					FontSize = 22,
-					FontFamily = (FontFamily)this.FindResource("FontFancy"),
-					TextAlignment=TextAlignment.Center,
+					FontFamily = (FontFamily) FindResource("FontFancy"),
+					TextAlignment = TextAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					Margin = new Thickness(5)
 				};
@@ -150,7 +147,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				if (!monsterDiscovered)
 				{
-					var monsterSeparator = new Separator()
+					var monsterSeparator = new Separator
 					{
 						Height = 2,
 						Width = 200,
@@ -162,22 +159,22 @@ namespace ClickQuest.Game.UserInterface.Pages
 					continue;
 				}
 
-				var monsterHealthBlock = new TextBlock()
+				var monsterHealthBlock = new TextBlock
 				{
-					Text="Health: " + monster.Health,
+					Text = "Health: " + monster.Health,
 					FontSize = 16,
-					TextAlignment=TextAlignment.Center,
+					TextAlignment = TextAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					Margin = new Thickness(5)
 				};
 
 				InfoPanel.Children.Add(monsterHealthBlock);
 
-				var monsterDescriptionBlock = new TextBlock()
+				var monsterDescriptionBlock = new TextBlock
 				{
-					Text=monster.Description,
+					Text = monster.Description,
 					FontSize = 16,
-					TextAlignment=TextAlignment.Justify,
+					TextAlignment = TextAlignment.Justify,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					Margin = new Thickness(5),
 					TextWrapping = TextWrapping.Wrap
@@ -185,27 +182,27 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				InfoPanel.Children.Add(monsterDescriptionBlock);
 
-				var lootLabelBlock = new TextBlock()
+				var lootLabelBlock = new TextBlock
 				{
-					Text="Loot: ",
+					Text = "Loot: ",
 					FontSize = 18,
-					TextAlignment=TextAlignment.Center,
+					TextAlignment = TextAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Center,
-					Margin = new Thickness(5),
+					Margin = new Thickness(5)
 				};
 
 				InfoPanel.Children.Add(lootLabelBlock);
 
-				var sortedLootPatterns = monster.MonsterLootPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y=>y.Id == x.MonsterLootId && y.EntryType == BestiaryEntryType.MonsterLoot)).ThenBy(y => y.Item.Rarity);
+				var sortedLootPatterns = monster.MonsterLootPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y => y.Id == x.MonsterLootId && y.EntryType == BestiaryEntryType.MonsterLoot)).ThenBy(y => y.Item.Rarity);
 
 				foreach (var lootPattern in sortedLootPatterns)
 				{
 					var item = lootPattern.Item;
-					var monsterLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == item.Id && x.EntryType == BestiaryEntryType.MonsterLoot);
+					bool monsterLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == item.Id && x.EntryType == BestiaryEntryType.MonsterLoot);
 
-					var itemNameBlock = new TextBlock()
+					var itemNameBlock = new TextBlock
 					{
-						TextAlignment=TextAlignment.Center,
+						TextAlignment = TextAlignment.Center,
 						HorizontalAlignment = HorizontalAlignment.Center,
 						Margin = new Thickness(5),
 						Foreground = ColorsController.GetRarityColor(item.Rarity),
@@ -217,20 +214,20 @@ namespace ClickQuest.Game.UserInterface.Pages
 					if (!monsterLootDiscovered)
 					{
 						itemNameBlock.Text = "Unknown " + item.RarityString + " " + lootPattern.MonsterLootType;
-						itemNameBlock.FontFamily = (FontFamily)this.FindResource("FontRegularItalic");
+						itemNameBlock.FontFamily = (FontFamily) FindResource("FontRegularItalic");
 						itemNameBlock.ToolTip = ItemToolTipController.GenerateUndiscoveredItemToolTip();
 					}
 					else
 					{
 						itemNameBlock.Text = item is Recipe recipe ? recipe.FullName : item.Name;
-						itemNameBlock.FontFamily = (FontFamily)this.FindResource("FontRegularBold");
+						itemNameBlock.FontFamily = (FontFamily) FindResource("FontRegularBold");
 						itemNameBlock.ToolTip = ItemToolTipController.GenerateItemToolTip(item);
 					}
 
 					InfoPanel.Children.Add(itemNameBlock);
 				}
 
-				var itemSeparator = new Separator()
+				var itemSeparator = new Separator
 				{
 					Height = 2,
 					Width = 200,
@@ -245,38 +242,38 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			InfoPanel.Children.Clear();
 
-			var dungeonNameBlock = new TextBlock()
+			var dungeonNameBlock = new TextBlock
 			{
-				Text=dungeon.Name,
+				Text = dungeon.Name,
 				FontSize = 26,
-				FontFamily = (FontFamily)this.FindResource("FontFancy"),
-				TextAlignment=TextAlignment.Center,
+				FontFamily = (FontFamily) FindResource("FontFancy"),
+				TextAlignment = TextAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Center,
 				Margin = new Thickness(5)
 			};
 
-			var dungeonGroupBlock = new TextBlock()
+			var dungeonGroupBlock = new TextBlock
 			{
-				Text=dungeon.DungeonGroup.Name,
+				Text = dungeon.DungeonGroup.Name,
 				FontSize = 20,
-				TextAlignment=TextAlignment.Center,
+				TextAlignment = TextAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Center,
 				Margin = new Thickness(5),
-				Foreground = ColorsController.GetRarityColor((Rarity)dungeon.DungeonGroupId)
+				Foreground = ColorsController.GetRarityColor((Rarity) dungeon.DungeonGroupId)
 			};
 
-			var descriptionBlock = new TextBlock()
+			var descriptionBlock = new TextBlock
 			{
 				Text = dungeon.Description,
 				FontSize = 18,
-				TextAlignment=TextAlignment.Justify,
+				TextAlignment = TextAlignment.Justify,
 				HorizontalAlignment = HorizontalAlignment.Center,
 				Margin = new Thickness(5),
 				TextWrapping = TextWrapping.Wrap,
-				FontFamily = (FontFamily)this.FindResource("FontFancy")
+				FontFamily = (FontFamily) FindResource("FontFancy")
 			};
 
-			var separator = new Separator()
+			var separator = new Separator
 			{
 				Height = 2,
 				Width = 400,
@@ -288,17 +285,17 @@ namespace ClickQuest.Game.UserInterface.Pages
 			InfoPanel.Children.Add(descriptionBlock);
 			InfoPanel.Children.Add(separator);
 
-			var sortedBosses = GameAssets.Bosses.Where(x => dungeon.BossIds.Contains(x.Id)).OrderByDescending(y => GameAssets.BestiaryEntries.Any(z=>z.Id == y.Id && z.EntryType == BestiaryEntryType.Boss));
+			var sortedBosses = GameAssets.Bosses.Where(x => dungeon.BossIds.Contains(x.Id)).OrderByDescending(y => GameAssets.BestiaryEntries.Any(z => z.Id == y.Id && z.EntryType == BestiaryEntryType.Boss));
 
 			foreach (var boss in sortedBosses)
 			{
 				bool bossDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == boss.Id && x.EntryType == BestiaryEntryType.Boss);
 
-				var bossNameBlock = new TextBlock()
+				var bossNameBlock = new TextBlock
 				{
 					FontSize = 22,
-					FontFamily = (FontFamily)this.FindResource("FontFancy"),
-					TextAlignment=TextAlignment.Center,
+					FontFamily = (FontFamily) FindResource("FontFancy"),
+					TextAlignment = TextAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					Margin = new Thickness(5)
 				};
@@ -319,7 +316,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				if (!bossDiscovered)
 				{
-					var bossSeparator = new Separator()
+					var bossSeparator = new Separator
 					{
 						Height = 2,
 						Width = 200,
@@ -335,37 +332,37 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				foreach (var affix in boss.Affixes)
 				{
-					var	affixString = string.Concat(affix.ToString().Select(x => Char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
+					string affixString = string.Concat(affix.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
 					bossAffixesStrings.Add(affixString);
 				}
 
-				var bossAffixBlock = new TextBlock()
+				var bossAffixBlock = new TextBlock
 				{
-					Text="Affixes: " + string.Join(" / ", bossAffixesStrings),
+					Text = "Affixes: " + string.Join(" / ", bossAffixesStrings),
 					FontSize = 16,
-					TextAlignment=TextAlignment.Center,
+					TextAlignment = TextAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					Margin = new Thickness(5)
 				};
 
 				InfoPanel.Children.Add(bossAffixBlock);
 
-				var bossHealthBlock = new TextBlock()
+				var bossHealthBlock = new TextBlock
 				{
-					Text="Health: " + boss.Health,
+					Text = "Health: " + boss.Health,
 					FontSize = 16,
-					TextAlignment=TextAlignment.Center,
+					TextAlignment = TextAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					Margin = new Thickness(5)
 				};
 
 				InfoPanel.Children.Add(bossHealthBlock);
 
-				var bossDescriptionBlock = new TextBlock()
+				var bossDescriptionBlock = new TextBlock
 				{
-					Text=boss.Description,
+					Text = boss.Description,
 					FontSize = 16,
-					TextAlignment=TextAlignment.Justify,
+					TextAlignment = TextAlignment.Justify,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					Margin = new Thickness(5),
 					TextWrapping = TextWrapping.Wrap
@@ -373,27 +370,27 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				InfoPanel.Children.Add(bossDescriptionBlock);
 
-				var lootLabelBlock = new TextBlock()
+				var lootLabelBlock = new TextBlock
 				{
-					Text="Loot: ",
+					Text = "Loot: ",
 					FontSize = 18,
-					TextAlignment=TextAlignment.Center,
+					TextAlignment = TextAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Center,
-					Margin = new Thickness(5),
+					Margin = new Thickness(5)
 				};
 
 				InfoPanel.Children.Add(lootLabelBlock);
 
-				var sortedLootPatterns = boss.BossLootPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y=>y.Id == x.BossLootId && y.EntryType == BestiaryEntryType.BossLoot)).ThenBy(z => z.Item.Rarity);
+				var sortedLootPatterns = boss.BossLootPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y => y.Id == x.BossLootId && y.EntryType == BestiaryEntryType.BossLoot)).ThenBy(z => z.Item.Rarity);
 
 				foreach (var lootPattern in sortedLootPatterns)
 				{
 					var item = lootPattern.Item;
 					bool bossLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == item.Id && x.EntryType == BestiaryEntryType.BossLoot);
 
-					var itemNameBlock = new TextBlock()
+					var itemNameBlock = new TextBlock
 					{
-						TextAlignment=TextAlignment.Center,
+						TextAlignment = TextAlignment.Center,
 						HorizontalAlignment = HorizontalAlignment.Center,
 						Margin = new Thickness(5),
 						Foreground = ColorsController.GetRarityColor(item.Rarity),
@@ -405,17 +402,18 @@ namespace ClickQuest.Game.UserInterface.Pages
 					if (!bossLootDiscovered)
 					{
 						itemNameBlock.Text = "Unknown " + item.RarityString + " " + lootPattern.BossLootType;
-						itemNameBlock.FontFamily = (FontFamily)this.FindResource("FontRegularItalic");
+						itemNameBlock.FontFamily = (FontFamily) FindResource("FontRegularItalic");
 						itemNameBlock.ToolTip = ItemToolTipController.GenerateUndiscoveredItemToolTip();
 					}
 					else
 					{
-						itemNameBlock.Text = item is Recipe recipe ? recipe.FullName : item.Name;;
-						itemNameBlock.FontFamily = (FontFamily)this.FindResource("FontRegularBold");
-						
-						if (lootPattern.BossLootType == Core.Items.Types.RewardType.Blessing)
+						itemNameBlock.Text = item is Recipe recipe ? recipe.FullName : item.Name;
+						;
+						itemNameBlock.FontFamily = (FontFamily) FindResource("FontRegularBold");
+
+						if (lootPattern.BossLootType == RewardType.Blessing)
 						{
-							itemNameBlock.ToolTip = ItemToolTipController.GenerateBlessingToolTip(GameAssets.Blessings.FirstOrDefault(x=>x.Id==lootPattern.BossLootId));
+							itemNameBlock.ToolTip = ItemToolTipController.GenerateBlessingToolTip(GameAssets.Blessings.FirstOrDefault(x => x.Id == lootPattern.BossLootId));
 						}
 						else
 						{
@@ -426,7 +424,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					InfoPanel.Children.Add(itemNameBlock);
 				}
 
-				var itemSeparator = new Separator()
+				var itemSeparator = new Separator
 				{
 					Height = 2,
 					Width = 200,
@@ -441,31 +439,31 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			InfoPanel.Children.Clear();
 
-			var selectedName = e.AddedItems[0].ToString();
+			string? selectedName = e.AddedItems[0].ToString();
 
-			var description = GameAssets.GameMechanicsTabs.FirstOrDefault(x => x.Name == selectedName).Description;
+			string description = GameAssets.GameMechanicsTabs.FirstOrDefault(x => x.Name == selectedName).Description;
 
-			var nameTextBlock = new TextBlock()
+			var nameTextBlock = new TextBlock
 			{
-				Text=selectedName,
+				Text = selectedName,
 				FontSize = 24,
-				FontFamily = (FontFamily)this.FindResource("FontFancy"),
-				TextAlignment=TextAlignment.Center,
+				FontFamily = (FontFamily) FindResource("FontFancy"),
+				TextAlignment = TextAlignment.Center,
 				HorizontalAlignment = HorizontalAlignment.Center,
 				Margin = new Thickness(5)
 			};
 
-			var separator = new Separator()
+			var separator = new Separator
 			{
 				Height = 2,
 				Width = 400,
 				Margin = new Thickness(10)
 			};
 
-			var descriptionTextBlock = new TextBlock()
+			var descriptionTextBlock = new TextBlock
 			{
 				FontSize = 18,
-				TextAlignment=TextAlignment.Justify,
+				TextAlignment = TextAlignment.Justify,
 				HorizontalAlignment = HorizontalAlignment.Center,
 				Margin = new Thickness(5),
 				TextWrapping = TextWrapping.Wrap

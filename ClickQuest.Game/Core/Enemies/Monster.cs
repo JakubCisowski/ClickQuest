@@ -1,18 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
-using System.Windows;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Patterns;
-using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Pages;
-using ClickQuest.Game.UserInterface.Windows;
 using MaterialDesignThemes.Wpf;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 
@@ -74,9 +70,13 @@ namespace ClickQuest.Game.Core.Enemies
 				CombatTimerController.StopPoisonTimer();
 
 				// Mark the Monster as discovered.
-				if (!GameAssets.BestiaryEntries.Any(x=>x.EntryType == BestiaryEntryType.Monster && x.Id==this.Id))
+				if (!GameAssets.BestiaryEntries.Any(x => x.EntryType == BestiaryEntryType.Monster && x.Id == Id))
 				{
-					GameAssets.BestiaryEntries.Add(new BestiaryEntry() { Id = this.Id, EntryType = BestiaryEntryType.Monster });
+					GameAssets.BestiaryEntries.Add(new BestiaryEntry
+					{
+						Id = Id,
+						EntryType = BestiaryEntryType.Monster
+					});
 				}
 
 				GrantVictoryBonuses();
@@ -104,11 +104,15 @@ namespace ClickQuest.Game.Core.Enemies
 				selectedLoot.AddItem();
 
 				// Mark the corresponding Pattern as discovered.
-				if (!GameAssets.BestiaryEntries.Any(x=>x.EntryType == BestiaryEntryType.MonsterLoot && x.Id==selectedLoot.Id))
+				if (!GameAssets.BestiaryEntries.Any(x => x.EntryType == BestiaryEntryType.MonsterLoot && x.Id == selectedLoot.Id))
 				{
-					GameAssets.BestiaryEntries.Add(new BestiaryEntry() { Id = selectedLoot.Id, EntryType = BestiaryEntryType.MonsterLoot });
+					GameAssets.BestiaryEntries.Add(new BestiaryEntry
+					{
+						Id = selectedLoot.Id,
+						EntryType = BestiaryEntryType.MonsterLoot
+					});
 				}
-				
+
 				switch (selectedLoot)
 				{
 					case Material material:
@@ -123,7 +127,7 @@ namespace ClickQuest.Game.Core.Enemies
 						LootQueueController.AddToQueue(artifact.Name, artifact.Rarity, PackIconKind.DiamondStone);
 						break;
 				}
-			}			
+			}
 
 			CheckForDungeonKeyDrop();
 
@@ -144,6 +148,7 @@ namespace ClickQuest.Game.Core.Enemies
 				{
 					return MonsterLootPatterns[i].Item;
 				}
+
 				randomizedValue -= frequencyList[i];
 				i++;
 			}

@@ -1,5 +1,4 @@
 ﻿using ClickQuest.Game.Core.Heroes.Buffs;
-using ClickQuest.Game.Core.Items;
 
 namespace ClickQuest.Game.Core.Items.Artifacts
 {

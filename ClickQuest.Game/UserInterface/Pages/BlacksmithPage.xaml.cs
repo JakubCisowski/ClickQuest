@@ -7,7 +7,6 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
-using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
@@ -36,7 +35,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			ItemsListViewMeltMaterials.Items.Refresh();
 			ItemsListViewMeltArtifacts.Items.Refresh();
 			ItemsListViewCraft.Items.Refresh();
-			
+
 			// Refresh Scroll Bar visibilities based on the amount of items.
 			RefreshScrollBarVisibilities();
 		}
@@ -51,7 +50,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltMaterials, ScrollBarVisibility.Disabled);
 			}
-			
+
 			if (ItemsListViewMeltArtifacts.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
 			{
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltArtifacts, ScrollBarVisibility.Visible);
@@ -60,7 +59,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltArtifacts, ScrollBarVisibility.Disabled);
 			}
-			
+
 			if (ItemsListViewCraft.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
 			{
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewCraft, ScrollBarVisibility.Visible);
@@ -81,19 +80,25 @@ namespace ClickQuest.Game.UserInterface.Pages
 				{
 					var listOfRuns = new List<Run>();
 					listOfRuns.Add(new Run("Are you sure you want to melt "));
-					listOfRuns.Add(new Run($"{material.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+					listOfRuns.Add(new Run($"{material.Name}")
+					{
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+					});
 					listOfRuns.Add(new Run("?\nThis action will destroy this item and create at least "));
-					listOfRuns.Add(new Run($"{Material.BaseMeltingIngotBonus} {material.Rarity} Ingots"){Foreground = ColorsController.GetRarityColor(material.Rarity)});
+					listOfRuns.Add(new Run($"{Material.BaseMeltingIngotBonus} {material.Rarity} Ingots")
+					{
+						Foreground = ColorsController.GetRarityColor(material.Rarity)
+					});
 					listOfRuns.Add(new Run(".\nYou can get bonus ingots if you master Melter specialization (by melting more materials)."));
-					
-					var result = AlertBox.Show(listOfRuns, MessageBoxButton.YesNo);
+
+					var result = AlertBox.Show(listOfRuns);
 
 					if (result == MessageBoxResult.No)
 					{
 						return;
 					}
 				}
-				
+
 				MeltMaterial(material);
 
 				GameController.UpdateSpecializationAmountAndUI(SpecializationType.Melting);
@@ -102,22 +107,28 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				var listOfRuns = new List<Run>();
 				listOfRuns.Add(new Run("Are you sure you want to melt "));
-				listOfRuns.Add(new Run($"{artifact.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				listOfRuns.Add(new Run($"{artifact.Name}")
+				{
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+				});
 				listOfRuns.Add(new Run("?\nThis action will destroy this item and create:"));
-				
+
 				var ingotAmounts = CalculateIngotAmountsWhenMeltingArtifact(artifact);
 
-				for (int i=0;i<6;i++)
+				for (int i = 0; i < 6; i++)
 				{
 					if (ingotAmounts[i] == 0)
 					{
 						continue;
 					}
-					
-					listOfRuns.Add(new Run($"\n{ingotAmounts[i]}x {(Rarity)i} Ingots"){Foreground = ColorsController.GetRarityColor((Rarity)i)});
+
+					listOfRuns.Add(new Run($"\n{ingotAmounts[i]}x {(Rarity) i} Ingots")
+					{
+						Foreground = ColorsController.GetRarityColor((Rarity) i)
+					});
 				}
 
-				var result = AlertBox.Show(listOfRuns, MessageBoxButton.YesNo);
+				var result = AlertBox.Show(listOfRuns);
 
 				if (result == MessageBoxResult.No)
 				{
@@ -146,9 +157,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			var ingotAmounts = CalculateIngotAmountsWhenMeltingArtifact(meltedArtifact);
 
-			for (int i=0;i<6;i++)
+			for (int i = 0; i < 6; i++)
 			{
-				var ingot = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == (Rarity)i);
+				var ingot = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == (Rarity) i);
 				ingot.AddItem(ingotAmounts[i]);
 			}
 		}
@@ -179,22 +190,22 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			var ingotAmounts = new List<int>();
 
-			var artifactRecipe = GameAssets.Recipes.FirstOrDefault(x=>x.ArtifactId==meltedArtifact.Id);
+			var artifactRecipe = GameAssets.Recipes.FirstOrDefault(x => x.ArtifactId == meltedArtifact.Id);
 
 			if (artifactRecipe is not null)
 			{
 				for (int i = 0; i < 6; i++)
 				{
-					var materialsOfRarity = artifactRecipe.IngredientPatterns.Where(x=>x.RelatedMaterial.Rarity == (Rarity)i);
-					var totalMaterialQuantity = materialsOfRarity.Sum(x => x.Quantity);
-					ingotAmounts.Add((int)(totalMaterialQuantity * Material.BaseMeltingIngotBonus * Artifact.MeltingIngredientsRatio));
+					var materialsOfRarity = artifactRecipe.IngredientPatterns.Where(x => x.RelatedMaterial.Rarity == (Rarity) i);
+					int totalMaterialQuantity = materialsOfRarity.Sum(x => x.Quantity);
+					ingotAmounts.Add((int) (totalMaterialQuantity * Material.BaseMeltingIngotBonus * Artifact.MeltingIngredientsRatio));
 				}
 			}
 			else
 			{
 				for (int i = 0; i < 6; i++)
 				{
-					if ((Rarity)i == meltedArtifact.Rarity)
+					if ((Rarity) i == meltedArtifact.Rarity)
 					{
 						ingotAmounts.Add(Artifact.MeltingWithoutIngredientsValue);
 					}
@@ -222,9 +233,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				var listOfRuns = new List<Run>();
 				listOfRuns.Add(new Run("You dont meet Craftsman specialization requirements to craft "));
-				listOfRuns.Add(new Run($"{recipe.Rarity.ToString()}"){Foreground = ColorsController.GetRarityColor(recipe.Rarity), FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				listOfRuns.Add(new Run($"{recipe.Rarity.ToString()}")
+				{
+					Foreground = ColorsController.GetRarityColor(recipe.Rarity),
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+				});
 				listOfRuns.Add(new Run(" artifacts.\nCraft more common items in order to master it."));
-				
+
 				AlertBox.Show(listOfRuns, MessageBoxButton.OK);
 				return;
 			}
@@ -248,7 +263,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				recipe.RemoveItem();
 
 				GameController.UpdateSpecializationAmountAndUI(SpecializationType.Crafting);
-				
+
 				UpdateBlacksmithItems();
 			}
 		}
@@ -256,41 +271,49 @@ namespace ClickQuest.Game.UserInterface.Pages
 		private bool CheckAndRemoveIngots(Recipe recipe)
 		{
 			var ingotRaritiesRuns = new List<Run>();
-			
+
 			var ingotAmounts = CalculateIngotAmountsWhenCraftingArtifact(recipe.Artifact);
 
-			for (int i=0;i<6;i++)
+			for (int i = 0; i < 6; i++)
 			{
 				if (ingotAmounts[i] == 0)
 				{
 					continue;
 				}
-				
-				ingotRaritiesRuns.Add(new Run($"\n{ingotAmounts[i]}x {(Rarity)i} Ingots"){Foreground = ColorsController.GetRarityColor((Rarity)i)});
-			}
 
+				ingotRaritiesRuns.Add(new Run($"\n{ingotAmounts[i]}x {(Rarity) i} Ingots")
+				{
+					Foreground = ColorsController.GetRarityColor((Rarity) i)
+				});
+			}
 
 			if (!CheckIfUserHasEnoughIngots(recipe))
 			{
 				var notEnoughIngotsRuns = new List<Run>();
 				notEnoughIngotsRuns.Add(new Run("You dont have enough ingots to craft "));
-				notEnoughIngotsRuns.Add(new Run($"{recipe.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				notEnoughIngotsRuns.Add(new Run($"{recipe.Name}")
+				{
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+				});
 				notEnoughIngotsRuns.Add(new Run(".\nIngots required:"));
 				notEnoughIngotsRuns.AddRange(ingotRaritiesRuns);
 				notEnoughIngotsRuns.Add(new Run("\n\nGet more ingots by melting materials/artifacts or try to craft this artifact using materials."));
-				
+
 				AlertBox.Show(notEnoughIngotsRuns, MessageBoxButton.OK);
 				return false;
 			}
 
 			var enoughIngotsRuns = new List<Run>();
 			enoughIngotsRuns.Add(new Run("Are you sure you want to craft "));
-			enoughIngotsRuns.Add(new Run($"{recipe.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+			enoughIngotsRuns.Add(new Run($"{recipe.Name}")
+			{
+				FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+			});
 			enoughIngotsRuns.Add(new Run(" using ingots?\nIngots required:"));
 			enoughIngotsRuns.AddRange(ingotRaritiesRuns);
 			enoughIngotsRuns.Add(new Run("\n\nThis action will destroy all ingots and this recipe."));
 
-			var result = AlertBox.Show(enoughIngotsRuns, MessageBoxButton.YesNo);
+			var result = AlertBox.Show(enoughIngotsRuns);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -305,9 +328,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			var ingotsAmount = CalculateIngotAmountsWhenCraftingArtifact(recipe.Artifact);
 
-			for (int i=0;i<6;i++)
+			for (int i = 0; i < 6; i++)
 			{
-				User.Instance.Ingots.FirstOrDefault(x => x.Rarity == (Rarity)i).Quantity -= ingotsAmount[i];
+				User.Instance.Ingots.FirstOrDefault(x => x.Rarity == (Rarity) i).Quantity -= ingotsAmount[i];
 			}
 		}
 
@@ -315,11 +338,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			var ingotsAmount = CalculateIngotAmountsWhenCraftingArtifact(recipe.Artifact);
 
-			for (int i=0;i<6;i++)
+			for (int i = 0; i < 6; i++)
 			{
-				bool userHasEnoughIngots = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == (Rarity)i).Quantity >= ingotsAmount[i];
+				bool userHasEnoughIngots = User.Instance.Ingots.FirstOrDefault(x => x.Rarity == (Rarity) i).Quantity >= ingotsAmount[i];
 
-				if(!userHasEnoughIngots)
+				if (!userHasEnoughIngots)
 				{
 					return false;
 				}
@@ -332,13 +355,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			var ingotAmounts = new List<int>();
 
-			var artifactRecipe = GameAssets.Recipes.FirstOrDefault(x=>x.ArtifactId==craftedArtifact.Id);
+			var artifactRecipe = GameAssets.Recipes.FirstOrDefault(x => x.ArtifactId == craftedArtifact.Id);
 
 			for (int i = 0; i < 6; i++)
 			{
-				var materialsOfRarity = artifactRecipe.IngredientPatterns.Where(x=>x.RelatedMaterial.Rarity == (Rarity)i);
-				var totalMaterialQuantity = materialsOfRarity.Sum(x => x.Quantity);
-				ingotAmounts.Add((int)(totalMaterialQuantity * Material.BaseMeltingIngotBonus * Artifact.CraftingRatio));
+				var materialsOfRarity = artifactRecipe.IngredientPatterns.Where(x => x.RelatedMaterial.Rarity == (Rarity) i);
+				int totalMaterialQuantity = materialsOfRarity.Sum(x => x.Quantity);
+				ingotAmounts.Add((int) (totalMaterialQuantity * Material.BaseMeltingIngotBonus * Artifact.CraftingRatio));
 			}
 
 			return ingotAmounts;
@@ -350,7 +373,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				var notEnoughMaterialsRuns = new List<Run>();
 				notEnoughMaterialsRuns.Add(new Run("You don't have enough materials to craft "));
-				notEnoughMaterialsRuns.Add(new Run($"{recipe.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				notEnoughMaterialsRuns.Add(new Run($"{recipe.Name}")
+				{
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+				});
 				notEnoughMaterialsRuns.Add(new Run(".\n"));
 				notEnoughMaterialsRuns.AddRange(ItemToolTipController.GenerateRecipeIngredientsRuns(recipe));
 				notEnoughMaterialsRuns.Add(new Run("\n\nGet more materials by completing quests and killing monsters and boses or try to craft this artifact using ingots."));
@@ -361,12 +387,15 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			var enoughMaterialsRuns = new List<Run>();
 			enoughMaterialsRuns.Add(new Run("Are you sure you want to craft "));
-			enoughMaterialsRuns.Add(new Run($"{recipe.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+			enoughMaterialsRuns.Add(new Run($"{recipe.Name}")
+			{
+				FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+			});
 			enoughMaterialsRuns.Add(new Run(" using materials?\n"));
 			enoughMaterialsRuns.AddRange(ItemToolTipController.GenerateRecipeIngredientsRuns(recipe));
 			enoughMaterialsRuns.Add(new Run("\n\nThis action will destroy all materials and this recipe."));
 
-			var result = AlertBox.Show(enoughMaterialsRuns, MessageBoxButton.YesNo);
+			var result = AlertBox.Show(enoughMaterialsRuns);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -422,9 +451,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (button?.ToolTip == null)
 			{
-				var toolTipBlock = new TextBlock()
+				var toolTipBlock = new TextBlock
 				{
-					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+					Style = (Style) FindResource("ToolTipTextBlockBase")
 				};
 
 				if (button.CommandParameter is Material material)
@@ -432,7 +461,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 					toolTipBlock.Inlines.Add(new Run("Melt for at least"));
 					toolTipBlock.Inlines.Add(new LineBreak());
 
-					toolTipBlock.Inlines.Add(new Run($"{Material.BaseMeltingIngotBonus}x {material.RarityString} Ingots") {FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold"), Foreground = ColorsController.GetRarityColor(material.Rarity)});
+					toolTipBlock.Inlines.Add(new Run($"{Material.BaseMeltingIngotBonus}x {material.RarityString} Ingots")
+					{
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold"),
+						Foreground = ColorsController.GetRarityColor(material.Rarity)
+					});
 					toolTipBlock.Inlines.Add(new LineBreak());
 
 					toolTipBlock.Inlines.Add(new Run("Chance for more through Melter specialization"));
@@ -443,21 +476,25 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 					toolTipBlock.Inlines.Add(new Run("Melt for:"));
 
-					for (int i=0;i<6;i++)
+					for (int i = 0; i < 6; i++)
 					{
 						if (ingotAmounts[i] == 0)
 						{
 							continue;
 						}
-						
+
 						toolTipBlock.Inlines.Add(new LineBreak());
-						toolTipBlock.Inlines.Add(new Run($"{ingotAmounts[i]}x {(Rarity)i} Ingots"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold"), Foreground = ColorsController.GetRarityColor((Rarity)i)});
+						toolTipBlock.Inlines.Add(new Run($"{ingotAmounts[i]}x {(Rarity) i} Ingots")
+						{
+							FontFamily = (FontFamily) FindResource("FontRegularDemiBold"),
+							Foreground = ColorsController.GetRarityColor((Rarity) i)
+						});
 					}
 				}
 
-				var toolTip = new ToolTip()
+				var toolTip = new ToolTip
 				{
-					Style = (Style)this.FindResource("ToolTipSimple")
+					Style = (Style) FindResource("ToolTipSimple")
 				};
 
 				GeneralToolTipController.SetToolTipDelayAndDuration(button);
@@ -474,9 +511,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (button?.ToolTip == null)
 			{
-				var toolTipBlock = new TextBlock()
+				var toolTipBlock = new TextBlock
 				{
-					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+					Style = (Style) FindResource("ToolTipTextBlockBase")
 				};
 
 				toolTipBlock.Inlines.Add(new Run("Craft with:"));
@@ -486,13 +523,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				foreach (var run in listOfRuns)
 				{
-					run.FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold");
+					run.FontFamily = (FontFamily) FindResource("FontRegularDemiBold");
 					toolTipBlock.Inlines.Add(run);
 				}
 
-				var toolTip = new ToolTip()
+				var toolTip = new ToolTip
 				{
-					Style = (Style)this.FindResource("ToolTipSimple")
+					Style = (Style) FindResource("ToolTipSimple")
 				};
 
 				GeneralToolTipController.SetToolTipDelayAndDuration(button);
@@ -509,18 +546,22 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (button?.ToolTip == null)
 			{
-				var toolTipBlock = new TextBlock()
+				var toolTipBlock = new TextBlock
 				{
-					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+					Style = (Style) FindResource("ToolTipTextBlockBase")
 				};
 
 				toolTipBlock.Inlines.Add(new Run("Craft with:"));
 				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run("Ingots:"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold"), FontSize=(double)this.FindResource("FontSizeToolTipIngredientText")});
+				toolTipBlock.Inlines.Add(new Run("Ingots:")
+				{
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold"),
+					FontSize = (double) FindResource("FontSizeToolTipIngredientText")
+				});
 
 				var ingotAmounts = CalculateIngotAmountsWhenCraftingArtifact((button.CommandParameter as Recipe).Artifact);
 
-				for (int i=0;i<6;i++)
+				for (int i = 0; i < 6; i++)
 				{
 					if (ingotAmounts[i] == 0)
 					{
@@ -528,12 +569,16 @@ namespace ClickQuest.Game.UserInterface.Pages
 					}
 
 					toolTipBlock.Inlines.Add(new LineBreak());
-					toolTipBlock.Inlines.Add(new Run($"{ingotAmounts[i]}x {(Rarity)i} Ingots"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold"), Foreground = ColorsController.GetRarityColor((Rarity)i)});
+					toolTipBlock.Inlines.Add(new Run($"{ingotAmounts[i]}x {(Rarity) i} Ingots")
+					{
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold"),
+						Foreground = ColorsController.GetRarityColor((Rarity) i)
+					});
 				}
 
-				var toolTip = new ToolTip()
+				var toolTip = new ToolTip
 				{
-					Style = (Style)this.FindResource("ToolTipSimple")
+					Style = (Style) FindResource("ToolTipSimple")
 				};
 
 				GeneralToolTipController.SetToolTipDelayAndDuration(button);

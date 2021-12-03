@@ -10,7 +10,7 @@
 	<Style x:Key="TabControlStyleGeneral" TargetType="TabControl">
 		<Setter Property="Background" Value="{StaticResource BrushGray4}" />
 	</Style>
-	
+
 	<!-- Custom TabItem style with Selected, NotSelcted and Hover background changes -->
 	<Style x:Key="TabItemStyleGeneral" TargetType="{x:Type TabItem}">
 		<Setter Property="Template">
@@ -22,8 +22,7 @@
 							<ContentPresenter x:Name="ContentSite" VerticalAlignment="Center"
 							                  HorizontalAlignment="Center"
 							                  ContentSource="Header" Margin="2,2,2,2"
-							                  RecognizesAccessKey="True">
-							</ContentPresenter>
+							                  RecognizesAccessKey="True" />
 						</Border>
 					</Grid>
 					<ControlTemplate.Triggers>
@@ -33,15 +32,15 @@
 							<Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,1" />
 						</Trigger>
 						<Trigger Property="IsSelected" Value="False">
-							<Setter TargetName="Border" Property="Background" Value="{StaticResource BrushGray1}"/>
+							<Setter TargetName="Border" Property="Background" Value="{StaticResource BrushGray1}" />
 						</Trigger>
 						<MultiTrigger>
 							<MultiTrigger.Conditions>
-								<Condition Property="IsMouseOver" Value="True"/>
-								<Condition Property="IsSelected" Value="False"/>
+								<Condition Property="IsMouseOver" Value="True" />
+								<Condition Property="IsSelected" Value="False" />
 							</MultiTrigger.Conditions>
-												
-							<Setter TargetName="Border" Property="Background" Value="{StaticResource BrushAccent2}"/>
+
+							<Setter TargetName="Border" Property="Background" Value="{StaticResource BrushAccent2}" />
 						</MultiTrigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>

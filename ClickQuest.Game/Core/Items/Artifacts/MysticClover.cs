@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Places;
 using ClickQuest.Game.UserInterface.Pages;
 

@@ -38,7 +38,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		public ObservableDictionary<SpecializationType, int> SpecializationThresholds { get; set; }
 
 		public ObservableDictionary<SpecializationType, int> SpecializationAmounts { get; set; }
-		
+
 		public string SpecCraftingText { get; set; }
 
 		public Specialization()

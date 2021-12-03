@@ -1,6 +1,4 @@
-﻿using ClickQuest.Game.Core.Items;
-
-namespace ClickQuest.Game.Core.Items.Artifacts
+﻿namespace ClickQuest.Game.Core.Items.Artifacts
 {
 	// Your poison damage is increased by 20%.
 	public class ToxicAmulet : ArtifactFunctionality

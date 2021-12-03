@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using ClickQuest.ContentManager.GameData.Models;
 using static ClickQuest.ContentManager.GameData.JsonFilePaths;
 
@@ -30,7 +29,7 @@ namespace ClickQuest.ContentManager.GameData
 
 		public static List<T> LoadContent<T>(string jsonFilePath)
 		{
-			var encryptedJson = File.ReadAllBytes(jsonFilePath);
+			byte[] encryptedJson = File.ReadAllBytes(jsonFilePath);
 
 			string json = DataEncryptionController.DecryptJsonUsingAes(encryptedJson);
 
@@ -44,10 +43,10 @@ namespace ClickQuest.ContentManager.GameData
 		{
 			var emptyList = new List<T>();
 
-			string json = JsonSerializer.Serialize<List<T>>(emptyList);
+			string json = JsonSerializer.Serialize(emptyList);
 
-			var encryptedJson = DataEncryptionController.EncryptJsonUsingAes(json);
-			
+			byte[] encryptedJson = DataEncryptionController.EncryptJsonUsingAes(json);
+
 			File.WriteAllBytes(jsonFilePath, encryptedJson);
 		}
 	}

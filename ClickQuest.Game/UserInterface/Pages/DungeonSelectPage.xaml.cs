@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -155,7 +154,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					FontSize = 25,
 					Text = dungeonsOfThisGroup[i].Name,
 					TextAlignment = TextAlignment.Center,
-					FontFamily = (FontFamily)this.FindResource("FontFancy")
+					FontFamily = (FontFamily) FindResource("FontFancy")
 				};
 
 				panel.Children.Add(block);
@@ -190,7 +189,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Height = 120
 				};
 
-				var grid = new Grid()
+				var grid = new Grid
 				{
 					Width = 320,
 					Height = 110
@@ -201,36 +200,39 @@ namespace ClickQuest.Game.UserInterface.Pages
 					FontSize = 25,
 					Text = boss.Name,
 					TextAlignment = TextAlignment.Center,
-					FontFamily = (FontFamily)this.FindResource("FontFancy"),
-					VerticalAlignment=VerticalAlignment.Top,
-					Margin = new Thickness(0,10,0,0)
+					FontFamily = (FontFamily) FindResource("FontFancy"),
+					VerticalAlignment = VerticalAlignment.Top,
+					Margin = new Thickness(0, 10, 0, 0)
 				};
 
 				var block2 = new TextBlock
 				{
 					FontSize = 18,
 					TextAlignment = TextAlignment.Center,
-					FontFamily = (FontFamily)this.FindResource("FontFancy"),
-					VerticalAlignment=VerticalAlignment.Center
+					FontFamily = (FontFamily) FindResource("FontFancy"),
+					VerticalAlignment = VerticalAlignment.Center
 				};
 
 				block2.Inlines.Add(new Run("Health: "));
-				block2.Inlines.Add(new Run(boss.Health.ToString()){Foreground=(SolidColorBrush)this.FindResource("BrushRed")});
+				block2.Inlines.Add(new Run(boss.Health.ToString())
+				{
+					Foreground = (SolidColorBrush) FindResource("BrushRed")
+				});
 
 				var block3 = new TextBlock
 				{
 					FontSize = 16,
-					FontFamily = (FontFamily)this.FindResource("FontRegularItalic"),
+					FontFamily = (FontFamily) FindResource("FontRegularItalic"),
 					TextAlignment = TextAlignment.Center,
-					VerticalAlignment=VerticalAlignment.Bottom,
-					Margin = new Thickness(0,0,0,10)
+					VerticalAlignment = VerticalAlignment.Bottom,
+					Margin = new Thickness(0, 0, 0, 10)
 				};
 
 				var affixesStringList = new List<string>();
 
 				foreach (var affix in boss.Affixes)
 				{
-					var	affixString = string.Concat(affix.ToString().Select(x => Char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
+					string affixString = string.Concat(affix.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
 
 					affixesStringList.Add(affixString);
 				}

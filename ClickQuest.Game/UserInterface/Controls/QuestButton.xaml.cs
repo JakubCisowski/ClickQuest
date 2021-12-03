@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -6,12 +5,12 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.GameData;
+using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
-using MaterialDesignThemes.Wpf;
-using ClickQuest.Game.Extensions.UserInterface.ToolTips;
-using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.Extensions.UserInterface.ToolTips;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.Game.UserInterface.Controls
 {
@@ -32,21 +31,21 @@ namespace ClickQuest.Game.UserInterface.Controls
 
 			if (_quest.Rare)
 			{
-				var star1 = new PackIcon()
+				var star1 = new PackIcon
 				{
 					Width = 25,
 					Height = 25,
 					Kind = PackIconKind.Star,
-					Foreground = (SolidColorBrush)this.FindResource("BrushQuestRare"),
+					Foreground = (SolidColorBrush) FindResource("BrushQuestRare"),
 					VerticalAlignment = VerticalAlignment.Center
 				};
 
-				var star2 = new PackIcon()
+				var star2 = new PackIcon
 				{
 					Width = 25,
 					Height = 25,
 					Kind = PackIconKind.Star,
-					Foreground = (SolidColorBrush)this.FindResource("BrushQuestRare"),
+					Foreground = (SolidColorBrush) FindResource("BrushQuestRare"),
 					VerticalAlignment = VerticalAlignment.Center
 				};
 
@@ -59,24 +58,24 @@ namespace ClickQuest.Game.UserInterface.Controls
 		{
 			foreach (var rewardPattern in _quest.QuestRewardPatterns)
 			{
-				var panel = new StackPanel()
+				var panel = new StackPanel
 				{
 					Orientation = Orientation.Horizontal,
-					HorizontalAlignment=HorizontalAlignment.Center,
-					Margin = new Thickness(0,0,0,5)
+					HorizontalAlignment = HorizontalAlignment.Center,
+					Margin = new Thickness(0, 0, 0, 5)
 				};
 
-				var rewardIcon = new PackIcon()
+				var rewardIcon = new PackIcon
 				{
-					Width=30,
-					Height=30,
-					VerticalAlignment=VerticalAlignment.Center
+					Width = 30,
+					Height = 30,
+					VerticalAlignment = VerticalAlignment.Center
 				};
 
-				var rewardText = new TextBlock()
+				var rewardText = new TextBlock
 				{
-					FontSize=22,
-					VerticalAlignment=VerticalAlignment.Center
+					FontSize = 22,
+					VerticalAlignment = VerticalAlignment.Center
 				};
 
 				ToolTip toolTip = null;
@@ -140,7 +139,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 					case RewardType.Ingot:
 						var ingot = GameAssets.Ingots.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
-						toolTip = ItemToolTipController.GenerateCurrencyToolTip<Ingot>((int)ingot.Rarity);
+						toolTip = ItemToolTipController.GenerateCurrencyToolTip<Ingot>((int) ingot.Rarity);
 
 						rewardIcon.Kind = PackIconKind.Gold;
 

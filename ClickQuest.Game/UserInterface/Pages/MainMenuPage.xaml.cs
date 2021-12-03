@@ -1,3 +1,10 @@
+using System;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Player;
@@ -6,13 +13,6 @@ using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.Extensions.UserInterface.ToolTips;
 using ClickQuest.Game.UserInterface.Controls;
 using MaterialDesignThemes.Wpf;
-using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
@@ -68,15 +68,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private Button GenerateDeleteHeroButton(Hero hero)
 		{
-			var toolTip = new ToolTip()
+			var toolTip = new ToolTip
 			{
-				Style= (Style)FindResource("ToolTipSimple")
+				Style = (Style) FindResource("ToolTipSimple")
 			};
-
 
 			var toolTipBlock = new TextBlock
 			{
-				Style = (Style)FindResource("ToolTipTextBlockBase"),
+				Style = (Style) FindResource("ToolTipTextBlockBase"),
 				Text = "This will permanently delete the hero and all of their items\nCurrencies (gold, ingots, dungeon keys) will not be reset"
 			};
 
@@ -88,7 +87,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Width = 50,
 				Height = 50,
 				Margin = new Thickness(5),
-				Background = (SolidColorBrush)FindResource("BrushGray5"),
+				Background = (SolidColorBrush) FindResource("BrushGray5"),
 				Tag = hero
 			};
 
@@ -100,7 +99,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Width = 30,
 				Height = 30,
 				Kind = PackIconKind.DeleteForever,
-				Foreground = (SolidColorBrush)FindResource("BrushBlack")
+				Foreground = (SolidColorBrush) FindResource("BrushBlack")
 			};
 
 			deleteHeroButton.Content = deleteHeroIcon;
@@ -147,7 +146,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Height = 50,
 				Margin = new Thickness(5),
 				Tag = hero,
-				Background = (SolidColorBrush)this.FindResource("BrushGray1")
+				Background = (SolidColorBrush) FindResource("BrushGray1")
 			};
 
 			var selectHeroButtonBlock = new TextBlock
@@ -155,21 +154,27 @@ namespace ClickQuest.Game.UserInterface.Pages
 				TextAlignment = TextAlignment.Center
 			};
 
-			var heroNameText = new Run(hero.Name) { FontFamily = (FontFamily)this.FindResource("FontFancy") };
+			var heroNameText = new Run(hero.Name)
+			{
+				FontFamily = (FontFamily) FindResource("FontFancy")
+			};
 			var heroLevelText = new Run($"\n{hero.Level} lvl | ");
 			var heroClassText = new Run($"{hero.HeroClass}");
 			var separator = new Run(" | ");
-			var heroTotalTimePlayedText = new Run($"{Math.Floor(hero.TimePlayed.TotalHours)}h {hero.TimePlayed.Minutes}m") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") };
+			var heroTotalTimePlayedText = new Run($"{Math.Floor(hero.TimePlayed.TotalHours)}h {hero.TimePlayed.Minutes}m")
+			{
+				FontFamily = (FontFamily) FindResource("FontRegularLightItalic")
+			};
 
 			heroNameText.FontSize = 20;
 			switch (hero.HeroClass)
 			{
 				case HeroClass.Slayer:
-					heroClassText.Foreground = (SolidColorBrush)FindResource("BrushSlayerRelated");
+					heroClassText.Foreground = (SolidColorBrush) FindResource("BrushSlayerRelated");
 					break;
 
 				case HeroClass.Venom:
-					heroClassText.Foreground = (SolidColorBrush)FindResource("BrushVenomRelated");
+					heroClassText.Foreground = (SolidColorBrush) FindResource("BrushVenomRelated");
 					break;
 			}
 
@@ -195,7 +200,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 					TextAlignment = TextAlignment.Center
 				};
 
-				var disabledText = new Run("Can't create new hero\nMax heroes reached!") { FontFamily = (FontFamily)this.FindResource("FontRegularLightItalic") };
+				var disabledText = new Run("Can't create new hero\nMax heroes reached!")
+				{
+					FontFamily = (FontFamily) FindResource("FontRegularLightItalic")
+				};
 				disabledInfoBlock.Inlines.Add(disabledText);
 
 				CreateHeroButton.Content = disabledInfoBlock;
@@ -239,7 +247,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			var hero = (sender as Button).Tag as Hero;
 
-			var result = AlertBox.Show($"Press Yes to delete {hero.Name}.", MessageBoxButton.YesNo);
+			var result = AlertBox.Show($"Press Yes to delete {hero.Name}.");
 			if (result == MessageBoxResult.Yes)
 			{
 				User.Instance.Heroes.Remove(hero);
@@ -251,7 +259,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void ResetProgressButton_Click(object sender, RoutedEventArgs e)
 		{
-			var result = AlertBox.Show("This action will delete all heroes, along with their equipment, as well as all currencies and achievements. Are you sure?", MessageBoxButton.YesNo);
+			var result = AlertBox.Show("This action will delete all heroes, along with their equipment, as well as all currencies and achievements. Are you sure?");
 
 			if (result == MessageBoxResult.Yes)
 			{

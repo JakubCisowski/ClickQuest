@@ -1,6 +1,3 @@
-using System.Text.Json.Serialization;
-using System.Windows.Controls;
-using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.UserInterface;
@@ -10,7 +7,7 @@ namespace ClickQuest.Game.Core.Items
 	public class Material : Item
 	{
 		public const int BaseMeltingIngotBonus = 10;
-		
+
 		public override Material CopyItem(int quantity)
 		{
 			var copy = new Material();
@@ -41,7 +38,7 @@ namespace ClickQuest.Game.Core.Items
 		public override void RemoveItem(int amount = 1)
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Materials, amount);
-			
+
 			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Material));
 		}
 	}

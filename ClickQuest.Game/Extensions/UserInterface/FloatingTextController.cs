@@ -1,12 +1,11 @@
-﻿using ClickQuest.Game.Core.Heroes.Buffs;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Extensions.Combat;
-using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Extensions.Combat;
+using MaterialDesignThemes.Wpf;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 using Colors = ClickQuest.Game.Extensions.UserInterface.ColorsController;
 
@@ -15,26 +14,102 @@ namespace ClickQuest.Game.Extensions.UserInterface
 	public static class FloatingTextController
 	{
 		public const int IngotDungeonKeyOffset = 22;
-		public static Point GoldPositionPoint = new Point() { X = 193, Y = 232 };
-		public static Point ExperiencePositionPoint = new Point() { X = 200, Y = 50 };
-		public static Point IngotGeneralPositionPoint = new Point() { X = 1, Y = 257 };
-		public static Point DungeonKeyGeneralPositionPoint = new Point() { X = 265, Y = 257 };
 
+		public static Point GoldPositionPoint = new Point
+		{
+			X = 193,
+			Y = 232
+		};
 
-		public static Point IngotFinePositionPoint = new Point() { X = IngotGeneralPositionPoint.X, Y = IngotGeneralPositionPoint.Y + IngotDungeonKeyOffset };
-		public static Point IngotSuperiorPositionPoint = new Point() { X = IngotGeneralPositionPoint.X, Y = IngotFinePositionPoint.Y + IngotDungeonKeyOffset };
-		public static Point IngotExceptionalPositionPoint = new Point() { X = IngotGeneralPositionPoint.X, Y = IngotSuperiorPositionPoint.Y + IngotDungeonKeyOffset };
-		public static Point IngotMasterworkPositionPoint = new Point() { X = IngotGeneralPositionPoint.X, Y = IngotExceptionalPositionPoint.Y + IngotDungeonKeyOffset };
-		public static Point IngotMythicPositionPoint = new Point() { X = IngotGeneralPositionPoint.X, Y = IngotMasterworkPositionPoint.Y + IngotDungeonKeyOffset };
-		public static Point DungeonKeyFinePositionPoint = new Point() { X = DungeonKeyGeneralPositionPoint.X, Y = DungeonKeyGeneralPositionPoint.Y + IngotDungeonKeyOffset };
-		public static Point DungeonKeySuperiorPositionPoint = new Point() { X = DungeonKeyGeneralPositionPoint.X, Y = DungeonKeyFinePositionPoint.Y + IngotDungeonKeyOffset };
-		public static Point DungeonKeyExceptionalPositionPoint = new Point() { X = DungeonKeyGeneralPositionPoint.X, Y = DungeonKeySuperiorPositionPoint.Y + IngotDungeonKeyOffset };
-		public static Point DungeonKeyMasterworkPositionPoint = new Point() { X = DungeonKeyGeneralPositionPoint.X, Y = DungeonKeyExceptionalPositionPoint.Y + IngotDungeonKeyOffset };
-		public static Point DungeonKeyMythicPositionPoint = new Point() { X = DungeonKeyGeneralPositionPoint.X, Y = DungeonKeyMasterworkPositionPoint.Y + IngotDungeonKeyOffset };
+		public static Point ExperiencePositionPoint = new Point
+		{
+			X = 200,
+			Y = 50
+		};
 
+		public static Point IngotGeneralPositionPoint = new Point
+		{
+			X = 1,
+			Y = 257
+		};
 
-		public static Point EnemyCenterPoint = new Point() { X = 683, Y = 384 };
-		public static Point LootEndPositionPoint = new Point() { X = EnemyCenterPoint.X + 200, Y = EnemyCenterPoint.Y - 200 };
+		public static Point DungeonKeyGeneralPositionPoint = new Point
+		{
+			X = 265,
+			Y = 257
+		};
+
+		public static Point IngotFinePositionPoint = new Point
+		{
+			X = IngotGeneralPositionPoint.X,
+			Y = IngotGeneralPositionPoint.Y + IngotDungeonKeyOffset
+		};
+
+		public static Point IngotSuperiorPositionPoint = new Point
+		{
+			X = IngotGeneralPositionPoint.X,
+			Y = IngotFinePositionPoint.Y + IngotDungeonKeyOffset
+		};
+
+		public static Point IngotExceptionalPositionPoint = new Point
+		{
+			X = IngotGeneralPositionPoint.X,
+			Y = IngotSuperiorPositionPoint.Y + IngotDungeonKeyOffset
+		};
+
+		public static Point IngotMasterworkPositionPoint = new Point
+		{
+			X = IngotGeneralPositionPoint.X,
+			Y = IngotExceptionalPositionPoint.Y + IngotDungeonKeyOffset
+		};
+
+		public static Point IngotMythicPositionPoint = new Point
+		{
+			X = IngotGeneralPositionPoint.X,
+			Y = IngotMasterworkPositionPoint.Y + IngotDungeonKeyOffset
+		};
+
+		public static Point DungeonKeyFinePositionPoint = new Point
+		{
+			X = DungeonKeyGeneralPositionPoint.X,
+			Y = DungeonKeyGeneralPositionPoint.Y + IngotDungeonKeyOffset
+		};
+
+		public static Point DungeonKeySuperiorPositionPoint = new Point
+		{
+			X = DungeonKeyGeneralPositionPoint.X,
+			Y = DungeonKeyFinePositionPoint.Y + IngotDungeonKeyOffset
+		};
+
+		public static Point DungeonKeyExceptionalPositionPoint = new Point
+		{
+			X = DungeonKeyGeneralPositionPoint.X,
+			Y = DungeonKeySuperiorPositionPoint.Y + IngotDungeonKeyOffset
+		};
+
+		public static Point DungeonKeyMasterworkPositionPoint = new Point
+		{
+			X = DungeonKeyGeneralPositionPoint.X,
+			Y = DungeonKeyExceptionalPositionPoint.Y + IngotDungeonKeyOffset
+		};
+
+		public static Point DungeonKeyMythicPositionPoint = new Point
+		{
+			X = DungeonKeyGeneralPositionPoint.X,
+			Y = DungeonKeyMasterworkPositionPoint.Y + IngotDungeonKeyOffset
+		};
+
+		public static Point EnemyCenterPoint = new Point
+		{
+			X = 683,
+			Y = 384
+		};
+
+		public static Point LootEndPositionPoint = new Point
+		{
+			X = EnemyCenterPoint.X + 200,
+			Y = EnemyCenterPoint.Y - 200
+		};
 
 		public static DoubleAnimation CreateTextOpacityAnimation(int durationInSeconds)
 		{
@@ -94,7 +169,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 			if (damageType == DamageType.Critical)
 			{
-				text.FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold");
+				text.FontFamily = (FontFamily) Application.Current.FindResource("FontRegularDemiBold");
 			}
 
 			stackPanel.Children.Add(text);
@@ -149,14 +224,14 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				Orientation = Orientation.Horizontal
 			};
 
-			var lootIcon = new PackIcon()
+			var lootIcon = new PackIcon
 			{
 				Foreground = ColorsController.GetRarityColor(lootRarity),
 				Width = 20,
 				Height = 20,
 				VerticalAlignment = VerticalAlignment.Center
 			};
-			
+
 			lootIcon.Kind = lootIconKind;
 
 			stackPanel.Children.Add(lootIcon);
@@ -165,9 +240,9 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			{
 				Foreground = ColorsController.GetRarityColor(lootRarity),
 				FontSize = 28,
-				FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBold"),
+				FontFamily = (FontFamily) Application.Current.FindResource("FontRegularBold"),
 				VerticalAlignment = VerticalAlignment.Center,
-				Margin = new Thickness(5,0,0,0)
+				Margin = new Thickness(5, 0, 0, 0)
 			};
 
 			if (quantity <= 1)

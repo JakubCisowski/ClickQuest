@@ -1,10 +1,6 @@
 using System.Linq;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Data;
-using ClickQuest.Game.Extensions.Collections;
-using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Pages;
 
 namespace ClickQuest.Game.Extensions.Items
@@ -15,7 +11,7 @@ namespace ClickQuest.Game.Extensions.Items
 		{
 			while (User.Instance.CurrentHero.EquippedArtifacts.Count > 0)
 			{
-				var currentIndex = User.Instance.CurrentHero.EquippedArtifacts.Count - 1;
+				int currentIndex = User.Instance.CurrentHero.EquippedArtifacts.Count - 1;
 
 				var artifactRemoved = User.Instance.CurrentHero.EquippedArtifacts[currentIndex];
 
@@ -25,9 +21,9 @@ namespace ClickQuest.Game.Extensions.Items
 
 			var newSet = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x => x.Id == targetSetId);
 
-			foreach (var artifactId in newSet.ArtifactIds)
+			foreach (int artifactId in newSet.ArtifactIds)
 			{
-				var newArtifact = GameAssets.Artifacts.FirstOrDefault(x=>x.Id==artifactId);
+				var newArtifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == artifactId);
 				User.Instance.CurrentHero.EquippedArtifacts.Add(newArtifact);
 				newArtifact.ArtifactFunctionality.OnEquip();
 			}
@@ -37,7 +33,7 @@ namespace ClickQuest.Game.Extensions.Items
 
 		public static bool CanArtifactSetsBeChanged()
 		{
-			if (User.Instance.CurrentHero.Quests.Any(x=>x.EndDate != default))
+			if (User.Instance.CurrentHero.Quests.Any(x => x.EndDate != default))
 			{
 				return false;
 			}

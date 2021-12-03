@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -36,12 +35,37 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		public int Buff { get; set; }
 		public bool AchievementBonusGranted { get; set; }
 
-		public string TypeString => Type.ToString();
+		public string TypeString
+		{
+			get
+			{
+				return Type.ToString();
+			}
+		}
 
-		public string RarityString => Rarity.ToString();
+		public string RarityString
+		{
+			get
+			{
+				return Rarity.ToString();
+			}
+		}
 
-		public bool IsFinished => Duration <= 0;
-		public ToolTip ToolTip => ItemToolTipController.GenerateBlessingToolTip(this);
+		public bool IsFinished
+		{
+			get
+			{
+				return Duration <= 0;
+			}
+		}
+
+		public ToolTip ToolTip
+		{
+			get
+			{
+				return ItemToolTipController.GenerateBlessingToolTip(this);
+			}
+		}
 
 		public Blessing CopyBlessing()
 		{
@@ -109,7 +133,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 			InitializeAndStartTimer();
 			UpdateDurationText();
 			CheckAndAddAchievementProgress();
-			InterfaceController.RefreshBlessingInterfaceOnCurrentPage(this.Type);
+			InterfaceController.RefreshBlessingInterfaceOnCurrentPage(Type);
 		}
 
 		public void DisableBuff()
@@ -146,7 +170,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 
 			DurationText = "";
 
-			InterfaceController.RefreshBlessingInterfaceOnCurrentPage(this.Type);
+			InterfaceController.RefreshBlessingInterfaceOnCurrentPage(Type);
 		}
 
 		private void InitializeAndStartTimer()
@@ -183,7 +207,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 
 			if (User.Instance.CurrentHero.Blessing != null)
 			{
-				result = AlertBox.Show($"Do you want to swap current blessing to {blessingBlueprint.Name}?\n{blessingBlueprint.Description}", MessageBoxButton.YesNo);
+				result = AlertBox.Show($"Do you want to swap current blessing to {blessingBlueprint.Name}?\n{blessingBlueprint.Description}");
 			}
 
 			if (result == MessageBoxResult.Yes)

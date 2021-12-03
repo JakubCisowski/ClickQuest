@@ -11,9 +11,9 @@
 	<Border BorderThickness="3" CornerRadius="7">
 		<Border.Background>
 			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-					<GradientStop Color="{DynamicResource ColorAccent1}" Offset="0.25" />
-					<GradientStop Color="{StaticResource ColorWhite}" Offset="0.75" />
-				</LinearGradientBrush>
+				<GradientStop Color="{DynamicResource ColorAccent1}" Offset="0.25" />
+				<GradientStop Color="{StaticResource ColorWhite}" Offset="0.75" />
+			</LinearGradientBrush>
 		</Border.Background>
 		<StackPanel Background="Transparent">
 
@@ -31,7 +31,7 @@
 				<Button x:Name="InfoButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="InfoButton_Click" Padding="0" Margin="5,5,75,5" Background="{StaticResource BrushGray1}">
 					<Button.ToolTip>
 						<ToolTip Style="{StaticResource ToolTipSimple}">
-							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Info"/>
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Info" />
 						</ToolTip>
 					</Button.ToolTip>
 
@@ -45,7 +45,7 @@
 				<Button x:Name="AchievementsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="AchievementsButton_Click" Padding="0" Margin="5,5,40,5" Background="{StaticResource BrushGray1}">
 					<Button.ToolTip>
 						<ToolTip Style="{StaticResource ToolTipSimple}">
-							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Your Achievements"/>
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Your Achievements" />
 						</ToolTip>
 					</Button.ToolTip>
 
@@ -59,7 +59,7 @@
 				<Button x:Name="SettingsButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleGeneral}" Click="SettingsButton_OnClick" Padding="0" Margin="5,5,40,5" Background="{StaticResource BrushGray1}" Visibility="Hidden">
 					<Button.ToolTip>
 						<ToolTip Style="{StaticResource ToolTipSimple}">
-							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Game Settings"/>
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Game Settings" />
 						</ToolTip>
 					</Button.ToolTip>
 
@@ -73,7 +73,7 @@
 				<Button x:Name="ExitButton" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource ButtonStyleDanger}" Click="ExitButton_Click" Background="{StaticResource BrushGray5}" Padding="0">
 					<Button.ToolTip>
 						<ToolTip Style="{StaticResource ToolTipSimple}">
-							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Exit the Game"/>
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}" Text="Exit the Game" />
 						</ToolTip>
 					</Button.ToolTip>
 
@@ -85,7 +85,7 @@
 
 				<!-- Game icon-->
 				<Image Source="/Resources/Images/GameIcon.png" Width="40" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" RenderOptions.EdgeMode="Aliased"
-					RenderOptions.BitmapScalingMode="Fant" Margin="5,0,0,0">
+				       RenderOptions.BitmapScalingMode="Fant" Margin="5,0,0,0">
 					<Image.RenderTransform>
 						<ScaleTransform ScaleX="1.5" />
 					</Image.RenderTransform>
@@ -96,7 +96,7 @@
 				<!-- Game frame-->
 				<Frame x:Name="CurrentFrame" NavigationUIVisibility="Hidden" Background="Transparent" />
 
-				<Canvas x:Name="FloatingTextAnimationCanvas" Width="{Binding ActualWidth, ElementName=MainGrid}" Height="{Binding ActualHeight, ElementName=MainGrid}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+				<Canvas x:Name="FloatingTextAnimationCanvas" Width="{Binding ActualWidth, ElementName=MainGrid}" Height="{Binding ActualHeight, ElementName=MainGrid}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 			</Grid>
 		</StackPanel>
 	</Border>

@@ -15,19 +15,27 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static Line GenerateTextSeparator()
 		{
-			return new Line() { X1 = 0, Y1 = 0, X2 = 500, Stroke = (SolidColorBrush)Application.Current.FindResource("BrushWhite"), StrokeThickness = 1, Margin = new Thickness(0, 6, 0, 6) };
+			return new Line
+			{
+				X1 = 0,
+				Y1 = 0,
+				X2 = 500,
+				Stroke = (SolidColorBrush) Application.Current.FindResource("BrushWhite"),
+				StrokeThickness = 1,
+				Margin = new Thickness(0, 6, 0, 6)
+			};
 		}
 
 		public static ToolTip GenerateUndiscoveredEnemyToolTip()
 		{
-			var toolTip = new ToolTip()
+			var toolTip = new ToolTip
 			{
-				Style = (Style)Application.Current.FindResource("ToolTipSimple")
+				Style = (Style) Application.Current.FindResource("ToolTipSimple")
 			};
 
 			var toolTipBlock = new TextBlock
 			{
-				Style = (Style)Application.Current.FindResource("ToolTipTextBlockBase"),
+				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase"),
 				Text = "You have not discovered this Enemy yet\nIt will show up here once you first fight it"
 			};
 

@@ -5,151 +5,151 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d" Title="Town" Background="Transparent"
       Height="728" Width="1366">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="2*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
 
-        <!-- Hero stats frame-->
-        <Frame x:Name="StatsFrame" Grid.Column="0" Source="/UserInterface/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" Background="Transparent"/>
+		<!-- Hero stats frame-->
+		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/UserInterface/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" Background="Transparent" />
 
-        <!-- Equipment frame-->
-        <Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/UserInterface/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="335" Background="Transparent"/>
+		<!-- Equipment frame-->
+		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/UserInterface/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="335" Background="Transparent" />
 
-        <!-- Main grid - regions and districts -->
-        <Grid Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+		<!-- Main grid - regions and districts -->
+		<Grid Grid.Column="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="7*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="2*" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="7*" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
 
-            <!-- Page description -->
-            <Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" Height="70" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}">
+			<!-- Page description -->
+			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" Height="70" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}">
 
-                <TextBlock FontSize="16" Height="45" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Town Districts are where you can buy and craft upgrades or go on an adventure. Regions are where your hero can fight monsters for experience and loot"/>
-            </Border>
+				<TextBlock FontSize="16" Height="45" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Town Districts are where you can buy and craft upgrades or go on an adventure. Regions are where your hero can fight monsters for experience and loot" />
+			</Border>
 
-            <!-- Districts text -->
-            <TextBlock Grid.Row="1" Grid.Column="0" FontSize="22" FontFamily="{StaticResource FontRegularDemiBold}" Text="Districts" HorizontalAlignment="Center" Margin="0,10,0,20" />
+			<!-- Districts text -->
+			<TextBlock Grid.Row="1" Grid.Column="0" FontSize="22" FontFamily="{StaticResource FontRegularDemiBold}" Text="Districts" HorizontalAlignment="Center" Margin="0,10,0,20" />
 
-            <!-- Districts panel -->
-            <StackPanel x:Name="TownPanel" Orientation="Vertical" Grid.Column="0" Grid.Row="2">
+			<!-- Districts panel -->
+			<StackPanel x:Name="TownPanel" Orientation="Vertical" Grid.Column="0" Grid.Row="2">
 
-                <!-- Shop button -->
-                <Button x:Name="ShopButton" Click="ShopButton_Click" Width="150" Height="70" Background="{StaticResource BrushGray1}">
+				<!-- Shop button -->
+				<Button x:Name="ShopButton" Click="ShopButton_Click" Width="150" Height="70" Background="{StaticResource BrushGray1}">
 
-                    <Button.ToolTip>
-                        <ToolTip Style="{StaticResource ToolTipSimple}">
-                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
 								<Run Text="Here you can sell your materials and recipes" />
 								<LineBreak />
 								<Run Text="You can also buy recipes with gold" />
-                            </TextBlock>
-                        </ToolTip>
-                    </Button.ToolTip>
+							</TextBlock>
+						</ToolTip>
+					</Button.ToolTip>
 
-                    <TextBlock Text="Shop" FontSize="20" />
-                </Button>
+					<TextBlock Text="Shop" FontSize="20" />
+				</Button>
 
-                <!-- Blacksmith button -->
-                <Button x:Name="BlacksmithButton" Click="BlacksmithButton_Click" Width="150" Height="70" Background="{StaticResource BrushGray1}">
+				<!-- Blacksmith button -->
+				<Button x:Name="BlacksmithButton" Click="BlacksmithButton_Click" Width="150" Height="70" Background="{StaticResource BrushGray1}">
 
-                    <Button.ToolTip>
-                        <ToolTip Style="{StaticResource ToolTipSimple}">
-                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
 								<Run Text="Here you can melt your materials or use them to craft artifacts" />
 								<LineBreak />
 								<Run Text="Melting gives you ingots that can be used instead of materials to craft artifacts" />
-                            </TextBlock>
-                        </ToolTip>
-                    </Button.ToolTip>
+							</TextBlock>
+						</ToolTip>
+					</Button.ToolTip>
 
-                    <TextBlock Text="Blacksmith" FontSize="20" />
-                </Button>
+					<TextBlock Text="Blacksmith" FontSize="20" />
+				</Button>
 
-                <!-- Priest button -->
-                <Button x:Name="PriestButton" Click="PriestButton_Click" Width="150" Height="70" Background="{StaticResource BrushGray1}">
+				<!-- Priest button -->
+				<Button x:Name="PriestButton" Click="PriestButton_Click" Width="150" Height="70" Background="{StaticResource BrushGray1}">
 
-                    <Button.ToolTip>
-                        <ToolTip Style="{StaticResource ToolTipSimple}">
-                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
 								<Run Text="Here you can buy temporary blessings which empower your hero" />
 								<LineBreak />
 								<Run Text="If you exit this hero or game all blessings are paused" />
 								<LineBreak />
 								<Run Text="Blessing timer is started right when you buy it, you can only have one blessing at a time" />
-                            </TextBlock>
-                        </ToolTip>
-                    </Button.ToolTip>
+							</TextBlock>
+						</ToolTip>
+					</Button.ToolTip>
 
-                    <TextBlock Text="Priest" FontSize="20" />
-                </Button>
+					<TextBlock Text="Priest" FontSize="20" />
+				</Button>
 
-                <!-- Quest menu button -->
-                <Button x:Name="QuestMenuButton" Click="QuestMenuButton_Click" Width="150" Height="70" Background="{StaticResource BrushGray1}">
+				<!-- Quest menu button -->
+				<Button x:Name="QuestMenuButton" Click="QuestMenuButton_Click" Width="150" Height="70" Background="{StaticResource BrushGray1}">
 
-                    <Button.ToolTip>
-                        <ToolTip Style="{StaticResource ToolTipSimple}">
-                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
 								<Run Text="Here you can complete quests that give you different rewards" />
 								<LineBreak />
 								<Run Text="You can't fight during quests, and they are running even if you exit the game" />
 								<LineBreak />
 								<Run Text="Rerolling gives you a new set of three quests" />
-                            </TextBlock>
-                        </ToolTip>
-                    </Button.ToolTip>
+							</TextBlock>
+						</ToolTip>
+					</Button.ToolTip>
 
-                    <TextBlock Text="Quests" FontSize="20" />
-                </Button>
+					<TextBlock Text="Quests" FontSize="20" />
+				</Button>
 
-                <!-- Dungeon select button -->
-                <Button x:Name="DungeonSelectButton" Click="DungeonSelectButton_Click" Width="150" Height="70" Background="{StaticResource BrushGray1}">
+				<!-- Dungeon select button -->
+				<Button x:Name="DungeonSelectButton" Click="DungeonSelectButton_Click" Width="150" Height="70" Background="{StaticResource BrushGray1}">
 
-                    <Button.ToolTip>
-                        <ToolTip Style="{StaticResource ToolTipSimple}">
-                            <TextBlock Style="{StaticResource ToolTipTextBlockBase}">
+					<Button.ToolTip>
+						<ToolTip Style="{StaticResource ToolTipSimple}">
+							<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
 								<Run Text="Here you can use dropped Dungeon Keys to fight Bosses" />
 								<LineBreak />
 								<Run Text="You have 30 seconds to deal as much damage as you can, the more damage the better rewards" />
 								<LineBreak />
 								<Run Text="Rare keys open tougher dungeons, but provide better loot" />
-                            </TextBlock>
-                        </ToolTip>
-                    </Button.ToolTip>
+							</TextBlock>
+						</ToolTip>
+					</Button.ToolTip>
 
-                    <TextBlock Text="Dungeons" FontSize="20" />
-                </Button>
-            </StackPanel>
+					<TextBlock Text="Dungeons" FontSize="20" />
+				</Button>
+			</StackPanel>
 
-            <!-- Regions text -->
-            <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontSize="22" FontFamily="{StaticResource FontRegularDemiBold}" Text="Regions" HorizontalAlignment="Center" Margin="0,10,0,20" />
+			<!-- Regions text -->
+			<TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontSize="22" FontFamily="{StaticResource FontRegularDemiBold}" Text="Regions" HorizontalAlignment="Center" Margin="0,10,0,20" />
 
-            <!-- Regions panel left -->
-            <StackPanel x:Name="RegionsPanelLeft" Orientation="Vertical" Grid.Column="1" Grid.Row="2">
-                <!-- [Here region buttons are dynamically generated] -->
-            </StackPanel>
+			<!-- Regions panel left -->
+			<StackPanel x:Name="RegionsPanelLeft" Orientation="Vertical" Grid.Column="1" Grid.Row="2">
+				<!-- [Here region buttons are dynamically generated] -->
+			</StackPanel>
 
-            <!-- Regions panel right -->
-            <StackPanel x:Name="RegionsPanelRight" Orientation="Vertical" Grid.Column="2" Grid.Row="2">
+			<!-- Regions panel right -->
+			<StackPanel x:Name="RegionsPanelRight" Orientation="Vertical" Grid.Column="2" Grid.Row="2">
 
-                <!-- [Here region buttons are dynamically generated] -->
-            </StackPanel>
+				<!-- [Here region buttons are dynamically generated] -->
+			</StackPanel>
 
-            <!-- Back to menu button -->
-            <Button x:Name="MainMenuButton" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" Click="MainMenuButton_Click" Width="450" Height="50" Background="{StaticResource BrushAccent3}">
-                <TextBlock Text="Back to menu" FontSize="22" />
-            </Button>
-        </Grid>
-    </Grid>
+			<!-- Back to menu button -->
+			<Button x:Name="MainMenuButton" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" Click="MainMenuButton_Click" Width="450" Height="50" Background="{StaticResource BrushAccent3}">
+				<TextBlock Text="Back to menu" FontSize="22" />
+			</Button>
+		</Grid>
+	</Grid>
 </Page>

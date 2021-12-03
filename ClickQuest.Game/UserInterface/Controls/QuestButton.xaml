@@ -19,7 +19,7 @@
 
 			<!-- Name text -->
 			<StackPanel x:Name="QuestNamePanel" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal">
-				<TextBlock x:Name="QuestName" Text="{Binding Path=Name}" FontSize="28" TextAlignment="Center" Margin="5" FontFamily="{StaticResource FontFancy}"/>
+				<TextBlock x:Name="QuestName" Text="{Binding Path=Name}" FontSize="28" TextAlignment="Center" Margin="5" FontFamily="{StaticResource FontFancy}" />
 			</StackPanel>
 
 			<!-- dodać rare -->
@@ -32,9 +32,9 @@
 
 			<Separator Grid.Row="3" Height="2" Width="160" Margin="10,4,10,4" HorizontalAlignment="Center" />
 
-			<TextBlock Grid.Row="4" Text="Rewards:" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Margin="5" FontFamily="{StaticResource FontRegularDemiBold}"/>
+			<TextBlock Grid.Row="4" Text="Rewards:" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Margin="5" FontFamily="{StaticResource FontRegularDemiBold}" />
 
-			<StackPanel x:Name="RewardsPanel" Grid.Row="5" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+			<StackPanel x:Name="RewardsPanel" Grid.Row="5" VerticalAlignment="Top" HorizontalAlignment="Center" />
 		</Grid>
 	</Button>
 </UserControl>

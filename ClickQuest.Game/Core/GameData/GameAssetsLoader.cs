@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Info;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Patterns;
-using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Places;
 using ClickQuest.Game.Extensions.Encryption;
 
@@ -70,7 +67,7 @@ namespace ClickQuest.Game.Core.GameData
 		{
 			var result = new List<T>();
 
-			var encryptedJson = File.ReadAllBytes(filePath);
+			byte[] encryptedJson = File.ReadAllBytes(filePath);
 
 			string json = DataEncryptionController.DecryptJsonUsingAes(encryptedJson);
 

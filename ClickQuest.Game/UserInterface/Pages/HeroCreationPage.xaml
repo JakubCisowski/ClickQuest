@@ -16,12 +16,6 @@
 				<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Indigo.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
-			<SolidColorBrush x:Key="PrimaryHueLightBrush" Color="{StaticResource ColorAccent2}"/>
-			<SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="{StaticResource ColorAccent2}"/>
-			<SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource ColorAccent2}"/>
-			<SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="{StaticResource ColorAccent2}"/>
-			<SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource ColorAccent2}"/>
-			<SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource ColorAccent2}"/>
 		</ResourceDictionary>
 	</Page.Resources>
 
@@ -66,7 +60,7 @@
 				</TextBlock>
 
 				<!-- Hero class selection -->
-				<Border  BorderThickness="2" BorderBrush="{StaticResource BrushAccent3}" Width="150">
+				<Border BorderThickness="2" BorderBrush="{StaticResource BrushAccent3}" Width="150">
 					<ListView x:Name="HeroClassBox" Style="{StaticResource MaterialDesignListView}" HorizontalAlignment="Center">
 
 						<ListView.ItemTemplate>
@@ -85,7 +79,7 @@
 								<Setter Property="ToolTipService.ShowDuration" Value="20000" />
 								<Setter Property="ToolTipService.InitialShowDelay" Value="100" />
 								<Style.Triggers>
-									
+
 									<MultiTrigger>
 										<MultiTrigger.Conditions>
 											<Condition Property="IsSelected" Value="True" />
@@ -100,14 +94,14 @@
 											<Condition Property="IsSelected" Value="True" />
 											<Condition Property="Selector.IsSelectionActive" Value="False" />
 										</MultiTrigger.Conditions>
-									
+
 										<Setter Property="Background" Value="{StaticResource BrushAccent3}" />
 									</MultiTrigger>
-									
+
 									<MultiTrigger>
 										<MultiTrigger.Conditions>
 											<Condition Property="IsMouseOver" Value="True" />
-											<Condition Property="IsSelected" Value="False"/>
+											<Condition Property="IsSelected" Value="False" />
 										</MultiTrigger.Conditions>
 
 										<Setter Property="Background" Value="{StaticResource BrushAccent3}" />
@@ -115,15 +109,15 @@
 
 									<!-- Slayer class -->
 									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroClass.Slayer}">
-										
-										<Setter Property="Foreground" Value="{StaticResource BrushSlayerRelated}"/>
-										
+
+										<Setter Property="Foreground" Value="{StaticResource BrushSlayerRelated}" />
+
 										<!-- ToolTip -->
 										<Setter Property="ToolTip">
 											<Setter.Value>
 												<ToolTip BorderBrush="{StaticResource BrushSlayerRelated}">
 													<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-														<Run Text="Slayer" FontSize="{StaticResource FontSizeToolTipName}" Foreground="{StaticResource BrushSlayerRelated}"/>
+														<Run Text="Slayer" FontSize="{StaticResource FontSizeToolTipName}" Foreground="{StaticResource BrushSlayerRelated}" />
 														<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 														<LineBreak />
 
@@ -131,19 +125,19 @@
 														<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 														<LineBreak />
 
-														<Run Text="Click damage" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularDemiBold}"/>
+														<Run Text="Click damage" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularDemiBold}" />
 														<Run Text=": " />
-														<Run Text="2" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}"/>
+														<Run Text="2" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}" />
 														<Run Text=" (+" />
-														<Run Text="1" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}"/>
+														<Run Text="1" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}" />
 														<Run Text="/lvl)" />
 														<LineBreak />
 
-														<Run Text="Crit chance" Foreground="{StaticResource BrushDamageTypeCritical}" FontFamily="{StaticResource FontRegularDemiBold}"/>
+														<Run Text="Crit chance" Foreground="{StaticResource BrushDamageTypeCritical}" FontFamily="{StaticResource FontRegularDemiBold}" />
 														<Run Text=": " />
-														<Run Text="25%" Foreground="{StaticResource BrushDamageTypeCritical}" FontFamily="{StaticResource FontRegularBold}"/>
+														<Run Text="25%" Foreground="{StaticResource BrushDamageTypeCritical}" FontFamily="{StaticResource FontRegularBold}" />
 														<Run Text=" (+" />
-														<Run Text="0.4%" Foreground="{StaticResource BrushDamageTypeCritical}" FontFamily="{StaticResource FontRegularBold}"/>
+														<Run Text="0.4%" Foreground="{StaticResource BrushDamageTypeCritical}" FontFamily="{StaticResource FontRegularBold}" />
 														<Run Text="/lvl)" />
 
 													</TextBlock>
@@ -154,16 +148,16 @@
 
 									<!-- Venom class -->
 									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroClass.Venom}">
-										
-										<Setter Property="Foreground" Value="{StaticResource BrushVenomRelated}"/>
-										
+
+										<Setter Property="Foreground" Value="{StaticResource BrushVenomRelated}" />
+
 										<!-- ToolTip -->
 										<Setter Property="ToolTip">
 											<Setter.Value>
 
 												<ToolTip BorderBrush="{StaticResource BrushVenomRelated}">
 													<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-														<Run Text="Venom" FontSize="{StaticResource FontSizeToolTipName}" Foreground="{StaticResource BrushVenomRelated}"/>
+														<Run Text="Venom" FontSize="{StaticResource FontSizeToolTipName}" Foreground="{StaticResource BrushVenomRelated}" />
 														<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 														<LineBreak />
 
@@ -171,26 +165,26 @@
 														<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 														<LineBreak />
 
-														<Run Text="Click damage" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularDemiBold}"/>
+														<Run Text="Click damage" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularDemiBold}" />
 														<Run Text=": " />
-														<Run Text="2" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}"/>
+														<Run Text="2" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}" />
 														<Run Text=" (+" />
-														<Run Text="1" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}"/>
+														<Run Text="1" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}" />
 														<Run Text="/lvl)" />
 														<LineBreak />
 
-														<Run Text="Poison damage" Foreground="{StaticResource BrushDamageTypePoison}" FontFamily="{StaticResource FontRegularDemiBold}"/>
+														<Run Text="Poison damage" Foreground="{StaticResource BrushDamageTypePoison}" FontFamily="{StaticResource FontRegularDemiBold}" />
 														<Run Text=": " />
-														<Run Text="1" Foreground="{StaticResource BrushDamageTypePoison}" FontFamily="{StaticResource FontRegularBold}"/>
+														<Run Text="1" Foreground="{StaticResource BrushDamageTypePoison}" FontFamily="{StaticResource FontRegularBold}" />
 														<Run Text=" (+" />
-														<Run Text="2" Foreground="{StaticResource BrushDamageTypePoison}" FontFamily="{StaticResource FontRegularBold}"/>
+														<Run Text="2" Foreground="{StaticResource BrushDamageTypePoison}" FontFamily="{StaticResource FontRegularBold}" />
 														<Run Text="/lvl) per tick (5 ticks over 2.5s)" />
 
 													</TextBlock>
 												</ToolTip>
 											</Setter.Value>
 										</Setter>
-									</DataTrigger> 
+									</DataTrigger>
 								</Style.Triggers>
 							</Style>
 						</ListView.ItemContainerStyle>
@@ -234,7 +228,7 @@
 								<Setter Property="ToolTipService.ShowDuration" Value="20000" />
 								<Setter Property="ToolTipService.InitialShowDelay" Value="100" />
 								<Style.Triggers>
-									
+
 									<MultiTrigger>
 										<MultiTrigger.Conditions>
 											<Condition Property="IsSelected" Value="True" />
@@ -249,19 +243,19 @@
 											<Condition Property="IsSelected" Value="True" />
 											<Condition Property="Selector.IsSelectionActive" Value="False" />
 										</MultiTrigger.Conditions>
-									
+
 										<Setter Property="Background" Value="{StaticResource BrushAccent3}" />
 									</MultiTrigger>
-									
+
 									<MultiTrigger>
 										<MultiTrigger.Conditions>
 											<Condition Property="IsMouseOver" Value="True" />
-											<Condition Property="IsSelected" Value="False"/>
+											<Condition Property="IsSelected" Value="False" />
 										</MultiTrigger.Conditions>
 
 										<Setter Property="Background" Value="{StaticResource BrushAccent3}" />
 									</MultiTrigger>
-									
+
 									<!-- Human race -->
 									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroRace.Human}">
 										<!-- ToolTip -->
@@ -270,14 +264,14 @@
 
 												<ToolTip>
 													<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-														<Run Text="Human" FontSize="{StaticResource FontSizeToolTipName}"/>
+														<Run Text="Human" FontSize="{StaticResource FontSizeToolTipName}" />
 														<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 														<LineBreak />
 
 														<Run Text="Human race specializes in trading and crafting" />
 														<LineBreak />
 
-														<Run Text="This means that human progresses these specializations two times faster than other races" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
+														<Run Text="This means that human progresses these specializations two times faster than other races" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}" />
 
 														<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 
@@ -303,14 +297,14 @@
 											<Setter.Value>
 												<ToolTip>
 													<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-														<Run Text="Elf" FontSize="{StaticResource FontSizeToolTipName}"/>
+														<Run Text="Elf" FontSize="{StaticResource FontSizeToolTipName}" />
 														<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 														<LineBreak />
 
 														<Run Text="Elf race specializes in questing and blessings" />
 														<LineBreak />
 
-														<Run Text="This means that elf progresses these specializations two times faster than other races" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
+														<Run Text="This means that elf progresses these specializations two times faster than other races" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}" />
 
 														<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 
@@ -336,14 +330,14 @@
 											<Setter.Value>
 												<ToolTip>
 													<TextBlock Style="{StaticResource ToolTipTextBlockBase}">
-														<Run Text="Dwarf" FontSize="{StaticResource FontSizeToolTipName}"/>
+														<Run Text="Dwarf" FontSize="{StaticResource FontSizeToolTipName}" />
 														<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 														<LineBreak />
 
 														<Run Text="Dwarf race specializes in melting and fighting bosses" />
 														<LineBreak />
 
-														<Run Text="This means that dwarf progresses these specializations two times faster than other races" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}"/>
+														<Run Text="This means that dwarf progresses these specializations two times faster than other races" FontFamily="{StaticResource FontRegularItalic}" Foreground="{StaticResource BrushGray5}" />
 
 														<Line X1="0" Y1="0" X2="500" Y2="0" Stroke="{StaticResource BrushWhite}" StrokeThickness="1" Margin="0,6,0,6" />
 

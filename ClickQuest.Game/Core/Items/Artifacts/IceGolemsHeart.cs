@@ -1,8 +1,6 @@
 ﻿using ClickQuest.Game.Core.Enemies;
-using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
-using ClickQuest.Game.Extensions.UserInterface;
 
 namespace ClickQuest.Game.Core.Items.Artifacts
 {
@@ -25,7 +23,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 				User.Instance.CurrentHero.CritChance -= _stackCount * CritChanceIncreasePerStack;
 				_stackCount = 0;
 			}
-			
+
 			if (_stackCount < MaxStacks)
 			{
 				_stackCount++;

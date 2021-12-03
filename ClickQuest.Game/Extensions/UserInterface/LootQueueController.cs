@@ -11,7 +11,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 {
 	public class LootQueueEntry
 	{
-		public string LootName{ get; set; }
+		public string LootName { get; set; }
 		public Rarity LootRarity { get; set; }
 		public PackIconKind LootIconKind { get; set; }
 		public int Quantity { get; set; }
@@ -26,23 +26,22 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 		public LootQueueEntry()
 		{
-			
 		}
 	}
-	
+
 	public static class LootQueueController
 	{
 		public const double QueueIntervalMilliseconds = 500;
 
 		public static List<LootQueueEntry> LootQueue { get; set; }
 
-		private static DispatcherTimer _timer;
+		private static readonly DispatcherTimer _timer;
 
 		static LootQueueController()
 		{
 			LootQueue = new List<LootQueueEntry>();
 
-			_timer = new DispatcherTimer()
+			_timer = new DispatcherTimer
 			{
 				Interval = TimeSpan.FromMilliseconds(QueueIntervalMilliseconds)
 			};
@@ -88,7 +87,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 			LootQueue.Remove(firstEntry);
 
-			if(LootQueue.Count == 0)
+			if (LootQueue.Count == 0)
 			{
 				_timer.Stop();
 			}
@@ -104,7 +103,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 			foreach (var lootQueueEntry in LootQueue)
 			{
-				if (merged.Any(x=>x.LootName == lootQueueEntry.LootName))
+				if (merged.Any(x => x.LootName == lootQueueEntry.LootName))
 				{
 					merged.FirstOrDefault(x => x.LootName == lootQueueEntry.LootName).Quantity += lootQueueEntry.Quantity;
 				}

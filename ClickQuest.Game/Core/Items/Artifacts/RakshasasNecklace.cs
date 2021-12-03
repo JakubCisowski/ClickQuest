@@ -1,6 +1,4 @@
-﻿using ClickQuest.Game.Core.Items;
-
-namespace ClickQuest.Game.Core.Items.Artifacts
+﻿namespace ClickQuest.Game.Core.Items.Artifacts
 {
 	// Increases passive Aura Attack Speed by 50%.
 	public class RakshasasNecklace : ArtifactFunctionality

@@ -37,7 +37,7 @@ namespace ClickQuest.Game.Extensions.Gameplay
 			if (User.Instance.CurrentHero is not null)
 			{
 				User.Instance.CurrentHero.Specialization.SpecializationAmounts[specializationType] += amountIncreased;
-				
+
 				InterfaceController.UpdateSingleSpecializationInterface(specializationType);
 			}
 		}

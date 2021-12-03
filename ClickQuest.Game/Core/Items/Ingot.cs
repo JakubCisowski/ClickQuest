@@ -56,7 +56,7 @@ namespace ClickQuest.Game.Core.Items
 		{
 			CollectionsController.AddItemToCollection(this, User.Instance.Ingots, amount);
 
-			if (amount!=0)
+			if (amount != 0)
 			{
 				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{amount}", ColorsController.GetRarityColor(Rarity), FloatingTextController.GetIngotRarityPosition(Rarity));
 			}
@@ -69,12 +69,11 @@ namespace ClickQuest.Game.Core.Items
 		{
 			CollectionsController.RemoveItemFromCollection(this, User.Instance.Ingots, amount);
 
-			if (amount!=0)
+			if (amount != 0)
 			{
 				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{amount}", ColorsController.GetRarityColor(Rarity), FloatingTextController.GetIngotRarityPosition(Rarity));
-
 			}
-			
+
 			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Ingot));
 		}
 	}

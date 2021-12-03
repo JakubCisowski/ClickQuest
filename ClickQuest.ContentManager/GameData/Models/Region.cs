@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization;
 
 namespace ClickQuest.ContentManager.GameData.Models
 {
@@ -9,7 +8,13 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public int MonsterId { get; set; }
 		public double Frequency { get; set; }
 
-		public Monster Monster => GameContent.Monsters.FirstOrDefault(x => x.Id == MonsterId);
+		public Monster Monster
+		{
+			get
+			{
+				return GameContent.Monsters.FirstOrDefault(x => x.Id == MonsterId);
+			}
+		}
 	}
 
 	public class Region : IIdentifiable

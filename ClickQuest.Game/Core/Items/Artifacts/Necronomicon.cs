@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Threading;
-using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 
 namespace ClickQuest.Game.Core.Items.Artifacts

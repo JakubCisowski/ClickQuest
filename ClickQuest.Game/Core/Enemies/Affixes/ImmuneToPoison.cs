@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClickQuest.Game.Core.Enemies.Affixes
+﻿namespace ClickQuest.Game.Core.Enemies.Affixes
 {
 	public class ImmuneToPoison : AffixFunctionality
 	{

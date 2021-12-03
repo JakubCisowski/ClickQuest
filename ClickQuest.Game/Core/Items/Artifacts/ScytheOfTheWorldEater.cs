@@ -1,5 +1,4 @@
-﻿using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Player;
+﻿using ClickQuest.Game.Core.Player;
 
 namespace ClickQuest.Game.Core.Items.Artifacts
 {

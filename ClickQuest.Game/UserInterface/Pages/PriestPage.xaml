@@ -26,10 +26,10 @@
 		</Grid.ColumnDefinitions>
 
 		<!-- Hero stats frame-->
-		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/UserInterface/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" Background="Transparent"/>
+		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/UserInterface/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" Background="Transparent" />
 
 		<!-- Equipment frame-->
-		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/UserInterface/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="335" Background="Transparent"/>
+		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/UserInterface/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="335" Background="Transparent" />
 
 		<!-- Main priest page grid -->
 		<Grid Grid.Column="1">
@@ -42,7 +42,7 @@
 			<!-- Page description -->
 			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" HorizontalAlignment="Center" Margin="5" Width="600" Background="{StaticResource BrushGray1}">
 
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Here you can buy temporary blessings which empower your hero. If you exit this hero or game all blessings are paused. Blessing timer is started right when you buy it, you can only have one blessing at a time"/>
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Here you can buy temporary blessings which empower your hero. If you exit this hero or game all blessings are paused. Blessing timer is started right when you buy it, you can only have one blessing at a time" />
 			</Border>
 
 			<!-- Town button -->
@@ -74,9 +74,9 @@
 								<Setter Property="HorizontalContentAlignment" Value="Center" />
 								<Setter Property="ToolTipService.ShowDuration" Value="20000" />
 								<Setter Property="ToolTipService.InitialShowDelay" Value="100" />
-								<Setter Property="ToolTip" Value="{Binding ToolTip}"/>
-								<Setter Property="Foreground" Value="{StaticResource BrushBlack}"/>
-								<Setter Property="Template" Value="{StaticResource ListViewItemVendorTemplate}"/>
+								<Setter Property="ToolTip" Value="{Binding ToolTip}" />
+								<Setter Property="Foreground" Value="{StaticResource BrushBlack}" />
+								<Setter Property="Template" Value="{StaticResource ListViewItemVendorTemplate}" />
 							</Style>
 						</ListView.ItemContainerStyle>
 
@@ -87,9 +87,9 @@
 								<GridViewColumn Header="Name" Width="410" DisplayMemberBinding="{Binding Name}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
-											<Setter Property="Height" Value="50"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}" />
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}" />
+											<Setter Property="Height" Value="50" />
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -101,9 +101,9 @@
 								<GridViewColumn Header="Value" Width="100" DisplayMemberBinding="{Binding Value}">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
-											<Setter Property="Height" Value="50"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}" />
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}" />
+											<Setter Property="Height" Value="50" />
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -115,9 +115,9 @@
 								<GridViewColumn Width="120">
 									<GridViewColumn.HeaderContainerStyle>
 										<Style TargetType="{x:Type GridViewColumnHeader}">
-											<Setter Property="Background" Value="{StaticResource BrushAccent2}"/>
-											<Setter Property="Foreground" Value="{StaticResource BrushGray5}"/>
-											<Setter Property="Height" Value="50"/>
+											<Setter Property="Background" Value="{StaticResource BrushAccent2}" />
+											<Setter Property="Foreground" Value="{StaticResource BrushGray5}" />
+											<Setter Property="Height" Value="50" />
 											<Setter Property="IsHitTestVisible" Value="False" />
 											<Setter Property="HorizontalContentAlignment" Value="Center" />
 											<Setter Property="Padding" Value="1,5,1,5" />
@@ -127,7 +127,7 @@
 									<!-- Buy button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Buy" Click="BuyButton_Click" Initialized="BuyButton_OnInitialized" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}"/>
+											<Button Content="Buy" Click="BuyButton_Click" Initialized="BuyButton_OnInitialized" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}" />
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>

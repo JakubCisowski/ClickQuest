@@ -23,7 +23,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			{
 				SaveObjectChanges();
 
-				var currentTabName = (tabControl.SelectedItem as TabItem).Header.ToString();
+				string? currentTabName = (tabControl.SelectedItem as TabItem).Header.ToString();
 				var currentTabNameAsContentType = (ContentType) Enum.Parse(typeof(ContentType), currentTabName.Replace(" ", ""));
 
 				switch (currentTabNameAsContentType)

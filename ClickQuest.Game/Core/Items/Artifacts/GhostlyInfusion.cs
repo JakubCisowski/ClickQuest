@@ -1,11 +1,5 @@
-﻿using System.Linq;
-using System.Windows;
-using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Player;
+﻿using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
-using ClickQuest.Game.UserInterface.Controls;
-using ClickQuest.Game.UserInterface.Pages;
 
 namespace ClickQuest.Game.Core.Items.Artifacts
 {
@@ -29,7 +23,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 
 					CombatController.DealDamageToCurrentEnemy(criticalDamageDealt, DamageType.Critical);
 					CombatController.DealDamageToCurrentEnemy((int) (criticalDamageDealt * DamageModifier), DamageType.Artifact);
-					
+
 					clickDamage = 0;
 				}
 				else if (clickDamageType == DamageType.Critical)

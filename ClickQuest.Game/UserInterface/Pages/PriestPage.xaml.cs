@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
@@ -29,7 +28,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			ItemsListViewBuy.ItemsSource = GetPriestOfferAsBlessings();
 			ItemsListViewBuy.Items.Refresh();
-			
+
 			if (ItemsListViewBuy.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
 			{
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Visible);
@@ -62,12 +61,19 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				var buyRuns = new List<Run>();
 				buyRuns.Add(new Run("Are you sure you want to buy "));
-				buyRuns.Add(new Run($"{blessingBlueprint.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				buyRuns.Add(new Run($"{blessingBlueprint.Name}")
+				{
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+				});
 				buyRuns.Add(new Run(" for "));
-				buyRuns.Add(new Run($"{blessingBlueprint.Value} gold"){Foreground = (SolidColorBrush)this.FindResource("BrushGold"), FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				buyRuns.Add(new Run($"{blessingBlueprint.Value} gold")
+				{
+					Foreground = (SolidColorBrush) FindResource("BrushGold"),
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+				});
 				buyRuns.Add(new Run("?"));
-				
-				var result = AlertBox.Show(buyRuns, MessageBoxButton.YesNo);
+
+				var result = AlertBox.Show(buyRuns);
 
 				if (result == MessageBoxResult.No)
 				{
@@ -90,7 +96,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Blessing.AddOrReplaceBlessing(blessingBlueprint.Id);
 				}
 
-				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{blessingBlueprint.Value}", (SolidColorBrush)this.FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{blessingBlueprint.Value}", (SolidColorBrush) FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
 
 				User.Instance.Gold -= blessingBlueprint.Value;
 
@@ -100,9 +106,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				var notEnoughGoldRuns = new List<Run>();
 				notEnoughGoldRuns.Add(new Run("You do not have enough gold to buy this blessing.\nIt costs "));
-				notEnoughGoldRuns.Add(new Run($"{blessingBlueprint.Value} gold"){Foreground = (SolidColorBrush)this.FindResource("BrushGold"), FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				notEnoughGoldRuns.Add(new Run($"{blessingBlueprint.Value} gold")
+				{
+					Foreground = (SolidColorBrush) FindResource("BrushGold"),
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+				});
 				notEnoughGoldRuns.Add(new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses."));
-				
+
 				AlertBox.Show(notEnoughGoldRuns, MessageBoxButton.OK);
 			}
 		}
@@ -113,20 +123,24 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (button?.ToolTip == null)
 			{
-				var toolTip = new ToolTip()
+				var toolTip = new ToolTip
 				{
-					Style = (Style)this.FindResource("ToolTipSimple")
+					Style = (Style) FindResource("ToolTipSimple")
 				};
 
 				GeneralToolTipController.SetToolTipDelayAndDuration(button);
 
-				var toolTipBlock = new TextBlock()
+				var toolTipBlock = new TextBlock
 				{
-					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+					Style = (Style) FindResource("ToolTipTextBlockBase")
 				};
 
 				toolTipBlock.Inlines.Add(new Run("Buy for "));
-				toolTipBlock.Inlines.Add(new Run($"{(button.CommandParameter as Blessing).Value} gold"){FontFamily=(FontFamily)this.FindResource("FontRegularDemiBold"),Foreground=(SolidColorBrush)this.FindResource("BrushGold")});
+				toolTipBlock.Inlines.Add(new Run($"{(button.CommandParameter as Blessing).Value} gold")
+				{
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold"),
+					Foreground = (SolidColorBrush) FindResource("BrushGold")
+				});
 
 				toolTip.Content = toolTipBlock;
 

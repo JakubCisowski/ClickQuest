@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using ClickQuest.Game.Core.Enemies;
-using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Extensions.Combat;
 
 namespace ClickQuest.Game.Core.Items.Artifacts

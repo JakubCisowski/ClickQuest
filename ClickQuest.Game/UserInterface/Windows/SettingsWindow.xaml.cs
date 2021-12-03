@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using ClickQuest.Game.Core.Player;
@@ -11,7 +9,7 @@ using ClickQuest.Game.UserInterface.Controls.Styles.Themes;
 
 namespace ClickQuest.Game.UserInterface.Windows
 {
-	public partial class SettingsWindow : Window
+	public partial class SettingsWindow
 	{
 		private static SettingsWindow _instance;
 
@@ -36,19 +34,19 @@ namespace ClickQuest.Game.UserInterface.Windows
 		public new void Show()
 		{
 			_instance.Visibility = Visibility.Visible;
-			
+
 			switch (User.Instance.Theme)
 			{
 				case ColorTheme.Blue:
-					BlueThemeBorder.BorderBrush = (SolidColorBrush)this.FindResource("BrushBlack");
+					BlueThemeBorder.BorderBrush = (SolidColorBrush) FindResource("BrushBlack");
 					break;
 
 				case ColorTheme.Orange:
-					OrangeThemeBorder.BorderBrush = (SolidColorBrush)this.FindResource("BrushBlack");
+					OrangeThemeBorder.BorderBrush = (SolidColorBrush) FindResource("BrushBlack");
 					break;
 
 				case ColorTheme.Pink:
-					PinkThemeBorder.BorderBrush = (SolidColorBrush)this.FindResource("BrushBlack");
+					PinkThemeBorder.BorderBrush = (SolidColorBrush) FindResource("BrushBlack");
 					break;
 			}
 		}
@@ -63,7 +61,7 @@ namespace ClickQuest.Game.UserInterface.Windows
 
 		private void OkButton_OnClick(object sender, RoutedEventArgs e)
 		{
-			this.Close();
+			Close();
 		}
 
 		private void SettingsWindow_Closing(object sender, CancelEventArgs e)
@@ -75,24 +73,24 @@ namespace ClickQuest.Game.UserInterface.Windows
 
 		private void ThemeBorder_OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
 		{
-			var borderName = (sender as Border).Name;
-			
-			ColorTheme selectedTheme = ColorTheme.Blue;
+			string borderName = (sender as Border).Name;
+
+			var selectedTheme = ColorTheme.Blue;
 
 			if (borderName.StartsWith("Blue"))
 			{
 				selectedTheme = ColorTheme.Blue;
-				BlueThemeBorder.BorderBrush = (SolidColorBrush)this.FindResource("BrushBlack");
+				BlueThemeBorder.BorderBrush = (SolidColorBrush) FindResource("BrushBlack");
 			}
 			else if (borderName.StartsWith("Orange"))
 			{
 				selectedTheme = ColorTheme.Orange;
-				OrangeThemeBorder.BorderBrush = (SolidColorBrush)this.FindResource("BrushBlack");
+				OrangeThemeBorder.BorderBrush = (SolidColorBrush) FindResource("BrushBlack");
 			}
 			else if (borderName.StartsWith("Pink"))
 			{
 				selectedTheme = ColorTheme.Pink;
-				PinkThemeBorder.BorderBrush = (SolidColorBrush)this.FindResource("BrushBlack");
+				PinkThemeBorder.BorderBrush = (SolidColorBrush) FindResource("BrushBlack");
 			}
 
 			ColorsController.ChangeApplicationColorTheme(selectedTheme);

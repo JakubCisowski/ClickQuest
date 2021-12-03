@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
 using ClickQuest.Game.Core.Enemies;
-using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;

@@ -19,7 +19,7 @@ namespace ClickQuest.Game.Extensions.Combat
 			if (isNoQuestActive)
 			{
 				var clickedEnemy = InterfaceController.CurrentEnemy;
-				
+
 				CombatTimerController.StartPoisonTimer();
 
 				var damageBaseAndCritInfo = User.Instance.CurrentHero.CalculateBaseAndCritClickDamage();
@@ -29,7 +29,7 @@ namespace ClickQuest.Game.Extensions.Combat
 				// Passing clickedEnemy ensures that even if we kill the enemy with dealt damage (eg. click damage),
 				// other effects (on-hit and artifacts) will be dealt to that dead enemy instead of being carried over.
 				// However, stacking artifacts and other similar bonuses will still work properly.
-				
+
 				DealDamageToEnemy(clickedEnemy, damageBaseAndCritInfo.Damage, damageBaseAndCritInfo.DamageType);
 
 				DealDamageToEnemy(clickedEnemy, damageOnHit, DamageType.OnHit);
@@ -46,7 +46,10 @@ namespace ClickQuest.Game.Extensions.Combat
 			}
 		}
 
-		public static void DealDamageToCurrentEnemy(int damage, DamageType damageType = DamageType.Normal) => DealDamageToEnemy(InterfaceController.CurrentEnemy, damage, damageType);
+		public static void DealDamageToCurrentEnemy(int damage, DamageType damageType = DamageType.Normal)
+		{
+			DealDamageToEnemy(InterfaceController.CurrentEnemy, damage, damageType);
+		}
 
 		public static void DealDamageToEnemy(Enemy enemy, int damage, DamageType damageType = DamageType.Normal)
 		{

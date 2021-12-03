@@ -1,16 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
 
@@ -35,14 +31,18 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			BossButton.IsEnabled = true;
 			TownButton.Visibility = Visibility.Hidden;
-			BossHealthBorder.BorderBrush = (SolidColorBrush)this.FindResource("BrushGold");
+			BossHealthBorder.BorderBrush = (SolidColorBrush) FindResource("BrushGold");
 
 			BindFightInfoToInterface(boss);
 
 			// Mark the Boss as discovered.
-			if (!GameAssets.BestiaryEntries.Any(x=>x.EntryType == BestiaryEntryType.Boss && x.Id==boss.Id))
+			if (!GameAssets.BestiaryEntries.Any(x => x.EntryType == BestiaryEntryType.Boss && x.Id == boss.Id))
 			{
-				GameAssets.BestiaryEntries.Add(new BestiaryEntry() { Id = boss.Id, EntryType = BestiaryEntryType.Boss });
+				GameAssets.BestiaryEntries.Add(new BestiaryEntry
+				{
+					Id = boss.Id,
+					EntryType = BestiaryEntryType.Boss
+				});
 			}
 
 			CombatTimerController.BossFightTimer.Start();
@@ -64,7 +64,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			foreach (var affix in boss.Affixes)
 			{
-				var	affixString = string.Concat(affix.ToString().Select(x => Char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
+				string affixString = string.Concat(affix.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
 
 				affixesStringList.Add(affixString);
 			}
@@ -76,7 +76,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			BossButton.IsEnabled = false;
 			TownButton.Visibility = Visibility.Visible;
-			BossHealthBorder.BorderBrush = (SolidColorBrush)this.FindResource("BrushGray3");
+			BossHealthBorder.BorderBrush = (SolidColorBrush) FindResource("BrushGray3");
 
 			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
 			(StatsFrame.Content as HeroStatsPage).RefreshAllDynamicStatsAndToolTips();

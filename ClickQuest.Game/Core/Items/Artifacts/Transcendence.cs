@@ -1,5 +1,4 @@
 ﻿using ClickQuest.Game.Core.Enemies;
-using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
 
@@ -19,7 +18,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 
 		public override void OnDealingPoisonDamage(ref int poisonDamage)
 		{
-			if (InterfaceController.CurrentEnemy is Monster monster)
+			if (InterfaceController.CurrentEnemy is Monster)
 			{
 				poisonDamage = 0;
 			}
@@ -27,7 +26,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 
 		public override void OnDealingAuraDamage(ref int auraDamage)
 		{
-			if (InterfaceController.CurrentEnemy is Monster monster)
+			if (InterfaceController.CurrentEnemy is Monster)
 			{
 				auraDamage = 0;
 			}

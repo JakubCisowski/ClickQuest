@@ -1,9 +1,7 @@
 using System.ComponentModel;
-using System.Text.Json.Serialization;
 using System.Windows.Controls;
 using ClickQuest.Game.Core.Interfaces;
 using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.Extensions.UserInterface.ToolTips;
 
 namespace ClickQuest.Game.Core.Items
@@ -18,8 +16,14 @@ namespace ClickQuest.Game.Core.Items
 		public int Value { get; set; }
 		public Rarity Rarity { get; set; }
 		public virtual string Description { get; set; }
-		
-		public ToolTip ToolTip => ItemToolTipController.GenerateItemToolTip(this);
+
+		public ToolTip ToolTip
+		{
+			get
+			{
+				return ItemToolTipController.GenerateItemToolTip(this);
+			}
+		}
 
 		public int Quantity
 		{
@@ -41,7 +45,13 @@ namespace ClickQuest.Game.Core.Items
 			}
 		}
 
-		public string RarityString => Rarity.ToString();
+		public string RarityString
+		{
+			get
+			{
+				return Rarity.ToString();
+			}
+		}
 
 		public abstract Item CopyItem(int quantity);
 		public abstract void AddAchievementProgress(int amount = 1);

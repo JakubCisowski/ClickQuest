@@ -3,8 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-	  xmlns:local="clr-namespace:ClickQuest.Game.Core.Adventures"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:ClickQuest.Game.Core.Adventures"
       mc:Ignorable="d" Title="Quest Menu" Background="Transparent"
       Height="728" Width="1366">
 
@@ -16,10 +16,10 @@
 		</Grid.ColumnDefinitions>
 
 		<!-- Hero stats frame-->
-		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/UserInterface/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" Background="Transparent"/>
+		<Frame x:Name="StatsFrame" Grid.Column="0" Source="/UserInterface/Pages/HeroStatsPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="341" Background="Transparent" />
 
 		<!-- Equipment frame-->
-		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/UserInterface/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="335" Background="Transparent"/>
+		<Frame x:Name="EquipmentFrame" Grid.Column="2" Source="/UserInterface/Pages/EquipmentPage.xaml" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Width="335" Background="Transparent" />
 
 		<!-- Main Grid -->
 		<Grid Grid.Column="1">
@@ -32,9 +32,9 @@
 			</Grid.RowDefinitions>
 
 			<!-- Page description -->
-			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2"  Background="{StaticResource BrushGray1}" HorizontalAlignment="Center" Margin="5" Width="600">
+			<Border Grid.Row="0" CornerRadius="8" BorderBrush="{StaticResource BrushAccent3}" BorderThickness="2" Background="{StaticResource BrushGray1}" HorizontalAlignment="Center" Margin="5" Width="600">
 
-				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Here you can complete quests that give you different rewards. You can't fight during quests, and they are running even if you exit the game. Rerolling gives you a new set of three quests"/>
+				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Here you can complete quests that give you different rewards. You can't fight during quests, and they are running even if you exit the game. Rerolling gives you a new set of three quests" />
 			</Border>
 
 			<!-- Quest reroll button -->
@@ -43,8 +43,8 @@
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 						<TextBlock Text="Reroll" FontSize="22" VerticalAlignment="Center" />
 						<TextBlock Text=" (" FontSize="22" VerticalAlignment="Center" />
-						<materialDesign:PackIcon Width="20" Height="20" Kind="CheckboxMultipleBlankCircle" VerticalAlignment="Center" Foreground="{StaticResource BrushGold}"/>
-						<TextBlock FontSize="22" Text="{Binding Source={x:Static local:Quest.RerollGoldCost}, StringFormat='\{0\})'}" VerticalAlignment="Center"/>
+						<materialDesign:PackIcon Width="20" Height="20" Kind="CheckboxMultipleBlankCircle" VerticalAlignment="Center" Foreground="{StaticResource BrushGold}" />
+						<TextBlock FontSize="22" Text="{Binding Source={x:Static local:Quest.RerollGoldCost}, StringFormat='\{0\})'}" VerticalAlignment="Center" />
 					</StackPanel>
 				</Button.Content>
 			</Button>
@@ -56,7 +56,7 @@
 					</Button.Content>
 				</Button>
 
-				<TextBlock x:Name="NavigationTextBlock" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" Text="1 / 3"/>
+				<TextBlock x:Name="NavigationTextBlock" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" Text="1 / 3" />
 
 				<Button x:Name="RightNavigationButton" HorizontalAlignment="Center" Width="50" Height="50" Margin="110,0,0,0" Click="RightNavigationButton_OnClick">
 					<Button.Content>

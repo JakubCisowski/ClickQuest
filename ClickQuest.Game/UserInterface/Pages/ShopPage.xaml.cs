@@ -1,20 +1,20 @@
-using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Heroes.Buffs;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.UserInterface.Controls;
-using ClickQuest.Game.UserInterface.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
+using ClickQuest.Game.Core.GameData;
+using ClickQuest.Game.Core.Heroes.Buffs;
+using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.Gameplay;
+using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.Extensions.UserInterface.ToolTips;
-using System.Windows.Documents;
+using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Windows;
 
 namespace ClickQuest.Game.UserInterface.Pages
 {
@@ -32,7 +32,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			ItemsListViewSellMaterials.ItemsSource = User.Instance.CurrentHero?.Materials.ReorderItemsInList();
 			ItemsListViewSellRecipes.ItemsSource = User.Instance.CurrentHero?.Recipes.ReorderItemsInList();
-			
+
 			if (User.Instance.CurrentHero != null)
 			{
 				ItemsListViewBuy.ItemsSource = GetShopOfferAsRecipes();
@@ -41,10 +41,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 			ItemsListViewSellMaterials.Items.Refresh();
 			ItemsListViewSellRecipes.Items.Refresh();
 			ItemsListViewBuy.Items.Refresh();
-			
+
 			RefreshScrollBarVisibilities();
 		}
-		
+
 		public void RefreshScrollBarVisibilities()
 		{
 			if (ItemsListViewSellMaterials.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
@@ -55,7 +55,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellMaterials, ScrollBarVisibility.Disabled);
 			}
-			
+
 			if (ItemsListViewSellRecipes.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
 			{
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Visible);
@@ -64,7 +64,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Disabled);
 			}
-			
+
 			if (ItemsListViewBuy.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
 			{
 				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Visible);
@@ -77,15 +77,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		public List<Recipe> GetShopOfferAsRecipes()
 		{
-			var result = new List<Recipe>();
 			var listOfPatterns = GameAssets.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]);
 
-			foreach (var pattern in listOfPatterns)
-			{
-				result.Add(GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.Id));
-			}
-
-			return result;
+			return listOfPatterns.Select(pattern => GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.Id)).ToList();
 		}
 
 		private void TownButton_Click(object sender, RoutedEventArgs e)
@@ -104,10 +98,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				var sellItemRuns = new List<Run>();
 				sellItemRuns.Add(new Run("Are you sure you want to sell "));
-				sellItemRuns.Add(new Run($"{item.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				sellItemRuns.Add(new Run($"{item.Name}")
+				{
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+				});
 				sellItemRuns.Add(new Run("?"));
-				
-				var result = AlertBox.Show(sellItemRuns, MessageBoxButton.YesNo);
+
+				var result = AlertBox.Show(sellItemRuns);
 
 				if (result == MessageBoxResult.No)
 				{
@@ -118,7 +115,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			if (item is Material)
 			{
 				// The selling ratio is only applied for materials.
-				itemSellValue = (int)Math.Ceiling(item.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+				itemSellValue = (int) Math.Ceiling(item.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
 				GameController.UpdateSpecializationAmountAndUI(SpecializationType.Trading);
 			}
 			else
@@ -126,11 +123,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 				itemSellValue = item.Value;
 			}
 
-			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{itemSellValue}", (SolidColorBrush)this.FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{itemSellValue}", (SolidColorBrush) FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
 
 			item.RemoveItem();
 			User.Instance.Gold += itemSellValue;
-			
+
 			UpdateShop();
 		}
 
@@ -143,18 +140,25 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				var buyRecipeRuns = new List<Run>();
 				buyRecipeRuns.Add(new Run("Are you sure you want to buy "));
-				buyRecipeRuns.Add(new Run($"{recipe.Name}"){FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				buyRecipeRuns.Add(new Run($"{recipe.Name}")
+				{
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+				});
 				buyRecipeRuns.Add(new Run(" for "));
-				buyRecipeRuns.Add(new Run($"{recipe.Value} gold"){Foreground = (SolidColorBrush)this.FindResource("BrushGold"), FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				buyRecipeRuns.Add(new Run($"{recipe.Value} gold")
+				{
+					Foreground = (SolidColorBrush) FindResource("BrushGold"),
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+				});
 				buyRecipeRuns.Add(new Run("?"));
-				
-				var result = AlertBox.Show(buyRecipeRuns, MessageBoxButton.YesNo);
+
+				var result = AlertBox.Show(buyRecipeRuns);
 				if (result == MessageBoxResult.No)
 				{
 					return;
 				}
 
-				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{recipe.Value}", (SolidColorBrush)this.FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{recipe.Value}", (SolidColorBrush) FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
 
 				recipe.AddItem();
 				User.Instance.Gold -= recipe.Value;
@@ -167,9 +171,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				var notEnoughGoldRuns = new List<Run>();
 				notEnoughGoldRuns.Add(new Run("You do not have enough gold to buy this item.\nIt costs "));
-				notEnoughGoldRuns.Add(new Run($"{recipe.Value} gold"){Foreground = (SolidColorBrush)this.FindResource("BrushGold"), FontFamily = (FontFamily)this.FindResource("FontRegularDemiBold")});
+				notEnoughGoldRuns.Add(new Run($"{recipe.Value} gold")
+				{
+					Foreground = (SolidColorBrush) FindResource("BrushGold"),
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+				});
 				notEnoughGoldRuns.Add(new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses."));
-				
+
 				AlertBox.Show(notEnoughGoldRuns, MessageBoxButton.OK);
 			}
 		}
@@ -184,27 +192,31 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				if (button.CommandParameter is Material material)
 				{
-					itemSellValue = (int)Math.Ceiling(material.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+					itemSellValue = (int) Math.Ceiling(material.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
 				}
 				else
 				{
 					itemSellValue = (button.CommandParameter as Item).Value;
 				}
 
-				var toolTip = new ToolTip()
+				var toolTip = new ToolTip
 				{
-					Style = (Style)this.FindResource("ToolTipSimple")
+					Style = (Style) FindResource("ToolTipSimple")
 				};
 
 				GeneralToolTipController.SetToolTipDelayAndDuration(button);
 
-				var toolTipBlock = new TextBlock()
+				var toolTipBlock = new TextBlock
 				{
-					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+					Style = (Style) FindResource("ToolTipTextBlockBase")
 				};
 
 				toolTipBlock.Inlines.Add(new Run("Sell for "));
-				toolTipBlock.Inlines.Add(new Run($"{itemSellValue} gold"){FontFamily=(FontFamily)this.FindResource("FontRegularDemiBold"),Foreground=(SolidColorBrush)this.FindResource("BrushGold")});
+				toolTipBlock.Inlines.Add(new Run($"{itemSellValue} gold")
+				{
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold"),
+					Foreground = (SolidColorBrush) FindResource("BrushGold")
+				});
 
 				toolTip.Content = toolTipBlock;
 
@@ -218,20 +230,24 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (button?.ToolTip == null)
 			{
-				var toolTip = new ToolTip()
+				var toolTip = new ToolTip
 				{
-					Style = (Style)this.FindResource("ToolTipSimple")
+					Style = (Style) FindResource("ToolTipSimple")
 				};
 
 				GeneralToolTipController.SetToolTipDelayAndDuration(button);
 
-				var toolTipBlock = new TextBlock()
+				var toolTipBlock = new TextBlock
 				{
-					Style = (Style)this.FindResource("ToolTipTextBlockBase")
+					Style = (Style) FindResource("ToolTipTextBlockBase")
 				};
 
 				toolTipBlock.Inlines.Add(new Run("Buy for "));
-				toolTipBlock.Inlines.Add(new Run($"{(button.CommandParameter as Item).Value} gold"){FontFamily=(FontFamily)this.FindResource("FontRegularDemiBold"),Foreground=(SolidColorBrush)this.FindResource("BrushGold")});
+				toolTipBlock.Inlines.Add(new Run($"{(button.CommandParameter as Item).Value} gold")
+				{
+					FontFamily = (FontFamily) FindResource("FontRegularDemiBold"),
+					Foreground = (SolidColorBrush) FindResource("BrushGold")
+				});
 
 				toolTip.Content = toolTipBlock;
 

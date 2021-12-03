@@ -110,7 +110,7 @@ namespace ClickQuest.Game.Extensions.Combat
 				BossFightTimer.Stop();
 
 				InterfaceController.CurrentEnemy.GrantVictoryBonuses();
-				
+
 				// Invoke Artifacts with the "on-death" effect.
 				// We need to do this here because some artifacts should reset upon leaving combat (eg. Ice Golem's Heart).
 				// Even if the Boss wasn't fully defeated.

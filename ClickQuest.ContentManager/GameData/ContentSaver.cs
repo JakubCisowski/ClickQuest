@@ -2,8 +2,6 @@
 using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Text.Unicode;
 using static ClickQuest.ContentManager.GameData.JsonFilePaths;
 
 namespace ClickQuest.ContentManager.GameData
@@ -38,7 +36,7 @@ namespace ClickQuest.ContentManager.GameData
 				IgnoreReadOnlyProperties = true
 			});
 
-			var encryptedJson = DataEncryptionController.EncryptJsonUsingAes(json);
+			byte[] encryptedJson = DataEncryptionController.EncryptJsonUsingAes(json);
 
 			File.WriteAllBytes(jsonFilePath, encryptedJson);
 		}

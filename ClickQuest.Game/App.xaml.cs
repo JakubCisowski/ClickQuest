@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using System.Windows;
-using System.Windows.Threading;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Data;
-using ClickQuest.Game.Extensions.Encryption;
-using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Pages;
 using ClickQuest.Game.UserInterface.Windows;
 
@@ -19,9 +15,9 @@ namespace ClickQuest.Game
 		{
 			// Set crash logs output to Logs - any unhandled exceptions will be saved to a text file locally.
 			// Release only, because we want to see Exceptions in IDE during development.
-			#if RELEASE
+#if RELEASE
 			Application.Current.DispatcherUnhandledException += OnUnhandledException;
-			#endif
+#endif
 
 			// Set default culture for all threads for this application (affects date and string formats, e.g. periods instead of commas)
 			CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;

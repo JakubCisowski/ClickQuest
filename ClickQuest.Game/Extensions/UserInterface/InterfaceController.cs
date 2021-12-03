@@ -17,7 +17,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 		public const int EquipmentItemsNeededToShowScrollBar = 15;
 		public const int EquipmentItemsNeededToShowScrollBarIfArtifactsAreEquipped = 10;
 		public const int VendorItemsNeededToShowScrollBar = 12;
-		
+
 		public static Enemy CurrentEnemy
 		{
 			get
@@ -137,7 +137,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				// This might be necessary instead of the above with the new approach.
 			}
 		}
-		
+
 		public static void UpdateSingleSpecializationInterface(SpecializationType specializationType)
 		{
 			try
@@ -167,21 +167,21 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 				HeroStatsPage statsPage = p.StatsFrame.Content;
 				statsPage.UpdateBlessingTimer();
-				
+
 				switch (blessingType)
 				{
 					case BlessingType.ClickDamage:
 						statsPage.GenerateStatValueDamageToolTip();
 						break;
-					
+
 					case BlessingType.CritChance or BlessingType.CritDamage:
 						statsPage.GenerateStatValueCritToolTip();
 						break;
-					
+
 					case BlessingType.PoisonDamage:
 						statsPage.GenerateStatValuePoisonToolTip();
 						break;
-					
+
 					case BlessingType.AuraDamage or BlessingType.AuraSpeed:
 						statsPage.GenerateStatValueAuraToolTip();
 						break;

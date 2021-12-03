@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Player;
@@ -32,17 +31,15 @@ namespace ClickQuest.Game.Data
 				SeedDungeonKeys();
 				return;
 			}
-			
+
 			// Decrypt the file.
 			byte[] encryptedJson = File.ReadAllBytes(UserDataPath);
-			
+
 			string json = DataEncryptionController.DecryptJsonUsingAes(encryptedJson);
 
 			if (!string.IsNullOrEmpty(json))
 			{
-				var user = JsonSerializer.Deserialize<User>(json, new JsonSerializerOptions()
-				{
-				});
+				var user = JsonSerializer.Deserialize<User>(json, new JsonSerializerOptions());
 
 				User.Instance = user;
 
@@ -66,13 +63,17 @@ namespace ClickQuest.Game.Data
 			foreach (var hero in User.Instance.Heroes)
 			{
 				hero.Artifacts.ForEach(x => x.ArtifactFunctionality = GameAssets.Artifacts.FirstOrDefault(y => y.Name == x.Name)?.ArtifactFunctionality);
-				hero.Recipes.ForEach(x => { x.UpdateDescription(); x.UpdateRequirementsDescription(); });
+				hero.Recipes.ForEach(x =>
+				{
+					x.UpdateDescription();
+					x.UpdateRequirementsDescription();
+				});
 			}
 
 			// Re-arrange references between hero's Artifacts and EquippedArtifacts.
 			foreach (var hero in User.Instance.Heroes)
 			{
-				for (int i=0;i<hero.EquippedArtifacts.Count;i++)
+				for (int i = 0; i < hero.EquippedArtifacts.Count; i++)
 				{
 					var newEquippedArtifact = hero.Artifacts.FirstOrDefault(x => x.Id == hero.EquippedArtifacts[i].Id);
 					hero.EquippedArtifacts[i] = newEquippedArtifact;
@@ -111,16 +112,16 @@ namespace ClickQuest.Game.Data
 			// Convert TimePlayed on all heroes to string.
 			User.Instance.Heroes.ForEach(x => x.TimePlayedString = x.TimePlayed.ToString());
 
-			string json = JsonSerializer.Serialize(User.Instance, new JsonSerializerOptions()
+			string json = JsonSerializer.Serialize(User.Instance, new JsonSerializerOptions
 			{
 				IgnoreReadOnlyProperties = true,
 				WriteIndented = true,
 				Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
 			});
-			
+
 			// Encrypt the file.
-			var encrypted = DataEncryptionController.EncryptJsonUsingAes(json);
-			
+			byte[] encrypted = DataEncryptionController.EncryptJsonUsingAes(json);
+
 			File.WriteAllBytes(UserDataPath, encrypted);
 
 			SaveBestiary();
@@ -130,14 +131,14 @@ namespace ClickQuest.Game.Data
 
 		public static void SaveBestiary()
 		{
-			string bestiaryJson = JsonSerializer.Serialize(GameAssets.BestiaryEntries, new JsonSerializerOptions()
+			string bestiaryJson = JsonSerializer.Serialize(GameAssets.BestiaryEntries, new JsonSerializerOptions
 			{
 				IgnoreReadOnlyProperties = true,
 				WriteIndented = true,
 				Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
 			});
 
-			var encrypted = DataEncryptionController.EncryptJsonUsingAes(bestiaryJson);
+			byte[] encrypted = DataEncryptionController.EncryptJsonUsingAes(bestiaryJson);
 			File.WriteAllBytes(BestiaryDataPath, encrypted);
 		}
 
