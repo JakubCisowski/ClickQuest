@@ -23,7 +23,10 @@ namespace ClickQuest.Game.Core.Adventures
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		private readonly DispatcherTimer _timer;
-		public static readonly int RerollGoldCost = 100;
+		public const int RerollBaseCost = 100;
+		public const int RerollLevelRatio = 10;
+
+		public static int RerollCost => RerollBaseCost + RerollLevelRatio * User.Instance.CurrentHero.Level;
 
 		public bool Rare { get; set; }
 

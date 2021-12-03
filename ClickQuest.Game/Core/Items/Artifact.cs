@@ -20,8 +20,8 @@ namespace ClickQuest.Game.Core.Items
 		public string ExtraInfo { get; set; }
 		public string MythicTag { get; set; }
 		public const double MeltingIngredientsRatio = 0.6;
-		public const int MeltingWithoutIngredientsValue = 100;
-		public const double CraftingRatio = 20;
+		public const int MeltingWithoutIngredientsValue = 120;
+		public const double CraftingRatio = 25;
 
 		public int BaseIngotBonus => 100;
 

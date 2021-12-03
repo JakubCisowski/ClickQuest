@@ -93,15 +93,15 @@ namespace ClickQuest.Game.UserInterface.Pages
 			// Check if any quest is currently assigned - if so, user can't reroll quests.
 			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
 			{
-				if (User.Instance.Gold >= Quest.RerollGoldCost)
+				if (User.Instance.Gold >= Quest.RerollCost)
 				{
 					var result = AlertBox.Show("Are you sure you want to reroll your current quests for 100 gold?");
 
 					if (result == MessageBoxResult.Yes)
 					{
-						(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{Quest.RerollGoldCost}", (SolidColorBrush) FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+						(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{Quest.RerollCost}", (SolidColorBrush) FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
 
-						User.Instance.Gold -= Quest.RerollGoldCost;
+						User.Instance.Gold -= Quest.RerollCost;
 
 						RerollQuests();
 
