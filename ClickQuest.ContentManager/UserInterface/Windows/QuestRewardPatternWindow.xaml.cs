@@ -31,12 +31,12 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			// Add controls to Dictionary for easier navigation.
 			_controls.Clear();
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "MainInfoPanel"
 			};
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = _pattern.QuestRewardId.ToString(),
@@ -45,7 +45,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			};
 			_controls.Add(idBox.Name, idBox);
 
-			var nameBox = new ComboBox
+			ComboBox nameBox = new ComboBox
 			{
 				Name = "NameBox",
 				Margin = new Thickness(10)
@@ -53,7 +53,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 			_controls.Add(nameBox.Name, nameBox);
 
-			var rewardTypeBox = new ComboBox
+			ComboBox rewardTypeBox = new ComboBox
 			{
 				Name = "RewardTypeBox",
 				ItemsSource = Enum.GetValues(typeof(RewardType)),
@@ -62,7 +62,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			rewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
 			rewardTypeBox.SelectedValue = _pattern.QuestRewardType;
 
-			var quantityBox = new TextBox
+			TextBox quantityBox = new TextBox
 			{
 				Name = "QuantityBox",
 				Text = _pattern.Quantity.ToString(),
@@ -111,7 +111,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				return;
 			}
 
-			var comboBox = sender as ComboBox;
+			ComboBox comboBox = sender as ComboBox;
 
 			if (comboBox.SelectedValue is null)
 			{

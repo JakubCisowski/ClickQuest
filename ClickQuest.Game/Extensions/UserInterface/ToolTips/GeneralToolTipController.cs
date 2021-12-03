@@ -28,12 +28,12 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static ToolTip GenerateUndiscoveredEnemyToolTip()
 		{
-			var toolTip = new ToolTip
+			ToolTip toolTip = new ToolTip
 			{
 				Style = (Style) Application.Current.FindResource("ToolTipSimple")
 			};
 
-			var toolTipBlock = new TextBlock
+			TextBlock toolTipBlock = new TextBlock
 			{
 				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase"),
 				Text = "You have not discovered this Enemy yet\nIt will show up here once you first fight it"

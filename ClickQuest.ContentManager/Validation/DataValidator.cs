@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using ClickQuest.ContentManager.GameData;
 using ClickQuest.ContentManager.GameData.Models;
 using ClickQuest.GameManager.Validation;
@@ -27,16 +28,16 @@ namespace ClickQuest.ContentManager.Validation
 		{
 			var dataProperties = typeof(GameContent).GetProperties();
 
-			foreach (var propertyInfo in dataProperties)
+			foreach (PropertyInfo propertyInfo in dataProperties)
 			{
-				var propertyValue = propertyInfo.GetValue(null) as IEnumerable;
-				var collectionType = propertyInfo.PropertyType.GetGenericArguments().FirstOrDefault();
+				IEnumerable propertyValue = propertyInfo.GetValue(null) as IEnumerable;
+				Type? collectionType = propertyInfo.PropertyType.GetGenericArguments().FirstOrDefault();
 
 				bool isCollectionIdentifiable = typeof(IIdentifiable).IsAssignableFrom(collectionType);
 				if (isCollectionIdentifiable)
 				{
 					var convertedCollection = propertyValue.Cast<IIdentifiable>().ToList();
-					var methodInfo = typeof(DataValidator).GetMethod("CheckCollectionIdUniqueness");
+					MethodInfo? methodInfo = typeof(DataValidator).GetMethod("CheckCollectionIdUniqueness");
 					methodInfo.Invoke(null, new object[] {convertedCollection, collectionType});
 				}
 			}
@@ -51,7 +52,7 @@ namespace ClickQuest.ContentManager.Validation
 			bool areIdsUnique = duplicates.Count == 0;
 			if (!areIdsUnique)
 			{
-				string message = $"Following Id's of type '{collectionType}' are not unique: ";
+				var message = $"Following Id's of type '{collectionType}' are not unique: ";
 
 				var duplicatedValues = duplicates.Distinct();
 				foreach (int value in duplicatedValues)
@@ -75,7 +76,7 @@ namespace ClickQuest.ContentManager.Validation
 			double frequenciesSum = frequencies.Sum();
 			if (frequenciesSum <= 0.9999 || frequenciesSum >= 1.0001) // <== cringe	
 			{
-				string message = $"{objectName} loot/spawn frequencies do not add up to 1";
+				var message = $"{objectName} loot/spawn frequencies do not add up to 1";
 				Logger.Log(message);
 			}
 		}
@@ -86,7 +87,7 @@ namespace ClickQuest.ContentManager.Validation
 
 			if (frequenciesSum >= 1.0001)
 			{
-				string message = $"{objectName} loot/spawn frequencies is greater than 1";
+				var message = $"{objectName} loot/spawn frequencies is greater than 1";
 				Logger.Log(message);
 			}
 		}
@@ -97,7 +98,7 @@ namespace ClickQuest.ContentManager.Validation
 
 			if (areFrequenciesInvalid)
 			{
-				string message = $"{objectName} loot/spawn frequency value is less than 0";
+				var message = $"{objectName} loot/spawn frequency value is less than 0";
 				Logger.Log(message);
 			}
 		}
@@ -131,7 +132,7 @@ namespace ClickQuest.ContentManager.Validation
 			var notAvailable = requiredIds.Except(availableIds);
 			if (notAvailable.Count() > 0)
 			{
-				string message = $"Following referenced Id's in '{objectName}' do not exist: ";
+				var message = $"Following referenced Id's in '{objectName}' do not exist: ";
 
 				foreach (int value in notAvailable)
 				{
@@ -144,11 +145,11 @@ namespace ClickQuest.ContentManager.Validation
 
 		private static void CheckBossReferences(Boss boss)
 		{
-			foreach (var lootPattern in boss.BossLootPatterns)
+			foreach (BossLootPattern lootPattern in boss.BossLootPatterns)
 			{
 				if (lootPattern.BossLootType == RewardType.Blessing)
 				{
-					var blessing = GameContent.Blessings.FirstOrDefault(x => x.Id == lootPattern.BossLootId);
+					Blessing? blessing = GameContent.Blessings.FirstOrDefault(x => x.Id == lootPattern.BossLootId);
 
 					if (blessing is null)
 					{
@@ -158,7 +159,7 @@ namespace ClickQuest.ContentManager.Validation
 				}
 				else
 				{
-					var item = lootPattern.Item;
+					Item item = lootPattern.Item;
 
 					if (item is null)
 					{
@@ -171,9 +172,9 @@ namespace ClickQuest.ContentManager.Validation
 
 		private static void CheckMonsterReferences(Monster monster)
 		{
-			foreach (var lootPattern in monster.MonsterLootPatterns)
+			foreach (MonsterLootPattern lootPattern in monster.MonsterLootPatterns)
 			{
-				var item = lootPattern.Item;
+				Item item = lootPattern.Item;
 
 				if (item is null)
 				{
@@ -185,9 +186,9 @@ namespace ClickQuest.ContentManager.Validation
 
 		private static void CheckRegionReferences(Region region)
 		{
-			foreach (var spawnPattern in region.MonsterSpawnPatterns)
+			foreach (MonsterSpawnPattern spawnPattern in region.MonsterSpawnPatterns)
 			{
-				var monster = spawnPattern.Monster;
+				Monster monster = spawnPattern.Monster;
 
 				if (monster is null)
 				{
@@ -220,7 +221,7 @@ namespace ClickQuest.ContentManager.Validation
 
 			if (!isEveryEnumValueInCollectionValid)
 			{
-				string message = $"'{collectionName}' - rarity out of scope";
+				var message = $"'{collectionName}' - rarity out of scope";
 				Logger.Log(message);
 			}
 		}
@@ -251,7 +252,7 @@ namespace ClickQuest.ContentManager.Validation
 
 			if (!isEveryValueValid)
 			{
-				string message = $"At least one {collectionValuesInfo} is nonpositive";
+				var message = $"At least one {collectionValuesInfo} is nonpositive";
 				Logger.Log(message);
 			}
 		}
@@ -264,43 +265,43 @@ namespace ClickQuest.ContentManager.Validation
 
 			if (!isEveryLevelRequirementValid)
 			{
-				string message = "Level requirement of region is invalid";
+				var message = "Level requirement of region is invalid";
 				Logger.Log(message);
 			}
 		}
 
 		private static void CheckRewardBlessingsQuantity()
 		{
-			foreach (var boss in GameContent.Bosses)
+			foreach (Boss boss in GameContent.Bosses)
 			{
 				var blessingPatterns = boss.BossLootPatterns.Where(pattern => pattern.BossLootType == RewardType.Blessing);
 
 				if (blessingPatterns.Any(pattern => pattern.Frequencies.Any(frequency => frequency > 1)))
 				{
-					string message = $"More than one of the same Blessing can be dropped from Boss of Id {boss.Id}";
+					var message = $"More than one of the same Blessing can be dropped from Boss of Id {boss.Id}";
 					Logger.Log(message);
 				}
 
 				if (blessingPatterns.Count() > 1)
 				{
-					string message = $"More than one Blessing can be dropped from Boss of Id {boss.Id}";
+					var message = $"More than one Blessing can be dropped from Boss of Id {boss.Id}";
 					Logger.Log(message);
 				}
 			}
 
-			foreach (var quest in GameContent.Quests)
+			foreach (Quest quest in GameContent.Quests)
 			{
 				var blessingPatterns = quest.QuestRewardPatterns.Where(pattern => pattern.QuestRewardType == RewardType.Blessing);
 
 				if (blessingPatterns.Any(pattern => pattern.Quantity > 1))
 				{
-					string message = $"More than one of the same Blessing is awarded from Quest of Id {quest.Id}";
+					var message = $"More than one of the same Blessing is awarded from Quest of Id {quest.Id}";
 					Logger.Log(message);
 				}
 
 				if (blessingPatterns.Count() > 1)
 				{
-					string message = $"More than one Blessing is awarded from Quest of Id {quest.Id}";
+					var message = $"More than one Blessing is awarded from Quest of Id {quest.Id}";
 					Logger.Log(message);
 				}
 			}
@@ -308,13 +309,13 @@ namespace ClickQuest.ContentManager.Validation
 
 		private static void CheckRecipeArtifactLinks()
 		{
-			foreach (var recipe in GameContent.Recipes)
+			foreach (Recipe recipe in GameContent.Recipes)
 			{
-				var artifact = GameContent.Artifacts.FirstOrDefault(artifact => artifact.Id == recipe.ArtifactId);
+				Artifact? artifact = GameContent.Artifacts.FirstOrDefault(artifact => artifact.Id == recipe.ArtifactId);
 
 				if (!recipe.Name.Contains(artifact.Name))
 				{
-					string message = $"{recipe.FullName} of Id: {recipe.Id} is not linked to the correct artifact ({artifact.Name} instead)";
+					var message = $"{recipe.FullName} of Id: {recipe.Id} is not linked to the correct artifact ({artifact.Name} instead)";
 					Logger.Log(message);
 				}
 			}
@@ -322,13 +323,13 @@ namespace ClickQuest.ContentManager.Validation
 
 		private static void CheckMonsterRewardTypes()
 		{
-			foreach (var monster in GameContent.Monsters)
+			foreach (Monster monster in GameContent.Monsters)
 			{
 				var monsterBlessingPatterns = monster.MonsterLootPatterns.Where(pattern => pattern.MonsterLootType == RewardType.Blessing);
 
 				if (monsterBlessingPatterns.Count() != 0)
 				{
-					string message = $"Blessing can be dropped from Monster of Id {monster.Id} (blessing drops from monsters are not handled)";
+					var message = $"Blessing can be dropped from Monster of Id {monster.Id} (blessing drops from monsters are not handled)";
 					Logger.Log(message);
 				}
 			}

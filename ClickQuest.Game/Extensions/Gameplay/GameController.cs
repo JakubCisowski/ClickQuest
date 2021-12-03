@@ -32,7 +32,7 @@ namespace ClickQuest.Game.Extensions.Gameplay
 			CollectionInitializer.InitializeDictionary(User.Instance.Achievements.NumericAchievementCollection);
 		}
 
-		public static void UpdateSpecializationAmountAndUI(SpecializationType specializationType, int amountIncreased = 1)
+		public static void UpdateSpecializationAmountAndUi(SpecializationType specializationType, int amountIncreased = 1)
 		{
 			if (User.Instance.CurrentHero is not null)
 			{

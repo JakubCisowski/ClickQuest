@@ -51,18 +51,18 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			var questsForCurrentHeroClass = GameAssets.Quests.Where(x => x.HeroClass == User.Instance.CurrentHero.HeroClass || x.HeroClass == HeroClass.All).ToList();
 
-			for (int i = 0; i < 3; i++)
+			for (var i = 0; i < 3; i++)
 			{
-				int randomizedIndex = RNG.Next(0, questsForCurrentHeroClass.Count());
+				int randomizedIndex = Rng.Next(0, questsForCurrentHeroClass.Count);
 
 				bool isQuestRare = questsForCurrentHeroClass.ElementAt(randomizedIndex).Rare;
 				if (isQuestRare)
 				{
 					// Randomize once again.
-					randomizedIndex = RNG.Next(0, questsForCurrentHeroClass.Count());
+					randomizedIndex = Rng.Next(0, questsForCurrentHeroClass.Count);
 				}
 
-				var randomizedQuest = questsForCurrentHeroClass.ElementAt(randomizedIndex).CopyQuest();
+				Quest randomizedQuest = questsForCurrentHeroClass.ElementAt(randomizedIndex).CopyQuest();
 				User.Instance.CurrentHero.Quests.Add(randomizedQuest);
 
 				questsForCurrentHeroClass.RemoveAt(randomizedIndex);
@@ -78,9 +78,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 			QuestPanel.Children.Clear();
 			_questButtons.Clear();
 
-			for (int i = 0; i < 3; i++)
+			for (var i = 0; i < 3; i++)
 			{
-				var button = new QuestButton(User.Instance.CurrentHero.Quests[i]);
+				QuestButton button = new QuestButton(User.Instance.CurrentHero.Quests[i]);
 
 				_questButtons.Add(button);
 			}
@@ -95,7 +95,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				if (User.Instance.Gold >= Quest.RerollGoldCost)
 				{
-					var result = AlertBox.Show("Are you sure you want to reroll your current quests for 100 gold?");
+					MessageBoxResult result = AlertBox.Show("Are you sure you want to reroll your current quests for 100 gold?");
 
 					if (result == MessageBoxResult.Yes)
 					{

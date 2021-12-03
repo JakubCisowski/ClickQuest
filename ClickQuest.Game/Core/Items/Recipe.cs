@@ -14,13 +14,7 @@ namespace ClickQuest.Game.Core.Items
 		[JsonIgnore]
 		public override string Description { get; set; }
 
-		public string FullName
-		{
-			get
-			{
-				return "Recipe: " + Name;
-			}
-		}
+		public string FullName => "Recipe: " + Name;
 
 		public List<IngredientPattern> IngredientPatterns { get; set; }
 
@@ -42,9 +36,9 @@ namespace ClickQuest.Game.Core.Items
 
 			RequirementsDescription = "Materials required:";
 
-			foreach (var ingredient in IngredientPatterns)
+			foreach (IngredientPattern ingredient in IngredientPatterns)
 			{
-				var relatedMaterial = ingredient.RelatedMaterial;
+				Material relatedMaterial = ingredient.RelatedMaterial;
 				RequirementsDescription += $"\n- {ingredient.Quantity}x {relatedMaterial.Name}";
 			}
 		}
@@ -56,17 +50,18 @@ namespace ClickQuest.Game.Core.Items
 
 		public override Recipe CopyItem(int quantity)
 		{
-			var copy = new Recipe();
-
-			copy.Id = Id;
-			copy.Name = Name;
-			copy.Rarity = Rarity;
-			copy.Value = Value;
-			copy.Description = Description;
-			copy.Quantity = quantity;
-			copy.ArtifactId = ArtifactId;
-			copy.IngredientPatterns = IngredientPatterns;
-			copy.RequirementsDescription = RequirementsDescription;
+			Recipe copy = new Recipe
+			{
+				Id = Id,
+				Name = Name,
+				Rarity = Rarity,
+				Value = Value,
+				Description = Description,
+				Quantity = quantity,
+				ArtifactId = ArtifactId,
+				IngredientPatterns = IngredientPatterns,
+				RequirementsDescription = RequirementsDescription
+			};
 
 			return copy;
 		}

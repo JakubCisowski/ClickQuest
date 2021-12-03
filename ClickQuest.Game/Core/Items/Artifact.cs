@@ -23,29 +23,24 @@ namespace ClickQuest.Game.Core.Items
 		public const int MeltingWithoutIngredientsValue = 100;
 		public const double CraftingRatio = 20;
 
-		public int BaseIngotBonus
-		{
-			get
-			{
-				return 100;
-			}
-		}
+		public int BaseIngotBonus => 100;
 
 		public override Artifact CopyItem(int quantity)
 		{
-			var copy = new Artifact();
-
-			copy.Id = Id;
-			copy.Name = Name;
-			copy.Rarity = Rarity;
-			copy.Value = Value;
-			copy.Quantity = quantity;
-			copy.ArtifactType = ArtifactType;
-			copy.ArtifactFunctionality = ArtifactFunctionality;
-			copy.Description = Description;
-			copy.Lore = Lore;
-			copy.ExtraInfo = ExtraInfo;
-			copy.MythicTag = MythicTag;
+			Artifact copy = new Artifact
+			{
+				Id = Id,
+				Name = Name,
+				Rarity = Rarity,
+				Value = Value,
+				Quantity = quantity,
+				ArtifactType = ArtifactType,
+				ArtifactFunctionality = ArtifactFunctionality,
+				Description = Description,
+				Lore = Lore,
+				ExtraInfo = ExtraInfo,
+				MythicTag = MythicTag
+			};
 
 			return copy;
 		}
@@ -97,7 +92,7 @@ namespace ClickQuest.Game.Core.Items
 			{
 				AlertBox.Show($"{Name} has been removed from all Artifact Sets", MessageBoxButton.OK);
 
-				foreach (var artifactSet in User.Instance.CurrentHero.ArtifactSets)
+				foreach (ArtifactSet artifactSet in User.Instance.CurrentHero.ArtifactSets)
 				{
 					artifactSet.ArtifactIds.Remove(Id);
 				}

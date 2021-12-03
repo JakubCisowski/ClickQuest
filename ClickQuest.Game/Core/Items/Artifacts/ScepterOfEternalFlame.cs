@@ -46,7 +46,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 		{
 			_ticksCount++;
 
-			int damage = BurningDamage / TicksNumber;
+			const int damage = BurningDamage / TicksNumber;
 
 			CombatController.DealDamageToCurrentEnemy(damage, DamageType.Artifact);
 

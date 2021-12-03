@@ -35,40 +35,40 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "StaticInfoPanel"
 			};
 
-			var selectedIngot = _dataContext;
+			Ingot selectedIngot = _dataContext;
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = selectedIngot.Id.ToString(),
 				Margin = new Thickness(10),
 				IsEnabled = false
 			};
-			var nameBox = new TextBox
+			TextBox nameBox = new TextBox
 			{
 				Name = "NameBox",
 				Text = selectedIngot.Name,
 				Margin = new Thickness(10)
 			};
-			var valueBox = new TextBox
+			TextBox valueBox = new TextBox
 			{
 				Name = "ValueBox",
 				Text = selectedIngot.Value.ToString(),
 				Margin = new Thickness(10)
 			};
-			var rarityBox = new ComboBox
+			ComboBox rarityBox = new ComboBox
 			{
 				Name = "RarityBox",
 				ItemsSource = Enum.GetValues(typeof(Rarity)),
 				SelectedIndex = (int) selectedIngot.Rarity,
 				Margin = new Thickness(10)
 			};
-			var descriptionBox = new TextBox
+			TextBox descriptionBox = new TextBox
 			{
 				Name = "DescriptionBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -129,7 +129,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		public void Save()
 		{
-			var ingot = _dataContext;
+			Ingot ingot = _dataContext;
 
 			if (ingot is null)
 			{
@@ -176,9 +176,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			Save();
 
-			var objectToDelete = GameContent.Ingots.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+			Ingot? objectToDelete = GameContent.Ingots.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
-			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -198,7 +198,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{

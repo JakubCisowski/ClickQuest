@@ -7,7 +7,7 @@
       mc:Ignorable="d" Title="Stats"
       Height="715" Width="341" Background="Transparent">
 
-	<!-- Material design resources for progres bar -->
+	<!-- Material design resources for progress bar -->
 	<Page.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -248,7 +248,7 @@
 					</Grid.ColumnDefinitions>
 				</Grid>
 
-				<!-- [Here ingots and dungeon keys are dyanmically generated] -->
+				<!-- [Here ingots and dungeon keys are dynamically generated] -->
 			</StackPanel>
 
 			<Separator Height="2" Width="200" Margin="10" />
@@ -267,7 +267,7 @@
 					<RowDefinition Height="*" />
 					<RowDefinition Height="*" />
 				</Grid.RowDefinitions>
-				<!-- [Here specializations info is dyanmically generated] -->
+				<!-- [Here specializations info is dynamically generated] -->
 			</Grid>
 
 			<Separator Height="2" Width="200" Margin="5" />

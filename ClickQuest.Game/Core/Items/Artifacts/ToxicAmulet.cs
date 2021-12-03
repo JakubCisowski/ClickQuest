@@ -7,7 +7,7 @@
 
 		public override void OnDealingPoisonDamage(ref int poisonDamage)
 		{
-			int bonusPoisonDamage = (int) (poisonDamage * PoisonDamageModifier);
+			var bonusPoisonDamage = (int) (poisonDamage * PoisonDamageModifier);
 
 			poisonDamage += bonusPoisonDamage;
 		}

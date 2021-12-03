@@ -53,7 +53,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			Boss = boss;
 			DataContext = Boss;
 
-			var binding = new Binding("Duration")
+			Binding binding = new Binding("Duration")
 			{
 				Source = this,
 				StringFormat = "Time remaining: {0}s"
@@ -62,7 +62,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			var affixesStringList = new List<string>();
 
-			foreach (var affix in boss.Affixes)
+			foreach (Affix affix in boss.Affixes)
 			{
 				string affixString = string.Concat(affix.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
 

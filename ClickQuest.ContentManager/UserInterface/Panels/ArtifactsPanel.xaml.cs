@@ -35,41 +35,41 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "StaticInfoPanel"
 			};
 
-			var selectedArtifact = _dataContext;
+			Artifact selectedArtifact = _dataContext;
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = selectedArtifact.Id.ToString(),
 				Margin = new Thickness(10),
 				IsEnabled = false
 			};
-			var nameBox = new TextBox
+			TextBox nameBox = new TextBox
 			{
 				Name = "NameBox",
 				Text = selectedArtifact.Name,
 				Margin = new Thickness(10)
 			};
-			var rarityBox = new ComboBox
+			ComboBox rarityBox = new ComboBox
 			{
 				Name = "RarityBox",
 				ItemsSource = Enum.GetValues(typeof(Rarity)),
 				SelectedIndex = (int) selectedArtifact.Rarity,
 				Margin = new Thickness(10)
 			};
-			var artifactTypeBox = new ComboBox
+			ComboBox artifactTypeBox = new ComboBox
 			{
 				Name = "ArtifactTypeBox",
 				ItemsSource = Enum.GetValues(typeof(ArtifactType)),
 				SelectedIndex = (int) selectedArtifact.ArtifactType,
 				Margin = new Thickness(10)
 			};
-			var descriptionBox = new TextBox
+			TextBox descriptionBox = new TextBox
 			{
 				Name = "DescriptionBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -82,7 +82,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Margin = new Thickness(10)
 			};
 
-			var loreBox = new TextBox
+			TextBox loreBox = new TextBox
 			{
 				Name = "LoreBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -95,7 +95,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Margin = new Thickness(10)
 			};
 
-			var extraInfoBox = new TextBox
+			TextBox extraInfoBox = new TextBox
 			{
 				Name = "ExtraInfoBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -160,7 +160,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		public void Save()
 		{
-			var artifact = _dataContext;
+			Artifact artifact = _dataContext;
 
 			if (artifact is null)
 			{
@@ -210,9 +210,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			Save();
 
-			var objectToDelete = GameContent.Artifacts.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+			Artifact? objectToDelete = GameContent.Artifacts.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
-			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -232,7 +232,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{

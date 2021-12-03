@@ -17,7 +17,7 @@
 				<!-- Window title-->
 				<TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="410" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{StaticResource FontRegularDemiBold}" Text="Achievements" FontSize="24" />
 
-				<!-- Achievemets list text -->
+				<!-- Achievements list text -->
 				<Border Grid.Row="1" BorderThickness="3" BorderBrush="{StaticResource BrushAccent3}" CornerRadius="3" Width="500">
 					<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
 						<StackPanel x:Name="AchievementsList" />

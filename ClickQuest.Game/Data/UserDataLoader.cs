@@ -6,6 +6,8 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
+using ClickQuest.Game.Core.Heroes;
+using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Encryption;
 
@@ -13,8 +15,8 @@ namespace ClickQuest.Game.Data
 {
 	public static class UserDataLoader
 	{
-		public static string UserDataPath;
-		public static string BestiaryDataPath;
+		public static readonly string UserDataPath;
+		public static readonly string BestiaryDataPath;
 
 		static UserDataLoader()
 		{
@@ -39,7 +41,7 @@ namespace ClickQuest.Game.Data
 
 			if (!string.IsNullOrEmpty(json))
 			{
-				var user = JsonSerializer.Deserialize<User>(json, new JsonSerializerOptions());
+				User? user = JsonSerializer.Deserialize<User>(json, new JsonSerializerOptions());
 
 				User.Instance = user;
 
@@ -60,7 +62,7 @@ namespace ClickQuest.Game.Data
 		public static void PostLoad()
 		{
 			// Re-arrange references for all artifacts on all heroes using GameAssets.
-			foreach (var hero in User.Instance.Heroes)
+			foreach (Hero hero in User.Instance.Heroes)
 			{
 				hero.Artifacts.ForEach(x => x.ArtifactFunctionality = GameAssets.Artifacts.FirstOrDefault(y => y.Name == x.Name)?.ArtifactFunctionality);
 				hero.Recipes.ForEach(x =>
@@ -71,11 +73,11 @@ namespace ClickQuest.Game.Data
 			}
 
 			// Re-arrange references between hero's Artifacts and EquippedArtifacts.
-			foreach (var hero in User.Instance.Heroes)
+			foreach (Hero hero in User.Instance.Heroes)
 			{
-				for (int i = 0; i < hero.EquippedArtifacts.Count; i++)
+				for (var i = 0; i < hero.EquippedArtifacts.Count; i++)
 				{
-					var newEquippedArtifact = hero.Artifacts.FirstOrDefault(x => x.Id == hero.EquippedArtifacts[i].Id);
+					Artifact? newEquippedArtifact = hero.Artifacts.FirstOrDefault(x => x.Id == hero.EquippedArtifacts[i].Id);
 					hero.EquippedArtifacts[i] = newEquippedArtifact;
 				}
 			}
@@ -91,7 +93,7 @@ namespace ClickQuest.Game.Data
 		{
 			if (!File.Exists(BestiaryDataPath))
 			{
-				var stream = File.Create(BestiaryDataPath);
+				FileStream stream = File.Create(BestiaryDataPath);
 				stream.Close();
 			}
 
@@ -146,7 +148,7 @@ namespace ClickQuest.Game.Data
 		{
 			if (User.Instance.Ingots.Count == 0)
 			{
-				foreach (var ingot in GameAssets.Ingots)
+				foreach (Ingot ingot in GameAssets.Ingots)
 				{
 					User.Instance.Ingots.Add(ingot.CopyItem(0));
 				}
@@ -157,7 +159,7 @@ namespace ClickQuest.Game.Data
 		{
 			if (User.Instance.DungeonKeys.Count == 0)
 			{
-				foreach (var dungeonKey in GameAssets.DungeonKeys)
+				foreach (DungeonKey dungeonKey in GameAssets.DungeonKeys)
 				{
 					User.Instance.DungeonKeys.Add(dungeonKey.CopyItem(0));
 				}

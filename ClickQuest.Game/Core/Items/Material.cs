@@ -10,14 +10,15 @@ namespace ClickQuest.Game.Core.Items
 
 		public override Material CopyItem(int quantity)
 		{
-			var copy = new Material();
-
-			copy.Id = Id;
-			copy.Name = Name;
-			copy.Rarity = Rarity;
-			copy.Value = Value;
-			copy.Description = Description;
-			copy.Quantity = quantity;
+			Material copy = new Material
+			{
+				Id = Id,
+				Name = Name,
+				Rarity = Rarity,
+				Value = Value,
+				Description = Description,
+				Quantity = quantity
+			};
 
 			return copy;
 		}

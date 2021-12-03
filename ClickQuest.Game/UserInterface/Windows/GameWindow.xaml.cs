@@ -25,10 +25,7 @@ namespace ClickQuest.Game.UserInterface.Windows
 
 		public string LocationInfo
 		{
-			get
-			{
-				return _locationInfo;
-			}
+			get => _locationInfo;
 			set
 			{
 				_locationInfo = value;
@@ -55,28 +52,28 @@ namespace ClickQuest.Game.UserInterface.Windows
 				return;
 			}
 
-			int animationDuration = 1;
-			int maximumPositionOffset = 50;
-			var mousePosition = Mouse.GetPosition(FloatingTextAnimationCanvas);
+			const int animationDuration = 1;
+			const int maximumPositionOffset = 50;
+			Point mousePosition = Mouse.GetPosition(FloatingTextAnimationCanvas);
 
-			var panel = FloatingTextController.CreateFloatingTextCombatBorder(damage, damageType);
+			Border panel = FloatingTextController.CreateFloatingTextCombatBorder(damage, damageType);
 
-			var randomizedPositions = FloatingTextController.RandomizeFloatingTextPathPosition(mousePosition, FloatingTextAnimationCanvas.ActualWidth, FloatingTextAnimationCanvas.ActualHeight, maximumPositionOffset);
+			(double X, double Y) randomizedPositions = FloatingTextController.RandomizeFloatingTextPathPosition(mousePosition, FloatingTextAnimationCanvas.ActualWidth, FloatingTextAnimationCanvas.ActualHeight, maximumPositionOffset);
 
 			Canvas.SetLeft(panel, randomizedPositions.X);
 			Canvas.SetTop(panel, randomizedPositions.Y);
 
 			FloatingTextAnimationCanvas.Children.Add(panel);
 
-			var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration);
+			DoubleAnimation textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration);
 			textOpacityAnimation.Completed += FloatingTextAnimation_Completed;
 			panel.BeginAnimation(OpacityProperty, textOpacityAnimation);
 
-			var transform = new ScaleTransform(1, 1);
+			ScaleTransform transform = new ScaleTransform(1, 1);
 			panel.LayoutTransform = transform;
-			var animationX = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
+			DoubleAnimation animationX = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
 			transform.BeginAnimation(ScaleTransform.ScaleXProperty, animationX);
-			var animationY = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
+			DoubleAnimation animationY = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
 			transform.BeginAnimation(ScaleTransform.ScaleYProperty, animationY);
 		}
 
@@ -87,52 +84,52 @@ namespace ClickQuest.Game.UserInterface.Windows
 				return;
 			}
 
-			int animationDuration = 1;
+			const int animationDuration = 1;
 
-			var panel = FloatingTextController.CreateFloatingTextUtilityBorder(value, textBrush);
+			Border panel = FloatingTextController.CreateFloatingTextUtilityBorder(value, textBrush);
 
 			Canvas.SetLeft(panel, position.X);
 			Canvas.SetTop(panel, position.Y);
 
 			FloatingTextAnimationCanvas.Children.Add(panel);
 
-			var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration);
+			DoubleAnimation textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration);
 			textOpacityAnimation.Completed += FloatingTextAnimation_Completed;
 			panel.BeginAnimation(OpacityProperty, textOpacityAnimation);
 
-			var transform = new ScaleTransform(1, 1);
+			ScaleTransform transform = new ScaleTransform(1, 1);
 			panel.LayoutTransform = transform;
-			var animationX = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
+			DoubleAnimation animationX = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
 			transform.BeginAnimation(ScaleTransform.ScaleXProperty, animationX);
-			var animationY = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
+			DoubleAnimation animationY = new DoubleAnimation(1, 0.5, new Duration(TimeSpan.FromSeconds(animationDuration)));
 			transform.BeginAnimation(ScaleTransform.ScaleYProperty, animationY);
 		}
 
 		public void CreateFloatingTextLoot(Border lootBorder, int animationDelay = 0)
 		{
-			int animationDuration = 5;
+			const int animationDuration = 5;
 
 			// Start position is center of the screen (so center of the enemy as well).
-			var startPosition = FloatingTextController.EnemyCenterPoint;
-			var endPosition = FloatingTextController.LootEndPositionPoint;
+			Point startPosition = FloatingTextController.EnemyCenterPoint;
+			Point endPosition = FloatingTextController.LootEndPositionPoint;
 
 			Canvas.SetLeft(lootBorder, startPosition.X);
 			Canvas.SetTop(lootBorder, startPosition.Y);
 
 			FloatingTextAnimationCanvas.Children.Add(lootBorder);
 
-			// Add animationDelay to the duration, because otherwise all of the animations spawn (and dissapear) at the same time.
-			var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration + animationDelay);
+			// Add animationDelay to the duration, because otherwise all of the animations spawn (and disappear) at the same time.
+			DoubleAnimation textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration + animationDelay);
 			textOpacityAnimation.Completed += FloatingTextAnimation_Completed;
 			lootBorder.BeginAnimation(OpacityProperty, textOpacityAnimation);
 
 			double top = Canvas.GetTop(lootBorder);
 			double left = Canvas.GetLeft(lootBorder);
-			var transform = new TranslateTransform();
+			TranslateTransform transform = new TranslateTransform();
 			lootBorder.RenderTransform = transform;
 
-			var animX = new DoubleAnimation(startPosition.X - left, endPosition.X - left - 100, TimeSpan.FromSeconds(animationDuration));
-			var animY = new DoubleAnimation(startPosition.Y - top, endPosition.Y - top - 100, TimeSpan.FromSeconds(animationDuration));
+			DoubleAnimation animX = new DoubleAnimation(startPosition.X - left, endPosition.X - left - 100, TimeSpan.FromSeconds(animationDuration));
+			DoubleAnimation animY = new DoubleAnimation(startPosition.Y - top, endPosition.Y - top - 100, TimeSpan.FromSeconds(animationDuration));
 
 			// Delay the animations.
 			animX.BeginTime = TimeSpan.FromSeconds(animationDelay);
@@ -145,7 +142,7 @@ namespace ClickQuest.Game.UserInterface.Windows
 		private void FloatingTextAnimation_Completed(object sender, EventArgs e)
 		{
 			// Remove invisible paths.
-			FloatingTextAnimationCanvas.Children.Remove(FloatingTextAnimationCanvas.Children.OfType<Border>().FirstOrDefault(x => x.Opacity == 0.5));
+			FloatingTextAnimationCanvas.Children.Remove(FloatingTextAnimationCanvas.Children.OfType<Border>().FirstOrDefault(x => Math.Abs(x.Opacity - 0.5) < 0.001));
 		}
 
 		private void SwitchLocationInfoBorderVisibility()
@@ -153,7 +150,7 @@ namespace ClickQuest.Game.UserInterface.Windows
 			LocationInfoBorder.Visibility = LocationInfo == "" ? Visibility.Hidden : Visibility.Visible;
 		}
 
-		private void DragableTop_MouseDown(object sender, MouseButtonEventArgs e)
+		private void DraggableTop_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			if (e.ChangedButton == MouseButton.Left)
 			{
@@ -174,7 +171,7 @@ namespace ClickQuest.Game.UserInterface.Windows
 
 		private void InfoButton_Click(object sender, RoutedEventArgs e)
 		{
-			var currentPage = GameAssets.CurrentPage;
+			Page currentPage = GameAssets.CurrentPage;
 
 			if (currentPage is RegionPage or DungeonBossPage)
 			{
@@ -187,12 +184,12 @@ namespace ClickQuest.Game.UserInterface.Windows
 
 		private void AchievementsButton_Click(object sender, RoutedEventArgs e)
 		{
-			AchievementsWindow.Instance.Show();
+			AchievementsWindow.Show();
 		}
 
 		private void ExitButton_Click(object sender, RoutedEventArgs e)
 		{
-			var result = AlertBox.Show("Are you sure you want to quit?\nAll progress will be saved.");
+			MessageBoxResult result = AlertBox.Show("Are you sure you want to quit?\nAll progress will be saved.");
 
 			if (result == MessageBoxResult.Yes)
 			{

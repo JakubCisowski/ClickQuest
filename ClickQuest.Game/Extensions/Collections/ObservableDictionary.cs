@@ -46,8 +46,8 @@ namespace ClickQuest.Game.Extensions.Collections
 
 			CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, new KeyValuePair<TKey, TValue>(key, value)));
 			PropertyChanged(this, new PropertyChangedEventArgs("Count"));
-			PropertyChanged(this, new PropertyChangedEventArgs("Keys"));
-			PropertyChanged(this, new PropertyChangedEventArgs("Values"));
+			PropertyChanged(this, new PropertyChangedEventArgs(nameof(Keys)));
+			PropertyChanged(this, new PropertyChangedEventArgs(nameof(Values)));
 		}
 
 		private bool RemoveWithNotification(TKey key)
@@ -57,8 +57,8 @@ namespace ClickQuest.Game.Extensions.Collections
 			{
 				CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>(key, value)));
 				PropertyChanged(this, new PropertyChangedEventArgs("Count"));
-				PropertyChanged(this, new PropertyChangedEventArgs("Keys"));
-				PropertyChanged(this, new PropertyChangedEventArgs("Values"));
+				PropertyChanged(this, new PropertyChangedEventArgs(nameof(Keys)));
+				PropertyChanged(this, new PropertyChangedEventArgs(nameof(Values)));
 
 				return true;
 			}
@@ -74,7 +74,7 @@ namespace ClickQuest.Game.Extensions.Collections
 				_dictionary[key] = value;
 
 				CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new KeyValuePair<TKey, TValue>(key, value), new KeyValuePair<TKey, TValue>(key, existing)));
-				PropertyChanged(this, new PropertyChangedEventArgs("Values"));
+				PropertyChanged(this, new PropertyChangedEventArgs(nameof(Values)));
 
 				// Custom events.
 
@@ -103,13 +103,7 @@ namespace ClickQuest.Game.Extensions.Collections
 			return _dictionary.ContainsKey(key);
 		}
 
-		public ICollection<TKey> Keys
-		{
-			get
-			{
-				return _dictionary.Keys;
-			}
-		}
+		public ICollection<TKey> Keys => _dictionary.Keys;
 
 		public bool Remove(TKey key)
 		{
@@ -121,24 +115,12 @@ namespace ClickQuest.Game.Extensions.Collections
 			return _dictionary.TryGetValue(key, out value);
 		}
 
-		public ICollection<TValue> Values
-		{
-			get
-			{
-				return _dictionary.Values;
-			}
-		}
+		public ICollection<TValue> Values => _dictionary.Values;
 
 		public TValue this[TKey key]
 		{
-			get
-			{
-				return _dictionary[key];
-			}
-			set
-			{
-				UpdateWithNotification(key, value);
-			}
+			get => _dictionary[key];
+			set => UpdateWithNotification(key, value);
 		}
 
 		void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)
@@ -152,8 +134,8 @@ namespace ClickQuest.Game.Extensions.Collections
 
 			CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 			PropertyChanged(this, new PropertyChangedEventArgs("Count"));
-			PropertyChanged(this, new PropertyChangedEventArgs("Keys"));
-			PropertyChanged(this, new PropertyChangedEventArgs("Values"));
+			PropertyChanged(this, new PropertyChangedEventArgs(nameof(Keys)));
+			PropertyChanged(this, new PropertyChangedEventArgs(nameof(Values)));
 		}
 
 		bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item)
@@ -166,21 +148,9 @@ namespace ClickQuest.Game.Extensions.Collections
 			_dictionary.CopyTo(array, arrayIndex);
 		}
 
-		int ICollection<KeyValuePair<TKey, TValue>>.Count
-		{
-			get
-			{
-				return _dictionary.Count;
-			}
-		}
+		int ICollection<KeyValuePair<TKey, TValue>>.Count => _dictionary.Count;
 
-		bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
-		{
-			get
-			{
-				return _dictionary.IsReadOnly;
-			}
-		}
+		bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => _dictionary.IsReadOnly;
 
 		bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)
 		{

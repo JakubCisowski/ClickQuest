@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace ClickQuest.Game.Extensions.Collections
@@ -9,15 +8,15 @@ namespace ClickQuest.Game.Extensions.Collections
 	{
 		public static string SerializeData<T1, T2>(IDictionary<T1, T2> source)
 		{
-			var builder = new StringBuilder();
+			StringBuilder builder = new StringBuilder();
 
-			int i = 0;
+			var i = 0;
 
 			foreach (var pair in source)
 			{
 				builder.Append($"{pair.Value.ToString()}");
 
-				if (i != source.Count() - 1)
+				if (i != source.Count - 1)
 				{
 					builder.Append(',');
 				}
@@ -36,7 +35,7 @@ namespace ClickQuest.Game.Extensions.Collections
 			}
 
 			int indexOfComma = -1;
-			int i = 0;
+			var i = 0;
 
 			while ((indexOfComma = source.IndexOf(',')) != -1)
 			{

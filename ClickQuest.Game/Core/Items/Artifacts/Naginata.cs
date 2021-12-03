@@ -44,7 +44,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 			{
 				_wasMonsterOneshot = false;
 
-				int bonusExperience = (int) (experienceGained * ExperienceModifier - experienceGained);
+				var bonusExperience = (int) (experienceGained * ExperienceModifier - experienceGained);
 				User.Instance.CurrentHero.GainExperience(bonusExperience, true);
 			}
 		}

@@ -38,26 +38,26 @@ namespace ClickQuest.Game.UserInterface.Pages
 			UndoButton.Click -= UndoButtonGroup_Click;
 			UndoButton.Click -= UndoButtonDungeon_Click;
 
-			var grid = new Grid();
+			Grid grid = new Grid();
 
-			var col1 = new ColumnDefinition
+			ColumnDefinition col1 = new ColumnDefinition
 			{
 				Width = new GridLength(1, GridUnitType.Star)
 			};
-			var col2 = new ColumnDefinition
+			ColumnDefinition col2 = new ColumnDefinition
 			{
 				Width = new GridLength(1, GridUnitType.Star)
 			};
 
-			var row1 = new RowDefinition
+			RowDefinition row1 = new RowDefinition
 			{
 				Height = new GridLength(1, GridUnitType.Star)
 			};
-			var row2 = new RowDefinition
+			RowDefinition row2 = new RowDefinition
 			{
 				Height = new GridLength(1, GridUnitType.Star)
 			};
-			var row3 = new RowDefinition
+			RowDefinition row3 = new RowDefinition
 			{
 				Height = new GridLength(1, GridUnitType.Star)
 			};
@@ -70,9 +70,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 			grid.RowDefinitions.Add(row3);
 
 			// Create buttons for selecting dungeon groups.
-			for (int i = 0; i < GameAssets.DungeonGroups.Count; i++)
+			for (var i = 0; i < GameAssets.DungeonGroups.Count; i++)
 			{
-				var button = new Button
+				Button button = new Button
 				{
 					Background = (SolidColorBrush) FindResource("BrushGray1"),
 					Name = "DungeonGroup" + GameAssets.DungeonGroups[i].Id,
@@ -80,19 +80,19 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Height = 100
 				};
 
-				var panel = new StackPanel
+				StackPanel panel = new StackPanel
 				{
 					VerticalAlignment = VerticalAlignment.Center
 				};
 
-				var block = new TextBlock
+				TextBlock block = new TextBlock
 				{
 					FontSize = 22,
 					Text = GameAssets.DungeonGroups[i].Name,
 					TextAlignment = TextAlignment.Center
 				};
 
-				var border = new Border
+				Border border = new Border
 				{
 					BorderThickness = new Thickness(3),
 					BorderBrush = Colors.GetRarityColor((Rarity) i),
@@ -100,7 +100,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Height = 90
 				};
 
-				var block2 = new TextBlock
+				TextBlock block2 = new TextBlock
 				{
 					FontSize = 16,
 					FontStyle = FontStyles.Italic,
@@ -137,22 +137,22 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var dungeonsOfThisGroup = GameAssets.Dungeons.Where(x => x.DungeonGroup == _dungeonGroupSelected).ToList();
 
 			// Create buttons for selecting dungeon groups.
-			for (int i = 0; i < dungeonsOfThisGroup.Count; i++)
+			foreach (Dungeon dungeon in dungeonsOfThisGroup)
 			{
-				var button = new Button
+				Button button = new Button
 				{
 					Background = (SolidColorBrush) FindResource("BrushGray1"),
-					Name = "Dungeon" + dungeonsOfThisGroup[i].Id,
+					Name = "Dungeon" + dungeon.Id,
 					Width = 330,
 					Height = 100
 				};
 
-				var panel = new StackPanel();
+				StackPanel panel = new StackPanel();
 
-				var block = new TextBlock
+				TextBlock block = new TextBlock
 				{
 					FontSize = 25,
-					Text = dungeonsOfThisGroup[i].Name,
+					Text = dungeon.Name,
 					TextAlignment = TextAlignment.Center,
 					FontFamily = (FontFamily) FindResource("FontFancy")
 				};
@@ -161,7 +161,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				button.Content = panel;
 
-				button.Tag = dungeonsOfThisGroup[i];
+				button.Tag = dungeon;
 
 				button.Click += DungeonButton_Click;
 
@@ -177,11 +177,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 			UndoButton.Click += UndoButtonDungeon_Click;
 
 			// Create buttons for selecting dungeon groups.
-			for (int i = 0; i < _dungeonSelected.BossIds.Count; i++)
+			foreach (int bossId in _dungeonSelected.BossIds)
 			{
-				var boss = GameAssets.Bosses.FirstOrDefault(x => x.Id == _dungeonSelected.BossIds[i]);
+				Boss? boss = GameAssets.Bosses.FirstOrDefault(x => x.Id == bossId);
 
-				var button = new Button
+				Button button = new Button
 				{
 					Background = (SolidColorBrush) FindResource("BrushGray1"),
 					Name = "Boss" + boss.Id,
@@ -189,13 +189,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Height = 120
 				};
 
-				var grid = new Grid
+				Grid grid = new Grid
 				{
 					Width = 320,
 					Height = 110
 				};
 
-				var block = new TextBlock
+				TextBlock block = new TextBlock
 				{
 					FontSize = 25,
 					Text = boss.Name,
@@ -205,7 +205,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Margin = new Thickness(0, 10, 0, 0)
 				};
 
-				var block2 = new TextBlock
+				TextBlock block2 = new TextBlock
 				{
 					FontSize = 18,
 					TextAlignment = TextAlignment.Center,
@@ -219,7 +219,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Foreground = (SolidColorBrush) FindResource("BrushRed")
 				});
 
-				var block3 = new TextBlock
+				TextBlock block3 = new TextBlock
 				{
 					FontSize = 16,
 					FontFamily = (FontFamily) FindResource("FontRegularItalic"),
@@ -230,7 +230,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				var affixesStringList = new List<string>();
 
-				foreach (var affix in boss.Affixes)
+				foreach (Affix affix in boss.Affixes)
 				{
 					string affixString = string.Concat(affix.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
 
@@ -253,17 +253,17 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 		}
 
-		private DungeonGroup GetDungeonGroup(Button dungeonGroupButton)
+		private static DungeonGroup GetDungeonGroup(Button dungeonGroupButton)
 		{
 			return dungeonGroupButton.Tag as DungeonGroup;
 		}
 
-		private Dungeon GetDungeon(Button dungeonButton)
+		private static Dungeon GetDungeon(Button dungeonButton)
 		{
 			return dungeonButton.Tag as Dungeon;
 		}
 
-		private Boss GetBoss(Button bossButton)
+		private static Boss GetBoss(Button bossButton)
 		{
 			return bossButton.Tag as Boss;
 		}
@@ -313,7 +313,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private bool CheckAndRemoveDungeonKeys()
 		{
-			// Check if user has enough dungoen keys to enter boss fight.
+			// Check if user has enough dungeon keys to enter boss fight.
 			var counts = _dungeonGroupSelected.KeyRequirementRarities.GroupBy(x => x).ToDictionary(k => k.Key, v => v.Count());
 
 			foreach (var pair in counts)
@@ -337,7 +337,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			InterfaceController.ChangePage(GameAssets.Pages["DungeonBoss"], "Boss fight");
 
-			(GameAssets.Pages["DungeonBoss"] as DungeonBossPage).StartBossFight(_bossSelected.CopyEnemy());
+			(GameAssets.Pages["DungeonBoss"] as DungeonBossPage)?.StartBossFight(_bossSelected.CopyEnemy());
 		}
 
 		private void UndoButtonGroup_Click(object sender, RoutedEventArgs e)

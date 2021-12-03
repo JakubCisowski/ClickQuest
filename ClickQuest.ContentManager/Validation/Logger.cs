@@ -17,7 +17,7 @@ namespace ClickQuest.GameManager.Validation
 			}
 
 			// Log bugs in specified format.
-			using var writer = new StreamWriter(Path.Combine(folderPath, "Logs " + SessionStartDate.ToString("dd-MM-yyyy-HH-mm-ss") + ".txt"), true);
+			using StreamWriter writer = new StreamWriter(Path.Combine(folderPath, "Logs " + SessionStartDate.ToString("dd-MM-yyyy-HH-mm-ss") + ".txt"), true);
 
 			writer.WriteLine(log);
 		}

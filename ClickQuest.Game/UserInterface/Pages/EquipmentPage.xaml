@@ -15,7 +15,7 @@
 				<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Indigo.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
-        </ResourceDictionary>
+		</ResourceDictionary>
 	</Page.Resources>
 
 	<!-- Main Border -->

@@ -19,7 +19,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 
 				if (clickDamageType == DamageType.Normal)
 				{
-					int criticalDamageDealt = (int) (clickDamage * User.Instance.CurrentHero.CritDamage);
+					var criticalDamageDealt = (int) (clickDamage * User.Instance.CurrentHero.CritDamage);
 
 					CombatController.DealDamageToCurrentEnemy(criticalDamageDealt, DamageType.Critical);
 					CombatController.DealDamageToCurrentEnemy((int) (criticalDamageDealt * DamageModifier), DamageType.Artifact);

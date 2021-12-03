@@ -7,6 +7,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
+using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.Extensions.UserInterface.ToolTips;
@@ -39,12 +40,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 		}
 
-		public List<Blessing> GetPriestOfferAsBlessings()
+		public static List<Blessing> GetPriestOfferAsBlessings()
 		{
 			var result = new List<Blessing>();
 			var listOfPatterns = GameAssets.PriestOffer;
 
-			foreach (var pattern in listOfPatterns)
+			foreach (VendorPattern pattern in listOfPatterns)
 			{
 				result.Add(GameAssets.Blessings.FirstOrDefault(x => x.Id == pattern.Id));
 			}
@@ -54,26 +55,28 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void BuyButton_Click(object sender, RoutedEventArgs e)
 		{
-			var b = sender as Button;
-			var blessingBlueprint = b.CommandParameter as Blessing;
+			Button b = sender as Button;
+			Blessing blessingBlueprint = b.CommandParameter as Blessing;
 
 			if (User.Instance.Gold >= blessingBlueprint.Value)
 			{
-				var buyRuns = new List<Run>();
-				buyRuns.Add(new Run("Are you sure you want to buy "));
-				buyRuns.Add(new Run($"{blessingBlueprint.Name}")
+				var buyRuns = new List<Run>
 				{
-					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-				});
-				buyRuns.Add(new Run(" for "));
-				buyRuns.Add(new Run($"{blessingBlueprint.Value} gold")
-				{
-					Foreground = (SolidColorBrush) FindResource("BrushGold"),
-					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-				});
-				buyRuns.Add(new Run("?"));
+					new Run("Are you sure you want to buy "),
+					new Run($"{blessingBlueprint.Name}")
+					{
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+					},
+					new Run(" for "),
+					new Run($"{blessingBlueprint.Value} gold")
+					{
+						Foreground = (SolidColorBrush) FindResource("BrushGold"),
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+					},
+					new Run("?")
+				};
 
-				var result = AlertBox.Show(buyRuns);
+				MessageBoxResult result = AlertBox.Show(buyRuns);
 
 				if (result == MessageBoxResult.No)
 				{
@@ -104,14 +107,16 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 			else
 			{
-				var notEnoughGoldRuns = new List<Run>();
-				notEnoughGoldRuns.Add(new Run("You do not have enough gold to buy this blessing.\nIt costs "));
-				notEnoughGoldRuns.Add(new Run($"{blessingBlueprint.Value} gold")
+				var notEnoughGoldRuns = new List<Run>
 				{
-					Foreground = (SolidColorBrush) FindResource("BrushGold"),
-					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-				});
-				notEnoughGoldRuns.Add(new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses."));
+					new Run("You do not have enough gold to buy this blessing.\nIt costs "),
+					new Run($"{blessingBlueprint.Value} gold")
+					{
+						Foreground = (SolidColorBrush) FindResource("BrushGold"),
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+					},
+					new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses.")
+				};
 
 				AlertBox.Show(notEnoughGoldRuns, MessageBoxButton.OK);
 			}
@@ -119,18 +124,18 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void BuyButton_OnInitialized(object sender, EventArgs e)
 		{
-			var button = sender as Button;
+			Button button = sender as Button;
 
 			if (button?.ToolTip == null)
 			{
-				var toolTip = new ToolTip
+				ToolTip toolTip = new ToolTip
 				{
 					Style = (Style) FindResource("ToolTipSimple")
 				};
 
 				GeneralToolTipController.SetToolTipDelayAndDuration(button);
 
-				var toolTipBlock = new TextBlock
+				TextBlock toolTipBlock = new TextBlock
 				{
 					Style = (Style) FindResource("ToolTipTextBlockBase")
 				};

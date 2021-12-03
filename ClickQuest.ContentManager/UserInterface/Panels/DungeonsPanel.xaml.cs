@@ -37,40 +37,40 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "StaticInfoPanel"
 			};
 
-			var selectedDungeon = _dataContext;
+			Dungeon selectedDungeon = _dataContext;
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = selectedDungeon.Id.ToString(),
 				Margin = new Thickness(10),
 				IsEnabled = false
 			};
-			var dungeonGroupBox = new ComboBox
+			ComboBox dungeonGroupBox = new ComboBox
 			{
 				Name = "DungeonGroupBox",
 				ItemsSource = GameContent.DungeonGroups.Select(x => x.Name),
 				SelectedValue = GameContent.DungeonGroups.FirstOrDefault(x => x.Id == selectedDungeon.DungeonGroupId)?.Name,
 				Margin = new Thickness(10)
 			};
-			var nameBox = new TextBox
+			TextBox nameBox = new TextBox
 			{
 				Name = "NameBox",
 				Text = selectedDungeon.Name,
 				Margin = new Thickness(10)
 			};
-			var backgroundBox = new TextBox
+			TextBox backgroundBox = new TextBox
 			{
 				Name = "BackgroundBox",
 				Text = selectedDungeon.Background,
 				Margin = new Thickness(10)
 			};
-			var descriptionBox = new TextBox
+			TextBox descriptionBox = new TextBox
 			{
 				Name = "DescriptionBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -131,7 +131,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		public void Save()
 		{
-			var dungeon = _dataContext;
+			Dungeon dungeon = _dataContext;
 
 			if (dungeon is null)
 			{
@@ -183,9 +183,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			Save();
 
-			var objectToDelete = GameContent.Dungeons.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+			Dungeon? objectToDelete = GameContent.Dungeons.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
-			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -209,7 +209,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{
@@ -236,7 +236,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			foreach (int id in _bossIds)
 			{
-				var border = new Border
+				Border border = new Border
 				{
 					BorderThickness = new Thickness(0.5),
 					BorderBrush = (SolidColorBrush) FindResource("BrushGray2"),
@@ -244,7 +244,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 					Margin = new Thickness(4)
 				};
 
-				var grid = CreateDynamicValueGrid(id);
+				Grid grid = CreateDynamicValueGrid(id);
 
 				border.Child = grid;
 
@@ -254,9 +254,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private Grid CreateDynamicValueGrid(int id)
 		{
-			var grid = new Grid();
+			Grid grid = new Grid();
 
-			var idBlock = new TextBlock
+			TextBlock idBlock = new TextBlock
 			{
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
@@ -266,7 +266,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = $"[{id}]"
 			};
 
-			var nameBlock = new TextBlock
+			TextBlock nameBlock = new TextBlock
 			{
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
@@ -275,7 +275,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = GameContent.Bosses.FirstOrDefault(x => x.Id == id).Name
 			};
 
-			var editButton = new Button
+			Button editButton = new Button
 			{
 				Width = 30,
 				Height = 30,
@@ -285,7 +285,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Tag = id
 			};
 
-			var editIcon = new PackIcon
+			PackIcon editIcon = new PackIcon
 			{
 				Width = 20,
 				Height = 20,
@@ -297,7 +297,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			editButton.Click += EditDynamicValue_Click;
 
-			var deleteButton = new Button
+			Button deleteButton = new Button
 			{
 				Width = 30,
 				Height = 30,
@@ -307,7 +307,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				HorizontalAlignment = HorizontalAlignment.Right
 			};
 
-			var deleteIcon = new PackIcon
+			PackIcon deleteIcon = new PackIcon
 			{
 				Width = 20,
 				Height = 20,
@@ -331,7 +331,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			int bossId = int.Parse((sender as Button).Tag.ToString());
 
-			var bossIdWindow = new BossIdWindow(_dataContext, bossId)
+			BossIdWindow bossIdWindow = new BossIdWindow(_dataContext, bossId)
 			{
 				Owner = Application.Current.MainWindow
 			};
@@ -344,7 +344,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			int bossId = int.Parse((sender as Button).Tag.ToString());
 
-			var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {bossId}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {bossId}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -358,10 +358,10 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void CreateDynamicValueButton_Click(object sender, RoutedEventArgs e)
 		{
-			int bossId = 0;
+			var bossId = 0;
 			_bossIds.Add(bossId);
 
-			var tempButton = new Button
+			Button tempButton = new Button
 			{
 				Tag = bossId
 			};

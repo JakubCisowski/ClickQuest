@@ -77,7 +77,7 @@ namespace ClickQuest.Game.Core.GameData
 			// Dungeon Boss Page
 			Pages.Add("DungeonBoss", new DungeonBossPage());
 
-			foreach (var region in Regions)
+			foreach (Region region in Regions)
 			{
 				Pages.Add(region.Name, new RegionPage(region));
 			}

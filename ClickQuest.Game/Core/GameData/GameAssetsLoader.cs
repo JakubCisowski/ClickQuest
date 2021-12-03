@@ -45,14 +45,14 @@ namespace ClickQuest.Game.Core.GameData
 
 		public static void PostLoad()
 		{
-			foreach (var recipe in GameAssets.Recipes)
+			foreach (Recipe recipe in GameAssets.Recipes)
 			{
 				// Update descriptions now that artifacts are loaded.
 				recipe.UpdateDescription();
 				recipe.UpdateRequirementsDescription();
 			}
 
-			foreach (var quest in GameAssets.Quests)
+			foreach (Quest quest in GameAssets.Quests)
 			{
 				quest.UpdateAllRewardsDescription();
 			}
@@ -81,7 +81,7 @@ namespace ClickQuest.Game.Core.GameData
 
 			var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Core.Items.Artifacts", StringComparison.Ordinal));
 
-			foreach (var type in types)
+			foreach (Type type in types)
 			{
 				if (Activator.CreateInstance(type) is ArtifactFunctionality artifactFunctionality)
 				{
@@ -89,7 +89,7 @@ namespace ClickQuest.Game.Core.GameData
 				}
 			}
 
-			foreach (var artifact in GameAssets.Artifacts)
+			foreach (Artifact artifact in GameAssets.Artifacts)
 			{
 				artifact.ArtifactFunctionality = artifactFunctionalities.FirstOrDefault(x => x.Name == artifact.Name);
 			}
@@ -101,7 +101,7 @@ namespace ClickQuest.Game.Core.GameData
 
 			var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Core.Items.ArtifactTypes", StringComparison.Ordinal));
 
-			foreach (var type in types)
+			foreach (Type type in types)
 			{
 				if (Activator.CreateInstance(type) is ArtifactTypeFunctionality artifactTypeFunctionality)
 				{
@@ -109,7 +109,7 @@ namespace ClickQuest.Game.Core.GameData
 				}
 			}
 
-			foreach (var artifact in GameAssets.Artifacts)
+			foreach (Artifact artifact in GameAssets.Artifacts)
 			{
 				artifact.ArtifactFunctionality.ArtifactTypeFunctionality = artifactTypeFunctionalities.FirstOrDefault(x => x.ArtifactType == artifact.ArtifactType);
 			}
@@ -121,7 +121,7 @@ namespace ClickQuest.Game.Core.GameData
 
 			var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Core.Enemies.Affixes", StringComparison.Ordinal));
 
-			foreach (var type in types)
+			foreach (Type type in types)
 			{
 				if (Activator.CreateInstance(type) is AffixFunctionality affixFunctionality)
 				{
@@ -129,11 +129,11 @@ namespace ClickQuest.Game.Core.GameData
 				}
 			}
 
-			foreach (var boss in GameAssets.Bosses)
+			foreach (Boss boss in GameAssets.Bosses)
 			{
 				boss.AffixFunctionalities = new List<AffixFunctionality>();
 
-				foreach (var affix in boss.Affixes)
+				foreach (Affix affix in boss.Affixes)
 				{
 					boss.AffixFunctionalities.Add(affixFunctionalities.FirstOrDefault(x => x.Affix == affix));
 				}

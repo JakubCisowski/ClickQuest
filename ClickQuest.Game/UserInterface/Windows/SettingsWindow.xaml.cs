@@ -75,7 +75,7 @@ namespace ClickQuest.Game.UserInterface.Windows
 		{
 			string borderName = (sender as Border).Name;
 
-			var selectedTheme = ColorTheme.Blue;
+			ColorTheme selectedTheme = ColorTheme.Blue;
 
 			if (borderName.StartsWith("Blue"))
 			{

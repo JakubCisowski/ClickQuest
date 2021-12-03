@@ -30,12 +30,12 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			// Add controls to Dictionary for easier navigation.
 			_controls.Clear();
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "MainInfoPanel"
 			};
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = _bossId.ToString(),
@@ -43,7 +43,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				IsEnabled = false
 			};
 
-			var nameBox = new ComboBox
+			ComboBox nameBox = new ComboBox
 			{
 				Name = "NameBox",
 				ItemsSource = GameContent.Bosses.Select(x => x.Name),

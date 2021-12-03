@@ -31,12 +31,12 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			// Add controls to Dictionary for easier navigation.
 			_controls.Clear();
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "MainInfoPanel"
 			};
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = _pattern.MonsterLootId.ToString(),
@@ -45,7 +45,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			};
 			_controls.Add(idBox.Name, idBox);
 
-			var nameBox = new ComboBox
+			ComboBox nameBox = new ComboBox
 			{
 				Name = "NameBox",
 				Margin = new Thickness(10)
@@ -53,16 +53,16 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 			_controls.Add(nameBox.Name, nameBox);
 
-			var RewardTypeBox = new ComboBox
+			ComboBox rewardTypeBox = new ComboBox
 			{
 				Name = "RewardTypeBox",
 				ItemsSource = Enum.GetValues(typeof(RewardType)),
 				Margin = new Thickness(10)
 			};
-			RewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
-			RewardTypeBox.SelectedValue = _pattern.MonsterLootType;
+			rewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
+			rewardTypeBox.SelectedValue = _pattern.MonsterLootType;
 
-			var frequencyBox = new TextBox
+			TextBox frequencyBox = new TextBox
 			{
 				Name = "FrequencyBox",
 				Text = _pattern.Frequency.ToString(),
@@ -72,10 +72,10 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			// Set TextBox and ComboBox hints.
 			HintAssist.SetHint(idBox, "ID");
 			HintAssist.SetHint(nameBox, "Name");
-			HintAssist.SetHint(RewardTypeBox, "RewardType");
+			HintAssist.SetHint(rewardTypeBox, "RewardType");
 			HintAssist.SetHint(frequencyBox, "Frequency");
 
-			_controls.Add(RewardTypeBox.Name, RewardTypeBox);
+			_controls.Add(rewardTypeBox.Name, rewardTypeBox);
 			_controls.Add(frequencyBox.Name, frequencyBox);
 
 			foreach (var elem in _controls)
@@ -111,7 +111,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				return;
 			}
 
-			var comboBox = sender as ComboBox;
+			ComboBox comboBox = sender as ComboBox;
 
 			if (comboBox.SelectedValue is null)
 			{

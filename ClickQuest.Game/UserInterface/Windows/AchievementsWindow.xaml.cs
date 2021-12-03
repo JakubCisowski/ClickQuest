@@ -32,7 +32,7 @@ namespace ClickQuest.Game.UserInterface.Windows
 			RefreshAchievementsPanel();
 		}
 
-		public new void Show()
+		public new static void Show()
 		{
 			_instance.Visibility = Visibility.Visible;
 		}
@@ -41,19 +41,19 @@ namespace ClickQuest.Game.UserInterface.Windows
 		{
 			AchievementsList.Children.Clear();
 
-			var achievements = User.Instance.Achievements;
+			Achievements achievements = User.Instance.Achievements;
 
-			var time = achievements.TotalTimePlayed;
+			TimeSpan time = achievements.TotalTimePlayed;
 			AppendAchievementToAchievementsList("Total Time Played", $"{Math.Floor(time.TotalHours)}h {time.Minutes}m");
 
 			foreach (var pair in achievements.NumericAchievementCollection)
 			{
-				string name = pair.Key.ToString();
+				var name = pair.Key.ToString();
 
 				// Add spaces in between words.
 				name = string.Concat(name.Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
 
-				string amount = pair.Value.ToString();
+				var amount = pair.Value.ToString();
 
 				AppendAchievementToAchievementsList(name, amount);
 			}
@@ -63,7 +63,7 @@ namespace ClickQuest.Game.UserInterface.Windows
 		{
 			string nameWithoutSpaces = name.Replace(" ", "");
 
-			var border = new Border
+			Border border = new Border
 			{
 				Name = nameWithoutSpaces + "Border",
 				BorderThickness = new Thickness(0.5),
@@ -73,9 +73,9 @@ namespace ClickQuest.Game.UserInterface.Windows
 				Background = FindResource("BrushAccent1") as SolidColorBrush
 			};
 
-			var grid = new Grid();
+			Grid grid = new Grid();
 
-			var nameBlock = new TextBlock
+			TextBlock nameBlock = new TextBlock
 			{
 				Name = nameWithoutSpaces + "Name",
 				FontSize = 18,
@@ -83,7 +83,7 @@ namespace ClickQuest.Game.UserInterface.Windows
 				Text = name
 			};
 
-			var amountBlock = new TextBlock
+			TextBlock amountBlock = new TextBlock
 			{
 				Name = nameWithoutSpaces + "Amount",
 				FontSize = 18,
@@ -101,13 +101,13 @@ namespace ClickQuest.Game.UserInterface.Windows
 
 		public void RefreshSingleAchievement(NumericAchievementType achievementType)
 		{
-			var achievements = User.Instance.Achievements;
+			Achievements achievements = User.Instance.Achievements;
 
-			var achievementBorder = AchievementsList.Children.OfType<Border>().FirstOrDefault(x => x.Name == achievementType + "Border");
+			Border? achievementBorder = AchievementsList.Children.OfType<Border>().FirstOrDefault(x => x.Name == achievementType + "Border");
 
 			if (achievementBorder != null)
 			{
-				var achievementAmountBlock = (achievementBorder.Child as Grid)?.Children.OfType<TextBlock>().FirstOrDefault(x => x.Name == achievementType + "Amount");
+				TextBlock? achievementAmountBlock = (achievementBorder.Child as Grid)?.Children.OfType<TextBlock>().FirstOrDefault(x => x.Name == achievementType + "Amount");
 
 				if (achievementAmountBlock != null)
 				{

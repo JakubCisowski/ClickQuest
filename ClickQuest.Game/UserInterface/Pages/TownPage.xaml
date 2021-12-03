@@ -147,7 +147,7 @@
 			</StackPanel>
 
 			<!-- Back to menu button -->
-			<Button x:Name="MainMenuButton" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" Click="MainMenuButton_Click" Width="450" Height="50" Background="{StaticResource BrushAccent3}">
+			<Button x:Name="MainMenuButton" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="0" HorizontalAlignment="Center" Click="MainMenuButton_Click" Width="450" Height="50" Background="{StaticResource BrushAccent3}">
 				<TextBlock Text="Back to menu" FontSize="22" />
 			</Button>
 		</Grid>

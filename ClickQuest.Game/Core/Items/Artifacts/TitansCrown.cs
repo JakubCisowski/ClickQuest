@@ -9,7 +9,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 
 		public override void OnExperienceGained(int experienceGained)
 		{
-			int bonusExperience = (int) (experienceGained * BonusExperienceMultiplier);
+			var bonusExperience = (int) (experienceGained * BonusExperienceMultiplier);
 			User.Instance.CurrentHero.GainExperience(bonusExperience, true);
 		}
 

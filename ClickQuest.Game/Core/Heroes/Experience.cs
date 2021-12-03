@@ -9,12 +9,12 @@ namespace ClickQuest.Game.Core.Heroes
 			return (int) Math.Floor(xp + 300 * Math.Pow(2, xp / 7));
 		}
 
-		public static int LevelToXP(int level)
+		public static int LevelToXp(int level)
 		{
 			level += 1;
 			double xp = 0;
 
-			for (int i = 1; i < level; i++)
+			for (var i = 1; i < level; i++)
 			{
 				xp += Equate(i);
 			}
@@ -22,11 +22,11 @@ namespace ClickQuest.Game.Core.Heroes
 			return (int) Math.Floor(xp / 16);
 		}
 
-		public static int XPToLevel(int xp)
+		public static int XpToLevel(int xp)
 		{
-			int level = 1;
+			var level = 1;
 
-			while (LevelToXP(level) <= xp)
+			while (LevelToXp(level) <= xp)
 			{
 				level++;
 			}
@@ -36,7 +36,7 @@ namespace ClickQuest.Game.Core.Heroes
 
 		public static int CalculateMonsterXpReward(int monsterHp)
 		{
-			int experience = (int) Math.Ceiling(monsterHp / 10d);
+			var experience = (int) Math.Ceiling(monsterHp / 10d);
 
 			return experience;
 		}
@@ -44,12 +44,12 @@ namespace ClickQuest.Game.Core.Heroes
 		public static void CheckIfLeveledUpAndGrantBonuses(Hero hero)
 		{
 			// Check if hero leveled up - if so, grant him level up bonuses and increment his lvl.
-			int xpToLevel = XPToLevel(hero.Experience);
+			int xpToLevel = XpToLevel(hero.Experience);
 			int lvlDifference = xpToLevel - hero.Level;
 
 			if (lvlDifference > 0)
 			{
-				for (int i = 0; i < lvlDifference; i++)
+				for (var i = 0; i < lvlDifference; i++)
 				{
 					hero.Level++;
 					hero.GrantLevelUpBonuses();
@@ -60,13 +60,13 @@ namespace ClickQuest.Game.Core.Heroes
 		public static int CalculateXpToNextLvl(Hero hero)
 		{
 			// Calculate how many experience is needed to level up (for hero stats panel info).
-			return LevelToXP(hero.Level + 1) - hero.Experience;
+			return LevelToXp(hero.Level + 1) - hero.Experience;
 		}
 
 		public static int CalculateXpProgress(Hero hero)
 		{
 			// Calculate progress to next level in % (for progress bar on hero stats panel).
-			return (int) (100 - (double) hero.ExperienceToNextLvl / (LevelToXP(hero.Level + 1) - LevelToXP(hero.Level)) * 100);
+			return (int) (100 - (double) hero.ExperienceToNextLvl / (LevelToXp(hero.Level + 1) - LevelToXp(hero.Level)) * 100);
 		}
 	}
 }

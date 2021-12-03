@@ -40,14 +40,15 @@ namespace ClickQuest.Game.Core.Items
 
 		public override DungeonKey CopyItem(int quantity)
 		{
-			var copy = new DungeonKey();
-
-			copy.Id = Id;
-			copy.Name = Name;
-			copy.Rarity = Rarity;
-			copy.Value = Value;
-			copy.Description = Description;
-			copy.Quantity = quantity;
+			DungeonKey copy = new DungeonKey
+			{
+				Id = Id,
+				Name = Name,
+				Rarity = Rarity,
+				Value = Value,
+				Description = Description,
+				Quantity = quantity
+			};
 
 			return copy;
 		}
@@ -79,40 +80,40 @@ namespace ClickQuest.Game.Core.Items
 
 		public static List<double> CreateRarityChancesList(int monsterHealth)
 		{
-			var DungeonKeyRarityChances = new List<double>();
-			double EmptyLootChance = 1;
-			double DungeonKeyRarity0Chance = 0;
-			double DungeonKeyRarity1Chance = 0;
-			double DungeonKeyRarity2Chance = 0;
-			double DungeonKeyRarity3Chance = 0;
-			double DungeonKeyRarity4Chance = 0;
-			double DungeonKeyRarity5Chance = 0;
+			var dungeonKeyRarityChances = new List<double>();
+			double emptyLootChance = 1;
+			double dungeonKeyRarity0Chance = 0;
+			double dungeonKeyRarity1Chance = 0;
+			double dungeonKeyRarity2Chance = 0;
+			double dungeonKeyRarity3Chance = 0;
+			double dungeonKeyRarity4Chance = 0;
+			double dungeonKeyRarity5Chance = 0;
 
 			// Set dungeon key drop rates.
 			if (monsterHealth < 100)
 			{
-				EmptyLootChance = 0.05000;
-				DungeonKeyRarity0Chance = 0.8000;
-				DungeonKeyRarity1Chance = 0.1500;
+				emptyLootChance = 0.05000;
+				dungeonKeyRarity0Chance = 0.8000;
+				dungeonKeyRarity1Chance = 0.1500;
 			}
 			else if (monsterHealth < 200)
 			{
-				EmptyLootChance = 0.05000;
-				DungeonKeyRarity0Chance = 0.4500;
-				DungeonKeyRarity1Chance = 0.5000;
+				emptyLootChance = 0.05000;
+				dungeonKeyRarity0Chance = 0.4500;
+				dungeonKeyRarity1Chance = 0.5000;
 			}
 
 			// Set drop rates in list for randomizing algorithm.
 			// Note that index 0 is for empty loot, rarities start with index 1 up to 6.
-			DungeonKeyRarityChances.Add(EmptyLootChance);
-			DungeonKeyRarityChances.Add(DungeonKeyRarity0Chance);
-			DungeonKeyRarityChances.Add(DungeonKeyRarity1Chance);
-			DungeonKeyRarityChances.Add(DungeonKeyRarity2Chance);
-			DungeonKeyRarityChances.Add(DungeonKeyRarity3Chance);
-			DungeonKeyRarityChances.Add(DungeonKeyRarity4Chance);
-			DungeonKeyRarityChances.Add(DungeonKeyRarity5Chance);
+			dungeonKeyRarityChances.Add(emptyLootChance);
+			dungeonKeyRarityChances.Add(dungeonKeyRarity0Chance);
+			dungeonKeyRarityChances.Add(dungeonKeyRarity1Chance);
+			dungeonKeyRarityChances.Add(dungeonKeyRarity2Chance);
+			dungeonKeyRarityChances.Add(dungeonKeyRarity3Chance);
+			dungeonKeyRarityChances.Add(dungeonKeyRarity4Chance);
+			dungeonKeyRarityChances.Add(dungeonKeyRarity5Chance);
 
-			return DungeonKeyRarityChances;
+			return dungeonKeyRarityChances;
 		}
 	}
 }

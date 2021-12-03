@@ -35,52 +35,29 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		public int Buff { get; set; }
 		public bool AchievementBonusGranted { get; set; }
 
-		public string TypeString
-		{
-			get
-			{
-				return Type.ToString();
-			}
-		}
+		public string TypeString => Type.ToString();
 
-		public string RarityString
-		{
-			get
-			{
-				return Rarity.ToString();
-			}
-		}
+		public string RarityString => Rarity.ToString();
 
-		public bool IsFinished
-		{
-			get
-			{
-				return Duration <= 0;
-			}
-		}
+		public bool IsFinished => Duration <= 0;
 
-		public ToolTip ToolTip
-		{
-			get
-			{
-				return ItemToolTipController.GenerateBlessingToolTip(this);
-			}
-		}
+		public ToolTip ToolTip => ItemToolTipController.GenerateBlessingToolTip(this);
 
 		public Blessing CopyBlessing()
 		{
-			var copy = new Blessing();
-
-			copy.Id = Id;
-			copy.Name = Name;
-			copy.Type = Type;
-			copy.Rarity = Rarity;
-			copy.Duration = Duration;
-			copy.Description = Description;
-			copy.Lore = Lore;
-			copy.Buff = Buff;
-			copy.Value = Value;
-			copy.AchievementBonusGranted = false;
+			Blessing copy = new Blessing
+			{
+				Id = Id,
+				Name = Name,
+				Type = Type,
+				Rarity = Rarity,
+				Duration = Duration,
+				Description = Description,
+				Lore = Lore,
+				Buff = Buff,
+				Value = Value,
+				AchievementBonusGranted = false
+			};
 
 			return copy;
 		}
@@ -97,7 +74,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		public void EnableBuff()
 		{
 			// Trigger on-blessing artifacts.
-			foreach (var artifact in User.Instance.CurrentHero.EquippedArtifacts)
+			foreach (Artifact artifact in User.Instance.CurrentHero.EquippedArtifacts)
 			{
 				artifact.ArtifactFunctionality.OnBlessingStarted(this);
 			}
@@ -201,13 +178,13 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 
 		public static bool AskUserAndSwapBlessing(int newBlessingId)
 		{
-			var blessingBlueprint = GameAssets.Blessings.FirstOrDefault(x => x.Id == newBlessingId);
+			Blessing? blessingBlueprint = GameAssets.Blessings.FirstOrDefault(x => x.Id == newBlessingId);
 
-			var result = MessageBoxResult.OK;
+			MessageBoxResult result = MessageBoxResult.OK;
 
 			if (User.Instance.CurrentHero.Blessing != null)
 			{
-				result = AlertBox.Show($"Do you want to swap current blessing to {blessingBlueprint.Name}?\n{blessingBlueprint.Description}");
+				result = AlertBox.Show($"Do you want to swap current blessing to {blessingBlueprint?.Name}?\n{blessingBlueprint.Description}");
 			}
 
 			if (result == MessageBoxResult.Yes)
@@ -221,13 +198,13 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 
 		public static void AddOrReplaceBlessing(int newBlessingId)
 		{
-			var blessingBlueprint = GameAssets.Blessings.FirstOrDefault(x => x.Id == newBlessingId);
+			Blessing? blessingBlueprint = GameAssets.Blessings.FirstOrDefault(x => x.Id == newBlessingId);
 
 			User.Instance.CurrentHero.RemoveBlessing();
 
-			var newBlessing = blessingBlueprint.CopyBlessing();
+			Blessing newBlessing = blessingBlueprint?.CopyBlessing();
 			newBlessing.Duration += User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing];
-			GameController.UpdateSpecializationAmountAndUI(SpecializationType.Blessing);
+			GameController.UpdateSpecializationAmountAndUi(SpecializationType.Blessing);
 
 			User.Instance.CurrentHero.Blessing = newBlessing;
 			newBlessing.EnableBuff();

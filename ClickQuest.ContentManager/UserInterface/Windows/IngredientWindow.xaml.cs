@@ -30,12 +30,12 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			// Add controls to Dictionary for easier navigation.
 			_controls.Clear();
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "MainInfoPanel"
 			};
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = _ingredient.MaterialId.ToString(),
@@ -43,7 +43,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				IsEnabled = false
 			};
 
-			var nameBox = new ComboBox
+			ComboBox nameBox = new ComboBox
 			{
 				Name = "NameBox",
 				ItemsSource = GameContent.Materials.Select(x => x.Name),
@@ -52,7 +52,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			nameBox.SelectedValue = GameContent.Materials.FirstOrDefault(x => x.Id == _ingredient.MaterialId)?.Name;
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 
-			var quantityBox = new TextBox
+			TextBox quantityBox = new TextBox
 			{
 				Name = "QuantityBox",
 				Text = _ingredient.Quantity.ToString(),

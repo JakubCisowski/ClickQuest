@@ -7,8 +7,8 @@ namespace ClickQuest.Game.UserInterface.Controls
 {
 	public partial class AlertBox : Window
 	{
-		private static MessageBoxResult Result = MessageBoxResult.OK;
-		private static AlertBox MessageBox;
+		private static MessageBoxResult _result = MessageBoxResult.OK;
+		private static AlertBox _messageBox;
 
 		public AlertBox()
 		{
@@ -20,7 +20,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 		{
 			// Display a single string message on the screen.
 
-			MessageBox = new AlertBox
+			_messageBox = new AlertBox
 			{
 				ContentBox =
 				{
@@ -32,56 +32,56 @@ namespace ClickQuest.Game.UserInterface.Controls
 			{
 				case MessageBoxButton.YesNo:
 				{
-					MessageBox.OkButton.Visibility = Visibility.Collapsed;
-					MessageBox.YesButton.Visibility = Visibility.Visible;
-					MessageBox.NoButton.Visibility = Visibility.Visible;
+					_messageBox.OkButton.Visibility = Visibility.Collapsed;
+					_messageBox.YesButton.Visibility = Visibility.Visible;
+					_messageBox.NoButton.Visibility = Visibility.Visible;
 				}
 					break;
 
 				case MessageBoxButton.OK:
 				{
-					MessageBox.OkButton.Visibility = Visibility.Visible;
-					MessageBox.YesButton.Visibility = Visibility.Collapsed;
-					MessageBox.NoButton.Visibility = Visibility.Collapsed;
+					_messageBox.OkButton.Visibility = Visibility.Visible;
+					_messageBox.YesButton.Visibility = Visibility.Collapsed;
+					_messageBox.NoButton.Visibility = Visibility.Collapsed;
 				}
 					break;
 			}
 
-			MessageBox.ShowDialog();
+			_messageBox.ShowDialog();
 
-			return Result;
+			return _result;
 		}
 
 		public static MessageBoxResult Show(List<Run> textRuns, MessageBoxButton buttons = MessageBoxButton.YesNo)
 		{
 			// Display a complex message that supports coloring and styling on the screen.
 
-			MessageBox = new AlertBox();
+			_messageBox = new AlertBox();
 
-			MessageBox.ContentBox.Inlines.AddRange(textRuns);
+			_messageBox.ContentBox.Inlines.AddRange(textRuns);
 
 			switch (buttons)
 			{
 				case MessageBoxButton.YesNo:
 				{
-					MessageBox.OkButton.Visibility = Visibility.Collapsed;
-					MessageBox.YesButton.Visibility = Visibility.Visible;
-					MessageBox.NoButton.Visibility = Visibility.Visible;
+					_messageBox.OkButton.Visibility = Visibility.Collapsed;
+					_messageBox.YesButton.Visibility = Visibility.Visible;
+					_messageBox.NoButton.Visibility = Visibility.Visible;
 				}
 					break;
 
 				case MessageBoxButton.OK:
 				{
-					MessageBox.OkButton.Visibility = Visibility.Visible;
-					MessageBox.YesButton.Visibility = Visibility.Collapsed;
-					MessageBox.NoButton.Visibility = Visibility.Collapsed;
+					_messageBox.OkButton.Visibility = Visibility.Visible;
+					_messageBox.YesButton.Visibility = Visibility.Collapsed;
+					_messageBox.NoButton.Visibility = Visibility.Collapsed;
 				}
 					break;
 			}
 
-			MessageBox.ShowDialog();
+			_messageBox.ShowDialog();
 
-			return Result;
+			return _result;
 		}
 
 		private void AlertBox_MouseDown(object sender, MouseButtonEventArgs e)
@@ -94,23 +94,23 @@ namespace ClickQuest.Game.UserInterface.Controls
 
 		private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-			Result = MessageBoxResult.OK;
-			MessageBox.Close();
-			MessageBox = null;
+			_result = MessageBoxResult.OK;
+			_messageBox.Close();
+			_messageBox = null;
 		}
 
 		private void YesButton_Click(object sender, RoutedEventArgs e)
 		{
-			Result = MessageBoxResult.Yes;
-			MessageBox.Close();
-			MessageBox = null;
+			_result = MessageBoxResult.Yes;
+			_messageBox.Close();
+			_messageBox = null;
 		}
 
 		private void NoButton_Click(object sender, RoutedEventArgs e)
 		{
-			Result = MessageBoxResult.No;
-			MessageBox.Close();
-			MessageBox = null;
+			_result = MessageBoxResult.No;
+			_messageBox.Close();
+			_messageBox = null;
 		}
 	}
 }

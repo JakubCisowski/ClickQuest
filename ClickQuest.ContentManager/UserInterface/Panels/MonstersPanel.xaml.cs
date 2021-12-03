@@ -37,39 +37,39 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "StaticInfoPanel"
 			};
 
-			var selectedMonster = _dataContext;
+			Monster selectedMonster = _dataContext;
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = selectedMonster.Id.ToString(),
 				Margin = new Thickness(10),
 				IsEnabled = false
 			};
-			var nameBox = new TextBox
+			TextBox nameBox = new TextBox
 			{
 				Name = "NameBox",
 				Text = selectedMonster.Name,
 				Margin = new Thickness(10)
 			};
-			var healthBox = new TextBox
+			TextBox healthBox = new TextBox
 			{
 				Name = "HealthBox",
 				Text = selectedMonster.Health.ToString(),
 				Margin = new Thickness(10)
 			};
-			var imageBox = new TextBox
+			TextBox imageBox = new TextBox
 			{
 				Name = "ImageBox",
 				Text = selectedMonster.Image,
 				Margin = new Thickness(10)
 			};
-			var descriptionBox = new TextBox
+			TextBox descriptionBox = new TextBox
 			{
 				Name = "DescriptionBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -130,7 +130,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		public void Save()
 		{
-			var monster = _dataContext;
+			Monster monster = _dataContext;
 
 			if (monster is null)
 			{
@@ -182,9 +182,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			Save();
 
-			var objectToDelete = GameContent.Monsters.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+			Monster? objectToDelete = GameContent.Monsters.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
-			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -208,7 +208,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{
@@ -233,9 +233,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			CreateDynamicValueButton.Visibility = Visibility.Visible;
 
-			foreach (var pattern in _monsterLootPatterns)
+			foreach (MonsterLootPattern pattern in _monsterLootPatterns)
 			{
-				var border = new Border
+				Border border = new Border
 				{
 					BorderThickness = new Thickness(0.5),
 					BorderBrush = (SolidColorBrush) FindResource("BrushGray2"),
@@ -243,7 +243,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 					Margin = new Thickness(4)
 				};
 
-				var grid = CreateDynamicValueGrid(pattern);
+				Grid grid = CreateDynamicValueGrid(pattern);
 
 				border.Child = grid;
 
@@ -253,9 +253,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private Grid CreateDynamicValueGrid(MonsterLootPattern pattern)
 		{
-			var grid = new Grid();
+			Grid grid = new Grid();
 
-			var idBlock = new TextBlock
+			TextBlock idBlock = new TextBlock
 			{
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
@@ -265,7 +265,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = $"[{pattern.MonsterLootId}]"
 			};
 
-			var itemTypeBlock = new TextBlock
+			TextBlock itemTypeBlock = new TextBlock
 			{
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
@@ -274,7 +274,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = pattern.MonsterLootType.ToString()
 			};
 
-			var nameBlock = new TextBlock
+			TextBlock nameBlock = new TextBlock
 			{
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
@@ -305,7 +305,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 					break;
 			}
 
-			var frequencyBlock = new TextBlock
+			TextBlock frequencyBlock = new TextBlock
 			{
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
@@ -314,7 +314,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = pattern.Frequency.ToString()
 			};
 
-			var editButton = new Button
+			Button editButton = new Button
 			{
 				Width = 30,
 				Height = 30,
@@ -324,7 +324,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Tag = pattern
 			};
 
-			var editIcon = new PackIcon
+			PackIcon editIcon = new PackIcon
 			{
 				Width = 20,
 				Height = 20,
@@ -336,7 +336,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			editButton.Click += EditDynamicValue_Click;
 
-			var deleteButton = new Button
+			Button deleteButton = new Button
 			{
 				Width = 30,
 				Height = 30,
@@ -346,7 +346,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				HorizontalAlignment = HorizontalAlignment.Right
 			};
 
-			var deleteIcon = new PackIcon
+			PackIcon deleteIcon = new PackIcon
 			{
 				Width = 20,
 				Height = 20,
@@ -370,9 +370,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void EditDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var monsterLootPattern = (sender as Button).Tag as MonsterLootPattern;
+			MonsterLootPattern monsterLootPattern = (sender as Button).Tag as MonsterLootPattern;
 
-			var monsterLootPatternWindow = new MonsterLootPatternWindow(_dataContext, monsterLootPattern)
+			MonsterLootPatternWindow monsterLootPatternWindow = new MonsterLootPatternWindow(_dataContext, monsterLootPattern)
 			{
 				Owner = Application.Current.MainWindow
 			};
@@ -383,9 +383,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void DeleteDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var pattern = (sender as Button).Tag as MonsterLootPattern;
+			MonsterLootPattern pattern = (sender as Button).Tag as MonsterLootPattern;
 
-			var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {pattern.MonsterLootId}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {pattern.MonsterLootId}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -399,10 +399,10 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void CreateDynamicValueButton_Click(object sender, RoutedEventArgs e)
 		{
-			var newMonsterLootPattern = new MonsterLootPattern();
+			MonsterLootPattern newMonsterLootPattern = new MonsterLootPattern();
 			_monsterLootPatterns.Add(newMonsterLootPattern);
 
-			var tempButton = new Button
+			Button tempButton = new Button
 			{
 				Tag = newMonsterLootPattern
 			};

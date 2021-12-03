@@ -27,7 +27,7 @@ namespace ClickQuest.Game
 			// Load JSONs.
 			GameAssetsLoader.Load();
 
-			var gameWindow = new GameWindow();
+			GameWindow gameWindow = new GameWindow();
 			Current.MainWindow = gameWindow;
 			gameWindow.Show();
 

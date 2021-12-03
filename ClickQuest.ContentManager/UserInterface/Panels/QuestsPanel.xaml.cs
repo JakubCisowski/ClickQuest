@@ -38,47 +38,47 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "StaticInfoPanel"
 			};
 
-			var selectedQuest = _dataContext;
+			Quest selectedQuest = _dataContext;
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = selectedQuest.Id.ToString(),
 				Margin = new Thickness(10),
 				IsEnabled = false
 			};
-			var nameBox = new TextBox
+			TextBox nameBox = new TextBox
 			{
 				Name = "NameBox",
 				Text = selectedQuest.Name,
 				Margin = new Thickness(10)
 			};
-			var rareBox = new CheckBox
+			CheckBox rareBox = new CheckBox
 			{
 				Name = "RareBox",
 				Content = "Rare?",
 				IsChecked = selectedQuest.Rare,
 				Margin = new Thickness(10)
 			};
-			var heroClassBox = new ComboBox
+			ComboBox heroClassBox = new ComboBox
 			{
 				Name = "HeroClassBox",
 				ItemsSource = Enum.GetValues(typeof(HeroClass)),
 				SelectedIndex = (int) selectedQuest.HeroClass,
 				Margin = new Thickness(10)
 			};
-			var durationBox = new TextBox
+			TextBox durationBox = new TextBox
 			{
 				Name = "DurationBox",
 				Text = selectedQuest.Duration.ToString(),
 				Margin = new Thickness(10)
 			};
-			var descriptionBox = new TextBox
+			TextBox descriptionBox = new TextBox
 			{
 				Name = "DescriptionBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -141,7 +141,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		public void Save()
 		{
-			var quest = _dataContext;
+			Quest quest = _dataContext;
 
 			if (quest is null)
 			{
@@ -194,9 +194,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			Save();
 
-			var objectToDelete = GameContent.Quests.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+			Quest? objectToDelete = GameContent.Quests.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
-			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -220,7 +220,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{
@@ -245,9 +245,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			CreateDynamicValueButton.Visibility = Visibility.Visible;
 
-			foreach (var pattern in _questRewardPatterns)
+			foreach (QuestRewardPattern pattern in _questRewardPatterns)
 			{
-				var border = new Border
+				Border border = new Border
 				{
 					BorderThickness = new Thickness(0.5),
 					BorderBrush = (SolidColorBrush) FindResource("BrushGray2"),
@@ -255,7 +255,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 					Margin = new Thickness(4)
 				};
 
-				var grid = CreateDynamicValueGrid(pattern);
+				Grid grid = CreateDynamicValueGrid(pattern);
 
 				border.Child = grid;
 
@@ -265,9 +265,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private Grid CreateDynamicValueGrid(QuestRewardPattern pattern)
 		{
-			var grid = new Grid();
+			Grid grid = new Grid();
 
-			var idBlock = new TextBlock
+			TextBlock idBlock = new TextBlock
 			{
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
@@ -286,7 +286,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = pattern.QuestRewardType.ToString()
 			};
 
-			var nameBlock = new TextBlock
+			TextBlock nameBlock = new TextBlock
 			{
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
@@ -317,7 +317,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 					break;
 			}
 
-			var editButton = new Button
+			Button editButton = new Button
 			{
 				Width = 30,
 				Height = 30,
@@ -327,7 +327,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Tag = pattern
 			};
 
-			var editIcon = new PackIcon
+			PackIcon editIcon = new PackIcon
 			{
 				Width = 20,
 				Height = 20,
@@ -339,7 +339,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			editButton.Click += EditDynamicValue_Click;
 
-			var deleteButton = new Button
+			Button deleteButton = new Button
 			{
 				Width = 30,
 				Height = 30,
@@ -349,7 +349,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				HorizontalAlignment = HorizontalAlignment.Right
 			};
 
-			var deleteIcon = new PackIcon
+			PackIcon deleteIcon = new PackIcon
 			{
 				Width = 20,
 				Height = 20,
@@ -371,9 +371,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void EditDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var pattern = (sender as Button).Tag as QuestRewardPattern;
+			QuestRewardPattern pattern = (sender as Button).Tag as QuestRewardPattern;
 
-			var questRewardPatternWindow = new QuestRewardPatternWindow(_dataContext, pattern)
+			QuestRewardPatternWindow questRewardPatternWindow = new QuestRewardPatternWindow(_dataContext, pattern)
 			{
 				Owner = Application.Current.MainWindow
 			};
@@ -384,9 +384,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void DeleteDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var pattern = (sender as Button).Tag as QuestRewardPattern;
+			QuestRewardPattern pattern = (sender as Button).Tag as QuestRewardPattern;
 
-			var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {pattern.QuestRewardId}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {pattern.QuestRewardId}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -400,13 +400,13 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void CreateDynamicValueButton_Click(object sender, RoutedEventArgs e)
 		{
-			var newQuestRewardPattern = new QuestRewardPattern
+			QuestRewardPattern newQuestRewardPattern = new QuestRewardPattern
 			{
 				Quantity = 1
 			};
 			_questRewardPatterns.Add(newQuestRewardPattern);
 
-			var tempButton = new Button
+			Button tempButton = new Button
 			{
 				Tag = newQuestRewardPattern
 			};

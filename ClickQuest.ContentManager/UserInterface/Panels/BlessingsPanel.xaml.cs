@@ -35,59 +35,59 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "StaticInfoPanel"
 			};
 
-			var selectedBlessing = _dataContext;
+			Blessing selectedBlessing = _dataContext;
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = selectedBlessing.Id.ToString(),
 				Margin = new Thickness(10),
 				IsEnabled = false
 			};
-			var nameBox = new TextBox
+			TextBox nameBox = new TextBox
 			{
 				Name = "NameBox",
 				Text = selectedBlessing.Name,
 				Margin = new Thickness(10)
 			};
-			var rarityBox = new ComboBox
+			ComboBox rarityBox = new ComboBox
 			{
 				Name = "RarityBox",
 				ItemsSource = Enum.GetValues(typeof(Rarity)),
 				SelectedIndex = (int) selectedBlessing.Rarity,
 				Margin = new Thickness(10)
 			};
-			var blessingTypeBox = new ComboBox
+			ComboBox blessingTypeBox = new ComboBox
 			{
 				Name = "BlessingTypeBox",
 				ItemsSource = Enum.GetValues(typeof(BlessingType)),
 				SelectedIndex = (int) selectedBlessing.Type,
 				Margin = new Thickness(10)
 			};
-			var durationBox = new TextBox
+			TextBox durationBox = new TextBox
 			{
 				Name = "DurationBox",
 				Text = selectedBlessing.Duration.ToString(),
 				Margin = new Thickness(10)
 			};
-			var buffBox = new TextBox
+			TextBox buffBox = new TextBox
 			{
 				Name = "BuffBox",
 				Text = selectedBlessing.Buff.ToString(),
 				Margin = new Thickness(10)
 			};
-			var valueBox = new TextBox
+			TextBox valueBox = new TextBox
 			{
 				Name = "ValueBox",
 				Text = selectedBlessing.Value.ToString(),
 				Margin = new Thickness(10)
 			};
-			var loreBox = new TextBox
+			TextBox loreBox = new TextBox
 			{
 				Name = "LoreBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -100,7 +100,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Margin = new Thickness(10)
 			};
 
-			var descriptionBox = new TextBox
+			TextBox descriptionBox = new TextBox
 			{
 				Name = "DescriptionBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -169,7 +169,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		public void Save()
 		{
-			var blessing = _dataContext;
+			Blessing blessing = _dataContext;
 
 			if (blessing is null)
 			{
@@ -220,9 +220,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			Save();
 
-			var objectToDelete = GameContent.Blessings.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+			Blessing? objectToDelete = GameContent.Blessings.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
-			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -242,7 +242,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{

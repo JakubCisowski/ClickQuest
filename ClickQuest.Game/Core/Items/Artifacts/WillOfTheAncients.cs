@@ -10,7 +10,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 		{
 			double critChance = User.Instance.CurrentHero.CritChance;
 			double critDamage = User.Instance.CurrentHero.CritDamage;
-			double randomizedValue = RNG.Next(1, 101) / 100d;
+			double randomizedValue = Rng.Next(1, 101) / 100d;
 
 			if (randomizedValue <= critChance)
 			{

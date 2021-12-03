@@ -18,7 +18,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 
 		public override void OnDealingDamage(ref int baseDamage)
 		{
-			var newEnemy = InterfaceController.CurrentEnemy;
+			Enemy newEnemy = InterfaceController.CurrentEnemy;
 
 			if (newEnemy != _currentEnemy)
 			{
@@ -31,7 +31,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 
 			if (_timer.IsEnabled)
 			{
-				int bonusDamage = (int) (baseDamage * DamageModifier);
+				var bonusDamage = (int) (baseDamage * DamageModifier);
 				baseDamage += bonusDamage;
 			}
 		}

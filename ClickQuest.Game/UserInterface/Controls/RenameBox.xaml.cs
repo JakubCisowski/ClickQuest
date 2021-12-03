@@ -8,7 +8,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 	public partial class RenameBox : Window
 	{
 		public static string ArtifactSetName;
-		private static RenameBox MessageBox;
+		private static RenameBox _messageBox;
 
 		public RenameBox(string previousName)
 		{
@@ -22,12 +22,12 @@ namespace ClickQuest.Game.UserInterface.Controls
 		{
 			ArtifactSetName = previousName;
 
-			MessageBox = new RenameBox(previousName);
+			_messageBox = new RenameBox(previousName);
 
-			MessageBox.RenameTextBox.Focus();
-			MessageBox.RenameTextBox.CaretIndex = int.MaxValue;
+			_messageBox.RenameTextBox.Focus();
+			_messageBox.RenameTextBox.CaretIndex = int.MaxValue;
 
-			MessageBox.ShowDialog();
+			_messageBox.ShowDialog();
 
 			return ArtifactSetName;
 		}
@@ -50,14 +50,14 @@ namespace ClickQuest.Game.UserInterface.Controls
 			}
 
 			ArtifactSetName = RenameTextBox.Text;
-			MessageBox.Close();
-			MessageBox = null;
+			_messageBox.Close();
+			_messageBox = null;
 		}
 
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Close();
-			MessageBox = null;
+			_messageBox.Close();
+			_messageBox = null;
 		}
 	}
 }

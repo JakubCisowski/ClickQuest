@@ -21,10 +21,7 @@ namespace ClickQuest.Game.Core.Enemies
 		[JsonIgnore]
 		public override int CurrentHealth
 		{
-			get
-			{
-				return _currentHealth;
-			}
+			get => _currentHealth;
 			set
 			{
 				// value - new current health
@@ -50,15 +47,16 @@ namespace ClickQuest.Game.Core.Enemies
 
 		public override Monster CopyEnemy()
 		{
-			var copy = new Monster();
-
-			copy.Id = Id;
-			copy.Name = Name;
-			copy.Health = Health;
-			copy.CurrentHealth = Health;
-			copy.Description = Description;
-			copy.CurrentHealthProgress = CurrentHealthProgress;
-			copy.MonsterLootPatterns = MonsterLootPatterns;
+			Monster copy = new Monster
+			{
+				Id = Id,
+				Name = Name,
+				Health = Health,
+				CurrentHealth = Health,
+				Description = Description,
+				CurrentHealthProgress = CurrentHealthProgress,
+				MonsterLootPatterns = MonsterLootPatterns
+			};
 
 			return copy;
 		}
@@ -82,7 +80,7 @@ namespace ClickQuest.Game.Core.Enemies
 				GrantVictoryBonuses();
 
 				// Invoke Artifacts with the "on-death" effect.
-				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
+				foreach (Artifact equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
 				{
 					equippedArtifact.ArtifactFunctionality.OnKill();
 				}
@@ -96,7 +94,7 @@ namespace ClickQuest.Game.Core.Enemies
 			int experienceGained = Experience.CalculateMonsterXpReward(Health);
 			User.Instance.CurrentHero.GainExperience(experienceGained);
 
-			var selectedLoot = RandomizeMonsterLoot();
+			Item selectedLoot = RandomizeMonsterLoot();
 
 			if (selectedLoot != null)
 			{
@@ -138,9 +136,9 @@ namespace ClickQuest.Game.Core.Enemies
 		public Item RandomizeMonsterLoot()
 		{
 			var frequencyList = MonsterLootPatterns.Select(x => x.Frequency).ToList();
-			double randomizedValue = RNG.Next(1, 10001) / 10000d;
+			double randomizedValue = Rng.Next(1, 10001) / 10000d;
 
-			int i = 0;
+			var i = 0;
 
 			while (i < frequencyList.Count)
 			{

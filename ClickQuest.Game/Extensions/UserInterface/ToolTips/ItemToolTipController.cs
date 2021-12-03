@@ -8,6 +8,7 @@ using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Items.Types;
 using static ClickQuest.Game.Extensions.UserInterface.ToolTips.GeneralToolTipController;
 using static ClickQuest.Game.Extensions.UserInterface.DescriptionsController;
@@ -19,15 +20,15 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 	{
 		public static ToolTip GenerateItemToolTip<T>(T itemToGenerateToolTipFor) where T : Item
 		{
-			double fontSizeToolTipname = (double) Application.Current.FindResource("FontSizeToolTipName");
-			var fontFamilyRegularDemiBold = (FontFamily) Application.Current.FindResource("FontRegularDemiBold");
+			var fontSizeToolTipname = (double) Application.Current.FindResource("FontSizeToolTipName");
+			FontFamily fontFamilyRegularDemiBold = (FontFamily) Application.Current.FindResource("FontRegularDemiBold");
 
-			var toolTip = new ToolTip
+			ToolTip toolTip = new ToolTip
 			{
 				BorderBrush = Colors.GetRarityColor(itemToGenerateToolTipFor.Rarity)
 			};
 
-			var toolTipBlock = new TextBlock
+			TextBlock toolTipBlock = new TextBlock
 			{
 				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase")
 			};
@@ -89,7 +90,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 					toolTipBlock.Inlines.Add(new LineBreak());
 
 					var listOfDescriptionRuns = GenerateDescriptionRuns(artifact.Description);
-					foreach (var run in listOfDescriptionRuns)
+					foreach (Run run in listOfDescriptionRuns)
 					{
 						toolTipBlock.Inlines.Add(run);
 					}
@@ -143,7 +144,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 					toolTipBlock.Inlines.Add(new LineBreak());
 
 					var listOfDescriptionRuns = GenerateDescriptionRuns(recipe.Description);
-					foreach (var run in listOfDescriptionRuns)
+					foreach (Run run in listOfDescriptionRuns)
 					{
 						toolTipBlock.Inlines.Add(run);
 					}
@@ -153,7 +154,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 					toolTipBlock.Inlines.Add(new LineBreak());
 
 					var listOfIngredientRuns = GenerateRecipeIngredientsRuns(recipe);
-					foreach (var run in listOfIngredientRuns)
+					foreach (Run run in listOfIngredientRuns)
 					{
 						toolTipBlock.Inlines.Add(run);
 					}
@@ -178,20 +179,20 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static ToolTip GenerateCurrencyToolTip<T>(int rarityValue) where T : Item
 		{
-			var fontFamilyRegularDemiBold = (FontFamily) Application.Current.FindResource("FontRegularDemiBold");
+			FontFamily fontFamilyRegularDemiBold = (FontFamily) Application.Current.FindResource("FontRegularDemiBold");
 
-			var currencyToolTip = new ToolTip
+			ToolTip currencyToolTip = new ToolTip
 			{
 				Style = (Style) Application.Current.FindResource("ToolTipSimple")
 			};
 
-			var currencyToolTipTextBlock = new TextBlock
+			TextBlock currencyToolTipTextBlock = new TextBlock
 			{
 				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase"),
 				FontFamily = fontFamilyRegularDemiBold
 			};
 
-			var currencyColor = Colors.GetRarityColor((Rarity) rarityValue);
+			SolidColorBrush currencyColor = Colors.GetRarityColor((Rarity) rarityValue);
 			currencyToolTipTextBlock.Foreground = currencyColor;
 
 			currencyToolTipTextBlock.Text = (Rarity) rarityValue + " " + (typeof(T) == typeof(Ingot) ? "Ingots" : "Dungeon Keys");
@@ -203,12 +204,12 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static ToolTip GenerateBlessingToolTip(Blessing blessing)
 		{
-			double fontSizeToolTipname = (double) Application.Current.FindResource("FontSizeToolTipName");
-			var fontFamilyRegularDemiBold = (FontFamily) Application.Current.FindResource("FontRegularDemiBold");
+			var fontSizeToolTipname = (double) Application.Current.FindResource("FontSizeToolTipName");
+			FontFamily fontFamilyRegularDemiBold = (FontFamily) Application.Current.FindResource("FontRegularDemiBold");
 
-			var blessingToolTip = new ToolTip();
+			ToolTip blessingToolTip = new ToolTip();
 
-			var blessingToolTipBlock = new TextBlock
+			TextBlock blessingToolTipBlock = new TextBlock
 			{
 				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase")
 			};
@@ -258,11 +259,11 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static ToolTip GenerateQuestToolTip(Quest currentQuest)
 		{
-			double fontSizeToolTipname = (double) Application.Current.FindResource("FontSizeToolTipName");
+			var fontSizeToolTipname = (double) Application.Current.FindResource("FontSizeToolTipName");
 
-			var questToolTip = new ToolTip();
+			ToolTip questToolTip = new ToolTip();
 
-			var questToolTipTextBlock = new TextBlock
+			TextBlock questToolTipTextBlock = new TextBlock
 			{
 				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase")
 			};
@@ -294,7 +295,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 				questToolTipTextBlock.Inlines.Add(new LineBreak());
 
 				var listOfIngredientRuns = GenerateQuestRewardRuns(currentQuest);
-				foreach (var run in listOfIngredientRuns)
+				foreach (Run run in listOfIngredientRuns)
 				{
 					questToolTipTextBlock.Inlines.Add(run);
 				}
@@ -312,16 +313,17 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static List<Run> GenerateRecipeIngredientsRuns(Recipe recipe)
 		{
-			var ingredientRuns = new List<Run>();
-
-			ingredientRuns.Add(new Run("Ingredients:\n")
+			var ingredientRuns = new List<Run>
 			{
-				FontSize = (double) Application.Current.FindResource("FontSizeToolTipIngredientText")
-			});
+				new Run("Ingredients:\n")
+				{
+					FontSize = (double) Application.Current.FindResource("FontSizeToolTipIngredientText")
+				}
+			};
 
-			foreach (var ingredient in recipe.IngredientPatterns)
+			foreach (IngredientPattern ingredient in recipe.IngredientPatterns)
 			{
-				var relatedMaterial = ingredient.RelatedMaterial;
+				Material relatedMaterial = ingredient.RelatedMaterial;
 				ingredientRuns.Add(new Run($"{ingredient.Quantity}x "));
 				ingredientRuns.Add(new Run($"{relatedMaterial.Name}")
 				{
@@ -337,21 +339,22 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static List<Run> GenerateQuestRewardRuns(Quest quest)
 		{
-			var questRewardRuns = new List<Run>();
-
-			questRewardRuns.Add(new Run("Rewards:\n")
+			var questRewardRuns = new List<Run>
 			{
-				FontSize = (double) Application.Current.FindResource("FontSizeToolTipIngredientText")
-			});
+				new Run("Rewards:\n")
+				{
+					FontSize = (double) Application.Current.FindResource("FontSizeToolTipIngredientText")
+				}
+			};
 
-			foreach (var pattern in quest.QuestRewardPatterns)
+			foreach (QuestRewardPattern pattern in quest.QuestRewardPatterns)
 			{
 				questRewardRuns.Add(new Run($"{pattern.Quantity}x "));
 
 				switch (pattern.QuestRewardType)
 				{
 					case RewardType.Material:
-						var material = GameAssets.Materials.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
+						Material? material = GameAssets.Materials.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
 						questRewardRuns.Add(new Run($"{material.Name}")
 						{
 							Foreground = Colors.GetRarityColor(material.Rarity)
@@ -360,7 +363,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						break;
 
 					case RewardType.Artifact:
-						var artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
+						Artifact? artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
 						questRewardRuns.Add(new Run($"{artifact.Name}")
 						{
 							Foreground = Colors.GetRarityColor(artifact.Rarity)
@@ -369,7 +372,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						break;
 
 					case RewardType.Recipe:
-						var recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
+						Recipe? recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
 						questRewardRuns.Add(new Run($"{recipe.Name}")
 						{
 							Foreground = Colors.GetRarityColor(recipe.Rarity)
@@ -378,7 +381,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						break;
 
 					case RewardType.Ingot:
-						var ingot = GameAssets.Materials.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
+						Material? ingot = GameAssets.Materials.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
 						questRewardRuns.Add(new Run($"{ingot.Name}")
 						{
 							Foreground = Colors.GetRarityColor(ingot.Rarity)
@@ -387,7 +390,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 						break;
 
 					case RewardType.Blessing:
-						var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
+						Blessing? blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
 						questRewardRuns.Add(new Run($"{blessing.Name}")
 						{
 							Foreground = Colors.GetRarityColor(blessing.Rarity)
@@ -406,12 +409,12 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static ToolTip GenerateUndiscoveredItemToolTip()
 		{
-			var toolTip = new ToolTip
+			ToolTip toolTip = new ToolTip
 			{
 				Style = (Style) Application.Current.FindResource("ToolTipSimple")
 			};
 
-			var toolTipBlock = new TextBlock
+			TextBlock toolTipBlock = new TextBlock
 			{
 				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase"),
 				Text = "You have not discovered this item yet\nIt will show up here once you first loot it"

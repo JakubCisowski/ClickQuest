@@ -5,6 +5,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
+using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Places;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Combat;
@@ -30,11 +31,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void GenerateRegionButtons()
 		{
-			for (int i = 0; i < GameAssets.Regions.Count; i++)
+			for (var i = 0; i < GameAssets.Regions.Count; i++)
 			{
-				var region = GameAssets.Regions[i];
+				Region region = GameAssets.Regions[i];
 
-				var regionButton = new Button
+				Button regionButton = new Button
 				{
 					Name = "Region" + region.Id,
 					Width = 200,
@@ -43,13 +44,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 					Background = (SolidColorBrush) FindResource("BrushGray1")
 				};
 
-				var regionBlock = new TextBlock
+				TextBlock regionBlock = new TextBlock
 				{
 					FontSize = 20,
 					TextAlignment = TextAlignment.Center
 				};
 
-				var regionNameRun = new Run(region.Name)
+				Run regionNameRun = new Run(region.Name)
 				{
 					FontSize = 20
 				};
@@ -88,11 +89,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 		}
 
-		private void RegionButton_Click(object sender, RoutedEventArgs e)
+		private static void RegionButton_Click(object sender, RoutedEventArgs e)
 		{
-			var selectedRegion = (sender as Button).Tag as Region;
+			Region selectedRegion = (sender as Button).Tag as Region;
 			string regionName = selectedRegion.Name;
-			var selectedRegionPage = GameAssets.Pages[regionName] as RegionPage;
+			RegionPage selectedRegionPage = GameAssets.Pages[regionName] as RegionPage;
 
 			bool canHeroEnterThisRegion = User.Instance.CurrentHero.Level >= selectedRegion.LevelRequirement;
 			if (canHeroEnterThisRegion)
@@ -106,18 +107,18 @@ namespace ClickQuest.Game.UserInterface.Pages
 				InterfaceController.ChangePage(selectedRegionPage, $"{regionName}");
 
 				// Invoke Artifacts with the "on-region-enter" effect.
-				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
+				foreach (Artifact equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
 				{
 					equippedArtifact.ArtifactFunctionality.OnRegionEnter();
 				}
 
 				// [PRERELEASE]
-				foreach (var key in User.Instance.DungeonKeys)
+				foreach (DungeonKey key in User.Instance.DungeonKeys)
 				{
 					key.AddItem(100);
 				}
 
-				foreach (var ingot in User.Instance.Ingots)
+				foreach (Ingot ingot in User.Instance.Ingots)
 				{
 					ingot.AddItem(100);
 				}

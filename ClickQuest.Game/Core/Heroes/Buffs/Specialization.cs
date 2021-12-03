@@ -30,7 +30,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 		public const int SpecCraftingBuffBonus = 1; // Increases crafting rarity limit. <Base - 1> <Limit - 5>
 		public const int SpecTradingBuffBonus = 1; // Increases shop offer size and material selling ratio by 1% <Base - 5>
 		public const int SpecMeltingBuffBonus = 5; // Increases % chance to get additional ingots when melting. <Base - 0%>
-		public const int SpecQuestingBuffBonus = 5; // Reduces % time required to complete questes. <Base - 0%> <Limit - 50%>
+		public const int SpecQuestingBuffBonus = 5; // Reduces % time required to complete quests. <Base - 0%> <Limit - 50%>
 		public const int SpecDungeonBuffBonus = 1; // Increases amount of time to defeat dungeon boss in seconds <Base - 30s>
 
 		public ObservableDictionary<SpecializationType, int> SpecializationBuffs { get; set; }
@@ -54,7 +54,7 @@ namespace ClickQuest.Game.Core.Heroes.Buffs
 			UpdateSpecialization();
 		}
 
-		private void SpecializationAmounts_Updated(object sender, EventArgs e)
+		private static void SpecializationAmounts_Updated(object sender, EventArgs e)
 		{
 			User.Instance.CurrentHero?.Specialization.UpdateBuffs();
 		}

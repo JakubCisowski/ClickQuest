@@ -21,8 +21,8 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 
 			if (_clickTimes.Count == ClicksRequired)
 			{
-				var requiredTimeSpan = TimeSpan.FromMilliseconds(TimeFrame);
-				var actualTimeSpan = _clickTimes.Last() - _clickTimes.First();
+				TimeSpan requiredTimeSpan = TimeSpan.FromMilliseconds(TimeFrame);
+				TimeSpan actualTimeSpan = _clickTimes.Last() - _clickTimes.First();
 
 				if (actualTimeSpan <= requiredTimeSpan)
 				{

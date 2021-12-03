@@ -12,7 +12,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 		{
 			if (InterfaceController.CurrentEnemy is Monster)
 			{
-				int bonusDamage = (int) (DamageIncreasePercent * baseDamage);
+				var bonusDamage = (int) (DamageIncreasePercent * baseDamage);
 
 				baseDamage += bonusDamage;
 			}

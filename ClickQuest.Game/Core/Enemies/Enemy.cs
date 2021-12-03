@@ -44,14 +44,14 @@ namespace ClickQuest.Game.Core.Enemies
 
 		protected void CheckForDungeonKeyDrop()
 		{
-			var DungeonKeyRarityChances = DungeonKey.CreateRarityChancesList(Health);
+			var dungeonKeyRarityChances = DungeonKey.CreateRarityChancesList(Health);
 
-			int position = CollectionsController.RandomizeFreqenciesListPosition(DungeonKeyRarityChances);
+			int position = CollectionsController.RandomizeFrequenciesListPosition(dungeonKeyRarityChances);
 
 			// Grant dungeon key after if algorithm didn't roll empty loot.
 			if (position != 0)
 			{
-				var dungeonKey = User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity) (position - 1));
+				DungeonKey? dungeonKey = User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity) (position - 1));
 				dungeonKey.AddItem();
 
 				// [PRERELEASE] Display dungeon key drop.

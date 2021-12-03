@@ -11,7 +11,7 @@
 		<Setter Property="Background" Value="{StaticResource BrushGray4}" />
 	</Style>
 
-	<!-- Custom TabItem style with Selected, NotSelcted and Hover background changes -->
+	<!-- Custom TabItem style with Selected, NotSelected and Hover background changes -->
 	<Style x:Key="TabItemStyleGeneral" TargetType="{x:Type TabItem}">
 		<Setter Property="Template">
 			<Setter.Value>

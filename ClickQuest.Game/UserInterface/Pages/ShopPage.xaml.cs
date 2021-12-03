@@ -75,7 +75,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 		}
 
-		public List<Recipe> GetShopOfferAsRecipes()
+		public static List<Recipe> GetShopOfferAsRecipes()
 		{
 			var listOfPatterns = GameAssets.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]);
 
@@ -89,22 +89,24 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void SellButton_Click(object sender, RoutedEventArgs e)
 		{
-			var b = sender as Button;
-			var item = b.CommandParameter as Item;
+			Button b = sender as Button;
+			Item item = b.CommandParameter as Item;
 
-			int itemSellValue = 0;
+			var itemSellValue = 0;
 
 			if (item.Rarity == Rarity.Mythic)
 			{
-				var sellItemRuns = new List<Run>();
-				sellItemRuns.Add(new Run("Are you sure you want to sell "));
-				sellItemRuns.Add(new Run($"{item.Name}")
+				var sellItemRuns = new List<Run>
 				{
-					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-				});
-				sellItemRuns.Add(new Run("?"));
+					new Run("Are you sure you want to sell "),
+					new Run($"{item.Name}")
+					{
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+					},
+					new Run("?")
+				};
 
-				var result = AlertBox.Show(sellItemRuns);
+				MessageBoxResult result = AlertBox.Show(sellItemRuns);
 
 				if (result == MessageBoxResult.No)
 				{
@@ -116,7 +118,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				// The selling ratio is only applied for materials.
 				itemSellValue = (int) Math.Ceiling(item.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
-				GameController.UpdateSpecializationAmountAndUI(SpecializationType.Trading);
+				GameController.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
 			}
 			else
 			{
@@ -133,26 +135,28 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void BuyButton_Click(object sender, RoutedEventArgs e)
 		{
-			var b = sender as Button;
-			var recipe = b.CommandParameter as Recipe;
+			Button b = sender as Button;
+			Recipe recipe = b.CommandParameter as Recipe;
 
 			if (User.Instance.Gold >= recipe.Value)
 			{
-				var buyRecipeRuns = new List<Run>();
-				buyRecipeRuns.Add(new Run("Are you sure you want to buy "));
-				buyRecipeRuns.Add(new Run($"{recipe.Name}")
+				var buyRecipeRuns = new List<Run>
 				{
-					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-				});
-				buyRecipeRuns.Add(new Run(" for "));
-				buyRecipeRuns.Add(new Run($"{recipe.Value} gold")
-				{
-					Foreground = (SolidColorBrush) FindResource("BrushGold"),
-					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-				});
-				buyRecipeRuns.Add(new Run("?"));
+					new Run("Are you sure you want to buy "),
+					new Run($"{recipe.Name}")
+					{
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+					},
+					new Run(" for "),
+					new Run($"{recipe.Value} gold")
+					{
+						Foreground = (SolidColorBrush) FindResource("BrushGold"),
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+					},
+					new Run("?")
+				};
 
-				var result = AlertBox.Show(buyRecipeRuns);
+				MessageBoxResult result = AlertBox.Show(buyRecipeRuns);
 				if (result == MessageBoxResult.No)
 				{
 					return;
@@ -163,20 +167,22 @@ namespace ClickQuest.Game.UserInterface.Pages
 				recipe.AddItem();
 				User.Instance.Gold -= recipe.Value;
 
-				GameController.UpdateSpecializationAmountAndUI(SpecializationType.Trading);
+				GameController.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
 
 				UpdateShop();
 			}
 			else
 			{
-				var notEnoughGoldRuns = new List<Run>();
-				notEnoughGoldRuns.Add(new Run("You do not have enough gold to buy this item.\nIt costs "));
-				notEnoughGoldRuns.Add(new Run($"{recipe.Value} gold")
+				var notEnoughGoldRuns = new List<Run>
 				{
-					Foreground = (SolidColorBrush) FindResource("BrushGold"),
-					FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-				});
-				notEnoughGoldRuns.Add(new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses."));
+					new Run("You do not have enough gold to buy this item.\nIt costs "),
+					new Run($"{recipe.Value} gold")
+					{
+						Foreground = (SolidColorBrush) FindResource("BrushGold"),
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
+					},
+					new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses.")
+				};
 
 				AlertBox.Show(notEnoughGoldRuns, MessageBoxButton.OK);
 			}
@@ -184,11 +190,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void SellButton_OnInitialized(object sender, EventArgs e)
 		{
-			var button = sender as Button;
+			Button button = sender as Button;
 
 			if (button?.ToolTip == null)
 			{
-				int itemSellValue = 0;
+				var itemSellValue = 0;
 
 				if (button.CommandParameter is Material material)
 				{
@@ -199,14 +205,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 					itemSellValue = (button.CommandParameter as Item).Value;
 				}
 
-				var toolTip = new ToolTip
+				ToolTip toolTip = new ToolTip
 				{
 					Style = (Style) FindResource("ToolTipSimple")
 				};
 
 				GeneralToolTipController.SetToolTipDelayAndDuration(button);
 
-				var toolTipBlock = new TextBlock
+				TextBlock toolTipBlock = new TextBlock
 				{
 					Style = (Style) FindResource("ToolTipTextBlockBase")
 				};
@@ -226,18 +232,18 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void BuyButton_OnInitialized(object sender, EventArgs e)
 		{
-			var button = sender as Button;
+			Button button = sender as Button;
 
 			if (button?.ToolTip == null)
 			{
-				var toolTip = new ToolTip
+				ToolTip toolTip = new ToolTip
 				{
 					Style = (Style) FindResource("ToolTipSimple")
 				};
 
 				GeneralToolTipController.SetToolTipDelayAndDuration(button);
 
-				var toolTipBlock = new TextBlock
+				TextBlock toolTipBlock = new TextBlock
 				{
 					Style = (Style) FindResource("ToolTipTextBlockBase")
 				};

@@ -30,12 +30,12 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			// Add controls to Dictionary for easier navigation.
 			_controls.Clear();
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "MainInfoPanel"
 			};
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = _pattern.MonsterId.ToString(),
@@ -43,7 +43,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 				IsEnabled = false
 			};
 
-			var nameBox = new ComboBox
+			ComboBox nameBox = new ComboBox
 			{
 				Name = "NameBox",
 				ItemsSource = GameContent.Monsters.Select(x => x.Name),
@@ -52,7 +52,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			nameBox.SelectedValue = GameContent.Monsters.FirstOrDefault(x => x.Id == _pattern.MonsterId)?.Name;
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 
-			var frequencyBox = new TextBox
+			TextBox frequencyBox = new TextBox
 			{
 				Name = "FrequencyBox",
 				Text = _pattern.Frequency.ToString(),

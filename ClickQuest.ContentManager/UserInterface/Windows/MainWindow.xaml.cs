@@ -23,13 +23,13 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 			{
 				SaveObjectChanges();
 
-				string? currentTabName = (tabControl.SelectedItem as TabItem).Header.ToString();
-				var currentTabNameAsContentType = (ContentType) Enum.Parse(typeof(ContentType), currentTabName.Replace(" ", ""));
+				var currentTabName = (tabControl.SelectedItem as TabItem).Header.ToString();
+				ContentType currentTabNameAsContentType = (ContentType) Enum.Parse(typeof(ContentType), currentTabName.Replace(" ", ""));
 
 				switch (currentTabNameAsContentType)
 				{
 					case ContentType.Artifacts:
-						var artifactsPanel = new ArtifactsPanel();
+						ArtifactsPanel artifactsPanel = new ArtifactsPanel();
 						_currentPanel = artifactsPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -37,7 +37,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.Regions:
-						var regionsPanel = new RegionsPanel();
+						RegionsPanel regionsPanel = new RegionsPanel();
 						_currentPanel = regionsPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -45,7 +45,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.Materials:
-						var materialsPanel = new MaterialsPanel();
+						MaterialsPanel materialsPanel = new MaterialsPanel();
 						_currentPanel = materialsPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -53,7 +53,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.Recipes:
-						var recipesPanel = new RecipesPanel();
+						RecipesPanel recipesPanel = new RecipesPanel();
 						_currentPanel = recipesPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -61,7 +61,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.Blessings:
-						var blessingsPanel = new BlessingsPanel();
+						BlessingsPanel blessingsPanel = new BlessingsPanel();
 						_currentPanel = blessingsPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -69,7 +69,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.Bosses:
-						var bossesPanel = new BossesPanel();
+						BossesPanel bossesPanel = new BossesPanel();
 						_currentPanel = bossesPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -77,7 +77,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.DngGroups:
-						var dngGroupsPanel = new DungeonGroupsPanel();
+						DungeonGroupsPanel dngGroupsPanel = new DungeonGroupsPanel();
 						_currentPanel = dngGroupsPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -85,7 +85,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.DngKeys:
-						var dngKeysPanel = new DungeonKeysPanel();
+						DungeonKeysPanel dngKeysPanel = new DungeonKeysPanel();
 						_currentPanel = dngKeysPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -93,7 +93,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.Dungeons:
-						var dungeonsPanel = new DungeonsPanel();
+						DungeonsPanel dungeonsPanel = new DungeonsPanel();
 						_currentPanel = dungeonsPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -101,7 +101,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.Ingots:
-						var ingotsPanel = new IngotsPanel();
+						IngotsPanel ingotsPanel = new IngotsPanel();
 						_currentPanel = ingotsPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -109,7 +109,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.Monsters:
-						var monstersPanel = new MonstersPanel();
+						MonstersPanel monstersPanel = new MonstersPanel();
 						_currentPanel = monstersPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -117,7 +117,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.Quests:
-						var questsPanel = new QuestsPanel();
+						QuestsPanel questsPanel = new QuestsPanel();
 						_currentPanel = questsPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -125,7 +125,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.Priest:
-						var priestPanel = new PriestOfferPatternsPanel();
+						PriestOfferPatternsPanel priestPanel = new PriestOfferPatternsPanel();
 						_currentPanel = priestPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -133,7 +133,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.Shop:
-						var shopPanel = new ShopOfferPatternsPanel();
+						ShopOfferPatternsPanel shopPanel = new ShopOfferPatternsPanel();
 						_currentPanel = shopPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();
@@ -141,7 +141,7 @@ namespace ClickQuest.ContentManager.UserInterface.Windows
 						break;
 
 					case ContentType.GameMech:
-						var gameMechanicsPanel = new GameMechanicsTabsPanel();
+						GameMechanicsTabsPanel gameMechanicsPanel = new GameMechanicsTabsPanel();
 						_currentPanel = gameMechanicsPanel;
 
 						(tabControl.SelectedContent as Grid)?.Children.Clear();

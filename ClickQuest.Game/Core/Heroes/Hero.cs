@@ -21,10 +21,10 @@ namespace ClickQuest.Game.Core.Heroes
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private const int MAX_LEVEL = 100;
-		public const double AURA_SPEED_PER_LEVEL = 0.004;
-		public const double AURA_SPEED_BASE = 1;
-		public const double AURA_DAMAGE_BASE = 0.084;
+		private const int MaxLevel = 100;
+		public const double AuraSpeedPerLevel = 0.004;
+		public const double AuraSpeedBase = 1;
+		public const double AuraDamageBase = 0.084;
 
 		public int Id { get; set; }
 
@@ -67,27 +67,15 @@ namespace ClickQuest.Game.Core.Heroes
 		public double AuraDamage { get; set; }
 		public double AuraAttackSpeed { get; set; }
 
-		public string ThisHeroClass
-		{
-			get
-			{
-				return HeroClass.ToString();
-			}
-		}
+		public string ThisHeroClass => HeroClass.ToString();
 
-		public string ThisHeroRace
-		{
-			get
-			{
-				return HeroRace.ToString();
-			}
-		}
+		public string ThisHeroRace => HeroRace.ToString();
 
 		public string CritChanceText
 		{
 			get
 			{
-				string critChanceText = (Math.Clamp(CritChance, 0, 1) * 100).ToString("0.##");
+				var critChanceText = (Math.Clamp(CritChance, 0, 1) * 100).ToString("0.##");
 				critChanceText += "%";
 				return critChanceText;
 			}
@@ -97,119 +85,53 @@ namespace ClickQuest.Game.Core.Heroes
 		{
 			get
 			{
-				string critDamageText = Math.Floor(CritDamage * 100).ToString();
+				var critDamageText = Math.Floor(CritDamage * 100).ToString();
 				critDamageText += "%";
 				return critDamageText;
 			}
 		}
 
-		public int LevelDamageBonus
-		{
-			get
-			{
-				return ClickDamagePerLevel * Level;
-			}
-		}
+		public int LevelDamageBonus => ClickDamagePerLevel * Level;
 
-		public int LevelDamageBonusTotal
-		{
-			get
-			{
-				return ClickDamagePerLevel * Level + 2;
-			}
-		}
+		public int LevelDamageBonusTotal => ClickDamagePerLevel * Level + 2;
 
-		public double LevelCritBonus
-		{
-			get
-			{
-				return Math.Round(CritChancePerLevel * Level * 100, 2);
-			}
-		}
+		public double LevelCritBonus => Math.Round(CritChancePerLevel * Level * 100, 2);
 
-		public double LevelCritBonusTotal
-		{
-			get
-			{
-				return Math.Round(CritChancePerLevel * Level * 100 + 25, 2);
-			}
-		}
+		public double LevelCritBonusTotal => Math.Round(CritChancePerLevel * Level * 100 + 25, 2);
 
-		public int LevelPoisonBonus
-		{
-			get
-			{
-				return PoisonDamagePerLevel * Level;
-			}
-		}
+		public int LevelPoisonBonus => PoisonDamagePerLevel * Level;
 
-		public int LevelPoisonBonusTotal
-		{
-			get
-			{
-				return PoisonDamagePerLevel * Level + 1;
-			}
-		}
+		public int LevelPoisonBonusTotal => PoisonDamagePerLevel * Level + 1;
 
 		public string AuraDamageText
 		{
 			get
 			{
-				string auraDamageText = (AuraDamage * 100).ToString("0.##");
+				var auraDamageText = (AuraDamage * 100).ToString("0.##");
 				auraDamageText += "%";
 				return auraDamageText;
 			}
 		}
 
-		public string AuraSpeedText
-		{
-			get
-			{
-				return AuraAttackSpeed.ToString("0.###");
-			}
-		}
+		public string AuraSpeedText => AuraAttackSpeed.ToString("0.###");
 
 		public string AuraDpsText
 		{
 			get
 			{
-				string auraDps = (Math.Ceiling(AuraDamage * AuraAttackSpeed * 10000) / 100).ToString("0.##");
+				var auraDps = (Math.Ceiling(AuraDamage * AuraAttackSpeed * 10000) / 100).ToString("0.##");
 				auraDps += "%";
 				return auraDps;
 			}
 		}
 
-		public double LevelAuraBonus
-		{
-			get
-			{
-				return AURA_SPEED_PER_LEVEL * Level;
-			}
-		}
+		public double LevelAuraBonus => AuraSpeedPerLevel * Level;
 
-		public string LevelAuraBonusText
-		{
-			get
-			{
-				return LevelAuraBonus.ToString("0.###");
-			}
-		}
+		public string LevelAuraBonusText => LevelAuraBonus.ToString("0.###");
 
-		public double LevelAuraBonusTotal
-		{
-			get
-			{
-				return AURA_SPEED_BASE + AURA_SPEED_PER_LEVEL * Level;
-			}
-		}
+		public double LevelAuraBonusTotal => AuraSpeedBase + AuraSpeedPerLevel * Level;
 
-		public string LevelAuraBonusTotalText
-		{
-			get
-			{
-				return LevelAuraBonusTotal.ToString("0.###");
-			}
-		}
+		public string LevelAuraBonusTotalText => LevelAuraBonusTotal.ToString("0.###");
 
 		public Hero(HeroClass heroClass, HeroRace heroRace, string heroName)
 		{
@@ -221,12 +143,14 @@ namespace ClickQuest.Game.Core.Heroes
 
 			Specialization = new Specialization();
 
-			ArtifactSets = new List<ArtifactSet>();
-			ArtifactSets.Add(new ArtifactSet
+			ArtifactSets = new List<ArtifactSet>
 			{
-				Id = 0,
-				Name = "Default set"
-			});
+				new ArtifactSet
+				{
+					Id = 0,
+					Name = "Default set"
+				}
+			};
 
 			HeroClass = heroClass;
 			HeroRace = heroRace;
@@ -236,7 +160,7 @@ namespace ClickQuest.Game.Core.Heroes
 			ClickDamagePerLevel = 1;
 			AuraDamage = 0.084;
 			CritDamage = 2.0;
-			AuraAttackSpeed = AURA_SPEED_BASE;
+			AuraAttackSpeed = AuraSpeedBase;
 
 			Id = ++User.Instance.LastHeroId;
 
@@ -268,7 +192,7 @@ namespace ClickQuest.Game.Core.Heroes
 
 		public void GrantLevelUpBonuses()
 		{
-			if (Level < MAX_LEVEL)
+			if (Level < MaxLevel)
 			{
 				// Class specific bonuses and hero stats panel update.
 				switch (HeroClass)
@@ -276,14 +200,14 @@ namespace ClickQuest.Game.Core.Heroes
 					case HeroClass.Slayer:
 						ClickDamage += ClickDamagePerLevel;
 						CritChance += CritChancePerLevel;
-						AuraAttackSpeed += AURA_SPEED_PER_LEVEL;
+						AuraAttackSpeed += AuraSpeedPerLevel;
 
 						break;
 
 					case HeroClass.Venom:
 						ClickDamage += ClickDamagePerLevel;
 						PoisonDamage += PoisonDamagePerLevel;
-						AuraAttackSpeed += AURA_SPEED_PER_LEVEL;
+						AuraAttackSpeed += AuraSpeedPerLevel;
 
 						break;
 				}
@@ -342,10 +266,10 @@ namespace ClickQuest.Game.Core.Heroes
 		public void LoadQuests()
 		{
 			// Clone hero's quests using those from Database - rewards are not stored in Entity.
-			for (int i = 0; i < Quests.Count; i++)
+			for (var i = 0; i < Quests.Count; i++)
 			{
-				var heroQuest = Quests[i];
-				var databaseQuest = GameAssets.Quests.FirstOrDefault(x => x.Id == heroQuest.Id);
+				Quest heroQuest = Quests[i];
+				Quest? databaseQuest = GameAssets.Quests.FirstOrDefault(x => x.Id == heroQuest.Id);
 
 				Quests[i] = databaseQuest.CopyQuest();
 
@@ -356,7 +280,7 @@ namespace ClickQuest.Game.Core.Heroes
 
 		public void ReequipArtifacts()
 		{
-			foreach (var equippedArtifact in EquippedArtifacts)
+			foreach (Artifact equippedArtifact in EquippedArtifacts)
 			{
 				equippedArtifact.ArtifactFunctionality.OnEquip();
 			}
@@ -366,7 +290,7 @@ namespace ClickQuest.Game.Core.Heroes
 		{
 			// Trigger OnUnequip, OnRegionLeave and similar artifact effects.
 			// This is done so that stacking effects are not retained permanently.
-			foreach (var equippedArtifact in EquippedArtifacts)
+			foreach (Artifact equippedArtifact in EquippedArtifacts)
 			{
 				equippedArtifact.ArtifactFunctionality.OnUnequip();
 				equippedArtifact.ArtifactFunctionality.OnRegionLeave();
@@ -376,10 +300,10 @@ namespace ClickQuest.Game.Core.Heroes
 		public (int Damage, DamageType DamageType) CalculateBaseAndCritClickDamage()
 		{
 			int damage = ClickDamage;
-			var damageType = DamageType.Normal;
+			DamageType damageType = DamageType.Normal;
 
 			// Calculate crit (max 100%).
-			double randomizedValue = RNG.Next(1, 101) / 100d;
+			double randomizedValue = Rng.Next(1, 101) / 100d;
 			if (randomizedValue <= CritChance)
 			{
 				damage = (int) (damage * CritDamage);
@@ -391,18 +315,16 @@ namespace ClickQuest.Game.Core.Heroes
 			return (damage, damageType);
 		}
 
-		public void GainExperience(int value, bool isTriggeredFromOnExperienceGained = false)
+		public void GainExperience(int experienceGained, bool isTriggeredFromOnExperienceGained = false)
 		{
-			int experienceGained = value;
-
 			if (ExperienceToNextLvl != 0)
 			{
 				User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.ExperienceGained, experienceGained);
 			}
 
-			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{value}", (SolidColorBrush) Application.Current.FindResource("BrushExperienceRelated"), FloatingTextController.ExperiencePositionPoint);
+			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{experienceGained}", (SolidColorBrush) Application.Current.FindResource("BrushExperienceRelated"), FloatingTextController.ExperiencePositionPoint);
 
-			Experience += value;
+			Experience += experienceGained;
 			Heroes.Experience.CheckIfLeveledUpAndGrantBonuses(this);
 			ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
 			ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
@@ -410,7 +332,7 @@ namespace ClickQuest.Game.Core.Heroes
 
 			if (!isTriggeredFromOnExperienceGained)
 			{
-				foreach (var artifact in User.Instance.CurrentHero.EquippedArtifacts)
+				foreach (Artifact artifact in User.Instance.CurrentHero.EquippedArtifacts)
 				{
 					artifact.ArtifactFunctionality.OnExperienceGained(experienceGained);
 				}

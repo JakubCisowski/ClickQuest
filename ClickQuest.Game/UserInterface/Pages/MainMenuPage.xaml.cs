@@ -29,7 +29,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			ClearSelectOrDeletePanels();
 
-			for (int i = 0; i < User.Instance.Heroes.Count; i++)
+			for (var i = 0; i < User.Instance.Heroes.Count; i++)
 			{
 				SelectOrDeleteHeroButtonsGrid.Children.Add(GenerateSelectOrDeletePanel(i));
 			}
@@ -39,7 +39,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			var selectOrDeletePanels = SelectOrDeleteHeroButtonsGrid.Children.OfType<StackPanel>();
 
-			for (int i = 0; i < selectOrDeletePanels.Count(); i++)
+			for (var i = 0; i < selectOrDeletePanels.Count(); i++)
 			{
 				SelectOrDeleteHeroButtonsGrid.Children.Remove(selectOrDeletePanels.ElementAt(i--));
 			}
@@ -47,11 +47,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private StackPanel GenerateSelectOrDeletePanel(int heroPosition)
 		{
-			var hero = User.Instance.Heroes[heroPosition];
-			var selectHeroButton = GenerateSelectHeroButton(hero);
-			var deleteHeroButton = GenerateDeleteHeroButton(hero);
+			Hero hero = User.Instance.Heroes[heroPosition];
+			Button selectHeroButton = GenerateSelectHeroButton(hero);
+			Button deleteHeroButton = GenerateDeleteHeroButton(hero);
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Orientation = Orientation.Horizontal,
 				HorizontalAlignment = HorizontalAlignment.Center,
@@ -68,12 +68,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private Button GenerateDeleteHeroButton(Hero hero)
 		{
-			var toolTip = new ToolTip
+			ToolTip toolTip = new ToolTip
 			{
 				Style = (Style) FindResource("ToolTipSimple")
 			};
 
-			var toolTipBlock = new TextBlock
+			TextBlock toolTipBlock = new TextBlock
 			{
 				Style = (Style) FindResource("ToolTipTextBlockBase"),
 				Text = "This will permanently delete the hero and all of their items\nCurrencies (gold, ingots, dungeon keys) will not be reset"
@@ -81,7 +81,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			toolTip.Content = toolTipBlock;
 
-			var deleteHeroButton = new Button
+			Button deleteHeroButton = new Button
 			{
 				Name = "DeleteHero" + hero.Id,
 				Width = 50,
@@ -94,7 +94,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			GeneralToolTipController.SetToolTipDelayAndDuration(deleteHeroButton);
 			deleteHeroButton.ToolTip = toolTip;
 
-			var deleteHeroIcon = new PackIcon
+			PackIcon deleteHeroIcon = new PackIcon
 			{
 				Width = 30,
 				Height = 30,
@@ -104,7 +104,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			deleteHeroButton.Content = deleteHeroIcon;
 
-			var deleteHeroButtonStyle = FindResource("ButtonStyleDanger") as Style;
+			Style deleteHeroButtonStyle = FindResource("ButtonStyleDanger") as Style;
 			deleteHeroButton.Style = deleteHeroButtonStyle;
 
 			deleteHeroButton.Click += DeleteHeroButton_Click;
@@ -112,7 +112,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			return deleteHeroButton;
 		}
 
-		private void OrganizeSelectOrDeleteGrid(StackPanel panel, int heroPosition)
+		private static void OrganizeSelectOrDeleteGrid(StackPanel panel, int heroPosition)
 		{
 			if (User.Instance.Heroes.Count < 4)
 			{
@@ -139,7 +139,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private Button GenerateSelectHeroButton(Hero hero)
 		{
-			var selectHeroButton = new Button
+			Button selectHeroButton = new Button
 			{
 				Name = "Hero" + hero.Id,
 				Width = 250,
@@ -149,19 +149,19 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Background = (SolidColorBrush) FindResource("BrushGray1")
 			};
 
-			var selectHeroButtonBlock = new TextBlock
+			TextBlock selectHeroButtonBlock = new TextBlock
 			{
 				TextAlignment = TextAlignment.Center
 			};
 
-			var heroNameText = new Run(hero.Name)
+			Run heroNameText = new Run(hero.Name)
 			{
 				FontFamily = (FontFamily) FindResource("FontFancy")
 			};
-			var heroLevelText = new Run($"\n{hero.Level} lvl | ");
-			var heroClassText = new Run($"{hero.HeroClass}");
-			var separator = new Run(" | ");
-			var heroTotalTimePlayedText = new Run($"{Math.Floor(hero.TimePlayed.TotalHours)}h {hero.TimePlayed.Minutes}m")
+			Run heroLevelText = new Run($"\n{hero.Level} lvl | ");
+			Run heroClassText = new Run($"{hero.HeroClass}");
+			Run separator = new Run(" | ");
+			Run heroTotalTimePlayedText = new Run($"{Math.Floor(hero.TimePlayed.TotalHours)}h {hero.TimePlayed.Minutes}m")
 			{
 				FontFamily = (FontFamily) FindResource("FontRegularLightItalic")
 			};
@@ -193,14 +193,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		public void UpdateCreateHeroButton()
 		{
-			if (User.Instance.Heroes.Count == User.HERO_LIMIT)
+			if (User.Instance.Heroes.Count == User.HeroLimit)
 			{
-				var disabledInfoBlock = new TextBlock
+				TextBlock disabledInfoBlock = new TextBlock
 				{
 					TextAlignment = TextAlignment.Center
 				};
 
-				var disabledText = new Run("Can't create new hero\nMax heroes reached!")
+				Run disabledText = new Run("Can't create new hero\nMax heroes reached!")
 				{
 					FontFamily = (FontFamily) FindResource("FontRegularLightItalic")
 				};
@@ -218,36 +218,39 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void CreateHeroButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (User.Instance.Heroes.Count < User.HERO_LIMIT)
+			if (User.Instance.Heroes.Count < User.HeroLimit)
 			{
 				InterfaceController.ChangePage(GameAssets.Pages["HeroCreation"], "Hero Creation");
 			}
 		}
 
-		private void SelectHeroButton_Click(object sender, RoutedEventArgs e)
+		private static void SelectHeroButton_Click(object sender, RoutedEventArgs e)
 		{
-			var selectedHero = (sender as Button).Tag as Hero;
+			Hero selectedHero = (sender as Button)?.Tag as Hero;
 			User.Instance.CurrentHero = selectedHero;
 
-			selectedHero.LoadQuests();
-			selectedHero.ResumeBlessing();
-			selectedHero.ReequipArtifacts();
-			selectedHero.Specialization.UpdateSpecialization();
-			selectedHero.SessionStartDate = DateTime.Now;
+			if (selectedHero != null)
+			{
+				selectedHero.LoadQuests();
+				selectedHero.ResumeBlessing();
+				selectedHero.ReequipArtifacts();
+				selectedHero.Specialization.UpdateSpecialization();
+				selectedHero.SessionStartDate = DateTime.Now;
 
-			selectedHero.RefreshHeroExperience();
-			GameAssets.RefreshPages();
+				selectedHero.RefreshHeroExperience();
+				GameAssets.RefreshPages();
 
-			InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
+				InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
 
-			selectedHero.ResumeQuest();
+				selectedHero.ResumeQuest();
+			}
 		}
 
 		private void DeleteHeroButton_Click(object sender, RoutedEventArgs e)
 		{
-			var hero = (sender as Button).Tag as Hero;
+			Hero hero = (sender as Button)?.Tag as Hero;
 
-			var result = AlertBox.Show($"Press Yes to delete {hero.Name}.");
+			MessageBoxResult result = AlertBox.Show($"Press Yes to delete {hero.Name}.");
 			if (result == MessageBoxResult.Yes)
 			{
 				User.Instance.Heroes.Remove(hero);
@@ -259,7 +262,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void ResetProgressButton_Click(object sender, RoutedEventArgs e)
 		{
-			var result = AlertBox.Show("This action will delete all heroes, along with their equipment, as well as all currencies and achievements. Are you sure?");
+			MessageBoxResult result = AlertBox.Show("This action will delete all heroes, along with their equipment, as well as all currencies and achievements. Are you sure?");
 
 			if (result == MessageBoxResult.Yes)
 			{

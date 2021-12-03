@@ -38,48 +38,48 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "StaticInfoPanel"
 			};
 
-			var selectedRecipe = _dataContext;
+			Recipe selectedRecipe = _dataContext;
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = selectedRecipe.Id.ToString(),
 				Margin = new Thickness(10),
 				IsEnabled = false
 			};
-			var nameBox = new TextBox
+			TextBox nameBox = new TextBox
 			{
 				Name = "NameBox",
 				Text = selectedRecipe.Name,
 				Margin = new Thickness(10),
 				IsEnabled = false
 			};
-			var valueBox = new TextBox
+			TextBox valueBox = new TextBox
 			{
 				Name = "ValueBox",
 				Text = selectedRecipe.Value.ToString(),
 				Margin = new Thickness(10)
 			};
-			var rarityBox = new ComboBox
+			ComboBox rarityBox = new ComboBox
 			{
 				Name = "RarityBox",
 				ItemsSource = Enum.GetValues(typeof(Rarity)),
 				SelectedIndex = (int) selectedRecipe.Rarity,
 				Margin = new Thickness(10)
 			};
-			var artifactIdBox = new TextBox
+			TextBox artifactIdBox = new TextBox
 			{
 				Name = "ArtifactIDBox",
 				Text = selectedRecipe.ArtifactId.ToString(),
 				Margin = new Thickness(10),
 				IsEnabled = false
 			};
-			var artifactNameBox = new ComboBox
+			ComboBox artifactNameBox = new ComboBox
 			{
 				Name = "ArtifactNameBox",
 				ItemsSource = GameContent.Artifacts.Select(x => x.Name),
@@ -145,7 +145,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		public void Save()
 		{
-			var recipe = _dataContext;
+			Recipe recipe = _dataContext;
 
 			if (recipe is null)
 			{
@@ -197,9 +197,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			Save();
 
-			var objectToDelete = GameContent.Recipes.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+			Recipe? objectToDelete = GameContent.Recipes.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
-			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -223,7 +223,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{
@@ -248,9 +248,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			CreateDynamicValueButton.Visibility = Visibility.Visible;
 
-			foreach (var ingredient in _ingredients)
+			foreach (IngredientPattern ingredient in _ingredients)
 			{
-				var border = new Border
+				Border border = new Border
 				{
 					BorderThickness = new Thickness(0.5),
 					BorderBrush = (SolidColorBrush) FindResource("BrushGray2"),
@@ -258,7 +258,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 					Margin = new Thickness(4)
 				};
 
-				var grid = CreateDynamicValueGrid(ingredient);
+				Grid grid = CreateDynamicValueGrid(ingredient);
 
 				border.Child = grid;
 
@@ -268,9 +268,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private Grid CreateDynamicValueGrid(IngredientPattern ingredient)
 		{
-			var grid = new Grid();
+			Grid grid = new Grid();
 
-			var idBlock = new TextBlock
+			TextBlock idBlock = new TextBlock
 			{
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
@@ -280,7 +280,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = $"[{ingredient.MaterialId}]"
 			};
 
-			var nameBlock = new TextBlock
+			TextBlock nameBlock = new TextBlock
 			{
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
@@ -289,7 +289,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = GameContent.Materials.FirstOrDefault(x => x.Id == ingredient.MaterialId).Name
 			};
 
-			var quantityBlock = new TextBlock
+			TextBlock quantityBlock = new TextBlock
 			{
 				FontSize = 18,
 				VerticalAlignment = VerticalAlignment.Center,
@@ -298,7 +298,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Text = ingredient.Quantity.ToString()
 			};
 
-			var editButton = new Button
+			Button editButton = new Button
 			{
 				Width = 30,
 				Height = 30,
@@ -308,7 +308,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				Tag = ingredient
 			};
 
-			var editIcon = new PackIcon
+			PackIcon editIcon = new PackIcon
 			{
 				Width = 20,
 				Height = 20,
@@ -320,7 +320,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 			editButton.Click += EditDynamicValue_Click;
 
-			var deleteButton = new Button
+			Button deleteButton = new Button
 			{
 				Width = 30,
 				Height = 30,
@@ -330,7 +330,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				HorizontalAlignment = HorizontalAlignment.Right
 			};
 
-			var deleteIcon = new PackIcon
+			PackIcon deleteIcon = new PackIcon
 			{
 				Width = 20,
 				Height = 20,
@@ -353,9 +353,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void EditDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var ingredient = (sender as Button).Tag as IngredientPattern;
+			IngredientPattern ingredient = (sender as Button).Tag as IngredientPattern;
 
-			var ingredientWindow = new IngredientWindow(_dataContext, ingredient)
+			IngredientWindow ingredientWindow = new IngredientWindow(_dataContext, ingredient)
 			{
 				Owner = Application.Current.MainWindow
 			};
@@ -366,9 +366,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void DeleteDynamicValue_Click(object sender, RoutedEventArgs e)
 		{
-			var ingredient = (sender as Button).Tag as IngredientPattern;
+			IngredientPattern ingredient = (sender as Button).Tag as IngredientPattern;
 
-			var result = MessageBox.Show($"Are you sure you want to delete ingredient of Id: {ingredient.MaterialId}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete ingredient of Id: {ingredient.MaterialId}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -382,10 +382,10 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void CreateDynamicValueButton_Click(object sender, RoutedEventArgs e)
 		{
-			var newIngredient = new IngredientPattern();
+			IngredientPattern newIngredient = new IngredientPattern();
 			_ingredients.Add(newIngredient);
 
-			var tempButton = new Button
+			Button tempButton = new Button
 			{
 				Tag = newIngredient
 			};

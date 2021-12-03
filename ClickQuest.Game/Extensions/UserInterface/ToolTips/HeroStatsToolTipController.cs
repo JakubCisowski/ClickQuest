@@ -12,15 +12,15 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 {
 	public static class HeroStatsToolTipController
 	{
-		public static ToolTip GenerateSpecizaltionToolTip(SpecializationType typeOfGeneratedSpecialization, int nextUpgrade)
+		public static ToolTip GenerateSpecializationToolTip(SpecializationType typeOfGeneratedSpecialization, int nextUpgrade)
 		{
-			double fontSizeToolTipname = (double) Application.Current.FindResource("FontSizeToolTipName");
-			var fontFamilyRegularItalic = (FontFamily) Application.Current.FindResource("FontRegularItalic");
-			var fontFamilyRegularBlackItalic = (FontFamily) Application.Current.FindResource("FontRegularBlackItalic");
+			var fontSizeToolTipName = (double) Application.Current.FindResource("FontSizeToolTipName");
+			FontFamily fontFamilyRegularItalic = (FontFamily) Application.Current.FindResource("FontRegularItalic");
+			FontFamily fontFamilyRegularBlackItalic = (FontFamily) Application.Current.FindResource("FontRegularBlackItalic");
 
-			var specToolTip = new ToolTip();
+			ToolTip specToolTip = new ToolTip();
 
-			var toolTipBlock = new TextBlock
+			TextBlock toolTipBlock = new TextBlock
 			{
 				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase")
 			};
@@ -31,7 +31,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 				{
 					toolTipBlock.Inlines.Add(new Run("Prayer")
 					{
-						FontSize = fontSizeToolTipname
+						FontSize = fontSizeToolTipName
 					});
 
 					toolTipBlock.Inlines.Add(new LineBreak());
@@ -78,7 +78,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 				{
 					toolTipBlock.Inlines.Add(new Run("Clicker")
 					{
-						FontSize = fontSizeToolTipname
+						FontSize = fontSizeToolTipName
 					});
 
 					toolTipBlock.Inlines.Add(new LineBreak());
@@ -136,7 +136,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 				{
 					toolTipBlock.Inlines.Add(new Run("Craftsman")
 					{
-						FontSize = fontSizeToolTipname
+						FontSize = fontSizeToolTipName
 					});
 
 					toolTipBlock.Inlines.Add(new LineBreak());
@@ -184,7 +184,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 				{
 					toolTipBlock.Inlines.Add(new Run("Tradesman")
 					{
-						FontSize = fontSizeToolTipname
+						FontSize = fontSizeToolTipName
 					});
 
 					toolTipBlock.Inlines.Add(new LineBreak());
@@ -237,7 +237,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 				{
 					toolTipBlock.Inlines.Add(new Run("Melter")
 					{
-						FontSize = fontSizeToolTipname
+						FontSize = fontSizeToolTipName
 					});
 
 					toolTipBlock.Inlines.Add(new LineBreak());
@@ -290,7 +290,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 				{
 					toolTipBlock.Inlines.Add(new Run("Adventurer")
 					{
-						FontSize = fontSizeToolTipname
+						FontSize = fontSizeToolTipName
 					});
 
 					toolTipBlock.Inlines.Add(new LineBreak());
@@ -342,7 +342,7 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 				{
 					toolTipBlock.Inlines.Add(new Run("Daredevil")
 					{
-						FontSize = fontSizeToolTipname
+						FontSize = fontSizeToolTipName
 					});
 
 					toolTipBlock.Inlines.Add(new LineBreak());
@@ -391,13 +391,13 @@ namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
 
 		public static ToolTip GenerateHeroInfoToolTip(HeroRace heroRace, HeroClass heroClass)
 		{
-			double fontSizeToolTipname = (double) Application.Current.FindResource("FontSizeToolTipName");
-			var fontFamilyRegularItalic = (FontFamily) Application.Current.FindResource("FontRegularItalic");
-			var fontFamilyRegularBlackItalic = (FontFamily) Application.Current.FindResource("FontRegularBlackItalic");
+			var fontSizeToolTipname = (double) Application.Current.FindResource("FontSizeToolTipName");
+			FontFamily fontFamilyRegularItalic = (FontFamily) Application.Current.FindResource("FontRegularItalic");
+			FontFamily fontFamilyRegularBlackItalic = (FontFamily) Application.Current.FindResource("FontRegularBlackItalic");
 
-			var toolTip = new ToolTip();
+			ToolTip toolTip = new ToolTip();
 
-			var block = new TextBlock
+			TextBlock block = new TextBlock
 			{
 				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase")
 			};

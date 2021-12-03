@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.UserInterface.Windows;
@@ -35,28 +36,28 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 		public static List<LootQueueEntry> LootQueue { get; set; }
 
-		private static readonly DispatcherTimer _timer;
+		private static readonly DispatcherTimer Timer;
 
 		static LootQueueController()
 		{
 			LootQueue = new List<LootQueueEntry>();
 
-			_timer = new DispatcherTimer
+			Timer = new DispatcherTimer
 			{
 				Interval = TimeSpan.FromMilliseconds(QueueIntervalMilliseconds)
 			};
 
-			_timer.Tick += Timer_Tick;
+			Timer.Tick += Timer_Tick;
 		}
 
 		public static void AddToQueue(string lootName, Rarity lootRarity, PackIconKind lootIconKind, int quantity = 1)
 		{
 			LootQueue.Add(new LootQueueEntry(lootName, lootRarity, lootIconKind, quantity));
 
-			if (!_timer.IsEnabled)
+			if (!Timer.IsEnabled)
 			{
 				Timer_Tick(null, null);
-				_timer.Start();
+				Timer.Start();
 			}
 		}
 
@@ -64,24 +65,24 @@ namespace ClickQuest.Game.Extensions.UserInterface
 		{
 			LootQueue.AddRange(lootQueueEntries);
 
-			if (!_timer.IsEnabled)
+			if (!Timer.IsEnabled)
 			{
 				Timer_Tick(null, null);
-				_timer.Start();
+				Timer.Start();
 			}
 		}
 
 		private static void Timer_Tick(object source, EventArgs e)
 		{
-			var firstEntry = LootQueue.FirstOrDefault();
+			LootQueueEntry? firstEntry = LootQueue.FirstOrDefault();
 
 			if (firstEntry is null)
 			{
-				_timer.Stop();
+				Timer.Stop();
 				return;
 			}
 
-			var border = FloatingTextController.CreateFloatingTextLootBorder(firstEntry.LootName, firstEntry.LootRarity, firstEntry.LootIconKind, firstEntry.Quantity);
+			Border border = FloatingTextController.CreateFloatingTextLootBorder(firstEntry.LootName, firstEntry.LootRarity, firstEntry.LootIconKind, firstEntry.Quantity);
 
 			(Application.Current.MainWindow as GameWindow).CreateFloatingTextLoot(border);
 
@@ -89,7 +90,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 			if (LootQueue.Count == 0)
 			{
-				_timer.Stop();
+				Timer.Stop();
 			}
 			else
 			{
@@ -101,7 +102,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 		{
 			var merged = new List<LootQueueEntry>();
 
-			foreach (var lootQueueEntry in LootQueue)
+			foreach (LootQueueEntry lootQueueEntry in LootQueue)
 			{
 				if (merged.Any(x => x.LootName == lootQueueEntry.LootName))
 				{

@@ -1,7 +1,4 @@
-﻿using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Places;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.UserInterface.Pages;
+﻿using ClickQuest.Game.Core.Player;
 
 namespace ClickQuest.Game.Core.Items.Artifacts
 {
@@ -14,18 +11,14 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 		private const double CritDamagePerStack = 0.01;
 		private const int MaxStacks = 20;
 
-		private Region _currentRegion;
 		private int _stackCount;
 
 		public override void OnRegionEnter()
 		{
-			_currentRegion = (GameAssets.CurrentPage as RegionPage)?.Region;
 		}
 
 		public override void OnRegionLeave()
 		{
-			_currentRegion = default;
-
 			User.Instance.CurrentHero.ClickDamage -= _stackCount * ClickDamagePerStack;
 			User.Instance.CurrentHero.CritChance -= _stackCount * CritChancePerStack;
 			User.Instance.CurrentHero.CritDamage -= _stackCount * CritDamagePerStack;

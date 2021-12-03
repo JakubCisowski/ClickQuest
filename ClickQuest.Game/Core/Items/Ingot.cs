@@ -10,14 +10,15 @@ namespace ClickQuest.Game.Core.Items
 	{
 		public override Ingot CopyItem(int quantity)
 		{
-			var copy = new Ingot();
-
-			copy.Id = Id;
-			copy.Name = Name;
-			copy.Rarity = Rarity;
-			copy.Value = Value;
-			copy.Description = Description;
-			copy.Quantity = quantity;
+			Ingot copy = new Ingot
+			{
+				Id = Id,
+				Name = Name,
+				Rarity = Rarity,
+				Value = Value,
+				Description = Description,
+				Quantity = quantity
+			};
 
 			return copy;
 		}
@@ -58,7 +59,7 @@ namespace ClickQuest.Game.Core.Items
 
 			if (amount != 0)
 			{
-				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{amount}", ColorsController.GetRarityColor(Rarity), FloatingTextController.GetIngotRarityPosition(Rarity));
+				(Application.Current.MainWindow as GameWindow)?.CreateFloatingTextUtility($"+{amount}", ColorsController.GetRarityColor(Rarity), FloatingTextController.GetIngotRarityPosition(Rarity));
 			}
 
 			AddAchievementProgress();

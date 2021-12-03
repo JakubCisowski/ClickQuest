@@ -6,6 +6,7 @@ using System.Windows.Media;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Places;
 using ClickQuest.Game.Extensions.UserInterface;
@@ -42,7 +43,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				return;
 			}
 
-			var region = GameAssets.Regions.FirstOrDefault(x => x.Name == e.AddedItems[0].ToString());
+			Region? region = GameAssets.Regions.FirstOrDefault(x => x.Name == e.AddedItems[0]?.ToString());
 
 			if (region != null)
 			{
@@ -59,7 +60,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				return;
 			}
 
-			var dungeon = GameAssets.Dungeons.FirstOrDefault(x => x.Name == e.AddedItems[0].ToString());
+			Dungeon? dungeon = GameAssets.Dungeons.FirstOrDefault(x => x.Name == e.AddedItems[0]?.ToString());
 
 			if (dungeon != null)
 			{
@@ -73,7 +74,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			InfoPanel.Children.Clear();
 
-			var regionNameBlock = new TextBlock
+			TextBlock regionNameBlock = new TextBlock
 			{
 				Text = region.Name,
 				FontSize = 26,
@@ -83,7 +84,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Margin = new Thickness(5)
 			};
 
-			var levelRequirementBlock = new TextBlock
+			TextBlock levelRequirementBlock = new TextBlock
 			{
 				Text = "Level Requirement: " + region.LevelRequirement,
 				FontSize = 20,
@@ -92,7 +93,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Margin = new Thickness(5)
 			};
 
-			var descriptionBlock = new TextBlock
+			TextBlock descriptionBlock = new TextBlock
 			{
 				Text = region.Description,
 				FontSize = 18,
@@ -103,7 +104,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				FontFamily = (FontFamily) FindResource("FontFancy")
 			};
 
-			var separator = new Separator
+			Separator separator = new Separator
 			{
 				Height = 2,
 				Width = 400,
@@ -117,12 +118,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			var sortedMonsterPatterns = region.MonsterSpawnPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y => y.Id == x.MonsterId && y.EntryType == BestiaryEntryType.Monster)).ThenByDescending(z => z.Frequency);
 
-			foreach (var monsterPattern in sortedMonsterPatterns)
+			foreach (MonsterSpawnPattern monsterPattern in sortedMonsterPatterns)
 			{
-				var monster = monsterPattern.Monster;
+				Monster monster = monsterPattern.Monster;
 				bool monsterDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == monster.Id && x.EntryType == BestiaryEntryType.Monster);
 
-				var monsterNameBlock = new TextBlock
+				TextBlock monsterNameBlock = new TextBlock
 				{
 					FontSize = 22,
 					FontFamily = (FontFamily) FindResource("FontFancy"),
@@ -147,7 +148,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				if (!monsterDiscovered)
 				{
-					var monsterSeparator = new Separator
+					Separator monsterSeparator = new Separator
 					{
 						Height = 2,
 						Width = 200,
@@ -159,7 +160,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					continue;
 				}
 
-				var monsterHealthBlock = new TextBlock
+				TextBlock monsterHealthBlock = new TextBlock
 				{
 					Text = "Health: " + monster.Health,
 					FontSize = 16,
@@ -170,7 +171,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				InfoPanel.Children.Add(monsterHealthBlock);
 
-				var monsterDescriptionBlock = new TextBlock
+				TextBlock monsterDescriptionBlock = new TextBlock
 				{
 					Text = monster.Description,
 					FontSize = 16,
@@ -182,7 +183,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				InfoPanel.Children.Add(monsterDescriptionBlock);
 
-				var lootLabelBlock = new TextBlock
+				TextBlock lootLabelBlock = new TextBlock
 				{
 					Text = "Loot: ",
 					FontSize = 18,
@@ -195,12 +196,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				var sortedLootPatterns = monster.MonsterLootPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y => y.Id == x.MonsterLootId && y.EntryType == BestiaryEntryType.MonsterLoot)).ThenBy(y => y.Item.Rarity);
 
-				foreach (var lootPattern in sortedLootPatterns)
+				foreach (MonsterLootPattern lootPattern in sortedLootPatterns)
 				{
-					var item = lootPattern.Item;
+					Item item = lootPattern.Item;
 					bool monsterLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == item.Id && x.EntryType == BestiaryEntryType.MonsterLoot);
 
-					var itemNameBlock = new TextBlock
+					TextBlock itemNameBlock = new TextBlock
 					{
 						TextAlignment = TextAlignment.Center,
 						HorizontalAlignment = HorizontalAlignment.Center,
@@ -227,7 +228,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					InfoPanel.Children.Add(itemNameBlock);
 				}
 
-				var itemSeparator = new Separator
+				Separator itemSeparator = new Separator
 				{
 					Height = 2,
 					Width = 200,
@@ -242,7 +243,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			InfoPanel.Children.Clear();
 
-			var dungeonNameBlock = new TextBlock
+			TextBlock dungeonNameBlock = new TextBlock
 			{
 				Text = dungeon.Name,
 				FontSize = 26,
@@ -252,7 +253,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Margin = new Thickness(5)
 			};
 
-			var dungeonGroupBlock = new TextBlock
+			TextBlock dungeonGroupBlock = new TextBlock
 			{
 				Text = dungeon.DungeonGroup.Name,
 				FontSize = 20,
@@ -262,7 +263,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Foreground = ColorsController.GetRarityColor((Rarity) dungeon.DungeonGroupId)
 			};
 
-			var descriptionBlock = new TextBlock
+			TextBlock descriptionBlock = new TextBlock
 			{
 				Text = dungeon.Description,
 				FontSize = 18,
@@ -273,7 +274,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				FontFamily = (FontFamily) FindResource("FontFancy")
 			};
 
-			var separator = new Separator
+			Separator separator = new Separator
 			{
 				Height = 2,
 				Width = 400,
@@ -287,11 +288,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			var sortedBosses = GameAssets.Bosses.Where(x => dungeon.BossIds.Contains(x.Id)).OrderByDescending(y => GameAssets.BestiaryEntries.Any(z => z.Id == y.Id && z.EntryType == BestiaryEntryType.Boss));
 
-			foreach (var boss in sortedBosses)
+			foreach (Boss boss in sortedBosses)
 			{
 				bool bossDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == boss.Id && x.EntryType == BestiaryEntryType.Boss);
 
-				var bossNameBlock = new TextBlock
+				TextBlock bossNameBlock = new TextBlock
 				{
 					FontSize = 22,
 					FontFamily = (FontFamily) FindResource("FontFancy"),
@@ -316,7 +317,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				if (!bossDiscovered)
 				{
-					var bossSeparator = new Separator
+					Separator bossSeparator = new Separator
 					{
 						Height = 2,
 						Width = 200,
@@ -330,13 +331,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				var bossAffixesStrings = new List<string>();
 
-				foreach (var affix in boss.Affixes)
+				foreach (Affix affix in boss.Affixes)
 				{
 					string affixString = string.Concat(affix.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
 					bossAffixesStrings.Add(affixString);
 				}
 
-				var bossAffixBlock = new TextBlock
+				TextBlock bossAffixBlock = new TextBlock
 				{
 					Text = "Affixes: " + string.Join(" / ", bossAffixesStrings),
 					FontSize = 16,
@@ -347,7 +348,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				InfoPanel.Children.Add(bossAffixBlock);
 
-				var bossHealthBlock = new TextBlock
+				TextBlock bossHealthBlock = new TextBlock
 				{
 					Text = "Health: " + boss.Health,
 					FontSize = 16,
@@ -358,7 +359,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				InfoPanel.Children.Add(bossHealthBlock);
 
-				var bossDescriptionBlock = new TextBlock
+				TextBlock bossDescriptionBlock = new TextBlock
 				{
 					Text = boss.Description,
 					FontSize = 16,
@@ -370,7 +371,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				InfoPanel.Children.Add(bossDescriptionBlock);
 
-				var lootLabelBlock = new TextBlock
+				TextBlock lootLabelBlock = new TextBlock
 				{
 					Text = "Loot: ",
 					FontSize = 18,
@@ -383,12 +384,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				var sortedLootPatterns = boss.BossLootPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y => y.Id == x.BossLootId && y.EntryType == BestiaryEntryType.BossLoot)).ThenBy(z => z.Item.Rarity);
 
-				foreach (var lootPattern in sortedLootPatterns)
+				foreach (BossLootPattern lootPattern in sortedLootPatterns)
 				{
-					var item = lootPattern.Item;
+					Item item = lootPattern.Item;
 					bool bossLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == item.Id && x.EntryType == BestiaryEntryType.BossLoot);
 
-					var itemNameBlock = new TextBlock
+					TextBlock itemNameBlock = new TextBlock
 					{
 						TextAlignment = TextAlignment.Center,
 						HorizontalAlignment = HorizontalAlignment.Center,
@@ -408,7 +409,6 @@ namespace ClickQuest.Game.UserInterface.Pages
 					else
 					{
 						itemNameBlock.Text = item is Recipe recipe ? recipe.FullName : item.Name;
-						;
 						itemNameBlock.FontFamily = (FontFamily) FindResource("FontRegularBold");
 
 						if (lootPattern.BossLootType == RewardType.Blessing)
@@ -424,7 +424,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					InfoPanel.Children.Add(itemNameBlock);
 				}
 
-				var itemSeparator = new Separator
+				Separator itemSeparator = new Separator
 				{
 					Height = 2,
 					Width = 200,
@@ -439,11 +439,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 		{
 			InfoPanel.Children.Clear();
 
-			string? selectedName = e.AddedItems[0].ToString();
+			var selectedName = e.AddedItems[0]?.ToString();
 
-			string description = GameAssets.GameMechanicsTabs.FirstOrDefault(x => x.Name == selectedName).Description;
+			string description = GameAssets.GameMechanicsTabs.FirstOrDefault(x => x.Name == selectedName)?.Description;
 
-			var nameTextBlock = new TextBlock
+			TextBlock nameTextBlock = new TextBlock
 			{
 				Text = selectedName,
 				FontSize = 24,
@@ -453,14 +453,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Margin = new Thickness(5)
 			};
 
-			var separator = new Separator
+			Separator separator = new Separator
 			{
 				Height = 2,
 				Width = 400,
 				Margin = new Thickness(10)
 			};
 
-			var descriptionTextBlock = new TextBlock
+			TextBlock descriptionTextBlock = new TextBlock
 			{
 				FontSize = 18,
 				TextAlignment = TextAlignment.Justify,

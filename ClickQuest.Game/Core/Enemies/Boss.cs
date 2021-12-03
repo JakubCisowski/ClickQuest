@@ -28,10 +28,7 @@ namespace ClickQuest.Game.Core.Enemies
 		[JsonIgnore]
 		public override int CurrentHealth
 		{
-			get
-			{
-				return _currentHealth;
-			}
+			get => _currentHealth;
 			set
 			{
 				// value - new current health
@@ -57,17 +54,18 @@ namespace ClickQuest.Game.Core.Enemies
 
 		public override Boss CopyEnemy()
 		{
-			var copy = new Boss();
-
-			copy.Id = Id;
-			copy.Name = Name;
-			copy.Health = Health;
-			copy.CurrentHealth = Health;
-			copy.Description = Description;
-			copy.CurrentHealthProgress = CurrentHealthProgress;
-			copy.BossLootPatterns = BossLootPatterns;
-			copy.AffixFunctionalities = AffixFunctionalities;
-			copy.Affixes = Affixes;
+			Boss copy = new Boss
+			{
+				Id = Id,
+				Name = Name,
+				Health = Health,
+				CurrentHealth = Health,
+				Description = Description,
+				CurrentHealthProgress = CurrentHealthProgress,
+				BossLootPatterns = BossLootPatterns,
+				AffixFunctionalities = AffixFunctionalities,
+				Affixes = Affixes
+			};
 
 			return copy;
 		}
@@ -84,7 +82,7 @@ namespace ClickQuest.Game.Core.Enemies
 				GrantVictoryBonuses();
 
 				// Invoke Artifacts with the "on-death" effect.
-				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
+				foreach (Artifact equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
 				{
 					equippedArtifact.ArtifactFunctionality.OnKill();
 				}
@@ -96,7 +94,7 @@ namespace ClickQuest.Game.Core.Enemies
 		public override void GrantVictoryBonuses()
 		{
 			// [PRERELEASE]
-			int experienceGained = 10;
+			const int experienceGained = 10;
 			User.Instance.CurrentHero.GainExperience(experienceGained);
 
 			// Grant boss loot.
@@ -106,11 +104,11 @@ namespace ClickQuest.Game.Core.Enemies
 
 			var lootQueueEntries = new List<LootQueueEntry>();
 
-			foreach (var loot in BossLootPatterns)
+			foreach (BossLootPattern loot in BossLootPatterns)
 			{
-				int itemIntegerCount = (int) loot.Frequencies[threshold];
+				var itemIntegerCount = (int) loot.Frequencies[threshold];
 
-				double randomizedValue = RNG.Next(1, 10001) / 10000d;
+				double randomizedValue = Rng.Next(1, 10001) / 10000d;
 				if (randomizedValue < loot.Frequencies[threshold] - itemIntegerCount)
 				{
 					itemIntegerCount++;
@@ -134,7 +132,7 @@ namespace ClickQuest.Game.Core.Enemies
 					if (isBlessingAccepted)
 					{
 						// Start blessing animation.
-						var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == loot.BossLootId);
+						Blessing? blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == loot.BossLootId);
 
 						lootQueueEntries.Add(new LootQueueEntry(blessing.Name, blessing.Rarity, PackIconKind.BookCross, 1));
 					}
@@ -180,7 +178,7 @@ namespace ClickQuest.Game.Core.Enemies
 
 			InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 
-			GameController.UpdateSpecializationAmountAndUI(SpecializationType.Dungeon);
+			GameController.UpdateSpecializationAmountAndUi(SpecializationType.Dungeon);
 
 			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.DungeonsCompleted, 1);
 		}

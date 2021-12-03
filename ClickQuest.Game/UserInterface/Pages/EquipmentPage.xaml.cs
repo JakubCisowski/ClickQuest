@@ -150,9 +150,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				materials = materials.ReorderItemsInList();
 
-				foreach (var material in materials)
+				foreach (Material material in materials)
 				{
-					var border = new Border
+					Border border = new Border
 					{
 						BorderThickness = new Thickness(2),
 						BorderBrush = (SolidColorBrush) FindResource("BrushBlack"),
@@ -167,10 +167,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 					GeneralToolTipController.SetToolTipDelayAndDuration(border);
 
-					var toolTip = ItemToolTipController.GenerateItemToolTip(material);
+					ToolTip toolTip = ItemToolTipController.GenerateItemToolTip(material);
 					border.ToolTip = toolTip;
 
-					var grid = CreateSingleItemGrid(material);
+					Grid grid = CreateSingleItemGrid(material);
 
 					border.Child = grid;
 
@@ -195,9 +195,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				recipes = recipes.ReorderItemsInList();
 
-				foreach (var recipe in recipes)
+				foreach (Recipe recipe in recipes)
 				{
-					var border = new Border
+					Border border = new Border
 					{
 						BorderThickness = new Thickness(2),
 						BorderBrush = (SolidColorBrush) FindResource("BrushBlack"),
@@ -212,10 +212,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 					GeneralToolTipController.SetToolTipDelayAndDuration(border);
 
-					var toolTip = ItemToolTipController.GenerateItemToolTip(recipe);
+					ToolTip toolTip = ItemToolTipController.GenerateItemToolTip(recipe);
 					border.ToolTip = toolTip;
 
-					var grid = CreateSingleItemGrid(recipe);
+					Grid grid = CreateSingleItemGrid(recipe);
 
 					border.Child = grid;
 
@@ -240,7 +240,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			{
 				artifacts = artifacts.ReorderItemsInList();
 
-				foreach (var artifact in artifacts)
+				foreach (Artifact artifact in artifacts)
 				{
 					// If the current Artifact is equipped, and its count is equal to 1 (so the only available Artifact is equipped), skip it
 					// Otherwise, we'll create the block but with quantity of one less.
@@ -249,7 +249,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 						continue;
 					}
 
-					var border = new Border
+					Border border = new Border
 					{
 						Name = "Artifact" + artifact.Id + "ItemBorder",
 						BorderThickness = new Thickness(2),
@@ -265,10 +265,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 					GeneralToolTipController.SetToolTipDelayAndDuration(border);
 
-					var toolTip = ItemToolTipController.GenerateItemToolTip(artifact);
+					ToolTip toolTip = ItemToolTipController.GenerateItemToolTip(artifact);
 					border.ToolTip = toolTip;
 
-					var grid = CreateArtifactGrid(artifact, User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact));
+					Grid grid = CreateArtifactGrid(artifact, User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact));
 
 					border.Child = grid;
 
@@ -289,12 +289,12 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void ItemBorder_TryToEquip(object sender, MouseButtonEventArgs e)
 		{
-			object item = (sender as Border).Tag;
+			object item = (sender as Border)?.Tag;
 
 			if (item is Artifact artifact)
 			{
 				bool isEquipped = User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact);
-				bool equippedArtifactsChanged = false;
+				var equippedArtifactsChanged = false;
 
 				if (!isEquipped)
 				{
@@ -303,7 +303,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 					if (canBeEquipped)
 					{
 						User.Instance.CurrentHero.EquippedArtifacts.Add(artifact);
-						User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x => x.Id == User.Instance.CurrentHero.CurrentArtifactSetId).ArtifactIds.Add(artifact.Id);
+						User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x => x.Id == User.Instance.CurrentHero.CurrentArtifactSetId)?.ArtifactIds.Add(artifact.Id);
 						artifact.ArtifactFunctionality.OnEquip();
 						(sender as Border).Background = FindResource("BrushAccent3") as SolidColorBrush;
 						(sender as Border).BorderBrush = FindResource("BrushBlack") as SolidColorBrush;
@@ -321,7 +321,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 						if (canBeUnequipped)
 						{
 							User.Instance.CurrentHero.EquippedArtifacts.Remove(artifact);
-							User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x => x.Id == User.Instance.CurrentHero.CurrentArtifactSetId).ArtifactIds.Remove(artifact.Id);
+							User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x => x.Id == User.Instance.CurrentHero.CurrentArtifactSetId)?.ArtifactIds.Remove(artifact.Id);
 							artifact.ArtifactFunctionality.OnUnequip();
 							(sender as Border).Background = FindResource("BrushAccent1") as SolidColorBrush;
 							(sender as Border).BorderBrush = FindResource("BrushBlack") as SolidColorBrush;
@@ -350,7 +350,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 
 			// Add "Equipped" block.
-			var equippedTextBlock = new TextBlock
+			TextBlock equippedTextBlock = new TextBlock
 			{
 				Text = "Equipped",
 				FontSize = 20,
@@ -361,7 +361,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			ArtifactsPanel.Children.Insert(0, equippedTextBlock);
 
 			// Add separator between equipped and not-equipped Artifacts.
-			var separator = new Separator
+			Separator separator = new Separator
 			{
 				Height = 2,
 				Width = 200,
@@ -371,7 +371,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (User.Instance.CurrentHero.EquippedArtifacts.Count == 0)
 			{
-				var noArtifactsEquippedTextBlock = new TextBlock
+				TextBlock noArtifactsEquippedTextBlock = new TextBlock
 				{
 					Text = "You have no Artifacts equipped in this set\nEquip Artifacts by clicking them in this tab",
 					FontSize = 16,
@@ -388,11 +388,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 			var equippedArtifacts = User.Instance.CurrentHero.EquippedArtifacts;
 
 			// Add Equipped Artifacts borders (no quantity) with a different style.
-			for (int i = 0; i < User.Instance.CurrentHero.EquippedArtifacts.Count; i++)
+			for (var i = 0; i < User.Instance.CurrentHero.EquippedArtifacts.Count; i++)
 			{
-				var equippedArtifact = equippedArtifacts[i];
+				Artifact equippedArtifact = equippedArtifacts[i];
 
-				var border = new Border
+				Border border = new Border
 				{
 					Name = "EquippedArtifact" + equippedArtifact.Id + "ItemBorder",
 					BorderThickness = new Thickness(2),
@@ -407,10 +407,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				GeneralToolTipController.SetToolTipDelayAndDuration(border);
 
-				var toolTip = ItemToolTipController.GenerateItemToolTip(equippedArtifact);
+				ToolTip toolTip = ItemToolTipController.GenerateItemToolTip(equippedArtifact);
 				border.ToolTip = toolTip;
 
-				var grid = CreateEquippedArtifactGrid(equippedArtifact);
+				Grid grid = CreateEquippedArtifactGrid(equippedArtifact);
 
 				border.Child = grid;
 
@@ -432,13 +432,13 @@ namespace ClickQuest.Game.UserInterface.Pages
 				oldGrid.Children.Clear();
 			}
 
-			var artifactSetsGrid = new Grid
+			Grid artifactSetsGrid = new Grid
 			{
 				Name = "ArtifactSetsGrid",
 				Margin = new Thickness(0, 10, 0, 10)
 			};
 
-			var addButton = new Button
+			Button addButton = new Button
 			{
 				HorizontalAlignment = HorizontalAlignment.Right,
 				Margin = new Thickness(0, 0, 75, 0),
@@ -449,7 +449,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			};
 			addButton.Click += AddArtifactSet_Click;
 
-			var removeButton = new Button
+			Button removeButton = new Button
 			{
 				HorizontalAlignment = HorizontalAlignment.Right,
 				Margin = new Thickness(0, 0, 5, 0),
@@ -460,7 +460,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			};
 			removeButton.Click += RemoveArtifactSet_Click;
 
-			var renameButton = new Button
+			Button renameButton = new Button
 			{
 				HorizontalAlignment = HorizontalAlignment.Right,
 				Margin = new Thickness(0, 0, 40, 0),
@@ -471,7 +471,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			};
 			renameButton.Click += RenameArtifactSet_Click;
 
-			var artifactSetsComboBox = new ComboBox
+			ComboBox artifactSetsComboBox = new ComboBox
 			{
 				Name = "ArtifactSetsComboBox",
 				HorizontalAlignment = HorizontalAlignment.Left,
@@ -515,16 +515,16 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			RefreshWholeArtifactsPanel();
 
-			var oldGrid = LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") as Grid;
-			var artifactSetsComboBox = LogicalTreeHelper.FindLogicalNode(oldGrid, "ArtifactSetsComboBox") as ComboBox;
+			Grid oldGrid = LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") as Grid;
+			ComboBox artifactSetsComboBox = LogicalTreeHelper.FindLogicalNode(oldGrid, "ArtifactSetsComboBox") as ComboBox;
 			artifactSetsComboBox.SelectedItem = "Artifact Set " + newId;
 		}
 
 		private void RenameArtifactSet_Click(object sender, RoutedEventArgs e)
 		{
-			var oldGrid = LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") as Grid;
-			var artifactSetsComboBox = LogicalTreeHelper.FindLogicalNode(oldGrid, "ArtifactSetsComboBox") as ComboBox;
-			string? selectedName = artifactSetsComboBox.SelectedItem.ToString();
+			Grid oldGrid = LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") as Grid;
+			ComboBox artifactSetsComboBox = LogicalTreeHelper.FindLogicalNode(oldGrid, "ArtifactSetsComboBox") as ComboBox;
+			var selectedName = artifactSetsComboBox?.SelectedItem.ToString();
 
 			string newName = RenameBox.Show(selectedName);
 
@@ -546,10 +546,10 @@ namespace ClickQuest.Game.UserInterface.Pages
 				int removedSetId = User.Instance.CurrentHero.CurrentArtifactSetId;
 
 				int firstId = User.Instance.CurrentHero.ArtifactSets.Min(x => x.Id);
-				string firstName = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x => x.Id == firstId).Name;
+				string firstName = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x => x.Id == firstId)?.Name;
 
-				var oldGrid = LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") as Grid;
-				var artifactSetsComboBox = LogicalTreeHelper.FindLogicalNode(oldGrid, "ArtifactSetsComboBox") as ComboBox;
+				Grid oldGrid = LogicalTreeHelper.FindLogicalNode(ArtifactsPanel, "ArtifactSetsGrid") as Grid;
+				ComboBox artifactSetsComboBox = LogicalTreeHelper.FindLogicalNode(oldGrid, "ArtifactSetsComboBox") as ComboBox;
 				artifactSetsComboBox.SelectedItem = firstName;
 
 				User.Instance.CurrentHero.ArtifactSets.RemoveAt(removedSetId);
@@ -570,14 +570,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 				{
 					AlertBox.Show("Artifact Sets cannot be changed while in combat or questing", MessageBoxButton.OK);
 
-					var comboBox = sender as ComboBox;
+					ComboBox comboBox = sender as ComboBox;
 					_artifactSetsComboBoxSelectionHandled = false;
 					comboBox.SelectedItem = e.RemovedItems[0];
 
 					return;
 				}
 
-				string? artifactSetName = e.AddedItems[0].ToString();
+				var artifactSetName = e.AddedItems[0]?.ToString();
 
 				int artifactSetId = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x => x.Name == artifactSetName).Id;
 
@@ -591,11 +591,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 			_artifactSetsComboBoxSelectionHandled = true;
 		}
 
-		private Grid CreateSingleItemGrid(Item item)
+		private static Grid CreateSingleItemGrid(Item item)
 		{
-			var grid = new Grid();
+			Grid grid = new Grid();
 
-			var circleIcon = new PackIcon
+			PackIcon circleIcon = new PackIcon
 			{
 				Kind = PackIconKind.Circle,
 				Width = 15,
@@ -604,7 +604,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Foreground = ColorsController.GetRarityColor(item.Rarity)
 			};
 
-			var nameBlock = new TextBlock
+			TextBlock nameBlock = new TextBlock
 			{
 				FontSize = 18,
 				HorizontalAlignment = HorizontalAlignment.Left,
@@ -617,7 +617,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (item.Quantity > 1)
 			{
-				var quantityBlock = new TextBlock
+				TextBlock quantityBlock = new TextBlock
 				{
 					FontSize = 18,
 					HorizontalAlignment = HorizontalAlignment.Right,
@@ -630,11 +630,11 @@ namespace ClickQuest.Game.UserInterface.Pages
 			return grid;
 		}
 
-		private Grid CreateEquippedArtifactGrid(Artifact artifact)
+		private static Grid CreateEquippedArtifactGrid(Artifact artifact)
 		{
-			var grid = new Grid();
+			Grid grid = new Grid();
 
-			var circleIcon = new PackIcon
+			PackIcon circleIcon = new PackIcon
 			{
 				Kind = PackIconKind.Circle,
 				Width = 15,
@@ -643,7 +643,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Foreground = ColorsController.GetRarityColor(artifact.Rarity)
 			};
 
-			var nameBlock = new TextBlock
+			TextBlock nameBlock = new TextBlock
 			{
 				FontSize = 18,
 				HorizontalAlignment = HorizontalAlignment.Left,
@@ -657,14 +657,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 			return grid;
 		}
 
-		private Grid CreateArtifactGrid(Artifact artifact, bool isAlreadyEquipped)
+		private static Grid CreateArtifactGrid(Artifact artifact, bool isAlreadyEquipped)
 		{
 			// If the Artifact is already equipped (but this exact one isn't), treat it as if it had 1 less quantity (but don't display quantity if it's 1).
 			// If not and quantity is equal to 1, do not display its quantity.
 
-			var grid = new Grid();
+			Grid grid = new Grid();
 
-			var circleIcon = new PackIcon
+			PackIcon circleIcon = new PackIcon
 			{
 				Kind = PackIconKind.Circle,
 				Width = 15,
@@ -673,7 +673,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				Foreground = ColorsController.GetRarityColor(artifact.Rarity)
 			};
 
-			var nameBlock = new TextBlock
+			TextBlock nameBlock = new TextBlock
 			{
 				FontSize = 18,
 				HorizontalAlignment = HorizontalAlignment.Left,
@@ -686,7 +686,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 			if (isAlreadyEquipped && artifact.Quantity > 2)
 			{
-				var quantityBlock = new TextBlock
+				TextBlock quantityBlock = new TextBlock
 				{
 					FontSize = 18,
 					HorizontalAlignment = HorizontalAlignment.Right,
@@ -697,7 +697,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			}
 			else if (!isAlreadyEquipped && artifact.Quantity > 1)
 			{
-				var quantityBlock = new TextBlock
+				TextBlock quantityBlock = new TextBlock
 				{
 					FontSize = 18,
 					HorizontalAlignment = HorizontalAlignment.Right,

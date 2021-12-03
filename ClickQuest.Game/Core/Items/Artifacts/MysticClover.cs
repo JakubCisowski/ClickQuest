@@ -16,13 +16,13 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 
 		public override void OnRegionEnter()
 		{
-			var region = GameAssets.CurrentPage as RegionPage;
+			RegionPage region = GameAssets.CurrentPage as RegionPage;
 
 			_oldPattern = region.Region.MonsterSpawnPatterns;
 
 			double totalFrequencyAdded = 0;
 
-			foreach (var monsterSpawnPattern in region.Region.MonsterSpawnPatterns.OrderBy(x => x.Frequency))
+			foreach (MonsterSpawnPattern monsterSpawnPattern in region.Region.MonsterSpawnPatterns.OrderBy(x => x.Frequency))
 			{
 				if (monsterSpawnPattern.Frequency <= 0.02)
 				{
@@ -36,7 +36,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 
 		public override void OnRegionLeave()
 		{
-			var region = GameAssets.CurrentPage as RegionPage;
+			RegionPage region = GameAssets.CurrentPage as RegionPage;
 
 			region.Region.MonsterSpawnPatterns = _oldPattern;
 			_oldPattern = default;

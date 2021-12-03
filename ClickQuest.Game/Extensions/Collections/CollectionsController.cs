@@ -9,7 +9,7 @@ namespace ClickQuest.Game.Extensions.Collections
 	{
 		public static void AddItemToCollection<T>(Item itemToAdd, List<T> itemCollection, int amount = 1) where T : Item
 		{
-			foreach (var item in itemCollection)
+			foreach (T item in itemCollection)
 			{
 				if (item.Id == itemToAdd.Id)
 				{
@@ -19,14 +19,14 @@ namespace ClickQuest.Game.Extensions.Collections
 			}
 
 			// If user doesn't have this item, clone and add it.
-			var copy = itemToAdd.CopyItem(amount);
+			Item copy = itemToAdd.CopyItem(amount);
 
 			itemCollection.Add((T) copy);
 		}
 
 		public static void RemoveItemFromCollection<T>(Item itemToRemove, List<T> itemCollection, int amount = 1) where T : Item
 		{
-			foreach (Item item in itemCollection)
+			foreach (T item in itemCollection)
 			{
 				if (item.Id == itemToRemove.Id)
 				{
@@ -43,10 +43,10 @@ namespace ClickQuest.Game.Extensions.Collections
 			// If user doesn't have this item, don't do anything (check Item.Quantity).
 		}
 
-		public static int RandomizeFreqenciesListPosition(List<double> frequencies)
+		public static int RandomizeFrequenciesListPosition(List<double> frequencies)
 		{
-			double randomizedValue = RNG.Next(1, 10001) / 10000d;
-			int i = 0;
+			double randomizedValue = Rng.Next(1, 10001) / 10000d;
+			var i = 0;
 
 			while (randomizedValue > frequencies[i])
 			{

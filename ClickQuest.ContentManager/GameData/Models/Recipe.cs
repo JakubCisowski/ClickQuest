@@ -15,13 +15,7 @@ namespace ClickQuest.ContentManager.GameData.Models
 		public override string Description { get; set; }
 
 		[JsonIgnore]
-		public string FullName
-		{
-			get
-			{
-				return "Recipe: " + Name;
-			}
-		}
+		public string FullName => "Recipe: " + Name;
 
 		public int ArtifactId { get; set; }
 		public List<IngredientPattern> IngredientPatterns { get; set; }

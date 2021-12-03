@@ -113,7 +113,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 		public static DoubleAnimation CreateTextOpacityAnimation(int durationInSeconds)
 		{
-			var textVisibilityAnimation = new DoubleAnimation
+			DoubleAnimation textVisibilityAnimation = new DoubleAnimation
 			{
 				Name = "ClickTextVisibilityAnimation",
 				Duration = new Duration(TimeSpan.FromSeconds(durationInSeconds)),
@@ -126,8 +126,8 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 		public static (double X, double Y) RandomizeFloatingTextPathPosition(Point mousePosition, double canvasActualWidth, double canvasActualHeight, int maximumPositionOffset)
 		{
-			double randomizedPositionX = mousePosition.X + RNG.Next(-maximumPositionOffset, maximumPositionOffset + 1);
-			double randomizedPositionY = mousePosition.Y + RNG.Next(-maximumPositionOffset, maximumPositionOffset + 1);
+			double randomizedPositionX = mousePosition.X + Rng.Next(-maximumPositionOffset, maximumPositionOffset + 1);
+			double randomizedPositionY = mousePosition.Y + Rng.Next(-maximumPositionOffset, maximumPositionOffset + 1);
 
 			// Clamp the positions, so that floating numbers do not follow cursor when user hovers over stats panel, equipment panel, etc.
 			randomizedPositionX = Math.Clamp(randomizedPositionX, -90, canvasActualWidth + 45);
@@ -138,7 +138,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 		public static Border CreateFloatingTextCombatBorder(int damageValue, DamageType damageType)
 		{
-			var border = new Border
+			Border border = new Border
 			{
 				CornerRadius = new CornerRadius(20),
 				BorderThickness = new Thickness(5),
@@ -146,20 +146,20 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				IsHitTestVisible = false
 			};
 
-			var stackPanel = new StackPanel
+			StackPanel stackPanel = new StackPanel
 			{
 				Orientation = Orientation.Horizontal
 			};
 
-			var textBrush = Colors.GetDamageTypeColor(damageType);
+			SolidColorBrush textBrush = Colors.GetDamageTypeColor(damageType);
 
-			var icon = GetFloatingCombatIcon(damageType);
+			PackIcon icon = GetFloatingCombatIcon(damageType);
 			icon.Foreground = textBrush;
 			icon.VerticalAlignment = VerticalAlignment.Center;
 
 			stackPanel.Children.Add(icon);
 
-			var text = new TextBlock
+			TextBlock text = new TextBlock
 			{
 				Text = damageValue.ToString(),
 				Foreground = textBrush,
@@ -181,7 +181,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 		public static Border CreateFloatingTextUtilityBorder(string value, SolidColorBrush textBrush)
 		{
-			var border = new Border
+			Border border = new Border
 			{
 				CornerRadius = new CornerRadius(20),
 				BorderThickness = new Thickness(5),
@@ -189,12 +189,12 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				IsHitTestVisible = false
 			};
 
-			var stackPanel = new StackPanel
+			StackPanel stackPanel = new StackPanel
 			{
 				Orientation = Orientation.Horizontal
 			};
 
-			var text = new TextBlock
+			TextBlock text = new TextBlock
 			{
 				Text = value,
 				Foreground = textBrush,
@@ -211,7 +211,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 		public static Border CreateFloatingTextLootBorder(string lootName, Rarity lootRarity, PackIconKind lootIconKind, int quantity = 1)
 		{
-			var border = new Border
+			Border border = new Border
 			{
 				CornerRadius = new CornerRadius(20),
 				BorderThickness = new Thickness(5),
@@ -219,24 +219,23 @@ namespace ClickQuest.Game.Extensions.UserInterface
 				IsHitTestVisible = false
 			};
 
-			var stackPanel = new StackPanel
+			StackPanel stackPanel = new StackPanel
 			{
 				Orientation = Orientation.Horizontal
 			};
 
-			var lootIcon = new PackIcon
+			PackIcon lootIcon = new PackIcon
 			{
 				Foreground = ColorsController.GetRarityColor(lootRarity),
 				Width = 20,
 				Height = 20,
-				VerticalAlignment = VerticalAlignment.Center
+				VerticalAlignment = VerticalAlignment.Center,
+				Kind = lootIconKind
 			};
-
-			lootIcon.Kind = lootIconKind;
 
 			stackPanel.Children.Add(lootIcon);
 
-			var itemBlock = new TextBlock
+			TextBlock itemBlock = new TextBlock
 			{
 				Foreground = ColorsController.GetRarityColor(lootRarity),
 				FontSize = 28,
@@ -263,7 +262,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 		public static PackIcon GetFloatingCombatIcon(DamageType damageType)
 		{
-			var icon = new PackIcon
+			PackIcon icon = new PackIcon
 			{
 				Width = 28,
 				Height = 28,

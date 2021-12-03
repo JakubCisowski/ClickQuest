@@ -231,7 +231,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			{
 			}
 
-			var window = Application.Current.MainWindow as GameWindow;
+			GameWindow window = Application.Current.MainWindow as GameWindow;
 			window.CurrentFrame.Navigate(destinationPage);
 			window.LocationInfo = locationInfoText;
 

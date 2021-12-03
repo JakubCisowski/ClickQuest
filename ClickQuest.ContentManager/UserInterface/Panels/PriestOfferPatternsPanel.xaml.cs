@@ -38,14 +38,14 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "StaticInfoPanel"
 			};
 
-			var selectedVendorPattern = _dataContext;
+			VendorPattern selectedVendorPattern = _dataContext;
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = selectedVendorPattern.Id.ToString(),
@@ -54,7 +54,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			};
 			_controls.Add(idBox.Name, idBox);
 
-			var vendorIdBox = new TextBox
+			TextBox vendorIdBox = new TextBox
 			{
 				Name = "VendorIdBox",
 				Text = selectedVendorPattern.VendorItemId.ToString(),
@@ -63,7 +63,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			};
 			_controls.Add(vendorIdBox.Name, vendorIdBox);
 
-			var nameBox = new ComboBox
+			ComboBox nameBox = new ComboBox
 			{
 				Name = "NameBox",
 				Margin = new Thickness(10)
@@ -71,7 +71,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			nameBox.SelectionChanged += NameBox_SelectionChanged;
 			_controls.Add(nameBox.Name, nameBox);
 
-			var vendorTypeBox = new ComboBox
+			ComboBox vendorTypeBox = new ComboBox
 			{
 				Name = "VendorTypeBox",
 				ItemsSource = Enum.GetValues(typeof(RewardType)),
@@ -81,7 +81,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 			vendorTypeBox.SelectedValue = selectedVendorPattern.VendorItemType;
 			_controls.Add(vendorTypeBox.Name, vendorTypeBox);
 
-			var valueBox = new TextBox
+			TextBox valueBox = new TextBox
 			{
 				Name = "ValueBox",
 				Text = selectedVendorPattern.Value.ToString(),
@@ -163,7 +163,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				return;
 			}
 
-			var comboBox = sender as ComboBox;
+			ComboBox comboBox = sender as ComboBox;
 
 			if (comboBox.SelectedValue is null)
 			{
@@ -201,7 +201,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		public void Save()
 		{
-			var vendorPattern = _dataContext;
+			VendorPattern vendorPattern = _dataContext;
 
 			if (vendorPattern is null)
 			{
@@ -248,9 +248,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			Save();
 
-			var objectToDelete = GameContent.PriestOffer.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+			VendorPattern? objectToDelete = GameContent.PriestOffer.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
-			var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {objectToDelete.Id}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {objectToDelete.Id}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -270,7 +270,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			string? selectedValue = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			var selectedValue = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedValue is null)
 			{

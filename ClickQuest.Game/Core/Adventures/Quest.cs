@@ -7,6 +7,7 @@ using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Interfaces;
+using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
@@ -22,7 +23,7 @@ namespace ClickQuest.Game.Core.Adventures
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		private readonly DispatcherTimer _timer;
-		public static int RerollGoldCost = 100;
+		public static readonly int RerollGoldCost = 100;
 
 		public bool Rare { get; set; }
 
@@ -45,13 +46,7 @@ namespace ClickQuest.Game.Core.Adventures
 		public DateTime EndDate { get; set; }
 		public int Id { get; set; }
 
-		public bool IsFinished
-		{
-			get
-			{
-				return TicksCountNumber <= 0;
-			}
-		}
+		public bool IsFinished => TicksCountNumber <= 0;
 
 		public Quest()
 		{
@@ -66,18 +61,19 @@ namespace ClickQuest.Game.Core.Adventures
 
 		public Quest CopyQuest()
 		{
-			var copy = new Quest();
+			Quest copy = new Quest
+			{
+				Id = Id,
+				Rare = Rare,
+				HeroClass = HeroClass,
+				Name = Name,
+				Duration = Duration,
+				Description = Description,
+				RewardsDescription = RewardsDescription,
+				QuestRewardPatterns = QuestRewardPatterns
+			};
 
 			// Copy only the Database Id, not the Entity Id.
-			copy.Id = Id;
-			copy.Rare = Rare;
-			copy.HeroClass = HeroClass;
-			copy.Name = Name;
-			copy.Duration = Duration;
-			copy.Description = Description;
-			copy.RewardsDescription = RewardsDescription;
-
-			copy.QuestRewardPatterns = QuestRewardPatterns;
 
 			return copy;
 		}
@@ -85,11 +81,11 @@ namespace ClickQuest.Game.Core.Adventures
 		public void StartQuest()
 		{
 			// Create copy of this quest (to make doing the same quest possible on other heroes at the same time).
-			var questCopy = CopyQuest();
+			Quest questCopy = CopyQuest();
 			questCopy.EndDate = EndDate;
 
 			// Trigger on-quest start artifacts.
-			foreach (var artifact in User.Instance.CurrentHero.EquippedArtifacts)
+			foreach (Artifact artifact in User.Instance.CurrentHero.EquippedArtifacts)
 			{
 				artifact.ArtifactFunctionality.OnQuestStarted(questCopy);
 			}
@@ -128,7 +124,7 @@ namespace ClickQuest.Game.Core.Adventures
 		{
 			_timer.Stop();
 			TicksCountText = "";
-			GameController.UpdateSpecializationAmountAndUI(SpecializationType.Questing);
+			GameController.UpdateSpecializationAmountAndUi(SpecializationType.Questing);
 			AssignRewards();
 			QuestController.RerollQuests();
 			CombatTimerController.StartAuraTimerOnCurrentRegion();
@@ -136,9 +132,9 @@ namespace ClickQuest.Game.Core.Adventures
 
 		public void UpdateAllRewardsDescription()
 		{
-			foreach (var reward in QuestRewardPatterns)
+			foreach (QuestRewardPattern reward in QuestRewardPatterns)
 			{
-				string itemName = "";
+				var itemName = "";
 
 				switch (reward.QuestRewardType)
 				{
@@ -171,31 +167,31 @@ namespace ClickQuest.Game.Core.Adventures
 		{
 			User.Instance.Achievements.NumericAchievementCollection[NumericAchievementType.QuestsCompleted]++;
 
-			foreach (var materialRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Material))
+			foreach (QuestRewardPattern materialRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Material))
 			{
-				var material = GameAssets.Materials.FirstOrDefault(x => x.Id == materialRewardPattern.QuestRewardId);
+				Material? material = GameAssets.Materials.FirstOrDefault(x => x.Id == materialRewardPattern.QuestRewardId);
 				material.AddItem(materialRewardPattern.Quantity);
 			}
 
-			foreach (var artifactRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Artifact))
+			foreach (QuestRewardPattern artifactRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Artifact))
 			{
-				var artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == artifactRewardPattern.QuestRewardId);
+				Artifact? artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == artifactRewardPattern.QuestRewardId);
 				artifact.AddItem(artifactRewardPattern.Quantity);
 			}
 
-			foreach (var recipeRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Recipe))
+			foreach (QuestRewardPattern recipeRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Recipe))
 			{
-				var recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == recipeRewardPattern.QuestRewardId);
+				Recipe? recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == recipeRewardPattern.QuestRewardId);
 				recipe.AddItem(recipeRewardPattern.Quantity);
 			}
 
-			foreach (var ingotRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Ingot))
+			foreach (QuestRewardPattern ingotRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Ingot))
 			{
-				var ingot = GameAssets.Ingots.FirstOrDefault(x => x.Id == ingotRewardPattern.QuestRewardId);
+				Ingot? ingot = GameAssets.Ingots.FirstOrDefault(x => x.Id == ingotRewardPattern.QuestRewardId);
 				ingot.AddItem(ingotRewardPattern.Quantity);
 			}
 
-			foreach (var blessingRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Blessing))
+			foreach (QuestRewardPattern blessingRewardPattern in QuestRewardPatterns.Where(x => x.QuestRewardType == RewardType.Blessing))
 			{
 				Blessing.AskUserAndSwapBlessing(blessingRewardPattern.QuestRewardId);
 			}
@@ -209,7 +205,7 @@ namespace ClickQuest.Game.Core.Adventures
 			_timer.Stop();
 		}
 
-		private void UpdateTicksCountText(Quest quest)
+		private static void UpdateTicksCountText(Quest quest)
 		{
 			quest.TicksCountText = $"{quest.Name}\n{quest.TicksCountNumber / 60}m {quest.TicksCountNumber % 60}s";
 		}

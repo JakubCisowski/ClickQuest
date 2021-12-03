@@ -5,7 +5,9 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.GameData;
+using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
+using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.UserInterface;
@@ -31,7 +33,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 
 			if (_quest.Rare)
 			{
-				var star1 = new PackIcon
+				PackIcon star1 = new PackIcon
 				{
 					Width = 25,
 					Height = 25,
@@ -40,7 +42,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 					VerticalAlignment = VerticalAlignment.Center
 				};
 
-				var star2 = new PackIcon
+				PackIcon star2 = new PackIcon
 				{
 					Width = 25,
 					Height = 25,
@@ -56,23 +58,23 @@ namespace ClickQuest.Game.UserInterface.Controls
 
 		public void GenerateRewardsInterface()
 		{
-			foreach (var rewardPattern in _quest.QuestRewardPatterns)
+			foreach (QuestRewardPattern rewardPattern in _quest.QuestRewardPatterns)
 			{
-				var panel = new StackPanel
+				StackPanel panel = new StackPanel
 				{
 					Orientation = Orientation.Horizontal,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					Margin = new Thickness(0, 0, 0, 5)
 				};
 
-				var rewardIcon = new PackIcon
+				PackIcon rewardIcon = new PackIcon
 				{
 					Width = 30,
 					Height = 30,
 					VerticalAlignment = VerticalAlignment.Center
 				};
 
-				var rewardText = new TextBlock
+				TextBlock rewardText = new TextBlock
 				{
 					FontSize = 22,
 					VerticalAlignment = VerticalAlignment.Center
@@ -85,7 +87,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 				switch (rewardPattern.QuestRewardType)
 				{
 					case RewardType.Material:
-						var material = GameAssets.Materials.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
+						Material? material = GameAssets.Materials.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
 						toolTip = ItemToolTipController.GenerateItemToolTip(material);
 
@@ -98,7 +100,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 						break;
 
 					case RewardType.Recipe:
-						var recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
+						Recipe? recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
 						toolTip = ItemToolTipController.GenerateItemToolTip(recipe);
 
@@ -111,7 +113,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 						break;
 
 					case RewardType.Artifact:
-						var artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
+						Artifact? artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
 						toolTip = ItemToolTipController.GenerateItemToolTip(artifact);
 
@@ -124,7 +126,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 						break;
 
 					case RewardType.Blessing:
-						var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
+						Blessing? blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
 						toolTip = ItemToolTipController.GenerateBlessingToolTip(blessing);
 
@@ -137,7 +139,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 						break;
 
 					case RewardType.Ingot:
-						var ingot = GameAssets.Ingots.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
+						Ingot? ingot = GameAssets.Ingots.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
 						toolTip = ItemToolTipController.GenerateCurrencyToolTip<Ingot>((int) ingot.Rarity);
 
@@ -166,7 +168,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 
 		private void QuestButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Start this quest (if another one isnt currently assigned).
+			// Start this quest (if another one isn't currently assigned).
 			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
 			{
 				_quest.StartQuest();

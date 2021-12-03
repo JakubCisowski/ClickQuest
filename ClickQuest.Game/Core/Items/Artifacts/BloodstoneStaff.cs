@@ -31,21 +31,21 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 
 		public override void OnDealingClickDamage(ref int clickDamage, DamageType clickDamageType)
 		{
-			int bonusDamage = (int) (clickDamage * _stackList.Count * DamageModifierPerStack);
+			var bonusDamage = (int) (clickDamage * _stackList.Count * DamageModifierPerStack);
 
 			clickDamage += bonusDamage;
 		}
 
 		public override void OnDealingPoisonDamage(ref int poisonDamage)
 		{
-			int bonusDamage = (int) (poisonDamage * _stackList.Count * DamageModifierPerStack);
+			var bonusDamage = (int) (poisonDamage * _stackList.Count * DamageModifierPerStack);
 
 			poisonDamage += bonusDamage;
 		}
 
 		public override void OnDealingAuraDamage(ref int auraDamage)
 		{
-			int bonusDamage = (int) (auraDamage * _stackList.Count * DamageModifierPerStack);
+			var bonusDamage = (int) (auraDamage * _stackList.Count * DamageModifierPerStack);
 
 			auraDamage += bonusDamage;
 		}
@@ -64,7 +64,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 		{
 			if (_stackList.Count > 0)
 			{
-				var oldestStack = _stackList.ElementAt(0);
+				DateTime oldestStack = _stackList.ElementAt(0);
 
 				// If the stack has been active for at least StackDuration seconds, remove it.
 				if (DateTime.Now - oldestStack >= TimeSpan.FromSeconds(StackDuration))

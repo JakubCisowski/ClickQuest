@@ -17,20 +17,11 @@ namespace ClickQuest.Game.Core.Items
 		public Rarity Rarity { get; set; }
 		public virtual string Description { get; set; }
 
-		public ToolTip ToolTip
-		{
-			get
-			{
-				return ItemToolTipController.GenerateItemToolTip(this);
-			}
-		}
+		public ToolTip ToolTip => ItemToolTipController.GenerateItemToolTip(this);
 
 		public int Quantity
 		{
-			get
-			{
-				return _quantity;
-			}
+			get => _quantity;
 			set
 			{
 				_quantity = value;
@@ -45,13 +36,7 @@ namespace ClickQuest.Game.Core.Items
 			}
 		}
 
-		public string RarityString
-		{
-			get
-			{
-				return Rarity.ToString();
-			}
-		}
+		public string RarityString => Rarity.ToString();
 
 		public abstract Item CopyItem(int quantity);
 		public abstract void AddAchievementProgress(int amount = 1);

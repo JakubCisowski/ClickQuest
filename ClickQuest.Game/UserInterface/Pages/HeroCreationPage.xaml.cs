@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
+using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.UserInterface;
@@ -31,7 +32,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 			if (isHeroClassSelected && isHeroRaceSelected)
 			{
 				bool isHeroNameAlphanumericWithSpaces = HeroNameBox.Text.Trim().All(x => char.IsLetterOrDigit(x) || x == ' ');
-				bool isHeroNameLengthCorrect = HeroNameBox.Text.Trim().Length > 0 && HeroNameBox.Text.Trim().Length <= 15;
+				bool isHeroNameLengthCorrect = HeroNameBox.Text.Trim().Length is > 0 and <= 15;
 
 				if (!isHeroNameAlphanumericWithSpaces || !isHeroNameLengthCorrect)
 				{
@@ -53,14 +54,14 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 		private void CreateHero()
 		{
-			var newHero = new Hero((HeroClass) Enum.Parse(typeof(HeroClass), HeroClassBox.SelectedValue.ToString()), (HeroRace) Enum.Parse(typeof(HeroRace), HeroRaceBox.SelectedValue.ToString()), HeroNameBox.Text);
+			Hero newHero = new Hero((HeroClass) Enum.Parse(typeof(HeroClass), HeroClassBox.SelectedValue.ToString()), (HeroRace) Enum.Parse(typeof(HeroRace), HeroRaceBox.SelectedValue.ToString()), HeroNameBox.Text);
 
 			User.Instance.Heroes.Add(newHero);
 
 			// Select current hero from entity database, because variable 'hero' doesn't represent the same hero that was loaded from entity in LoadGame().
 			User.Instance.CurrentHero = User.Instance.Heroes.FirstOrDefault(x => x.Id == newHero.Id);
 
-			User.Instance.CurrentHero.Specialization.UpdateBuffs();
+			User.Instance.CurrentHero?.Specialization.UpdateBuffs();
 
 			newHero.SessionStartDate = DateTime.Now;
 
@@ -68,9 +69,9 @@ namespace ClickQuest.Game.UserInterface.Pages
 		}
 
 		// [PRERELEASE]
-		private void SeedArtifacts()
+		private static void SeedArtifacts()
 		{
-			foreach (var artifact in GameAssets.Artifacts)
+			foreach (Artifact artifact in GameAssets.Artifacts)
 			{
 				artifact.CreateMythicTag("FunctionSeedingArtifacts");
 

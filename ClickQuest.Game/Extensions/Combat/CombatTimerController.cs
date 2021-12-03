@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using ClickQuest.Game.Core.Heroes.Buffs;
+using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Pages;
@@ -20,16 +21,13 @@ namespace ClickQuest.Game.Extensions.Combat
 
 		public static int BossFightDuration
 		{
-			get
-			{
-				return _bossFightDuration;
-			}
+			get => _bossFightDuration;
 			set
 			{
 				_bossFightDuration = value;
 
 				// todo: refactor this shit
-				var bossPage = InterfaceController.CurrentBossPage;
+				DungeonBossPage bossPage = InterfaceController.CurrentBossPage;
 				if (bossPage is not null)
 				{
 					InterfaceController.CurrentBossPage.Duration = _bossFightDuration;
@@ -37,21 +35,9 @@ namespace ClickQuest.Game.Extensions.Combat
 			}
 		}
 
-		public static int AuraTickDamage
-		{
-			get
-			{
-				return (int) Math.Ceiling(User.Instance.CurrentHero.AuraDamage * InterfaceController.CurrentEnemy.Health);
-			}
-		}
+		public static int AuraTickDamage => (int) Math.Ceiling(User.Instance.CurrentHero.AuraDamage * InterfaceController.CurrentEnemy.Health);
 
-		public static double AuraTickInterval
-		{
-			get
-			{
-				return 1d / User.Instance.CurrentHero.AuraAttackSpeed;
-			}
-		}
+		public static double AuraTickInterval => 1d / User.Instance.CurrentHero.AuraAttackSpeed;
 
 		public static void StartAuraTimerOnCurrentRegion()
 		{
@@ -74,7 +60,7 @@ namespace ClickQuest.Game.Extensions.Combat
 
 		private static void PoisonTimer_Tick(object source, EventArgs e)
 		{
-			int poisonTicksMax = 5;
+			const int poisonTicksMax = 5;
 
 			if (_poisonTicks >= poisonTicksMax)
 			{
@@ -114,7 +100,7 @@ namespace ClickQuest.Game.Extensions.Combat
 				// Invoke Artifacts with the "on-death" effect.
 				// We need to do this here because some artifacts should reset upon leaving combat (eg. Ice Golem's Heart).
 				// Even if the Boss wasn't fully defeated.
-				foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
+				foreach (Artifact equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
 				{
 					equippedArtifact.ArtifactFunctionality.OnKill();
 				}
@@ -131,9 +117,11 @@ namespace ClickQuest.Game.Extensions.Combat
 
 		public static void SetupPoisonTimer()
 		{
-			int poisonIntervalMs = 500;
-			PoisonTimer = new DispatcherTimer();
-			PoisonTimer.Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs);
+			const int poisonIntervalMs = 500;
+			PoisonTimer = new DispatcherTimer
+			{
+				Interval = new TimeSpan(0, 0, 0, 0, poisonIntervalMs)
+			};
 			PoisonTimer.Tick += PoisonTimer_Tick;
 			_poisonTicks = 0;
 		}

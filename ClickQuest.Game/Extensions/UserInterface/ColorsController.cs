@@ -140,14 +140,14 @@ namespace ClickQuest.Game.Extensions.UserInterface
 			{
 				case ColorTheme.Blue:
 				{
-					string blueThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Blue.xaml";
+					const string blueThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Blue.xaml";
 
-					var newDict = new ResourceDictionary
+					ResourceDictionary newDict = new ResourceDictionary
 					{
 						Source = new Uri(blueThemeXamlPath, UriKind.Relative)
 					};
 
-					foreach (var mergedDict in newDict.MergedDictionaries)
+					foreach (ResourceDictionary mergedDict in newDict.MergedDictionaries)
 					{
 						Application.Current.Resources.MergedDictionaries.Add(mergedDict);
 					}
@@ -162,14 +162,14 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 				case ColorTheme.Orange:
 				{
-					string orangeThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Orange.xaml";
+					const string orangeThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Orange.xaml";
 
-					var newDict = new ResourceDictionary
+					ResourceDictionary newDict = new ResourceDictionary
 					{
 						Source = new Uri(orangeThemeXamlPath, UriKind.Relative)
 					};
 
-					foreach (var mergedDict in newDict.MergedDictionaries)
+					foreach (ResourceDictionary mergedDict in newDict.MergedDictionaries)
 					{
 						Application.Current.Resources.MergedDictionaries.Add(mergedDict);
 					}
@@ -184,14 +184,14 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 				case ColorTheme.Pink:
 				{
-					string pinkThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Pink.xaml";
+					const string pinkThemeXamlPath = "/UserInterface/Controls/Styles/Themes/Pink.xaml";
 
-					var newDict = new ResourceDictionary
+					ResourceDictionary newDict = new ResourceDictionary
 					{
 						Source = new Uri(pinkThemeXamlPath, UriKind.Relative)
 					};
 
-					foreach (var mergedDict in newDict.MergedDictionaries)
+					foreach (ResourceDictionary mergedDict in newDict.MergedDictionaries)
 					{
 						Application.Current.Resources.MergedDictionaries.Add(mergedDict);
 					}

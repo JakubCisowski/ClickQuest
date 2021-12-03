@@ -20,13 +20,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 
 		public Monster Monster { get; set; }
 
-		public Region Region
-		{
-			get
-			{
-				return _regionPage.Region;
-			}
-		}
+		public Region Region => _regionPage.Region;
 
 		public MonsterButton(RegionPage regionPage)
 		{
@@ -42,7 +36,7 @@ namespace ClickQuest.Game.UserInterface.Controls
 		public void SpawnMonster()
 		{
 			var frequencyList = Region.MonsterSpawnPatterns.Select(x => x.Frequency).ToList();
-			int position = CollectionsController.RandomizeFreqenciesListPosition(frequencyList);
+			int position = CollectionsController.RandomizeFrequenciesListPosition(frequencyList);
 			Monster = Region.MonsterSpawnPatterns[position].Monster.CopyEnemy();
 
 			DataContext = Monster;

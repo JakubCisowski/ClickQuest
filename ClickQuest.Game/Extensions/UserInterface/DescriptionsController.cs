@@ -52,7 +52,7 @@ namespace ClickQuest.Game.Extensions.UserInterface
 
 				string taggedPart = description.Substring(indexOfTagOpeningEnd + 1, indexOfTagClosingStart - indexOfTagOpeningEnd - 1);
 
-				var coloredRun = new Run(taggedPart);
+				Run coloredRun = new Run(taggedPart);
 
 				switch (tagType)
 				{

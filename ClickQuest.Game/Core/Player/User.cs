@@ -25,10 +25,7 @@ namespace ClickQuest.Game.Core.Player
 
 				return _instance;
 			}
-			set
-			{
-				_instance = value;
-			}
+			set => _instance = value;
 		}
 
 		[JsonIgnore]
@@ -37,7 +34,7 @@ namespace ClickQuest.Game.Core.Player
 		public int LastHeroId { get; set; }
 
 		private int _gold;
-		public const int HERO_LIMIT = 6;
+		public const int HeroLimit = 6;
 		public List<Hero> Heroes { get; set; }
 		public List<Ingot> Ingots { get; set; }
 		public List<DungeonKey> DungeonKeys { get; set; }
@@ -48,10 +45,7 @@ namespace ClickQuest.Game.Core.Player
 
 		public int Gold
 		{
-			get
-			{
-				return _gold;
-			}
+			get => _gold;
 			set
 			{
 				if (value - _gold > 0)

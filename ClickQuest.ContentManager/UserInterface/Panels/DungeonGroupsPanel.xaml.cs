@@ -34,71 +34,71 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 				MainGrid.Children.Remove(_currentPanel);
 			}
 
-			var panel = new StackPanel
+			StackPanel panel = new StackPanel
 			{
 				Name = "StaticInfoPanel"
 			};
 
-			var selectedDungeonGroup = _dataContext;
+			DungeonGroup selectedDungeonGroup = _dataContext;
 
-			var idBox = new TextBox
+			TextBox idBox = new TextBox
 			{
 				Name = "IdBox",
 				Text = selectedDungeonGroup.Id.ToString(),
 				Margin = new Thickness(10),
 				IsEnabled = false
 			};
-			var nameBox = new TextBox
+			TextBox nameBox = new TextBox
 			{
 				Name = "NameBox",
 				Text = selectedDungeonGroup.Name,
 				Margin = new Thickness(10)
 			};
-			var colorBox = new TextBox
+			TextBox colorBox = new TextBox
 			{
 				Name = "ColorBox",
 				Text = selectedDungeonGroup.Color,
 				Margin = new Thickness(10)
 			};
 
-			var rarityBoxGeneral = new TextBox
+			TextBox rarityBoxGeneral = new TextBox
 			{
 				Name = "RarityBoxGeneral",
 				Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.General).ToString(),
 				Margin = new Thickness(10)
 			};
-			var rarityBoxFine = new TextBox
+			TextBox rarityBoxFine = new TextBox
 			{
 				Name = "RarityBoxFine",
 				Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Fine).ToString(),
 				Margin = new Thickness(10)
 			};
-			var rarityBoxSuperior = new TextBox
+			TextBox rarityBoxSuperior = new TextBox
 			{
 				Name = "RarityBoxSuperior",
 				Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Superior).ToString(),
 				Margin = new Thickness(10)
 			};
-			var rarityBoxExceptional = new TextBox
+			TextBox rarityBoxExceptional = new TextBox
 			{
 				Name = "RarityBoxExceptional",
 				Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Exceptional).ToString(),
 				Margin = new Thickness(10)
 			};
-			var rarityBoxMasterwork = new TextBox
+			TextBox rarityBoxMasterwork = new TextBox
 			{
 				Name = "RarityBoxMasterwork",
 				Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Masterwork).ToString(),
 				Margin = new Thickness(10)
 			};
-			var rarityBoxMythic = new TextBox
+			TextBox rarityBoxMythic = new TextBox
 			{
 				Name = "RarityBoxMythic",
 				Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Mythic).ToString(),
 				Margin = new Thickness(10)
 			};
 
-			var descriptionBox = new TextBox
+			TextBox descriptionBox = new TextBox
 			{
 				Name = "DescriptionBox",
 				TextWrapping = TextWrapping.Wrap,
@@ -169,7 +169,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		public void Save()
 		{
-			var dungeonGroup = _dataContext;
+			DungeonGroup dungeonGroup = _dataContext;
 
 			if (dungeonGroup is null)
 			{
@@ -208,7 +208,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			var newList = new List<Rarity>();
 
-			for (int i = 0; i < int.Parse(textBox.Text); i++)
+			for (var i = 0; i < int.Parse(textBox.Text); i++)
 			{
 				newList.Add(rarity);
 			}
@@ -236,9 +236,9 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 		{
 			Save();
 
-			var objectToDelete = GameContent.DungeonGroups.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+			DungeonGroup? objectToDelete = GameContent.DungeonGroups.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
-			var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -258,7 +258,7 @@ namespace ClickQuest.ContentManager.UserInterface.Panels
 
 		private void ContentSelectionBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			string? selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
+			var selectedName = (e.Source as ComboBox)?.SelectedValue?.ToString();
 
 			if (selectedName is null)
 			{
