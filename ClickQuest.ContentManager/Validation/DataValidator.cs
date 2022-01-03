@@ -21,6 +21,7 @@ namespace ClickQuest.ContentManager.Validation
 			CheckRewardBlessingsQuantity();
 			CheckRecipeArtifactLinks();
 			CheckMonsterRewardTypes();
+			CheckEmptyCollections();
 		}
 
 		private static void CheckIdUniqueness()
@@ -51,7 +52,7 @@ namespace ClickQuest.ContentManager.Validation
 			bool areIdsUnique = duplicates.Count == 0;
 			if (!areIdsUnique)
 			{
-				var message = $"Following Id's of type '{collectionType}' are not unique: ";
+				var message = $"> Following Id's of type '{collectionType}' are not unique: ";
 
 				var duplicatedValues = duplicates.Distinct();
 				foreach (int value in duplicatedValues)
@@ -75,7 +76,7 @@ namespace ClickQuest.ContentManager.Validation
 			double frequenciesSum = frequencies.Sum();
 			if (frequenciesSum <= 0.9999 || frequenciesSum >= 1.0001) // <== cringe	
 			{
-				var message = $"{objectName} loot/spawn frequencies do not add up to 1";
+				var message = $"> {objectName} loot/spawn frequencies do not add up to 1";
 				Logger.Log(message);
 			}
 		}
@@ -86,7 +87,7 @@ namespace ClickQuest.ContentManager.Validation
 
 			if (frequenciesSum >= 1.0001)
 			{
-				var message = $"{objectName} loot/spawn frequencies is greater than 1";
+				var message = $"> {objectName} loot/spawn frequencies is greater than 1";
 				Logger.Log(message);
 			}
 		}
@@ -97,7 +98,7 @@ namespace ClickQuest.ContentManager.Validation
 
 			if (areFrequenciesInvalid)
 			{
-				var message = $"{objectName} loot/spawn frequency value is less than 0";
+				var message = $"> {objectName} loot/spawn frequency value is less than 0";
 				Logger.Log(message);
 			}
 		}
@@ -131,7 +132,7 @@ namespace ClickQuest.ContentManager.Validation
 			var notAvailable = requiredIds.Except(availableIds);
 			if (notAvailable.Count() > 0)
 			{
-				var message = $"Following referenced Id's in '{objectName}' do not exist: ";
+				var message = $"> Following referenced Id's in '{objectName}' do not exist: ";
 
 				foreach (int value in notAvailable)
 				{
@@ -152,7 +153,7 @@ namespace ClickQuest.ContentManager.Validation
 
 					if (blessing is null)
 					{
-						string message = $"Following referenced blessing Id's in '{boss.Name}' do not exist: " + lootPattern.BossLootId;
+						string message = $"> Following referenced blessing Id's in '{boss.Name}' do not exist: " + lootPattern.BossLootId;
 						Logger.Log(message);
 					}
 				}
@@ -162,7 +163,7 @@ namespace ClickQuest.ContentManager.Validation
 
 					if (item is null)
 					{
-						string message = $"Following referenced item Id's in '{boss.Name}' do not exist: " + lootPattern.BossLootId;
+						string message = $"> Following referenced item Id's in '{boss.Name}' do not exist: " + lootPattern.BossLootId;
 						Logger.Log(message);
 					}
 				}
@@ -177,7 +178,7 @@ namespace ClickQuest.ContentManager.Validation
 
 				if (item is null)
 				{
-					string message = $"Following referenced item Id's in '{monster.Name}' do not exist: " + lootPattern.MonsterLootId;
+					string message = $"> Following referenced item Id's in '{monster.Name}' do not exist: " + lootPattern.MonsterLootId;
 					Logger.Log(message);
 				}
 			}
@@ -191,7 +192,7 @@ namespace ClickQuest.ContentManager.Validation
 
 				if (monster is null)
 				{
-					string message = $"Following referenced item Id's in '{region.Name}' do not exist: " + spawnPattern.MonsterId;
+					string message = $"> Following referenced item Id's in '{region.Name}' do not exist: " + spawnPattern.MonsterId;
 					Logger.Log(message);
 				}
 			}
@@ -220,7 +221,7 @@ namespace ClickQuest.ContentManager.Validation
 
 			if (!isEveryEnumValueInCollectionValid)
 			{
-				var message = $"'{collectionName}' - rarity out of scope";
+				var message = $"> '{collectionName}' - rarity out of scope";
 				Logger.Log(message);
 			}
 		}
@@ -245,13 +246,25 @@ namespace ClickQuest.ContentManager.Validation
 			CheckCollectionPositiveValues("IngredientPatterns_Quantity", GameContent.Recipes.SelectMany(x => x.IngredientPatterns).Select(y => y.Quantity));
 		}
 
+		private static void CheckEmptyCollections()
+		{
+			for (int i = 0; i < GameContent.Recipes.Count; i++)
+			{
+				if (GameContent.Recipes[i].IngredientPatterns.Count == 0)
+				{
+					var message = $"> Recipe of id {GameContent.Recipes[i].Id} has no ingredients";
+					Logger.Log(message);
+				}
+			}
+		}
+
 		private static void CheckCollectionPositiveValues(string collectionValuesInfo, IEnumerable<int> valuesCollection)
 		{
 			bool isEveryValueValid = valuesCollection.All(x => x > 0);
 
 			if (!isEveryValueValid)
 			{
-				var message = $"At least one {collectionValuesInfo} is nonpositive";
+				var message = $"> At least one {collectionValuesInfo} is nonpositive";
 				Logger.Log(message);
 			}
 		}
@@ -264,7 +277,7 @@ namespace ClickQuest.ContentManager.Validation
 
 			if (!isEveryLevelRequirementValid)
 			{
-				var message = "Level requirement of region is invalid";
+				var message = "> Level requirement of region is invalid";
 				Logger.Log(message);
 			}
 		}
@@ -277,13 +290,13 @@ namespace ClickQuest.ContentManager.Validation
 
 				if (blessingPatterns.Any(pattern => pattern.Frequencies.Any(frequency => frequency > 1)))
 				{
-					var message = $"More than one of the same Blessing can be dropped from Boss of Id {boss.Id}";
+					var message = $"> More than one of the same Blessing can be dropped from Boss of Id {boss.Id}";
 					Logger.Log(message);
 				}
 
 				if (blessingPatterns.Count() > 1)
 				{
-					var message = $"More than one Blessing can be dropped from Boss of Id {boss.Id}";
+					var message = $"> More than one Blessing can be dropped from Boss of Id {boss.Id}";
 					Logger.Log(message);
 				}
 			}
@@ -294,13 +307,13 @@ namespace ClickQuest.ContentManager.Validation
 
 				if (blessingPatterns.Any(pattern => pattern.Quantity > 1))
 				{
-					var message = $"More than one of the same Blessing is awarded from Quest of Id {quest.Id}";
+					var message = $"> More than one of the same Blessing is awarded from Quest of Id {quest.Id}";
 					Logger.Log(message);
 				}
 
 				if (blessingPatterns.Count() > 1)
 				{
-					var message = $"More than one Blessing is awarded from Quest of Id {quest.Id}";
+					var message = $"> More than one Blessing is awarded from Quest of Id {quest.Id}";
 					Logger.Log(message);
 				}
 			}
@@ -314,7 +327,7 @@ namespace ClickQuest.ContentManager.Validation
 
 				if (!recipe.Name.Contains(artifact.Name))
 				{
-					var message = $"{recipe.FullName} of Id: {recipe.Id} is not linked to the correct artifact ({artifact.Name} instead)";
+					var message = $"> {recipe.FullName} of Id: {recipe.Id} is not linked to the correct artifact ({artifact.Name} instead)";
 					Logger.Log(message);
 				}
 			}
@@ -328,7 +341,7 @@ namespace ClickQuest.ContentManager.Validation
 
 				if (monsterBlessingPatterns.Count() != 0)
 				{
-					var message = $"Blessing can be dropped from Monster of Id {monster.Id} (blessing drops from monsters are not handled)";
+					var message = $"> Blessing can be dropped from Monster of Id {monster.Id} (blessing drops from monsters are not handled)";
 					Logger.Log(message);
 				}
 			}

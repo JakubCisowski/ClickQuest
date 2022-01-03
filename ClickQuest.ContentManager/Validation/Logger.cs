@@ -16,10 +16,19 @@ namespace ClickQuest.ContentManager.Validation
 				Directory.CreateDirectory(folderPath);
 			}
 
-			// Log bugs in specified format.
-			using StreamWriter writer = new StreamWriter(Path.Combine(folderPath, "Logs " + SessionStartDate.ToString("dd-MM-yyyy-HH-mm-ss") + ".txt"), true);
+			string fullPath = Path.Combine(folderPath, "Logs " + SessionStartDate.ToString("dd-MM-yyyy-HH-mm-ss") + ".txt");
+			bool isFirstLogInThisFile = !File.Exists(fullPath);
 
+			// Log bugs in specified format.
+			using StreamWriter writer = new StreamWriter(fullPath, true);
+
+			if(isFirstLogInThisFile)
+			{
+				writer.WriteLine($"ASSETS LOGS - {SessionStartDate.ToString("dd.MM.yyyy - HH:mm:ss")}\n");
+			}
+			
 			writer.WriteLine(log);
+			
 		}
 	}
 }
