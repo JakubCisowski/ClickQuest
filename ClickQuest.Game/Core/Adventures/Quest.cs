@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows.Threading;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Heroes.Buffs;
@@ -15,6 +10,11 @@ using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Extensions.Quests;
 using ClickQuest.Game.Extensions.UserInterface;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Threading;
 
 namespace ClickQuest.Game.Core.Adventures
 {
@@ -26,7 +26,7 @@ namespace ClickQuest.Game.Core.Adventures
 		public const int RerollBaseCost = 100;
 		public const int RerollLevelRatio = 10;
 
-		public static int RerollCost => RerollBaseCost + RerollLevelRatio * User.Instance.CurrentHero.Level;
+		public static int RerollCost => RerollBaseCost + RerollLevelRatio * User.Instance.CurrentHero?.Level ?? 0;
 
 		public bool Rare { get; set; }
 
