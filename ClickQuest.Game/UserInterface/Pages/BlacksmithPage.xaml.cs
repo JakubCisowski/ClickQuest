@@ -89,7 +89,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 						new Run("?\nThis action will destroy this item and create at least "),
 						new Run($"{Material.BaseMeltingIngotBonus} {material.Rarity} Ingots")
 						{
-							Foreground = ColorsController.GetRarityColor(material.Rarity)
+							Foreground = ColorsController.GetRarityColor(material.Rarity),
+							FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
 						},
 						new Run(".\nYou can get bonus ingots if you master Melter specialization (by melting more materials).")
 					};
@@ -129,7 +130,8 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 					listOfRuns.Add(new Run($"\n{ingotAmounts[i]}x {(Rarity) i} Ingots")
 					{
-						Foreground = ColorsController.GetRarityColor((Rarity) i)
+						Foreground = ColorsController.GetRarityColor((Rarity) i),
+						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
 					});
 				}
 
