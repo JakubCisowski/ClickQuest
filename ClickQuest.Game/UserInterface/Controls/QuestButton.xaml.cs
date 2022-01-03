@@ -172,6 +172,10 @@ namespace ClickQuest.Game.UserInterface.Controls
 			{
 				_quest.StartQuest();
 			}
+			else
+			{
+				AlertBox.Show("Your hero is already completing quest!\nCheck back when it's finished.", MessageBoxButton.OK);
+			}
 		}
 	}
 }
