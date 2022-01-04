@@ -26,7 +26,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 
 			if (_clickCount == ClickThreshold)
 			{
-				int damageDealt = _currentEnemy is Monster ? (int) (_currentEnemy.Health * DamageAgainstMonsters) : (int) (_currentEnemy.Health * DamageAgainstBosses);
+				int damageDealt = _currentEnemy is Monster ? (int) (_currentEnemy.MaxHealth * DamageAgainstMonsters) : (int) (_currentEnemy.MaxHealth * DamageAgainstBosses);
 				CombatController.DealDamageToEnemy(_currentEnemy, damageDealt, DamageType.Artifact);
 
 				_clickCount = 0;

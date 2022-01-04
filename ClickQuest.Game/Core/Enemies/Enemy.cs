@@ -17,7 +17,7 @@ namespace ClickQuest.Game.Core.Enemies
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public int Health { get; set; }
+		public int MaxHealth { get; set; }
 		public abstract int CurrentHealth { get; set; }
 
 		[JsonIgnore]
@@ -35,7 +35,7 @@ namespace ClickQuest.Game.Core.Enemies
 		protected int CalculateCurrentHealthProgress()
 		{
 			// Calculate killing progress in % (for progress bar on monster button).
-			return (int) ((double) CurrentHealth / Health * 100);
+			return (int) ((double) CurrentHealth / MaxHealth * 100);
 		}
 
 		public abstract void HandleEnemyDeathIfDefeated();
@@ -44,7 +44,7 @@ namespace ClickQuest.Game.Core.Enemies
 
 		protected void CheckForDungeonKeyDrop()
 		{
-			var dungeonKeyRarityChances = DungeonKey.CreateRarityChancesList(Health);
+			var dungeonKeyRarityChances = DungeonKey.CreateRarityChancesList(MaxHealth);
 
 			int position = CollectionsController.RandomizeFrequenciesListPosition(dungeonKeyRarityChances);
 

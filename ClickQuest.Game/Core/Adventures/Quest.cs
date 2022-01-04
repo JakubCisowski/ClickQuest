@@ -198,6 +198,9 @@ namespace ClickQuest.Game.Core.Adventures
 			{
 				Blessing.AskUserAndSwapBlessing(blessingRewardPattern.QuestRewardId);
 			}
+			
+			int experienceReward = ExperienceHelper.CalculateQuestXpReward(Duration);
+			User.Instance.CurrentHero.GainExperience(experienceReward);
 
 			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
 			InterfaceController.RefreshQuestInterfaceOnCurrentPage();

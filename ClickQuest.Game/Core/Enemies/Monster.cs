@@ -25,7 +25,7 @@ namespace ClickQuest.Game.Core.Enemies
 			set
 			{
 				// value - new current health
-				if (value == Health)
+				if (value == MaxHealth)
 				{
 					_currentHealth = value;
 				}
@@ -51,8 +51,8 @@ namespace ClickQuest.Game.Core.Enemies
 			{
 				Id = Id,
 				Name = Name,
-				Health = Health,
-				CurrentHealth = Health,
+				MaxHealth = MaxHealth,
+				CurrentHealth = MaxHealth,
 				Description = Description,
 				CurrentHealthProgress = CurrentHealthProgress,
 				MonsterLootPatterns = MonsterLootPatterns
@@ -91,7 +91,7 @@ namespace ClickQuest.Game.Core.Enemies
 
 		public override void GrantVictoryBonuses()
 		{
-			int experienceGained = Experience.CalculateMonsterXpReward(Health);
+			int experienceGained = ExperienceHelper.CalculateMonsterXpReward(MaxHealth);
 			User.Instance.CurrentHero.GainExperience(experienceGained);
 
 			Item selectedLoot = RandomizeMonsterLoot();

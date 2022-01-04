@@ -176,9 +176,9 @@ namespace ClickQuest.Game.Core.Heroes
 		public void RefreshHeroExperience()
 		{
 			// Updates hero experience to make sure panels are updated at startup.
-			ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
+			ExperienceToNextLvl = Heroes.ExperienceHelper.CalculateXpToNextLvl(this);
 			ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
-			ExperienceProgress = Heroes.Experience.CalculateXpProgress(this);
+			ExperienceProgress = Heroes.ExperienceHelper.CalculateXpProgress(this);
 		}
 
 		public void UpdateTimePlayed()
@@ -325,10 +325,10 @@ namespace ClickQuest.Game.Core.Heroes
 			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{experienceGained}", (SolidColorBrush) Application.Current.FindResource("BrushExperienceRelated"), FloatingTextController.ExperiencePositionPoint);
 
 			Experience += experienceGained;
-			Heroes.Experience.CheckIfLeveledUpAndGrantBonuses(this);
-			ExperienceToNextLvl = Heroes.Experience.CalculateXpToNextLvl(this);
+			Heroes.ExperienceHelper.CheckIfLeveledUpAndGrantBonuses(this);
+			ExperienceToNextLvl = Heroes.ExperienceHelper.CalculateXpToNextLvl(this);
 			ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
-			ExperienceProgress = Heroes.Experience.CalculateXpProgress(this);
+			ExperienceProgress = Heroes.ExperienceHelper.CalculateXpProgress(this);
 
 			if (!isTriggeredFromOnExperienceGained)
 			{

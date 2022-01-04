@@ -162,7 +162,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				TextBlock monsterHealthBlock = new TextBlock
 				{
-					Text = "Health: " + monster.Health,
+					Text = "Health: " + monster.MaxHealth,
 					FontSize = 16,
 					TextAlignment = TextAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Center,
@@ -350,7 +350,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 
 				TextBlock bossHealthBlock = new TextBlock
 				{
-					Text = "Health: " + boss.Health,
+					Text = "Health: " + boss.MaxHealth,
 					FontSize = 16,
 					TextAlignment = TextAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Center,

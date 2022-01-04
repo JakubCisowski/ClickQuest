@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using ClickQuest.Game.Core.GameData;
+using ClickQuest.Game.Core.Heroes;
 using ClickQuest.Game.Core.Heroes.Buffs;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.Core.Items.Patterns;
@@ -32,7 +33,7 @@ namespace ClickQuest.Game.Core.Enemies
 			set
 			{
 				// value - new current health
-				if (value == Health)
+				if (value == MaxHealth)
 				{
 					_currentHealth = value;
 				}
@@ -58,8 +59,8 @@ namespace ClickQuest.Game.Core.Enemies
 			{
 				Id = Id,
 				Name = Name,
-				Health = Health,
-				CurrentHealth = Health,
+				MaxHealth = MaxHealth,
+				CurrentHealth = MaxHealth,
 				Description = Description,
 				CurrentHealthProgress = CurrentHealthProgress,
 				BossLootPatterns = BossLootPatterns,
@@ -93,14 +94,15 @@ namespace ClickQuest.Game.Core.Enemies
 
 		public override void GrantVictoryBonuses()
 		{
-			// [PRERELEASE]
-			const int experienceGained = 10;
-			User.Instance.CurrentHero.GainExperience(experienceGained);
-
-			// Grant boss loot.
-			// 1. Check % threshold for reward loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
-			int threshold = 5 - (int) Math.Ceiling(CurrentHealth / (Health / 5.0));
-			// 2. Iterate through every possible loot.
+			// Grant boss rewards.
+			// 1. Check % threshold for reward exp and loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
+			int threshold = 5 - (int) Math.Ceiling(CurrentHealth / (MaxHealth / 5.0));
+			
+			// 2. Grant experience
+			int experienceReward = ExperienceHelper.CalculateBossXpReward(MaxHealth, threshold);
+			User.Instance.CurrentHero.GainExperience(experienceReward);
+			
+			// 3. Iterate through every possible loot.
 
 			var lootQueueEntries = new List<LootQueueEntry>();
 
