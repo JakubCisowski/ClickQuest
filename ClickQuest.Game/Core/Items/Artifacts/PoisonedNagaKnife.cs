@@ -12,7 +12,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 		{
 			if (clickedEnemy is Monster monster)
 			{
-				CombatController.DealDamageToEnemy(clickedEnemy, (int) (monster.MaxHealth * DamageDealtPercentage), DamageType.Artifact);
+				CombatController.DealDamageToEnemy(clickedEnemy, (int) (monster.Health * DamageDealtPercentage), DamageType.Artifact);
 			}
 		}
 

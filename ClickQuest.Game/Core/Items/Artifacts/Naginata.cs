@@ -24,7 +24,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 		{
 			if (InterfaceController.CurrentEnemy is Monster monster)
 			{
-				bool isDamageInThreshold = clickDamage >= HealthThreshold * monster.MaxHealth;
+				bool isDamageInThreshold = clickDamage >= HealthThreshold * monster.Health;
 
 				if (isDamageInThreshold)
 				{

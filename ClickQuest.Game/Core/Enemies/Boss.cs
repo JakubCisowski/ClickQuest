@@ -33,7 +33,7 @@ namespace ClickQuest.Game.Core.Enemies
 			set
 			{
 				// value - new current health
-				if (value == MaxHealth)
+				if (value == Health)
 				{
 					_currentHealth = value;
 				}
@@ -59,8 +59,8 @@ namespace ClickQuest.Game.Core.Enemies
 			{
 				Id = Id,
 				Name = Name,
-				MaxHealth = MaxHealth,
-				CurrentHealth = MaxHealth,
+				Health = Health,
+				CurrentHealth = Health,
 				Description = Description,
 				CurrentHealthProgress = CurrentHealthProgress,
 				BossLootPatterns = BossLootPatterns,
@@ -96,10 +96,10 @@ namespace ClickQuest.Game.Core.Enemies
 		{
 			// Grant boss rewards.
 			// 1. Check % threshold for reward exp and loot frequencies ("5-" is for inverting 0 -> full hp, 5 -> boss died).
-			int threshold = 5 - (int) Math.Ceiling(CurrentHealth / (MaxHealth / 5.0));
+			int threshold = 5 - (int) Math.Ceiling(CurrentHealth / (Health / 5.0));
 			
 			// 2. Grant experience
-			int experienceReward = ExperienceHelper.CalculateBossXpReward(MaxHealth, threshold);
+			int experienceReward = ExperienceHelper.CalculateBossXpReward(Health, threshold);
 			User.Instance.CurrentHero.GainExperience(experienceReward);
 			
 			// 3. Iterate through every possible loot.

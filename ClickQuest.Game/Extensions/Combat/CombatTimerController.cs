@@ -35,7 +35,7 @@ namespace ClickQuest.Game.Extensions.Combat
 			}
 		}
 
-		public static int AuraTickDamage => (int) Math.Ceiling(User.Instance.CurrentHero.AuraDamage * InterfaceController.CurrentEnemy.MaxHealth);
+		public static int AuraTickDamage => (int) Math.Ceiling(User.Instance.CurrentHero.AuraDamage * InterfaceController.CurrentEnemy.Health);
 
 		public static double AuraTickInterval => 1d / User.Instance.CurrentHero.AuraAttackSpeed;
 

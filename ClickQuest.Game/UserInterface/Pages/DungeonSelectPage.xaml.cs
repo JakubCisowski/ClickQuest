@@ -214,7 +214,7 @@ namespace ClickQuest.Game.UserInterface.Pages
 				};
 
 				block2.Inlines.Add(new Run("Health: "));
-				block2.Inlines.Add(new Run(boss.MaxHealth.ToString())
+				block2.Inlines.Add(new Run(boss.Health.ToString())
 				{
 					Foreground = (SolidColorBrush) FindResource("BrushRed")
 				});

@@ -31,7 +31,7 @@ namespace ClickQuest.Game.Core.Items.Artifacts
 			}
 
 			bool isEnemyAMonster = _currentEnemy is Monster;
-			bool isEnemyInThreshold = _currentEnemy.CurrentHealth <= ExecuteThreshold * _currentEnemy.MaxHealth;
+			bool isEnemyInThreshold = _currentEnemy.CurrentHealth <= ExecuteThreshold * _currentEnemy.Health;
 
 			if (isEnemyAMonster && isEnemyInThreshold && _stackCount == MaxStacks)
 			{
