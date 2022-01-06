@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.DataTypes.Enums;
+using ClickQuest.ContentManager.Logic.Models;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels;
@@ -24,7 +24,7 @@ public partial class DungeonKeysPanel : UserControl
 
 	private void PopulateContentSelectionBox()
 	{
-		ContentSelectionBox.ItemsSource = GameContent.DungeonKeys.Select(x => x.Name);
+		ContentSelectionBox.ItemsSource = GameAssets.DungeonKeys.Select(x => x.Name);
 	}
 
 	public void RefreshStaticValuesPanel()
@@ -143,15 +143,15 @@ public partial class DungeonKeysPanel : UserControl
 		dungeonKey.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
 		// Check if this Id is already in the collection (modified).
-		if (GameContent.DungeonKeys.Select(x => x.Id).Contains(dungeonKey.Id))
+		if (GameAssets.DungeonKeys.Select(x => x.Id).Contains(dungeonKey.Id))
 		{
-			var indexOfDungeonKey = GameContent.DungeonKeys.FindIndex(x => x.Id == dungeonKey.Id);
-			GameContent.DungeonKeys[indexOfDungeonKey] = dungeonKey;
+			var indexOfDungeonKey = GameAssets.DungeonKeys.FindIndex(x => x.Id == dungeonKey.Id);
+			GameAssets.DungeonKeys[indexOfDungeonKey] = dungeonKey;
 		}
 		else
 		{
 			// If not, add it.
-			GameContent.DungeonKeys.Add(dungeonKey);
+			GameAssets.DungeonKeys.Add(dungeonKey);
 		}
 
 		PopulateContentSelectionBox();
@@ -161,7 +161,7 @@ public partial class DungeonKeysPanel : UserControl
 	{
 		Save();
 
-		var nextId = (GameContent.DungeonKeys.Max(x => x.Id as int?) ?? 0) + 1;
+		var nextId = (GameAssets.DungeonKeys.Max(x => x.Id as int?) ?? 0) + 1;
 		_dataContext = new DungeonKey
 		{
 			Id = nextId
@@ -176,7 +176,7 @@ public partial class DungeonKeysPanel : UserControl
 	{
 		Save();
 
-		var objectToDelete = GameContent.DungeonKeys.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+		var objectToDelete = GameAssets.DungeonKeys.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 		var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -185,7 +185,7 @@ public partial class DungeonKeysPanel : UserControl
 			return;
 		}
 
-		GameContent.DungeonKeys.Remove(objectToDelete);
+		GameAssets.DungeonKeys.Remove(objectToDelete);
 
 		PopulateContentSelectionBox();
 		ContentSelectionBox.SelectedIndex = -1;
@@ -210,7 +210,7 @@ public partial class DungeonKeysPanel : UserControl
 			Save();
 		}
 
-		_dataContext = GameContent.DungeonKeys.FirstOrDefault(x => x.Name == selectedName);
+		_dataContext = GameAssets.DungeonKeys.FirstOrDefault(x => x.Name == selectedName);
 		RefreshStaticValuesPanel();
 		DeleteObjectButton.Visibility = Visibility.Visible;
 	}

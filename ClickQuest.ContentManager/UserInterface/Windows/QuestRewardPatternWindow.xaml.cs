@@ -4,8 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.DataTypes.Enums;
+using ClickQuest.ContentManager.Logic.DataTypes.Structs;
+using ClickQuest.ContentManager.Logic.Models;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Windows;
@@ -121,23 +122,23 @@ public partial class QuestRewardPatternWindow : Window
 		switch (_pattern.QuestRewardType)
 		{
 			case RewardType.Material:
-				(_controls["IdBox"] as TextBox).Text = GameContent.Materials.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+				(_controls["IdBox"] as TextBox).Text = GameAssets.Materials.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 				break;
 
 			case RewardType.Recipe:
-				(_controls["IdBox"] as TextBox).Text = GameContent.Recipes.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+				(_controls["IdBox"] as TextBox).Text = GameAssets.Recipes.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 				break;
 
 			case RewardType.Artifact:
-				(_controls["IdBox"] as TextBox).Text = GameContent.Artifacts.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+				(_controls["IdBox"] as TextBox).Text = GameAssets.Artifacts.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 				break;
 
 			case RewardType.Blessing:
-				(_controls["IdBox"] as TextBox).Text = GameContent.Blessings.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+				(_controls["IdBox"] as TextBox).Text = GameAssets.Blessings.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 				break;
 
 			case RewardType.Ingot:
-				(_controls["IdBox"] as TextBox).Text = GameContent.Ingots.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+				(_controls["IdBox"] as TextBox).Text = GameAssets.Ingots.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 				break;
 		}
 	}
@@ -152,23 +153,23 @@ public partial class QuestRewardPatternWindow : Window
 		switch ((RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString()))
 		{
 			case RewardType.Material:
-				(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Materials.Select(x => x.Name);
+				(_controls["NameBox"] as ComboBox).ItemsSource = GameAssets.Materials.Select(x => x.Name);
 				break;
 
 			case RewardType.Recipe:
-				(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Recipes.Select(x => x.Name);
+				(_controls["NameBox"] as ComboBox).ItemsSource = GameAssets.Recipes.Select(x => x.Name);
 				break;
 
 			case RewardType.Artifact:
-				(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Artifacts.Select(x => x.Name);
+				(_controls["NameBox"] as ComboBox).ItemsSource = GameAssets.Artifacts.Select(x => x.Name);
 				break;
 
 			case RewardType.Blessing:
-				(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Blessings.Select(x => x.Name);
+				(_controls["NameBox"] as ComboBox).ItemsSource = GameAssets.Blessings.Select(x => x.Name);
 				break;
 
 			case RewardType.Ingot:
-				(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Ingots.Select(x => x.Name);
+				(_controls["NameBox"] as ComboBox).ItemsSource = GameAssets.Ingots.Select(x => x.Name);
 				break;
 		}
 

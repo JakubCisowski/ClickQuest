@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.DataTypes.Enums;
+using ClickQuest.ContentManager.Logic.Models;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels;
@@ -23,7 +23,7 @@ public partial class DungeonGroupsPanel : UserControl
 
 	private void PopulateContentSelectionBox()
 	{
-		ContentSelectionBox.ItemsSource = GameContent.DungeonGroups.Select(x => x.Name);
+		ContentSelectionBox.ItemsSource = GameAssets.DungeonGroups.Select(x => x.Name);
 	}
 
 	public void RefreshStaticValuesPanel()
@@ -190,15 +190,15 @@ public partial class DungeonGroupsPanel : UserControl
 		dungeonGroup.KeyRequirementRarities = dungeonGroup.KeyRequirementRarities.Concat(AddKeyRequirementRarities(_controls["RarityBoxMythic"] as TextBox, Rarity.Mythic)).ToList();
 
 		// Check if this Id is already in the collection (modified).
-		if (GameContent.DungeonGroups.Select(x => x.Id).Contains(dungeonGroup.Id))
+		if (GameAssets.DungeonGroups.Select(x => x.Id).Contains(dungeonGroup.Id))
 		{
-			var indexOfOldDungeonGroup = GameContent.DungeonGroups.FindIndex(x => x.Id == dungeonGroup.Id);
-			GameContent.DungeonGroups[indexOfOldDungeonGroup] = dungeonGroup;
+			var indexOfOldDungeonGroup = GameAssets.DungeonGroups.FindIndex(x => x.Id == dungeonGroup.Id);
+			GameAssets.DungeonGroups[indexOfOldDungeonGroup] = dungeonGroup;
 		}
 		else
 		{
 			// If not, add it.
-			GameContent.DungeonGroups.Add(dungeonGroup);
+			GameAssets.DungeonGroups.Add(dungeonGroup);
 		}
 
 		PopulateContentSelectionBox();
@@ -220,7 +220,7 @@ public partial class DungeonGroupsPanel : UserControl
 	{
 		Save();
 
-		var nextId = (GameContent.DungeonGroups.Max(x => x.Id as int?) ?? 0) + 1;
+		var nextId = (GameAssets.DungeonGroups.Max(x => x.Id as int?) ?? 0) + 1;
 		_dataContext = new DungeonGroup
 		{
 			Id = nextId,
@@ -236,7 +236,7 @@ public partial class DungeonGroupsPanel : UserControl
 	{
 		Save();
 
-		var objectToDelete = GameContent.DungeonGroups.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+		var objectToDelete = GameAssets.DungeonGroups.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 		var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -245,7 +245,7 @@ public partial class DungeonGroupsPanel : UserControl
 			return;
 		}
 
-		GameContent.DungeonGroups.Remove(objectToDelete);
+		GameAssets.DungeonGroups.Remove(objectToDelete);
 
 		PopulateContentSelectionBox();
 		ContentSelectionBox.SelectedIndex = -1;
@@ -270,7 +270,7 @@ public partial class DungeonGroupsPanel : UserControl
 			Save();
 		}
 
-		_dataContext = GameContent.DungeonGroups.FirstOrDefault(x => x.Name == selectedName);
+		_dataContext = GameAssets.DungeonGroups.FirstOrDefault(x => x.Name == selectedName);
 		RefreshStaticValuesPanel();
 		DeleteObjectButton.Visibility = Visibility.Visible;
 	}

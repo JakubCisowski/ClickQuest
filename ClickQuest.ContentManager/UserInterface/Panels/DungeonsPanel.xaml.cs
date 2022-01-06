@@ -3,8 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.Models;
 using ClickQuest.ContentManager.UserInterface.Windows;
 using MaterialDesignThemes.Wpf;
 
@@ -26,7 +25,7 @@ public partial class DungeonsPanel : UserControl
 
 	private void PopulateContentSelectionBox()
 	{
-		ContentSelectionBox.ItemsSource = GameContent.Dungeons.Select(x => x.Name);
+		ContentSelectionBox.ItemsSource = GameAssets.Dungeons.Select(x => x.Name);
 	}
 
 	public void RefreshStaticValuesPanel()
@@ -54,8 +53,8 @@ public partial class DungeonsPanel : UserControl
 		var dungeonGroupBox = new ComboBox
 		{
 			Name = "DungeonGroupBox",
-			ItemsSource = GameContent.DungeonGroups.Select(x => x.Name),
-			SelectedValue = GameContent.DungeonGroups.FirstOrDefault(x => x.Id == selectedDungeon.DungeonGroupId)?.Name,
+			ItemsSource = GameAssets.DungeonGroups.Select(x => x.Name),
+			SelectedValue = GameAssets.DungeonGroups.FirstOrDefault(x => x.Id == selectedDungeon.DungeonGroupId)?.Name,
 			Margin = new Thickness(10)
 		};
 		var nameBox = new TextBox
@@ -139,21 +138,21 @@ public partial class DungeonsPanel : UserControl
 		}
 
 		dungeon.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
-		dungeon.DungeonGroupId = GameContent.DungeonGroups.FirstOrDefault(x => x.Name == (_controls["DungeonGroupBox"] as ComboBox).SelectedValue.ToString()).Id;
+		dungeon.DungeonGroupId = GameAssets.DungeonGroups.FirstOrDefault(x => x.Name == (_controls["DungeonGroupBox"] as ComboBox).SelectedValue.ToString()).Id;
 		dungeon.Name = (_controls["NameBox"] as TextBox).Text;
 		dungeon.Background = (_controls["BackgroundBox"] as TextBox).Text;
 		dungeon.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
 		// Check if this Id is already in the collection (modified).
-		if (GameContent.Dungeons.Select(x => x.Id).Contains(dungeon.Id))
+		if (GameAssets.Dungeons.Select(x => x.Id).Contains(dungeon.Id))
 		{
-			var indexOfOldDungeon = GameContent.Dungeons.FindIndex(x => x.Id == dungeon.Id);
-			GameContent.Dungeons[indexOfOldDungeon] = dungeon;
+			var indexOfOldDungeon = GameAssets.Dungeons.FindIndex(x => x.Id == dungeon.Id);
+			GameAssets.Dungeons[indexOfOldDungeon] = dungeon;
 		}
 		else
 		{
 			// If not, add it.
-			GameContent.Dungeons.Add(dungeon);
+			GameAssets.Dungeons.Add(dungeon);
 		}
 
 		PopulateContentSelectionBox();
@@ -163,7 +162,7 @@ public partial class DungeonsPanel : UserControl
 	{
 		Save();
 
-		var nextId = (GameContent.Dungeons.Max(x => x.Id as int?) ?? 0) + 1;
+		var nextId = (GameAssets.Dungeons.Max(x => x.Id as int?) ?? 0) + 1;
 
 		_dataContext = new Dungeon
 		{
@@ -183,7 +182,7 @@ public partial class DungeonsPanel : UserControl
 	{
 		Save();
 
-		var objectToDelete = GameContent.Dungeons.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+		var objectToDelete = GameAssets.Dungeons.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 		var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -192,7 +191,7 @@ public partial class DungeonsPanel : UserControl
 			return;
 		}
 
-		GameContent.Dungeons.Remove(objectToDelete);
+		GameAssets.Dungeons.Remove(objectToDelete);
 
 		PopulateContentSelectionBox();
 		ContentSelectionBox.SelectedIndex = -1;
@@ -221,7 +220,7 @@ public partial class DungeonsPanel : UserControl
 			Save();
 		}
 
-		_dataContext = GameContent.Dungeons.FirstOrDefault(x => x.Name == selectedName);
+		_dataContext = GameAssets.Dungeons.FirstOrDefault(x => x.Name == selectedName);
 		_bossIds = _dataContext.BossIds;
 		RefreshStaticValuesPanel();
 		RefreshDynamicValuesPanel();
@@ -272,7 +271,7 @@ public partial class DungeonsPanel : UserControl
 			VerticalAlignment = VerticalAlignment.Center,
 			HorizontalAlignment = HorizontalAlignment.Left,
 			Margin = new Thickness(80, 0, 0, 0),
-			Text = GameContent.Bosses.FirstOrDefault(x => x.Id == id).Name
+			Text = GameAssets.Bosses.FirstOrDefault(x => x.Id == id).Name
 		};
 
 		var editButton = new Button

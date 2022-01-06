@@ -2,8 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.Models;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels;
@@ -23,7 +22,7 @@ public partial class GameMechanicsTabsPanel : UserControl
 
 	private void PopulateContentSelectionBox()
 	{
-		ContentSelectionBox.ItemsSource = GameContent.GameMechanicsTabs.Select(x => x.Name);
+		ContentSelectionBox.ItemsSource = GameAssets.GameMechanicsTabs.Select(x => x.Name);
 	}
 
 	public void RefreshStaticInfoPanel()
@@ -118,15 +117,15 @@ public partial class GameMechanicsTabsPanel : UserControl
 		gameMechanicTab.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
 		// Check if this Id is already in the collection (modified).
-		if (GameContent.GameMechanicsTabs.Select(x => x.Id).Contains(gameMechanicTab.Id))
+		if (GameAssets.GameMechanicsTabs.Select(x => x.Id).Contains(gameMechanicTab.Id))
 		{
-			var indexOfOldGameMechanicTab = GameContent.GameMechanicsTabs.FindIndex(x => x.Id == gameMechanicTab.Id);
-			GameContent.GameMechanicsTabs[indexOfOldGameMechanicTab] = gameMechanicTab;
+			var indexOfOldGameMechanicTab = GameAssets.GameMechanicsTabs.FindIndex(x => x.Id == gameMechanicTab.Id);
+			GameAssets.GameMechanicsTabs[indexOfOldGameMechanicTab] = gameMechanicTab;
 		}
 		else
 		{
 			// If not, add it.
-			GameContent.GameMechanicsTabs.Add(gameMechanicTab);
+			GameAssets.GameMechanicsTabs.Add(gameMechanicTab);
 		}
 
 		PopulateContentSelectionBox();
@@ -136,7 +135,7 @@ public partial class GameMechanicsTabsPanel : UserControl
 	{
 		Save();
 
-		var nextId = (GameContent.GameMechanicsTabs.Max(x => x.Id as int?) ?? 0) + 1;
+		var nextId = (GameAssets.GameMechanicsTabs.Max(x => x.Id as int?) ?? 0) + 1;
 		_dataContext = new GameMechanicsTab
 		{
 			Id = nextId
@@ -151,7 +150,7 @@ public partial class GameMechanicsTabsPanel : UserControl
 	{
 		Save();
 
-		var objectToDelete = GameContent.GameMechanicsTabs.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+		var objectToDelete = GameAssets.GameMechanicsTabs.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 		var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -160,7 +159,7 @@ public partial class GameMechanicsTabsPanel : UserControl
 			return;
 		}
 
-		GameContent.GameMechanicsTabs.Remove(objectToDelete);
+		GameAssets.GameMechanicsTabs.Remove(objectToDelete);
 
 		PopulateContentSelectionBox();
 		ContentSelectionBox.SelectedIndex = -1;
@@ -185,7 +184,7 @@ public partial class GameMechanicsTabsPanel : UserControl
 			Save();
 		}
 
-		_dataContext = GameContent.GameMechanicsTabs.FirstOrDefault(x => x.Name == selectedName);
+		_dataContext = GameAssets.GameMechanicsTabs.FirstOrDefault(x => x.Name == selectedName);
 		RefreshStaticInfoPanel();
 		DeleteObjectButton.Visibility = Visibility.Visible;
 	}

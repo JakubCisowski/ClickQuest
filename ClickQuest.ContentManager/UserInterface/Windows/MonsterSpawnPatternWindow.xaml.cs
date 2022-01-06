@@ -3,8 +3,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.DataTypes.Structs;
+using ClickQuest.ContentManager.Logic.Models;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Windows;
@@ -46,10 +46,10 @@ public partial class MonsterSpawnPatternWindow : Window
 		var nameBox = new ComboBox
 		{
 			Name = "NameBox",
-			ItemsSource = GameContent.Monsters.Select(x => x.Name),
+			ItemsSource = GameAssets.Monsters.Select(x => x.Name),
 			Margin = new Thickness(10)
 		};
-		nameBox.SelectedValue = GameContent.Monsters.FirstOrDefault(x => x.Id == _pattern.MonsterId)?.Name;
+		nameBox.SelectedValue = GameAssets.Monsters.FirstOrDefault(x => x.Id == _pattern.MonsterId)?.Name;
 		nameBox.SelectionChanged += NameBox_SelectionChanged;
 
 		var frequencyBox = new TextBox
@@ -96,7 +96,7 @@ public partial class MonsterSpawnPatternWindow : Window
 
 	private void NameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
-		(_controls["IdBox"] as TextBox).Text = GameContent.Monsters.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Id.ToString();
+		(_controls["IdBox"] as TextBox).Text = GameAssets.Monsters.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Id.ToString();
 	}
 
 	private void UpdateMonsterPattern()

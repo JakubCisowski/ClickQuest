@@ -4,8 +4,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.DataTypes.Enums;
+using ClickQuest.ContentManager.Logic.Models;
 using ClickQuest.ContentManager.UserInterface.Windows;
 using MaterialDesignThemes.Wpf;
 
@@ -27,7 +27,7 @@ public partial class BossesPanel : UserControl
 
 	private void PopulateContentSelectionBox()
 	{
-		ContentSelectionBox.ItemsSource = GameContent.Bosses.Select(x => x.Name);
+		ContentSelectionBox.ItemsSource = GameAssets.Bosses.Select(x => x.Name);
 	}
 
 	public void RefreshStaticValuesPanel()
@@ -155,15 +155,15 @@ public partial class BossesPanel : UserControl
 		boss.Affixes = (_controls["AffixBox"] as ListBox).SelectedItems.Cast<Affix>().ToList();
 
 		// Check if this Id is already in the collection (modified).
-		if (GameContent.Bosses.Select(x => x.Id).Contains(boss.Id))
+		if (GameAssets.Bosses.Select(x => x.Id).Contains(boss.Id))
 		{
-			var indexOfOldBoss = GameContent.Bosses.FindIndex(x => x.Id == boss.Id);
-			GameContent.Bosses[indexOfOldBoss] = boss;
+			var indexOfOldBoss = GameAssets.Bosses.FindIndex(x => x.Id == boss.Id);
+			GameAssets.Bosses[indexOfOldBoss] = boss;
 		}
 		else
 		{
 			// If not, add it.
-			GameContent.Bosses.Add(boss);
+			GameAssets.Bosses.Add(boss);
 		}
 
 		PopulateContentSelectionBox();
@@ -173,7 +173,7 @@ public partial class BossesPanel : UserControl
 	{
 		Save();
 
-		var nextId = (GameContent.Bosses.Max(x => x.Id as int?) ?? 0) + 1;
+		var nextId = (GameAssets.Bosses.Max(x => x.Id as int?) ?? 0) + 1;
 
 		_dataContext = new Boss
 		{
@@ -193,7 +193,7 @@ public partial class BossesPanel : UserControl
 	{
 		Save();
 
-		var objectToDelete = GameContent.Bosses.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+		var objectToDelete = GameAssets.Bosses.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 		var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -202,7 +202,7 @@ public partial class BossesPanel : UserControl
 			return;
 		}
 
-		GameContent.Bosses.Remove(objectToDelete);
+		GameAssets.Bosses.Remove(objectToDelete);
 
 		PopulateContentSelectionBox();
 		ContentSelectionBox.SelectedIndex = -1;
@@ -231,7 +231,7 @@ public partial class BossesPanel : UserControl
 			Save();
 		}
 
-		_dataContext = GameContent.Bosses.FirstOrDefault(x => x.Name == selectedName);
+		_dataContext = GameAssets.Bosses.FirstOrDefault(x => x.Name == selectedName);
 		_bossLootPatterns = _dataContext.BossLootPatterns;
 		RefreshStaticValuesPanel();
 		RefreshDynamicValuesPanel();
@@ -296,23 +296,23 @@ public partial class BossesPanel : UserControl
 		switch (pattern.BossLootType)
 		{
 			case RewardType.Material:
-				nameBlock.Text = GameContent.Materials.FirstOrDefault(x => x.Id == pattern.BossLootId).Name;
+				nameBlock.Text = GameAssets.Materials.FirstOrDefault(x => x.Id == pattern.BossLootId).Name;
 				break;
 
 			case RewardType.Recipe:
-				nameBlock.Text = GameContent.Recipes.FirstOrDefault(x => x.Id == pattern.BossLootId).Name;
+				nameBlock.Text = GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.BossLootId).Name;
 				break;
 
 			case RewardType.Artifact:
-				nameBlock.Text = GameContent.Artifacts.FirstOrDefault(x => x.Id == pattern.BossLootId).Name;
+				nameBlock.Text = GameAssets.Artifacts.FirstOrDefault(x => x.Id == pattern.BossLootId).Name;
 				break;
 
 			case RewardType.Blessing:
-				nameBlock.Text = GameContent.Blessings.FirstOrDefault(x => x.Id == pattern.BossLootId).Name;
+				nameBlock.Text = GameAssets.Blessings.FirstOrDefault(x => x.Id == pattern.BossLootId).Name;
 				break;
 
 			case RewardType.Ingot:
-				nameBlock.Text = GameContent.Ingots.FirstOrDefault(x => x.Id == pattern.BossLootId).Name;
+				nameBlock.Text = GameAssets.Ingots.FirstOrDefault(x => x.Id == pattern.BossLootId).Name;
 				break;
 		}
 

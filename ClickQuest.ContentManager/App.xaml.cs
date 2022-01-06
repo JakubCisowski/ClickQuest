@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using System.Windows;
-using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.Logic.Helpers;
 
 namespace ClickQuest.ContentManager;
 
@@ -13,8 +13,8 @@ public partial class App : Application
 		CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
 		CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
-		JsonFilePaths.CalculateGameAssetsFilePaths();
+		FilePathHelper.CalculateGameAssetsFilePaths();
 
-		ContentLoader.LoadAllContent();
+		GameAssetsHelper.LoadAllContent();
 	}
 }

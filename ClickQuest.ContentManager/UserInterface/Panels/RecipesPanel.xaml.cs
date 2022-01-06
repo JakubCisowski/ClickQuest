@@ -4,8 +4,9 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.DataTypes.Enums;
+using ClickQuest.ContentManager.Logic.DataTypes.Structs;
+using ClickQuest.ContentManager.Logic.Models;
 using ClickQuest.ContentManager.UserInterface.Windows;
 using MaterialDesignThemes.Wpf;
 
@@ -27,7 +28,7 @@ public partial class RecipesPanel : UserControl
 
 	private void PopulateContentSelectionBox()
 	{
-		ContentSelectionBox.ItemsSource = GameContent.Recipes.Select(x => x.Name);
+		ContentSelectionBox.ItemsSource = GameAssets.Recipes.Select(x => x.Name);
 	}
 
 	public void RefreshStaticValuesPanel()
@@ -82,11 +83,11 @@ public partial class RecipesPanel : UserControl
 		var artifactNameBox = new ComboBox
 		{
 			Name = "ArtifactNameBox",
-			ItemsSource = GameContent.Artifacts.Select(x => x.Name),
+			ItemsSource = GameAssets.Artifacts.Select(x => x.Name),
 			Margin = new Thickness(10)
 		};
-		artifactNameBox.SelectedValue = GameContent.Artifacts.FirstOrDefault(x => x.Id == selectedRecipe.ArtifactId)?.Name;
-		nameBox.Text = GameContent.Artifacts.FirstOrDefault(x => x.Id == selectedRecipe.ArtifactId)?.Name;
+		artifactNameBox.SelectedValue = GameAssets.Artifacts.FirstOrDefault(x => x.Id == selectedRecipe.ArtifactId)?.Name;
+		nameBox.Text = GameAssets.Artifacts.FirstOrDefault(x => x.Id == selectedRecipe.ArtifactId)?.Name;
 		artifactNameBox.SelectionChanged += ArtifactNameBox_SelectionChanged;
 
 		// Set TextBox and ComboBox hints.
@@ -134,8 +135,8 @@ public partial class RecipesPanel : UserControl
 
 	private void ArtifactNameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
-		(_controls["ArtifactIDBox"] as TextBox).Text = GameContent.Artifacts.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Id.ToString();
-		(_controls["NameBox"] as TextBox).Text = GameContent.Artifacts.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Name;
+		(_controls["ArtifactIDBox"] as TextBox).Text = GameAssets.Artifacts.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Id.ToString();
+		(_controls["NameBox"] as TextBox).Text = GameAssets.Artifacts.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Name;
 	}
 
 	private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -159,15 +160,15 @@ public partial class RecipesPanel : UserControl
 		recipe.ArtifactId = int.Parse((_controls["ArtifactIDBox"] as TextBox).Text);
 
 		// Check if this Id is already in the collection (modified).
-		if (GameContent.Recipes.Select(x => x.Id).Contains(recipe.Id))
+		if (GameAssets.Recipes.Select(x => x.Id).Contains(recipe.Id))
 		{
-			var indexOfOldRecipe = GameContent.Recipes.FindIndex(x => x.Id == recipe.Id);
-			GameContent.Recipes[indexOfOldRecipe] = recipe;
+			var indexOfOldRecipe = GameAssets.Recipes.FindIndex(x => x.Id == recipe.Id);
+			GameAssets.Recipes[indexOfOldRecipe] = recipe;
 		}
 		else
 		{
 			// If not, add it.
-			GameContent.Recipes.Add(recipe);
+			GameAssets.Recipes.Add(recipe);
 		}
 
 		PopulateContentSelectionBox();
@@ -177,7 +178,7 @@ public partial class RecipesPanel : UserControl
 	{
 		Save();
 
-		var nextId = (GameContent.Recipes.Max(x => x.Id as int?) ?? 0) + 1;
+		var nextId = (GameAssets.Recipes.Max(x => x.Id as int?) ?? 0) + 1;
 
 		_dataContext = new Recipe
 		{
@@ -197,7 +198,7 @@ public partial class RecipesPanel : UserControl
 	{
 		Save();
 
-		var objectToDelete = GameContent.Recipes.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+		var objectToDelete = GameAssets.Recipes.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 		var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -206,7 +207,7 @@ public partial class RecipesPanel : UserControl
 			return;
 		}
 
-		GameContent.Recipes.Remove(objectToDelete);
+		GameAssets.Recipes.Remove(objectToDelete);
 
 		PopulateContentSelectionBox();
 		ContentSelectionBox.SelectedIndex = -1;
@@ -235,7 +236,7 @@ public partial class RecipesPanel : UserControl
 			Save();
 		}
 
-		_dataContext = GameContent.Recipes.FirstOrDefault(x => x.Name == selectedName);
+		_dataContext = GameAssets.Recipes.FirstOrDefault(x => x.Name == selectedName);
 		_ingredients = _dataContext.IngredientPatterns;
 		RefreshStaticValuesPanel();
 		RefreshDynamicValuesPanel();
@@ -286,7 +287,7 @@ public partial class RecipesPanel : UserControl
 			VerticalAlignment = VerticalAlignment.Center,
 			HorizontalAlignment = HorizontalAlignment.Left,
 			Margin = new Thickness(80, 0, 0, 0),
-			Text = GameContent.Materials.FirstOrDefault(x => x.Id == ingredient.MaterialId).Name
+			Text = GameAssets.Materials.FirstOrDefault(x => x.Id == ingredient.MaterialId).Name
 		};
 
 		var quantityBlock = new TextBlock

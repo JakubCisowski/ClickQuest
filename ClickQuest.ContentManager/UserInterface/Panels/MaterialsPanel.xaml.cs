@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.DataTypes.Enums;
+using ClickQuest.ContentManager.Logic.Models;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels;
@@ -24,7 +24,7 @@ public partial class MaterialsPanel : UserControl
 
 	private void PopulateContentSelectionBox()
 	{
-		ContentSelectionBox.ItemsSource = GameContent.Materials.Select(x => x.Name);
+		ContentSelectionBox.ItemsSource = GameAssets.Materials.Select(x => x.Name);
 	}
 
 	public void RefreshStaticValuesPanel()
@@ -143,15 +143,15 @@ public partial class MaterialsPanel : UserControl
 		material.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
 		// Check if this Id is already in the collection (modified).
-		if (GameContent.Materials.Select(x => x.Id).Contains(material.Id))
+		if (GameAssets.Materials.Select(x => x.Id).Contains(material.Id))
 		{
-			var indexOfOldMaterial = GameContent.Materials.FindIndex(x => x.Id == material.Id);
-			GameContent.Materials[indexOfOldMaterial] = material;
+			var indexOfOldMaterial = GameAssets.Materials.FindIndex(x => x.Id == material.Id);
+			GameAssets.Materials[indexOfOldMaterial] = material;
 		}
 		else
 		{
 			// If not, add it.
-			GameContent.Materials.Add(material);
+			GameAssets.Materials.Add(material);
 		}
 
 		PopulateContentSelectionBox();
@@ -161,7 +161,7 @@ public partial class MaterialsPanel : UserControl
 	{
 		Save();
 
-		var nextId = (GameContent.Materials.Max(x => x.Id as int?) ?? 0) + 1;
+		var nextId = (GameAssets.Materials.Max(x => x.Id as int?) ?? 0) + 1;
 		_dataContext = new Material
 		{
 			Id = nextId
@@ -174,7 +174,7 @@ public partial class MaterialsPanel : UserControl
 	{
 		Save();
 
-		var objectToDelete = GameContent.Materials.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+		var objectToDelete = GameAssets.Materials.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 		var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -183,7 +183,7 @@ public partial class MaterialsPanel : UserControl
 			return;
 		}
 
-		GameContent.Materials.Remove(objectToDelete);
+		GameAssets.Materials.Remove(objectToDelete);
 
 		PopulateContentSelectionBox();
 		ContentSelectionBox.SelectedIndex = -1;
@@ -208,7 +208,7 @@ public partial class MaterialsPanel : UserControl
 			Save();
 		}
 
-		_dataContext = GameContent.Materials.FirstOrDefault(x => x.Name == selectedName);
+		_dataContext = GameAssets.Materials.FirstOrDefault(x => x.Name == selectedName);
 		RefreshStaticValuesPanel();
 		DeleteObjectButton.Visibility = Visibility.Visible;
 	}

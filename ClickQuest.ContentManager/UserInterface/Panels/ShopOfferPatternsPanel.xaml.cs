@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.DataTypes.Enums;
+using ClickQuest.ContentManager.Logic.DataTypes.Structs;
+using ClickQuest.ContentManager.Logic.Models;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels;
@@ -24,7 +25,7 @@ public partial class ShopOfferPatternsPanel : UserControl
 
 	private void PopulateContentSelectionBox()
 	{
-		ContentSelectionBox.ItemsSource = GameContent.ShopOffer.Select(x => x.Id.ToString());
+		ContentSelectionBox.ItemsSource = GameAssets.ShopOffer.Select(x => x.Id.ToString());
 	}
 
 	public void RefreshStaticValuesPanel()
@@ -131,23 +132,23 @@ public partial class ShopOfferPatternsPanel : UserControl
 		switch ((RewardType)Enum.Parse(typeof(RewardType), (sender as ComboBox).SelectedValue.ToString()))
 		{
 			case RewardType.Material:
-				(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Materials.Select(x => x.Name);
+				(_controls["NameBox"] as ComboBox).ItemsSource = GameAssets.Materials.Select(x => x.Name);
 				break;
 
 			case RewardType.Recipe:
-				(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Recipes.Select(x => x.Name);
+				(_controls["NameBox"] as ComboBox).ItemsSource = GameAssets.Recipes.Select(x => x.Name);
 				break;
 
 			case RewardType.Artifact:
-				(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Artifacts.Select(x => x.Name);
+				(_controls["NameBox"] as ComboBox).ItemsSource = GameAssets.Artifacts.Select(x => x.Name);
 				break;
 
 			case RewardType.Blessing:
-				(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Blessings.Select(x => x.Name);
+				(_controls["NameBox"] as ComboBox).ItemsSource = GameAssets.Blessings.Select(x => x.Name);
 				break;
 
 			case RewardType.Ingot:
-				(_controls["NameBox"] as ComboBox).ItemsSource = GameContent.Ingots.Select(x => x.Name);
+				(_controls["NameBox"] as ComboBox).ItemsSource = GameAssets.Ingots.Select(x => x.Name);
 				break;
 		}
 
@@ -173,23 +174,23 @@ public partial class ShopOfferPatternsPanel : UserControl
 		switch (_dataContext.VendorItemType)
 		{
 			case RewardType.Material:
-				(_controls["VendorIdBox"] as TextBox).Text = GameContent.Materials.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+				(_controls["VendorIdBox"] as TextBox).Text = GameAssets.Materials.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 				break;
 
 			case RewardType.Recipe:
-				(_controls["VendorIdBox"] as TextBox).Text = GameContent.Recipes.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+				(_controls["VendorIdBox"] as TextBox).Text = GameAssets.Recipes.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 				break;
 
 			case RewardType.Artifact:
-				(_controls["VendorIdBox"] as TextBox).Text = GameContent.Artifacts.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+				(_controls["VendorIdBox"] as TextBox).Text = GameAssets.Artifacts.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 				break;
 
 			case RewardType.Blessing:
-				(_controls["VendorIdBox"] as TextBox).Text = GameContent.Blessings.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+				(_controls["VendorIdBox"] as TextBox).Text = GameAssets.Blessings.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 				break;
 
 			case RewardType.Ingot:
-				(_controls["VendorIdBox"] as TextBox).Text = GameContent.Ingots.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
+				(_controls["VendorIdBox"] as TextBox).Text = GameAssets.Ingots.FirstOrDefault(x => x.Name == comboBox.SelectedValue.ToString()).Id.ToString();
 				break;
 		}
 	}
@@ -214,15 +215,15 @@ public partial class ShopOfferPatternsPanel : UserControl
 		vendorPattern.VendorItemType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["VendorTypeBox"] as ComboBox).SelectedValue.ToString());
 
 		// Check if this Id is already in the collection (modified).
-		if (GameContent.ShopOffer.Select(x => x.Id).Contains(vendorPattern.Id))
+		if (GameAssets.ShopOffer.Select(x => x.Id).Contains(vendorPattern.Id))
 		{
-			var indexOfVendorPattern = GameContent.ShopOffer.FindIndex(x => x.Id == vendorPattern.Id);
-			GameContent.ShopOffer[indexOfVendorPattern] = vendorPattern;
+			var indexOfVendorPattern = GameAssets.ShopOffer.FindIndex(x => x.Id == vendorPattern.Id);
+			GameAssets.ShopOffer[indexOfVendorPattern] = vendorPattern;
 		}
 		else
 		{
 			// If not, add it.
-			GameContent.ShopOffer.Add(vendorPattern);
+			GameAssets.ShopOffer.Add(vendorPattern);
 		}
 
 		PopulateContentSelectionBox();
@@ -232,7 +233,7 @@ public partial class ShopOfferPatternsPanel : UserControl
 	{
 		Save();
 
-		var nextId = (GameContent.ShopOffer.Max(x => x.Id as int?) ?? 0) + 1;
+		var nextId = (GameAssets.ShopOffer.Max(x => x.Id as int?) ?? 0) + 1;
 		_dataContext = new VendorPattern
 		{
 			Id = nextId
@@ -247,7 +248,7 @@ public partial class ShopOfferPatternsPanel : UserControl
 	{
 		Save();
 
-		var objectToDelete = GameContent.ShopOffer.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+		var objectToDelete = GameAssets.ShopOffer.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 		var result = MessageBox.Show($"Are you sure you want to delete pattern of Id: {objectToDelete.Id}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -256,7 +257,7 @@ public partial class ShopOfferPatternsPanel : UserControl
 			return;
 		}
 
-		GameContent.ShopOffer.Remove(objectToDelete);
+		GameAssets.ShopOffer.Remove(objectToDelete);
 
 		PopulateContentSelectionBox();
 		ContentSelectionBox.SelectedIndex = -1;
@@ -283,7 +284,7 @@ public partial class ShopOfferPatternsPanel : UserControl
 			Save();
 		}
 
-		_dataContext = GameContent.ShopOffer.FirstOrDefault(x => x.Id == selectedId);
+		_dataContext = GameAssets.ShopOffer.FirstOrDefault(x => x.Id == selectedId);
 		ContentSelectionBox.SelectedValue = _dataContext.Id.ToString();
 		RefreshStaticValuesPanel();
 		DeleteObjectButton.Visibility = Visibility.Visible;

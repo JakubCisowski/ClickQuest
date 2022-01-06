@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.DataTypes.Enums;
+using ClickQuest.ContentManager.Logic.Models;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels;
@@ -24,7 +24,7 @@ public partial class BlessingsPanel : UserControl
 
 	private void PopulateContentSelectionBox()
 	{
-		ContentSelectionBox.ItemsSource = GameContent.Blessings.Select(x => x.Name);
+		ContentSelectionBox.ItemsSource = GameAssets.Blessings.Select(x => x.Name);
 	}
 
 	public void RefreshStaticValuesPanel()
@@ -187,15 +187,15 @@ public partial class BlessingsPanel : UserControl
 		blessing.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
 		// Check if this Id is already in the collection (modified).
-		if (GameContent.Blessings.Select(x => x.Id).Contains(blessing.Id))
+		if (GameAssets.Blessings.Select(x => x.Id).Contains(blessing.Id))
 		{
-			var indexOfOldBlessing = GameContent.Blessings.FindIndex(x => x.Id == blessing.Id);
-			GameContent.Blessings[indexOfOldBlessing] = blessing;
+			var indexOfOldBlessing = GameAssets.Blessings.FindIndex(x => x.Id == blessing.Id);
+			GameAssets.Blessings[indexOfOldBlessing] = blessing;
 		}
 		else
 		{
 			// If not, add it.
-			GameContent.Blessings.Add(blessing);
+			GameAssets.Blessings.Add(blessing);
 		}
 
 		PopulateContentSelectionBox();
@@ -205,7 +205,7 @@ public partial class BlessingsPanel : UserControl
 	{
 		Save();
 
-		var nextId = (GameContent.Blessings.Max(x => x.Id as int?) ?? 0) + 1;
+		var nextId = (GameAssets.Blessings.Max(x => x.Id as int?) ?? 0) + 1;
 		_dataContext = new Blessing
 		{
 			Id = nextId
@@ -220,7 +220,7 @@ public partial class BlessingsPanel : UserControl
 	{
 		Save();
 
-		var objectToDelete = GameContent.Blessings.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+		var objectToDelete = GameAssets.Blessings.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 		var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -229,7 +229,7 @@ public partial class BlessingsPanel : UserControl
 			return;
 		}
 
-		GameContent.Blessings.Remove(objectToDelete);
+		GameAssets.Blessings.Remove(objectToDelete);
 
 		PopulateContentSelectionBox();
 		ContentSelectionBox.SelectedIndex = -1;
@@ -254,7 +254,7 @@ public partial class BlessingsPanel : UserControl
 			Save();
 		}
 
-		_dataContext = GameContent.Blessings.FirstOrDefault(x => x.Name == selectedName);
+		_dataContext = GameAssets.Blessings.FirstOrDefault(x => x.Name == selectedName);
 		RefreshStaticValuesPanel();
 		DeleteObjectButton.Visibility = Visibility.Visible;
 	}

@@ -3,8 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.Models;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Windows;
@@ -46,10 +45,10 @@ public partial class BossIdWindow : Window
 		var nameBox = new ComboBox
 		{
 			Name = "NameBox",
-			ItemsSource = GameContent.Bosses.Select(x => x.Name),
+			ItemsSource = GameAssets.Bosses.Select(x => x.Name),
 			Margin = new Thickness(10)
 		};
-		nameBox.SelectedValue = GameContent.Bosses.FirstOrDefault(x => x.Id == _bossId)?.Name;
+		nameBox.SelectedValue = GameAssets.Bosses.FirstOrDefault(x => x.Id == _bossId)?.Name;
 		nameBox.SelectionChanged += NameBox_SelectionChanged;
 
 		// Set TextBox and ComboBox hints.
@@ -87,7 +86,7 @@ public partial class BossIdWindow : Window
 
 	private void NameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
-		(_controls["IdBox"] as TextBox).Text = GameContent.Bosses.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Id.ToString();
+		(_controls["IdBox"] as TextBox).Text = GameAssets.Bosses.FirstOrDefault(x => x.Name == (sender as ComboBox).SelectedItem.ToString()).Id.ToString();
 	}
 
 	private void UpdateBossId()

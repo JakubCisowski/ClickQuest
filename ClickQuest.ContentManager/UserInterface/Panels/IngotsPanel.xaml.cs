@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.DataTypes.Enums;
+using ClickQuest.ContentManager.Logic.Models;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels;
@@ -24,7 +24,7 @@ public partial class IngotsPanel : UserControl
 
 	private void PopulateContentSelectionBox()
 	{
-		ContentSelectionBox.ItemsSource = GameContent.Ingots.Select(x => x.Name);
+		ContentSelectionBox.ItemsSource = GameAssets.Ingots.Select(x => x.Name);
 	}
 
 	public void RefreshStaticValuesPanel()
@@ -143,15 +143,15 @@ public partial class IngotsPanel : UserControl
 		ingot.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
 		// Check if this Id is already in the collection (modified).
-		if (GameContent.Ingots.Select(x => x.Id).Contains(ingot.Id))
+		if (GameAssets.Ingots.Select(x => x.Id).Contains(ingot.Id))
 		{
-			var indexOfIngot = GameContent.Ingots.FindIndex(x => x.Id == ingot.Id);
-			GameContent.Ingots[indexOfIngot] = ingot;
+			var indexOfIngot = GameAssets.Ingots.FindIndex(x => x.Id == ingot.Id);
+			GameAssets.Ingots[indexOfIngot] = ingot;
 		}
 		else
 		{
 			// If not, add it.
-			GameContent.Ingots.Add(ingot);
+			GameAssets.Ingots.Add(ingot);
 		}
 
 		PopulateContentSelectionBox();
@@ -161,7 +161,7 @@ public partial class IngotsPanel : UserControl
 	{
 		Save();
 
-		var nextId = (GameContent.Ingots.Max(x => x.Id as int?) ?? 0) + 1;
+		var nextId = (GameAssets.Ingots.Max(x => x.Id as int?) ?? 0) + 1;
 		_dataContext = new Ingot
 		{
 			Id = nextId
@@ -176,7 +176,7 @@ public partial class IngotsPanel : UserControl
 	{
 		Save();
 
-		var objectToDelete = GameContent.Ingots.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+		var objectToDelete = GameAssets.Ingots.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 		var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -185,7 +185,7 @@ public partial class IngotsPanel : UserControl
 			return;
 		}
 
-		GameContent.Ingots.Remove(objectToDelete);
+		GameAssets.Ingots.Remove(objectToDelete);
 
 		PopulateContentSelectionBox();
 		ContentSelectionBox.SelectedIndex = -1;
@@ -210,7 +210,7 @@ public partial class IngotsPanel : UserControl
 			Save();
 		}
 
-		_dataContext = GameContent.Ingots.FirstOrDefault(x => x.Name == selectedName);
+		_dataContext = GameAssets.Ingots.FirstOrDefault(x => x.Name == selectedName);
 		RefreshStaticValuesPanel();
 		DeleteObjectButton.Visibility = Visibility.Visible;
 	}

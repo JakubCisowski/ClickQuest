@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.DataTypes.Enums;
+using ClickQuest.ContentManager.Logic.Models;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.ContentManager.UserInterface.Panels;
@@ -24,7 +24,7 @@ public partial class ArtifactsPanel : UserControl
 
 	private void PopulateContentSelectionBox()
 	{
-		ContentSelectionBox.ItemsSource = GameContent.Artifacts.Select(x => x.Name);
+		ContentSelectionBox.ItemsSource = GameAssets.Artifacts.Select(x => x.Name);
 	}
 
 	public void RefreshStaticInfoPanel()
@@ -177,15 +177,15 @@ public partial class ArtifactsPanel : UserControl
 		artifact.Value = 0;
 
 		// Check if this Id is already in the collection (modified).
-		if (GameContent.Artifacts.Select(x => x.Id).Contains(artifact.Id))
+		if (GameAssets.Artifacts.Select(x => x.Id).Contains(artifact.Id))
 		{
-			var indexOfOldArtifact = GameContent.Artifacts.FindIndex(x => x.Id == artifact.Id);
-			GameContent.Artifacts[indexOfOldArtifact] = artifact;
+			var indexOfOldArtifact = GameAssets.Artifacts.FindIndex(x => x.Id == artifact.Id);
+			GameAssets.Artifacts[indexOfOldArtifact] = artifact;
 		}
 		else
 		{
 			// If not, add it.
-			GameContent.Artifacts.Add(artifact);
+			GameAssets.Artifacts.Add(artifact);
 		}
 
 		PopulateContentSelectionBox();
@@ -195,7 +195,7 @@ public partial class ArtifactsPanel : UserControl
 	{
 		Save();
 
-		var nextId = (GameContent.Artifacts.Max(x => x.Id as int?) ?? 0) + 1;
+		var nextId = (GameAssets.Artifacts.Max(x => x.Id as int?) ?? 0) + 1;
 		_dataContext = new Artifact
 		{
 			Id = nextId
@@ -210,7 +210,7 @@ public partial class ArtifactsPanel : UserControl
 	{
 		Save();
 
-		var objectToDelete = GameContent.Artifacts.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+		var objectToDelete = GameAssets.Artifacts.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 		var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -219,7 +219,7 @@ public partial class ArtifactsPanel : UserControl
 			return;
 		}
 
-		GameContent.Artifacts.Remove(objectToDelete);
+		GameAssets.Artifacts.Remove(objectToDelete);
 
 		PopulateContentSelectionBox();
 		ContentSelectionBox.SelectedIndex = -1;
@@ -244,7 +244,7 @@ public partial class ArtifactsPanel : UserControl
 			Save();
 		}
 
-		_dataContext = GameContent.Artifacts.FirstOrDefault(x => x.Name == selectedName);
+		_dataContext = GameAssets.Artifacts.FirstOrDefault(x => x.Name == selectedName);
 		RefreshStaticInfoPanel();
 		DeleteObjectButton.Visibility = Visibility.Visible;
 	}

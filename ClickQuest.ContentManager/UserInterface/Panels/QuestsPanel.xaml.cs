@@ -4,8 +4,9 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.DataTypes.Enums;
+using ClickQuest.ContentManager.Logic.DataTypes.Structs;
+using ClickQuest.ContentManager.Logic.Models;
 using ClickQuest.ContentManager.UserInterface.Windows;
 using MaterialDesignThemes.Wpf;
 
@@ -27,7 +28,7 @@ public partial class QuestsPanel : UserControl
 
 	private void PopulateContentSelectionBox()
 	{
-		ContentSelectionBox.ItemsSource = GameContent.Quests.Select(x => x.Name);
+		ContentSelectionBox.ItemsSource = GameAssets.Quests.Select(x => x.Name);
 	}
 
 	public void RefreshStaticValuesPanel()
@@ -156,15 +157,15 @@ public partial class QuestsPanel : UserControl
 		quest.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
 		// Check if this Id is already in the collection (modified).
-		if (GameContent.Quests.Select(x => x.Id).Contains(quest.Id))
+		if (GameAssets.Quests.Select(x => x.Id).Contains(quest.Id))
 		{
-			var indexOfOldQuest = GameContent.Quests.FindIndex(x => x.Id == quest.Id);
-			GameContent.Quests[indexOfOldQuest] = quest;
+			var indexOfOldQuest = GameAssets.Quests.FindIndex(x => x.Id == quest.Id);
+			GameAssets.Quests[indexOfOldQuest] = quest;
 		}
 		else
 		{
 			// If not, add it.
-			GameContent.Quests.Add(quest);
+			GameAssets.Quests.Add(quest);
 		}
 
 		PopulateContentSelectionBox();
@@ -174,7 +175,7 @@ public partial class QuestsPanel : UserControl
 	{
 		Save();
 
-		var nextId = (GameContent.Quests.Max(x => x.Id as int?) ?? 0) + 1;
+		var nextId = (GameAssets.Quests.Max(x => x.Id as int?) ?? 0) + 1;
 
 		_dataContext = new Quest
 		{
@@ -194,7 +195,7 @@ public partial class QuestsPanel : UserControl
 	{
 		Save();
 
-		var objectToDelete = GameContent.Quests.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+		var objectToDelete = GameAssets.Quests.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 		var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -203,7 +204,7 @@ public partial class QuestsPanel : UserControl
 			return;
 		}
 
-		GameContent.Quests.Remove(objectToDelete);
+		GameAssets.Quests.Remove(objectToDelete);
 
 		PopulateContentSelectionBox();
 		ContentSelectionBox.SelectedIndex = -1;
@@ -232,7 +233,7 @@ public partial class QuestsPanel : UserControl
 			Save();
 		}
 
-		_dataContext = GameContent.Quests.FirstOrDefault(x => x.Name == selectedName);
+		_dataContext = GameAssets.Quests.FirstOrDefault(x => x.Name == selectedName);
 		_questRewardPatterns = _dataContext.QuestRewardPatterns;
 		RefreshStaticValuesPanel();
 		RefreshDynamicValuesPanel();
@@ -297,23 +298,23 @@ public partial class QuestsPanel : UserControl
 		switch (pattern.QuestRewardType)
 		{
 			case RewardType.Material:
-				nameBlock.Text = GameContent.Materials.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
+				nameBlock.Text = GameAssets.Materials.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
 				break;
 
 			case RewardType.Recipe:
-				nameBlock.Text = GameContent.Recipes.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
+				nameBlock.Text = GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
 				break;
 
 			case RewardType.Artifact:
-				nameBlock.Text = GameContent.Artifacts.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
+				nameBlock.Text = GameAssets.Artifacts.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
 				break;
 
 			case RewardType.Blessing:
-				nameBlock.Text = GameContent.Blessings.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
+				nameBlock.Text = GameAssets.Blessings.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
 				break;
 
 			case RewardType.Ingot:
-				nameBlock.Text = GameContent.Ingots.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
+				nameBlock.Text = GameAssets.Ingots.FirstOrDefault(x => x.Id == pattern.QuestRewardId).Name;
 				break;
 		}
 

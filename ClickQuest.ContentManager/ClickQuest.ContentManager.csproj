@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MaterialDesignExtensions" Version="3.3.0"/>
-        <PackageReference Include="MaterialDesignThemes" Version="4.2.1"/>
+        <PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
+        <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -89,12 +89,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Logs\"/>
-        <Folder Include="Resources\"/>
+        <Folder Include="Logs" />
+        <Folder Include="Logs\" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ClickQuest.Game\ClickQuest.Game.csproj"/>
+        <ProjectReference Include="..\ClickQuest.Game\ClickQuest.Game.csproj" />
     </ItemGroup>
 
 </Project>

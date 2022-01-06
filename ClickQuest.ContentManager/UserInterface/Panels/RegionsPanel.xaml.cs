@@ -3,8 +3,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using ClickQuest.ContentManager.GameData;
-using ClickQuest.ContentManager.GameData.Models;
+using ClickQuest.ContentManager.Logic.DataTypes.Structs;
+using ClickQuest.ContentManager.Logic.Models;
 using ClickQuest.ContentManager.UserInterface.Windows;
 using MaterialDesignThemes.Wpf;
 
@@ -26,7 +26,7 @@ public partial class RegionsPanel : UserControl
 
 	private void PopulateContentSelectionBox()
 	{
-		ContentSelectionBox.ItemsSource = GameContent.Regions.Select(x => x.Name);
+		ContentSelectionBox.ItemsSource = GameAssets.Regions.Select(x => x.Name);
 	}
 
 	public void RefreshStaticValuesPanel()
@@ -144,15 +144,15 @@ public partial class RegionsPanel : UserControl
 		region.Description = (_controls["DescriptionBox"] as TextBox).Text;
 
 		// Check if this Id is already in the collection (modified).
-		if (GameContent.Regions.Select(x => x.Id).Contains(region.Id))
+		if (GameAssets.Regions.Select(x => x.Id).Contains(region.Id))
 		{
-			var indexOfOldRegion = GameContent.Regions.FindIndex(x => x.Id == region.Id);
-			GameContent.Regions[indexOfOldRegion] = region;
+			var indexOfOldRegion = GameAssets.Regions.FindIndex(x => x.Id == region.Id);
+			GameAssets.Regions[indexOfOldRegion] = region;
 		}
 		else
 		{
 			// If not, add it.
-			GameContent.Regions.Add(region);
+			GameAssets.Regions.Add(region);
 		}
 
 		PopulateContentSelectionBox();
@@ -162,7 +162,7 @@ public partial class RegionsPanel : UserControl
 	{
 		Save();
 
-		var nextId = (GameContent.Regions.Max(x => x.Id as int?) ?? 0) + 1;
+		var nextId = (GameAssets.Regions.Max(x => x.Id as int?) ?? 0) + 1;
 
 		_dataContext = new Region
 		{
@@ -182,7 +182,7 @@ public partial class RegionsPanel : UserControl
 	{
 		Save();
 
-		var objectToDelete = GameContent.Regions.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
+		var objectToDelete = GameAssets.Regions.FirstOrDefault(x => x.Id == int.Parse((_controls["IdBox"] as TextBox).Text));
 
 		var result = MessageBox.Show($"Are you sure you want to delete {objectToDelete.Name}? This action will close ContentManager, check Logs directory (for missing references after deleting).", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -191,7 +191,7 @@ public partial class RegionsPanel : UserControl
 			return;
 		}
 
-		GameContent.Regions.Remove(objectToDelete);
+		GameAssets.Regions.Remove(objectToDelete);
 
 		PopulateContentSelectionBox();
 		ContentSelectionBox.SelectedIndex = -1;
@@ -220,7 +220,7 @@ public partial class RegionsPanel : UserControl
 			Save();
 		}
 
-		_dataContext = GameContent.Regions.FirstOrDefault(x => x.Name == selectedName);
+		_dataContext = GameAssets.Regions.FirstOrDefault(x => x.Name == selectedName);
 		_monsterSpawnPatterns = _dataContext.MonsterSpawnPatterns;
 		RefreshStaticValuesPanel();
 		RefreshDynamicValuesPanel();
@@ -271,7 +271,7 @@ public partial class RegionsPanel : UserControl
 			VerticalAlignment = VerticalAlignment.Center,
 			HorizontalAlignment = HorizontalAlignment.Left,
 			Margin = new Thickness(80, 0, 0, 0),
-			Text = GameContent.Monsters.FirstOrDefault(x => x.Id == pattern.MonsterId).Name
+			Text = GameAssets.Monsters.FirstOrDefault(x => x.Id == pattern.MonsterId).Name
 		};
 
 		var frequencyBlock = new TextBlock

@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.ContentManager.GameData;
+using ClickQuest.ContentManager.Logic.DataTypes.Enums;
+using ClickQuest.ContentManager.Logic.Helpers;
 using ClickQuest.ContentManager.UserInterface.Panels;
-using ClickQuest.ContentManager.Validation;
 
 namespace ClickQuest.ContentManager.UserInterface.Windows;
 
@@ -24,11 +24,11 @@ public partial class MainWindow : Window
 			SaveObjectChanges();
 
 			var currentTabName = (tabControl.SelectedItem as TabItem).Header.ToString();
-			var currentTabNameAsContentType = (ContentType)Enum.Parse(typeof(ContentType), currentTabName.Replace(" ", ""));
+			var currentTabNameAsContentType = (AssetType)Enum.Parse(typeof(AssetType), currentTabName.Replace(" ", ""));
 
 			switch (currentTabNameAsContentType)
 			{
-				case ContentType.Artifacts:
+				case AssetType.Artifacts:
 					var artifactsPanel = new ArtifactsPanel();
 					_currentPanel = artifactsPanel;
 
@@ -36,7 +36,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(artifactsPanel);
 					break;
 
-				case ContentType.Regions:
+				case AssetType.Regions:
 					var regionsPanel = new RegionsPanel();
 					_currentPanel = regionsPanel;
 
@@ -44,7 +44,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(regionsPanel);
 					break;
 
-				case ContentType.Materials:
+				case AssetType.Materials:
 					var materialsPanel = new MaterialsPanel();
 					_currentPanel = materialsPanel;
 
@@ -52,7 +52,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(materialsPanel);
 					break;
 
-				case ContentType.Recipes:
+				case AssetType.Recipes:
 					var recipesPanel = new RecipesPanel();
 					_currentPanel = recipesPanel;
 
@@ -60,7 +60,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(recipesPanel);
 					break;
 
-				case ContentType.Blessings:
+				case AssetType.Blessings:
 					var blessingsPanel = new BlessingsPanel();
 					_currentPanel = blessingsPanel;
 
@@ -68,7 +68,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(blessingsPanel);
 					break;
 
-				case ContentType.Bosses:
+				case AssetType.Bosses:
 					var bossesPanel = new BossesPanel();
 					_currentPanel = bossesPanel;
 
@@ -76,7 +76,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(bossesPanel);
 					break;
 
-				case ContentType.DngGroups:
+				case AssetType.DngGroups:
 					var dngGroupsPanel = new DungeonGroupsPanel();
 					_currentPanel = dngGroupsPanel;
 
@@ -84,7 +84,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(dngGroupsPanel);
 					break;
 
-				case ContentType.DngKeys:
+				case AssetType.DngKeys:
 					var dngKeysPanel = new DungeonKeysPanel();
 					_currentPanel = dngKeysPanel;
 
@@ -92,7 +92,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(dngKeysPanel);
 					break;
 
-				case ContentType.Dungeons:
+				case AssetType.Dungeons:
 					var dungeonsPanel = new DungeonsPanel();
 					_currentPanel = dungeonsPanel;
 
@@ -100,7 +100,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(dungeonsPanel);
 					break;
 
-				case ContentType.Ingots:
+				case AssetType.Ingots:
 					var ingotsPanel = new IngotsPanel();
 					_currentPanel = ingotsPanel;
 
@@ -108,7 +108,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(ingotsPanel);
 					break;
 
-				case ContentType.Monsters:
+				case AssetType.Monsters:
 					var monstersPanel = new MonstersPanel();
 					_currentPanel = monstersPanel;
 
@@ -116,7 +116,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(monstersPanel);
 					break;
 
-				case ContentType.Quests:
+				case AssetType.Quests:
 					var questsPanel = new QuestsPanel();
 					_currentPanel = questsPanel;
 
@@ -124,7 +124,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(questsPanel);
 					break;
 
-				case ContentType.Priest:
+				case AssetType.Priest:
 					var priestPanel = new PriestOfferPatternsPanel();
 					_currentPanel = priestPanel;
 
@@ -132,7 +132,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(priestPanel);
 					break;
 
-				case ContentType.Shop:
+				case AssetType.Shop:
 					var shopPanel = new ShopOfferPatternsPanel();
 					_currentPanel = shopPanel;
 
@@ -140,7 +140,7 @@ public partial class MainWindow : Window
 					(tabControl.SelectedContent as Grid)?.Children.Add(shopPanel);
 					break;
 
-				case ContentType.GameMech:
+				case AssetType.GameMech:
 					var gameMechanicsPanel = new GameMechanicsTabsPanel();
 					_currentPanel = gameMechanicsPanel;
 
@@ -222,8 +222,8 @@ public partial class MainWindow : Window
 	{
 		SaveObjectChanges();
 
-		ContentSaver.SaveAllContent();
+		GameAssetsHelper.SaveAllContent();
 
-		DataValidator.ValidateData();
+		ValidationHelper.ValidateData();
 	}
 }
