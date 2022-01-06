@@ -5,9 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.DataTypes.Enums;
-using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
@@ -103,7 +101,7 @@ public partial class BlacksmithPage : Page
 
 			MeltMaterial(material);
 
-			GameController.UpdateSpecializationAmountAndUi(SpecializationType.Melting);
+			GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Melting);
 		}
 		else if (b.CommandParameter is Artifact artifact)
 		{
@@ -269,7 +267,7 @@ public partial class BlacksmithPage : Page
 			recipe.Artifact.AddItem();
 			recipe.RemoveItem();
 
-			GameController.UpdateSpecializationAmountAndUi(SpecializationType.Crafting);
+			GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Crafting);
 
 			UpdateBlacksmithItems();
 		}

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Media;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.Helpers;
 using ClickQuest.Game.UserInterface.Helpers;

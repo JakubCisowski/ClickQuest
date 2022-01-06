@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Threading;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.DataTypes.Structs;
-using ClickQuest.Game.Extensions.Gameplay;
-using ClickQuest.Game.Extensions.Quests;
 using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models.Interfaces;
 using ClickQuest.Game.UserInterface.Helpers;
+using ClickQuest.Game.UserInterface.Pages;
 
 namespace ClickQuest.Game.Models;
 
@@ -123,9 +121,9 @@ public class Quest : INotifyPropertyChanged, IIdentifiable
 	{
 		_timer.Stop();
 		TicksCountText = "";
-		GameController.UpdateSpecializationAmountAndUi(SpecializationType.Questing);
+		GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Questing);
 		AssignRewards();
-		QuestController.RerollQuests();
+		(GameAssets.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
 		CombatTimersHelper.StartAuraTimerOnCurrentRegion();
 	}
 

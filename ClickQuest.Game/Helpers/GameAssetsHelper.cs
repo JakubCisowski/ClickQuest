@@ -5,31 +5,30 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using ClickQuest.Game.DataTypes.Structs;
-using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
 using ClickQuest.Game.Models.Functionalities;
 
-namespace ClickQuest.Game.Core.GameData;
+namespace ClickQuest.Game.Helpers;
 
-public static class GameAssetsLoader
+public static class GameAssetsHelper
 {
 	public static void Load()
 	{
-		GameAssets.Materials = DeserializeType<Material>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Materials.aes"));
-		GameAssets.Artifacts = DeserializeType<Artifact>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Artifacts.aes"));
-		GameAssets.Recipes = DeserializeType<Recipe>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Recipes.aes"));
-		GameAssets.Ingots = DeserializeType<Ingot>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Ingots.aes"));
-		GameAssets.DungeonKeys = DeserializeType<DungeonKey>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "DungeonKeys.aes"));
-		GameAssets.Monsters = DeserializeType<Monster>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Monsters.aes"));
-		GameAssets.Regions = DeserializeType<Region>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Regions.aes"));
-		GameAssets.Blessings = DeserializeType<Blessing>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Blessings.aes"));
-		GameAssets.ShopOffer = DeserializeType<VendorPattern>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "ShopOffer.aes"));
-		GameAssets.PriestOffer = DeserializeType<VendorPattern>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "PriestOffer.aes"));
-		GameAssets.Quests = DeserializeType<Quest>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Quests.aes"));
-		GameAssets.Bosses = DeserializeType<Boss>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Bosses.aes"));
-		GameAssets.DungeonGroups = DeserializeType<DungeonGroup>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "DungeonGroups.aes"));
-		GameAssets.Dungeons = DeserializeType<Dungeon>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "Dungeons.aes"));
-		GameAssets.GameMechanicsTabs = DeserializeType<GameMechanicsTab>(Path.Combine(Environment.CurrentDirectory, @"Core\", @"GameData\", @"GameAssets\", "GameMechanics.aes"));
+		GameAssets.Materials = DeserializeType<Material>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "Materials.aes"));
+		GameAssets.Artifacts = DeserializeType<Artifact>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "Artifacts.aes"));
+		GameAssets.Recipes = DeserializeType<Recipe>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "Recipes.aes"));
+		GameAssets.Ingots = DeserializeType<Ingot>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "Ingots.aes"));
+		GameAssets.DungeonKeys = DeserializeType<DungeonKey>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "DungeonKeys.aes"));
+		GameAssets.Monsters = DeserializeType<Monster>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "Monsters.aes"));
+		GameAssets.Regions = DeserializeType<Region>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "Regions.aes"));
+		GameAssets.Blessings = DeserializeType<Blessing>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "Blessings.aes"));
+		GameAssets.ShopOffer = DeserializeType<VendorPattern>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "ShopOffer.aes"));
+		GameAssets.PriestOffer = DeserializeType<VendorPattern>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "PriestOffer.aes"));
+		GameAssets.Quests = DeserializeType<Quest>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "Quests.aes"));
+		GameAssets.Bosses = DeserializeType<Boss>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "Bosses.aes"));
+		GameAssets.DungeonGroups = DeserializeType<DungeonGroup>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "DungeonGroups.aes"));
+		GameAssets.Dungeons = DeserializeType<Dungeon>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "Dungeons.aes"));
+		GameAssets.GameMechanicsTabs = DeserializeType<GameMechanicsTab>(Path.Combine(Environment.CurrentDirectory, @"Data", @"GameAssets\", "GameMechanics.aes"));
 
 		PostLoad();
 

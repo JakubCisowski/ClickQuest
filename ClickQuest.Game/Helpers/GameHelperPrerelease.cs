@@ -1,12 +1,10 @@
-using ClickQuest.Game.Data;
 using ClickQuest.Game.DataTypes.Collections;
-using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Helpers;
 
-namespace ClickQuest.Game.Extensions.Gameplay;
+namespace ClickQuest.Game.Helpers;
 
-public static class GameController
+public static class GameHelperPrerelease
 {
 	public static void OnHeroExit()
 	{
@@ -22,10 +20,10 @@ public static class GameController
 		User.Instance.Gold = 0;
 
 		User.Instance.DungeonKeys.Clear();
-		UserDataLoader.SeedDungeonKeys();
+		UserDataHelper.SeedDungeonKeys();
 
 		User.Instance.Ingots.Clear();
-		UserDataLoader.SeedIngots();
+		UserDataHelper.SeedIngots();
 
 		User.Instance.Achievements.TotalTimePlayed = default;
 		User.Instance.Achievements.NumericAchievementCollection = new ObservableDictionary<NumericAchievementType, long>();

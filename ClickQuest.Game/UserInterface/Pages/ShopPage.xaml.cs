@@ -5,9 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.DataTypes.Enums;
-using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
@@ -117,7 +115,7 @@ public partial class ShopPage : Page
 		{
 			// The selling ratio is only applied for materials.
 			itemSellValue = (int)Math.Ceiling(item.Value * (SellingRatio + Specializations.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Trading]));
-			GameController.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
+			GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
 		}
 		else
 		{
@@ -166,7 +164,7 @@ public partial class ShopPage : Page
 			recipe.AddItem();
 			User.Instance.Gold -= recipe.Value;
 
-			GameController.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
+			GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
 
 			UpdateShop();
 		}

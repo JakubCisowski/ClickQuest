@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Models.Interfaces;
 
 namespace ClickQuest.Game.Models;

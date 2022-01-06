@@ -6,10 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Data;
 using ClickQuest.Game.DataTypes.Enums;
-using ClickQuest.Game.Extensions.Gameplay;
+using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Helpers;
@@ -162,9 +160,9 @@ public partial class GameWindow : Window, INotifyPropertyChanged
 	{
 		User.Instance.Achievements.TotalTimePlayed += DateTime.Now - User.SessionStartDate;
 
-		GameController.OnHeroExit();
+		GameHelperPrerelease.OnHeroExit();
 
-		UserDataLoader.Save();
+		UserDataHelper.Save();
 
 		base.OnClosing(e);
 	}

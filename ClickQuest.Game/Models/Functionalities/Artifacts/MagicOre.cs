@@ -1,5 +1,4 @@
 ﻿using System;
-using ClickQuest.Game.Core.GameData;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 

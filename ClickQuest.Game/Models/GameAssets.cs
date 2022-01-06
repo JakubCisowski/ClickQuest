@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
 using ClickQuest.Game.DataTypes.Structs;
-using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Pages;
 
-namespace ClickQuest.Game.Core.GameData;
+namespace ClickQuest.Game.Models;
 
 public static class GameAssets
 {

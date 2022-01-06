@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;

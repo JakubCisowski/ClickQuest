@@ -1,5 +1,4 @@
 using System.Linq;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.Models;
 

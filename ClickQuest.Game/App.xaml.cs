@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows;
-using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Data;
+using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Pages;
 using ClickQuest.Game.UserInterface.Windows;
@@ -25,13 +24,13 @@ public partial class App : Application
 		CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
 		// Load JSONs.
-		GameAssetsLoader.Load();
+		GameAssetsHelper.Load();
 
 		var gameWindow = new GameWindow();
 		Current.MainWindow = gameWindow;
 		gameWindow.Show();
 
-		UserDataLoader.Load();
+		UserDataHelper.Load();
 
 		(GameAssets.Pages["MainMenu"] as MainMenuPage).UpdateCreateHeroButton();
 		(GameAssets.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
@@ -45,7 +44,7 @@ public partial class App : Application
 		{
 			var e = args.Exception;
 		
-			string directoryPath = Path.Combine(Environment.CurrentDirectory, "Logs");
+			string directoryPath = Path.Combine(Environment.CurrentDirectory, "Data", "Logs");
 			string filePath = Path.Combine(directoryPath, $"CrashLog {DateTime.Now.ToString("dd-MM-yyyy HH-mm-ss")}.txt");
 		
 			if (!Directory.Exists(directoryPath))

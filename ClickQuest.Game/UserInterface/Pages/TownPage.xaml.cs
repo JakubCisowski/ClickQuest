@@ -3,8 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
-using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
@@ -139,7 +137,7 @@ public partial class TownPage : Page
 		// Pause all quest timers (so that quest doesn't finish while current hero is not selected).
 		User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default)?.PauseTimer();
 
-		GameController.OnHeroExit();
+		GameHelperPrerelease.OnHeroExit();
 
 		User.Instance.CurrentHero = null;
 

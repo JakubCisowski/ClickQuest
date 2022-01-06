@@ -1,9 +1,9 @@
 using System;
 using System.Windows;
 using System.Windows.Media;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.DataTypes.Structs;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Styles.Themes;
 
 namespace ClickQuest.Game.UserInterface.Helpers;

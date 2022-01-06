@@ -4,9 +4,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.DataTypes.Enums;
-using ClickQuest.Game.Extensions.Gameplay;
+using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models.Interfaces;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Helpers;
@@ -203,7 +202,7 @@ public class Blessing : INotifyPropertyChanged, IIdentifiable
 
 		var newBlessing = blessingBlueprint?.CopyBlessing();
 		newBlessing.Duration += User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Blessing];
-		GameController.UpdateSpecializationAmountAndUi(SpecializationType.Blessing);
+		GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Blessing);
 
 		User.Instance.CurrentHero.Blessing = newBlessing;
 		newBlessing.EnableBuff();

@@ -5,9 +5,8 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.DataTypes.Enums;
-using ClickQuest.Game.Extensions.Gameplay;
+using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Helpers;
@@ -266,7 +265,7 @@ public partial class MainMenuPage : Page
 
 		if (result == MessageBoxResult.Yes)
 		{
-			GameController.ResetAllProgress();
+			GameHelperPrerelease.ResetAllProgress();
 			UpdateSelectOrDeleteHeroButtons();
 			UpdateCreateHeroButton();
 		}

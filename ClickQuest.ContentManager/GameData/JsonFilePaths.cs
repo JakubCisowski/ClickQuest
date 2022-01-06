@@ -23,20 +23,20 @@ public static class JsonFilePaths
 
 	public static void CalculateGameAssetsFilePaths()
 	{
-		ArtifactsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "Artifacts.aes");
-		BlessingsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "Blessings.aes");
-		BossesFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "Bosses.aes");
-		DungeonsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "Dungeons.aes");
-		DungeonGroupsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "DungeonGroups.aes");
-		DungeonKeysFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "DungeonKeys.aes");
-		MaterialsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "Materials.aes");
-		MonstersFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "Monsters.aes");
-		QuestsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "Quests.aes");
-		RecipesFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "Recipes.aes");
-		RegionsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "Regions.aes");
-		PriestOfferFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "PriestOffer.aes");
-		ShopOfferFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "ShopOffer.aes");
-		IngotsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "Ingots.aes");
-		GameMechanicsPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Core\", @"GameData\", @"GameAssets\", "GameMechanics.aes");
+		ArtifactsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "Artifacts.aes");
+		BlessingsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "Blessings.aes");
+		BossesFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "Bosses.aes");
+		DungeonsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "Dungeons.aes");
+		DungeonGroupsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "DungeonGroups.aes");
+		DungeonKeysFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "DungeonKeys.aes");
+		MaterialsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "Materials.aes");
+		MonstersFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "Monsters.aes");
+		QuestsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "Quests.aes");
+		RecipesFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "Recipes.aes");
+		RegionsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "Regions.aes");
+		PriestOfferFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "PriestOffer.aes");
+		ShopOfferFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "ShopOffer.aes");
+		IngotsFilePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "Ingots.aes");
+		GameMechanicsPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName, @"ClickQuest.Game\", @"Data", @"GameAssets\", "GameMechanics.aes");
 	}
 }

@@ -4,23 +4,21 @@ using System.IO;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.DataTypes.Structs;
-using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
 
-namespace ClickQuest.Game.Data;
+namespace ClickQuest.Game.Helpers;
 
-public static class UserDataLoader
+public static class UserDataHelper
 {
 	public static readonly string UserDataPath;
 	public static readonly string BestiaryDataPath;
 
-	static UserDataLoader()
+	static UserDataHelper()
 	{
 		// [PRERELEASE]
-		UserDataPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Data\", "User.aes");
-		BestiaryDataPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Data\", "Bestiary.aes");
+		UserDataPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Data\", @"UserData\", "User.aes");
+		BestiaryDataPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Data\", @"UserData\", "Bestiary.aes");
 	}
 
 	public static void Load()

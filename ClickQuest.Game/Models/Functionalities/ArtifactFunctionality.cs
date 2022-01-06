@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Windows;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Pages;

@@ -1,6 +1,5 @@
 using System.Windows;
 using System.Windows.Controls;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;

@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
-using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.DataTypes.Structs;
-using ClickQuest.Game.Extensions.Gameplay;
 using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models.Functionalities;
 using ClickQuest.Game.UserInterface.Helpers;
@@ -177,7 +175,7 @@ public class Boss : Enemy
 
 		InterfaceHelper.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 
-		GameController.UpdateSpecializationAmountAndUi(SpecializationType.Dungeon);
+		GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Dungeon);
 
 		User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.DungeonsCompleted, 1);
 	}
