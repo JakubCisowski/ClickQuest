@@ -9,162 +9,161 @@ using System.ComponentModel;
 using System.Diagnostics;
 using ClickQuest.Game.Extensions.Events;
 
-namespace ClickQuest.Game.Extensions.Collections
+namespace ClickQuest.Game.Extensions.Collections;
+
+[DebuggerDisplay("Count={Count}")]
+public class ObservableDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TValue>>, IDictionary<TKey, TValue>, INotifyCollectionChanged, INotifyPropertyChanged
 {
-	[DebuggerDisplay("Count={Count}")]
-	public class ObservableDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TValue>>, IDictionary<TKey, TValue>, INotifyCollectionChanged, INotifyPropertyChanged
+	private readonly IDictionary<TKey, TValue> _dictionary;
+
+	public ObservableDictionary() : this(new Dictionary<TKey, TValue>())
 	{
-		private readonly IDictionary<TKey, TValue> _dictionary;
+	}
 
-		public ObservableDictionary() : this(new Dictionary<TKey, TValue>())
+	public ObservableDictionary(IDictionary<TKey, TValue> dictionary)
+	{
+		_dictionary = dictionary;
+	}
+
+	public event NotifyCollectionChangedEventHandler CollectionChanged = (sender, args) => { };
+
+	public event PropertyChangedEventHandler PropertyChanged = (sender, args) => { };
+
+	// Custom events.
+
+	// Handle updating specialization text and ToolTips - only for Specialization.SpecializationAmounts.
+	// Handle specialization buffs, amounts and threshold updates - for collections in Specialization.
+	public event SpecializationCollectionUpdatedEventHandler SpecializationCollectionUpdated;
+
+	private void AddWithNotification(KeyValuePair<TKey, TValue> item)
+	{
+		AddWithNotification(item.Key, item.Value);
+	}
+
+	private void AddWithNotification(TKey key, TValue value)
+	{
+		_dictionary.Add(key, value);
+
+		CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, new KeyValuePair<TKey, TValue>(key, value)));
+		PropertyChanged(this, new PropertyChangedEventArgs("Count"));
+		PropertyChanged(this, new PropertyChangedEventArgs(nameof(Keys)));
+		PropertyChanged(this, new PropertyChangedEventArgs(nameof(Values)));
+	}
+
+	private bool RemoveWithNotification(TKey key)
+	{
+		TValue value;
+		if (_dictionary.TryGetValue(key, out value) && _dictionary.Remove(key))
 		{
-		}
-
-		public ObservableDictionary(IDictionary<TKey, TValue> dictionary)
-		{
-			_dictionary = dictionary;
-		}
-
-		public event NotifyCollectionChangedEventHandler CollectionChanged = (sender, args) => { };
-
-		public event PropertyChangedEventHandler PropertyChanged = (sender, args) => { };
-
-		// Custom events.
-
-		// Handle updating specialization text and ToolTips - only for Specialization.SpecializationAmounts.
-		// Handle specialization buffs, amounts and threshold updates - for collections in Specialization.
-		public event SpecializationCollectionUpdatedEventHandler SpecializationCollectionUpdated;
-
-		private void AddWithNotification(KeyValuePair<TKey, TValue> item)
-		{
-			AddWithNotification(item.Key, item.Value);
-		}
-
-		private void AddWithNotification(TKey key, TValue value)
-		{
-			_dictionary.Add(key, value);
-
-			CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, new KeyValuePair<TKey, TValue>(key, value)));
+			CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>(key, value)));
 			PropertyChanged(this, new PropertyChangedEventArgs("Count"));
 			PropertyChanged(this, new PropertyChangedEventArgs(nameof(Keys)));
 			PropertyChanged(this, new PropertyChangedEventArgs(nameof(Values)));
+
+			return true;
 		}
 
-		private bool RemoveWithNotification(TKey key)
+		return false;
+	}
+
+	private void UpdateWithNotification(TKey key, TValue value)
+	{
+		TValue existing;
+		if (_dictionary.TryGetValue(key, out existing))
 		{
-			TValue value;
-			if (_dictionary.TryGetValue(key, out value) && _dictionary.Remove(key))
-			{
-				CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>(key, value)));
-				PropertyChanged(this, new PropertyChangedEventArgs("Count"));
-				PropertyChanged(this, new PropertyChangedEventArgs(nameof(Keys)));
-				PropertyChanged(this, new PropertyChangedEventArgs(nameof(Values)));
+			_dictionary[key] = value;
 
-				return true;
-			}
+			CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new KeyValuePair<TKey, TValue>(key, value), new KeyValuePair<TKey, TValue>(key, existing)));
+			PropertyChanged(this, new PropertyChangedEventArgs(nameof(Values)));
 
-			return false;
+			// Custom events.
+
+			// Update interface when Specialization Amount is changed.
+			// Also refresh stats when any Specialization collection is changed.
+			SpecializationCollectionUpdated?.Invoke(this, new EventArgs());
 		}
-
-		private void UpdateWithNotification(TKey key, TValue value)
-		{
-			TValue existing;
-			if (_dictionary.TryGetValue(key, out existing))
-			{
-				_dictionary[key] = value;
-
-				CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new KeyValuePair<TKey, TValue>(key, value), new KeyValuePair<TKey, TValue>(key, existing)));
-				PropertyChanged(this, new PropertyChangedEventArgs(nameof(Values)));
-
-				// Custom events.
-
-				// Update interface when Specialization Amount is changed.
-				// Also refresh stats when any Specialization collection is changed.
-				SpecializationCollectionUpdated?.Invoke(this, new EventArgs());
-			}
-			else
-			{
-				AddWithNotification(key, value);
-			}
-		}
-
-		protected void RaisePropertyChanged(PropertyChangedEventArgs args)
-		{
-			PropertyChanged(this, args);
-		}
-
-		public void Add(TKey key, TValue value)
+		else
 		{
 			AddWithNotification(key, value);
 		}
+	}
 
-		public bool ContainsKey(TKey key)
-		{
-			return _dictionary.ContainsKey(key);
-		}
+	protected void RaisePropertyChanged(PropertyChangedEventArgs args)
+	{
+		PropertyChanged(this, args);
+	}
 
-		public ICollection<TKey> Keys => _dictionary.Keys;
+	public void Add(TKey key, TValue value)
+	{
+		AddWithNotification(key, value);
+	}
 
-		public bool Remove(TKey key)
-		{
-			return RemoveWithNotification(key);
-		}
+	public bool ContainsKey(TKey key)
+	{
+		return _dictionary.ContainsKey(key);
+	}
 
-		public bool TryGetValue(TKey key, out TValue value)
-		{
-			return _dictionary.TryGetValue(key, out value);
-		}
+	public ICollection<TKey> Keys => _dictionary.Keys;
 
-		public ICollection<TValue> Values => _dictionary.Values;
+	public bool Remove(TKey key)
+	{
+		return RemoveWithNotification(key);
+	}
 
-		public TValue this[TKey key]
-		{
-			get => _dictionary[key];
-			set => UpdateWithNotification(key, value);
-		}
+	public bool TryGetValue(TKey key, out TValue value)
+	{
+		return _dictionary.TryGetValue(key, out value);
+	}
 
-		void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)
-		{
-			AddWithNotification(item);
-		}
+	public ICollection<TValue> Values => _dictionary.Values;
 
-		void ICollection<KeyValuePair<TKey, TValue>>.Clear()
-		{
-			_dictionary.Clear();
+	public TValue this[TKey key]
+	{
+		get => _dictionary[key];
+		set => UpdateWithNotification(key, value);
+	}
 
-			CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-			PropertyChanged(this, new PropertyChangedEventArgs("Count"));
-			PropertyChanged(this, new PropertyChangedEventArgs(nameof(Keys)));
-			PropertyChanged(this, new PropertyChangedEventArgs(nameof(Values)));
-		}
+	void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)
+	{
+		AddWithNotification(item);
+	}
 
-		bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item)
-		{
-			return _dictionary.Contains(item);
-		}
+	void ICollection<KeyValuePair<TKey, TValue>>.Clear()
+	{
+		_dictionary.Clear();
 
-		void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
-		{
-			_dictionary.CopyTo(array, arrayIndex);
-		}
+		CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+		PropertyChanged(this, new PropertyChangedEventArgs("Count"));
+		PropertyChanged(this, new PropertyChangedEventArgs(nameof(Keys)));
+		PropertyChanged(this, new PropertyChangedEventArgs(nameof(Values)));
+	}
 
-		int ICollection<KeyValuePair<TKey, TValue>>.Count => _dictionary.Count;
+	bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item)
+	{
+		return _dictionary.Contains(item);
+	}
 
-		bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => _dictionary.IsReadOnly;
+	void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+	{
+		_dictionary.CopyTo(array, arrayIndex);
+	}
 
-		bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)
-		{
-			return RemoveWithNotification(item.Key);
-		}
+	int ICollection<KeyValuePair<TKey, TValue>>.Count => _dictionary.Count;
 
-		IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
-		{
-			return _dictionary.GetEnumerator();
-		}
+	bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => _dictionary.IsReadOnly;
 
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return _dictionary.GetEnumerator();
-		}
+	bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)
+	{
+		return RemoveWithNotification(item.Key);
+	}
+
+	IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
+	{
+		return _dictionary.GetEnumerator();
+	}
+
+	IEnumerator IEnumerable.GetEnumerator()
+	{
+		return _dictionary.GetEnumerator();
 	}
 }

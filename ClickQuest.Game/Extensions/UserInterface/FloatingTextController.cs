@@ -9,362 +9,361 @@ using MaterialDesignThemes.Wpf;
 using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
 using Colors = ClickQuest.Game.Extensions.UserInterface.ColorsController;
 
-namespace ClickQuest.Game.Extensions.UserInterface
+namespace ClickQuest.Game.Extensions.UserInterface;
+
+public static class FloatingTextController
 {
-	public static class FloatingTextController
+	public const int IngotDungeonKeyOffset = 22;
+
+	public static Point GoldPositionPoint = new Point
 	{
-		public const int IngotDungeonKeyOffset = 22;
+		X = 193,
+		Y = 232
+	};
 
-		public static Point GoldPositionPoint = new Point
+	public static Point ExperiencePositionPoint = new Point
+	{
+		X = 200,
+		Y = 50
+	};
+
+	public static Point IngotGeneralPositionPoint = new Point
+	{
+		X = 1,
+		Y = 257
+	};
+
+	public static Point DungeonKeyGeneralPositionPoint = new Point
+	{
+		X = 265,
+		Y = 257
+	};
+
+	public static Point IngotFinePositionPoint = new Point
+	{
+		X = IngotGeneralPositionPoint.X,
+		Y = IngotGeneralPositionPoint.Y + IngotDungeonKeyOffset
+	};
+
+	public static Point IngotSuperiorPositionPoint = new Point
+	{
+		X = IngotGeneralPositionPoint.X,
+		Y = IngotFinePositionPoint.Y + IngotDungeonKeyOffset
+	};
+
+	public static Point IngotExceptionalPositionPoint = new Point
+	{
+		X = IngotGeneralPositionPoint.X,
+		Y = IngotSuperiorPositionPoint.Y + IngotDungeonKeyOffset
+	};
+
+	public static Point IngotMasterworkPositionPoint = new Point
+	{
+		X = IngotGeneralPositionPoint.X,
+		Y = IngotExceptionalPositionPoint.Y + IngotDungeonKeyOffset
+	};
+
+	public static Point IngotMythicPositionPoint = new Point
+	{
+		X = IngotGeneralPositionPoint.X,
+		Y = IngotMasterworkPositionPoint.Y + IngotDungeonKeyOffset
+	};
+
+	public static Point DungeonKeyFinePositionPoint = new Point
+	{
+		X = DungeonKeyGeneralPositionPoint.X,
+		Y = DungeonKeyGeneralPositionPoint.Y + IngotDungeonKeyOffset
+	};
+
+	public static Point DungeonKeySuperiorPositionPoint = new Point
+	{
+		X = DungeonKeyGeneralPositionPoint.X,
+		Y = DungeonKeyFinePositionPoint.Y + IngotDungeonKeyOffset
+	};
+
+	public static Point DungeonKeyExceptionalPositionPoint = new Point
+	{
+		X = DungeonKeyGeneralPositionPoint.X,
+		Y = DungeonKeySuperiorPositionPoint.Y + IngotDungeonKeyOffset
+	};
+
+	public static Point DungeonKeyMasterworkPositionPoint = new Point
+	{
+		X = DungeonKeyGeneralPositionPoint.X,
+		Y = DungeonKeyExceptionalPositionPoint.Y + IngotDungeonKeyOffset
+	};
+
+	public static Point DungeonKeyMythicPositionPoint = new Point
+	{
+		X = DungeonKeyGeneralPositionPoint.X,
+		Y = DungeonKeyMasterworkPositionPoint.Y + IngotDungeonKeyOffset
+	};
+
+	public static Point EnemyCenterPoint = new Point
+	{
+		X = 683,
+		Y = 384
+	};
+
+	public static Point LootEndPositionPoint = new Point
+	{
+		X = EnemyCenterPoint.X + 200,
+		Y = EnemyCenterPoint.Y - 200
+	};
+
+	public static DoubleAnimation CreateTextOpacityAnimation(int durationInSeconds)
+	{
+		var textVisibilityAnimation = new DoubleAnimation
 		{
-			X = 193,
-			Y = 232
+			Name = "ClickTextVisibilityAnimation",
+			Duration = new Duration(TimeSpan.FromSeconds(durationInSeconds)),
+			From = 1.0,
+			To = 0.5
 		};
 
-		public static Point ExperiencePositionPoint = new Point
+		return textVisibilityAnimation;
+	}
+
+	public static (double X, double Y) RandomizeFloatingTextPathPosition(Point mousePosition, double canvasActualWidth, double canvasActualHeight, int maximumPositionOffset)
+	{
+		var randomizedPositionX = mousePosition.X + Rng.Next(-maximumPositionOffset, maximumPositionOffset + 1);
+		var randomizedPositionY = mousePosition.Y + Rng.Next(-maximumPositionOffset, maximumPositionOffset + 1);
+
+		// Clamp the positions, so that floating numbers do not follow cursor when user hovers over stats panel, equipment panel, etc.
+		randomizedPositionX = Math.Clamp(randomizedPositionX, -90, canvasActualWidth + 45);
+		randomizedPositionY = Math.Clamp(randomizedPositionY, -115, canvasActualHeight + 90);
+
+		return (randomizedPositionX, randomizedPositionY);
+	}
+
+	public static Border CreateFloatingTextCombatBorder(int damageValue, DamageType damageType)
+	{
+		var border = new Border
 		{
-			X = 200,
-			Y = 50
+			CornerRadius = new CornerRadius(20),
+			BorderThickness = new Thickness(5),
+			Padding = new Thickness(2),
+			IsHitTestVisible = false
 		};
 
-		public static Point IngotGeneralPositionPoint = new Point
+		var stackPanel = new StackPanel
 		{
-			X = 1,
-			Y = 257
+			Orientation = Orientation.Horizontal
 		};
 
-		public static Point DungeonKeyGeneralPositionPoint = new Point
+		var textBrush = Colors.GetDamageTypeColor(damageType);
+
+		var icon = GetFloatingCombatIcon(damageType);
+		icon.Foreground = textBrush;
+		icon.VerticalAlignment = VerticalAlignment.Center;
+
+		stackPanel.Children.Add(icon);
+
+		var text = new TextBlock
 		{
-			X = 265,
-			Y = 257
+			Text = damageValue.ToString(),
+			Foreground = textBrush,
+			FontSize = 28,
+			VerticalAlignment = VerticalAlignment.Center
 		};
 
-		public static Point IngotFinePositionPoint = new Point
+		if (damageType == DamageType.Critical)
 		{
-			X = IngotGeneralPositionPoint.X,
-			Y = IngotGeneralPositionPoint.Y + IngotDungeonKeyOffset
-		};
-
-		public static Point IngotSuperiorPositionPoint = new Point
-		{
-			X = IngotGeneralPositionPoint.X,
-			Y = IngotFinePositionPoint.Y + IngotDungeonKeyOffset
-		};
-
-		public static Point IngotExceptionalPositionPoint = new Point
-		{
-			X = IngotGeneralPositionPoint.X,
-			Y = IngotSuperiorPositionPoint.Y + IngotDungeonKeyOffset
-		};
-
-		public static Point IngotMasterworkPositionPoint = new Point
-		{
-			X = IngotGeneralPositionPoint.X,
-			Y = IngotExceptionalPositionPoint.Y + IngotDungeonKeyOffset
-		};
-
-		public static Point IngotMythicPositionPoint = new Point
-		{
-			X = IngotGeneralPositionPoint.X,
-			Y = IngotMasterworkPositionPoint.Y + IngotDungeonKeyOffset
-		};
-
-		public static Point DungeonKeyFinePositionPoint = new Point
-		{
-			X = DungeonKeyGeneralPositionPoint.X,
-			Y = DungeonKeyGeneralPositionPoint.Y + IngotDungeonKeyOffset
-		};
-
-		public static Point DungeonKeySuperiorPositionPoint = new Point
-		{
-			X = DungeonKeyGeneralPositionPoint.X,
-			Y = DungeonKeyFinePositionPoint.Y + IngotDungeonKeyOffset
-		};
-
-		public static Point DungeonKeyExceptionalPositionPoint = new Point
-		{
-			X = DungeonKeyGeneralPositionPoint.X,
-			Y = DungeonKeySuperiorPositionPoint.Y + IngotDungeonKeyOffset
-		};
-
-		public static Point DungeonKeyMasterworkPositionPoint = new Point
-		{
-			X = DungeonKeyGeneralPositionPoint.X,
-			Y = DungeonKeyExceptionalPositionPoint.Y + IngotDungeonKeyOffset
-		};
-
-		public static Point DungeonKeyMythicPositionPoint = new Point
-		{
-			X = DungeonKeyGeneralPositionPoint.X,
-			Y = DungeonKeyMasterworkPositionPoint.Y + IngotDungeonKeyOffset
-		};
-
-		public static Point EnemyCenterPoint = new Point
-		{
-			X = 683,
-			Y = 384
-		};
-
-		public static Point LootEndPositionPoint = new Point
-		{
-			X = EnemyCenterPoint.X + 200,
-			Y = EnemyCenterPoint.Y - 200
-		};
-
-		public static DoubleAnimation CreateTextOpacityAnimation(int durationInSeconds)
-		{
-			DoubleAnimation textVisibilityAnimation = new DoubleAnimation
-			{
-				Name = "ClickTextVisibilityAnimation",
-				Duration = new Duration(TimeSpan.FromSeconds(durationInSeconds)),
-				From = 1.0,
-				To = 0.5
-			};
-
-			return textVisibilityAnimation;
+			text.FontFamily = (FontFamily)Application.Current.FindResource("FontRegularDemiBold");
 		}
 
-		public static (double X, double Y) RandomizeFloatingTextPathPosition(Point mousePosition, double canvasActualWidth, double canvasActualHeight, int maximumPositionOffset)
+		stackPanel.Children.Add(text);
+
+		border.Child = stackPanel;
+
+		return border;
+	}
+
+	public static Border CreateFloatingTextUtilityBorder(string value, SolidColorBrush textBrush)
+	{
+		var border = new Border
 		{
-			double randomizedPositionX = mousePosition.X + Rng.Next(-maximumPositionOffset, maximumPositionOffset + 1);
-			double randomizedPositionY = mousePosition.Y + Rng.Next(-maximumPositionOffset, maximumPositionOffset + 1);
+			CornerRadius = new CornerRadius(20),
+			BorderThickness = new Thickness(5),
+			Padding = new Thickness(2),
+			IsHitTestVisible = false
+		};
 
-			// Clamp the positions, so that floating numbers do not follow cursor when user hovers over stats panel, equipment panel, etc.
-			randomizedPositionX = Math.Clamp(randomizedPositionX, -90, canvasActualWidth + 45);
-			randomizedPositionY = Math.Clamp(randomizedPositionY, -115, canvasActualHeight + 90);
+		var stackPanel = new StackPanel
+		{
+			Orientation = Orientation.Horizontal
+		};
 
-			return (randomizedPositionX, randomizedPositionY);
+		var text = new TextBlock
+		{
+			Text = value,
+			Foreground = textBrush,
+			FontSize = 28,
+			VerticalAlignment = VerticalAlignment.Center
+		};
+
+		stackPanel.Children.Add(text);
+
+		border.Child = stackPanel;
+
+		return border;
+	}
+
+	public static Border CreateFloatingTextLootBorder(string lootName, Rarity lootRarity, PackIconKind lootIconKind, int quantity = 1)
+	{
+		var border = new Border
+		{
+			CornerRadius = new CornerRadius(20),
+			BorderThickness = new Thickness(5),
+			Padding = new Thickness(2),
+			IsHitTestVisible = false
+		};
+
+		var stackPanel = new StackPanel
+		{
+			Orientation = Orientation.Horizontal
+		};
+
+		var lootIcon = new PackIcon
+		{
+			Foreground = ColorsController.GetRarityColor(lootRarity),
+			Width = 20,
+			Height = 20,
+			VerticalAlignment = VerticalAlignment.Center,
+			Kind = lootIconKind
+		};
+
+		stackPanel.Children.Add(lootIcon);
+
+		var itemBlock = new TextBlock
+		{
+			Foreground = ColorsController.GetRarityColor(lootRarity),
+			FontSize = 28,
+			FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBold"),
+			VerticalAlignment = VerticalAlignment.Center,
+			Margin = new Thickness(5, 0, 0, 0)
+		};
+
+		if (quantity <= 1)
+		{
+			itemBlock.Text = lootName;
+		}
+		else
+		{
+			itemBlock.Text = quantity + "x " + lootName;
 		}
 
-		public static Border CreateFloatingTextCombatBorder(int damageValue, DamageType damageType)
+		stackPanel.Children.Add(itemBlock);
+
+		border.Child = stackPanel;
+
+		return border;
+	}
+
+	public static PackIcon GetFloatingCombatIcon(DamageType damageType)
+	{
+		var icon = new PackIcon
 		{
-			Border border = new Border
-			{
-				CornerRadius = new CornerRadius(20),
-				BorderThickness = new Thickness(5),
-				Padding = new Thickness(2),
-				IsHitTestVisible = false
-			};
+			Width = 28,
+			Height = 28,
+			VerticalAlignment = VerticalAlignment.Center
+		};
 
-			StackPanel stackPanel = new StackPanel
-			{
-				Orientation = Orientation.Horizontal
-			};
+		switch (damageType)
+		{
+			case DamageType.Normal:
+				icon.Kind = PackIconKind.CursorDefault;
+				break;
 
-			SolidColorBrush textBrush = Colors.GetDamageTypeColor(damageType);
+			case DamageType.Critical:
+				icon.Kind = PackIconKind.CursorDefaultClick;
+				break;
 
-			PackIcon icon = GetFloatingCombatIcon(damageType);
-			icon.Foreground = textBrush;
-			icon.VerticalAlignment = VerticalAlignment.Center;
+			case DamageType.Poison:
+				icon.Kind = PackIconKind.Water;
+				break;
 
-			stackPanel.Children.Add(icon);
+			case DamageType.Aura:
+				icon.Kind = PackIconKind.Brightness5;
+				break;
 
-			TextBlock text = new TextBlock
-			{
-				Text = damageValue.ToString(),
-				Foreground = textBrush,
-				FontSize = 28,
-				VerticalAlignment = VerticalAlignment.Center
-			};
+			case DamageType.OnHit:
+				icon.Kind = PackIconKind.CursorDefaultOutline;
+				break;
 
-			if (damageType == DamageType.Critical)
-			{
-				text.FontFamily = (FontFamily) Application.Current.FindResource("FontRegularDemiBold");
-			}
-
-			stackPanel.Children.Add(text);
-
-			border.Child = stackPanel;
-
-			return border;
+			case DamageType.Artifact:
+				icon.Kind = PackIconKind.DiamondStone;
+				break;
 		}
 
-		public static Border CreateFloatingTextUtilityBorder(string value, SolidColorBrush textBrush)
+		return icon;
+	}
+
+	public static Point GetIngotRarityPosition(Rarity rarity)
+	{
+		Point point;
+
+		switch (rarity)
 		{
-			Border border = new Border
-			{
-				CornerRadius = new CornerRadius(20),
-				BorderThickness = new Thickness(5),
-				Padding = new Thickness(2),
-				IsHitTestVisible = false
-			};
+			case Rarity.General:
+				point = IngotGeneralPositionPoint;
+				break;
 
-			StackPanel stackPanel = new StackPanel
-			{
-				Orientation = Orientation.Horizontal
-			};
+			case Rarity.Fine:
+				point = IngotFinePositionPoint;
+				break;
 
-			TextBlock text = new TextBlock
-			{
-				Text = value,
-				Foreground = textBrush,
-				FontSize = 28,
-				VerticalAlignment = VerticalAlignment.Center
-			};
+			case Rarity.Superior:
+				point = IngotSuperiorPositionPoint;
+				break;
 
-			stackPanel.Children.Add(text);
+			case Rarity.Exceptional:
+				point = IngotExceptionalPositionPoint;
+				break;
 
-			border.Child = stackPanel;
+			case Rarity.Masterwork:
+				point = IngotMasterworkPositionPoint;
+				break;
 
-			return border;
+			case Rarity.Mythic:
+				point = IngotMythicPositionPoint;
+				break;
 		}
 
-		public static Border CreateFloatingTextLootBorder(string lootName, Rarity lootRarity, PackIconKind lootIconKind, int quantity = 1)
+		return point;
+	}
+
+	public static Point GetDungeonKeyRarityPosition(Rarity rarity)
+	{
+		Point point;
+
+		switch (rarity)
 		{
-			Border border = new Border
-			{
-				CornerRadius = new CornerRadius(20),
-				BorderThickness = new Thickness(5),
-				Padding = new Thickness(2),
-				IsHitTestVisible = false
-			};
+			case Rarity.General:
+				point = DungeonKeyGeneralPositionPoint;
+				break;
 
-			StackPanel stackPanel = new StackPanel
-			{
-				Orientation = Orientation.Horizontal
-			};
+			case Rarity.Fine:
+				point = DungeonKeyFinePositionPoint;
+				break;
 
-			PackIcon lootIcon = new PackIcon
-			{
-				Foreground = ColorsController.GetRarityColor(lootRarity),
-				Width = 20,
-				Height = 20,
-				VerticalAlignment = VerticalAlignment.Center,
-				Kind = lootIconKind
-			};
+			case Rarity.Superior:
+				point = DungeonKeySuperiorPositionPoint;
+				break;
 
-			stackPanel.Children.Add(lootIcon);
+			case Rarity.Exceptional:
+				point = DungeonKeyExceptionalPositionPoint;
+				break;
 
-			TextBlock itemBlock = new TextBlock
-			{
-				Foreground = ColorsController.GetRarityColor(lootRarity),
-				FontSize = 28,
-				FontFamily = (FontFamily) Application.Current.FindResource("FontRegularBold"),
-				VerticalAlignment = VerticalAlignment.Center,
-				Margin = new Thickness(5, 0, 0, 0)
-			};
+			case Rarity.Masterwork:
+				point = DungeonKeyMasterworkPositionPoint;
+				break;
 
-			if (quantity <= 1)
-			{
-				itemBlock.Text = lootName;
-			}
-			else
-			{
-				itemBlock.Text = quantity + "x " + lootName;
-			}
-
-			stackPanel.Children.Add(itemBlock);
-
-			border.Child = stackPanel;
-
-			return border;
+			case Rarity.Mythic:
+				point = DungeonKeyMythicPositionPoint;
+				break;
 		}
 
-		public static PackIcon GetFloatingCombatIcon(DamageType damageType)
-		{
-			PackIcon icon = new PackIcon
-			{
-				Width = 28,
-				Height = 28,
-				VerticalAlignment = VerticalAlignment.Center
-			};
-
-			switch (damageType)
-			{
-				case DamageType.Normal:
-					icon.Kind = PackIconKind.CursorDefault;
-					break;
-
-				case DamageType.Critical:
-					icon.Kind = PackIconKind.CursorDefaultClick;
-					break;
-
-				case DamageType.Poison:
-					icon.Kind = PackIconKind.Water;
-					break;
-
-				case DamageType.Aura:
-					icon.Kind = PackIconKind.Brightness5;
-					break;
-
-				case DamageType.OnHit:
-					icon.Kind = PackIconKind.CursorDefaultOutline;
-					break;
-
-				case DamageType.Artifact:
-					icon.Kind = PackIconKind.DiamondStone;
-					break;
-			}
-
-			return icon;
-		}
-
-		public static Point GetIngotRarityPosition(Rarity rarity)
-		{
-			Point point;
-
-			switch (rarity)
-			{
-				case Rarity.General:
-					point = IngotGeneralPositionPoint;
-					break;
-
-				case Rarity.Fine:
-					point = IngotFinePositionPoint;
-					break;
-
-				case Rarity.Superior:
-					point = IngotSuperiorPositionPoint;
-					break;
-
-				case Rarity.Exceptional:
-					point = IngotExceptionalPositionPoint;
-					break;
-
-				case Rarity.Masterwork:
-					point = IngotMasterworkPositionPoint;
-					break;
-
-				case Rarity.Mythic:
-					point = IngotMythicPositionPoint;
-					break;
-			}
-
-			return point;
-		}
-
-		public static Point GetDungeonKeyRarityPosition(Rarity rarity)
-		{
-			Point point;
-
-			switch (rarity)
-			{
-				case Rarity.General:
-					point = DungeonKeyGeneralPositionPoint;
-					break;
-
-				case Rarity.Fine:
-					point = DungeonKeyFinePositionPoint;
-					break;
-
-				case Rarity.Superior:
-					point = DungeonKeySuperiorPositionPoint;
-					break;
-
-				case Rarity.Exceptional:
-					point = DungeonKeyExceptionalPositionPoint;
-					break;
-
-				case Rarity.Masterwork:
-					point = DungeonKeyMasterworkPositionPoint;
-					break;
-
-				case Rarity.Mythic:
-					point = DungeonKeyMythicPositionPoint;
-					break;
-			}
-
-			return point;
-		}
+		return point;
 	}
 }

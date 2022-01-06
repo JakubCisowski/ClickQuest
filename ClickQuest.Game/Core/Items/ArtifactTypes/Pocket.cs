@@ -1,13 +1,12 @@
 ﻿using ClickQuest.Game.Core.Items.Types;
 
-namespace ClickQuest.Game.Core.Items.ArtifactTypes
+namespace ClickQuest.Game.Core.Items.ArtifactTypes;
+
+public class Pocket : ArtifactTypeFunctionality
 {
-	public class Pocket : ArtifactTypeFunctionality
+	public Pocket()
 	{
-		public Pocket()
-		{
-			ArtifactType = ArtifactType.Pocket;
-			Description = "";
-		}
+		ArtifactType = ArtifactType.Pocket;
+		Description = "";
 	}
 }

@@ -3,37 +3,36 @@ using System.Linq;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Items.Types;
 
-namespace ClickQuest.Game.Core.Items.Patterns
+namespace ClickQuest.Game.Core.Items.Patterns;
+
+public class BossLootPattern
 {
-	public class BossLootPattern
+	public int BossLootId { get; set; }
+	public RewardType BossLootType { get; set; }
+	public List<double> Frequencies { get; set; }
+
+	public Item Item
 	{
-		public int BossLootId { get; set; }
-		public RewardType BossLootType { get; set; }
-		public List<double> Frequencies { get; set; }
-
-		public Item Item
+		get
 		{
-			get
+			Item item = null;
+
+			switch (BossLootType)
 			{
-				Item item = null;
+				case RewardType.Material:
+					item = GameAssets.Materials.FirstOrDefault(x => x.Id == BossLootId);
+					break;
 
-				switch (BossLootType)
-				{
-					case RewardType.Material:
-						item = GameAssets.Materials.FirstOrDefault(x => x.Id == BossLootId);
-						break;
+				case RewardType.Recipe:
+					item = GameAssets.Recipes.FirstOrDefault(x => x.Id == BossLootId);
+					break;
 
-					case RewardType.Recipe:
-						item = GameAssets.Recipes.FirstOrDefault(x => x.Id == BossLootId);
-						break;
-
-					case RewardType.Artifact:
-						item = GameAssets.Artifacts.FirstOrDefault(x => x.Id == BossLootId);
-						break;
-				}
-
-				return item;
+				case RewardType.Artifact:
+					item = GameAssets.Artifacts.FirstOrDefault(x => x.Id == BossLootId);
+					break;
 			}
+
+			return item;
 		}
 	}
 }

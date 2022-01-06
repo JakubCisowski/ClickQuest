@@ -2,99 +2,99 @@
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net5.0-windows</TargetFramework>
+        <TargetFramework>net6.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
-      <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
+        <PackageReference Include="MaterialDesignExtensions" Version="3.3.0"/>
+        <PackageReference Include="MaterialDesignThemes" Version="4.2.1"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="UserInterface\Panels\IngotsPanel - Copy %282%29.xaml.cs">
-        <DependentUpon>IngotsPanel.xaml.cs</DependentUpon>
-      </Compile>
-      <Compile Update="UserInterface\Panels\IngotsPanel - Copy - Copy.xaml.cs">
-        <DependentUpon>IngotsPanel - Copy.xaml.cs</DependentUpon>
-      </Compile>
-      <Compile Update="UserInterface\Panels\IngotsPanel - Copy.xaml.cs">
-        <DependentUpon>IngotsPanel.xaml.cs</DependentUpon>
-      </Compile>
-      <Compile Update="UserInterface\Panels\MaterialsPanel.xaml.cs">
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="UserInterface\Panels\RecipesPanel.xaml.cs">
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="UserInterface\Panels\BlessingsPanel.xaml.cs">
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="UserInterface\Panels\BossesPanel.xaml.cs">
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="UserInterface\Panels\DungeonsPanel.xaml.cs">
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="UserInterface\Windows\BossIdWindow.xaml.cs">
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="UserInterface\Windows\IngredientWindow.xaml.cs">
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="UserInterface\Windows\BossLootPatternWindow.xaml.cs">
-        <SubType>Code</SubType>
-      </Compile>
+        <Compile Update="UserInterface\Panels\IngotsPanel - Copy %282%29.xaml.cs">
+            <DependentUpon>IngotsPanel.xaml.cs</DependentUpon>
+        </Compile>
+        <Compile Update="UserInterface\Panels\IngotsPanel - Copy - Copy.xaml.cs">
+            <DependentUpon>IngotsPanel - Copy.xaml.cs</DependentUpon>
+        </Compile>
+        <Compile Update="UserInterface\Panels\IngotsPanel - Copy.xaml.cs">
+            <DependentUpon>IngotsPanel.xaml.cs</DependentUpon>
+        </Compile>
+        <Compile Update="UserInterface\Panels\MaterialsPanel.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="UserInterface\Panels\RecipesPanel.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="UserInterface\Panels\BlessingsPanel.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="UserInterface\Panels\BossesPanel.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="UserInterface\Panels\DungeonsPanel.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="UserInterface\Windows\BossIdWindow.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="UserInterface\Windows\IngredientWindow.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="UserInterface\Windows\BossLootPatternWindow.xaml.cs">
+            <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
-      <Page Update="UserInterface\Panels\IngotsPanel - Copy.xaml">
-        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      </Page>
-      <Page Update="UserInterface\Panels\MaterialsPanel.xaml">
-        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="UserInterface\Panels\ShopOfferPatternsPanel.xaml">
-        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      </Page>
-      <Page Update="UserInterface\Panels\RecipesPanel.xaml">
-        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="UserInterface\Panels\BlessingsPanel.xaml">
-        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="UserInterface\Panels\BossesPanel.xaml">
-        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="UserInterface\Panels\DungeonsPanel.xaml">
-        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="UserInterface\Windows\BossIdWindow.xaml">
-        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="UserInterface\Windows\IngredientWindow.xaml">
-        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="UserInterface\Windows\BossLootPatternWindow.xaml">
-        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
+        <Page Update="UserInterface\Panels\IngotsPanel - Copy.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+        </Page>
+        <Page Update="UserInterface\Panels\MaterialsPanel.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="UserInterface\Panels\ShopOfferPatternsPanel.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+        </Page>
+        <Page Update="UserInterface\Panels\RecipesPanel.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="UserInterface\Panels\BlessingsPanel.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="UserInterface\Panels\BossesPanel.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="UserInterface\Panels\DungeonsPanel.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="UserInterface\Windows\BossIdWindow.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="UserInterface\Windows\IngredientWindow.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="UserInterface\Windows\BossLootPatternWindow.xaml">
+            <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Logs\" />
-      <Folder Include="Resources\" />
+        <Folder Include="Logs\"/>
+        <Folder Include="Resources\"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ClickQuest.Game\ClickQuest.Game.csproj" />
+        <ProjectReference Include="..\ClickQuest.Game\ClickQuest.Game.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -3,45 +3,44 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace ClickQuest.Game.Extensions.UserInterface.ToolTips
+namespace ClickQuest.Game.Extensions.UserInterface.ToolTips;
+
+public static class GeneralToolTipController
 {
-	public static class GeneralToolTipController
+	public static void SetToolTipDelayAndDuration(DependencyObject control)
 	{
-		public static void SetToolTipDelayAndDuration(DependencyObject control)
+		ToolTipService.SetInitialShowDelay(control, 100);
+		ToolTipService.SetShowDuration(control, 20000);
+	}
+
+	public static Line GenerateTextSeparator()
+	{
+		return new Line
 		{
-			ToolTipService.SetInitialShowDelay(control, 100);
-			ToolTipService.SetShowDuration(control, 20000);
-		}
+			X1 = 0,
+			Y1 = 0,
+			X2 = 500,
+			Stroke = (SolidColorBrush)Application.Current.FindResource("BrushWhite"),
+			StrokeThickness = 1,
+			Margin = new Thickness(0, 6, 0, 6)
+		};
+	}
 
-		public static Line GenerateTextSeparator()
+	public static ToolTip GenerateUndiscoveredEnemyToolTip()
+	{
+		var toolTip = new ToolTip
 		{
-			return new Line
-			{
-				X1 = 0,
-				Y1 = 0,
-				X2 = 500,
-				Stroke = (SolidColorBrush) Application.Current.FindResource("BrushWhite"),
-				StrokeThickness = 1,
-				Margin = new Thickness(0, 6, 0, 6)
-			};
-		}
+			Style = (Style)Application.Current.FindResource("ToolTipSimple")
+		};
 
-		public static ToolTip GenerateUndiscoveredEnemyToolTip()
+		var toolTipBlock = new TextBlock
 		{
-			ToolTip toolTip = new ToolTip
-			{
-				Style = (Style) Application.Current.FindResource("ToolTipSimple")
-			};
+			Style = (Style)Application.Current.FindResource("ToolTipTextBlockBase"),
+			Text = "You have not discovered this Enemy yet\nIt will show up here once you first fight it"
+		};
 
-			TextBlock toolTipBlock = new TextBlock
-			{
-				Style = (Style) Application.Current.FindResource("ToolTipTextBlockBase"),
-				Text = "You have not discovered this Enemy yet\nIt will show up here once you first fight it"
-			};
+		toolTip.Content = toolTipBlock;
 
-			toolTip.Content = toolTipBlock;
-
-			return toolTip;
-		}
+		return toolTip;
 	}
 }

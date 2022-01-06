@@ -4,57 +4,56 @@ using System.Text.Json.Serialization;
 using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.UserInterface.Windows;
 
-namespace ClickQuest.Game.Core.Player
+namespace ClickQuest.Game.Core.Player;
+
+public enum NumericAchievementType
 {
-	public enum NumericAchievementType
+	ExperienceGained, GoldEarned, GoldSpent, GeneralIngotsEarned, FineIngotsEarned, SuperiorIngotsEarned, ExceptionalIngotsEarned,
+	MythicIngotsEarned, MasterworkIngotsEarned, GeneralDungeonKeysEarned, FineDungeonKeysEarned, SuperiorDungeonKeysEarned,
+	ExceptionalDungeonKeysEarned, MythicDungeonKeysEarned, MasterworkDungeonKeysEarned, TotalDamageDealt, CritsAmount, PoisonTicksAmount,
+	MonstersDefeated, DungeonsCompleted, BossesDefeated, QuestsCompleted, QuestRerollsAmount, BlessingsUsed, MaterialsGained, RecipesGained,
+	GeneralArtifactsGained, FineArtifactsGained, SuperiorArtifactsGained, ExceptionalArtifactsGained, MythicArtifactsGained, MasterworkArtifactsGained
+}
+
+public class Achievements : INotifyPropertyChanged
+{
+	public event PropertyChangedEventHandler PropertyChanged;
+
+	[JsonIgnore]
+	public ObservableDictionary<NumericAchievementType, long> NumericAchievementCollection { get; set; }
+
+	public string AchievementCollectionString { get; set; }
+
+	[JsonIgnore]
+	public TimeSpan TotalTimePlayed { get; set; }
+
+	public string TotalTimePlayedString { get; set; }
+
+	public Achievements()
 	{
-		ExperienceGained, GoldEarned, GoldSpent, GeneralIngotsEarned, FineIngotsEarned, SuperiorIngotsEarned, ExceptionalIngotsEarned,
-		MythicIngotsEarned, MasterworkIngotsEarned, GeneralDungeonKeysEarned, FineDungeonKeysEarned, SuperiorDungeonKeysEarned,
-		ExceptionalDungeonKeysEarned, MythicDungeonKeysEarned, MasterworkDungeonKeysEarned, TotalDamageDealt, CritsAmount, PoisonTicksAmount,
-		MonstersDefeated, DungeonsCompleted, BossesDefeated, QuestsCompleted, QuestRerollsAmount, BlessingsUsed, MaterialsGained, RecipesGained,
-		GeneralArtifactsGained, FineArtifactsGained, SuperiorArtifactsGained, ExceptionalArtifactsGained, MythicArtifactsGained, MasterworkArtifactsGained
+		NumericAchievementCollection = new ObservableDictionary<NumericAchievementType, long>();
+
+		CollectionInitializer.InitializeDictionary(NumericAchievementCollection);
 	}
 
-	public class Achievements : INotifyPropertyChanged
+	public void SerializeAchievements()
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
+		AchievementCollectionString = Serialization.SerializeData(NumericAchievementCollection);
+		TotalTimePlayedString = TotalTimePlayed.ToString();
+	}
 
-		[JsonIgnore]
-		public ObservableDictionary<NumericAchievementType, long> NumericAchievementCollection { get; set; }
+	public void DeserializeAchievements()
+	{
+		Serialization.DeserializeData(AchievementCollectionString, NumericAchievementCollection);
+		TotalTimePlayed = TimeSpan.Parse(TotalTimePlayedString);
 
-		public string AchievementCollectionString { get; set; }
+		// After deserializing, refresh the UI.
+		AchievementsWindow.Instance.RefreshAchievementsPanel();
+	}
 
-		[JsonIgnore]
-		public TimeSpan TotalTimePlayed { get; set; }
-
-		public string TotalTimePlayedString { get; set; }
-
-		public Achievements()
-		{
-			NumericAchievementCollection = new ObservableDictionary<NumericAchievementType, long>();
-
-			CollectionInitializer.InitializeDictionary(NumericAchievementCollection);
-		}
-
-		public void SerializeAchievements()
-		{
-			AchievementCollectionString = Serialization.SerializeData(NumericAchievementCollection);
-			TotalTimePlayedString = TotalTimePlayed.ToString();
-		}
-
-		public void DeserializeAchievements()
-		{
-			Serialization.DeserializeData(AchievementCollectionString, NumericAchievementCollection);
-			TotalTimePlayed = TimeSpan.Parse(TotalTimePlayedString);
-
-			// After deserializing, refresh the UI.
-			AchievementsWindow.Instance.RefreshAchievementsPanel();
-		}
-
-		public void IncreaseAchievementValue(NumericAchievementType achievementType, long value)
-		{
-			NumericAchievementCollection[achievementType] += value;
-			AchievementsWindow.Instance.RefreshSingleAchievement(achievementType);
-		}
+	public void IncreaseAchievementValue(NumericAchievementType achievementType, long value)
+	{
+		NumericAchievementCollection[achievementType] += value;
+		AchievementsWindow.Instance.RefreshSingleAchievement(achievementType);
 	}
 }

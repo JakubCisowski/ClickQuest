@@ -4,25 +4,24 @@ using System.Linq;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Interfaces;
 
-namespace ClickQuest.Game.Core.Places
+namespace ClickQuest.Game.Core.Places;
+
+public class Dungeon : INotifyPropertyChanged, IIdentifiable
 {
-	public class Dungeon : INotifyPropertyChanged, IIdentifiable
+	public event PropertyChangedEventHandler PropertyChanged;
+
+	public int Id { get; set; }
+	public int DungeonGroupId { get; set; }
+	public string Name { get; set; }
+	public string Description { get; set; }
+	public string Background { get; set; }
+	public List<int> BossIds { get; set; }
+
+	public DungeonGroup DungeonGroup
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		public int Id { get; set; }
-		public int DungeonGroupId { get; set; }
-		public string Name { get; set; }
-		public string Description { get; set; }
-		public string Background { get; set; }
-		public List<int> BossIds { get; set; }
-
-		public DungeonGroup DungeonGroup
+		get
 		{
-			get
-			{
-				return GameAssets.DungeonGroups.FirstOrDefault(x => x.Id == DungeonGroupId);
-			}
+			return GameAssets.DungeonGroups.FirstOrDefault(x => x.Id == DungeonGroupId);
 		}
 	}
 }

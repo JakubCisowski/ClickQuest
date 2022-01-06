@@ -16,249 +16,248 @@ using ClickQuest.Game.Extensions.UserInterface.ToolTips;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Windows;
 
-namespace ClickQuest.Game.UserInterface.Pages
-{
-	public partial class ShopPage : Page
-	{
-		public const double SellingRatio = 0.65;
+namespace ClickQuest.Game.UserInterface.Pages;
 
-		public ShopPage()
+public partial class ShopPage : Page
+{
+	public const double SellingRatio = 0.65;
+
+	public ShopPage()
+	{
+		InitializeComponent();
+		UpdateShop();
+	}
+
+	public void UpdateShop()
+	{
+		ItemsListViewSellMaterials.ItemsSource = User.Instance.CurrentHero?.Materials.ReorderItemsInList();
+		ItemsListViewSellRecipes.ItemsSource = User.Instance.CurrentHero?.Recipes.ReorderItemsInList();
+
+		if (User.Instance.CurrentHero != null)
 		{
-			InitializeComponent();
+			ItemsListViewBuy.ItemsSource = GetShopOfferAsRecipes();
+		}
+
+		ItemsListViewSellMaterials.Items.Refresh();
+		ItemsListViewSellRecipes.Items.Refresh();
+		ItemsListViewBuy.Items.Refresh();
+
+		RefreshScrollBarVisibilities();
+	}
+
+	public void RefreshScrollBarVisibilities()
+	{
+		if (ItemsListViewSellMaterials.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
+		{
+			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellMaterials, ScrollBarVisibility.Visible);
+		}
+		else
+		{
+			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellMaterials, ScrollBarVisibility.Disabled);
+		}
+
+		if (ItemsListViewSellRecipes.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
+		{
+			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Visible);
+		}
+		else
+		{
+			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Disabled);
+		}
+
+		if (ItemsListViewBuy.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
+		{
+			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Visible);
+		}
+		else
+		{
+			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Disabled);
+		}
+	}
+
+	public static List<Recipe> GetShopOfferAsRecipes()
+	{
+		var listOfPatterns = GameAssets.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]);
+
+		return listOfPatterns.Select(pattern => GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.Id)).ToList();
+	}
+
+	private void TownButton_Click(object sender, RoutedEventArgs e)
+	{
+		InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
+	}
+
+	private void SellButton_Click(object sender, RoutedEventArgs e)
+	{
+		var b = sender as Button;
+		var item = b.CommandParameter as Item;
+
+		var itemSellValue = 0;
+
+		if (item.Rarity == Rarity.Mythic)
+		{
+			var sellItemRuns = new List<Run>
+			{
+				new Run("Are you sure you want to sell "),
+				new Run($"{item.Name}")
+				{
+					FontFamily = (FontFamily)FindResource("FontRegularDemiBold")
+				},
+				new Run("?")
+			};
+
+			var result = AlertBox.Show(sellItemRuns);
+
+			if (result == MessageBoxResult.No)
+			{
+				return;
+			}
+		}
+
+		if (item is Material)
+		{
+			// The selling ratio is only applied for materials.
+			itemSellValue = (int)Math.Ceiling(item.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+			GameController.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
+		}
+		else
+		{
+			itemSellValue = item.Value;
+		}
+
+		(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{itemSellValue}", (SolidColorBrush)FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+
+		item.RemoveItem();
+		User.Instance.Gold += itemSellValue;
+
+		UpdateShop();
+	}
+
+	private void BuyButton_Click(object sender, RoutedEventArgs e)
+	{
+		var b = sender as Button;
+		var recipe = b.CommandParameter as Recipe;
+
+		if (User.Instance.Gold >= recipe.Value)
+		{
+			var buyRecipeRuns = new List<Run>
+			{
+				new Run("Are you sure you want to buy "),
+				new Run($"{recipe.Name}")
+				{
+					FontFamily = (FontFamily)FindResource("FontRegularDemiBold")
+				},
+				new Run(" for "),
+				new Run($"{recipe.Value} gold")
+				{
+					Foreground = (SolidColorBrush)FindResource("BrushGold"),
+					FontFamily = (FontFamily)FindResource("FontRegularDemiBold")
+				},
+				new Run("?")
+			};
+
+			var result = AlertBox.Show(buyRecipeRuns);
+			if (result == MessageBoxResult.No)
+			{
+				return;
+			}
+
+			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{recipe.Value}", (SolidColorBrush)FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+
+			recipe.AddItem();
+			User.Instance.Gold -= recipe.Value;
+
+			GameController.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
+
 			UpdateShop();
 		}
-
-		public void UpdateShop()
+		else
 		{
-			ItemsListViewSellMaterials.ItemsSource = User.Instance.CurrentHero?.Materials.ReorderItemsInList();
-			ItemsListViewSellRecipes.ItemsSource = User.Instance.CurrentHero?.Recipes.ReorderItemsInList();
-
-			if (User.Instance.CurrentHero != null)
+			var notEnoughGoldRuns = new List<Run>
 			{
-				ItemsListViewBuy.ItemsSource = GetShopOfferAsRecipes();
-			}
+				new Run("You do not have enough gold to buy this item.\nIt costs "),
+				new Run($"{recipe.Value} gold")
+				{
+					Foreground = (SolidColorBrush)FindResource("BrushGold"),
+					FontFamily = (FontFamily)FindResource("FontRegularDemiBold")
+				},
+				new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses.")
+			};
 
-			ItemsListViewSellMaterials.Items.Refresh();
-			ItemsListViewSellRecipes.Items.Refresh();
-			ItemsListViewBuy.Items.Refresh();
-
-			RefreshScrollBarVisibilities();
+			AlertBox.Show(notEnoughGoldRuns, MessageBoxButton.OK);
 		}
+	}
 
-		public void RefreshScrollBarVisibilities()
+	private void SellButton_OnInitialized(object sender, EventArgs e)
+	{
+		var button = sender as Button;
+
+		if (button?.ToolTip == null)
 		{
-			if (ItemsListViewSellMaterials.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
-			{
-				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellMaterials, ScrollBarVisibility.Visible);
-			}
-			else
-			{
-				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellMaterials, ScrollBarVisibility.Disabled);
-			}
-
-			if (ItemsListViewSellRecipes.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
-			{
-				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Visible);
-			}
-			else
-			{
-				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Disabled);
-			}
-
-			if (ItemsListViewBuy.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
-			{
-				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Visible);
-			}
-			else
-			{
-				ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Disabled);
-			}
-		}
-
-		public static List<Recipe> GetShopOfferAsRecipes()
-		{
-			var listOfPatterns = GameAssets.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]);
-
-			return listOfPatterns.Select(pattern => GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.Id)).ToList();
-		}
-
-		private void TownButton_Click(object sender, RoutedEventArgs e)
-		{
-			InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
-		}
-
-		private void SellButton_Click(object sender, RoutedEventArgs e)
-		{
-			Button b = sender as Button;
-			Item item = b.CommandParameter as Item;
-
 			var itemSellValue = 0;
 
-			if (item.Rarity == Rarity.Mythic)
+			if (button.CommandParameter is Material material)
 			{
-				var sellItemRuns = new List<Run>
-				{
-					new Run("Are you sure you want to sell "),
-					new Run($"{item.Name}")
-					{
-						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-					},
-					new Run("?")
-				};
-
-				var result = AlertBox.Show(sellItemRuns);
-
-				if (result == MessageBoxResult.No)
-				{
-					return;
-				}
-			}
-
-			if (item is Material)
-			{
-				// The selling ratio is only applied for materials.
-				itemSellValue = (int) Math.Ceiling(item.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
-				GameController.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
+				itemSellValue = (int)Math.Ceiling(material.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
 			}
 			else
 			{
-				itemSellValue = item.Value;
+				itemSellValue = (button.CommandParameter as Item).Value;
 			}
 
-			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{itemSellValue}", (SolidColorBrush) FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+			var toolTip = new ToolTip
+			{
+				Style = (Style)FindResource("ToolTipSimple")
+			};
 
-			item.RemoveItem();
-			User.Instance.Gold += itemSellValue;
+			GeneralToolTipController.SetToolTipDelayAndDuration(button);
 
-			UpdateShop();
+			var toolTipBlock = new TextBlock
+			{
+				Style = (Style)FindResource("ToolTipTextBlockBase")
+			};
+
+			toolTipBlock.Inlines.Add(new Run("Sell for "));
+			toolTipBlock.Inlines.Add(new Run($"{itemSellValue} gold")
+			{
+				FontFamily = (FontFamily)FindResource("FontRegularDemiBold"),
+				Foreground = (SolidColorBrush)FindResource("BrushGold")
+			});
+
+			toolTip.Content = toolTipBlock;
+
+			button.ToolTip = toolTip;
 		}
+	}
 
-		private void BuyButton_Click(object sender, RoutedEventArgs e)
+	private void BuyButton_OnInitialized(object sender, EventArgs e)
+	{
+		var button = sender as Button;
+
+		if (button?.ToolTip == null)
 		{
-			Button b = sender as Button;
-			Recipe recipe = b.CommandParameter as Recipe;
-
-			if (User.Instance.Gold >= recipe.Value)
+			var toolTip = new ToolTip
 			{
-				var buyRecipeRuns = new List<Run>
-				{
-					new Run("Are you sure you want to buy "),
-					new Run($"{recipe.Name}")
-					{
-						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-					},
-					new Run(" for "),
-					new Run($"{recipe.Value} gold")
-					{
-						Foreground = (SolidColorBrush) FindResource("BrushGold"),
-						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-					},
-					new Run("?")
-				};
+				Style = (Style)FindResource("ToolTipSimple")
+			};
 
-				var result = AlertBox.Show(buyRecipeRuns);
-				if (result == MessageBoxResult.No)
-				{
-					return;
-				}
+			GeneralToolTipController.SetToolTipDelayAndDuration(button);
 
-				(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{recipe.Value}", (SolidColorBrush) FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
-
-				recipe.AddItem();
-				User.Instance.Gold -= recipe.Value;
-
-				GameController.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
-
-				UpdateShop();
-			}
-			else
+			var toolTipBlock = new TextBlock
 			{
-				var notEnoughGoldRuns = new List<Run>
-				{
-					new Run("You do not have enough gold to buy this item.\nIt costs "),
-					new Run($"{recipe.Value} gold")
-					{
-						Foreground = (SolidColorBrush) FindResource("BrushGold"),
-						FontFamily = (FontFamily) FindResource("FontRegularDemiBold")
-					},
-					new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses.")
-				};
+				Style = (Style)FindResource("ToolTipTextBlockBase")
+			};
 
-				AlertBox.Show(notEnoughGoldRuns, MessageBoxButton.OK);
-			}
-		}
-
-		private void SellButton_OnInitialized(object sender, EventArgs e)
-		{
-			Button button = sender as Button;
-
-			if (button?.ToolTip == null)
+			toolTipBlock.Inlines.Add(new Run("Buy for "));
+			toolTipBlock.Inlines.Add(new Run($"{(button.CommandParameter as Item).Value} gold")
 			{
-				var itemSellValue = 0;
+				FontFamily = (FontFamily)FindResource("FontRegularDemiBold"),
+				Foreground = (SolidColorBrush)FindResource("BrushGold")
+			});
 
-				if (button.CommandParameter is Material material)
-				{
-					itemSellValue = (int) Math.Ceiling(material.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
-				}
-				else
-				{
-					itemSellValue = (button.CommandParameter as Item).Value;
-				}
+			toolTip.Content = toolTipBlock;
 
-				ToolTip toolTip = new ToolTip
-				{
-					Style = (Style) FindResource("ToolTipSimple")
-				};
-
-				GeneralToolTipController.SetToolTipDelayAndDuration(button);
-
-				TextBlock toolTipBlock = new TextBlock
-				{
-					Style = (Style) FindResource("ToolTipTextBlockBase")
-				};
-
-				toolTipBlock.Inlines.Add(new Run("Sell for "));
-				toolTipBlock.Inlines.Add(new Run($"{itemSellValue} gold")
-				{
-					FontFamily = (FontFamily) FindResource("FontRegularDemiBold"),
-					Foreground = (SolidColorBrush) FindResource("BrushGold")
-				});
-
-				toolTip.Content = toolTipBlock;
-
-				button.ToolTip = toolTip;
-			}
-		}
-
-		private void BuyButton_OnInitialized(object sender, EventArgs e)
-		{
-			Button button = sender as Button;
-
-			if (button?.ToolTip == null)
-			{
-				ToolTip toolTip = new ToolTip
-				{
-					Style = (Style) FindResource("ToolTipSimple")
-				};
-
-				GeneralToolTipController.SetToolTipDelayAndDuration(button);
-
-				TextBlock toolTipBlock = new TextBlock
-				{
-					Style = (Style) FindResource("ToolTipTextBlockBase")
-				};
-
-				toolTipBlock.Inlines.Add(new Run("Buy for "));
-				toolTipBlock.Inlines.Add(new Run($"{(button.CommandParameter as Item).Value} gold")
-				{
-					FontFamily = (FontFamily) FindResource("FontRegularDemiBold"),
-					Foreground = (SolidColorBrush) FindResource("BrushGold")
-				});
-
-				toolTip.Content = toolTipBlock;
-
-				button.ToolTip = toolTip;
-			}
+			button.ToolTip = toolTip;
 		}
 	}
 }

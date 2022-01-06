@@ -4,28 +4,26 @@ using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.UserInterface.Controls;
 
-namespace ClickQuest.Game.Core.Items.ArtifactTypes
+namespace ClickQuest.Game.Core.Items.ArtifactTypes;
+
+public class BodyModification : ArtifactTypeFunctionality
 {
-	public class BodyModification : ArtifactTypeFunctionality
+	public override bool CanBeEquipped()
 	{
-		public override bool CanBeEquipped()
+		var isNoOtherBodyModificationEquipped = User.Instance.CurrentHero.EquippedArtifacts.Count(x => x.ArtifactType == ArtifactType.BodyModification) == 0;
+
+		if (isNoOtherBodyModificationEquipped)
 		{
-			bool isNoOtherBodyModificationEquipped = User.Instance.CurrentHero.EquippedArtifacts
-				.Count(x=>x.ArtifactType==ArtifactType.BodyModification) == 0;
-
-			if (isNoOtherBodyModificationEquipped)
-			{
-				return true;
-			}
-
-			AlertBox.Show("This artifact cannot be equipped right now - only one Body Modification can be equipped at a time.", MessageBoxButton.OK);
-			return false;
+			return true;
 		}
-		
-		public BodyModification()
-        {
-        	ArtifactType = ArtifactType.BodyModification;
-        	Description = "You can only equip one Artifact of this type.";
-        }
+
+		AlertBox.Show("This artifact cannot be equipped right now - only one Body Modification can be equipped at a time.", MessageBoxButton.OK);
+		return false;
+	}
+
+	public BodyModification()
+	{
+		ArtifactType = ArtifactType.BodyModification;
+		Description = "You can only equip one Artifact of this type.";
 	}
 }

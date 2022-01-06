@@ -3,54 +3,53 @@ using System.Windows.Threading;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Extensions.UserInterface;
 
-namespace ClickQuest.Game.Core.Items.Artifacts
+namespace ClickQuest.Game.Core.Items.Artifacts;
+
+// All damage dealt is increased by 50% for the first few seconds in combat.
+// Against Monsters, the duration is 2 seconds; against Bosses - 5 seconds. The duration is refreshed each time you kill a Monster.
+public class GladiatorsTrident : ArtifactFunctionality
 {
-	// All damage dealt is increased by 50% for the first few seconds in combat.
-	// Against Monsters, the duration is 2 seconds; against Bosses - 5 seconds. The duration is refreshed each time you kill a Monster.
-	public class GladiatorsTrident : ArtifactFunctionality
+	private const int DurationAgainstMonsters = 2;
+	private const int DurationAgainstBosses = 5;
+	private const double DamageModifier = 0.50;
+
+	private Enemy _currentEnemy;
+	private readonly DispatcherTimer _timer;
+
+	public override void OnDealingDamage(ref int baseDamage)
 	{
-		private const int DurationAgainstMonsters = 2;
-		private const int DurationAgainstBosses = 5;
-		private const double DamageModifier = 0.50;
+		var newEnemy = InterfaceController.CurrentEnemy;
 
-		private Enemy _currentEnemy;
-		private readonly DispatcherTimer _timer;
-
-		public override void OnDealingDamage(ref int baseDamage)
+		if (newEnemy != _currentEnemy)
 		{
-			Enemy newEnemy = InterfaceController.CurrentEnemy;
-
-			if (newEnemy != _currentEnemy)
-			{
-				_currentEnemy = newEnemy;
-				_timer.Stop();
-
-				_timer.Interval = new TimeSpan(0, 0, newEnemy is Monster ? DurationAgainstMonsters : DurationAgainstBosses);
-				_timer.Start();
-			}
-
-			if (_timer.IsEnabled)
-			{
-				var bonusDamage = (int) (baseDamage * DamageModifier);
-				baseDamage += bonusDamage;
-			}
-		}
-
-		public override void OnRegionLeave()
-		{
+			_currentEnemy = newEnemy;
 			_timer.Stop();
+
+			_timer.Interval = new TimeSpan(0, 0, newEnemy is Monster ? DurationAgainstMonsters : DurationAgainstBosses);
+			_timer.Start();
 		}
 
-		public GladiatorsTrident()
+		if (_timer.IsEnabled)
 		{
-			Name = "Gladiator's Trident";
-			_timer = new DispatcherTimer();
-			_timer.Tick += DamageIncreaseTimer_Tick;
+			var bonusDamage = (int)(baseDamage * DamageModifier);
+			baseDamage += bonusDamage;
 		}
+	}
 
-		private void DamageIncreaseTimer_Tick(object source, EventArgs e)
-		{
-			_timer.Stop();
-		}
+	public override void OnRegionLeave()
+	{
+		_timer.Stop();
+	}
+
+	public GladiatorsTrident()
+	{
+		Name = "Gladiator's Trident";
+		_timer = new DispatcherTimer();
+		_timer.Tick += DamageIncreaseTimer_Tick;
+	}
+
+	private void DamageIncreaseTimer_Tick(object source, EventArgs e)
+	{
+		_timer.Stop();
 	}
 }

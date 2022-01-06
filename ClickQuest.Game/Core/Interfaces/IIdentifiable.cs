@@ -1,8 +1,7 @@
-namespace ClickQuest.Game.Core.Interfaces
+namespace ClickQuest.Game.Core.Interfaces;
+
+public interface IIdentifiable
 {
-	public interface IIdentifiable
-	{
-		int Id { get; set; }
-		string Name { get; set; }
-	}
+	int Id { get; set; }
+	string Name { get; set; }
 }

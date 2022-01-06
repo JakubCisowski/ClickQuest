@@ -6,176 +6,174 @@ using System.Windows.Media;
 using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Items.Patterns;
 using ClickQuest.Game.Core.Items.Types;
 using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.Extensions.UserInterface.ToolTips;
 using MaterialDesignThemes.Wpf;
 
-namespace ClickQuest.Game.UserInterface.Controls
+namespace ClickQuest.Game.UserInterface.Controls;
+
+public partial class QuestButton : UserControl, INotifyPropertyChanged
 {
-	public partial class QuestButton : UserControl, INotifyPropertyChanged
+	public event PropertyChangedEventHandler PropertyChanged;
+
+	private readonly Quest _quest;
+
+	public QuestButton(Quest quest)
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
+		InitializeComponent();
 
-		private readonly Quest _quest;
+		_quest = quest;
+		DataContext = _quest;
 
-		public QuestButton(Quest quest)
+		GenerateRewardsInterface();
+
+		if (_quest.Rare)
 		{
-			InitializeComponent();
-
-			_quest = quest;
-			DataContext = _quest;
-
-			GenerateRewardsInterface();
-
-			if (_quest.Rare)
+			var star1 = new PackIcon
 			{
-				PackIcon star1 = new PackIcon
-				{
-					Width = 25,
-					Height = 25,
-					Kind = PackIconKind.Star,
-					Foreground = (SolidColorBrush) FindResource("BrushQuestRare"),
-					VerticalAlignment = VerticalAlignment.Center
-				};
+				Width = 25,
+				Height = 25,
+				Kind = PackIconKind.Star,
+				Foreground = (SolidColorBrush)FindResource("BrushQuestRare"),
+				VerticalAlignment = VerticalAlignment.Center
+			};
 
-				PackIcon star2 = new PackIcon
-				{
-					Width = 25,
-					Height = 25,
-					Kind = PackIconKind.Star,
-					Foreground = (SolidColorBrush) FindResource("BrushQuestRare"),
-					VerticalAlignment = VerticalAlignment.Center
-				};
+			var star2 = new PackIcon
+			{
+				Width = 25,
+				Height = 25,
+				Kind = PackIconKind.Star,
+				Foreground = (SolidColorBrush)FindResource("BrushQuestRare"),
+				VerticalAlignment = VerticalAlignment.Center
+			};
 
-				QuestNamePanel.Children.Insert(0, star1);
-				QuestNamePanel.Children.Add(star2);
-			}
+			QuestNamePanel.Children.Insert(0, star1);
+			QuestNamePanel.Children.Add(star2);
 		}
+	}
 
-		public void GenerateRewardsInterface()
+	public void GenerateRewardsInterface()
+	{
+		foreach (var rewardPattern in _quest.QuestRewardPatterns)
 		{
-			foreach (QuestRewardPattern rewardPattern in _quest.QuestRewardPatterns)
+			var panel = new StackPanel
 			{
-				StackPanel panel = new StackPanel
-				{
-					Orientation = Orientation.Horizontal,
-					HorizontalAlignment = HorizontalAlignment.Center,
-					Margin = new Thickness(0, 0, 0, 5)
-				};
+				Orientation = Orientation.Horizontal,
+				HorizontalAlignment = HorizontalAlignment.Center,
+				Margin = new Thickness(0, 0, 0, 5)
+			};
 
-				PackIcon rewardIcon = new PackIcon
-				{
-					Width = 30,
-					Height = 30,
-					VerticalAlignment = VerticalAlignment.Center
-				};
+			var rewardIcon = new PackIcon
+			{
+				Width = 30,
+				Height = 30,
+				VerticalAlignment = VerticalAlignment.Center
+			};
 
-				TextBlock rewardText = new TextBlock
-				{
-					FontSize = 22,
-					VerticalAlignment = VerticalAlignment.Center
-				};
+			var rewardText = new TextBlock
+			{
+				FontSize = 22,
+				VerticalAlignment = VerticalAlignment.Center
+			};
 
-				ToolTip toolTip = null;
+			ToolTip toolTip = null;
 
-				SolidColorBrush rewardColor = null;
+			SolidColorBrush rewardColor = null;
 
-				switch (rewardPattern.QuestRewardType)
-				{
-					case RewardType.Material:
-						var material = GameAssets.Materials.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
+			switch (rewardPattern.QuestRewardType)
+			{
+				case RewardType.Material:
+					var material = GameAssets.Materials.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
-						toolTip = ItemToolTipController.GenerateItemToolTip(material);
+					toolTip = ItemToolTipController.GenerateItemToolTip(material);
 
-						rewardIcon.Kind = PackIconKind.Cog;
+					rewardIcon.Kind = PackIconKind.Cog;
 
-						rewardText.Text = $"{rewardPattern.Quantity}x {material.Name}";
+					rewardText.Text = $"{rewardPattern.Quantity}x {material.Name}";
 
-						rewardColor = ColorsController.GetRarityColor(material.Rarity);
+					rewardColor = ColorsController.GetRarityColor(material.Rarity);
 
-						break;
+					break;
 
-					case RewardType.Recipe:
-						var recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
+				case RewardType.Recipe:
+					var recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
-						toolTip = ItemToolTipController.GenerateItemToolTip(recipe);
+					toolTip = ItemToolTipController.GenerateItemToolTip(recipe);
 
-						rewardIcon.Kind = PackIconKind.ScriptText;
+					rewardIcon.Kind = PackIconKind.ScriptText;
 
-						rewardText.Text = $"{rewardPattern.Quantity}x {recipe.Name}";
+					rewardText.Text = $"{rewardPattern.Quantity}x {recipe.Name}";
 
-						rewardColor = ColorsController.GetRarityColor(recipe.Rarity);
+					rewardColor = ColorsController.GetRarityColor(recipe.Rarity);
 
-						break;
+					break;
 
-					case RewardType.Artifact:
-						var artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
+				case RewardType.Artifact:
+					var artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
-						toolTip = ItemToolTipController.GenerateItemToolTip(artifact);
+					toolTip = ItemToolTipController.GenerateItemToolTip(artifact);
 
-						rewardIcon.Kind = PackIconKind.DiamondStone;
+					rewardIcon.Kind = PackIconKind.DiamondStone;
 
-						rewardText.Text = $"{rewardPattern.Quantity}x {artifact.Name}";
+					rewardText.Text = $"{rewardPattern.Quantity}x {artifact.Name}";
 
-						rewardColor = ColorsController.GetRarityColor(artifact.Rarity);
+					rewardColor = ColorsController.GetRarityColor(artifact.Rarity);
 
-						break;
+					break;
 
-					case RewardType.Blessing:
-						var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
+				case RewardType.Blessing:
+					var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
-						toolTip = ItemToolTipController.GenerateBlessingToolTip(blessing);
+					toolTip = ItemToolTipController.GenerateBlessingToolTip(blessing);
 
-						rewardIcon.Kind = PackIconKind.BookCross;
+					rewardIcon.Kind = PackIconKind.BookCross;
 
-						rewardText.Text = $"{blessing.Name}";
+					rewardText.Text = $"{blessing.Name}";
 
-						rewardColor = ColorsController.GetRarityColor(blessing.Rarity);
+					rewardColor = ColorsController.GetRarityColor(blessing.Rarity);
 
-						break;
+					break;
 
-					case RewardType.Ingot:
-						var ingot = GameAssets.Ingots.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
+				case RewardType.Ingot:
+					var ingot = GameAssets.Ingots.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
-						toolTip = ItemToolTipController.GenerateCurrencyToolTip<Ingot>((int) ingot.Rarity);
+					toolTip = ItemToolTipController.GenerateCurrencyToolTip<Ingot>((int)ingot.Rarity);
 
-						rewardIcon.Kind = PackIconKind.Gold;
+					rewardIcon.Kind = PackIconKind.Gold;
 
-						rewardText.Text = $"{rewardPattern.Quantity}x {ingot.Name}";
+					rewardText.Text = $"{rewardPattern.Quantity}x {ingot.Name}";
 
-						rewardColor = ColorsController.GetRarityColor(ingot.Rarity);
+					rewardColor = ColorsController.GetRarityColor(ingot.Rarity);
 
-						break;
-				}
-
-				rewardIcon.Foreground = rewardColor;
-				rewardText.Foreground = rewardColor;
-
-				panel.Children.Add(rewardIcon);
-				panel.Children.Add(rewardText);
-
-				GeneralToolTipController.SetToolTipDelayAndDuration(panel);
-
-				panel.ToolTip = toolTip;
-
-				RewardsPanel.Children.Add(panel);
+					break;
 			}
+
+			rewardIcon.Foreground = rewardColor;
+			rewardText.Foreground = rewardColor;
+
+			panel.Children.Add(rewardIcon);
+			panel.Children.Add(rewardText);
+
+			GeneralToolTipController.SetToolTipDelayAndDuration(panel);
+
+			panel.ToolTip = toolTip;
+
+			RewardsPanel.Children.Add(panel);
 		}
+	}
 
-		private void QuestButton_Click(object sender, RoutedEventArgs e)
+	private void QuestButton_Click(object sender, RoutedEventArgs e)
+	{
+		// Start this quest (if another one isn't currently assigned).
+		if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
 		{
-			// Start this quest (if another one isn't currently assigned).
-			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
-			{
-				_quest.StartQuest();
-			}
-			else
-			{
-				AlertBox.Show("Your hero is already completing quest!\nCheck back when it's finished.", MessageBoxButton.OK);
-			}
+			_quest.StartQuest();
+		}
+		else
+		{
+			AlertBox.Show("Your hero is already completing quest!\nCheck back when it's finished.", MessageBoxButton.OK);
 		}
 	}
 }

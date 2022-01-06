@@ -1,8 +1,7 @@
-﻿namespace ClickQuest.ContentManager.GameData.Models
+﻿namespace ClickQuest.ContentManager.GameData.Models;
+
+public interface IIdentifiable
 {
-	public interface IIdentifiable
-	{
-		int Id { get; set; }
-		string Name { get; set; }
-	}
+	int Id { get; set; }
+	string Name { get; set; }
 }

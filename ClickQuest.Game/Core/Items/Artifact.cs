@@ -8,109 +8,108 @@ using ClickQuest.Game.Extensions.Collections;
 using ClickQuest.Game.Extensions.UserInterface;
 using ClickQuest.Game.UserInterface.Controls;
 
-namespace ClickQuest.Game.Core.Items
+namespace ClickQuest.Game.Core.Items;
+
+public class Artifact : Item
 {
-	public class Artifact : Item
+	[JsonIgnore]
+	public ArtifactFunctionality ArtifactFunctionality { get; set; }
+
+	public ArtifactType ArtifactType { get; set; }
+	public string Lore { get; set; }
+	public string ExtraInfo { get; set; }
+	public string MythicTag { get; set; }
+	public const double MeltingIngredientsRatio = 0.6;
+	public const int MeltingWithoutIngredientsValue = 120;
+	public const double CraftingRatio = 25;
+
+	public int BaseIngotBonus => 100;
+
+	public override Artifact CopyItem(int quantity)
 	{
-		[JsonIgnore]
-		public ArtifactFunctionality ArtifactFunctionality { get; set; }
-
-		public ArtifactType ArtifactType { get; set; }
-		public string Lore { get; set; }
-		public string ExtraInfo { get; set; }
-		public string MythicTag { get; set; }
-		public const double MeltingIngredientsRatio = 0.6;
-		public const int MeltingWithoutIngredientsValue = 120;
-		public const double CraftingRatio = 25;
-
-		public int BaseIngotBonus => 100;
-
-		public override Artifact CopyItem(int quantity)
+		var copy = new Artifact
 		{
-			Artifact copy = new Artifact
-			{
-				Id = Id,
-				Name = Name,
-				Rarity = Rarity,
-				Value = Value,
-				Quantity = quantity,
-				ArtifactType = ArtifactType,
-				ArtifactFunctionality = ArtifactFunctionality,
-				Description = Description,
-				Lore = Lore,
-				ExtraInfo = ExtraInfo,
-				MythicTag = MythicTag
-			};
+			Id = Id,
+			Name = Name,
+			Rarity = Rarity,
+			Value = Value,
+			Quantity = quantity,
+			ArtifactType = ArtifactType,
+			ArtifactFunctionality = ArtifactFunctionality,
+			Description = Description,
+			Lore = Lore,
+			ExtraInfo = ExtraInfo,
+			MythicTag = MythicTag
+		};
 
-			return copy;
+		return copy;
+	}
+
+	public override void AddAchievementProgress(int amount = 1)
+	{
+		NumericAchievementType achievementType = 0;
+		// Increase achievement amount.
+		switch (Rarity)
+		{
+			case Rarity.General:
+				achievementType = NumericAchievementType.GeneralArtifactsGained;
+				break;
+			case Rarity.Fine:
+				achievementType = NumericAchievementType.FineArtifactsGained;
+				break;
+			case Rarity.Superior:
+				achievementType = NumericAchievementType.SuperiorArtifactsGained;
+				break;
+			case Rarity.Exceptional:
+				achievementType = NumericAchievementType.ExceptionalArtifactsGained;
+				break;
+			case Rarity.Mythic:
+				achievementType = NumericAchievementType.MythicArtifactsGained;
+				break;
+			case Rarity.Masterwork:
+				achievementType = NumericAchievementType.MasterworkArtifactsGained;
+				break;
 		}
 
-		public override void AddAchievementProgress(int amount = 1)
+		User.Instance.Achievements.IncreaseAchievementValue(achievementType, amount);
+	}
+
+	public override void AddItem(int amount = 1)
+	{
+		CollectionsController.AddItemToCollection(this, User.Instance.CurrentHero.Artifacts, amount);
+
+		AddAchievementProgress();
+		InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Artifact));
+	}
+
+	public override void RemoveItem(int amount = 1)
+	{
+		CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Artifacts, amount);
+
+		InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Artifact));
+
+		if (User.Instance.CurrentHero.ArtifactSets.Any(x => x.ArtifactIds.Any(y => y == Id)) && !User.Instance.CurrentHero.Artifacts.Contains(this))
 		{
-			NumericAchievementType achievementType = 0;
-			// Increase achievement amount.
-			switch (Rarity)
+			AlertBox.Show($"{Name} has been removed from all Artifact Sets", MessageBoxButton.OK);
+
+			foreach (var artifactSet in User.Instance.CurrentHero.ArtifactSets)
 			{
-				case Rarity.General:
-					achievementType = NumericAchievementType.GeneralArtifactsGained;
-					break;
-				case Rarity.Fine:
-					achievementType = NumericAchievementType.FineArtifactsGained;
-					break;
-				case Rarity.Superior:
-					achievementType = NumericAchievementType.SuperiorArtifactsGained;
-					break;
-				case Rarity.Exceptional:
-					achievementType = NumericAchievementType.ExceptionalArtifactsGained;
-					break;
-				case Rarity.Mythic:
-					achievementType = NumericAchievementType.MythicArtifactsGained;
-					break;
-				case Rarity.Masterwork:
-					achievementType = NumericAchievementType.MasterworkArtifactsGained;
-					break;
-			}
-
-			User.Instance.Achievements.IncreaseAchievementValue(achievementType, amount);
-		}
-
-		public override void AddItem(int amount = 1)
-		{
-			CollectionsController.AddItemToCollection(this, User.Instance.CurrentHero.Artifacts, amount);
-
-			AddAchievementProgress();
-			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Artifact));
-		}
-
-		public override void RemoveItem(int amount = 1)
-		{
-			CollectionsController.RemoveItemFromCollection(this, User.Instance.CurrentHero.Artifacts, amount);
-
-			InterfaceController.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Artifact));
-
-			if (User.Instance.CurrentHero.ArtifactSets.Any(x => x.ArtifactIds.Any(y => y == Id)) && !User.Instance.CurrentHero.Artifacts.Contains(this))
-			{
-				AlertBox.Show($"{Name} has been removed from all Artifact Sets", MessageBoxButton.OK);
-
-				foreach (ArtifactSet artifactSet in User.Instance.CurrentHero.ArtifactSets)
-				{
-					artifactSet.ArtifactIds.Remove(Id);
-				}
+				artifactSet.ArtifactIds.Remove(Id);
 			}
 		}
+	}
 
-		public void CreateMythicTag(string enemyName = "")
+	public void CreateMythicTag(string enemyName = "")
+	{
+		if (Rarity == Rarity.Mythic)
 		{
-			if (Rarity == Rarity.Mythic)
+			if (enemyName == "")
 			{
-				if (enemyName == "")
-				{
-					MythicTag = "Crafted by " + User.Instance.CurrentHero.Name + " on " + DateTime.Now.ToString("dd/MM/yyyy");
-				}
-				else
-				{
-					MythicTag = "Dropped from " + enemyName + " by " + User.Instance.CurrentHero.Name + " on " + DateTime.Now.ToString("dd/MM/yyyy");
-				}
+				MythicTag = "Crafted by " + User.Instance.CurrentHero.Name + " on " + DateTime.Now.ToString("dd/MM/yyyy");
+			}
+			else
+			{
+				MythicTag = "Dropped from " + enemyName + " by " + User.Instance.CurrentHero.Name + " on " + DateTime.Now.ToString("dd/MM/yyyy");
 			}
 		}
 	}

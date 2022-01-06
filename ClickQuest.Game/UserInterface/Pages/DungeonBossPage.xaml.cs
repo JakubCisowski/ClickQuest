@@ -10,86 +10,85 @@ using ClickQuest.Game.Core.GameData;
 using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.UserInterface;
 
-namespace ClickQuest.Game.UserInterface.Pages
+namespace ClickQuest.Game.UserInterface.Pages;
+
+public partial class DungeonBossPage : Page, INotifyPropertyChanged
 {
-	public partial class DungeonBossPage : Page, INotifyPropertyChanged
+	public event PropertyChangedEventHandler PropertyChanged;
+
+	public Boss Boss { get; set; }
+	public int Duration { get; set; }
+
+	public DungeonBossPage()
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
+		InitializeComponent();
+	}
 
-		public Boss Boss { get; set; }
-		public int Duration { get; set; }
+	public void StartBossFight(Boss boss)
+	{
+		CombatTimerController.SetupFightTimer();
+		CombatTimerController.SetupPoisonTimer();
 
-		public DungeonBossPage()
+		BossButton.IsEnabled = true;
+		TownButton.Visibility = Visibility.Hidden;
+		BossHealthBorder.BorderBrush = (SolidColorBrush)FindResource("BrushGold");
+
+		BindFightInfoToInterface(boss);
+
+		// Mark the Boss as discovered.
+		if (!GameAssets.BestiaryEntries.Any(x => x.EntryType == BestiaryEntryType.Boss && x.Id == boss.Id))
 		{
-			InitializeComponent();
-		}
-
-		public void StartBossFight(Boss boss)
-		{
-			CombatTimerController.SetupFightTimer();
-			CombatTimerController.SetupPoisonTimer();
-
-			BossButton.IsEnabled = true;
-			TownButton.Visibility = Visibility.Hidden;
-			BossHealthBorder.BorderBrush = (SolidColorBrush) FindResource("BrushGold");
-
-			BindFightInfoToInterface(boss);
-
-			// Mark the Boss as discovered.
-			if (!GameAssets.BestiaryEntries.Any(x => x.EntryType == BestiaryEntryType.Boss && x.Id == boss.Id))
+			GameAssets.BestiaryEntries.Add(new BestiaryEntry
 			{
-				GameAssets.BestiaryEntries.Add(new BestiaryEntry
-				{
-					Id = boss.Id,
-					EntryType = BestiaryEntryType.Boss
-				});
-			}
-
-			CombatTimerController.BossFightTimer.Start();
+				Id = boss.Id,
+				EntryType = BestiaryEntryType.Boss
+			});
 		}
 
-		private void BindFightInfoToInterface(Boss boss)
+		CombatTimerController.BossFightTimer.Start();
+	}
+
+	private void BindFightInfoToInterface(Boss boss)
+	{
+		Boss = boss;
+		DataContext = Boss;
+
+		var binding = new Binding("Duration")
 		{
-			Boss = boss;
-			DataContext = Boss;
+			Source = this,
+			StringFormat = "Time remaining: {0}s"
+		};
+		DungeonTimerBlock.SetBinding(TextBlock.TextProperty, binding);
 
-			Binding binding = new Binding("Duration")
-			{
-				Source = this,
-				StringFormat = "Time remaining: {0}s"
-			};
-			DungeonTimerBlock.SetBinding(TextBlock.TextProperty, binding);
+		var affixesStringList = new List<string>();
 
-			var affixesStringList = new List<string>();
-
-			foreach (var affix in boss.Affixes)
-			{
-				string affixString = string.Concat(affix.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
-
-				affixesStringList.Add(affixString);
-			}
-
-			BossAffixesBlock.Text = string.Join(" / ", affixesStringList);
-		}
-
-		public void HandleInterfaceAfterBossDeath()
+		foreach (var affix in boss.Affixes)
 		{
-			BossButton.IsEnabled = false;
-			TownButton.Visibility = Visibility.Visible;
-			BossHealthBorder.BorderBrush = (SolidColorBrush) FindResource("BrushGray3");
+			var affixString = string.Concat(affix.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
 
-			InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
-			(StatsFrame.Content as HeroStatsPage).RefreshAllDynamicStatsAndToolTips();
+			affixesStringList.Add(affixString);
 		}
 
-		private void BossButton_Click(object sender, RoutedEventArgs e)
-		{
-			CombatController.HandleUserClickOnEnemy();
-		}
+		BossAffixesBlock.Text = string.Join(" / ", affixesStringList);
+	}
 
-		private void TownButton_Click(object sender, RoutedEventArgs e)
-		{
-			InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
-		}
+	public void HandleInterfaceAfterBossDeath()
+	{
+		BossButton.IsEnabled = false;
+		TownButton.Visibility = Visibility.Visible;
+		BossHealthBorder.BorderBrush = (SolidColorBrush)FindResource("BrushGray3");
+
+		InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
+		(StatsFrame.Content as HeroStatsPage).RefreshAllDynamicStatsAndToolTips();
+	}
+
+	private void BossButton_Click(object sender, RoutedEventArgs e)
+	{
+		CombatController.HandleUserClickOnEnemy();
+	}
+
+	private void TownButton_Click(object sender, RoutedEventArgs e)
+	{
+		InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
 	}
 }

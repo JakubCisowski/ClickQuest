@@ -1,4 +1,3 @@
-namespace ClickQuest.Game.Core.Heroes
-{
-	public enum HeroClass { All, Slayer, Venom }
-}
+namespace ClickQuest.Game.Core.Heroes;
+
+public enum HeroClass { All, Slayer, Venom }

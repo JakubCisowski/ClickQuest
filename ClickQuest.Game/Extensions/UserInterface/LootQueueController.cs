@@ -2,119 +2,117 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Threading;
 using ClickQuest.Game.Core.Items;
 using ClickQuest.Game.UserInterface.Windows;
 using MaterialDesignThemes.Wpf;
 
-namespace ClickQuest.Game.Extensions.UserInterface
+namespace ClickQuest.Game.Extensions.UserInterface;
+
+public class LootQueueEntry
 {
-	public class LootQueueEntry
+	public string LootName { get; set; }
+	public Rarity LootRarity { get; set; }
+	public PackIconKind LootIconKind { get; set; }
+	public int Quantity { get; set; }
+
+	public LootQueueEntry(string lootName, Rarity lootRarity, PackIconKind lootIconKind, int quantity)
 	{
-		public string LootName { get; set; }
-		public Rarity LootRarity { get; set; }
-		public PackIconKind LootIconKind { get; set; }
-		public int Quantity { get; set; }
+		LootName = lootName;
+		LootRarity = lootRarity;
+		LootIconKind = lootIconKind;
+		Quantity = quantity;
+	}
 
-		public LootQueueEntry(string lootName, Rarity lootRarity, PackIconKind lootIconKind, int quantity)
-		{
-			LootName = lootName;
-			LootRarity = lootRarity;
-			LootIconKind = lootIconKind;
-			Quantity = quantity;
-		}
+	public LootQueueEntry()
+	{
+	}
+}
 
-		public LootQueueEntry()
+public static class LootQueueController
+{
+	public const double QueueIntervalMilliseconds = 500;
+
+	public static List<LootQueueEntry> LootQueue { get; set; }
+
+	private static readonly DispatcherTimer Timer;
+
+	static LootQueueController()
+	{
+		LootQueue = new List<LootQueueEntry>();
+
+		Timer = new DispatcherTimer
 		{
+			Interval = TimeSpan.FromMilliseconds(QueueIntervalMilliseconds)
+		};
+
+		Timer.Tick += Timer_Tick;
+	}
+
+	public static void AddToQueue(string lootName, Rarity lootRarity, PackIconKind lootIconKind, int quantity = 1)
+	{
+		LootQueue.Add(new LootQueueEntry(lootName, lootRarity, lootIconKind, quantity));
+
+		if (!Timer.IsEnabled)
+		{
+			Timer_Tick(null, null);
+			Timer.Start();
 		}
 	}
 
-	public static class LootQueueController
+	public static void AddToQueue(List<LootQueueEntry> lootQueueEntries)
 	{
-		public const double QueueIntervalMilliseconds = 500;
+		LootQueue.AddRange(lootQueueEntries);
 
-		public static List<LootQueueEntry> LootQueue { get; set; }
-
-		private static readonly DispatcherTimer Timer;
-
-		static LootQueueController()
+		if (!Timer.IsEnabled)
 		{
-			LootQueue = new List<LootQueueEntry>();
+			Timer_Tick(null, null);
+			Timer.Start();
+		}
+	}
 
-			Timer = new DispatcherTimer
-			{
-				Interval = TimeSpan.FromMilliseconds(QueueIntervalMilliseconds)
-			};
+	private static void Timer_Tick(object source, EventArgs e)
+	{
+		var firstEntry = LootQueue.FirstOrDefault();
 
-			Timer.Tick += Timer_Tick;
+		if (firstEntry is null)
+		{
+			Timer.Stop();
+			return;
 		}
 
-		public static void AddToQueue(string lootName, Rarity lootRarity, PackIconKind lootIconKind, int quantity = 1)
-		{
-			LootQueue.Add(new LootQueueEntry(lootName, lootRarity, lootIconKind, quantity));
+		var border = FloatingTextController.CreateFloatingTextLootBorder(firstEntry.LootName, firstEntry.LootRarity, firstEntry.LootIconKind, firstEntry.Quantity);
 
-			if (!Timer.IsEnabled)
-			{
-				Timer_Tick(null, null);
-				Timer.Start();
-			}
+		(Application.Current.MainWindow as GameWindow).CreateFloatingTextLoot(border);
+
+		LootQueue.Remove(firstEntry);
+
+		if (LootQueue.Count == 0)
+		{
+			Timer.Stop();
 		}
-
-		public static void AddToQueue(List<LootQueueEntry> lootQueueEntries)
+		else
 		{
-			LootQueue.AddRange(lootQueueEntries);
-
-			if (!Timer.IsEnabled)
-			{
-				Timer_Tick(null, null);
-				Timer.Start();
-			}
+			MergeQueue();
 		}
+	}
 
-		private static void Timer_Tick(object source, EventArgs e)
+	private static void MergeQueue()
+	{
+		var merged = new List<LootQueueEntry>();
+
+		foreach (var lootQueueEntry in LootQueue)
 		{
-			var firstEntry = LootQueue.FirstOrDefault();
-
-			if (firstEntry is null)
+			if (merged.Any(x => x.LootName == lootQueueEntry.LootName))
 			{
-				Timer.Stop();
-				return;
-			}
-
-			Border border = FloatingTextController.CreateFloatingTextLootBorder(firstEntry.LootName, firstEntry.LootRarity, firstEntry.LootIconKind, firstEntry.Quantity);
-
-			(Application.Current.MainWindow as GameWindow).CreateFloatingTextLoot(border);
-
-			LootQueue.Remove(firstEntry);
-
-			if (LootQueue.Count == 0)
-			{
-				Timer.Stop();
+				merged.FirstOrDefault(x => x.LootName == lootQueueEntry.LootName).Quantity += lootQueueEntry.Quantity;
 			}
 			else
 			{
-				MergeQueue();
+				merged.Add(new LootQueueEntry(lootQueueEntry.LootName, lootQueueEntry.LootRarity, lootQueueEntry.LootIconKind, lootQueueEntry.Quantity));
 			}
 		}
 
-		private static void MergeQueue()
-		{
-			var merged = new List<LootQueueEntry>();
-
-			foreach (LootQueueEntry lootQueueEntry in LootQueue)
-			{
-				if (merged.Any(x => x.LootName == lootQueueEntry.LootName))
-				{
-					merged.FirstOrDefault(x => x.LootName == lootQueueEntry.LootName).Quantity += lootQueueEntry.Quantity;
-				}
-				else
-				{
-					merged.Add(new LootQueueEntry(lootQueueEntry.LootName, lootQueueEntry.LootRarity, lootQueueEntry.LootIconKind, lootQueueEntry.Quantity));
-				}
-			}
-
-			LootQueue = merged;
-		}
+		LootQueue = merged;
 	}
 }

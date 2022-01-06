@@ -3,59 +3,58 @@ using System.Windows.Threading;
 using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Extensions.UserInterface;
 
-namespace ClickQuest.Game.Core.Items.Artifacts
+namespace ClickQuest.Game.Core.Items.Artifacts;
+
+// After 3 seconds in combat with an Enemy, curse them, increasing all damage they take by 20%.
+public class CursedRing : ArtifactFunctionality
 {
-	// After 3 seconds in combat with an Enemy, curse them, increasing all damage they take by 20%.
-	public class CursedRing : ArtifactFunctionality
+	private const int TimeToCurseEnemy = 3;
+	private const double DamageIncreaseModifier = 0.20;
+
+	private bool _isCurseActive;
+	private Enemy _currentEnemy;
+	private readonly DispatcherTimer _timer;
+
+	public override void OnRegionEnter()
 	{
-		private const int TimeToCurseEnemy = 3;
-		private const double DamageIncreaseModifier = 0.20;
+		_isCurseActive = false;
+		_currentEnemy = InterfaceController.CurrentEnemy;
+		_timer.Start();
+	}
 
-		private bool _isCurseActive = false;
-		private Enemy _currentEnemy;
-		private DispatcherTimer _timer;
+	public override void OnKill()
+	{
+		_timer.Stop();
+		_isCurseActive = false;
 
-		public override void OnRegionEnter()
+		_currentEnemy = InterfaceController.CurrentEnemy;
+		_timer.Start();
+	}
+
+	public override void OnDealingDamage(ref int damage)
+	{
+		if (_isCurseActive)
 		{
-			_isCurseActive = false;
-			_currentEnemy = InterfaceController.CurrentEnemy;
-			_timer.Start();
+			damage += (int)Math.Ceiling(damage * DamageIncreaseModifier);
 		}
+	}
 
-		public override void OnKill()
+	public CursedRing()
+	{
+		Name = "Cursed Ring";
+		_timer = new DispatcherTimer
 		{
+			Interval = TimeSpan.FromSeconds(TimeToCurseEnemy)
+		};
+		_timer.Tick += CurseTimer_Tick;
+	}
+
+	private void CurseTimer_Tick(object sender, EventArgs e)
+	{
+		if (_currentEnemy.Equals(InterfaceController.CurrentEnemy))
+		{
+			_isCurseActive = true;
 			_timer.Stop();
-			_isCurseActive = false;
-			
-			_currentEnemy = InterfaceController.CurrentEnemy;
-			_timer.Start();
-		}
-
-		public override void OnDealingDamage(ref int damage)
-		{
-			if (_isCurseActive)
-			{
-				damage += (int) Math.Ceiling(damage * DamageIncreaseModifier);
-			}
-		}
-
-		public CursedRing()
-		{
-			Name = "Cursed Ring";
-			_timer = new DispatcherTimer()
-			{
-				Interval = TimeSpan.FromSeconds(TimeToCurseEnemy)
-			};
-			_timer.Tick += CurseTimer_Tick;
-		}
-
-		private void CurseTimer_Tick(object sender, EventArgs e)
-		{
-			if (_currentEnemy.Equals(InterfaceController.CurrentEnemy))
-			{
-				_isCurseActive = true;
-				_timer.Stop();
-			}
 		}
 	}
 }

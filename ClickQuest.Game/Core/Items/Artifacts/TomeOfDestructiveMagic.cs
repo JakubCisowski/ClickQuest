@@ -1,10 +1,9 @@
-﻿namespace ClickQuest.Game.Core.Items.Artifacts
+﻿namespace ClickQuest.Game.Core.Items.Artifacts;
+
+public class TomeOfDestructiveMagic : ArtifactFunctionality
 {
-	public class TomeOfDestructiveMagic : ArtifactFunctionality
+	public TomeOfDestructiveMagic()
 	{
-		public TomeOfDestructiveMagic()
-		{
-			Name = "Tome of Destructive Magic";
-		}
+		Name = "Tome of Destructive Magic";
 	}
 }

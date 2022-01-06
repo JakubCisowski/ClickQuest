@@ -1,20 +1,19 @@
 ﻿using ClickQuest.Game.Core.Heroes.Buffs;
 
-namespace ClickQuest.Game.Core.Items.Artifacts
+namespace ClickQuest.Game.Core.Items.Artifacts;
+
+// Blessings on you have a doubled effectiveness.
+public class WritOfExcellence : ArtifactFunctionality
 {
-	// Blessings on you have a doubled effectiveness.
-	public class WritOfExcellence : ArtifactFunctionality
+	private const double EffectivenessIncrease = 2.0;
+
+	public override void OnBlessingStarted(Blessing blessing)
 	{
-		private const double EffectivenessIncrease = 2.0;
+		blessing.Buff = (int)(blessing.Buff * EffectivenessIncrease);
+	}
 
-		public override void OnBlessingStarted(Blessing blessing)
-		{
-			blessing.Buff = (int) (blessing.Buff * EffectivenessIncrease);
-		}
-
-		public WritOfExcellence()
-		{
-			Name = "Writ of Excellence";
-		}
+	public WritOfExcellence()
+	{
+		Name = "Writ of Excellence";
 	}
 }
