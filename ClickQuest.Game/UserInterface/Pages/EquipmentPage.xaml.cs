@@ -449,6 +449,18 @@ public partial class EquipmentPage : Page
 		};
 		addButton.Click += AddArtifactSet_Click;
 
+		var toolTipBlockAdd = new TextBlock
+		{
+			Style = (Style)FindResource("ToolTipTextBlockBase"),
+			Text = "Create new set"
+		};
+		var toolTipAdd = new ToolTip
+		{
+			Style = (Style)FindResource("ToolTipSimple")
+		};
+		toolTipAdd.Content = toolTipBlockAdd;
+		addButton.ToolTip = toolTipAdd;
+
 		var removeButton = new Button
 		{
 			HorizontalAlignment = HorizontalAlignment.Right,
@@ -460,6 +472,18 @@ public partial class EquipmentPage : Page
 		};
 		removeButton.Click += RemoveArtifactSet_Click;
 
+		var toolTipBlockRemove = new TextBlock
+		{
+			Style = (Style)FindResource("ToolTipTextBlockBase"),
+			Text = "Delete this set"
+		};
+		var toolTipRemove = new ToolTip
+		{
+			Style = (Style)FindResource("ToolTipSimple")
+		};
+		toolTipRemove.Content = toolTipBlockRemove;
+		removeButton.ToolTip = toolTipRemove;
+
 		var renameButton = new Button
 		{
 			HorizontalAlignment = HorizontalAlignment.Right,
@@ -470,6 +494,18 @@ public partial class EquipmentPage : Page
 			}
 		};
 		renameButton.Click += RenameArtifactSet_Click;
+
+		var toolTipBlockRename = new TextBlock
+		{
+			Style = (Style)FindResource("ToolTipTextBlockBase"),
+			Text = "Rename this set"
+		};
+		var toolTipRename = new ToolTip
+		{
+			Style = (Style)FindResource("ToolTipSimple")
+		};
+		toolTipRename.Content = toolTipBlockRename;
+		renameButton.ToolTip = toolTipRename;
 
 		var artifactSetsComboBox = new ComboBox
 		{
