@@ -6,15 +6,12 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
-using ClickQuest.Game.Core.Heroes;
-using ClickQuest.Game.Core.Heroes.Buffs;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Combat;
-using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.Extensions.UserInterface.ToolTips;
+using ClickQuest.Game.DataTypes.Enums;
+using ClickQuest.Game.Models;
+using ClickQuest.Game.UserInterface.Helpers;
+using ClickQuest.Game.UserInterface.Helpers.ToolTips;
 using MaterialDesignThemes.Wpf;
-using static ClickQuest.Game.Extensions.UserInterface.ToolTips.GeneralToolTipController;
+using static ClickQuest.Game.UserInterface.Helpers.ToolTips.GeneralToolTipHelper;
 
 namespace ClickQuest.Game.UserInterface.Pages;
 
@@ -144,7 +141,7 @@ public partial class HeroStatsPage : Page
 			Grid.SetColumn(currencyPanel, 0);
 			Grid.SetRow(currencyPanel, currencyRarityValue);
 
-			currencyPanel.ToolTip = ItemToolTipController.GenerateCurrencyToolTip<Ingot>(currencyRarityValue);
+			currencyPanel.ToolTip = ItemToolTipHelper.GenerateCurrencyToolTip<Ingot>(currencyRarityValue);
 		}
 	}
 
@@ -184,7 +181,7 @@ public partial class HeroStatsPage : Page
 			Grid.SetColumn(currencyPanel, 1);
 			Grid.SetRow(currencyPanel, currencyRarityValue);
 
-			currencyPanel.ToolTip = ItemToolTipController.GenerateCurrencyToolTip<DungeonKey>(currencyRarityValue);
+			currencyPanel.ToolTip = ItemToolTipHelper.GenerateCurrencyToolTip<DungeonKey>(currencyRarityValue);
 		}
 	}
 
@@ -198,7 +195,7 @@ public partial class HeroStatsPage : Page
 			VerticalAlignment = VerticalAlignment.Center
 		};
 
-		var currencyIconColor = ColorsController.GetRarityColor((Rarity)rarityValue);
+		var currencyIconColor = ColorsHelper.GetRarityColor((Rarity)rarityValue);
 		currencyIcon.Foreground = currencyIconColor;
 
 		return currencyIcon;
@@ -215,7 +212,7 @@ public partial class HeroStatsPage : Page
 		QuestDurationBlock.SetBinding(TextBlock.TextProperty, questDurationBinding);
 
 		SetToolTipDelayAndDuration(QuestDurationBlock);
-		QuestDurationBlock.ToolTip = ItemToolTipController.GenerateQuestToolTip(currentQuest);
+		QuestDurationBlock.ToolTip = ItemToolTipHelper.GenerateQuestToolTip(currentQuest);
 	}
 
 	public void UpdateBlessingTimer()
@@ -229,20 +226,20 @@ public partial class HeroStatsPage : Page
 		BlessingDurationBlock.SetBinding(TextBlock.TextProperty, binding);
 
 		SetToolTipDelayAndDuration(BlessingDurationBlock);
-		BlessingDurationBlock.ToolTip = ItemToolTipController.GenerateBlessingToolTip(currentBlessing);
+		BlessingDurationBlock.ToolTip = ItemToolTipHelper.GenerateBlessingToolTip(currentBlessing);
 	}
 
 	private void GenerateSingleSpecializationToolTip(SpecializationType specializationType)
 	{
-		var nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationAmounts[specializationType];
-		while (nextUpgrade >= User.Instance.CurrentHero.Specialization.SpecializationThresholds[specializationType])
+		var nextUpgrade = User.Instance.CurrentHero.Specializations.SpecializationAmounts[specializationType];
+		while (nextUpgrade >= User.Instance.CurrentHero.Specializations.SpecializationThresholds[specializationType])
 		{
-			nextUpgrade -= User.Instance.CurrentHero.Specialization.SpecializationThresholds[specializationType];
+			nextUpgrade -= User.Instance.CurrentHero.Specializations.SpecializationThresholds[specializationType];
 		}
 
-		nextUpgrade = User.Instance.CurrentHero.Specialization.SpecializationThresholds[specializationType] - nextUpgrade;
+		nextUpgrade = User.Instance.CurrentHero.Specializations.SpecializationThresholds[specializationType] - nextUpgrade;
 
-		var toolTip = HeroStatsToolTipController.GenerateSpecializationToolTip(specializationType, nextUpgrade);
+		var toolTip = HeroStatsToolTipHelper.GenerateSpecializationToolTip(specializationType, nextUpgrade);
 
 		var buffBlock = (TextBlock)LogicalTreeHelper.FindLogicalNode(this, "Spec" + specializationType + "Buff");
 
@@ -287,7 +284,7 @@ public partial class HeroStatsPage : Page
 			{
 				case SpecializationType.Blessing:
 					buffBlock.Inlines.Add(new Run("Blessing duration +"));
-					buffBlock.Inlines.Add(new Run(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Blessing] + "s")
+					buffBlock.Inlines.Add(new Run(User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Blessing] + "s")
 					{
 						FontFamily = fontFamilyRegularBold
 					});
@@ -295,7 +292,7 @@ public partial class HeroStatsPage : Page
 
 				case SpecializationType.Clicking:
 					buffBlock.Inlines.Add(new Run("On-hit damage "));
-					buffBlock.Inlines.Add(new Run("+" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Clicking])
+					buffBlock.Inlines.Add(new Run("+" + User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Clicking])
 					{
 						Foreground = (SolidColorBrush)FindResource("BrushDamageTypeOnHit"),
 						FontFamily = fontFamilyRegularBold
@@ -304,9 +301,9 @@ public partial class HeroStatsPage : Page
 
 				case SpecializationType.Crafting:
 					buffBlock.Inlines.Add("Can craft ");
-					buffBlock.Inlines.Add(new Run(User.Instance.CurrentHero.Specialization.SpecCraftingText)
+					buffBlock.Inlines.Add(new Run(User.Instance.CurrentHero.Specializations.SpecCraftingText)
 					{
-						Foreground = ColorsController.GetRarityColor((Rarity)User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting]),
+						Foreground = ColorsHelper.GetRarityColor((Rarity)User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Crafting]),
 						FontFamily = fontFamilyRegularBold
 					});
 					buffBlock.Inlines.Add(" recipes");
@@ -314,7 +311,7 @@ public partial class HeroStatsPage : Page
 
 				case SpecializationType.Trading:
 					buffBlock.Inlines.Add(new Run("Shop size & ratio "));
-					buffBlock.Inlines.Add(new Run("+" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading])
+					buffBlock.Inlines.Add(new Run("+" + User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Trading])
 					{
 						FontFamily = fontFamilyRegularBold
 					});
@@ -322,7 +319,7 @@ public partial class HeroStatsPage : Page
 
 				case SpecializationType.Melting:
 					buffBlock.Inlines.Add(new Run("Extra ingots "));
-					buffBlock.Inlines.Add(new Run("+" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting] + "%")
+					buffBlock.Inlines.Add(new Run("+" + User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Melting] + "%")
 					{
 						FontFamily = fontFamilyRegularBold
 					});
@@ -330,7 +327,7 @@ public partial class HeroStatsPage : Page
 
 				case SpecializationType.Questing:
 					buffBlock.Inlines.Add(new Run("Quest time "));
-					buffBlock.Inlines.Add(new Run("-" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Questing] + "%")
+					buffBlock.Inlines.Add(new Run("-" + User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Questing] + "%")
 					{
 						FontFamily = fontFamilyRegularBold
 					});
@@ -338,7 +335,7 @@ public partial class HeroStatsPage : Page
 
 				case SpecializationType.Dungeon:
 					buffBlock.Inlines.Add(new Run("Bossfight timer "));
-					buffBlock.Inlines.Add(new Run("+" + User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Dungeon] + "s")
+					buffBlock.Inlines.Add(new Run("+" + User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Dungeon] + "s")
 					{
 						FontFamily = fontFamilyRegularBold
 					});
@@ -359,7 +356,7 @@ public partial class HeroStatsPage : Page
 
 		var specializationTypes = Enum.GetValues(typeof(SpecializationType));
 
-		User.Instance.CurrentHero.Specialization.UpdateSpecialization();
+		User.Instance.CurrentHero.Specializations.UpdateSpecialization();
 
 		var usedSpecializationTypes = RemoveUnusedSpecializations(specializationTypes.OfType<SpecializationType>());
 
@@ -406,7 +403,7 @@ public partial class HeroStatsPage : Page
 
 	public static List<SpecializationType> RemoveUnusedSpecializations(IEnumerable<SpecializationType> specializationTypes)
 	{
-		return specializationTypes.Where(specType => User.Instance.CurrentHero.Specialization.SpecializationBuffs[specType] != 0).ToList();
+		return specializationTypes.Where(specType => User.Instance.CurrentHero.Specializations.SpecializationBuffs[specType] != 0).ToList();
 	}
 
 	private void GenerateHeroInfoToolTip()
@@ -416,7 +413,7 @@ public partial class HeroStatsPage : Page
 			return;
 		}
 
-		var toolTip = HeroStatsToolTipController.GenerateHeroInfoToolTip(User.Instance.CurrentHero.HeroRace, User.Instance.CurrentHero.HeroClass);
+		var toolTip = HeroStatsToolTipHelper.GenerateHeroInfoToolTip(User.Instance.CurrentHero.HeroRace, User.Instance.CurrentHero.HeroClass);
 
 		SetToolTipDelayAndDuration(HeroNameBlock);
 
@@ -435,7 +432,7 @@ public partial class HeroStatsPage : Page
 
 		var toolTipDamage = new ToolTip
 		{
-			BorderBrush = ColorsController.GetDamageTypeColor(DamageType.Normal),
+			BorderBrush = ColorsHelper.GetDamageTypeColor(DamageType.Normal),
 			BorderThickness = new Thickness(1)
 		};
 
@@ -565,7 +562,7 @@ public partial class HeroStatsPage : Page
 			});
 		}
 
-		if (User.Instance.CurrentHero?.Specialization.SpecializationBuffs[SpecializationType.Clicking] > 0)
+		if (User.Instance.CurrentHero?.Specializations.SpecializationBuffs[SpecializationType.Clicking] > 0)
 		{
 			blockDamage.Inlines.Add(new LineBreak());
 			blockDamage.Inlines.Add(new LineBreak());
@@ -573,7 +570,7 @@ public partial class HeroStatsPage : Page
 			{
 				FontFamily = (FontFamily)FindResource("FontRegularItalic")
 			});
-			blockDamage.Inlines.Add(new Run(User.Instance.CurrentHero?.Specialization.SpecializationBuffs[SpecializationType.Clicking].ToString())
+			blockDamage.Inlines.Add(new Run(User.Instance.CurrentHero?.Specializations.SpecializationBuffs[SpecializationType.Clicking].ToString())
 			{
 				FontFamily = (FontFamily)FindResource("FontRegularBoldItalic")
 			});
@@ -599,7 +596,7 @@ public partial class HeroStatsPage : Page
 
 		var toolTipCrit = new ToolTip
 		{
-			BorderBrush = ColorsController.GetDamageTypeColor(DamageType.Critical),
+			BorderBrush = ColorsHelper.GetDamageTypeColor(DamageType.Critical),
 			BorderThickness = new Thickness(1)
 		};
 
@@ -858,7 +855,7 @@ public partial class HeroStatsPage : Page
 
 		var toolTipPoison = new ToolTip
 		{
-			BorderBrush = ColorsController.GetDamageTypeColor(DamageType.Poison),
+			BorderBrush = ColorsHelper.GetDamageTypeColor(DamageType.Poison),
 			BorderThickness = new Thickness(1)
 		};
 
@@ -1014,7 +1011,7 @@ public partial class HeroStatsPage : Page
 
 		var toolTipAura = new ToolTip
 		{
-			BorderBrush = ColorsController.GetDamageTypeColor(DamageType.Aura),
+			BorderBrush = ColorsHelper.GetDamageTypeColor(DamageType.Aura),
 			BorderThickness = new Thickness(1)
 		};
 

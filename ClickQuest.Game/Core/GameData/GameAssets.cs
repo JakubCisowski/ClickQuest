@@ -1,12 +1,7 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
-using ClickQuest.Game.Core.Adventures;
-using ClickQuest.Game.Core.Enemies;
-using ClickQuest.Game.Core.Heroes.Buffs;
-using ClickQuest.Game.Core.Info;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Items.Patterns;
-using ClickQuest.Game.Core.Places;
+using ClickQuest.Game.DataTypes.Structs;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Pages;
 
 namespace ClickQuest.Game.Core.GameData;

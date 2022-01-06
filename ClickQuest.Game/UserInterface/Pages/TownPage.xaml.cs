@@ -4,13 +4,11 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Heroes;
-using ClickQuest.Game.Core.Places;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Combat;
 using ClickQuest.Game.Extensions.Gameplay;
-using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.Helpers;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Helpers;
 
 namespace ClickQuest.Game.UserInterface.Pages;
 
@@ -100,10 +98,10 @@ public partial class TownPage : Page
 			// Start AuraTimer if no quest is active.
 			if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
 			{
-				CombatTimerController.StartAuraTimer();
+				CombatTimersHelper.StartAuraTimer();
 			}
 
-			InterfaceController.ChangePage(selectedRegionPage, $"{regionName}");
+			InterfaceHelper.ChangePage(selectedRegionPage, $"{regionName}");
 
 			// Invoke Artifacts with the "on-region-enter" effect.
 			foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
@@ -130,7 +128,7 @@ public partial class TownPage : Page
 
 	private void ShopButton_Click(object sender, RoutedEventArgs e)
 	{
-		InterfaceController.ChangePage(GameAssets.Pages["Shop"], "Shop");
+		InterfaceHelper.ChangePage(GameAssets.Pages["Shop"], "Shop");
 		(GameAssets.Pages["Shop"] as ShopPage).UpdateShop();
 	}
 
@@ -145,29 +143,29 @@ public partial class TownPage : Page
 
 		User.Instance.CurrentHero = null;
 
-		InterfaceController.ChangePage(GameAssets.Pages["MainMenu"], "");
+		InterfaceHelper.ChangePage(GameAssets.Pages["MainMenu"], "");
 	}
 
 	private void QuestMenuButton_Click(object sender, RoutedEventArgs e)
 	{
 		(GameAssets.Pages["QuestMenu"] as QuestMenuPage).LoadPage();
-		InterfaceController.ChangePage(GameAssets.Pages["QuestMenu"], "Quests");
+		InterfaceHelper.ChangePage(GameAssets.Pages["QuestMenu"], "Quests");
 	}
 
 	private void BlacksmithButton_Click(object sender, RoutedEventArgs e)
 	{
-		InterfaceController.ChangePage(GameAssets.Pages["Blacksmith"], "Blacksmith");
+		InterfaceHelper.ChangePage(GameAssets.Pages["Blacksmith"], "Blacksmith");
 		(GameAssets.Pages["Blacksmith"] as BlacksmithPage).UpdateBlacksmithItems();
 	}
 
 	private void PriestButton_Click(object sender, RoutedEventArgs e)
 	{
-		InterfaceController.ChangePage(GameAssets.Pages["Priest"], "Priest");
+		InterfaceHelper.ChangePage(GameAssets.Pages["Priest"], "Priest");
 		(GameAssets.Pages["Priest"] as PriestPage).UpdatePriest();
 	}
 
 	private void DungeonSelectButton_Click(object sender, RoutedEventArgs e)
 	{
-		InterfaceController.ChangePage(GameAssets.Pages["DungeonSelect"], "Selecting dungeon group");
+		InterfaceHelper.ChangePage(GameAssets.Pages["DungeonSelect"], "Selecting dungeon group");
 	}
 }

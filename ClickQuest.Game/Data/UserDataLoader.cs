@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Encryption;
+using ClickQuest.Game.DataTypes.Structs;
+using ClickQuest.Game.Helpers;
+using ClickQuest.Game.Models;
 
 namespace ClickQuest.Game.Data;
 
@@ -35,7 +35,7 @@ public static class UserDataLoader
 		// Decrypt the file.
 		var encryptedJson = File.ReadAllBytes(UserDataPath);
 
-		var json = DataEncryptionController.DecryptJsonUsingAes(encryptedJson);
+		var json = EncryptionHelper.DecryptJsonUsingAes(encryptedJson);
 
 		if (!string.IsNullOrEmpty(json))
 		{
@@ -96,7 +96,7 @@ public static class UserDataLoader
 		}
 
 		var encryptedJson = File.ReadAllBytes(BestiaryDataPath);
-		var bestiaryJson = DataEncryptionController.DecryptJsonUsingAes(encryptedJson);
+		var bestiaryJson = EncryptionHelper.DecryptJsonUsingAes(encryptedJson);
 
 		if (!string.IsNullOrEmpty(bestiaryJson))
 		{
@@ -120,7 +120,7 @@ public static class UserDataLoader
 		});
 
 		// Encrypt the file.
-		var encrypted = DataEncryptionController.EncryptJsonUsingAes(json);
+		var encrypted = EncryptionHelper.EncryptJsonUsingAes(json);
 
 		File.WriteAllBytes(UserDataPath, encrypted);
 
@@ -138,7 +138,7 @@ public static class UserDataLoader
 			Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
 		});
 
-		var encrypted = DataEncryptionController.EncryptJsonUsingAes(bestiaryJson);
+		var encrypted = EncryptionHelper.EncryptJsonUsingAes(bestiaryJson);
 		File.WriteAllBytes(BestiaryDataPath, encrypted);
 	}
 

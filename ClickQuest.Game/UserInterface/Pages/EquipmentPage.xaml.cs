@@ -5,13 +5,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Collections;
-using ClickQuest.Game.Extensions.Items;
-using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.Extensions.UserInterface.ToolTips;
+using ClickQuest.Game.Helpers;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Helpers;
+using ClickQuest.Game.UserInterface.Helpers.ToolTips;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.Game.UserInterface.Pages;
@@ -165,9 +163,9 @@ public partial class EquipmentPage : Page
 
 				border.PreviewMouseUp += ItemBorder_TryToEquip;
 
-				GeneralToolTipController.SetToolTipDelayAndDuration(border);
+				GeneralToolTipHelper.SetToolTipDelayAndDuration(border);
 
-				var toolTip = ItemToolTipController.GenerateItemToolTip(material);
+				var toolTip = ItemToolTipHelper.GenerateItemToolTip(material);
 				border.ToolTip = toolTip;
 
 				var grid = CreateSingleItemGrid(material);
@@ -178,7 +176,7 @@ public partial class EquipmentPage : Page
 			}
 
 			// Toggle ScrollBar visibility based on how many elements there are.
-			if (MaterialsPanel.Children.Count > InterfaceController.EquipmentItemsNeededToShowScrollBar)
+			if (MaterialsPanel.Children.Count > InterfaceHelper.EquipmentItemsNeededToShowScrollBar)
 			{
 				MaterialsScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
 			}
@@ -210,9 +208,9 @@ public partial class EquipmentPage : Page
 
 				border.PreviewMouseUp += ItemBorder_TryToEquip;
 
-				GeneralToolTipController.SetToolTipDelayAndDuration(border);
+				GeneralToolTipHelper.SetToolTipDelayAndDuration(border);
 
-				var toolTip = ItemToolTipController.GenerateItemToolTip(recipe);
+				var toolTip = ItemToolTipHelper.GenerateItemToolTip(recipe);
 				border.ToolTip = toolTip;
 
 				var grid = CreateSingleItemGrid(recipe);
@@ -223,7 +221,7 @@ public partial class EquipmentPage : Page
 			}
 
 			// Toggle ScrollBar visibility based on how many elements there are.
-			if (RecipesPanel.Children.Count > InterfaceController.EquipmentItemsNeededToShowScrollBar)
+			if (RecipesPanel.Children.Count > InterfaceHelper.EquipmentItemsNeededToShowScrollBar)
 			{
 				RecipesScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
 			}
@@ -263,9 +261,9 @@ public partial class EquipmentPage : Page
 
 				border.PreviewMouseUp += ItemBorder_TryToEquip;
 
-				GeneralToolTipController.SetToolTipDelayAndDuration(border);
+				GeneralToolTipHelper.SetToolTipDelayAndDuration(border);
 
-				var toolTip = ItemToolTipController.GenerateItemToolTip(artifact);
+				var toolTip = ItemToolTipHelper.GenerateItemToolTip(artifact);
 				border.ToolTip = toolTip;
 
 				var grid = CreateArtifactGrid(artifact, User.Instance.CurrentHero.EquippedArtifacts.Contains(artifact));
@@ -276,7 +274,7 @@ public partial class EquipmentPage : Page
 			}
 
 			// Toggle ScrollBar visibility based on how many elements there are.
-			if (ArtifactsPanel.Children.Count > InterfaceController.EquipmentItemsNeededToShowScrollBar || ArtifactsPanel.Children.Count > InterfaceController.EquipmentItemsNeededToShowScrollBarIfArtifactsAreEquipped && User.Instance.CurrentHero.EquippedArtifacts.Count > 0)
+			if (ArtifactsPanel.Children.Count > InterfaceHelper.EquipmentItemsNeededToShowScrollBar || ArtifactsPanel.Children.Count > InterfaceHelper.EquipmentItemsNeededToShowScrollBarIfArtifactsAreEquipped && User.Instance.CurrentHero.EquippedArtifacts.Count > 0)
 			{
 				ArtifactsScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
 			}
@@ -336,7 +334,7 @@ public partial class EquipmentPage : Page
 			{
 				RefreshWholeArtifactsPanel();
 
-				InterfaceController.RefreshStatsAndEquipmentPanelsOnCurrentPage();
+				InterfaceHelper.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 				ArtifactsScrollViewer.ScrollToTop();
 			}
 		}
@@ -405,9 +403,9 @@ public partial class EquipmentPage : Page
 
 			border.PreviewMouseUp += ItemBorder_TryToEquip;
 
-			GeneralToolTipController.SetToolTipDelayAndDuration(border);
+			GeneralToolTipHelper.SetToolTipDelayAndDuration(border);
 
-			var toolTip = ItemToolTipController.GenerateItemToolTip(equippedArtifact);
+			var toolTip = ItemToolTipHelper.GenerateItemToolTip(equippedArtifact);
 			border.ToolTip = toolTip;
 
 			var grid = CreateEquippedArtifactGrid(equippedArtifact);
@@ -536,7 +534,7 @@ public partial class EquipmentPage : Page
 
 	private void AddArtifactSet_Click(object sender, RoutedEventArgs e)
 	{
-		if (!ArtifactSetsController.CanArtifactSetsBeChanged())
+		if (!EquipmentHelper.CanArtifactSetsBeChanged())
 		{
 			AlertBox.Show("Artifact Sets cannot be changed while in combat or questing", MessageBoxButton.OK);
 			return;
@@ -580,7 +578,7 @@ public partial class EquipmentPage : Page
 				return;
 			}
 
-			if (!ArtifactSetsController.CanArtifactSetsBeChanged())
+			if (!EquipmentHelper.CanArtifactSetsBeChanged())
 			{
 				AlertBox.Show("Artifact Sets cannot be changed while in combat or questing", MessageBoxButton.OK);
 				return;
@@ -609,7 +607,7 @@ public partial class EquipmentPage : Page
 	{
 		if (_artifactSetsComboBoxSelectionHandled)
 		{
-			if (!ArtifactSetsController.CanArtifactSetsBeChanged())
+			if (!EquipmentHelper.CanArtifactSetsBeChanged())
 			{
 				AlertBox.Show("Artifact Sets cannot be changed while in combat or questing", MessageBoxButton.OK);
 
@@ -624,7 +622,7 @@ public partial class EquipmentPage : Page
 
 			var artifactSetId = User.Instance.CurrentHero.ArtifactSets.FirstOrDefault(x => x.Name == artifactSetName).Id;
 
-			ArtifactSetsController.SwitchArtifactSet(artifactSetId);
+			EquipmentHelper.SwitchArtifactSet(artifactSetId);
 
 			// Refresh the entire panel.
 			RefreshWholeArtifactsPanel();
@@ -644,7 +642,7 @@ public partial class EquipmentPage : Page
 			Width = 15,
 			Height = 15,
 			VerticalAlignment = VerticalAlignment.Center,
-			Foreground = ColorsController.GetRarityColor(item.Rarity)
+			Foreground = ColorsHelper.GetRarityColor(item.Rarity)
 		};
 
 		var nameBlock = new TextBlock
@@ -683,7 +681,7 @@ public partial class EquipmentPage : Page
 			Width = 15,
 			Height = 15,
 			VerticalAlignment = VerticalAlignment.Center,
-			Foreground = ColorsController.GetRarityColor(artifact.Rarity)
+			Foreground = ColorsHelper.GetRarityColor(artifact.Rarity)
 		};
 
 		var nameBlock = new TextBlock
@@ -713,7 +711,7 @@ public partial class EquipmentPage : Page
 			Width = 15,
 			Height = 15,
 			VerticalAlignment = VerticalAlignment.Center,
-			Foreground = ColorsController.GetRarityColor(artifact.Rarity)
+			Foreground = ColorsHelper.GetRarityColor(artifact.Rarity)
 		};
 
 		var nameBlock = new TextBlock

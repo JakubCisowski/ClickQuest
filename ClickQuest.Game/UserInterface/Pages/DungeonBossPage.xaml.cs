@@ -5,10 +5,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Extensions.Combat;
-using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.DataTypes.Enums;
+using ClickQuest.Game.DataTypes.Structs;
+using ClickQuest.Game.Helpers;
+using ClickQuest.Game.Models;
+using ClickQuest.Game.UserInterface.Helpers;
 
 namespace ClickQuest.Game.UserInterface.Pages;
 
@@ -26,8 +28,8 @@ public partial class DungeonBossPage : Page, INotifyPropertyChanged
 
 	public void StartBossFight(Boss boss)
 	{
-		CombatTimerController.SetupFightTimer();
-		CombatTimerController.SetupPoisonTimer();
+		CombatTimersHelper.SetupFightTimer();
+		CombatTimersHelper.SetupPoisonTimer();
 
 		BossButton.IsEnabled = true;
 		TownButton.Visibility = Visibility.Hidden;
@@ -45,7 +47,7 @@ public partial class DungeonBossPage : Page, INotifyPropertyChanged
 			});
 		}
 
-		CombatTimerController.BossFightTimer.Start();
+		CombatTimersHelper.BossFightTimer.Start();
 	}
 
 	private void BindFightInfoToInterface(Boss boss)
@@ -78,17 +80,17 @@ public partial class DungeonBossPage : Page, INotifyPropertyChanged
 		TownButton.Visibility = Visibility.Visible;
 		BossHealthBorder.BorderBrush = (SolidColorBrush)FindResource("BrushGray3");
 
-		InterfaceController.RefreshCurrentEquipmentPanelTabOnCurrentPage();
+		InterfaceHelper.RefreshCurrentEquipmentPanelTabOnCurrentPage();
 		(StatsFrame.Content as HeroStatsPage).RefreshAllDynamicStatsAndToolTips();
 	}
 
 	private void BossButton_Click(object sender, RoutedEventArgs e)
 	{
-		CombatController.HandleUserClickOnEnemy();
+		CombatHelper.HandleUserClickOnEnemy();
 	}
 
 	private void TownButton_Click(object sender, RoutedEventArgs e)
 	{
-		InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
+		InterfaceHelper.ChangePage(GameAssets.Pages["Town"], "Town");
 	}
 }

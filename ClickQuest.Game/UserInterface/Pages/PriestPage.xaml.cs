@@ -6,11 +6,10 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Heroes.Buffs;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.Extensions.UserInterface.ToolTips;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Helpers;
+using ClickQuest.Game.UserInterface.Helpers.ToolTips;
 using ClickQuest.Game.UserInterface.Windows;
 
 namespace ClickQuest.Game.UserInterface.Pages;
@@ -29,7 +28,7 @@ public partial class PriestPage : Page
 		ItemsListViewBuy.ItemsSource = GetPriestOfferAsBlessings();
 		ItemsListViewBuy.Items.Refresh();
 
-		if (ItemsListViewBuy.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
+		if (ItemsListViewBuy.Items.Count > InterfaceHelper.VendorItemsNeededToShowScrollBar)
 		{
 			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Visible);
 		}
@@ -98,7 +97,7 @@ public partial class PriestPage : Page
 				Blessing.AddOrReplaceBlessing(blessingBlueprint.Id);
 			}
 
-			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{blessingBlueprint.Value}", (SolidColorBrush)FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{blessingBlueprint.Value}", (SolidColorBrush)FindResource("BrushGold"), FloatingTextHelper.GoldPositionPoint);
 
 			User.Instance.Gold -= blessingBlueprint.Value;
 
@@ -132,7 +131,7 @@ public partial class PriestPage : Page
 				Style = (Style)FindResource("ToolTipSimple")
 			};
 
-			GeneralToolTipController.SetToolTipDelayAndDuration(button);
+			GeneralToolTipHelper.SetToolTipDelayAndDuration(button);
 
 			var toolTipBlock = new TextBlock
 			{
@@ -154,6 +153,6 @@ public partial class PriestPage : Page
 
 	private void TownButton_Click(object sender, RoutedEventArgs e)
 	{
-		InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
+		InterfaceHelper.ChangePage(GameAssets.Pages["Town"], "Town");
 	}
 }

@@ -4,14 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
-using ClickQuest.Game.Core.Adventures;
-using ClickQuest.Game.Core.Enemies;
-using ClickQuest.Game.Core.Heroes.Buffs;
-using ClickQuest.Game.Core.Info;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Items.Patterns;
-using ClickQuest.Game.Core.Places;
-using ClickQuest.Game.Extensions.Encryption;
+using ClickQuest.Game.DataTypes.Structs;
+using ClickQuest.Game.Helpers;
+using ClickQuest.Game.Models;
+using ClickQuest.Game.Models.Functionalities;
 
 namespace ClickQuest.Game.Core.GameData;
 
@@ -69,7 +65,7 @@ public static class GameAssetsLoader
 
 		var encryptedJson = File.ReadAllBytes(filePath);
 
-		var json = DataEncryptionController.DecryptJsonUsingAes(encryptedJson);
+		var json = EncryptionHelper.DecryptJsonUsingAes(encryptedJson);
 
 		result = JsonSerializer.Deserialize<List<T>>(json);
 		return result;
@@ -79,7 +75,7 @@ public static class GameAssetsLoader
 	{
 		var artifactFunctionalities = new List<ArtifactFunctionality>();
 
-		var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Core.Items.Artifacts", StringComparison.Ordinal));
+		var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Models.Functionalities.Artifacts", StringComparison.Ordinal));
 
 		foreach (var type in types)
 		{
@@ -99,7 +95,7 @@ public static class GameAssetsLoader
 	{
 		var artifactTypeFunctionalities = new List<ArtifactTypeFunctionality>();
 
-		var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Core.Items.ArtifactTypes", StringComparison.Ordinal));
+		var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Models.Functionalities.ArtifactTypes", StringComparison.Ordinal));
 
 		foreach (var type in types)
 		{
@@ -119,7 +115,7 @@ public static class GameAssetsLoader
 	{
 		var affixFunctionalities = new List<AffixFunctionality>();
 
-		var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Core.Enemies.Affixes", StringComparison.Ordinal));
+		var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => string.Equals(t.Namespace, "ClickQuest.Game.Models.Functionalities.Affixes", StringComparison.Ordinal));
 
 		foreach (var type in types)
 		{

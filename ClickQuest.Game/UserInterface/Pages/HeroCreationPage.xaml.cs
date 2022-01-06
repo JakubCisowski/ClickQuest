@@ -3,11 +3,11 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Heroes;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Collections;
-using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.DataTypes.Enums;
+using ClickQuest.Game.Helpers;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Helpers;
 
 namespace ClickQuest.Game.UserInterface.Pages;
 
@@ -43,7 +43,7 @@ public partial class HeroCreationPage : Page
 
 			GameAssets.RefreshPages();
 
-			InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
+			InterfaceHelper.ChangePage(GameAssets.Pages["Town"], "Town");
 		}
 		else
 		{
@@ -60,7 +60,7 @@ public partial class HeroCreationPage : Page
 		// Select current hero from entity database, because variable 'hero' doesn't represent the same hero that was loaded from entity in LoadGame().
 		User.Instance.CurrentHero = User.Instance.Heroes.FirstOrDefault(x => x.Id == newHero.Id);
 
-		User.Instance.CurrentHero?.Specialization.UpdateBuffs();
+		User.Instance.CurrentHero?.Specializations.UpdateBuffs();
 
 		newHero.SessionStartDate = DateTime.Now;
 
@@ -74,12 +74,12 @@ public partial class HeroCreationPage : Page
 		{
 			artifact.CreateMythicTag("FunctionSeedingArtifacts");
 
-			CollectionsController.AddItemToCollection(artifact, User.Instance.CurrentHero.Artifacts);
+			CollectionsHelper.AddItemToCollection(artifact, User.Instance.CurrentHero.Artifacts);
 		}
 	}
 
 	public void NoButton_Click(object sender, RoutedEventArgs e)
 	{
-		InterfaceController.ChangePage(GameAssets.Pages["MainMenu"], "");
+		InterfaceHelper.ChangePage(GameAssets.Pages["MainMenu"], "");
 	}
 }

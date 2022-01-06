@@ -3,9 +3,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.UserInterface.Controls.Styles.Themes;
+using ClickQuest.Game.Models;
+using ClickQuest.Game.UserInterface.Helpers;
+using ClickQuest.Game.UserInterface.Styles.Themes;
 
 namespace ClickQuest.Game.UserInterface.Windows;
 
@@ -93,7 +93,7 @@ public partial class SettingsWindow
 			PinkThemeBorder.BorderBrush = (SolidColorBrush)FindResource("BrushBlack");
 		}
 
-		ColorsController.ChangeApplicationColorTheme(selectedTheme);
+		ColorsHelper.ChangeApplicationColorTheme(selectedTheme);
 		User.Instance.Theme = selectedTheme;
 	}
 }

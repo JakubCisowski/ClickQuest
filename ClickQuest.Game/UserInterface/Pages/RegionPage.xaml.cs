@@ -1,11 +1,10 @@
 using System.Windows;
 using System.Windows.Controls;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Places;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Combat;
-using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.Helpers;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Helpers;
 
 namespace ClickQuest.Game.UserInterface.Pages;
 
@@ -32,9 +31,9 @@ public partial class RegionPage : Page
 	private void TownButton_Click(object sender, RoutedEventArgs e)
 	{
 		// Stop poison and aura ticks (so that the monster doesn't die when we're outside of RegionPage + no exception when Timer attempts to tick in MainMenu).
-		CombatTimerController.StopCombatTimers();
+		CombatTimersHelper.StopCombatTimers();
 
-		InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
+		InterfaceHelper.ChangePage(GameAssets.Pages["Town"], "Town");
 
 		// Invoke Artifacts with the "on-region-leave" effect.
 		foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)

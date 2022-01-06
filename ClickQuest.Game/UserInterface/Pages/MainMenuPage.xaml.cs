@@ -6,12 +6,12 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Heroes;
-using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.Extensions.Gameplay;
-using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.Extensions.UserInterface.ToolTips;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Helpers;
+using ClickQuest.Game.UserInterface.Helpers.ToolTips;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.Game.UserInterface.Pages;
@@ -91,7 +91,7 @@ public partial class MainMenuPage : Page
 			Tag = hero
 		};
 
-		GeneralToolTipController.SetToolTipDelayAndDuration(deleteHeroButton);
+		GeneralToolTipHelper.SetToolTipDelayAndDuration(deleteHeroButton);
 		deleteHeroButton.ToolTip = toolTip;
 
 		var deleteHeroIcon = new PackIcon
@@ -220,7 +220,7 @@ public partial class MainMenuPage : Page
 	{
 		if (User.Instance.Heroes.Count < User.HeroLimit)
 		{
-			InterfaceController.ChangePage(GameAssets.Pages["HeroCreation"], "Hero Creation");
+			InterfaceHelper.ChangePage(GameAssets.Pages["HeroCreation"], "Hero Creation");
 		}
 	}
 
@@ -234,13 +234,13 @@ public partial class MainMenuPage : Page
 			selectedHero.LoadQuests();
 			selectedHero.ResumeBlessing();
 			selectedHero.ReequipArtifacts();
-			selectedHero.Specialization.UpdateSpecialization();
+			selectedHero.Specializations.UpdateSpecialization();
 			selectedHero.SessionStartDate = DateTime.Now;
 
 			selectedHero.RefreshHeroExperience();
 			GameAssets.RefreshPages();
 
-			InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
+			InterfaceHelper.ChangePage(GameAssets.Pages["Town"], "Town");
 
 			selectedHero.ResumeQuest();
 		}

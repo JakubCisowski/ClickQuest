@@ -6,15 +6,14 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Heroes.Buffs;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Collections;
+using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.Extensions.Gameplay;
-using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.Extensions.UserInterface.ToolTips;
+using ClickQuest.Game.Helpers;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
-using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
+using ClickQuest.Game.UserInterface.Helpers;
+using ClickQuest.Game.UserInterface.Helpers.ToolTips;
+using static ClickQuest.Game.Helpers.RandomnessHelper;
 
 namespace ClickQuest.Game.UserInterface.Pages;
 
@@ -42,7 +41,7 @@ public partial class BlacksmithPage : Page
 
 	public void RefreshScrollBarVisibilities()
 	{
-		if (ItemsListViewMeltMaterials.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
+		if (ItemsListViewMeltMaterials.Items.Count > InterfaceHelper.VendorItemsNeededToShowScrollBar)
 		{
 			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltMaterials, ScrollBarVisibility.Visible);
 		}
@@ -51,7 +50,7 @@ public partial class BlacksmithPage : Page
 			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltMaterials, ScrollBarVisibility.Disabled);
 		}
 
-		if (ItemsListViewMeltArtifacts.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
+		if (ItemsListViewMeltArtifacts.Items.Count > InterfaceHelper.VendorItemsNeededToShowScrollBar)
 		{
 			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltArtifacts, ScrollBarVisibility.Visible);
 		}
@@ -60,7 +59,7 @@ public partial class BlacksmithPage : Page
 			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewMeltArtifacts, ScrollBarVisibility.Disabled);
 		}
 
-		if (ItemsListViewCraft.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
+		if (ItemsListViewCraft.Items.Count > InterfaceHelper.VendorItemsNeededToShowScrollBar)
 		{
 			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewCraft, ScrollBarVisibility.Visible);
 		}
@@ -88,7 +87,7 @@ public partial class BlacksmithPage : Page
 					new Run("?\nThis action will destroy this item and create at least "),
 					new Run($"{Material.BaseMeltingIngotBonus} {material.Rarity} Ingots")
 					{
-						Foreground = ColorsController.GetRarityColor(material.Rarity),
+						Foreground = ColorsHelper.GetRarityColor(material.Rarity),
 						FontFamily = (FontFamily)FindResource("FontRegularDemiBold")
 					},
 					new Run(".\nYou can get bonus ingots if you master Melter specialization (by melting more materials).")
@@ -129,7 +128,7 @@ public partial class BlacksmithPage : Page
 
 				listOfRuns.Add(new Run($"\n{ingotAmounts[i]}x {(Rarity)i} Ingots")
 				{
-					Foreground = ColorsController.GetRarityColor((Rarity)i),
+					Foreground = ColorsHelper.GetRarityColor((Rarity)i),
 					FontFamily = (FontFamily)FindResource("FontRegularDemiBold")
 				});
 			}
@@ -173,7 +172,7 @@ public partial class BlacksmithPage : Page
 	private static int CalculateIngotAmountsWhenMeltingMaterial(int baseIngotBonus)
 	{
 		var ingotAmount = baseIngotBonus;
-		var meltingBuffPercent = User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Melting];
+		var meltingBuffPercent = User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Melting];
 		while (meltingBuffPercent >= 100)
 		{
 			ingotAmount += baseIngotBonus;
@@ -242,7 +241,7 @@ public partial class BlacksmithPage : Page
 				new Run("You dont meet Craftsman specialization requirements to craft "),
 				new Run($"{recipe.Rarity.ToString()}")
 				{
-					Foreground = ColorsController.GetRarityColor(recipe.Rarity),
+					Foreground = ColorsHelper.GetRarityColor(recipe.Rarity),
 					FontFamily = (FontFamily)FindResource("FontRegularDemiBold")
 				},
 				new Run(" artifacts.\nCraft more common items in order to master it.")
@@ -291,7 +290,7 @@ public partial class BlacksmithPage : Page
 
 			ingotRaritiesRuns.Add(new Run($"\n{ingotAmounts[i]}x {(Rarity)i} Ingots")
 			{
-				Foreground = ColorsController.GetRarityColor((Rarity)i)
+				Foreground = ColorsHelper.GetRarityColor((Rarity)i)
 			});
 		}
 
@@ -392,7 +391,7 @@ public partial class BlacksmithPage : Page
 				},
 				new Run(".\n")
 			};
-			notEnoughMaterialsRuns.AddRange(ItemToolTipController.GenerateRecipeIngredientsRuns(recipe));
+			notEnoughMaterialsRuns.AddRange(ItemToolTipHelper.GenerateRecipeIngredientsRuns(recipe));
 			notEnoughMaterialsRuns.Add(new Run("\n\nGet more materials by completing quests and killing monsters and bosses or try to craft this artifact using ingots."));
 
 			AlertBox.Show(notEnoughMaterialsRuns, MessageBoxButton.OK);
@@ -408,7 +407,7 @@ public partial class BlacksmithPage : Page
 			},
 			new Run(" using materials?\n")
 		};
-		enoughMaterialsRuns.AddRange(ItemToolTipController.GenerateRecipeIngredientsRuns(recipe));
+		enoughMaterialsRuns.AddRange(ItemToolTipHelper.GenerateRecipeIngredientsRuns(recipe));
 		enoughMaterialsRuns.Add(new Run("\n\nThis action will destroy all materials and this recipe."));
 
 		var result = AlertBox.Show(enoughMaterialsRuns);
@@ -450,7 +449,7 @@ public partial class BlacksmithPage : Page
 
 	private static bool MeetsCraftingRequirement(Recipe recipe)
 	{
-		return User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Crafting] >= (int)recipe.Rarity;
+		return User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Crafting] >= (int)recipe.Rarity;
 	}
 
 	private void CraftIngotButton_Click(object sender, RoutedEventArgs e)
@@ -480,7 +479,7 @@ public partial class BlacksmithPage : Page
 				toolTipBlock.Inlines.Add(new Run($"{Material.BaseMeltingIngotBonus}x {material.RarityString} Ingots")
 				{
 					FontFamily = (FontFamily)FindResource("FontRegularDemiBold"),
-					Foreground = ColorsController.GetRarityColor(material.Rarity)
+					Foreground = ColorsHelper.GetRarityColor(material.Rarity)
 				});
 				toolTipBlock.Inlines.Add(new LineBreak());
 
@@ -503,7 +502,7 @@ public partial class BlacksmithPage : Page
 					toolTipBlock.Inlines.Add(new Run($"{ingotAmounts[i]}x {(Rarity)i} Ingots")
 					{
 						FontFamily = (FontFamily)FindResource("FontRegularDemiBold"),
-						Foreground = ColorsController.GetRarityColor((Rarity)i)
+						Foreground = ColorsHelper.GetRarityColor((Rarity)i)
 					});
 				}
 			}
@@ -513,7 +512,7 @@ public partial class BlacksmithPage : Page
 				Style = (Style)FindResource("ToolTipSimple")
 			};
 
-			GeneralToolTipController.SetToolTipDelayAndDuration(button);
+			GeneralToolTipHelper.SetToolTipDelayAndDuration(button);
 
 			toolTip.Content = toolTipBlock;
 
@@ -535,7 +534,7 @@ public partial class BlacksmithPage : Page
 			toolTipBlock.Inlines.Add(new Run("Craft with:"));
 			toolTipBlock.Inlines.Add(new LineBreak());
 
-			var listOfRuns = ItemToolTipController.GenerateRecipeIngredientsRuns(button.CommandParameter as Recipe);
+			var listOfRuns = ItemToolTipHelper.GenerateRecipeIngredientsRuns(button.CommandParameter as Recipe);
 
 			foreach (var run in listOfRuns)
 			{
@@ -548,7 +547,7 @@ public partial class BlacksmithPage : Page
 				Style = (Style)FindResource("ToolTipSimple")
 			};
 
-			GeneralToolTipController.SetToolTipDelayAndDuration(button);
+			GeneralToolTipHelper.SetToolTipDelayAndDuration(button);
 
 			toolTip.Content = toolTipBlock;
 
@@ -588,7 +587,7 @@ public partial class BlacksmithPage : Page
 				toolTipBlock.Inlines.Add(new Run($"{ingotAmounts[i]}x {(Rarity)i} Ingots")
 				{
 					FontFamily = (FontFamily)FindResource("FontRegularDemiBold"),
-					Foreground = ColorsController.GetRarityColor((Rarity)i)
+					Foreground = ColorsHelper.GetRarityColor((Rarity)i)
 				});
 			}
 
@@ -597,7 +596,7 @@ public partial class BlacksmithPage : Page
 				Style = (Style)FindResource("ToolTipSimple")
 			};
 
-			GeneralToolTipController.SetToolTipDelayAndDuration(button);
+			GeneralToolTipHelper.SetToolTipDelayAndDuration(button);
 
 			toolTip.Content = toolTipBlock;
 
@@ -607,6 +606,6 @@ public partial class BlacksmithPage : Page
 
 	private void TownButton_Click(object sender, RoutedEventArgs e)
 	{
-		InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
+		InterfaceHelper.ChangePage(GameAssets.Pages["Town"], "Town");
 	}
 }

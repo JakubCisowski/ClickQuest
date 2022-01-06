@@ -2,8 +2,8 @@
 using System.Globalization;
 using System.Windows;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Data;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Pages;
 using ClickQuest.Game.UserInterface.Windows;
 

@@ -1,8 +1,8 @@
-using ClickQuest.Game.Core.Heroes.Buffs;
-using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Data;
-using ClickQuest.Game.Extensions.Collections;
-using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.DataTypes.Collections;
+using ClickQuest.Game.Helpers;
+using ClickQuest.Game.Models;
+using ClickQuest.Game.UserInterface.Helpers;
 
 namespace ClickQuest.Game.Extensions.Gameplay;
 
@@ -29,16 +29,16 @@ public static class GameController
 
 		User.Instance.Achievements.TotalTimePlayed = default;
 		User.Instance.Achievements.NumericAchievementCollection = new ObservableDictionary<NumericAchievementType, long>();
-		CollectionInitializer.InitializeDictionary(User.Instance.Achievements.NumericAchievementCollection);
+		CollectionsHelper.InitializeDictionary(User.Instance.Achievements.NumericAchievementCollection);
 	}
 
 	public static void UpdateSpecializationAmountAndUi(SpecializationType specializationType, int amountIncreased = 1)
 	{
 		if (User.Instance.CurrentHero is not null)
 		{
-			User.Instance.CurrentHero.Specialization.SpecializationAmounts[specializationType] += amountIncreased;
+			User.Instance.CurrentHero.Specializations.SpecializationAmounts[specializationType] += amountIncreased;
 
-			InterfaceController.UpdateSingleSpecializationInterface(specializationType);
+			InterfaceHelper.UpdateSingleSpecializationInterface(specializationType);
 		}
 	}
 }

@@ -6,14 +6,13 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Heroes.Buffs;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.Collections;
+using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.Extensions.Gameplay;
-using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.Extensions.UserInterface.ToolTips;
+using ClickQuest.Game.Helpers;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Helpers;
+using ClickQuest.Game.UserInterface.Helpers.ToolTips;
 using ClickQuest.Game.UserInterface.Windows;
 
 namespace ClickQuest.Game.UserInterface.Pages;
@@ -47,7 +46,7 @@ public partial class ShopPage : Page
 
 	public void RefreshScrollBarVisibilities()
 	{
-		if (ItemsListViewSellMaterials.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
+		if (ItemsListViewSellMaterials.Items.Count > InterfaceHelper.VendorItemsNeededToShowScrollBar)
 		{
 			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellMaterials, ScrollBarVisibility.Visible);
 		}
@@ -56,7 +55,7 @@ public partial class ShopPage : Page
 			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellMaterials, ScrollBarVisibility.Disabled);
 		}
 
-		if (ItemsListViewSellRecipes.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
+		if (ItemsListViewSellRecipes.Items.Count > InterfaceHelper.VendorItemsNeededToShowScrollBar)
 		{
 			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Visible);
 		}
@@ -65,7 +64,7 @@ public partial class ShopPage : Page
 			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewSellRecipes, ScrollBarVisibility.Disabled);
 		}
 
-		if (ItemsListViewBuy.Items.Count > InterfaceController.VendorItemsNeededToShowScrollBar)
+		if (ItemsListViewBuy.Items.Count > InterfaceHelper.VendorItemsNeededToShowScrollBar)
 		{
 			ScrollViewer.SetVerticalScrollBarVisibility(ItemsListViewBuy, ScrollBarVisibility.Visible);
 		}
@@ -77,14 +76,14 @@ public partial class ShopPage : Page
 
 	public static List<Recipe> GetShopOfferAsRecipes()
 	{
-		var listOfPatterns = GameAssets.ShopOffer.Take(User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]);
+		var listOfPatterns = GameAssets.ShopOffer.Take(User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Trading]);
 
 		return listOfPatterns.Select(pattern => GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.Id)).ToList();
 	}
 
 	private void TownButton_Click(object sender, RoutedEventArgs e)
 	{
-		InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
+		InterfaceHelper.ChangePage(GameAssets.Pages["Town"], "Town");
 	}
 
 	private void SellButton_Click(object sender, RoutedEventArgs e)
@@ -117,7 +116,7 @@ public partial class ShopPage : Page
 		if (item is Material)
 		{
 			// The selling ratio is only applied for materials.
-			itemSellValue = (int)Math.Ceiling(item.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+			itemSellValue = (int)Math.Ceiling(item.Value * (SellingRatio + Specializations.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Trading]));
 			GameController.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
 		}
 		else
@@ -125,7 +124,7 @@ public partial class ShopPage : Page
 			itemSellValue = item.Value;
 		}
 
-		(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{itemSellValue}", (SolidColorBrush)FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+		(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{itemSellValue}", (SolidColorBrush)FindResource("BrushGold"), FloatingTextHelper.GoldPositionPoint);
 
 		item.RemoveItem();
 		User.Instance.Gold += itemSellValue;
@@ -162,7 +161,7 @@ public partial class ShopPage : Page
 				return;
 			}
 
-			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{recipe.Value}", (SolidColorBrush)FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+			(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{recipe.Value}", (SolidColorBrush)FindResource("BrushGold"), FloatingTextHelper.GoldPositionPoint);
 
 			recipe.AddItem();
 			User.Instance.Gold -= recipe.Value;
@@ -198,7 +197,7 @@ public partial class ShopPage : Page
 
 			if (button.CommandParameter is Material material)
 			{
-				itemSellValue = (int)Math.Ceiling(material.Value * (SellingRatio + Specialization.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specialization.SpecializationBuffs[SpecializationType.Trading]));
+				itemSellValue = (int)Math.Ceiling(material.Value * (SellingRatio + Specializations.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Trading]));
 			}
 			else
 			{
@@ -210,7 +209,7 @@ public partial class ShopPage : Page
 				Style = (Style)FindResource("ToolTipSimple")
 			};
 
-			GeneralToolTipController.SetToolTipDelayAndDuration(button);
+			GeneralToolTipHelper.SetToolTipDelayAndDuration(button);
 
 			var toolTipBlock = new TextBlock
 			{
@@ -241,7 +240,7 @@ public partial class ShopPage : Page
 				Style = (Style)FindResource("ToolTipSimple")
 			};
 
-			GeneralToolTipController.SetToolTipDelayAndDuration(button);
+			GeneralToolTipHelper.SetToolTipDelayAndDuration(button);
 
 			var toolTipBlock = new TextBlock
 			{

@@ -4,7 +4,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      xmlns:local="clr-namespace:ClickQuest.Game.Core.Heroes"
+      xmlns:enums="clr-namespace:ClickQuest.Game.DataTypes.Enums"
       mc:Ignorable="d" Background="Transparent"
       Title="HeroCreationPage" Height="728" Width="1366">
 
@@ -108,7 +108,7 @@
 									</MultiTrigger>
 
 									<!-- Slayer class -->
-									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroClass.Slayer}">
+									<DataTrigger Binding="{Binding}" Value="{x:Static enums:HeroClass.Slayer}">
 
 										<Setter Property="Foreground" Value="{StaticResource BrushSlayerRelated}" />
 
@@ -147,7 +147,7 @@
 									</DataTrigger>
 
 									<!-- Venom class -->
-									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroClass.Venom}">
+									<DataTrigger Binding="{Binding}" Value="{x:Static enums:HeroClass.Venom}">
 
 										<Setter Property="Foreground" Value="{StaticResource BrushVenomRelated}" />
 
@@ -257,7 +257,7 @@
 									</MultiTrigger>
 
 									<!-- Human race -->
-									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroRace.Human}">
+									<DataTrigger Binding="{Binding}" Value="{x:Static enums:HeroRace.Human}">
 										<!-- ToolTip -->
 										<Setter Property="ToolTip">
 											<Setter.Value>
@@ -291,7 +291,7 @@
 									</DataTrigger>
 
 									<!-- Elf race -->
-									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroRace.Elf}">
+									<DataTrigger Binding="{Binding}" Value="{x:Static enums:HeroRace.Elf}">
 										<!-- ToolTip -->
 										<Setter Property="ToolTip">
 											<Setter.Value>
@@ -324,7 +324,7 @@
 									</DataTrigger>
 
 									<!-- Dwarf race -->
-									<DataTrigger Binding="{Binding}" Value="{x:Static local:HeroRace.Dwarf}">
+									<DataTrigger Binding="{Binding}" Value="{x:Static enums:HeroRace.Dwarf}">
 										<!-- ToolTip -->
 										<Setter Property="ToolTip">
 											<Setter.Value>

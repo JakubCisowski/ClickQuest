@@ -3,13 +3,11 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Items.Types;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.Extensions.UserInterface.ToolTips;
+using ClickQuest.Game.DataTypes.Enums;
+using ClickQuest.Game.Models;
+using ClickQuest.Game.UserInterface.Helpers;
+using ClickQuest.Game.UserInterface.Helpers.ToolTips;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.Game.UserInterface.Controls;
@@ -87,65 +85,65 @@ public partial class QuestButton : UserControl, INotifyPropertyChanged
 				case RewardType.Material:
 					var material = GameAssets.Materials.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
-					toolTip = ItemToolTipController.GenerateItemToolTip(material);
+					toolTip = ItemToolTipHelper.GenerateItemToolTip(material);
 
 					rewardIcon.Kind = PackIconKind.Cog;
 
 					rewardText.Text = $"{rewardPattern.Quantity}x {material.Name}";
 
-					rewardColor = ColorsController.GetRarityColor(material.Rarity);
+					rewardColor = ColorsHelper.GetRarityColor(material.Rarity);
 
 					break;
 
 				case RewardType.Recipe:
 					var recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
-					toolTip = ItemToolTipController.GenerateItemToolTip(recipe);
+					toolTip = ItemToolTipHelper.GenerateItemToolTip(recipe);
 
 					rewardIcon.Kind = PackIconKind.ScriptText;
 
 					rewardText.Text = $"{rewardPattern.Quantity}x {recipe.Name}";
 
-					rewardColor = ColorsController.GetRarityColor(recipe.Rarity);
+					rewardColor = ColorsHelper.GetRarityColor(recipe.Rarity);
 
 					break;
 
 				case RewardType.Artifact:
 					var artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
-					toolTip = ItemToolTipController.GenerateItemToolTip(artifact);
+					toolTip = ItemToolTipHelper.GenerateItemToolTip(artifact);
 
 					rewardIcon.Kind = PackIconKind.DiamondStone;
 
 					rewardText.Text = $"{rewardPattern.Quantity}x {artifact.Name}";
 
-					rewardColor = ColorsController.GetRarityColor(artifact.Rarity);
+					rewardColor = ColorsHelper.GetRarityColor(artifact.Rarity);
 
 					break;
 
 				case RewardType.Blessing:
 					var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
-					toolTip = ItemToolTipController.GenerateBlessingToolTip(blessing);
+					toolTip = ItemToolTipHelper.GenerateBlessingToolTip(blessing);
 
 					rewardIcon.Kind = PackIconKind.BookCross;
 
 					rewardText.Text = $"{blessing.Name}";
 
-					rewardColor = ColorsController.GetRarityColor(blessing.Rarity);
+					rewardColor = ColorsHelper.GetRarityColor(blessing.Rarity);
 
 					break;
 
 				case RewardType.Ingot:
 					var ingot = GameAssets.Ingots.FirstOrDefault(x => x.Id == rewardPattern.QuestRewardId);
 
-					toolTip = ItemToolTipController.GenerateCurrencyToolTip<Ingot>((int)ingot.Rarity);
+					toolTip = ItemToolTipHelper.GenerateCurrencyToolTip<Ingot>((int)ingot.Rarity);
 
 					rewardIcon.Kind = PackIconKind.Gold;
 
 					rewardText.Text = $"{rewardPattern.Quantity}x {ingot.Name}";
 
-					rewardColor = ColorsController.GetRarityColor(ingot.Rarity);
+					rewardColor = ColorsHelper.GetRarityColor(ingot.Rarity);
 
 					break;
 			}
@@ -156,7 +154,7 @@ public partial class QuestButton : UserControl, INotifyPropertyChanged
 			panel.Children.Add(rewardIcon);
 			panel.Children.Add(rewardText);
 
-			GeneralToolTipController.SetToolTipDelayAndDuration(panel);
+			GeneralToolTipHelper.SetToolTipDelayAndDuration(panel);
 
 			panel.ToolTip = toolTip;
 

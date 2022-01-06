@@ -3,13 +3,11 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Items.Types;
-using ClickQuest.Game.Core.Places;
-using ClickQuest.Game.Extensions.UserInterface;
-using ClickQuest.Game.Extensions.UserInterface.ToolTips;
+using ClickQuest.Game.DataTypes.Enums;
+using ClickQuest.Game.Models;
+using ClickQuest.Game.UserInterface.Helpers;
+using ClickQuest.Game.UserInterface.Helpers.ToolTips;
 
 namespace ClickQuest.Game.UserInterface.Pages;
 
@@ -32,7 +30,7 @@ public partial class InfoPage
 
 	private void PreviousPageButton_Click(object sender, RoutedEventArgs e)
 	{
-		InterfaceController.ChangePage(_previousPage, _previousLocationInfo);
+		InterfaceHelper.ChangePage(_previousPage, _previousLocationInfo);
 	}
 
 	private void RegionsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -135,8 +133,8 @@ public partial class InfoPage
 			{
 				monsterNameBlock.Text = "Unknown Monster";
 
-				GeneralToolTipController.SetToolTipDelayAndDuration(monsterNameBlock);
-				monsterNameBlock.ToolTip = GeneralToolTipController.GenerateUndiscoveredEnemyToolTip();
+				GeneralToolTipHelper.SetToolTipDelayAndDuration(monsterNameBlock);
+				monsterNameBlock.ToolTip = GeneralToolTipHelper.GenerateUndiscoveredEnemyToolTip();
 			}
 			else
 			{
@@ -205,23 +203,23 @@ public partial class InfoPage
 					TextAlignment = TextAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					Margin = new Thickness(5),
-					Foreground = ColorsController.GetRarityColor(item.Rarity),
+					Foreground = ColorsHelper.GetRarityColor(item.Rarity),
 					FontSize = 16
 				};
 
-				GeneralToolTipController.SetToolTipDelayAndDuration(itemNameBlock);
+				GeneralToolTipHelper.SetToolTipDelayAndDuration(itemNameBlock);
 
 				if (!monsterLootDiscovered)
 				{
 					itemNameBlock.Text = "Unknown " + item.RarityString + " " + lootPattern.MonsterLootType;
 					itemNameBlock.FontFamily = (FontFamily)FindResource("FontRegularItalic");
-					itemNameBlock.ToolTip = ItemToolTipController.GenerateUndiscoveredItemToolTip();
+					itemNameBlock.ToolTip = ItemToolTipHelper.GenerateUndiscoveredItemToolTip();
 				}
 				else
 				{
 					itemNameBlock.Text = item is Recipe recipe ? recipe.FullName : item.Name;
 					itemNameBlock.FontFamily = (FontFamily)FindResource("FontRegularBold");
-					itemNameBlock.ToolTip = ItemToolTipController.GenerateItemToolTip(item);
+					itemNameBlock.ToolTip = ItemToolTipHelper.GenerateItemToolTip(item);
 				}
 
 				InfoPanel.Children.Add(itemNameBlock);
@@ -259,7 +257,7 @@ public partial class InfoPage
 			TextAlignment = TextAlignment.Center,
 			HorizontalAlignment = HorizontalAlignment.Center,
 			Margin = new Thickness(5),
-			Foreground = ColorsController.GetRarityColor((Rarity)dungeon.DungeonGroupId)
+			Foreground = ColorsHelper.GetRarityColor((Rarity)dungeon.DungeonGroupId)
 		};
 
 		var descriptionBlock = new TextBlock
@@ -304,8 +302,8 @@ public partial class InfoPage
 			{
 				bossNameBlock.Text = "Unknown Boss";
 
-				GeneralToolTipController.SetToolTipDelayAndDuration(bossNameBlock);
-				bossNameBlock.ToolTip = GeneralToolTipController.GenerateUndiscoveredEnemyToolTip();
+				GeneralToolTipHelper.SetToolTipDelayAndDuration(bossNameBlock);
+				bossNameBlock.ToolTip = GeneralToolTipHelper.GenerateUndiscoveredEnemyToolTip();
 			}
 			else
 			{
@@ -393,17 +391,17 @@ public partial class InfoPage
 					TextAlignment = TextAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					Margin = new Thickness(5),
-					Foreground = ColorsController.GetRarityColor(item.Rarity),
+					Foreground = ColorsHelper.GetRarityColor(item.Rarity),
 					FontSize = 16
 				};
 
-				GeneralToolTipController.SetToolTipDelayAndDuration(itemNameBlock);
+				GeneralToolTipHelper.SetToolTipDelayAndDuration(itemNameBlock);
 
 				if (!bossLootDiscovered)
 				{
 					itemNameBlock.Text = "Unknown " + item.RarityString + " " + lootPattern.BossLootType;
 					itemNameBlock.FontFamily = (FontFamily)FindResource("FontRegularItalic");
-					itemNameBlock.ToolTip = ItemToolTipController.GenerateUndiscoveredItemToolTip();
+					itemNameBlock.ToolTip = ItemToolTipHelper.GenerateUndiscoveredItemToolTip();
 				}
 				else
 				{
@@ -412,11 +410,11 @@ public partial class InfoPage
 
 					if (lootPattern.BossLootType == RewardType.Blessing)
 					{
-						itemNameBlock.ToolTip = ItemToolTipController.GenerateBlessingToolTip(GameAssets.Blessings.FirstOrDefault(x => x.Id == lootPattern.BossLootId));
+						itemNameBlock.ToolTip = ItemToolTipHelper.GenerateBlessingToolTip(GameAssets.Blessings.FirstOrDefault(x => x.Id == lootPattern.BossLootId));
 					}
 					else
 					{
-						itemNameBlock.ToolTip = ItemToolTipController.GenerateItemToolTip(item);
+						itemNameBlock.ToolTip = ItemToolTipHelper.GenerateItemToolTip(item);
 					}
 				}
 
@@ -468,7 +466,7 @@ public partial class InfoPage
 			TextWrapping = TextWrapping.Wrap
 		};
 
-		descriptionTextBlock.Inlines.AddRange(DescriptionsController.GenerateDescriptionRuns(description));
+		descriptionTextBlock.Inlines.AddRange(DescriptionsHelper.GenerateDescriptionRuns(description));
 
 		InfoPanel.Children.Add(nameTextBlock);
 		InfoPanel.Children.Add(separator);

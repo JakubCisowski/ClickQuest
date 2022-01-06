@@ -3,14 +3,13 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using ClickQuest.Game.Core.Adventures;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Heroes;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.DataTypes.Enums;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Helpers;
 using ClickQuest.Game.UserInterface.Windows;
-using static ClickQuest.Game.Extensions.Randomness.RandomnessController;
+using static ClickQuest.Game.Helpers.RandomnessHelper;
 
 namespace ClickQuest.Game.UserInterface.Pages;
 
@@ -99,7 +98,7 @@ public partial class QuestMenuPage : Page
 
 				if (result == MessageBoxResult.Yes)
 				{
-					(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{Quest.RerollCost}", (SolidColorBrush)FindResource("BrushGold"), FloatingTextController.GoldPositionPoint);
+					(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"-{Quest.RerollCost}", (SolidColorBrush)FindResource("BrushGold"), FloatingTextHelper.GoldPositionPoint);
 
 					User.Instance.Gold -= Quest.RerollCost;
 
@@ -119,7 +118,7 @@ public partial class QuestMenuPage : Page
 	private void TownButton_Click(object sender, RoutedEventArgs e)
 	{
 		// Go back to Town.
-		InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
+		InterfaceHelper.ChangePage(GameAssets.Pages["Town"], "Town");
 	}
 
 	private void LeftNavigationButton_OnClick(object sender, RoutedEventArgs e)

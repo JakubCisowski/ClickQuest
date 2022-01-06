@@ -7,12 +7,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Player;
 using ClickQuest.Game.Data;
-using ClickQuest.Game.Extensions.Combat;
+using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.Extensions.Gameplay;
-using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Helpers;
 using ClickQuest.Game.UserInterface.Pages;
 
 namespace ClickQuest.Game.UserInterface.Windows;
@@ -42,7 +42,7 @@ public partial class GameWindow : Window, INotifyPropertyChanged
 		(GameAssets.Pages["MainMenu"] as MainMenuPage).UpdateCreateHeroButton();
 		(GameAssets.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
 
-		InterfaceController.ChangePage(GameAssets.Pages["MainMenu"], "");
+		InterfaceHelper.ChangePage(GameAssets.Pages["MainMenu"], "");
 	}
 
 	public void CreateFloatingTextCombat(int damage, DamageType damageType)
@@ -56,16 +56,16 @@ public partial class GameWindow : Window, INotifyPropertyChanged
 		const int maximumPositionOffset = 50;
 		var mousePosition = Mouse.GetPosition(FloatingTextAnimationCanvas);
 
-		var panel = FloatingTextController.CreateFloatingTextCombatBorder(damage, damageType);
+		var panel = FloatingTextHelper.CreateFloatingTextCombatBorder(damage, damageType);
 
-		var randomizedPositions = FloatingTextController.RandomizeFloatingTextPathPosition(mousePosition, FloatingTextAnimationCanvas.ActualWidth, FloatingTextAnimationCanvas.ActualHeight, maximumPositionOffset);
+		var randomizedPositions = FloatingTextHelper.RandomizeFloatingTextPathPosition(mousePosition, FloatingTextAnimationCanvas.ActualWidth, FloatingTextAnimationCanvas.ActualHeight, maximumPositionOffset);
 
 		Canvas.SetLeft(panel, randomizedPositions.X);
 		Canvas.SetTop(panel, randomizedPositions.Y);
 
 		FloatingTextAnimationCanvas.Children.Add(panel);
 
-		var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration);
+		var textOpacityAnimation = FloatingTextHelper.CreateTextOpacityAnimation(animationDuration);
 		textOpacityAnimation.Completed += FloatingTextAnimation_Completed;
 		panel.BeginAnimation(OpacityProperty, textOpacityAnimation);
 
@@ -86,14 +86,14 @@ public partial class GameWindow : Window, INotifyPropertyChanged
 
 		const int animationDuration = 1;
 
-		var panel = FloatingTextController.CreateFloatingTextUtilityBorder(value, textBrush);
+		var panel = FloatingTextHelper.CreateFloatingTextUtilityBorder(value, textBrush);
 
 		Canvas.SetLeft(panel, position.X);
 		Canvas.SetTop(panel, position.Y);
 
 		FloatingTextAnimationCanvas.Children.Add(panel);
 
-		var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration);
+		var textOpacityAnimation = FloatingTextHelper.CreateTextOpacityAnimation(animationDuration);
 		textOpacityAnimation.Completed += FloatingTextAnimation_Completed;
 		panel.BeginAnimation(OpacityProperty, textOpacityAnimation);
 
@@ -110,8 +110,8 @@ public partial class GameWindow : Window, INotifyPropertyChanged
 		const int animationDuration = 5;
 
 		// Start position is center of the screen (so center of the enemy as well).
-		var startPosition = FloatingTextController.EnemyCenterPoint;
-		var endPosition = FloatingTextController.LootEndPositionPoint;
+		var startPosition = FloatingTextHelper.EnemyCenterPoint;
+		var endPosition = FloatingTextHelper.LootEndPositionPoint;
 
 		Canvas.SetLeft(lootBorder, startPosition.X);
 		Canvas.SetTop(lootBorder, startPosition.Y);
@@ -119,7 +119,7 @@ public partial class GameWindow : Window, INotifyPropertyChanged
 		FloatingTextAnimationCanvas.Children.Add(lootBorder);
 
 		// Add animationDelay to the duration, because otherwise all of the animations spawn (and disappear) at the same time.
-		var textOpacityAnimation = FloatingTextController.CreateTextOpacityAnimation(animationDuration + animationDelay);
+		var textOpacityAnimation = FloatingTextHelper.CreateTextOpacityAnimation(animationDuration + animationDelay);
 		textOpacityAnimation.Completed += FloatingTextAnimation_Completed;
 		lootBorder.BeginAnimation(OpacityProperty, textOpacityAnimation);
 
@@ -179,7 +179,7 @@ public partial class GameWindow : Window, INotifyPropertyChanged
 			return;
 		}
 
-		InterfaceController.ChangePage(new InfoPage(currentPage, LocationInfo), "Bestiary & Game Mechanics");
+		InterfaceHelper.ChangePage(new InfoPage(currentPage, LocationInfo), "Bestiary & Game Mechanics");
 	}
 
 	private void AchievementsButton_Click(object sender, RoutedEventArgs e)

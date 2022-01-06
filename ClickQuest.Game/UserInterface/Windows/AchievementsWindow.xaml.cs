@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Models;
 
 namespace ClickQuest.Game.UserInterface.Windows;
 

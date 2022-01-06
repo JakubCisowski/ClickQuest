@@ -4,15 +4,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
-using ClickQuest.Game.Core.Enemies;
 using ClickQuest.Game.Core.GameData;
-using ClickQuest.Game.Core.Items;
-using ClickQuest.Game.Core.Places;
-using ClickQuest.Game.Core.Player;
-using ClickQuest.Game.Extensions.UserInterface;
+using ClickQuest.Game.DataTypes.Enums;
+using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
+using ClickQuest.Game.UserInterface.Helpers;
 using ClickQuest.Game.UserInterface.Windows;
-using Colors = ClickQuest.Game.Extensions.UserInterface.ColorsController;
 
 namespace ClickQuest.Game.UserInterface.Pages;
 
@@ -95,7 +92,7 @@ public partial class DungeonSelectPage : Page
 			var border = new Border
 			{
 				BorderThickness = new Thickness(3),
-				BorderBrush = Colors.GetRarityColor((Rarity)i),
+				BorderBrush = ColorsHelper.GetRarityColor((Rarity)i),
 				Width = 240,
 				Height = 90
 			};
@@ -335,7 +332,7 @@ public partial class DungeonSelectPage : Page
 
 	private void SetupBossFight()
 	{
-		InterfaceController.ChangePage(GameAssets.Pages["DungeonBoss"], "Boss fight");
+		InterfaceHelper.ChangePage(GameAssets.Pages["DungeonBoss"], "Boss fight");
 
 		(GameAssets.Pages["DungeonBoss"] as DungeonBossPage)?.StartBossFight(_bossSelected.CopyEnemy());
 	}
@@ -356,7 +353,7 @@ public partial class DungeonSelectPage : Page
 
 	private void TownButton_Click(object sender, RoutedEventArgs e)
 	{
-		InterfaceController.ChangePage(GameAssets.Pages["Town"], "Town");
+		InterfaceHelper.ChangePage(GameAssets.Pages["Town"], "Town");
 		ResetAndLoadDungeonGroupSelectionInterface();
 	}
 }

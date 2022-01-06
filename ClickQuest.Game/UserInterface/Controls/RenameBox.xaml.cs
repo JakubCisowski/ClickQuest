@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using ClickQuest.Game.Core.Player;
+using ClickQuest.Game.Models;
 
 namespace ClickQuest.Game.UserInterface.Controls;
 
