@@ -103,4 +103,8 @@
         <Resource Include="Data\Images\GameIcon.png" />
         <Resource Include="Data\Images\logo.png" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Data\UserData" />
+    </ItemGroup>
 </Project>
