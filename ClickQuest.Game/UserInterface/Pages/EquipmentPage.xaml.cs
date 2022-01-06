@@ -537,6 +537,13 @@ public partial class EquipmentPage : Page
 	{
 		if (User.Instance.CurrentHero.ArtifactSets.Count > 1)
 		{
+			var result = AlertBox.Show("Are you sure you want to delete selected artifact set?");
+
+			if (result == MessageBoxResult.No)
+			{
+				return;
+			}
+
 			if (!ArtifactSetsController.CanArtifactSetsBeChanged())
 			{
 				AlertBox.Show("Artifact Sets cannot be changed while in combat or questing", MessageBoxButton.OK);
