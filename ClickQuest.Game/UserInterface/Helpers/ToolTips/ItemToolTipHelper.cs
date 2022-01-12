@@ -263,7 +263,7 @@ public static class ItemToolTipHelper
 			Style = (Style)Application.Current.FindResource("ToolTipTextBlockBase")
 		};
 
-		if (currentQuest != null)
+		if (currentQuest != null && currentQuest.IsFinished == false)
 		{
 			questToolTipTextBlock.Inlines.Add(new Run($"{currentQuest.Name}")
 			{
