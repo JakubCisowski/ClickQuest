@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -84,11 +85,16 @@ public partial class ShopPage : Page
 		InterfaceHelper.ChangePage(GameAssets.Pages["Town"], "Town");
 	}
 
-	private void SellButton_Click(object sender, RoutedEventArgs e)
+	private void SellOneButton_Click(object sender, RoutedEventArgs e)
 	{
 		var b = sender as Button;
 		var item = b.CommandParameter as Item;
 
+		HandleItemSelling(item, 1);
+	}
+
+	private void HandleItemSelling(Item item, int amount)
+	{
 		var itemSellValue = 0;
 
 		if (item.Rarity == Rarity.Mythic)
@@ -96,7 +102,7 @@ public partial class ShopPage : Page
 			var sellItemRuns = new List<Run>
 			{
 				new Run("Are you sure you want to sell "),
-				new Run($"{item.Name}")
+				new Run($"{amount}x {item.Name}")
 				{
 					FontFamily = (FontFamily)FindResource("FontRegularDemiBold")
 				},
@@ -114,17 +120,17 @@ public partial class ShopPage : Page
 		if (item is Material)
 		{
 			// The selling ratio is only applied for materials.
-			itemSellValue = (int)Math.Ceiling(item.Value * (SellingRatio + Specializations.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Trading]));
-			GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
+			itemSellValue = (int)Math.Ceiling(item.Value * amount * (SellingRatio + Specializations.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Trading]));
+			GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Trading, amount);
 		}
 		else
 		{
-			itemSellValue = item.Value;
+			itemSellValue = item.Value * amount;
 		}
 
 		(Application.Current.MainWindow as GameWindow).CreateFloatingTextUtility($"+{itemSellValue}", (SolidColorBrush)FindResource("BrushGold"), FloatingTextHelper.GoldPositionPoint);
 
-		item.RemoveItem();
+		item.RemoveItem(amount);
 		User.Instance.Gold += itemSellValue;
 
 		UpdateShop();
