@@ -155,7 +155,7 @@
 									<!-- Melt button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Melt" Click="MeltButton_Click" Initialized="MeltButton_OnInitialized" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}" />
+											<Button Content="MELT" Click="MeltButton_Click" Initialized="MeltButton_OnInitialized" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}" />
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -265,7 +265,7 @@
 									<!-- Melt button -->
 									<GridViewColumn.CellTemplate>
 										<DataTemplate>
-											<Button Content="Melt" Click="MeltButton_Click" Initialized="MeltButton_OnInitialized" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}" />
+											<Button Content="MELT" Click="MeltButton_Click" Initialized="MeltButton_OnInitialized" CommandParameter="{Binding}" Background="{StaticResource BrushGray1}" />
 										</DataTemplate>
 									</GridViewColumn.CellTemplate>
 								</GridViewColumn>
@@ -377,7 +377,7 @@
 											<Button Click="CraftIngotButton_Click" Initialized="CraftIngotButton_OnInitialized" CommandParameter="{Binding}">
 												<Button.Content>
 													<StackPanel Orientation="Horizontal">
-														<TextBlock Text="Craft" FontSize="17" Margin="2,0,0,0" />
+														<TextBlock Text="CRAFT" FontSize="17" Margin="2,0,0,0" />
 														<materialDesign:PackIcon Kind="Gold" Width="20" Height="20" Margin="5,0,0,0" />
 													</StackPanel>
 												</Button.Content>
