@@ -11,7 +11,6 @@ using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Helpers;
-using ClickQuest.Game.UserInterface.Helpers.ToolTips;
 using ClickQuest.Game.UserInterface.Windows;
 
 namespace ClickQuest.Game.UserInterface.Pages;
@@ -213,8 +212,6 @@ public partial class ShopPage : Page
 				Style = (Style)FindResource("ToolTipSimple")
 			};
 
-			GeneralToolTipHelper.SetToolTipDelayAndDuration(button);
-
 			var toolTipBlock = new TextBlock
 			{
 				Style = (Style)FindResource("ToolTipTextBlockBase")
@@ -243,8 +240,6 @@ public partial class ShopPage : Page
 			{
 				Style = (Style)FindResource("ToolTipSimple")
 			};
-
-			GeneralToolTipHelper.SetToolTipDelayAndDuration(button);
 
 			var toolTipBlock = new TextBlock
 			{

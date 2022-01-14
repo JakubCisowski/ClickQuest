@@ -510,8 +510,6 @@ public partial class BlacksmithPage : Page
 				Style = (Style)FindResource("ToolTipSimple")
 			};
 
-			GeneralToolTipHelper.SetToolTipDelayAndDuration(button);
-
 			toolTip.Content = toolTipBlock;
 
 			button.ToolTip = toolTip;
@@ -544,8 +542,6 @@ public partial class BlacksmithPage : Page
 			{
 				Style = (Style)FindResource("ToolTipSimple")
 			};
-
-			GeneralToolTipHelper.SetToolTipDelayAndDuration(button);
 
 			toolTip.Content = toolTipBlock;
 
@@ -593,8 +589,6 @@ public partial class BlacksmithPage : Page
 			{
 				Style = (Style)FindResource("ToolTipSimple")
 			};
-
-			GeneralToolTipHelper.SetToolTipDelayAndDuration(button);
 
 			toolTip.Content = toolTipBlock;
 

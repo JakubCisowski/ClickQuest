@@ -153,8 +153,6 @@ public partial class QuestButton : UserControl, INotifyPropertyChanged
 			panel.Children.Add(rewardIcon);
 			panel.Children.Add(rewardText);
 
-			GeneralToolTipHelper.SetToolTipDelayAndDuration(panel);
-
 			panel.ToolTip = toolTip;
 
 			RewardsPanel.Children.Add(panel);

@@ -91,8 +91,6 @@ public partial class HeroStatsPage : Page
 			Style = (Style)FindResource("ToolTipSimple")
 		};
 
-		SetToolTipDelayAndDuration(GoldPanel);
-
 		var toolTipTextBlock = new TextBlock
 		{
 			Style = (Style)FindResource("ToolTipTextBlockBase"),
@@ -116,8 +114,6 @@ public partial class HeroStatsPage : Page
 				Margin = new Thickness(60, 0, 0, 0),
 				Background = new SolidColorBrush(Colors.Transparent)
 			};
-
-			SetToolTipDelayAndDuration(currencyPanel);
 
 			currencyPanel.Children.Add(GenerateCurrencyIcon<Ingot>(currencyRarityValue));
 
@@ -156,8 +152,6 @@ public partial class HeroStatsPage : Page
 				HorizontalAlignment = HorizontalAlignment.Right,
 				Background = new SolidColorBrush(Colors.Transparent)
 			};
-
-			SetToolTipDelayAndDuration(currencyPanel);
 
 			var currencyAmountTextBlock = new TextBlock
 			{
@@ -211,7 +205,6 @@ public partial class HeroStatsPage : Page
 		};
 		QuestDurationBlock.SetBinding(TextBlock.TextProperty, questDurationBinding);
 
-		SetToolTipDelayAndDuration(QuestDurationBlock);
 		QuestDurationBlock.ToolTip = ItemToolTipHelper.GenerateQuestToolTip(currentQuest);
 	}
 
@@ -225,7 +218,6 @@ public partial class HeroStatsPage : Page
 		};
 		BlessingDurationBlock.SetBinding(TextBlock.TextProperty, binding);
 
-		SetToolTipDelayAndDuration(BlessingDurationBlock);
 		BlessingDurationBlock.ToolTip = ItemToolTipHelper.GenerateBlessingToolTip(currentBlessing);
 	}
 
@@ -255,8 +247,6 @@ public partial class HeroStatsPage : Page
 		}
 
 		var specializationTypes = Enum.GetValues(typeof(SpecializationType));
-
-		SetToolTipDelayAndDuration(SpecializationsGrid);
 
 		var usedSpecializationTypes = RemoveUnusedSpecializations(specializationTypes.OfType<SpecializationType>());
 
@@ -415,8 +405,6 @@ public partial class HeroStatsPage : Page
 
 		var toolTip = HeroStatsToolTipHelper.GenerateHeroInfoToolTip(User.Instance.CurrentHero.HeroRace, User.Instance.CurrentHero.HeroClass);
 
-		SetToolTipDelayAndDuration(HeroNameBlock);
-
 		HeroNameBlock.ToolTip = toolTip;
 	}
 
@@ -435,8 +423,6 @@ public partial class HeroStatsPage : Page
 			BorderBrush = ColorsHelper.GetDamageTypeColor(DamageType.Normal),
 			BorderThickness = new Thickness(1)
 		};
-
-		SetToolTipDelayAndDuration(ClickDamageBlock);
 
 		var blockDamage = new TextBlock
 		{
@@ -599,8 +585,6 @@ public partial class HeroStatsPage : Page
 			BorderBrush = ColorsHelper.GetDamageTypeColor(DamageType.Critical),
 			BorderThickness = new Thickness(1)
 		};
-
-		SetToolTipDelayAndDuration(CritChanceBlock);
 
 		var blockCrit = new TextBlock
 		{
@@ -859,8 +843,6 @@ public partial class HeroStatsPage : Page
 			BorderThickness = new Thickness(1)
 		};
 
-		SetToolTipDelayAndDuration(PoisonDamageBlock);
-
 		var blockPoison = new TextBlock
 		{
 			Style = (Style)FindResource("ToolTipTextBlockBase")
@@ -1014,8 +996,6 @@ public partial class HeroStatsPage : Page
 			BorderBrush = ColorsHelper.GetDamageTypeColor(DamageType.Aura),
 			BorderThickness = new Thickness(1)
 		};
-
-		SetToolTipDelayAndDuration(AuraDamageBlock);
 
 		var blockAura = new TextBlock
 		{

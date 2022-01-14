@@ -7,10 +7,11 @@ namespace ClickQuest.Game.UserInterface.Helpers.ToolTips;
 
 public static class GeneralToolTipHelper
 {
-	public static void SetToolTipDelayAndDuration(DependencyObject control)
+	public static void SetGlobalToolTipDelay()
 	{
-		ToolTipService.SetInitialShowDelay(control, 100);
-		ToolTipService.SetShowDuration(control, 20000);
+		ToolTipService.InitialShowDelayProperty
+			.OverrideMetadata(typeof(FrameworkElement), 
+				new FrameworkPropertyMetadata(0));
 	}
 
 	public static Line GenerateTextSeparator()

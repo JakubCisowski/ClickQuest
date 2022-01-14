@@ -132,7 +132,6 @@ public partial class InfoPage
 			{
 				monsterNameBlock.Text = "Unknown Monster";
 
-				GeneralToolTipHelper.SetToolTipDelayAndDuration(monsterNameBlock);
 				monsterNameBlock.ToolTip = GeneralToolTipHelper.GenerateUndiscoveredEnemyToolTip();
 			}
 			else
@@ -205,8 +204,6 @@ public partial class InfoPage
 					Foreground = ColorsHelper.GetRarityColor(item.Rarity),
 					FontSize = 16
 				};
-
-				GeneralToolTipHelper.SetToolTipDelayAndDuration(itemNameBlock);
 
 				if (!monsterLootDiscovered)
 				{
@@ -301,7 +298,6 @@ public partial class InfoPage
 			{
 				bossNameBlock.Text = "Unknown Boss";
 
-				GeneralToolTipHelper.SetToolTipDelayAndDuration(bossNameBlock);
 				bossNameBlock.ToolTip = GeneralToolTipHelper.GenerateUndiscoveredEnemyToolTip();
 			}
 			else
@@ -393,8 +389,6 @@ public partial class InfoPage
 					Foreground = ColorsHelper.GetRarityColor(item.Rarity),
 					FontSize = 16
 				};
-
-				GeneralToolTipHelper.SetToolTipDelayAndDuration(itemNameBlock);
 
 				if (!bossLootDiscovered)
 				{

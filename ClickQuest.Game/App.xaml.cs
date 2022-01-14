@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows;
 using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
+using ClickQuest.Game.UserInterface.Helpers.ToolTips;
 using ClickQuest.Game.UserInterface.Pages;
 using ClickQuest.Game.UserInterface.Windows;
 
@@ -37,6 +38,8 @@ public partial class App : Application
 
 		// Save current time as the application's start time (for achievement tracking).
 		User.SessionStartDate = DateTime.Now;
+		
+		GeneralToolTipHelper.SetGlobalToolTipDelay();
 	}
 
 #if RELEASE

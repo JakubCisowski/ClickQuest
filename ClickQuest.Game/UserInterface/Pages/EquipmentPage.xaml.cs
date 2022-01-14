@@ -163,8 +163,6 @@ public partial class EquipmentPage : Page
 
 				border.PreviewMouseUp += ItemBorder_TryToEquip;
 
-				GeneralToolTipHelper.SetToolTipDelayAndDuration(border);
-
 				var toolTip = ItemToolTipHelper.GenerateItemToolTip(material);
 				border.ToolTip = toolTip;
 
@@ -207,8 +205,6 @@ public partial class EquipmentPage : Page
 				};
 
 				border.PreviewMouseUp += ItemBorder_TryToEquip;
-
-				GeneralToolTipHelper.SetToolTipDelayAndDuration(border);
 
 				var toolTip = ItemToolTipHelper.GenerateItemToolTip(recipe);
 				border.ToolTip = toolTip;
@@ -260,8 +256,6 @@ public partial class EquipmentPage : Page
 				};
 
 				border.PreviewMouseUp += ItemBorder_TryToEquip;
-
-				GeneralToolTipHelper.SetToolTipDelayAndDuration(border);
 
 				var toolTip = ItemToolTipHelper.GenerateItemToolTip(artifact);
 				border.ToolTip = toolTip;
@@ -402,8 +396,6 @@ public partial class EquipmentPage : Page
 			};
 
 			border.PreviewMouseUp += ItemBorder_TryToEquip;
-
-			GeneralToolTipHelper.SetToolTipDelayAndDuration(border);
 
 			var toolTip = ItemToolTipHelper.GenerateItemToolTip(equippedArtifact);
 			border.ToolTip = toolTip;

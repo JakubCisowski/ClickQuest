@@ -10,7 +10,6 @@ using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Helpers;
-using ClickQuest.Game.UserInterface.Helpers.ToolTips;
 using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.Game.UserInterface.Pages;
@@ -90,7 +89,6 @@ public partial class MainMenuPage : Page
 			Tag = hero
 		};
 
-		GeneralToolTipHelper.SetToolTipDelayAndDuration(deleteHeroButton);
 		deleteHeroButton.ToolTip = toolTip;
 
 		var deleteHeroIcon = new PackIcon
