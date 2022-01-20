@@ -4,4 +4,5 @@
 // while the chance to loot the most common Items is reduced appropriately.
 public class CloakOfTheWoodlander
 {
+	// TODO
 }

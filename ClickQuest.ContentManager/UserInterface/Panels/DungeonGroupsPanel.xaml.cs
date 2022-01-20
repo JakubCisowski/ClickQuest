@@ -85,16 +85,16 @@ public partial class DungeonGroupsPanel : UserControl
 			Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Exceptional).ToString(),
 			Margin = new Thickness(10)
 		};
-		var rarityBoxMasterwork = new TextBox
-		{
-			Name = "RarityBoxMasterwork",
-			Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Masterwork).ToString(),
-			Margin = new Thickness(10)
-		};
 		var rarityBoxMythic = new TextBox
 		{
 			Name = "RarityBoxMythic",
 			Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Mythic).ToString(),
+			Margin = new Thickness(10)
+		};
+		var rarityBoxMasterwork = new TextBox
+		{
+			Name = "RarityBoxMasterwork",
+			Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Masterwork).ToString(),
 			Margin = new Thickness(10)
 		};
 
@@ -133,8 +133,8 @@ public partial class DungeonGroupsPanel : UserControl
 		_controls.Add(rarityBoxFine.Name, rarityBoxFine);
 		_controls.Add(rarityBoxSuperior.Name, rarityBoxSuperior);
 		_controls.Add(rarityBoxExceptional.Name, rarityBoxExceptional);
-		_controls.Add(rarityBoxMasterwork.Name, rarityBoxMasterwork);
 		_controls.Add(rarityBoxMythic.Name, rarityBoxMythic);
+		_controls.Add(rarityBoxMasterwork.Name, rarityBoxMasterwork);
 		_controls.Add(descriptionBox.Name, descriptionBox);
 
 		foreach (var elem in _controls)
