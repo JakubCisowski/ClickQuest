@@ -5,9 +5,19 @@ namespace ClickQuest.Game.Models.Functionalities;
 public class AffixFunctionality
 {
 	public Affix Affix { get; set; }
+	
+	// Used to modify or trigger an effect based on the amount of click damage dealt (regardless if critical or not).
+	public virtual void OnDealingClickDamage(ref int clickDamage, DamageType clickDamageType)
+	{
+	}
 
-	// Use to increase poison damage dealt (eg. by a percentage).
+	// Used to modify or trigger an effect based on the amount of poison dealt.
 	public virtual void OnDealingPoisonDamage(ref int poisonDamage)
+	{
+	}
+	
+	// Used to modify or trigger an effect based on the amount of artifact damage dealt.
+	public virtual void OnDealingArtifactDamage(ref int artifactDamage)
 	{
 	}
 }

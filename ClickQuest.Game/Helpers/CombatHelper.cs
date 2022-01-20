@@ -99,6 +99,14 @@ public static class CombatHelper
 					case DamageType.Poison:
 						affix.OnDealingPoisonDamage(ref damage);
 						break;
+					
+					case DamageType.Artifact:
+						affix.OnDealingArtifactDamage(ref damage);
+						break;
+					
+					case DamageType.Normal or DamageType.Critical:
+						affix.OnDealingClickDamage(ref damage, damageType);
+						break;
 				}
 			}
 		}
