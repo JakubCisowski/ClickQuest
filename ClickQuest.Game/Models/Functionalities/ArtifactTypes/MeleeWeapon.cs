@@ -3,6 +3,7 @@ using ClickQuest.Game.DataTypes.Enums;
 
 namespace ClickQuest.Game.Models.Functionalities.ArtifactTypes;
 
+// If you have exactly two Melee Weapons equipped, gain 10 Click Damage and 10% Critical Click Chance.
 public class MeleeWeapon : ArtifactTypeFunctionality
 {
 	private const int ClickDamageIncrease = 10;

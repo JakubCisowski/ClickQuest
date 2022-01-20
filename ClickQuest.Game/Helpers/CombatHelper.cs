@@ -82,6 +82,10 @@ public static class CombatHelper
 				case DamageType.Aura:
 					equippedArtifact.ArtifactFunctionality.OnDealingAuraDamage(ref damage);
 					break;
+				
+				case DamageType.Artifact:
+					equippedArtifact.ArtifactFunctionality.OnDealingArtifactDamage(ref damage);
+					break;
 			}
 		}
 

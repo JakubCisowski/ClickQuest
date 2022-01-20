@@ -3,6 +3,7 @@ using ClickQuest.Game.DataTypes.Enums;
 
 namespace ClickQuest.Game.Models.Functionalities.ArtifactTypes;
 
+// Each equipped Utility Artifact increases the amount of Experience you gain by 10%.
 public class Utility : ArtifactTypeFunctionality
 {
 	private const double ExperienceModifierPerArtifact = 0.10;

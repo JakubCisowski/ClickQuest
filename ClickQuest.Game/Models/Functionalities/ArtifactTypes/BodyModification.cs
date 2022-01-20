@@ -5,6 +5,7 @@ using ClickQuest.Game.UserInterface.Controls;
 
 namespace ClickQuest.Game.Models.Functionalities.ArtifactTypes;
 
+// You can only equip one Artifact of this type.
 public class BodyModification : ArtifactTypeFunctionality
 {
 	public override bool CanBeEquipped()

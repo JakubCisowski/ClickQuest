@@ -3,6 +3,7 @@ using ClickQuest.Game.DataTypes.Enums;
 
 namespace ClickQuest.Game.Models.Functionalities.ArtifactTypes;
 
+// If you have exactly two Accessories and an Amulet equipped, increase your Click Damage, Poison Damage, Critical Click Chance and Critical Click Damage by 20%.
 public class Amulet : ArtifactTypeFunctionality
 {
 	private const double StatModifier = 0.20;

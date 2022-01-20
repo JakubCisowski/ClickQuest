@@ -129,6 +129,13 @@ public class ArtifactFunctionality
 	{
 	}
 
+	// Used to modify or trigger an effect based on the amount of artifact damage dealt.
+	// Triggered: before dealing artifact damage to an enemy, but after triggering the OnDealingDamage effect.
+	// artifactDamage - the amount of damage dealt.
+	public virtual void OnDealingArtifactDamage(ref int artifactDamage)
+	{
+	}
+
 	// Used to trigger an effect based on enemy deaths.
 	// Triggered: after killing an enemy and after granting victory bonuses, but before spawning another monster
 	// Also triggered when boss timer goes down to 0, regardless if the boss died or not.

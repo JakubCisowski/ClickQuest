@@ -5,6 +5,7 @@ using ClickQuest.Game.UserInterface.Controls;
 
 namespace ClickQuest.Game.Models.Functionalities.ArtifactTypes;
 
+// Requires at least one other Artifact equipped, and cannot be equipped with another Infusion.
 public class Infusion : ArtifactTypeFunctionality
 {
 	public override bool CanBeEquipped()

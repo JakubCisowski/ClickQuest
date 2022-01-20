@@ -4,6 +4,7 @@ using ClickQuest.Game.UserInterface.Controls;
 
 namespace ClickQuest.Game.Models.Functionalities.ArtifactTypes;
 
+// Requires two free slots to equip. If equipped with an Artifact of type Infusion, double its effectiveness.
 public class DualWielded : ArtifactTypeFunctionality
 {
 	private const int ArtifactSlotsRequired = 2;

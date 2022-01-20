@@ -20,7 +20,11 @@ public class MagicOre : ArtifactFunctionality
 	{
 		foreach (var region in GameAssets.Regions)
 		{
-			region.LevelRequirement += 5;
+			// To prevent increasing Level Requirement of the first region.
+			if (region.LevelRequirement > 0)
+			{
+				region.LevelRequirement += 5;
+			}
 		}
 	}
 

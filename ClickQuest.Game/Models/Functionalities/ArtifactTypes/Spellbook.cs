@@ -3,6 +3,7 @@ using ClickQuest.Game.DataTypes.Enums;
 
 namespace ClickQuest.Game.Models.Functionalities.ArtifactTypes;
 
+// Each equipped Spellbook increases your Aura Speed by 5% (additively). If you have three Spellbooks equipped, this bonus is doubled, to a total of 30%.
 public class Spellbook : ArtifactTypeFunctionality
 {
 	private const double AuraSpeedPerSpellbook = 0.05;
