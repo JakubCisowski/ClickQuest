@@ -3,7 +3,7 @@ using ClickQuest.Game.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
-// Has to be equipped with at least one other artifact. Causes all clicks to leave a spine in the target’s body.
+// Causes all clicks to leave a spine in the target’s body.
 // Click damage dealt is increased by 2 (?) for each spine in the target.
 public class ChollaSpineInfusion : ArtifactFunctionality
 {

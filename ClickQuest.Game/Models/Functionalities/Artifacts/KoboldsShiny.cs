@@ -8,19 +8,14 @@ public class KoboldsShiny : ArtifactFunctionality
 	private const double DamageIncreaseModifier = 0.25;
 	private const double AuraDamageReductionModifier = 0.50;
 
-	public override void OnEquip()
-	{
-		User.Instance.CurrentHero.AuraDamage -= User.Instance.CurrentHero.AuraDamage * AuraDamageReductionModifier;
-	}
-
-	public override void OnUnequip()
-	{
-		User.Instance.CurrentHero.AuraDamage += User.Instance.CurrentHero.AuraDamage * AuraDamageReductionModifier;
-	}
-
 	public override void OnDealingDamage(ref int damage)
 	{
 		damage += (int)Math.Ceiling(damage * DamageIncreaseModifier);
+	}
+
+	public override void OnDealingAuraDamage(ref int auraDamage)
+	{
+		auraDamage = (int)(auraDamage * AuraDamageReductionModifier);
 	}
 
 	public KoboldsShiny()

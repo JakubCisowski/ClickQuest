@@ -270,6 +270,14 @@ public partial class BlacksmithPage : Page
 			GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Crafting);
 
 			UpdateBlacksmithItems();
+			
+			// [PRERELEASE]
+			// If hero has all other artifacts, grant Transcendence.
+			if (User.Instance.CurrentHero.Artifacts.Select(x => x.Name).Distinct().Count() == GameAssets.Artifacts.Count)
+			{
+				var transcendence = GameAssets.Artifacts.FirstOrDefault(x => x.Name == "Transcendence");
+				transcendence?.AddItem();
+			}
 		}
 	}
 

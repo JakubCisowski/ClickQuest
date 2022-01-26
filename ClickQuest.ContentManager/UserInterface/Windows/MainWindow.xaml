@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" Closing="MainWindow_OnClosing"
-        Title="Content Loader" Height="1040" Width="1920" WindowStartupLocation="Manual" Top="0" Left="0"
+        Title="Content Manager" Height="1040" Width="1920" WindowStartupLocation="Manual" Top="0" Left="0"
         ResizeMode="NoResize">
 	<Grid>
 		<TabControl Style="{StaticResource MaterialDesignTabControl}" SelectionChanged="TabControl_SelectionChanged" HorizontalAlignment="Center" FontSize="14">

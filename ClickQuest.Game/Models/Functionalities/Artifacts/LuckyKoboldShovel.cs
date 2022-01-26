@@ -1,4 +1,5 @@
-﻿using ClickQuest.Game.Helpers;
+﻿using System.Linq;
+using ClickQuest.Game.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
@@ -14,9 +15,8 @@ public class LuckyKoboldShovel : ArtifactFunctionality
 
 		if (randomizedNumber <= ChanceToGetItemOnKill * 10000)
 		{
-			// TODO
-			var specialMaterial = new Material();
-			specialMaterial.AddItem();
+			var specialMaterial = GameAssets.Materials.FirstOrDefault(x => x.Name == "Leather Satchel");
+			specialMaterial?.AddItem();
 		}
 	}
 
