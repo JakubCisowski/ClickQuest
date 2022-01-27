@@ -5,10 +5,10 @@ using ClickQuest.Game.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
-// On click, applies burning for 2 seconds that deals a total of 80 (?) damage.
+// On click, applies burning for 2 seconds that deals a total of 600 damage.
 public class ScepterOfEternalFlame : ArtifactFunctionality
 {
-	private const int BurningDamage = 80;
+	private const int BurningDamage = 600;
 	private const double BurningDuration = 2;
 	private const int TicksNumber = 10;
 

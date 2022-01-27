@@ -6,11 +6,11 @@ using ClickQuest.Game.UserInterface.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
-// Your first attack against a monster places 'Decay' on them, dealing damage every 0.5 seconds for 2.5 seconds. 
+// Your first attack against a monster places 'Decay' on them, dealing damage every 0.5 seconds for 5 seconds. 
 // Damage dealt is equal to your poison damage. Deals double damage against bosses.
 public class DeathInfusedBoneTalisman : ArtifactFunctionality
 {
-	private const int TicksNumber = 5;
+	private const int TicksNumber = 10;
 	private const int Interval = 500;
 	private const int DamageModifier = 2;
 

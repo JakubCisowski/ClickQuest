@@ -3,10 +3,10 @@ using ClickQuest.Game.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
-// After killing a monster, your next click is guaranteed to critically hit, and will deal 10% more damage.
+// After killing a monster, your next click is guaranteed to critically hit, and will deal 40% more damage.
 public class GhostlyInfusion : ArtifactFunctionality
 {
-	private const double DamageModifier = 0.1;
+	private const double DamageModifier = 0.4;
 
 	private bool _isNextClickEmpowered;
 

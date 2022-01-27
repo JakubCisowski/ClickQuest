@@ -3,10 +3,10 @@ using ClickQuest.Game.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
-// Every other click you make deals an additional 10 (?) damage.
+// Every other click you make deals an additional 50 damage.
 public class Skullbasher : ArtifactFunctionality
 {
-	private const int DamageDealt = 10;
+	private const int DamageDealt = 50;
 
 	private bool _isNextClickEmpowered;
 
