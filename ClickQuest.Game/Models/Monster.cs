@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
+using System.Windows;
 using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.DataTypes.Structs;
 using ClickQuest.Game.Helpers;
+using ClickQuest.Game.Models.Functionalities.Artifacts;
 using ClickQuest.Game.UserInterface.Helpers;
 using ClickQuest.Game.UserInterface.Pages;
+using ClickQuest.Game.UserInterface.Windows;
 using MaterialDesignThemes.Wpf;
 using static ClickQuest.Game.Helpers.RandomnessHelper;
 
@@ -133,6 +136,22 @@ public class Monster : Enemy
 	public Item RandomizeMonsterLoot()
 	{
 		var frequencyList = MonsterLootPatterns.Select(x => x.Frequency).ToList();
+
+		// Special case - if Cloak of the Woodlander is equipped, and player is currently in Woodland Cascades, increase rare item chances.
+		var currentFrameContent = (Application.Current.MainWindow as GameWindow)?.CurrentFrame.Content;
+		var isCurrentFrameContentARegion = currentFrameContent is RegionPage;
+		
+		if (isCurrentFrameContentARegion)
+		{
+			var isCurrentRegionWoodlandCascades = (currentFrameContent as RegionPage).Region.Name == "Woodland Cascades";
+			var isCloakOfTheWoodlanderEquipped = User.Instance.CurrentHero.EquippedArtifacts.FirstOrDefault(x => x.ArtifactFunctionality is CloakOfTheWoodlander) != null;
+
+			if (isCurrentRegionWoodlandCascades && isCloakOfTheWoodlanderEquipped)
+			{
+				frequencyList = CloakOfTheWoodlander.ModifyWoodlandCascadesLootFrequencies(frequencyList);
+			}
+		}
+		
 		var randomizedValue = Rng.Next(1, 10001) / 10000d;
 
 		var i = 0;
