@@ -300,7 +300,7 @@ public partial class QuestsPanel : UserControl
 			FontSize = 18,
 			VerticalAlignment = VerticalAlignment.Center,
 			HorizontalAlignment = HorizontalAlignment.Left,
-			Margin = new Thickness(400, 0, 0, 0),
+			Margin = new Thickness(480, 0, 0, 0),
 			Text = pattern.Quantity.ToString()
 		};
 
