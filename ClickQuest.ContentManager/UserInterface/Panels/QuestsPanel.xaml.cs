@@ -295,6 +295,15 @@ public partial class QuestsPanel : UserControl
 			Margin = new Thickness(80, 0, 0, 0)
 		};
 
+		var quantityBlock = new TextBlock()
+		{
+			FontSize = 18,
+			VerticalAlignment = VerticalAlignment.Center,
+			HorizontalAlignment = HorizontalAlignment.Left,
+			Margin = new Thickness(400, 0, 0, 0),
+			Text = pattern.Quantity.ToString()
+		};
+
 		switch (pattern.QuestRewardType)
 		{
 			case RewardType.Material:
@@ -364,6 +373,7 @@ public partial class QuestsPanel : UserControl
 
 		grid.Children.Add(idBlock);
 		grid.Children.Add(nameBlock);
+		grid.Children.Add(quantityBlock);
 		grid.Children.Add(editButton);
 		grid.Children.Add(deleteButton);
 
