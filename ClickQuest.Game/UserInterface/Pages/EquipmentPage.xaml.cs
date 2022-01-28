@@ -718,6 +718,11 @@ public partial class EquipmentPage : Page
 			Text = artifact.Name
 		};
 
+		if (artifact.Name.Length > 26)
+		{
+			nameBlock.FontSize = 17;
+		}
+
 		grid.Children.Add(circleIcon);
 		grid.Children.Add(nameBlock);
 

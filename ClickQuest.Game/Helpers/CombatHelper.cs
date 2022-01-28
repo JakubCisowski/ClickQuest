@@ -22,7 +22,7 @@ public static class CombatHelper
 
 			var damageBaseAndCritInfo = User.Instance.CurrentHero.CalculateBaseAndCritClickDamage();
 			var damageOnHit = User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Clicking];
-			GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Clicking);
+			Specializations.UpdateSpecializationAmountAndUi(SpecializationType.Clicking);
 
 			// Passing clickedEnemy ensures that even if we kill the enemy with dealt damage (eg. click damage),
 			// other effects (on-hit and artifacts) will be dealt to that dead enemy instead of being carried over.

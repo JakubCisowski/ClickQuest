@@ -55,7 +55,6 @@ public class TwinKamas : ArtifactFunctionality
 				CombatHelper.HandleUserClickOnEnemy();
 				_clickTimes.RemoveAt(0);
 				
-				// [PRERELEASE] - make this less cringe!
 				// Remove the artificial click (should be the last one in the list).
 				_clickTimes.RemoveAt(_clickTimes.Count - 1);
 			}

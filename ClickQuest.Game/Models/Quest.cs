@@ -121,7 +121,7 @@ public class Quest : INotifyPropertyChanged, IIdentifiable
 	{
 		_timer.Stop();
 		TicksCountText = "";
-		GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Questing);
+		Specializations.UpdateSpecializationAmountAndUi(SpecializationType.Questing);
 		AssignRewards();
 		(GameAssets.Pages["QuestMenu"] as QuestMenuPage).RerollQuests();
 		CombatTimersHelper.StartAuraTimerOnCurrentRegion();

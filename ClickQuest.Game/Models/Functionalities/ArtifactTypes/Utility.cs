@@ -8,7 +8,7 @@ public class Utility : ArtifactTypeFunctionality
 {
 	private const double ExperienceModifierPerArtifact = 0.10;
 
-	public override void OnExperienceGained(int experienceGained)
+	public override void OnExperienceGained(ref int experienceGained)
 	{
 		var amountOfUtilityArtifacts = User.Instance.CurrentHero.EquippedArtifacts.Count(x => x.ArtifactType == ArtifactType.Utility);
 
@@ -16,7 +16,7 @@ public class Utility : ArtifactTypeFunctionality
 		{
 			var bonusExperience = (int)(amountOfUtilityArtifacts * experienceGained * ExperienceModifierPerArtifact);
 
-			User.Instance.CurrentHero.GainExperience(bonusExperience, true);
+			experienceGained += bonusExperience;
 		}
 	}
 

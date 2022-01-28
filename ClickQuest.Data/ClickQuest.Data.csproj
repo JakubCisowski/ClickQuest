@@ -54,8 +54,4 @@
         </None>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Data\UserData" />
-    </ItemGroup>
-
 </Project>

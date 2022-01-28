@@ -3,6 +3,7 @@ using System.ComponentModel;
 using ClickQuest.Game.DataTypes.Collections;
 using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.Helpers;
+using ClickQuest.Game.UserInterface.Helpers;
 
 namespace ClickQuest.Game.Models;
 
@@ -130,5 +131,15 @@ public class Specializations : INotifyPropertyChanged
 		// https://stackoverflow.com/a/3598010/17360812
 		SpecializationAmounts.SpecializationCollectionUpdated -= SpecializationAmounts_Updated;
 		SpecializationAmounts.SpecializationCollectionUpdated += SpecializationAmounts_Updated;
+	}
+
+	public static void UpdateSpecializationAmountAndUi(SpecializationType specializationType, int amountIncreased = 1)
+	{
+		if (User.Instance.CurrentHero is not null)
+		{
+			User.Instance.CurrentHero.Specializations.SpecializationAmounts[specializationType] += amountIncreased;
+
+			InterfaceHelper.UpdateSingleSpecializationInterface(specializationType);
+		}
 	}
 }

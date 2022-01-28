@@ -22,8 +22,6 @@
 				<TextBlock x:Name="QuestName" Text="{Binding Path=Name}" FontSize="28" TextAlignment="Center" Margin="5" FontFamily="{StaticResource FontFancy}" />
 			</StackPanel>
 
-			<!-- [PRERELEASE] dodać rare -->
-
 			<!-- Duration info text -->
 			<TextBlock x:Name="QuestDuration" Grid.Row="1" Text="{Binding Path=Duration, StringFormat=Duration: {0}}" FontSize="24" TextAlignment="Center" Margin="5" VerticalAlignment="Center" />
 

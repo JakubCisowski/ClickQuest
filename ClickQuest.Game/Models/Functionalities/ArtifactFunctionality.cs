@@ -158,7 +158,7 @@ public class ArtifactFunctionality
 	// Used to trigger an effect upon gaining experience.
 	// Triggered: when gaining experience, after adding to the hero Experience property.
 	// experienceGained - the amount of experience gained.
-	public virtual void OnExperienceGained(int experienceGained)
+	public virtual void OnExperienceGained(ref int experienceGained)
 	{
 	}
 

@@ -23,8 +23,8 @@
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="1.1*" />
-				<RowDefinition Height="*" />
 				<RowDefinition Height="7*" />
+				<RowDefinition Height="*" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
@@ -34,15 +34,15 @@
 				<TextBlock FontSize="16" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource FontFancy}" TextWrapping="Wrap" Text="Here you can use dropped Dungeon Keys to fight Bosses. You have 30 seconds to deal as much damage as you can, the more damage the better rewards. Rare keys open tougher dungeons, but provide better loot" />
 			</Border>
 
-			<!-- Undo selection (of DungeonGroup/Dungeon) button -->
-			<Button x:Name="UndoButton" Background="{StaticResource BrushAccent2}" Grid.Row="1" Width="450" Height="50" Visibility="Hidden">
-				<TextBlock Text="Undo" FontSize="22" />
-			</Button>
-
 			<!-- Panel for displaying DungeonGroup, Dungeon and Boss choices -->
-			<Grid Grid.Row="2">
+			<Grid Grid.Row="1">
 				<StackPanel x:Name="DungeonSelectPanel" Orientation="Vertical" VerticalAlignment="Center" />
 			</Grid>
+
+			<!-- Undo selection (of DungeonGroup/Dungeon) button -->
+			<Button x:Name="UndoButton" Background="{StaticResource BrushAccent2}" Grid.Row="2" Width="450" Height="50" Visibility="Hidden">
+				<TextBlock Text="Undo" FontSize="22" />
+			</Button>
 
 			<!-- Back to town button -->
 			<Button x:Name="TownButton" Background="{StaticResource BrushAccent3}" Grid.Row="3" Width="450" Height="50" Click="TownButton_Click">

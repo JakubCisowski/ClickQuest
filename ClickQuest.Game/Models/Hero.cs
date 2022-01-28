@@ -311,8 +311,13 @@ public class Hero : INotifyPropertyChanged
 		return (damage, damageType);
 	}
 
-	public void GainExperience(int experienceGained, bool isTriggeredFromOnExperienceGained = false)
+	public void GainExperience(int experienceGained)
 	{
+		foreach (var artifact in User.Instance.CurrentHero.EquippedArtifacts)
+		{
+			artifact.ArtifactFunctionality.OnExperienceGained(ref experienceGained);
+		}
+
 		if (ExperienceToNextLvl != 0)
 		{
 			User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.ExperienceGained, experienceGained);
@@ -325,13 +330,5 @@ public class Hero : INotifyPropertyChanged
 		ExperienceToNextLvl = ExperienceHelper.CalculateXpToNextLvl(this);
 		ExperienceToNextLvlTotal = Experience + ExperienceToNextLvl;
 		ExperienceProgress = ExperienceHelper.CalculateXpProgress(this);
-
-		if (!isTriggeredFromOnExperienceGained)
-		{
-			foreach (var artifact in User.Instance.CurrentHero.EquippedArtifacts)
-			{
-				artifact.ArtifactFunctionality.OnExperienceGained(experienceGained);
-			}
-		}
 	}
 }

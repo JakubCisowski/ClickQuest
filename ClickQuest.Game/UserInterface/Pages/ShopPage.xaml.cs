@@ -120,7 +120,7 @@ public partial class ShopPage : Page
 		{
 			// The selling ratio is only applied for materials.
 			itemSellValue = (int)Math.Ceiling(item.Value * amount * (SellingRatio + Specializations.SpecTradingRatioIncreasePerBuffValue * User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Trading]));
-			GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Trading, amount);
+			Specializations.UpdateSpecializationAmountAndUi(SpecializationType.Trading, amount);
 		}
 		else
 		{
@@ -169,7 +169,7 @@ public partial class ShopPage : Page
 			recipe.AddItem();
 			User.Instance.Gold -= recipe.Value;
 
-			GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
+			Specializations.UpdateSpecializationAmountAndUi(SpecializationType.Trading);
 
 			UpdateShop();
 		}

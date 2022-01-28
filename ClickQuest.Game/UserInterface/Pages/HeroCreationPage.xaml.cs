@@ -62,19 +62,6 @@ public partial class HeroCreationPage : Page
 		User.Instance.CurrentHero?.Specializations.UpdateBuffs();
 
 		newHero.SessionStartDate = DateTime.Now;
-
-		SeedArtifacts();
-	}
-
-	// [PRERELEASE]
-	private static void SeedArtifacts()
-	{
-		foreach (var artifact in GameAssets.Artifacts)
-		{
-			artifact.CreateMythicTag("FunctionSeedingArtifacts");
-
-			CollectionsHelper.AddItemToCollection(artifact, User.Instance.CurrentHero.Artifacts, 2);
-		}
 	}
 
 	public void NoButton_Click(object sender, RoutedEventArgs e)

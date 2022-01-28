@@ -36,14 +36,13 @@ public class Naginata : ArtifactFunctionality
 		}
 	}
 
-	public override void OnExperienceGained(int experienceGained)
+	public override void OnExperienceGained(ref int experienceGained)
 	{
 		if (_wasMonsterOneshot)
 		{
 			_wasMonsterOneshot = false;
 
-			var bonusExperience = (int)(experienceGained * ExperienceModifier - experienceGained);
-			User.Instance.CurrentHero.GainExperience(bonusExperience, true);
+			experienceGained = (int)(experienceGained * ExperienceModifier);
 		}
 	}
 

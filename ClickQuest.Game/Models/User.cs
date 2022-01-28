@@ -69,4 +69,11 @@ public class User : INotifyPropertyChanged
 		Achievements = new Achievements();
 		Theme = ColorTheme.Blue;
 	}
+
+	public void OnHeroExit()
+	{
+		CurrentHero?.UpdateTimePlayed();
+		CurrentHero?.PauseBlessing();
+		CurrentHero?.UnequipArtfacts();
+	}
 }

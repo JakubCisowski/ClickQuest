@@ -7,6 +7,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
 using ClickQuest.Game.DataTypes.Enums;
+using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Helpers;
 using ClickQuest.Game.UserInterface.Helpers.ToolTips;
@@ -49,6 +50,10 @@ public partial class HeroStatsPage : Page
 		GenerateHeroInfoToolTip();
 
 		RefreshAllDynamicStatsAndToolTips();
+
+#if DEBUG
+		HeroNameBlock.PreviewMouseUp += EnableMushroomMode;
+#endif
 	}
 
 	public void RefreshAllDynamicStatsAndToolTips()
@@ -1226,4 +1231,26 @@ public partial class HeroStatsPage : Page
 		toolTipAura.Content = blockAura;
 		AuraDamageBlock.ToolTip = toolTipAura;
 	}
+
+	#if DEBUG
+	private static void EnableMushroomMode(object sender, EventArgs e)
+	{
+		foreach (var artifact in GameAssets.Artifacts)
+		{
+			artifact.CreateMythicTag("FunctionSeedingArtifacts");
+
+			CollectionsHelper.AddItemToCollection(artifact, User.Instance.CurrentHero.Artifacts);
+		}
+
+		foreach (var key in User.Instance.DungeonKeys)
+		{
+			key.AddItem(100);
+		}
+
+		foreach (var ingot in User.Instance.Ingots)
+		{
+			ingot.AddItem(100);
+		}
+	}
+	#endif
 }

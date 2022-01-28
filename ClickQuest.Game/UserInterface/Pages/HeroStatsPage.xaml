@@ -297,7 +297,7 @@
 				<!-- Quest timer-->
 				<StackPanel Grid.Column="2" HorizontalAlignment="Center" Margin="5,0,5,0">
 					<!-- Icon -->
-					<materialDesign:PackIcon Width="30" Height="30" Kind="ProgressQuestion" Foreground="{StaticResource BrushBlack}" HorizontalAlignment="Center" />
+					<materialDesign:PackIcon Width="30" Height="30" Kind="HorseHuman" Foreground="{StaticResource BrushBlack}" HorizontalAlignment="Center" />
 					<!-- Name and timer -->
 					<TextBlock x:Name="QuestDurationBlock" Text="" TextAlignment="Center" FontSize="14" />
 				</StackPanel>

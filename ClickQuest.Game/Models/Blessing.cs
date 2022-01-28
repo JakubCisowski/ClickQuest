@@ -202,7 +202,7 @@ public class Blessing : INotifyPropertyChanged, IIdentifiable
 
 		var newBlessing = blessingBlueprint?.CopyBlessing();
 		newBlessing.Duration += User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Blessing];
-		GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Blessing);
+		Specializations.UpdateSpecializationAmountAndUi(SpecializationType.Blessing);
 
 		User.Instance.CurrentHero.Blessing = newBlessing;
 		newBlessing.EnableBuff();

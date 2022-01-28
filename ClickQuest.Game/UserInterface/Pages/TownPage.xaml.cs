@@ -73,13 +73,17 @@ public partial class TownPage : Page
 				regionButton.IsEnabled = false;
 			}
 
-			if (i <= GameAssets.Regions.Count / 2)
+			if (i < GameAssets.Regions.Count / 3)
 			{
-				RegionsPanelLeft.Children.Insert(i, regionButton);
+				RegionsPanelLeft.Children.Add(regionButton);
+			}
+			else if (i <= 2 * GameAssets.Regions.Count / 3)
+			{
+				RegionsPanelMiddle.Children.Add(regionButton);
 			}
 			else
 			{
-				RegionsPanelRight.Children.Insert(i - GameAssets.Regions.Count / 2 - 1, regionButton);
+				RegionsPanelRight.Children.Add(regionButton);
 			}
 		}
 	}
@@ -106,17 +110,6 @@ public partial class TownPage : Page
 			{
 				equippedArtifact.ArtifactFunctionality.OnRegionEnter();
 			}
-
-			// [PRERELEASE]
-			foreach (var key in User.Instance.DungeonKeys)
-			{
-				key.AddItem(100);
-			}
-
-			foreach (var ingot in User.Instance.Ingots)
-			{
-				ingot.AddItem(100);
-			}
 		}
 		else
 		{
@@ -137,7 +130,7 @@ public partial class TownPage : Page
 		// Pause all quest timers (so that quest doesn't finish while current hero is not selected).
 		User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default)?.PauseTimer();
 
-		GameHelperPrerelease.OnHeroExit();
+		User.Instance.OnHeroExit();
 
 		User.Instance.CurrentHero = null;
 

@@ -175,7 +175,7 @@ public class Boss : Enemy
 
 		InterfaceHelper.RefreshStatsAndEquipmentPanelsOnCurrentPage();
 
-		GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Dungeon);
+		Specializations.UpdateSpecializationAmountAndUi(SpecializationType.Dungeon);
 
 		User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.DungeonsCompleted, 1);
 	}

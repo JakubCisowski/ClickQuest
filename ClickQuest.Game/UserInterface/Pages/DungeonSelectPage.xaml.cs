@@ -9,6 +9,7 @@ using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Helpers;
 using ClickQuest.Game.UserInterface.Windows;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.Game.UserInterface.Pages;
 
@@ -96,18 +97,41 @@ public partial class DungeonSelectPage : Page
 				Height = 90
 			};
 
+			var panel2 = new StackPanel()
+			{
+				Orientation = Orientation.Horizontal,
+				HorizontalAlignment = HorizontalAlignment.Center,
+				Margin = new Thickness(0,5,0,0)
+			};
+
+			var icon = new PackIcon
+			{
+				Width = 28,
+				Height = 28,
+				Foreground = ColorsHelper.GetRarityColor((Rarity)i),
+				VerticalAlignment = VerticalAlignment.Center
+			};
+			icon.Kind = PackIconKind.Key;
+
 			var block2 = new TextBlock
 			{
-				FontSize = 16,
+				FontSize = 24,
 				FontStyle = FontStyles.Italic,
-				Text = GameAssets.DungeonGroups[i].Description,
-				TextAlignment = TextAlignment.Center
+				Text = "x1",
+				TextAlignment = TextAlignment.Center,
+				Margin = new Thickness(5,0,0,0)
 			};
+
+
+			panel.Children.Add(block);
+
+			panel2.Children.Add(icon);
+			panel2.Children.Add(block2);
+
+			panel.Children.Add(panel2);
 
 			border.Child = panel;
 
-			panel.Children.Add(block);
-			panel.Children.Add(block2);
 			button.Content = border;
 
 			button.Tag = GameAssets.DungeonGroups[i];

@@ -37,15 +37,15 @@ public class Idle : ArtifactTypeFunctionality
 		}
 	}
 
-	public override void OnExperienceGained(int experienceGained)
+	public override void OnExperienceGained(ref int experienceGained)
 	{
 		if (_questStarted)
 		{
 			_questStarted = false;
-			
+
 			var bonusExperience = (int)(TwoPieceXPModifier * experienceGained);
 
-			User.Instance.CurrentHero.GainExperience(bonusExperience, true);
+			experienceGained += bonusExperience;
 		}
 	}
 

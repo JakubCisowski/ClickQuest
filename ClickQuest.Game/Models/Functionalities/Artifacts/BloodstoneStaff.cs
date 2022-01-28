@@ -55,8 +55,8 @@ public class BloodstoneStaff : ArtifactFunctionality
 		Name = "Bloodstone Staff";
 		_timer = new DispatcherTimer
 		{
-			Interval = new TimeSpan(0, 0, 0, 0, 500)
-		}; // todo: The timer might have to tick faster.
+			Interval = new TimeSpan(0, 0, 0, 0, 100)
+		}; 
 		_timer.Tick += EmpowermentTimer_Tick;
 	}
 

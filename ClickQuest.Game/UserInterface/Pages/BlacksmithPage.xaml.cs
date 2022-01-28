@@ -101,7 +101,7 @@ public partial class BlacksmithPage : Page
 
 			MeltMaterial(material);
 
-			GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Melting);
+			Specializations.UpdateSpecializationAmountAndUi(SpecializationType.Melting);
 		}
 		else if (b.CommandParameter is Artifact artifact)
 		{
@@ -267,13 +267,12 @@ public partial class BlacksmithPage : Page
 			recipe.Artifact.AddItem();
 			recipe.RemoveItem();
 
-			GameHelperPrerelease.UpdateSpecializationAmountAndUi(SpecializationType.Crafting);
+			Specializations.UpdateSpecializationAmountAndUi(SpecializationType.Crafting);
 
 			UpdateBlacksmithItems();
 			
-			// [PRERELEASE]
 			// If hero has all other artifacts, grant Transcendence.
-			if (User.Instance.CurrentHero.Artifacts.Select(x => x.Name).Distinct().Count() == GameAssets.Artifacts.Count)
+			if (User.Instance.CurrentHero.Artifacts.Select(x => x.Name).Distinct().Count() == GameAssets.Artifacts.Count - 1)
 			{
 				var transcendence = GameAssets.Artifacts.FirstOrDefault(x => x.Name == "Transcendence");
 				transcendence?.AddItem();

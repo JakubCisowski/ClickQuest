@@ -166,7 +166,7 @@ public partial class GameWindow : Window, INotifyPropertyChanged
 	{
 		User.Instance.Achievements.TotalTimePlayed += DateTime.Now - User.SessionStartDate;
 
-		GameHelperPrerelease.OnHeroExit();
+		User.Instance.OnHeroExit();
 
 		UserDataHelper.Save();
 

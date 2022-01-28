@@ -24,7 +24,7 @@ public partial class RegionPage : Page
 	public void CreateMonsterButton()
 	{
 		var button = new MonsterButton(this);
-		RegionPanel.Children.Insert(1, button);
+		RegionPanel.Children.Insert(0, button);
 	}
 
 	private void TownButton_Click(object sender, RoutedEventArgs e)

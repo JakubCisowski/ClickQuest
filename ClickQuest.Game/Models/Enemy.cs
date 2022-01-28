@@ -52,9 +52,6 @@ public abstract class Enemy : INotifyPropertyChanged, IIdentifiable
 		{
 			var dungeonKey = User.Instance.DungeonKeys.FirstOrDefault(x => x.Rarity == (Rarity)(position - 1));
 			dungeonKey.AddItem();
-
-			// [PRERELEASE] Display dungeon key drop.
-			// (GameAssets.CurrentPage as RegionPage).TestRewardsBlock.Text += $". You've got a {(Rarity) (position - 1)} Dungeon Key!";
 		}
 	}
 }

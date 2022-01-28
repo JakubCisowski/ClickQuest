@@ -77,11 +77,6 @@ public static class ItemToolTipHelper
 					Foreground = ColorsHelper.GetRarityColor(artifact.Rarity),
 					FontFamily = fontFamilyRegularDemiBold
 				});
-				toolTipBlock.Inlines.Add(new LineBreak());
-
-				// Split capital letters.
-				var artifactTypeString = string.Concat(artifact.ArtifactType.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
-				toolTipBlock.Inlines.Add(new Run($"{artifactTypeString}"));
 
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(GenerateTextSeparator());
@@ -93,9 +88,28 @@ public static class ItemToolTipHelper
 					toolTipBlock.Inlines.Add(run);
 				}
 
+				if (!string.IsNullOrEmpty(artifact.ExtraInfo))
+				{
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new LineBreak());
+					toolTipBlock.Inlines.Add(new Run($"{artifact.ExtraInfo}")
+					{
+						FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"),
+						Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGray5")
+					});
+				}
+
 				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(GenerateTextSeparator());
 				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"{artifact.ArtifactFunctionality.ArtifactTypeFunctionality.Description + artifact.ExtraInfo}")
+
+				// Split capital letters.
+				var artifactTypeString = string.Concat(artifact.ArtifactType.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
+				toolTipBlock.Inlines.Add(new Run($"{artifactTypeString}"));
+				
+				toolTipBlock.Inlines.Add(new LineBreak());
+				
+				toolTipBlock.Inlines.Add(new Run($"{artifact.ArtifactFunctionality.ArtifactTypeFunctionality.Description}")
 				{
 					FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"),
 					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGray5")
@@ -136,6 +150,11 @@ public static class ItemToolTipHelper
 					Foreground = ColorsHelper.GetRarityColor(recipe.Rarity),
 					FontFamily = fontFamilyRegularDemiBold
 				});
+				toolTipBlock.Inlines.Add(new LineBreak());
+
+				// Split capital letters.
+				var artifactTypeString = string.Concat(recipe.Artifact.ArtifactType.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
+				toolTipBlock.Inlines.Add(new Run($"{artifactTypeString}"));
 
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(GenerateTextSeparator());
@@ -319,7 +338,7 @@ public static class ItemToolTipHelper
 			}
 		};
 
-		foreach (var ingredient in recipe.IngredientPatterns)
+		foreach (var ingredient in recipe.IngredientPatterns.OrderBy(x => x.RelatedMaterial.Rarity))
 		{
 			var relatedMaterial = ingredient.RelatedMaterial;
 			ingredientRuns.Add(new Run($"{ingredient.Quantity}x "));

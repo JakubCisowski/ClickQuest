@@ -5,10 +5,10 @@ public class TitansCrown : ArtifactFunctionality
 {
 	private const double BonusExperienceMultiplier = 0.30;
 
-	public override void OnExperienceGained(int experienceGained)
+	public override void OnExperienceGained(ref int experienceGained)
 	{
 		var bonusExperience = (int)(experienceGained * BonusExperienceMultiplier);
-		User.Instance.CurrentHero.GainExperience(bonusExperience, true);
+		experienceGained += bonusExperience;
 	}
 
 	public TitansCrown()

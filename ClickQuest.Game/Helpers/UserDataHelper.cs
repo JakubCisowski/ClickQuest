@@ -16,7 +16,6 @@ public static class UserDataHelper
 
 	static UserDataHelper()
 	{
-		// [PRERELEASE]
 		UserDataPath = Path.Combine(Environment.CurrentDirectory, @"Data\", @"UserData\", "User.aes");
 		BestiaryDataPath = Path.Combine(Environment.CurrentDirectory, @"Data\", @"UserData\", "Bestiary.aes");
 

@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using ClickQuest.Game.DataTypes.Collections;
 using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models;
@@ -263,7 +264,20 @@ public partial class MainMenuPage : Page
 
 		if (result == MessageBoxResult.Yes)
 		{
-			GameHelperPrerelease.ResetAllProgress();
+			User.Instance.LastHeroId = 0;
+			User.Instance.Heroes.Clear();
+			User.Instance.Gold = 0;
+
+			User.Instance.DungeonKeys.Clear();
+			UserDataHelper.SeedDungeonKeys();
+
+			User.Instance.Ingots.Clear();
+			UserDataHelper.SeedIngots();
+
+			User.Instance.Achievements.TotalTimePlayed = default;
+			User.Instance.Achievements.NumericAchievementCollection = new ObservableDictionary<NumericAchievementType, long>();
+			CollectionsHelper.InitializeDictionary(User.Instance.Achievements.NumericAchievementCollection);
+
 			UpdateSelectOrDeleteHeroButtons();
 			UpdateCreateHeroButton();
 		}
