@@ -3,22 +3,22 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
 	<!-- REGULAR-->
-	<FontFamily x:Key="FontRegular">/Data/Fonts/#Lato Regular</FontFamily>
+	<FontFamily x:Key="FontRegular">/UserInterface/Fonts/#Lato Regular</FontFamily>
 
 	<!-- bold -->
-	<FontFamily x:Key="FontRegularDemiBold">/Data/Fonts/#Lato Bold</FontFamily>
-	<FontFamily x:Key="FontRegularBold">/Data/Fonts/#Lato Black</FontFamily>
+	<FontFamily x:Key="FontRegularDemiBold">/UserInterface/Fonts/#Lato Bold</FontFamily>
+	<FontFamily x:Key="FontRegularBold">/UserInterface/Fonts/#Lato Black</FontFamily>
 
 	<!-- italic -->
-	<FontFamily x:Key="FontRegularLightItalic">/Data/Fonts/#Lato Light Italic</FontFamily>
-	<FontFamily x:Key="FontRegularItalic">/Data/Fonts/#Lato Italic</FontFamily>
+	<FontFamily x:Key="FontRegularLightItalic">/UserInterface/Fonts/#Lato Light Italic</FontFamily>
+	<FontFamily x:Key="FontRegularItalic">/UserInterface/Fonts/#Lato Italic</FontFamily>
 
 	<!-- bold italic -->
-	<FontFamily x:Key="FontRegularBoldItalic">/Data/Fonts/#Lato Bold Italic</FontFamily>
-	<FontFamily x:Key="FontRegularBlackItalic">/Data/Fonts/#Lato Black Italic</FontFamily>
+	<FontFamily x:Key="FontRegularBoldItalic">/UserInterface/Fonts/#Lato Bold Italic</FontFamily>
+	<FontFamily x:Key="FontRegularBlackItalic">/UserInterface/Fonts/#Lato Black Italic</FontFamily>
 
 	<!-- FANCY-->
-	<FontFamily x:Key="FontFancy">/Data/Fonts/#Courgette Regular</FontFamily>
+	<FontFamily x:Key="FontFancy">/UserInterface/Fonts/#Courgette Regular</FontFamily>
 
 	<!-- SIZES -->
 	<system:Double x:Key="FontSizeToolTipName">20</system:Double>

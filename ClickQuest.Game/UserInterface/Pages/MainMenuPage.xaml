@@ -15,7 +15,7 @@
 		<TextBlock Grid.Row="0" Text="BETA" FontSize="12" Foreground="{StaticResource BrushBlack}" HorizontalAlignment="Left" Margin="10,10,0,0" />
 
 		<!-- Game logo -->
-		<Image Grid.Row="0" Height="350" Width="560" HorizontalAlignment="Center" Source="/Data/Images/logo.png" />
+		<Image Grid.Row="0" Height="350" Width="560" HorizontalAlignment="Center" Source="/UserInterface/Images/logo.png" />
 
 		<!-- Buttons grid -->
 		<Grid x:Name="SelectOrDeleteHeroButtonsGrid" Grid.Row="1">
