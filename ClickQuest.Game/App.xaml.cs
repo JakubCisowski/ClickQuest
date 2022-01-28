@@ -6,6 +6,11 @@ using ClickQuest.Game.Models;
 using ClickQuest.Game.UserInterface.Helpers.ToolTips;
 using ClickQuest.Game.UserInterface.Pages;
 using ClickQuest.Game.UserInterface.Windows;
+#if RELEASE
+using System.Windows.Threading;
+using System.IO;
+using ClickQuest.Game.UserInterface.Controls;
+#endif
 
 namespace ClickQuest.Game;
 
@@ -66,13 +71,13 @@ public partial class App : Application
 				//  If exception was thrown before loading User.json (Ingots.Count can't be null after loading)
 				if (User.Instance.Ingots?.Count == 0)
 				{
-					var encryptedUserJson = File.ReadAllBytes(UserDataLoader.UserDataPath);
-					var userJson = DataEncryptionController.DecryptJsonUsingAes(encryptedUserJson);
+					var encryptedUserJson = File.ReadAllBytes(UserDataHelper.UserDataPath);
+					var userJson = EncryptionHelper.DecryptJsonUsingAes(encryptedUserJson);
 					writer.Write(userJson);
 				}
 				else
 				{
-					writer.Write(UserDataLoader.Save());
+					writer.Write(UserDataHelper.Save());
 				}
 			}
 			

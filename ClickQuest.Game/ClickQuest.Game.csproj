@@ -12,14 +12,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Remove="Logs\AssetsLogs\**" />
-        <Compile Remove="Logs\CrashLogs\**" />
-        <EmbeddedResource Remove="Logs\AssetsLogs\**" />
-        <EmbeddedResource Remove="Logs\CrashLogs\**" />
-        <None Remove="Logs\AssetsLogs\**" />
-        <None Remove="Logs\CrashLogs\**" />
-        <Page Remove="Logs\AssetsLogs\**" />
-        <Page Remove="Logs\CrashLogs\**" />
         <None Update="Data\GameAssets\Artifacts.aes">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>

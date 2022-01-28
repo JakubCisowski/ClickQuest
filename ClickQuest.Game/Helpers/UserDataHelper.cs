@@ -17,8 +17,13 @@ public static class UserDataHelper
 	static UserDataHelper()
 	{
 		// [PRERELEASE]
-		UserDataPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Data\", @"UserData\", "User.aes");
-		BestiaryDataPath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Data\", @"UserData\", "Bestiary.aes");
+		UserDataPath = Path.Combine(Environment.CurrentDirectory, @"Data\", @"UserData\", "User.aes");
+		BestiaryDataPath = Path.Combine(Environment.CurrentDirectory, @"Data\", @"UserData\", "Bestiary.aes");
+
+		if (!Directory.Exists(Path.Combine(Environment.CurrentDirectory, @"Data\", @"UserData")))
+		{
+			Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, @"Data\", @"UserData"));
+		}
 	}
 
 	public static void Load()
