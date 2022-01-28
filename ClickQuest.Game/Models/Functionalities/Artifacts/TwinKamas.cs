@@ -6,7 +6,7 @@ using ClickQuest.Game.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
-// After clicking on a monster, strike again after a 1s delay.
+// After clicking on an Enemy, strike again after a 1s delay.
 // The second attack can critically hit, as well as apply on-hit effects (such as poison).
 public class TwinKamas : ArtifactFunctionality
 {

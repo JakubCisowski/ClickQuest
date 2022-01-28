@@ -1,4 +1,5 @@
-﻿using ClickQuest.Game.DataTypes.Enums;
+﻿using System;
+using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
@@ -12,7 +13,7 @@ public class PoisonedNagaKnife : ArtifactFunctionality
 	{
 		if (clickedEnemy is Monster monster)
 		{
-			CombatHelper.DealDamageToEnemy(clickedEnemy, (int)(monster.Health * DamageDealtPercentage), DamageType.Magic);
+			CombatHelper.DealDamageToEnemy(clickedEnemy, (int)Math.Ceiling(monster.Health * DamageDealtPercentage), DamageType.Magic);
 		}
 	}
 

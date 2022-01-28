@@ -31,21 +31,21 @@ public class BloodstoneStaff : ArtifactFunctionality
 
 	public override void OnDealingClickDamage(ref int clickDamage, DamageType clickDamageType)
 	{
-		var bonusDamage = (int)(clickDamage * _stackList.Count * DamageModifierPerStack);
+		var bonusDamage = (int)Math.Ceiling(clickDamage * _stackList.Count * DamageModifierPerStack);
 
 		clickDamage += bonusDamage;
 	}
 
 	public override void OnDealingPoisonDamage(ref int poisonDamage)
 	{
-		var bonusDamage = (int)(poisonDamage * _stackList.Count * DamageModifierPerStack);
+		var bonusDamage = (int)Math.Ceiling(poisonDamage * _stackList.Count * DamageModifierPerStack);
 
 		poisonDamage += bonusDamage;
 	}
 
 	public override void OnDealingAuraDamage(ref int auraDamage)
 	{
-		var bonusDamage = (int)(auraDamage * _stackList.Count * DamageModifierPerStack);
+		var bonusDamage = (int)Math.Ceiling(auraDamage * _stackList.Count * DamageModifierPerStack);
 
 		auraDamage += bonusDamage;
 	}

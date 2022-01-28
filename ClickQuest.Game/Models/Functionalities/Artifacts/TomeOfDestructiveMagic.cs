@@ -1,4 +1,5 @@
-﻿using ClickQuest.Game.DataTypes.Enums;
+﻿using System;
+using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
@@ -12,7 +13,7 @@ public class TomeOfDestructiveMagic : ArtifactFunctionality
 	
 	public override void OnDealingPoisonDamage(ref int poisonDamage)
 	{
-		int convertedDamage = (int)(poisonDamage * DamageConversionRatio);
+		int convertedDamage = (int)Math.Ceiling(poisonDamage * DamageConversionRatio);
 		poisonDamage = 0;
 		
 		CombatHelper.DealDamageToCurrentEnemy(convertedDamage, DamageType.Magic);
@@ -20,7 +21,7 @@ public class TomeOfDestructiveMagic : ArtifactFunctionality
 
 	public override void OnDealingMagicDamage(ref int magicDamage)
 	{
-		magicDamage = (int)(magicDamage * MagicDamageIncreaseRatio);
+		magicDamage = (int)Math.Ceiling(magicDamage * MagicDamageIncreaseRatio);
 	}
 
 	public TomeOfDestructiveMagic()

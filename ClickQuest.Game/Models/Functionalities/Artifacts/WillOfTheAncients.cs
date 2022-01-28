@@ -1,4 +1,5 @@
-﻿using static ClickQuest.Game.Helpers.RandomnessHelper;
+﻿using System;
+using static ClickQuest.Game.Helpers.RandomnessHelper;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
@@ -13,7 +14,7 @@ public class WillOfTheAncients : ArtifactFunctionality
 
 		if (randomizedValue <= critChance)
 		{
-			poisonDamage = (int)(poisonDamage * critDamage);
+			poisonDamage = (int)Math.Ceiling(poisonDamage * critDamage);
 		}
 	}
 

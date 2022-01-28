@@ -1,4 +1,5 @@
-﻿using ClickQuest.Game.DataTypes.Enums;
+﻿using System;
+using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
@@ -18,7 +19,7 @@ public class GhostlyInfusion : ArtifactFunctionality
 
 			if (clickDamageType == DamageType.Normal)
 			{
-				var criticalDamageDealt = (int)(clickDamage * User.Instance.CurrentHero.CritDamage);
+				var criticalDamageDealt = (int)Math.Ceiling(clickDamage * User.Instance.CurrentHero.CritDamage);
 
 				CombatHelper.DealDamageToCurrentEnemy(criticalDamageDealt, DamageType.Critical);
 				CombatHelper.DealDamageToCurrentEnemy((int)(criticalDamageDealt * DamageModifier), DamageType.Magic);

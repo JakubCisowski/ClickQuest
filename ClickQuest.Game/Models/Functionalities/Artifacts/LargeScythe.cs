@@ -1,4 +1,5 @@
-﻿using ClickQuest.Game.UserInterface.Helpers;
+﻿using System;
+using ClickQuest.Game.UserInterface.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
@@ -11,7 +12,7 @@ public class LargeScythe : ArtifactFunctionality
 	{
 		if (InterfaceHelper.CurrentEnemy is Monster)
 		{
-			var bonusDamage = (int)(DamageIncreasePercent * baseDamage);
+			var bonusDamage = (int)Math.Ceiling(DamageIncreasePercent * baseDamage);
 
 			baseDamage += bonusDamage;
 		}

@@ -30,7 +30,7 @@ public class GladiatorsTrident : ArtifactFunctionality
 
 		if (_timer.IsEnabled)
 		{
-			var bonusDamage = (int)(baseDamage * DamageModifier);
+			var bonusDamage = (int)Math.Ceiling(baseDamage * DamageModifier);
 			baseDamage += bonusDamage;
 		}
 	}

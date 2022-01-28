@@ -1,4 +1,6 @@
-﻿namespace ClickQuest.Game.Models.Functionalities.Artifacts;
+﻿using System;
+
+namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
 // Blessings on you have a doubled effectiveness.
 public class WritOfExcellence : ArtifactFunctionality
@@ -7,7 +9,7 @@ public class WritOfExcellence : ArtifactFunctionality
 
 	public override void OnBlessingStarted(Blessing blessing)
 	{
-		blessing.Buff = (int)(blessing.Buff * EffectivenessIncrease);
+		blessing.Buff = (int)Math.Ceiling(blessing.Buff * EffectivenessIncrease);
 	}
 
 	public WritOfExcellence()

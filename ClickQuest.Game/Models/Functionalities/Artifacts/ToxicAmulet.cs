@@ -1,13 +1,15 @@
-﻿namespace ClickQuest.Game.Models.Functionalities.Artifacts;
+﻿using System;
+
+namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
 // Your poison damage is increased by 20%.
 public class ToxicAmulet : ArtifactFunctionality
 {
-	private const double PoisonDamageModifier = 1.2;
+	private const double PoisonDamageModifier = 0.2;
 
 	public override void OnDealingPoisonDamage(ref int poisonDamage)
 	{
-		var bonusPoisonDamage = (int)(poisonDamage * PoisonDamageModifier);
+		var bonusPoisonDamage = (int)Math.Ceiling(poisonDamage * PoisonDamageModifier);
 
 		poisonDamage += bonusPoisonDamage;
 	}

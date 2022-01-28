@@ -15,7 +15,7 @@ public class KoboldsShiny : ArtifactFunctionality
 
 	public override void OnDealingAuraDamage(ref int auraDamage)
 	{
-		auraDamage = (int)(auraDamage * AuraDamageReductionModifier);
+		auraDamage = (int)Math.Ceiling(auraDamage * AuraDamageReductionModifier);
 	}
 
 	public KoboldsShiny()

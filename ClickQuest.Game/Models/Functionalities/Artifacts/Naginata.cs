@@ -42,7 +42,7 @@ public class Naginata : ArtifactFunctionality
 		{
 			_wasMonsterOneshot = false;
 
-			experienceGained = (int)(experienceGained * ExperienceModifier);
+			experienceGained = (int)Math.Ceiling(experienceGained * ExperienceModifier);
 		}
 	}
 

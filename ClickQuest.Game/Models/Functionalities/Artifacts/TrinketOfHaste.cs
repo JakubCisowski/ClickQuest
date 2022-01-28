@@ -1,4 +1,6 @@
-﻿namespace ClickQuest.Game.Models.Functionalities.Artifacts;
+﻿using System;
+
+namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
 // Quests take 25% less time to complete.
 public class TrinketOfHaste : ArtifactFunctionality
@@ -7,7 +9,7 @@ public class TrinketOfHaste : ArtifactFunctionality
 
 	public override void OnQuestStarted(Quest quest)
 	{
-		quest.Duration -= (int)(quest.Duration * QuestTimeReduced);
+		quest.Duration -= (int)Math.Ceiling(quest.Duration * QuestTimeReduced);
 	}
 
 	public TrinketOfHaste()

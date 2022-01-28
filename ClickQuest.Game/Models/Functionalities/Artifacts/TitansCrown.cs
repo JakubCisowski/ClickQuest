@@ -1,4 +1,6 @@
-﻿namespace ClickQuest.Game.Models.Functionalities.Artifacts;
+﻿using System;
+
+namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
 // All experience gained is increased by 30%.
 public class TitansCrown : ArtifactFunctionality
@@ -7,7 +9,7 @@ public class TitansCrown : ArtifactFunctionality
 
 	public override void OnExperienceGained(ref int experienceGained)
 	{
-		var bonusExperience = (int)(experienceGained * BonusExperienceMultiplier);
+		var bonusExperience = (int)Math.Ceiling(experienceGained * BonusExperienceMultiplier);
 		experienceGained += bonusExperience;
 	}
 

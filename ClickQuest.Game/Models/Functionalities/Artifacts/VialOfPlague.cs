@@ -1,4 +1,5 @@
-﻿using ClickQuest.Game.DataTypes.Enums;
+﻿using System;
+using ClickQuest.Game.DataTypes.Enums;
 using ClickQuest.Game.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
@@ -26,7 +27,7 @@ public class VialOfPlague : ArtifactFunctionality
 
 		if (_clickCount == ClickThreshold)
 		{
-			var damageDealt = _currentEnemy is Monster ? (int)(_currentEnemy.Health * DamageAgainstMonsters) : (int)(_currentEnemy.Health * DamageAgainstBosses);
+			var damageDealt = _currentEnemy is Monster ? (int)Math.Ceiling(_currentEnemy.Health * DamageAgainstMonsters) : (int)Math.Ceiling(_currentEnemy.Health * DamageAgainstBosses);
 			CombatHelper.DealDamageToEnemy(_currentEnemy, damageDealt, DamageType.Magic);
 
 			_clickCount = 0;
