@@ -43,7 +43,7 @@ public partial class PriestPage : Page
 
 		foreach (var pattern in listOfPatterns)
 		{
-			result.Add(GameAssets.Blessings.FirstOrDefault(x => x.Id == pattern.Id));
+			result.Add(GameAssets.Blessings.FirstOrDefault(x => x.Id == pattern.VendorItemId));
 		}
 
 		return result;

@@ -67,8 +67,19 @@ public partial class ShopOfferPatternsPanel : UserControl
 		var nameBox = new ComboBox
 		{
 			Name = "NameBox",
-			Margin = new Thickness(10)
+			Margin = new Thickness(10),
 		};
+
+		switch (_dataContext.VendorItemType)
+		{
+			case RewardType.Recipe:
+				nameBox.ItemsSource = GameAssets.Recipes.Select(x => x.Name);
+				nameBox.SelectedValue = GameAssets.Recipes.FirstOrDefault(x => x.Id == _dataContext.VendorItemId)?.Name;
+				break;
+			
+			// todo: add other types here
+		}
+		
 		nameBox.SelectionChanged += NameBox_SelectionChanged;
 		_controls.Add(nameBox.Name, nameBox);
 
@@ -78,8 +89,8 @@ public partial class ShopOfferPatternsPanel : UserControl
 			ItemsSource = Enum.GetValues(typeof(RewardType)),
 			Margin = new Thickness(10)
 		};
-		vendorTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
 		vendorTypeBox.SelectedValue = selectedVendorPattern.VendorItemType;
+		vendorTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
 		_controls.Add(vendorTypeBox.Name, vendorTypeBox);
 
 		var valueBox = new TextBox

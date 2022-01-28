@@ -32,7 +32,7 @@ public static class GameAssetsHelper
 
 		PostLoad();
 
-		// Refresh Pages collection in order to  rearrange page bindings.
+		// Refresh Pages collection in order to rearrange page bindings.
 		GameAssets.RefreshPages();
 
 		GameAssets.CurrentPage = GameAssets.Pages["MainMenu"];

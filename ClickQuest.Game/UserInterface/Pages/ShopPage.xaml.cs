@@ -76,7 +76,7 @@ public partial class ShopPage : Page
 	{
 		var listOfPatterns = GameAssets.ShopOffer.Take(User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Trading]);
 
-		return listOfPatterns.Select(pattern => GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.Id)).ToList();
+		return listOfPatterns.Select(pattern => GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.VendorItemId)).ToList();
 	}
 
 	private void TownButton_Click(object sender, RoutedEventArgs e)

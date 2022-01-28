@@ -67,7 +67,9 @@ public partial class PriestOfferPatternsPanel : UserControl
 		var nameBox = new ComboBox
 		{
 			Name = "NameBox",
-			Margin = new Thickness(10)
+			Margin = new Thickness(10),
+			ItemsSource = GameAssets.Blessings.Select(x=>x.Name),
+			SelectedValue = GameAssets.Blessings.FirstOrDefault(x => x.Id == _dataContext.VendorItemId)?.Name
 		};
 		nameBox.SelectionChanged += NameBox_SelectionChanged;
 		_controls.Add(nameBox.Name, nameBox);
@@ -78,8 +80,8 @@ public partial class PriestOfferPatternsPanel : UserControl
 			ItemsSource = Enum.GetValues(typeof(RewardType)),
 			Margin = new Thickness(10)
 		};
-		vendorTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
 		vendorTypeBox.SelectedValue = selectedVendorPattern.VendorItemType;
+		vendorTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
 		_controls.Add(vendorTypeBox.Name, vendorTypeBox);
 
 		var valueBox = new TextBox
