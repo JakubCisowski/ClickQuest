@@ -12,7 +12,7 @@ public class PoisonedNagaKnife : ArtifactFunctionality
 	{
 		if (clickedEnemy is Monster monster)
 		{
-			CombatHelper.DealDamageToEnemy(clickedEnemy, (int)(monster.Health * DamageDealtPercentage), DamageType.Artifact);
+			CombatHelper.DealDamageToEnemy(clickedEnemy, (int)(monster.Health * DamageDealtPercentage), DamageType.Magic);
 		}
 	}
 

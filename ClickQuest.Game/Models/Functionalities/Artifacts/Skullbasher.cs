@@ -20,7 +20,7 @@ public class Skullbasher : ArtifactFunctionality
 
 		_isNextClickEmpowered = false;
 
-		CombatHelper.DealDamageToEnemy(clickedEnemy, DamageDealt, DamageType.Artifact);
+		CombatHelper.DealDamageToEnemy(clickedEnemy, DamageDealt, DamageType.Magic);
 	}
 
 	public override void OnRegionLeave()

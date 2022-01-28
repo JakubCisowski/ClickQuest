@@ -16,8 +16,8 @@ public class AffixFunctionality
 	{
 	}
 	
-	// Used to modify or trigger an effect based on the amount of artifact damage dealt.
-	public virtual void OnDealingArtifactDamage(ref int artifactDamage)
+	// Used to modify or trigger an effect based on the amount of magic damage dealt.
+	public virtual void OnDealingMagicDamage(ref int magicDamage)
 	{
 	}
 }

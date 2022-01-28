@@ -56,7 +56,7 @@ public class RodOfSummoning : ArtifactFunctionality
 	{
 		var totalFamiliarDamageModifier = BaseFamiliarClickDamageModifier + FamiliarClickDamageModifierPerStack * _stacksCount;
 		var damage = (int)Math.Ceiling(User.Instance.CurrentHero.ClickDamage * totalFamiliarDamageModifier);
-		CombatHelper.DealDamageToCurrentEnemy(damage, DamageType.Artifact);
+		CombatHelper.DealDamageToCurrentEnemy(damage, DamageType.Magic);
 
 		_familiarAttacksCount++;
 

@@ -70,7 +70,7 @@ public static class ColorsHelper
 				brush = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeOnHit");
 				break;
 
-			case DamageType.Artifact:
+			case DamageType.Magic:
 				brush = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeArtifact");
 				break;
 		}

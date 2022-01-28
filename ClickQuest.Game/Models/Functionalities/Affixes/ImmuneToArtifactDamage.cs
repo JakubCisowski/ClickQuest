@@ -2,15 +2,15 @@
 
 namespace ClickQuest.Game.Models.Functionalities.Affixes;
 
-public class ImmuneToArtifactDamage : AffixFunctionality
+public class ImmuneToMagicDamage : AffixFunctionality
 {
-	public override void OnDealingArtifactDamage(ref int artifactDamage)
+	public override void OnDealingMagicDamage(ref int magicDamage)
 	{
-		artifactDamage = 0;
+		magicDamage = 0;
 	}
 
-	public ImmuneToArtifactDamage()
+	public ImmuneToMagicDamage()
 	{
-		Affix = Affix.ImmuneToArtifactDamage;
+		Affix = Affix.ImmuneToMagicDamage;
 	}
 }

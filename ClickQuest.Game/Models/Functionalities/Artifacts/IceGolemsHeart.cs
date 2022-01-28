@@ -34,7 +34,7 @@ public class IceGolemsHeart : ArtifactFunctionality
 
 		if (isEnemyAMonster && isEnemyInThreshold && _stackCount == MaxStacks)
 		{
-			CombatHelper.DealDamageToEnemy(_currentEnemy, _currentEnemy.CurrentHealth, DamageType.Artifact);
+			CombatHelper.DealDamageToEnemy(_currentEnemy, _currentEnemy.CurrentHealth, DamageType.Magic);
 		}
 	}
 

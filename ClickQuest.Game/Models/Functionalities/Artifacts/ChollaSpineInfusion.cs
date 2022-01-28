@@ -20,7 +20,7 @@ public class ChollaSpineInfusion : ArtifactFunctionality
 			_currentEnemy = clickedEnemy;
 		}
 
-		CombatHelper.DealDamageToEnemy(clickedEnemy, DamagePerSpine * _spineCount, DamageType.Artifact);
+		CombatHelper.DealDamageToEnemy(clickedEnemy, DamagePerSpine * _spineCount, DamageType.Magic);
 		_spineCount++;
 	}
 

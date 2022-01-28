@@ -21,13 +21,13 @@ public class GhostlyInfusion : ArtifactFunctionality
 				var criticalDamageDealt = (int)(clickDamage * User.Instance.CurrentHero.CritDamage);
 
 				CombatHelper.DealDamageToCurrentEnemy(criticalDamageDealt, DamageType.Critical);
-				CombatHelper.DealDamageToCurrentEnemy((int)(criticalDamageDealt * DamageModifier), DamageType.Artifact);
+				CombatHelper.DealDamageToCurrentEnemy((int)(criticalDamageDealt * DamageModifier), DamageType.Magic);
 
 				clickDamage = 0;
 			}
 			else if (clickDamageType == DamageType.Critical)
 			{
-				CombatHelper.DealDamageToCurrentEnemy((int)(clickDamage * DamageModifier), DamageType.Artifact);
+				CombatHelper.DealDamageToCurrentEnemy((int)(clickDamage * DamageModifier), DamageType.Magic);
 			}
 		}
 	}

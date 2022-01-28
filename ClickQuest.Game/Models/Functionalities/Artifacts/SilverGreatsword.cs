@@ -2,7 +2,7 @@
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
-// All non-artifact damage dealt by you is increased by 10% against Bosses.
+// All non-magic damage dealt by you is increased by 10% against Bosses.
 public class SilverGreatsword : ArtifactFunctionality
 {
 	private const double DamageIncreasePercent = 0.10;

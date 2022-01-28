@@ -61,7 +61,7 @@ public class DeathInfusedBoneTalisman : ArtifactFunctionality
 			damage *= DamageModifier;
 		}
 
-		CombatHelper.DealDamageToCurrentEnemy(damage, DamageType.Artifact);
+		CombatHelper.DealDamageToCurrentEnemy(damage, DamageType.Magic);
 
 		if (_ticksCount == TicksNumber)
 		{

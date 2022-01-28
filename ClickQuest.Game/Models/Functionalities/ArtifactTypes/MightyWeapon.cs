@@ -14,7 +14,7 @@ public class MightyWeapon : ArtifactTypeFunctionality
 	{
 		var bonusDamageDealt = (int)Math.Ceiling(User.Instance.CurrentHero.ClickDamage * ClickDamagePercentageAsBonusDamage * User.Instance.CurrentHero.CritDamage);
 
-		CombatHelper.DealDamageToEnemy(clickedEnemy, bonusDamageDealt, DamageType.Artifact);
+		CombatHelper.DealDamageToEnemy(clickedEnemy, bonusDamageDealt, DamageType.Magic);
 	}
 
 	public MightyWeapon()

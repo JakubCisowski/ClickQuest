@@ -26,7 +26,7 @@ public class LightningBolt : ArtifactFunctionality
 
 			if (actualTimeSpan <= requiredTimeSpan)
 			{
-				CombatHelper.DealDamageToEnemy(clickedEnemy, DamageDealt, DamageType.Artifact);
+				CombatHelper.DealDamageToEnemy(clickedEnemy, DamageDealt, DamageType.Magic);
 			}
 
 			_clickTimes.Clear();

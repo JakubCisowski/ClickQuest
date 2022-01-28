@@ -36,7 +36,7 @@ public class Transcendence : ArtifactFunctionality
 	{
 		if (clickedEnemy is Monster monster)
 		{
-			CombatHelper.DealDamageToEnemy(monster, monster.CurrentHealth, DamageType.Artifact);
+			CombatHelper.DealDamageToEnemy(monster, monster.CurrentHealth, DamageType.Magic);
 		}
 	}
 

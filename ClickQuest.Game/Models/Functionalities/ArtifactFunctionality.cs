@@ -101,7 +101,7 @@ public class ArtifactFunctionality
 	{
 	}
 
-	// Used to modify or trigger an effect based on the amount of any damage dealt (click, on-hit, poison, aura) except artifact damage.
+	// Used to modify or trigger an effect based on the amount of any damage dealt (click, on-hit, poison, aura) except magic damage.
 	// Triggered: before dealing any damage to an enemy, and before triggering other OnDealingXDamage effects.
 	// damage - the amount of damage dealt.
 	public virtual void OnDealingDamage(ref int damage)
@@ -129,10 +129,10 @@ public class ArtifactFunctionality
 	{
 	}
 
-	// Used to modify or trigger an effect based on the amount of artifact damage dealt.
-	// Triggered: before dealing artifact damage to an enemy, but after triggering the OnDealingDamage effect.
-	// artifactDamage - the amount of damage dealt.
-	public virtual void OnDealingArtifactDamage(ref int artifactDamage)
+	// Used to modify or trigger an effect based on the amount of magic damage dealt.
+	// Triggered: before dealing magic (artifact) damage to an enemy, but after triggering the OnDealingDamage effect.
+	// magicDamage - the amount of damage dealt.
+	public virtual void OnDealingMagicDamage(ref int magicDamage)
 	{
 	}
 

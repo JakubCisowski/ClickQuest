@@ -6,7 +6,7 @@ using ClickQuest.Game.DataTypes.Enums;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
-// Killing a Monster grants a 10% increase to all non-artifact damage dealt for 5 seconds. Stacks additively up to 5 times. Each stack has its own duration.
+// Killing a Monster grants a 10% increase to all non-magic damage dealt for 5 seconds. Stacks additively up to 5 times. Each stack has its own duration.
 public class BloodstoneStaff : ArtifactFunctionality
 {
 	private const double DamageModifierPerStack = 0.1;

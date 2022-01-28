@@ -2,7 +2,7 @@
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
-// All non-artifact damage dealt by you is increased by 15% against Monsters (excluding Bosses).
+// All non-magic damage dealt by you is increased by 15% against Monsters (excluding Bosses).
 public class LargeScythe : ArtifactFunctionality
 {
 	private const double DamageIncreasePercent = 0.15;

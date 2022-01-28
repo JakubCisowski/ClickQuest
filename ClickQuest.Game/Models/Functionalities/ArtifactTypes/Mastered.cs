@@ -47,7 +47,7 @@ public class Mastered : ArtifactTypeFunctionality
 	
 	private void ExplosionTimer_Tick(object source, EventArgs e)
 	{
-		CombatHelper.DealDamageToCurrentEnemy(InterfaceHelper.CurrentEnemy.CurrentHealth, DamageType.Artifact);
+		CombatHelper.DealDamageToCurrentEnemy(InterfaceHelper.CurrentEnemy.CurrentHealth, DamageType.Magic);
 		
 		_timer.Stop();
 		_canTrigger = true;

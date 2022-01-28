@@ -289,7 +289,7 @@ public static class FloatingTextHelper
 				icon.Kind = PackIconKind.CursorDefaultOutline;
 				break;
 
-			case DamageType.Artifact:
+			case DamageType.Magic:
 				icon.Kind = PackIconKind.DiamondStone;
 				break;
 		}

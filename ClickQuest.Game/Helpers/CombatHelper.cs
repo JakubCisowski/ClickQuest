@@ -58,7 +58,7 @@ public static class CombatHelper
 		}
 
 		// Trigger on dealing (any) damage artifact event.
-		if (damageType != DamageType.Artifact)
+		if (damageType != DamageType.Magic)
 		{
 			foreach (var equippedArtifact in User.Instance.CurrentHero.EquippedArtifacts)
 			{
@@ -83,8 +83,8 @@ public static class CombatHelper
 					equippedArtifact.ArtifactFunctionality.OnDealingAuraDamage(ref damage);
 					break;
 				
-				case DamageType.Artifact:
-					equippedArtifact.ArtifactFunctionality.OnDealingArtifactDamage(ref damage);
+				case DamageType.Magic:
+					equippedArtifact.ArtifactFunctionality.OnDealingMagicDamage(ref damage);
 					break;
 			}
 		}
@@ -100,8 +100,8 @@ public static class CombatHelper
 						affix.OnDealingPoisonDamage(ref damage);
 						break;
 					
-					case DamageType.Artifact:
-						affix.OnDealingArtifactDamage(ref damage);
+					case DamageType.Magic:
+						affix.OnDealingMagicDamage(ref damage);
 						break;
 					
 					case DamageType.Normal or DamageType.Critical:

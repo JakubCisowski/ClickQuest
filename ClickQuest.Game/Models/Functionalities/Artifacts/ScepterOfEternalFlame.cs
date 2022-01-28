@@ -48,7 +48,7 @@ public class ScepterOfEternalFlame : ArtifactFunctionality
 
 		const int damage = BurningDamage / TicksNumber;
 
-		CombatHelper.DealDamageToCurrentEnemy(damage, DamageType.Artifact);
+		CombatHelper.DealDamageToCurrentEnemy(damage, DamageType.Magic);
 
 		if (_ticksCount == TicksNumber)
 		{

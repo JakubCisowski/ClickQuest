@@ -72,7 +72,7 @@ public static class DescriptionsHelper
 					coloredRun.Foreground = ColorsHelper.GetDamageTypeColor(DamageType.OnHit);
 					break;
 				case "ARTIFACT":
-					coloredRun.Foreground = ColorsHelper.GetDamageTypeColor(DamageType.Artifact);
+					coloredRun.Foreground = ColorsHelper.GetDamageTypeColor(DamageType.Magic);
 					break;
 
 				// Class 

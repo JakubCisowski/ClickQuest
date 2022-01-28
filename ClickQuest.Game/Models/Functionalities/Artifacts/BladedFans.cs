@@ -51,7 +51,7 @@ public class BladedFans : ArtifactFunctionality
 	private void ExplosionTimer_Tick(object source, EventArgs e)
 	{
 		_timer.Stop();
-		CombatHelper.DealDamageToCurrentEnemy(_damageStored * DamageModifier, DamageType.Artifact);
+		CombatHelper.DealDamageToCurrentEnemy(_damageStored * DamageModifier, DamageType.Magic);
 		_damageStored = 0;
 	}
 }
