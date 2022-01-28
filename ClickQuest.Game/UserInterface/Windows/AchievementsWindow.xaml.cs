@@ -34,7 +34,7 @@ public partial class AchievementsWindow : Window
 
 	public new static void Show()
 	{
-		_instance.Visibility = Visibility.Visible;
+		Instance.Visibility = Visibility.Visible;
 	}
 
 	public void RefreshAchievementsPanel()

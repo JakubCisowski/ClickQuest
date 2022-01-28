@@ -52,7 +52,7 @@ public partial class App : Application
 		{
 			var e = args.Exception;
 		
-			string directoryPath = Path.Combine(Environment.CurrentDirectory, "Data", "Logs");
+			string directoryPath = Path.Combine(Environment.CurrentDirectory, "Logs");
 			string filePath = Path.Combine(directoryPath, $"CrashLog {DateTime.Now.ToString("dd-MM-yyyy HH-mm-ss")}.txt");
 		
 			if (!Directory.Exists(directoryPath))
