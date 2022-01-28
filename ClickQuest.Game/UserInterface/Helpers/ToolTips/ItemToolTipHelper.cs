@@ -78,7 +78,10 @@ public static class ItemToolTipHelper
 					FontFamily = fontFamilyRegularDemiBold
 				});
 				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(new Run($"{artifact.ArtifactType.ToString()}"));
+
+				// Split capital letters.
+				var artifactTypeString = string.Concat(artifact.ArtifactType.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
+				toolTipBlock.Inlines.Add(new Run($"{artifactTypeString}"));
 
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(GenerateTextSeparator());

@@ -321,6 +321,10 @@ public partial class EquipmentPage : Page
 						equippedArtifactsChanged = true;
 					}
 				}
+				else
+				{
+					AlertBox.Show("You cannot equip two of the same artifacts!", MessageBoxButton.OK);
+				}
 			}
 
 			// Refresh Artifacts tab.

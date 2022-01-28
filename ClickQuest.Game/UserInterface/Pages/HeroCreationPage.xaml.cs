@@ -73,7 +73,7 @@ public partial class HeroCreationPage : Page
 		{
 			artifact.CreateMythicTag("FunctionSeedingArtifacts");
 
-			CollectionsHelper.AddItemToCollection(artifact, User.Instance.CurrentHero.Artifacts);
+			CollectionsHelper.AddItemToCollection(artifact, User.Instance.CurrentHero.Artifacts, 2);
 		}
 	}
 
