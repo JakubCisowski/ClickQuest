@@ -93,20 +93,11 @@ public partial class ShopOfferPatternsPanel : UserControl
 		vendorTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
 		_controls.Add(vendorTypeBox.Name, vendorTypeBox);
 
-		var valueBox = new TextBox
-		{
-			Name = "ValueBox",
-			Text = selectedVendorPattern.Value.ToString(),
-			Margin = new Thickness(10)
-		};
-		_controls.Add(valueBox.Name, valueBox);
-
 		// Set TextBox and ComboBox hints.
 		HintAssist.SetHint(idBox, "ID");
 		HintAssist.SetHint(vendorIdBox, "VendorItemId");
 		HintAssist.SetHint(nameBox, "Name");
 		HintAssist.SetHint(vendorTypeBox, "VendorTypeBox");
-		HintAssist.SetHint(valueBox, "Value");
 
 		foreach (var elem in _controls)
 		{
@@ -222,7 +213,6 @@ public partial class ShopOfferPatternsPanel : UserControl
 
 		vendorPattern.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
 		vendorPattern.VendorItemId = int.Parse((_controls["VendorIdBox"] as TextBox).Text);
-		vendorPattern.Value = int.Parse((_controls["ValueBox"] as TextBox).Text);
 		vendorPattern.VendorItemType = (RewardType)Enum.Parse(typeof(RewardType), (_controls["VendorTypeBox"] as ComboBox).SelectedValue.ToString());
 
 		// Check if this Id is already in the collection (modified).

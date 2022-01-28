@@ -85,29 +85,16 @@ public partial class DungeonGroupsPanel : UserControl
 			Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Exceptional).ToString(),
 			Margin = new Thickness(10)
 		};
-		var rarityBoxMythic = new TextBox
-		{
-			Name = "RarityBoxMythic",
-			Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Mythic).ToString(),
-			Margin = new Thickness(10)
-		};
 		var rarityBoxMasterwork = new TextBox
 		{
 			Name = "RarityBoxMasterwork",
 			Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Masterwork).ToString(),
 			Margin = new Thickness(10)
 		};
-
-		var descriptionBox = new TextBox
+		var rarityBoxMythic = new TextBox
 		{
-			Name = "DescriptionBox",
-			TextWrapping = TextWrapping.Wrap,
-			VerticalAlignment = VerticalAlignment.Stretch,
-			MinWidth = 280,
-			AcceptsReturn = true,
-			VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-			Height = 160,
-			Text = selectedDungeonGroup.Description,
+			Name = "RarityBoxMythic",
+			Text = selectedDungeonGroup.KeyRequirementRarities.Count(x => x == Rarity.Mythic).ToString(),
 			Margin = new Thickness(10)
 		};
 
@@ -121,7 +108,6 @@ public partial class DungeonGroupsPanel : UserControl
 		HintAssist.SetHint(rarityBoxExceptional, "Exceptional Keys Requirement");
 		HintAssist.SetHint(rarityBoxMasterwork, "Masterwork Keys Requirement");
 		HintAssist.SetHint(rarityBoxMythic, "Mythic Keys Requirement");
-		HintAssist.SetHint(descriptionBox, "Description");
 
 		// Add controls to Dictionary for easier navigation.
 		_controls.Clear();
@@ -133,9 +119,8 @@ public partial class DungeonGroupsPanel : UserControl
 		_controls.Add(rarityBoxFine.Name, rarityBoxFine);
 		_controls.Add(rarityBoxSuperior.Name, rarityBoxSuperior);
 		_controls.Add(rarityBoxExceptional.Name, rarityBoxExceptional);
-		_controls.Add(rarityBoxMythic.Name, rarityBoxMythic);
 		_controls.Add(rarityBoxMasterwork.Name, rarityBoxMasterwork);
-		_controls.Add(descriptionBox.Name, descriptionBox);
+		_controls.Add(rarityBoxMythic.Name, rarityBoxMythic);
 
 		foreach (var elem in _controls)
 		{
@@ -179,7 +164,6 @@ public partial class DungeonGroupsPanel : UserControl
 		dungeonGroup.Id = int.Parse((_controls["IdBox"] as TextBox).Text);
 		dungeonGroup.Name = (_controls["NameBox"] as TextBox).Text;
 		dungeonGroup.Color = (_controls["ColorBox"] as TextBox).Text;
-		dungeonGroup.Description = (_controls["DescriptionBox"] as TextBox).Text;
 		dungeonGroup.KeyRequirementRarities = new List<Rarity>();
 
 		dungeonGroup.KeyRequirementRarities = dungeonGroup.KeyRequirementRarities.Concat(AddKeyRequirementRarities(_controls["RarityBoxGeneral"] as TextBox, Rarity.General)).ToList();

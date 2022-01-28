@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿// Comment or uncomment this line: based on whether we want to write JSON contents encrypted or not.
+#define WRITE_ENCRYPTED
+#define READ_ENCRYPTED
+
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -32,9 +36,12 @@ public static class GameAssetsHelper
 
 	public static List<T> LoadContent<T>(string jsonFilePath)
 	{
+#if READ_ENCRYPTED
 		var encryptedJson = File.ReadAllBytes(jsonFilePath);
-
 		var json = EncryptionHelper.DecryptJsonUsingAes(encryptedJson);
+#else
+		var json = File.ReadAllText(jsonFilePath);
+#endif
 
 		var objects = JsonSerializer.Deserialize<List<T>>(json);
 
@@ -80,9 +87,12 @@ public static class GameAssetsHelper
 			Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
 			IgnoreReadOnlyProperties = true
 		});
-
+		
+#if WRITE_ENCRYPTED
 		var encryptedJson = EncryptionHelper.EncryptJsonUsingAes(json);
-
 		File.WriteAllBytes(jsonFilePath, encryptedJson);
+#else
+		File.WriteAllText(jsonFilePath, json);
+#endif
 	}
 }
