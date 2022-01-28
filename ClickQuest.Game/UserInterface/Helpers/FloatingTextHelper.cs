@@ -128,8 +128,8 @@ public static class FloatingTextHelper
 		var randomizedPositionY = mousePosition.Y + Rng.Next(-maximumPositionOffset, maximumPositionOffset + 1);
 
 		// Clamp the positions, so that floating numbers do not follow cursor when user hovers over stats panel, equipment panel, etc.
-		randomizedPositionX = Math.Clamp(randomizedPositionX, -90, canvasActualWidth + 45);
-		randomizedPositionY = Math.Clamp(randomizedPositionY, -115, canvasActualHeight + 90);
+		randomizedPositionX = Math.Clamp(randomizedPositionX, 390, 950);
+		randomizedPositionY = Math.Clamp(randomizedPositionY, 180, 560);
 
 		return (randomizedPositionX, randomizedPositionY);
 	}

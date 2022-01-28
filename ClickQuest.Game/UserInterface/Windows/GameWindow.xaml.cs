@@ -51,8 +51,14 @@ public partial class GameWindow : Window, INotifyPropertyChanged
 		}
 
 		const int animationDuration = 1;
-		const int maximumPositionOffset = 50;
+		const int maximumPositionOffset = 70;
 		var mousePosition = Mouse.GetPosition(FloatingTextAnimationCanvas);
+
+		if (damageType == DamageType.Aura)
+		{
+			// Center of the button - so that aura damage is always randomized regardless of mouse position.
+			mousePosition = new Point(680, 380);
+		}
 
 		var panel = FloatingTextHelper.CreateFloatingTextCombatBorder(damage, damageType);
 
