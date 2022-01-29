@@ -80,7 +80,7 @@ public static class DescriptionsHelper
 					case "ONHIT":
 						coloredRun.Foreground = ColorsHelper.GetDamageTypeColor(DamageType.OnHit);
 						break;
-					case "ARTIFACT":
+					case "MAGIC":
 						coloredRun.Foreground = ColorsHelper.GetDamageTypeColor(DamageType.Magic);
 						break;
 
