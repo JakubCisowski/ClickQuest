@@ -30,7 +30,10 @@ public static class DescriptionsHelper
 			if (indexOfTagOpeningStart == -1)
 			{
 				// Tag opening not found - create a normal Run with the remainder of description.
-				descriptionInlines.Add(new Run(description));
+				descriptionInlines.Add(new Run(description)
+				{
+					Foreground = defaultBrush
+				});
 				break;
 			}
 
@@ -38,7 +41,10 @@ public static class DescriptionsHelper
 			{
 				// If tag opening index is not zero, first create a normal Run with that part of description.
 				var taglessPart = description.Substring(0, indexOfTagOpeningStart);
-				descriptionInlines.Add(new Run(taglessPart));
+				descriptionInlines.Add(new Run(taglessPart)
+				{
+					Foreground = defaultBrush
+				});
 				description = description.Remove(0, indexOfTagOpeningStart);
 				indexOfTagOpeningStart = 0;
 			}

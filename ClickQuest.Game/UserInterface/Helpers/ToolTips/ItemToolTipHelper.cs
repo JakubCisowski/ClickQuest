@@ -141,7 +141,6 @@ public static class ItemToolTipHelper
 				{
 					inline.FontSize = (double)Application.Current.FindResource("FontSizeToolTipArtifactTypeDescription");
 					inline.FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic");
-					inline.Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipArtifactTypeDescription");
 					toolTipBlock.Inlines.Add(inline);
 				}
 
