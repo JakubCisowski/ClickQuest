@@ -20,6 +20,6 @@ public class MightyWeapon : ArtifactTypeFunctionality
 	public MightyWeapon()
 	{
 		ArtifactType = ArtifactType.MightyWeapon;
-		Description = "For each Mighty Weapon you have equipped, deal additional on-hit damage. The damage is equal to 5% of your Click Damage multiplied by your Critical Click Damage.";
+		Description = "For each Mighty Weapon you have equipped, deal additional on-hit damage. The damage is equal to <NORMAL>5%</NORMAL> of your <NORMAL>Click Damage</NORMAL> multiplied by your <CRITICAL>Critical Click Damage</CRITICAL>.";
 	}
 }

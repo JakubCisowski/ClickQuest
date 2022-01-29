@@ -35,7 +35,7 @@ public class Mastered : ArtifactTypeFunctionality
 	public Mastered()
 	{
 		ArtifactType = ArtifactType.Mastered;
-		Description = "On kill, chance to cause an explosion that instantly kills the next Monster. Only works on Regions. Chance is equal to 10% per Mastered artifact equipped.";
+		Description = "On kill, chance to cause an explosion that instantly kills the next Monster. Only works on Regions. Chance is equal to <BOLD>10%</BOLD> per Mastered artifact equipped.";
 		_canTrigger = true;
 
 		_timer = new DispatcherTimer()

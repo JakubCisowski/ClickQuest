@@ -31,7 +31,7 @@ public class Pocket : ArtifactTypeFunctionality
 	public Pocket()
 	{
 		ArtifactType = ArtifactType.Pocket;
-		Description = "On kill, chance to gain a random Dungeon Key. The chance is calculated independently of regular Dungeon Key drops.";
+		Description = "On kill, chance to gain a random <BOLD>Dungeon Key</BOLD>. The chance is calculated independently of regular Dungeon Key drops.";
 
 		_dungeonKeyRarityChances = new List<double>()
 		{

@@ -55,6 +55,6 @@ public class Amulet : ArtifactTypeFunctionality
 	public Amulet()
 	{
 		ArtifactType = ArtifactType.Amulet;
-		Description = "If you have exactly two Accessories and an Amulet equipped, increase your Click Damage, Poison Damage, Critical Click Chance and Critical Click Damage by 20%.";
+		Description = "If you have exactly two Accessories and an Amulet equipped, increase your <NORMAL>Click Damage</NORMAL>, <POISON>Poison Damage</POISON>, <CRITICAL>Critical Click Chance</CRITICAL> and <CRITICAL>Critical Click Damage</CRITICAL> by <BOLD>20%</BOLD>.";
 	}
 }

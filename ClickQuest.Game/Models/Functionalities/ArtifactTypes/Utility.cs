@@ -23,6 +23,6 @@ public class Utility : ArtifactTypeFunctionality
 	public Utility()
 	{
 		ArtifactType = ArtifactType.Utility;
-		Description = "Each equipped Utility Artifact increases the amount of Experience you gain by 10%.";
+		Description = "Each equipped Utility Artifact increases the amount of Experience you gain by <BOLD>10%</BOLD>.";
 	}
 }

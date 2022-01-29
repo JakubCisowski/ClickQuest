@@ -46,6 +46,6 @@ public class Spellbook : ArtifactTypeFunctionality
 	public Spellbook()
 	{
 		ArtifactType = ArtifactType.Spellbook;
-		Description = "Each equipped Spellbook increases your Aura Speed by 5% (additively). If you have three Spellbooks equipped, this bonus is doubled, to a total of 30%.";
+		Description = "Each equipped Spellbook increases your <AURA>Aura Speed</AURA> by <AURA>5%</AURA> (additively). If you have three Spellbooks equipped, this bonus is doubled, to a total of <AURA>30%</AURA>.";
 	}
 }

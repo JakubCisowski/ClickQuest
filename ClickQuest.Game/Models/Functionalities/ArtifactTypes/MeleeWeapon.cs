@@ -37,6 +37,6 @@ public class MeleeWeapon : ArtifactTypeFunctionality
 	public MeleeWeapon()
 	{
 		ArtifactType = ArtifactType.MeleeWeapon;
-		Description = "If you have exactly two Melee Weapons equipped, gain 10 Click Damage and 10% Critical Click Chance.";
+		Description = "If you have exactly two Melee Weapons equipped, gain <NORMAL>10 Click Damage</NORMAL> and <CRITICAL>10% Critical Click Chance</CRITICAL>.";
 	}
 }
