@@ -104,7 +104,7 @@
 					</StackPanel.ToolTip>
 
 					<!-- Click damage icon-->
-					<materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="{StaticResource BrushDamageTypeNormal}" VerticalAlignment="Center" />
+					<materialDesign:PackIcon Width="22" Height="22" Kind="CursorDefault" Foreground="{StaticResource BrushFloatingTextNormal}" VerticalAlignment="Center" />
 					<!-- Click damage text-->
 					<TextBlock FontSize="18" Margin="3" Text="Damage:" VerticalAlignment="Center" />
 				</StackPanel>

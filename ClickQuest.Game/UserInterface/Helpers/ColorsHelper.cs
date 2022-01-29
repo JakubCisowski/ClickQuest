@@ -44,14 +44,21 @@ public static class ColorsHelper
 		return brush;
 	}
 
-	public static SolidColorBrush GetDamageTypeColor(DamageType damageType)
+	public static SolidColorBrush GetDamageTypeColor(DamageType damageType, bool floatingText = false)
 	{
 		SolidColorBrush brush = null;
 
 		switch (damageType)
 		{
 			case DamageType.Normal:
-				brush = (SolidColorBrush)Application.Current.FindResource("BrushFloatingTextNormal");
+				if (floatingText)
+				{
+					brush = (SolidColorBrush)Application.Current.FindResource("BrushFloatingTextNormal");
+				}
+				else
+				{
+					brush = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeNormal");
+				}
 				break;
 
 			case DamageType.Critical:

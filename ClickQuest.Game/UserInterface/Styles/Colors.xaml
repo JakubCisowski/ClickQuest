@@ -24,7 +24,7 @@
 	<Color x:Key="ColorRarity5">#FFD700</Color>
 
 	<!-- Damage type-->
-	<Color x:Key="ColorDamageTypeNormal">#666666</Color>
+	<Color x:Key="ColorDamageTypeNormal">#e0e0e0</Color>
 	<Color x:Key="ColorFloatingTextNormal">#000000</Color>
 	<Color x:Key="ColorDamageTypeCritical">#FF4242</Color>
 	<Color x:Key="ColorDamageTypePoison">#008500</Color>
@@ -81,11 +81,11 @@
 	
 	<SolidColorBrush x:Key="BrushMythicTag" Color="{StaticResource ColorMythicTag}" />
 	<SolidColorBrush x:Key="BrushFontToolTipBase" Color="{StaticResource ColorWhite}" />
-	<SolidColorBrush x:Key="BrushFontToolTipDescription" Color="{StaticResource ColorWhite}" />
+	<SolidColorBrush x:Key="BrushFontToolTipDescription" Color="{StaticResource ColorGray4}" />
 	<SolidColorBrush x:Key="BrushFontToolTipExtraInfo" Color="{StaticResource ColorGray4}" />
 	<SolidColorBrush x:Key="BrushFontToolTipLore" Color="{StaticResource ColorGray5}" /> <!-- Artifact lore = Material description -->
 	<SolidColorBrush x:Key="BrushFontToolTipArtifactTypeName" Color="{StaticResource ColorGray1}" />
-	<SolidColorBrush x:Key="BrushFontToolTipArtifactTypeDescription" Color="{StaticResource ColorGray5}" />
-	<SolidColorBrush x:Key="BrushFontToolTipArtifactTypeTag" Color="{StaticResource ColorGray3}" />
+	<SolidColorBrush x:Key="BrushFontToolTipArtifactTypeDescription" Color="{StaticResource ColorGray4}" />
+	<SolidColorBrush x:Key="BrushFontToolTipArtifactTypeTag" Color="{StaticResource ColorGray4}" />
 
 </ResourceDictionary>

@@ -199,21 +199,21 @@ public static class ItemToolTipHelper
 				toolTipBlock.Inlines.Add(GenerateTextSeparator());
 				toolTipBlock.Inlines.Add(new LineBreak());
 
+				toolTipBlock.Inlines.Add(new Run("Artifact Type")
+				{
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipArtifactTypeTag"),
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipArtifactTypeTag"),
+					FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic")
+				});
+
+				toolTipBlock.Inlines.Add(new LineBreak());
+
 				// Split capital letters.
 				var artifactTypeString = string.Concat(recipe.Artifact.ArtifactType.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
 				toolTipBlock.Inlines.Add(new Run($"{artifactTypeString}")
 				{
 					FontSize = (double)Application.Current.FindResource("FontSizeToolTipArtifactTypeName"),
 					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipArtifactTypeName"),
-					FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic")
-				});
-
-				toolTipBlock.Inlines.Add(new LineBreak());
-
-				toolTipBlock.Inlines.Add(new Run("Artifact Type")
-				{
-					FontSize = (double)Application.Current.FindResource("FontSizeToolTipArtifactTypeTag"),
-					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipArtifactTypeTag"),
 					FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic")
 				});
 

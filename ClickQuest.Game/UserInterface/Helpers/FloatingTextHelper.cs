@@ -149,7 +149,7 @@ public static class FloatingTextHelper
 			Orientation = Orientation.Horizontal
 		};
 
-		var textBrush = ColorsHelper.GetDamageTypeColor(damageType);
+		var textBrush = ColorsHelper.GetDamageTypeColor(damageType, true);
 
 		var icon = GetFloatingCombatIcon(damageType);
 		icon.Foreground = textBrush;
