@@ -52,6 +52,6 @@ public class Idle : ArtifactTypeFunctionality
 	public Idle()
 	{
 		ArtifactType = ArtifactType.Idle;
-		Description = "Gain bonuses based on the amount of Idle Artifacts equipped: (1) Quest durations reduced by 10%; (2) Also, Quest XP increased by 20%; (3) Also, the Quantity of all items received from Quests increased by 1.";
+		Description = "Gain bonuses based on the amount of Idle Artifacts equipped:<NEWLINE></NEWLINE>(1) Quest durations reduced by 10%<NEWLINE></NEWLINE>(2) Also, Quest XP increased by 20%<NEWLINE></NEWLINE>(3) Also, the Quantity of all items received from Quests increased by 1";
 	}
 }

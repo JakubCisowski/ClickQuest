@@ -8,7 +8,7 @@
         Title="GameWindow" Height="768" Width="1366" Background="Transparent" AllowsTransparency="True"
         ResizeMode="NoResize" WindowStyle="None">
 
-	<Border BorderThickness="3" CornerRadius="7">
+	<Border BorderThickness="3" CornerRadius="8">
 		<Border.Background>
 			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
 				<GradientStop Color="{DynamicResource ColorAccent1}" Offset="0.25" />

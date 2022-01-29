@@ -20,9 +20,22 @@
 	<!-- FANCY-->
 	<FontFamily x:Key="FontFancy">/UserInterface/Fonts/#Courgette Regular</FontFamily>
 
-	<!-- SIZES -->
-	<system:Double x:Key="FontSizeToolTipName">20</system:Double>
+	<!-- TOOLTIP FONTS -->
+	<!-- TOOLTIP FONTS SIZES -->
+	<system:Double x:Key="FontSizeToolTipBase">16</system:Double>
+
+	<system:Double x:Key="FontSizeToolTipName">24</system:Double>
+	<system:Double x:Key="FontSizeToolTipRarityString">16</system:Double>
+	<system:Double x:Key="FontSizeToolTipArtifactDescription">18</system:Double> 
+	<system:Double x:Key="FontSizeToolTipArtifactTypeTag">14</system:Double>
+	<system:Double x:Key="FontSizeToolTipArtifactTypeName">18</system:Double>
+	<system:Double x:Key="FontSizeToolTipArtifactTypeDescription">16</system:Double> 
 	<system:Double x:Key="FontSizeToolTipIngredientText">18</system:Double>
+	<system:Double x:Key="FontSizeToolTipLore">16</system:Double> <!-- Artifact lore = Material description -->
+	<system:Double x:Key="FontSizeToolTipMythicTag">16</system:Double>
+	<system:Double x:Key="FontSizeToolTipExtraInfo">16</system:Double>
+	<system:Double x:Key="FontSizeToolTipValue">16</system:Double>
+	<!-- TOOLTIP FONTS COLORS -->
 
 
 </ResourceDictionary>

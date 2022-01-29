@@ -56,7 +56,7 @@ public partial class PriestPage : Page
 
 		if (User.Instance.Gold >= blessingBlueprint.Value)
 		{
-			var buyRuns = new List<Run>
+			var buyInlines = new List<Inline>
 			{
 				new Run("Are you sure you want to buy "),
 				new Run($"{blessingBlueprint.Name}")
@@ -72,7 +72,7 @@ public partial class PriestPage : Page
 				new Run("?")
 			};
 
-			var result = AlertBox.Show(buyRuns);
+			var result = AlertBox.Show(buyInlines);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -103,7 +103,7 @@ public partial class PriestPage : Page
 		}
 		else
 		{
-			var notEnoughGoldRuns = new List<Run>
+			var notEnoughGoldInlines = new List<Inline>
 			{
 				new Run("You do not have enough gold to buy this blessing.\nIt costs "),
 				new Run($"{blessingBlueprint.Value} gold")
@@ -114,7 +114,7 @@ public partial class PriestPage : Page
 				new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses.")
 			};
 
-			AlertBox.Show(notEnoughGoldRuns, MessageBoxButton.OK);
+			AlertBox.Show(notEnoughGoldInlines, MessageBoxButton.OK);
 		}
 	}
 

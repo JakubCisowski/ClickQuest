@@ -459,7 +459,7 @@ public partial class InfoPage
 			TextWrapping = TextWrapping.Wrap
 		};
 
-		descriptionTextBlock.Inlines.AddRange(DescriptionsHelper.GenerateDescriptionRuns(description));
+		descriptionTextBlock.Inlines.AddRange(DescriptionsHelper.GenerateDescriptionInlines(description, (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipDescription")));
 
 		InfoPanel.Children.Add(nameTextBlock);
 		InfoPanel.Children.Add(separator);

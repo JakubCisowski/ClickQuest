@@ -98,7 +98,7 @@ public partial class ShopPage : Page
 
 		if (item.Rarity == Rarity.Mythic)
 		{
-			var sellItemRuns = new List<Run>
+			var sellItemInlines = new List<Inline>
 			{
 				new Run("Are you sure you want to sell "),
 				new Run($"{amount}x {item.Name}")
@@ -108,7 +108,7 @@ public partial class ShopPage : Page
 				new Run("?")
 			};
 
-			var result = AlertBox.Show(sellItemRuns);
+			var result = AlertBox.Show(sellItemInlines);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -142,7 +142,7 @@ public partial class ShopPage : Page
 
 		if (User.Instance.Gold >= recipe.Value)
 		{
-			var buyRecipeRuns = new List<Run>
+			var buyRecipeInlines = new List<Inline>
 			{
 				new Run("Are you sure you want to buy "),
 				new Run($"{recipe.Name}")
@@ -158,7 +158,7 @@ public partial class ShopPage : Page
 				new Run("?")
 			};
 
-			var result = AlertBox.Show(buyRecipeRuns);
+			var result = AlertBox.Show(buyRecipeInlines);
 			if (result == MessageBoxResult.No)
 			{
 				return;
@@ -175,7 +175,7 @@ public partial class ShopPage : Page
 		}
 		else
 		{
-			var notEnoughGoldRuns = new List<Run>
+			var notEnoughGoldInlines = new List<Inline>
 			{
 				new Run("You do not have enough gold to buy this item.\nIt costs "),
 				new Run($"{recipe.Value} gold")
@@ -186,7 +186,7 @@ public partial class ShopPage : Page
 				new Run(".\nYou can get more gold by completing quests and selling loot from monsters and bosses.")
 			};
 
-			AlertBox.Show(notEnoughGoldRuns, MessageBoxButton.OK);
+			AlertBox.Show(notEnoughGoldInlines, MessageBoxButton.OK);
 		}
 	}
 

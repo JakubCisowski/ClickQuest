@@ -75,7 +75,7 @@ public partial class BlacksmithPage : Page
 		{
 			if (material.Rarity == Rarity.Mythic)
 			{
-				var listOfRuns = new List<Run>
+				var listOfInlines = new List<Inline>
 				{
 					new Run("Are you sure you want to melt "),
 					new Run($"{material.Name}")
@@ -91,7 +91,7 @@ public partial class BlacksmithPage : Page
 					new Run(".\nYou can get bonus ingots if you master Melter specialization (by melting more materials).")
 				};
 
-				var result = AlertBox.Show(listOfRuns);
+				var result = AlertBox.Show(listOfInlines);
 
 				if (result == MessageBoxResult.No)
 				{
@@ -105,7 +105,7 @@ public partial class BlacksmithPage : Page
 		}
 		else if (b.CommandParameter is Artifact artifact)
 		{
-			var listOfRuns = new List<Run>
+			var listOfInlines = new List<Inline>
 			{
 				new Run("Are you sure you want to melt "),
 				new Run($"{artifact.Name}")
@@ -124,14 +124,14 @@ public partial class BlacksmithPage : Page
 					continue;
 				}
 
-				listOfRuns.Add(new Run($"\n{ingotAmounts[i]}x {(Rarity)i} Ingots")
+				listOfInlines.Add(new Run($"\n{ingotAmounts[i]}x {(Rarity)i} Ingots")
 				{
 					Foreground = ColorsHelper.GetRarityColor((Rarity)i),
 					FontFamily = (FontFamily)FindResource("FontRegularDemiBold")
 				});
 			}
 
-			var result = AlertBox.Show(listOfRuns);
+			var result = AlertBox.Show(listOfInlines);
 
 			if (result == MessageBoxResult.No)
 			{
@@ -234,7 +234,7 @@ public partial class BlacksmithPage : Page
 	{
 		if (!MeetsCraftingRequirement(recipe))
 		{
-			var listOfRuns = new List<Run>
+			var listOfInlines = new List<Inline>
 			{
 				new Run("You dont meet Craftsman specialization requirements to craft "),
 				new Run($"{recipe.Rarity.ToString()}")
@@ -245,7 +245,7 @@ public partial class BlacksmithPage : Page
 				new Run(" artifacts.\nCraft more common items in order to master it.")
 			};
 
-			AlertBox.Show(listOfRuns, MessageBoxButton.OK);
+			AlertBox.Show(listOfInlines, MessageBoxButton.OK);
 			return;
 		}
 
@@ -282,7 +282,7 @@ public partial class BlacksmithPage : Page
 
 	private bool CheckAndRemoveIngots(Recipe recipe)
 	{
-		var ingotRaritiesRuns = new List<Run>();
+		var ingotRaritiesInlines = new List<Inline>();
 
 		var ingotAmounts = CalculateIngotAmountsWhenCraftingArtifact(recipe.Artifact);
 
@@ -293,7 +293,7 @@ public partial class BlacksmithPage : Page
 				continue;
 			}
 
-			ingotRaritiesRuns.Add(new Run($"\n{ingotAmounts[i]}x {(Rarity)i} Ingots")
+			ingotRaritiesInlines.Add(new Run($"\n{ingotAmounts[i]}x {(Rarity)i} Ingots")
 			{
 				Foreground = ColorsHelper.GetRarityColor((Rarity)i)
 			});
@@ -301,7 +301,7 @@ public partial class BlacksmithPage : Page
 
 		if (!CheckIfUserHasEnoughIngots(recipe))
 		{
-			var notEnoughIngotsRuns = new List<Run>
+			var notEnoughIngotsInlines = new List<Inline>
 			{
 				new Run("You dont have enough ingots to craft "),
 				new Run($"{recipe.Name}")
@@ -310,14 +310,14 @@ public partial class BlacksmithPage : Page
 				},
 				new Run(".\nIngots required:")
 			};
-			notEnoughIngotsRuns.AddRange(ingotRaritiesRuns);
-			notEnoughIngotsRuns.Add(new Run("\n\nGet more ingots by melting materials/artifacts or try to craft this artifact using materials."));
+			notEnoughIngotsInlines.AddRange(ingotRaritiesInlines);
+			notEnoughIngotsInlines.Add(new Run("\n\nGet more ingots by melting materials/artifacts or try to craft this artifact using materials."));
 
-			AlertBox.Show(notEnoughIngotsRuns, MessageBoxButton.OK);
+			AlertBox.Show(notEnoughIngotsInlines, MessageBoxButton.OK);
 			return false;
 		}
 
-		var enoughIngotsRuns = new List<Run>
+		var enoughIngotsInlines = new List<Inline>
 		{
 			new Run("Are you sure you want to craft "),
 			new Run($"{recipe.Name}")
@@ -326,10 +326,10 @@ public partial class BlacksmithPage : Page
 			},
 			new Run(" using ingots?\nIngots required:")
 		};
-		enoughIngotsRuns.AddRange(ingotRaritiesRuns);
-		enoughIngotsRuns.Add(new Run("\n\nThis action will destroy all ingots and this recipe."));
+		enoughIngotsInlines.AddRange(ingotRaritiesInlines);
+		enoughIngotsInlines.Add(new Run("\n\nThis action will destroy all ingots and this recipe."));
 
-		var result = AlertBox.Show(enoughIngotsRuns);
+		var result = AlertBox.Show(enoughIngotsInlines);
 
 		if (result == MessageBoxResult.No)
 		{
@@ -387,7 +387,7 @@ public partial class BlacksmithPage : Page
 	{
 		if (!CheckIfHeroHasEnoughMaterials(recipe))
 		{
-			var notEnoughMaterialsRuns = new List<Run>
+			var notEnoughMaterialsInlines = new List<Inline>
 			{
 				new Run("You don't have enough materials to craft "),
 				new Run($"{recipe.Name}")
@@ -396,14 +396,14 @@ public partial class BlacksmithPage : Page
 				},
 				new Run(".\n")
 			};
-			notEnoughMaterialsRuns.AddRange(ItemToolTipHelper.GenerateRecipeIngredientsRuns(recipe));
-			notEnoughMaterialsRuns.Add(new Run("\n\nGet more materials by completing quests and killing monsters and bosses or try to craft this artifact using ingots."));
+			notEnoughMaterialsInlines.AddRange(ItemToolTipHelper.GenerateRecipeIngredientsInlines(recipe));
+			notEnoughMaterialsInlines.Add(new Run("\n\nGet more materials by completing quests and killing monsters and bosses or try to craft this artifact using ingots."));
 
-			AlertBox.Show(notEnoughMaterialsRuns, MessageBoxButton.OK);
+			AlertBox.Show(notEnoughMaterialsInlines, MessageBoxButton.OK);
 			return false;
 		}
 
-		var enoughMaterialsRuns = new List<Run>
+		var enoughMaterialsInlines = new List<Inline>
 		{
 			new Run("Are you sure you want to craft "),
 			new Run($"{recipe.Name}")
@@ -412,10 +412,10 @@ public partial class BlacksmithPage : Page
 			},
 			new Run(" using materials?\n")
 		};
-		enoughMaterialsRuns.AddRange(ItemToolTipHelper.GenerateRecipeIngredientsRuns(recipe));
-		enoughMaterialsRuns.Add(new Run("\n\nThis action will destroy all materials and this recipe."));
+		enoughMaterialsInlines.AddRange(ItemToolTipHelper.GenerateRecipeIngredientsInlines(recipe));
+		enoughMaterialsInlines.Add(new Run("\n\nThis action will destroy all materials and this recipe."));
 
-		var result = AlertBox.Show(enoughMaterialsRuns);
+		var result = AlertBox.Show(enoughMaterialsInlines);
 
 		if (result == MessageBoxResult.No)
 		{
@@ -537,9 +537,9 @@ public partial class BlacksmithPage : Page
 			toolTipBlock.Inlines.Add(new Run("Craft with:"));
 			toolTipBlock.Inlines.Add(new LineBreak());
 
-			var listOfRuns = ItemToolTipHelper.GenerateRecipeIngredientsRuns(button.CommandParameter as Recipe);
+			var listOfInlines = ItemToolTipHelper.GenerateRecipeIngredientsInlines(button.CommandParameter as Recipe);
 
-			foreach (var run in listOfRuns)
+			foreach (var run in listOfInlines)
 			{
 				run.FontFamily = (FontFamily)FindResource("FontRegularDemiBold");
 				toolTipBlock.Inlines.Add(run);

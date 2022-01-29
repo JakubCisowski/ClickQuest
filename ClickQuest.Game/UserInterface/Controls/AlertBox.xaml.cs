@@ -52,7 +52,7 @@ public partial class AlertBox : Window
 		return _result;
 	}
 
-	public static MessageBoxResult Show(List<Run> textRuns, MessageBoxButton buttons = MessageBoxButton.YesNo)
+	public static MessageBoxResult Show(List<Inline> textRuns, MessageBoxButton buttons = MessageBoxButton.YesNo)
 	{
 		// Display a complex message that supports coloring and styling on the screen.
 

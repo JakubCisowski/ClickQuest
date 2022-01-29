@@ -56,8 +56,7 @@
 	<SolidColorBrush x:Key="BrushAccent1" Color="{DynamicResource ColorAccent1}" />
 	<SolidColorBrush x:Key="BrushAccent2" Color="{DynamicResource ColorAccent2}" />
 	<SolidColorBrush x:Key="BrushAccent3" Color="{DynamicResource ColorAccent3}" />
-	<SolidColorBrush x:Key="BrushToolTip" Color="{StaticResource ColorToolTip}" Opacity="0.8" />
-	<SolidColorBrush x:Key="BrushMythicTag" Color="{StaticResource ColorMythicTag}" />
+	<SolidColorBrush x:Key="BrushToolTip" Color="{StaticResource ColorToolTip}" Opacity="0.9" />
 	<SolidColorBrush x:Key="BrushGray2" Color="{StaticResource ColorGray2}" />
 	<SolidColorBrush x:Key="BrushRed" Color="{StaticResource ColorRed}" />
 	<SolidColorBrush x:Key="BrushGold" Color="{StaticResource ColorGold}" />
@@ -78,5 +77,15 @@
 	<SolidColorBrush x:Key="BrushDamageTypeOnHit" Color="{StaticResource ColorDamageTypeOnHit}" />
 	<SolidColorBrush x:Key="BrushDamageTypeArtifact" Color="{StaticResource ColorDamageTypeArtifact}" />
 	<SolidColorBrush x:Key="BrushFloatingTextNormal" Color="{StaticResource ColorFloatingTextNormal}" />
+
+	
+	<SolidColorBrush x:Key="BrushMythicTag" Color="{StaticResource ColorMythicTag}" />
+	<SolidColorBrush x:Key="BrushFontToolTipBase" Color="{StaticResource ColorWhite}" />
+	<SolidColorBrush x:Key="BrushFontToolTipDescription" Color="{StaticResource ColorWhite}" />
+	<SolidColorBrush x:Key="BrushFontToolTipExtraInfo" Color="{StaticResource ColorGray4}" />
+	<SolidColorBrush x:Key="BrushFontToolTipLore" Color="{StaticResource ColorGray5}" /> <!-- Artifact lore = Material description -->
+	<SolidColorBrush x:Key="BrushFontToolTipArtifactTypeName" Color="{StaticResource ColorGray1}" />
+	<SolidColorBrush x:Key="BrushFontToolTipArtifactTypeDescription" Color="{StaticResource ColorGray5}" />
+	<SolidColorBrush x:Key="BrushFontToolTipArtifactTypeTag" Color="{StaticResource ColorGray3}" />
 
 </ResourceDictionary>

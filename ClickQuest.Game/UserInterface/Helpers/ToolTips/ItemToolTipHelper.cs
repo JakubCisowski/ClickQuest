@@ -34,13 +34,15 @@ public static class ItemToolTipHelper
 			{
 				toolTipBlock.Inlines.Add(new Run($"{material.Name}")
 				{
-					FontSize = fontSizeToolTipname
+					FontSize = fontSizeToolTipname,
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipBase")
 				});
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(new Run($"*{material.RarityString}*")
 				{
 					Foreground = ColorsHelper.GetRarityColor(material.Rarity),
-					FontFamily = fontFamilyRegularDemiBold
+					FontFamily = fontFamilyRegularDemiBold,
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipRarityString")
 				});
 
 				toolTipBlock.Inlines.Add(new LineBreak());
@@ -50,17 +52,23 @@ public static class ItemToolTipHelper
 				toolTipBlock.Inlines.Add(new Run($"{material.Description}")
 				{
 					FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"),
-					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGray3")
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipLore"),
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipLore")
 				});
 
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(GenerateTextSeparator());
 				toolTipBlock.Inlines.Add(new LineBreak());
 
-				toolTipBlock.Inlines.Add(new Run("Value: "));
+				toolTipBlock.Inlines.Add(new Run("Value: ")
+				{
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipBase"),
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipValue")
+				});
 				toolTipBlock.Inlines.Add(new Run($"{material.Value} gold")
 				{
-					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGold")
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGold"),
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipValue")
 				});
 			}
 				break;
@@ -69,23 +77,26 @@ public static class ItemToolTipHelper
 			{
 				toolTipBlock.Inlines.Add(new Run($"{artifact.Name}")
 				{
-					FontSize = fontSizeToolTipname
+					FontSize = fontSizeToolTipname,
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipBase")
 				});
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(new Run($"*{artifact.RarityString}*")
 				{
 					Foreground = ColorsHelper.GetRarityColor(artifact.Rarity),
-					FontFamily = fontFamilyRegularDemiBold
+					FontFamily = fontFamilyRegularDemiBold,
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipRarityString")
 				});
 
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(GenerateTextSeparator());
 				toolTipBlock.Inlines.Add(new LineBreak());
 
-				var listOfDescriptionRuns = GenerateDescriptionRuns(artifact.Description);
-				foreach (var run in listOfDescriptionRuns)
+				var listOfDescriptionInlines = GenerateDescriptionInlines(artifact.Description, (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipDescription"));
+				foreach (var inline in listOfDescriptionInlines)
 				{
-					toolTipBlock.Inlines.Add(run);
+					inline.FontSize = (double)Application.Current.FindResource("FontSizeToolTipArtifactDescription");
+					toolTipBlock.Inlines.Add(inline);
 				}
 
 				if (!string.IsNullOrEmpty(artifact.ExtraInfo))
@@ -95,7 +106,8 @@ public static class ItemToolTipHelper
 					toolTipBlock.Inlines.Add(new Run($"{artifact.ExtraInfo}")
 					{
 						FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"),
-						Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGray5")
+						Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipExtraInfo"),
+						FontSize = (double)Application.Current.FindResource("FontSizeToolTipExtraInfo")
 					});
 				}
 
@@ -103,17 +115,35 @@ public static class ItemToolTipHelper
 				toolTipBlock.Inlines.Add(GenerateTextSeparator());
 				toolTipBlock.Inlines.Add(new LineBreak());
 
+				toolTipBlock.Inlines.Add(new Run("Artifact Type")
+				{
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipArtifactTypeTag"),
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipArtifactTypeTag"),
+					FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic")
+				});
+
+				toolTipBlock.Inlines.Add(new LineBreak());
+
 				// Split capital letters.
 				var artifactTypeString = string.Concat(artifact.ArtifactType.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
-				toolTipBlock.Inlines.Add(new Run($"{artifactTypeString}"));
-				
-				toolTipBlock.Inlines.Add(new LineBreak());
-				
-				toolTipBlock.Inlines.Add(new Run($"{artifact.ArtifactFunctionality.ArtifactTypeFunctionality.Description}")
+				toolTipBlock.Inlines.Add(new Run($"{artifactTypeString}")
 				{
-					FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"),
-					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGray5")
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipArtifactTypeName"),
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipArtifactTypeName"),
+					FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic")
 				});
+
+				toolTipBlock.Inlines.Add(new LineBreak());
+
+				var listOfTypeDescriptionInlines = GenerateDescriptionInlines(artifact.ArtifactFunctionality.ArtifactTypeFunctionality.Description, (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipArtifactTypeDescription"));
+
+				foreach (var inline in listOfTypeDescriptionInlines)
+				{
+					inline.FontSize = (double)Application.Current.FindResource("FontSizeToolTipArtifactTypeDescription");
+					inline.FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic");
+					inline.Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipArtifactTypeDescription");
+					toolTipBlock.Inlines.Add(inline);
+				}
 
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(GenerateTextSeparator());
@@ -122,7 +152,8 @@ public static class ItemToolTipHelper
 				toolTipBlock.Inlines.Add(new Run($"{artifact.Lore}")
 				{
 					FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic"),
-					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGray3")
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipLore"),
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipLore")
 				});
 
 				if (artifact.Rarity == Rarity.Mythic)
@@ -131,6 +162,7 @@ public static class ItemToolTipHelper
 					toolTipBlock.Inlines.Add(new LineBreak());
 					toolTipBlock.Inlines.Add(new Run($"{artifact.MythicTag}")
 					{
+						FontSize = (double)Application.Current.FindResource("FontSizeToolTipMythicTag"),
 						FontFamily = (FontFamily)Application.Current.FindResource("FontFancy"),
 						Foreground = (SolidColorBrush)Application.Current.FindResource("BrushMythicTag")
 					});
@@ -142,48 +174,84 @@ public static class ItemToolTipHelper
 			{
 				toolTipBlock.Inlines.Add(new Run($"{recipe.FullName}")
 				{
-					FontSize = fontSizeToolTipname
+					FontSize = fontSizeToolTipname,
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipBase")
 				});
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(new Run($"*{recipe.RarityString}*")
 				{
 					Foreground = ColorsHelper.GetRarityColor(recipe.Rarity),
-					FontFamily = fontFamilyRegularDemiBold
+					FontFamily = fontFamilyRegularDemiBold,
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipRarityString")
 				});
+
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(GenerateTextSeparator());
+				toolTipBlock.Inlines.Add(new LineBreak());
+
+				var listOfDescriptionInlines = GenerateDescriptionInlines(recipe.Description, (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipDescription"));
+				foreach (var inline in listOfDescriptionInlines)
+				{
+					inline.FontSize = (double)Application.Current.FindResource("FontSizeToolTipArtifactDescription");
+					toolTipBlock.Inlines.Add(inline);
+				}
+
+				toolTipBlock.Inlines.Add(new LineBreak());
+				toolTipBlock.Inlines.Add(GenerateTextSeparator());
 				toolTipBlock.Inlines.Add(new LineBreak());
 
 				// Split capital letters.
 				var artifactTypeString = string.Concat(recipe.Artifact.ArtifactType.ToString().Select(x => char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
-				toolTipBlock.Inlines.Add(new Run($"{artifactTypeString}"));
-
-				toolTipBlock.Inlines.Add(new LineBreak());
-				toolTipBlock.Inlines.Add(GenerateTextSeparator());
-				toolTipBlock.Inlines.Add(new LineBreak());
-
-				var listOfDescriptionRuns = GenerateDescriptionRuns(recipe.Description);
-				foreach (var run in listOfDescriptionRuns)
+				toolTipBlock.Inlines.Add(new Run($"{artifactTypeString}")
 				{
-					toolTipBlock.Inlines.Add(run);
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipArtifactTypeName"),
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipArtifactTypeName"),
+					FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic")
+				});
+
+				toolTipBlock.Inlines.Add(new LineBreak());
+
+				toolTipBlock.Inlines.Add(new Run("Artifact Type")
+				{
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipArtifactTypeTag"),
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipArtifactTypeTag"),
+					FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic")
+				});
+
+				toolTipBlock.Inlines.Add(new LineBreak());
+
+				var listOfTypeDescriptionInlines = GenerateDescriptionInlines(recipe.Artifact.ArtifactFunctionality.ArtifactTypeFunctionality.Description, (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipArtifactTypeDescription"));
+
+				foreach (var inline in listOfTypeDescriptionInlines)
+				{
+					inline.FontSize = (double)Application.Current.FindResource("FontSizeToolTipArtifactTypeDescription");
+					inline.FontFamily = (FontFamily)Application.Current.FindResource("FontRegularItalic");
+					toolTipBlock.Inlines.Add(inline);
 				}
 
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(GenerateTextSeparator());
 				toolTipBlock.Inlines.Add(new LineBreak());
 
-				var listOfIngredientRuns = GenerateRecipeIngredientsRuns(recipe);
-				foreach (var run in listOfIngredientRuns)
+				var listOfIngredientInlines = GenerateRecipeIngredientsInlines(recipe);
+				foreach (var inline in listOfIngredientInlines)
 				{
-					toolTipBlock.Inlines.Add(run);
+					toolTipBlock.Inlines.Add(inline);
 				}
 
 				toolTipBlock.Inlines.Add(new LineBreak());
 				toolTipBlock.Inlines.Add(GenerateTextSeparator());
 				toolTipBlock.Inlines.Add(new LineBreak());
 
-				toolTipBlock.Inlines.Add(new Run("Value: "));
+				toolTipBlock.Inlines.Add(new Run("Value: ")
+				{
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipBase"),
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipValue")
+				});
 				toolTipBlock.Inlines.Add(new Run($"{recipe.Value} gold")
 				{
-					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGold")
+					Foreground = (SolidColorBrush)Application.Current.FindResource("BrushGold"),
+					FontSize = (double)Application.Current.FindResource("FontSizeToolTipValue")
 				});
 			}
 				break;
@@ -311,10 +379,10 @@ public static class ItemToolTipHelper
 			questToolTipTextBlock.Inlines.Add(GenerateTextSeparator());
 			questToolTipTextBlock.Inlines.Add(new LineBreak());
 
-			var listOfIngredientRuns = GenerateQuestRewardRuns(currentQuest);
-			foreach (var run in listOfIngredientRuns)
+			var listOfIngredientInlines = GenerateQuestRewardInlines(currentQuest);
+			foreach (var inline in listOfIngredientInlines)
 			{
-				questToolTipTextBlock.Inlines.Add(run);
+				questToolTipTextBlock.Inlines.Add(inline);
 			}
 		}
 		else
@@ -328,35 +396,37 @@ public static class ItemToolTipHelper
 		return questToolTip;
 	}
 
-	public static List<Run> GenerateRecipeIngredientsRuns(Recipe recipe)
+	public static List<Inline> GenerateRecipeIngredientsInlines(Recipe recipe)
 	{
-		var ingredientRuns = new List<Run>
+		var ingredientInlines = new List<Inline>
 		{
 			new Run("Ingredients:\n")
-			{
-				FontSize = (double)Application.Current.FindResource("FontSizeToolTipIngredientText")
-			}
 		};
 
 		foreach (var ingredient in recipe.IngredientPatterns.OrderBy(x => x.RelatedMaterial.Rarity))
 		{
 			var relatedMaterial = ingredient.RelatedMaterial;
-			ingredientRuns.Add(new Run($"{ingredient.Quantity}x "));
-			ingredientRuns.Add(new Run($"{relatedMaterial.Name}")
+			ingredientInlines.Add(new Run($"{ingredient.Quantity}x "));
+			ingredientInlines.Add(new Run($"{relatedMaterial.Name}")
 			{
 				Foreground = ColorsHelper.GetRarityColor(relatedMaterial.Rarity)
 			});
-			ingredientRuns.Add(new Run("\n"));
+			ingredientInlines.Add(new Run("\n"));
 		}
 
-		ingredientRuns.RemoveAt(ingredientRuns.Count - 1);
+		ingredientInlines.RemoveAt(ingredientInlines.Count - 1);
 
-		return ingredientRuns;
+		foreach (var inline in ingredientInlines)
+		{
+			inline.FontSize = (double)Application.Current.FindResource("FontSizeToolTipIngredientText");
+		}
+
+		return ingredientInlines;
 	}
 
-	public static List<Run> GenerateQuestRewardRuns(Quest quest)
+	public static List<Inline> GenerateQuestRewardInlines(Quest quest)
 	{
-		var questRewardRuns = new List<Run>
+		var questRewardInlines = new List<Inline>
 		{
 			new Run("Rewards:\n")
 			{
@@ -366,13 +436,13 @@ public static class ItemToolTipHelper
 
 		foreach (var pattern in quest.QuestRewardPatterns)
 		{
-			questRewardRuns.Add(new Run($"{pattern.Quantity}x "));
+			questRewardInlines.Add(new Run($"{pattern.Quantity}x "));
 
 			switch (pattern.QuestRewardType)
 			{
 				case RewardType.Material:
 					var material = GameAssets.Materials.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
-					questRewardRuns.Add(new Run($"{material.Name}")
+					questRewardInlines.Add(new Run($"{material.Name}")
 					{
 						Foreground = ColorsHelper.GetRarityColor(material.Rarity)
 					});
@@ -381,7 +451,7 @@ public static class ItemToolTipHelper
 
 				case RewardType.Artifact:
 					var artifact = GameAssets.Artifacts.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
-					questRewardRuns.Add(new Run($"{artifact.Name}")
+					questRewardInlines.Add(new Run($"{artifact.Name}")
 					{
 						Foreground = ColorsHelper.GetRarityColor(artifact.Rarity)
 					});
@@ -390,7 +460,7 @@ public static class ItemToolTipHelper
 
 				case RewardType.Recipe:
 					var recipe = GameAssets.Recipes.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
-					questRewardRuns.Add(new Run($"{recipe.Name}")
+					questRewardInlines.Add(new Run($"{recipe.Name}")
 					{
 						Foreground = ColorsHelper.GetRarityColor(recipe.Rarity)
 					});
@@ -399,7 +469,7 @@ public static class ItemToolTipHelper
 
 				case RewardType.Ingot:
 					var ingot = GameAssets.Materials.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
-					questRewardRuns.Add(new Run($"{ingot.Name}")
+					questRewardInlines.Add(new Run($"{ingot.Name}")
 					{
 						Foreground = ColorsHelper.GetRarityColor(ingot.Rarity)
 					});
@@ -408,7 +478,7 @@ public static class ItemToolTipHelper
 
 				case RewardType.Blessing:
 					var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == pattern.QuestRewardId);
-					questRewardRuns.Add(new Run($"{blessing.Name}")
+					questRewardInlines.Add(new Run($"{blessing.Name}")
 					{
 						Foreground = ColorsHelper.GetRarityColor(blessing.Rarity)
 					});
@@ -416,12 +486,12 @@ public static class ItemToolTipHelper
 					break;
 			}
 
-			questRewardRuns.Add(new Run("\n"));
+			questRewardInlines.Add(new Run("\n"));
 		}
 
-		questRewardRuns.RemoveAt(questRewardRuns.Count - 1);
+		questRewardInlines.RemoveAt(questRewardInlines.Count - 1);
 
-		return questRewardRuns;
+		return questRewardInlines;
 	}
 
 	public static ToolTip GenerateUndiscoveredItemToolTip()
