@@ -456,10 +456,10 @@ public partial class InfoPage
 			TextAlignment = TextAlignment.Justify,
 			HorizontalAlignment = HorizontalAlignment.Center,
 			Margin = new Thickness(5),
-			TextWrapping = TextWrapping.Wrap
+			TextWrapping = TextWrapping.Wrap,
 		};
 
-		descriptionTextBlock.Inlines.AddRange(DescriptionsHelper.GenerateDescriptionInlines(description, (SolidColorBrush)Application.Current.FindResource("BrushFontToolTipDescription")));
+		descriptionTextBlock.Inlines.AddRange(DescriptionsHelper.GenerateDescriptionInlines(description, (SolidColorBrush)Application.Current.FindResource("BrushBlack")));
 
 		InfoPanel.Children.Add(nameTextBlock);
 		InfoPanel.Children.Add(separator);
