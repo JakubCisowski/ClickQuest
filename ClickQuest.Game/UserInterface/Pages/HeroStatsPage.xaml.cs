@@ -217,7 +217,7 @@ public partial class HeroStatsPage : Page
 	{
 		var currentBlessing = User.Instance.CurrentHero?.Blessing;
 
-		var binding = new Binding("DurationText")
+		var binding = new Binding("DurationStatsPanelText")
 		{
 			Source = currentBlessing
 		};
@@ -1251,6 +1251,8 @@ public partial class HeroStatsPage : Page
 		{
 			ingot.AddItem(100);
 		}
+
+		User.Instance.Gold += 100000;
 	}
 	#endif
 }

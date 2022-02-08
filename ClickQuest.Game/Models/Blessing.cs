@@ -20,7 +20,9 @@ public class Blessing : INotifyPropertyChanged, IIdentifiable
 	public event PropertyChangedEventHandler PropertyChanged;
 	private DispatcherTimer _timer;
 
-	public string DurationText { get; set; }
+	public string DurationStatsPanelText { get; set; }
+	
+	public string DurationPriestPageText => Duration % 60 == 0 ? $"{Duration / 60} min" : $"{Duration / 60} min {Duration % 60} sec"  ;
 
 	public int Id { get; set; }
 	public string Name { get; set; }
@@ -143,7 +145,7 @@ public class Blessing : INotifyPropertyChanged, IIdentifiable
 				break;
 		}
 
-		DurationText = "";
+		DurationStatsPanelText = "";
 
 		InterfaceHelper.RefreshBlessingInterfaceOnCurrentPage(Type);
 	}
@@ -160,7 +162,7 @@ public class Blessing : INotifyPropertyChanged, IIdentifiable
 
 	private void UpdateDurationText()
 	{
-		DurationText = $"{Name}\n{Duration / 60}m {Duration % 60}s";
+		DurationStatsPanelText = $"{Name}\n{Duration / 60}m {Duration % 60}s";
 	}
 
 	private void Timer_Tick(object source, EventArgs e)

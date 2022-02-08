@@ -312,9 +312,6 @@ public static class ItemToolTipHelper
 			});
 
 			blessingToolTipBlock.Inlines.Add(new LineBreak());
-			blessingToolTipBlock.Inlines.Add(new Run($"*{blessing.TypeString}*"));
-
-			blessingToolTipBlock.Inlines.Add(new LineBreak());
 			blessingToolTipBlock.Inlines.Add(GenerateTextSeparator());
 			blessingToolTipBlock.Inlines.Add(new LineBreak());
 
