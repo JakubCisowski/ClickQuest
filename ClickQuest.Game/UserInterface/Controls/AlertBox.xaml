@@ -12,7 +12,7 @@
 			<StackPanel>
 				<!-- Alert text -->
 				<Grid Height="Auto" MinHeight="95">
-					<TextBlock x:Name="ContentBox" VerticalAlignment="Center" HorizontalAlignment="Center" Width="410" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{StaticResource FontRegular}" />
+					<TextBlock x:Name="ContentBox" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="30" FontSize="20" Width="410" TextAlignment="Center" TextWrapping="Wrap" FontFamily="{StaticResource FontRegular}" />
 				</Grid>
 
 				<!-- Buttons -->
