@@ -29,6 +29,8 @@ public class Quest : INotifyPropertyChanged, IIdentifiable
 	public string Name { get; set; }
 
 	public int Duration { get; set; }
+	
+	public string DurationText => TimeSpan.FromSeconds(Duration).ToString(@"d\ \d\a\y\s\ h\ \h\o\u\r\s\ m\ \m\i\n\u\t\e\s\ s\ \s\e\c\o\n\d\s\ ").TrimStart(' ','d','a','y','o','u','r','i','n','t','e','h','m','s','c','d','0');
 
 	public string Description { get; set; }
 

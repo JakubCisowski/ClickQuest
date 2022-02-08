@@ -23,7 +23,7 @@
 			</StackPanel>
 
 			<!-- Duration info text -->
-			<TextBlock x:Name="QuestDuration" Grid.Row="1" Text="{Binding Path=Duration, StringFormat=Duration: {0}}" FontSize="24" TextAlignment="Center" Margin="5" VerticalAlignment="Center" />
+			<TextBlock x:Name="QuestDuration" Grid.Row="1" Text="{Binding Path=DurationText, StringFormat=Duration: {0}}" FontSize="24" TextAlignment="Center" Margin="5" VerticalAlignment="Center" />
 
 			<!-- Description text -->
 			<TextBlock x:Name="QuestDescription" Grid.Row="2" Text="{Binding Path=Description}" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="5" FontFamily="{StaticResource FontFancy}" />
