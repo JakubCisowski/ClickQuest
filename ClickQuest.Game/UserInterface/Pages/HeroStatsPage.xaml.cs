@@ -301,7 +301,7 @@ public partial class HeroStatsPage : Page
 						Foreground = ColorsHelper.GetRarityColor((Rarity)User.Instance.CurrentHero.Specializations.SpecializationBuffs[SpecializationType.Crafting]),
 						FontFamily = fontFamilyRegularBold
 					});
-					buffBlock.Inlines.Add(" recipes");
+					buffBlock.Inlines.Add(" artifacts");
 					break;
 
 				case SpecializationType.Trading:
