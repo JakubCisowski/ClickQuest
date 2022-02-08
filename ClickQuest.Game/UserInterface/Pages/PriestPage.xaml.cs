@@ -46,7 +46,7 @@ public partial class PriestPage : Page
 			result.Add(GameAssets.Blessings.FirstOrDefault(x => x.Id == pattern.VendorItemId));
 		}
 
-		return result;
+		return result.OrderBy(x => x.Value).ToList();
 	}
 
 	private void BuyButton_Click(object sender, RoutedEventArgs e)
