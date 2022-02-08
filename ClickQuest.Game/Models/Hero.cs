@@ -87,9 +87,11 @@ public class Hero : INotifyPropertyChanged
 		}
 	}
 
+	public int ClickDamageBase => 10;
+
 	public int LevelDamageBonus => ClickDamagePerLevel * Level;
 
-	public int LevelDamageBonusTotal => ClickDamagePerLevel * Level + 2;
+	public int LevelDamageBonusTotal => ClickDamagePerLevel * Level + ClickDamageBase;
 
 	public double LevelCritBonus => Math.Round(CritChancePerLevel * Level * 100, 2);
 

@@ -483,7 +483,7 @@ public partial class HeroStatsPage : Page
 		};
 		runLevelDamageBonusTotal.SetBinding(Run.TextProperty, bindingLevelDamageBonusTotal);
 		blockDamage.Inlines.Add("Click damage: ");
-		blockDamage.Inlines.Add(new Run("2")
+		blockDamage.Inlines.Add(new Run("10")
 		{
 			FontFamily = fontFamilyRegularBold
 		});
@@ -537,7 +537,7 @@ public partial class HeroStatsPage : Page
 		}
 
 		// ["Artifacts, damage: X"]
-		var clickDamageFromArtifacts = User.Instance.CurrentHero.ClickDamage - (2 + User.Instance.CurrentHero.ClickDamagePerLevel * User.Instance.CurrentHero.Level) - clickDamageFromBlessing;
+		var clickDamageFromArtifacts = User.Instance.CurrentHero.ClickDamage - (User.Instance.CurrentHero.ClickDamageBase + User.Instance.CurrentHero.ClickDamagePerLevel * User.Instance.CurrentHero.Level) - clickDamageFromBlessing;
 
 		if (clickDamageFromArtifacts > 0.009 || clickDamageFromArtifacts < -0.009)
 		{

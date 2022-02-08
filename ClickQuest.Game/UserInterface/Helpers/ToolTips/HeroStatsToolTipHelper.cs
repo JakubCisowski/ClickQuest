@@ -586,7 +586,7 @@ public static class HeroStatsToolTipHelper
 			Foreground = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeNormal")
 		});
 		block.Inlines.Add(new Run(": "));
-		block.Inlines.Add(new Run("2")
+		block.Inlines.Add(new Run("10")
 		{
 			FontFamily = (FontFamily)Application.Current.FindResource("FontRegularBold"),
 			Foreground = (SolidColorBrush)Application.Current.FindResource("BrushDamageTypeNormal")

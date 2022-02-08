@@ -127,7 +127,7 @@
 
 														<Run Text="Click damage" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularDemiBold}" />
 														<Run Text=": " />
-														<Run Text="2" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}" />
+														<Run Text="10" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}" />
 														<Run Text=" (+" />
 														<Run Text="1" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}" />
 														<Run Text="/lvl)" />
@@ -167,7 +167,7 @@
 
 														<Run Text="Click damage" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularDemiBold}" />
 														<Run Text=": " />
-														<Run Text="2" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}" />
+														<Run Text="10" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}" />
 														<Run Text=" (+" />
 														<Run Text="1" Foreground="{StaticResource BrushDamageTypeNormal}" FontFamily="{StaticResource FontRegularBold}" />
 														<Run Text="/lvl)" />
