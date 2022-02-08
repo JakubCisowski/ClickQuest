@@ -300,6 +300,8 @@ public static class ItemToolTipHelper
 
 		if (blessing != null)
 		{
+			blessingToolTip.BorderBrush = ColorsHelper.GetRarityColor(blessing.Rarity);
+				
 			blessingToolTipBlock.Inlines.Add(new Run($"{blessing.Name}")
 			{
 				FontSize = fontSizeToolTipname
