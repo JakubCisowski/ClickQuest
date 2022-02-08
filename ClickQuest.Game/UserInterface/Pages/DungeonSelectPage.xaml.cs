@@ -298,14 +298,10 @@ public partial class DungeonSelectPage : Page
 
 	private void DungeonGroupButton_Click(object sender, RoutedEventArgs e)
 	{
-		// Check if any quest is currently assigned to this hero (if so, hero can't enter the dungeon).
-		if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
-		{
-			_dungeonGroupSelected = GetDungeonGroup(sender as Button);
-			LoadDungeonSelectionInterface();
+		_dungeonGroupSelected = GetDungeonGroup(sender as Button);
+		LoadDungeonSelectionInterface();
 
-			(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting dungeon";
-		}
+		(Window.GetWindow(this) as GameWindow).LocationInfo = "Selecting dungeon";
 	}
 
 	private void DungeonButton_Click(object sender, RoutedEventArgs e)
@@ -318,17 +314,25 @@ public partial class DungeonSelectPage : Page
 
 	private void BossButton_Click(object sender, RoutedEventArgs e)
 	{
-		_bossSelected = GetBoss(sender as Button);
-
-		if (!CheckAndRemoveDungeonKeys())
+		// Check if any quest is currently assigned to this hero (if so, hero can't enter the dungeon).
+		if (User.Instance.CurrentHero.Quests.All(x => x.EndDate == default))
 		{
-			AlertBox.Show("Not enough dungeon keys to enter.\nTry to get them by completing quests and killing monsters!", MessageBoxButton.OK);
-			return;
+			_bossSelected = GetBoss(sender as Button);
+
+			if (!CheckAndRemoveDungeonKeys())
+			{
+				AlertBox.Show("Not enough dungeon keys to enter.\nTry to get them by completing quests and killing monsters!", MessageBoxButton.OK);
+				return;
+			}
+
+			SetupBossFight();
+
+			ResetAndLoadDungeonGroupSelectionInterface();
 		}
-
-		SetupBossFight();
-
-		ResetAndLoadDungeonGroupSelectionInterface();
+		else
+		{
+			AlertBox.Show("Your hero is busy completing quest!\nCheck back when it's finished.", MessageBoxButton.OK);
+		}
 	}
 
 	private bool CheckAndRemoveDungeonKeys()
