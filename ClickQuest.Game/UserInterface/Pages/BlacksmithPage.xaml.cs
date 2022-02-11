@@ -542,6 +542,7 @@ public partial class BlacksmithPage : Page
 			foreach (var run in listOfInlines)
 			{
 				run.FontFamily = (FontFamily)FindResource("FontRegularDemiBold");
+				run.FontSize = (double)FindResource("FontSizeToolTipBase");
 				toolTipBlock.Inlines.Add(run);
 			}
 
@@ -572,7 +573,7 @@ public partial class BlacksmithPage : Page
 			toolTipBlock.Inlines.Add(new Run("Ingots:")
 			{
 				FontFamily = (FontFamily)FindResource("FontRegularDemiBold"),
-				FontSize = (double)FindResource("FontSizeToolTipIngredientText")
+				FontSize = (double)FindResource("FontSizeToolTipBase")
 			});
 
 			var ingotAmounts = CalculateIngotAmountsWhenCraftingArtifact((button?.CommandParameter as Recipe).Artifact);
@@ -588,6 +589,7 @@ public partial class BlacksmithPage : Page
 				toolTipBlock.Inlines.Add(new Run($"{ingotAmounts[i]}x {(Rarity)i} Ingots")
 				{
 					FontFamily = (FontFamily)FindResource("FontRegularDemiBold"),
+					FontSize = (double)FindResource("FontSizeToolTipBase"),
 					Foreground = ColorsHelper.GetRarityColor((Rarity)i)
 				});
 			}

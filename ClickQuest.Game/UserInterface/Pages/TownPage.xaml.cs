@@ -24,8 +24,12 @@ public partial class TownPage : Page
 		GenerateRegionButtons();
 	}
 
-	private void GenerateRegionButtons()
+	public void GenerateRegionButtons()
 	{
+		RegionsPanelLeft.Children.Clear();
+		RegionsPanelMiddle.Children.Clear();
+		RegionsPanelRight.Children.Clear();
+		
 		for (var i = 0; i < GameAssets.Regions.Count; i++)
 		{
 			var region = GameAssets.Regions[i];
@@ -125,8 +129,6 @@ public partial class TownPage : Page
 
 	private void MainMenuButton_Click(object sender, RoutedEventArgs e)
 	{
-		(GameAssets.Pages["MainMenu"] as MainMenuPage).UpdateSelectOrDeleteHeroButtons();
-
 		// Pause all quest timers (so that quest doesn't finish while current hero is not selected).
 		User.Instance.CurrentHero.Quests.FirstOrDefault(x => x.EndDate != default)?.PauseTimer();
 

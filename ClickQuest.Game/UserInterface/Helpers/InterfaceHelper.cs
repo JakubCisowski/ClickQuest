@@ -235,5 +235,22 @@ public static class InterfaceHelper
 
 		GameAssets.CurrentPage = destinationPage;
 		RefreshStatsAndEquipmentPanelsOnCurrentPage();
+		
+		// Putting these here so that they're always called in one place.
+		
+		// If switching to Town, make sure to re-make Region Buttons (in case the player has leveled up), otherwise they couldn't access new zones.
+		if (destinationPage is TownPage townPage)
+		{
+			townPage.GenerateRegionButtons();
+		}
+		// If switching to Main Menu, make sure to re-make Hero Buttons (to reflect the change in hero level as well as time played).
+		// Also, update Time Played (otherwise it's only updated when exiting the game).
+		else if (destinationPage is MainMenuPage menuPage)
+		{
+			menuPage.UpdateSelectOrDeleteHeroButtons();
+			
+			User.Instance.Achievements.TotalTimePlayed += DateTime.Now - User.SessionStartDate;
+			User.SessionStartDate = DateTime.Now;
+		}
 	}
 }

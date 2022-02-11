@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="GameWindow" Height="768" Width="1366" Background="Transparent" AllowsTransparency="True"
-        ResizeMode="NoResize" WindowStyle="None">
+        Title="ClickQuest" Height="768" Width="1366" Background="Transparent" AllowsTransparency="True"
+        ResizeMode="CanMinimize" WindowStyle="None">
 
 	<Border BorderThickness="3" CornerRadius="8">
 		<Border.Background>
