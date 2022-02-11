@@ -45,7 +45,9 @@ public partial class InfoPage
 		{
 			GenerateRegionInfoPanel(region);
 
+			// Clear the selected Dungeons and GameMechanics when choosing a Region.
 			DungeonsListView.SelectedItems.Clear();
+			GameMechanicsListView.SelectedItems.Clear();
 		}
 	}
 
@@ -62,7 +64,9 @@ public partial class InfoPage
 		{
 			GenerateDungeonInfoPanel(dungeon);
 
+			// Clear the selected Regions and GameMechanics when choosing a Dungeon.
 			RegionsListView.SelectedItems.Clear();
+			GameMechanicsListView.SelectedItems.Clear();
 		}
 	}
 
@@ -448,6 +452,15 @@ public partial class InfoPage
 
 	private void GameMechanicsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
+		if (e.AddedItems.Count == 0)
+		{
+			return;
+		}
+		
+		// Clear the selected Regions and Dungeons when choosing a Game Mechanic.
+		RegionsListView.SelectedItems.Clear();
+		DungeonsListView.SelectedItems.Clear();
+		
 		InfoPanel.Children.Clear();
 
 		var selectedName = e.AddedItems[0]?.ToString();
