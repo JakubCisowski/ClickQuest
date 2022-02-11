@@ -374,39 +374,60 @@ public partial class InfoPage
 
 			InfoPanel.Children.Add(lootLabelBlock);
 
-			var sortedLootPatterns = boss.BossLootPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y => y.Id == x.BossLootId && y.EntryType == BestiaryEntryType.BossLoot)).ThenBy(z => z.Item.Rarity);
+			var sortedLootPatterns = boss.BossLootPatterns.OrderByDescending(x => GameAssets.BestiaryEntries.Any(y => y.Id == x.BossLootId && y.EntryType == BestiaryEntryType.BossLoot)).ThenBy(z => z.Item?.Rarity);
 
 			foreach (var lootPattern in sortedLootPatterns)
 			{
 				var item = lootPattern.Item;
-				var bossLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == item.Id && x.EntryType == BestiaryEntryType.BossLoot);
-
+				bool bossLootDiscovered;
+				
 				var itemNameBlock = new TextBlock
 				{
 					TextAlignment = TextAlignment.Center,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					Margin = new Thickness(5),
-					Foreground = ColorsHelper.GetRarityColor(item.Rarity),
 					FontSize = 16
 				};
 
-				if (!bossLootDiscovered)
+				// If item is null, then the LootPattern represents a Blessing.
+				// Todo: rework this cringe
+				if (item is null)
 				{
-					itemNameBlock.Text = "Unknown " + item.RarityString + " " + lootPattern.BossLootType;
-					itemNameBlock.FontFamily = (FontFamily)FindResource("FontRegularItalic");
-					itemNameBlock.ToolTip = ItemToolTipHelper.GenerateUndiscoveredItemToolTip();
-				}
-				else
-				{
-					itemNameBlock.Text = item is Recipe recipe ? recipe.FullName : item.Name;
-					itemNameBlock.FontFamily = (FontFamily)FindResource("FontRegularBold");
+					var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == lootPattern.BossLootId);
+					bossLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == blessing.Id && x.EntryType == BestiaryEntryType.BossLoot && x.LootType == RewardType.Blessing);
 
-					if (lootPattern.BossLootType == RewardType.Blessing)
+					itemNameBlock.Foreground = ColorsHelper.GetRarityColor(blessing.Rarity);
+
+					if (!bossLootDiscovered)
 					{
-						itemNameBlock.ToolTip = ItemToolTipHelper.GenerateBlessingToolTip(GameAssets.Blessings.FirstOrDefault(x => x.Id == lootPattern.BossLootId));
+						itemNameBlock.Text = "Unknown " + blessing.RarityString + " " + lootPattern.BossLootType;
+						itemNameBlock.FontFamily = (FontFamily)FindResource("FontRegularItalic");
+						itemNameBlock.ToolTip = ItemToolTipHelper.GenerateUndiscoveredItemToolTip();
 					}
 					else
 					{
+						itemNameBlock.Text = blessing.Name;
+						itemNameBlock.FontFamily = (FontFamily)FindResource("FontRegularBold");
+						
+						itemNameBlock.ToolTip = ItemToolTipHelper.GenerateBlessingToolTip(blessing);
+					}
+				}
+				else
+				{
+					bossLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == item.Id && x.EntryType == BestiaryEntryType.BossLoot && x.LootType == lootPattern.BossLootType);
+					
+					itemNameBlock.Foreground = ColorsHelper.GetRarityColor(item.Rarity);
+					
+					if (!bossLootDiscovered)
+					{
+						itemNameBlock.Text = "Unknown " + item.RarityString + " " + lootPattern.BossLootType;
+						itemNameBlock.FontFamily = (FontFamily)FindResource("FontRegularItalic");
+						itemNameBlock.ToolTip = ItemToolTipHelper.GenerateUndiscoveredItemToolTip();
+					}
+					else
+					{
+						itemNameBlock.Text = item is Recipe recipe ? recipe.FullName : item.Name;
+						itemNameBlock.FontFamily = (FontFamily)FindResource("FontRegularBold");
 						itemNameBlock.ToolTip = ItemToolTipHelper.GenerateItemToolTip(item);
 					}
 				}
