@@ -7,12 +7,12 @@ public class BatWingBackpack : ArtifactFunctionality
 {
 	private const double DamageModifier = 0.25;
 
-	private int _auraDamageIncreased;
+	private double _auraDamageIncreased;
 	private int _clickDamageDecreased;
 
 	public override void OnEquip()
 	{
-		_auraDamageIncreased = (int)Math.Ceiling(User.Instance.CurrentHero.AuraDamage * DamageModifier);
+		_auraDamageIncreased = User.Instance.CurrentHero.AuraDamage * DamageModifier;
 		_clickDamageDecreased = (int)Math.Ceiling(User.Instance.CurrentHero.ClickDamage * DamageModifier);
 
 		User.Instance.CurrentHero.AuraDamage += _auraDamageIncreased;
