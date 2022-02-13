@@ -8,11 +8,15 @@ public class RakshasasNecklace : ArtifactFunctionality
 	public override void OnEquip()
 	{
 		User.Instance.CurrentHero.AuraAttackSpeed += AuraAttackSpeedBonus;
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
 	{
 		User.Instance.CurrentHero.AuraAttackSpeed -= AuraAttackSpeedBonus;
+		
+		base.OnUnequip();
 	}
 
 	public RakshasasNecklace()

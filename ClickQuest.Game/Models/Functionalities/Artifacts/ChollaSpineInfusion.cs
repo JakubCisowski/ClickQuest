@@ -22,6 +22,8 @@ public class ChollaSpineInfusion : ArtifactFunctionality
 
 		CombatHelper.DealDamageToEnemy(clickedEnemy, DamagePerSpine * _spineCount, DamageType.Magic);
 		_spineCount++;
+		
+		base.OnEnemyClick(clickedEnemy);
 	}
 
 	public override void OnRegionLeave()

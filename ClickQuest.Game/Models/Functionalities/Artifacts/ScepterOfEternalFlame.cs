@@ -20,11 +20,15 @@ public class ScepterOfEternalFlame : ArtifactFunctionality
 	{
 		_timer.Start();
 		_ticksCount = 0;
+		
+		base.OnEnemyClick(clickedEnemy);
 	}
 
 	public override void OnKill()
 	{
 		_timer.Stop();
+		
+		base.OnKill();
 	}
 
 	public override void OnRegionLeave()

@@ -9,7 +9,8 @@ public class MeleeWeapon : ArtifactTypeFunctionality
 	private const int ClickDamageIncrease = 10;
 	private const double CritChanceIncrease = 0.10;
 
-	private bool _statsIncreased;
+	// This needs to be static, otherwise equipping the second artifact and unequipping the first will not decrease the stats.
+	private static bool _statsIncreased;
 
 	public override void OnEquip()
 	{

@@ -36,6 +36,8 @@ public class GhostlyInfusion : ArtifactFunctionality
 	public override void OnKill()
 	{
 		_isNextClickEmpowered = true;
+		
+		base.OnKill();
 	}
 
 	public GhostlyInfusion()

@@ -16,6 +16,8 @@ public class ScytheOfTheWorldEater : ArtifactFunctionality
 			_critDamageIncreased = User.Instance.CurrentHero.CritChance - 1.0;
 			User.Instance.CurrentHero.CritDamage += _critDamageIncreased;
 		}
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
@@ -27,6 +29,8 @@ public class ScytheOfTheWorldEater : ArtifactFunctionality
 			User.Instance.CurrentHero.CritDamage -= _critDamageIncreased;
 			_critDamageIncreased = 0;
 		}
+		
+		base.OnUnequip();
 	}
 
 	public ScytheOfTheWorldEater()

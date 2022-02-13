@@ -10,12 +10,16 @@ public class ObsidianSword : ArtifactFunctionality
 	{
 		User.Instance.CurrentHero.ClickDamage += ClickDamageIncrease;
 		User.Instance.CurrentHero.CritDamage += CritDamageIncrease;
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
 	{
 		User.Instance.CurrentHero.ClickDamage -= ClickDamageIncrease;
 		User.Instance.CurrentHero.CritDamage -= CritDamageIncrease;
+		
+		base.OnUnequip();
 	}
 
 	public ObsidianSword()

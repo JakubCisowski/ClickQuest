@@ -20,6 +20,8 @@ public class Necronomicon : ArtifactFunctionality
 
 		User.Instance.CurrentHero.PoisonDamage += PoisonDamageIncrease;
 		_timer.Start();
+		
+		base.OnKill();
 	}
 
 	public override void OnRegionLeave()

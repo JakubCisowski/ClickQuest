@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using ClickQuest.Game.DataTypes.Enums;
 
 namespace ClickQuest.Game.Models.Functionalities.ArtifactTypes;
@@ -8,11 +9,12 @@ public class Accessory : ArtifactTypeFunctionality
 {
 	private const double StatModifier = 0.20;
 
-	private int _clickDamageIncreased;
-	private int _poisonDamageIncreased;
-	private double _critChanceIncreased;
-	private double _critDamageIncreased;
-	private bool _statsIncreased;
+	// These need to be static, otherwise equipping the artifact and unequipping the others will not decrease the stats.
+	public static int ClickDamageIncreased;
+	public static int PoisonDamageIncreased;
+	public static double CritChanceIncreased;
+	public static double CritDamageIncreased;
+	public static bool StatsIncreased;
 
 	public override void OnEquip()
 	{
@@ -21,34 +23,34 @@ public class Accessory : ArtifactTypeFunctionality
 
 		if (hasTwoAccessories && hasAmulet)
 		{
-			_clickDamageIncreased = (int)(User.Instance.CurrentHero.ClickDamage * StatModifier);
-			_poisonDamageIncreased = (int)(User.Instance.CurrentHero.PoisonDamage * StatModifier);
-			_critChanceIncreased = 0.2;
-			_critDamageIncreased = 0.2;
+			ClickDamageIncreased = (int)Math.Ceiling(User.Instance.CurrentHero.ClickDamage * StatModifier);
+			PoisonDamageIncreased = (int)Math.Ceiling(User.Instance.CurrentHero.PoisonDamage * StatModifier);
+			CritChanceIncreased = 0.2;
+			CritDamageIncreased = 0.2;
 
-			User.Instance.CurrentHero.ClickDamage += _clickDamageIncreased;
-			User.Instance.CurrentHero.PoisonDamage += _poisonDamageIncreased;
-			User.Instance.CurrentHero.CritChance += _critChanceIncreased;
-			User.Instance.CurrentHero.CritDamage += _critDamageIncreased;
+			User.Instance.CurrentHero.ClickDamage += ClickDamageIncreased;
+			User.Instance.CurrentHero.PoisonDamage += PoisonDamageIncreased;
+			User.Instance.CurrentHero.CritChance += CritChanceIncreased;
+			User.Instance.CurrentHero.CritDamage += CritDamageIncreased;
 
-			_statsIncreased = true;
+			StatsIncreased = true;
 		}
 	}
 
 	public override void OnUnequip()
 	{
-		if (_statsIncreased)
+		if (StatsIncreased)
 		{
-			_statsIncreased = false;
+			StatsIncreased = false;
 
-			User.Instance.CurrentHero.ClickDamage -= _clickDamageIncreased;
-			User.Instance.CurrentHero.PoisonDamage -= _poisonDamageIncreased;
-			User.Instance.CurrentHero.CritChance -= _critChanceIncreased;
-			User.Instance.CurrentHero.CritDamage -= _critDamageIncreased;
+			User.Instance.CurrentHero.ClickDamage -= ClickDamageIncreased;
+			User.Instance.CurrentHero.PoisonDamage -= PoisonDamageIncreased;
+			User.Instance.CurrentHero.CritChance -= CritChanceIncreased;
+			User.Instance.CurrentHero.CritDamage -= CritDamageIncreased;
 
-			_clickDamageIncreased = _poisonDamageIncreased = 0;
-			_critChanceIncreased = 0.0;
-			_critDamageIncreased = 0.0;
+			ClickDamageIncreased = PoisonDamageIncreased = 0;
+			CritChanceIncreased = 0.0;
+			CritDamageIncreased = 0.0;
 		}
 	}
 

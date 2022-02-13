@@ -8,11 +8,15 @@ public class MeatCleaver : ArtifactFunctionality
 	public override void OnEquip()
 	{
 		User.Instance.CurrentHero.CritDamage += CritDamageIncrease;
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
 	{
 		User.Instance.CurrentHero.CritDamage -= CritDamageIncrease;
+		
+		base.OnUnequip();
 	}
 
 	public MeatCleaver()

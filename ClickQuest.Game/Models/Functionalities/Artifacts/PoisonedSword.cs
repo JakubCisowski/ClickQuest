@@ -10,12 +10,16 @@ public class PoisonedSword : ArtifactFunctionality
 	{
 		User.Instance.CurrentHero.ClickDamage += ClickDamageIncrease;
 		User.Instance.CurrentHero.PoisonDamage += PoisonDamageIncrease;
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
 	{
 		User.Instance.CurrentHero.ClickDamage -= ClickDamageIncrease;
 		User.Instance.CurrentHero.PoisonDamage -= PoisonDamageIncrease;
+		
+		base.OnUnequip();
 	}
 
 	public PoisonedSword()

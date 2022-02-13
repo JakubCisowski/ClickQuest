@@ -17,6 +17,8 @@ public class GoldTippedSpear : ArtifactFunctionality
 
 		User.Instance.CurrentHero.ClickDamage += _poisonDamageConverted * ClickDamagePerPoison;
 		User.Instance.CurrentHero.CritDamage += _poisonDamageConverted / PoisonThresholdForCritDamageIncrease * CritDamagePerTenPoison;
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
@@ -26,6 +28,8 @@ public class GoldTippedSpear : ArtifactFunctionality
 
 		User.Instance.CurrentHero.PoisonDamage += _poisonDamageConverted;
 		_poisonDamageConverted = 0;
+		
+		base.OnUnequip();
 	}
 
 	public GoldTippedSpear()

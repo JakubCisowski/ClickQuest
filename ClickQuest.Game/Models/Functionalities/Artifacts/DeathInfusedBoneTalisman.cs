@@ -26,12 +26,16 @@ public class DeathInfusedBoneTalisman : ArtifactFunctionality
 
 			_timer.Start();
 		}
+		
+		base.OnEnemyClick(clickedEnemy);
 	}
 
 	public override void OnKill()
 	{
 		_timer.Stop();
 		_affectedEnemy = null;
+		
+		base.OnKill();
 	}
 
 	public override void OnRegionLeave()

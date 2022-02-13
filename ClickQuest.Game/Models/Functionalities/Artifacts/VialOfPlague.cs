@@ -32,6 +32,8 @@ public class VialOfPlague : ArtifactFunctionality
 
 			_clickCount = 0;
 		}
+		
+		base.OnEnemyClick(clickedEnemy);
 	}
 
 	public override void OnRegionLeave()

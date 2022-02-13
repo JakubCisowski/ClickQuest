@@ -10,12 +10,16 @@ public class StrongBadgeOfLuck : ArtifactFunctionality
 	{
 		User.Instance.CurrentHero.ClickDamage += ClickDamageIncrease;
 		User.Instance.CurrentHero.CritChance += CritChanceIncrease;
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
 	{
 		User.Instance.CurrentHero.ClickDamage -= ClickDamageIncrease;
 		User.Instance.CurrentHero.CritChance -= CritChanceIncrease;
+		
+		base.OnUnequip();
 	}
 
 	public StrongBadgeOfLuck()

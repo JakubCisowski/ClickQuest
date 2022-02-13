@@ -15,6 +15,8 @@ public class PoisonedNagaKnife : ArtifactFunctionality
 		{
 			CombatHelper.DealDamageToEnemy(clickedEnemy, (int)Math.Ceiling(monster.Health * DamageDealtPercentage), DamageType.Magic);
 		}
+		
+		base.OnEnemyClick(clickedEnemy);
 	}
 
 	public PoisonedNagaKnife()

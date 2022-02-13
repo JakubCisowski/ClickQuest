@@ -31,6 +31,8 @@ public class LightningBolt : ArtifactFunctionality
 
 			_clickTimes.Clear();
 		}
+		
+		base.OnEnemyClick(clickedEnemy);
 	}
 
 	public override void OnRegionLeave()

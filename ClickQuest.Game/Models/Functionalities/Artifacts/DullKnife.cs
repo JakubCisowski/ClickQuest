@@ -8,11 +8,15 @@ public class DullKnife : ArtifactFunctionality
 	public override void OnEquip()
 	{
 		User.Instance.CurrentHero.CritChance += CritChanceIncrease;
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
 	{
 		User.Instance.CurrentHero.CritChance -= CritChanceIncrease;
+		
+		base.OnUnequip();
 	}
 
 	public DullKnife()

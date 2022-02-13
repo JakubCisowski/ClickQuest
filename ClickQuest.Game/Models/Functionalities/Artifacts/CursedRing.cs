@@ -28,6 +28,8 @@ public class CursedRing : ArtifactFunctionality
 
 		_currentEnemy = InterfaceHelper.CurrentEnemy;
 		_timer.Start();
+		
+		base.OnKill();
 	}
 
 	public override void OnDealingDamage(ref int damage)

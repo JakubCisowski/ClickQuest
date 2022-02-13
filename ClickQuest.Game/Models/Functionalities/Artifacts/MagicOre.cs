@@ -14,6 +14,8 @@ public class MagicOre : ArtifactFunctionality
 			// To prevent Level Requirement from falling below 0.
 			region.LevelRequirement = Math.Max(0, region.LevelRequirement - 5);
 		}
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
@@ -26,6 +28,8 @@ public class MagicOre : ArtifactFunctionality
 				region.LevelRequirement += 5;
 			}
 		}
+		
+		base.OnUnequip();
 	}
 
 	public MagicOre()

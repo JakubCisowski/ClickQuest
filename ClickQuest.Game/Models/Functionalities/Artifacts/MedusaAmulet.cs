@@ -34,6 +34,8 @@ public class MedusaAmulet : ArtifactFunctionality
 			User.Instance.CurrentHero.CritChance += CritChancePerStack;
 			User.Instance.CurrentHero.CritDamage += CritDamagePerStack;
 		}
+		
+		base.OnKill();
 	}
 
 	public MedusaAmulet()

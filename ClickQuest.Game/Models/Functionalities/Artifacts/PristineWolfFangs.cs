@@ -10,12 +10,16 @@ public class PristineWolfFangs : ArtifactFunctionality
 	{
 		User.Instance.CurrentHero.CritChance += CritChanceIncrease;
 		User.Instance.CurrentHero.CritDamage += CritDamageIncrease;
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
 	{
 		User.Instance.CurrentHero.CritChance -= CritChanceIncrease;
 		User.Instance.CurrentHero.CritDamage -= CritDamageIncrease;
+		
+		base.OnUnequip();
 	}
 
 	public PristineWolfFangs()

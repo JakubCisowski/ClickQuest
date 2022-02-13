@@ -10,6 +10,8 @@ public class TrinketOfHaste : ArtifactFunctionality
 	public override void OnQuestStarted(Quest quest)
 	{
 		quest.Duration -= (int)Math.Ceiling(quest.Duration * QuestTimeReduced);
+		
+		base.OnQuestStarted(quest);
 	}
 
 	public TrinketOfHaste()

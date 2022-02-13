@@ -17,6 +17,8 @@ public class BatWingBackpack : ArtifactFunctionality
 
 		User.Instance.CurrentHero.AuraDamage += _auraDamageIncreased;
 		User.Instance.CurrentHero.ClickDamage -= _clickDamageDecreased;
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
@@ -26,6 +28,8 @@ public class BatWingBackpack : ArtifactFunctionality
 
 		_auraDamageIncreased = 0;
 		_clickDamageDecreased = 0;
+		
+		base.OnUnequip();
 	}
 
 	public BatWingBackpack()

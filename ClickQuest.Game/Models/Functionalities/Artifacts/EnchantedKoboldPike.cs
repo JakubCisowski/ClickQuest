@@ -10,12 +10,16 @@ public class EnchantedKoboldPike : ArtifactFunctionality
 	{
 		User.Instance.CurrentHero.PoisonDamage += PoisonDamageIncrease;
 		User.Instance.CurrentHero.CritDamage += CritDamageIncrease;
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
 	{
 		User.Instance.CurrentHero.PoisonDamage -= PoisonDamageIncrease;
 		User.Instance.CurrentHero.CritDamage -= CritDamageIncrease;
+		
+		base.OnUnequip();
 	}
 
 	public EnchantedKoboldPike()

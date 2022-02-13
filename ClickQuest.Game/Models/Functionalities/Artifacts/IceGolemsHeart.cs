@@ -36,6 +36,8 @@ public class IceGolemsHeart : ArtifactFunctionality
 		{
 			CombatHelper.DealDamageToEnemy(_currentEnemy, _currentEnemy.CurrentHealth, DamageType.Magic);
 		}
+		
+		base.OnEnemyClick(clickedEnemy);
 	}
 
 	public override void OnKill()
@@ -43,6 +45,8 @@ public class IceGolemsHeart : ArtifactFunctionality
 		User.Instance.CurrentHero.CritChance -= _stackCount * CritChanceIncreasePerStack;
 		_stackCount = 0;
 		_currentEnemy = null;
+		
+		base.OnKill();
 	}
 
 	public override void OnRegionLeave()

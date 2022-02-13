@@ -23,6 +23,8 @@ public class RodOfSummoning : ArtifactFunctionality
 	{
 		_familiarAttacksCount = 0;
 		_timer.Start();
+		
+		base.OnEnemyClick(clickedEnemy);
 	}
 
 	public override void OnRegionLeave()
@@ -40,6 +42,8 @@ public class RodOfSummoning : ArtifactFunctionality
 		}
 
 		_timer.Stop();
+		
+		base.OnKill();
 	}
 
 	public RodOfSummoning()

@@ -38,6 +38,8 @@ public class Transcendence : ArtifactFunctionality
 		{
 			CombatHelper.DealDamageToEnemy(monster, monster.CurrentHealth, DamageType.Magic);
 		}
+		
+		base.OnEnemyClick(clickedEnemy);
 	}
 
 	public Transcendence()

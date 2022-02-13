@@ -8,11 +8,15 @@ public class DullSword : ArtifactFunctionality
 	public override void OnEquip()
 	{
 		User.Instance.CurrentHero.ClickDamage += DamageIncrease;
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
 	{
 		User.Instance.CurrentHero.ClickDamage -= DamageIncrease;
+		
+		base.OnUnequip();
 	}
 
 	public DullSword()

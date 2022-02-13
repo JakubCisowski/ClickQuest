@@ -86,12 +86,14 @@ public class ArtifactFunctionality
 	// Triggered: after equipping an Artifact, and after loading data from User.json.
 	public virtual void OnEquip()
 	{
+		ArtifactTypeFunctionality.OnEquip();
 	}
 
 	// Used upon unequipping an artifact to take back the bonuses granted in OnEquip.
 	// Triggered: after unequipping an Artifact, and before exiting the game and saving user data (to prevent bonuses from persisting forever).
 	public virtual void OnUnequip()
 	{
+		ArtifactTypeFunctionality.OnUnequip();
 	}
 
 	// Used to trigger on-click effects, such as a damage increase or a stacking bonus.
@@ -99,6 +101,7 @@ public class ArtifactFunctionality
 	// clickedEnemy - the enemy that was clicked.
 	public virtual void OnEnemyClick(Enemy clickedEnemy)
 	{
+		ArtifactTypeFunctionality.OnEnemyClick(clickedEnemy);
 	}
 
 	// Used to modify or trigger an effect based on the amount of any damage dealt (click, on-hit, poison, aura) except magic damage.
@@ -141,6 +144,7 @@ public class ArtifactFunctionality
 	// Also triggered when boss timer goes down to 0, regardless if the boss died or not.
 	public virtual void OnKill()
 	{
+		ArtifactTypeFunctionality.OnKill();
 	}
 
 	// Used to trigger an effect when entering a region.
@@ -160,6 +164,7 @@ public class ArtifactFunctionality
 	// experienceGained - the amount of experience gained.
 	public virtual void OnExperienceGained(ref int experienceGained)
 	{
+		ArtifactTypeFunctionality.OnExperienceGained(ref experienceGained);
 	}
 
 	// Used to trigger an effect upon gaining a blessing.
@@ -174,5 +179,6 @@ public class ArtifactFunctionality
 	// quest - quest that is being started.
 	public virtual void OnQuestStarted(Quest quest)
 	{
+		ArtifactTypeFunctionality.OnQuestStarted(quest);
 	}
 }

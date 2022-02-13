@@ -8,11 +8,15 @@ public class LargeStinger : ArtifactFunctionality
 	public override void OnEquip()
 	{
 		User.Instance.CurrentHero.PoisonDamage += PoisonDamageIncrease;
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
 	{
 		User.Instance.CurrentHero.PoisonDamage -= PoisonDamageIncrease;
+		
+		base.OnUnequip();
 	}
 
 	public LargeStinger()

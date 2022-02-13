@@ -11,6 +11,8 @@ public class TitansCrown : ArtifactFunctionality
 	{
 		var bonusExperience = (int)Math.Ceiling(experienceGained * BonusExperienceMultiplier);
 		experienceGained += bonusExperience;
+		
+		base.OnExperienceGained(ref experienceGained);
 	}
 
 	public TitansCrown()

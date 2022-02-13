@@ -21,6 +21,8 @@ public class TwinKamas : ArtifactFunctionality
 		_clickTimes.Add(DateTime.Now);
 		
 		_timer.Start();
+		
+		base.OnEnemyClick(clickedEnemy);
 	}
 
 	public TwinKamas()

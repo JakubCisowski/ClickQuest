@@ -44,6 +44,8 @@ public class Naginata : ArtifactFunctionality
 
 			experienceGained = (int)Math.Ceiling(experienceGained * ExperienceModifier);
 		}
+		
+		base.OnExperienceGained(ref experienceGained);
 	}
 
 	public Naginata()

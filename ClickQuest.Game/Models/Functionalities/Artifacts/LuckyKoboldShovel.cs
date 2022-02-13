@@ -18,6 +18,8 @@ public class LuckyKoboldShovel : ArtifactFunctionality
 			var specialMaterial = GameAssets.Materials.FirstOrDefault(x => x.Name == "Leather Satchel");
 			specialMaterial?.AddItem();
 		}
+		
+		base.OnKill();
 	}
 
 	public LuckyKoboldShovel()

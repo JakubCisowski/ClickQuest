@@ -27,6 +27,8 @@ public class BloodstoneStaff : ArtifactFunctionality
 		_stackList.Add(DateTime.Now);
 
 		_timer.Start();
+		
+		base.OnKill();
 	}
 
 	public override void OnDealingClickDamage(ref int clickDamage, DamageType clickDamageType)

@@ -15,6 +15,8 @@ public class SlySnakeOrb : ArtifactFunctionality
 		_auraSpeedIncreased = User.Instance.CurrentHero.AuraAttackSpeed * AuraSpeedIncreaseMultiplier;
 
 		User.Instance.CurrentHero.AuraAttackSpeed += _auraSpeedIncreased;
+		
+		base.OnEquip();
 	}
 
 	public override void OnUnequip()
@@ -23,6 +25,8 @@ public class SlySnakeOrb : ArtifactFunctionality
 		User.Instance.CurrentHero.AuraAttackSpeed -= _auraSpeedIncreased;
 
 		_auraSpeedIncreased = 0;
+		
+		base.OnUnequip();
 	}
 
 	public SlySnakeOrb()

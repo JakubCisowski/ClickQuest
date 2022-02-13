@@ -20,6 +20,8 @@ public class IllegibleKoboldInscription : ArtifactFunctionality
 			User.Instance.CurrentHero.ClickDamage += ClickDamageIncrease;
 			User.Instance.CurrentHero.AuraAttackSpeed += AuraSpeedIncrease;
 		}
+		
+		base.OnEquip();
 	}
 
 	public override void OnBlessingStarted(Blessing blessing)
@@ -36,6 +38,8 @@ public class IllegibleKoboldInscription : ArtifactFunctionality
 
 		User.Instance.CurrentHero.ClickDamage += ClickDamageIncrease;
 		User.Instance.CurrentHero.AuraAttackSpeed += AuraSpeedIncrease;
+		
+		base.OnUnequip();
 	}
 
 	public IllegibleKoboldInscription()
