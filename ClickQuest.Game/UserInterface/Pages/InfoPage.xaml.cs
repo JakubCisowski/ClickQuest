@@ -198,7 +198,7 @@ public partial class InfoPage
 			foreach (var lootPattern in sortedLootPatterns)
 			{
 				var item = lootPattern.Item;
-				var monsterLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == item.Id && x.EntryType == BestiaryEntryType.MonsterLoot);
+				var monsterLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == item.Id && x.RelatedEnemyId == monster.Id && x.EntryType == BestiaryEntryType.MonsterLoot);
 
 				var itemNameBlock = new TextBlock
 				{
@@ -398,7 +398,7 @@ public partial class InfoPage
 				if (item is null)
 				{
 					var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == lootPattern.BossLootId);
-					bossLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == blessing.Id && x.EntryType == BestiaryEntryType.BossLoot && x.LootType == RewardType.Blessing);
+					bossLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == blessing.Id && x.RelatedEnemyId == boss.Id && x.EntryType == BestiaryEntryType.BossLoot && x.LootType == RewardType.Blessing);
 
 					itemNameBlock.Foreground = ColorsHelper.GetRarityColor(blessing.Rarity);
 
@@ -418,7 +418,7 @@ public partial class InfoPage
 				}
 				else
 				{
-					bossLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == item.Id && x.EntryType == BestiaryEntryType.BossLoot && x.LootType == lootPattern.BossLootType);
+					bossLootDiscovered = GameAssets.BestiaryEntries.Any(x => x.Id == item.Id && x.RelatedEnemyId == boss.Id && x.EntryType == BestiaryEntryType.BossLoot && x.LootType == lootPattern.BossLootType);
 					
 					itemNameBlock.Foreground = ColorsHelper.GetRarityColor(item.Rarity);
 					

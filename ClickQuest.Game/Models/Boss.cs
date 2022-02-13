@@ -111,36 +111,37 @@ public class Boss : Enemy
 				itemIntegerCount++;
 			}
 
-			// Grant loot after checking if it's not empty.
-			if (loot.BossLootType == RewardType.Blessing)
-			{
-				var isBlessingAccepted = Blessing.AskUserAndSwapBlessing(loot.BossLootId);
-
-				if (!GameAssets.BestiaryEntries.Any(x => x.EntryType == BestiaryEntryType.BossLoot && x.LootType == RewardType.Blessing && x.Id == loot.BossLootId))
-				{
-					GameAssets.BestiaryEntries.Add(new BestiaryEntry
-					{
-						Id = loot.BossLootId,
-						LootType = RewardType.Blessing,
-						EntryType = BestiaryEntryType.BossLoot
-					});
-				}
-
-				if (isBlessingAccepted)
-				{
-					// Start blessing animation.
-					var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == loot.BossLootId);
-
-					lootQueueEntries.Add(new LootQueueEntry(blessing.Name, blessing.Rarity, PackIconKind.BookCross, 1));
-				}
-
-				continue;
-			}
-
-			(loot.Item as Artifact)?.CreateMythicTag(Name);
-
 			if (itemIntegerCount > 0)
 			{
+				// Grant loot after checking if it's not empty.
+				if (loot.BossLootType == RewardType.Blessing)
+				{
+					var isBlessingAccepted = Blessing.AskUserAndSwapBlessing(loot.BossLootId);
+
+					if (!GameAssets.BestiaryEntries.Any(x => x.EntryType == BestiaryEntryType.BossLoot && x.LootType == RewardType.Blessing && x.Id == loot.BossLootId))
+					{
+						GameAssets.BestiaryEntries.Add(new BestiaryEntry
+						{
+							Id = loot.BossLootId,
+							RelatedEnemyId = this.Id,
+							LootType = RewardType.Blessing,
+							EntryType = BestiaryEntryType.BossLoot
+						});
+					}
+
+					if (isBlessingAccepted)
+					{
+						// Start blessing animation.
+						var blessing = GameAssets.Blessings.FirstOrDefault(x => x.Id == loot.BossLootId);
+
+						lootQueueEntries.Add(new LootQueueEntry(blessing.Name, blessing.Rarity, PackIconKind.BookCross, 1));
+					}
+
+					continue;
+				}
+
+				(loot.Item as Artifact)?.CreateMythicTag(Name);
+
 				// AddItem starts loot animation.
 				loot.Item.AddItem(itemIntegerCount, true);
 
@@ -149,6 +150,7 @@ public class Boss : Enemy
 					GameAssets.BestiaryEntries.Add(new BestiaryEntry
 					{
 						Id = loot.BossLootId,
+						RelatedEnemyId = this.Id,
 						LootType = loot.BossLootType,
 						EntryType = BestiaryEntryType.BossLoot
 					});

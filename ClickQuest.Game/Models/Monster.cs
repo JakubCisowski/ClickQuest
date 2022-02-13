@@ -109,6 +109,7 @@ public class Monster : Enemy
 				GameAssets.BestiaryEntries.Add(new BestiaryEntry
 				{
 					Id = selectedLoot.Id,
+					RelatedEnemyId = this.Id,
 					EntryType = BestiaryEntryType.MonsterLoot
 				});
 			}

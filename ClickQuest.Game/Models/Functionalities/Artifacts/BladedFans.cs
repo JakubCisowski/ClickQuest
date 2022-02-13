@@ -32,6 +32,21 @@ public class BladedFans : ArtifactFunctionality
 		}
 	}
 
+	public override void OnDealingMagicDamage(ref int magicDamage)
+	{
+		if (_currentEnemy != InterfaceHelper.CurrentEnemy)
+		{
+			_currentEnemy = InterfaceHelper.CurrentEnemy;
+			_timer.Start();
+		}
+
+		if (_timer.IsEnabled)
+		{
+			_damageStored += magicDamage;
+			magicDamage = 0;
+		}
+	}
+
 	public override void OnRegionLeave()
 	{
 		_timer.Stop();

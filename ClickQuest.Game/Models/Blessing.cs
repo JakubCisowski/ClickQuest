@@ -180,7 +180,7 @@ public class Blessing : INotifyPropertyChanged, IIdentifiable
 	{
 		var blessingBlueprint = GameAssets.Blessings.FirstOrDefault(x => x.Id == newBlessingId);
 
-		var result = MessageBoxResult.OK;
+		var result = MessageBoxResult.Yes;
 
 		if (User.Instance.CurrentHero.Blessing != null)
 		{
