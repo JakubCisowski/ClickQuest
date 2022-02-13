@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using ClickQuest.Game.DataTypes.Structs;
 using ClickQuest.Game.Helpers;
 using ClickQuest.Game.UserInterface.Helpers;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.Game.Models;
 
@@ -69,9 +70,14 @@ public class Recipe : Item
 		User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.RecipesGained, amount);
 	}
 
-	public override void AddItem(int amount = 1)
+	public override void AddItem(int amount = 1, bool displayFloatingText = false)
 	{
 		CollectionsHelper.AddItemToCollection(this, User.Instance.CurrentHero.Recipes, amount);
+
+		if (displayFloatingText)
+		{
+			LootQueueHelper.AddToQueue(Name, Rarity, PackIconKind.ScriptText);
+		}
 
 		AddAchievementProgress();
 		InterfaceHelper.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Recipe));

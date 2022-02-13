@@ -7,6 +7,7 @@ using ClickQuest.Game.Helpers;
 using ClickQuest.Game.Models.Functionalities;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Helpers;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.Game.Models;
 
@@ -74,9 +75,14 @@ public class Artifact : Item
 		User.Instance.Achievements.IncreaseAchievementValue(achievementType, amount);
 	}
 
-	public override void AddItem(int amount = 1)
+	public override void AddItem(int amount = 1, bool displayFloatingText = false)
 	{
 		CollectionsHelper.AddItemToCollection(this, User.Instance.CurrentHero.Artifacts, amount);
+
+		if (displayFloatingText)
+		{
+			LootQueueHelper.AddToQueue(Name, Rarity, PackIconKind.DiamondStone);
+		}
 
 		AddAchievementProgress();
 		InterfaceHelper.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Artifact));

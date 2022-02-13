@@ -41,6 +41,6 @@ public abstract class Item : INotifyPropertyChanged, IIdentifiable
 	public abstract Item CopyItem(int quantity);
 	public abstract void AddAchievementProgress(int amount = 1);
 
-	public abstract void AddItem(int amount = 1);
+	public abstract void AddItem(int amount = 1, bool displayFloatingText = false);
 	public abstract void RemoveItem(int amount = 1);
 }

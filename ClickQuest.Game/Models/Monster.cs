@@ -99,7 +99,9 @@ public class Monster : Enemy
 		if (selectedLoot != null)
 		{
 			(selectedLoot as Artifact)?.CreateMythicTag(Name);
-			selectedLoot.AddItem();
+
+			// AddItem starts loot animation.
+			selectedLoot.AddItem(displayFloatingText: true);
 
 			// Mark the corresponding Pattern as discovered.
 			if (!GameAssets.BestiaryEntries.Any(x => x.EntryType == BestiaryEntryType.MonsterLoot && x.Id == selectedLoot.Id))
@@ -109,21 +111,6 @@ public class Monster : Enemy
 					Id = selectedLoot.Id,
 					EntryType = BestiaryEntryType.MonsterLoot
 				});
-			}
-
-			switch (selectedLoot)
-			{
-				case Material material:
-					LootQueueHelper.AddToQueue(material.Name, material.Rarity, PackIconKind.Cog);
-					break;
-
-				case Recipe recipe:
-					LootQueueHelper.AddToQueue(recipe.FullName, recipe.Rarity, PackIconKind.ScriptText);
-					break;
-
-				case Artifact artifact:
-					LootQueueHelper.AddToQueue(artifact.Name, artifact.Rarity, PackIconKind.DiamondStone);
-					break;
 			}
 		}
 

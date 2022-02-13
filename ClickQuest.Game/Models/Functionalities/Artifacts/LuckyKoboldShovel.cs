@@ -16,7 +16,7 @@ public class LuckyKoboldShovel : ArtifactFunctionality
 		if (randomizedNumber <= ChanceToGetItemOnKill * 10000)
 		{
 			var specialMaterial = GameAssets.Materials.FirstOrDefault(x => x.Name == "Leather Satchel");
-			specialMaterial?.AddItem();
+			specialMaterial?.AddItem(displayFloatingText: true);
 		}
 		
 		base.OnKill();

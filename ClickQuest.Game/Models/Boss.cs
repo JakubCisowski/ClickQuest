@@ -141,7 +141,8 @@ public class Boss : Enemy
 
 			if (itemIntegerCount > 0)
 			{
-				loot.Item.AddItem(itemIntegerCount);
+				// AddItem starts loot animation.
+				loot.Item.AddItem(itemIntegerCount, true);
 
 				if (!GameAssets.BestiaryEntries.Any(x => x.EntryType == BestiaryEntryType.BossLoot && x.LootType == loot.BossLootType && x.Id == loot.BossLootId))
 				{
@@ -151,22 +152,6 @@ public class Boss : Enemy
 						LootType = loot.BossLootType,
 						EntryType = BestiaryEntryType.BossLoot
 					});
-				}
-
-				// Start loot animation.
-				switch (loot.Item)
-				{
-					case Material material:
-						lootQueueEntries.Add(new LootQueueEntry(material.Name, material.Rarity, PackIconKind.Cog, itemIntegerCount));
-						break;
-
-					case Recipe recipe:
-						lootQueueEntries.Add(new LootQueueEntry(recipe.FullName, recipe.Rarity, PackIconKind.ScriptText, itemIntegerCount));
-						break;
-
-					case Artifact artifact:
-						lootQueueEntries.Add(new LootQueueEntry(artifact.Name, artifact.Rarity, PackIconKind.DiamondStone, itemIntegerCount));
-						break;
 				}
 			}
 		}

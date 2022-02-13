@@ -53,7 +53,7 @@ public class DungeonKey : Item
 		return copy;
 	}
 
-	public override void AddItem(int amount = 1)
+	public override void AddItem(int amount = 1, bool displayFloatingText = true)
 	{
 		CollectionsHelper.AddItemToCollection(this, User.Instance.DungeonKeys, amount);
 

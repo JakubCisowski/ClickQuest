@@ -53,7 +53,7 @@ public class Ingot : Item
 		User.Instance.Achievements.IncreaseAchievementValue(achievementType, amount);
 	}
 
-	public override void AddItem(int amount = 1)
+	public override void AddItem(int amount = 1, bool displayFloatingText = true)
 	{
 		CollectionsHelper.AddItemToCollection(this, User.Instance.Ingots, amount);
 

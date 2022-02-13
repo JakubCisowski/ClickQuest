@@ -1,5 +1,6 @@
 using ClickQuest.Game.Helpers;
 using ClickQuest.Game.UserInterface.Helpers;
+using MaterialDesignThemes.Wpf;
 
 namespace ClickQuest.Game.Models;
 
@@ -27,9 +28,14 @@ public class Material : Item
 		User.Instance.Achievements.IncreaseAchievementValue(NumericAchievementType.MaterialsGained, amount);
 	}
 
-	public override void AddItem(int amount = 1)
+	public override void AddItem(int amount = 1, bool displayFloatingText = false)
 	{
 		CollectionsHelper.AddItemToCollection(this, User.Instance.CurrentHero.Materials, amount);
+
+		if (displayFloatingText)
+		{
+			LootQueueHelper.AddToQueue(Name, Rarity, PackIconKind.Cog);
+		}
 
 		AddAchievementProgress();
 		InterfaceHelper.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Material));
