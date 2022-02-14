@@ -51,7 +51,6 @@ public partial class MonsterLootPatternWindow : Window
 			Name = "NameBox",
 			Margin = new Thickness(10)
 		};
-		nameBox.SelectionChanged += NameBox_SelectionChanged;
 		_controls.Add(nameBox.Name, nameBox);
 
 		var rewardTypeBox = new ComboBox
@@ -62,6 +61,9 @@ public partial class MonsterLootPatternWindow : Window
 		};
 		rewardTypeBox.SelectionChanged += RewardTypeBox_SelectionChanged;
 		rewardTypeBox.SelectedValue = _pattern.MonsterLootType;
+		
+		nameBox.SelectionChanged += NameBox_SelectionChanged;
+		nameBox.SelectedValue = _pattern.Item?.Name;
 
 		var frequencyBox = new TextBox
 		{
