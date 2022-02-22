@@ -17,6 +17,9 @@ namespace ClickQuest.Game.Models;
 public class Monster : Enemy
 {
 	public List<MonsterLootPattern> MonsterLootPatterns { get; set; }
+	
+	[JsonIgnore]
+	public int SpawnRegionId { get; set; }
 
 	[JsonIgnore]
 	public override int CurrentHealth
@@ -55,7 +58,8 @@ public class Monster : Enemy
 			CurrentHealth = Health,
 			Description = Description,
 			CurrentHealthProgress = CurrentHealthProgress,
-			MonsterLootPatterns = MonsterLootPatterns
+			MonsterLootPatterns = MonsterLootPatterns,
+			SpawnRegionId = SpawnRegionId
 		};
 
 		return copy;
@@ -91,7 +95,7 @@ public class Monster : Enemy
 
 	public override void GrantVictoryBonuses()
 	{
-		var experienceGained = ExperienceHelper.CalculateMonsterXpReward(Health);
+		var experienceGained = ExperienceHelper.CalculateMonsterXpReward(this);
 		User.Instance.CurrentHero.GainExperience(experienceGained);
 
 		var selectedLoot = RandomizeMonsterLoot();

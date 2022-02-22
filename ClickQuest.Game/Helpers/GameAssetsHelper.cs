@@ -51,6 +51,15 @@ public static class GameAssetsHelper
 		{
 			quest.UpdateAllRewardsDescription();
 		}
+		
+		// Match region Ids with Monsters.
+		foreach (var region in GameAssets.Regions)
+		{
+			region.MonsterSpawnPatterns.ForEach(x=>
+			{
+				x.Monster.SpawnRegionId = region.Id;
+			});
+		}
 
 		LoadArtifactFunctionalities();
 		LoadArtifactTypeFunctionalities();
