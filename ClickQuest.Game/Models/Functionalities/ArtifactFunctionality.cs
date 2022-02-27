@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows;
 using ClickQuest.Game.DataTypes.Enums;
+using ClickQuest.Game.Models.Interfaces;
 using ClickQuest.Game.UserInterface.Controls;
 using ClickQuest.Game.UserInterface.Pages;
 
@@ -180,5 +181,12 @@ public class ArtifactFunctionality
 	public virtual void OnQuestStarted(Quest quest)
 	{
 		ArtifactTypeFunctionality.OnQuestStarted(quest);
+	}
+
+	// Used to trigger an effect upon consuming Ammunition.
+	// Triggered: when consuming an Ammunition-type Artifact, after reducing its Quantity.
+	// artifactConsumed - ammunition that is being consumed.
+	public virtual void OnConsumed(Artifact artifactConsumed)
+	{
 	}
 }
