@@ -5,9 +5,10 @@ using ClickQuest.Game.Models.Interfaces;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
+// Can be consumed by critically clicking. Deals 250 damage.
 public class SharpArrows : ArtifactFunctionality, IConsumable
 {
-	private const int DamageDealt = 500;
+	private const int DamageDealt = 250;
 	
 	public override void OnDealingClickDamage(ref int clickDamage, DamageType clickDamageType)
 	{

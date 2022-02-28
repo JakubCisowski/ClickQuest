@@ -5,6 +5,7 @@ using ClickQuest.Game.Models.Interfaces;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
+// Can be consumed by clicking. Deals 50 damage.
 public class Arrows : ArtifactFunctionality, IConsumable
 {
 	private const int DamageDealt = 50;

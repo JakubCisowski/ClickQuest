@@ -7,9 +7,11 @@ using ClickQuest.Game.UserInterface.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
+// Can be consumed by clicking. Deals 250 damage, increased by up to 200% based on Enemy's missing health
+// (maximum damage dealt is 750 at 20% Health; damage increases by 2.5% per 1% Health lost).
 public class FatigueArrows : ArtifactFunctionality, IConsumable
 {
-	private const int BaseDamageDealt = 500;
+	private const int BaseDamageDealt = 250;
 	private const double BonusDamageDealtPerHealthPercentLost = 0.025;
 	
 	public override void OnEnemyClick(Enemy clickedEnemy)

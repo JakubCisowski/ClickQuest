@@ -1,5 +1,6 @@
 ﻿namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
+// Increases your Click Damage by 25, Critical Click Chance by 10% and Critical Click Damage by 20%.
 public class Longbow : ArtifactFunctionality
 {
 	private const int ClickDamageIncrease = 25;

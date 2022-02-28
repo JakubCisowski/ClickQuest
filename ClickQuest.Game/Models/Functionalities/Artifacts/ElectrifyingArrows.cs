@@ -7,6 +7,7 @@ using ClickQuest.Game.UserInterface.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
+// Can be consumed by dealing Magic Damage (from any source). Deals damage based on Enemy's current Health: 20% against Monsters, 0.5% against Bosses.
 public class ElectrifyingArrows : ArtifactFunctionality, IConsumable
 {
 	private const double PercentageHealthDamageAgainstMonsters = 0.20;

@@ -5,6 +5,8 @@ using ClickQuest.Game.UserInterface.Controls;
 
 namespace ClickQuest.Game.Models.Functionalities.ArtifactTypes;
 
+// Does not take up an Artifact slot. On its own, Ammunition-type Artifacts do not have an effect,
+// but can be consumed if a Ranged Weapon is equipped. Only one Ammunition can be equipped at a time.
 public class Ammunition : ArtifactTypeFunctionality
 {
 	public override bool CanBeEquipped()

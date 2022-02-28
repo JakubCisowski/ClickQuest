@@ -4,6 +4,7 @@ using ClickQuest.Game.Helpers;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
+// Increases all Magic Damage dealt by 10%. Additionally, consuming Ammunition deals 20 Magic Damage to the current Enemy.
 public class ElementalBow : ArtifactFunctionality
 {
 	private const double MagicDamageModifier = 1.1;

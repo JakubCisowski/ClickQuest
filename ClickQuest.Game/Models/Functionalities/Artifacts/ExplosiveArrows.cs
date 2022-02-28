@@ -7,6 +7,8 @@ using ClickQuest.Game.Models.Interfaces;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
+// Can be consumed by clicking. Applies burning that deals 50 damage every second until the Enemy dies.
+// Additional clicks against burning Enemies will not consume additional Ammunition.
 public class ExplosiveArrows : ArtifactFunctionality, IConsumable
 {
 	private const int DamageDealtPerTick = 50;

@@ -7,6 +7,8 @@ using ClickQuest.Game.Models.Interfaces;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
+// Can be consumed by clicking. Applies poison that deals 50 damage every 0.5 seconds for 2.5 seconds.
+// Additional clicks increase this duration.
 public class PoisonedArrows : ArtifactFunctionality, IConsumable
 {
 	private const int DamageDealtPerTick = 50;
