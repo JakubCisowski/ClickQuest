@@ -93,11 +93,15 @@ public class Artifact : Item
 		CollectionsHelper.RemoveItemFromCollection(this, User.Instance.CurrentHero.Artifacts, amount);
 
 		InterfaceHelper.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Artifact));
-
+		
 		if (User.Instance.CurrentHero.ArtifactSets.Any(x => x.ArtifactIds.Any(y => y == Id)) && !User.Instance.CurrentHero.Artifacts.Contains(this))
 		{
-			AlertBox.Show($"{Name} has been removed from all Artifact Sets", MessageBoxButton.OK);
-
+			// Special case - if Ammunition was removed (for example by consuming it in combat), do not show the popup.
+			if (this.ArtifactType != ArtifactType.Ammunition)
+			{
+				AlertBox.Show($"{Name} has been removed from all Artifact Sets", MessageBoxButton.OK);
+			}
+			
 			foreach (var artifactSet in User.Instance.CurrentHero.ArtifactSets)
 			{
 				artifactSet.ArtifactIds.Remove(Id);

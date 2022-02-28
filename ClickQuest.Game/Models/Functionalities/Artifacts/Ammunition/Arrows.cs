@@ -9,8 +9,8 @@ namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 public class Arrows : ArtifactFunctionality, IConsumable
 {
 	private const int DamageDealt = 50;
-	
-	public override void OnDealingClickDamage(ref int clickDamage, DamageType clickDamageType)
+
+	public override void OnEnemyClick(Enemy clickedEnemy)
 	{
 		var rangedWeaponArtifact = User.Instance.CurrentHero.EquippedArtifacts.FirstOrDefault(x => x.ArtifactType == ArtifactType.RangedWeapon);
 

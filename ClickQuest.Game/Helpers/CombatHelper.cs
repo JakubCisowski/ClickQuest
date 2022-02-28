@@ -37,6 +37,16 @@ public static class CombatHelper
 			{
 				equippedArtifact.ArtifactFunctionality.OnEnemyClick(clickedEnemy);
 			}
+			
+			// Remove Ammunition if exhausted.
+			var ammunition = User.Instance.CurrentHero.EquippedArtifacts.FirstOrDefault(x => x.ArtifactType == ArtifactType.Ammunition);
+
+			if (ammunition is not null && ammunition.Quantity <= 0)
+			{
+				ammunition.ArtifactFunctionality.OnUnequip();
+				User.Instance.CurrentHero.EquippedArtifacts.Remove(ammunition);
+				InterfaceHelper.RefreshSpecificEquipmentPanelTabOnCurrentPage(typeof(Artifact));
+			}
 		}
 		else
 		{
