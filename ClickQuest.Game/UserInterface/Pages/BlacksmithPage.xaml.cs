@@ -201,7 +201,15 @@ public partial class BlacksmithPage : Page
 			{
 				var materialsOfRarity = artifactRecipe.IngredientPatterns.Where(x => x.RelatedMaterial.Rarity == (Rarity)i);
 				var totalMaterialQuantity = materialsOfRarity.Sum(x => x.Quantity);
-				ingotAmounts.Add((int)(totalMaterialQuantity * Material.BaseMeltingIngotBonus * Artifact.MeltingIngredientsRatio));
+
+				if (meltedArtifact.ArtifactType == ArtifactType.Ammunition)
+				{
+					ingotAmounts.Add(Math.Max((int)Math.Floor((totalMaterialQuantity * Material.BaseMeltingIngotBonus * Artifact.MeltingIngredientsRatio) / 50d), 1));
+				}
+				else
+				{
+					ingotAmounts.Add((int)(totalMaterialQuantity * Material.BaseMeltingIngotBonus * Artifact.MeltingIngredientsRatio));
+				}
 			}
 		}
 		else
@@ -264,7 +272,15 @@ public partial class BlacksmithPage : Page
 		{
 			recipe.Artifact.CreateMythicTag();
 
-			recipe.Artifact.AddItem();
+			if (recipe.Artifact.ArtifactType == ArtifactType.Ammunition)
+			{
+				recipe.Artifact.AddItem(Models.Functionalities.ArtifactTypes.Ammunition.AmountPerCraft);
+			}
+			else
+			{
+				recipe.Artifact.AddItem();
+			}
+
 			recipe.RemoveItem();
 
 			Specializations.UpdateSpecializationAmountAndUi(SpecializationType.Crafting);

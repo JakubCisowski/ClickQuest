@@ -7,8 +7,11 @@ namespace ClickQuest.Game.Models.Functionalities.ArtifactTypes;
 
 // Does not take up an Artifact slot. On its own, Ammunition-type Artifacts do not have an effect,
 // but can be consumed if a Ranged Weapon is equipped. Only one Ammunition can be equipped at a time.
+// Crafting ammunition always grants 50 pieces.
 public class Ammunition : ArtifactTypeFunctionality
 {
+	public const int AmountPerCraft = 50;
+	
 	public override bool CanBeEquipped()
 	{
 		var isAnyAmmunitionEquipped = User.Instance.CurrentHero.EquippedArtifacts.Any(x => x.ArtifactType == ArtifactType.Ammunition);
@@ -25,6 +28,6 @@ public class Ammunition : ArtifactTypeFunctionality
 	public Ammunition()
 	{
 		ArtifactType = ArtifactType.Ammunition;
-		Description = "Does not take up an Artifact slot. On its own, Ammunition-type Artifacts do not have an effect, but can be consumed if a <BOLD>Ranged Weapon</BOLD> is equipped. Only one Ammunition can be equipped at a time.";
+		Description = $"Does not take up an Artifact slot. On its own, Ammunition-type Artifacts do not have an effect, but can be consumed if a <BOLD>Ranged Weapon</BOLD> is equipped. Only one Ammunition can be equipped at a time. Crafting ammunition always grants {AmountPerCraft} pieces.";
 	}
 }

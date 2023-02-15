@@ -1252,6 +1252,16 @@ public partial class HeroStatsPage : Page
 			ingot.AddItem(100);
 		}
 
+		foreach (var material in GameAssets.Materials)
+		{
+			CollectionsHelper.AddItemToCollection(material, User.Instance.CurrentHero.Materials, 100);
+		}
+		
+		foreach (var recipe in GameAssets.Recipes)
+		{
+			CollectionsHelper.AddItemToCollection(recipe, User.Instance.CurrentHero.Recipes);
+		}
+
 		User.Instance.Gold += 100000;
 	}
 	#endif

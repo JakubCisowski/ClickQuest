@@ -7,12 +7,15 @@ using ClickQuest.Game.Models.Interfaces;
 
 namespace ClickQuest.Game.Models.Functionalities.Artifacts;
 
+using UserInterface.Helpers;
+
 // Can be consumed by clicking. Applies burning that deals 50 damage every second until the Enemy dies.
 // Additional clicks against burning Enemies will not consume additional Ammunition.
 public class ExplosiveArrows : ArtifactFunctionality, IConsumable
 {
 	private const int DamageDealtPerTick = 50;
 	private const int TicksIntervalInSeconds = 1;
+	private Enemy _enemy;
 
 	private readonly DispatcherTimer _timer;
 
@@ -33,11 +36,15 @@ public class ExplosiveArrows : ArtifactFunctionality, IConsumable
 		}
 
 		Consume(ammunitionArtifact);
+
+		_enemy = InterfaceHelper.CurrentEnemy;
 	}
 
 	public override void OnKill()
 	{
 		_timer.Stop();
+		
+		base.OnKill();
 	}
 
 	public void Consume(Artifact ammunitionArtifact)
@@ -68,6 +75,12 @@ public class ExplosiveArrows : ArtifactFunctionality, IConsumable
 	
 	private void BurningTimer_Tick(object source, EventArgs e)
 	{
+		if (InterfaceHelper.CurrentEnemy != _enemy || (_enemy is Boss && CombatTimersHelper.BossFightDuration <= 0))
+		{
+			_timer.Stop();
+			return;
+		}
+		
 		CombatHelper.DealDamageToCurrentEnemy(DamageDealtPerTick, DamageType.Magic);
 	}
 }
